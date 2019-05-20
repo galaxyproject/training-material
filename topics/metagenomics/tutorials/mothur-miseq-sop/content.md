@@ -1,3 +1,12 @@
+{% if include.short %}
+  {% assign other_tutorial = "../mothur-miseq-sop/tutorial.html" %}
+  {% assign other_tutorial_name = "extended" %}
+{% else %}
+  {% assign other_tutorial = "../mothur-miseq-sop-short/tutorial.html" %}
+  {% assign other_tutorial_name = "short"%}
+{% endif %}
+
+
 # Overview
 {:.no_toc}
 
@@ -158,8 +167,6 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    - Import the following reference datasets
 >      - `silva.v4.fasta`
 >      - `HMP_MOCK.v35.fasta`
->      - `mouse.dpw.metadata`
->      - `mouse.time.design`
 >      - `trainset9_032012.pds.fasta`
 >      - `trainset9_032012.pds.tax`
 >
@@ -167,8 +174,6 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    > ### {% icon solution %} List of Zenodo URLs
 >    > ```
 >    > https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
->    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
->    > https://zenodo.org/record/800651/files/mouse.time.design
 >    > https://zenodo.org/record/800651/files/silva.v4.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
@@ -190,7 +195,7 @@ convention, so that our tools will know which files belong together. We do this 
 > 1. Click on the **checkmark icon** {% icon param-check %} at top of your history.
 >
 > 2. Select all the FASTQ files (40 in total)
->    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the fastq files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
+>    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the FASTQ files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
 >    - Click on **for all selected..**
 >    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
@@ -223,6 +228,7 @@ convention, so that our tools will know which files belong together. We do this 
 
 
 # Quality Control
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="quality-control" %}
 
 For more information on the topic of quality control, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %}).
@@ -312,7 +318,7 @@ Next, we want to improve the quality of our data. To this end we will run a work
 > > > 1. The screening removed **23,488** sequences.
 > > >
 > > >    This can be determined by looking at the number of lines in `bad.accnos` output of **Screen.seqs** {% icon tool %}
-> > >    or by comparing the total number of sequencess before and after this screening step in the output of **Summary.seqs** {% icon tool %}
+> > >    or by comparing the total number of sequences before and after this screening step in the output of **Summary.seqs** {% icon tool %}
 > > >
 > > > 2. There are **16,426** unique sequences.
 > > >
@@ -405,7 +411,7 @@ the original dataset. We do this by using the **Unique.seqs** tool.
 >
 > > ### {% icon question %} Question
 > >
-> > How many sequences were unique? how many duplicates were removed?
+> > How many sequences were unique? How many duplicates were removed?
 > >
 > > > ### {% icon solution %} Solution
 > > > 16,426 unique sequences and 112,446 duplicates.
@@ -473,16 +479,16 @@ the number of duplicates of this sequence observed in each sample.
 > report both the number of unique *representative sequences* as well as the *total sequences* they represent.
 {: .comment}
 
+
+
 # Sequence Alignment
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="sequence-alignment" %}
 
 For more information on the topic of alignment, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
 We are now ready to align our sequences to the reference. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
-
-
-
 
 
 > ### {% icon hands_on %} Hands-on: Align sequences
@@ -587,7 +593,7 @@ To ensure that all our reads overlap our region of interest, we will:
 >     Next, we will remove any overhang on either side of the V4 region, and
 >
 > 2. **Filter.seqs** {% icon tool %} with the following parameters
->   - {% icon param-file %} *"fasta"*: `good.fasta` output from the lastest **Screen.seqs** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: `good.fasta` output from the latest **Screen.seqs** {% icon tool %}
 >   - *"vertical"*: `yes`
 >   - *"trump"*: `.`
 >   - *"Output logfile"*: `yes`
@@ -766,6 +772,7 @@ way of doing this is to use the abundant sequences as our reference.
 
 
 # Taxonomic Classification
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="taxonomic-classification" %}
 
 Now that we have thoroughly cleaned our data, we are finally ready to assign a taxonomy to our sequences.
 
@@ -862,14 +869,15 @@ our sequencing and bioinformatics pipeline is.
 
 
 # Optional: Calculate error rates based on our mock community
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="optional-calculate-error-rates-based-on-our-mock-community" %}
 
 
 > ### {% icon comment %} Skipping the mock community analysis
 >
-> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#otu-based-analysis)
+> The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#otu-clustering)
 > where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 > <br><br>
-> Click [here](#otu-based-analysis) to skip this section and continue with the analysis.
+> Click [here](#otu-clustering) to skip this section and continue with the analysis.
 >
 {: .comment}
 
@@ -904,7 +912,7 @@ accurate your sequencing and analysis protocol is.
 > As an example, consider the following image from Fouhy et al {% cite Fouhy2016 %}.
 > A mock community sample was sequenced for different combinations of sequencer and primer sets (V-regions).
 > Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
-> assess different parameter settings of the *in-silico*  analysis pipline.
+> assess different parameter settings of the *in-silico*  analysis pipeline.
 >
 > ![example results of mock community sequencing to assess error rates](../../images/mock_community.jpg "Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)")
 >
@@ -974,19 +982,7 @@ are also of high quality, and we can continue with our analysis.
 We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.
 
-> ### {% icon comment %} Background: What are Operational Taxonomic Units (OTUs)?
->
-> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
-> sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
-> depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
-> threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
-> separation.
->
-> ![OTU graph](../../images/OTU_graph.png)
->
-> (Image credit: Danzeisen et al. 2013, 10.7717/peerj.237)
-{: .comment}
-
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_otus.md %}
 
 > ### {% icon hands_on %} Hands-on: Cluster mock sequences into OTUs
 >
@@ -1015,7 +1011,7 @@ and comparing the results with the expected outcome.
 >
 >     Next we group sequences into OTUs
 >
-> 2. **Cluster** {% icon tool %} with the following parameters
+> 2. **Cluster - Assign sequences to OTUs** {% icon tool %} with the following parameters
 >   - {% icon param-file %} *"column"*: the `dist` output from **Dist.seqs** {% icon tool %}
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >
@@ -1083,13 +1079,23 @@ best efforts, some chimeras or other contaminations may have slipped through our
 Now that we have assessed our error rates we are ready for some real analysis.
 
 
-# OTU-based Analysis
+# OTU Clustering
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="otu-clustering" %}
+
 
 In this tutorial we will continue with an OTU-based approach, for the phylotype and phylogenic
 approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
 
 
-### Removing Mock sample
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/background_otus.md %}
+
+
+{% if include.short %}
+We will now repeat the OTU clustering we performed on our mock community for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
+
+{% else %}
+
+### Remove Mock Sample
 
 Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
@@ -1107,13 +1113,8 @@ the **Remove.groups** tool:
 >
 {: .hands_on}
 
+### Cluster sequences into OTUs
 
-## Clustering sequences into OTUs
-
-{% if include.short %}
-We will now repeat the OTU clustering for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
-
-{% else %}
 There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the **Dist.seqs** and **Cluster** tools. Alternatively, we can also use the **Cluster.split** tool. With
 this approach, the sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
@@ -1137,9 +1138,9 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >
 > 2. Run **Workflow 5: OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Sequences"*: the `fasta` output from **Remove.groups** {% icon tool %}
->    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.groups** {% icon tool%}
->    - {% icon param-file %} *"3: Taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool%}
+>    - {% icon param-file %} *"1: Sequences"*: the `fasta` output from **Remove.lineage** {% icon tool %}
+>    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.lineage** {% icon tool%}
+>    - {% icon param-file %} *"3: Taxonomy"*: the `taxonomy` output from **Remove.lineage** {% icon tool%}
 >
 >    {% include snippets/run_workflow.md %}
 >
@@ -1237,7 +1238,7 @@ dataset by subsampling.
 >
 >    > ### {% icon question %} Question
 >    >
->    >  What would you exect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
+>    >  What would you expect the result of `count.groups` on this new shared output collection to be? Check if you are correct.
 >    > > ### {% icon solution %} Solution
 >    > > all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
 >    > > tool to confirm that this is indeed what happened.
@@ -1250,11 +1251,13 @@ dataset by subsampling.
 
 {% endunless %}
 
-## Calculate Species Diversity
+
+# Diversity Analysis
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="diversity-analysis" %}
 
 Species diversity is a valuable tool for describing the ecological complexity of a single sample (alpha diversity)
 or between samples (beta diversity). However, diversity is not a physical quantity that can be measured directly,
-and many different metrics have been proposed to quantify diversity [Finotello et al. 2016](https://www.ncbi.nlm.nih.gov/pubmed/28025179).
+and many different metrics have been proposed to quantify diversity by {% cite Finotello2016 %}.
 
 
 > ### {% icon comment %} Background: Species Diversity
@@ -1266,17 +1269,26 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 > - **Phylogenetic diversity** = how closely related the species in a community are.
 >
 > <br><br>
-> To understand the difference between richness and evenness, consider the following example:
 >
-> ![illustration of richness and evenness](../../images/richness-evenness.png)
+> Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
+> Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
+> smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
+> ochiai, canberra, thetayc, invsimpson*, just to name a few ;). A comparison of several different diversity metrics is discussed in {% cite BonillaRosso2012 %}
+>
 >
 > > ### {% icon question %} Question
+> > To understand the difference between richness and evenness, consider the following example:
+> >
+> > ![illustration of richness and evenness](../../images/richness-evenness-blank.png)
+> >
 > > 1. Which of these communities has the highest richness?
 > > 2. Which of these communities has the highest evenness?
 > >
 > > > ### {% icon solution %} Solution
 > > > 1. Both communities have 4 different species, so they have same richness.
-> > > 2. Communty B is more even, because each species has the same abundance.
+> > > 2. Community B is more even, because each species has the same abundance.
+> > >
+> > > ![illustration of richness and evenness](../../images/richness-evenness.png)
 > > {: .solution }
 > >
 > {: .question}
@@ -1288,22 +1300,42 @@ and many different metrics have been proposed to quantify diversity [Finotello e
 >
 > ![illustration of phylogenetic distance](../../images/phylogenetic-distance.png){: width="50%"}
 >
-> Each of these factors play a role in diversity, but how to combine them into a single measure of diversity is nontrivial.
-> Many different metrics have been proposed for this, for example: *shannon, chao, pd, ace, simpson, sobs, jack, npshannon,
-> smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, coverage, anderberg, hamming, jclass, jest,
-> ochiai, canberra, thetayc, invsimpson*, just to name a few ;).
->
 > Now, you do not need to know what all these different metrics are, but just remember that there is not a single
 > definition of diversity and as always, the metric you choose to use may influence your results.
 >
 {: .comment}
 
-### Alpha diversity
+## Alpha diversity
+
 
 In order to estimate alpha diversity of the samples, we first generate the *rarefaction curves*. Recall that
-rarefaction measure the number of observed OTUs as a function of the subsampling size.
+rarefaction measures the number of observed OTUs as a function of the subsampling size.
 
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/background_rarefaction.md %}
+
+
+{% if include.short %}
+
+We will use a plotting tool to visualize the rarefaction curves, and use **Summary.single** {% icon tool %} to calculate a number of different alpha diversity metrics on all our samples.
+
+> ### {% icon hands_on %} Hands-on: Alpha Diversity
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow6_alpha_diversity.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 6: Alpha Diversity** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Shared File"*: the `Shared file` output from **Make.shared** {% icon tool %}
+>
+>    {% include snippets/run_workflow.md %}
+>
+{: .hands_on}
+
+{% else %}
+
 
 We calculate rarefaction curves with the **Rarefaction.single** {% icon tool %} tool:
 
@@ -1329,14 +1361,15 @@ numsampled    0.03-F3D0    lci-F3D0    hci-F3D0    0.03-F3D1   ...
 ...
 ```
 
-This file displays the number of OTUs identified per amount of sequences used (numsampled). What we would like
+This file displays the number of OTUs identified per amount of sequences used (`numsampled`). What we would like
 to see is the number of additional OTUs identified when adding more sequences reaching a plateau. Then we know
 we have covered our full diversity. This information would be easier to interpret in the form of a graph.
 Let's plot the rarefaction curve for a couple of our sequences:
 
+
 > ### {% icon hands_on %} Hands-on: Plot Rarefaction
 >
-> - **Plotting tool** {% icon tool %} with the following parameters
+> - **Plotting tool - for multiple series and graph types** {% icon tool %} with the following parameters
 >   - *"Plot Title"*: `Rarefaction`
 >   - *"Label for x axis"*: `Number of Sequences`
 >   - *"Label for y axis"*: `Number of OTUs`
@@ -1350,11 +1383,14 @@ Let's plot the rarefaction curve for a couple of our sequences:
 >
 {: .hands_on}
 
-From the resulting image we can see that the rarefaction curves for all samples have started to level
+{% endif %}
+
+View the rarefaction plot output. From this image can see that the rarefaction curves for all samples have started to level
 off so we are confident we cover a large part of our sample diversity:
 
 ![Rarefaction curves](../../images/rarefaction_curves.png)
 
+{% unless include.short %}
 
 Finally, let's use the **Summary.single** tool to generate a summary report.  The following step
 will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:
@@ -1367,7 +1403,16 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 >   - *"size"*: `2389`
 {: .hands_on}
 
-The data will be outputted to a table called the *summary file*:
+{% endunless %}
+
+
+View the `summary` output from **Summary.single** {% icon tool %}. This shows several alpha diversity metrics:
+- [sobs](https://www.mothur.org/wiki/Sobs): observed richness (number of OTUs)
+- [coverage](https://mothur.org/wiki/Coverage): Good's coverage index
+- [invsimpson](https://en.wikipedia.org/wiki/Diversity_index#Simpson_index): Inverse Simpson Index
+- [nseqs](https://www.mothur.org/wiki/Nseqs): number of sequences
+
+
 
 ```
 label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
@@ -1392,20 +1437,48 @@ label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimps
 0.03    F3D9    162.000000    0.994803    24.120541    23.105499        25.228865       5773.000000
 ```
 
-This shows the [number of sequences](https://www.mothur.org/wiki/Nseqs), the [sample coverage](https://www.mothur.org/wiki/Coverage), the number of [observed OTUs](https://www.mothur.org/wiki/Sobs), and the [Inverse Simpson diversity estimate](https://www.mothur.org/wiki/Invsimpson) for each group.
-
 There are a couple of things to note here:
 * The differences in diversity and richness between early and late time points is small.
 * All sample coverage is above 97%.
 
+There are many more diversity metrics, and for more information about the different calculators available in mothur, see [the mothur wiki page](https://mothur.org/wiki/Calculators)
+
 We could perform additional statistical tests (e.g. ANOVA) to confirm our feeling that there is no significant difference based on sex or early vs. late, but this is beyond the scope of this tutorial.
 
-### Beta diversity
+## Beta diversity
 
 Beta diversity is a measure of the similarity of the membership and structure found between *different* samples.
 The default calculator in the following section is *thetaYC*, which is the [Yue & Clayton theta similarity
-coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf).
+coefficient](http://csyue.nccu.edu.tw/2005communicationindex.pdf). We will also calculate the [Jaccard index](https://en.wikipedia.org/wiki/Jaccard_index) (termed `jclass` in mothur).
 
+{% if include.short %}
+
+In the following workflow we will:
+- Calculate pairwise distances between samples using the *thetaYC* calculator (**Dist.shared** {% icon tool %})
+- Create a **Venn diagram** to show the number of overlapping OTUs between 4 of our samples
+- Create a **heatmap** of the intersample similarities (**Heatmap.sim** {% icon tool %})
+- Create **pylogenetic tree** showing the relatedness of samples (**Newick Display** {% icon tool %})
+
+
+> ### {% icon hands_on %} Hands-on: Beta Diversity
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow7_beta_diversity.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 7: Beta Diversity** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Shared File"*: the `Shared file` output from **Make.shared** {% icon tool %}
+>    - {% icon param-collection %} *"2: Subsample shared"*: the `shared` output from **Sub.sample** {% icon tool %}
+>
+>    {% include snippets/run_workflow.md %}
+>
+{: .hands_on}
+
+
+{% else %}
 We calculate this with the **Dist.shared** tool, which will rarefy our data.
 
 > ### {% icon hands_on %} Hands-on: Beta diversity
@@ -1424,6 +1497,8 @@ We calculate this with the **Dist.shared** tool, which will rarefy our data.
 > <!-- TODO: add image conversion tool for Galaxy instances that do not support viewing of SVGs files? -->
 {: .hands_on}
 
+{% endif %}
+
 Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
 heatmaps the red colors indicate communities that are more similar than those with black colors.
 
@@ -1434,6 +1509,9 @@ For example this is the heatmap for the `thetayc` calculator (output `thetayc.0.
 and the jclass calulator (output `jclass.0.03.lt.ave`):
 
 ![Heatmap for the jclass calculator](../../images/heatmap.sim_jclass.png)
+
+
+{% unless include.short %}
 
 When generating Venn diagrams we are limited by the number of samples that we can analyze simultaneously.
 Let's take a look at the Venn diagrams for the first 4 time points of female 3 using the **Venn** tool:
@@ -1447,14 +1525,19 @@ Let's take a look at the Venn diagrams for the first 4 time points of female 3 u
 
 This generates a 4-way Venn diagram and a table listing the shared OTUs.
 
+{% endunless %}
+
+Examine the Venn diagram:
+
 ![Venn diagram and table with shared OTUs](../../images/venn.png)
 
 This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
 shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
 numerically rare or just had a low incidence.
 
+{% unless include.short %}
 Next, let's generate a dendrogram to describe the similarity of the samples to each other. We will generate a
-dendrogram using the jclass and thetayc calculators within the **Tree.shared** tool:
+dendrogram using the `jclass` and `thetayc` calculators within the **Tree.shared** tool:
 
 > ### {% icon hands_on %} Tree
 >
@@ -1466,8 +1549,11 @@ dendrogram using the jclass and thetayc calculators within the **Tree.shared** t
 >  - {% icon param-collection %} *"Newick file"*: output from **Tree.shared** {% icon tool %}
 {: .hands_on}
 
+{% endunless %}
+
 Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
 of the others.
+
 
 `thetayc.0.03.lt.ave`:
 
@@ -1480,7 +1566,7 @@ of the others.
 
 # Visualisations
 
-We may now wish to visualize our results. We can convert our *shared* file to the more widely used `biom` format and
+We may now wish to further visualize our results. We can convert our *shared* file to the more widely used `biom` format and
 view it in a platform like [Phinch](http://www.phinch.org/).
 
 ## Phinch
