@@ -167,8 +167,6 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    - Import the following reference datasets
 >      - `silva.v4.fasta`
 >      - `HMP_MOCK.v35.fasta`
->      - `mouse.dpw.metadata`
->      - `mouse.time.design`
 >      - `trainset9_032012.pds.fasta`
 >      - `trainset9_032012.pds.tax`
 >
