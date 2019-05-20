@@ -1103,7 +1103,14 @@ In this tutorial we will continue with an OTU-based approach, for the phylotype 
 approaches, please refer to the [mothur wiki page](https://www.mothur.org/wiki/MiSeq_SOP).
 
 
-### Removing Mock sample
+
+
+{% if include.short %}
+We will now repeat the OTU clustering for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
+
+{% else %}
+
+### Remove Mock Sample
 
 Now that we have cleaned up our data set as best we can, and assured ourselves of the quality of our sequencing
 pipeline by considering a mock sample, we are almost ready to cluster and classify our real data. But
@@ -1121,13 +1128,8 @@ the **Remove.groups** tool:
 >
 {: .hands_on}
 
+### Cluster sequences into OTUs
 
-## Clustering sequences into OTUs
-
-{% if include.short %}
-We will now repeat the OTU clustering for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.
-
-{% else %}
 There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
 using the **Dist.seqs** and **Cluster** tools. Alternatively, we can also use the **Cluster.split** tool. With
 this approach, the sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
@@ -1151,9 +1153,9 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >
 > 2. Run **Workflow 5: OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Sequences"*: the `fasta` output from **Remove.groups** {% icon tool %}
->    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.groups** {% icon tool%}
->    - {% icon param-file %} *"3: Taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool%}
+>    - {% icon param-file %} *"1: Sequences"*: the `fasta` output from **Remove.lineage** {% icon tool %}
+>    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.lineage** {% icon tool%}
+>    - {% icon param-file %} *"3: Taxonomy"*: the `taxonomy` output from **Remove.lineage** {% icon tool%}
 >
 >    {% include snippets/run_workflow.md %}
 >
