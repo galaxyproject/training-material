@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Analysis of molecular dynamics simulations
 zenodo_link: 'https://zenodo.org/record/2537734'
+level: Intermediate
 questions:
 - Which analysis tools are available?
 objectives:
@@ -30,8 +31,6 @@ contributors:
   - chrisbarnettster
   - tsenapathi
   - simonbray
-level:
-  - "Intermediate"
 ---
 
 

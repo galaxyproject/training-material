@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Running molecular dynamics simulations using GROMACS
 zenodo_link: 'https://zenodo.org/record/2598415'
+level: Intermediate
 questions:
 - How do I use the GROMACS engine in Galaxy?
 - What is the correct procedure for performing a simple molecular dynamics simulation of a protein?
@@ -22,8 +23,6 @@ follow_up_training:
       - analysis-md-simulations
 contributors:
   - simonbray
-level:
-  - "Intermediate"
 
 ---
 

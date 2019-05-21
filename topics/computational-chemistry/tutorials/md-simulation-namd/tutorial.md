@@ -4,6 +4,7 @@ enable: false
 
 title: Running molecular dynamics simulations using NAMD
 zenodo_link: ''
+level: Intermediate
 questions:
 - How do I use the NAMD engine in Galaxy?
 - What is the correct procedure for performing a simple molecular dynamics simulation of a protein?
@@ -30,8 +31,6 @@ contributors:
 - chrisbarnettster
 - tsenapathi
 - simonbray
-level:
-- Intermediate
 
 ---
 
