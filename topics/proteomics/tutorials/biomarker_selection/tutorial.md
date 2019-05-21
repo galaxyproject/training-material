@@ -11,7 +11,7 @@ questions:
   and annotation from public databases?
 
 objectives:
-- Build a workflow implementing a **strategy for the selection of tissue-leakage biomarkers** using ProteoRE
+- Build a workflow implementing a strategy for the selection of tissue-leakage biomarkers using ProteoRE
 
 time_estimation: 3H
 
@@ -68,16 +68,14 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 {: .agenda}
 
 
-# Methods
-{:.no_toc}
-
 **Create a new history** and give it a name.
 {% include snippets/create_new_history.md %}
 
 
-## Sub-step with **Build tissue-specific expression dataset**
+# Selection of tissue-specific proteins based on experimental data available in HPA
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+> ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
 >
 > 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
@@ -85,18 +83,25 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 >    - *"Expression level"*: `High` and `Medium`
 >    - *"Reliability score"*: `Enhanced` and `Supported`
 >
+>   > ### Output
+>   > - **Tissue-specific expression from IHC** (1596 lines): List of the selected proteins. 
+>   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   {: .comment}
 {: .hands_on}
 
 We will now rerun the same tool but to select transcripts according to their expression profile.
 
-## Sub-step with **Build tissue-specific expression dataset**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on RNAseq
 >
 > 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `RNA levels based on RNA-seq experiments`
 >    - *"Select tissue"*: `Heart muscle`
 >
+>   > ### Output
+>   > - **Tissue-specific expression from RNAseq** (19613 lines): List of the selected transcripts. 
+>   > 4 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   {: .comment}
 {: .hands_on}
 
 
@@ -105,9 +110,7 @@ To do so, a filter is applied on the expression value provided by HPA and measur
 In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 
 
-## Sub-step with **Filter by keywords and/or numerical value**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter on expression value criterium
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Operation"*: `Discard`
@@ -118,20 +121,17 @@ In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 >            - *"Value"*: `10.0`
 >    - *"Sort by column ?"*: `Yes`
 >
-> ### {% icon question %} Questions
 >
-> How many lines are there in the file of heart transcripts
-> with a TPM value >10 ?
+> > ### {% icon question %} Questions
+> >
+> > How many lines are there in the file of heart transcripts
+> > with a TPM value >10 ?
+> >
+> > > ### {% icon solution %} Solution
+> > > 5257 lines.
+> > {: .solution}
+> {: .question}
 >
-> > ### {% icon solution %} Solution
-> > 5257 lines.
-> {: .solution}
-{: .question}
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -140,9 +140,7 @@ We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC data o
 We want now to select candidate biomarkers that are expressed in the heart muscle according to **both** IHC and RNA-seq data, using the Jvenn tool.
 
 
-## Sub-step with **Venn diagram**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Venn diagram
 >
 > 1. **Venn diagram** {% icon tool %} with the following parameters:
 >    - In *"List to compare"*:
@@ -153,26 +151,19 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >            - *"Enter your list"*: `Input file containing your list`
 >                - *"Enter the name of this list"*: `heart RNAseq`
 >
->
+>   > ### {% icon question %} Questions
+>   > How many IDs are in common to both IHC and RNA-seq lists ?
+>   >   > ### {% icon solution %} Solution
+>   >   > 931
+>   > {: .solution}
+>   {: .question}
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
->
-> How many IDs common to both IHC and RNA-seq lists ?
->
-> > ### {% icon solution %} Solution
-> >
-> > 931
-> {: .solution}
->
-{: .question}
-
 For greater clarity we'll keep only the column with those 931 IDs to continue our pipeline.
 
-## Sub-step with **Cut**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Cut
 >
 > 1. **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut by"*: `fields`
@@ -182,9 +173,7 @@ For greater clarity we'll keep only the column with those 931 IDs to continue ou
 
 Now we'll filter this dataset not to keep the 'NA' lines.
 
-## Sub-step with **Filter by keywords and/or numerical value**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Operation"*: `Discard`
@@ -204,20 +193,13 @@ Pipeline will then continue based on those 931, from which we have to select bio
 highly specific to the heart using additional expression data (still from HPA).
 
 
-## Sub-step with **Add expression data**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Add expression data
 >
 > 1. **Add expression data** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)"*: `Input file containing your IDs`
 >    - In *"RNAseq/Ab-based expression data"*:
 >        - *"Select information to add to your list"*: `Gene name, Gene description, RNA tissue category, RNA tissue specificity abundance in ‘Transcript Per Million`
 >
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -231,9 +213,8 @@ This information is listed in the column 4 : "RNA tissue category" of the result
 Let's use the "Filter by keywords and/or numerical value" tool to select the candidate biomarkers based on this
 "RNA tissue category" criterium.
 
-## Sub-step with **Filter by keywords and/or numerical value**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - In *"Filter by keywords"*:
@@ -243,10 +224,20 @@ Let's use the "Filter by keywords and/or numerical value" tool to select the can
 >                - *"Copy/paste keywords to find (keep or discard)"*: `enriched enhanced`
 >    - *"Sort by column ?"*: `Yes`
 >
+>   > ### Output
+>   > - **Filtered Add_expression_data_on_data_8**: output list of the heart biomarkers with RNA tissue category 
+>   > containing "enriched" or "enhanced" (115 lines = what we are interested in)
+>   > - **Filtered Add_expression_data_on_data_8 - discarded lines**: output list of the heart biomarkers with 
+>   > RNA tissue category NOT containing "enriched" or "enhanced" (not what we are interested in)
+>   {: .comment}
 {: .hands_on}
 
 We now have identified 115 candidates considered to have significantly higher expression in heart muscle according to HPA criteria.
 Let's call the dataset where are those 115 candidates '**heart115**'.
+
+
+# Annotation of this protein list with biochemical and cellular features
+
 
 Candidate biomarkers we want to identify have to be cytoplasmic and without transmembrane domains (TMD).
 Thus we will retrieve protein features from neXtProt to retrieve those informations.
@@ -255,9 +246,8 @@ Since HPA only considers ENSG identifiers (related to the gene), although neXtPr
 identifiers (related to proteins), first thing to do is to map the Ensembl identifiers contained our list of (115)
 candidates to their corresponding UniProt accession number. The tool **ID Converter** is what we need to do so.
 
-## Sub-step with **ID Converter**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: ID Converter
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
@@ -266,15 +256,17 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >        - In *"Target type"*:
 >            - *"Target type of IDs you would like to map to"*: `Uniprot accession number, Uniprot ID`
 >
+>   > ### Output
+>   > **ID converter on data 11**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
+>   > UniProt accession number and ID are added.  
+>   {: .comment}
 {: .hands_on}
 
 We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect protein features from neXtProt. For this purpose,
 we use the **Add protein features** ProteoRE tool.
 
 
-## Sub-step with **Add protein features**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Add protein features
 >
 > 1. **Add protein features** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (neXtProt or UniProt)"*: `Input file containing your IDs `
@@ -284,16 +276,17 @@ we use the **Add protein features** ProteoRE tool.
 >        - *"Localization"*: `Subcellular Location`
 >        - *"Disease information"*: `Yes`
 >
->
+>   > ### Output
+>   > **Add information from NextProt**: In this file (431 lines), 3 columns (columns 8, 9 and 10)
+>   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info. 
+>   {: .comment}
 {: .hands_on}
 
 With this dataset, we can select proteins reported as localized in the cytoplasm and having
 no transmembrane domains by running the Filter by keywords and/or numerical value tool.
 
 
-## Sub-step with **Filter by keywords and/or numerical value**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Select an operator to combine your filters (if more than one)"*: `AND`
@@ -305,12 +298,18 @@ no transmembrane domains by running the Filter by keywords and/or numerical valu
 >    - In *"Filter by numerical value"*:
 >        - {% icon param-repeat %} *"Insert Filter by numerical value"*
 >            - *"Column number on which to apply the filter"*: `c8`
->            - *"Value"*: `0.0`
+>            - *"Value"*: `0`
 >    - *"Sort by column ?"*: `Yes`
 >        - *"Sort result files by:"*: `c5`
 >        - *"Sort in descending order ?"*: `Yes`
 >
 >
+>   > ### Output
+>   > - **Filtered Add_information_from_neXtProt**: output list of the proteins having a cytoplasmic
+>   > location and no TMD (48 proteins) 
+>   > - **Filtered Add_information_from_neXtProt - discarded lines**: output list of the proteins NOT 
+>   > cytoplasmic and having at least 1 TMD. 
+>   {: .comment}
 {: .hands_on}
 
 We have now 48 proteins.
@@ -318,10 +317,9 @@ We have now 48 proteins.
 Next step : to identify proteins already seen in LS MS/MS experiments.
 
 
+# Check whether these proteins have already been detected by LC-MS/MS experiments
 
-## Sub-step with **Get MS/MS observations in tissue/fluid**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get MS/MS observations in tissue/fluid
 >
 > 1. **Get MS/MS observations in tissue/fluid** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (UniProt Accession number only)"*: `Input file containing your IDs `
@@ -330,14 +328,16 @@ Next step : to identify proteins already seen in LS MS/MS experiments.
 >        - `Human Heart`
 >        - `Human Plasma non glyco`
 >
->
+>   > ### Output
+>   > **Get MS/MS observations in tissue/fluid on data 15**: In this file, 2 columns (11 and 12, at the end)
+>   > were added with the info of number of times peptides were seen by MS/MS.   
+>   {: .comment}
 {: .hands_on}
 
 Let's now keep only proteins that have already been seen by MS/MS in the plasma (last column of the file).
 
-## Sub-step with **Filter by keywords and/or numerical value**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Operation"*: `Discard`
@@ -349,7 +349,12 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 >                - *"Copy/paste keywords to find (keep or discard)"*: `NA`
 >    - *"Sort by column ?"*: `Yes`
 >
->
+>   > ### Output
+>   > - **Filtered Get MS/MS observations in tissue/fluid on data 15**: output list of the proteins 
+>   > whose some peptides have been seen in plasma (21 proteins)
+>   > - **Filtered Get MS/MS observations in tissue/fluid on data 15 - discarded lines**:  
+>   > output list of proteins with no peptides seen in the plassma
+>   {: .comment}
 {: .hands_on}
 
 
