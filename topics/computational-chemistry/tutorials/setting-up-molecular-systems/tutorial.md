@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Setting up molecular systems
 zenodo_link: 'https://zenodo.org/record/2600690'
+level: Intermediate
 questions:
 - How to get started modelling a protein and a ligand?
 objectives:
@@ -29,8 +30,7 @@ follow_up_training:
 contributors:
   - chrisbarnettster
   - simonbray
-level:
-  - "Intermediate"
+
 ---
 
 > ### {% icon comment %} Audience
