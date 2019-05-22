@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
+topic_name: de-novo-assembly
 tutorial_name: genome-close-reopen
 ---
 
@@ -11,8 +11,9 @@ tutorial_name: genome-close-reopen
 > * Genome Closure
 >    > * Confirmation PCR
 >    > * Closure PCR
->    > * Trimming/Re-naming Genome Nodes
->    > * Troubleshooting
+>    >    > * Background
+>    > * Trimming
+>    > * Renaming
 >
 > * Contig Re-Opening
 >    > * Deciding Where to Re-Open
