@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title:  Strategy for candidate biomarkers identification
+title:  Biomarker candidate identification
 zenodo_link: ''
 questions:
 - How to mine public databases to retrieve info?
@@ -16,7 +16,7 @@ objectives:
 time_estimation: 3H
 
 key_points:
-- biomarker, pipeline
+- biomarker candidates selection workflow, public proteomics data retrieval and annotation
 
 contributors:
 - combesf
@@ -39,9 +39,12 @@ response to therapeutic treatment, or other relevant biological state.
 In this tutorial we introduce successively the tools of this pipeline, and guide you to execute them in order to complete the entire
 pipeline on a concrete example.
 
-This strategy is described in  the following paper :
+This strategy is described in  the following paper : 
 [Designing an In Silico Strategy to Select Tissue-Leakage Biomarkers Using the Galaxy Framework](https://www.ncbi.nlm.nih.gov/pubmed/30852829)
-by Nguyen *et al.* Proteomics for Biomarker Discovery: Methods and Protocols, Methods in Molecular Biology, vol. 1959, ISBN 978-1-4939-9164-8.
+by Nguyen *et al.* Proteomics for Biomarker Discovery: Methods and Protocols, 
+Methods Mol Biol. 2019;1959:275-289. doi: 10.1007/978-1-4939-9164-8_18
+ 
+![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 # Global view of the strategy
 {:.no_toc}
@@ -154,12 +157,12 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >   > ### {% icon question %} Questions
 >   > How many IDs are in common to both IHC and RNA-seq lists ?
 >   >   > ### {% icon solution %} Solution
->   >   > 931
+>   >   > 931 (you can visualize it in [the output of the Venn](#figure-1))
 >   > {: .solution}
 >   {: .question}
 {: .hands_on}
 
-
+You can see the [the graphical output of the Venn](#figure-1). 
 For greater clarity we'll keep only the column with those 931 IDs to continue our pipeline.
 
 
