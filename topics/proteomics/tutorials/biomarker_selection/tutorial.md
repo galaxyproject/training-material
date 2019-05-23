@@ -37,13 +37,8 @@ response to therapeutic treatment, or other relevant biological state.
 
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a complete biomarkers selection pipeline.
 In this tutorial we introduce successively the tools of this pipeline, and guide you to execute them in order to complete the entire
-pipeline on a concrete example.
+pipeline on a concrete example. This strategy is described by {% cite Nguyen2019 %}.
 
-This strategy is described in  the following paper : 
-[Designing an In Silico Strategy to Select Tissue-Leakage Biomarkers Using the Galaxy Framework](https://www.ncbi.nlm.nih.gov/pubmed/30852829)
-by Nguyen *et al.* Proteomics for Biomarker Discovery: Methods and Protocols, 
-Methods Mol Biol. 2019;1959:275-289. doi: 10.1007/978-1-4939-9164-8_18
- 
 ![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 # Global view of the strategy
@@ -87,8 +82,8 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 >    - *"Reliability score"*: `Enhanced` and `Supported`
 >
 >   > ### Output
->   > - **Tissue-specific expression from IHC** (1596 lines): List of the selected proteins. 
->   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   > - **Tissue-specific expression from IHC** (1596 lines): List of the selected proteins.
+>   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
 >   {: .comment}
 {: .hands_on}
 
@@ -102,8 +97,8 @@ We will now rerun the same tool but to select transcripts according to their exp
 >    - *"Select tissue"*: `Heart muscle`
 >
 >   > ### Output
->   > - **Tissue-specific expression from RNAseq** (19613 lines): List of the selected transcripts. 
->   > 4 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   > - **Tissue-specific expression from RNAseq** (19613 lines): List of the selected transcripts.
+>   > 4 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
 >   {: .comment}
 {: .hands_on}
 
@@ -162,7 +157,7 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >   {: .question}
 {: .hands_on}
 
-You can see the [the graphical output of the Venn](#figure-1). 
+You can see the [the graphical output of the Venn](#figure-1).
 For greater clarity we'll keep only the column with those 931 IDs to continue our pipeline.
 
 
@@ -228,9 +223,9 @@ Let's use the "Filter by keywords and/or numerical value" tool to select the can
 >    - *"Sort by column ?"*: `Yes`
 >
 >   > ### Output
->   > - **Filtered Add_expression_data_on_data_8**: output list of the heart biomarkers with RNA tissue category 
+>   > - **Filtered Add_expression_data_on_data_8**: output list of the heart biomarkers with RNA tissue category
 >   > containing "enriched" or "enhanced" (115 lines = what we are interested in)
->   > - **Filtered Add_expression_data_on_data_8 - discarded lines**: output list of the heart biomarkers with 
+>   > - **Filtered Add_expression_data_on_data_8 - discarded lines**: output list of the heart biomarkers with
 >   > RNA tissue category NOT containing "enriched" or "enhanced" (not what we are interested in)
 >   {: .comment}
 {: .hands_on}
@@ -261,7 +256,7 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >
 >   > ### Output
 >   > **ID converter on data 11**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
->   > UniProt accession number and ID are added.  
+>   > UniProt accession number and ID are added.
 >   {: .comment}
 {: .hands_on}
 
@@ -281,7 +276,7 @@ we use the **Add protein features** ProteoRE tool.
 >
 >   > ### Output
 >   > **Add information from NextProt**: In this file (431 lines), 3 columns (columns 8, 9 and 10)
->   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info. 
+>   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info.
 >   {: .comment}
 {: .hands_on}
 
@@ -309,9 +304,9 @@ no transmembrane domains by running the Filter by keywords and/or numerical valu
 >
 >   > ### Output
 >   > - **Filtered Add_information_from_neXtProt**: output list of the proteins having a cytoplasmic
->   > location and no TMD (48 proteins) 
->   > - **Filtered Add_information_from_neXtProt - discarded lines**: output list of the proteins NOT 
->   > cytoplasmic and having at least 1 TMD. 
+>   > location and no TMD (48 proteins)
+>   > - **Filtered Add_information_from_neXtProt - discarded lines**: output list of the proteins NOT
+>   > cytoplasmic and having at least 1 TMD.
 >   {: .comment}
 {: .hands_on}
 
@@ -333,7 +328,7 @@ Next step : to identify proteins already seen in LS MS/MS experiments.
 >
 >   > ### Output
 >   > **Get MS/MS observations in tissue/fluid on data 15**: In this file, 2 columns (11 and 12, at the end)
->   > were added with the info of number of times peptides were seen by MS/MS.   
+>   > were added with the info of number of times peptides were seen by MS/MS.
 >   {: .comment}
 {: .hands_on}
 
@@ -353,9 +348,9 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 >    - *"Sort by column ?"*: `Yes`
 >
 >   > ### Output
->   > - **Filtered Get MS/MS observations in tissue/fluid on data 15**: output list of the proteins 
+>   > - **Filtered Get MS/MS observations in tissue/fluid on data 15**: output list of the proteins
 >   > whose some peptides have been seen in plasma (21 proteins)
->   > - **Filtered Get MS/MS observations in tissue/fluid on data 15 - discarded lines**:  
+>   > - **Filtered Get MS/MS observations in tissue/fluid on data 15 - discarded lines**:
 >   > output list of proteins with no peptides seen in the plassma
 >   {: .comment}
 {: .hands_on}
