@@ -66,7 +66,9 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 ![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 
-# Selection of tissue-specific proteins based on experimental data available in HPA
+# Selection of tissue-specific proteins
+
+We will start by selecting proteins associated with heart muscle tissue based on experimental data available in HPA
 
 
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
@@ -236,7 +238,7 @@ We now have identified 115 candidates considered to have significantly higher ex
 Let's call the dataset where are those 115 candidates '**heart115**'.
 
 
-# Annotation of this protein list with biochemical and cellular features
+# Annotation with biochemical and cellular features
 
 
 Candidate biomarkers we want to identify have to be cytoplasmic and without transmembrane domains (TMD).
@@ -317,7 +319,7 @@ We have now 48 proteins.
 Next step : to identify proteins already seen in LS MS/MS experiments.
 
 
-# Check whether these proteins have already been detected by LC-MS/MS experiments
+# Check for previous detection by LC-MS/MS experiments
 
 > ### {% icon hands_on %} Hands-on: Get MS/MS observations in tissue/fluid
 >
