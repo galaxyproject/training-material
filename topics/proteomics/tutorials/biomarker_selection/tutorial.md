@@ -30,8 +30,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
 A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
 response to therapeutic treatment, or other relevant biological state.
 
@@ -39,7 +37,17 @@ response to therapeutic treatment, or other relevant biological state.
 In this tutorial we introduce successively the tools of this pipeline, and guide you to execute them in order to complete the entire
 pipeline on a concrete example. This strategy is described by {% cite Nguyen2019 %}.
 
-![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+
 
 # Global view of the strategy
 {:.no_toc}
@@ -55,19 +63,7 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 - cytoplasmic localization
 - detection in LC-MS/MS experiments already done
 
-
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-
-**Create a new history** and give it a name.
-{% include snippets/create_new_history.md %}
+![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 
 # Selection of tissue-specific proteins based on experimental data available in HPA
@@ -75,7 +71,10 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
 >
-> 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
+> 1. **Create a new history** and give it a name.
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
 >    - *"Select tissue"*: `Heart muscle`
 >    - *"Expression level"*: `High` and `Medium`
@@ -356,8 +355,6 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 {: .hands_on}
 
 
-**How to extract a workflow from your history**
-{% include snippets/extract_workflow.md %}
 
 # Conclusion
 {:.no_toc}
