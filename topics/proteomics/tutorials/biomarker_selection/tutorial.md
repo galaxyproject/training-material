@@ -158,7 +158,7 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 
 You can see the the graphical output of the Venn:
 
-![Venn diagram output](../../images/jVenn_chart-tuto2.png)
+![Venn diagram output](../../images/biomarker-selection/jVenn_chart-tuto2.png)
 
 For greater clarity we'll keep only the column with those 931 IDs to continue our pipeline.
 
