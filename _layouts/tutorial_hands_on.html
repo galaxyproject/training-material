@@ -8,6 +8,30 @@ layout: base
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
 
+{% assign intro_link = false %}
+{% capture intro_target %}
+{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html
+{% endcapture %}
+{% assign associated_slides = false %}
+{% assign own_material = null %}
+{% for material in topic_material %}
+    {% if material.enable != "false" %}
+        {% if material.tutorial_name == page.tutorial_name %}
+            {% if material.slides  %}
+                {% assign associated_slides = true %}
+            {% else %}
+                {% assign own_material = material %}
+            {% endif %}
+        {% endif %}
+        {% if material.type == "introduction" %}
+            {% assign intro_link = true %}
+            {%- capture intro_target -%}
+                {{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html
+            {%- endcapture -%}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -26,19 +50,6 @@ layout: base
                             {% icon topic %} {{ topic.title }}
                         </a>
                     </li>
-
-                    {% assign intro_link = false %}
-                    {% assign associated_slides = false %}
-                    {% for material in topic_material %}
-                        {% if material.enable != "false" %}
-                            {% if material.slides and material.tutorial_name == page.tutorial_name %}
-                                {% assign associated_slides = true %}
-                            {% endif %}
-                            {% if material.type == "introduction" %}
-                                {% assign intro_link = true %}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}
 
                     {% if topic.references and topic.references != "" %}
                     <li class="nav-item">
@@ -84,27 +95,6 @@ layout: base
         <div class="contributors-line">By: {% include _includes/contributor-badge-list.html contributors=page.contributors %}</div>
         <blockquote class="overview">
             <h3>Overview</h3>
-            <p><strong>{% icon slides %} Slides</strong>
-            {% if associated_slides %}
-            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                {% icon slides %} Associated slides
-            </a>
-            {% else %}
-                {% if intro_link %}
-                        {% for material in topic_material %}
-                            {% if material.enable != "false" %}
-                                {% if material.type == "introduction" %}
-                                    <a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">
-                                        {{ material.title }}
-                                    </a>
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-                {% endif %}
-            {% endif %}
-            </p>
-
-
             <strong>{% icon question %} Questions</strong>
             <ul>
             {% for question in page.questions %}
@@ -136,35 +126,47 @@ layout: base
             {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
             {% endif %}
 
-            {% if page.zenodo_link != "" %}
-            <p><strong>{% icon zenodo_link %} Input Datasets:</strong> <a href="{{ page.zenodo_link }}" title="Links to data">{{ page.zenodo_link }}</a>
-            </p>
-            {% endif %}
 
 
-            {% if topic.docker_image or instances[topic.name].supported and instances[topic.name]['tutorials'][page.tutorial_name].supported %}
-            <strong>{% icon instances %} Galaxy Instances: </strong>
-            <ul>
-                {% if topic.docker_image %}
-                <li>
-                    <a href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/docker" title="Docker image for this tutorial">
-                        {% icon docker_image %} Docker image
-                    </a>
-                </li>
-                {% endif %}
+            <div>
+                <div><strong>Supporting Materials</strong></div>
 
-                {% if instances[topic.name]['tutorials'][page.tutorial_name].supported %}
-                    {% for inst in instances[topic.name]['tutorials'][page.tutorial_name]['instances'] %}
-                        {% if inst[1].supported %}
-                        <li>
-                        <a href="{{ inst[1].url }}" title="{{ inst[0] }}">
-                            {{ inst[0] }}
+                <div id="supporting_materials">
+                    {% if associated_slides or intro_link %}
+                        <div>
+                        <a class="topic-icon" href="{{ intro_target }}">
+                            {% icon slides %}
                         </a>
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endif %}
+                        </div>
+                    {% endif %}
+
+                    {% if own_material.zenodo_link %}
+                    <div>
+                        {% include _includes/resource-zenodo.html material=own_material topic=topic.name %}
+                    </div>
+                    {% endif %}
+                    {% if own_material.workflows %}
+                    <div>
+                        {% include _includes/resource-workflows.html material=own_material topic=topic.name %}
+                    </div>
+                    {% endif %}
+                    {% if own_material.tours %}
+                    <div>
+                        {% include _includes/resource-tours.html material=own_material topic=topic.name %}
+                    </div>
+                    {% endif %}
+
+
+                    {% if instances[topic.name].supported or topic.docker_image %}
+                    {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
+                    <div>
+                        {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image %}
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+
+            </div>
 
         </blockquote>
 
