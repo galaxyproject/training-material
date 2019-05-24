@@ -9,25 +9,20 @@ layout: base
 {% assign language = site.other_languages | split: ", " %}
 
 {% assign intro_link = false %}
-{% capture intro_target %}
-{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html
-{% endcapture %}
+{% assign intro_target = "" %}
 {% assign associated_slides = false %}
 {% assign own_material = null %}
 {% for material in topic_material %}
     {% if material.enable != "false" %}
         {% if material.tutorial_name == page.tutorial_name %}
+            {% assign own_material = material %}
             {% if material.slides  %}
                 {% assign associated_slides = true %}
-            {% else %}
-                {% assign own_material = material %}
             {% endif %}
         {% endif %}
         {% if material.type == "introduction" %}
             {% assign intro_link = true %}
-            {%- capture intro_target -%}
-                {{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html
-            {%- endcapture -%}
+            {% assign intro_target = site.base_url | append: '/topics/' | append: topic.name | append: '/slides/' | append: material.tutorial_name | append: '.html' %}
         {% endif %}
     {% endif %}
 {% endfor %}
@@ -50,14 +45,6 @@ layout: base
                             {% icon topic %} {{ topic.title }}
                         </a>
                     </li>
-
-                    {% if topic.references and topic.references != "" %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}#references" title="References">
-                            {% icon references %} Literature
-                        </a>
-                    </li>
-                    {% endif %}
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
@@ -129,30 +116,47 @@ layout: base
 
 
             <div>
-                <div><strong>Supporting Materials</strong></div>
-
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
-                    {% if associated_slides or intro_link %}
-                        <div>
-                        <a class="topic-icon" href="{{ intro_target }}">
-                            {% icon slides %}
+                    <ul>
+                        <li>
+                            <div>
+                    {% if associated_slides %}
+                    <div>
+                        <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
+                            {% icon slides %} Slides
                         </a>
-                        </div>
+                    </div>
+                    {% elsif intro_link %}
+                    <div>
+                        <a class="topic-icon" href="{{ intro_target }}">
+                            {% icon slides %} Introduction Slides
+                        </a>
+                    </div>
                     {% endif %}
 
                     {% if own_material.zenodo_link %}
                     <div>
-                        {% include _includes/resource-zenodo.html material=own_material topic=topic.name %}
+                        {% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}
                     </div>
                     {% endif %}
+
+                    {% if topic.references and topic.references != "" %}
+                    <div>
+                        <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}#references" title="References">
+                            {% icon references %} Literature
+                        </a>
+                    </div>
+                    {% endif %}
+
                     {% if own_material.workflows %}
                     <div>
-                        {% include _includes/resource-workflows.html material=own_material topic=topic.name %}
+                        {% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}
                     </div>
                     {% endif %}
                     {% if own_material.tours %}
                     <div>
-                        {% include _includes/resource-tours.html material=own_material topic=topic.name %}
+                        {% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}
                     </div>
                     {% endif %}
 
@@ -160,10 +164,13 @@ layout: base
                     {% if instances[topic.name].supported or topic.docker_image %}
                     {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
                     <div>
-                        {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image %}
+                        {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}
                     </div>
                     {% endif %}
                     {% endif %}
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
             </div>
