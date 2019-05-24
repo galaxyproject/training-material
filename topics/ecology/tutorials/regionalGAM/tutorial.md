@@ -229,7 +229,7 @@ Now you have a file containing all the data on the species of interest. The main
 > 2. Generate the chart using the visualization
 >    1. Inspect and expand the output data from **Flight curve** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select **Line chart (NVD 3)** as visualization type
+>    3. Select **Line chart (NVD3)** as visualization type
 >    4. Give it a proper name, e.g. `Pyronia tithonus phenology raw simple vizu`
 >    5. On **Select data** area, specify:
 >       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
@@ -291,7 +291,7 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 > 8. Generate the chart using the visualization with the x-axis corresponding to your column `"week""year"`.
 >    1. Inspect and expand the output data from **Remove beginning of a file** {% icon tool %}
 >    2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
->    3. Select **Line chart (NVD 3)** as visualization type
+>    3. Select **Line chart (NVD3)** as visualization type
 >    4. Give it a proper name, e.g. `Pyronia tithonus phenology simple vizu`
 >    5. On **Select data** area, specify:
 >       - *"Provide a label"*: `Pyronia tithonus phenology from 2003 to 2012` for example
@@ -354,7 +354,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 > > ### {% icon hands_on %} Hands-on:
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
 > > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
-> > 3. Select a visualization: `line chart (NVD 3)`
+> > 3. Select a visualization: `line chart (NVD3)`
 > > 4. Give it a proper name like `Aglais io & Pyronia tithonus phenology`
 > > 5. Select data
 > >     -  *"Provide a label"*: The name of the first species, for example `Aglais io`
