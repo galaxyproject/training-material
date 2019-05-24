@@ -22,7 +22,8 @@ layout: base
         {% endif %}
         {% if material.type == "introduction" %}
             {% assign intro_link = true %}
-            {% assign intro_target = site.base_url | append: '/topics/' | append: topic.name | append: '/slides/' | append: material.tutorial_name | append: '.html' %}
+            {% assign intro_target = material.tutorial_name | append: '.html' %}
+
         {% endif %}
     {% endif %}
 {% endfor %}
@@ -129,7 +130,7 @@ layout: base
                     </div>
                     {% elsif intro_link %}
                     <div>
-                        <a class="topic-icon" href="{{ intro_target }}">
+                        <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
                             {% icon slides %} Introduction Slides
                         </a>
                     </div>
