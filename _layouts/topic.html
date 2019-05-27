@@ -59,7 +59,7 @@ layout: base
                                        <span class="label label-default" style="{{ tag | colour_tag }}">{{ tag  }}</span>
                                   {% endfor %}
                             {% endif %}
-                            </div>
+                        </div>
                         </td>
                         {% if material.type == "introduction" %}
                             <td>
@@ -79,81 +79,27 @@ layout: base
                             {% endif %}
                         {% elsif material.type == "tutorial" %}
                             <td>
-                                {% if material.slides %}
-                                    <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">
-                                    {% icon slides %}
-                                </a>
-                                {% endif %}
+                                {% include _includes/resource-slides.html material=material topic=topic.name %}
                             </td>
                             <td>
-                                {% if material.hands_on == "external" %}
-                                <a class="topic-icon" href="{{ material.hands_on_url }}">
-                                    {% icon tutorial %}
-                                </a>
-                                {% elsif material.hands_on == "github" %}
-                                <a href="{{ site.github.repository_url }}/tree/master/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.md">
-                                    {% icon tutorial %}
-                                </a>
-                                {% elsif material.hands_on %}
-                                    <span class="btn-group">
-                                        <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html" class="btn btn-default" title="Where to run the tutorial">
-                                            {% icon tutorial %}
-                                        </a>
-                                        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                        {% for lang in language %}
-                                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
-                                                {{ lang | upcase }}
-                                            </a>
-                                        {% endfor %}
-                                    </span>
-                                {% endif %}
+                                {% include _includes/resource-handson.html material=material topic=topic.name %}
                             </td>
 
                             {% if topic.type == "use" %}
                                 <td>
-                                    {% if material.zenodo_link != nil and material.zenodo_link != "" %}
-                                    <a class="topic-icon" h href="{{ material.zenodo_link }}">
-                                        {% icon zenodo_link %}
-                                    </a>
-                                    {% endif %}
+                                    {% include _includes/resource-zenodo.html material=material topic=topic.name %}
                                 </td>
                                 <td>
-                                    {% if material.workflows %}
-                                        <a href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/workflows/" title="{{ workflow.title }}" alt="{{ material.title }} workflows">
-                                            {% icon workflow %}
-                                        </a>
-                                    {% endif %}
+                                    {% include _includes/resource-workflows.html material=material topic=topic.name %}
                                 </td>
                                 <td>
-                                    {% if material.tours %}
-                                    <a href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tours/">
-                                        {% icon interactive_tour %}
-                                    </a>
-                                    {% endif %}
+                                    {% include _includes/resource-tours.html material=material topic=topic.name %}
                                 </td>
                             {% endif %}
 
-                            {% if instances[topic.name].supported %}
-                                <td>
-                                {% if instances[topic.name]['tutorials'][material.tutorial_name].supported %}
-                                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
-                                        {% icon instances %}
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                    {% for inst in instances[topic.name]['tutorials'][material.tutorial_name]['instances'] %}
-                                        {% if inst[1].supported %}
-                                        <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
-                                            {{ inst[0] }}
-                                        </a>
-                                        {% endif %}
-                                    {% endfor %}
-                                    </ul>
-                                {% endif %}
-                                </td>
-                            {% endif %}
+                            <td>
+                                {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %}
+                            </td>
                         {% endif %}
                     </tr>
                 {% endif %}
