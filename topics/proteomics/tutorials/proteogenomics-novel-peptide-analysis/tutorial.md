@@ -11,6 +11,17 @@ objectives:
 time_estimation: "30m"
 key_points:
   - "Learning how to visualize proteomic data and to perform its genomic allocation"
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - proteogenomics-dbcreation
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - proteogenomics-dbsearch
 
 contributors:
   - subinamehta
@@ -18,6 +29,7 @@ contributors:
   - pratikdjagtap
   - jraysajulga
   - jj-umn
+  - pravs3683
 ---
 
 # Introduction
@@ -39,7 +51,7 @@ The third and the last workflow in the proteogenomics tutorial is to identifying
 
 {: .no_toc}
 
-All the files to run this workflow can be obtained from the [second tutorial]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html)) output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
+All the files to run this workflow can be obtained from the [second tutorial]({{ site.baseurl }}{% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %}) output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
 
 > ### {% icon hands_on %} Hands-on: data organization
 >
@@ -92,12 +104,12 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >
 >    - *"Save the sqlite database in your history"*: `No`
 >
->       > ### {% icon tip %} Tip
+>       > ### {% icon comment %} Querying an SQLite Database
 >       >
 >       > **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
 >       > will store the created database in the history, allowing to reuse it directly.
 >       >
->       {: .tip}
+>       {: .comment}
 >
 >    - *"SQL Query to generate tabular output"*:
 >      ```
@@ -113,7 +125,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >
 {: .hands_on}
 
-Once this step is completed, a tabular output containing novel proteoforms are displayed. These novel proteforms fulfill our criteria of not being present in the existing NCBI repository. The next step is to remove any duplicate sequences. For this, we use the Query tabular tool again to select distinct sequences from the tabular output. 
+Once this step is completed, a tabular output containing novel proteoforms are displayed. These novel proteforms fulfill our criteria of not being present in the existing NCBI repository. The next step is to remove any duplicate sequences. For this, we use the Query tabular tool again to select distinct sequences from the tabular output.
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
@@ -317,8 +329,8 @@ The Final summary displays a tabular output containing the list of novel peptide
 This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.
 
 Please look at the following tutorials in this proteogenomics series:
-- First: [Proteogenomics database creation]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html)
-- Second: [Proteogenomics database search]({{ site.baseurl }}/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html)
+1. [Proteogenomics database creation]({{ site.baseurl }}{% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
+2. [Proteogenomics database search]({{ site.baseurl }}{% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
 
 This workflow is also available at [Proteogenomics gateway](http://galaxyp-proteogenomics.duckdns.org/).
 

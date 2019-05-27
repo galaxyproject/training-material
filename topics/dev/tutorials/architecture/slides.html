@@ -589,7 +589,7 @@ All in `config/plugins/visualizations`:
 
 - `csg` - Chemical structure viewer
 - `graphviz` - Visualize graph data using [cytoscape.js](http://www.cytoscape.org/)
-- `charts` - A more elaborate builds on more Galaxy abstractions.
+- `charts` - Classic charts as well as some integrated BioJS visualizations
 - `trackster` - Genome browser, deeply tied to Galaxy internals.
 
 ---
@@ -609,7 +609,7 @@ Data providers process data before sending to browser - slice, filter, reformat,
 
 ### Interactive Environments
 
-Similar to vizualizations: config and template
+Similar to visualizations: config and template
 
 Within the base template, launch a Docker container running a web accessible
 process
@@ -951,8 +951,8 @@ INFO:galaxy.config:Logging at '10' level to 'stdout'
 galaxy.queue_worker INFO 2016-06-23 19:11:51,925 Initializing main Galaxy Queue Worker on sqlalchemy+sqlite:///./database/control.sqlite?isolation_level=IMMEDIATE
 tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loading references to tool sheds from ./config/tool_sheds_conf.xml.sample
 tool_shed.tool_shed_registry DEBUG 2016-06-23 19:11:51,951 Loaded reference to tool shed: Galaxy Main Tool Shed
-galaxy.app DEBUG 2016-06-23 19:11:51,956 Using "galaxy.ini" config file:
-/home/john/workspace/galaxy-clean/config/galaxy.ini.sample
+galaxy.app DEBUG 2016-06-23 19:11:51,956 Using "galaxy.yml" config file:
+/home/john/workspace/galaxy-clean/config/galaxy.yml.sample
 ```]
 
 ---
@@ -1122,7 +1122,7 @@ class: reduce70
 ### Job Configuration, Citation Cache
 
 .code[```
-galaxy.jobs DEBUG 2016-06-23 19:13:36,233 Loading job configuration from /home/john/workspace/galaxy-clean/config/galaxy.ini.sample
+galaxy.jobs DEBUG 2016-06-23 19:13:36,233 Loading job configuration from /home/john/workspace/galaxy-clean/config/galaxy.yml.sample
 galaxy.jobs DEBUG 2016-06-23 19:13:36,233 Done loading job configuration
 beaker.container DEBUG 2016-06-23 19:13:36,278 data file ./database/citations/data/container_file/4/48/48e563f148dc04d8b31c94878c138019862e580d.cache
 ```]
@@ -1217,7 +1217,7 @@ galaxy.tools.special_tools DEBUG 2016-06-23 19:13:38,108 Loaded history export t
 
 class: reduce70
 
-### Vizualization Plugins
+### Visualization Plugins
 
 .code[```
 galaxy.web.base.pluginframework INFO 2016-06-23 19:13:38,109 VisualizationsRegistry, loaded plugin: charts

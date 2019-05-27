@@ -27,7 +27,7 @@ contributors:
 >
 > 1. quality control
 > 2. alignment
-> 3. methylation extraction 
+> 3. methylation extraction
 > 4. visualization of methylation levels
 > 5. differentially methylated regions analysis
 >
@@ -74,7 +74,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    >
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion. 
+>    > > 1. The attentive audience of the theory part knows: Every C-meth stays a C and every normal C becomes a T during the bisulfite conversion.
 >    > > 2. Yes it is. Always be careful and have the specific characteristics of your data in mind during the interpretation of FastQC results.
 >    > {: .solution }
 >    {: .question}
@@ -106,10 +106,10 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 # Methylation bias and metric extraction
 
 > ### {% icon hands_on %} Hands-on: Methylation bias
-> 
+>
 > In this step we will have a look at the distribution of the methylation and will look at a possible bias.
 >
-> 1. **MethylDackel** {% icon tool %} with the following parameters: 
+> 1. **MethylDackel** {% icon tool %} with the following parameters:
 > - Choose at the first option `Load reference genome from` `Local cache` and for `Using reference genome` the value `hg38`.
 > - Select for the option `sorted_alignments.bam` the computed bam file of step 4 of the `bwameth` alignment.
 > - Use for `What do you want to do?` the value `Determine the position-dependent methylation bias in the dataset, producing diagnostic SVG images`.
@@ -123,7 +123,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    > 2. If we would trim, what would be the start and the end positions?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable. 
+>    > > 1. The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable.
 >    > > 2. To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.
 >    > {: .solution }
 >    {: .question}
@@ -154,15 +154,15 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 
 > ### {% icon hands_on %} Hands-on:
 >
-> In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark. 
+> In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark.
 >
-> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters: 
+> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - Use the result of MethylDackel to transform it to a bigWig file.
 >
 >      > ### {% icon tip %} Tip: Database edit
 >      >
 >      > It can happen that you can not select the correct input file. In this case you have to add meta information about the used genome to the file.
->      > * Click on the pencil of the correct history item. 
+>      > * Click on the pencil of the correct history item.
 >      > * Change `Database/Build:` to the genome you used.
 >      > * In our case the correct genome is `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >      {: .tip}
@@ -191,12 +191,12 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 >    > {: .solution }
 >    {: .question}
 >
->    > ### {% icon tip %} Tip: UCSC - Ensembl convert
+>    > ### {% icon comment %} UCSC - Ensembl convert
 >    >
 >    > * Download the `Replace information file` for hg38 chromosome: [Download](https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt) and import it to Galaxy.
 >    > * **Replace column** {% icon tool %}:
 >    >    - Choose for `File in which you want to replace some values` the previous used `NB1_CpG.meth.bedGraph` file and for `Replace information file`  conversion file. For `Which column should be replaced?` choose `Column: 1`, for `Skip this many starting lines` a `1` and for `Delimited by` `Tab`.
->    {: .tip}
+>    {: .comment}
 >
 > 3. To save compute time we prepared the converted files for you. Import the files: `NB1_CpG.meth_ucsc.bedGraph`, `NB2_CpG.meth_ucsc.bedGraph`, `BT089_CpG.meth_ucsc.bedGraph`, `BT126_CpG.meth_ucsc.bedGraph`, `BT198_CpG.meth_ucsc.bedGraph` and `MCF7_CpG.meth_ucsc.bedgraph`.
 > 4. Compute the matrix and plot the profile as described above.
@@ -214,7 +214,7 @@ The data we use in this tutorial is available at [Zenodo](https://zenodo.org/rec
 > With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.
 >
 > 1. **Galaxy** {% icon tool %}: Import from the data library the files `NB1_CpG.meth.bedGraph`, `NB2_CpG.meth.bedGraph` and `BT198_CpG.meth.bedGraph`.
-> 2. **Metilene** {% icon tool %}: 
+> 2. **Metilene** {% icon tool %}:
 >    - Choose for the first option `Input group 1` the imported files starting with ``NB`` and for `Input group 2` the imported files `BT198_CpG.meth.bedGraph`.
 >    - Select for the option `BED file containing regions of interest` the imported BED file CpGIslands.bed.
 > 3. More information about metilene can be found here: https://www.bioinf.uni-leipzig.de/Software/metilene

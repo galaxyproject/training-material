@@ -19,7 +19,7 @@ follow_up_training:
   -
     type: "internal"
     topic_name: sequence-analysis
-    tutorials: 
+    tutorials:
       - mapping
 time_estimation: "1H"
 key_points:
@@ -504,7 +504,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 > ```
 > 42 40 26 27 8 7 11 4 2 3
 > ```
-> 
+>
 > 1. Subtract the threshold
 >
 >     ```
@@ -522,7 +522,7 @@ It is usual that the quality of the sequences is worse for the reverse than for 
 > 3. Choose the position of the minimum (`-25`) as the trimming position
 >
 > Therefore, the read is trimmed to the first four bases, which have quality values
-> 
+>
 > ```
 > 42 40 26 27
 > ```
