@@ -49,7 +49,7 @@ Depending on the analyte of interest, the sample type and the mass spectrometer,
 
 As MSI measures only unfractionated molecules (MS1), identification of the resulting m/z features requires matching them to a list of known m/z features. The easiest approach is to match the MSI m/z features to existing databases such as UniProt for proteins or lipidmaps for lipids. More accurate identification is obtained by performing additional mass spectrometry experiments (either on the same or on a similar sample, e.g. adjacent slice from a tissue) that also measure the fragmented molecules (MS2) and thereby also allow accurate identification of isobaric molecules. This tandem mass spectrometry approach can either be done in situ directly on the sample or by transferring the sample to a tube and bringing it into solution for liquid-chromatography tandem mass spectrometry (LC-MS/MS). 
 
-In this tutorial we will determine and identify N-linked glycans by differential analysis of a control murine kidney sections with a section treated with PNGase F. The data analysis steps can be transferred to any other application that requires finding differential analytes, such as for biomarker discovery. 
+In this tutorial we will determine and identify N-linked glycans by differential analysis of a control (untreated) murine kidney section and a section treated with PNGase F. The data analysis steps can be transferred to any other application that requires finding differential analytes, such as for biomarker discovery. 
 
 
 > ### Agenda
