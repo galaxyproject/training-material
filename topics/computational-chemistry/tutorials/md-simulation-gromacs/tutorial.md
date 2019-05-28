@@ -76,9 +76,9 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    {% include snippets/create_new_history.md %}
 >
 > 2. Upload the file in Galaxy from the PDB:
->    >    ```
->    > https://files.rcsb.org/download/1AKI.pdb
->    >    ```
+>    ```
+>    https://files.rcsb.org/download/1AKI.pdb
+>    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
@@ -87,12 +87,14 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
 >
-> Alternatively, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
->    >    ```
->    > https://zenodo.org/record/2598415
->    >    ```
 {: .hands_on}
 
+> ### {% icon comment %} Alternative upload
+> As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
+>    ```
+>    https://zenodo.org/record/2598415
+>    ```
+{: .comment}
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?
 >
@@ -289,11 +291,12 @@ A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a 
 ![GROMACS workflow]({{ site.baseurl }}{% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
 
 # Conclusion
+{:.no_toc}
 
 After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 
 ![Trajectory]({{ site.baseurl }}{% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
 
 
-{:.no_toc}
+
 

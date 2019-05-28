@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Unicycler Assembly"
 zenodo_link: "https://doi.org/10.5281/zenodo.940733"
+level: Introductory
 tags:
   - prokaryote
 questions:
@@ -16,7 +17,7 @@ follow_up_training:
   -
     type: "internal"
     topic_name: assembly
-    tutorials: 
+    tutorials:
       - ecoli_comparison
 time_estimation: "4h"
 key_points:
@@ -32,7 +33,7 @@ contributors:
 
 # The goal: *E. coli* C-1 assembly
 
-In this tutorial we assemble and annotate the genome of *E. coli* strain [C-1](http://cgsc2.biology.yale.edu/Strain.php?ID=8232). This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull ([Bull et al. 1997](https://www.ncbi.nlm.nih.gov/pubmed/9409816), [Bull & Wichman 1998](https://www.ncbi.nlm.nih.gov/pubmed/9767038), [Wichman et al. 1999](https://www.ncbi.nlm.nih.gov/pubmed/10411508)) have been performed using this strain and bacteriophage phiX174.
+In this tutorial we assemble and annotate the genome of *E. coli* strain [C-1](http://cgsc2.biology.yale.edu/Strain.php?ID=8232). This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull ({% cite Bull1997 %}, {% cite Bull1998 %}, {% cite Wichman1999 %}) have been performed using this strain and bacteriophage phiX174.
 
 To sequence the genome we have obtained the strain from the [Yale E. coli Stock Center](http://cgsc2.biology.yale.edu/). The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic DNA was isolated. The DNA was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end reads. To generate high length reads we used the Oxford Nanopore MinION machine.
 
@@ -87,19 +88,21 @@ In this analysis we will perform two tasks: (1) assembly and (2) annotation. Bel
 
 ![Logo unicycler](https://github.com/rrwick/Unicycler/raw/master/misc/logo.png)
 
-For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication by Wick:[2017](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005595)). Unicycler is designed specifically for *hybrid assembly* (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
+For assembly we will be using [Unicycler](https://github.com/rrwick/Unicycler) (also see publication {% cite Wick2017 %}). Unicycler is designed specifically for *hybrid assembly* (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:
 
-![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From Wick:2017). In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool.")
+![Unicycler process](../../images/unicycler.png "Simplified view of the Unicycler assembly process (From {% cite Wick2017 %}) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool. {% cite Wick2017 %}")
 
-As you can see Unicycler relies heavily on [SPAdes](http://cab.spbu.ru/software/spades/) and [Pilon](https://github.com/broadinstitute/pilon/wiki). We will briefly describe these two tools.
+
+
+As you can see Unicycler relies heavily on SPAdes ({% cite Bankevich2012 %}) and [Pilon](https://github.com/broadinstitute/pilon/wiki). We will briefly describe these two tools.
 
 #### Spades
 
 ##### Multisized deBruijn graph
 
-Assemblers usually construct graphs for *k*-mers of a fixed size. We have noted that when *k* is small it is difficult to resolve the repeats. If *k* is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for *k* (that are either manually set or inferred automatically) to create a *multisized* graph that minimized tangledness and fragmentation by combining various *k*-mers (see [Bankevich:2012](http://online.liebertpub.com/doi/full/10.1089/cmb.2012.0021)):
+Assemblers usually construct graphs for *k*-mers of a fixed size. We have noted that when *k* is small it is difficult to resolve the repeats. If *k* is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for *k* (that are either manually set or inferred automatically) to create a *multisized* graph that minimized tangledness and fragmentation by combining various *k*-mers ({% cite Bankevich2012 %})):
 
-![Multigraph approach implemented in SPAdes](../../images/multiGraph.jpg "Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from [Bankevich:2012](https://www.ncbi.nlm.nih.gov/pubmed/22506599)")
+![Multigraph approach implemented in SPAdes](../../images/multiGraph.jpg "Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from {% cite Bankevich2012 %}.")
 
 ##### Read pair utilization
 
@@ -107,7 +110,7 @@ While the use of paired reads and mate pairs is key to genome assembly, and not 
 
 ##### Error correction
 
-Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses [BayesHammer](https://goo.gl/1iGkMe) to correct the reads. Here is a brief summary of what it does (see [Nikolenko:2013](https://goo.gl/1iGkMe)):
+Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses BayesHammer ({% cite Nikolenko2013 %}) to correct the reads. Here is a brief summary of what it does:
 
 1. SPAdes (or rather BayesHammer) counts *k*-mers in reads and computes *k*-mer statistics that take into account base quality values.
 2. A [Hamming graph](https://en.wikipedia.org/wiki/Hamming_graph) is constructed in which *k*-mers are nodes. In this graph edges connect nodes (*k*-mers) if they differ from each other by a number of nucleotides up to a certain threshold (the [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance)). The graph is central to the error correction algorithm.
@@ -116,19 +119,19 @@ Sequencing data contains a substantial number of sequencing errors that manifest
 5. Solid *k*-mers are mapped back to the reads.
 6. Reads are corrected using solid *k*-mers:
 
-![Read correction with BayesHammer](../../images/readCorrection.jpg "Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From [Nikolenko:2013])")
+![Read correction with BayesHammer](../../images/readCorrection.jpg "Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From {% cite Nikolenko2013 %})")
 
 In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.
 
 #### Pilon
 
-Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by [Walker:2014](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0112963) highlights the steps of this process:
+Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by {% cite Walker2014 %} highlights the steps of this process:
 
-![Pilon workflow](../../images/pilon.png "The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From Walker:2014)")
+![Pilon workflow](../../images/pilon.png "The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From {% cite Walker2014 %})")
 
 ### Annotation
 
-For annotation we are using [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml) (also see [Seeman:2014](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btu153)). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from [Seeman:2014](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btu153)):
+For annotation we are using [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml) (also see {% cite Seemann2014 %}). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from {% cite Seemann2014 %}):
 
 | Feature | Tool used by Prokka |
 |---------|----------------------|
@@ -154,7 +157,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 >   - Create new history (if you are new to Galaxy see [Galaxy 101 tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first).
 >
 > 2. **Get data** {% icon tool %} as shown below (see [these slides]({{site.baseurl}}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for an introduction on how to load data into Galaxy):
-> 
+>
 >       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
 >
 > 3. Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
@@ -163,7 +166,7 @@ In this example we will use a downsampled version of *E. coli* C-1 Illumina and 
 > 4. And paste them into the **Galaxy upload**:
 >
 >
->       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click <b>Paste/Fetch data</b> link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
+>       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click **Paste/Fetch data** link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
 >
 {: .hands_on}
 
@@ -174,7 +177,7 @@ If all goes well you will see datasets uploading and changing states from gray t
 
 ### Assess Read Quality
 
-To assess quality we will use two tools: [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to generate quality statistics and [multiQC](http://multiqc.info/) to summarize these statistics.
+To assess quality we will use two tools: FastQC ({% cite FastQC %}) to generate quality statistics and multiQC ({% cite Ewels2016 %}) to summarize these statistics.
 
 > ### {% icon hands_on %} Hands-on: Quality Control
 >
@@ -220,7 +223,7 @@ Now it is time to perform assembly.
 
 ## Assess Assembly quality with Quast
 
-[Quast](http://quast.bioinf.spbau.ru) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
+[Quast](http://quast.bioinf.spbau.ru) ({% cite Gurevich2013 %}) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
 
 > ### {% icon hands_on %} Hands-on: Assembly Quality
 >

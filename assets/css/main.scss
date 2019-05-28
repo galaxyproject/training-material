@@ -450,6 +450,26 @@ footer {
     background-color: #999999;
 }
 
+.level {
+    color: lightgray;
+    margin-right: 0.5em;
+
+    .fa {
+        font-size: 0.9em;
+    }
+    &.introductory i:first-of-type {
+        color: green;
+    }
+    &.intermediate i:not(:last-of-type) {
+        color: orange;
+    }
+    &.advanced {
+        color: red;
+    }
+}
+
+
+
 .visually-hidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -550,5 +570,54 @@ nav[data-toggle='toc'] {
         height: 1.25em;
         border-radius: 50%;
         margin: 0.25em;
+    }
+}
+
+
+div.highlight {
+	position: relative;
+}
+div.highlight .btn{
+	-webkit-transition:opacity .3s ease-in-out;
+	-o-transition:opacity .3s ease-in-out;
+	transition:opacity .3s ease-in-out;
+	opacity:0;
+	padding:2px 6px;
+	position:absolute;
+	right:4px;
+	top:4px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+div.highlight:hover .btn,div.highlight .btn:focus{
+	opacity:1
+}
+
+#supporting_materials ul li {
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        div {
+            a.topic-icon {
+                padding: 0 .5rem 0 .5rem;
+            }
+
+            a.topic-icon.btn {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        div:first-child {
+            a.topic-icon {
+                padding-left: 0;
+            }
+        }
+
+        div:not(:first-child):before {
+            content: " - ";
+        }
     }
 }
