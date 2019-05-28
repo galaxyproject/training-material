@@ -412,7 +412,7 @@ functional changes to the mako files.
 >    </html>
 >    ```
 >
-> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press [Enter]
+> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press <kbd>Enter</kbd>
 >   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
 >
 {: .hands_on}
