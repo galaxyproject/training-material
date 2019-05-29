@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 enable: false
 
 title: Running molecular dynamics simulations using NAMD
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/3234841'
 level: Intermediate
 questions:
 - How do I use the NAMD engine in Galaxy?
@@ -75,6 +75,31 @@ This tool will:
 - solvate the protein-ligand complex, using the TIP3P water model
 - neutralise the system, using 0.05M NaCl
 - conduct a short energy minimisation 
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. Create a new history for this tutorial.
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. Import the files from the Zenodo link provided.
+>    ```
+>    https://zenodo.org/record/3234841/files/cbh1test.crd
+>    https://zenodo.org/record/3234841/files/cbh1test.psf
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>
+> 3. Rename the datasets.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Check that the datatype is correct. The crd file should have the CRD datatype and the psf file the PSF datatype.
+>
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
+>
+{: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: initial processing
 >
@@ -170,7 +195,7 @@ Both the CHARMM preparatory workflow and the NAMD simulation workflow are availa
 ![Snapshot of NAMD analysis workflow]({{ site.baseurl }}{% link topics/computational-chemistry/images/NAMD_workflow.png %} "A simple NAMD simulation workflow")
 
 # Conclusion
+{:.no_toc}
 After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 
-{:.no_toc}
 
