@@ -644,7 +644,7 @@ NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/bl
 >
 > 2. Add the role `galaxyproject.nginx` to your playbook and have it run as root.
 >
-> 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally because it's 2019, we will include certbot for SSL from the start. There is no longer any valid excuse for not deploying SSL.
+> 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
 >    Add the following to your group variables file:
 >    {% raw %}
