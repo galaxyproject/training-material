@@ -32,17 +32,17 @@ In microbiology, identifying links between genotype and phenotype is key to unde
 
 Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.
 
-When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene. 
+When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.
 
 ![Illustration of tnseq Method](../../images/tnseq/principle_tnseq.png "Transposon insertion sequencing method (from <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
 1. **Data production** (**a** in the previous image)
 
-    An initial population of genomes is mutated so that the genome of the bacteria is saturated with transposon insertions. A library is called *saturated* if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions, to identify the impact of the insertions on the bacteria growth. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion. 
+    An initial population of genomes is mutated so that the genome of the bacteria is saturated with transposon insertions. A library is called *saturated* if in the genomes across the whole population of bacteria, each potential insertion site has at least one insertion. The population is then divided into several media containing different growth conditions, to identify the impact of the insertions on the bacteria growth. After growth, the regions flanking the insertion are amplified and sequenced, allowing to determine the location of the insertion.
 
 2. **Analysis** (**b** in the previous image)
 
-    The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of reads on each site. If a gene present several insertions, like the two leftmost genes in *Condition A*, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in *Condition A*, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene. 
+    The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of reads on each site. If a gene present several insertions, like the two leftmost genes in *Condition A*, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in *Condition A*, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene.
 
 Two type of transposon insertion methods exist:
 - Gene disruption, where we analyze only the disruptions. This will covered by of this tutorial
@@ -63,20 +63,20 @@ Different types of transposons can be used depending of the goal of your analysi
         This transposon do not require any target sequences. It is useful for specie where it is difficult to build mariner based transposons. But it has a preference for high GC content, causing insertion bias
 
 - Defined sequence transposon
-    
+
     It can be used to study interactions in pathways of interest, but also more precise targeting (small genes, pathways) for specific analyses
 
-Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries. 
+Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
 
 After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the tranposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.
 
-As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads and not a good coverage of the entire genome. Long reads are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %}. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI. 
+As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads and not a good coverage of the entire genome. Long reads are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %}. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.
 
 **In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformely,** with two specific regions used to specifically sequence the region upstream of the insertion {% cite Santiago2015 %}
 
 ![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "Structure of the transposon containing several parcodes and adapters (from <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
 
-The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp upstream the restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence. 
+The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp upstream the restriction site. These two site are the 5' and 3' limits to the genomic DNA we want to sequence.
 
 1. After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream, where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.
 
@@ -89,7 +89,7 @@ Because of this complex tranposon structure, the reads obtained after sequencing
 
 Once the genomic sequences are extracted from the initial reads (i.e. remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.
 
-We will apply this approach in this tutorial using a subset of TnSeq reads from {% cite Santiago2015 %}. 
+We will apply this approach in this tutorial using a subset of TnSeq reads from {% cite Santiago2015 %}.
 
 > ### Agenda
 >
@@ -146,12 +146,12 @@ Because of the experimental design for transposon insertion sequencing, the raw 
 1. We separate the reads of each experimental condition based on a 8 bp barcode at the beginning of each read. These barcodes were added to be able to pool different conditions together before the transposon insertion and sequencing.
 2. The tail of each set of read is then removed. It immediately follows the 3 bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream
 3. To be sure all our reads have been trimmed correctly we filter out the reads too large.
-4. We then separate the reads per transposon construct 
+4. We then separate the reads per transposon construct
 5. We remove the remaining transposon sequence containing MmeI.
 
 ## Separate reads by experimental conditions
 
-First we divide the initial data set by experimental conditions using the 8 bp barcode added during the Illumina multiplexing protocol. 
+First we divide the initial data set by experimental conditions using the 8 bp barcode added during the Illumina multiplexing protocol.
 
 > ### {% icon hands_on %} Hands-on: Inspect condition barcodes
 >
@@ -249,7 +249,7 @@ Our reads are now divided by condition. We need to trim their tail containing th
 >    > > More than 99% of the reads contained the adapter in both conditions (line `Reads with adapters` in the reports)
 >    > {: .solution }
 >    {: .question}
-> 
+>
 > 3. **Cutadapt** {% icon tool %} to filter reads based on length with:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
 >      - {% icon param-collection %} *"FASTQ/A file"*: collection output of the previous **Cutadapt**
@@ -277,7 +277,7 @@ We can see that is both samples the reads have pass the filtering at more than 9
 The constructs used in this experiment contain different strengths and directions of promoters. We use the different constructs as replicates, so we need now to separate the reads based on the construct specific 3 bp barcodes.
 
 > ### {% icon comment %} Comment
-> In addition of disrupting a gene at the location of the insertion, such constructs can modify the expression of either upstream or downstream regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis. 
+> In addition of disrupting a gene at the location of the insertion, such constructs can modify the expression of either upstream or downstream regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Inspect construct barcodes
@@ -414,9 +414,9 @@ In our case, the sequenced reads cover the  5' region flanking region of the TA 
 
 ## Identify TA sites positions
 
-In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site. 
+In order to get the coverage on each TA site we need to prepare a file containing the position of each TA site.
 
-As you can see on the [previous figure](#figure-4), the read can cover one side or the other of the TA depending on the direction of insertion of the transposon. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site. 
+As you can see on the [previous figure](#figure-4), the read can cover one side or the other of the TA depending on the direction of insertion of the transposon. Depending on the direction of insertion the coverage will be counted on the leftmost position of the TA site or on the rightmost. As we are not considering strand separately in this analyses, we will consider both count as attached to the leftmost base of the TA site. To do that we will create two list of TA site positions, listing the 5' end of each TA site for forward and reverse strand, and then merge them to get a global count per TA site.
 
 > ### {% icon hands_on %} Hands-on: Get TA sites coordinates
 >
@@ -572,7 +572,24 @@ We now have a read count for each nucleotide at the different TA sites. The inse
 >
 {: .hands_on}
 
-**TODO: add a question that checks the results**
+> ### {% icon question %} Questions
+>
+> Take a look at the output files:
+>
+> 1. What are the data contained in the two columns ?
+> 2. What do the 5 first lines of the blunt sample in the treatment with the condition look like ?
+>
+> > ### {% icon solution %} Solution
+> > 1. The first column contain the position of the TA site, and the second collumn the number of insertions observed.
+> > 2. Your five first lines should look like this :
+> >     - One collumn with the positions : `4,10,16,42,79`
+> >     - One collumn with the number of insertions : `0,3,20,0,11`
+> >
+> > If your counts are only zeros in one of the blunt sample, you might have made a mistake in merging the counts to the TA sites.
+> >
+> {: .solution }
+{: .question}
+
 
 # Predicting Essential Genes with Transit
 
@@ -583,16 +600,44 @@ Now that we have the counts of insertions per TA site, we can use them to predic
 1. **Annotation dependent method**
 
     The total read count an/or percentage of disrupted site are computed per annotated regions. The values are then compared to the rest of the genome to classify the genes into the categories *essential* or *non-essential*.
-  
+
 2. **Annotation independent method**
 
-    The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories *essential* or *non-essential*. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as *essential*, *non-essential*, or *domain essential* according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as *essential* or *non essential*. 
+    The total read count and/or disrupted sites are computed independently of annotated regions. One of these methods is using a sliding window. Each window is then classified into the categories *essential* or *non-essential*. After the windows have been classified, they are linked annotations, and the genes/regions can be classified as *essential*, *non-essential*, or *domain essential* according to the classification of the windows they cover. The same classification can be done using HMM based methods instead of sliding windows. In that case, each insertion site will be predicted as *essential* or *non essential* {% cite Chao2016 %}).
 
-Here we will use the annotation dependent method, using Transit. **TODO: add some words about Transit + citations**
+To predict the essential genes in our datasets, we will use the Transit tool {% cite dejesus2015transit %}.
+
+## Transit
+Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 tranposon. In total, 3 methods are available to assess gene essentiality in one sample.
+
+#### Gumbel method
+
+The Gumbel method performs a gene by gene analysis of essentiality for Mariner data based on the longest consecutive sequence of TA site without insertions in a gene. This allows to identify essential domains regardless of insertion at other location of the gene.
+
+The distribution governing the longest sequence of consecutive non insertion is  characterized by a Gumbel distribution. This distribution is often used to model the distribution of maximums (or minimums) of a variable (See the [Wikipedia article on Gumbel distribution ](https://en.wikipedia.org/wiki/Gumbel_distribution)). The Gumbel distribution is used as a likelihood of non-essentiality, as the longest run of non-insertions should follow what is expected given the global distribution of non-insertion runs. The essential genes, whose runs of empty sites are longer than expected, are modeled through a normalized sigmoid function. This function reflect that any gene can be essential, except the gene were the run of non insertions are too smell to represent a domain.
+
+The total distribution of the maximum run of non-insertion per gene is therefore represented y a bimodal distribution composed of a Gumbel distribution of non-essential genes and a normalized sigmoid function of essential ones. The parameters of these distributions are estimated through a Metropolis–Hastings (MH) sampling procedure {% cite dejesus2013bayesian %}).
+
+Using these two distribution, the posterior probability of each distribution is calculated for each gene. Some genes can be classified as "Unclear" if one probability is not winning over the other. Some other can be classified as "Small" if the space of TA sites covered by the gene is insufficient to categorize it (See the [Transit Manual for the Gumbel method](https://transit.readthedocs.io/en/latest/transit_methods.html#gumbel)).
+
+#### HMM method
+
+The HMM method performs a whole genome essentiality analysis for Mariner data. This approach uses the clustering of TA sites along the genome to identify essential regions, and then apply results to the annotation to identify genes containing essential regions. The HMM method provides a classification for each TA site into 4 states : Essential, Non-Essential, Growth Advantage, and Growth Defect.
+
+This method require a well-saturated library and is sensitive to sparse datasets {% cite dejesus2013hidden %}.
+
+#### Tn5Gaps method
+
+The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method {% cite griffin2011high %} and adapted to Tn5 transposon specificities.  The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
+creating libraries with lower insertion rates. The difference from the Gumbel method described above is that the run of non insertion are computer on the whole genome instead of individual genes. The longest run of non insertion considered is not the longest within the gene, but the longest one overlapping the gene.
+
 
 ## Predict the essentiality of genes
 
-In order to use transit, we need to create a an annotation file in the `prot_table` format, specifique to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.
+In our case, we will use the Gumbel method, because we are using Mariner data and our data look pretty sparse. Gumbel is therefore the safe choice compared to HMM which is more sensitive to sparse data.
+
+
+In order to use transit, we need to create a an annotation file in the `prot_table` format, specific to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.
 
 > ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
 > 1. Check that the format of `staph_aur.gff` file is `gff3` and not `gff`
@@ -605,10 +650,11 @@ In order to use transit, we need to create a an annotation file in the `prot_tab
 >
 {: .hands_on}
 
+
 Now that we have prepared the annotation file, we can use the count per TA site to predict essential genes using Transit tool, with some customized parameters:
 
 - The number of sites with a single read could be artefactual. We ignore then counts lower than 2
-- A disrupted site that would be very close to the border of the gene may not actually disturb the gene function, and therefore not be an actual signal of disruption. We ignore then insertion near the extremities of the genes. 
+- A disrupted site that would be very close to the border of the gene may not actually disturb the gene function, and therefore not be an actual signal of disruption. We ignore then insertion near the extremities of the genes.
 
 > ### {% icon hands_on %} Hands-on: Predict gene essentiality with Transit
 >
