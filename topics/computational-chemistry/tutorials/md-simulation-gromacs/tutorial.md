@@ -226,7 +226,7 @@ Having stabilized the temperature of the system with NVT equilibration, we also 
 
 > ### {% icon hands_on %} Hands-on: NPT dynamics
 >
-> **GROMACS NVT equilibration** {% icon tool %} with the following parameters:
+> **GROMACS NPT equilibration** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
 >    - {% icon param-file %} *"Checkpoint (TOP) file"*: Checkpoint file produced by NVT equilibration
