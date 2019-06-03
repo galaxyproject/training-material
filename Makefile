@@ -126,10 +126,14 @@ check-yaml: ## lint yaml files
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references ## run all checks
+check-snippets: ## lint snippets
+	./bin/check-for-trailing-newline
+.PHONY: check-snippets
+
+check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
 
-lint: check-yaml check-frontmatter check-workflows check-references ## run all linting checks
+lint: check-yaml check-frontmatter check-workflows check-references check-snippets ## run all linting checks
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
