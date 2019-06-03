@@ -1,0 +1,852 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Analysis of molecular dynamics simulations</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:title" content="Galaxy Training: Analysis of molecular dynamics simulations" />
+        <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/computational-chemistry" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Computational chemistry
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fanalysis-md-simulations%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fanalysis-md-simulations%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fanalysis-md-simulations%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fanalysis-md-simulations%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fanalysis-md-simulations%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Analysis of molecular dynamics simulations",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "computational-chemistry / analysis-md-simulations / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Analysis of molecular dynamics simulations' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Analysis of molecular dynamics simulations",
+    "description": "Analysis of molecular dynamics simulations",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "Analysis of molecular dynamics simulations\\nThe questions this  addresses are:\n - Which analysis tools are available?\n\n\\nThe objectives are:\n - Learn which analysis tools are available.\n - Analyse a protein and discuss the meaning behind each analysis.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.html",
+      "name": "Setting up molecular systems",
+      "description": "Hands-on for 'Setting up molecular systems' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html",
+      "name": "Running molecular dynamics simulations using NAMD",
+      "description": "Hands-on for 'Running molecular dynamics simulations using NAMD' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/2537734",
+      "name": "Training data for Analysis of molecular dynamics simulations tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Chris Barnett"
+    },
+    {
+      "@type": "Person",
+      "name": "Tharindu Senapathi"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Chris Barnett"
+    },
+    {
+      "@type": "Person",
+      "name": "Tharindu Senapathi"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Computational chemistry",
+      "description": "Modelling, simulation and analysis of biomolecular systems",
+      "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Analysis of molecular dynamics simulations</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#chrisbarnettster" class="contributor-badge"><img src="https://avatars.githubusercontent.com/chrisbarnettster" alt="Chris Barnett">Chris Barnett</a>, <a href="/training-material/hall-of-fame#tsenapathi" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tsenapathi" alt="Tharindu Senapathi">Tharindu Senapathi</a>, <a href="/training-material/hall-of-fame#simonbray" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Simon Bray">Simon Bray</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>Which analysis tools are available?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn which analysis tools are available.</li>
+            
+            <li>Analyse a protein and discuss the meaning behind each analysis.</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/computational-chemistry">Computational chemistry</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Setting up molecular systems:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Running molecular dynamics simulations using NAMD:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+
+
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+
+                    
+                    <div>
+                        
+<a class="topic-icon" href="https://zenodo.org/record/2537734">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+
+                    </div>
+                    
+
+                    
+                    <div>
+                        
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/" title="Workflows" alt="Analysis of molecular dynamics simulations workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                    </div>
+                    
+                    
+
+
+                    
+                    
+                    <div>
+                        
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+
+                    </div>
+                    
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Molecular dynamics simulations return highly complex data. The Cartesian positions of each atom of the system (thousands or even millions) are recorded at every time step of the trajectory; this may again be thousands to millions of steps in length. Therefore, some kind of further analysis is needed to extract useful information from the data.</p>
+
+<p>In this tutorial, we illustrate some of the analytical tools able to investigate conformational changes by analysis of a typical short protein simulation, such as for CBH1.</p>
+
+<p>There are other analysis tools available; you are encouraged to try these out too.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#analysis-with-bio3d" id="markdown-toc-analysis-with-bio3d">Analysis with BIO3D</a>    <ol>
+      <li><a href="#rmsd" id="markdown-toc-rmsd">RMSD</a></li>
+      <li><a href="#rmsf" id="markdown-toc-rmsf">RMSF</a></li>
+      <li><a href="#pca" id="markdown-toc-pca">PCA</a></li>
+      <li><a href="#workflow-vs-individual-tools" id="markdown-toc-workflow-vs-individual-tools">Workflow vs. individual tools</a></li>
+    </ol>
+  </li>
+  <li><a href="#further-analysis" id="markdown-toc-further-analysis">Further analysis</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+
+<p>The data required can be generated by completing the <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">NAMD simulation tutorial</a>.  Access it from your history. Alternatively, download the data from the Zenodo link provided.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-cellulose-simulation-trajectory"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload cellulose simulation trajectory</h3>
+
+  <ol>
+    <li>Create a new history</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/2537734">Zenodo</a>, or from your history, if you completed the previous <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">NAMD simulation tutorial</a>:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2537734/files/cbh1test.dcd
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename the file ‘CBH1 trajectory’</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="analysis-with-bio3d">Analysis with BIO3D</h1>
+
+<p>We’ll carry out some basic analysis by calculating RMSD, RMSF and PCA. The tools use the <a href="http://thegrantlab.org/bio3d/index.php">Bio3D package</a>, developed by the <a href="http://thegrantlab.org/">Grant lab</a>.</p>
+
+<h2 id="rmsd">RMSD</h2>
+
+<p>RMSD, or root-mean-square deviation, is a standard measure of structural distance between coordinates. It measures the average distance between a group of atoms (e.g. backbone atoms of a protein). If we calculate RMSD between two sets of atomic coordinates - for example, two time points from the trajectory - the value is a measure of how much the protein conformation has changed. <a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions">Wikipedia</a> provides more information.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculate-rmsd"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate RMSD</h3>
+
+  <p><strong>RMSD Analysis</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“dcd trajectory input”</em>: Trajectory file</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pdb input”</em>: Structure file</li>
+    <li><em>“Select domains”</em>: <code class="highlighter-rouge">Calpha</code> (calculate RMSD only for the C-alpha domain of the protein)</li>
+  </ul>
+
+</blockquote>
+
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/RMSD_plot_33.png" alt="Snapshot of RMSD plot" /><figcaption><span class="figcaption-prefix">Figure 1:</span> RMSD plot for a short CBH1 simulation</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/RMSD_Histogram_Plot_34.png" alt="Snapshot of RMSD histogram" /><figcaption><span class="figcaption-prefix">Figure 2:</span> RMSD histogram for a short CBH1 simulation</figcaption></figure>
+
+<blockquote>
+  <blockquote class="question">
+    <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>What do the features in the RMSD plot tell us?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>The increase in the RMSD plot with time shows the protein steadily deviates from its original conformation.</p>
+
+      <p>The three peaks visible in the histogram suggests the presence of three main conformations which are accessed during the trajectory.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="rmsf">RMSF</h2>
+
+<p>The root-mean-square fluctuation (RMSF) measures the average deviation of a particle (e.g. a protein residue) over time from a reference position (typically the time-averaged position of the particle). Thus, RMSF analyzes the portions of structure that are fluctuating from their mean structure the most (or least).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculate-rmsf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate RMSF</h3>
+
+  <ol>
+    <li><strong>RMSF Analysis</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“dcd trajectory input”</em>: Trajectory file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pdb input”</em>: Structure file</li>
+        <li><em>“Select domains”</em>: <code class="highlighter-rouge">Calpha</code> (calculate RMSF only for the C-alpha domain of the protein)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/rmsf_plot_23.png" alt="Snapshot of RMSF plot" /><figcaption><span class="figcaption-prefix">Figure 3:</span> RMSF plot for a short CBH1 simulation</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+  <p>What can we learn from the features in the RMSF plot?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Higher RMSF values most likely are loop regions with more conformational flexibility, where the structure is not as well defined.</p>
+
+    <p>This allows a link with experimental spectroscopic techniques which detect the secondary structure of a protein.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="pca">PCA</h2>
+
+<p>Principal component analysis (PCA) converts a set of correlated observations (movement of all atoms in protein) to a set of principal components which are linearly independent (or uncorrelated). Mathematically, it is a transformation of the data to a new coordinate system, in which the first coordinate represents the greatest variance, the second coordinate represents the second most variance, and so on.</p>
+
+<p>You can read more about PCA on <a href="https://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia</a>. In a nutshell, PCA takes a complex dataset with many variables and tries to distill the variables down to a few ‘principal components’ which still preserve most of the differences between the data.</p>
+
+<p>In summary:</p>
+<ul>
+  <li>The <strong>PCA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool will calculate and return a PCA to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory. THe tool returns several images of the PCA and the raw data in tab-separated format.</li>
+  <li>The <strong>PCA visualization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool will carry out PCA and return a trajectory of the selected principle component. This trajectory is useful for visualisation and further investigating the interesting modes and changes that occur within a selected principle component.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculate-pca"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate PCA</h3>
+
+  <ol>
+    <li><strong>PCA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“dcd trajectory input”</em>: Trajectory file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pdb input”</em>: Structure file</li>
+        <li><em>“Use singular value decomposition (SVD) instead of default eigenvalue decomposition ?”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Select domains”</em>: <code class="highlighter-rouge">Calpha</code></li>
+      </ul>
+    </li>
+    <li><strong>PCA visualization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“dcd trajectory input”</em>: Trajectory file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pdb input”</em>: Structure file</li>
+        <li><em>“Use singular value decomposition (SVD) instead of default eigenvalue decomposition ?”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Select domains”</em>: <code class="highlighter-rouge">Calpha</code></li>
+        <li><em>“Principal component id”</em>: <code class="highlighter-rouge">Calpha</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>PCA visualisation: This tool can generate small trajectories of the first three principal components. The .pdb of the .nc files can be visualized using a visualization software such as VMD.</p>
+
+</blockquote>
+
+<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/PCA_plot_46.png" alt="Snapshot of PCA plot" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PCA plot for a short CBH1 simulation</figcaption></figure>
+
+<blockquote>
+  <blockquote class="question">
+    <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>What do the features in the RMSD plot tell us? Do the principal coordinates have a meaning?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>Here, PCA shows the statistically meaningful conformations in the CBH1 trajectory. The principal motions within the trajectory and the vital motions needed for conformational changes can be identified. Two distinct groupings along the PC1 plane, indicating a non-periodic conformational change, are identified. The groupings along the PC2 and PC3 planes do not completely cluster separately, implying that these global motions are periodic. The PC1 is linked to an active site motion that limits the motion to a key glycosidic bond.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="workflow-vs-individual-tools">Workflow vs. individual tools</h2>
+<p>You can choose to use the tools one by one as described above, or alternatively combine into a single analysis using the workflow provided.</p>
+<figure id="figure-5"><img src="/training-material/topics/computational-chemistry/images/workflow_confanalysis.png" alt="Snapshot of conformational analysis workflow" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A simple analysis workflow</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-upload-a-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Upload a workflow</h3>
+
+  <ol>
+    <li>
+      <p>Click on ‘Workflow’ in the toolbar at the top of the main Galaxy page. In the upper right corner of the central pane, click the ‘Upload or import workflow’ icon.</p>
+    </li>
+    <li>
+      <p>Enter the ‘Archived workflow URL’ and click ‘Import workflow’.</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/galaxyproject/training-material/master/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.ga
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="further-analysis">Further analysis</h1>
+
+<p>Further analyses are available; try out the <a href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.ga">MDAnalysis workflow</a>, which includes a Ramachandran plot and various timeseries.</p>
+
+<figure id="figure-6"><img src="/training-material/topics/computational-chemistry/images/workflow_mdanalysis.png" alt="MDAnalysis workflow" /><figcaption><span class="figcaption-prefix">Figure 6:</span> MD analysis workflow</figcaption></figure>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+                        <ul>
+                            
+                            <li>Multiple analyses including timeseries, RMSD, PCA are available</li>
+                            
+                            <li>Analysis tools allow a further chemical understanding of the system</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/computational-chemistry">Computational chemistry</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Analysis of molecular dynamics simulations:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Analysis of molecular dynamics simulations (Computational chemistry)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Analysis of molecular dynamics simulations (Computational chemistry)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Chris Barnett, Tharindu Senapathi, Simon Bray)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+</html>

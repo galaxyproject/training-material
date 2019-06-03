@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Running molecular dynamics simulations using GROMACS</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:title" content="Galaxy Training: Running molecular dynamics simulations using GROMACS" />
+        <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/computational-chemistry" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Computational chemistry
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fmd-simulation-gromacs%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fmd-simulation-gromacs%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fmd-simulation-gromacs%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fmd-simulation-gromacs%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fmd-simulation-gromacs%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Running molecular dynamics simulations using GROMACS",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "computational-chemistry / md-simulation-gromacs / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Running molecular dynamics simulations using GROMACS' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Running molecular dynamics simulations using GROMACS",
+    "description": "Running molecular dynamics simulations using GROMACS",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "Running molecular dynamics simulations using GROMACS\\nThe questions this  addresses are:\n - How do I use the GROMACS engine in Galaxy?\n - What is the correct procedure for performing a simple molecular dynamics simulation of a protein?\n\n\\nThe objectives are:\n - Learn about the GROMACS engine provided via Galaxy.\n - Understand the structure of the molecular dynamics workflow.\n - Prepare a short (1 ns) trajectory for a simulation of a protein.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/2598415",
+      "name": "Training data for Running molecular dynamics simulations using GROMACS tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Computational chemistry",
+      "description": "Modelling, simulation and analysis of biomolecular systems",
+      "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Running molecular dynamics simulations using GROMACS</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#simonbray" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Simon Bray">Simon Bray</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How do I use the GROMACS engine in Galaxy?</li>
+            
+            <li>What is the correct procedure for performing a simple molecular dynamics simulation of a protein?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn about the GROMACS engine provided via Galaxy.</li>
+            
+            <li>Understand the structure of the molecular dynamics workflow.</li>
+            
+            <li>Prepare a short (1 ns) trajectory for a simulation of a protein.</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+
+
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+
+                    
+                    <div>
+                        
+<a class="topic-icon" href="https://zenodo.org/record/2598415">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+
+                    </div>
+                    
+
+                    
+                    <div>
+                        
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/md-simulation-gromacs/workflows/" title="Workflows" alt="Running molecular dynamics simulations using GROMACS workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                    </div>
+                    
+                    
+
+
+                    
+                    
+                    <div>
+                        
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+
+                    </div>
+                    
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.</p>
+
+<p>Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">NAMD</a> and CHARMM (available in the <a href="https://github.com/scientificomputing/BRIDGE">docker container</a>).</p>
+
+<p>This is a introductory guide to using GROMACS <a class="citation" href="#abraham15">Abraham <i>et al.</i> 2015</a> in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-more-information"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> More information</h3>
+  <p>This guide is based on the GROMACS tutorial provided by Justin Lemkul <a href="http://www.mdtutorials.com/gmx/lysozyme/index.html">here</a> - please consult it if you are interested in a more detailed, technical guide to GROMACS.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#process" id="markdown-toc-process">Process</a></li>
+  <li><a href="#getting-data" id="markdown-toc-getting-data">Getting data</a>    <ol>
+      <li><a href="#lysozyme" id="markdown-toc-lysozyme">Lysozyme</a></li>
+    </ol>
+  </li>
+  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+  <li><a href="#solvation" id="markdown-toc-solvation">Solvation</a></li>
+  <li><a href="#energy-minimization" id="markdown-toc-energy-minimization">Energy minimization</a></li>
+  <li><a href="#equilibration" id="markdown-toc-equilibration">Equilibration</a>    <ol>
+      <li><a href="#nvt-equilibration" id="markdown-toc-nvt-equilibration">NVT equilibration</a></li>
+      <li><a href="#npt-equilibration" id="markdown-toc-npt-equilibration">NPT equilibration</a></li>
+    </ol>
+  </li>
+  <li><a href="#production-simulation" id="markdown-toc-production-simulation">Production simulation</a></li>
+  <li><a href="#workflow" id="markdown-toc-workflow">Workflow</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="process">Process</h1>
+
+<p>Prior to performing simulations, a number of preparatory steps need to be executed.</p>
+
+<p>The process can be divided into multiple stages:</p>
+<ol>
+  <li>Setup (loading data, solvation i.e. addition of water and ions)</li>
+  <li>Energy minimization of the protein</li>
+  <li>Equilibration of the solvent around the protein (with two ensembles, NVT and NPT)</li>
+  <li>Production simulation, which produces our trajectory.</li>
+</ol>
+
+<p>The trajectory is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein. We will discuss each step making up this workflow in more detail.</p>
+
+<h1 id="getting-data">Getting data</h1>
+<p>To perform simulation, an initial PDB file is required. This should be ‘cleaned’ of solvent and any other non-protein atoms. Solvent will be re-added in a subsequent step.</p>
+
+<p>A prepared file is available via Zenodo. Alternatively, you can prepare the file yourself. Download a PDB structure file from the <a href="https://www.rcsb.org/">Protein Data Bank</a> and remove the unwanted atoms using the grep text processing tool. This simply removes the lines in the PDB file that refer to the unwanted atoms.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-an-initial-structure"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload an initial structure</h3>
+  <ol>
+    <li>
+      <p>First of all, create a new history and give it a name.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on <strong>Create New</strong></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Upload the file in Galaxy from the PDB:
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://files.rcsb.org/download/1AKI.pdb
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+    </li>
+    <li>Use the <strong>grep</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> text processing tool to remove all lines that refer to non-protein atoms.
+      <ul>
+        <li><em>“Select lines from”</em>: uploaded PDB file</li>
+        <li><em>“that”</em>: <code class="highlighter-rouge">Don't Match</code></li>
+        <li><em>“Regular Expression”</em>: <code class="highlighter-rouge">HETATM</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-alternative-upload"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Alternative upload</h3>
+  <p>As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:</p>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2598415
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-background-what-is-the-pdb-protein-data-bank-and-format"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Background: What is the PDB (Protein Data Bank) and format?</h3>
+
+  <p>The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI">1AKI</a>).</p>
+
+  <p>More resources:</p>
+
+  <ul>
+    <li>Multiple structures are stored and can be queried at <a href="https://www.rcsb.org/">https://www.rcsb.org/</a></li>
+    <li>Documentation describing the PDB file format is available from the wwPDB at <a href="http://www.wwpdb.org/documentation/file-format.php">http://www.wwpdb.org/documentation/file-format.php</a>.</li>
+  </ul>
+</blockquote>
+
+<h2 id="lysozyme">Lysozyme</h2>
+<p>The protein we will look at in this tutorial is hen egg white <a href="https://en.wikipedia.org/wiki/Lysozyme">lysozyme</a>, a widely studied enzyme which is capable of breaking down the polysaccharides of many bacterial cell walls. It is a small (129 residues), highly stable globular protein, which makes it ideal for our purposes.</p>
+
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/Lysozyme.png" alt="Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of lysozyme</figcaption></figure>
+
+<h1 id="setup">Setup</h1>
+
+<p>The <strong>GROMACS initial setup</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool uses the PDB input to create three files which will be required for MD simulation.</p>
+
+<p>Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model.</p>
+
+<p>Secondly, a GRO structure file is created, storing the structure of the protein. It also defines the unit cell ‘box’, centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.</p>
+
+<p>Finally, a ‘position restraint file’ is created which will be used for NVT/NPT equilibration. We will return to this later.</p>
+
+<p>In summary, this tool will:</p>
+<ul>
+  <li>create a ‘topology’ file</li>
+  <li>convert a PDB protein structure into a GRO file, with the structure centered in a simulation box (unit cell)</li>
+  <li>create a position restraint file</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-perform-initial-processing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: perform initial processing</h3>
+
+  <p>Run <strong>GROMACS initial setup</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input file”</em>: <code class="highlighter-rouge">1AKI_clean.pdb</code> (Input dataset)</li>
+    <li><em>“Water model”</em>: <code class="highlighter-rouge">SPC/E</code></li>
+    <li><em>“Force field”</em>: <code class="highlighter-rouge">OPLS/AA</code></li>
+    <li><em>“Ignore hydrogens”</em>: <code class="highlighter-rouge">no</code></li>
+    <li><em>“Box type”</em>: <code class="highlighter-rouge">Rectangular box with all sides equal</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+  </ul>
+
+  <blockquote class="question">
+    <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>Why is it necessary to provide an input structure containing no non-protein molecules?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>Automatic topology construction only succeeds if the components of the structure are recognized. For example, providing a structure of a protein in complex with a non-protein ligand or cofactor will result in an error.</p>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="solvation">Solvation</h1>
+
+<p>The next stage is protein solvation, performed using <strong>GROMACS solvation and adding ions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Water molecules are added to the structure and topology files to fill the unit cell. At this stage sodium or chloride ions are also automatically added to neutralize the charge of the system. In our case, as lysozyme has a charge of +8, 8 chloride anions are added.</p>
+
+<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/solvated_protein.png" alt="Solvated protein" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Solvated protein in a cubic unit cell</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-solvation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: solvation</h3>
+
+  <p><strong>GROMACS solvation and adding ions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by setup</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology produced by setup</li>
+    <li><em>“Water model for solvation”</em>: <code class="highlighter-rouge">SPC</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+  </ul>
+
+</blockquote>
+
+<h1 id="energy-minimization">Energy minimization</h1>
+
+<p>To remove any steric clashes or unusual geometry which would artificially raise the energy of the system, we must relax the structure by running an energy minimization (EM) algorithm.</p>
+
+<p>Here, and in the later steps, two options are presented under ‘Parameter input’. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found <a href="http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html">here</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-energy-minimization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: energy minimization</h3>
+
+  <p><strong>GROMACS energy minimization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+    <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
+    <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">Steepest descent algorithm</code> (most common choice for EM)</li>
+    <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+    <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
+    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+    <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
+    <li><em>“Number of steps for the MD simulation”</em>: <code class="highlighter-rouge">50000</code></li>
+    <li><em>“EM tolerance”</em>: <code class="highlighter-rouge">1000.0</code></li>
+    <li><em>“Maximum step size”</em>: <code class="highlighter-rouge">0.01</code></li>
+  </ul>
+
+</blockquote>
+
+<h1 id="equilibration">Equilibration</h1>
+
+<p>At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant <strong>n</strong>umber of particles, <strong>v</strong>olume and <strong>t</strong>emperature, while the NPT ensemble maintains constant <strong>n</strong>umber of particles, <strong>p</strong>ressure and <strong>t</strong>emperature.</p>
+
+<p>For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.</p>
+
+<h2 id="nvt-equilibration">NVT equilibration</h2>
+<p>Firstly, we perform equilibration using classical NVT dynamics.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-nvt-dynamics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NVT dynamics</h3>
+
+  <p><strong>GROMACS NVT equilibration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by setup</li>
+    <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
+    <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
+    <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
+    <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+    <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+    <li><em>“Temperature”</em>: <code class="highlighter-rouge">300</code></li>
+    <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
+    <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">5000</code></li>
+    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
+    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+    <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
+    <li><em>“Number of steps for the NVT simulation”</em>: <code class="highlighter-rouge">50000</code></li>
+    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
+    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return the .gro structure</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+  </ul>
+</blockquote>
+
+<h2 id="npt-equilibration">NPT equilibration</h2>
+<p>Having stabilized the temperature of the system with NVT equilibration, we also need to stabilize the pressure of the system. We therefore equilibrate again using the NPT (constant number of particles, pressure, temperature) ensemble.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-npt-dynamics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NPT dynamics</h3>
+
+  <p><strong>GROMACS NVT equilibration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (TOP) file”</em>: Checkpoint file produced by NVT equilibration</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by setup</li>
+    <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
+    <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
+    <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
+    <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+    <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+    <li><em>“Temperature”</em>: <code class="highlighter-rouge">300</code></li>
+    <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
+    <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">5000</code></li>
+    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
+    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+    <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
+    <li><em>“Number of steps for the NPT simulation”</em>: <code class="highlighter-rouge">50000</code></li>
+    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
+    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return the .gro structure</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <blockquote class="question">
+    <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>Why is the position of the protein restrained during equilibration?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h1 id="production-simulation">Production simulation</h1>
+<p>Now that equilibration is complete, we can release the position restraints. We are now finally ready to perform a production MD simulation.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-production-simulation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Production simulation</h3>
+
+  <ol>
+    <li><strong>GROMACS production simulation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (TOP) file”</em>: Checkpoint file produced by NPT equilibration</li>
+        <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
+        <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
+        <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
+        <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+        <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+        <li><em>“Temperature”</em>: <code class="highlighter-rouge">300</code></li>
+        <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
+        <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">5000</code></li>
+        <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
+        <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+        <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
+        <li><em>“Number of steps for the simulation”</em>: <code class="highlighter-rouge">500000</code></li>
+        <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code> (this time, we save the trajectory)</li>
+        <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return the .gro structure</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="workflow">Workflow</h1>
+
+<p>A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a PDB (Protein Data Bank) structure file as input and returns a MD trajectory.</p>
+
+<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/workflow_gromacs.png" alt="GROMACS workflow" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The basic GROMACS workflow</figcaption></figure>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and <a href="/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html">analysis</a> tutorials for more information.</p>
+
+<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/traj.gif" alt="Trajectory" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Trajectory produced using the GROMACS workflow, visualized with the NGL viewer</figcaption></figure>
+
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+                        <ul>
+                            
+                            <li>Molecular dynamics produces a trajectory describing the atomic motion of a system.</li>
+                            
+                            <li>Preparation of the system is required; setup, solvation, minimization, equilibration.</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="abraham15">Abraham, M. J., T. Murtola, R. Schulz, S. Páll, J. C. Smith <i>et al.</i>, 2015 <b>GROMACS: High performance molecular simulations through multi-level parallelism from laptops to supercomputers.</b> SoftwareX 1-2: 19–25.</span>
+    
+    
+    <a href="https://doi.org/https://doi.org/10.1016/j.softx.2015.06.001">https://doi.org/10.1016/j.softx.2015.06.001</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://www.sciencedirect.com/science/article/pii/S2352711015000059">http://www.sciencedirect.com/science/article/pii/S2352711015000059</a>
+      
+    
+
+</li></ol>
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/computational-chemistry">Computational chemistry</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Analysis of molecular dynamics simulations:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Running molecular dynamics simulations using GROMACS (Computational chemistry)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Running molecular dynamics simulations using GROMACS (Computational chemistry)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Bray)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+</html>
