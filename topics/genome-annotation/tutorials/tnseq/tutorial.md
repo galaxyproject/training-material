@@ -659,9 +659,9 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 > ### {% icon hands_on %} Hands-on: Predict gene essentiality with Transit
 >
 > 1. **Gumbel** {% icon tool %} with:
->    - *"Operation mode"*: `Batch`
->      - {% icon param-collection %} *"Input .wig files"*: output of the last **Sort**
->    - {% icon param-file %} *"Input annotation"*: output of the last **Convert**
+>    - *"Operation mode"*: `Replicates`
+>      - {% icon param-collection %} *"Input .wig files"*: output of the latest **Sort**
+>    - {% icon param-file %} *"Input annotation"*: output of the latest **Convert**
 >    - *"Smallest read-count to consider"*: `2` (to ignore single count insertions)
 >    - *"Ignore TAs occuring at given fraction of the N terminus."*: `0.1` (to ignore 10% of the insertion at the N-terminus extremity of the gene)
 >    - *"Ignore TAs occuring at given fraction of the C terminus."*: `0.1` (to ignore 10% of the insertion at the C-terminus extremity of the gene)
@@ -697,7 +697,18 @@ We can obtain the list of genes predicted as essential by filtering on the essen
 >
 {: .hands_on}
 
-**TODO: add a question that checks the results (e.g. how many genes are essential in 2 conditions**
+
+> ### {% icon question %} Questions
+>
+> How many genes are essential in each conditions?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 359 genes are essential in control, and 381 in condition.
+> {: .solution }
+>
+{: .question}
+
 
 ## Compare the essential genes between two conditions
 
@@ -733,7 +744,8 @@ We would like now to get the list of essential gene in both conditions
 >
 {: .hands_on}
 
-**TODO: add a question that checks the results (e.g. how many genes are essential in both + more annotation?)**
+
+Let's now get the list of essential gene that are different between the two conditions.
 
 > ### {% icon hands_on %} Hands-on: Get gene essential only in control
 >
@@ -745,7 +757,7 @@ We would like now to get the list of essential gene in both conditions
 >    - *Output lines appearing in"*: `1st but not 2nd`
 {: .hands_on}
 
-**TODO: add a question that checks the results (e.g. number of genes + more annotation?)**
+
 
 > ### {% icon hands_on %} Hands-on : Get gene essential only in condition
 >
@@ -757,9 +769,41 @@ We would like now to get the list of essential gene in both conditions
 >   - *Output lines appearing in"*: `2nd but not 1st`
 {: .hands_on}
 
-**TODO: add a question that checks the results (e.g. number of genes + more annotation?)**
+
+> ### {% icon question %} Questions
+>
+> 1. How many genes are essential in both conditions?
+> 2. How many genes are essential only in control?
+> 3. How many genes are essential only in condition?
+>
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. 320 genes are essential in both conditions.
+> > 2. 39 genes are essential only in control.
+> > 3. 61 genes are essential only in condition.
+> {: .solution }
+>
+{: .question}
 
 # Conclusion
 {:.no_toc}
+In this tutorial, we learned how to predict essential genes in different conditions. Although it seems to be a long process, keep in mind that the steps allowing to get the list of TA site does not need to be repeated for each analysis as long as you study the same genome.
+For repetitive analyses, the steps are fewer : mapping, coverage, attribution to TA sites, merging of strands and Transit analysis.
 
-**TODO: add some conclusion, maybe relate to the original question + maybe a schema of the workflow (as it is rather complex with so many steps)**
+This tutorial focused on simple gene essentiality prediction in individual samples. You could be interested in intergenic regions as well, or comparing many samples together. Other methods exist in transit for these goals, that follow the same workflow. It is important to look at your data and to perform quality control to evaluate the coverage and sparsity of your data. This will influence not only the choice of method (HMM does not manage sparse data well), but the choice of parameters for your analysis.
+
+Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.
+
+>    {% include snippets/add_genome_to_IGV.md %}
+
+>    {% include snippets/view_mapping_in_IGV.md %}
+
+When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.  
+
+![Example of Essential gene with no reads mapped](../../images/tnseq/empty_gene.png "Example of Essential gene with no reads mapped")
+![Example of Essential gene with depleted coverage](../../images/tnseq/low_coverage_gene.png "Example of Essential gene with depleted coverage")
+
+Once you have curated and confirm the genes that appear essential, comparing the annotation of essential genes with the condition of growth will allow you a better understanding of certain mechanism of interest, like the gene involved in resistance to stress for example.
+
+A comparison with published results of essentiality in your organism will be useful but don't expect to find exactly the same results. The conditions of growth differ from one experiment to another, and can highly influence the detection of essential genes.
