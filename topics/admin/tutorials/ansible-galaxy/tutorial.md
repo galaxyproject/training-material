@@ -349,19 +349,19 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    We need to set the following variables:
 >
 >    {% raw %}
->    Variable                     | Value                                      | Purpose
->    ---                          | -----                                      | ---
->    `galaxy_create_user`         | `true`                                     | Instruct the role to create a Galaxy user
->    `galaxy_separate_privileges` | `true`                                     | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
->    `galaxy_manage_paths`        | `true`                                     | Instruct thre role to create the needed directories.
->    `galaxy_layout`              | `root-dir`                                 | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
->    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
->    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
->    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`         | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
->    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `check_migrate_tools`        | `false`                                    | Must be set to false in this case due to a new install of Galaxy
+>    Variable                     | Value                              | Purpose
+>    ---                          | -----                              | ---
+>    `galaxy_create_user`         | `true`                             | Instruct the role to create a Galaxy user
+>    `galaxy_separate_privileges` | `true`                             | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
+>    `galaxy_manage_paths`        | `true`                             | Instruct thre role to create the needed directories.
+>    `galaxy_layout`              | `root-dir`                         | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_root`                | `/srv/galaxy`                      | This is the root of the Galaxy deployment.
+>    `galaxy_file_path`           | `/data`                            | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
+>    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}` | The user that Galaxy will run as.
+>    `galaxy_commit_id`           | `release_18.09`                    | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
+>    `galaxy_config_style`        | `yaml`                             | We want to opt-in to the new style YAML configuration.
+>    `galaxy_force_checkout`      | `true`                             | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `check_migrate_tools`        | `false`                            | Must be set to false in this case due to a new install of Galaxy
 >    {% endraw %}
 >
 >
