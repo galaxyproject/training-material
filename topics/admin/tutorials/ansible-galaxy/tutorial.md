@@ -201,11 +201,11 @@ We have codified all of the dependencies you will need into a yaml file that `an
 > 2. Create a new file in your working directory called `requirements.yml` and include the following contents:
 >
 >    ```yaml
->    - galaxyproject.galaxy
+>    - src: galaxyproject.galaxy
+>      version: 0.8.4
 >    - geerlingguy.nginx
 >    - natefoo.postgresql_objects
 >    - galaxyproject.postgresql
->    - galaxyproject.proftpd
 >    - geerlingguy.pip
 >    - src: https://github.com/usegalaxy-eu/ansible-role-supervisor
 >      name: usegalaxy-eu.supervisor
