@@ -232,34 +232,54 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon hands_on %} Hands-on: Setting up our workspace
 >
-> 1. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+> 1. Decide where you will install and run Ansible? On your laptop? Or on the remote machine/VM you will manage? All of the following steps should be done in the one location you pick.
 >
-> 2. Create an empty directory and `cd` into it
+> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 >
-> 2. Create your hosts file, name it `hosts`, in the folder you have just entered.
+> 3. Create an empty directory and `cd` into it
 >
->    1. Identify a host you have `SSH` access to. If you do not have access to any remote machines, `localhost` is fine.
->    2. Make sure you can SSH into it. Test it now.
->    3. We will call our group "my_hosts".
->    4. Create a hosts file with the group `my_hosts` and the host you have chosen.
+> 4. Create your hosts file, name it `hosts`, in the folder you have just entered.
 >
->    > ### {% icon solution %} Solution
->    > The file should look like:
->    >
->    > ```ini
->    > [my_hosts]
->    > your.host
->    > ```
->    >
->    > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
->    >
->    {: .solution }
+>    - You are installing ansible on the machine it will be used to manage
 >
-> 3. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
+>      1. Make sure you can SSH into it. Test it now.
 >
-> 4. Create a YAML file in that directory, `roles/my-role/tasks/main.yml` and open it for editing
+>      2. We will call our group `my_hosts`
 >
-> 5. Define a `copy` task like below:
+>      3. Create a hosts file with the group `my_hosts` and your host.
+>
+>         > ### {% icon solution %} Solution
+>         > The file should look like:
+>         >
+>         > ```ini
+>         > [my_hosts]
+>         > your.host
+>         > ```
+>         > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
+>         {: .solution }
+>
+>    - You are installing ansible on a machine that will manage a second, remote machine
+>
+>      1. We will call our group `my_hosts`
+>
+>      2. Create a hosts file with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
+>
+>
+>         > ### {% icon solution %} Solution
+>         > The file should look like:
+>         >
+>         > ```ini
+>         > [galaxyservers]
+>         > localhost ansible_connection=local
+>         > ```
+>         {: .solution }
+>
+>
+> 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
+>
+> 6. Create a YAML file in that directory, `roles/my-role/tasks/main.yml` and open it for editing
+>
+> 7. Define a `copy` task like below:
 >
 >    ```yaml
 >    ---
@@ -276,11 +296,11 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .details }
 >
-> 6. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
+> 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
 >
-> 7. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
+> 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
 >
-> 8. Open `playbook.yml` for editing in the root folder. Place the following content in there:
+> 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
 >
 >    ```yaml
 >    ---
@@ -310,7 +330,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    > {: .solution }
 >    {: .question}
 >
-> 9. Run one of the following command, whichever is appropriate:
+> 11. Run one of the following command, whichever is appropriate:
 >
 >    - Real remote host: `ansible-playbook -i hosts playbook.yml`
 >    - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
@@ -341,7 +361,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    {: .question}
 >
 >
-> 10. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
+> 12. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
 >
 {: .hands_on}
 
