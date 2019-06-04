@@ -203,10 +203,14 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >    ```yaml
 >    - src: galaxyproject.galaxy
 >      version: 0.8.4
->    - geerlingguy.nginx
->    - natefoo.postgresql_objects
->    - galaxyproject.postgresql
->    - geerlingguy.pip
+>    - src: galaxyproject.nginx
+>      version: 0.6.0
+>    - src: galaxyproject.postgresql
+>      version: 1.0.1
+>    - src: natefoo.postgresql_objects
+>      version: 1.1
+>    - src: geerlingguy.pip
+>      version: 1.0.0
 >    - src: https://github.com/usegalaxy-eu/ansible-role-supervisor
 >      name: usegalaxy-eu.supervisor
 >    - src: https://github.com/usegalaxy-eu/ansible-certbot
@@ -323,6 +327,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >
 >    > > ```yaml
 >    > > - hosts: galaxyservers
+>    > >   become: true
 >    > >   pre_tasks:
 >    > >     - name: Install Dependencies
 >    > >       package:
