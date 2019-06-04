@@ -67,6 +67,8 @@ The Galaxy project supports a few CVMFS repositories.
 | Singularity Containers     | `singularity.galaxyproject.org` | Singularity containers for everything in Biocontainers for use in Galaxy systems |
 | Galaxy Main Configuration  | `main.galaxyproject.org`        | The configuration files etc for Galaxy Main (usegalaxy.org)                      |
 
+You can browse the contents of `data.galaxyproject.org` at the [datacache](http://datacache.galaxyproject.org/).
+
 ## Installing and configuring Galaxy's CVMFS reference data with ansible
 
 Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.
