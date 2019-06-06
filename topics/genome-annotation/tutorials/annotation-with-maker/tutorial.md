@@ -27,7 +27,7 @@ contributors:
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
-In this tutorial we will use a software tool called Maker to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).
+In this tutorial we will use a software tool called Maker {% cite Campbell2014 %} to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).
 
 Maker is able to annotate both prokaryotes and eukaryotes. It works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.
 
@@ -39,7 +39,7 @@ In this tutorial you will learn how to perform a genome annotation, and how to e
 
 More information about Maker can be found [here](http://www.yandell-lab.org/software/maker.html).
 
-This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018 ](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
+This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
 
 > ### Agenda
 >
@@ -55,12 +55,10 @@ This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotatio
 To annotate a genome using Maker, you need the following files:
 
 - The genome sequence in fasta format
-- A set of transcripts or EST sequences, preferably from the same organism.
+- A set of transcripts or [EST sequences](https://en.wikipedia.org/wiki/Expressed_sequence_tag), preferably from the same organism.
 - A set of protein sequences, usually from closely related species or from a curated sequence database like UniProt/SwissProt.
 
  Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.
-
-## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -91,9 +89,21 @@ You have four main datasets:
 - `S_pombe_trinity_assembly.fasta` contains the EST sequences
 - `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
 - `S_pombe_genome.fasta` contains the full genome sequence
-- `S_pombe_chrIII.fasta` contains only a fraction of the full genome sequence, ie the chromosome III
+- `S_pombe_chrIII.fasta` contains only the third chromosome from the full genome
 
-For the rest of this tutorial, you need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`. If you have time, use the full genome (`S_pombe_genome.fasta`), it will take more computing time, but the results will be closer to real-life data. If you want to get results faster, use the chromosome III (`S_pombe_chrIII.fasta`). In the rest of this tutorial, we will refer to the file you choose as `the genome`.
+
+> ### {% icon hands_on %} Hands-on: Choose your Genome
+>
+> 1. You need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`:
+>
+>    - If you have time: use the full genome (`S_pombe_genome.fasta`), it will take more computing time, but the results will be closer to real-life data.
+>    - If you want to get results faster: use the chromosome III (`S_pombe_chrIII.fasta`).
+>
+> 2. Rename the file you will use to `genome.fasta`. E.g. if you are using `S_pombe_chrIII.fasta`, rename it to `genome.fa`
+>
+>    {% include snippets/rename_dataset.md name="genome.fa" %}
+>
+{: .hands_on}
 
 The two other datasets (`augustus_training_1.tar.gz` an `augustus_training_2.tar.gz`) will be used later in the tutorial.
 
@@ -106,7 +116,7 @@ Before running the full annotation process, you need first to evaluate the quali
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
 > 1. **Fasta Statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: select the genome sequence from your history
+>    - {% icon param-file %} *"Sequences to analyse"*: select `genome.fasta` sequence from your history
 >
 {: .hands_on}
 
@@ -118,7 +128,7 @@ Have a look at the statistics:
 
 These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
 
-[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evluation of the "completeness" of the genome or annotation.
+[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the genome or annotation.
 
 We will first run this tool on the genome sequence to evaluate its quality.
 
@@ -147,11 +157,11 @@ BUSCO produces three output datasets
 
 > ### {% icon question %} Questions
 >
-> 1. Do you think the genome quality is good enough for performing the annotation?
+> Do you think the genome quality is good enough for performing the annotation?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The genome consists of the exepected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
+> > The genome consists of the expected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That's a very good material to perform an annotation.
 > >
 > {: .solution}
 >
@@ -166,7 +176,7 @@ BUSCO produces three output datasets
 
 ## Maker
 
-For this first round, we configure Maker to construct gene models only by aligning ESTs and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.
+For this first round, we configure Maker to construct gene models only by aligning [ESTs](https://en.wikipedia.org/wiki/Expressed_sequence_tag) and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.
 
 > ### {% icon hands_on %} Hands-on: First draft annotation with Maker
 >
@@ -195,7 +205,7 @@ For this first round, we configure Maker to construct gene models only by aligni
 Maker produces three GFF3 datasets:
 
 - The final annotation: the final consensus gene models produced by Maker
-- The evidences: the alignements of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
+- The evidences: the alignments of all the data Maker used to construct the final annotation (ESTs and proteins that we used)
 - A GFF3 file containing both the final annotation and the evidences
 
 ## Annotation statistics
@@ -294,7 +304,7 @@ Augustus is trained in a very similar way.
 
 Both SNAP and Augustus produce a statistical model representing the observed general structure of genes in the analysed genome. Maker will use these models to create a new annotation for our genome.
 
-The Augustus training usually take around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file `augustus_training_1.tar.gz` imported from Zenodo.
+The Augustus training usually takes around 2 hours to complete, to continue this tutorial without waiting for the result, you can use the file `augustus_training_1.tar.gz` imported from Zenodo.
 
 # Second Maker annotation round
 
@@ -302,7 +312,7 @@ The Augustus training usually take around 2 hours to complete, to continue this 
 
 We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments as is.
 But this time, enable ab-initio gene prediction, and input the output of **Train SNAP** {% icon tool %} and **Train Augustus** {% icon tool %} tools.
-We also disable infering gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
+We also disable inferring gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
 
 > ### {% icon hands_on %} Hands-on: Second draft annotation with Maker
 >
@@ -556,7 +566,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 
 ## More visualisation
 
-You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST ailgnements, protein aligments, ab-initio predictions, ...) by using JBrowse too.
+You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST alignments, protein alignments, ab-initio predictions, ...) by using JBrowse too.
 
 > ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
 >
