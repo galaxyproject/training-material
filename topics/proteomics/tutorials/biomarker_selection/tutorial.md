@@ -15,6 +15,9 @@ objectives:
 
 time_estimation: 3H
 
+key_points:
+- biomarker candidates selection workflow, public proteomics data retrieval and annotation
+
 contributors:
 - combesf
 - davidchristiany
@@ -22,6 +25,7 @@ contributors:
 - yvandenb
 
 ---
+
 
 # Introduction
 {:.no_toc}
@@ -32,27 +36,6 @@ response to therapeutic treatment, or other relevant biological state.
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a complete biomarkers selection pipeline.
 In this tutorial we introduce successively the tools of this pipeline, and guide you to execute them in order to complete the entire
 pipeline on a concrete example. This strategy is described by {% cite Nguyen2019 %}.
-
-This strategy is described in  the following paper : 
-[Designing an In Silico Strategy to Select Tissue-Leakage Biomarkers Using the Galaxy Framework](https://www.ncbi.nlm.nih.gov/pubmed/30852829)
-by Nguyen *et al.* Proteomics for Biomarker Discovery: Methods and Protocols, 
-Methods Mol Biol. 2019;1959:275-289. doi: 10.1007/978-1-4939-9164-8_18
- 
-![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
-
-# Global view of the strategy
-{:.no_toc}
-
-For this tutorial, no input data are required as the first steps will be to select data from
-public databases with ProteoRE tools.
-
-The strategy consists in selecting, one step after another, the most interesting candidate biomarkers.
-Our use-case here is to identify candidate biomarkers for myocardial infarction tissue-leakage.
-
-Criteria candidate biomarkers have to fulfill through this pipeline are:
-- heart-specificity
-- cytoplasmic localization
-- detection in LC-MS/MS experiments already done
 
 
 > ### Agenda
@@ -65,30 +48,47 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 {: .agenda}
 
 
-**Create a new history** and give it a name.
-{% include snippets/create_new_history.md %}
+
+# Global view of the strategy
+{:.no_toc}
+
+For this tutorial, no input data are required as the first steps will be to select data from
+public databases with ProteoRE tools.
+
+The strategy consists in selecting, one step after another, the most interesting candidates biomarkers.
+Our use-case here is to identify candidate biomarkers for myocardial infarction tissue-leakage.
+
+Criteria candidate biomarkers have to fulfill through this pipeline are:
+- heart-specificity
+- cytoplasmic localization
+- detection in LC-MS/MS experiments already done
+
+![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 
-# Selection of tissue-specific proteins based on experimental data available in HPA
+# Selection of tissue-specific proteins
+
+We will start by selecting proteins associated with heart muscle tissue based on experimental data available in HPA
 
 
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
 >
-> 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
+> 1. **Create a new history** and give it a name.
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
 >    - *"Select tissue"*: `Heart muscle`
 >    - *"Expression level"*: `High` and `Medium`
 >    - *"Reliability score"*: `Enhanced` and `Supported`
 >
 >   > ### Output
->   > - **Tissue-specific expression from IHC** (1596 lines): List of the selected proteins. 
->   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   > - **Tissue-specific expression from IHC** (1596 lines): List of the selected proteins.
+>   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
 >   {: .comment}
 {: .hands_on}
 
-We have just built the first dataset of this tutorial; it consists of 1596 proteins expressed in the heart muscle, 
-based on ImmunoHistoChemistry data. Please be aware that the ID in the output dataset in Ensembl Gene ID (transcript ID).  
-We will now rerun the same tool but this time to select transcripts according to their expression profile.
+We will now rerun the same tool but to select transcripts according to their expression profile.
 
 
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on RNAseq
@@ -98,15 +98,15 @@ We will now rerun the same tool but this time to select transcripts according to
 >    - *"Select tissue"*: `Heart muscle`
 >
 >   > ### Output
->   > - **Tissue-specific expression from RNAseq** (19613 lines): List of the selected transcripts. 
->   > 4 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   > - **Tissue-specific expression from RNAseq** (19613 lines): List of the selected transcripts.
+>   > 4 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
 >   {: .comment}
 {: .hands_on}
 
 
-This second list must be reduced by removing transcripts that are not highly enriched in heart muscle,
-by applying  a filter on the expression value provided by HPA and measured in TPM (last column of the output file).
-To do so we'll use the ProteoRE "Filter by keywords and/or numerical value" tool. 
+This second list must be reduced by removing transcripts that are not highly enriched in heart muscle.
+To do so, a filter is applied on the expression value provided by HPA and measured in TPM (last column of the output file).
+In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 
 
 > ### {% icon hands_on %} Hands-on: Filter on expression value criterium
@@ -135,8 +135,8 @@ To do so we'll use the ProteoRE "Filter by keywords and/or numerical value" tool
 {: .hands_on}
 
 We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC data or TPM value.
-We want now to select candidate biomarkers that are expressed in the heart muscle according to **both**
-IHC and RNA-seq data. We will use the "Jvenn" tool of ProteoRE. 
+
+We want now to select candidate biomarkers that are expressed in the heart muscle according to **both** IHC and RNA-seq data, using the Jvenn tool.
 
 
 > ### {% icon hands_on %} Hands-on: Venn diagram
@@ -158,8 +158,10 @@ IHC and RNA-seq data. We will use the "Jvenn" tool of ProteoRE.
 >   {: .question}
 {: .hands_on}
 
-You can see on the [the graphical output of the Venn](#figure-1) that there is 931 IDs in common 
-between the 2 considered lists. 
+You can see the the graphical output of the Venn:
+
+![Venn diagram output](../../images/biomarker-selection/jVenn_chart-tuto2.png)
+
 For greater clarity we'll keep only the column with those 931 IDs to continue our pipeline.
 
 
@@ -225,9 +227,9 @@ Let's use the "Filter by keywords and/or numerical value" tool to select the can
 >    - *"Sort by column ?"*: `Yes`
 >
 >   > ### Output
->   > - **Filtered Add_expression_data_on_data_8**: output list of the heart biomarkers with RNA tissue category 
+>   > - **Filtered Add_expression_data_on_data_8**: output list of the heart biomarkers with RNA tissue category
 >   > containing "enriched" or "enhanced" (115 lines = what we are interested in)
->   > - **Filtered Add_expression_data_on_data_8 - discarded lines**: output list of the heart biomarkers with 
+>   > - **Filtered Add_expression_data_on_data_8 - discarded lines**: output list of the heart biomarkers with
 >   > RNA tissue category NOT containing "enriched" or "enhanced" (not what we are interested in)
 >   {: .comment}
 {: .hands_on}
@@ -236,7 +238,7 @@ We now have identified 115 candidates considered to have significantly higher ex
 Let's call the dataset where are those 115 candidates '**heart115**'.
 
 
-# Annotation of this protein list with biochemical and cellular features
+# Annotation with biochemical and cellular features
 
 
 Candidate biomarkers we want to identify have to be cytoplasmic and without transmembrane domains (TMD).
@@ -257,15 +259,13 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >            - *"Target type of IDs you would like to map to"*: `Uniprot accession number, Uniprot ID`
 >
 >   > ### Output
->   > **ID converter**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
->   > UniProt accession number and ID are added. This step has thus allowed us to link ID for genes 
->   > with ID for proteins.    
+>   > **ID converter on data 11**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
+>   > UniProt accession number and ID are added.
 >   {: .comment}
 {: .hands_on}
 
-We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect protein features from neXtProt, 
-as this tool needs ID at the proteic level as input. 
-Let's then use the **Add protein features** ProteoRE tool.
+We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect protein features from neXtProt. For this purpose,
+we use the **Add protein features** ProteoRE tool.
 
 
 > ### {% icon hands_on %} Hands-on: Add protein features
@@ -280,7 +280,7 @@ Let's then use the **Add protein features** ProteoRE tool.
 >
 >   > ### Output
 >   > **Add information from NextProt**: In this file (431 lines), 3 columns (columns 8, 9 and 10)
->   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info. 
+>   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info.
 >   {: .comment}
 {: .hands_on}
 
@@ -308,9 +308,9 @@ no transmembrane domains by running the Filter by keywords and/or numerical valu
 >
 >   > ### Output
 >   > - **Filtered Add_information_from_neXtProt**: output list of the proteins having a cytoplasmic
->   > location and no TMD (48 proteins) 
->   > - **Filtered Add_information_from_neXtProt - discarded lines**: output list of the proteins NOT 
->   > cytoplasmic and having at least 1 TMD. 
+>   > location and no TMD (48 proteins)
+>   > - **Filtered Add_information_from_neXtProt - discarded lines**: output list of the proteins NOT
+>   > cytoplasmic and having at least 1 TMD.
 >   {: .comment}
 {: .hands_on}
 
@@ -319,7 +319,7 @@ We have now 48 proteins.
 Next step : to identify proteins already seen in LS MS/MS experiments.
 
 
-# Check whether these proteins have already been detected by LC-MS/MS experiments
+# Check for previous detection by LC-MS/MS experiments
 
 > ### {% icon hands_on %} Hands-on: Get MS/MS observations in tissue/fluid
 >
@@ -331,8 +331,8 @@ Next step : to identify proteins already seen in LS MS/MS experiments.
 >        - `Human Plasma non glyco`
 >
 >   > ### Output
->   > **Get MS/MS observations in tissue/fluid**: In this file, 2 columns (11 and 12, at the end)
->   > were added with the info of number of times peptides were seen by MS/MS.   
+>   > **Get MS/MS observations in tissue/fluid on data 15**: In this file, 2 columns (11 and 12, at the end)
+>   > were added with the info of number of times peptides were seen by MS/MS.
 >   {: .comment}
 {: .hands_on}
 
@@ -352,16 +352,14 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 >    - *"Sort by column ?"*: `Yes`
 >
 >   > ### Output
->   > - **Filtered Get MS/MS observations in tissue/fluid**: output list of the proteins 
+>   > - **Filtered Get MS/MS observations in tissue/fluid on data 15**: output list of the proteins
 >   > whose some peptides have been seen in plasma (21 proteins)
->   > - **Filtered Get MS/MS observations in tissue/fluid - discarded lines**:  
+>   > - **Filtered Get MS/MS observations in tissue/fluid on data 15 - discarded lines**:
 >   > output list of proteins with no peptides seen in the plassma
 >   {: .comment}
 {: .hands_on}
 
 
-**How to extract a workflow from your history**
-{% include snippets/extract_workflow.md %}
 
 # Conclusion
 {:.no_toc}
