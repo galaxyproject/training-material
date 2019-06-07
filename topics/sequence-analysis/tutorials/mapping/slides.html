@@ -17,47 +17,471 @@ key_points:
   - There are many mapping algorithms, it depends on your data which one to choose
 contributors:
   - joachimwolff
+  - shiltemann
+---
+
+# NGS pipelines
+
+.left-column30[
+![](../../images/mapping/variant_calling_workflow.png)
+]
+
+.right-column50[
+A typical NGS workflow:
+
+1. Raw reads from sequencer
+
+2. **QC:** filtering and trimming
+
+3. Mapping / Assembly
+
+4. Data cleaning
+
+5. Feature detection, e.g.
+  - Variant Calling
+  - Differential Gene Expression
+  - .. many more
+]
+
+???
+
+- Short reads by themselves don't tell us much
+- Must be combined into larger contigs (chromosomes, plasmids, etc)
+
+- Steps 1-4 are a part of many analyses
+- Assemble reads can be used for analysis feature of interest
+  - Variant analysis
+  - Differential Gene Expression (RNA)
+  - Taxonomy determination (Metagenomics)
+  - .. many more
+
+---
+
+# Example NGS pipeline
+
+![high level view of a typical NGS workflow](../../images/mapping/variant_calling_workflow.png)
+
+A high level view of a typical NGS bioinformatics workflow
+
+???
+- Mapping step occurs if a reference genome is available for the organism of interest
+  - else: de-novo assembly
+- Variant calling step is just an example, after mapping can do many steps
+  - Structural Variants / Fusion genes
+  - Differential Gene expression
+  - Alternative Splicing
+  - ..
+
 ---
 
 # What is mapping?
 
----
+.pull-left[
+![mapping vs assembly](../../images/mapping/mapping_assembly.png)
+]
 
-# Mapping
+.pull-right[
+- Short reads must be combined into longer contigs
 
-- Visualise the position of reads on the genome
+- **Mapping:** use a reference genome as a guide
 
-![alt text](../../images/igv_mapping.png "IGV Browser")
+- **De-novo assembly:** without reference genome
+]
 
----
-
-# Sequence alignment
-
-```
-A A C C G C C T T
-
-A G G G G C C T T
-
-1 2 3 4 5 6 7 8 9
-```
+???
+- Mapping is also referred to as *alignment*
+- This tutorial only deals with mapping/alighnment
+- There are other tutorials available for de-novo assembly
 
 ---
 
 # Sequence alignment
 
-```
-A A C C G C C T T
-|       | | | | |
-A G G G G C C T T
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A C G C C T T . . .
 
-1 2 3 4 5 6 7 8 9
-```
+  Read:            A G G G G C C T T
+  ```
+
+- Determine Alignment Score
+  - Penalties for gaps and mismatches
+
 
 ---
 
-# Looks easy...
+# Sequence alignment
 
-Lego time: Who wants to volunteer?
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A - C G C C T T . . .
+  .                | : - : | | | | |
+  Read:            A G G G G C C T T
+  ```
+
+-
+  - Penalties for gaps and mismatches
+  - Determine
+
+
+???
+| = match
+: = mismatch
+- = gap
+---
+
+# Looks easy but..
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+<table class="hidden" style="width:100%; font-size:0.8em">
+<th>Alignment</th><th></th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+
+</table>
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+
+<table style="width:100%; font-size:0.8em">
+<th>Alignment</th><th></th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr class="hidden"><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr class="hidden"><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr class="hidden"><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+
+</table>
+
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+<table style="width:100%; font-size:0.8em;">
+<th>Alignment</th><th></th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr class="hidden"><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr class="hidden"><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+
+</table>
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+<table style="width:100%; font-size:0.8em">
+<th>Alignment</th><th></th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr class="hidden"><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+
+</table>
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+<table style="width:100%; font-size:0.8em">
+<th>Alignment</th><th></th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+</table>
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+<table style="width:100%; font-size:0.8em">
+<th>Alignment</th><th>Tool</th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Novoalign</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Ssaha2 </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td> BWA </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> Complete Genomics </td>
+</tr>
+</table>
+
+
+???
+We didn't just make these up, different real aligners gave these different results
+
+---
+
+Sequence 1: `AAA CAGTGA GAA`
+Sequence 2: `AAA TCTCT  GAA`
+
+<table style="width:100%; font-size:0.8em">
+<th>Alignment</th><th>Variants</th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td><pre>
+ins T
+del AG
+sub GA -> CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td><pre>
+del C
+sub AG -> CT
+sub GA -> CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+</pre></td>
+<td><pre>
+snp C -> T
+del A
+snp G -> C
+sub GA -> CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td><pre>
+del CAGTGA
+int TCTCT
+</pre></td>
+</tr>
+</table>
+
+
+???
+Mapping can affect downstream analysis, in this cases very different variant calls
+
+
+---
+
+# Alignment Scores
+
+- Different scores or penalties for each
+ - Match
+ - Mismatch
+ - Opening a gap
+ - Extending a gap
+
+
+
+- Considerations:
+  - base quality score?
+    - if low quality base call, lower penalty for mismatch?
+  - transition vs transversion?
+   - transitions are typically about 2x as frequent
+as transversions in real sequences
+
+---
+
+
+# Try it yourself.
+
+- Lego time! Who wants to volunteer?
+
+- Or try this [online sequence alignment game](http://teacheng.illinois.edu/SequenceAlignment/)
+
+![](../../images/mapping/alignment.gif){: width="75%"}
+
+
+.footnote[https://tinyurl.com/sequence-alignment]
 
 ---
 
@@ -82,7 +506,11 @@ And many more!
 
 ???
 
-# Hands-on!
+---
+
+## Tools, tools, tools
+
+![timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)
 
 ---
 
@@ -99,6 +527,14 @@ And many more!
 SAM: Sequence Alignment/Map format
 
 BAM: Binary SAM
+
+---
+
+# Genome Browser
+
+- Visualise the alignments
+
+![alt text](../../images/igv_mapping.png "IGV Browser")
 
 ---
 
