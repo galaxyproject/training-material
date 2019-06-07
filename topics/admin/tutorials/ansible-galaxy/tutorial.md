@@ -29,7 +29,7 @@ requirements:
 # Overview
 {:.no_toc}
 
-This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
+This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
 {: .quote}
@@ -173,7 +173,7 @@ Installation of Galaxy with the playbook follows generally the steps you would e
 - Any database updates are applied
 
 It would not be difficult to write a role that does this yourself, but by using
-the galaxyproject.galaxy role, you know that you're getting all of the Galaxy
+the `galaxyproject.galaxy` role, you know that you're getting all of the Galaxy
 best practices and knowledge from previous admins codified for you.
 
 # Installing Galaxy
@@ -185,10 +185,10 @@ To proceed from here it is expected that:
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 
   > ### {% icon comment %} Comment: Running Ansible on your remote machine
-  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
   {: .comment}
 
-- You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
+- You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
 
 ## Requirements
 
@@ -217,7 +217,7 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 > 3. In the same directory, run `ansible-galaxy install -p roles -r requirements.yml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
-> 4. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Galaxy.
+> 4. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy.
 >
 > 5. Inspect the contents of the newly created `roles` directory in your working directory.
 >
@@ -358,7 +358,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_root`                | `/srv/galaxy`                              | This is the root of the Galaxy deployment.
 >    `galaxy_file_path`           | `/data`                                    | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`         | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
+>    `galaxy_commit_id`           | `release_18.09`                            | The git reference to check out, which in this case is the <br>branch for Galaxy release 18.09.
 >    `galaxy_config_style`        | `yaml`                                     | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                     | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `check_migrate_tools`        | `false`                                    | Must be set to false in this case due to a new install of Galaxy
@@ -516,7 +516,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened. Setting `retry_files_enabled = false` will prevent Ansible from creating `playbook.retry` files whenever a playbook crashes before finishing. These are rarely useful for the cases in which we run Ansible.
 >
-> For users running with the local connection, you can specify this in your `hosts` file:
+> For users running with the local connection, you can specify this in your `hosts` inventory file:
 >
 > ```ini
 > [galaxyservers]
@@ -564,7 +564,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    ```
 >    {% endraw %}
 >
->    Here we've defined a `galaxy` command that should be `present`. It will run the command `uwsgi ...` and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as `running`. It starts as the galaxy user with a umask of `022` (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.
+>    Here we've defined a `galaxy` command that should be `present`. It will run the command `uwsgi ...` and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as `running`. It starts as the `galaxy` user with a umask of `022` (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.
 >
 > 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or config changes are made. To do so, open `playbook.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a task to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
 >
@@ -881,7 +881,7 @@ For this "disaster", we will pretend that:
 
 Your entire Galaxy server is gone. You were a responsible admin and had your user data and database stored on a separate system (and backed up), so at least those survived. Nevertheless, this is when most of us start feeling really bad; bosses start yelling, we start crying or reaching for bad coping habits.
 
-But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you've made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
+But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you have made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
 
 > ### {% icon hands_on %} Hands-on: Revert the Apocalypse
 >
