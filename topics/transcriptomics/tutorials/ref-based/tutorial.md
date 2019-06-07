@@ -740,10 +740,10 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >                  - In *"1: Factor level"*:
 >                      - *"Specify a factor level"*: `treated`
 >                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
->                         - Tip: use the <kbd>Ctrl</kbd> key to select multiple files
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `untreated`
 >                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>
 >          - Click on *"Insert Factor"* (not on "Insert Factor level")
 >          - In "2: Factor"
 >              - "Specify a factor name" to `Sequencing`
@@ -757,7 +757,9 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    - *"Files have header?"*: `No`
 >    - *"Output normalized counts table"*: `Yes`
 >
->    > ### {% icon comment %} Tip: Using group tags for large sample sets
+>    {% include snippets/select_multiple_datasets.md %}
+>
+>    > ### {% icon comment %} Comment: Using group tags for large sample sets
 >    >
 >    > If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
 >    > may be a lot of work. In these situations, **group tags** can make your life a lot easier.
