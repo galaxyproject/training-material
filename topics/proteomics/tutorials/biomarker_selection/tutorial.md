@@ -16,7 +16,8 @@ objectives:
 time_estimation: 3H
 
 key_points:
-- biomarker candidates selection workflow, public proteomics data retrieval and annotation
+- biomarker candidates selection workflow
+- public proteomics data retrieval and annotation
 
 contributors:
 - combesf
@@ -109,7 +110,7 @@ To do so, a filter is applied on the expression value provided by HPA and measur
 In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 
 
-> ### {% icon hands_on %} Hands-on: Filter on expression value criterium
+> ### {% icon hands_on %} Hands-on: Filter on expression value criterion
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Operation"*: `Discard`
@@ -150,19 +151,22 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >            - *"Enter your list"*: `Input file containing your list`
 >                - *"Enter the name of this list"*: `heart RNAseq`
 >
->   > ### {% icon question %} Questions
->   > How many IDs are in common to both IHC and RNA-seq lists ?
->   >   > ### {% icon solution %} Solution
->   >   > 931 (you can visualize it in [the output of the Venn](#figure-1))
->   > {: .solution}
->   {: .question}
 {: .hands_on}
 
-You can see the the graphical output of the Venn:
+Examine the Venn diagram output:
 
 ![Venn diagram output](../../images/biomarker-selection/jVenn_chart-tuto2.png)
 
-For greater clarity we'll keep only the column with those 931 IDs to continue our pipeline.
+
+> ### {% icon question %} Questions
+> How many IDs are common to both IHC and RNA-seq data?
+>   > ### {% icon solution %} Solution
+>   > 931 candidate biomarkers are detected by both IHC and RNA-seq data.
+>   {: .solution}
+{: .question}
+
+For greater clarity we'll keep only the column with those 931 candidate biomarkers detected in both IHC and RNA-seq data in the
+rest of our pipeline.
 
 
 > ### {% icon hands_on %} Hands-on: Cut
@@ -213,7 +217,7 @@ We wish to focus on transcripts that have been classed as (according to the HPA 
 This information is listed in the column 4 : "RNA tissue category" of the result dataset.
 
 Let's use the "Filter by keywords and/or numerical value" tool to select the candidate biomarkers based on this
-"RNA tissue category" criterium.
+"RNA tissue category" criterion.
 
 
 > ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
@@ -227,9 +231,9 @@ Let's use the "Filter by keywords and/or numerical value" tool to select the can
 >    - *"Sort by column ?"*: `Yes`
 >
 >   > ### Output
->   > - **Filtered Add_expression_data_on_data_8**: output list of the heart biomarkers with RNA tissue category
+>   > - **Filtered Add_expression_data**: output list of the heart biomarkers with RNA tissue category
 >   > containing "enriched" or "enhanced" (115 lines = what we are interested in)
->   > - **Filtered Add_expression_data_on_data_8 - discarded lines**: output list of the heart biomarkers with
+>   > - **Filtered Add_expression_data - discarded lines**: output list of the heart biomarkers with
 >   > RNA tissue category NOT containing "enriched" or "enhanced" (not what we are interested in)
 >   {: .comment}
 {: .hands_on}
@@ -259,7 +263,7 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >            - *"Target type of IDs you would like to map to"*: `Uniprot accession number, Uniprot ID`
 >
 >   > ### Output
->   > **ID converter on data 11**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
+>   > **ID converter**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
 >   > UniProt accession number and ID are added.
 >   {: .comment}
 {: .hands_on}
@@ -314,9 +318,8 @@ no transmembrane domains by running the Filter by keywords and/or numerical valu
 >   {: .comment}
 {: .hands_on}
 
-We have now 48 proteins.
-
-Next step : to identify proteins already seen in LS MS/MS experiments.
+We have now 48 proteins. The next step is to identify those proteins already previously observed in
+LS MS/MS experiments.
 
 
 # Check for previous detection by LC-MS/MS experiments
@@ -331,7 +334,7 @@ Next step : to identify proteins already seen in LS MS/MS experiments.
 >        - `Human Plasma non glyco`
 >
 >   > ### Output
->   > **Get MS/MS observations in tissue/fluid on data 15**: In this file, 2 columns (11 and 12, at the end)
+>   > **Get MS/MS observations in tissue/fluid**: In this file, 2 columns (11 and 12, at the end)
 >   > were added with the info of number of times peptides were seen by MS/MS.
 >   {: .comment}
 {: .hands_on}
@@ -339,7 +342,7 @@ Next step : to identify proteins already seen in LS MS/MS experiments.
 Let's now keep only proteins that have already been seen by MS/MS in the plasma (last column of the file).
 
 
-> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
+> ### {% icon hands_on %} Hands-on: Filter for proteins seen in the plasma
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - *"Operation"*: `Discard`
@@ -352,10 +355,10 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 >    - *"Sort by column ?"*: `Yes`
 >
 >   > ### Output
->   > - **Filtered Get MS/MS observations in tissue/fluid on data 15**: output list of the proteins
+>   > - **Filtered Get MS/MS observations in tissue/fluid**: output list of the proteins
 >   > whose some peptides have been seen in plasma (21 proteins)
->   > - **Filtered Get MS/MS observations in tissue/fluid on data 15 - discarded lines**:
->   > output list of proteins with no peptides seen in the plassma
+>   > - **Filtered Get MS/MS observations in tissue/fluid - discarded lines**:
+>   > output list of proteins with no peptides seen in the plasma
 >   {: .comment}
 {: .hands_on}
 
@@ -372,7 +375,6 @@ These potential mechanistic biomarkers of myocardial infarction include (i) card
 that is routinely used as the most specific marker of myocardial injury and (ii) the heart-type fatty acid-binding protein
 (FABP3 (P05413)) that has been proposed as a diagnostic and prognostic marker for acute and chronic cardiac injury.
 
-Extraction of workflow is first valuable for analyses reproductibility and tracability.
-
+Extraction of a workflow from your history is valuable for analyses reproducibility and traceability.
 Moreover, a workflow can also be made reusable with modifiable parameters, and as a result this strategy can
 be applied to other types of tissue injury (e.g. brain, liver, kidney).
