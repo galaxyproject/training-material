@@ -133,9 +133,9 @@ First we need to get some data into our history. You can upload files from your 
 >    ![Rename dataset to `Exons`](../../images/101_rename.png)
 {: .hands_on}
 
-## Upload SNP information
+## Obtaining SNP information
 
-Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
+We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### {% icon hands_on %} Hands-on: SNP information
 > Again open the `UCSC Main - table browser` tool and set the following parameters
@@ -153,16 +153,18 @@ Now we have information about the exon locations, but our question was which exo
 >
 >    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
 >
->    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. You will get your second item in your analysis history.
+>    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. A second item will appear in your analysis history.
 >
 > 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+>
+>    {% include snippets/rename_dataset.md name="SNPs" %}
 {: .hands_on}
 
 # Analysis
 
-## Find exons with the highest number of SNPs
+## Find exons with the most SNPs
 
-Let's remind ourselves that our objective is to find which exon contains the most SNPs. Therefore we have to join the file with the exon locations with the file containing the SNP locations (here "join" is just a fancy word for printing the SNPs and exons that overlap side-by-side).
+Our objective is to find which exon contains the most SNPs. Therefore we have to intersect the file with the exon locations with the file containing the SNP locations (here "intersect" is just a fancy word for printing SNPs and exons that overlap side-by-side).
 
 > ### {% icon comment %} Search bar
 >
