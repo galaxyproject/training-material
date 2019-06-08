@@ -210,7 +210,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 {: .hands_on}
 
-Let's take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first lines in the file all have the same exon ID but different SNP IDs, meaning these lines represent different SNPs that all overlap the same exon. Therefore we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID in the fourth column.
+Let's take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first lines in the file all have the same exon ID but different SNP IDs, meaning these lines represent different SNPs that all overlap the same exon.
 
 > ### {% icon question %} Question
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
@@ -218,7 +218,8 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 
 
 ## Count the number of SNPs per exon
-We've just seen how to count the number of SNPs in each exon, so let's do this for all the exons in our file.
+
+Since each line represents a single case of overlap between SNP and exon, we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID, so let's do this for all the exons in our file.
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
