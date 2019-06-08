@@ -527,6 +527,12 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
 3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
 
+> ### {% icon comment %} Permissions
+> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
+>
+> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Share history and workflow
 >
 > 1. Share one of your histories with your neighbour.
