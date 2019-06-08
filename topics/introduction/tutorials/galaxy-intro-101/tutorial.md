@@ -48,16 +48,16 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 
 # Pretreatments
 
-Suppose you get the following question:
-
-> ### {% icon question %} Question
-> *Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?*
-{: .question}
+Suppose you answer the question: Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?
 
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
-With your data in hand, you are left with the question: "but how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
+But even with your data in hand, you stll have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
-Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
+Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts:
+
+1. The available tools are listed on the left
+2. Your analysis history is recorded on the right
+3. The central panel will let you run analyses and view outputs
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
