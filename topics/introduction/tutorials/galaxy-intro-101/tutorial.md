@@ -364,7 +364,13 @@ An alternative overview of your histories can be accessed by clicking on the {% 
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
-Here you see a more detailed view of each history, and can perform the same operations, such as switching to a different history, deleting a history, purging it (permanently deleting it, this action cannot be reversed), or copying datasets and even entire histories.
+Here you see a more detailed view of each history, and can perform the same operations as the other view:
+- switching between different histories,
+- deleting a history,
+- purging it (permanently deleting it, this action cannot be reversed)
+- copying histories
+
+One difference is that this view lets you copy datasets between your histories by dragging and dropping them.
 
 You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
 
