@@ -77,9 +77,9 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 >
 {: .hands_on}
 
-## Upload exon locations
+## Locating Exons
 
-We are now ready to perform our analysis, but first we need to get some data into our history. You can upload files from your computer, but Galaxy can also fetch data directly from external sources. We will now import a list of all the exon locations on chromosome 22 directly from the UCSC table browser.
+First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
