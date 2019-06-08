@@ -376,9 +376,9 @@ You can always return to your analysis view by clicking on **Analyze Data** in t
 
 ## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
-Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
@@ -392,7 +392,9 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of SNPs`.
+> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of interactions`.
+>
+>    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find those interactions as well.
 >
 >    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
@@ -419,7 +421,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    ![Workflow editor](../../images/101_28.png)
 >
->    When you click on a component, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
+>    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
 >    > ### {% icon tip %} Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
@@ -461,7 +463,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 {: .hands_on}
 
 > ### {% icon comment %} Comments
-> We could **validate** our newly built workflow by running it on the same input datasets than the ones in the `Galaxy 101` history used to extract the workflow in order to make sure we do obtain the same results.
+> We could **validate** our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.
 {: .comment}
 
 ## Run workflow on different data
@@ -470,7 +472,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon hands_on %} Hands-on: Run workflow
 >
-> 1. Create a **new history** (gear icon) and give it a name.
+> 1. Create a **new history** and give it a name.
+>
+>    {% include snippets/create_new_history.md %}
 >
 > 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history panel). Here you can just drag and drop datasets from one history to another.
 >
