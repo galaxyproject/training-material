@@ -265,7 +265,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 
 ## Sort the exons by SNPs count
 
-Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
+Now that we have a list of all exons, and the number of SNPs they contain, we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
@@ -284,7 +284,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 >
 >    ![Contents of the `Sort` output dataset](../../images/101_16.png)
 >
->    You should now see the same file as we had before, but the exons with the highest number of SNPs are now at the top.
+>    The file should look similar to before sorting, but now the exons with the highest number of SNPs are at the top.
 {: .hands_on}
 
 
@@ -307,7 +307,6 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
->
 >
 > 2. Click **Execute**
 >
