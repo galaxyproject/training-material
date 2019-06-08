@@ -169,6 +169,9 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 > ### {% icon comment %} Search bar
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
+>
+> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you'll need to search among the various options to find the one that works for you.
+>
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
