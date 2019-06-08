@@ -103,10 +103,16 @@ A high level view of a typical NGS bioinformatics workflow
 
   Read:            A G G G G C C T T
   ```
-
-- Determine Alignment Score
-  - Penalties for gaps and mismatches
-
+.hidden[
+- Find best alignment by assigning a *score*
+  - Reward for matches
+  - Penalty for mismatches and gaps
+    - gap open vs gap extend
+- Further considerations
+  - Take base quality into consideration?
+  - transitions vs transversions?
+    ![](../../images/mapping/transition_transversion.gif)
+]
 
 ---
 
@@ -118,24 +124,82 @@ A high level view of a typical NGS bioinformatics workflow
   .                | : - : | | | | |
   Read:            A G G G G C C T T
   ```
-
--
-  - Penalties for gaps and mismatches
-  - Determine
-
+.hidden[
+- Find best alignment by assigning a *score*
+  - Reward for matches
+  - Penalty for mismatches and gaps
+    - gap open vs gap extend
+- Further considerations
+  - Take base quality into consideration?
+  - transitions vs transversions?
+    ![](../../images/mapping/transition_transversion.gif)
+]
 
 ???
 | = match
 : = mismatch
 - = gap
+
+---
+
+# Sequence alignment
+
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A - C G C C T T . . .
+  .                | : - : | | | | |
+  Read:            A G G G G C C T T
+  ```
+- Find best alignment by assigning a *score*
+  - Reward for matches (`|`)
+  - Penalty for mismatches (`:`) and gaps (`-`)
+     - Gap open vs gap extend
+.hidden[
+- Further considerations
+  - Take base quality into consideration?
+  - Transitions vs transversions?
+     - Transitions about 2x as frequent as transversions
+       .image-05[ ![](../../images/mapping/transition_transversion.gif)]
+]
+
+---
+
+# Sequence alignment
+
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A - C G C C T T . . .
+  .                | : - : | | | | |
+  Read:            A G G G G C C T T
+  ```
+- Find best alignment by assigning a *score*
+  - Reward for matches (`|`)
+  - Penalty for mismatches (`:`) and gaps (`-`)
+     - Gap open vs gap extend
+- Further considerations:
+  - Take base quality into consideration?
+  - Transitions vs transversions?
+     - Transitions about 2x as frequent as transversions
+       .image-05[ ![](../../images/mapping/transition_transversion.gif) ]
+
+???
+**Transitions** are interchanges of two-ring purines (A G) or of one-ring pyrimidines (C T): they therefore involve bases of similar shape.
+
+**Transversions** are interchanges of purine for pyrimidine bases, which therefore involve exchange of one-ring and two-ring structures.
+
+
 ---
 
 # Looks easy but..
 
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
+
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table class="hidden" style="width:100%; font-size:0.8em">
 <th>Alignment</th><th></th><th></th>
@@ -176,9 +240,12 @@ AAA------TCTCTGAA
 
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
 
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table style="width:100%; font-size:0.8em">
 <th>Alignment</th><th></th><th></th>
@@ -220,8 +287,12 @@ AAA------TCTCTGAA
 
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
+
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table style="width:100%; font-size:0.8em;">
 <th>Alignment</th><th></th><th></th>
@@ -262,8 +333,12 @@ AAA------TCTCTGAA
 
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
+
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table style="width:100%; font-size:0.8em">
 <th>Alignment</th><th></th><th></th>
@@ -304,8 +379,12 @@ AAA------TCTCTGAA
 
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
+
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table style="width:100%; font-size:0.8em">
 <th>Alignment</th><th></th><th></th>
@@ -343,10 +422,21 @@ AAA------TCTCTGAA
 </tr>
 </table>
 
+???
+There is no one right way to do alignment
+  - Hard to say which of these is "better" or "worse"
+  - Just different choices, but all valid
+
+Non-trivial problem
+
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
+
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table style="width:100%; font-size:0.8em">
 <th>Alignment</th><th>Tool</th>
@@ -390,8 +480,12 @@ We didn't just make these up, different real aligners gave these different resul
 
 ---
 
-Sequence 1: `AAA CAGTGA GAA`
-Sequence 2: `AAA TCTCT  GAA`
+# Sequence Alignment
+
+```
+Sequence 1: AAA CAGTGA GAA
+Sequence 2: AAA TCTCT  GAA
+```
 
 <table style="width:100%; font-size:0.8em">
 <th>Alignment</th><th>Variants</th>
@@ -447,70 +541,65 @@ int TCTCT
 
 
 ???
-Mapping can affect downstream analysis, in this cases very different variant calls
+**Important:** Mapping can affect downstream analysis, in this case
+different alignments lead to very different variant calls
 
 
 ---
 
-# Alignment Scores
+## Tools, tools, tools
 
-- Different scores or penalties for each
- - Match
- - Mismatch
- - Opening a gap
- - Extending a gap
+- Many different mappers exist
+  - Bowtie, HISAT, MAQ, BWA, Eland, SOAP, STAR, BISMARCK, Novoalign
+  - Many more
 
 
+- Each algorithm makes **different choices** during alignment
 
-- Considerations:
-  - base quality score?
-    - if low quality base call, lower penalty for mismatch?
-  - transition vs transversion?
-   - transitions are typically about 2x as frequent
-as transversions in real sequences
+
+- Choice of aligner may **affect downstream results**
+   - For example different variant calls (previous slide)
+
+
+- Best tool for your data depends on many factors
+  - Type of experiment
+  - Sequencing platform
+  - Compute resources vs sensitivity
+  - Read characteristics
+
+???
+Choice of mapper depends on your experiment
+ - Some mappers are good for DNA but not RNA
+ - Some mappers do well in highly rearranged genomes, others less so (e.g. for cancer genomes)
+ - Some mappers do well on some platforms but worse on others
+ - ..
+
+Or other factors
+ - STAR needs a LOT of RAM
+ - Do you need results fast? or accurate? (e.g. medical setting)
 
 ---
 
+## Tools, tools, tools
 
-# Try it yourself.
+- Over 60 different alignment tools
+- Many comparison papers
+- Feature comparison:  https://www.ebi.ac.uk/~nf/hts_mappers/
+
+![timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)
+
+---
+
+# Try it yourself!
 
 - Lego time! Who wants to volunteer?
 
-- Or try this [online sequence alignment game](http://teacheng.illinois.edu/SequenceAlignment/)
+- Or try this [online sequence alignment game](http://teacheng.illinois.edu/SequenceAlignment/):
 
-![](../../images/mapping/alignment.gif){: width="75%"}
-
+.image-75[![recording of alignment game](../../images/mapping/alignment.gif)]
 
 .footnote[https://tinyurl.com/sequence-alignment]
 
----
-
-- Know your data!
-- Maybe not the "best" result is the one you are searching for
-- Try different mappers
-
----
-
-## Tools, tools, tools
-
-- Bowtie
-- HISAT
-- MAQ
-- BWA
-- Eland
-- SOAP
-- STAR
-- BISMARCK
-
-And many more!
-
-???
-
----
-
-## Tools, tools, tools
-
-![timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)
 
 ---
 
