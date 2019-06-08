@@ -49,7 +49,7 @@ A high level view of a typical NGS bioinformatics workflow
 ]
 
 .pull-right[
-- Short reads must be combined into longer contigs
+- Short reads must be combined into longer fragments
 
 - **Mapping:** use a reference genome as a guide
 
@@ -58,8 +58,15 @@ A high level view of a typical NGS bioinformatics workflow
 
 ???
 - Mapping is also referred to as *alignment*
-- This tutorial only deals with mapping/alighnment
+- Short reads produced by sequencer must be combined into larger contigs
+  - e.g. reconstruct the chromosomes
+  - mapping uses a reference genome as a guide
+  - can subsequently find where our sample differs from reference (variants)
+
+
+- This tutorial only deals with mapping/alignment
 - There are other tutorials available for de-novo assembly
+
 
 
 ---
@@ -75,7 +82,7 @@ class: top
   ```
 
 ???
-Consider situation where we mush map this read to this reference genome
+Consider situation where we must map this read to this reference genome
 - This area looks pretty similar, but not quite identical..
 
 ---
@@ -167,8 +174,10 @@ Many more complexities may be considered, different tools make different choices
   - A mismatch on a low-confidence base may get lower penalty than mismatch
     of a base with high confidence score
 
+
 - **Transitions vs Transversions**
   - Transitions are more likely to occur in real sequences, so may give lower penalty than transversions
+
 
 **Transitions** are interchanges of two-ring purines (A G) or of one-ring pyrimidines (C T): they therefore involve bases of similar shape.
 
@@ -484,6 +493,11 @@ These different mappings led to different variants, and hard to tell the are equ
 .image-75[![Recording of alignment game](../../images/mapping/alignment.gif)]
 
 .footnote[https://tinyurl.com/sequence-alignment]
+
+???
+Can have learners play around with this alignment game now
+
+Or use lego bricks, each nucleotide a different colour
 
 
 ---
