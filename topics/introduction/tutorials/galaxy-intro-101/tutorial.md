@@ -83,7 +83,9 @@ First we need to get some data into our history. You can upload files from your 
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
-> 1. **UCSC Main** {% icon tool %}: In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> 1. **UCSC Main** {% icon tool %} - table browser:
+>
+>     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
 >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
 >
@@ -136,7 +138,9 @@ First we need to get some data into our history. You can upload files from your 
 Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### {% icon hands_on %} Hands-on: SNP information
-> 1. **UCSC Main** {% icon tool %}: Open again the `UCSC Main - table browser` tool and set the following parameters:
+> Again open the `UCSC Main - table browser` tool and set the following parameters
+>
+> 1. **UCSC Main** {% icon tool %} table browser:
 >    - *"group"* should be changed to `Variation`
 >    - {% icon param-text %} *"region"* should be changed again to `position` with value `chr22`
 >    - *"output format"* should be changed again to `BED - browser extensible data`
