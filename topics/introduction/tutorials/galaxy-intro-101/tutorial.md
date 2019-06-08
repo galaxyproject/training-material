@@ -66,9 +66,11 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 > 1. Make sure you start from an empty analysis history.
 >
 >    > ### {% icon tip %} Creating a new history
+>    > 1. Click the {% icon new-history %} **plus icon** at the top of the history panel
 >    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
+>    > If the {% icon new-history %} is missing:
+>    > 1. Click the **gear icon** at the top of the history panel
+>    > 2. Select the option **Create New** from the menu
 >    {: .tip}
 >
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
