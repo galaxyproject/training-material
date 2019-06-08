@@ -229,7 +229,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 
 ## Count the number of SNPs per exon
 
-Since each line represents a single case of overlap between SNP and exon, we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID, so let's do this for all the exons in our file.
+Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. So let's do this for all the exons in our file:
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
