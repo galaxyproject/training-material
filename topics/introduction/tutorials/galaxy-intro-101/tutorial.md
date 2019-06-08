@@ -352,7 +352,7 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **Options** menu on the top of the history panel (gear symbol):
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the {% icon galaxy-gear %} **Options** menu on the top of the history panel (gear symbol):
 
 ![History options menu](../../images/history_options_menu.png)
 
@@ -384,7 +384,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 > 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
 >
-> 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
+> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -476,7 +476,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history panel). Here you can just drag and drop datasets from one history to another.
+> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
@@ -504,13 +504,13 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
 >    {: .comment}
 >
-> 6. Once the workflow has started, you will initially be able to see all its steps:
+> 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting `Unhide Hidden Datasets` from the history options menu.
+> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on "hidden", just below the history name, or by selecting `Unhide Hidden Datasets` from the {% icon galaxy-gear %} history options menu.
 {: .comment}
 
 > ### {% icon question %} Questions
@@ -521,7 +521,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the gear symbol in the history panel and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
 
 1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
