@@ -184,10 +184,10 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >    - *"Join"*: Select `Exons`
 >    - *"With"*: Select `SNPs`
 >    - *"with min overlap"*: `1`
->    - *"Return"*: `Only records that are joined (INNER JOIN)`, so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+>    - *"Return"*: `Only records that are joined (INNER JOIN)`, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
 >    > ### {% icon tip %} How do I use this tool?
->    > If you scroll down on this page, you will find the help of the tool.
+>    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
 >    {: .tip}
 >
 >
@@ -197,9 +197,9 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
->    Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
+>    Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
 >
-> > ### {% icon comment %} If things don't work...
+> > ### {% icon comment %} If things didn't work...
 > >
 > > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
