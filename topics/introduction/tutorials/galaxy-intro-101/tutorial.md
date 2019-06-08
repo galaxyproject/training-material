@@ -214,6 +214,16 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 
 > ### {% icon question %} Question
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
+>
+> ### {% icon solution %} Solution
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> to look for how many times each is used:
+> >
+> > Gene | Occurences
+> > ---- | ----------
+> > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 24
+> > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 24
+> > `ENST00000343518.10_cds_0_0_chr22_15690078_f` | 40
+> {: .solution}
 {: .question}
 
 
