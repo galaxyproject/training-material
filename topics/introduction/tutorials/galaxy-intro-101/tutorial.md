@@ -356,11 +356,11 @@ In Galaxy your analyses live in histories such as your current one. Histories ca
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the central panel:
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view, or choose `Saved Histories` from the history gear menu and you will see a list of all your histories in the central panel:
 
 ![`Saved Histories` list](../../images/101_23.png)
 
-An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history panel (window icon).
+An alternative overview of your histories can be accessed by clicking on the {% icon galaxy-columns %} **View all histories** button at top of your history panel.
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
