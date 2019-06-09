@@ -48,7 +48,7 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 
 # Pretreatments
 
-Suppose you answer the question: Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?
+We start with the question: In human chromosome 22, which exon has the highest number of single nucleotide polymorphisms (SNPs)?
 
 > ### {% icon comment %} Background
 > Not everyone has the same background and that's ok! You may have studied different organisms with different gene models, or you may not be familiar with the biological aspect at all. The biological background is not necessary for following this tutorial, we just like to provide research context for any tutorial. Here are brief explanations of some of the concepts mentioned in this tutorial:
