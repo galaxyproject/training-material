@@ -1,7 +1,6 @@
 >
 >    > ### {% icon tip %} Tip: Creating a new history
 >    >
->    > 2. Click on **Create New**
 >    > 1. Click the {% icon new-history %} icon at the top of the history panel
 >    >
 >    > If the {% icon new-history %} is missing:
