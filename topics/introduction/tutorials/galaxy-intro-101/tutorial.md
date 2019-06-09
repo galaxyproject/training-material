@@ -61,7 +61,7 @@ Suppose you answer the question: Which coding exon has the highest number of sin
 >
 >   ![Eukaryotic gene model](../../images/DNA_exons_introns.png "An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)")
 >
-> - **SNP** stands for [single-nucleotide polymorphism](https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism) and are pronounced like the english word "snip". These are single bases changed between two individuals; where one individual might have an A, another could have a C in specific position. These are often especially interesting to geneticists as the causes of certain inheritable diseases.
+> - **SNP** stands for [single-nucleotide polymorphism](https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism) and are pronounced like the english word "snip". These are single nucleotide differences between a sequenced individual and some reference sequence; where one individual might have an A, another could have a C in specific position. SNP databases have been created for many organisms which have a reference sequence and they often include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. >1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.
 {: .comment}
 
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
