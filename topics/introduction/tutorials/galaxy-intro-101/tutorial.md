@@ -50,6 +50,20 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 
 Suppose you answer the question: Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?
 
+> ### {% icon comment %} Background
+> Not everyone has the same background and that's ok! You may have studied different organisms with different gene models, or you may not be familiar with the biological aspect at all. The biological background is not necessary for following this tutorial, we just like to provide research context for any tutorial. Here is a quick overview of the important concepts with somewhat simplified explanations:
+>
+> - **Nucleotides** are the A, C, T, and Gs that make up DNA.
+> - A **Chromosomes** can be thought of as a very long piece of DNA (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.
+> - **Features** are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.
+> - **Genes** are one kind of interesting feature, a region that will be [transcribed](https://en.wikipedia.org/wiki/Transcription_(biology)) into RNA before being [translated](https://en.wikipedia.org/wiki/Translation_(biology)) into proteins.
+> - **Exons** are part of the [eukaryotic](https://en.wikipedia.org/wiki/Eukaryote) gene [model](https://en.wikipedia.org/wiki/Gene#Structure_and_function). A gene is a complex structure with numerous segments that are removed before the the gene is transcribed into an RNA. The exons are the coding regions, the regions that will appear in the final protein product.
+>
+>   ![Eukaryotic gene model](../../images/DNA_exons_introns.png "An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)")
+>
+> - **SNP** stands for [single-nucleotide polymorphism](https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism) and are pronounced like the english word "snip". These are single bases changed between two individuals; where one individual might have an A, another could have a C in specific position. These are often especially interesting to geneticists as the causes of certain inheritable diseases.
+{: .comment}
+
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
 But even with your data in hand, you stll have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
