@@ -92,9 +92,9 @@ class: top
 
 - Determine position of short read on the genome
   ```
-  Reference: . . . A A - C G C C T T . . .
-  .                | : - : | | | | |
-  Read:            A G G G G C C T T
+  Reference: . . . A A - C G C C T T . . .              | = match
+  .                | : - : | | | | |                    : = mismatch
+  Read:            A G G G G C C T T                    - = gap
   ```
 ???
 But if we introduce gaps and allow for some mismatches in bases, this matches
@@ -111,73 +111,86 @@ class: top
 
 - Determine position of short read on the genome
   ```
-  Reference: . . . A A - C G C C T T . . .
-  .                | : - : | | | | |
-  Read:            A G G G G C C T T
+  Reference: . . . A A - C G C C T T . . .              | = match
+  .                | : - : | | | | |                    : = mismatch
+  Read:            A G G G G C C T T                    - = gap
   ```
 
-- Might be another place on reference where this read would also fit
-- Find best mapping by assigning an *alignment score*
-  - Reward for matches (`|`)
-  - Penalty for mismatches (`:`) and gaps (`-`)
-     - Gap open vs gap extend
 
+- Read could align to multiple places
+  .center[.image-50[![Illustration of multimapped read](../../images/mapping/multimap.png)]]
+
+
+- How to handle multi-mapped reads? Depends on tool:
+  - Map to best region (but what about ties?)
+  - Map to all regions
+  - Map to one region randomly
+  - Discard read
+
+
+- How do we determine *best* region?
+  - Assign ***alignment score*** to every mapping
 
 ???
-- Score based on number of matches, mismatches and gaps in alignment
-- Many algorithms will distinguish between opening a gap and extending one
-
-For example
- - 20 points for every match
- - -10 for every mismatch
- - -20 for starting a gap
- - -10 for extending a gap
-
-- In case of a tie (multiple locations on reference genome with equal score),
-  aligners may:
-   - multimap,
-   - randomly pick one location
-   - discard read
 
 
 ---
-class:top
+class: top
 
-# Sequence alignment
+# Alignment Scoring (basics)
 
-- Determine position of short read on the genome
-  ```
-  Reference: . . . A A - C G C C T T . . .
-  .                | : - : | | | | |
-  Read:            A G G G G C C T T
-  ```
-
-- Might be another place on reference where this read would also fit
-- Find best mapping by assigning an *alignment score*
-  - Reward for matches (`|`)
-  - Penalty for mismatches (`:`) and gaps (`-`)
-     - Gap open vs gap extend
+- **Reward** for a match (e.g. +10), **penalty** for a mismatch (e.g. -5)
+- **Penalty** for gaps
+   - *Linear:* every gap same penalty (e.g. -5)
+   - *Affine:* gap open vs gap extend (e.g. -5 and -1)
 
 
-- Further considerations:
-  - Take base quality into consideration?
-  - Transitions vs transversions?
-     - Transitions about 2x as frequent as transversions
-  - Knowledge about sequencing platform biases?
-  - ..
+- Different tools use different scoring values (and give different results)
 
+
+.center[
+.image-25[![](../../images/mapping/scoring_example.png)]
+
+**Example** (with affine gap penalty)
+]
+
+???
+- Each locus get scored independently (first row of scores in example)
+- Scores from all loci are added up (cumulative score row)
+- Final score for entire alignment in this example is 29
+
+- These reward and penalty values are just examples and will vary
+
+---
+class: top
+
+# Alignment Scoring (advanced)
+
+- **Base quality**
+    - Mismatch of low-confidence base: lower penalty
+    - Mismatch of high-confidence base: higher penalty
+
+
+- **Transitions vs transversions**
+  - Transitions about 2x as frequent as transversions
+
+
+.center[
+.image-50[ ![Transitions vs transversions](../../images/mapping/ti_tv.png) ]
+.image-25[ ![Example scoring matrix](../../images/mapping/ti_tv_scoring.png) ]
+]
+
+
+- Knowledge about sequencing platform and biases
+  - Optimize for read length, error rate, homopolymer accuracy, etc..
+
+
+.footnote[More information about mapping algorithms: [10.1089/cmb.2012.0022](https://doi.org/10.1089/cmb.2012.0022)]
 ???
 
 Many more complexities may be considered, different tools make different choices
 
-- **Base quality score**
-  - A mismatch on a low-confidence base may get lower penalty than mismatch
-    of a base with high confidence score
-
-
-- **Transitions vs Transversions**
-  - Transitions are more likely to occur in real sequences, so may give lower penalty than transversions
-
+Transitions are more likely to occur in real sequences, so may give lower penalty than transversions
 
 **Transitions** are interchanges of two-ring purines (A G) or of one-ring pyrimidines (C T): they therefore involve bases of similar shape.
 
@@ -541,11 +554,18 @@ class: top
   - Read characteristics (paired/single end, read length)
 
 
+.center[
+.image-40[![Mapping RNA](../../images/mapping/spliced_mapper.png)]
+]
+.footnote[**Figure:** mapping of RNA-seq reads is different than DNA-seq]
+
+
 ???
 Choice of mapper depends on your experiment
  - Some mappers are good for DNA but not RNA
- - Some mappers do well in highly rearranged genomes, others less so (e.g. for cancer genomes)
+ - Some mappers do well in highly rearranged genomes (e.g. cancer), others less so
  - Some mappers do well on some platforms but worse on others
+   - e.g. Oxford Nanopore with its long reads but high error rates
  - ..
 
 Read characteristics such as
@@ -628,7 +648,7 @@ This is [IGV](https://software.broadinstitute.org/software/igv/)
   - **local:** start IGV on your machine first, then click link to load data
   - **[Reference genome name]**: downloads and starts IGV
      - **Human hg19** in screenshot
-     - Requires [Java web start](https://java.com/en/download/faq/java_webstart.xml) be installed
+     - Requires [Java web start](https://java.com/en/download/faq/java_webstart.xml) be installed on your machine
 
 ???
 In the mapping hands-on tutorial you will use IGV
