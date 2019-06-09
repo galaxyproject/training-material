@@ -226,7 +226,7 @@ What if:
 
 ---
 
-### Hosts File
+### Inventory File
 
 ```ini
 [webservers]
@@ -236,6 +236,14 @@ What if:
 [databases]
 db_1.example.org ansible_user=root
 ```
+
+???
+
+Defines the systems (called &quot;hosts&quot;) against which Ansible will work.
+
+The headings in square brackets are group names, used to select a set of systems on which Ansible should operate.
+
+It is possible to assign variables to hosts and groups to be used later in playbooks.
 
 ---
 
@@ -259,7 +267,7 @@ db_1.example.org ansible_user=root
 
 Tasks are module invocations with their configuration.
 
-Here is an example of invoking the `copy` module and the package module. Copy copies a file from src on the local host to destination (the remote host) and sets some attributes about the file
+Here is an example of invoking the `copy` module and the package module. Copy copies a file from `src` on the local host to destination (the remote host) and sets some attributes about the file
 
 Next we see an example of the `package` module, a generic OS package manager. It ensures that for the package named `ntpdate`, its state is `present` (i.e. installed)
 

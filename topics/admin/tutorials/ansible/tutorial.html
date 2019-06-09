@@ -373,7 +373,7 @@
 
 <ol id="markdown-toc">
   <li><a href="#what-is-ansible" id="markdown-toc-what-is-ansible">What is Ansible?</a>    <ol>
-      <li><a href="#hosts-file" id="markdown-toc-hosts-file">Hosts file</a></li>
+      <li><a href="#inventory-file" id="markdown-toc-inventory-file">Inventory file</a></li>
       <li><a href="#roles" id="markdown-toc-roles">Roles</a></li>
       <li><a href="#modules-and-tasks" id="markdown-toc-modules-and-tasks">Modules and Tasks</a></li>
       <li><a href="#playbooks" id="markdown-toc-playbooks">Playbooks</a></li>
@@ -408,8 +408,8 @@
 <p>Some terms that you should know first:</p>
 
 <dl>
-  <dt>host files</dt>
-  <dd>An Ansible-specific file that defines groups of hosts (not be confused with <code class="highlighter-rouge">/etc/hosts</code>).</dd>
+  <dt>Inventory file</dt>
+  <dd>An Ansible-specific file that defines the systems (“hosts”) and groups of hosts on which Ansible should operate.</dd>
   <dt>Ansible module</dt>
   <dd>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="highlighter-rouge">command</code> module which converts parameters like <code class="highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</dd>
   <dt>task</dt>
@@ -424,7 +424,7 @@
 
 <p>Looking at each of these briefly:</p>
 
-<h2 id="hosts-file">Hosts file</h2>
+<h2 id="inventory-file">Inventory file</h2>
 
 <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[webservers]</span>
 <span class="err">web_a</span>
@@ -438,7 +438,7 @@
 
 <blockquote class="details">
   <h3 id="details-ansible-inventory-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Inventory Documentation</h3>
-  <p>For more advanced features of the hosts file or “inventory”, check out <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
+  <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
 <h2 id="roles">Roles</h2>
@@ -640,18 +640,18 @@ Ansible provides some flags which can help you identify changes before they’re
       <p>Create an empty directory and <code class="highlighter-rouge">cd</code> into it</p>
     </li>
     <li>
-      <p>Create your hosts file, name it <code class="highlighter-rouge">hosts</code>, in the folder you have just entered.</p>
+      <p>Create your inventory file, name it <code class="highlighter-rouge">hosts</code>, in the folder you have just entered.</p>
 
       <ol>
         <li>Identify a host you have <code class="highlighter-rouge">SSH</code> access to. If you do not have access to any remote machines, <code class="highlighter-rouge">localhost</code> is fine.</li>
         <li>Make sure you can SSH into it. Test it now.</li>
         <li>We will call our group “my_hosts”.</li>
-        <li>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and the host you have chosen.</li>
+        <li>Populate the inventory file with the group <code class="highlighter-rouge">my_hosts</code> and the host you have chosen.</li>
       </ol>
 
       <blockquote class="solution">
         <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-        <p>The file should look like:</p>
+        <p>The <code class="highlighter-rouge">hosts</code> file should look like:</p>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
 <span class="err">your.host</span>
@@ -810,7 +810,7 @@ ok: [localhost]
     <li>
       <p>Run the command <code class="highlighter-rouge">ansible -i hosts -c local -m setup my_hosts</code>.</p>
 
-      <p>The <code class="highlighter-rouge">my_hosts</code> at the end refers to the group we defined in our hosts file.</p>
+      <p>The <code class="highlighter-rouge">my_hosts</code> at the end of the command refers to the group we defined in our <code class="highlighter-rouge">hosts</code> inventory file.</p>
     </li>
     <li>
       <p>Investigate the output. See what sort of information is made available to you.</p>
