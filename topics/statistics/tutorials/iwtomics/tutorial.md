@@ -58,6 +58,9 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 > ### {% icon hands_on %} Hands-on: Get the data
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import datasets:
 >    - Fixed ETn (`ETn_fixed.bed`) regions
 >    - Control (`Control.bed`) regions

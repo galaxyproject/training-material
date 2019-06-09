@@ -59,6 +59,10 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
 >    {% include snippets/import_via_link.md %}

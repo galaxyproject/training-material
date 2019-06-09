@@ -46,6 +46,9 @@ The data are available in [Zenodo]({{ page.zenodo_link }}). It is composed of 4 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the 4 mzXML files from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library inside a collection:
 >
 >    ```
