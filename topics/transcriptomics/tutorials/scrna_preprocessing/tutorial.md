@@ -114,7 +114,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq single batch tutorial)
 >
->    {% include snippets/history_create_new.md %}
+>    {% include snippets/create_new_history.md %}
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
 >

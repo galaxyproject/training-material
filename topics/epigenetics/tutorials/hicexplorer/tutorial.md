@@ -47,6 +47,9 @@ After a corrected Hi-C matrix is created other tools can be used to visualize it
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.1183661).
 >
 >    > ### {% icon tip %} Tip: Importing data via links
