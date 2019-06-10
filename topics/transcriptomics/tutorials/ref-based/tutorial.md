@@ -64,6 +64,9 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the FASTQ file pairs from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library:
 >   - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
 >   - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`

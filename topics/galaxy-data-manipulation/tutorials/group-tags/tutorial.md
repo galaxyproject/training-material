@@ -62,6 +62,9 @@ The second method works at any step during the analysis.
 > ### {% icon hands_on %} Hands-on: Set group tags during upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
 > 3. Click on **Rule-based** on the top
 >

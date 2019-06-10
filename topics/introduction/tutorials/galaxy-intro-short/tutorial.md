@@ -259,13 +259,14 @@ You can re-run a tool many times with different settings. Each time you re-run t
 Let's create a new history.
 
 > ### {% icon hands_on %} Hands-on: New history
-> 1. Click on the {% icon galaxy-gear %} (gear) icon (**History options**) in the History panel
+> 1. Create a new history
 >
->    ![cog](../../images/cog.png)
+>    {% include snippets/create_new_history.md %}
 >
-> 2. Select **Create New**
-> 3. Name your history, *e.g.* "Next-analysis"
-> 4. Press <kbd>Enter</kbd>
+> 2. Rename your history, *e.g.* "Next-analysis"
+>
+>    {% include snippets/rename_history.md %}
+>
 {: .hands_on}
 
 This new history does not have any files in it yet.

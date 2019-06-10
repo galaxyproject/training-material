@@ -75,6 +75,10 @@ For now we will work with the count matrix alone.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and name it "RaceID on scRNA"
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the file from [Zenodo](https://zenodo.org/record/1511582) or from the shared data library
 >
 >    ```

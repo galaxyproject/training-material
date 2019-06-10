@@ -77,6 +77,9 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. Create and name a new history for this tutorial.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the ChIP-seq raw data (\*.fastqsanger) from [Zenodo](https://doi.org/10.5281/zenodo.197100)
 >
 >    > ### {% icon tip %} Tip: Importing data via links
@@ -200,16 +203,16 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > 3. If the mouse genome has 21 pairs of chromosomes, what are the other reference chromosomes (*e.g.* chr1_GL456210_random)?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 
+>    > > 1.
 >    > >    Column | Description
 >    > >    --- | ---
 >    > >    1 | Reference sequence identifier
 >    > >    2 | Reference sequence length
 >    > >    3 | Number of mapped reads
 >    > >    4 | Number of placed but unmapped reads (typically unmapped partners of mapped reads)
->    > >   
+>    > >
 >    > > 2. This information can be seen in column 3, e.g. for Megakaryocyte_Tal1_R1 2143352 reads are mapped.
->    > > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome. 
+>    > > 3. These are parts of chromosomes that e.g. for chr1_GL456210_random do belong to chr1 but it is unclear where exactly. There entires like chrUn that are not associated with a chromosome but it is believed that they are part of the genome.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -246,9 +249,9 @@ We expect that the replicate samples will cluster more closely to each other tha
 >     > 3. What does the output of making a Scatterplot instead of a Heatmap look like?
 >     >
 >     > > ### {% icon solution %} Solution
->     > > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless. 
+>     > > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.
 >     > > 2. The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. [ More information about Pearson and Spearman correlation. ](http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/)
->     > > 3. No solution for you, just compare the different outputs. 
+>     > > 3. No solution for you, just compare the different outputs.
 >     > {: .solution }
 >     {: .question}
 >
@@ -281,9 +284,9 @@ We will now evaluate the quality of the immuno-precipitation step in the ChIP-se
 >    > 4. How does the quality of the IP for megakaryocytes compare to G1E cells?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. 
->    > > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis. 
->    > > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates! 
+>    > > 1. It shows us how good the ChIP Signal compared to the control signal is. An ideal control [input] with perfect uniform distribution of reads along the genome (i.e. without enrichments in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank.
+>    > > 2. We expect that the control (input) signal is more or less uniform distributed over the genome (e.g. like the green line in the image above.) The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis.
+>    > > 3. The enrichment did not work as it should. Compare the blue line with the red one! For your future experiments: You can never have enough replicates!
 >    > > 4. The quality of megakaryocytes is better then G1E.
 >    > {: .solution }
 >    {: .question}
