@@ -484,7 +484,22 @@ A detailed description of the full dataset is available in the <a href="">PRIDE 
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create a new history for this SILAC Proteome exercise</li>
+    <li>
+      <p>Create a new history for this SILAC Proteome exercise</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
     <li>
       <p>Import the mzml file, containing the measured mass spectra from <a href="https://doi.org/10.5281/zenodo.1051552">Zenodo</a> or a data library:</p>
 
@@ -636,7 +651,7 @@ The next step is to map the MS2-based peptide identifications to the quantified 
 For labelled data, it is necessary to map peptide identifications to <em>consensus</em> features (i.e. a pair of one light peptide feature with one matching heavy feature in the correct m/z distance).
 For <code class="highlighter-rouge">consensusXML</code>, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to <code class="highlighter-rouge">featureXML</code>. A good starting value is half the expected typical retention time.</p>
 
-<p>Sometimes several peptide identifications are mapped to a feature. The tool <a href="http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html">IDConflictResolver</a> filters the mapping so that only the identification with the best score is associated to each feature. 
+<p>Sometimes several peptide identifications are mapped to a feature. The tool <a href="http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html">IDConflictResolver</a> filters the mapping so that only the identification with the best score is associated to each feature.
 Another refinement of the quantitative result is obtained by removing falsely mapped identifications e.g. light identification mapped to heavy feature. This step is performed by the <strong>MultiplexResolver</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that returns a first file with the correctly mapped peptides and as a second output the falsly mapped peptides.</p>
 
 <p>Finally, the correctly mapped peptides will be combined into protein quantifications with the <strong>ProteinQuantifier</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
