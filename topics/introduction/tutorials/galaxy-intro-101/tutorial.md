@@ -225,7 +225,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > ### {% icon question %} Question
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
-> ### {% icon solution %} Solution
+> > ### {% icon solution %} Solution
 > > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> to look for how many times each is used:
 > >
 > > Gene | Occurences
