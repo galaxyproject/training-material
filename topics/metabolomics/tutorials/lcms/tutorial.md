@@ -4,16 +4,13 @@ layout: tutorial_hands_on
 title: 'Mass spectrometry: LC-MS analysis'
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What are the main steps of untargetted LC-MS data processing for metabolomic analysis?
+- How to conduct metabolomic data analysis from preprocessing to annotation using Galaxy?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: ''
+- To comprehend the diversity of LC-MS metabolomic data analysis.
+- To get familiar with the main steps constituting a metabolomic workflow for untargetted LC-MS analysis.
+- To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data. 
+time_estimation: '3h'
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
@@ -29,16 +26,26 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+**TODO** Explain why metabolomics, what do you want to do
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze 
+the inﬂuence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples 
+from 183 employees from the French Alternative Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap 
+(negative ionization mode) (**TODO** explain the terms).
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+Since the original dataset takes a few hours to be processed, we chose to take a limited subset of individuals for this tutorial.
+This will allow you to perform an example of metabolomic workflow from pre-processing to annotation in a limited time, even though
+the results obtained may not be reliable from a scientific point of view due to a sample size way too small. Nevertheless,
+the chosen diversity of sample will allow you to explore the bases of a metabolomic workflow. 
+
+We chose a subset of 9 samples, composed of 6 biological samples and 3 quality-control pooled samples (QC pools - mix of all 
+biological samples). 
+
+To analyze these data, we will the follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), 
+developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}). 
+**TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). 
+This workflow takes as input **TODO** and perform several steps: pre-processing, statistics and annotation.
+
 
 > ### Agenda
 >
@@ -49,23 +56,59 @@ and technical) key concepts they will learn.
 >
 {: .agenda}
 
-# Title for your first section
+# Title of the section usually corresponding to a big step in the analysis
 
-Give some background about what the trainees will be doing in the section.
+<!-- Kept this to keep it in mind while contructing the tutorial. -->
 
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+It comes first a description of the step: some background and some theory.
+Some image can be added there to support the theory explanation:
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+![Alternative text](../../images/image_name "Legend of the image")
 
-have fun!
+The idea is to keep the theory description before quite simple to focus more on the practical part.
 
-## Get data
+***TODO***: *Consider adding a detail box to expand the theory*
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon details %} More details about the theory
+>
+> But to describe more details, it is possible to use the detail boxes which are expandable
+>
+{: .details}
+
+A big step can have several subsections or sub steps
+
+
+# Preprocessing with XCMS
+
+The first step in the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
+
+XCMS is a free software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to 
+high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is 
+used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
+
+This software is based on different algorithms that have been published, and is provided and maintained using R software [5,6,7].
+
+XCMS is able to read files with open format as mzXML and netCDF which are independent of the constructors' formats.
+
+It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, 
+adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well 
+adapted to define workflows, one of the key points of Galaxy:
+
+![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
+
+
+## Uploading your data into Galaxy
+
+In metabolomics studies, the number of samples can vary a lot (from a few ones to hundreds). Thus, extracting your 
+data from the raw files can be very fast as well as take quite a long time. To optimise as much as possible the 
+computing time, W4M core team chose to propose modules that can run single raw files for the first steps of
+pre-processing, since the initial actions in the extraction process treat files independantly. 
+
+Since the first steps can be run on each file, the use of **Dataset collection** is recommanded in Galaxy to avoid 
+launching jobs manually for each sample. You can consider the Dataset collection option from the very beginning, while 
+uploading your data into Galaxy.
+
+> ### {% icon hands_on %} Hands-on: Data upload with **Get data**
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]() or from the shared data library
@@ -91,29 +134,14 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+Any comment needed here?
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+## Data preparation before XCMS steps: **MSnbase readMSData**
 
-![Alternative text](../../images/image_name "Legend of the image")
+This first step is only meant to prepare your data for XCMS. It takes as input your raw files and 
+prepares RData files for the first XCMS step. 
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **MSnbase readMSData**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
 > 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
 >
@@ -123,30 +151,30 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > There is only one parameter for this module, corresponding to the input file. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Question
 >
-> 1. Question1?
-> 2. Question2?
+> With this single input parameter, what actions should I take before clicking on 'Execute'?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Choosing the correct type of input (here **Dataset collection**)
+> > 2. Selecting the correct input (here **mzML**)
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **xcms findChromPeaks (xcmsSet)**
+## First XCMS step: **peak picking**
 
-> ### {% icon hands_on %} Hands-on: Task description
+***TODO*** step introduction
+
+> ### {% icon hands_on %} Hands-on: xcms findChromPeaks (xcmsSet)
 >
 > 1. **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
@@ -490,9 +518,66 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Batch_correction**
 
-> ### {% icon hands_on %} Hands-on: Task description
+# Data processing: quality checks, normalisation, data filtering
+
+In the previous step of LC-MS workflow, you saw how to extract features from your acquisition files. This data is 
+shaped in a format allowing the use of various standard statistical methods. However, being able to perform a 
+statistical analysis does not mean necessarily being able to highlight relevant information. Indeed, data are often affected 
+by various sources of unwanted variability. It can limit the effectiveness of statistical methods, leading sometimes to 
+difficulties in revealing investigated effects. Identifying such variability can help analysing your data at its full potential. 
+
+In this tutorial, we chose to limit the data processing to 3 steps:
+ - overview of the variability in the data
+ - signal drift correction
+ - filtering of unreliable variables based on coefficients of variation
+
+> ### {% icon comment %} Comments
+> To get a little more information regarding data processing, do not hesitate to visit the usemetabo.oc plateform:
+> [Link to LC-MS processing step](https://usemetabo.org/courses/w4mlc-ms-processing)
+{: .comment}
+
+
+## Step 1: global variability in the data
+
+Next thing I will fill (MP)
+
+> ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to get an overview of your data
+>
+> 1. **Quality Metrics** {% icon tool %} with the following parameters:
+>    - *"Coefficient of Variation"*: `no`
+>    - *"Advanced parameters"*: `Use default`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Step 2: handling the signal drift observed althrough the analytical sequence
+
+> ### {% icon hands_on %} Hands-on: Data normalisation using the **Batch_correction** module
 >
 > 1. **Batch_correction** {% icon tool %} with the following parameters:
 >    - *"Type of regression model "*: `linear`
@@ -525,9 +610,9 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Quality Metrics**
+## Step 3: getting rid of unreliable variable using CV
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: CV calculation using the **Quality Metrics** module
 >
 > 1. **Quality Metrics** {% icon tool %} with the following parameters:
 >    - *"Coefficient of Variation"*: `no`
@@ -560,44 +645,9 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Quality Metrics**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Quality Metrics** {% icon tool %} with the following parameters:
->    - *"Coefficient of Variation"*: `no`
->    - *"Advanced parameters"*: `Use default`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Generic_Filter**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Data filtering using the **Generic_Filter** module
 >
 > 1. **Generic_Filter** {% icon tool %} with the following parameters:
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
@@ -645,9 +695,15 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Univariate**
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+
+# Statistical analysis to find variables of interest
+
+
+## Computation of statistical indices
+
+> ### {% icon hands_on %} Hands-on: Statistical analysis using the **Univariate** module
 >
 > 1. **Univariate** {% icon tool %} with the following parameters:
 >    - *"Factor of interest"*: `bmi`
@@ -681,9 +737,9 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Generic_Filter**
+## Reduction of the dataset to variables of interest (to do: rephrase this to something better)
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Variable filtering using the **Generic_Filter** module
 >
 > 1. **Generic_Filter** {% icon tool %} with the following parameters:
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
@@ -728,9 +784,11 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **HMDB MS search**
 
-> ### {% icon hands_on %} Hands-on: Task description
+# Annotation
+
+
+> ### {% icon hands_on %} Hands-on: Annotating the data using the HMDB
 >
 > 1. **HMDB MS search** {% icon tool %} with the following parameters:
 >    - *"Would you use a file "*: `YES`
