@@ -98,13 +98,13 @@ We can see that this RNA-seq dataset is high-dimensional. There are over `27,000
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
 > 1. **Pipeline builder** {% icon tool %} with the following parameters:
->    - In *"1: Pre-processing step:"*:
->        - *"Choose the type of transformation:"*: `Feature Selection`
->            - *"Select a feature selection algorithm:"*: `SelectKBest - Select features according to the k highest scores`
->                - *"Select a score function:"*: `f_regression - Univariate linear regression tests`
->    - In *"Final Estimator:"*:
->        - *"Choose the module that contains target estimator:"*: `sklearn.linear_model`
->            - *"Choose estimator class:"*: `ElasticNet`
+>    - In *"1: Pre-processing step"*:
+>        - *"Choose the type of transformation"*: `Feature Selection`
+>            - *"Select a feature selection algorithm"*: `SelectKBest - Select features according to the k highest scores`
+>                - *"Select a score function"*: `f_regression - Univariate linear regression tests`
+>    - In *"Final Estimator"*:
+>        - *"Choose the module that contains target estimator"*: `sklearn.linear_model`
+>            - *"Choose estimator class"*: `ElasticNet`
 >    - In *"Output the final estimator instead?"*: `Pipeline`
 >
 {: .hands_on}
@@ -171,7 +171,7 @@ After extracting the parameter names from the **pipeline builder** file, we will
 >                - {% icon param-repeat %} *"2: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `elasticnet__normalize: False`
 >                    - *"Search list"*: `[True, False]`
->                - {% icon param-repeat %} *"3: Parameter settings for search:"*
+>                - {% icon param-repeat %} *"3: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `elasticnet__alpha: 1.0`
 >                    - *"Search list"*: `[0.00001, 0.0001, 0.001]`
 >        - In *"Advanced Options for SearchCV"*:
@@ -399,11 +399,11 @@ Using the hyperparameter search, we found the best model based on the training d
 > ### {% icon hands_on %} Hands-on: Predict age
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
->    - *"Select a Classification Task:"*: `Load a model and predict`
+>    - *"Select a Classification Task"*: `Load a model and predict`
 >        - {% icon param-files %} *"Models"*: `Zipped` file (output of **Hyperparameter Search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
->        - *"Does the dataset contain header:"*: `Yes`
->        - *"Select the type of prediction:"*: `Predict class labels`
+>        - *"Does the dataset contain header"*: `Yes`
+>        - *"Select the type of prediction"*: `Predict class labels`
 >
 {: .hands_on}
 
@@ -414,8 +414,8 @@ In the previous step, we generated predictions for the test dataset. We have one
 > ### {% icon hands_on %} Hands-on: Create regression plots
 >
 > 1. **Plot actual vs predicted curves and residual plots of tabular data** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Select input data file :"*: `test_rows_labels` tabular file
->    - {% icon param-files %} *"Select predicted data file :"*: `Tabular` file (output of **Ensemble methods for classification and regression** {% icon tool %})
+>    - {% icon param-files %} *"Select input data file"*: `test_rows_labels` tabular file
+>    - {% icon param-files %} *"Select predicted data file"*: `tabular` file (output of **Ensemble methods for classification and regression** {% icon tool %})
 >
 {: .hands_on}
 
