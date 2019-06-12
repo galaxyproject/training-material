@@ -218,7 +218,7 @@ The tool returns two outputs, one of which is a table with numerical results. Pl
 > > ### {% icon solution %} Solution
 > >
 > > 1. 0.73 (it is close to the best r2 score (0.81) achieved by a customised ensemble algorithm explained in [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9))
-> > 2. alpha: 0.001, normalize: True, k: 5900
+> > 2. alpha: 0.001, normalize: True, k: 5880
 > > 3. 24 (it is equal to the number of rows in the tabular output of **hyperparameter search** {% icon tool %})
 > >
 > {: .solution}
@@ -231,15 +231,14 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 
 > ### {% icon hands_on %} Hands-on: Create parallel coordinates plot
 >
-> 1. **Parallel coordinates lot** {% icon tool %} with the following parameters:
+> 1. **Parallel coordinates plot** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"Select data file"*: `tabular` file (output of **Hyperparameter search** {% icon tool %})
 >    - *"Select the columns for dimensions"*: `c4, c5, c6`
 >    - *"Select a column containing the values for coloring"*: `c3`
 >
 {: .hands_on}
 
-The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading to the score along every column with parameters' settings. The columns `c4, c5` and `c6` are the parameters we chose and `c3` is the accuracy column present in the `tabular` output of hyperparameter search tool.
-
+The output plot has the following legend: the colour-coding is based on the `mean_test_score` (`c3`) column. You can follow the line leading to the score along every column with parameters' settings. The columns `c4, c5` and `c6` are the parameters we chose and `c3` is the accuracy column present in the `tabular` output of hyperparameter search tool.
 
 ![data](../../images/age-prediction-with-ml/parallel_coor_plot.png "The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).")
 
@@ -328,7 +327,7 @@ We will use the **Estimator attributes** tool to get a list of different hyperpa
 > ### {% icon hands_on %} Hands-on: Estimator attributes
 >
 > 1. **Estimator attributes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `Final_Estimator_Builder` file (output of **Pipeline builder** {% icon tool %})
+>    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `final estimator builder` file (output of **Pipeline builder** {% icon tool %})
 >    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
 >
 {: .hands_on}
