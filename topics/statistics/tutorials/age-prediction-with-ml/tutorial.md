@@ -105,6 +105,7 @@ We can see that this RNA-seq dataset is high-dimensional. There are over `27,000
 >    - In *"Final Estimator:"*:
 >        - *"Choose the module that contains target estimator:"*: `sklearn.linear_model`
 >            - *"Choose estimator class:"*: `ElasticNet`
+>    - In *"Output the final estimator instead?"*: `Pipeline`
 >
 {: .hands_on}
 
@@ -140,28 +141,45 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 > These parameters have the same description and values in the second part of the tutorial where we will again use **hyperparameter search** tool.
 {: .comment}
 
+### Extract hyperparameters
+
+To use these hyperparameters, first we need to use a tool to extract a list of parameters of preprocessors and estimator. To achieve it, we will use **Estimator attributes** tool. This tool creates a tabular file with a list of all the different hyperparameters of preprocessors and estimators. This tabular file will be used in the hyperparameter search tool to populate the list of hyperparameters with their respective values.
+
+> ### {% icon hands_on %} Hands-on: Estimator attributes
+>
+> 1. **Estimator attributes** {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `pipeline builder` file (output of **Pipeline Builder** {% icon tool %})
+>    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
+>
+{: .hands_on}
+
+### Search for the best values of hyperparameters
+
+After extracting the parameter names from **pipeline builder** file, we will use **hyperparameter search tool** to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
+
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
 > 1. **Hyperparameter Search** {% icon tool %} with the following parameters:
->    - *"Select a model selection search scheme:"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
->        - {% icon param-files %} *"Choose the dataset containing pipeline object"*: `Zipped` file (output of **Pipeline Builder** {% icon tool %})
+>    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
+>        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline Builder** {% icon tool %})
 >        - In *"Search parameters Builder"*:
->            - In *"Parameter setting for search:"*:
->                - {% icon param-repeat %} *"Insert Parameter setting for search:"*
->                    - *"Choose the transformation the parameter belongs to"*: `Pre-processing step #1`
->                        - *"Pre_processing component #1  parameter:"*: `k: [5880, 5890, 5895, 5900]`
->                - {% icon param-repeat %} *"Insert Parameter setting for search:"*
->                    - *"Choose the transformation the parameter belongs to"*: `Final estimator`
->                        - *"Estimator parameter:"*: `normalize: [True, False]`
->                - {% icon param-repeat %} *"Insert Parameter setting for search:"*
->                    - *"Choose the transformation the parameter belongs to"*: `Final estimator`
->                        - *"Estimator parameter:"*: `alpha: [0.00001, 0.0001, 0.001]`
+>             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (output of **Estimator attributes** {% icon tool %})
+>             - In *"Parameter settings for search"*:
+>                 - {% icon param-repeat %} *"1: Parameter settings for search"*
+>                    - *"Choose a parameter name (with current value)"*: `selectkbest__k: 10`
+>                    - *"Search list"*: `[5880, 5890, 5895, 5900]`
+>                - {% icon param-repeat %} *"2: Parameter settings for search"*
+>                    - *"Choose a parameter name (with current value)"*: `elasticnet__normalize: True`
+>                    - *"Search list"*: `[True, False]`
+>                - {% icon param-repeat %} *"3: Parameter settings for search:"*
+>                    - *"Choose a parameter name (with current value)"*: `elasticnet__normalize: 1.0`
+>                    - *"Search list"*: `[0.00001, 0.0001, 0.001]`
 >        - In *"Advanced Options for SearchCV"*:
->            - *"Select the primary metric (scoring):"*: `Regression -- 'r2'`
+>            - *"Select the primary metric (scoring)"*: `Regression -- 'r2'`
 >
 >               A scoring metric can be set. In this tutorial, we use `Regression -- 'r2'`
 >
->            - *"Select the cv splitter:"*: `KFold`
+>            - *"Select the cv splitter"*: `KFold`
 >
 >               There are different ways to split the dataset into training and validation sets. In our tutorial, we will use `KFold` which splits the dataset into `K` consecutive parts. It is used for cross-validation. It is set to `5` using another parameter `n_splits`.
 >
@@ -171,19 +189,21 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 >
 >                   It is set to an integer and used to retain the randomness/accuracy when *"Whether to shuffle data before splitting"* is `True` across successive experiments.
 >
->            - *"Raise fit error:"*: `No`
+>            - *"Raise fit error"*: `No`
 >
 >               While setting different values for a parameter during hyperparameter search, it can happen that wrong values are set which may generate exceptions. To avoid stopping the execution of a regressor, it is set to `No` which means even if a wrong parameter value is encountered, the regressor does not stop running and skips that value.
 >
->    - *"Select input type:"*: `tabular data`
->        - {% icon param-files %} *"Training samples dataset:"*: `training_data_normal` tabular file
->        - *"Does the dataset contain header:"*: `Yes`
->        - *"Choose how to select data by column:"*: `All columns BUT by column header name(s)`
->            - *"Type header name(s):"*: `age`
+>    - *"Save the searchCV object"*: `Yes`
+>    - *"Select input type"*: `tabular data`
+>        - {% icon param-files %} *"Training samples dataset"*: `training_data_normal` tabular file
+>        - *"Does the dataset contain header"*: `Yes`
+>        - *"Choose how to select data by column"*: `All columns BUT by column header name(s)`
+>            - *"Type header name(s)"*: `age`
 >        - {% icon param-files %} *"Dataset containing class labels or target values"*: `training_data_normal` tabular file
->        - *"Does the dataset contain header:"*: `Yes`
->        - *"Choose how to select data by column:"*: `Select columns by column header name(s)`
->            - *"Type header name(s):"*: `age`
+>        - *"Does the dataset contain header"*: `Yes`
+>        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
+>            - *"Type header name(s)"*: `age`
+>    - *"Whether to hold a portion of samples for test exclusively?"*: `No`
 >
 {: .hands_on}
 
@@ -198,7 +218,7 @@ The tool returns two outputs, one of which is a table with numerical results. Pl
 > > ### {% icon solution %} Solution
 > >
 > > 1. 0.73 (it is close to the best r2 score (0.81) achieved by a customised ensemble algorithm explained in [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9))
-> > 2. alpha: 0.001, normalize: True, k: 5880
+> > 2. alpha: 0.001, normalize: True, k: 5900
 > > 3. 24 (it is equal to the number of rows in the tabular output of **hyperparameter search** {% icon tool %})
 > >
 > {: .solution}
@@ -212,16 +232,16 @@ We will visualize the tabular output of hyperparameter search tool from the prev
 > ### {% icon hands_on %} Hands-on: Create parallel coordinates plot
 >
 > 1. **Parallel Coordinates Plot** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Select data file:"*: 'Tabular' file (output of **Hyperparameter Search** {% icon tool %})
->    - *"Select the columns for dimensions:"*: `c5, c6, c7, c14`
->    - *"Select a column containing the values for coloring:"*: `c14`
+>    - {% icon param-files %} *"Select data file"*: `tabular` file (output of **Hyperparameter Search** {% icon tool %})
+>    - *"Select the columns for dimensions"*: `c4, c5, c6`
+>    - *"Select a column containing the values for coloring"*: `c3`
 >
 {: .hands_on}
 
-The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading to the score along every column with parameters' settings. The columns `c5, c6` and `c7` are the parameters we chose and `c14` is the accuracy column present in the `tabular` output of hyperparameter search tool.
+The output plot has the following legend: the colour-coding is based on the `mean_test_score` column. You can follow the line leading to the score along every column with parameters' settings. The columns `c4, c5` and `c6` are the parameters we chose and `c3` is the accuracy column present in the `tabular` output of hyperparameter search tool.
 
 
-![data](../../images/age-prediction-with-ml/plotting_output.png "The visualization of the hyperparameter optimisation tool output.")
+![data](../../images/age-prediction-with-ml/parallel_coor_plot.png "The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).")
 
 > ### {% icon question %} Question
 >
@@ -284,9 +304,9 @@ We will create a pipeline with **pipeline builder** tool but this time, we just 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
 > 1. **Pipeline Builder** {% icon tool %} with the following parameters:
->    - In *"Final Estimator:"*:
->        - *"Choose the module that contains target estimator:"*: `sklearn.ensemble`
->            - *"Choose estimator class:"*: `GradientBoostingRegressor`
+>    - In *"Final Estimator"*:
+>        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
+>            - *"Choose estimator class"*: `GradientBoostingRegressor`
 >
 {: .hands_on}
 
