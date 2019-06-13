@@ -503,6 +503,11 @@ prepares RData files for the first XCMS step.
 {: .question}
 
 
+# W4M 3-tables format
+
+To do: add a complement about the 3-table format, depending on the information already given in XCMS part. 
+Inparticular, a focus of mandatory information for the present tutorial. 
+
 # Data processing: quality checks, normalisation, data filtering
 
 In the previous step of LC-MS workflow, you saw how to extract features from your acquisition files. This data is
@@ -524,7 +529,10 @@ In this tutorial, we chose to limit the data processing to 3 steps:
 
 ## Step 1: global variability in the data
 
-Next thing I will fill (MP)
+Commonly, LC-MS analysis generates a significant number of variables (hundreds to thousands). Getting a complete view of
+such dataset may not be an easy task, but getting a glimpse of it is possible using some common unsupervised multivariate
+analysis. One of the most commonly used method is the Principal Components Analysis (PCA). You can get a basic PCA along with
+over useful information using the Quality Metrics tool available in the Quality Control section. 
 
 > ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to get an overview of your data
 >
@@ -543,17 +551,32 @@ Next thing I will fill (MP)
 >
 {: .hands_on}
 
+For a first overview of your data, you can focus on the graphical output of this tool **Quality_Metrics_figure.pdf**.
+It provides a variety of useful information:
+ - summary of the intensities in the dataMatrix file
+ - view of these intensities with a color scale
+ - 2-components PCA score plot to check for clusters or outliers
+ - sum of intensities per sample according to injection order to check the presence of signal drift or batch effect
+ - z-scores for intensity distribution and proportion of missing values
+ - ions' sd and mean values
+
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Cross-referencing information
 >
-> 1. Question1?
-> 2. Question2?
+> Look at the 'Quality_Metrics_figure.pdf' file.
+> 1. Look at the proportion of ions with a pool coefficient of variation <30%. Knowing that pools are identical samples, and that 
+values with a CV > 30% can not be considered stables, what can you conclude about your dataset regarding the possibility to
+compare intensities between samples?
+> 2. Look at the sum of intensities per sample according to injection order. What major information do you observe on the plot?
+Can this observation help you understand the CV results you just look at?
+> 3. Now look at the PCA plot. Can you explain the first component (t1)? Use the previous plot to help you. 
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
+> > 3. Answer for question3
 > >
 > {: .solution}
 >
