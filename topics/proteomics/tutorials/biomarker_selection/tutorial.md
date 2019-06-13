@@ -115,6 +115,7 @@ In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 > ### {% icon hands_on %} Hands-on: Filter on expression value criterion
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+>    - *"Input File"*: `Tissue-specific expression from RNASeq` from the previous step
 >    - *"Operation"*: `Discard`
 >    - In *"Filter by numerical value"*:
 >        - {% icon param-repeat %} *"Insert Filter by numerical value"*
@@ -122,7 +123,7 @@ In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 >            - *"Select operator"*: `<=`
 >            - *"Value"*: `10.0`
 >    - *"Sort by column ?"*: `Yes`
->
+>      - *"Sort result files by"*: `c4`
 >
 > > ### {% icon question %} Questions
 > >
