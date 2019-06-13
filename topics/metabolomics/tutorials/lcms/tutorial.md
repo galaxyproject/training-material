@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Mass spectrometry: LC-MS analysis'
-zenodo_link: ''
+zenodo_link: 'http://doi.org/10.5281/zenodo.3244991'
 questions:
 - What are the main steps of untargetted LC-MS data processing for metabolomic analysis?
 - How to conduct metabolomic data analysis from preprocessing to annotation using Galaxy?
@@ -90,26 +90,31 @@ uploading your data into Galaxy.
 > ### {% icon hands_on %} Hands-on: Data upload with **Get data**
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the 9 mzXML files from [Zenodo](http://doi.org/10.5281/zenodo.3244991) or a shared data library inside a collection
+>    - HU_neg_048.mzML
+>    - HU_neg_090.mzML
+>    - HU_neg_123.mzML
+>    - HU_neg_157.mzML
+>    - HU_neg_173.mzML
+>    - HU_neg_192.mzML
+>    - QC1_002.mzML
+>    - QC1_008.mzML
+>    - QC1_014.mzML
 >
 >    ```
->    
+>    https://zenodo.org/record/3244991/files/HU_neg_048.mzML
+>    https://zenodo.org/record/3244991/files/HU_neg_090.mzML
+>    https://zenodo.org/record/3244991/files/HU_neg_123.mzML
+>    https://zenodo.org/record/3244991/files/HU_neg_157.mzML
+>    https://zenodo.org/record/3244991/files/HU_neg_173.mzML
+>    https://zenodo.org/record/3244991/files/HU_neg_192.mzML
+>    https://zenodo.org/record/3244991/files/QC1_002.mzML
+>    https://zenodo.org/record/3244991/files/QC1_008.mzML
+>    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_via_link.md collection=true collection_type="mzml" collection_name="raw"%}
 >    {% include snippets/import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
