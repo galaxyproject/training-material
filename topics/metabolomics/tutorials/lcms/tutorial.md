@@ -9,7 +9,7 @@ questions:
 objectives:
 - To comprehend the diversity of LC-MS metabolomic data analysis.
 - To get familiar with the main steps constituting a metabolomic workflow for untargetted LC-MS analysis.
-- To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data. 
+- To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data.
 time_estimation: '3h'
 key_points:
 - The take-home messages
@@ -28,22 +28,22 @@ contributors:
 
 **TODO** Explain why metabolomics, what do you want to do
 
-To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze 
-the inﬂuence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples 
-from 183 employees from the French Alternative Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap 
+To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze
+the inﬂuence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
+from 183 employees from the French Alternative Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap
 (negative ionization mode) (**TODO** explain the terms).
 
 Since the original dataset takes a few hours to be processed, we chose to take a limited subset of individuals for this tutorial.
 This will allow you to perform an example of metabolomic workflow from pre-processing to annotation in a limited time, even though
 the results obtained may not be reliable from a scientific point of view due to a sample size way too small. Nevertheless,
-the chosen diversity of sample will allow you to explore the bases of a metabolomic workflow. 
+the chosen diversity of sample will allow you to explore the bases of a metabolomic workflow.
 
-We chose a subset of 9 samples, composed of 6 biological samples and 3 quality-control pooled samples (QC pools - mix of all 
-biological samples). 
+We chose a subset of 9 samples, composed of 6 biological samples and 3 quality-control pooled samples (QC pools - mix of all
+biological samples).
 
-To analyze these data, we will the follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), 
-developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}). 
-**TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc). 
+To analyze these data, we will the follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
+developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
+**TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc).
 This workflow takes as input **TODO** and perform several steps: pre-processing, statistics and annotation.
 
 
@@ -56,42 +56,21 @@ This workflow takes as input **TODO** and perform several steps: pre-processing,
 >
 {: .agenda}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-<!-- Kept this to keep it in mind while contructing the tutorial. -->
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps
-
 
 # Preprocessing with XCMS
 
 The first step in the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
 
-XCMS is a free software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to 
-high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is 
+XCMS is a free software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to
+high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is
 used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software [5,6,7].
 
 XCMS is able to read files with open format as mzXML and netCDF which are independent of the constructors' formats.
 
-It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, 
-adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well 
+It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
+adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well
 adapted to define workflows, one of the key points of Galaxy:
 
 ![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
@@ -99,13 +78,13 @@ adapted to define workflows, one of the key points of Galaxy:
 
 ## Uploading your data into Galaxy
 
-In metabolomics studies, the number of samples can vary a lot (from a few ones to hundreds). Thus, extracting your 
-data from the raw files can be very fast as well as take quite a long time. To optimise as much as possible the 
+In metabolomics studies, the number of samples can vary a lot (from a few ones to hundreds). Thus, extracting your
+data from the raw files can be very fast as well as take quite a long time. To optimise as much as possible the
 computing time, W4M core team chose to propose modules that can run single raw files for the first steps of
-pre-processing, since the initial actions in the extraction process treat files independantly. 
+pre-processing, since the initial actions in the extraction process treat files independantly.
 
-Since the first steps can be run on each file, the use of **Dataset collection** is recommanded in Galaxy to avoid 
-launching jobs manually for each sample. You can consider the Dataset collection option from the very beginning, while 
+Since the first steps can be run on each file, the use of **Dataset collection** is recommanded in Galaxy to avoid
+launching jobs manually for each sample. You can consider the Dataset collection option from the very beginning, while
 uploading your data into Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Data upload with **Get data**
@@ -138,8 +117,8 @@ Any comment needed here?
 
 ## Data preparation before XCMS steps: **MSnbase readMSData**
 
-This first step is only meant to prepare your data for XCMS. It takes as input your raw files and 
-prepares RData files for the first XCMS step. 
+This first step is only meant to prepare your data for XCMS. It takes as input your raw files and
+prepares RData files for the first XCMS step.
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
@@ -151,7 +130,7 @@ prepares RData files for the first XCMS step.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > There is only one parameter for this module, corresponding to the input file. 
+>    > There is only one parameter for this module, corresponding to the input file.
 >    {: .comment}
 >
 {: .hands_on}
@@ -521,11 +500,11 @@ prepares RData files for the first XCMS step.
 
 # Data processing: quality checks, normalisation, data filtering
 
-In the previous step of LC-MS workflow, you saw how to extract features from your acquisition files. This data is 
-shaped in a format allowing the use of various standard statistical methods. However, being able to perform a 
-statistical analysis does not mean necessarily being able to highlight relevant information. Indeed, data are often affected 
-by various sources of unwanted variability. It can limit the effectiveness of statistical methods, leading sometimes to 
-difficulties in revealing investigated effects. Identifying such variability can help analysing your data at its full potential. 
+In the previous step of LC-MS workflow, you saw how to extract features from your acquisition files. This data is
+shaped in a format allowing the use of various standard statistical methods. However, being able to perform a
+statistical analysis does not mean necessarily being able to highlight relevant information. Indeed, data are often affected
+by various sources of unwanted variability. It can limit the effectiveness of statistical methods, leading sometimes to
+difficulties in revealing investigated effects. Identifying such variability can help analysing your data at its full potential.
 
 In this tutorial, we chose to limit the data processing to 3 steps:
  - overview of the variability in the data
