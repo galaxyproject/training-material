@@ -560,7 +560,7 @@ It provides a variety of useful information:
  - z-scores for intensity distribution and proportion of missing values
  - ions' sd and mean values
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![Quality_Metrics_figure.pdf](../../images/QM_9samp_raw.png)
 
 > ### {% icon question %} Cross-referencing information
 >
@@ -569,20 +569,41 @@ It provides a variety of useful information:
 values with a CV > 30% can not be considered stables, what can you conclude about your dataset regarding the possibility to
 compare intensities between samples?
 > 2. Look at the sum of intensities per sample according to injection order. What major information do you observe on the plot?
-Can this observation help you understand the CV results you just look at?
+Can this observation help you understand the CV results you just looked at?
 > 3. Now look at the PCA plot. Can you explain the first component (t1)? Use the previous plot to help you. 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> > 3. Answer for question3
+> > 1. You can read on the plot that *pool CV < 30%: 26%*, meaning that the pool values are stable only for a quarter of the ions 
+in your dataset. If the pooled samples are not stable, this means that you can observe differences between samples even when 
+there are no biological differences. Thus, comparing samples becomes difficult and has high risk of being unreliable. 
+Consequently, with only a quarter of the ions being stable regarding pool intensities, performing statistical analyses on
+this full dataset would probably lead to unreliable results. 
+> > 2. We can see on the figure that the global intensity of samples seems to decrease with the injection order. In particular,
+the fact that the pooled samples' intensities decrease leads us to suspect a signal drift due to the clogging effect of successive 
+injection of samples. 
+> > This signal drift could be the reason why so many ions in the dataset leaded to high CV values for pools, since it prevents
+at least part of the ions to be stable regarding pools' intensities. 
+> > 3. If we look closely at the samples' identifiers on the plot, it seems that the lowest numbers in IDs are at the right side
+of the first component. Knowing that these numbers correspond to an order in the injection sequence, we can link it to the 
+previous picture's samples. Then, what we can observe is that the order of samples in the first component of PCA from right to left
+corresponds approximately to the decreasing order of sums of intensities. Thus, we can conclude that the main variability in
+the dataset may be due to the signal drift. 
 > >
 > {: .solution}
 >
 {: .question}
 
 ## Step 2: handling the signal drift observed althrough the analytical sequence
+
+It is known that when injecting successively a large number of samples, the system tends to get dirty, and this may cause a measure drift. 
+To prevent inability to catch signal anymore, in case of large injection series, the sequence is generally divided into several batches 
+and the source is cleaned between batches. Unfortunately, these signal drift and batch design can add significant variability in data, 
+making sample comparison complicated. In case data is impacted by these effects, it is highly recommanded to normalise the data to get
+rid of these unwanted effects.
+
+In our case study, we saw that the data seemed to be affected by signal drift. Thus, we will use the **Batch_correction** module to
+get rid of it. 
 
 > ### {% icon hands_on %} Hands-on: Data normalisation using the **Batch_correction** module
 >
@@ -592,32 +613,43 @@ Can this observation help you understand the CV results you just look at?
 >
 >    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The choice of the type of regression model to use depends on several parameters.
+>    > In this case-study, since we only have 3 pools, there are only two possible choices: *linear* or *all loess sample*
+>    > When possible, we recommend to use pools to correct the signal drift, that is why we chose to run the module with *linear*. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+**What transformation did this module on the ions' intensities?**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+For each ion independently, the normalisation process works as described in the folowing picture:
+
+![How this works](../../images/BC_theo.png)
+
+The methodology is meant to correct for signal drift. In the module, it is combined with a correction for batch effect. Thus, if your
+sequence is divided into several batches, the idea is to obtain something like the folowing:
+
+![Before/after picture](../../images/BC_theo2.png)
+
+In the case of *linear* regression model, the module performs some tests before applying the normalisation for quality purposes.
+For some ions, if the normalisation process would have led to unconsistant results, the concerned ions are not corrected for signal drift. 
+This kind of quality checks depends on the type of regression model you use. Please refer to the module's help section for more information!
+ 
 
 ## Step 3: getting rid of unreliable variable using CV
+
+Now that the data is corrected for signal drift, we expect to have stable intensities within pools. But is this always the case?
+Truth is, even when correcting ions, we may not manage to get rid of analytical effect for 100% of ions. And even if we could,
+LC-MS data may contain noise signal, or ions that are not reliable as they are too noisy. Thus, it is possible that the data still
+contains unusable ions. 
+
+To filter the ions not reliable enough, we can consider CVs as a filtering indicator. The **Quality Metrics** module provides
+different CV indicators depending on what is in your sample list. In particular, in the present case-study, it can compute pool CVs
+as previously seen, but also a ratio between pool CVs and sample CVs. This is particularly of interest since we can expect that, 
+whatever the pool CV value, it will be lower than the corresponding sample CV value, since biological samples are supposed to be affected
+by biological variability. Thus, we can filter the ions that do not respect this particular condition. 
 
 > ### {% icon hands_on %} Hands-on: CV calculation using the **Quality Metrics** module
 >
@@ -631,27 +663,14 @@ Can this observation help you understand the CV results you just look at?
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Do not forget you need to use this module again, since this time indicators will be computed on normalised intensities. 
+>    > What we are going to use this time is the tabular output, but while you are at it you can always check the pdf file. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
+The module provides a variableMetadata tabular output, containing all the computed CV values. You can then use these values to filter
+your data using the **Generic_Filter** module.
 
 
 > ### {% icon hands_on %} Hands-on: Data filtering using the **Generic_Filter** module
