@@ -138,7 +138,7 @@ In ProteoRE we'll use the "Filter by keywords and/or numerical value" tool.
 >
 {: .hands_on}
 
-We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC data or TPM value.
+We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC (Immonohistochemistry) data or [TPM](https://statquest.org/2015/07/09/rpkm-fpkm-and-tpm-clearly-explained/) (Expression level expressed in Transcripts Per Million) value.
 
 We want now to select candidate biomarkers that are expressed in the heart muscle according to **both** IHC and RNA-seq data, using the Jvenn tool.
 
