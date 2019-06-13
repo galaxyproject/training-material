@@ -149,9 +149,11 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >    - In *"List to compare"*:
 >        - {% icon param-repeat %} *"Insert List to compare"*
 >            - *"Enter your list"*: `Input file containing your list`
+>                - *"Select your file"*: `Tissue-specific expression from IHC`
 >                - *"Enter the name of this list"*: `heart IHC`
 >        - {% icon param-repeat %} *"Insert List to compare"*
 >            - *"Enter your list"*: `Input file containing your list`
+>                - *"Select your file"*: `Filtered tissue-specific expression from RNAseq`
 >                - *"Enter the name of this list"*: `heart RNAseq`
 >
 {: .hands_on}
@@ -172,19 +174,17 @@ For greater clarity we'll keep only the column with those 931 candidate biomarke
 rest of our pipeline.
 
 
-> ### {% icon hands_on %} Hands-on: Cut
+> ### {% icon hands_on %} Hands-on: Obtain list of candidate biomarkers
 >
 > 1. **Cut** {% icon tool %} with the following parameters:
+>    - *"File to cut"*: `Venn diagram text output`
 >    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c['3']`
+>        - *"List of Fields"*: `Column: 3`
 >
-{: .hands_on}
-
-Now we'll filter this dataset not to keep the 'NA' lines.
-
-> ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
+>    Now we'll filter this dataset not to keep the 'NA' lines.
 >
-> 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+> 2. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+>    - *"Input file"*: output from **Cut** {% icon tool %}
 >    - *"Operation"*: `Discard`
 >    - In *"Filter by keywords"*:
 >        - {% icon param-repeat %} *"Insert Filter by keywords"*
@@ -192,13 +192,16 @@ Now we'll filter this dataset not to keep the 'NA' lines.
 >            - *"Enter keywords"*: `copy/paste`
 >                - *"Copy/paste keywords to find (keep or discard)"*: `NA`
 >    - *"Sort by column ?"*: `Yes`
+>      - *"Sort result files by"*: `c1`
 >
+> 3. Let's rename the 931 IDs dataset in "heart931" for simplification.
+>
+>    {% include snippets/rename_datasets.md %}
 >
 {: .hands_on}
 
-Let's rename the 931 IDs dataset in "heart931" for simplification.
 
-Pipeline will then continue based on those 931, from which we have to select biomarkers that are
+The pipeline will then continue based on these 931 candidates, from which we have to select biomarkers that are
 highly specific to the heart using additional expression data (still from HPA).
 
 
