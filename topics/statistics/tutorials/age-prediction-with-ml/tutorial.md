@@ -368,11 +368,11 @@ After extracting the parameter names from the **pipeline builder** file, we will
 >
 >    - *"Save the searchCV object"*: `Yes`
 >    - *"Select input type"*: `tabular data`
->        - {% icon param-files %} *"Training samples dataset"*: `training_data_normal` tabular file
+>        - {% icon param-files %} *"Training samples dataset"*: `train_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `All columns BUT by column header name(s)`
 >            - *"Type header name(s)"*: `Age`
->        - {% icon param-files %} *"Dataset containing class labels or target values"*: `training_data_normal` tabular file
+>        - {% icon param-files %} *"Dataset containing class labels or target values"*: `train_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >            - *"Type header name(s)"*: `Age`
@@ -383,10 +383,11 @@ After extracting the parameter names from the **pipeline builder** file, we will
 > ### {% icon question %} Question
 >
 > What is the optimal number of estimators for the given dataset?
+> Hint: Please look at the `mean_test_score` column in the tabular result from the **Hyperparameter tool**.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 75 (Even though the default value of number of estimators for gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset)
+> > 50 (Even though the default value of number of estimators for gradient boosting regressor is `100`, `50` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset). 75 estimators also give almost the same accuracy.
 > >
 > {: .solution}
 >
@@ -400,7 +401,7 @@ Using the hyperparameter search, we found the best model based on the training d
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-files %} *"Models"*: `Zipped` file (output of **Hyperparameter Search** {% icon tool %})
+>        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Select the type of prediction"*: `Predict class labels`
