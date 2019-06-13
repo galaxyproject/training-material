@@ -1,0 +1,241 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Galaxy Monitoring with gxadmin"
+questions:
+  - What is gxadmin
+  - What can it do?
+  - How to write a query?
+objectives:
+  - Learn gxadmin basics
+  - See some queries and learn how they help debug production issues
+key_points:
+  - gxadmin is a tool to run common database queries useful for Galaxy admins
+  - new queries are welcome and easy to contribute
+contributors:
+  - natefoo
+  - bgruening
+  - slugger70
+  - erasche
+---
+
+# Database Queries
+
+Sometimes it's the best way to get the exact data you need
+
+Can be very useful for:
+- Debugging
+- Reporting
+- Analytics
+
+But consider: [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin) and sharing your SQL
+
+---
+# Database Queries
+
+"Can you send me the number of jobs per day/state from Main in September and October?"
+
+```sql
+SELECT
+  date_trunc('month', j.create_time) AS month,
+  j.state,
+  COUNT(j.state) AS job_count
+FROM job j
+LEFT OUTER JOIN galaxy_user u
+  ON j.user_id = u.id
+WHERE u.email != 'monitor@bx.psu.edu'
+GROUP BY month,
+         j.state
+HAVING date_trunc('month', j.create_time) >= '2016-09-01'
+AND date_trunc('month', j.create_time) < '2016-11-01'
+ORDER BY month, j.state;
+```
+
+---
+# Database Queries
+
+```console
+        month        |  state  | job_count
+---------------------+---------+-----------
+ 2016-09-01 00:00:00 | deleted |     11369
+ 2016-09-01 00:00:00 | error   |     15375
+ 2016-09-01 00:00:00 | new     |      1179
+ 2016-09-01 00:00:00 | ok      |    165963
+ 2016-09-01 00:00:00 | paused  |       933
+ 2016-09-01 00:00:00 | waiting |         9
+ 2016-10-01 00:00:00 | deleted |     13190
+ 2016-10-01 00:00:00 | error   |     12539
+ 2016-10-01 00:00:00 | new     |      1183
+ 2016-10-01 00:00:00 | ok      |    167547
+ 2016-10-01 00:00:00 | paused  |       645
+ 2016-10-01 00:00:00 | queued  |        75
+ 2016-10-01 00:00:00 | running |        36
+ 2016-10-01 00:00:00 | waiting |        17
+(14 rows)
+```
+
+---
+# Database Queries
+
+"I need a list of current main toolshed users and a number of their repos"
+
+```console
+$ gxadmin query ts-repos
+```
+
+**OR**
+
+```sql
+SELECT
+  u.username,
+  COUNT(r.id) AS r_count
+FROM galaxy_user u
+JOIN repository r
+  ON u.id = r.user_id
+WHERE NOT r.deleted
+GROUP BY u.id
+ORDER BY r_count DESC
+LIMIT 12;
+```
+
+---
+# Database Queries
+
+```console
+                 username                 | r_count
+------------------------------------------+---------
+ iuc                                      |     571
+ devteam                                  |     366
+ bgruening                                |      95
+ galaxyp                                  |      87
+ jjohnson                                 |      46
+ xuebing                                  |      40
+ peterjc                                  |      39
+ rnateam                                  |      33
+ anton                                    |      32
+ nml                                      |      32
+ yhoogstrate                              |      31
+ iracooke                                 |      30
+(12 rows)
+```
+
+---
+
+# Database Queries
+
+"What is the status of this job"
+
+*Lots* of SQL or: `gxadmin report job-info <job-id>`
+
+```console
+# Galaxy Job 5132146
+
+Property      | Value
+------------- | -----
+         Tool | toolshed.g2.bx.psu.edu/repos/bgruening/canu/canu/1.7
+        State | running
+      Handler | handler_main_2
+      Created | 2019-04-20 11:04:40.854975+02 (3 days 03:35:04.881599 ago)
+Job Runner/ID | condor / 568537
+        Owner | e08d6c893f5
+
+## Destination Parameters
+
+Key                     |   Value
+---                     |   ---
+description             |   `canu`
+priority                |   `-128`
+request_cpus            |   `20`
+request_memory          |   `64G`
+```
+
+---
+
+# Database Queries
+
+"Get me a list of recently registered users"
+
+```console
+$ gxadmin query latest-users
+```
+
+**OR**
+
+```sql
+SELECT
+	id,
+	create_time AT TIME ZONE 'UTC' as create_time,
+	pg_size_pretty(disk_usage) as disk_usage,
+	username,
+	email,
+	active
+FROM galaxy_user
+ORDER BY create_time desc
+LIMIT 40
+```
+---
+
+# Database Queries
+
+```console
+
+  id  |          create_time   | disk_usage |  username   |    email    |    groups    | active
+------+------------------------+------------+-------------+-------------+--------------+--------
+ 5581 | 2019-04-23 14:53:58+02 |            | xxx         | xxx         |              | t
+ 5580 | 2019-04-23 11:25:03+02 | 1222 MB    | xxx         | xxx         |              | t
+ 5579 | 2019-04-23 10:40:30+02 | 841 MB     | xxx         | xxx         |              | t
+ 5578 | 2019-04-23 10:31:50+02 |            | xxx         | xxx         |              | t
+ 5577 | 2019-04-23 10:27:21+02 | 0 bytes    | xxx         | xxx         |              | t
+ 5576 | 2019-04-23 10:07:53+02 |            | xxx         | xxx         |              | t
+ 5575 | 2019-04-23 09:04:40+02 | 2011 MB    | xxx         | xxx         | training-gqa | t
+ 5574 | 2019-04-23 09:01:58+02 | 296 MB     | xxx         | xxx         |              | t
+ 5573 | 2019-04-23 08:58:42+02 | 605 MB     | xxx         | xxx         |              | t
+ 5572 | 2019-04-23 08:58:17+02 | 1762 MB    | xxx         | xxx         | training-gqa | t
+ 5571 | 2019-04-23 08:56:11+02 | 0 bytes    | xxx         | xxx         |              | f
+ 5570 | 2019-04-23 08:55:57+02 | 1759 MB    | xxx         | xxx         | training-gqa | t
+ 5569 | 2019-04-23 08:43:21+02 | 1621 MB    | xxx         | xxx         |              | t
+ 5568 | 2019-04-23 07:48:38+02 |            | xxx         | xxx         |              | t
+ 5567 | 2019-04-23 05:12:43+02 |            | xxx         | xxx         |              | t
+```
+
+---
+
+# Tabular Output
+
+Converting SQL query output to tabular and other formats
+
+```SQL
+COPY (...) to STDOUT with CSV DELIMITER E'\t'
+```
+
+**or**
+
+```console
+$ gxadmin query ...
+$ gxadmin tsvquery ...
+$ gxadmin csvquery ...
+```
+
+---
+
+# Monitoring
+
+Telegraf can consume Influx formatted output, which `gxadmin` can produce:
+
+```console
+$ gxadmin iquery queue
+queue,tool_id=ncbi_blastx_wrapper/0.3.1,state=running count=76
+queue,tool_id=rna_star/2.6.0b-2,state=queued count=36
+queue,tool_id=rna_star/2.6.0b-2,state=running count=15
+queue,tool_id=unicycler/0.4.7.0,state=running count=10
+queue,tool_id=hisat2/2.1.0+galaxy4,state=running count=9
+```
+
+---
+
+# gxadmin
+
+- Many of these queries are interesting to most or all admins.
+- Most queries have versions already included in `gxadmin` with more detail than you might write.
+- Check first if [`gxadmin`](https://github.com/usegalaxy-eu/gxadmin/) already supports your query, and feel free to contribute back any changes or additions you might have.

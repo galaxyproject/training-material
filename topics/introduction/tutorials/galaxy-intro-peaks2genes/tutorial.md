@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "From peaks to genes"
 zenodo_link: "https://doi.org/10.5281/zenodo.1025586"
+level: Introductory
 questions:
   - "How to use Galaxy?"
   - "How to get from peak regions to a list of gene names?"
@@ -34,7 +35,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-We stumbled upon a paper [Li et al., Cell Stem Cell 2012](https://www.ncbi.nlm.nih.gov/pubmed/22862943) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
+We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
 The closest thing we could find is a file in GEO containing a list of the regions where the signal is significantly enriched (so called *peaks*):
 
@@ -78,11 +79,7 @@ Let's start with a fresh history.
 >
 > 1. Make sure you have an empty analysis history.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the {% icon galaxy-gear %} (gear) icon (**History options**)  at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
 > 2. **Rename your history** to make it easy to recognize
 >
@@ -542,7 +539,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 > 1. Create a new history and give it a new name like `Galaxy Introduction Part 2`
 >
->    If you have forgotten how to do that, you can check the beginning of this tutorial.
+>    {% include snippets/create_new_history.md %}
 >
 > 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
 >

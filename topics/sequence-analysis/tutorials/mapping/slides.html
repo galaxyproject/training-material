@@ -5,71 +5,526 @@ logo: "GTN"
 title: "Mapping"
 zenodo_link: "https://doi.org/10.5281/zenodo.61771"
 questions:
-  - What two things are crucial for a correct mapping?
-  - What is BAM?
+  - What is mapping (alignment)?
+  - What is the BAM format?
+  - How can we view aligned sequences?
 objectives:
-  - You will learn what mapping is
-  - A genome browser is shown that helps you to understand your data
+  - Understand the basic concept of mapping
+  - Learn about factors influencing alignment
+  - See a genome browser used to better understand your aligned data
 time_estimation: "1h"
 key_points:
-  - Know your data!
   - Mapping is not trivial
-  - There are many mapping algorithms, it depends on your data which one to choose
+  - There are many mapping tools, best choice depends on your data
+  - Choice of mapper can affect downstream results
+  - Know your data!
+  - Genome browsers can be used to view aligned reads
 contributors:
   - joachimwolff
+  - shiltemann
+
+---
+
+# Example NGS pipeline
+
+![High level view of a typical NGS workflow](../../images/mapping/variant_calling_workflow.png)
+
+A high level view of a typical NGS bioinformatics workflow
+
+???
+- Mapping step occurs if a reference genome is available for the organism of interest
+  - else: de-novo assembly
+- Variant calling step is just an example, after mapping can do many steps
+  - Structural Variants / Fusion genes
+  - Differential Gene expression
+  - Alternative Splicing
+  - ..
+
 ---
 
 # What is mapping?
 
+.pull-left[
+![Mapping vs assembly](../../images/mapping/mapping_assembly.png)
+]
+
+.pull-right[
+- Short reads must be combined into longer fragments
+
+- **Mapping:** use a reference genome as a guide
+
+- **De-novo assembly:** without reference genome
+]
+
+???
+- Mapping is also referred to as *alignment*
+- Short reads produced by sequencer must be combined into larger contigs
+  - e.g. reconstruct the chromosomes
+  - mapping uses a reference genome as a guide
+  - can subsequently find where our sample differs from reference (variants)
+
+
+- This tutorial only deals with mapping/alignment
+- There are other tutorials available for de-novo assembly
+
+
+
 ---
-
-# Mapping
-
-- Search the position of a read in the genome
-
-![alt text](../../images/igv_mapping.png "IGV Browser")
-
----
+class: top
 
 # Sequence alignment
 
-```
-A A C C G C C T T
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A C G C C T T . . .
 
-A G G G G C C T T
+  Read:            A G G G G C C T T
+  ```
 
-1 2 3 4 5 6 7 8 9
-```
+???
+Consider situation where we must map this read to this reference genome
+- This area looks pretty similar, but not quite identical..
 
 ---
+class: top
 
 # Sequence alignment
 
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A - C G C C T T . . .              | = match
+  .                | : - : | | | | |                    : = mismatch
+  Read:            A G G G G C C T T                    - = gap
+  ```
+???
+But if we introduce gaps and allow for some mismatches in bases, this matches
+up pretty well..
+
+- `|` = match
+- `:` = mismatch
+- `-` = gap
+
+---
+class: top
+
+# Sequence alignment
+
+- Determine position of short read on the genome
+  ```
+  Reference: . . . A A - C G C C T T . . .              | = match
+  .                | : - : | | | | |                    : = mismatch
+  Read:            A G G G G C C T T                    - = gap
+  ```
+
+
+- Read could align to multiple places
+  .center[.image-50[![Illustration of multimapped read](../../images/mapping/multimap.png)]]
+
+
+- How to handle multi-mapped reads? Depends on tool:
+  - Map to best region (but what about ties?)
+  - Map to all regions
+  - Map to one region randomly
+  - Discard read
+
+
+- How do we determine *best* region?
+  - Assign ***alignment score*** to every mapping
+
+???
+
+
+---
+class: top
+
+# Alignment Scoring (basics)
+
+- **Reward** for a match (e.g. +10), **penalty** for a mismatch (e.g. -5)
+- **Penalty** for gaps
+   - *Linear:* every gap same penalty (e.g. -5)
+   - *Affine:* gap open vs gap extend (e.g. -5 and -1)
+
+
+- Different tools use different scoring values (and give different results)
+
+
+.center[
+.image-25[![](../../images/mapping/scoring_example.png)]
+
+**Example** (with affine gap penalty)
+]
+
+???
+- Each locus get scored independently (first row of scores in example)
+- Scores from all loci are added up (cumulative score row)
+- Final score for entire alignment in this example is 29
+
+- These reward and penalty values are just examples and will vary
+
+---
+class: top
+
+# Alignment Scoring (advanced)
+
+- **Base quality**
+    - Mismatch of low-confidence base: lower penalty
+    - Mismatch of high-confidence base: higher penalty
+
+
+- **Transitions vs transversions**
+  - Transitions about 2x as frequent as transversions
+
+
+.center[
+.image-50[ ![Transitions vs transversions](../../images/mapping/ti_tv.png) ]
+.image-25[ ![Example scoring matrix](../../images/mapping/ti_tv_scoring.png) ]
+]
+
+
+- Knowledge about sequencing platform and biases
+  - Optimize for read length, error rate, homopolymer accuracy, etc..
+
+
+.footnote[More information about mapping algorithms: [10.1089/cmb.2012.0022](https://doi.org/10.1089/cmb.2012.0022)]
+???
+
+Many more complexities may be considered, different tools make different choices
+
+Transitions are more likely to occur in real sequences, so may give lower penalty than transversions
+
+**Transitions** are interchanges of two-ring purines (A G) or of one-ring pyrimidines (C T): they therefore involve bases of similar shape.
+
+**Transversions** are interchanges of purine for pyrimidine bases, which therefore involve exchange of one-ring and two-ring structures.
+
+![Transitions and transversions](../../images/mapping/transition_transversion.gif)
+
+
+---
+
+# Looks easy but..
+
+---
+class: top
+
+# Sequence Alignment
+
 ```
-A A C C G C C T T
-|       | | | | |
-A G G G G C C T T
-
-1 2 3 4 5 6 7 8 9
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
 ```
 
----
+???
 
-# Looks easy...
+Suppose you have this reference sequence (top) and the bottom sequence is one of the reads in your sample.
 
-Lego time: Who wants to volunteer?
-
----
-
-- Know your data!
-- Maybe not the "best" result is the one you are searching for
-- Try different mappers
+How would you align these?
 
 ---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+<table style="width:100%; table-layout: fixed; font-size:0.8em">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+</table>
+
+???
+This is one possibility, is it the only one?
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em;">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+</table>
+
+???
+This is also a possible alignment. Not easy to say which is better.
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+</table>
+
+???
+And a third option
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th></th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Maybe like this?</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Or this? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td>Or..? </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> What about this? </td>
+</tr>
+</table>
+
+???
+There is no one right way to do alignment
+  - Hard to say which of these is "better" or "worse"
+  - Just different choices, but all valid
+
+Mapping is a non-trivial problem!
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th>Tool</th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td>Novoalign</td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td> Ssaha2 </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td> BWA </td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td> Complete Genomics </td>
+</tr>
+</table>
+
+
+???
+We didn't just make these up, these real aligners gave these different results
+
+---
+class: top
+
+# Sequence Alignment
+
+```
+Reference: AAA CAGTGA GAA
+Observed:  AAA TCTCT  GAA
+```
+
+<table style="width:100%; table-layout:fixed; font-size:0.8em">
+<th>Alignment</th><th>Variant calls</th>
+
+<tr><td><pre>
+AAA-CAGTGAGAA
+|||-|--|::|||
+AAATC--TCTGAA
+</pre></td>
+<td><pre>
+ins T
+del AG
+sub GA -> CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||-::|::|||
+AAA-TCTCTGAA
+</pre></td>
+<td><pre>
+del C
+sub AG -> CT
+sub GA -> CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTGAGAA
+|||:-:|::|||
+AAAT-CTCTGAA
+
+</pre></td>
+<td><pre>
+snp C -> T
+del A
+snp G -> C
+sub GA -> CT
+</pre></td>
+</tr>
+
+<tr><td><pre>
+AAACAGTCA-----GAA
+|||-----------|||
+AAA------TCTCTGAA
+</pre></td>
+<td><pre>
+del CAGTGA
+int TCTCT
+</pre></td>
+</tr>
+</table>
+
+
+???
+**Important:** Mapping can affect downstream analysis!
+
+These different mappings led to different variants, and hard to tell the are equivalent.
+
+---
+
+# Try it yourself!
+
+- Lego time! Who wants to volunteer?
+
+- Or try this [online sequence alignment game](http://teacheng.illinois.edu/SequenceAlignment/):
+
+.image-75[![Recording of alignment game](../../images/mapping/alignment.gif)]
+
+.footnote[https://tinyurl.com/sequence-alignment]
+
+???
+Can have learners play around with this alignment game now
+
+Or use lego bricks, each nucleotide a different colour
+
+
+---
+class: top
 
 ## Tools, tools, tools
 
-- Bowtie
+60+ different mappers, many comparison papers
+
+
+.left-column70[![Timeline of mapping tools](../../images/mapping/ngs_read_mappers_timeline.jpeg)]
+]
+.right-column30[
+- Bowtie2
 - HISAT
 - MAQ
 - BWA
@@ -77,24 +532,92 @@ Lego time: Who wants to volunteer?
 - SOAP
 - STAR
 - BISMARCK
+- Novoalign
+- TopHat2
+- BLASR
+- ..
+]
 
-And many more!
+
+.footnote[Feature comparison:  https://www.ebi.ac.uk/~nf/hts_mappers/]
+---
+
+## Choosing an Aligner
+
+- Each tool makes **different choices** during alignment
+  - Choice of aligner may **affect downstream results**
+  - Default options may not be best for your data!
+
+
+- Best tool for your data **depends on many factors**
+  - Type of experiment (e.g. DNA, RNA, Bisulphite)
+  - Sequencing platform
+  - Compute resources vs sensitivity
+  - Read characteristics (paired/single end, read length)
+
+
+.center[
+.image-40[![Mapping RNA](../../images/mapping/spliced_mapper.png)]
+]
+.footnote[**Figure:** mapping of RNA-seq reads is different than DNA-seq]
+
+
+???
+Choice of mapper depends on your experiment
+ - Some mappers are good for DNA but not RNA
+ - Some mappers do well in highly rearranged genomes (e.g. cancer), others less so
+ - Some mappers do well on some platforms but worse on others
+   - e.g. Oxford Nanopore with its long reads but high error rates
+ - ..
+
+Read characteristics such as
+ - paired end vs single
+ - length of reads
+ -
+
+Or other factors
+ - STAR needs a LOT of RAM
+ - Do you need results fast? or accurate? (e.g. medical setting)
+
+"Why not BLAST or BLAT?"
+- optimized for longer sequences
+- not base quality aware
+- too slow
+
+---
+
+# Know your data!
+
+
+*“... there is no tool that outperforms all of the others in
+all the tests. Therefore, the end user should clearly
+specify his needs in order to choose the tool that
+provides the best results.”* - Hatem et al BMC Bioinformatics 2013, 14:184
+
+
+.footnote[ [DOI: 10.1186/1471-2105-14-184](https://doi.org/10.1186/1471-2105-14-184) ]
 
 ???
 
-# Hands-on!
+Know the data you are working with and pick the right mapper and parameters for the job!
+
+Not an easy task..
+
+---
+
+# File Formats
 
 ---
 
 # SAM/BAM file format
 
-![alt text](../../images/bam_file.png "SAM/BAM file")
+![Example of SAM file format](../../images/bam_file.png "SAM/BAM file")
 
 ---
 
 # SAM/BAM file format
 
-![alt text](../../images/bam_file_explained.png "SAM/BAM file detail")
+![More detailed view of SAM format](../../images/bam_file_explained.png "SAM/BAM file detail")
 
 SAM: Sequence Alignment/Map format
 
@@ -102,6 +625,35 @@ BAM: Binary SAM
 
 ---
 
-# IGV Browser -- Hands-on
+# Genome Browser
 
-![alt text](../../images/igv_part2.png "igv detail")
+- Visualise aligned reads (BAM files)
+
+![IGV Genome Browser](../../images/mapping/igv_animation.gif)
+
+This is [IGV](https://software.broadinstitute.org/software/igv/)
+
+???
+- Can zoom in and out, drag left and right, explore your sample
+- Zoom in for more information, mismatches, read information
+- Many different genome browsers exist
+
+---
+
+# Genome Browers in Galaxy
+
+- BAM datasets in Galaxy have links to display in genome browsers
+  - [UCSC Genome Browser](https://genome-euro.ucsc.edu/cgi-bin/hgTracks), [Ensemble](https://www.ensembl.org), [IGV](https://software.broadinstitute.org/software/igv/), [IGB](https://bioviz.org/), [BAM.iobo](https://bam.iobio.io/home)
+
+
+  ![Display application links in Galaxy](../../images/mapping/igv_link.png)
+
+
+- 2 links for IGV (Integrative Genome Viewer)
+  - **local:** start IGV on your machine first, then click link to load data
+  - **[Reference genome name]**: downloads and starts IGV
+     - **Human hg19** in screenshot
+     - Requires [Java web start](https://java.com/en/download/faq/java_webstart.xml) be installed on your machine
+
+???
+In the mapping hands-on tutorial you will use IGV

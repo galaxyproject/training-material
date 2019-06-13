@@ -1,18 +1,26 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy Monitoring"
+title: "Galaxy Monitoring with Telegraf and Grafana"
 zenodo_link: ""
 questions:
-  - How to monitor a Galaxy service with the Reports?
+  - How to monitor Galaxy with Telegraf
 objectives:
   - Setup and start the Galaxy reports app.
 time_estimation: "30m"
+tags:
+  - ansible
 key_points:
   - Galaxy supports pluggable monitoring extensions.
-  - The Reports webapp is one option to monitor your system.
+  - Use grafana or the reports webapp to monitor your service.
 contributors:
   - erasche
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+      - ansible-galaxy
 ---
 
 
@@ -44,7 +52,7 @@ We use [Telegraf](https://github.com/influxdata/telegraf) for monitoring as it i
 > 2. `ansible-galaxy install -p roles -r requirements.yml`
 >
 > 3. Add an entry to your playbook under `roles:`
-> 
+>
 >    ```yaml
 >    - dj-wasabi.telegraf
 >    ```
@@ -86,7 +94,7 @@ This role has many convenient variables for us to set. We'll do that now:
 >          - metric_separator = "."
 >          - allowed_pending_messages = 10000
 >    ```
-> 
+>
 > 2. Replace the `YOUR-INFLUX-URL` placeholder with your influx service url.
 >
 >    This configures telegraf to output to the configured influxdb server in the `telegraf` database. A number of plugins are enabled as `defaults`, this is useful if you have telegraf configured for multiple machines; you can have a base configuration that applies to all machines (perhaps in `group_vars/all.yml`), and then `extra` configuration that is per-machine.

@@ -83,6 +83,14 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 {% endif %}
 
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
 ---
 
 {{ content | xml_escape }}
@@ -91,7 +99,13 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, [{{ contributors[c].name | default: c }}]({{ site.baseurl }}/hall-of-fame#{{ c }}){% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+{% if tutorial.contributors %}
+<div class="contributors-line">
+{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+</div>
+{% endif %}
 
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
