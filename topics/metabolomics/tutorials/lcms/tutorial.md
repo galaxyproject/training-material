@@ -57,23 +57,23 @@ This workflow takes as input **TODO** and perform several steps: pre-processing,
 {: .agenda}
 
 
-# Preprocessing with XCMS
+# Preprocessing with xcms
 
-The first step in the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
+The first step in the workflow is the pre-processing of the raw data with xcms ({% cite Smith2006 %}).
 
-XCMS is a free software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to
+xcms is a free and open source software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is
 used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software [5,6,7].
 
-XCMS is able to read files with open format as mzXML and netCDF which are independent of the constructors' formats.
+xcms is able to read files with open format as mzXML, mzMl, mzData and netCDF which are independent of the constructors' formats.
 
 It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
 adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well
 adapted to define workflows, one of the key points of Galaxy:
 
-![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
+![Preprocessing of the raw data with xcms (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
 
 
 ## Uploading your data into Galaxy
@@ -113,48 +113,42 @@ uploading your data into Galaxy.
 >    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="mzml" collection_name="raw"%}
+>    {% include snippets/import_via_link.md collection=true collection_type="mzml" collection_name="sacurine"%}
 >    {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
-Any comment needed here?
+You should have in your history a green Dataset collection (`sacurine`) with 9 datasets with as format mzml.
+Their size can be checked in their information panel (i)
 
-## Data preparation before XCMS steps: **MSnbase readMSData**
+## Data preparation before xcms steps: **MSnbase readMSData**
 
-This first step is only meant to prepare your data for XCMS. It takes as input your raw files and
-prepares RData files for the first XCMS step.
+This first step is only meant to read your mzXML and generate an object usable by xcms. It takes as input your raw files and
+prepares RData files for the first xcms step.
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
 > 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > There is only one parameter for this module, corresponding to the input file.
->    {: .comment}
+>    - *"File(s) from your history containing your chromatograms"*:
+>        - Click on the folder icon to select the Dataset collection: `sacurine`
 >
 {: .hands_on}
 
 
 > ### {% icon question %} Question
 >
-> With this single input parameter, what actions should I take before clicking on 'Execute'?
+> What do you get as output?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Choosing the correct type of input (here **Dataset collection**)
-> > 2. Selecting the correct input (here **mzML**)
+> > 1. A **Dataset collection** containing 9 dataset
+> > 2. The dataset are some RData object with the datatype **rdata.msnbase.raw**
 > >
 > {: .solution}
 >
 {: .question}
 
-## First XCMS step: **peak picking**
+## First xcms step: **peak picking**
 
 ***TODO*** step introduction
 
@@ -505,8 +499,8 @@ prepares RData files for the first XCMS step.
 
 # W4M 3-tables format
 
-To do: add a complement about the 3-table format, depending on the information already given in XCMS part. 
-Inparticular, a focus of mandatory information for the present tutorial. 
+To do: add a complement about the 3-table format, depending on the information already given in xcms part.
+Inparticular, a focus of mandatory information for the present tutorial.
 
 # Data processing: quality checks, normalisation, data filtering
 
@@ -532,7 +526,7 @@ In this tutorial, we chose to limit the data processing to 3 steps:
 Commonly, LC-MS analysis generates a significant number of variables (hundreds to thousands). Getting a complete view of
 such dataset may not be an easy task, but getting a glimpse of it is possible using some common unsupervised multivariate
 analysis. One of the most commonly used method is the Principal Components Analysis (PCA). You can get a basic PCA along with
-over useful information using the Quality Metrics tool available in the Quality Control section. 
+over useful information using the Quality Metrics tool available in the Quality Control section.
 
 > ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to get an overview of your data
 >
@@ -565,30 +559,30 @@ It provides a variety of useful information:
 > ### {% icon question %} Cross-referencing information
 >
 > Look at the 'Quality_Metrics_figure.pdf' file.
-> 1. Look at the proportion of ions with a pool coefficient of variation <30%. Knowing that pools are identical samples, and that 
+> 1. Look at the proportion of ions with a pool coefficient of variation <30%. Knowing that pools are identical samples, and that
 values with a CV > 30% can not be considered stables, what can you conclude about your dataset regarding the possibility to
 compare intensities between samples?
 > 2. Look at the sum of intensities per sample according to injection order. What major information do you observe on the plot?
 Can this observation help you understand the CV results you just looked at?
-> 3. Now look at the PCA plot. Can you explain the first component (t1)? Use the previous plot to help you. 
+> 3. Now look at the PCA plot. Can you explain the first component (t1)? Use the previous plot to help you.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. You can read on the plot that *pool CV < 30%: 26%*, meaning that the pool values are stable only for a quarter of the ions 
-in your dataset. If the pooled samples are not stable, this means that you can observe differences between samples even when 
-there are no biological differences. Thus, comparing samples becomes difficult and has high risk of being unreliable. 
+> > 1. You can read on the plot that *pool CV < 30%: 26%*, meaning that the pool values are stable only for a quarter of the ions
+in your dataset. If the pooled samples are not stable, this means that you can observe differences between samples even when
+there are no biological differences. Thus, comparing samples becomes difficult and has high risk of being unreliable.
 Consequently, with only a quarter of the ions being stable regarding pool intensities, performing statistical analyses on
-this full dataset would probably lead to unreliable results. 
+this full dataset would probably lead to unreliable results.
 > > 2. We can see on the figure that the global intensity of samples seems to decrease with the injection order. In particular,
-the fact that the pooled samples' intensities decrease leads us to suspect a signal drift due to the clogging effect of successive 
-injection of samples. 
+the fact that the pooled samples' intensities decrease leads us to suspect a signal drift due to the clogging effect of successive
+injection of samples.
 > > This signal drift could be the reason why so many ions in the dataset leaded to high CV values for pools, since it prevents
-at least part of the ions to be stable regarding pools' intensities. 
+at least part of the ions to be stable regarding pools' intensities.
 > > 3. If we look closely at the samples' identifiers on the plot, it seems that the lowest numbers in IDs are at the right side
-of the first component. Knowing that these numbers correspond to an order in the injection sequence, we can link it to the 
+of the first component. Knowing that these numbers correspond to an order in the injection sequence, we can link it to the
 previous picture's samples. Then, what we can observe is that the order of samples in the first component of PCA from right to left
 corresponds approximately to the decreasing order of sums of intensities. Thus, we can conclude that the main variability in
-the dataset may be due to the signal drift. 
+the dataset may be due to the signal drift.
 > >
 > {: .solution}
 >
@@ -596,14 +590,14 @@ the dataset may be due to the signal drift.
 
 ## Step 2: handling the signal drift observed althrough the analytical sequence
 
-It is known that when injecting successively a large number of samples, the system tends to get dirty, and this may cause a measure drift. 
-To prevent inability to catch signal anymore, in case of large injection series, the sequence is generally divided into several batches 
-and the source is cleaned between batches. Unfortunately, these signal drift and batch design can add significant variability in data, 
+It is known that when injecting successively a large number of samples, the system tends to get dirty, and this may cause a measure drift.
+To prevent inability to catch signal anymore, in case of large injection series, the sequence is generally divided into several batches
+and the source is cleaned between batches. Unfortunately, these signal drift and batch design can add significant variability in data,
 making sample comparison complicated. In case data is impacted by these effects, it is highly recommanded to normalise the data to get
 rid of these unwanted effects.
 
 In our case study, we saw that the data seemed to be affected by signal drift. Thus, we will use the **Batch_correction** module to
-get rid of it. 
+get rid of it.
 
 > ### {% icon hands_on %} Hands-on: Data normalisation using the **Batch_correction** module
 >
@@ -617,7 +611,7 @@ get rid of it.
 >    >
 >    > The choice of the type of regression model to use depends on several parameters.
 >    > In this case-study, since we only have 3 pools, there are only two possible choices: *linear* or *all loess sample*
->    > When possible, we recommend to use pools to correct the signal drift, that is why we chose to run the module with *linear*. 
+>    > When possible, we recommend to use pools to correct the signal drift, that is why we chose to run the module with *linear*.
 >    {: .comment}
 >
 {: .hands_on}
@@ -634,22 +628,22 @@ sequence is divided into several batches, the idea is to obtain something like t
 ![Before/after picture](../../images/BC_theo2.png)
 
 In the case of *linear* regression model, the module performs some tests before applying the normalisation for quality purposes.
-For some ions, if the normalisation process would have led to unconsistant results, the concerned ions are not corrected for signal drift. 
+For some ions, if the normalisation process would have led to unconsistant results, the concerned ions are not corrected for signal drift.
 This kind of quality checks depends on the type of regression model you use. Please refer to the module's help section for more information!
- 
+
 
 ## Step 3: getting rid of unreliable variable using CV
 
 Now that the data is corrected for signal drift, we expect to have stable intensities within pools. But is this always the case?
 Truth is, even when correcting ions, we may not manage to get rid of analytical effect for 100% of ions. And even if we could,
 LC-MS data may contain noise signal, or ions that are not reliable as they are too noisy. Thus, it is possible that the data still
-contains unusable ions. 
+contains unusable ions.
 
 To filter the ions not reliable enough, we can consider CVs as a filtering indicator. The **Quality Metrics** module provides
 different CV indicators depending on what is in your sample list. In particular, in the present case-study, it can compute pool CVs
-as previously seen, but also a ratio between pool CVs and sample CVs. This is particularly of interest since we can expect that, 
+as previously seen, but also a ratio between pool CVs and sample CVs. This is particularly of interest since we can expect that,
 whatever the pool CV value, it will be lower than the corresponding sample CV value, since biological samples are supposed to be affected
-by biological variability. Thus, we can filter the ions that do not respect this particular condition. 
+by biological variability. Thus, we can filter the ions that do not respect this particular condition.
 
 > ### {% icon hands_on %} Hands-on: CV calculation using the **Quality Metrics** module
 >
@@ -663,8 +657,8 @@ by biological variability. Thus, we can filter the ions that do not respect this
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Do not forget you need to use this module again, since this time indicators will be computed on normalised intensities. 
->    > What we are going to use this time is the tabular output, but while you are at it you can always check the pdf file. 
+>    > Do not forget you need to use this module again, since this time indicators will be computed on normalised intensities.
+>    > What we are going to use this time is the tabular output, but while you are at it you can always check the pdf file.
 >    {: .comment}
 >
 {: .hands_on}
