@@ -219,7 +219,7 @@ highly specific to the heart using additional expression data (still from HPA).
 
 We wish to focus on transcripts that have been classed as (according to the HPA definition):
  - **Tissue enriched** (expression in one tissue at least fivefold higher than all other tissues),
- - **Hroup enriched** (fivefold higher average TPM in a group of two to to seven tissues compared to all other tissues) and
+ - **Group enriched** (fivefold higher average TPM in a group of two to to seven tissues compared to all other tissues) and
  - **Tissue enhanced** (fivefold higher average TPM in one or more tissues/cell lines compared to the mean TPM for all tissues)
 
 
