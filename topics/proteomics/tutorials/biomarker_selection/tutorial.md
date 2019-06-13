@@ -67,6 +67,8 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 ![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 
+{% include snippets/warning_results_may_vary.md %}
+
 # Selection of tissue-specific proteins
 
 We will start by selecting proteins associated with heart muscle tissue based on experimental data available in HPA
