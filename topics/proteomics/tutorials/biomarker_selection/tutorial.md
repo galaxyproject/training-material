@@ -16,8 +16,7 @@ objectives:
 time_estimation: 3H
 
 key_points:
-- biomarker candidates selection workflow
-- public proteomics data retrieval and annotation
+- Public proteomics databases are useful resources for annotation of biomarker candidates
 
 contributors:
 - combesf
@@ -219,36 +218,44 @@ highly specific to the heart using additional expression data (still from HPA).
 {: .hands_on}
 
 We wish to focus on transcripts that have been classed as (according to the HPA definition):
-* "tissue enriched" (expression in one tissue at least fivefold higher than all other tissues),
-* "group enriched" (fivefold higher average TPM in a group of two to to seven tissues compared to all other tissues) and
-* "tissue enhanced" (fivefold higher average TPM in one or more tissues/cell lines compared to the mean TPM for all tissues)
+ - **Tissue enriched** (expression in one tissue at least fivefold higher than all other tissues),
+ - **Hroup enriched** (fivefold higher average TPM in a group of two to to seven tissues compared to all other tissues) and
+ - **Tissue enhanced** (fivefold higher average TPM in one or more tissues/cell lines compared to the mean TPM for all tissues)
 
-This information is listed in the column 4 : "RNA tissue category" of the result dataset.
 
-Let's use the "Filter by keywords and/or numerical value" tool to select the candidate biomarkers based on this
-"RNA tissue category" criterion.
+This information is listed in the column 4 : *"RNA tissue category"* of the result dataset.
+
+Let's use **Filter by keywords and/or numerical value** {% icon tool %} to select the candidate biomarkers based on this
+*"RNA tissue category"* criterion.
 
 
 > ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+>    - *"Input file"*: output from **Add expression data** {% icon tool %}
 >    - In *"Filter by keywords"*:
 >        - {% icon param-repeat %} *"Insert Filter by keywords"*
 >            - *"Column number on which to apply the filter"*: `c4`
 >            - *"Enter keywords"*: `copy/paste`
 >                - *"Copy/paste keywords to find (keep or discard)"*: `enriched enhanced`
 >    - *"Sort by column ?"*: `Yes`
+>      - *"Sort result files by"*: `c1`
 >
->   > ### Output
->   > - **Filtered Add_expression_data**: output list of the heart biomarkers with RNA tissue category
->   > containing "enriched" or "enhanced" (115 lines = what we are interested in)
->   > - **Filtered Add_expression_data - discarded lines**: output list of the heart biomarkers with
->   > RNA tissue category NOT containing "enriched" or "enhanced" (not what we are interested in)
->   {: .comment}
+>    > ### Output
+>    > - **Filtered Add_expression_data**: output list of the heart biomarkers with RNA tissue category
+>    >   containing "enriched" or "enhanced" (115 lines = what we are interested in)
+>    >
+>    > - **Filtered Add_expression_data - discarded lines**: output list of the heart biomarkers with
+>    > RNA tissue category NOT containing "enriched" or "enhanced" (not what we are interested in)
+>    {: .comment}
+>
+> 2. Let's rename the filtered dataset **heart115**
+>
+>    {% include snippets/rename_dataset.md %}
+>
 {: .hands_on}
 
 We now have identified 115 candidates considered to have significantly higher expression in heart muscle according to HPA criteria.
-Let's call the dataset where are those 115 candidates '**heart115**'.
 
 
 # Annotation with biochemical and cellular features
@@ -257,8 +264,7 @@ Let's call the dataset where are those 115 candidates '**heart115**'.
 Candidate biomarkers we want to identify have to be cytoplasmic and without transmembrane domains (TMD).
 Thus we will retrieve protein features from neXtProt to retrieve those informations.
 
-Since HPA only considers ENSG identifiers (related to the gene), although neXtProt uses UniProt
-identifiers (related to proteins), first thing to do is to map the Ensembl identifiers contained our list of (115)
+Since HPA only considers [Ensemble](https://www.ensembl.org) `ENSG` identifiers (related to the gene), although [neXtProt](https://www.nextprot.org/) uses [UniProt](https://www.uniprot.org/) identifiers (related to proteins), first thing to do is to map the Ensembl identifiers contained our list of (115)
 candidates to their corresponding UniProt accession number. The tool **ID Converter** is what we need to do so.
 
 
@@ -266,10 +272,13 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
+>    - *"Select your file"*: `heart115`
 >    - *"Species"*: `Human (Homo sapiens)`
 >        - *"Type/source of IDs"*: `Ensembl gene ID (e.g. ENSG00000166913)`
 >        - In *"Target type"*:
->            - *"Target type of IDs you would like to map to"*: `Uniprot accession number, Uniprot ID`
+>            - *"Target type of IDs you would like to map to"*:
+>              - {% icon param-check %} `Uniprot accession number`
+>              - {% icon param-check %} `Uniprot ID`
 >
 >   > ### Output
 >   > **ID converter**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
@@ -277,18 +286,21 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >   {: .comment}
 {: .hands_on}
 
-We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect protein features from neXtProt. For this purpose,
-we use the **Add protein features** ProteoRE tool.
+We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect protein features from [neXtProt](https://www.nextprot.org/).
+For this purpose, we use the **Add protein features** {% icon tool %} ProteoRE tool.
 
 
 > ### {% icon hands_on %} Hands-on: Add protein features
 >
 > 1. **Add protein features** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (neXtProt or UniProt)"*: `Input file containing your IDs `
+>        - *"Select your file"*: the output from **ID Converter** {% icon tool %}
 >        - *"Column IDs (e.g : Enter c1 for column n°1)"*: `c6`
 >    - In *"Select features"*:
->        - *"Physico-Chemical Features"*: `Number of transmembrane domains`
->        - *"Localization"*: `Subcellular Location`
+>        - *"Physico-Chemical Features"*:
+>          - {% icon param-check %} `Number of transmembrane domains`
+>        - *"Localization"*:
+>          - {% icon param-check %} `Subcellular Location`
 >        - *"Disease information"*: `Yes`
 >
 >   > ### Output
@@ -304,6 +316,7 @@ no transmembrane domains by running the Filter by keywords and/or numerical valu
 > ### {% icon hands_on %} Hands-on: Filter by keywords and/or numerical value
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+>    - *"Input file"*: the output from **Add protein features** {% icon tool %}
 >    - *"Select an operator to combine your filters (if more than one)"*: `AND`
 >    - In *"Filter by keywords"*:
 >        - {% icon param-repeat %} *"Insert Filter by keywords"*
@@ -327,7 +340,7 @@ no transmembrane domains by running the Filter by keywords and/or numerical valu
 >   {: .comment}
 {: .hands_on}
 
-We have now 48 proteins. The next step is to identify those proteins already previously observed in
+We have now 45 proteins. The next step is to identify those proteins already previously observed in
 LS MS/MS experiments.
 
 
@@ -337,10 +350,11 @@ LS MS/MS experiments.
 >
 > 1. **Get MS/MS observations in tissue/fluid** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (UniProt Accession number only)"*: `Input file containing your IDs `
+>        - *"Select your file"*: the filtered output from the previous step
 >        - *"Column of IDs"*: `c6`
 >    - *"Proteomics dataset (biological sample)"*:
->        - `Human Heart`
->        - `Human Plasma non glyco`
+>        - {% icon param-check %} `Human Heart`
+>        - {% icon param-check %} `Human Plasma non glyco`
 >
 >   > ### Output
 >   > **Get MS/MS observations in tissue/fluid**: In this file, 2 columns (11 and 12, at the end)
@@ -354,6 +368,7 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 > ### {% icon hands_on %} Hands-on: Filter for proteins seen in the plasma
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+>    - *"Input file"*: the MA/MS observations output from the previous step
 >    - *"Operation"*: `Discard`
 >    - In *"Filter by keywords"*:
 >        - {% icon param-repeat %} *"Insert Filter by keywords"*
@@ -362,6 +377,7 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 >            - *"Enter keywords"*: `copy/paste`
 >                - *"Copy/paste keywords to find (keep or discard)"*: `NA`
 >    - *"Sort by column ?"*: `Yes`
+>      - *"Sort results file by"*: `c1`
 >
 >   > ### Output
 >   > - **Filtered Get MS/MS observations in tissue/fluid**: output list of the proteins
@@ -375,9 +391,9 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 
 # Conclusion
 {:.no_toc}
-At the end of the process we end up with a list of 21 biomarkers that are **highly enriched in heart muscle**, localized
+At the end of the process we end up with a list of 22 biomarkers that are **highly enriched in heart muscle**, localized
 **in the cytosol** and **detectable by MS in the plasma**.
-*NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.* 
+*NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.*
 
 Briefly and from a biological point of view, 3 of these proteins exhibit a relative low detection level in the plasma
 compared to heart muscle tissue, and are reported with a very high heart-muscle-specific RNA abundance.
