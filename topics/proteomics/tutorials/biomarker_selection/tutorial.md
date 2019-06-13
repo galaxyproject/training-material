@@ -377,6 +377,7 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 {:.no_toc}
 At the end of the process we end up with a list of 21 biomarkers that are **highly enriched in heart muscle**, localized
 **in the cytosol** and **detectable by MS in the plasma**.
+*NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.* 
 
 Briefly and from a biological point of view, 3 of these proteins exhibit a relative low detection level in the plasma
 compared to heart muscle tissue, and are reported with a very high heart-muscle-specific RNA abundance.
