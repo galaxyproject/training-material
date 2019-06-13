@@ -119,6 +119,7 @@ uploading your data into Galaxy.
 {: .hands_on}
 
 You should have in your history a green Dataset collection (`sacurine`) with 9 datasets with as format mzml.
+
 Their size can be checked in their information panel (i)
 
 ## Data preparation before xcms steps: **MSnbase readMSData**
@@ -143,6 +144,48 @@ prepares RData files for the first xcms step.
 > >
 > > 1. A **Dataset collection** containing 9 dataset
 > > 2. The dataset are some RData object with the datatype **rdata.msnbase.raw**
+> >
+> {: .solution}
+>
+{: .question}
+
+## Import a sample metadata file
+
+A sample metadata file contains for each of your raw files their metadata:
+- class which will be used during the preprocessing steps
+- number of batch which will be useful for a batch correction step
+- different experimental conditions which can be used for the statistics
+
+Note that you can either:
+- upload one already filled
+- use a template
+  1. generate a template with the tool **xcms get a sampleMetadata file**
+  2. fill it using your favorite table editor (Excel, Libre Office)
+  3. upload it within Galaxy
+
+> ### {% icon comment %} Comment
+>
+> The file have to be a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
+>
+> 1. **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Question
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
 > >
 > {: .solution}
 >
