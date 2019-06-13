@@ -157,19 +157,17 @@ We want now to select candidate biomarkers that are expressed in the heart muscl
 >                - *"Select your file"*: `Filtered tissue-specific expression from RNAseq`
 >                - *"Enter the name of this list"*: `heart RNAseq`
 >
+> 2. Examine {% icon galaxy-eye %} the Venn diagram output:
+>
+>    ![Venn diagram output](../../images/biomarker-selection/jVenn_chart-tuto2.png)
+>
+>    > ### {% icon question %} Questions
+>    > How many IDs are common to both IHC and RNA-seq data?
+>    >   > ### {% icon solution %} Solution
+>    >   > 931 candidate biomarkers are detected by both IHC and RNA-seq data.
+>    >   {: .solution}
+>    {: .question}
 {: .hands_on}
-
-Examine the Venn diagram output:
-
-![Venn diagram output](../../images/biomarker-selection/jVenn_chart-tuto2.png)
-
-
-> ### {% icon question %} Questions
-> How many IDs are common to both IHC and RNA-seq data?
->   > ### {% icon solution %} Solution
->   > 931 candidate biomarkers are detected by both IHC and RNA-seq data.
->   {: .solution}
-{: .question}
 
 For greater clarity we'll keep only the column with those 931 candidate biomarkers detected in both IHC and RNA-seq data in the
 rest of our pipeline.
@@ -197,7 +195,7 @@ rest of our pipeline.
 >
 > 3. Let's rename the 931 IDs dataset in "heart931" for simplification.
 >
->    {% include snippets/rename_datasets.md %}
+>    {% include snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
@@ -210,9 +208,13 @@ highly specific to the heart using additional expression data (still from HPA).
 >
 > 1. **Add expression data** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)"*: `Input file containing your IDs`
+>      - *"Select your file"*: `Heart931` output we created in the previous step
 >    - In *"RNAseq/Ab-based expression data"*:
->        - *"Select information to add to your list"*: `Gene name, Gene description, RNA tissue category, RNA tissue specificity abundance in ‘Transcript Per Million`
->
+>        - *"Select information to add to your list"*:
+>          - {% icon param-check %} `Gene name`
+>          - {% icon param-check %} `Gene description`
+>          - {% icon param-check %} `RNA tissue category`
+>          - {% icon param-check %} `RNA tissue specificity abundance in Transcript Per Million`
 >
 {: .hands_on}
 
