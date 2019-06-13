@@ -499,10 +499,10 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="na">title</span>       <span class="p">:</span> <span class="s1">'A PDB viewer'</span><span class="p">,</span>
-        <span class="na">library</span>     <span class="p">:</span> <span class="s1">'My Visualization'</span><span class="p">,</span>
-        <span class="na">description</span> <span class="p">:</span> <span class="s1">'Displays Protein Structures.'</span><span class="p">,</span>
-        <span class="na">datatypes</span>   <span class="p">:</span> <span class="p">[</span> <span class="s1">'pdb'</span> <span class="p">],</span>
+        <span class="na">title</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">A PDB viewer</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">library</span>     <span class="p">:</span> <span class="dl">'</span><span class="s1">My Visualization</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">description</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Displays Protein Structures.</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">datatypes</span>   <span class="p">:</span> <span class="p">[</span> <span class="dl">'</span><span class="s1">pdb</span><span class="dl">'</span> <span class="p">],</span>
         <span class="na">keywords</span>    <span class="p">:</span> <span class="p">[]</span>
     <span class="p">}</span>
 <span class="p">});</span>
@@ -533,7 +533,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
   <ol>
     <li>Create a file named <code class="highlighter-rouge">wrapper.js</code> which returns a <em>Backbone</em> model:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="s1">'visualizations/myviz/pdb/plugin'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="dl">'</span><span class="s1">visualizations/myviz/pdb/plugin</span><span class="dl">'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
         <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">options</span> <span class="p">)</span> <span class="p">{</span>
             <span class="c1">// Add code to configure and execute the plugin here.</span>
@@ -576,8 +576,8 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
       <p>Modify <code class="highlighter-rouge">wrapper.js</code> by adding the following code into the <code class="highlighter-rouge">initialize</code> call:</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
-    <span class="na">width</span>       <span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
-    <span class="na">height</span>      <span class="p">:</span> <span class="s1">'auto'</span><span class="p">,</span>
+    <span class="na">width</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">height</span>      <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
     <span class="na">antialias</span>   <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="na">outline</span>     <span class="p">:</span> <span class="kc">true</span>
 <span class="p">});</span>
@@ -586,7 +586,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
     <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">structure</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">pdb</span><span class="p">(</span> <span class="nx">response</span> <span class="p">);</span>
         <span class="nx">viewer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-        <span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="s1">'cartoon'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+        <span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
         <span class="nx">viewer</span><span class="p">.</span><span class="nx">centerOn</span><span class="p">(</span> <span class="nx">structure</span> <span class="p">);</span>
         <span class="nx">viewer</span><span class="p">.</span><span class="nx">autoZoom</span><span class="p">();</span>
         <span class="nx">options</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
@@ -680,30 +680,30 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
     <li>Add the following block into the <code class="highlighter-rouge">config.js</code> file:
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">settings</span> <span class="p">:</span> <span class="p">{</span>
     <span class="nl">mode</span> <span class="p">:</span> <span class="p">{</span>
-        <span class="nl">label</span>   <span class="p">:</span> <span class="s1">'Render as:'</span><span class="p">,</span>
-        <span class="nx">help</span>    <span class="p">:</span> <span class="s1">'Select the rendering mode.'</span><span class="p">,</span>
-        <span class="nx">type</span>    <span class="p">:</span> <span class="s1">'select'</span><span class="p">,</span>
-        <span class="nx">display</span> <span class="p">:</span> <span class="s1">'radio'</span><span class="p">,</span>
-        <span class="nx">value</span>   <span class="p">:</span> <span class="s1">'cartoon'</span><span class="p">,</span>
-        <span class="nx">data</span>    <span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Cartoon'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="s1">'cartoon'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Lines'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="s1">'lines'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Points'</span><span class="p">,</span>         <span class="na">value</span> <span class="p">:</span> <span class="s1">'points'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Spheres'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="s1">'spheres'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Trace'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="s1">'trace'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Trace (line)'</span><span class="p">,</span>   <span class="na">value</span> <span class="p">:</span> <span class="s1">'lineTrace'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Trace (smooth)'</span><span class="p">,</span> <span class="na">value</span> <span class="p">:</span> <span class="s1">'sline'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="s1">'Tube'</span><span class="p">,</span>           <span class="na">value</span> <span class="p">:</span> <span class="s1">'tube'</span> <span class="p">}</span> <span class="p">]</span>
+        <span class="nl">label</span>   <span class="p">:</span> <span class="dl">'</span><span class="s1">Render as:</span><span class="dl">'</span><span class="p">,</span>
+        <span class="nx">help</span>    <span class="p">:</span> <span class="dl">'</span><span class="s1">Select the rendering mode.</span><span class="dl">'</span><span class="p">,</span>
+        <span class="nx">type</span>    <span class="p">:</span> <span class="dl">'</span><span class="s1">select</span><span class="dl">'</span><span class="p">,</span>
+        <span class="nx">display</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">radio</span><span class="dl">'</span><span class="p">,</span>
+        <span class="nx">value</span>   <span class="p">:</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span>
+        <span class="nx">data</span>    <span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Cartoon</span><span class="dl">'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Lines</span><span class="dl">'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">lines</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Points</span><span class="dl">'</span><span class="p">,</span>         <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">points</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Spheres</span><span class="dl">'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">spheres</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Trace</span><span class="dl">'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">trace</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Trace (line)</span><span class="dl">'</span><span class="p">,</span>   <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">lineTrace</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Trace (smooth)</span><span class="dl">'</span><span class="p">,</span> <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">sline</span><span class="dl">'</span> <span class="p">},</span>
+                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Tube</span><span class="dl">'</span><span class="p">,</span>           <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">tube</span><span class="dl">'</span> <span class="p">}</span> <span class="p">]</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>      </div>
     </li>
     <li>Change the following line in <code class="highlighter-rouge">wrapper.js</code>:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="s1">'cartoon'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre></div>      </div>
       <p>to</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
-<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="s1">'protein'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="s1">'mode'</span> <span class="p">),</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">attributes</span> <span class="p">);</span>
+<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mode</span><span class="dl">'</span> <span class="p">),</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">attributes</span> <span class="p">);</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -731,25 +731,25 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
   <ol>
     <li>Add the following block into the <code class="highlighter-rouge">settings</code> of your <code class="highlighter-rouge">config.js</code> file:
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pointSize</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Point size'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="s1">'Specify the point size.'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span>
+    <span class="nl">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Point size</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">help</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">Specify the point size.</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">type</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">float</span><span class="dl">'</span><span class="p">,</span>
     <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="nx">max</span>   <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="nx">value</span> <span class="p">:</span> <span class="mi">1</span>
 <span class="p">},</span>
 <span class="nx">lineWidth</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Line width'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="s1">'Specify the line width.'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span>
+    <span class="nl">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Line width</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">help</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">Specify the line width.</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">type</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">float</span><span class="dl">'</span><span class="p">,</span>
     <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="nx">max</span>   <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
     <span class="nx">value</span> <span class="p">:</span> <span class="mi">4</span>
 <span class="p">},</span>
 <span class="nx">radius</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nl">label</span> <span class="p">:</span> <span class="s1">'Radius'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="s1">'Radius of tube profile. Also influences the profile thickness for helix and strand profiles.'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="s1">'float'</span><span class="p">,</span>
+    <span class="nl">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Radius</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">help</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">Radius of tube profile. Also influences the profile thickness for helix and strand profiles.</span><span class="dl">'</span><span class="p">,</span>
+    <span class="nx">type</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">float</span><span class="dl">'</span><span class="p">,</span>
     <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="nx">max</span>   <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
     <span class="nx">value</span> <span class="p">:</span> <span class="mf">0.3</span>

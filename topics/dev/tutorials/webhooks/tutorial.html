@@ -381,23 +381,23 @@ calls an REST endpoint defined by use in the next step. The return value of this
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
-        <span class="kd">var</span> <span class="nx">galaxyRoot</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">Galaxy</span> <span class="o">!=</span> <span class="s1">'undefined'</span> <span class="p">?</span> <span class="nx">Galaxy</span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="s1">'/'</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">galaxyRoot</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">Galaxy</span> <span class="o">!=</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">Galaxy</span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">;</span>
 
         <span class="kd">var</span> <span class="nx">PHDComicsAppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-            <span class="na">el</span><span class="p">:</span> <span class="s1">'#phdcomics'</span><span class="p">,</span>
+            <span class="na">el</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#phdcomics</span><span class="dl">'</span><span class="p">,</span>
 
             <span class="na">appTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span>
-                <span class="s1">'&lt;div id="phdcomics-header"&gt;'</span> <span class="o">+</span>
-                   <span class="s1">'&lt;div id="phdcomics-name"&gt;PHD Comics&lt;/div&gt;'</span> <span class="o">+</span>
-                    <span class="s1">'&lt;button id="phdcomics-random"&gt;Random&lt;/button&gt;'</span> <span class="o">+</span>
-                <span class="s1">'&lt;/div&gt;'</span> <span class="o">+</span>
-                <span class="s1">'&lt;div id="phdcomics-img"&gt;&lt;/div&gt;'</span>
+                <span class="dl">'</span><span class="s1">&lt;div id="phdcomics-header"&gt;</span><span class="dl">'</span> <span class="o">+</span>
+                   <span class="dl">'</span><span class="s1">&lt;div id="phdcomics-name"&gt;PHD Comics&lt;/div&gt;</span><span class="dl">'</span> <span class="o">+</span>
+                    <span class="dl">'</span><span class="s1">&lt;button id="phdcomics-random"&gt;Random&lt;/button&gt;</span><span class="dl">'</span> <span class="o">+</span>
+                <span class="dl">'</span><span class="s1">&lt;/div&gt;</span><span class="dl">'</span> <span class="o">+</span>
+                <span class="dl">'</span><span class="s1">&lt;div id="phdcomics-img"&gt;&lt;/div&gt;</span><span class="dl">'</span>
             <span class="p">),</span>
 
-            <span class="na">imgTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="s1">'&lt;img src="&lt;%= src %&gt;""&gt;'</span><span class="p">),</span>
+            <span class="na">imgTemplate</span><span class="p">:</span> <span class="nx">_</span><span class="p">.</span><span class="nx">template</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;img src="&lt;%= src %&gt;""&gt;</span><span class="dl">'</span><span class="p">),</span>
 
             <span class="na">events</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">'click #phdcomics-random'</span><span class="p">:</span> <span class="s1">'getRandomComic'</span>
+                <span class="dl">'</span><span class="s1">click #phdcomics-random</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">getRandomComic</span><span class="dl">'</span>
             <span class="p">},</span>
 
             <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -406,24 +406,24 @@ calls an REST endpoint defined by use in the next step. The return value of this
 
             <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">$el</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">appTemplate</span><span class="p">());</span>
-                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">(</span><span class="s1">'#phdcomics-img'</span><span class="p">);</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#phdcomics-img</span><span class="dl">'</span><span class="p">);</span>
                 <span class="k">this</span><span class="p">.</span><span class="nx">getRandomComic</span><span class="p">();</span>
                 <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
             <span class="p">},</span>
 
             <span class="na">getRandomComic</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
-                    <span class="nx">url</span> <span class="o">=</span> <span class="nx">galaxyRoot</span> <span class="o">+</span> <span class="s1">'api/webhooks/phdcomics/get_data'</span><span class="p">;</span>
+                    <span class="nx">url</span> <span class="o">=</span> <span class="nx">galaxyRoot</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">api/webhooks/phdcomics/get_data</span><span class="dl">'</span><span class="p">;</span>
 
-                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">'&lt;div/&gt;'</span><span class="p">,</span> <span class="p">{</span>
-                    <span class="na">id</span><span class="p">:</span> <span class="s1">'phdcomics-loader'</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div/&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">phdcomics-loader</span><span class="dl">'</span>
                 <span class="p">}));</span>
 
                 <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
                     <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
                         <span class="nx">me</span><span class="p">.</span><span class="nx">renderImg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
                     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">'[ERROR] "'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="s1">'":</span><span class="err">\</span><span class="s1">n'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
+                        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">[ERROR] "</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">":</span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
                     <span class="p">}</span>
                 <span class="p">});</span>
             <span class="p">},</span>

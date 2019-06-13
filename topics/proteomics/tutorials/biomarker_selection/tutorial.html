@@ -1,0 +1,1127 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Biomarker candidate identification</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Biomarker candidate identification" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fbiomarker_selection%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fbiomarker_selection%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fbiomarker_selection%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fbiomarker_selection%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fbiomarker_selection%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/biomarker_selection/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Biomarker candidate identification",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "proteomics / biomarker_selection / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Biomarker candidate identification' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Biomarker candidate identification",
+    "description": "Biomarker candidate identification",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/proteomics/tutorials/biomarker_selection/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "Biomarker candidate identification\\nThe questions this  addresses are:\n - How to mine public databases to retrieve info?\n - How to build a selection strategy by applying successive biochemical/cellular criteria to a list of gene/protein?\n - How to select biomarkers candidates using experimental information (transcriptomics & proteomics) and annotation from public databases?\n\n\\nThe objectives are:\n - Build a workflow implementing a strategy for the selection of tissue-leakage biomarkers using ProteoRE\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "",
+      "name": "Training data for Biomarker candidate identification tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Florence Combes"
+    },
+    {
+      "@type": "Person",
+      "name": "David Christiany"
+    },
+    {
+      "@type": "Person",
+      "name": "Valentin Loux"
+    },
+    {
+      "@type": "Person",
+      "name": "Yves Vandenbrouck"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Florence Combes"
+    },
+    {
+      "@type": "Person",
+      "name": "David Christiany"
+    },
+    {
+      "@type": "Person",
+      "name": "Valentin Loux"
+    },
+    {
+      "@type": "Person",
+      "name": "Yves Vandenbrouck"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://galaxyproject.github.io//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Biomarker candidate identification</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#combesf" class="contributor-badge"><img src="https://avatars.githubusercontent.com/combesf" alt="Florence Combes">Florence Combes</a>, <a href="/training-material/hall-of-fame#davidchristiany" class="contributor-badge"><img src="https://avatars.githubusercontent.com/davidchristiany" alt="David Christiany">David Christiany</a>, <a href="/training-material/hall-of-fame#vloux" class="contributor-badge"><img src="https://avatars.githubusercontent.com/vloux" alt="Valentin Loux">Valentin Loux</a>, <a href="/training-material/hall-of-fame#yvandenb" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvandenb" alt="Yves Vandenbrouck">Yves Vandenbrouck</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How to mine public databases to retrieve info?</li>
+            
+            <li>How to build a selection strategy by applying successive biochemical/cellular criteria to a list of gene/protein?</li>
+            
+            <li>How to select biomarkers candidates using experimental information (transcriptomics & proteomics) and annotation from public databases?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Build a workflow implementing a strategy for the selection of tissue-leakage biomarkers using ProteoRE</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+
+            
+
+
+
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+
+                    
+
+                    
+                    <div>
+                        
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/biomarker_selection/workflows/" title="Workflows" alt="Biomarker candidate identification workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                    </div>
+                    
+                    
+
+
+                    
+                    
+                    <div>
+                        
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+
+                    </div>
+                    
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
+response to therapeutic treatment, or other relevant biological state.</p>
+
+<p><a href="http://www.proteore.org">ProteoRE Galaxy instance</a> provides necessary tools to execute a complete biomarkers selection pipeline.
+In this tutorial we introduce successively the tools of this pipeline, and guide you to execute them in order to complete the entire
+pipeline on a concrete example. This strategy is described by <a class="citation" href="#Nguyen2019">Nguyen <i>et al.</i> 2019</a>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#selection-of-tissue-specific-proteins" id="markdown-toc-selection-of-tissue-specific-proteins">Selection of tissue-specific proteins</a></li>
+  <li><a href="#annotation-with-biochemical-and-cellular-features" id="markdown-toc-annotation-with-biochemical-and-cellular-features">Annotation with biochemical and cellular features</a></li>
+  <li><a href="#check-for-previous-detection-by-lc-msms-experiments" id="markdown-toc-check-for-previous-detection-by-lc-msms-experiments">Check for previous detection by LC-MS/MS experiments</a></li>
+</ol>
+
+</blockquote>
+
+<h1 class="no_toc" id="global-view-of-the-strategy">Global view of the strategy</h1>
+
+<p>For this tutorial, no input data are required as the first steps will be to select data from
+public databases with ProteoRE tools.</p>
+
+<p>The strategy consists in selecting, one step after another, the most interesting candidates biomarkers.
+Our use-case here is to identify candidate biomarkers for myocardial infarction tissue-leakage.</p>
+
+<p>Criteria candidate biomarkers have to fulfill through this pipeline are:</p>
+<ul>
+  <li>heart-specificity</li>
+  <li>cytoplasmic localization</li>
+  <li>detection in LC-MS/MS experiments already done</li>
+</ul>
+
+<figure id="figure-1"><img src="../../images/pipeline.png" alt="Overview of the pipeline described in this tutorial" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Pipeline of the tutorial, from Nguyen et al., as of in 2019.</figcaption></figure>
+
+<blockquote class="comment">
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, external databases, or
+because of stochastic processes in the algorithms.</p>
+
+</blockquote>
+
+<h1 id="selection-of-tissue-specific-proteins">Selection of tissue-specific proteins</h1>
+
+<p>We will start by selecting proteins associated with heart muscle tissue based on experimental data available from
+<a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA) (Publication: <a class="citation" href="#Uhln2005">Uhlén <i>et al.</i> 2005</a>)</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry</h3>
+
+  <ol>
+    <li><strong>Create a new history</strong> and give it a name.
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li><strong>Build tissue-specific expression dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Experimental data source (antibody- or RNAseq-based)”</em>: <code class="highlighter-rouge">Expression profiles based on immunohistochemistry</code></li>
+        <li><em>“Select tissue”</em>: <code class="highlighter-rouge">Heart muscle</code></li>
+        <li><em>“Expression level”</em>: <code class="highlighter-rouge">High</code> and <code class="highlighter-rouge">Medium</code></li>
+        <li><em>“Reliability score”</em>: <code class="highlighter-rouge">Enhanced</code> and <code class="highlighter-rouge">Supported</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output">Output</h3>
+    <ul>
+      <li><strong>Tissue-specific expression from IHC</strong> (1596 lines): List of the selected proteins.
+6 columns: ‘Gene’, ‘Gene name’ and the retrieved info from HPA.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p>We will now rerun the same tool but to select transcripts according to their expression profile.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build tissue-specific expression dataset based on RNAseq</h3>
+
+  <ol>
+    <li><strong>Build tissue-specific expression dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Experimental data source (antibody- or RNAseq-based)”</em>: <code class="highlighter-rouge">RNA levels based on RNA-seq experiments</code></li>
+        <li><em>“Select tissue”</em>: <code class="highlighter-rouge">Heart muscle</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output-1">Output</h3>
+    <ul>
+      <li><strong>Tissue-specific expression from RNAseq</strong> (19613 lines): List of the selected transcripts.
+4 columns: ‘Gene’, ‘Gene name’ and the retrieved info from HPA.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p>This second list must be reduced by removing transcripts that are not highly enriched in heart muscle.
+To do so, a filter is applied on the expression value provided by HPA and measured in TPM (last column of the output file).
+In ProteoRE we’ll use the “Filter by keywords and/or numerical value” tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-on-expression-value-criterion"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter on expression value criterion</h3>
+
+  <ol>
+    <li><strong>Filter by keywords and/or numerical value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input File”</em>: <code class="highlighter-rouge">Tissue-specific expression from RNASeq</code> from the previous step</li>
+        <li><em>“Operation”</em>: <code class="highlighter-rouge">Discard</code></li>
+        <li>In <em>“Filter by numerical value”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by numerical value”</em>
+              <ul>
+                <li><em>“Column number on which to apply the filter”</em>: <code class="highlighter-rouge">c4</code></li>
+                <li><em>“Select operator”</em>: <code class="highlighter-rouge">&lt;=</code></li>
+                <li><em>“Value”</em>: <code class="highlighter-rouge">10.0</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Sort by column ?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Sort result files by”</em>: <code class="highlighter-rouge">c4</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>How many lines are there in the file of heart transcripts
+with a TPM value &gt;10 ?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>5257 lines.</p>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<p>We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC (Immonohistochemistry) data or <a href="https://statquest.org/2015/07/09/rpkm-fpkm-and-tpm-clearly-explained/">TPM</a> (Expression level expressed in Transcripts Per Million) value.</p>
+
+<p>We want now to select candidate biomarkers that are expressed in the heart muscle according to <strong>both</strong> IHC and RNA-seq data, using the Jvenn tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-venn-diagram"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Venn diagram</h3>
+
+  <ol>
+    <li><strong>Venn diagram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“List to compare”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert List to compare”</em>
+              <ul>
+                <li><em>“Enter your list”</em>: <code class="highlighter-rouge">Input file containing your list</code>
+                  <ul>
+                    <li><em>“Select your file”</em>: <code class="highlighter-rouge">Tissue-specific expression from IHC</code></li>
+                    <li><em>“Enter the name of this list”</em>: <code class="highlighter-rouge">heart IHC</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert List to compare”</em>
+              <ul>
+                <li><em>“Enter your list”</em>: <code class="highlighter-rouge">Input file containing your list</code>
+                  <ul>
+                    <li><em>“Select your file”</em>: <code class="highlighter-rouge">Filtered tissue-specific expression from RNAseq</code></li>
+                    <li><em>“Enter the name of this list”</em>: <code class="highlighter-rouge">heart RNAseq</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Examine <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the Venn diagram output:</p>
+
+      <p><img src="../../images/biomarker-selection/jVenn_chart-tuto2.png" alt="Venn diagram output" /></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <p>How many IDs are common to both IHC and RNA-seq data?</p>
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>931 candidate biomarkers are detected by both IHC and RNA-seq data.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>For greater clarity we’ll keep only the column with those 931 candidate biomarkers detected in both IHC and RNA-seq data in the
+rest of our pipeline.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-obtain-list-of-candidate-biomarkers"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtain list of candidate biomarkers</h3>
+
+  <ol>
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“File to cut”</em>: <code class="highlighter-rouge">Venn diagram text output</code></li>
+        <li><em>“Cut by”</em>: <code class="highlighter-rouge">fields</code>
+          <ul>
+            <li><em>“List of Fields”</em>: <code class="highlighter-rouge">Column: 3</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Now we’ll filter this dataset not to keep the ‘NA’ lines.</p>
+    </li>
+    <li><strong>Filter by keywords and/or numerical value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input file”</em>: output from <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Operation”</em>: <code class="highlighter-rouge">Discard</code></li>
+        <li>In <em>“Filter by keywords”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by keywords”</em>
+              <ul>
+                <li><em>“Search for exact match?”</em>: <code class="highlighter-rouge">Yes</code></li>
+                <li><em>“Enter keywords”</em>: <code class="highlighter-rouge">copy/paste</code>
+                  <ul>
+                    <li><em>“Copy/paste keywords to find (keep or discard)”</em>: <code class="highlighter-rouge">NA</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Sort by column ?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Sort result files by”</em>: <code class="highlighter-rouge">c1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Let’s rename the 931 IDs dataset in “heart931” for simplification.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The pipeline will then continue based on these 931 candidates, from which we have to select biomarkers that are
+highly specific to the heart using additional expression data (still from HPA).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-expression-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add expression data</h3>
+
+  <ol>
+    <li><strong>Add expression data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)”</em>: <code class="highlighter-rouge">Input file containing your IDs</code>
+          <ul>
+            <li><em>“Select your file”</em>: <code class="highlighter-rouge">Heart931</code> output we created in the previous step</li>
+          </ul>
+        </li>
+        <li>In <em>“RNAseq/Ab-based expression data”</em>:
+          <ul>
+            <li><em>“Select information to add to your list”</em>:
+              <ul>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Gene name</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Gene description</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">RNA tissue category</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">RNA tissue specificity abundance in Transcript Per Million</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We wish to focus on transcripts that have been classed as (according to the HPA definition):</p>
+<ul>
+  <li><strong>Tissue enriched</strong> (expression in one tissue at least fivefold higher than all other tissues),</li>
+  <li><strong>Group enriched</strong> (fivefold higher average TPM in a group of two to to seven tissues compared to all other tissues) and</li>
+  <li><strong>Tissue enhanced</strong> (fivefold higher average TPM in one or more tissues/cell lines compared to the mean TPM for all tissues)</li>
+</ul>
+
+<p>This information is listed in the column 4 : <em>“RNA tissue category”</em> of the result dataset.</p>
+
+<p>Let’s use <strong>Filter by keywords and/or numerical value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to select the candidate biomarkers based on this
+<em>“RNA tissue category”</em> criterion.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-by-keywords-andor-numerical-value"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter by keywords and/or numerical value</h3>
+
+  <ol>
+    <li><strong>Filter by keywords and/or numerical value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input file”</em>: output from <strong>Add expression data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Filter by keywords”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by keywords”</em>
+              <ul>
+                <li><em>“Column number on which to apply the filter”</em>: <code class="highlighter-rouge">c4</code></li>
+                <li><em>“Enter keywords”</em>: <code class="highlighter-rouge">copy/paste</code>
+                  <ul>
+                    <li><em>“Copy/paste keywords to find (keep or discard)”</em>: <code class="highlighter-rouge">enriched enhanced</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Sort by column ?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Sort result files by”</em>: <code class="highlighter-rouge">c1</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="output-2">Output</h3>
+        <ul>
+          <li>
+            <p><strong>Filtered Add_expression_data</strong>: output list of the heart biomarkers with RNA tissue category
+containing “enriched” or “enhanced” (115 lines = what we are interested in)</p>
+          </li>
+          <li>
+            <p><strong>Filtered Add_expression_data - discarded lines</strong>: output list of the heart biomarkers with
+RNA tissue category NOT containing “enriched” or “enhanced” (not what we are interested in)</p>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Let’s rename the filtered dataset <strong>heart115</strong></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We now have identified 115 candidates considered to have significantly higher expression in heart muscle according to HPA criteria.</p>
+
+<h1 id="annotation-with-biochemical-and-cellular-features">Annotation with biochemical and cellular features</h1>
+
+<p>Candidate biomarkers we want to identify have to be cytoplasmic and without transmembrane domains (TMD).
+Thus we will retrieve protein features from neXtProt to retrieve those informations.</p>
+
+<p>Since HPA only considers <a href="https://www.ensembl.org">Ensemble</a> <code class="highlighter-rouge">ENSG</code> identifiers (related to the gene), although <a href="https://www.nextprot.org/">neXtProt</a> uses <a href="https://www.uniprot.org/">UniProt</a> identifiers (related to proteins), first thing to do is to map the Ensembl identifiers contained our list of (115)
+candidates to their corresponding UniProt accession number. The tool <strong>ID Converter</strong> is what we need to do so.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-id-converter"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: ID Converter</h3>
+
+  <ol>
+    <li><strong>ID Converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Enter IDs”</em>: <code class="highlighter-rouge">Input file containing IDs</code></li>
+        <li><em>“Select your file”</em>: <code class="highlighter-rouge">heart115</code></li>
+        <li><em>“Species”</em>: <code class="highlighter-rouge">Human (Homo sapiens)</code>
+          <ul>
+            <li><em>“Type/source of IDs”</em>: <code class="highlighter-rouge">Ensembl gene ID (e.g. ENSG00000166913)</code></li>
+            <li>In <em>“Target type”</em>:
+              <ul>
+                <li><em>“Target type of IDs you would like to map to”</em>:
+                  <ul>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Uniprot accession number</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Uniprot ID</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output-3">Output</h3>
+    <p><strong>ID converter</strong>: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
+UniProt accession number and ID are added.</p>
+  </blockquote>
+</blockquote>
+
+<p>We have now UniProt IDs for the 115 candidate biomarkers: we are able to collect protein features from <a href="https://www.nextprot.org/">neXtProt</a>.
+For this purpose, we use the <strong>Add protein features</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> ProteoRE tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-protein-features"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add protein features</h3>
+
+  <ol>
+    <li><strong>Add protein features</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Enter your IDs (neXtProt or UniProt)”</em>: <code class="highlighter-rouge">Input file containing your IDs </code>
+          <ul>
+            <li><em>“Select your file”</em>: the output from <strong>ID Converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><em>“Column IDs (e.g : Enter c1 for column n°1)”</em>: <code class="highlighter-rouge">c6</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Select features”</em>:
+          <ul>
+            <li><em>“Physico-Chemical Features”</em>:
+              <ul>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Number of transmembrane domains</code></li>
+              </ul>
+            </li>
+            <li><em>“Localization”</em>:
+              <ul>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Subcellular Location</code></li>
+              </ul>
+            </li>
+            <li><em>“Disease information”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output-4">Output</h3>
+    <p><strong>Add information from NextProt</strong>: In this file (431 lines), 3 columns (columns 8, 9 and 10)
+were added (at the end). These columns present TMDomains, Subcell Location and Diseases info.</p>
+  </blockquote>
+</blockquote>
+
+<p>With this dataset, we can select proteins reported as localized in the cytoplasm and having
+no transmembrane domains by running the Filter by keywords and/or numerical value tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-by-keywords-andor-numerical-value-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter by keywords and/or numerical value</h3>
+
+  <ol>
+    <li><strong>Filter by keywords and/or numerical value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input file”</em>: the output from <strong>Add protein features</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Select an operator to combine your filters (if more than one)”</em>: <code class="highlighter-rouge">AND</code></li>
+        <li>In <em>“Filter by keywords”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by keywords”</em>
+              <ul>
+                <li><em>“Column number on which to apply the filter”</em>: <code class="highlighter-rouge">c9</code></li>
+                <li><em>“Enter keywords”</em>: <code class="highlighter-rouge">copy/paste</code>
+                  <ul>
+                    <li><em>“Copy/paste keywords to find (keep or discard)”</em>: <code class="highlighter-rouge">cytoplasm cytosol</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Filter by numerical value”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by numerical value”</em>
+              <ul>
+                <li><em>“Column number on which to apply the filter”</em>: <code class="highlighter-rouge">c8</code></li>
+                <li><em>“Value”</em>: <code class="highlighter-rouge">0</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Sort by column ?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Sort result files by:”</em>: <code class="highlighter-rouge">c5</code></li>
+            <li><em>“Sort in descending order ?”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output-5">Output</h3>
+    <ul>
+      <li><strong>Filtered Add_information_from_neXtProt</strong>: output list of the proteins having a cytoplasmic
+location and no TMD (48 proteins)</li>
+      <li><strong>Filtered Add_information_from_neXtProt - discarded lines</strong>: output list of the proteins NOT
+cytoplasmic and having at least 1 TMD.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p>We have now 45 proteins. The next step is to identify those proteins already previously observed in
+LS MS/MS experiments.</p>
+
+<h1 id="check-for-previous-detection-by-lc-msms-experiments">Check for previous detection by LC-MS/MS experiments</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-get-msms-observations-in-tissuefluid"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get MS/MS observations in tissue/fluid</h3>
+
+  <ol>
+    <li><strong>Get MS/MS observations in tissue/fluid</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Enter your IDs (UniProt Accession number only)”</em>: <code class="highlighter-rouge">Input file containing your IDs </code>
+          <ul>
+            <li><em>“Select your file”</em>: the filtered output from the previous step</li>
+            <li><em>“Column of IDs”</em>: <code class="highlighter-rouge">c6</code></li>
+          </ul>
+        </li>
+        <li><em>“Proteomics dataset (biological sample)”</em>:
+          <ul>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Human Heart</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">Human Plasma non glyco</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output-6">Output</h3>
+    <p><strong>Get MS/MS observations in tissue/fluid</strong>: In this file, 2 columns (11 and 12, at the end)
+were added with the info of number of times peptides were seen by MS/MS.</p>
+  </blockquote>
+</blockquote>
+
+<p>Let’s now keep only proteins that have already been seen by MS/MS in the plasma (last column of the file).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-for-proteins-seen-in-the-plasma"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter for proteins seen in the plasma</h3>
+
+  <ol>
+    <li><strong>Filter by keywords and/or numerical value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input file”</em>: the MA/MS observations output from the previous step</li>
+        <li><em>“Operation”</em>: <code class="highlighter-rouge">Discard</code></li>
+        <li>In <em>“Filter by keywords”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by keywords”</em>
+              <ul>
+                <li><em>“Column number on which to apply the filter”</em>: <code class="highlighter-rouge">c12</code></li>
+                <li><em>“Search for exact match?”</em>: <code class="highlighter-rouge">Yes</code></li>
+                <li><em>“Enter keywords”</em>: <code class="highlighter-rouge">copy/paste</code>
+                  <ul>
+                    <li><em>“Copy/paste keywords to find (keep or discard)”</em>: <code class="highlighter-rouge">NA</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Sort by column ?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Sort results file by”</em>: <code class="highlighter-rouge">c1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="output-7">Output</h3>
+    <ul>
+      <li><strong>Filtered Get MS/MS observations in tissue/fluid</strong>: output list of the proteins
+whose some peptides have been seen in plasma (21 proteins)</li>
+      <li><strong>Filtered Get MS/MS observations in tissue/fluid - discarded lines</strong>:
+output list of proteins with no peptides seen in the plasma</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<p>At the end of the process we end up with a list of 22 biomarkers that are <strong>highly enriched in heart muscle</strong>, localized
+<strong>in the cytosol</strong> and <strong>detectable by MS in the plasma</strong>.
+<em>NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.</em></p>
+
+<p>Briefly and from a biological point of view, 3 of these proteins exhibit a relative low detection level in the plasma
+compared to heart muscle tissue, and are reported with a very high heart-muscle-specific RNA abundance.
+These potential mechanistic biomarkers of myocardial infarction include (i) cardiac Troponin I type 3 (TNNI3 (P19429))
+that is routinely used as the most specific marker of myocardial injury and (ii) the heart-type fatty acid-binding protein
+(FABP3 (P05413)) that has been proposed as a diagnostic and prognostic marker for acute and chronic cardiac injury.</p>
+
+<p>Extraction of a workflow from your history is valuable for analyses reproducibility and traceability.
+Moreover, a workflow can also be made reusable with modifiable parameters, and as a result this strategy can
+be applied to other types of tissue injury (e.g. brain, liver, kidney).</p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+                        <ul>
+                            
+                            <li>Public proteomics databases are useful resources for annotation of biomarker candidates</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Uhln2005">Uhlén, M., E. Björling, C. Agaton, C. A.-K. Szigyarto, B. Amini <i>et al.</i>, 2005 <b>A Human Protein Atlas for Normal and Cancer Tissues Based on Antibody Proteomics</b>. Molecular &amp; Cellular Proteomics 4: 1920–1932.</span>
+    
+    
+    <a href="https://doi.org/10.1074/mcp.m500279-mcp200">10.1074/mcp.m500279-mcp200</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Nguyen2019">Nguyen, L., V. Brun, F. Combes, V. Loux, and Y. Vandenbrouck, 2019 <b>Designing an In Silico Strategy to Select Tissue-Leakage Biomarkers Using the Galaxy Framework</b>, pp. 275–289 <span style="font-style: normal">in</span> <i>Methods in Molecular Biology</i>, <i>Springer New York</i>.</span>
+    
+    
+    <a href="https://doi.org/10.1007/978-1-4939-9164-8_18">10.1007/978-1-4939-9164-8_18</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Biomarker candidate identification (Proteomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Biomarker candidate identification (Proteomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Florence Combes, David Christiany, Valentin Loux, Yves Vandenbrouck)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/biomarker_selection/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+</html>

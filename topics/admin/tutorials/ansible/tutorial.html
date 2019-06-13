@@ -951,24 +951,24 @@ to show how a person using <code class="highlighter-rouge">my-role</code> would 
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ansible-playbook -i hosts playbook.yml -c local --check --diff
-PLAY [my_hosts] ******************************************
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> ansible-playbook -i hosts playbook.yml -c local --check --diff
+<span class="p">PLAY [my_hosts] ******************************************
 TASK [Gathering Facts] **********************************
 ok: [localhost]
 TASK [my-role : Copy] ***********************************
 ok: [localhost]
 TASK [my-role : Template the configuration file] ********
-<span class="gd">--- before: /tmp/test.ini
+</span><span class="gd">--- before: /tmp/test.ini
 </span><span class="gi">+++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
-</span><span class="gu">@@ -1,3 +1,3 @@
-</span> [example]
+</span><span class="p">@@ -1,3 +1,3 @@</span>
+ [example]
 <span class="gd">-api_key = deadbeefcafe
 </span><span class="gi">+api_key = my_super_secret_api_key
 </span> listen = 192.168.0.25
-changed: [localhost]
+<span class="p">changed: [localhost]
 PLAY RECAP **********************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0
-</code></pre></div>          </div>
+</span></code></pre></div>          </div>
 
           <p>Here you can see that the api_key value will be changed. Despite Ansible reporting <code class="highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
         </blockquote>
