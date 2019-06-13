@@ -71,7 +71,8 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 
 # Selection of tissue-specific proteins
 
-We will start by selecting proteins associated with heart muscle tissue based on experimental data available in HPA
+We will start by selecting proteins associated with heart muscle tissue based on experimental data available from
+[The Human Protein Atlas](https://www.proteinatlas.org/) (HPA) (Publication: {% cite Uhln2005 %})
 
 
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
