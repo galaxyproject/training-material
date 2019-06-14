@@ -383,7 +383,8 @@ After extracting the parameter names from the **pipeline builder** file, we will
 > ### {% icon question %} Question
 >
 > What is the optimal number of estimators for the given dataset?
-> Hint: Please look at the `mean_test_score` column in the tabular result from the **Hyperparameter tool**.
+>
+> Hint: Please look at the `mean_test_score` column in the tabular result from the **Hyperparameter search** tool.
 >
 > > ### {% icon solution %} Solution
 > >
