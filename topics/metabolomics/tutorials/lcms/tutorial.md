@@ -579,22 +579,20 @@ over useful information using the Quality Metrics tool available in the Quality 
 
 > ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to get an overview of your data
 >
-> 1. **Quality Metrics** {% icon tool %} with the following parameters:
->    - *"Coefficient of Variation"*: `no`
->    - *"Advanced parameters"*: `Use default`
+> Execute **Quality Metrics** {% icon tool %} with the following parameters:
+>    - *"Data matrix file"*: `The one from 'xcms fillChromPeaks' outputs`
+>    - *"Sample metadata file"*: `Your original completed sampleMetadata file`
+>    - *"Variable metadata file"*: `The one from 'xcms fillChromPeaks' or 'CAMERA.annotate' outputs`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > You can leave other parameters with default values. 
 >    {: .comment}
 >
 {: .hands_on}
 
-For a first overview of your data, you can focus on the graphical output of this tool **Quality_Metrics_figure.pdf**.
+For a first overview of your data, you can focus on the graphical output of this tool: **Quality_Metrics_figure.pdf**.
 It provides a variety of useful information:
  - summary of the intensities in the dataMatrix file
  - view of these intensities with a color scale
@@ -605,7 +603,7 @@ It provides a variety of useful information:
 
 ![Quality_Metrics_figure.pdf](../../images/QM_9samp_raw.png)
 
-> ### {% icon question %} Cross-referencing information
+> ### {% icon question %} Question time: cross-referencing information
 >
 > Look at the 'Quality_Metrics_figure.pdf' file.
 > 1. Look at the proportion of ions with a pool coefficient of variation <30%. Knowing that pools are identical samples, and that
@@ -650,11 +648,14 @@ get rid of it.
 
 > ### {% icon hands_on %} Hands-on: Data normalisation using the **Batch_correction** module
 >
-> 1. **Batch_correction** {% icon tool %} with the following parameters:
+> Execute **Batch_correction** {% icon tool %} with the following parameters:
+>    - *"Data matrix file"*: `The one from 'xcms fillChromPeaks' outputs`
+>    - *"Sample metadata file"*: `Your original completed sampleMetadata file`
+>    - *"Variable metadata file"*: `The one from 'xcms fillChromPeaks' or 'CAMERA.annotate' outputs`
 >    - *"Type of regression model "*: `linear`
 >        - *"Factor of interest "*: `gender`
 >
->    ***TODO***: *Check parameter descriptions*
+> You can leave other parameters with default values. 
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -665,7 +666,7 @@ get rid of it.
 >
 {: .hands_on}
 
-**What transformation did this module on the ions' intensities?**
+**What transformation have this module done to the ions' intensities?**
 
 For each ion independently, the normalisation process works as described in the folowing picture:
 
@@ -696,13 +697,11 @@ by biological variability. Thus, we can filter the ions that do not respect this
 
 > ### {% icon hands_on %} Hands-on: CV calculation using the **Quality Metrics** module
 >
-> 1. **Quality Metrics** {% icon tool %} with the following parameters:
->    - *"Coefficient of Variation"*: `no`
->    - *"Advanced parameters"*: `Use default`
+> Execute **Quality Metrics** {% icon tool %} with the following parameters:
+>    - *"Data matrix file"*: `The one from Batch_correction outputs`
+>    - *"Sample metadata file"*: `Your original completed sampleMetadata file`
+>    - *"Variable metadata file"*: `The one from Batch_correction outputs`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -718,47 +717,44 @@ your data using the **Generic_Filter** module.
 
 > ### {% icon hands_on %} Hands-on: Data filtering using the **Generic_Filter** module
 >
-> 1. **Generic_Filter** {% icon tool %} with the following parameters:
+> Execute **Generic_Filter** {% icon tool %} with the following parameters:
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
->        - In *"Identify the parameter to filter "*:
->            - {% icon param-repeat %} *"Insert Identify the parameter to filter "*
->                - *"On file"*: `Variable metadata`
->                - *"Name of the column to filter"*: `poolCV_over_sampleCV`
->                - *"Interval of values to remove"*: `upper`
->                    - *"Remove all values upper than"*: `1.0`
->            - {% icon param-repeat %} *"Insert Identify the parameter to filter "*
->                - *"On file"*: `Variable metadata`
->                - *"Name of the column to filter"*: `pool_CV`
->                - *"Interval of values to remove"*: `upper`
->                    - *"Remove all values upper than"*: `0.3`
+>        - {% icon param-repeat %} *"Identify the parameter to filter "*
+>            - *"On file"*: `Variable metadata`
+>            - *"Name of the column to filter"*: `poolCV_over_sampleCV`
+>            - *"Interval of values to remove"*: `upper`
+>                - *"Remove all values upper than"*: `1.0`
+>        - {% icon param-repeat %} *"Insert Identify the parameter to filter "*
+>            - *"On file"*: `Variable metadata`
+>            - *"Name of the column to filter"*: `pool_CV`
+>            - *"Interval of values to remove"*: `upper`
+>                - *"Remove all values upper than"*: `0.3`
 >    - *"Deleting samples and/or variables according to Qualitative values"*: `yes`
->        - In *"Removing a level in factor"*:
->            - {% icon param-repeat %} *"Insert Removing a level in factor"*
->                - *"Name of the column to filter"*: `sampleType`
->                - *"Remove factor when"*: `pool`
+>        - {% icon param-repeat %} *"Removing a level in factor"*
+>            - *"Name of the column to filter"*: `sampleType`
+>            - *"Remove factor when"*: `pool`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > You can see here that you can take the opportunity of this filtering step to get rid of the pools. Indeed, next step is
+statistical analysis, and you do not need the pools anymore since they do not participate in the scientific design of the study. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What does the *1.0* threshold mean in the hands-on exercice you just executed?
+> 2. How many variables are left in your dataset? How many samples?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
+*poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
+(*i.e.* a pool CV greater than the sample CV) is discarded from the dataset. 
+> > 2. Filtering led to 2706 ions and 6 samples.
 > >
 > {: .solution}
 >
@@ -771,6 +767,8 @@ your data using the **Generic_Filter** module.
 
 
 ## Computation of statistical indices
+
+Here come the statistics!
 
 > ### {% icon hands_on %} Hands-on: Statistical analysis using the **Univariate** module
 >
