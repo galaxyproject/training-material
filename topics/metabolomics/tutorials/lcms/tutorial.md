@@ -76,7 +76,7 @@ adapted to define workflows, one of the key points of Galaxy:
 ![Preprocessing of the raw data with xcms (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
 
 
-## Uploading your data into Galaxy
+## Importing the LC/MS data into Galaxy
 
 In metabolomics studies, the number of samples can vary a lot (from a few ones to hundreds). Thus, extracting your
 data from the raw files can be very fast as well as take quite a long time. To optimise as much as possible the
@@ -87,7 +87,7 @@ Since the first steps can be run on each file, the use of **Dataset collection**
 launching jobs manually for each sample. You can consider the Dataset collection option from the very beginning, while
 uploading your data into Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Data upload with **Get data**
+> ### {% icon hands_on %} Hands-on: Data upload the mzXML with **Get data**
 >
 > 1. Create a new history for this tutorial
 > 2. Import the 9 mzXML files from [Zenodo](http://doi.org/10.5281/zenodo.3244991) or a shared data library inside a collection
@@ -122,10 +122,11 @@ You should have in your history a green Dataset collection (`sacurine`) with 9 d
 
 Their size can be checked in their information panel (i)
 
-## Data preparation before xcms steps: **MSnbase readMSData**
+## Data preparation for xcms
 
-This first step is only meant to read your mzXML and generate an object usable by xcms. It takes as input your raw files and
-prepares RData files for the first xcms step.
+This first step is only meant to read your mzXML and generate an object usable by xcms.
+
+**MSnbase readMSData** takes as input your raw files and prepares RData files for the first xcms step.
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
@@ -149,7 +150,7 @@ prepares RData files for the first xcms step.
 >
 {: .question}
 
-## Import a sample metadata file
+## Importing a sample metadata file
 
 A sample metadata file contains for each of your raw files their metadata:
 - class which will be used during the preprocessing steps
@@ -158,7 +159,7 @@ A sample metadata file contains for each of your raw files their metadata:
 
 Note that you can either:
 - upload one already filled
-- use a template
+- use a template (because it can be painful to get the sample list without misspelling or omission)
   1. generate a template with the tool **xcms get a sampleMetadata file**
   2. fill it using your favorite table editor (Excel, Libre Office)
   3. upload it within Galaxy
@@ -168,24 +169,29 @@ Note that you can either:
 > The file have to be a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
+> ### {% icon hands_on %} Hands-on: Data upload the sampleMetada with **Get data**
 >
-> 1. **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
->    - *"RData file"*:
->        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
+> 1. Import the sampleMetadata_completed.tsv file from [Zenodo](http://doi.org/10.5281/zenodo.3244991) or from a shared data library
+>    - sampleMetadata_completed.tsv
+>
+>    ```
+>    https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
-
 > ### {% icon question %} Question
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many columns should I have in my sampleMetadata file?
+> 2. What kind of class can I have?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. At least 2, with the identify and the class. But as many as you need to describe the potencial variablity of your samples (ex: the person in charge of the sample preparation, the temperature, ...). The statistic analysis will expose the relevant parameters.
+> > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with xmcs to detect the metabolite across the samples. So it's important to separate the samples and the QC. If you don't have any specific class, just fill everywhere with `sample` or a dot `.`
 > >
 > {: .solution}
 >
