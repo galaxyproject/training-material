@@ -78,6 +78,13 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
 >
 >
+> ### {% icon comment %}
+>
+>    Please make sure once you have uploaded the FASTQ_ProB_22List.fastqsanger file is a .fastqsanger or else you might have >    to change the datatype.
+>    You can perform this action by clicking on the "Edit attributes" icon and selecting Datatypes.
+>    Also, change Database/BUILD in the Edit attributes to Mouse.Dec 2011 (GRCm38/mm10)(mm10).
+{: .comment}
+
 {: .hands_on}
 
 
@@ -93,6 +100,8 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 >    - {% icon param-select %} *"Single-end or paired-end reads"*: `Single end`
 >    - {% icon param-file %} *"Input FASTQ files"*: `FASTQ_ProB_22LIST.fastqsanger`
 >    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
+> 2. Click **Execute** and inspect the resulting files
+> 3. Rename the output to "**HISAT_Output.BAM**".
 >
 > > ### {% icon comment %} Note on strandedness
 > > Note that if your reads are from a stranded library, you need to choose the appropriate
@@ -149,8 +158,9 @@ and RO fields in the VCF output.
 >    - {% icon param-select %} *"Limit variant calling to a set of regions?"*: `Do not Limit`
 >    - {% icon param-select %} *"Choose parameter selection level"*: `Simple diploid calling`
 >
-> 2. Click **Execute** and inspect the resulting files
+> 2. Click **Execute** and inspect the resulting files.
 >
+> 3. FreeBayes may take some time...be patient!!!!
 {: .hands_on}
 
 > ### {% icon comment %} FreeBayes options
@@ -201,6 +211,7 @@ data manager to create these annotations to make them available for users.
 >    - {% icon param-check %} *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
 >    - {% icon param-check %} *"Create RData file of variant protein coding sequences"*: `Yes`
 >
+> 2. Click **Execute** and inspect the resulting files
 {: .hands_on}
 
 Three FASTA files are generated through the CustomProDB tool:
@@ -233,7 +244,9 @@ Its input can include not only the alignments of raw reads used by other transcr
 >      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
 >      - {% icon param-select %} *"Use Reference transcripts only?"*: `No`
 >      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
->
+>      - {% icon param-select %} *"Output coverage file?"*: `No`
+> 2. Click **Execute** and inspect the resulting files. Rename the output to "**Stringtie_outut.gtf**". 
+>    Also, make sure the datatype is .gtf.
 {: .hands_on}
 
 StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be
@@ -290,6 +303,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 >    - {% icon param-text %} *"Max distance for transcript grouping"*: `100`
 >    - {% icon param-select %} *"discard intron-redundant transfrags sharing 5'"*: `No`
 >
+> 2. Click **Execute**
 {: .hands_on}
 
 > ### {% icon details %} GffCompare vs CuffCompare
@@ -324,6 +338,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 >      - `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
 >      - `u : Unknown, intergenic transcript`
 >
+> 2. Click **Execute**
 >     Next, we translate transcripts from the input BED file into protein sequences.
 >
 > 1. **Translate BED transcripts cDNA in 3frames or CDS** {% icon tool %} with the following parameters:
@@ -331,11 +346,19 @@ The original form of this program is also distributed as part of the Cufflinks s
 >    - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
 >    - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
 >
+> ### {% icon comment %} Note on data formats
+> - Make sure you select the bed file output from the GFF compare tool.
+{: .comment}
+> 2. Click **Execute**
 >     Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
 >
 > 1. **bed to protein map** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `Translate cDNA_minus_CDS`
 >
+> ### {% icon comment %} Note on data formats
+> - Make sure you select the probed file output from the Translate tool.
+{: .comment}
+> 2. Click **Execute**
 {: .hands_on}
 
 > ### {% icon comment %} Note on data formats
@@ -372,6 +395,7 @@ along with the UniProt and cRAP databases.
 >   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
 >   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
+> 2. Click **Execute**
 {: .hands_on}
 
 > ### {% icon comment %} Tool parameters explained
@@ -399,9 +423,14 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      FROM genomic_mapping
 >      ORDER BY pro_name, cds_start, cds_end
 >      ```
+>   - {% icon param-file %} *"Omit column headers from tabular output"*: `No`
 >
+> 2. Click **Execute**
 >     The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
 >
+> ### {% icon comment %} Note on data formats
+> - You can Copy paste the Query into your tool.
+{: .comment}
 > 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
 >    - {% icon param-select %} *"Using"*: `column 1`
@@ -415,6 +444,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1`
 >
+> 2. Click **Execute**
 >     This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.
 >
 >     Next, we will concatenate the output from this tool with the "Bed to protein map" output.
@@ -437,6 +467,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >          - {% icon param-check %} *"This is a unique index"*: `No`
 >          - {% icon param-text %} *"Index on columns"*: `name,cds_start,cds_end`
 >
+> 2. Click **Execute**
 > 1. Rename the output as **"genomic_mapping_sqlite"**
 >
 >    ![genomic mapping](../../images/genomic_mapping_file.png)
