@@ -74,7 +74,7 @@ class: top
 
 # Sequence alignment
 
-- Determine position of short read on the genome
+- Determine position of short read on the reference genome
   ```
   Reference: . . . A A C G C C T T . . .
 
@@ -82,7 +82,9 @@ class: top
   ```
 
 ???
-Consider situation where we must map this read to this reference genome
+Consider situation where we must map this (short) read to this (long) reference
+  - e.g. human genome ~ 3.2 billion base pairs
+- We scan the reference genome until we find an area that's similar to our read
 - This area looks pretty similar, but not quite identical..
 
 ---
@@ -122,7 +124,7 @@ class: top
 
 
 - How to handle multi-mapped reads? Depends on tool:
-  - Map to best region (but what about ties?)
+  - Map to best region (but what is "best"? And what about ties?)
   - Map to all regions
   - Map to one region randomly
   - Discard read
@@ -132,7 +134,10 @@ class: top
   - Assign ***alignment score*** to every mapping
 
 ???
+Some reads may map to multiple locations
+ - repeat regions, short reads, highly variable regions, sequencing errors, ..
 
+We want a way to determine *best* alignment if none are perfect matches..
 
 ---
 class: top
@@ -511,6 +516,310 @@ These different mappings led to different variants, and hard to tell the are equ
 Can have learners play around with this alignment game now
 
 Or use lego bricks, each nucleotide a different colour
+
+
+
+---
+
+## Paired-end sequencing
+
+- **Sequencing:** Larger fragments of DNA, sequence both ends
+
+  .center[.image-90[![Paired-end reads](../../images/mapping/pairedend_read.png)]]
+
+- **Mapping:** known distance between reads improves accuracy
+
+  .center[.image-75[![Mapping of paired-end reads](../../images/mapping/pairedend_mapping.png)]]
+
+???
+
+- The fragments are too long to sequence entirely, but we can sequence
+the ends.
+- Then we have the added information of how far apart these two reads must map
+- This improves our mapping
+
+- For example for multimapped reads, or repeats (next slide)
+
+
+---
+class: top
+
+## Repeats
+
+- Single-end:
+
+  ![](../../images/mapping/repeats_se.png)
+
+???
+
+In the case of repeats, a single end alone would not have ben enough
+for unique mapping, put with the addional information provided by
+paired-end protocal, this can now be resolved
+
+
+---
+class: top
+
+## Repeats
+
+- Single-end:
+
+  ![](../../images/mapping/repeats_se.png)
+
+- Paired-end:
+
+  ![](../../images/mapping/repeats_pe.png)
+
+???
+
+- In the case of repeats, a single read alone would not have ben enough
+for unique mapping
+
+- But with the additional information provided by
+paired-end protocol, this can now be resolved
+
+
+- Mate-pair sequencing
+ - Same concept as paired-end
+ - Much longer distance between ends
+ - Very different library prep
+ - Useful for detection of Structural Variations / fusion genes
+
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- 2 FASTQ files (or sometimes one *interleaved* file)
+  - Forward reads (usually `_1` or `_R1`)
+  - Reverse reads (usually `_2` or `_R2`)
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- 2 FASTQ files (or sometimes one *interleaved* file)
+  - Forward reads (usually `_1` or `_R1`)
+  - Reverse reads (usually `_2` or `_R2`)
+
+
+- Order matters!
+
+.pull-left[
+.red[
+```
+@SEQ-ID-A
+GGGTGATGGCCGCTGCCGATGGCGTCAAATCCCACC
++
+))%255CCF>>>>>>CCCCCCC65`IIII%436CAB
+```
+]
+.orange[
+```
+@SEQ-ID-B
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTA
++
+!''3((((^^d+))%%%++)(%%%%).1))4-+I'
+```
+]
+.green[
+```
+@SEQ-ID-C
+TCGCACTCAACGCCCTGCATATGACAAGACAGAATC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^????#=
+```
+]
+
+`mysample_R1.fastq`
+]
+
+.pull-right[
+.red[
+```
+@SEQ-ID-X
+AAGTTACCCTTAACAACTTAAGGGTTTTCAAATAGA
++
+fffddf`feedB`I_Ba_^%YBBBRTT\^ddcdd`d
+```
+]
+.orange[
+```
+@SEQ-ID-Y
+AGCAGAAGTCGATGATAATACGCGTCGTTTTATCAT
++
+IIIIIII^^IIId`?III%IIIGII>IIIII-I)8I
+```
+]
+.green[
+```
+@SEQ-ID-Z
+AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
++
+9C;=;=<9@4868>9:67AA<9>65<=>591AAI^d
+```
+]
+`mysample_R2.fastq`
+]
+
+???
+- Nth read in forward file belongs in a pair with Nth read in reverse file
+- So red reads in this slide form a pair, orange ones, etc
+
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- 2 FASTQ files (or sometimes one *interleaved* file)
+  - Forward reads (usually `_1` or `_R1`)
+  - Reverse reads (usually `_2` or `_R2`)
+
+
+- Order matters! **Always trim and filter together!**
+
+.pull-left[
+.red[
+```
+@SEQ-ID-A
+GGGTGATGGCCGCTGCCGATGGCGTCAAATCCCACC
++
+))%255CCF>>>>>>CCCCCCC65`IIII%436CAB
+```
+]
+.left[<i class="fa fa-cut" style="width:15%;position:absolute;font-size:5em;"></i>]
+.orange[
+```
+@SEQ-ID-B
+GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTA
++
+!''3((((^^d+))%%%++)(%%%%).1))4-+I'
+```
+]
+
+.green[
+```
+@SEQ-ID-C
+TCGCACTCAACGCCCTGCATATGACAAGACAGAATC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^????#=
+```
+]
+
+`mysample_R1.fastq`
+]
+.pull-right[
+.red[
+```
+@SEQ-ID-X
+AAGTTACCCTTAACAACTTAAGGGTTTTCAAATAGA
++
+fffddf`feedB`I_Ba_^%YBBBRTT\^ddcdd`d
+```
+]
+.orange[
+```
+@SEQ-ID-Y
+AGCAGAAGTCGATGATAATACGCGTCGTTTTATCAT
++
+IIIIIII^^IIId`?III%IIIGII>IIIII-I)8I
+```
+]
+.green[
+```
+@SEQ-ID-Z
+AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
++
+9C;=;=<9@4868>9:67AA<9>65<=>591AAI^d
+```
+]
+`mysample_R2.fastq`
+]
+
+???
+
+- Important to always provide both files to trimming and filtering tools together
+- If a read in one file gets removed (e.g. because it is below quality threshold), but it's mate is not, the pairing between the two files is no longer correct.
+
+- If one half of pair is trimmed, the other
+ - also removed, or
+ - put into separate "singletons" FASTQ file that some mappers can use
+
+---
+class: top
+
+## Paired-end FASTQ files
+
+- 2 FASTQ files (or sometimes one *interleaved* file)
+  - Forward reads (usually `_1` or `_R1`)
+  - Reverse reads (usually `_2` or `_R2`)
+
+
+- Order matters! **Always trim and filter together!**
+
+.pull-left[
+.red[
+```
+@SEQ-ID-A
+GGGTGATGGCCGCTGCCGATGGCGTCAAATCCCACC
++
+))%255CCF>>>>>>CCCCCCC65`IIII%436CAB
+```
+]
+.green[
+```
+@SEQ-ID-C
+TCGCACTCAACGCCCTGCATATGACAAGACAGAATC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^????#=
+```
+]
+.blue[
+```
+@SEQ-ID-D
+AAACTTCGTAGGTCCATTTGACAGCGTGCATTGCCC
++
+6664%!!III^(=%3333^^d^d:#32333??^IAA
+```
+]
+`mysample_R1.fastq`
+]
+.pull-right[
+.red[
+```
+@SEQ-ID-X
+AAGTTACCCTTAACAACTTAAGGGTTTTCAAATAGA
++
+fffddf`feedB`I_Ba_^%YBBBRTT\^ddcdd`d
+```
+]
+<i class="fa fa-frown-o" style="width:15%;position:absolute;font-size:7em;left:2.7em;"></i>
+.orange[
+```
+@SEQ-ID-Y
+AGCAGAAGTCGATGATAATACGCGTCGTTTTATCAT
++
+IIIIIII^^IIId`?III%IIIGII>IIIII-I)8I
+```
+]
+.green[
+```
+@SEQ-ID-Z
+AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
++
+9C;=;=<9@4868>9:67AA<9>65<=>591AAI^d
+```
+]
+`mysample_R2.fastq`
+]
+
+
+
+???
+By cutting the yellow read only from the forward reads file, but leaving the other side of pair in the other file, an incorrect pairing is now assumed by downstream tools
 
 
 ---
