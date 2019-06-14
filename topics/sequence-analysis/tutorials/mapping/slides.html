@@ -498,7 +498,7 @@ ins TCTCT
 ???
 **Important:** Mapping can affect downstream analysis!
 
-These different mappings led to different variants, and hard to tell the are equivalent.
+These different mappings led to different variants, and hard to tell they are equivalent.
 
 ---
 
@@ -552,9 +552,8 @@ class: top
 
 ???
 
-In the case of repeats, a single end alone would not have ben enough
-for unique mapping, put with the addional information provided by
-paired-end protocal, this can now be resolved
+In the case of repeats, a single-end read alone would not have be enough
+for unique mapping..
 
 
 ---
@@ -572,18 +571,15 @@ class: top
 
 ???
 
-- In the case of repeats, a single read alone would not have ben enough
-for unique mapping
-
-- But with the additional information provided by
-paired-end protocol, this can now be resolved
+But with the additional information provided by
+paired-end protocol (distance to mate), this can now be resolved..
 
 
-- Mate-pair sequencing
+- FAQ: "What a bout mate-pair sequencing?"
  - Same concept as paired-end
  - Much longer distance between ends
  - Very different library prep
- - Useful for detection of Structural Variations / fusion genes
+ - Useful for detection of Structural Variations (SVs) / Fusion Genes
 
 
 ---
@@ -594,6 +590,14 @@ class: top
 - 2 FASTQ files (or sometimes one *interleaved* file)
   - Forward reads (usually `_1` or `_R1`)
   - Reverse reads (usually `_2` or `_R2`)
+
+???
+When you have paired-end data, you will usually get 2 files.
+ - File names identical except for e.g. `_1`/`_2` or `_R1`/`_R2`
+
+Sometimes data can be in a single **interleaved file** (aka **interlaced**)
+ - de-interlace tools in Galaxy to convert this to two separate files
+   - because many tools require two separate files
 
 ---
 class: top
