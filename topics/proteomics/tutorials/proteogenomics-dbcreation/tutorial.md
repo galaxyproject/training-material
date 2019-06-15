@@ -427,9 +427,11 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >
 > 2. Click **Execute**
 >     The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
+> 3. Rename output as "genomic_mapping_sqlite"
 >
-> ### {% icon comment %} Note on data formats
+> ### {% icon comment %} Note
 > - You can Copy paste the Query into your tool.
+> - Keep all the lines blank except for the one's mentioned in this tutorial.
 {: .comment}
 > 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
@@ -444,15 +446,15 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1`
 >
-> 2. Click **Execute**
+> 2. Click **Execute** and rename as "SAV_INDEL"
 >     This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.
 >
 >     Next, we will concatenate the output from this tool with the "Bed to protein map" output.
 >
 > 1. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
->   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous tool and the `Bed2protein_SJ_SAV_INDEL` output.
+>   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous tool named as `SAV_INDEL` and the output from the "bed to protein map" tool and concatenate the tool.
 >
->     Output will be the "Genomic_Protein_map"
+>     Output will be the "Genomic_Protein_map" rename it as that
 >
 >     Now, we load this tabular datasets into an SQLite database.
 >
@@ -466,6 +468,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >        - {% icon param-repeat %} **Insert Table Index**:
 >          - {% icon param-check %} *"This is a unique index"*: `No`
 >          - {% icon param-text %} *"Index on columns"*: `name,cds_start,cds_end`
+>        - {% icon param-select %} *"Save the sqlite database in your history"*:`Yes`
 >
 > 2. Click **Execute**
 > 1. Rename the output as **"genomic_mapping_sqlite"**
@@ -516,7 +519,7 @@ We will repeat the process for the variant annotations
 >      - {% icon param-repeat %} **Insert Table Index**
 >        - {% icon param-check %} *"This is a unique index"*: `No`
 >        - {% icon param-text %} *"Index on columns"*: `name,cigar`
->
+>      - {% icon param-select %} *"Save the sqlite database in your history"*:`Yes`
 > 1. Rename the output as **"Variant_annotation_sqlitedb"**
 >
 {: .hands_on}
@@ -530,6 +533,7 @@ by MVP to visualize the genomic loci of any variant peptides.
 > ### {% icon hands_on %} Hands-on
 >
 Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.
+
 To do so:
 
 > ### {% icon hands_on %} Hands-on
@@ -548,5 +552,6 @@ To do so:
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
+> - All the tools mentioned in this tutorial are subjected to change while upgrading the tool.
 {: .comment}
 
