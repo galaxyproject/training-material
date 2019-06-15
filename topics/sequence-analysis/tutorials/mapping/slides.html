@@ -940,17 +940,27 @@ Not an easy task..
 
 ![Example of SAM file format](../../images/bam_file.png "SAM/BAM file")
 
+**SAM:** **S**equence **A**lignment **M**ap
+
+**BAM:** Binary (compressed) SAM; not human-readable
+
 ---
 
 # SAM/BAM file format
 
 ![More detailed view of SAM format](../../images/bam_file_explained.png "SAM/BAM file detail")
 
-SAM: Sequence Alignment/Map format
 
-BAM: Binary (compressed) SAM, not human-readable
+- Original read information (from FASTQ) plus mapping information
+  - Position on reference, alignment, quality score, uniqueness, ..
+
+???
+Alignment given in CIGAR string.
+ - in screenshot "37M" means 37 matches
+ - in screenshot "18M2D19M" means 18 matches, then 2 deletions, then 19 matches
 
 ---
+class: top
 
 # Genome Browsers
 
@@ -958,7 +968,7 @@ BAM: Binary (compressed) SAM, not human-readable
 
 ![IGV Genome Browser](../../images/mapping/igv_animation.gif)
 
-This is [IGV](https://software.broadinstitute.org/software/igv/)
+.footnote[This is [IGV (Integrative Genome Browser)](https://software.broadinstitute.org/software/igv/) DOI: [10.1038/nbt.1754](https://doi.org/10.1038/nbt.1754)]
 
 ???
 - Can zoom in and out, drag left and right, explore your sample
@@ -966,28 +976,34 @@ This is [IGV](https://software.broadinstitute.org/software/igv/)
 - Many different genome browsers exist
 
 ---
+class: top
 
 # Genome Browsers in Galaxy
 
-- Galaxy Tool for [JBrowse](https://jbrowse.org/) Genome Browser
+- [JBrowse](https://jbrowse.org/) Genome Browser as Galaxy tool
 
 .image-90[![](../../images/mapping/jbrowse.png)]
 
+.footnote[[JBrowse.org](https://jbrowse.org) DOI: [10.1186/s13059-016-0924-1](https://doi.org/10.1186/s13059-016-0924-1)]
 ---
+class: top
 
 # Genome Browsers in Galaxy
 
-- **External Genome Browsers:** BAM datasets in Galaxy have display links
+- **External Genome Browsers** in Galaxy
+  - BAM datasets in Galaxy have display links
   - [UCSC Genome Browser](https://genome-euro.ucsc.edu/cgi-bin/hgTracks), [Ensemble](https://www.ensembl.org), [IGV](https://software.broadinstitute.org/software/igv/), [IGB](https://bioviz.org/), [BAM.iobo](https://bam.iobio.io/home)
 
 
   ![Display application links in Galaxy](../../images/mapping/igv_link.png)
 
 
-- 2 links for IGV (Integrative Genome Viewer)
-  - **local:** start IGV on your machine first, then click link to load data
-  - **[Reference genome name]**: downloads and starts IGV
-     - **Human hg19** in screenshot
+- Two different links for **IGV**
+  - **local:**
+     - Start IGV on your machine first
+     - Then click link to automatically load data from Galaxy
+  - **[Reference genome name]** (*"Human hg19"* in screenshot)
+     - Downloads and starts IGV
      - Requires [Java web start](https://java.com/en/download/faq/java_webstart.xml) be installed on your machine
 
 ???
