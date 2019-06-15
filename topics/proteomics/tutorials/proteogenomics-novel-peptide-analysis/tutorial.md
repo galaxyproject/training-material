@@ -56,7 +56,7 @@ All the files to run this workflow can be obtained from the [second tutorial]({{
 > ### {% icon hands_on %} Hands-on: data organization
 >
 > 1. The inputs for this workflow are:
->    - **Tabular file** – “**Peptides from BlastP analysis**”
+>    - **Tabular file** – “**Peptides for BlastP analysis**”
 >    - **Tabular file** – “**PeptideShaker_PSM**”
 >    - **Mz to sqlite**
 >    - **Genomic mapping sqlite**
@@ -158,11 +158,11 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 
 > ### {% icon hands_on %} Hands-on: Guide to MVP
 >
-> The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the mz to sqlite tool.
+> The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the `mz to sqlite tool` (Generated in the second workflow).
 > Here is a step by step guide to obtain the proteogenomic view of the "Novel peptides".
 >
 >
-> 1) Click on the **Visualize in MVP application**, it will open up a new window for MVP.
+> 1) Click on the **Visualize in MVP application**, it will open up options for visualization application in the center pane, Select **MVP Application** from the options (or Right click to open in a new window).
 >
 > ![mz to sqlite](../../images/mz2sqlite.png){:width="20%"}
 >
