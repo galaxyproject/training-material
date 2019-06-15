@@ -120,7 +120,7 @@ class: top
 
 
 - Read could align to multiple places
-  .center[.image-50[![Illustration of multimapped read](../../images/mapping/multimap.png)]]
+  .center[.image-50[![Illustration of multi-mapped read](../../images/mapping/multimap.png)]]
 
 
 - How to handle multi-mapped reads? Depends on tool:
@@ -191,8 +191,8 @@ class: top
 
 
 .footnote[More information about mapping algorithms: [10.1089/cmb.2012.0022](https://doi.org/10.1089/cmb.2012.0022)]
-???
 
+???
 Many more complexities may be considered, different tools make different choices
 
 Transitions are more likely to occur in real sequences, so may give lower penalty than transversions
@@ -515,7 +515,7 @@ These different mappings led to different variants, and hard to tell they are eq
 ???
 Can have learners play around with this alignment game now
 
-Or use lego bricks, each nucleotide a different colour
+Or use Lego bricks, each nucleotide a different colour
 
 
 
@@ -538,7 +538,7 @@ the ends.
 - Then we have the added information of how far apart these two reads must map
 - This improves our mapping
 
-- For example for multimapped reads, or repeats (next slide)
+- For example for multi-mapped reads, or repeats (next slide)
 
 
 ---
@@ -546,7 +546,9 @@ class: top
 
 ## Repeats
 
-- Single-end:
+- Multi-mapped reads (e.g. because of repeats) may now be resolved
+
+- **Single-end:**
 
   ![](../../images/mapping/repeats_se.png)
 
@@ -561,11 +563,13 @@ class: top
 
 ## Repeats
 
-- Single-end:
+- Multi-mapped reads (e.g. because of repeats) may now be resolved
+
+- **Single-end:**
 
   ![](../../images/mapping/repeats_se.png)
 
-- Paired-end:
+- **Paired-end:**
 
   ![](../../images/mapping/repeats_pe.png)
 
@@ -575,7 +579,7 @@ But with the additional information provided by
 paired-end protocol (distance to mate), this can now be resolved..
 
 
-- FAQ: "What a bout mate-pair sequencing?"
+- FAQ: "What about mate-pair sequencing?"
  - Same concept as paired-end
  - Much longer distance between ends
  - Very different library prep
@@ -752,6 +756,8 @@ AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
  - also removed, or
  - put into separate "singletons" FASTQ file that some mappers can use
 
+- FAQ:" why not look at read names to determine pairing?"
+  - analysis would be much slower if for every read must scan (max) entire other file for mate, since often millions or reads (for whole-genome sequencing).
 ---
 class: top
 
@@ -853,6 +859,13 @@ class: top
 
 
 .footnote[Feature comparison:  https://www.ebi.ac.uk/~nf/hts_mappers/]
+
+???
+
+Many different tools available
+
+Different strengths and weaknesses, comparison table in link
+
 ---
 
 ## Choosing an Aligner
@@ -888,7 +901,7 @@ Or other factors
  - Do you need results fast? or accurate? (e.g. medical setting)
 
 
-FAQ: "Why not map rna to transcriptome?"
+FAQ: "Why not map RNA reads to the transcriptome?"
  - you can, and it is done, but then cannot find novel genes or alternative splicing
 
 
@@ -935,11 +948,11 @@ Not an easy task..
 
 SAM: Sequence Alignment/Map format
 
-BAM: Binary SAM
+BAM: Binary (compressed) SAM, not human-readable
 
 ---
 
-# Genome Browser
+# Genome Browsers
 
 - Visualise aligned reads (BAM files)
 
@@ -954,9 +967,17 @@ This is [IGV](https://software.broadinstitute.org/software/igv/)
 
 ---
 
-# Genome Browers in Galaxy
+# Genome Browsers in Galaxy
 
-- BAM datasets in Galaxy have links to display in genome browsers
+- Galaxy Tool for [JBrowse](https://jbrowse.org/) Genome Browser
+
+.image-90[![](../../images/mapping/jbrowse.png)]
+
+---
+
+# Genome Browsers in Galaxy
+
+- **External Genome Browsers:** BAM datasets in Galaxy have display links
   - [UCSC Genome Browser](https://genome-euro.ucsc.edu/cgi-bin/hgTracks), [Ensemble](https://www.ensembl.org), [IGV](https://software.broadinstitute.org/software/igv/), [IGB](https://bioviz.org/), [BAM.iobo](https://bam.iobio.io/home)
 
 
