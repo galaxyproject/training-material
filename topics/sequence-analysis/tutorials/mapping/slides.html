@@ -82,7 +82,7 @@ class: top
   ```
 
 ???
-Consider situation where we must map this (short) read to this (long) reference
+- Consider situation where we must map this (short) read to this (long) reference
   - e.g. human genome ~ 3.2 billion base pairs
 - We scan the reference genome until we find an area that's similar to our read
 - This area looks pretty similar, but not quite identical..
@@ -92,32 +92,18 @@ class: top
 
 # Sequence alignment
 
-- Determine position of short read on the genome
+- Determine position of short read on the reference genome
   ```
   Reference: . . . A A - C G C C T T . . .              | = match
   .                | : - : | | | | |                    : = mismatch
   Read:            A G G G G C C T T                    - = gap
   ```
+
 ???
 But if we introduce gaps and allow for some mismatches in bases, this matches
 up pretty well..
 
-- `|` = match
-- `:` = mismatch
-- `-` = gap
-
----
-class: top
-
-# Sequence alignment
-
-- Determine position of short read on the genome
-  ```
-  Reference: . . . A A - C G C C T T . . .              | = match
-  .                | : - : | | | | |                    : = mismatch
-  Read:            A G G G G C C T T                    - = gap
-  ```
-
+--
 
 - Read could align to multiple places
   .center[.image-50[![Illustration of multi-mapped read](../../images/mapping/multimap.png)]]
@@ -134,6 +120,7 @@ class: top
   - Assign ***alignment score*** to every mapping
 
 ???
+
 Some reads may map to multiple locations
  - repeat regions, short reads, highly variable regions, sequencing errors, ..
 
@@ -219,10 +206,8 @@ Observed:  AAA TCTCT  GAA
 ```
 
 ???
+Suppose we want to map this read (bottom) to this reference sequence (top)
 
-Suppose you have this reference sequence (top) and the bottom sequence is one of the reads in your sample.
-
-How would you align these?
 
 ---
 class: top
@@ -523,7 +508,7 @@ Or use Lego bricks, each nucleotide a different colour
 
 ## Paired-end sequencing
 
-- **Sequencing:** Larger fragments of DNA, sequence both ends
+- **Sequencing:** Cut longer fragments of DNA, sequence only the ends
 
   .center[.image-90[![Paired-end reads](../../images/mapping/pairedend_read.png)]]
 
@@ -553,37 +538,28 @@ class: top
   ![](../../images/mapping/repeats_se.png)
 
 ???
-
 In the case of repeats, a single-end read alone would not have be enough
 for unique mapping..
 
-
----
-class: top
-
-## Repeats
-
-- Multi-mapped reads (e.g. because of repeats) may now be resolved
-
-- **Single-end:**
-
-  ![](../../images/mapping/repeats_se.png)
+--
 
 - **Paired-end:**
 
   ![](../../images/mapping/repeats_pe.png)
 
 ???
-
 But with the additional information provided by
 paired-end protocol (distance to mate), this can now be resolved..
 
 
-- FAQ: "What about mate-pair sequencing?"
+FAQ: "What about mate-pair sequencing?"
  - Same concept as paired-end
  - Much longer distance between ends
  - Very different library prep
  - Useful for detection of Structural Variations (SVs) / Fusion Genes
+    - longer than expected distance between mates: deletion in sample
+    - shorter than expected distance beetween mates: insertion in sample
+    - unexpected orientation of one mate: inversion in sample
 
 
 ---
@@ -591,88 +567,127 @@ class: top
 
 ## Paired-end FASTQ files
 
-- 2 FASTQ files (or sometimes one *interleaved* file)
-  - Forward reads (usually `_1` or `_R1`)
-  - Reverse reads (usually `_2` or `_R2`)
+- Sequencer produces two FASTQ files:
+  - **Forward** reads (usually **`_1`** or **`_R1`** in file name)
+  - **Reverse** reads (usually **`_2`** or **`_R2`** in file name)
+
+
+  ![Paired-end reads as two separate FASTQ files](../../images/mapping/pairedend_fastq.png)
+
 
 ???
 When you have paired-end data, you will usually get 2 files.
  - File names identical except for e.g. `_1`/`_2` or `_R1`/`_R2`
+ - First file contains all the forward reads ("left" sides of pairs)
+ - Other file contains all the reverse reads
 
+
+Pairing also visible in read names
+  - `/1` `/2` at end or `1:` and `2:` in read ID
+
+--
+- Sometimes: One **interleaved** (or **interlaced**) FASTQ file
+  - Most tools require 2 separate files
+  - {% icon tool %} De-interlace tools in Galaxy for conversion
+
+
+???
 Sometimes data can be in a single **interleaved file** (aka **interlaced**)
+ - alternating forward and reverse read
  - de-interlace tools in Galaxy to convert this to two separate files
    - because many tools require two separate files
+
 
 ---
 class: top
 
 ## Paired-end FASTQ files
 
-- 2 FASTQ files (or sometimes one *interleaved* file)
-  - Forward reads (usually `_1` or `_R1`)
-  - Reverse reads (usually `_2` or `_R2`)
-
-
 - Order of reads matters!
+  - **`N`<sup>th</sup>** read in forward file <i class="fa fa-arrows-h" aria-hidden="true"></i>
+**`N`<sup>th</sup>** read in reverse file
+  - Much faster than determining pairing by read names alone
+
+
+- ***Always trim and filter together!***
+
+
+???
+Most tools blindly assume that first read in forward file is paired with first read in reverse file etc
+
+Otherwise too slow
+  - for every read, worst case have to scan all reads in other file
+  - for files with millions of reads, that is millions ^ millions
+
+
+When trimming and filtering, if a read is removed from one file, its mate must be removed from other one too!
+
+**Always trim together in paired-end mode!**
+
+--
 
 .pull-left[
 .red[
 ```
-@SEQ-ID-A
-GGGTGATGGCCGCTGCCGATGGCGTCAAATCCCACC
+@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
 +
-))%255CCF>>>>>>CCCCCCC65`IIII%436CAB
+))%255CCF>>>>>>CCCCCCC65`IIII%
 ```
 ]
 .orange[
 ```
-@SEQ-ID-B
-GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTA
+@PAIR-2 forward
+GATTTGGGGTTCAAAGCAGTATCGATCAA
 +
-!''3((((^^d+))%%%++)(%%%%).1))4-+I'
+!''3((((^^d+))%%%++)(%%%%).1)
 ```
 ]
-.green[
+.blue[
 ```
-@SEQ-ID-C
-TCGCACTCAACGCCCTGCATATGACAAGACAGAATC
+@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
 +
-A64;##=#B9=AAAAAAAAAA9#:AB95%^????#=
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
 ```
 ]
 
-`mysample_R1.fastq`
+**`mysample_R1.fastq`**
 ]
 
 .pull-right[
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
 .red[
 ```
-@SEQ-ID-X
-AAGTTACCCTTAACAACTTAAGGGTTTTCAAATAGA
+@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
 +
-fffddf`feedB`I_Ba_^%YBBBRTT\^ddcdd`d
+fffddf`feedB`IABa)^%YBBBRTT\^d
 ```
 ]
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
 .orange[
 ```
-@SEQ-ID-Y
-AGCAGAAGTCGATGATAATACGCGTCGTTTTATCAT
+@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
 +
-IIIIIII^^IIId`?III%IIIGII>IIIII-I)8I
+IIIIIII^^IIId`?III%IIIGII>IIII
+```
+]<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.blue[
+```
+@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
++
+9C;=;=<9@4868>9:67AA<9>65<=>59
 ```
 ]
-.green[
-```
-@SEQ-ID-Z
-AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
-+
-9C;=;=<9@4868>9:67AA<9>65<=>591AAI^d
-```
-]
-`mysample_R2.fastq`
+**`mysample_R2.fastq`**
 ]
 
 ???
+
+
 - Nth read in forward file belongs in a pair with Nth read in reverse file
 - So red reads in this slide form a pair, orange ones, etc
 
@@ -682,69 +697,72 @@ class: top
 
 ## Paired-end FASTQ files
 
-- 2 FASTQ files (or sometimes one *interleaved* file)
-  - Forward reads (usually `_1` or `_R1`)
-  - Reverse reads (usually `_2` or `_R2`)
+- Order of reads matters!
+  - **`N`<sup>th</sup>** read in forward file <i class="fa fa-arrows-h" aria-hidden="true"></i>
+**`N`<sup>th</sup>** read in reverse file
+  - Much faster than determining pairing by read names alone
 
 
-- Order of reads matters! **Always trim and filter together!**
+- ***Always trim and filter together!***
 
 .pull-left[
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
 .red[
 ```
-@SEQ-ID-A
-GGGTGATGGCCGCTGCCGATGGCGTCAAATCCCACC
+@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
 +
-))%255CCF>>>>>>CCCCCCC65`IIII%436CAB
+))%255CCF>>>>>>CCCCCCC65`IIII%
 ```
 ]
 .left[<i class="fa fa-cut" style="width:15%;position:absolute;font-size:5em;"></i>]
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
 .orange[
 ```
-@SEQ-ID-B
-GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTA
+@PAIR-2 forward
+GATTTGGGGTTCAAAGCAGTATCGATCAA
 +
-!''3((((^^d+))%%%++)(%%%%).1))4-+I'
+!''3((((^^d+))%%%++)(%%%%).1)
+```
+]
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.blue[
+```
+@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
++
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
 ```
 ]
 
-.green[
-```
-@SEQ-ID-C
-TCGCACTCAACGCCCTGCATATGACAAGACAGAATC
-+
-A64;##=#B9=AAAAAAAAAA9#:AB95%^????#=
-```
-]
-
-`mysample_R1.fastq`
+**`mysample_R1.fastq`**
 ]
 .pull-right[
 .red[
 ```
-@SEQ-ID-X
-AAGTTACCCTTAACAACTTAAGGGTTTTCAAATAGA
+@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
 +
-fffddf`feedB`I_Ba_^%YBBBRTT\^ddcdd`d
+fffddf`feedB`IABa)^%YBBBRTT\^d
 ```
 ]
 .orange[
 ```
-@SEQ-ID-Y
-AGCAGAAGTCGATGATAATACGCGTCGTTTTATCAT
+@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
 +
-IIIIIII^^IIId`?III%IIIGII>IIIII-I)8I
+IIIIIII^^IIId`?III%IIIGII>IIII
 ```
 ]
-.green[
+.blue[
 ```
-@SEQ-ID-Z
-AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
+@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
 +
-9C;=;=<9@4868>9:67AA<9>65<=>591AAI^d
+9C;=;=<9@4868>9:67AA<9>65<=>59
 ```
 ]
-`mysample_R2.fastq`
+**`mysample_R2.fastq`**
 ]
 
 ???
@@ -763,67 +781,70 @@ class: top
 
 ## Paired-end FASTQ files
 
-- 2 FASTQ files (or sometimes one *interleaved* file)
-  - Forward reads (usually `_1` or `_R1`)
-  - Reverse reads (usually `_2` or `_R2`)
+- Order of reads matters!
+  - **`N`<sup>th</sup>** read in forward file <i class="fa fa-arrows-h" aria-hidden="true"></i>
+**`N`<sup>th</sup>** read in reverse file
+  - Much faster than determining pairing by read names alone
 
 
-- Order of reads matters! **Always trim and filter together!**
+- ***Always trim and filter together!***
 
 .pull-left[
+<i class="fa fa-arrows-h" style="position:absolute;font-size:3em;left:6.4em;"></i>
 .red[
 ```
-@SEQ-ID-A
-GGGTGATGGCCGCTGCCGATGGCGTCAAATCCCACC
+@PAIR-1 forward
+GGGTGATGGCCGCTGCCGATGGCGTCAAAT
 +
-))%255CCF>>>>>>CCCCCCC65`IIII%436CAB
+))%255CCF>>>>>>CCCCCCC65`IIII%
 ```
 ]
-.green[
-```
-@SEQ-ID-C
-TCGCACTCAACGCCCTGCATATGACAAGACAGAATC
-+
-A64;##=#B9=AAAAAAAAAA9#:AB95%^????#=
-```
-]
+<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:6.4em;"></i>
 .blue[
 ```
-@SEQ-ID-D
-AAACTTCGTAGGTCCATTTGACAGCGTGCATTGCCC
+@PAIR-3 forward
+TCGCACTCAACGCCCTGCATATGACAAGAC
 +
-6664%!!III^(=%3333^^d^d:#32333??^IAA
+A64;##=#B9=AAAAAAAAAA9#:AB95%^
 ```
 ]
-`mysample_R1.fastq`
+<i class="fa fa-frown-o" style="position:absolute;font-size:3em;left:6.4em;"></i>
+.green[
+```
+@PAIR-4 forward
+AAACTTCGTAGGTCCATTTGACAGCGTGCA
++
+6664%!!III^(=%3333^^d^d:#32333
+```
+]
+**`mysample_R1.fastq`**
 ]
 .pull-right[
 .red[
 ```
-@SEQ-ID-X
-AAGTTACCCTTAACAACTTAAGGGTTTTCAAATAGA
+@PAIR-1 reverse
+AAGTTACCCTTAACAACTTAAGGGTTTTCA
 +
-fffddf`feedB`I_Ba_^%YBBBRTT\^ddcdd`d
+fffddf`feedB`IABa)^%YBBBRTT\^d
 ```
 ]
-<i class="fa fa-frown-o" style="width:15%;position:absolute;font-size:7em;left:2.7em;"></i>
 .orange[
 ```
-@SEQ-ID-Y
-AGCAGAAGTCGATGATAATACGCGTCGTTTTATCAT
+@PAIR-2 reverse
+AGCAGAAGTCGATGATAATACGCGTCGTTT
 +
-IIIIIII^^IIId`?III%IIIGII>IIIII-I)8I
+IIIIIII^^IIId`?III%IIIGII>IIII
 ```
 ]
-.green[
+.blue[
 ```
-@SEQ-ID-Z
-AATCCATTTGTTCAACTCACAGTTTACCGTGACTGA
+@PAIR-3 reverse
+AATCCATTTGTTCAACTCACAGTTTACCGT
 +
-9C;=;=<9@4868>9:67AA<9>65<=>591AAI^d
+9C;=;=<9@4868>9:67AA<9>65<=>59
 ```
 ]
-`mysample_R2.fastq`
+**`mysample_R2.fastq`**
 ]
 
 
@@ -985,6 +1006,11 @@ class: top
 .image-90[![](../../images/mapping/jbrowse.png)]
 
 .footnote[[JBrowse.org](https://jbrowse.org) DOI: [10.1186/s13059-016-0924-1](https://doi.org/10.1186/s13059-016-0924-1)]
+
+???
+
+Jbrowse tool builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver.
+
 ---
 class: top
 
@@ -1007,4 +1033,4 @@ class: top
      - Requires [Java web start](https://java.com/en/download/faq/java_webstart.xml) be installed on your machine
 
 ???
-In the mapping hands-on tutorial you will use IGV
+In the mapping hands-on tutorial you will use JBrowse and IGV
