@@ -30,13 +30,21 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[Supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have targets/classes/categories defined in the datasets. These targets can either be discrete values (integers) or real-values (continuous). When the targets are discrete, the learning task is known as classification. These discrete values are called classes or categories. When the targets are real-values, the task becomes regression. Classification is assigning a category to each sample in the dataset. Regression assigns a real-valued output or target to each sample. In figure [1](#figure-1), the line is a boundary which separates blue balls from violet ones. The task of a classification method is to learn this boundary which can be used to differentiate between unseen balls. The line is the decision boundary which determines the category of a new ball.
+Machine learning is a combined field of computer science, mathematics and statistics to create predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The [Supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have outputs/targets/classes/categories defined in the datasets. These targets can either be discrete (integers) or real (continuous). When the targets are discrete, the learning task is known as classification. Thus, the classification is assigning a class/target to each sample (each row is a sample) in the dataset. The algorithms which are used for this learning task are called classifiers. When the targets are continuous, the learning task is called regression and the algorithms which are used for this task are called regressors. We will go through classification first and look at regression later in this tutorial.
 
-![classification](images/classification.png "Classification of differently coloured balls. The line creates a boundary between two sets of balls and is learned by a classifier.")
+> ### {% icon question %} Question
+>
+> What are features and outputs/targets in a dataset?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Features and targets of a breast cancer dataset:
+> > ![Breast_cancer_targets](images/breast_cancer_classification.png "The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" which gives information about the cells whether they are mono or multi-layered. Similarly, other columns/features provide different information about tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discreet which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.")
+> >
+> {: .solution}
+>
+{: .question}
 
-Figure [2](#figure-2) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points.
-
-![regression](images/regression.png "Regression fit through data points. A curve is learned which best explains the data points.")
 
 > ### Agenda
 >
@@ -47,14 +55,21 @@ Figure [2](#figure-2) shows how a (regression) curve is fit which explains most 
 >
 {: .agenda}
 
-
 # Classification
 
-[Classification](https://en.wikipedia.org/wiki/Statistical_classification) task assigns a category/class to a sample by learning a decision boundary using a dataset. This dataset is called a training dataset and contains a class/category for each sample. The algorithm which performs this task is called a classifier. The training dataset contains "features" as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using test dataset. The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
+[Classification](https://en.wikipedia.org/wiki/Statistical_classification) task assigns a category/class to a sample by learning a decision boundary for samples (rows) in a dataset. This dataset is called a training dataset and contains a class/category for each sample. The algorithm which performs this task is called a classifier. The training dataset contains "features" as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using test dataset. The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
+
+> ### {% icon comment %} Comment
+> The terms like 'targets', 'classes' or 'categories' have been used interchangeably for the classification part of this tutorial. They contain identical meaning.
+{: .comment}
+
+![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new samples come for which we do not know whether it is tumor or no tumor, we use this decision boundary to compute the actual class.")
+
+In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when dataset is complex and requires non-linear decision boundaries, the powerful classifiers like `suppor vector machine` or  `tree` or `ensemble` based classifiers may prove to be beneficial. In the following part, we will perform a classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let's begin by uploading the necessary datasets.
 
 ## Data upload
 
-The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column. The third dataset contains all the samples from test dataset but also the `target` column which would be needed to create a plot showing the comparison between actual and predicted targets.
+The datasets required for this tutorial contain 9 features which contains information about breast cancer including the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). Another description of these features can be found [here](https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer (benign) and `1` (malignant) indicates breast cancer. The test dataset does not contain the `target` column (which should be predicted by a classifier). The third dataset contains all the samples from test dataset but also the `target` column which would be needed to compare between real and predicted targets.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -80,7 +95,7 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 
 ## Learn using training data
 
-Using the dataset `breast-w_train`, [SVM](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) (support vector machine) classifier is trained which learns features from the data and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`.
+The training data is used for learning the associations between features and the targets. The classifier learns general patterns in a dataset and saves a trained model. This model can be used for classifying a new sample. In this step, we will use `breast-w_train` dataset as the training data and apply [SVM](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) (support vector machine) classifier. It will learn features from the data and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`.
 
 > ### {% icon hands_on %} Hands-on: Train the model
 >
@@ -99,24 +114,36 @@ Using the dataset `breast-w_train`, [SVM](https://scikit-learn.org/stable/module
 > 2. Rename the generated file to `model`
 {: .hands_on}
 
-## Predict using test data
-
-The `model` learned in the previous step can now be used to predict the categories of unseen test (`breast-w_test`) data. This step assigns a category to each row in `breast-w_test` dataset.
-
-> ### {% icon hands_on %} Hands-on: Predict categories using the model
+> ### {% icon question %} Question
 >
-> 2. **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to predict classes of test data using the trained model:
+> What is learned by the classifier?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Two attributes 'coef_' and 'intercept_' are learned by the classifier using the training data. The 'coef_' contains importance weight for each feature and 'intercept_' is just a constant/scalar. However,
+> > for different classifiers, these attributes are different. The attributes shown here are specific to the 'linear support vector classifier'.
+> {: .solution}
+>
+{: .question}
+
+## Predict categories of test data
+
+After the training process completes, we can see the trained model file (`zip` file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (`breast-w_test`) dataset. It assigns a class (either tumor or no tumor) to each row in `breast-w_test` dataset.
+
+> ### {% icon hands_on %} Hands-on: Predict classes using the trained model
+>
+> 1. **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to predict classes of test data using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->       - {% icon param-file %} *"Models"*: `model` (output of the previous step)
->       - {% icon param-file %} *"Data (tabular)"*: `breast-w_test`
+>       - {% icon param-file %} *"Models"*: `model` file (output of the previous step)
+>       - {% icon param-file %} *"Data (tabular)"*: `breast-w_test` file
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `predicted_labels`
 {: .hands_on}
 
-## Visualise the prediction
+## Visualise prediction
 
-After the training and prediction tasks, we should check whether the predictions are correct.  We will use another dataset `breast-w_targets` for this verification. It is similar to the test dataset (`breast-w_test`) but contains an extra target column having the true targets of the test data. With the predicted and true targets, the learned model is evaluated to verify how good the predictions are. To visualise these predictions, a plotting tool is used.
+After the training and prediction tasks, we should evaluate the quality of predictions. To do this, we will use another dataset (`breast-w_targets`). It is similar to the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test data. With the predicted and true classes, the learned model is evaluated to verify how good the predictions are. To visualise these predictions, a plotting tool is used.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
@@ -151,6 +178,11 @@ By following these steps, we learn how to perform classification and visualise t
 
 # Regression
 
+When the targets are real-values, the machine learning task is called regression. Regression assigns a real-valued output or target to each sample. 
+Figure [2](#figure-2) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points.
+
+![regression](images/regression.png "Regression fit through data points. A curve is learned which best explains the data points.")
+
 [Regression](https://en.wikipedia.org/wiki/Regression_analysis) is also a supervised learning task where target is a real number (continuous) instead of discrete like in classification. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.
 
 
@@ -164,9 +196,9 @@ The datasets required for this tutorial contain 21 features of [computer system 
 > 2. Import the following datasets and choose the type of data as `tabular`
 >
 >    ```
->    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/test_data.tabular
->    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/test_target.tabular
->    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tabular
+>    https://zenodo.org/record/3247726/files/body_fat_train.tsv
+>    https://zenodo.org/record/3247726/files/body_fat_test_labels.tsv
+>    https://zenodo.org/record/3247726/files/body_fat_test.tsv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
