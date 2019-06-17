@@ -63,7 +63,7 @@ Machine learning is a combined field of computer science, mathematics and statis
 > The terms like 'targets', 'classes', 'categories' or 'labels' have been used interchangeably for the classification part of this tutorial. They contain identical meaning. For regression, we will just use 'targets'.
 {: .comment}
 
-![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is tumor or no tumor, we use this decision boundary to compute the actual class.")
+![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is a tumor or no tumor, we use this decision boundary to compute the actual class.")
 
 In figure [2](#figure-2), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, the powerful classifiers like `support vector machine` or  `tree` or `ensemble` based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let's begin by uploading the necessary datasets.
 
@@ -144,7 +144,7 @@ After the training process completes, we can see the trained model file (`zip` f
 
 ## Visualise prediction
 
-After the training and prediction tasks, we should evaluate the quality of predictions. To do this, we will use another dataset (`breast-w_targets`). It is the same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and f1 and roc and auc. We will examine each of them one by one.
+We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (`breast-w_targets`). It is the same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and f1 and roc and auc. We will mainly analyze the precision and recall plot.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
@@ -154,17 +154,13 @@ After the training and prediction tasks, we should evaluate the quality of predi
 >
 {: .hands_on}
 
-The tool creates the following three plots:
+We will analyze the following plots:
 
-1. Confusion matrix of the correctly and incorrectly predicted samples:
+1. Precision, recall and F1 score:
 
-    ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the correctly and incorrectly predicted samples. It shows a matrix with the true and predicted class labels (0 or 1) along the axes. We can see '0' (no tumor) and '1' (tumor) on both the axes. The diagonal of the matrix from bottom-left to top-right shows the number of correctly predicted classes. The diagonal from top-left to bottom-right shows the number of incorrectly predicted samples and for a good prediction, these should be small. It means that a small number of samples are wrongly predicted.")
+    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. In the 'breast-w_test' dataset, all the samples with predicted class '0' (no tumor) have the true class as '0' (precision = 1.0) while not all samples with the predicted class as '1' have the true class as '1' (precision < 1.0) (see precision curve). The recall curve is the opposite of the precision curve. Not all the samples with the true class as '0' are predicted as class '0' (recall < 1.0) and all the samples with the true class as '1' are predicted as class as '1' (recall = 1.0) (see recall curve). It is important to analyze this plot for any classification to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.")
 
-2. Precision, recall and F1 score:
-
-    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. The recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in the 'breast-w_test' dataset get correctly classified.")
-
-3. Receiver operator characteristics (ROC) and area under ROC (AUC):
+2. Receiver operator characteristics (ROC) and area under ROC (AUC):
 
     ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).")
 
@@ -176,14 +172,14 @@ By following these steps from data upload until plotting, we have learned how to
 
 # Regression
 
-For classification the targets are discreet. But, when the targets in a dataset are real-values (real numbers), the machine learning task becomes [regression](https://en.wikipedia.org/wiki/Regression_analysis). Each sample in the dataset has a real-valued output or target. Figure [6](#figure-6) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear. In this part of the tutorial, we will perform regression on [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html) dataset.
+For classification, the targets are discreet. But, when the targets in a dataset are real-values (real numbers), the machine learning task becomes [regression](https://en.wikipedia.org/wiki/Regression_analysis). Each sample in the dataset has a real-valued output or target. Figure [6](#figure-6) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear. In this part of the tutorial, we will perform regression on [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html) dataset.
 
 ![regression](images/regression.png "Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.")
 
 
 ## Data upload
 
-The dataset contains information about body density. It includes 14 features like body density underwater, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train.tsv` dataset is used as the training dataset and `body_fat_test.tsv` as the test dataset. The dataset `body_fat_test_labels.tsv` contains the true targets for the test dataset (`body_fat_test.tsv`).
+The dataset contains information about the human [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html). It includes 14 features like underwater body density, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train` dataset is used as the training dataset and `body_fat_test` as the test dataset. The dataset `body_fat_test_labels` contains the true targets for the test dataset (`body_fat_test`).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -234,7 +230,7 @@ To learn the mapping between several features and the targets, we will apply a r
 > > ### {% icon solution %} Solution
 > >
 > > Unlike the 'Linear support vector' classifier (used for classification in the first part of the tutorial) which learned only two attributes,
-> > Gradient boosting regressor learn multiple attributes like 'feature_importances_' (weights for each feature/column),
+> > Gradient boosting regressor learns multiple attributes like 'feature_importances_' (weights for each feature/column),
 > > 'oob_improvement_' (which stores incremental improvements in learning), 'estimators_' (collection of weak learners) and a few more.
 > > These attributes are used to predict the target for a new sample. These attributes are stored in the trained model and can be
 > > accessed by reading this file.
