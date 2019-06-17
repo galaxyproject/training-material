@@ -841,77 +841,101 @@ considering a threshold of 0.05 generally corresponds to a misleading risk of 5%
 it goes from -1 to 1, with 0 meaning no correlation; in our example we consider as a sufficiently strong link a coefficient with
 absolute value above 0.9. 
 
+
 > ### {% icon hands_on %} Hands-on: Variable filtering using the **Generic_Filter** module
 >
 > 1. **Generic_Filter** {% icon tool %} with the following parameters:
+>    - *"Data matrix file"*: `The one from the previous Generic_filter's outputs`
+>    - *"Sample metadata file"*: `The one from the previous Generic_filter's outputs`
+>    - *"Variable metadata file"*: `The one from Univariate outputs`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
->        - In *"Identify the parameter to filter "*:
->            - {% icon param-repeat %} *"Insert Identify the parameter to filter "*
->                - *"On file"*: `Variable metadata`
->                - *"Name of the column to filter"*: `bmi_spearman_none`
->                - *"Interval of values to remove"*: `upper`
->                    - *"Remove all values upper than"*: `0.05`
->            - {% icon param-repeat %} *"Insert Identify the parameter to filter "*
->                - *"On file"*: `Variable metadata`
->                - *"Name of the column to filter"*: `bmi_spearman_cor`
->                - *"Interval of values to remove"*: `between`
->                    - *"Remove all values between"*: `-0.9`
->                    - *"And"*: `0.9`
+>        - {% icon param-repeat %} *"Identify the parameter to filter "*
+>            - *"On file"*: `Variable metadata`
+>            - *"Name of the column to filter"*: `bmi_spearman_none`
+>            - *"Interval of values to remove"*: `upper`
+>                - *"Remove all values upper than"*: `0.05`
+>        - {% icon param-repeat %} *"Insert Identify the parameter to filter "*
+>            - *"On file"*: `Variable metadata`
+>            - *"Name of the column to filter"*: `bmi_spearman_cor`
+>            - *"Interval of values to remove"*: `between`
+>                - *"Remove all values between"*: `-0.9`
+>                - *"And"*: `0.9`
 >    - *"Deleting samples and/or variables according to Qualitative values"*: `no`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+With this filter you obtain a subset of your data, supposedly ions that may present an interest regarding your study. If the goal
+is to find biomarkers, then you have a subset of biomarker candidates. If you aim for mechanism explaination, you obtain a subset
+of ions to identify and replace in a biological context. 
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+In this tutorial, the statistical filtering led to 25 remaining ions, linked to the BMI values by high correlation coefficients. 
 
 
 # Annotation
 
+Now that you have a short list of interesting ions, you may be interested in knowing from which molecules these ions come from.
+Identification in generally a difficult and time-consumming step. To help you in that process or to get a potential first glance
+of the nature of your selected subset, annotation can be a first valuable step. 
+
+Annotation is not identification. It is only meant to try matching your data with hypotheses based on known information. Nonetheless,
+it can help you save a lot of time giving you hints about what to search for. The basic idea is to bring your ion's masses and a 
+reference mass bank face to face. This will give you potential origins of your ions. 
+
+To be able to perform annotation, you will 'only' need to gather the mass list of you subset of ions, a reference bank, and a tool 
+to proceed to the matching. The use of 'only' is tricky here, since the subset of ions may be the only thing that is turnkey at this
+step of the workflow (if you consider the previous steps are all cleared now). 
+
+For example, what may be the reference bank that you need for the annotation step? This is a crucial question. It exists a variety
+of online resources with well-known reference banks, but which one to choose? Some banks may have overlaping content, but also 
+specific one. In fact, the appropriate bank may depend on the analytical technique used, the type of sample analysed, the nature of 
+individuals/organisms from which you got your biological samples... If you are working on widely studied organism, you may find 
+an adequate reference bank online. However, it is also possible that none of the provided banks is relevant for your study. In that
+case, you may need to construct your own database other time, to be able to search for relevant matching for your ions of interest. 
+
+In this tutorial, we chose the 'easy' case of human urinary samples. Thus, one possibility we have is to use the online reference 
+bank HMDB (The Human Metabolome Database). Let's try requesting directly into this widely used bank using the **HMDB MS search** 
+module available in the Annotation section. 
+
 
 > ### {% icon hands_on %} Hands-on: Annotating the data using the HMDB
 >
-> 1. **HMDB MS search** {% icon tool %} with the following parameters:
+> Execute **HMDB MS search** {% icon tool %} with the following parameters:
 >    - *"Would you use a file "*: `YES`
+>        - *"File of masses (Variable Metadata) "*: `The one from the last Generic_filter's outputs`
 >        - *"Do you have a header "*: `YES`
 >        - *"Column of masses "*: `c3`
 >    - *"Mass-to-charge ratio "*: `0.005`
 >    - *"Number of maximum entries returned by the query "*: `3`
 >    - *"Molecular Species "*: `Negatif Mode`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Here we will limit the maximum number of entries returned to 3, to limit the number of matches in the results. 
 >    {: .comment}
 >
 {: .hands_on}
 
+Here, we tried to provide a Mass-to-charge ratio (*i.e.* a mass delta) based on what we globaly know about the technique used to
+analyse the samples. Even if this parameter may seems simple, it is important to settle with a relevant value. If you provide a 
+value that is too low, you may not be able to have matches for your ions eventhough the original molecule is present in the database.
+On the opposite, if the value provided is too high, you may end with a huge number of matches, which could be time-consumming to 
+review to identify relevant proposed annotation. 
+
+
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon hands_on %} Hands-on: ???
+>
+> Some exercise(s) based on obtained results?
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > why not a comment?
+>    {: .comment}
+>
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
@@ -928,12 +952,9 @@ absolute value above 0.9.
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures. 
+For now, Galaxy4Metabolomics stops here but we have various perspectives of additionnal modules for the future (a little bit of
+[MetExplore](https://metexplore.toulouse.inra.fr/index.html/) for example?). 
 
 # Conclusion
 {:.no_toc}
