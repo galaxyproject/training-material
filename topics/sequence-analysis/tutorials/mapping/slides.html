@@ -551,8 +551,33 @@ for unique mapping..
 But with the additional information provided by
 paired-end protocol (distance to mate), this can now be resolved..
 
+---
+class: top
 
-FAQ: "What about mate-pair sequencing?"
+# Indels (Insertions / Deletions)
+
+- Discordant insert size
+
+- **Deletions:** Longer mapping distance than expected
+
+  ![Deletion between two paired reads](../../images/mapping/pairedend_deletion.png)
+
+--
+
+- **Insertions:** Shorter mapping distance than expected
+
+  ![Insertions beteween two paired reads](../../images/mapping/pairedend_insertion.png)
+
+???
+
+- unexpected mapping distance between two reads in a pair may indicate a variant.
+
+- exact location of variant unknown unless more reads covering the area
+  - only know it it somewhere between the two reads
+
+
+
+**FAQ:** "What about mate-pair sequencing?"
  - Same concept as paired-end
  - Much longer distance between ends
  - Very different library prep
