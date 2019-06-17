@@ -682,7 +682,7 @@ For some ions, if the normalisation process would have led to unconsistant resul
 This kind of quality checks depends on the type of regression model you use. Please refer to the module's help section for more information!
 
 
-## Step 3: getting rid of unreliable variable using CV
+## Step 3: getting rid of unreliable variables using CV
 
 Now that the data is corrected for signal drift, we expect to have stable intensities within pools. But is this always the case?
 Truth is, even when correcting ions, we may not manage to get rid of analytical effect for 100% of ions. And even if we could,
@@ -712,12 +712,15 @@ by biological variability. Thus, we can filter the ions that do not respect this
 {: .hands_on}
 
 The module provides a variableMetadata tabular output, containing all the computed CV values. You can then use these values to filter
-your data using the **Generic_Filter** module.
+your data using the **Generic_Filter** module, available in the **COMMON TOOLS > Data Handling** section. 
 
 
 > ### {% icon hands_on %} Hands-on: Data filtering using the **Generic_Filter** module
 >
 > Execute **Generic_Filter** {% icon tool %} with the following parameters:
+>    - *"Data matrix file"*: `The one from Batch_correction outputs`
+>    - *"Sample metadata file"*: `Your original completed sampleMetadata file or the one from Quality_Metrics outputs`
+>    - *"Variable metadata file"*: `The one from Quality_Metrics outputs`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
 >            - *"On file"*: `Variable metadata`
@@ -765,46 +768,78 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 
 # Statistical analysis to find variables of interest
 
+The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to 
+the decision of no action on data. Once you applied your customed processing procedure, your tables are ready for the 
+statistical analysis. 
+
+There is a large variety of statistical analysis methods that you can apply on metabolomic LC-MS data. The most standard 
+strategy is a combination of univariate analysis (such as applying a Mann-Whitney-Wilcoxon test on each ion indepedently)
+and multivariate analysis (such as constructing a PLS model using all your ions at once). What you should keep in mind is
+that the choice of your statistical analysis strategy depends on both your data characteristics (such as colinearity or
+dataset size) and your study design. You should think carefully about what is appropriate for your own project. 
+
+In this tutorial, we will take the example of univariate analysis, using the `bmi` column of the **sampleMetadata file** as 
+our variable of interest (body mass index). Since this variable is quantitative, we will chose in this example to mesure 
+the link between the BMI and the measured ions using **statistical correlation calculation**. For more examples of 
+statistical analysis performed on LC-MS data, you can take a few minutes to watch the usemetabo.org open course video
+[here](https://usemetabo.org/courses/w4mlc-ms-statistical-analysis). 
 
 ## Computation of statistical indices
 
-Here come the statistics!
+First thing is to compute the correlation coefficients used to estimate the link between the variable of interest `bmi` 
+and the ions that we have in our dataset. For this calculation we can use the **Univariate** module in the 
+**Statistical Analysis** section. 
 
 > ### {% icon hands_on %} Hands-on: Statistical analysis using the **Univariate** module
 >
-> 1. **Univariate** {% icon tool %} with the following parameters:
+> Execute **Univariate** {% icon tool %} with the following parameters:
+>    - *"Data matrix file"*: `The one from Generic_filter outputs`
+>    - *"Sample metadata file"*: `The one from Generic_filter outputs`
+>    - *"Variable metadata file"*: `The one from Generic_filter outputs`
 >    - *"Factor of interest"*: `bmi`
 >    - *"Test"*: `Spearman correlation rank test (quantitative)`
 >    - *"Method for multiple testing correction"*: `none`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > In this tutorial, we chose to perform the analysis without multiple testing correction. This choice is not 
+based on a relevant statistical strategy (which would more likely be to *use* multiple testing correction). It is based on
+the fact that with only 6 biological samples in a dataset of 2706 ions it is almost impossible to settle for correlation 
+coefficients significantly different from zero. Consequently, to illustrate better the filtering step that will follow,
+we chose not to apply the multiple testing correction, allowing us to obtain 'significant' results regarding statistical
+indices. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The module provides different types of output. You will find statistical indices in the *variableMetadata output* (such as
+p-values and statistical indicators). 'Significant' results are illustrated by graphics in the *Univariate_figure.pdf* file.  
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> How many *significant* variables were found?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > The module found that 61 variables have a correlation coefficient significantly different from 0. 
 > >
 > {: .solution}
 >
 {: .question}
 
-## Reduction of the dataset to variables of interest (to do: rephrase this to something better)
+
+## Reducing the dataset to keep ions of interest only
+
+In untargeted metabolomics, statistical analysis is usually used as a filter to focus on a subset of variables with potential. 
+This subset can be used to proceed to identification and thus biological interpretation. Hence, statistical indices are
+generally associated with thresholds allowing us to determine which ions should be kept or discarded. 
+
+In our example of correlation analysis, two indices can be used to filter the data.
+ - p-values: it indicates whether it is likely for a given correlation coefficient not to be actually different from zero; 
+considering a threshold of 0.05 generally corresponds to a misleading risk of 5%. 
+ - correlation coefficient: it indicates if the correlation between a given ion and the variable of interest is strong or not;
+it goes from -1 to 1, with 0 meaning no correlation; in our example we consider as a sufficiently strong link a coefficient with
+absolute value above 0.9. 
 
 > ### {% icon hands_on %} Hands-on: Variable filtering using the **Generic_Filter** module
 >
