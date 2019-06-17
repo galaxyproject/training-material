@@ -185,7 +185,7 @@ For classification the targets are discreet. But, when the targets in a dataset 
 
 ## Data upload
 
-The dataset contains information about body density. It includes 14 features like body density underwater, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between severel body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train.tsv` dataset is used as the training dataset and `body_fat_test.tsv` as the test dataset. The dataset `body_fat_test_labels.tsv` contains the true targets for the test dataset (`body_fat_test.tsv`).
+The dataset contains information about body density. It includes 14 features like body density underwater, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train.tsv` dataset is used as the training dataset and `body_fat_test.tsv` as the test dataset. The dataset `body_fat_test_labels.tsv` contains the true targets for the test dataset (`body_fat_test.tsv`).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -235,7 +235,7 @@ To learn the mapping between several features and the targets, we will apply a r
 >
 > > ### {% icon solution %} Solution
 > >
-> > Unlike the 'Linear suppor vector classifier' (used for classification in the first part of the tutorial) which learned only two attributes,
+> > Unlike the 'Linear support vector' classifier (used for classification in the first part of the tutorial) which learned only two attributes,
 > > Gradient boosting regressor learn multiple attributes like 'feature_importances_' (weights for each feature/column),
 > > 'oob_improvement_' (which stores incremental improvements in learning), 'estimators_' (collection of weak learners) and a few more.
 > > These attributes are used to predict the target for a new sample. These attributes are stored in the trained model and can be
