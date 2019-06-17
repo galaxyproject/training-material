@@ -470,7 +470,8 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “**Novel peptides**”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.
 >      > ### {% icon comment %} Comment:
 >      >
->      > The tools are subjected to changes while being upgraded. Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
+>      > The tools are subjected to changes while being upgraded. 
+>      > Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
 >      
 >      {: .comment}
 
