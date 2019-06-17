@@ -1,9 +1,14 @@
 > ### {% icon hands_on %} Hands-on: Visualization of the reads in IGV
 >
-> 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)
-> 2. Launch IGV on your computer
-> 2. Expand the {% icon param-file %} output of **{{ include.tool }}** {% icon tool %}
-> 3. Click on the `local` in `display with IGV` to load the reads into the IGV browser
+> There are two ways to run it:
+>
+> 1. If you have IGV installed (or want to install it):
+>     1. Install [IGV](https://software.broadinstitute.org/software/igv/download)
+>     2. Launch IGV on your computer
+>     3. Expand the {% icon param-file %} output of **{{ include.tool }}** {% icon tool %}
+>     4. Click on the `local` in `display with IGV` to load the reads into the IGV browser
+> 2. If you do not have IGV
+>     1. Click on the `Mouse mm10` (or correct organism) in `display with IGV` to load the reads into the IGV browser
 > 4. Zoom on the `{{ include.region_to_zoom }}`
 {: .hands_on}
 

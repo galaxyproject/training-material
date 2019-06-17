@@ -59,14 +59,17 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the following datasets and choose the type of data as `tabular`
-> 
+>
 >    ```
 >    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_targets.tsv
 >    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_test.tsv
 >    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train.tsv
 >    ```
-> 
+>
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename datasets to `breast-w_train`, `breast-w_test` and `breast-w_targets`
@@ -77,10 +80,10 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 
 ## Learn using training data
 
-Using the dataset `breast-w_train`, [SVM](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) (support vector machine) classifier is trained which learns features from the data and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`. 
+Using the dataset `breast-w_train`, [SVM](https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC) (support vector machine) classifier is trained which learns features from the data and maps them to the targets. This mapping is called a trained model. The training step produces a model file of type `zip`.
 
 > ### {% icon hands_on %} Hands-on: Train the model
-> 
+>
 > 1. **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to train the classifier on training data:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Linear Support Vector Classification`
@@ -101,7 +104,7 @@ Using the dataset `breast-w_train`, [SVM](https://scikit-learn.org/stable/module
 The `model` learned in the previous step can now be used to predict the categories of unseen test (`breast-w_test`) data. This step assigns a category to each row in `breast-w_test` dataset.
 
 > ### {% icon hands_on %} Hands-on: Predict categories using the model
-> 
+>
 > 2. **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to predict classes of test data using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `model` (output of the previous step)
@@ -141,7 +144,7 @@ The tool creates the following three plots:
 
     ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC).")
 
-    The blue curve in figure [5](#figure-5) shows the ROC curve. When it is close to the orange curve (y = x), the classification results are not good. When it is more towards the top-left (like the blue curve shown in the plot), the classification performance is good. 
+    The blue curve in figure [5](#figure-5) shows the ROC curve. When it is close to the orange curve (y = x), the classification results are not good. When it is more towards the top-left (like the blue curve shown in the plot), the classification performance is good.
 
 By following these steps, we learn how to perform classification and visualise the predictions using Galaxy machine learning and plotting tools. The classes of unseen (test) data are predicted, evaluated against the true classes and visualized to show how good is the classification.
 
@@ -159,13 +162,13 @@ The datasets required for this tutorial contain 21 features of [computer system 
 >
 > 1. Create a new history for this tutorial
 > 2. Import the following datasets and choose the type of data as `tabular`
-> 
+>
 >    ```
 >    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/test_data.tabular
 >    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/test_target.tabular
 >    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/train_data.tabular
 >    ```
-> 
+>
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename datasets to `train_data`, `test_data` and `test_target`
@@ -180,7 +183,7 @@ The datasets required for this tutorial contain 21 features of [computer system 
 [Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) is used for this task. It is an ensemble based regressor consisting of weak learners (e.g. decision trees). It learns features from training dataset (`train_data`) and maps all rows to respective targets which are real numbers. The process of mapping gives a trained model.
 
 > ### {% icon hands_on %} Hands-on: Train a model
-> 
+>
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to train the regressor:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Gradient Boosting Regressor`
@@ -201,7 +204,7 @@ The datasets required for this tutorial contain 21 features of [computer system 
 Similar to the classification task, the trained model is evaluated on `test_data` which predicts a target value for each row and the predicted targets are compared to the expected targets.
 
 > ### {% icon hands_on %} Hands-on: Predict categories using the model
-> 
+>
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test data using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `model`

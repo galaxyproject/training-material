@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy Tool Management"
+title: "Ephemeris for Galaxy Tool Management"
 questions:
   - How to install, update, and maintain Galaxy tools?
   - How to extract a list of tools from a workflow or Galaxy instance?
@@ -200,10 +200,11 @@ We will not install the tools from that server as the EU Galaxy server has more 
 
 # Production Best Practices
 
-Servers in `usegalaxy.\*` network use Ephemeris extensively to manage their large tool sets.
+Servers in `usegalaxy.*` network use Ephemeris extensively to manage their large tool sets.
 
 UseGalaxy.eu and UseGalaxy.org.au have different approaches:
 - AU maintains [separate yaml files](https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/current) per toolbox category, which allows easily identifying where tools should be added or found to add new revisions. They follow a cycle of adding the tool to their yaml file, triggering installation, and then updating the yaml files from the current server status.
 - EU maintains [yaml files roughly per domain](https://github.com/usegalaxy-eu/usegalaxy-eu-tools), it is not as clear of an ordering. They maintain a yaml file where humans add the tools which should be installed in a given category, and lock files are automatically generated from these with the latest revision if it is missing. They follow a cycle of updating the lock files with the latest available revisions of tools, and then installing from these lock files any missing revisions. They use a [Jenkins server](https://build.galaxyproject.eu/job/usegalaxy-eu/job/install-tools/) to automatically run tool installation weekly.
+- Together, `usegalaxy.*` are working on a collaborative approach at [galaxyproject/usegalaxy-tools](https://github.com/galaxyproject/usegalaxy-tools) but this is not consumption ready yet.
 
 If running ephemeris at the command line is not your preference, there is also an Ansible [role](https://github.com/galaxyproject/ansible-galaxy-tools) and a sample [playbook](https://github.com/afgane/galaxy-tools-playbook) that can help automate some tasks.
