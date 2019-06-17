@@ -60,7 +60,7 @@ Machine learning is a combined field of computer science, mathematics and statis
 [Classification](https://en.wikipedia.org/wiki/Statistical_classification) task assigns a category/class to a sample by learning a decision boundary for samples (rows) in a dataset. This dataset is called a training dataset and contains a class/category for each sample. The algorithm which performs this task is called a classifier. The training dataset contains "features" as columns and a mapping between these features and the target is learned for each sample. The performance of mapping is evaluated using test dataset. The test dataset contains only the feature columns and not the target column. The target column is predicted using the mapping learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
 
 > ### {% icon comment %} Comment
-> The terms like 'targets', 'classes' or 'categories' have been used interchangeably for the classification part of this tutorial. They contain identical meaning.
+> The terms like 'targets', 'classes', 'categories' or 'labels' have been used interchangeably for the classification part of this tutorial. They contain identical meaning.
 {: .comment}
 
 ![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new samples come for which we do not know whether it is tumor or no tumor, we use this decision boundary to compute the actual class.")
@@ -143,7 +143,7 @@ After the training process completes, we can see the trained model file (`zip` f
 
 ## Visualise prediction
 
-After the training and prediction tasks, we should evaluate the quality of predictions. To do this, we will use another dataset (`breast-w_targets`). It is similar to the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test data. With the predicted and true classes, the learned model is evaluated to verify how good the predictions are. To visualise these predictions, a plotting tool is used.
+After the training and prediction tasks, we should evaluate the quality of predictions. To do this, we will use another dataset (`breast-w_targets`). It is same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test data. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and f1 and roc and auc. We will examine each of them one by one.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
@@ -157,23 +157,22 @@ The tool creates the following three plots:
 
 1. Confusion matrix of the correctly and incorrectly predicted samples:
 
-    ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the correctly and incorrectly predicted samples.")
-
-    In figure [3](#figure-3), the diagonal from bottom-left to top-right shows the number of correctly predicted labels and the diagonal from top-left to bottom-right shows the number of incorrectly predicted samples.
+    ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the correctly and incorrectly predicted samples. It shows a matrix with the true and predicted class labels (0 or 1) along the axes. We can see '0' (no tumor) and '1' (tumor) on both the axes. The diagonal of the matrix from bottom-left to top-right shows the number of correctly predicted classes. The diagonal from top-left to bottom-right shows the number of incorrectly predicted samples and for a good prediction these should be small. It means that a small number of smaples are wrongly predicted.")
 
 2. Precision, recall and F1 score:
 
-    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score.")
+    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly.")
 
-    These scores determine the robustness of classification. In figure [4](#figure-4), the recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in `breast-w_test` file get correctly classified.
+    In figure [4](#figure-4), the recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in the `breast-w_test` dataset get correctly classified.
 
 3. Receiver operator characteristics (ROC) and area under ROC (AUC):
 
-    ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC).")
+    ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards top-left of this plot. For a bad prediction, it is close to the orange line (y = x).")
 
-    The blue curve in figure [5](#figure-5) shows the ROC curve. When it is close to the orange curve (y = x), the classification results are not good. When it is more towards the top-left (like the blue curve shown in the plot), the classification performance is good.
+Using these plots, the robustness of classification can be visualized. 
 
-By following these steps, we learn how to perform classification and visualise the predictions using Galaxy machine learning and plotting tools. The classes of unseen (test) data are predicted, evaluated against the true classes and visualized to show how good is the classification.
+## Summary
+By following these steps from data upload until plotting, we have learned how to do classification and visualise the predictions using Galaxy machine learning and plotting tools. A similar analysis can be performed using a different dataset or by using a different classifier. The Galaxy machine learning suite provides multiple classifiers from linear to complex ones suited for different classification tasks. For example for a binary class classification, `support vector machine` classifier may perform good. It is recommended to try out different classifiers on a dataset to find the best one.
 
 
 # Regression
