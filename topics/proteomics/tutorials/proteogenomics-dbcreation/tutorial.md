@@ -402,6 +402,7 @@ along with the UniProt and cRAP databases.
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
+> - Rename it as **CustomProDB Merged Fasta**
 {: .comment}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)
@@ -552,6 +553,6 @@ To do so:
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
-> - All the tools mentioned in this tutorial are subjected to change while upgrading the tool.
+> - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
 
