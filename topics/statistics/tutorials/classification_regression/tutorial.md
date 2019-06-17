@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Machine learning is a combined field of computer science, mathematics and statistics to create predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The [Supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have outputs/targets/classes/categories defined in the datasets. These targets can either be discrete (integers) or real (continuous). When the targets are discrete, the learning task is known as classification. Thus, the classification is assigning a class/target to each sample (each row is a sample) in the dataset. The algorithms which are used for this learning task are called classifiers. When the targets are continuous, the learning task is called regression and the algorithms which are used for this task are called regressors. We will go through classification first and look at regression later in this tutorial.
+Machine learning is a combined field of computer science, mathematics and statistics to create predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have outputs/targets/classes/categories defined in the datasets. These targets can either be discrete (integers) or real (continuous). When the targets are discrete, the learning task is known as classification. Thus, the classification is assigning a class/target to each sample (each row is a sample) in the dataset. The algorithms which are used for this learning task are called classifiers. When the targets are continuous, the learning task is called regression and the algorithms which are used for this task are called regressors. We will go through classification first and look at regression later in this tutorial.
 
 > ### {% icon question %} Question
 >
@@ -120,8 +120,9 @@ The training data is used for learning the associations between features and the
 >
 > > ### {% icon solution %} Solution
 > >
-> > Two attributes 'coef_' and 'intercept_' are learned by the classifier using the training data. The 'coef_' contains importance weight for each feature and 'intercept_' is just a constant/scalar. However,
-> > for different classifiers, these attributes are different. The attributes shown here are specific to the 'linear support vector classifier'.
+> > Two attributes 'coef_' and 'intercept_' are learned by the classifier using the training data. The 'coef_' contains importance weight for each feature and 'intercept_' is just a constant/scalar. However, for different classifiers, these attributes are different.
+> > The attributes shown here are specific to the 'Linear support vector' classifier. These attributes are stored in the trained model and can be
+> > accessed by reading this file.
 > {: .solution}
 >
 {: .question}
@@ -208,7 +209,8 @@ The dataset contains information about body density. It includes 14 features lik
 
 ## Learn from training data
 
-[Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression) is used for this task. It is an ensemble based regressor consisting of weak learners (e.g. decision trees). It learns features from training dataset (`train_data`) and maps all rows to respective targets which are real numbers. The process of mapping gives a trained model.
+To learn the mapping between several features and the targets, we will apply a regressor which is called
+[Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensemble.html#regression). It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset (`body_fat_train`) and maps all the rows to their respective targets (real numbers). The process of mapping gives a trained model.
 
 > ### {% icon hands_on %} Hands-on: Train a model
 >
@@ -227,11 +229,26 @@ The dataset contains information about body density. It includes 14 features lik
 > 2. Rename the generated file to `model`
 {: .hands_on}
 
+> ### {% icon question %} Question
+>
+> What is learned by the regressor?
+>
+> > ### {% icon solution %} Solution
+> >
+> > Unlike the 'Linear suppor vector classifier' (used for classification in the first part of the tutorial) which learned only two attributes,
+> > Gradient boosting regressor learn multiple attributes like 'feature_importances_' (weights for each feature/column),
+> > 'oob_improvement_' (which stores incremental improvements in learning), 'estimators_' (collection of weak learners) and a few more.
+> > These attributes are used to predict the target for a new sample. These attributes are stored in the trained model and can be
+> > accessed by reading this file.
+> {: .solution}
+>
+{: .question}
+
 ## Predict using test data
 
-Similar to the classification task, the trained model is evaluated on `test_data` which predicts a target value for each row and the predicted targets are compared to the expected targets.
+After learning on the training data, we should evaluate the performance on test data to know whether the algorithm learned general patterns from the training data or not. These patterns are used to predict a new sample and a similar accuracy is expected. Similar to the classification task, the trained model is evaluated on `body_fat_test` which predicts a target value for each row. The predicted targets are compared to the expected targets to measure the robustness of learning.
 
-> ### {% icon hands_on %} Hands-on: Predict categories using the model
+> ### {% icon hands_on %} Hands-on: Predict targets using the model
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test data using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
@@ -252,27 +269,25 @@ We will evaluate the predictions by comparing them to the expected targets.
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data`
 {: .hands_on}
 
-The last tool creates the following plots:
+The visualization tool creates the following plots:
 
 1. True vs predicted targets curves:
 
-    ![true_predicted](images/true_pred_curves.png "True vs predicted targets curves.")
+    ![true_predicted](images/true_pred_curves.png "True vs predicted targets curves. The corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.")
 
-    In figure [6](#figure-6) the corresponding points in both these curves should be close to each other for a good regression performance.
 
 2. Scatter plot for true vs. predicted targets:
 
-    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets.")
-
-    Figure [7](#figure-7) shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. [R2](https://en.wikipedia.org/wiki/Coefficient_of_determination) score is close to the best possible score of `1.0`.
+    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. he data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0")
 
 3. Residual plot between residual (predicted - true) and predicted targets:
 
-    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets.")
+    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.")
 
-    Figure [8](#figure-8) shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern.
+These plots are important to visualize the quality of regression.
 
-By following these steps, we learn how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool.
+## Summary
+By following these steps, we learned how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool. There are multiple other regression algorithms, few are simpler to use (with less parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well.
 
 # Conclusion
-We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy and visualized the output in multiple plots. There are many other classifiers and regressors in the Galaxy machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors.
+We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy. Moreover, we visualized the results using multiple plots to ascertain the robustness of machine learning tasks. There are many other classifiers and regressors in the Galaxy machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors.
