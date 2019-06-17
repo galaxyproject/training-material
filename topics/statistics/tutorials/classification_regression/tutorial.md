@@ -216,11 +216,11 @@ The dataset contains information about body density. It includes 14 features lik
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Gradient Boosting Regressor`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_data`
+>             - {% icon param-file %} *"Training samples dataset"*: `body_fat_train`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns BUT by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `target`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_data`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `body_fat_train`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `target`
@@ -236,7 +236,7 @@ Similar to the classification task, the trained model is evaluated on `test_data
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test data using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_data`
+>       - {% icon param-file %} *"Data (tabular)"*: `body_fat_test`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `predicted_data`
@@ -248,7 +248,7 @@ We will evaluate the predictions by comparing them to the expected targets.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualise the predictions:
->    - {% icon param-file %} *"Select input data file"*: `test_target`
+>    - {% icon param-file %} *"Select input data file"*: `body_fat_test_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data`
 {: .hands_on}
 
