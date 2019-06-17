@@ -65,7 +65,7 @@ Machine learning is a combined field of computer science, mathematics and statis
 
 ![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is tumor or no tumor, we use this decision boundary to compute the actual class.")
 
-In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, the powerful classifiers like `support vector machine` or  `tree` or `ensemble` based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let's begin by uploading the necessary datasets.
+In figure [2](#figure-2), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, the powerful classifiers like `support vector machine` or  `tree` or `ensemble` based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let's begin by uploading the necessary datasets.
 
 ## Data upload
 
@@ -162,9 +162,7 @@ The tool creates the following three plots:
 
 2. Precision, recall and F1 score:
 
-    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly.")
-
-    In figure [4](#figure-4), the recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in the `breast-w_test` dataset get correctly classified.
+    ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. The recall curve shows the percentage of correctly predicted samples per class. All these curves converge because all the samples in the 'breast-w_test' dataset get correctly classified.")
 
 3. Receiver operator characteristics (ROC) and area under ROC (AUC):
 
