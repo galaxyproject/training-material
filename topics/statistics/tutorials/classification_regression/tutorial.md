@@ -177,17 +177,14 @@ By following these steps from data upload until plotting, we have learned how to
 
 # Regression
 
-When the targets are real-values, the machine learning task is called regression. Regression assigns a real-valued output or target to each sample. 
-Figure [2](#figure-2) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points.
+For classification the targets are discreet. But, when the targets in a dataset are real-values (real numbers), the machine learning task becomes [regression](https://en.wikipedia.org/wiki/Regression_analysis). Each sample in the dataset has a real-valued output or target. Figure [6](#figure-6) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear. In this part of the tutorial, we will perform regression on [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html) dataset.
 
-![regression](images/regression.png "Regression fit through data points. A curve is learned which best explains the data points.")
-
-[Regression](https://en.wikipedia.org/wiki/Regression_analysis) is also a supervised learning task where target is a real number (continuous) instead of discrete like in classification. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear.
+![regression](images/regression.png "Regression fit through data points. These data points are the targets of the training data. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.")
 
 
 ## Data upload
 
-The datasets required for this tutorial contain 21 features of [computer system activity](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/regression/573_cpu_act) which include columns like fork, exec and so on ([more information](https://sci2s.ugr.es/keel/dataset/data/regression/compactiv-names.txt)). In addition to these features, the training dataset contains one more column as `target` which contains a real number for each row. All the values in the datasets are real numbers. The dataset `train_data.tabular` is used for training a regressor which maps the features to the targets. The test (unseen) dataset `test_data.tabular` is used to predict a target value for each row. The dataset `test_target.tabular` is used to evaluate the quality of predictions as it is also the test data along with the true targets. A plotting tool is used to demonstrate the difference between true and predicted targets.
+The dataset contains information about body density. It includes 14 features like body density underwater, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between sevevel body features and fat content inside human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train.tsv` dataset is used as the training dataset and `body_fat_test.tsv` as the test dataset. The dataset `body_fat_test_labels.tsv` contains the true targets for the test dataset (`body_fat_test.tsv`).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -202,7 +199,7 @@ The datasets required for this tutorial contain 21 features of [computer system 
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename datasets to `train_data`, `test_data` and `test_target`
+> 3. Rename datasets to `body_fat_train`, `body_fat_test_labels` and `body_fat_test`
 >
 >    {% include snippets/rename_dataset.md %}
 >
