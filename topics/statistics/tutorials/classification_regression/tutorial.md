@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Machine learning is a combined field of computer science, mathematics and statistics to create predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have outputs/targets/classes/categories defined in the datasets. These targets can either be discrete (integers) or real (continuous). When the targets are discrete, the learning task is known as classification. Thus, the classification is assigning a class/target to each sample (each row is a sample) in the dataset. The algorithms which are used for this learning task are called classifiers. When the targets are continuous, the learning task is called regression and the algorithms which are used for this task are called regressors. We will go through classification first and look at regression later in this tutorial.
+Machine learning is a combined field of computer science, mathematics and statistics to create a predictive model by learning patterns in a dataset. The dataset may have an output field which makes the learning process supervised. The [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) methods in machine learning have outputs/targets/classes/categories defined in the datasets. These targets can either be discrete (integers) or real (continuous). When the targets are discrete, the learning task is known as classification. Thus, the classification is assigning a class/target to each sample (each row is a sample) in the dataset. The algorithms which are used for this learning task are called classifiers. When the targets are continuous, the learning task is called regression and the algorithms which are used for this task are called regressors. We will go through classification first and look at regression later in this tutorial.
 
 > ### {% icon question %} Question
 >
@@ -63,13 +63,13 @@ Machine learning is a combined field of computer science, mathematics and statis
 > The terms like 'targets', 'classes', 'categories' or 'labels' have been used interchangeably for the classification part of this tutorial. They contain identical meaning.
 {: .comment}
 
-![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new samples come for which we do not know whether it is tumor or no tumor, we use this decision boundary to compute the actual class.")
+![classification](images/classification.png "Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is tumor or no tumor, we use this decision boundary to compute the actual class.")
 
-In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when dataset is complex and requires non-linear decision boundaries, the powerful classifiers like `suppor vector machine` or  `tree` or `ensemble` based classifiers may prove to be beneficial. In the following part, we will perform a classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let's begin by uploading the necessary datasets.
+In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, the powerful classifiers like `support vector machine` or  `tree` or `ensemble` based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let's begin by uploading the necessary datasets.
 
 ## Data upload
 
-The datasets required for this tutorial contain 9 features which contains information about breast cancer including the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). Another description of these features can be found [here](https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer (benign) and `1` (malignant) indicates breast cancer. The test dataset does not contain the `target` column (which should be predicted by a classifier). The third dataset contains all the samples from test dataset but also the `target` column which would be needed to compare between real and predicted targets.
+The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). Another description of these features can be found [here](https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations). In addition to these features, the training dataset contains one more column as the `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer (benign) and `1` (malignant) indicates breast cancer. The test dataset does not contain the `target` column (which should be predicted by a classifier). The third dataset contains all the samples from test dataset but also the `target` column which would be needed to compare between real and predicted targets.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -129,7 +129,7 @@ The training data is used for learning the associations between features and the
 
 ## Predict categories of test data
 
-After the training process completes, we can see the trained model file (`zip` file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (`breast-w_test`) dataset. It assigns a class (either tumor or no tumor) to each row in `breast-w_test` dataset.
+After the training process completes, we can see the trained model file (`zip` file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (`breast-w_test`) dataset. It assigns a class (either tumor or no tumor) to each row in the `breast-w_test` dataset.
 
 > ### {% icon hands_on %} Hands-on: Predict classes using the trained model
 >
@@ -144,7 +144,7 @@ After the training process completes, we can see the trained model file (`zip` f
 
 ## Visualise prediction
 
-After the training and prediction tasks, we should evaluate the quality of predictions. To do this, we will use another dataset (`breast-w_targets`). It is same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test data. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and f1 and roc and auc. We will examine each of them one by one.
+After the training and prediction tasks, we should evaluate the quality of predictions. To do this, we will use another dataset (`breast-w_targets`). It is the same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test data. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and f1 and roc and auc. We will examine each of them one by one.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
@@ -158,7 +158,7 @@ The tool creates the following three plots:
 
 1. Confusion matrix of the correctly and incorrectly predicted samples:
 
-    ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the correctly and incorrectly predicted samples. It shows a matrix with the true and predicted class labels (0 or 1) along the axes. We can see '0' (no tumor) and '1' (tumor) on both the axes. The diagonal of the matrix from bottom-left to top-right shows the number of correctly predicted classes. The diagonal from top-left to bottom-right shows the number of incorrectly predicted samples and for a good prediction these should be small. It means that a small number of smaples are wrongly predicted.")
+    ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the correctly and incorrectly predicted samples. It shows a matrix with the true and predicted class labels (0 or 1) along the axes. We can see '0' (no tumor) and '1' (tumor) on both the axes. The diagonal of the matrix from bottom-left to top-right shows the number of correctly predicted classes. The diagonal from top-left to bottom-right shows the number of incorrectly predicted samples and for a good prediction, these should be small. It means that a small number of samples are wrongly predicted.")
 
 2. Precision, recall and F1 score:
 
@@ -168,12 +168,12 @@ The tool creates the following three plots:
 
 3. Receiver operator characteristics (ROC) and area under ROC (AUC):
 
-    ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards top-left of this plot. For a bad prediction, it is close to the orange line (y = x).")
+    ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).")
 
 Using these plots, the robustness of classification can be visualized. 
 
 ## Summary
-By following these steps from data upload until plotting, we have learned how to do classification and visualise the predictions using Galaxy machine learning and plotting tools. A similar analysis can be performed using a different dataset or by using a different classifier. The Galaxy machine learning suite provides multiple classifiers from linear to complex ones suited for different classification tasks. For example for a binary class classification, `support vector machine` classifier may perform good. It is recommended to try out different classifiers on a dataset to find the best one.
+By following these steps from data upload until plotting, we have learned how to do classification and visualise the predictions using Galaxy machine learning and plotting tools. A similar analysis can be performed using a different dataset or by using a different classifier. The Galaxy machine learning suite provides multiple classifiers from linear to complex ones suited for different classification tasks. For example for a binary class classification, `support vector machine` classifier may perform well. It is recommended to try out different classifiers on a dataset to find the best one.
 
 
 # Regression
@@ -185,7 +185,7 @@ For classification the targets are discreet. But, when the targets in a dataset 
 
 ## Data upload
 
-The dataset contains information about body density. It includes 14 features like body density underwater, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between sevevel body features and fat content inside human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train.tsv` dataset is used as the training dataset and `body_fat_test.tsv` as the test dataset. The dataset `body_fat_test_labels.tsv` contains the true targets for the test dataset (`body_fat_test.tsv`).
+The dataset contains information about body density. It includes 14 features like body density underwater, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a mapping between severel body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. `body_fat_train.tsv` dataset is used as the training dataset and `body_fat_test.tsv` as the test dataset. The dataset `body_fat_test_labels.tsv` contains the true targets for the test dataset (`body_fat_test.tsv`).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -246,7 +246,7 @@ To learn the mapping between several features and the targets, we will apply a r
 
 ## Predict using test data
 
-After learning on the training data, we should evaluate the performance on test data to know whether the algorithm learned general patterns from the training data or not. These patterns are used to predict a new sample and a similar accuracy is expected. Similar to the classification task, the trained model is evaluated on `body_fat_test` which predicts a target value for each row. The predicted targets are compared to the expected targets to measure the robustness of learning.
+After learning on the training data, we should evaluate the performance on the test dataset to know whether the algorithm learned general patterns from the training data or not. These patterns are used to predict a new sample and a similar accuracy is expected. Similar to the classification task, the trained model is evaluated on `body_fat_test` which predicts a target value for each row. The predicted targets are compared to the expected targets to measure the robustness of learning.
 
 > ### {% icon hands_on %} Hands-on: Predict targets using the model
 >
@@ -278,7 +278,7 @@ The visualization tool creates the following plots:
 
 2. Scatter plot for true vs. predicted targets:
 
-    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. he data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0")
+    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0")
 
 3. Residual plot between residual (predicted - true) and predicted targets:
 
@@ -287,7 +287,7 @@ The visualization tool creates the following plots:
 These plots are important to visualize the quality of regression.
 
 ## Summary
-By following these steps, we learned how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool. There are multiple other regression algorithms, few are simpler to use (with less parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well.
+By following these steps, we learned how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training data are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool. There are multiple other regression algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well.
 
 # Conclusion
 We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy. Moreover, we visualized the results using multiple plots to ascertain the robustness of machine learning tasks. There are many other classifiers and regressors in the Galaxy machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors.
