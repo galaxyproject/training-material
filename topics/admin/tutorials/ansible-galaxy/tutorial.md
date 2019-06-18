@@ -538,7 +538,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 6. Accces at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
-### Supervisord
+## Supervisord
 
 Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [supervisord](http://supervisord.org/). If you're familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy's use cases better and was fully featured long before SystemD became common.
 
@@ -625,7 +625,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 
 Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
 
-### NGINX
+## NGINX
 
 With this we have:
 
