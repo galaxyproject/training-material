@@ -302,63 +302,63 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
 >
->    ```yaml
->    ---
->    - hosts: my_hosts
->      roles:
->        - my-role
->    ```
+>     ```yaml
+>     ---
+>     - hosts: my_hosts
+>       roles:
+>         - my-role
+>     ```
 >
->    > ### {% icon question %} Question
->    >
->    > How does your file tree look now? Use `find` or `tree`.
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```
->    > > .
->    > > ├── hosts
->    > > ├── playbook.yml
->    > > └── roles
->    > >     └── my-role
->    > >         ├── files
->    > >         │   └── test.txt
->    > >         └── tasks
->    > >             └── main.yml
->    > > ```
->    > >
->    > {: .solution }
->    {: .question}
+>     > ### {% icon question %} Question
+>     >
+>     > How does your file tree look now? Use `find` or `tree`.
+>     >
+>     > > ### {% icon solution %} Solution
+>     > >
+>     > > ```
+>     > > .
+>     > > ├── hosts
+>     > > ├── playbook.yml
+>     > > └── roles
+>     > >     └── my-role
+>     > >         ├── files
+>     > >         │   └── test.txt
+>     > >         └── tasks
+>     > >             └── main.yml
+>     > > ```
+>     > >
+>     > {: .solution }
+>     {: .question}
 >
 > 11. Run one of the following command, whichever is appropriate:
 >
->    - Real remote host: `ansible-playbook -i hosts playbook.yml`
->    - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
+>     - Real remote host: `ansible-playbook -i hosts playbook.yml`
+>     - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
 >
->    Even local users can run the 'real remote host' command, Ansible will just issue a warning. Running with `-c local` silences this warning.
+>     Even local users can run the 'real remote host' command, Ansible will just issue a warning. Running with `-c local` silences this warning.
 >
->    > ### {% icon question %} Question
->    >
->    > How does the output look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > The important thing is `failed=0`
->    > >
->    > > ```
->    > > $ ansible-playbook -i hosts playbook.yml -c local
->    > > PLAY [my_hosts] *********************************
->    > > TASK [Gathering Facts] *************************
->    > > ok: [localhost]
->    > > TASK [my-role : Copy] **************************
->    > > changed: [localhost]
->    > > PLAY RECAP *************************************
->    > > localhost                  : ok=2    changed=1    unreachable=0    failed=0
->    > > ```
->    > >
->    > > You can re-run this and it should say `changed=0`
->    > {: .solution }
->    {: .question}
+>     > ### {% icon question %} Question
+>     >
+>     > How does the output look?
+>     >
+>     > > ### {% icon solution %} Solution
+>     > >
+>     > > The important thing is `failed=0`
+>     > >
+>     > > ```
+>     > > $ ansible-playbook -i hosts playbook.yml -c local
+>     > > PLAY [my_hosts] *********************************
+>     > > TASK [Gathering Facts] *************************
+>     > > ok: [localhost]
+>     > > TASK [my-role : Copy] **************************
+>     > > changed: [localhost]
+>     > > PLAY RECAP *************************************
+>     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0
+>     > > ```
+>     > >
+>     > > You can re-run this and it should say `changed=0`
+>     > {: .solution }
+>     {: .question}
 >
 >
 > 12. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
