@@ -358,10 +358,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_root`                | `/srv/galaxy`                      | This is the root of the Galaxy deployment.
 >    `galaxy_file_path`           | `/data`                            | The directory where Galaxy datasets (user data) will be stored. On a real deployment, this would likely be a mounted network filesystem.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}` | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_18.09`                    | The git reference to check out, which in this case is the <br>branch for Galaxy Release 18.09.
+>    `galaxy_commit_id`           | `release_19.05`                    | The git reference to check out, which in this case is the branch for Galaxy Release 19.05
 >    `galaxy_config_style`        | `yaml`                             | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                             | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `check_migrate_tools`        | `false`                            | Must be set to false in this case due to a new install of Galaxy
 >    {% endraw %}
 >
 >
@@ -377,8 +376,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    Now you should set:
 >    1. `admin_users` to the email address you will use with this Galaxy.
 >    2. `brand` to something fun!
->    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`)
+>    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` for this lesson.
+>    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >
 >    > ### {% icon question %} Question
 >    >
