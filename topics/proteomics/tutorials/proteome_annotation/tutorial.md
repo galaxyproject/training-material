@@ -2,7 +2,12 @@
 layout: tutorial_hands_on
 
 title: Annotating a protein list identified by LC-MS/MS experiments
-zenodo_link: ''
+
+zenodo_link: 
+- 'https://zenodo.org/record/2650868'
+- 'https://zenodo.org/record/2650874'
+- 'https://zenodo.org/record/2650872'
+
 questions:
 - How to filter out technical contaminants?
 - How to check for tissue-specificity?
@@ -16,13 +21,15 @@ key_points:
 
 contributors:
 - vloux
+- combesf
+- davidchristiany
+- yvandenb
 
 ---
 
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) by Lacombe *et al., European Journal of Breath, 2018*. 
 
 
@@ -37,35 +44,31 @@ Once identified and/or quantified using a MS-based approach, interpreting the pr
 
 # Get Input Datasets
 
-For this tutorial, we will use three datasets, the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from Lacombe *et al.* and two others EBC proteomes previously published.
+For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from Lacombe *et al.* and two others EBC proteomes previously published.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a name
 >   {% include snippets/create_new_history.md %}
-
-> 2. Import the files from [Zenodo]() or from the shared data library (ask your instructors)
 >
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+> 2. Import the files from [Zenodo](https://zenodo.org) or from the shared data library (ask your instructors). 
 >
->    ***TODO***: *Remove the useless files (if added)*
+>   The datasets are available on Zenodo under the references: [2650868](https://zenodo.org/record/2650868) for Lacombe et
+>   al., [2650874](https://zenodo.org/record/2650874) for Mucilli and [2650872](https://zenodo.org/record/2650872) for
+>   Bredberg. 
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-
 >
 {: .hands_on}
 
 
-# Filter out technical contaminants
+# Filtering out technical contaminants
 
 A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in [_Lacombe et al. 2018_](https://www.ncbi.nlm.nih.gov/pubmed/29189203)) and have to be removed from the initial dataset.
 
-> ### {% icon hands_on %} Hands-on: Filter by keyword and  numerical values
+> ### {% icon hands_on %} Hands-on: Remove the contaminants
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017.txt` (Input dataset)
@@ -85,70 +88,37 @@ A group of 10 proteins were identified in both “technical” control samples w
 >
 {: .hands_on}
 
-<!-- ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question} -->
 
 # Check for the presence of biological contaminants
 
 As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the expression pattern for each protein of the "core" EBC proteome using the Human Protein Atlas (HPA). As HPA is indexed by Ensembl gene identifier (ENSG) we first need to convert Uniprot ID to Ensembl gene (ENSG). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.
 
-> ### {% icon hands_on %} Hands-on: Convert Uniprot ID to Ensembl gene
+> ### {% icon hands_on %} Hands-on: Convert Uniprot ID to Ensembl gene ID
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Filter_by_keywords_or_numerical_value_on_Lacombe_et_al_2017.txt` (output of **Build tissue-specific expression dataset** {% icon tool %})
+>        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` (output of **Build tissue-specific expression dataset** {% icon tool %})
 >    - *"Does file contain header"*: `Yes`
->     - *"Column number of IDs to map"*: `c1`
+>    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
 >        - *"Type/source of IDs"*: `Uniprot accession number (e.g. P31946)`
 >        - In *"Target type"*:
 >            - *"Target type of IDs you would like to map to"*: `Ensembl gene ID (e.g. ENSG00000166913)`
 >
->
 >    > ### {% icon comment %} Output
 >    >
->    > - **ID Converter on data 4**: In this file, a new column which contains Ensembl IDs was added.
+>    > - In the output file, a new column which contains Ensembl IDs was added (at the end)
 >    {: .comment}
 {: .hands_on}
-
-<!-- ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question} -->
 
 
 > ### {% icon hands_on %} Hands-on: Check for proteins highly expressed in salivary glands
 >
 > 1. **Add expression data** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)"*: `Input file containing your IDs`
->        - {% icon param-file %} *"Select your file"*: `output of ID Converter step ID Converter on data 4` (output of **ID Converter** {% icon tool %})
+>        - {% icon param-file %} *"Select your file"*: `output of ID Converter` (output of **ID Converter** {% icon tool %})
 >        - *"Column IDs: `c4`
 >        - *"Does file contain header"*: `Yes`
->        - 
 >    - Numerous information can be extracted from the HPA source files, you can read user documentation at the end of the submission form of the tool for more detailed description. In this activity, in *"RNAseq/Ab-based expression data"*, we *"Select information to add to your list"*:  
 >       - `Gene name`
 >       - `Gene description`
@@ -158,7 +128,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >
 >    > ### {% icon comment %} Outputs
 >    >
->    > - **Add expression data on data 6**: Four columns were added (n°5, 6, 7 and 8) corresponding to the HPA information previously selected.
+>    > - **Add expression data on data 6**: Four columns were added (n°5, 6, 7 and 8) corresponding to the retrieved information from HPA.
 >    {: .comment}
 >
 >   > ### {% icon comment %} Comments
@@ -168,31 +138,16 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >
 {: .hands_on}
 
-<!-- ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question} -->
-
-
-> ### {% icon hands_on %} Hands-on: Filter out the contaminant
+> ### {% icon hands_on %} Hands-on: Filter the data to remove the biological contaminants (i.e. proteins highly expressed in salivary glands)
 >
 >  **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `Add expression data on data 6` (output of **Add expression data** {% icon tool %})
 >    - Keep default option `Yes` for *"Does file contain header?"*
->    - *"Operation"*: `Discard`. We want to remove technical contaminants.
+>    - *"Operation"*: `Discard`. What we want is to remove biological contaminants.
 >    - Keep the `OR` option (by default) for the **operator** parameter. We don't need that parameter for a single filter.
->    - First add a  {% icon param-repeat %} *"Insert Filter by keywords"* box with a list of keywords to be filtered out.   In this step, we will filter out the lines that contain "salivary" in the column of RNA transcript specific TPM..
+>    - First add a  {% icon param-repeat %} *"Insert Filter by keywords"* box with a list of keywords to be filtered out.
+>   In this step, we will filter out the lines that contain "salivary" in the column of RNA transcript specific TPM.
 >    - *"Column number on which to apply the filter"* : `c8`, the column of RNA transcript specific TPM
 >    - *"Search for exact match ?" : `No`
 >    - To *"Enter keywords"*, you can either copy and paste list of keywords to the text area or choose a file that contains keywords in text format, in which each lines contains a keyword. Here we choose to `copy/paste` the keyword to be filtered out :  `salivary`
@@ -210,11 +165,123 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 {: .hands_on}
 
 
+# Functional annotation of the EBC proteome (enrichment analysis)
+
+The resulting list of 151 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler). 
+
+> ### {% icon hands_on %} Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis
+>
+> 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
+>    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
+>    - *"Select tissue"*: `Lung` and `Bronchus`
+>    - *"Expression level"*: `High`, `Medium` and `Low`
+>    - *"Reliability score"*: `Enhanced` and `Supported`
+>
+>   > ### Output
+>   > - **Tissue-specific expression from IHC**: List of the selected proteins. 
+>   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   {: .comment}
+{: .hands_on}
 
 
-## Sub-step with **Venn diagram**
+> ### {% icon tip %} Tip
+> Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells) 
+> that could be used for further refinement of your reference background.
+{: .tip}
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number. 
+
+> ### {% icon hands_on %} Hands-on: Convert Ensembl ID to Uniprot and Entrez Gene ID
+>
+> 1. **ID Converter** {% icon tool %} with the following parameters:
+>    - *"Enter IDs"*: `Input file containing IDs`
+>        - {% icon param-file %} *"Select your file"*: `Tissue-specific expression from IHC` (output of **Build tissue-specific expression dataset** {% icon tool %})
+>    - *"Does file contain header"*: `Yes`
+>    - *"Column number of IDs to map"*: `c1`
+>    - *"Species"*: `Human (Homo sapiens)`
+>        - *"Type/source of IDs"*: `Ensembl gene ID (e.g. ENSG00000166913)`
+>        - In *"Target type"*:
+>            - *"Target type of IDs you would like to map to"*: `UniProt accession number (e.g. P31946)` and `Entrez gene ID (e.g. 7529)`
+>
+>    > ### {% icon comment %} Output
+>    >
+>    > - In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion. 
+>    {: .comment}
+{: .hands_on}
+
+Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants 
+removal, which is the output of biological contaminants filter step. 
+
+> ### {% icon hands_on %} Hands-on: GO terms analysis
+>
+> 1. **GO terms classification and enrichment analysis** {% icon tool %} with the following parameters:
+>    - *"Enter your IDs (UniProt Accession numer or Gene ID)"*: `Input file containing your IDs`
+>        - {% icon param-file %} *"Choose a file that contains your list of IDs"*: `FilteredAdd expression data on data 6` (output of **Filter by keywords and/or numerical value** {% icon tool %})
+>    - *"Select type/source of IDs"*: `UniProt accession number (e.g.:P31946)`
+>    - - *"Species"*: `Homo sapiens`
+>    - *"Select GO terms category"*: select all three options `Cellular Component`, `Biological process`, 
+>    and `Molecular Function`
+>    - *"Perform GO categories representation analysis?"*: `Yes`
+>        - *"Ontology level (the higher this number, the deeper the GO level)"*: `3`
+>    - *"Perform GO categories enrichment analysis?"*: `Yes`
+>        - *"Define your own background IDs?"*: `Yes`
+>            - *"Enter your background IDs (UniProt Accession number or Entrez Gene ID)"*: `Input file containing your background IDs`
+>                - {% icon param-file %} *"Select file that contains your background IDs list"*: `ID converter on data 10` (output of **ID Converter** {% icon tool %})
+>                - *"Column number of IDs"*: `c7`
+>            - *"Select type of background IDs"*: `UniProt Accession number`
+>        - *"Graphical display"*: `dotplot`
+>
+>   > ### {% icon comment %} Output
+>   >
+>   > Results created in History panel are the following:    
+>   >   - Cluster profiler
+>   >   - ClusterProfiler diagram outputs (collection dataset of all graphical outputs)
+>   >   - ClusterProfiler text files (collection dataset of all text files) 
+>
+>   >   The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
+>   >   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
+>   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
+>   >   over-representation
+>   test of GO terms against the lung reference background). Two types of graphical output are provided either
+>   >   in the form of bar-plot or dot-plot. 
+>   >   According to this analysis, the main biological processes over-represented in EBC compared to
+>   >   lung were some processes related to the immune system and exocytosis (see EGO.BP.dot.png, for Enriched
+>   >   Biological Process GO terms dot-plot representation in png format).
+>    {: .comment}
+{: .hands_on}
+
+
+# Visualize EBC proteome on biological pathways (using Reactome)
+
+The 151 proteins identified in EBC samples are now mapped to biological pathways and visualized
+via the web service of Reactome, an open access, manually curated and peer-reviewed human pathway
+database that aims ti provide intuitive bioinformatics tools for the visualization,
+interpretation and analysis of pathway knowledge.
+
+> ### {% icon hands_on %} Hands-on: Protein list mapping on Reactome database
+>
+> 1. **Query Reactome pathway database** {% icon tool %} with the following parameters:
+>    - *"Input IDs (UniProt Accession number, Entrez Gene ID or Gene Name"*: `Input file containing your IDs`
+>    - {% icon param-file %} *"Input file containing your IDs"*: `Filtered_Add expression data on data 6` (output of **Filter by keywords and/or numerical value** {% icon tool %})
+>    - *"Column number of IDs"*: `c1`
+>    - *"Species"*: `Human (Homo sapiens)`
+>   > ### {% icon comment %} Output
+>   > 
+>   > You can click on a link that opens the connection on Reactome and shows the image below: 
+>   > ![the mapping of your IDs on the database](../../images/reactome.png).  
+>   > 
+>   {: .comment}
+{: .hands_on}
+
+
+Examine {% icon galaxy-eye %} the Reactome map of your IDs to see the context of your biological pathways. 
+
+
+
+# Comparison with other proteomic datasets from previous studies
+
+> ### {% icon hands_on %} Hands-on: Lists comparison with Venn diagramm tool
 >
 > 1. **Venn diagram** {% icon tool %} with the following parameters:
 >    - In *"List to compare"*:
@@ -231,187 +298,11 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >                - {% icon param-file %} *"Select your file"*: `output` (Input dataset)
 >            - *"Enter the name of this list"*: `Mucilli et al`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>   > ### {% icon comment %} Output
+>   > 
+>   > The Venn diagram shows the number of proteins specific and in common between the 3 lists. 
+>   > ![Graphical output of the Venn diagram](../../images/Venn-proteome-annot.png).  
+>   > 
+>   {: .comment}
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-## Sub-step with **Filter by keywords and/or numerical value**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `output` (output of **Add expression data** {% icon tool %})
->    - *"Operation"*: `Discard`
->    - In *"Filter by keywords"*:
->        - {% icon param-repeat %} *"Insert Filter by keywords"*
->            - *"Column number on which to apply the filter"*: `c8`
->            - *"Enter keywords"*: `copy/paste`
->                - *"Copy/paste keywords to find (keep or discard)"*: `salivary`
->    - In *"Filter by numerical value"*:
->        - {% icon param-repeat %} *"Insert Filter by numerical value"*
->            - *"Column number on which to apply the filter"*: `[`
->            - *"Select operator"*: ``
->            - *"Value"*: `[`
->        - {% icon param-repeat %} *"Insert Filter by numerical value"*
->            - *"Column number on which to apply the filter"*: `]`
->            - *"Select operator"*: ``
->            - *"Value"*: `]`
->    - In *"Filter by range of numerical values"*:
->        - {% icon param-repeat %} *"Insert Filter by range of numerical values"*
->            - *"Column number on which to apply the filter"*: `[`
->            - *"Enter the bottom value"*: `[`
->            - *"Enter the top value"*: `[`
->            - *"inclusive range ?"*: `Yes`
->        - {% icon param-repeat %} *"Insert Filter by range of numerical values"*
->            - *"Column number on which to apply the filter"*: `]`
->            - *"Enter the bottom value"*: `]`
->            - *"Enter the top value"*: `]`
->            - *"inclusive range ?"*: `Yes`
->    - *"Sort by column ?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Query Reactome pathway database**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Query Reactome pathway database** {% icon tool %} with the following parameters:
->    - *"Input IDs (UniProt Accession number, Entrez Gene ID or Gene Name"*: `Input file containing your IDs`
->        - {% icon param-file %} *"Input file containing your IDs"*: `kept_lines` (output of **Filter by keywords and/or numerical value** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GO terms classification and enrichment analysis**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **GO terms classification and enrichment analysis** {% icon tool %} with the following parameters:
->    - *"Enter your IDs (UniProt Accession numer or Gene ID)"*: `Input file containing your IDs`
->        - {% icon param-file %} *"Choose a file that contains your list of IDs"*: `kept_lines` (output of **Filter by keywords and/or numerical value** {% icon tool %})
->    - *"Select type/source of IDs"*: `UniProt accession number (e.g.:P31946)`
->    - *"Select GO terms category"*: ``
->    - *"Perform GO categories representation analysis?"*: `Yes`
->        - *"Ontology level (the higher this number, the deeper the GO level)"*: `3`
->    - *"Perform GO categories enrichment analysis?"*: `Yes`
->        - *"Define your own background IDs?"*: `Yes`
->            - *"Enter your background IDs (UniProt Accession number or Entrez Gene ID)"*: `Input file containing your background IDs`
->                - {% icon param-file %} *"Select file that contains your background IDs list"*: `output` (output of **ID Converter** {% icon tool %})
->                - *"Column number of IDs"*: `c7`
->            - *"Select type of background IDs"*: `UniProt Accession number`
->        - *"Graphical display"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
-# Conclusion
-{:.no_toc}
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
