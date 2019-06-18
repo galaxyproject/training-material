@@ -165,13 +165,12 @@ For more information on the topic of quality control, please see our training ma
 In this experiment we used Nanopore sequencing; this means that sequencing results in long reads with overlap.
 To find this overlap, Minimap2 is used. Minimap2 is a sequence alignment program that can be used for different 
 purposes, but in this case we'll use it to find overlaps between long reads with an error rate up to ~15%. 
-The optimal case would be to recreate a complete chromsome or plasmid. Typical other use cases for Minimap2
-include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human genome; (2) splice-aware alignment
- of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome; (3) aligning Illumina 
-single- or paired-end reads; (4) assembly-to-assembly alignment; (5) full-genome alignment between two closely
- related species with divergence below ~15%.
+Typical other use cases for Minimap2 include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human genome;
+(2) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome; 
+(3) aligning Illumina single- or paired-end reads; (4) assembly-to-assembly alignment; (5) full-genome alignment
+between two closely related species with divergence below ~15%.
 
-Minimap2 is faster, more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
+Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
 therefore widely used for Nanopore aligning. Detailed evaluations of Minimap2 are available from
 the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
 
@@ -182,7 +181,7 @@ the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
 >
 > 1. **Map with minimap2** {% icon tool %} with the following parameters
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->   - *"Use the following dataset as the reference sequence"*: `RB01.fasta`
+>   - *"Use the following data collection as the reference sequence"*: `Created dataset collection`
 >   - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
 >   - *"Select an output format"*: `paf`
 >
@@ -208,23 +207,28 @@ following predefined fields:
 |11 |int   |Alignment block length                    |
 |12 |int   |Mapping quality (0-255; 255 for missing)  |
 
-View that file now, it should look something like this:
+View the outcome of RB12, it should look something like this:
 ```
-b9497173-8976-48fa-a822-93edea3f0baf_Basecall_1D_template	4435	212	4342	+	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template	4464	121	4170	278	4142	0	tp:A:S	cm:i:35	s1:i:258	dv:f:0.2189
-b9497173-8976-48fa-a822-93edea3f0baf_Basecall_1D_template	4435	716	4235	+	channel_13_16a53018-b542-46ba-8175-3425db8b32aa_template	4460	159	3609	274	3531	0	tp:A:S	cm:i:34	s1:i:255	dv:f:0.2123
-b9497173-8976-48fa-a822-93edea3f0baf_Basecall_1D_template	4435	930	4275	+	channel_324_3090c29b-5e25-496f-ba01-7d496b381ad9_template	4479	731	4038	259	3365	0	tp:A:S	cm:i:34	s1:i:246	dv:f:0.2096
+channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	114	2613	+	channel_139_250c7e7b-f063-4313-8564-d3efbfa7e38d_template	3657	206	2732	273	2605	0	tp:A:S	cm:i:29	s1:i:240	dv:f:0.2016	rl:i:1516
+channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	148	1212	+	channel_313_35f447cb-7e4b-4c3d-977e-dc0de2717a4d_template	3776	2433	3450	218	1064	0	tp:A:S	cm:i:31	s1:i:210	dv:f:0.1291	rl:i:1516
+channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	251	1328	+	channel_313_a83f7257-52db-46e4-8e2a-1776500c7363_template	3699	2327	3382	208	1082	0	tp:A:S	cm:i:29	s1:i:203	dv:f:0.1363	rl:i:1516
 ```
 
 ## Ultrafast de novo assembly using Miniasm
 
-The mapped reads are ready to be assembled with Miniasm. Miniasm is a very fast OLC-based de novo assembler for noisy long reads. It takes all-vs-all read self-mappings (typically by minimap) as input and outputs an assembly graph in the GFA format. Different from mainstream assemblers, miniasm does not have a consensus step. It simply concatenates pieces of read sequences to generate the final unitig sequences. Thus the per-base error rate is similar to the raw input reads.
+The mapped reads are ready to be assembled with Miniasm. Miniasm is a very fast Overlap Layout Consensus based de novo assembler for noisy long reads.
+It takes all-vs-all read self-mappings (typically by Minimap2) as input and outputs an assembly graph in the GFA format.
+Different from mainstream assemblers, miniasm does not have a consensus step.
+It simply concatenates pieces of read sequences to generate the final sequences.
+The optimal case would be to recreate a complete chromosome or plasmid. 
+Thus the per-base error rate is similar to the raw input reads.
 ![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Miniasm.png)
 
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
 > 1. **miniasm** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: `RB01.fasta`
->   - *"PAF file"*: `PAF file` created by the Minimap2 tool
+>   - *"Sequence Reads"*: `Input dataset collection`
+>   - *"PAF file"*: `Output Minimap dataset collection` created by the Minimap2 tool
 >
 {: .hands_on}
 
@@ -266,7 +270,11 @@ The Assembly graph created can be used for mapping again with minimap2, but firs
 
 ## Ultrafast consensus module using racon
 
-The mapped reads can be improved even more using Racon to find a consensus sequence. Racon is intended as a standalone consensus module to correct raw contigs generated by rapid assembly methods which do not include a consensus step. The goal of Racon is to generate genomic consensus which is of similar or better quality compared to the output generated by assembly methods which employ both error correction and consensus steps, while providing a speedup of several times compared to those methods. It supports data produced by both Pacific Biosciences and Oxford Nanopore Technologies.
+The mapped reads can be improved even more using Racon to find a consensus sequence.
+Racon is a standalone consensus module to correct raw contigs generated by rapid assembly methods which do not include a consensus step.
+Racon generates genomic consensus which is of similar or better quality compared to the output generated by assembly methods which employ both error correction and consensus steps. 
+This while providing a speedup of several times compared to those methods.
+It supports data produced by both Pacific Biosciences and Oxford Nanopore Technologies.
 ![Consensus Module](../../images/nanopore_seqeunce_analysis/Racon.png)
 
 > ### {% icon hands_on %} Hands-on: Consensus module
@@ -294,7 +302,8 @@ GGGCAACGGATGTTATGGTAAATAGCTTCCGTTGGTAAGTATCTCAATGTCTGAAGTTTTCAGGGTTTGAGACTCGTTTA
 To determine whether the contigs are chomosomal or plasmid DNA PlasFlow can be used. Furthermore, it
 assigns the contigs to a bacterial class.
 
-PlasFlow is a set of scripts used for prediction of plasmid sequences in metagenomic contigs. It relies on the neural network models trained on full genome and plasmid sequences and is able to differentiate between plasmids and chromosomes with accuracy reaching 96%. It outperforms other available solutions for plasmids recovery from metagenomes and incorporates the thresholding which allows for exclusion of incertain predictions.
+PlasFlow is a set of scripts used for prediction of plasmid sequences in metagenomic contigs.
+It relies on the neural network models trained on full genome and plasmid sequences and is able to differentiate between plasmids and chromosomes with accuracy reaching 96%.
 
 ![Pairwise alignment](../../images/nanopore_seqeunce_analysis/PlasFlow.png)
 
@@ -317,7 +326,7 @@ PlasFlow is a set of scripts used for prediction of plasmid sequences in metagen
 {: .hands_on}
 
 
-The most important output of PlasFlow is a tabular file containing all predictions (specified with `--output` option), consiting of several columns including:
+The most important output of PlasFlow is a tabular file containing all predictions (specified with `--output` option), consisting of several columns including:
 
 ```
 contig_id 	contig_name 	contig_length 	id 	label 	...
@@ -332,17 +341,15 @@ where:
 - `label` is the actual classification
 - `...` represents additional columns showing probabilities of assignment to each possible class
 
-Sequences can be classified to 26 classes including: chromosome.Acidobacteria, chromosome.Actinobacteria, chromosome.Bacteroidetes, chromosome.Chlamydiae, chromosome.Chlorobi, chromosome.Chloroflexi, chromosome.Cyanobacteria, chromosome.DeinococcusThermus, chromosome.Firmicutes, chromosome.Fusobacteria, chromosome.Nitrospirae, chromosome.other, chromosome.Planctomycetes, chromosome.Proteobacteria, chromosome.Spirochaetes, chromosome.Tenericutes, chromosome.Thermotogae, chromosome.Verrucomicrobia, plasmid.Actinobacteria, plasmid.Bacteroidetes, plasmid.Chlamydiae, plasmid.Cyanobacteria, plasmid.DeinococcusThermus, plasmid.Firmicutes, plasmid.Fusobacteria, plasmid.other, plasmid.Proteobacteria, plasmid.Spirochaetes.
-
-If the probability of assignment to given class is lower than threshold (default = 0.7) then the sequence is treated as unclassified.
-
 Additionaly, PlasFlow produces fasta files containing input sequences binned to plasmids, chromosomes and unclassified.
 
 ## Visualising de novo assembly graphs using Bandage
 
 To determine whether the contigs are chomosomal or plasmid DNA Bandage can give a clear view of the assembly.
 
-Bandage (a Bioinformatics Application for Navigating De novo Assembly Graphs Easily), is a program that creates visualisations of assembly graphs. Sequence assembler programs (such as Miniasm, Velvet, SPAdes, Trinity and MEGAHIT) carry out assembly by building a graph, from which contigs are generated. By granting easy access to these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
+Bandage (a Bioinformatics Application for Navigating De novo Assembly Graphs Easily), is a program that creates visualisations of assembly graphs.
+Sequence assembler programs (such as Miniasm, Velvet, SPAdes, Trinity and MEGAHIT) carry out assembly by building a graph, from which contigs are generated.
+By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
 ![Bandage gui](../../images/nanopore_seqeunce_analysis/Bandage.png)
 
 > ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
@@ -360,7 +367,8 @@ The Assembly graph image shows one hypothetical plasmid, where the other sequenc
 ## Scans genome contigs for antimicrobial resistance genes
 
 To determine whether the contigs contain antimirocbial resistance genes (AMR) staramr can be used.
-Staramr (*AMR) scans bacterial genome contigs against both the ResFinder and PointFinder databases (used by the ResFinder webservice) and compiles a summary report of detected antimicrobial resistance genes.
+Staramr (*AMR) scans bacterial genome contigs against both the ResFinder and PointFinder databases (used by the ResFinder webservice)
+and compiles a summary report of detected antimicrobial resistance genes.
 
 ![Pairwise alignment](../../images/nanopore_seqeunce_analysis/StarAmr.png)
 
