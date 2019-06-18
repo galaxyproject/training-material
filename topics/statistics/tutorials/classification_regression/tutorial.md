@@ -80,9 +80,9 @@ The datasets to be used for classification contain 9 features. Each feature cont
 > 2. Import the following datasets and choose the type of data as `tabular`
 >
 >    ```
->    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_targets.tsv
->    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_test.tsv
->    https://zenodo.org/api/files/efd372b1-4d11-4f43-bba6-66e75a0b4d15/breast-w_train.tsv
+>    https://zenodo.org/record/3248907/files/breast-w_targets.tsv
+>    https://zenodo.org/record/3248907/files/breast-w_test.tsv
+>    https://zenodo.org/record/3248907/files/breast-w_train.tsv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -172,7 +172,7 @@ By following these steps from data upload until plotting, we have learned how to
 
 # Regression
 
-For classification, the targets are discreet. But, when the targets in a dataset are real-values (real numbers), the machine learning task becomes [regression](https://en.wikipedia.org/wiki/Regression_analysis). Each sample in the dataset has a real-valued output or target. Figure [6](#figure-6) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear. In this part of the tutorial, we will perform regression on [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html) dataset.
+For classification, the targets are discreet. But, when the targets in a dataset are real-values (real numbers), the machine learning task becomes [regression](https://en.wikipedia.org/wiki/Regression_analysis). Each sample in the dataset has a real-valued output or target. Figure [5](#figure-5) shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. The algorithms which are used for regression tasks are called regressors. A regressor learns the mapping between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear (straight line curve) or non-linear. In this part of the tutorial, we will perform regression on [body density](https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html) dataset.
 
 ![regression](images/regression.png "Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.")
 
@@ -187,9 +187,9 @@ The dataset contains information about the human [body density](https://rstudio-
 > 2. Import the following datasets and choose the type of data as `tabular`
 >
 >    ```
->    https://zenodo.org/record/3247726/files/body_fat_train.tsv
->    https://zenodo.org/record/3247726/files/body_fat_test_labels.tsv
->    https://zenodo.org/record/3247726/files/body_fat_test.tsv
+>    https://zenodo.org/record/3248907/files/body_fat_train.tsv
+>    https://zenodo.org/record/3248907/files/body_fat_test_labels.tsv
+>    https://zenodo.org/record/3248907/files/body_fat_test.tsv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
