@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Antibiotic resistance detection"
 tags: [nanopore, plasmids]
-zenodo_link: "https://doi.org/10.5281/zenodo.1443246"
+zenodo_link: "https://doi.org/10.5281/zenodo.3247504"
 questions:
   - "How do I assemble a genome with Nanopore data?"
   - "How do I get more information about the structure of the genomes?"
@@ -65,7 +65,7 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 
 In this tutorial we are interested in determing the antimicrobial resistance genes.
 
-As training data we use a single plasmid from a dataset (created by Li, Ruichao et al.) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
+As training data we use plasmids from a dataset (created by Li, Ruichao et al.) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
 
 > ### {% icon details %} More details about datasets
@@ -78,8 +78,6 @@ As training data we use a single plasmid from a dataset (created by Li, Ruichao 
 > Although a local basecaller script was used during the run, there was still a small amount of reads that were not basecalled due to the generation of raw data in a rapid mode. Albacore basecalling software (v1.0.3) was used to generate fast5 files harboring the 1D DNA sequence from fast5 files with only raw data in the tmp folder. Also, the read_fast5_basecaller.py script in Albacore was used to de-multiplex the 12 samples from basecalled fast5 files (except the files in fail folder) based on the 12 barcodes in SQK-RBK001. The Poretools toolkit was utilized to extract all the DNA sequences from fast5 to fasta format among the 12 samples, respectively (Poretools, RRID:SCR_015879).
 >
 {: .details}
-
-To make this tutorial easier to execute, we are providing only one MDR pasmid-bearing strain.
 
 > ### {% icon comment %} Dataset details
 > Because of the large size of the original datasets (1.15 GB) you are given 1 of the 12 plasmids
@@ -97,18 +95,29 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
-> 2. **Import Sample Data** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1443246.svg)](https://doi.org/10.5281/zenodo.1443246)
+> 2. **Import Sample Data** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3247504.svg)](https://doi.org/10.5281/zenodo.3247504)
 >    ```
->    https://zenodo.org/record/1443246/files/RB01.fasta
+>    https://zenodo.org/record/3247504/files/RB01.fasta
+>    https://zenodo.org/record/3247504/files/RB02.fasta
+>    https://zenodo.org/record/3247504/files/RB03.fasta
+>    https://zenodo.org/record/3247504/files/RB04.fasta
+>    https://zenodo.org/record/3247504/files/RB05.fasta
+>    https://zenodo.org/record/3247504/files/RB06.fasta
+>    https://zenodo.org/record/3247504/files/RB07.fasta
+>    https://zenodo.org/record/3247504/files/RB08.fasta
+>    https://zenodo.org/record/3247504/files/RB09.fasta
+>    https://zenodo.org/record/3247504/files/RB10.fasta
+>    https://zenodo.org/record/3247504/files/RB11.fasta
+>    https://zenodo.org/record/3247504/files/RB12.fasta
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
+> 3. **Build a list collection**
+>
+>    {% include snippets/build_list_collection.md %}
+
 {: .hands_on}
 
 # Quality Control
@@ -126,17 +135,17 @@ report page.
 >
 > 1. **NanoPlot** {% icon tool %} with the following parameters
 >   - *"Type of the file(s) to work on"*: `fasta`
->   - *"files"*: `RB01.fasta` you just uploaded
+>   - *"files"*: `Data list` you just created
 >
 {: .hands_on}
 
-The `Histogram Read Length` gives an overview of the read distribution of the input file.
+The `Histogram Read Length` gives an overview of the read distribution of all files in the given data collection.
 ![NanoPlot Output](../../images/nanopore_seqeunce_analysis/NanoPlot_output.png) <br><br>
 
 
 > ### {% icon question %} Question
 >
-> What was the mean read length for this sample?
+> What was the mean read length for this (RB01) sample?
 >
 > > ### {% icon solution %} Solution
 > > 4906.3
@@ -154,18 +163,16 @@ For more information on the topic of quality control, please see our training ma
 ## Pairwise alignment using Minimap2
 
 In this experiment we used Nanopore sequencing; this means that sequencing results in long reads with overlap.
-To find this overlap, Minimap2 is used. Minimap2 is a versatile sequence alignment program that aligns
-DNA or mRNA sequences against a large reference database. Typical use cases include: (1) mapping PacBio
- or Oxford Nanopore genomic reads to the human genome; (2) finding overlaps between long reads with
-error rate up to ~15%; (3) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA
-reads against a reference genome; (4) aligning Illumina single- or paired-end reads;
-(5) assembly-to-assembly alignment; (6) full-genome alignment between two closely related species
-with divergence below ~15%.
+To find this overlap, Minimap2 is used. Minimap2 is a sequence alignment program that can be used for different 
+purposes, but in this case we'll use it to find overlaps between long reads with an error rate up to ~15%. 
+The optimal case would be to recreate a complete chromsome or plasmid. Typical other use cases for Minimap2
+include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human genome; (2) splice-aware alignment
+ of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome; (3) aligning Illumina 
+single- or paired-end reads; (4) assembly-to-assembly alignment; (5) full-genome alignment between two closely
+ related species with divergence below ~15%.
 
-For ~10kb noisy reads sequences, minimap2 is tens of times faster than mainstream long-read mappers
-such as BLASR, BWA-MEM, NGMLR and GMAP. It is more accurate on simulated long reads and produces biologically
- meaningful alignment ready for downstream analyses. For >100bp Illumina short reads, Minimap2 is three times
- as fast as BWA-MEM and Bowtie2, and as accurate on simulated data. Detailed evaluations are available from
+Minimap2 is faster, more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
+therefore widely used for Nanopore aligning. Detailed evaluations of Minimap2 are available from
 the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
 
 ![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Minimap2.png)
