@@ -219,7 +219,7 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 > 3. In the same directory, run `ansible-galaxy install -p roles -r requirements.yml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
-> 4. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Galaxy.
+> 4. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Galaxy. Remember, if you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
 >
 > 5. Inspect the contents of the newly created `roles` directory in your working directory.
 >
