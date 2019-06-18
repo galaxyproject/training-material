@@ -316,7 +316,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `playbook.yml` with your text editor and set the following:
 >
->    - Amend the dependency installation pre-task to install additional necessary dependencies: git, python-virtualenv, make
+>    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install additional necessary dependencies: `git`, `python-virtualenv`, `make`
 >    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end
 >
 >    > ### {% icon question %} Question
