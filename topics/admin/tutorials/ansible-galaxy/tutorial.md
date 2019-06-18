@@ -427,32 +427,34 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```yaml
->    uwsgi:
->      # Default values
->      http: 0.0.0.0:8080
->      buffer-size: 16384
->      processes: 1
->      threads: 4
->      offload-threads: 2
->      static-map:
->        - /static/style={{ galaxy_server_dir }}/static/style/blue
->        - /static={{ galaxy_server_dir }}/static
->      master: true
->      virtualenv: "{{ galaxy_venv_dir }}"
->      pythonpath: "{{ galaxy_server_dir }}/lib"
->      module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->      thunder-lock: true
->      die-on-term: true
->      hook-master-start:
->        - unix_signal:2 gracefully_kill_them_all
->        - unix_signal:15 gracefully_kill_them_all
->      py-call-osafterfork: true
->      enable-threads: true
->      # Our additions
->      mule:
->        - lib/galaxy/main.py
->        - lib/galaxy/main.py
->      farm: job-handlers:1,2
+>    galaxy:
+>      ...
+>      uwsgi:
+>        # Default values
+>        http: 0.0.0.0:8080
+>        buffer-size: 16384
+>        processes: 1
+>        threads: 4
+>        offload-threads: 2
+>        static-map:
+>          - /static/style={{ galaxy_server_dir }}/static/style/blue
+>          - /static={{ galaxy_server_dir }}/static
+>        master: true
+>        virtualenv: "{{ galaxy_venv_dir }}"
+>        pythonpath: "{{ galaxy_server_dir }}/lib"
+>        module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+>        thunder-lock: true
+>        die-on-term: true
+>        hook-master-start:
+>          - unix_signal:2 gracefully_kill_them_all
+>          - unix_signal:15 gracefully_kill_them_all
+>        py-call-osafterfork: true
+>        enable-threads: true
+>        # Our additions
+>        mule:
+>          - lib/galaxy/main.py
+>          - lib/galaxy/main.py
+>        farm: job-handlers:1,2
 >    ```
 >    {% endraw %}
 >
