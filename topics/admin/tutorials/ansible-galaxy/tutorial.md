@@ -184,10 +184,12 @@ To proceed from here it is expected that:
 - You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
 
   > ### {% icon comment %} Comment: Running Ansible on your remote machine
-  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your hosts file to point to localhost, and pass the `-c local` parameter. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to pass `ansible_connection=local`. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
   {: .comment}
 
-- You have a [hosts file](../ansible/tutorial.html#hosts-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
+- You have a [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
+
+- In your inventory file, it uses the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
 
 ## Requirements
 
@@ -637,15 +639,7 @@ When we first configured Galaxy, we used the setting `http: 0.0.0.0:8080`, which
 Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 
-For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache
-
-NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/). Debian/Ubuntu provide multiple nginx "flavors":
-
-- `nginx-light`: minimal set of core modules
-- `nginx-full`: full set of core modules
-- `nginx-extras`: full set of core modules and extras (3rd party modules)
-
-[Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any compression or caching improvements you can make.
+For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache. [Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any compression or caching improvements you can make.
 
 > ### {% icon hands_on %} Hands-on: NGINX
 >
@@ -693,11 +687,6 @@ NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/bl
 >
 >    This is a lot of configuration but it is not very complex to understand. We'll go through it step by step:
 >
->    {% raw %}
->    ```yaml
->    ```
->    {% endraw %}
->
 > 4. The configuration variables we added in our group variables file has the following block:
 >
 >    ```yaml
@@ -711,12 +700,13 @@ NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/bl
 >
 >    Create the `redirect-ssl.j2` with the following contents:
 >
+>    {% raw %}
 >    ```nginx
 >    server {
 >        listen 80 default_server;
 >        listen [::]:80 default_server;
 >
->        server_name {{ inventory_hostname }};
+>        server_name "{{ inventory_hostname }}";
 >
 >        location /.well-known/ {
 >            root {{ certbot_well_known_root }};
@@ -727,24 +717,26 @@ NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/bl
 >        }
 >    }
 >    ```
+>    {% endraw %}
 >
 >    This will redirect all requests to use HTTPS.
 >
 > 5. Create `templates/nginx/galaxy.j2` with the following contents:
 >
+>    {% raw %}
 >    ```nginx
 >    ##
 >    ## This file is maintained by Ansible - CHANGES WILL BE OVERWRITTEN
 >    ##
 >    server {
 >        listen        *:443 ssl default_server;
->        server_name   {{ inventory_hostname }};
+>        server_name   "{{ inventory_hostname }}";
 >
 >        access_log  /var/log/nginx/access.log;
 >        error_log   /var/log/nginx/error.log;
 >
 >        location / {
->            uwsgi_pass 127.0.0.1:4001;
+>            uwsgi_pass 127.0.0.1:8080;
 >            uwsgi_param UWSGI_SCHEME $scheme;
 >            include uwsgi_params;
 >        }
@@ -780,6 +772,7 @@ NGINX plugins are dynamic shared objects since [1.9.11](https://www.nginx.com/bl
 >        }
 >    }
 >    ```
+>    {% endraw %}
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
@@ -840,17 +833,6 @@ Then you can potentially use it to recover.
 >
 {: .comment}
 
->    ```yaml
->    ```
->
-> 3. Run the playbook
->
-> 4. You are now running with staging certificates. You will need production certificates
->    for most applications, so now change the `certbot_environment` group variable to
->    `production`, wipe out the existing certifacts with `sudo rm -rf /etc/letsencrypt`,
->    and re-run the playbook.
->
-{: .hands_on}
 
 # Final Notes
 
