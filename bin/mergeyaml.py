@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import glob
 import yaml
 
@@ -11,7 +10,7 @@ def extend_dict(merged, a):
                 extend_dict(merged[k], v)
             else:
                 merged[k] = v
-    else:    
+    else:
         if isinstance(merged, list):
             extend_list(merged, a)
         else:
@@ -34,9 +33,9 @@ def extend_list(merged, a):
 
 merged = {}
 
-for filename in glob.iglob('./**/data-library.yaml'):
-    a = yaml.load(open(filename))
+for filename in glob.glob('./topics/*/tutorials/*/data-library.yaml'):
+    a = yaml.safe_load(open(filename))
     extend_dict(merged, a)
 
 
-print(yaml.dump(merged, default_flow_style=False, default_style=''))
+print(yaml.dump(merged, default_flow_style=False))
