@@ -117,7 +117,7 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 > 3. **Build a list collection**
 >
 >    {% include snippets/build_list_collection.md %}
-
+>
 {: .hands_on}
 
 # Quality Control
