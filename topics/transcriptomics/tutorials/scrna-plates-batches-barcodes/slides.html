@@ -206,12 +206,20 @@
     {
       "@type": "Person",
       "name": "Mehmet Tekman"
+    },
+    {
+      "@type": "Person",
+      "name": "Alex Ostrovsky"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Mehmet Tekman"
+    },
+    {
+      "@type": "Person",
+      "name": "Alex Ostrovsky"
     }
   ],
   "about": [
@@ -335,12 +343,7 @@ Press `P` again to switch presenter notes off
 ### Sorting Plates
 
 
-                      | · · · · · · · · · |  ← Plate: N=9, M=6
-                      | · · · · · · · · · |           54 slots
-                      | · · · · · · · · · |
-                      | · · · · · · · · · |
-                      | · · · · · · · · · |
-                      | · · · · · · · · · |
+.image-100[![slide5](../../images/scrna-plates-batches-barcodes_slide5.svg)]
 
 .left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
 
@@ -348,12 +351,7 @@ Press `P` again to switch presenter notes off
 
 ### Sorting Plates
 
-                      | o o · · o o · · · |  ← Plate: N=9, M=6
-                      | o o · · o o · · · |           54 slots
-                      | o o · · o o · · · |
-                      | o o · · o o · · · |     24 cells
-                      | o o · · o o · · · |     30 empty slots
-                      | o o · · o o · · · |
+.image-100[![slide6](../../images/scrna-plates-batches-barcodes_slide6.svg)]
 
 .left[Not all wells need to be occupied by cells, some wells are left empty.]
 .center[Why is this the case?]
@@ -362,12 +360,7 @@ Press `P` again to switch presenter notes off
 
 ### Sorting Plates
 
-                      | o o % % o o % · · |  ← Plate: N=9, M=6
-                      | o o % % o o % · · |           54 slots
-                      | o o % % o o % · · |
-                      | o o % % o o % · · |     24 cells
-                      | o o % % o o % · · |     30 empty slots
-                      | o o % % o o % · · |
+.image-100[![slide7](../../images/scrna-plates-batches-barcodes_slide7.svg)]
 
 .center[Library preparation is not always perfect]
 .center[Sample **contamination** from neighbouring wells]
@@ -377,22 +370,12 @@ Press `P` again to switch presenter notes off
 ### Plates and Lanes
 
 
-        | · · · · · · · · · |  &lt;- Plate: N=9, M=6
-        | · · · · · · · · · |            54 slots
-        | · · · · · · · · · |
-        | · · · · · · · · · |
-        | · · · · · · · · · |
-        | · · · · · · · · · |
+.image-50[![slide5](../../images/scrna-plates-batches-barcodes_slide5.svg)]
 
 .center[Sorting Plates are divided into *lanes*:]
 
 
-        | · · · : · · · : · · · |  &lt;---   Plate: N=9, M=6, 3 lanes
-        | · · · : · · · : · · · |                54 slots
-        | · · · : · · · : · · · |          Lane: n=3, m=6
-        | · · · : · · · : · · · |                18 slots per lane
-        | · · · : · · · : · · · |
-        | · · · : · · · : · · · |
+.image-50[![slide9](../../images/scrna-plates-batches-barcodes_slide9.svg)]
 
 ???
 Plates are $$N \times M$$ arrays or wells that cells are sorted into and then individually amplified and sequenced. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
@@ -404,12 +387,7 @@ Plates are $$N \times M$$ arrays or wells that cells are sorted into and then in
 
 ### Plates and Lanes
 
-        | · · · : · · · : · · · |  &lt;---   Plate: N=9, M=6, 3 lanes
-        | · · · : · · · : · · · |                54 slots
-        | · · · : · · · : · · · |          Lane: n=3, m=6
-        | · · · : · · · : · · · |                18 slots per lane
-        | · · · : · · · : · · · |
-        | · · · : · · · : · · · |
+.image-100[![slide9](../../images/scrna-plates-batches-barcodes_slide9.svg)]
 
 * All slots within a lane are sequenced at the same time.
 * All lanes within a plate *may or may not* be sequenced at the same time.
@@ -419,14 +397,8 @@ Plates are $$N \times M$$ arrays or wells that cells are sorted into and then in
 
 ### Lanes and Batches
 
-           L1       L2     L3                                  L1      L2      L3
-        | · · · : · · · : · · · |  &lt;---   Plate 1          | · · · : · · · : · · · |
-        | · · · : · · · : · · · |       with 3 lanes       | · · · : · · · : · · · |
-        | · · · : · · · : · · · |                          | · · · : · · · : · · · |
-        | · · · : · · · : · · · |         Plate 2   ---&gt;   | · · · : · · · : · · · |
-        | · · · : · · · : · · · |       with 3 lanes       | · · · : · · · : · · · |
-        | · · · : · · · : · · · |                          | · · · : · · · : · · · |
-           B1       B2     B3                                  B4      B5      B6
+.image-100[![slide10](../../images/scrna-plates-batches-barcodes_slide10.svg)]
+
 
 ???
 * Lanes and batches describe the same spaces, but not the same samples.
@@ -436,12 +408,8 @@ Plates are $$N \times M$$ arrays or wells that cells are sorted into and then in
 
 ### Distinguishing cells in a plate
 
-                          L1      L2      L3      L4
-      Plate 1 --&gt;     | · · · : · · · : · · · : · · · |
-    with 4 lanes      | · · · : · · · : · · · : · · · |
-    and 12 slots      | · · · : · · · : · · · : · · · |
-      per lane        | · · · : · · · : · · · : · · · |
-                          B1      B2      B3      B4
+.image-100[![slide11](../../images/scrna-plates-batches-barcodes_slide11.svg)]
+
 
 * Cells are selected from a plate by their *barcodes*
 * Barcodes must be unique
@@ -454,7 +422,7 @@ The way these slots are filled depends entirely on the protocol, but usually not
 
 ### What are Cell Barcodes?
 
-.image-75[![Add Barcodes](../../images/scrna_pbb_barcodes_add.svg)]
+.image-100[![Add Barcodes](../../images/scrna_pbb_barcodes_add.svg)]
 
 * Barcodes are added to *all* transcripts of a *specific* cell
 * Transcripts with different cell barcodes originate from different cells
@@ -476,12 +444,7 @@ The way these slots are filled depends entirely on the protocol, but usually not
 ### Questions about Cell Barcodes
 
 
-                                ←--- 20 ---→
-           a single lane   |····················|
-           in a sorting    |····················|  ↑
-              plate        |····················|  5
-                           |····················|  ↓
-                           |····················|
+.image-75[![slide14](../../images/scrna-plates-batches-barcodes_slide14.svg)]
 
 .left[Assuming a lane is a 20x5 array:]
 
@@ -491,10 +454,10 @@ The way these slots are filled depends entirely on the protocol, but usually not
 
 1. What would be the minimum length of the barcodes for each of the previous questions?
 --
-.center[.footnote[
+.footnote[
 1. *20 x 5 = 100 unique barcodes per lane*
 1. *20 x 5 x 10 = 1,000 unique barcodes per plate*
-]]
+]
 ---
 
 ### Questions about Cell Barcodes
@@ -768,19 +731,16 @@ Available Barcodes
 ]
 --
 
+.image-75[![slide36](../../images/scrna-plates-batches-barcodes_slide36.svg)]
+
 .pull-left[
 * 12 total slots in Plate 1
 
 * 12 slots in Lane 1
 
 * All slots filled
-
-
-           | 1 1 1 |       AAA ACC AGT
-           | 1 1 1 |       ATT CCC CAA
-           | 1 1 1 |       CGG CTT GGG
-           | 1 1 1 |       GAA GCC GTT
 ]
+
 --
 .pull-right[
 * We only need to use half of our barcodes
@@ -811,16 +771,12 @@ Available Barcodes
 * 12 slots in Lane 1, and 12 slots in Lane 2
 * All slots filled
 
-        | 1 1 1 : 2 2 2 |    AAA ACC AGG : TTT TAA TCC
-        | 1 1 1 : 2 2 2 |    ATT CCC CAA : TGG NAA NCC
-        | 1 1 1 : 2 2 2 |    CGG CTT GGG : NGG NTT ANN
-        | 1 1 1 : 2 2 2 |    GAA GCC GTT : CNN GNN TNN
+.image-75[![slide38](../../images/scrna-plates-batches-barcodes_slide38.svg)]
 
 --
 * We can use all of our barcodes
 * Maximum number of cells can be sequenced in a single run
 * Why might this be too optimal?
-
 
 
 ???
@@ -845,13 +801,11 @@ Available Barcodes
 * 12 slots in Lane 1, and 12 slots in Lane 2
 * Only slots in Lane 1 filled
 
-         | 1 1 1 : · · · |    AAA ACC AGG : ttt taa tcc
-         | 1 1 1 : · · · |    ATT CCC CAA : tgg naa ncc
-         | 1 1 1 : · · · |    CGG CTT GGG : ngg ntt ann
-         | 1 1 1 : · · · |    GAA GCC GTT : cnn gnn tnn
+.image-75[![slide40](../../images/scrna-plates-batches-barcodes_slide40.svg)]
+
 
 --
-* Why are we still using all barcodes
+* Why are we still using all barcodes?
 * Why have we not filled in Lane 2?
 
 
@@ -874,10 +828,8 @@ Available Barcodes
 
 * What would it mean if we sequenced reads with {TTT,TAA,...,TNN} as their Cell Barcodes?
 
-         | 1 1 1 : · · · |    AAA ACC AGG : ttt taa tcc
-         | 1 1 1 : · · · |    ATT CCC CAA : tgg naa ncc
-         | 1 1 1 : · · · |    CGG CTT GGG : ngg ntt ann
-         | 1 1 1 : · · · |    GAA GCC GTT : cnn gnn tnn
+.image-75[![slide40](../../images/scrna-plates-batches-barcodes_slide40.svg)]
+
 
 --
 * **Cross-Contamination**
@@ -907,15 +859,8 @@ Available Barcodes
 * Same as before but extra plate. A single lane used to check for contaminants.
 * Alternate barcodes used for each plate
 
-         | 1 1 1 : · · · | P1    AAA ACC AGG : ttt taa tcc
-         | 1 1 1 : · · · |       ATT CCC CAA : tgg naa ncc
-         | 1 1 1 : · · · |       CGG CTT GGG : ngg ntt ann
-         | 1 1 1 : · · · |       GAA GCC GTT : cnn gnn tnn
+.image-50[![slide44](../../images/scrna-plates-batches-barcodes_slide44.svg)]
 
-         | · · · : 2 2 2 | P2    aaa acc agg : TTT TAA TCC
-         | · · · : 2 2 2 |       att ccc caa : TGG NAA NCC
-         | · · · : 2 2 2 |       cgg ctt ggg : NGG NTT ANN
-         | · · · : 2 2 2 |       gaa gcc gtt : CNN GNN TNN
 
 &lt;small&gt;
 * Why alternate active lanes across plates?
@@ -952,10 +897,7 @@ Available Barcodes
 
 * Both lanes filled. *All barcodes* are applied individually to *each* lane
 
-         | 1 1 1 : 2 2 2 |    AAA ACC AGG ttt taa tcc : aaa acc agg TTT TAA TCC
-         | 1 1 1 : 2 2 2 |    ATT CCC CAA tgg naa ncc : att ccc caa TGG NAA NCC
-         | 1 1 1 : 2 2 2 |    CGG CTT GGG ngg ntt ann : cgg ctt ggg NGG NTT ANN
-         | 1 1 1 : 2 2 2 |    GAA GCC GTT cnn gnn tnn : gaa gcc gtt CNN GNN TNN
+.image-100[![slide46](../../images/scrna-plates-batches-barcodes_slide46.svg)]
 
 .pull-left[
 
@@ -1034,7 +976,8 @@ Follow one of our recommended follow-up trainings:
         
             
         
-- [Sequence analysis](/training-material/topics/sequence-analysis)
+- [Transcriptomics](/training-material/topics/transcriptomics)
+    - Pre-processing of Single-Cell RNA Data: [&lt;i class=&quot;fa fa-laptop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tutorial&lt;/span&gt; hands-on](/training-material/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.html)
     
 
 
@@ -1051,7 +994,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 <div class="contributors-line">
 
 
-<a href="/training-material/hall-of-fame#mtekman" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a>
+<a href="/training-material/hall-of-fame#mtekman" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a>, <a href="/training-material/hall-of-fame#astrovsky01" class="contributor-badge"><img src="https://avatars.githubusercontent.com/astrovsky01" alt="Alex Ostrovsky">Alex Ostrovsky</a>
 
 
 </div>
