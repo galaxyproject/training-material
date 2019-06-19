@@ -240,21 +240,27 @@ The output plot has the following legend: the colour-coding is based on the `mea
 
 ![data](../../images/age-prediction-with-ml/parallel_coor_plot.png "The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).")
 
-> ### {% icon question %} Question
+> ### {% icon question %} Questions
 >
-> What can you notice about the least performing (let's say least four) hyperparameters' settings (judging by the plot)?
+> 1. What is the best performing combination of hyperparameters?
+> 2. What are the worst performing combinations of hyperparameters (name four)?
 >
 > > ### {% icon solution %} Solution
 > >
-> > The four 'worst' settings are:
-> > - alpha: 0.00001, normalize: False, k: 5880
-> > - alpha: 0.00001, normalize: False, k: 5890
-> > - alpha: 0.00001, normalize: False, k: 5895
-> > - alpha: 0.00001, normalize: False, k: 5900
+> > 1. Best one: alpha: 0.001, normalize: True, k: 5880
+> > 2. Worst four: 
+> >    - alpha: 0.00001, normalize: False, k: 5880
+> >    - alpha: 0.00001, normalize: False, k: 5890
+> >    - alpha: 0.00001, normalize: False, k: 5895
+> >    - alpha: 0.00001, normalize: False, k: 5900
 > >
 > {: .solution}
 >
 {: .question}
+
+## Compare results with original paper
+
+![rna_seq_age_paper](../../images/age-prediction-with-ml/rna_seq_age.png "The plot shows the accuracies obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.")
 
 ## Summary
 
@@ -262,7 +268,7 @@ In the plot shown above in figure [4](#figure-4), we achieved an R2 score of `0.
 
 # Analyze DNA methylation dataset
 
-In the second part of the analysis, we will use the DNA methylation dataset to predict chronological age. One important reason to choose this dataset for age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model using the R2 scoring metric. 5-fold cross-validation is used for training.
+In the second part of the analysis, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict chronological age. One important reason to choose this dataset for age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model using the R2 scoring metric. 5-fold cross-validation is used for training.
 
 ## Get train and test datasets
 
@@ -441,9 +447,14 @@ The [residual plot](http://docs.statwing.com/interpreting-residual-plots-to-impr
 
 The plot in figure [7](#figure-7) shows the true and predicted ages. It can be seen that the points are close.
 
+## Compare results with original paper
+
+![dnam_image_paper](../../images/age-prediction-with-ml/dnam_age_paper.png "The plot shows a scatter plot with predicted age on vertical axis and true age on horizontal axis. The plot matches with the scatter plot shown in figure 6. The RMSE score is also comparable.")
+
+
 ## Summary
 
-We can see in figure [5](#figure-5) that we have achieved an R2 score of `0.94` and root mean square score of `3.76` for the test set using gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
+We can see in figure [6](#figure-6) that we have achieved an R2 score of `0.94` and root mean square score of `3.76` for the test set using gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
 
 # Conclusion
 {:.no_toc}
