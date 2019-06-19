@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Annotating a protein list identified by LC-MS/MS experiments
 
-zenodo_link: 
+zenodo_link:
 - 'https://zenodo.org/record/2650868'
 - 'https://zenodo.org/record/2650874'
 - 'https://zenodo.org/record/2650872'
@@ -16,7 +16,7 @@ questions:
 - How to compare your proteome with other studies?
 objectives:
 - Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments
-time_estimation: 60 minutes
+time_estimation: 60M
 key_points:
 
 contributors:
@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) by Lacombe *et al., European Journal of Breath, 2018*. 
+[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) by Lacombe *et al., European Journal of Breath, 2018*.
 
 
 Once identified and/or quantified using a MS-based approach, interpreting the proteome in a sample is an important step to characterize its content in terms of functional properties in order to extend the biological knowledge related to this sample. In this activity, we illustrate the annotation and the exploration of the human exhaled breath condensate (EBC) proteome by performing the following steps:
@@ -51,11 +51,11 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 > 1. Create a new history for this tutorial and give it a name
 >   {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org) or from the shared data library (ask your instructors). 
+> 2. Import the files from [Zenodo](https://zenodo.org) or from the shared data library (ask your instructors).
 >
 >   The datasets are available on Zenodo under the references: [2650868](https://zenodo.org/record/2650868) for Lacombe et
 >   al., [2650874](https://zenodo.org/record/2650874) for Mucilli and [2650872](https://zenodo.org/record/2650872) for
->   Bredberg. 
+>   Bredberg.
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -83,7 +83,7 @@ A group of 10 proteins were identified in both “technical” control samples w
 >    > ### {% icon comment %} Outputs
 >    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
 >   > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -119,7 +119,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >        - {% icon param-file %} *"Select your file"*: `output of ID Converter` (output of **ID Converter** {% icon tool %})
 >        - *"Column IDs: `c4`
 >        - *"Does file contain header"*: `Yes`
->    - Numerous information can be extracted from the HPA source files, you can read user documentation at the end of the submission form of the tool for more detailed description. In this activity, in *"RNAseq/Ab-based expression data"*, we *"Select information to add to your list"*:  
+>    - Numerous information can be extracted from the HPA source files, you can read user documentation at the end of the submission form of the tool for more detailed description. In this activity, in *"RNAseq/Ab-based expression data"*, we *"Select information to add to your list"*:
 >       - `Gene name`
 >       - `Gene description`
 >       - `RNA tissue category (according to HPA)`
@@ -167,7 +167,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 
 # Functional annotation of the EBC proteome (enrichment analysis)
 
-The resulting list of 151 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler). 
+The resulting list of 151 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler).
 
 > ### {% icon hands_on %} Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis
 >
@@ -178,19 +178,19 @@ The resulting list of 151 proteins identified in the two pooled EBC samples (exc
 >    - *"Reliability score"*: `Enhanced` and `Supported`
 >
 >   > ### Output
->   > - **Tissue-specific expression from IHC**: List of the selected proteins. 
->   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA. 
+>   > - **Tissue-specific expression from IHC**: List of the selected proteins.
+>   > 6 columns: 'Gene', 'Gene name' and the retrieved info from HPA.
 >   {: .comment}
 {: .hands_on}
 
 
 > ### {% icon tip %} Tip
-> Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells) 
+> Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells)
 > that could be used for further refinement of your reference background.
 {: .tip}
 
 
-As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number. 
+As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number.
 
 > ### {% icon hands_on %} Hands-on: Convert Ensembl ID to Uniprot and Entrez Gene ID
 >
@@ -206,12 +206,12 @@ As the ClusterProfiler tool (which we will use for the enrichment analysis) does
 >
 >    > ### {% icon comment %} Output
 >    >
->    > - In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion. 
+>    > - In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion.
 >    {: .comment}
 {: .hands_on}
 
-Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants 
-removal, which is the output of biological contaminants filter step. 
+Now we can perform the GO terms analysis. Input list is the EBC proteome to be analyzed after technical and biological contaminants
+removal, which is the output of biological contaminants filter step.
 
 > ### {% icon hands_on %} Hands-on: GO terms analysis
 >
@@ -220,7 +220,7 @@ removal, which is the output of biological contaminants filter step.
 >        - {% icon param-file %} *"Choose a file that contains your list of IDs"*: `FilteredAdd expression data on data 6` (output of **Filter by keywords and/or numerical value** {% icon tool %})
 >    - *"Select type/source of IDs"*: `UniProt accession number (e.g.:P31946)`
 >    - - *"Species"*: `Homo sapiens`
->    - *"Select GO terms category"*: select all three options `Cellular Component`, `Biological process`, 
+>    - *"Select GO terms category"*: select all three options `Cellular Component`, `Biological process`,
 >    and `Molecular Function`
 >    - *"Perform GO categories representation analysis?"*: `Yes`
 >        - *"Ontology level (the higher this number, the deeper the GO level)"*: `3`
@@ -234,17 +234,17 @@ removal, which is the output of biological contaminants filter step.
 >
 >   > ### {% icon comment %} Output
 >   >
->   > Results created in History panel are the following:    
+>   > Results created in History panel are the following:
 >   >   - Cluster profiler
 >   >   - ClusterProfiler diagram outputs (collection dataset of all graphical outputs)
->   >   - ClusterProfiler text files (collection dataset of all text files) 
+>   >   - ClusterProfiler text files (collection dataset of all text files)
 >
 >   >   The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
 >   >   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
 >   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
 >   >   over-representation
 >   test of GO terms against the lung reference background). Two types of graphical output are provided either
->   >   in the form of bar-plot or dot-plot. 
+>   >   in the form of bar-plot or dot-plot.
 >   >   According to this analysis, the main biological processes over-represented in EBC compared to
 >   >   lung were some processes related to the immune system and exocytosis (see EGO.BP.dot.png, for Enriched
 >   >   Biological Process GO terms dot-plot representation in png format).
@@ -267,15 +267,15 @@ interpretation and analysis of pathway knowledge.
 >    - *"Column number of IDs"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
 >   > ### {% icon comment %} Output
->   > 
->   > You can click on a link that opens the connection on Reactome and shows the image below: 
->   > ![the mapping of your IDs on the database](../../images/reactome.png).  
->   > 
+>   >
+>   > You can click on a link that opens the connection on Reactome and shows the image below:
+>   > ![the mapping of your IDs on the database](../../images/reactome.png).
+>   >
 >   {: .comment}
 {: .hands_on}
 
 
-Examine {% icon galaxy-eye %} the Reactome map of your IDs to see the context of your biological pathways. 
+Examine {% icon galaxy-eye %} the Reactome map of your IDs to see the context of your biological pathways.
 
 
 
@@ -299,10 +299,10 @@ Examine {% icon galaxy-eye %} the Reactome map of your IDs to see the context of
 >            - *"Enter the name of this list"*: `Mucilli et al`
 >
 >   > ### {% icon comment %} Output
->   > 
->   > The Venn diagram shows the number of proteins specific and in common between the 3 lists. 
->   > ![Graphical output of the Venn diagram](../../images/Venn-proteome-annot.png).  
->   > 
+>   >
+>   > The Venn diagram shows the number of proteins specific and in common between the 3 lists.
+>   > ![Graphical output of the Venn diagram](../../images/Venn-proteome-annot.png).
+>   >
 >   {: .comment}
 {: .hands_on}
 
