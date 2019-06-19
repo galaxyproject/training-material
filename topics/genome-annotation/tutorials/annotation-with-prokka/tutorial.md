@@ -6,8 +6,8 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:
   - prokaryote
 questions:
-  - "How to annotate a bacterial genome?"
-  - "How to visualize annoted genomic features?"
+  - "How can we annotate a bacterial genome?"
+  - "How can we visualize annotated genomic features?"
 objectives:
   - "Load genome into Galaxy"
   - "Annotate genome with Prokka"
@@ -64,12 +64,6 @@ Now we will run the tool called Prokka.
 >
 > 1. **Prokka** {% icon tool %} with the following parameters (leave everything else unchanged)
 >    - {% icon param-file %} *"contigs to annotate"*: `contigs.fasta`
->    - *"Locus tag prefix (--locustag)"*: `P`
->    - *"Force GenBank/ENA/DDJB compliance (--compliant)"*: `No`
->    - *"Sequencing Centre ID (--centre)"*: `V`
->    - *"Genus Name (--genus)"*: `Staphylococcus`
->    - *"Species Name (--species)"*: `aureus`
->    - *"Use genus-specific BLAST database"*: `No`
 {: .hands_on}
 
 ## Examine the output
@@ -96,7 +90,6 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >
 >    - *"Produce Standalone Instance"*: `Yes`
 >    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
->    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - Click on `Insert Track Group`
 >
 >      We will now set up one track - each track is a dataset displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format).
@@ -107,10 +100,6 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >           - Click on `Insert Annotation Track` and fill it with:
 >               - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
 >               - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff` output of **Prokka** {% icon tool %}
->               - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
->               - Click on "JBrowse Styling Options [Advanced]"
->                   - *"JBrowse style.label"*: `product,name,id`
->               - *"Track Visibility"*: `On for new users`
 >
 >    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it
 >
@@ -121,8 +110,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 > 3. Display all the tracks and practice maneuvering around
 >    1. Click on the tick boxes on the left to display the tracks
 >    2. Select contig 1 in the drop down box. You can only see one contig displayed at a time.
->    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
->    1. Zoom in by clicking on the `plus` button to see annotations.
+>    1. Zoom by clicking on the `plus` and `minus` buttons.
 >    1. JBrowse displays the sequence and a 6-frame amino acid translation.
 >    1. Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.
 >      - gene name
