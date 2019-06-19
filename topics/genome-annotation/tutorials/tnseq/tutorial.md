@@ -17,6 +17,10 @@ objectives:
   - "Compare gene essentiality in control sample and an different experimental condition"
 time_estimation: "7H"
 key_points:
+- "TnSeq is a useful analysis to detect essential genes and conditional essential genes"
+- "The saturation of the library must be sufficient so that every gene must have been impacted at least once"
+- "Be sure you have removed every transposon sequence before starting your analysis"
+- "Verify the results manually do separate domain essential and essential genes"
 contributors:
   - delphine-l
   - bebatut
