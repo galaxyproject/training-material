@@ -69,7 +69,7 @@ In figure [2](#figure-2), the line is a boundary which separates a class from an
 
 ## Data upload
 
-The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). Another description of these features can be found [here](https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations). In addition to these features, the training dataset contains one more column as the `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer (benign) and `1` (malignant) indicates breast cancer. The test dataset does not contain the `target` column (which should be predicted by a classifier). The third dataset contains all the samples from the test dataset but also the `target` column which would be needed to compare between real and predicted targets.
+The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on. More information about the dataset can be found here - [a](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(original)) and [b](https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations). In addition to these features, the training dataset contains one more column as the `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer (benign) and `1` (malignant) indicates breast cancer. The test dataset does not contain the `target` column (which should be predicted by a classifier). The third dataset contains all the samples from the test dataset but also the `target` column which would be needed to compare between real and predicted targets.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -120,9 +120,10 @@ The training dataset is used for learning the associations between features and 
 >
 > > ### {% icon solution %} Solution
 > >
-> > Two attributes 'coef_' and 'intercept_' are learned by the classifier using the training dataset. The 'coef_' contains importance weight for each feature and 'intercept_' is just a constant/scalar. However, for different classifiers, these attributes are different.
-> > The attributes shown here are specific to the 'Linear support vector' classifier. These attributes are stored in the trained model and can be
-> > accessed by reading this file.
+> > Two attributes **coef_** and **intercept_** are learned by the classifier using the training dataset. The **coef_** contains importance weight for each feature and **intercept_** is just a
+> > constant scalar. However, for different classifiers, these attributes are different. The attributes shown here are specific to the **Linear support vector** classifier.
+> > These attributes are stored in the trained model and can be accessed by reading this file.
+> > 
 > {: .solution}
 >
 {: .question}
@@ -144,7 +145,7 @@ After the training process completes, we can see the trained model file (`zip` f
 
 ## Visualise prediction
 
-We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (`breast-w_targets`). It is the same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and f1 and roc and auc. We will mainly analyze the precision and recall plot.
+We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (`breast-w_targets`). It is the same as the test dataset (`breast-w_test`) but contains an extra `target` column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and F1 and ROC and AUC. We will mainly analyze the precision and recall plot.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualise the predictions:
@@ -156,19 +157,19 @@ We should evaluate the quality of predictions by comparing them against the true
 
 We will analyze the following plots:
 
-1. Confusion matrix:
+1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix):
 
     ![confusion_matrix](images/confusion_matrix.png "Confusion matrix of the predictions as a heatmap. The horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). For a good prediction, the diagonal running from top-left to bottom-right should contain less number of samples (because it shows the counts of incorrectly predicted samples). Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.")
 
-2. Precision, recall and F1 score:
+2. [Precision, recall and F1 score](https://en.wikipedia.org/wiki/Precision_and_recall):
 
     ![prf1_scores](images/precision_recall_f1.png "Precision, recall and F1 score. These scores determine the robustness of classification. It shows 1 for both the classes (shown along the horizontal axis) which means that all the samples belonging to these classes have been classified correctly. In the 'breast-w_test' dataset, all the samples with predicted class '0' (no tumor) have the true class as '0' (precision = 1.0) while not all samples with the predicted class as '1' have the true class as '1' (precision < 1.0) (see precision curve). The recall curve is the opposite of the precision curve. Not all the samples with the true class as '0' are predicted as class '0' (recall < 1.0) and all the samples with the true class as '1' are predicted as class '1' (recall = 1.0) (see recall curve). It is important to analyze the plot for any classification task to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.")
 
-3. Receiver operator characteristics (ROC) and area under ROC (AUC):
+3. [Receiver operator characteristics (ROC) and area under ROC (AUC)](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5):
 
     ![roc_scores](images/roc.png "Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).")
 
-Using these plots, the robustness of classification can be visualized. 
+Using these plots, the robustness of classification can be visualized.
 
 
 ## Summary
@@ -234,11 +235,11 @@ To learn the mapping between several features and the targets, we will apply a r
 >
 > > ### {% icon solution %} Solution
 > >
-> > Unlike the 'Linear support vector' classifier (used for classification in the first part of the tutorial) which learned only two attributes,
-> > Gradient boosting regressor learns multiple attributes like 'feature_importances_' (weights for each feature/column),
-> > 'oob_improvement_' (which stores incremental improvements in learning), 'estimators_' (collection of weak learners) and a few more.
-> > These attributes are used to predict the target for a new sample. These attributes are stored in the trained model and can be
-> > accessed by reading this file.
+> > Unlike the **Linear support vector** classifier (used for classification in the first part of the tutorial) which learned only two attributes,
+> > **Gradient boosting** regressor learns multiple attributes like **feature_importances_** (weight for each feature/column),
+> > **oob_improvement_** (which stores incremental improvements in learning), **estimators_** (collection of weak learners) and a few more.
+> > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by reading this file.
+> > 
 > {: .solution}
 >
 {: .question}
@@ -275,11 +276,11 @@ The visualization tool creates the following plots:
     ![true_predicted](images/true_pred_curves.png "True vs predicted targets curves. The corresponding points in both these curves should be close to each other for a good regression performance. We can see that the plot shows this behaviour.")
 
 
-2. Scatter plot for true vs. predicted targets:
+2. [Scatter plot](https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5) for true vs. predicted targets:
 
     ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0")
 
-3. Residual plot between residual (predicted - true) and predicted targets:
+3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets:
 
     ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.")
 
