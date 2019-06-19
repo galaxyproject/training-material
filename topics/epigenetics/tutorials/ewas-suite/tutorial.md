@@ -58,7 +58,7 @@ The first step of EWAS data anylalysis is the raw methylation data loading (inte
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/history_create_new.md %}
+>    {% include snippets/create_new_history.md %}
 >
 > 2. Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
 >    - `GSM1588704_8795207135_R01C02_Red.idat`

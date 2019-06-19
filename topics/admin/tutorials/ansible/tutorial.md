@@ -44,8 +44,8 @@ Ansible runs commands on local or remote computers. It can move files around, cr
 
 Some terms that you should know first:
 
-host files
-:    An Ansible-specific file that defines groups of hosts (not be confused with `/etc/hosts`).
+Inventory file
+:    An Ansible-specific file that defines the systems ("hosts") and groups of hosts on which Ansible should operate.
 
 Ansible module
 :    A piece of Python code that converts some parameters into an invocation. An example would be the `command` module which converts parameters like `command: ls` into a command line that is executed. There are pre-built modules for just about everything.
@@ -64,7 +64,7 @@ vault
 
 Looking at each of these briefly:
 
-## Hosts file
+## Inventory file
 
 ```ini
 [webservers]
@@ -78,7 +78,7 @@ db_1.example.org ansible_user=root
 Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to specify which user to connect with.
 
 > ### {% icon details %} Ansible Inventory Documentation
-> For more advanced features of the hosts file or "inventory", check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
+> For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
 {: .details}
 
 ## Roles
@@ -238,7 +238,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 3. Create an empty directory and `cd` into it
 >
-> 4. Create your hosts file, name it `hosts`, in the folder you have just entered.
+> 4. Create your inventory file, name it `hosts`, in the folder you have just entered.
 >
 >    - You are installing ansible on the machine it will be used to manage
 >
@@ -269,7 +269,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >         > The file should look like:
 >         >
 >         > ```ini
->         > [galaxyservers]
+>         > [my_hosts]
 >         > localhost ansible_connection=local
 >         > ```
 >         {: .solution }
@@ -409,7 +409,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 >
 > 1. Run the command `ansible -i hosts -c local -m setup my_hosts`.
 >
->    The `my_hosts` at the end refers to the group we defined in our hosts file.
+>    The `my_hosts` at the end of the command refers to the group we defined in our `hosts` inventory file.
 >
 > 2. Investigate the output. See what sort of information is made available to you.
 >
