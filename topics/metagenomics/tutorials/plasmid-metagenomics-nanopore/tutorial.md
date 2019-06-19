@@ -26,15 +26,33 @@ contributors:
 # Overview
 {:.no_toc}
 
-In this tutorial we will perform an assembly of [Nanopore](https://nanoporetech.com/) data and show
-some of the possible analysis tools. The assembly is performed with **Minimap2** ({% cite Li2018 %}),
-**Miniasm** ({% cite Li2016 %}) and **Racon** ({% cite Vaser2017 %}).
-The downstream analysis is done with **Nanoplot** ({% cite DeCoster2018 %}),
-**Bandage** ({% cite Wick2015 %}) and **PlasFlow** ({% cite Krawczyk2018 %}).
+Pervasive use (and misuse) of antibiotics for human disease treatment, as well as for various agricultural purposes, has resulted in the evolution of multidrug resistant (MDR) pathogenic bacteria. The [Center for Disease Control estimates](https://www.cdc.gov/drugresistance/) that in the U.S. alone, every year at least 2 million people get an antibiotic-resistant infection, and at least 23,000 people die. Antibiotic resistance poses a major public health challenge, and its causes and mitigations are widely studied.
+
+Plasmids are small DNA molecules within a cell which are physically separated from chromosomal DNA and can replicate independently.
+
+![Depiction of plasmids](../../images/plasmid-metagenomics-nanopore/plasmids.png)
+
+Plasmids are considered a major vector facilitating the transmission of drug resistant genes among bacteria via [horizontal transfer](https://en.wikipedia.org/wiki/Horizontal_gene_transfer) ({% cite Beatson2014 %}, {% cite Smillie2010 %}). Careful characterization of plasmids and other MDR mobile genetic elements is vital for understanding their evolution and transmission and adaptation to new hosts.
+
+![Illustration of transformation of a bacteria to drug resistance](../../images/plasmid-metagenomics-nanopore/bacterial_transformation.png)
+
+Due to the high prevalence of repeat sequences and inserts in plasmids, using traditional NGS short-read sequencing to assemble plasmid sequences is difficult and time-consuming. With the advent of third-generation single-molecule long-read sequencing technologies, full assembly of plasmid sequences is now possible.
+
+In this tutorial we will recreate the analysis described in the paper by {% cite LiXie2018 %} entitled *Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data*. We will use data sequenced by the [Nanopore](https://nanoporetech.com/) MinION sequencer.
+
+The assembly is performed with **Minimap2** {% icon tool %} ({% cite Li2018 %}),
+**Miniasm** {% icon tool %} ({% cite Li2016 %}) and **Racon** {% icon tool %} ({% cite Vaser2017 %}).
+The downstream analysis is done with **Nanoplot** {% icon tool %} ({% cite DeCoster2018 %}),
+**Bandage** {% icon tool %} ({% cite Wick2015 %}) and **PlasFlow** {% icon tool %} ({% cite Krawczyk2018 %}).
+
+A schematic view of the workflow we will perform in this tutorial is given below:
+
+![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
+
 
 > ### Agenda
 >
-> In this tutorial, we will:
+> In this tutorial, we will cover:
 >
 > 1. TOC
 > {:toc}
@@ -46,19 +64,20 @@ The downstream analysis is done with **Nanoplot** ({% cite DeCoster2018 %}),
 
 # Obtaining and preparing data
 
-In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for types of datasets or sequencing platforms.
+In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for other types of datasets or other long-read sequencing platforms.
 
-> ### {% icon tip %} Background: Nanopore sequencing
-> ![How nanopore sequencing works](../../images/nanopore_seqeunce_analysis/sequence_method.jpg) <br><br>
+> ### {% icon comment %} Background: Nanopore sequencing
 >
-> Nanopore sequencing has serveral properties that make it more suited for our purposes
+> Nanopore sequencing has several properties that make it well-suited for our purposes
 >
 > 1. Long-read sequencing technology offers simplified and less ambiguous genome assembly
 > 2. Long-read sequencing gives the ability to span repetitive genomic regions
 > 3. Long-read sequencing makes it possible to identify large structural variation
 >
-> (slide credit [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
-{: .tip}
+> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg) <br><br>
+>
+> (Image credit: [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
+{: .comment}
 
 
 ## Understanding our input data
@@ -129,7 +148,7 @@ The first thing we want to do is to get a feeling for our input data and its qua
 using the NanoPlot tool. This will create several plots, a statisical report and an HTML
 report page.
 
-![NanoPlot example](../../images/nanopore_seqeunce_analysis/NanoPlot.png)
+![NanoPlot example](../../images/plasmid-metagenomics-nanopore/NanoPlot.png)
 
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
@@ -140,7 +159,7 @@ report page.
 {: .hands_on}
 
 The `Histogram Read Length` gives an overview of the read distribution of all files in the given data collection.
-![NanoPlot Output](../../images/nanopore_seqeunce_analysis/NanoPlot_output.png) <br><br>
+![NanoPlot Output](../../images/plasmid-metagenomics-nanopore/NanoPlot_output.png) <br><br>
 
 
 > ### {% icon question %} Question
@@ -174,7 +193,7 @@ Minimap2 is faster and more accurate than mainstream long-read mappers such as B
 therefore widely used for Nanopore aligning. Detailed evaluations of Minimap2 are available from
 the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
 
-![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Minimap2.png)
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Minimap2.png)
 
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
@@ -222,7 +241,7 @@ Different from mainstream assemblers, miniasm does not have a consensus step.
 It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
 Thus the per-base error rate is similar to the raw input reads.
-![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Miniasm.png)
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png)
 
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
@@ -275,7 +294,7 @@ Racon is a standalone consensus module to correct raw contigs generated by rapid
 Racon generates genomic consensus which is of similar or better quality compared to the output generated by assembly methods which employ both error correction and consensus steps.
 This while providing a speedup of several times compared to those methods.
 It supports data produced by both Pacific Biosciences and Oxford Nanopore Technologies.
-![Consensus Module](../../images/nanopore_seqeunce_analysis/Racon.png)
+![Consensus Module](../../images/plasmid-metagenomics-nanopore/Racon.png)
 
 > ### {% icon hands_on %} Hands-on: Consensus module
 >
@@ -305,7 +324,7 @@ assigns the contigs to a bacterial class.
 PlasFlow is a set of scripts used for prediction of plasmid sequences in metagenomic contigs.
 It relies on the neural network models trained on full genome and plasmid sequences and is able to differentiate between plasmids and chromosomes with accuracy reaching 96%.
 
-![Pairwise alignment](../../images/nanopore_seqeunce_analysis/PlasFlow.png)
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/PlasFlow.png)
 
 
 > ### {% icon hands_on %} Hands-on: Prediction of plasmid sequences
@@ -350,7 +369,7 @@ To determine whether the contigs are chomosomal or plasmid DNA Bandage can give 
 Bandage (a Bioinformatics Application for Navigating De novo Assembly Graphs Easily), is a program that creates visualisations of assembly graphs.
 Sequence assembler programs (such as Miniasm, Velvet, SPAdes, Trinity and MEGAHIT) carry out assembly by building a graph, from which contigs are generated.
 By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
-![Bandage gui](../../images/nanopore_seqeunce_analysis/Bandage.png)
+![Bandage gui](../../images/plasmid-metagenomics-nanopore/Bandage.png)
 
 > ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
 >
@@ -360,7 +379,7 @@ By visualisation of these assembly graphs, Bandage allows users to better unders
 {: .hands_on}
 
 The Assembly graph image shows one hypothetical plasmid, where the other sequences seem to be chromosal DNA.
-![Bandage output](../../images/nanopore_seqeunce_analysis/Bandage_output.png)
+![Bandage output](../../images/plasmid-metagenomics-nanopore/Bandage_output.png)
 
 # Antibiotic Resistance
 
@@ -370,7 +389,7 @@ To determine whether the contigs contain antimirocbial resistance genes (AMR) st
 Staramr (*AMR) scans bacterial genome contigs against both the ResFinder and PointFinder databases (used by the ResFinder webservice)
 and compiles a summary report of detected antimicrobial resistance genes.
 
-![Pairwise alignment](../../images/nanopore_seqeunce_analysis/StarAmr.png)
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/StarAmr.png)
 
 
 > ### {% icon hands_on %} Hands-on: Prediction of AMR genes
@@ -402,4 +421,4 @@ The summary file is most important and gives all the resistance genes found.
 
 # Conclusion
 You have now seen how to perform an assembly on Nanopore sequencing data, with some extra analysis tools. You have worked your way through the following pipeline:
-![Pairwise alignment](../../images/nanopore_seqeunce_analysis/Workflow.png)
+![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
