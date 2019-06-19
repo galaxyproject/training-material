@@ -150,53 +150,6 @@ This first step is only meant to read your mzXML and generate an object usable b
 >
 {: .question}
 
-## Importing a sample metadata file
-
-A sample metadata file contains for each of your raw files their metadata:
-- class which will be used during the preprocessing steps
-- number of batch which will be useful for a batch correction step
-- different experimental conditions which can be used for the statistics
-
-Note that you can either:
-- upload one already filled
-- use a template (because it can be painful to get the sample list without misspelling or omission)
-  1. generate a template with the tool **xcms get a sampleMetadata file**
-  2. fill it using your favorite table editor (Excel, Libre Office)
-  3. upload it within Galaxy
-
-> ### {% icon comment %} Comment
->
-> The file have to be a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
-{: .comment}
-
-> ### {% icon hands_on %} Hands-on: Data upload the sampleMetada with **Get data**
->
-> 1. Import the sampleMetadata_completed.tsv file from [Zenodo](http://doi.org/10.5281/zenodo.3244991) or from a shared data library
->    - sampleMetadata_completed.tsv
->
->    ```
->    https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
->    ```
->
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
->
-{: .hands_on}
-
-> ### {% icon question %} Question
->
-> 1. How many columns should I have in my sampleMetadata file?
-> 2. What kind of class can I have?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. At least 2, with the identify and the class. But as many as you need to describe the potencial variablity of your samples (ex: the person in charge of the sample preparation, the temperature, ...). The statistic analysis will expose the relevant parameters.
-> > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with xmcs to detect the metabolite across the samples. So it's important to separate the samples and the QC. If you don't have any specific class, just fill everywhere with `sample` or a dot `.`
-> >
-> {: .solution}
->
-{: .question}
-
 ## First xcms step: **peak picking**
 
 ***TODO*** step introduction
@@ -240,11 +193,77 @@ Note that you can either:
 >
 {: .question}
 
-## Sub-step with **xcms plot chromatogram**
+## Going from a dataset collection to a single file and checking chromatograms
+
+Blablabla
+
+### Importing a sample metadata file
+
+A sample metadata file contains for each of your raw files their metadata:
+- class which will be used during the preprocessing steps
+- number of batch which will be useful for a batch correction step
+- different experimental conditions which can be used for the statistics
+
+Note that you can either:
+- upload one already filled
+- use a template (because it can be painful to get the sample list without misspelling or omission)
+  1. generate a template with the tool **xcms get a sampleMetadata file**
+  2. fill it using your favorite table editor (Excel, Libre Office)
+  3. upload it within Galaxy
+
+
+#### Get the right template with 'xcms get a sampleMetadata file'
+
+Blablabla
+
+
+#### Prepare your sampleMetadata file
+
+Blablabla
+
+> ### {% icon comment %} Comment
+>
+> The file have to be a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
+{: .comment}
+
+
+#### Upload the sampleMetada file with 'Get data'
+
+> ### {% icon hands_on %} Hands-on: Data upload the sampleMetada with **Get data**
+>
+> 1. Import the sampleMetadata_completed.tsv file from [Zenodo](http://doi.org/10.5281/zenodo.3244991) or from a shared data library
+>    - sampleMetadata_completed.tsv
+>
+>    ```
+>    https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> 1. How many columns should I have in my sampleMetadata file?
+> 2. What kind of class can I have?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. At least 2, with the identify and the class. But as many as you need to describe the potencial variablity of your samples (ex: the person in charge of the sample preparation, the temperature, ...). The statistic analysis will expose the relevant parameters.
+> > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with xmcs to detect the metabolite across the samples. So it's important to separate the samples and the QC. If you don't have any specific class, just fill everywhere with `sample` or a dot `.`
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+### Sub-step with **xcms findChromPeaks Merger**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
@@ -275,11 +294,11 @@ Note that you can either:
 >
 {: .question}
 
-## Sub-step with **xcms findChromPeaks Merger**
+### Sub-step with **xcms plot chromatogram**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
