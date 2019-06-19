@@ -82,7 +82,7 @@ A group of 10 proteins were identified in both “technical” control samples w
 >
 >    > ### {% icon comment %} Outputs
 >    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
->   > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
+>    > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
 >    >
 >    {: .comment}
 >
@@ -238,7 +238,7 @@ removal, which is the output of biological contaminants filter step.
 >   >   - Cluster profiler
 >   >   - ClusterProfiler diagram outputs (collection dataset of all graphical outputs)
 >   >   - ClusterProfiler text files (collection dataset of all text files)
->
+>   >
 >   >   The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
 >   >   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
 >   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
@@ -266,6 +266,7 @@ interpretation and analysis of pathway knowledge.
 >    - {% icon param-file %} *"Input file containing your IDs"*: `Filtered_Add expression data on data 6` (output of **Filter by keywords and/or numerical value** {% icon tool %})
 >    - *"Column number of IDs"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
+>
 >   > ### {% icon comment %} Output
 >   >
 >   > You can click on a link that opens the connection on Reactome and shows the image below:
