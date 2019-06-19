@@ -65,7 +65,7 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 
 In this tutorial we are interested in determing the antimicrobial resistance genes.
 
-As training data we use plasmids from a dataset (created by Li, Ruichao et al.) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
+As training data we use plasmids from a dataset (created by {% cite LiXie2018 %}) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
 
 > ### {% icon details %} More details about datasets
