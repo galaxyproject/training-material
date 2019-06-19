@@ -260,7 +260,7 @@ The output plot has the following legend: the colour-coding is based on the `mea
 
 ## Compare results with original paper
 
-![rna_seq_age_paper](../../images/age-prediction-with-ml/rna_seq_age.png "The plot shows the accuracies obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.")
+![rna_seq_age_paper](../../images/age-prediction-with-ml/rna_seq_age.png "The plot shows accuracy obtained in the paper from Jason G. Fleischer et al. 2018 (Predicting age from the transcriptome of human dermal fibroblasts) using ElasticNet regressor. The R2 scores achieved in the tutorial and mentioned in the paper using the same regressor are comparable.")
 
 ## Summary
 
@@ -302,7 +302,7 @@ The `train_rows` contains a column `Age` which is the label or target. We will e
 
 ## Create data processing pipeline
 
-We will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient Boosting](https://en.wikipedia.org/wiki/Gradient_boosting) which is an ensemble-based regressor because it uses multiple tree-based regressors internally and predicts by taking an ensemble of the predictions. It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file. We will use this zipped file with **Estimator attributes** tool set the search space of hyperparameters.
+We will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient Boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor) which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file. We will use this zipped file with **Estimator attributes** tool set the search space of hyperparameters.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -316,7 +316,7 @@ We will create a pipeline with **Pipeline builder** tool but this time, we just 
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> [*Ensemble*](https://en.wikipedia.org/wiki/Ensemble_learning) method uses multiple learning models internally for better predictions.
+> [*Ensemble*](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions.
 {: .comment}
 
 ## Optimise hyperparameters
@@ -430,26 +430,24 @@ The tool outputs three HTML files with the interactive plots.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figure [5](#figure-5) and [7](#figure-7) show that the prediction is good because the predicted age lies close to the true age.
+> > Figure [6](#figure-6) and [8](#figure-8) show that the prediction is good because the predicted age lies close to the true age.
 > >
 > {: .solution}
 {: .question}
 
 ![Scatter plot](../../images/age-prediction-with-ml/scatter_plot.png "Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0")
 
-We can see in the scatter plot figure [5](#figure-5) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and the R2 score is `0.94`.
+We can see in the scatter plot figure [6](#figure-6) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and the R2 score is `0.94`.
 
 ![Residuals](../../images/age-prediction-with-ml/residual_plot.png "The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.")
 
-The [residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) shown in figure [6](#figure-6) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.
+The [residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) shown in figure [7](#figure-7) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good model, there should not be any visible pattern with the plotted points.
 
 ![True vs predicted age](../../images/age-prediction-with-ml/true_vs_predicted_plot.png "The plot shows the true vs predicted age for all the samples in the test set. We can see that the predicted values are close to the true values.")
 
-The plot in figure [7](#figure-7) shows the true and predicted ages. It can be seen that the points are close.
-
 ## Compare results with original paper
 
-![dnam_image_paper](../../images/age-prediction-with-ml/dnam_age_paper.png "The plot shows a scatter plot with predicted age on vertical axis and true age on horizontal axis. The plot matches with the scatter plot shown in figure 6. The RMSE score is also comparable.")
+![dnam_image_paper](../../images/age-prediction-with-ml/dnam_age_paper.png "The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random Forest as the regressor and we used Gradient Boosting as the regressor.")
 
 
 ## Summary
