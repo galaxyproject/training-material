@@ -173,7 +173,7 @@ Using these plots, the robustness of classification can be visualized.
 
 
 ## Summary
-By following these steps from data upload until plotting, we have learned how to do classification and visualise the predictions using Galaxy machine learning and plotting tools. A similar analysis can be performed using a different dataset or by using a different classifier. The Galaxy machine learning suite provides multiple classifiers from linear to complex ones suited for different classification tasks. For example for a binary class classification, `support vector machine` classifier may perform well. It is recommended to try out different classifiers on a dataset to find the best one.
+By following these steps from data upload until plotting, we have learned how to do classification and visualise the predictions using Galaxy's machine learning and plotting tools. A similar analysis can be performed using a different dataset or by using a different classifier. This machine learning suite provides multiple classifiers from linear to complex ones suited for different classification tasks. For example for a binary class classification, `support vector machine` classifier may perform well. It is recommended to try out different classifiers on a dataset to find the best one.
 
 
 # Regression
@@ -278,16 +278,16 @@ The visualization tool creates the following plots:
 
 2. [Scatter plot](https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5) for true vs. predicted targets:
 
-    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0")
+    ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also says that the predicted targets are close to the true targets.")
 
 3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets:
 
     ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.")
 
-These plots are important to visualize the quality of regression.
+These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better is the prediction.
 
 ## Summary
-By following these steps, we learned how to perform regression and visualise the predictions using Galaxy machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool. There are multiple other regression algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well.
+By following these steps, we learned how to perform regression and visualise the predictions using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool. There are multiple other regression algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well.
 
 # Conclusion
-We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy. Moreover, we visualized the results using multiple plots to ascertain the robustness of machine learning tasks. There are many other classifiers and regressors in the Galaxy machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors.
+We learned how to perform classification and regression using different datasets and machine learning tools in Galaxy. Moreover, we visualized the results using multiple plots to ascertain the robustness of machine learning tasks. There are many other classifiers and regressors in the machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these classifiers and regressors. The classifiers and regressors have lots of parameters which can be altered while performing the analyses to see if they affect the prediction accuracy. It may be beneficial to perform hyperparameter search to tune these parameters of classifiers and regressors for different datasets. Some data pre-processors can also be used to clean the datasets.
