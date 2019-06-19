@@ -64,6 +64,9 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the following datasets and choose the type of data as `tabular`.
 >
 >    ```
