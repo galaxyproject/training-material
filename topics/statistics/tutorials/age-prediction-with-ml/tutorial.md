@@ -242,13 +242,11 @@ The output plot has the following legend: the colour-coding is based on the `mea
 
 > ### {% icon question %} Questions
 >
-> 1. What is the best performing combination of hyperparameters?
-> 2. What are the worst performing combinations of hyperparameters (name four)?
+> What are the worst performing combinations of hyperparameters (name four)?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Best one: alpha: 0.001, normalize: True, k: 5880
-> > 2. Worst four: 
+> > Worst four: 
 > >    - alpha: 0.00001, normalize: False, k: 5880
 > >    - alpha: 0.00001, normalize: False, k: 5890
 > >    - alpha: 0.00001, normalize: False, k: 5895
@@ -264,7 +262,7 @@ The output plot has the following legend: the colour-coding is based on the `mea
 
 ## Summary
 
-In the plot shown above in figure [4](#figure-4), we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation on the training set. In the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors (Linear regression and ElasticNet). Moreover, the study also included a customised ensemble regressor which achieved better performance (`R2 = 0.81`). However, our analysis showcases the use of machine learning tools in Galaxy to reproduce the results published in the paper.
+Figure [4](#figure-4) shows that we achieved an R2 score of `0.73` (last column) with 5-fold cross-validation on the training set. In the study [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) as well, a similar R2 score is mentioned for linear regressors (Linear regression and ElasticNet). Moreover, the study also included a customised ensemble regressor which achieved better performance (`R2 = 0.81`). However, our analysis showcases the use of machine learning tools in Galaxy to reproduce the results published in the paper.
 
 # Analyze DNA methylation dataset
 
@@ -302,7 +300,7 @@ The `train_rows` contains a column `Age` which is the label or target. We will e
 
 ## Create data processing pipeline
 
-We will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient Boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor) which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file. We will use this zipped file with **Estimator attributes** tool set the search space of hyperparameters.
+We will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor) which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file. We will use this zipped file with **Estimator attributes** tool set the search space of hyperparameters.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -311,6 +309,7 @@ We will create a pipeline with **Pipeline builder** tool but this time, we just 
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
 >    - In *"Output the final estimator instead?"*: `Final Estimator`
+> 
 >      We choose `Final Estimator` as we have only the estimator and no preprocessor and need the parameters of only the estimator.
 >
 {: .hands_on}
@@ -322,7 +321,7 @@ We will create a pipeline with **Pipeline builder** tool but this time, we just 
 ## Optimise hyperparameters
 
 For this analysis as well, we will use the **Hyperparameter search** tool to estimate the best values of parameters for the given dataset.
-We use only one parameter `n_estimators` of `Gradient Boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. But, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `100` and a few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
+We use only one parameter `n_estimators` of `Gradient boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. But, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `100` and a few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
 
 ### Extract hyperparameters
 
@@ -390,7 +389,7 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >
 > > ### {% icon solution %} Solution
 > >
-> > 75 (Even though the default value of the number of estimators for gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.
+> > 75 (Even though the default value of the number of estimators for Gradient boosting regressor is `100`, `75` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.
 > >
 > {: .solution}
 >
@@ -430,14 +429,14 @@ The tool outputs three HTML files with the interactive plots.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figure [6](#figure-6) and [8](#figure-8) show that the prediction is good because the predicted age lies close to the true age.
+> > Figures [6](#figure-6) and [8](#figure-8) show that the prediction is good because the predicted age lies close to the true age.
 > >
 > {: .solution}
 {: .question}
 
 ![Scatter plot](../../images/age-prediction-with-ml/scatter_plot.png "Scatter plot for true and predicted age for test set. It is evident from the plot that most of the points lie along the x = y line which means that true and predicted ages are close to each other. The root mean squared error in predicting age is 3.76 years and R2 score (0.94) is close to the best score of 1.0")
 
-We can see in the scatter plot figure [6](#figure-6) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and the R2 score is `0.94`.
+We can see in the scatter plot (figure [6](#figure-6)) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (`RMSE`) is `3.76` and the R2 score is `0.94`.
 
 ![Residuals](../../images/age-prediction-with-ml/residual_plot.png "The plot shows the residuals (predicted age - true) age against the predicted age. For a good learning/training, this plot should not show any distinct pattern and the points should be symmetrically distributed along the y = 0 line.")
 
@@ -447,12 +446,12 @@ The [residual plot](http://docs.statwing.com/interpreting-residual-plots-to-impr
 
 ## Compare results with original paper
 
-![dnam_image_paper](../../images/age-prediction-with-ml/dnam_age_paper.png "The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random Forest as the regressor and we used Gradient Boosting as the regressor.")
+![dnam_image_paper](../../images/age-prediction-with-ml/dnam_age_paper.png "The plot is from Jana Naue et al. 2017 (Chronological age prediction based on DNA methylation) and shows a scatter plot with the predicted age on the vertical axis and the true age on the horizontal axis. The plot is comparable to the scatter plot shown in figure 6. The RMSE score is also comparable. The paper used Random forest as the regressor and we used Gradient boosting as the regressor.")
 
 
 ## Summary
 
-We can see in figure [6](#figure-6) that we have achieved an R2 score of `0.94` and root mean square score of `3.76` for the test set using gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
+Figure [6](#figure-6) shows that we achieved an R2 score of `0.94` and root mean square score of `3.76` for the test set using Gradient boosting regressor. In the study [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) as well, a similar root mean square score (`3.93`) is mentioned using random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
 
 # Conclusion
 {:.no_toc}
