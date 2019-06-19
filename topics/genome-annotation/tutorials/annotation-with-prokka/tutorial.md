@@ -115,6 +115,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >    1. Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.
 >      - gene name
 >      - product name
->      - you can download the FASTA sequence by clicking on the disk icon.
-> ![JBrowse](images/jbrowse6.png)
+>      - you can download the FASTA sequence by clicking on the disk icon
+
+> ![JBrowse](../../images/jbrowse6.png)
 {: .hands_on}
