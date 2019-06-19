@@ -59,15 +59,15 @@ This workflow takes as input **TODO** and perform several steps: pre-processing,
 
 # Preprocessing with xcms
 
-The first step in the workflow is the pre-processing of the raw data with xcms ({% cite Smith2006 %}).
+The first step in the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
 
-xcms is a free and open source software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to
+XCMS is a free and open source software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is
 used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
 
-This software is based on different algorithms that have been published, and is provided and maintained using R software [5,6,7].
+This software is based on different algorithms that have been published, and is provided and maintained using R software.
 
-xcms is able to read files with open format as mzXML, mzMl, mzData and netCDF which are independent of the constructors' formats.
+XCMS is able to read files with open format as mzXML, mzMl, mzData and netCDF which are independent of the constructors' formats.
 
 It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
 adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well
@@ -130,7 +130,7 @@ This first step is only meant to read your mzXML and generate an object usable b
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
-> 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
+> Use **MSnbase readMSData** {% icon tool %} with the following parameters:
 >    - *"File(s) from your history containing your chromatograms"*:
 >        - Click on the folder icon to select the Dataset collection: `sacurine`
 >
@@ -152,58 +152,89 @@ This first step is only meant to read your mzXML and generate an object usable b
 
 ## First xcms step: **peak picking**
 
-***TODO*** step introduction
+Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
+independently. The idea here is, for each peak, to proceed to chromatographic peak detection. 
+
+The XCMS solution provides two different algorithms to perform chromatographic peak detection: *matchedFilter* and
+*centWave*. The matchedFilter strategy is the first one provided by the XCMS R package. It is compatible with any 
+LC-MS device, but was developed at a time when high resolution mass spectrometry was not common standard yet. On the 
+other side, the centWave algorithm was specifically developped for high resolution mass spectrometry, dedicated to 
+data in centroid mode. In this tutorial, you are goning to practice using the centWave algorithm. 
+
+**Overview of how centWave works**
+
+Remember that these steps are performed for each of your data files independantly.
+ - Firstly, the algorithm detects series of scans with close values of m over z. They are called 'region of interest' (ROI). 
+The m over z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
+ - On these Regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define 
+the extract ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation 
+of the gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
+
+At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
+of your sample; if an existing peak is not considered a peak at this step, then it can not be considered in the next steps of 
+pre-processing. 
+
+Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSet)** module in the **LC-MS > Preprocessing** section. 
+
 
 > ### {% icon hands_on %} Hands-on: xcms findChromPeaks (xcmsSet)
 >
-> 1. **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+> Execute **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `The one from the previous 'MSnbase readMSData' step`
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
 >        - *"Min,Max peak width in seconds"*: `5,20`
 >        - In *"Advanced Options"*:
 >            - *"Prefilter step for for the first analysis step (ROI detection)"*: `3,5000`
 >            - *"Noise filter"*: `1000`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> You can leave the other parameters with their default values. 
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get 
+rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z 
+ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+At this step, you obtained a dataset collection containing one RData file per sample, with independant lists of ions. Although this
+is already a nice result, what you may want now is to get all this files together to identify what are the common ions between samples.
+To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
+need to group your individual RData files into a single one. And by the way you may also want to get a grasp of your samples' 
+chromatograms before going any further (note that you can also plot chromatograms *before* even performing you chromatographic peak
+detection). 
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Going from a dataset collection to a single file and checking chromatograms
 
-Blablabla
+In Galaxy4Metabolomics, we dedicated a tool to merge the different RData files into a single one. Although you can simply take as
+input your dataset collection alone, the module also provides de possibility to take into account a sampleMetadata file. Indeed,
+depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to the grouping step. 
+
+This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
+extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that 
+these blank samples have different caracteristics compared to your biological samples can be of importance when setting parameters of 
+your grouping step. You will see what this is all about in the 'grouping' section of this tutorial, but in the workflow order, it is 
+at this step that you need to provide the needed information if you want distinction in your grouping step. 
+
+You can also use the sampleMedata file we mentioned to add some group colors to your samples when visualising your chromatograms. 
+In this tutorial, we are not going to use distinct sample groups in the XCMS 'grouping' step. Nevertheless, we will provide a 
+sampleMetadata file for chromatogram visualisation purpose. Thus, you will find here how to import such a file into your Galaxy history. 
 
 ### Importing a sample metadata file
 
-A sample metadata file contains for each of your raw files their metadata:
-- class which will be used during the preprocessing steps
-- number of batch which will be useful for a batch correction step
-- different experimental conditions which can be used for the statistics
+What we referenced here as a sampleMetadata file corresponds to a table containing information about your samples (= sample metadata).  
 
+A sample metadata file contains various information for each of your raw files:
+- classes which will be used during the preprocessing steps
+- number of batches which will be useful for a batch correction step, along with sample types (pool/sample) and injection order
+- different experimental conditions which can be used for the statistics
+- any information about samples that you want to keep, in a "column" format
+
+The content of your sample metadata file has to be filled by you, since it is not contained in your raw data. 
 Note that you can either:
 - upload one already filled
 - use a template (because it can be painful to get the sample list without misspelling or omission)
@@ -214,7 +245,26 @@ Note that you can either:
 
 #### Get the right template with 'xcms get a sampleMetadata file'
 
-Blablabla
+In the case of this tutorial, we already prepared a sampleMetadata file with all the needed information. Nevertheless, we provide here 
+an optional hands-on if you want to check how to get a template to fill, with the two following advantages:
+- you will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
+- you will have a file with the right format (tabulation-separated text file) that only need to be filled with the information you want. 
+
+> ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
+>
+> Execute **xcms get a sampleMetadata file** {% icon tool %} that you will find in the **XXXXXXXXX** section. You only need to give 
+the dataset collection you obtained from the previous 'xcms findChromPeaks (xcmsSet)' step:
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `The one from the previous 'findChromPeaks' step`
+>
+> An easy step for an easy sampleMetadata filing!
+>
+>
+{: .hands_on}
+
+From this module, you will obtain a 'tabular' file (meaning a tabulation-separated text file) with a first column of identifiers and a 
+second column called *class* which is empty for the moment (only '.' for each sample). You can download this file using the 
+***y a-t-il une icone disquette prevue dans les GTN ??*** icon. 
 
 
 #### Prepare your sampleMetadata file
