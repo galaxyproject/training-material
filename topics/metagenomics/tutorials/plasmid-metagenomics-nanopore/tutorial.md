@@ -28,7 +28,7 @@ contributors:
 
 Pervasive use (and misuse) of antibiotics for human disease treatment, as well as for various agricultural purposes, has resulted in the evolution of multidrug resistant (MDR) pathogenic bacteria. The [Center for Disease Control estimates](https://www.cdc.gov/drugresistance/) that in the U.S. alone, every year at least 2 million people get an antibiotic-resistant infection, and at least 23,000 people die. Antibiotic resistance poses a major public health challenge, and its causes and mitigations are widely studied.
 
-Plasmids are small DNA molecules within a cell which are physically separated from chromosomal DNA and can replicate independently.
+Plasmids are small DNA molecules within a cell which are physically separated from chromosomal DNA and can replicate independently. They are most commonly found as small circular, double-stranded DNA molecules in bacteria.
 
 ![Depiction of plasmids](../../images/plasmid-metagenomics-nanopore/plasmids.png)
 
@@ -62,19 +62,21 @@ A schematic view of the workflow we will perform in this tutorial is given below
 
 {% include snippets/warning_results_may_vary.md %}
 
+In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for other types of datasets or other long-read sequencing platforms.
+
+
 # Obtaining and preparing data
 
-In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for other types of datasets or other long-read sequencing platforms.
 
 > ### {% icon comment %} Background: Nanopore sequencing
 >
 > Nanopore sequencing has several properties that make it well-suited for our purposes
 >
-> 1. Long-read sequencing technology offers simplified and less ambiguous genome assembly
-> 2. Long-read sequencing gives the ability to span repetitive genomic regions
-> 3. Long-read sequencing makes it possible to identify large structural variation
+> 1. Long-read sequencing technology offers **simplified** and less ambiguous genome **assembly**
+> 2. Long-read sequencing gives the ability to **span repetitive genomic regions**
+> 3. Long-read sequencing makes it possible to **identify large structural variations**
 >
-> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg) <br><br>
+> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample.") <br><br>
 >
 > (Image credit: [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
 {: .comment}
@@ -82,33 +84,13 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 
 ## Understanding our input data
 
-In this tutorial we are interested in determing the antimicrobial resistance genes.
+In this tutorial we are interested in reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
 
-As training data we use plasmids from a dataset (created by {% cite LiXie2018 %}) used for evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
+As training data we use plasmid dataset used by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
-
-> ### {% icon details %} More details about datasets
-> Overnight cultures (100 mL) were harvested and subjected to plasmid extraction using the QIAGEN Plasmid Midi Kit. The extracted plasmids were dissolved in ultrapure distilled water, and concentrations were measured by Qubit 3.0 Fluorometer with a dsDNA BR Assay Kit. The plasmids were stored in –20°C until library preparation.
->
-> Library preparation was performed using the Rapid Barcoding Sequencing Kit (SQK-RBK001) according to the standard protocol provided by the manufacturer (Oxford Nanopore). Briefly, 7.5-μL plasmid templates were combined with a 2.5-μL Fragmentation Mix Barcode (1 barcode for each sample). The mixtures were incubated at 30°C for 1 minute and at 75°C for 1 minute. The barcoded libraries were pooled together with designated ratios in 10 μL; 1 μL of RAD (Rapid 1D Adapter) was added to the pooled library and mixed gently; 0.2 μL of Blunt/TA Ligase Master Mix was added and incubated for 5 minutes at room temperature. The constructed library was loaded into the Flow Cell R9.4 (FLO-MIN106) on a MinION device and run with the SQK-RBK001_plus_Basecaller script of MinKNOW1.5.12 software. The run was stopped after 8 hours, and the flow cell was washed by a Wash Kit (EXP-WSH002) and stored in 4°C for later use.
->
-> To obtain high-quality short read data, paired-end (2 × 150 bp) libraries were prepared by the focused acoustic shearing method with the NEBNext Ultra DNA Library Prep Kit and the Multiplex Oligos Kit for Illumina (NEB). The libraries were quantified by employing quantitative PCR with P5-P7 primers, and they were pooled together and sequenced on the NextSeq 500 platform according to the manufacturer's protocol (Illumina).
->
-> Although a local basecaller script was used during the run, there was still a small amount of reads that were not basecalled due to the generation of raw data in a rapid mode. Albacore basecalling software (v1.0.3) was used to generate fast5 files harboring the 1D DNA sequence from fast5 files with only raw data in the tmp folder. Also, the read_fast5_basecaller.py script in Albacore was used to de-multiplex the 12 samples from basecalled fast5 files (except the files in fail folder) based on the 12 barcodes in SQK-RBK001. The Poretools toolkit was utilized to extract all the DNA sequences from fast5 to fasta format among the 12 samples, respectively (Poretools, RRID:SCR_015879).
->
-{: .details}
-
-> ### {% icon comment %} Dataset details
-> Because of the large size of the original datasets (1.15 GB) you are given 1 of the 12 plasmids
-> files.
-> <br><br>
-> This sequence file is 51 MB of nanopore sequences. The 10026 reads found in this file contain 49190798 nucleotides.
-> As mentioned before nanopore sequences are long reads and this is confirmed by a mean read length of 4906.3.
-{: .comment}
 
 ## Importing the data into Galaxy
 
-Now that we know what our input data is, let's get it into our Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Obtaining our data
 >
@@ -133,7 +115,7 @@ Now that we know what our input data is, let's get it into our Galaxy history:
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
-> 3. **Build a list collection**
+> 3. **Build a list collection** containing all 12 fasta files.
 >
 >    {% include snippets/build_list_collection.md %}
 >
