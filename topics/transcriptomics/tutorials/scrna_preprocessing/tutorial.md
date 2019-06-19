@@ -406,7 +406,7 @@ Let us annotate our BAM file with desired gene tags.
 > ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
 >
 > 1. **FeatureCounts** {%icon tool %} with the following parameters:
->    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **Filter BAM** {% icon tool %})
 >    - *"Specify strand information"*:`Unstranded`
 >    - *"Gene annotation file"*: `in your history`
 >        - {% icon param-file %} *"Gene annotation file"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`
