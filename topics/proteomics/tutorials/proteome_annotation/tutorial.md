@@ -30,10 +30,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) by Lacombe *et al., European Journal of Breath, 2018*.
-
+[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on {% cite Lacombe2018 %}
 
 Once identified and/or quantified using a MS-based approach, interpreting the proteome in a sample is an important step to characterize its content in terms of functional properties in order to extend the biological knowledge related to this sample. In this activity, we illustrate the annotation and the exploration of the human exhaled breath condensate (EBC) proteome by performing the following steps:
+
+
 > ### Agenda
 >
 >
@@ -44,7 +45,7 @@ Once identified and/or quantified using a MS-based approach, interpreting the pr
 
 # Get Input Datasets
 
-For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from Lacombe *et al.* and two others EBC proteomes previously published.
+For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
