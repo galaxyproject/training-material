@@ -214,6 +214,8 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >      version: 1.1
 >    - src: geerlingguy.pip
 >      version: 1.0.0
+>    - src: uchida.miniconda
+>      version: 0.3.0
 >    - src: https://github.com/usegalaxy-eu/ansible-role-supervisor
 >      name: usegalaxy-eu.supervisor
 >    - src: https://github.com/usegalaxy-eu/ansible-certbot
@@ -320,7 +322,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 1. Open `playbook.yml` with your text editor and set the following:
 >
 >    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install additional necessary dependencies: `git`, `python-virtualenv`, `make`
->    - Add the role `galaxyproject.galaxy` to the roles to be executed, at the end
+>    - Add the role `galaxyproject.galaxy`  to the roles
+>    - Add the role `uchida.miniconda` at the end
 >
 >    > ### {% icon question %} Question
 >    >
@@ -341,6 +344,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >       become: true
 >    > >       become_user: postgres
 >    > >     - galaxyproject.galaxy
+>    > >     - uchida.miniconda
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -364,6 +368,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_commit_id`           | `release_19.05`                    | The git reference to check out, which in this case is the branch for Galaxy Release 19.05
 >    `galaxy_config_style`        | `yaml`                             | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                             | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `miniconda_prefix`           | `{{ galaxy_tool_dependency_dir }}/_conda` | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    {% endraw %}
 >
 >
@@ -406,12 +411,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
 >    > > galaxy_file_path: /data
->    > > galaxy_user:
->    > >   name: galaxy
->    > >   shell: /bin/bash
+>    > > galaxy_user: {name: galaxy, shell: /bin/bash}
 >    > > galaxy_commit_id: release_18.09
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
+>    > > galaxy_file_path: /data
+>    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    > >
 >    > > galaxy_config:
 >    > >   galaxy:
