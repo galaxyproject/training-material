@@ -201,7 +201,7 @@ ranges, or *Noise filter* (as in this hands-on) not to use low intensity measure
 {: .hands_on}
 
 At this step, you obtained a dataset collection containing one RData file per sample, with independant lists of ions. Although this
-is already a nice result, what you may want now is to get all this files together to identify what are the common ions between samples.
+is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
 To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
 need to group your individual RData files into a single one. And by the way you may also want to get a grasp of your samples' 
 chromatograms before going any further (note that you can also plot chromatograms *before* even performing you chromatographic peak
@@ -266,6 +266,7 @@ second column called *class* which is empty for the moment (only '.' for each sa
 ***y a-t-il une icone disquette prevue dans les GTN ??*** icon. 
 >
 {: .tip}
+
 
 #### Prepare your sampleMetadata file
 
@@ -332,10 +333,11 @@ XCMS by groups, but we do plan to use it to plot coloured chromatograms.
 >
 > In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift (see later in 
 the tutorial). 
-> Once we completed to fill the table, we saved the file, minding to stick with the original format. Hence, our sampleMetadata was ready to 
+> Once we completed the table filling, we saved the file, minding to stick with the original format. Hence, our sampleMetadata was ready to 
 be uploaded into Galaxy. 
 >
 {: .tip}
+
 
 #### Upload the sampleMetada file with 'Get data'
 
@@ -351,6 +353,17 @@ be uploaded into Galaxy.
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
+> 2. Check the data type of your imported files. 
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that 
+it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file 
+not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns). 
+>    > Thus, we highly recommand that you always take a second to check the data type after the upload. This way you can handle the problem
+right away if you appear to get one of these obvious issues. 
+>    {: .comment}
+>
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -360,8 +373,11 @@ be uploaded into Galaxy.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. At least 2, with the identify and the class. But as many as you need to describe the potencial variablity of your samples (ex: the person in charge of the sample preparation, the temperature, ...). The statistic analysis will expose the relevant parameters.
-> > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with xmcs to detect the metabolite across the samples. So it's important to separate the samples and the QC. If you don't have any specific class, just fill everywhere with `sample` or a dot `.`
+> > 1. At least 2, with the identifers and the class column. But as many as you need to describe the potential variablity of your samples 
+(*e.g.* the person in charge of the sample preparation, the temperature...). The statistical analysis will expose the relevant parameters.
+> > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples. 
+So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
+that you want to consider in XCMS preprocessing, just fill everywhere with `sample` or a dot `.` for example. 
 > >
 > {: .solution}
 >
@@ -369,79 +385,83 @@ be uploaded into Galaxy.
 
 
 
-### Sub-step with **xcms findChromPeaks Merger**
+### Going from a dataset collection to a single file
 
-> ### {% icon hands_on %} Hands-on: Task description
+To merge your individual RData files into one single RData to be used for the grouping step that will follow, you need to use the 
+**xcms findChromPeaks Merger** module. For this step, you only need your dataset collection, plus a sampleMetadata **if you want to 
+consider groups in the *xcms groupChromPeaks (group)* step that will follow**. 
+
+If you do not have specific reasons to consider groups in your extraction process, then you do not need a sampleMetadata file at this step. 
+**Please note that if you provide a sampleMetadata file with the second column reporting several groups, this group information is then taken into
+consideration during the grouping step.**
+
+In the case of our tutorial data, we do not want to separate the samples according to groups, so we do not provide the sampleMetadata when executing
+the Merger module. 
+
+
+> ### {% icon hands_on %} Hands-on: xcms findChromPeaks Merger
 >
-> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
+> Execute **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `The one from the previous 'findChromPeaks' step`
+>    - *"Sample metadata file"*:
+>        - Leave this parameter to `Nothing selected`
 >
->    ***TODO***: *Check parameter descriptions*
+{: .hands_on}
+
+The module generates a single RData file containing information from all the samples in your dataset collection input. 
+
+### Getting an overview of your samples' chromatograms
+
+You may be interested in getting an overview of what your samples' chromatograms look like, for example to see if some of
+your samples have distinct overall characteristics (unexpected chromatographic peaks, huge overall intensity...). 
+
+Note that you can also check the chromatograms right after the 'MSnbase readMSData' step. In particular, this can help you defining retention time 
+ranges that you may want to discard from the very beginning. 
+
+> ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> Execute **xcms plot chromatogram** {% icon tool %} with the following parameters:
+>    - *"RData file"*: `The RData file from the 'Merger' step`
+>    - *"Sample metadata file"*: `The sampleMetadata file you uploaded previously`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you provided in the Merger step a sampleMetadata with a second column containing groups, you will get colouring according to 
+these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This module generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provided groups (as in our 
+hands-on), you obtain two plots: one with colours based on provided groups, one with one colour per sample. 
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![Base Peak Intensity Chromatograms](../../images/BPC_9samp.png)
 
-### Sub-step with **xcms plot chromatogram**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Second XCMS step: determining shared ions across samples
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The first peak picking step gave us lists of ions for each sample. However, what we want now is a single matrix of ions intensities for all samples.
+To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called 
+'grouping'.
 
-## Sub-step with **xcms groupChromPeaks (group)**
+The group function aligns ions extracted with close retention time and close 'm over z' values in the different samples. In order to define this 
+similarity, we have to define on one hand a 'm over z' windows and on the other hand a retention time window. A binning is then performed in the 
+mass domain. The size of the bins is called width of overlapping 'm over z' slices. You have to set it according to mass spectrometer resolution. 
 
-> ### {% icon hands_on %} Hands-on: Task description
+Then, a kernel density estimator algorithm is used to detect region of retention time with high density of ions. This algorithm uses a gaussian 
+model to group together peaks with simillar retention time. 
+
+The inclusivness of ions in a group is defined by the standard deviation of the gaussian model called bandwith. This parameter has a large weight 
+on the resulting matrix. It must be chosen according to the quality of the chromatography.
+
+To be valid, the number of ions in a group must be greater than a given number of samples. Either a percentage of the total number of samples 
+or an absolute value of samples can be given. This is defined by the user.
+
+
+
+> ### {% icon hands_on %} Hands-on: xcms groupChromPeaks (group)
 >
 > 1. **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
@@ -461,6 +481,18 @@ be uploaded into Galaxy.
 >    {: .comment}
 >
 {: .hands_on}
+
+
+This gouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses. 
+User has to check the effect of parameter values on the result.
+
+In order to check the result of group function, a pdf file is created and provides for all 'm over z' slices the gaussian model which width is 
+defined by bandwith parameter. Each red dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line 
+width corresponds to bandwith parameter.
+
+
+
+
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
@@ -678,7 +710,13 @@ be uploaded into Galaxy.
 # W4M 3-tables format
 
 To do: add a complement about the 3-table format, depending on the information already given in xcms part.
-Inparticular, a focus of mandatory information for the present tutorial.
+In particular, a focus on mandatory information for the present tutorial.
+
+Adding a Hands-on to:
+- copy the 3 tables into a new history (with question: what are the 3 datasets you need to copy)
+- rename the 3 tables into something shorter
+
+
 
 # Data processing: quality checks, normalisation, data filtering
 
