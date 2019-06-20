@@ -242,40 +242,100 @@ Note that you can either:
   2. fill it using your favorite table editor (Excel, Libre Office)
   3. upload it within Galaxy
 
-
-#### Get the right template with 'xcms get a sampleMetadata file'
-
-In the case of this tutorial, we already prepared a sampleMetadata file with all the needed information. Nevertheless, we provide here 
+> ### {% icon tip %} Tip: Get the right template with 'xcms get a sampleMetadata file'
+>
+> In the case of this tutorial, we already prepared a sampleMetadata file with all the needed information. Nevertheless, we provide here 
 an optional hands-on if you want to check how to get a template to fill, with the two following advantages:
-- you will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
-- you will have a file with the right format (tabulation-separated text file) that only need to be filled with the information you want. 
-
-> ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
+> - you will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
+> - you will have a file with the right format (tabulation-separated text file) that only need to be filled with the information you want. 
 >
-> Execute **xcms get a sampleMetadata file** {% icon tool %} that you will find in the **XXXXXXXXX** section. You only need to give 
+> > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
+> >
+> > Execute **xcms get a sampleMetadata file** {% icon tool %} that you will find in the **XXXXXXXXX** section. You only need to give 
 the dataset collection you obtained from the previous 'xcms findChromPeaks (xcmsSet)' step:
->    - *"RData file"*:
->        - Click on the folder icon to select the Dataset collection: `The one from the previous 'findChromPeaks' step`
+> >    - *"RData file"*:
+> >        - Click on the folder icon to select the Dataset collection: `The one from the previous 'findChromPeaks' step`
+> >
+> > An easy step for an easy sampleMetadata filling!
+> >
+> >
+> {: .hands_on}
 >
-> An easy step for an easy sampleMetadata filing!
->
->
-{: .hands_on}
-
-From this module, you will obtain a 'tabular' file (meaning a tabulation-separated text file) with a first column of identifiers and a 
+> From this module, you will obtain a 'tabular' file (meaning a tabulation-separated text file) with a first column of identifiers and a 
 second column called *class* which is empty for the moment (only '.' for each sample). You can download this file using the 
 ***y a-t-il une icone disquette prevue dans les GTN ??*** icon. 
-
+>
+{: .tip}
 
 #### Prepare your sampleMetadata file
 
-Blablabla
+The sampleMetadata file is a tabulation-separated table, in text format. This table have to be filled by the user. You can use any 
+software you find appropriate to contruct your table, as long as you save your file in a compatible format. For example, you can
+use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
 > ### {% icon comment %} Comment
 >
 > The file have to be a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
+> If you use a spreadsheet software, be sure to change the default format to **Text (Tab delimited)** or equivalent. 
 {: .comment}
 
+Once your sampleMetadata table is ready, you can proceed to the upload. In this tutorial we already prepared the table for you ;)
+
+> ### {% icon tip %} Tip: How did we fill the sampleMetadata using the template obtained from Galaxy?
+>
+> For this tutorial, we already provide the sampleMetadata file, so you only have to get the table and upload it to Galaxy. Here we 
+simply present how we filled the provided file from the template we generated in Galaxy. 
+>
+> First, we used the 'xcms get a sampleMetadata file' module as mentionned in the previous tip box. We obtained the following table:
+>
+> sample_name | class
+> --- | ---
+> QC1_014 | .
+> QC1_008 | .
+> QC1_002 | .
+> HU_neg_192 | .
+> HU_neg_173 | .
+> HU_neg_157 | .
+> HU_neg_123 | .
+> HU_neg_090 | .
+> HU_neg_048 | .
+>
+> We used a spreadsheet software to open the file. First, we completed the class column. We do not plan to use this column to process 
+XCMS by groups, but we do plan to use it to plot coloured chromatograms. 
+>
+> sample_name | class
+> --- | ---
+> QC1_014 | QC
+> QC1_008 | QC
+> QC1_002 | QC
+> HU_neg_192 | sample
+> HU_neg_173 | sample
+> HU_neg_157 | sample
+> HU_neg_123 | sample
+> HU_neg_090 | sample
+> HU_neg_048 | sample
+>
+> This way, we will be able to colour the samples depending on the sample type (QC or sample). 
+> Next, we added columns with interesting or needed information, as following: 
+>
+> sample_name | class | polarity | sampleType | injectionOrder | batch | osmolality | sampling | age | bmi | gender
+> --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+> QC1_014 | QC | 0 | pool | 185 | ne1 | NA | NA | NA | NA | NA
+> QC1_008 | QC | 0 | pool | 105 | ne1 | NA | NA | NA | NA | NA
+> QC1_002 | QC | 0 | pool | 27 | ne1 | NA | NA | NA | NA | NA
+> HU_neg_192 | sample | 0 | sample | 165 | ne1 | 1184 | 8 | 31 | 24.22 | Male
+> HU_neg_173 | sample | 0 | sample | 148 | ne1 | 182 | 7 | 55 | 20.28 | Female
+> HU_neg_157 | sample | 0 | sample | 137 | ne1 | 504 | 7 | 43 | 21.95 | Female
+> HU_neg_123 | sample | 0 | sample | 100 | ne1 | 808 | 5 | 49 | 24.39 | Male
+> HU_neg_090 | sample | 0 | sample | 75 | ne1 | 787 | 4 | 46 | 19.79 | Male
+> HU_neg_048 | sample | 0 | sample | 39 | ne1 | 997 | 3 | 39 | 19.49 | Female
+>
+> In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift (see later in 
+the tutorial). 
+> Once we completed to fill the table, we saved the file, minding to stick with the original format. Hence, our sampleMetadata was ready to 
+be uploaded into Galaxy. 
+>
+{: .tip}
 
 #### Upload the sampleMetada file with 'Get data'
 
