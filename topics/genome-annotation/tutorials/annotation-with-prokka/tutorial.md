@@ -116,6 +116,5 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      - gene name
 >      - product name
 >      - you can download the FASTA sequence by clicking on the disk icon
-
 > ![JBrowse](../../images/jbrowse6.png)
 {: .hands_on}
