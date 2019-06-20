@@ -48,11 +48,14 @@ Prokka requires assembled contigs.
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Import Sample Data.**
->   - Obtain data directly from Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1156405.svg)](https://doi.org/10.5281/zenodo.1156405)
->   - Download `contigs.fasta`
->   - Upload the file to your history.
-> <br><br>
+> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1156405) or from the shared data library
+>
+>    ```
+>    https://zenodo.org/record/1156405/files/contigs.fasta
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
