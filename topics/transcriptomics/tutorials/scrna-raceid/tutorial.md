@@ -257,6 +257,7 @@ Four histograms are generated with the top line giving the raw expression data f
 >(Bottom-Left) The lower-tail of our previous distribution has been trimmed off, which gives an even normal-looking distribution centred around $$10^{3.4}$$ transcripts per cell.
 >
 >(Bottom-Right) Instead of a distribution we have a single bar that indicates that all of our cells have the exact number of features. The red line displays the number of features across all cells (~ $$10^{3.3}$$).
+>
 {: .details}
 
 > ### {%icon comment %} Comment: Choosing Filtering Thresholds
@@ -303,18 +304,18 @@ The filtered distributions are what are expected of a properly filtered and norm
 
 # Normalising and Clustering Cells
 
-Normalisation permits the comparison of different samples by refactoring out uninformative variability relating to the size of sample, and other sources of unwanted variability. Clustering, which groups or categorises cells based on their similarity,  is one of the most crucial stages in the analysis after normalisation.
+Normalisation permits the comparison of different samples by refactoring out uninformative variability relating to the size of sample, and other sources of unwanted variability. Clustering, which groups or categorises cells based on their similarity, and is a crucial stage in the analysis after normalisation.
 
-The effectiveness of the clustering relies on the effectiveness of the normalisation, and the ideal method to normalise single cell RNA-seq data is still a field of active research. There are two main reasons normalisation is not a straightforward process, related to two potential sources of uncertainty: technological and biological variability.
+The effectiveness of the clustering relies on the normalisation. The ideal method to normalise single cell RNA-seq data is still a field of active research as  it is not a straightforward process due to two potential sources of uncertainty: technological and biological variability.
 
 
 ## Biological Variation
 
 ![Sources of variation]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_cellcycle.svg %} "Sources of unwanted biological variation: (Left) Transcriptional Bursting, and (Right) Cell-cycle Variation")
 
-Transcriptional bursting is a stochastic model for the transcription process in a cell, where transcription does not occur as a smooth or continuous process but occurs in spontaneous and discrete 'bursts' thought to be only loosely associated with chromatin conformation/availability. It is an effect that is not seen in bulk RNA-seq due to the smoothing effect of measuring average gene expression across a tissue. However, the effect is more pronounced in single-cell and it is hard to model against.
+Transcriptional bursting is a stochastic model for the transcription process in a cell, where transcription does not occur as a smooth or continuous process but occurs in spontaneous and discrete 'bursts' thought to be only loosely associated with chromatin conformation/availability. It is an effect that is not seen in bulk RNA-seq due to the smoothing effect of measuring average gene expression across a tissue. The effect is more pronounced in single-cell and is hard to model against.
 
-On the other hand, cell-cycle variation is well defined and can be modelled against. As the cell grows from the G1 to the M phase, the amount of mRNA transcribed grows with it, meaning that cells in the later stages of their cycle are more likely to produce more transcripts of a given gene than a cell of the same type in the earlier stages of its cycle. Such differences can give false variation that would cluster two cells of the same type but at different time-points separately. Fortunately, there are a well-defined set of genes whose expression is known to co-vary with the cell-cycle, and thus this effect can be modelled out.
+On the other hand, cell-cycle variation is well defined and can be modelled against. As the cell grows from the G1 to the M phase, the amount of mRNA transcribed grows, meaning that cells in the later stages of their cycle are more likely to produce more transcripts of a given gene. Such differences can give false variation that would cluster two cells of the same type but at different time-points separately. Fortunately, there are a well-defined set of genes whose expression is known  to co-vary with the cell-cycle, thus this effect can be modelled out.
 
 
 ## Technical Variation
@@ -329,6 +330,7 @@ Technical variation appears in three main forms: *Library size variation*, *Ampl
 >1. **Amplification bias** stems from an uneven amplification of certain transcripts of a cell over others, giving a false number of reads for the number of mRNA molecules actually observed in the cell. Unique Molecular Identifiers can significantly reduce this bias, and are covered more extensively in the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on.
 >
 >1. **Dropout events** are the zero counts that are prevalent in the data due to the reduced sequencing sensitivity in detecting reads, which yields many false negatives in the detection of genes, often resulting in over 80% of the count values in the count matrix being zero. A major point to take into account is that some of these zeroes are *real* (i.e. no transcripts of that gene were detected in that cell) and some of these are *false* (i.e. the transcripts were never captured due to the low sequencing depth). Modelling this duality in the data and mitigating against it is one of the biggest challenges of normalising single-cell data.
+>
 {: .details}
 
 
@@ -395,6 +397,7 @@ The first three plots in the PDF report tell us about the stability/reliability 
 >For example, if *k=2*, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of *k* may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of *k*. As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis.
 >
 >The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the Jaccard distance, which is a fractional quantity that measures the dissimilarity between two sets as measured by overlap divided by the union of both sets.
+>
 {: .details}
 
 > ### {% icon details %} Details: Jaccard Distance
@@ -407,7 +410,6 @@ The first three plots in the PDF report tell us about the stability/reliability 
 > In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on it's similarity to other sets.
 >
 > ![Jaccard]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_jaccard.svg %} "Example Jaccard Distance calculation")
->
 >
 {: .details}
 
@@ -443,6 +445,7 @@ The next three plots attempts to do this by describing the variation of the gene
 >This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1 \cdot 10^{-3}$$ by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 >
 >* (Bottom-Left) A bar plot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
+>
 {: .details}
 
 
@@ -567,7 +570,8 @@ The main issue with visualising this data is that as before, we have C cells tha
 > ### {% icon details %} Details: Dimension Reduction
 >![Dim red]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_dimred.svg %} "Reducing a set of 4 observations from 3D to 2D space, whilst approximating the 3D relationships")
 >
->Dimension reduciton aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.
+>Dimension reduction aims to preserve the distances and relationship of the higher dimensional (G-dimensional) data in a lower dimensional (usually 2D) space.
+>
 {: .details}
 
 Preserving these higher dimensional distances in lower dimensional space is a complex and ongoing challenge in computer science, but there are various commonly-used methods such as PCA and tSNE often encountered in single cell RNA-seq datasets. For more information, see the box below.
