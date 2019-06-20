@@ -15,7 +15,7 @@ questions:
 objectives:
 - Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments
 time_estimation: 60M
-key_points:
+key_points: how to annotate a list of proteins ID, Gene Ontology Enrichement analysys, ID conversion 
 
 contributors:
 - vloux
