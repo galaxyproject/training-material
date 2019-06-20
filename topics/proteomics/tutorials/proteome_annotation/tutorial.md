@@ -16,7 +16,7 @@ questions:
 - How to compare your proteome with other studies?
 objectives:
 - Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments
-time_estimation: 60 minutes
+time_estimation: 60M
 key_points:
 
 contributors:
