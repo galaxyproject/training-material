@@ -57,7 +57,7 @@ This workflow takes as input **TODO** and perform several steps: pre-processing,
 {: .agenda}
 
 
-# Preprocessing with xcms
+# Preprocessing with XCMS
 
 The first step in the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
 
@@ -73,7 +73,7 @@ It is composed of R functions able to extract, filter, align and fill gap, with 
 adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well
 adapted to define workflows, one of the key points of Galaxy:
 
-![Preprocessing of the raw data with xcms (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
+![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
 
 
 ## Importing the LC/MS data into Galaxy
@@ -122,11 +122,11 @@ You should have in your history a green Dataset collection (`sacurine`) with 9 d
 
 Their size can be checked in their information panel (i)
 
-## Data preparation for xcms
+## Data preparation for XCMS
 
-This first step is only meant to read your mzXML and generate an object usable by xcms.
+This first step is only meant to read your mzXML and generate an object usable by XCMS.
 
-**MSnbase readMSData** takes as input your raw files and prepares RData files for the first xcms step.
+**MSnbase readMSData** takes as input your raw files and prepares RData files for the first XCMS step.
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
@@ -150,7 +150,7 @@ This first step is only meant to read your mzXML and generate an object usable b
 >
 {: .question}
 
-## First xcms step: **peak picking**
+## First XCMS step: **peak picking**
 
 Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
 independently. The idea here is, for each peak, to proceed to chromatographic peak detection. 
