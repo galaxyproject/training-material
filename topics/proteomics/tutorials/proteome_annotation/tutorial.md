@@ -5,8 +5,6 @@ title: Annotating a protein list identified by LC-MS/MS experiments
 
 zenodo_link: 
 - 'https://zenodo.org/record/2650868'
-- 'https://zenodo.org/record/2650874'
-- 'https://zenodo.org/record/2650872'
 
 questions:
 - How to filter out technical contaminants?
@@ -58,12 +56,11 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 >   Bredberg. 
 >
 > You can import the 3 data files directly with these links in the galaxy upload menu :
-> 
+> ```
 > https://zenodo.org/record/2650868/files/Lacombe_et_al_2017_OK.txt
-> 
 > https://zenodo.org/record/2650874/files/Mucilli.txt
-> 
 > https://zenodo.org/record/2650872/files/Bredberg.txt
+> ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
