@@ -217,7 +217,7 @@
   "url": "https://galaxyproject.github.io//training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html",
   "timeRequired": "PT1H",
   "keywords": "prokaryote",
-  "description": "Genome annotation with Prokka\\nThe questions this  addresses are:\n - How to annotate a bacterial genome?\n - How to visualize annoted genomic features?\n\n\\nThe objectives are:\n - Load genome into Galaxy\n - Annotate genome with Prokka\n - View annotations in JBrowse\n\n",
+  "description": "Genome annotation with Prokka\\nThe questions this  addresses are:\n - How can we annotate a bacterial genome?\n - How can we visualize annotated genomic features?\n\n\\nThe objectives are:\n - Load genome into Galaxy\n - Annotate genome with Prokka\n - View annotations in JBrowse\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -293,9 +293,9 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>How to annotate a bacterial genome?</li>
+            <li>How can we annotate a bacterial genome?</li>
             
-            <li>How to visualize annoted genomic features?</li>
+            <li>How can we visualize annotated genomic features?</li>
             
             </ul>
 
@@ -467,13 +467,52 @@
       </blockquote>
     </li>
     <li>
-      <p><strong>Import Sample Data.</strong></p>
-      <ul>
-        <li>Obtain data directly from Zenodo: <a href="https://doi.org/10.5281/zenodo.1156405"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1156405.svg" alt="DOI" /></a></li>
-        <li>Download <code class="highlighter-rouge">contigs.fasta</code></li>
-        <li>Upload the file to your history.
-<br /><br /></li>
-      </ul>
+      <p>Import the following files from <a href="https://doi.org/10.5281/zenodo.1156405">Zenodo</a> or from the shared data library</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1156405/files/contigs.fasta
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
     </li>
   </ol>
 
@@ -490,12 +529,6 @@
     <li><strong>Prokka</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters (leave everything else unchanged)
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“contigs to annotate”</em>: <code class="highlighter-rouge">contigs.fasta</code></li>
-        <li><em>“Locus tag prefix (–locustag)”</em>: <code class="highlighter-rouge">P</code></li>
-        <li><em>“Force GenBank/ENA/DDJB compliance (–compliant)”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Sequencing Centre ID (–centre)”</em>: <code class="highlighter-rouge">V</code></li>
-        <li><em>“Genus Name (–genus)”</em>: <code class="highlighter-rouge">Staphylococcus</code></li>
-        <li><em>“Species Name (–species)”</em>: <code class="highlighter-rouge">aureus</code></li>
-        <li><em>“Use genus-specific BLAST database”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -531,7 +564,6 @@
         </li>
         <li><em>“Produce Standalone Instance”</em>: <code class="highlighter-rouge">Yes</code></li>
         <li><em>“Genetic Code”</em>: <code class="highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code></li>
-        <li><em>“JBrowse-in-Galaxy Action”</em>: <code class="highlighter-rouge">New JBrowse Instance</code></li>
         <li>
           <p>Click on <code class="highlighter-rouge">Insert Track Group</code></p>
 
@@ -546,13 +578,6 @@ We will choose to display the annotations (the Prokka.gff file).</p>
                   <ul>
                     <li><em>“Track Type”</em>: <code class="highlighter-rouge">GFF/GFF3/BED/GBK Features</code></li>
                     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="highlighter-rouge">gff</code> output of <strong>Prokka</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-                    <li><em>“JBrowse Track Type [Advanced]”</em>: <code class="highlighter-rouge">Canvas Features</code></li>
-                    <li>Click on “JBrowse Styling Options [Advanced]”
-                      <ul>
-                        <li><em>“JBrowse style.label”</em>: <code class="highlighter-rouge">product,name,id</code></li>
-                      </ul>
-                    </li>
-                    <li><em>“Track Visibility”</em>: <code class="highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
               </ul>
@@ -572,15 +597,14 @@ We will choose to display the annotations (the Prokka.gff file).</p>
       <ol>
         <li>Click on the tick boxes on the left to display the tracks</li>
         <li>Select contig 1 in the drop down box. You can only see one contig displayed at a time.</li>
-        <li>Zoom out by clicking on the <code class="highlighter-rouge">minus</code> button to see sequence reads and their coverage (the grey graph)</li>
-        <li>Zoom in by clicking on the <code class="highlighter-rouge">plus</code> button to see annotations.</li>
+        <li>Zoom by clicking on the <code class="highlighter-rouge">plus</code> and <code class="highlighter-rouge">minus</code> buttons.</li>
         <li>JBrowse displays the sequence and a 6-frame amino acid translation.</li>
         <li>Right click on a gene/feature annotation (the bars on the annotation track), then select View Details to see more information.
           <ul>
             <li>gene name</li>
             <li>product name</li>
-            <li>you can download the FASTA sequence by clicking on the disk icon.
-<img src="images/jbrowse6.png" alt="JBrowse" /></li>
+            <li>you can download the FASTA sequence by clicking on the disk icon
+<img src="../../images/jbrowse6.png" alt="JBrowse" /></li>
           </ul>
         </li>
       </ol>
