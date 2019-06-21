@@ -150,7 +150,7 @@ This first step is only meant to read your mzXML and generate an object usable b
 >
 {: .question}
 
-## First XCMS step: **peak picking**
+## First XCMS step: *peak picking*
 
 Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
 independently. The idea here is, for each peak, to proceed to chromatographic peak detection. 
@@ -446,39 +446,27 @@ The first peak picking step gave us lists of ions for each sample. However, what
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called 
 'grouping'.
 
-The group function aligns ions extracted with close retention time and close 'm over z' values in the different samples. In order to define this 
-similarity, we have to define on one hand a 'm over z' windows and on the other hand a retention time window. A binning is then performed in the 
-mass domain. The size of the bins is called width of overlapping 'm over z' slices. You have to set it according to mass spectrometer resolution. 
+The group function aligns ions extracted with close retention time and close 'm over z' (m/z) values in the different samples. In order to define this 
+similarity, we have to define on one hand a m/z windows and on the other hand a retention time window. A binning is then performed in the 
+mass domain. The size of the bins is called width of overlapping m/z slices. You have to set it according to your mass spectrometer resolution. 
 
 Then, a kernel density estimator algorithm is used to detect region of retention time with high density of ions. This algorithm uses a gaussian 
-model to group together peaks with simillar retention time. 
+model to group together peaks with similar retention time. 
 
-The inclusivness of ions in a group is defined by the standard deviation of the gaussian model called bandwith. This parameter has a large weight 
-on the resulting matrix. It must be chosen according to the quality of the chromatography.
-
-To be valid, the number of ions in a group must be greater than a given number of samples. Either a percentage of the total number of samples 
-or an absolute value of samples can be given. This is defined by the user.
-
-
+The inclusion of ions in a group is defined by the standard deviation of the gaussian model, called bandwith. This parameter has a large weight 
+on the resulting matrix. It must be chosen according to the quality of the chromatography. To be valid, the number of ions in a group must be greater 
+than a given number of samples. Either a percentage of the total number of samples or an absolute value of samples can be given. This is defined by the user.
 
 > ### {% icon hands_on %} Hands-on: xcms groupChromPeaks (group)
 >
-> 1. **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> Execute **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+>    - *"RData file"*: `The RData file from the 'Merger' step`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
 >        - *"Width of overlapping m/z slices"*: `0.01`
->    - *"Get the Peak List"*: `Yes`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
+>    - *"Get the Peak List"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> You can leave the other parameters to zero. 
 >
 {: .hands_on}
 
@@ -486,25 +474,26 @@ or an absolute value of samples can be given. This is defined by the user.
 This gouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses. 
 User has to check the effect of parameter values on the result.
 
-In order to check the result of group function, a pdf file is created and provides for all 'm over z' slices the gaussian model which width is 
-defined by bandwith parameter. Each red dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line 
-width corresponds to bandwith parameter.
+In order to check the result of group function, a pdf file is created and provides for all m/z slices the gaussian model which width is 
+defined by the bandwith parameter. Each red dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line 
+width corresponds to the bandwith parameter.
 
+Hear is an example of two m/z slides obtained from the hands-on:
 
+![plotChromPeakDensity.pdf](../../images/group_9samp.png)
 
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Look at the '283.1127 - 283.1163' m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?
+> 2. Look at the '284.1198 - 284.1253' m/z slice. What do you think could have happened if you had used a smaller bandwidth value?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
+the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.5) to consider a peak group. 
+> > 2. If the bandwidth value had been set to a smaller value, the density peak width would have been smaller. With a small enough bandwidth value,
+there could have been two density peaks instead of one under the current first density peak. Thus, the 
 > >
 > {: .solution}
 >
