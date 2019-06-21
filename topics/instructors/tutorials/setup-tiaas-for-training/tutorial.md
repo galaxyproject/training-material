@@ -21,7 +21,7 @@ contributors:
 
 ![TIaaS Logo](../../images/tiaas-logo.png){: width="500px"}
 
-UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use UseGalaxy.eu with a private queue for your training event. Your trainees' jobs won't wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private Galaxy combined with a public Galaxy that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the EU admins, rather than feeling the stress of debugging and fixing your private Galaxy.
+UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use UseGalaxy.eu with a private queue for your training event. Your trainees' jobs won't wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private Galaxy combined with a public Galaxy that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the UseGalaxy.eu admins, rather than feeling the stress of debugging and fixing your private Galaxy.
 
 > ### Agenda
 >
@@ -34,19 +34,19 @@ UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short
 
 # Identify if TIaaS is Appropriate For Your Training
 
-First consider the requirements for your training to see if TIaaS@EU is a good fit for you:
+First consider the requirements for your training to see if TIaaS from UseGalaxy.eu is a good fit for you:
 
-- Do you need really special tools that are not already available on EU?
-  - The EU server supports most training workflows and has one of the largest toolboxes
+- Do you need really special tools that are not already available on UseGalaxy.eu?
+  - The UseGalaxy.eu server supports most training workflows and has one of the largest toolboxes
   - But we only install publicly available and open tools: [usegalaxy.eu tool repository](https://github.com/usegalaxy-eu/usegalaxy-eu-tools)
   - If you need something special you might want to [contact the admins](mailto:contact@usegalaxy.eu), and they can potentially accomodate your needs.
 - Do you need extra guarantees that the server will be online?
-  - The EU server has good uptime for a server run by an academic group, but it cannot make promises regarding availability.
+  - The UseGalaxy.eu server has good uptime for a server run by an academic group, but it cannot make promises regarding availability.
   - Additionally this server can experience occasional slow downs due to usage by other groups and users. If you need more guarantees, please find an alternative.
 
 # How TIaaS Works
 
-We have several groups of VMs attached to UseGalaxy.eu that run user jobs. For trainings we attach a new group of VMs that is specially labelled for that training. When normal users run tools on our server, these jobs are instructed to avoid the training pools by default.
+We have several groups of virtual machines (VMs) attached to UseGalaxy.eu that run user jobs. For trainings we attach a new group of VMs that is specially labelled for that training. When normal users run tools on our server, these jobs are instructed to avoid the training pools by default.
 
 When your users join a training, using a special URL provided to you, they then are placed in a special training group. Their jobs will then preferentially run on a training machine, and, in the event there is no more capacity, they will run on the main queue. If a spot on a training VM opens up first, they will run there rather than continuing to wait in the main queue.
 
@@ -56,9 +56,9 @@ When your users join a training, using a special URL provided to you, they then 
 >
 > 1. [Fill out the form](https://usegalaxy.eu/request-tiaas)
 >
-> 2. The EU admin team will review the request and get in touch with you as needed to identify the compute resources you need for your training
+> 2. The UseGalaxy.eu admin team will review the request and get in touch with you as needed to identify the compute resources you need for your training
 >
-> 3. The EU admin team will inform you of the URL you should provide to your participants during the training. They can open this URL and they will be added to the special training group
+> 3. The UseGalaxy.eu admin team will inform you of the URL you should provide to your participants during the training. They can open this URL and they will be added to the special training group
 >
 {: .hands_on}
 
@@ -97,7 +97,7 @@ It shows:
 
 # Before Your Training
 
-1. Run through your planned trainings on the EU server to ensure everything is available including data libraries and tools.
+1. Run through your planned trainings on the UseGalaxy.eu server to ensure everything is available including data libraries and tools.
 2. If anything is missing, contact the admins via [Gitter](https://gitter.im/usegalaxy-eu/Lobby) or [Email](mailto:contact@usegalaxy.eu) and they will work to resolve the missing training material resources.
 3. Follow the rest of the training material's [guide to preparing a workshop]({{ site.baseurl }}{% link topics/instructors/tutorials/organize-workshop/tutorial.md %})
 
