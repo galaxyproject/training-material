@@ -182,20 +182,19 @@ With the necessary background in place, you are ready to install Galaxy with Ans
 
 To proceed from here it is expected that:
 
-- You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
+1. You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
+   > ### {% icon comment %} Comment: Running Ansible on your remote machine
+   > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to pass `ansible_connection=local`. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+   {: .comment}
+2. Your `ansible` version is `>=2.7`, you can check by running `ansible --version`
+3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
+4. In your inventory file, it uses the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
+5. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
 
-  > ### {% icon comment %} Comment: Running Ansible on your remote machine
-  > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to pass `ansible_connection=local`. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
-  {: .comment}
-
-- You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers." You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.
-
-- In your inventory file, it uses the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
 
 ## Requirements
 
 We have codified all of the dependencies you will need into a yaml file that `ansible-galaxy` can install
-
 
 > ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
 >
@@ -412,7 +411,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_root: /srv/galaxy
 >    > > galaxy_file_path: /data
 >    > > galaxy_user: {name: galaxy, shell: /bin/bash}
->    > > galaxy_commit_id: release_18.09
+>    > > galaxy_commit_id: release_19.05
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
 >    > > galaxy_file_path: /data
@@ -435,7 +434,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```yaml
->    galaxy:
+>    galaxy_config:
+>      galaxy:
 >      ...
 >      uwsgi:
 >        # Default values
@@ -530,7 +530,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > ```ini
 > [galaxyservers]
-> localhost ansible_connection=local
+> your.host.name ansible_connection=local
 > ```
 {: .details}
 
@@ -556,6 +556,8 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.
 >
+>    Add the following to your `group_vars/galaxyservers.yml`:
+>
 >    {% raw %}
 >    ```yaml
 >    supervisor_programs:
@@ -576,7 +578,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    Here we've defined a `galaxy` command that should be `present`. It will run the command `uwsgi ...` and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as `running`. It starts as the `galaxy` user with a umask of `022` (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.
 >
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or config changes are made. To do so, open `playbook.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a task to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `playbook.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a task to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
 >
 >    ```yaml
 >    - hosts: galaxyservers
@@ -672,7 +674,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    certbot_post_renewal: |
 >        systemctl restart nginx || true
 >    certbot_domains:
->     - "{{ ansible_hostname }}"
+>     - "{{ inventory_hostname }}"
 >    certbot_agree_tos: --agree-tos
 >
 >    # NGINX
