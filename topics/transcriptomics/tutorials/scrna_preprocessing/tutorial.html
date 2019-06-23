@@ -294,7 +294,7 @@
   "mentions": [
     {
       "@type": "Thing",
-      "url": "https://zenodo.org/record/2581041",
+      "url": "https://zenodo.org/record/3253142",
       "name": "Training data for Pre-processing of Single-Cell RNA Data tutorial"
     }
   ],
@@ -492,7 +492,7 @@
                     
                     <div>
                         
-<a class="topic-icon" href="https://zenodo.org/record/2581041">
+<a class="topic-icon" href="https://zenodo.org/record/3253142">
     <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
 </a>
 
@@ -624,10 +624,10 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the subset FASTQ paired data from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
+      <p>Import the subset FASTQ paired data from <a href="https://zenodo.org/record/3253142"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq
-https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3253142/files/SRR5683689_1.subset.fastq
+https://zenodo.org/record/3253142/files/SRR5683689_2.subset.fastq
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -682,10 +682,10 @@ https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq
       </blockquote>
     </li>
     <li>
-      <p>Import the Gene Annotations and Barcodes from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
+      <p>Import the Gene Annotations and Barcodes from <a href="https://zenodo.org/record/3253142"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581041/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
-https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3253142/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
+https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1149,7 +1149,7 @@ For a more detailed understanding of the naming conventions used in generating o
   <ol>
     <li><strong>FeatureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">mapped_reads</code> (output of <strong>RNA STAR</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">mapped_reads</code> (output of <strong>Filter BAM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Specify strand information”</em>:<code class="highlighter-rouge">Unstranded</code></li>
         <li><em>“Gene annotation file”</em>: <code class="highlighter-rouge">in your history</code>
           <ul>
@@ -1297,7 +1297,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <h3 id="data-upload-and-organisation">Data upload and organisation</h3>
 
-<p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a>.</p>
+<p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/3253142"><code class="highlighter-rouge">Zenodo</code></a>.</p>
 
 <p>Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.</p>
 
@@ -1308,16 +1308,20 @@ The number of columns can be seen by scrolling the file preview window completel
     <li>
       <p>Create a new history and rename it (<em>e.g.</em> scRNA-seq multiple-batch tutorial)</p>
     </li>
-    <li>Import the four matrices (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) and the barcodes file from <a href="https://zenodo.org/record/2581041"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
+    <li>Import the eight matrices (<code class="highlighter-rouge">P1_B1.tabular</code>, <code class="highlighter-rouge">P1_B2.tabular</code>, etc.) and the barcodes file from <a href="https://zenodo.org/record/3253142"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
       <ul>
         <li>Set the datatype of the tabular files to <strong>tabular</strong></li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581041/files/P1_B1.tabular
-https://zenodo.org/record/2581041/files/P1_B2.tabular
-https://zenodo.org/record/2581041/files/P2_B3.tabular
-https://zenodo.org/record/2581041/files/P2_B4.tabular
-https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3253142/files/P1_B1.tabular
+https://zenodo.org/record/3253142/files/P1_B2.tabular
+https://zenodo.org/record/3253142/files/P1_B3.tabular
+https://zenodo.org/record/3253142/files/P1_B4.tabular
+https://zenodo.org/record/3253142/files/P2_B5.tabular
+https://zenodo.org/record/3253142/files/P2_B6.tabular
+https://zenodo.org/record/3253142/files/P2_B7.tabular
+https://zenodo.org/record/3253142/files/P2_B8.tabular
+https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1410,15 +1414,29 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 
 </blockquote>
 
-<p>Let us now merge our matrices from different batches.</p>
+<p>Let us now merge our matrices from different batches. In order to ensure that our batches are merged in the order that we wish, we should first create a list of datasets so that our matrices are merged in the order given by the list.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-table-merge"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Table Merge</h3>
 
   <ol>
+    <li><strong>Create a Dataset List</strong>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-build-a-dataset-list"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Build a dataset list</h3>
+        <ul>
+          <li>Click on <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Operations on multiple datasets</strong> at the top of the history panel</li>
+          <li>Check the boxes next the datasets to select</li>
+          <li>In <strong>For all selected…</strong>, choose <strong>Build dataset list</strong></li>
+          <li>Ensure that only the wanted samples are selected</li>
+          <li>Enter a name for the new collection</li>
+          <li>Click on <strong>Create list</strong></li>
+        </ul>
+      </blockquote>
+    </li>
     <li><strong>Column Join on Collections</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Tabular Files”</em>: (Select each of the matrices that you wish to join)</li>
+        <li><em>“Tabular Files”</em>: (Select the Dataset Collection icon <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span>, and select the Collection from the previous step each of the matrices that you wish to join)</li>
         <li><em>“Identifier column”</em>:<code class="highlighter-rouge">1</code></li>
         <li><em>“Number of Header lines in each item”</em>:<code class="highlighter-rouge">1</code></li>
         <li><em>“Keep original column header”</em>:<code class="highlighter-rouge">Yes</code></li>
@@ -1449,19 +1467,19 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 
     <ol>
       <li>
-        <p>Given that they come from the same sample, and each matrix has ~2,500 genes, we would have expected a high overlap between matrices, yielding ~3,000 genes in the combined matrix.</p>
+        <p>Given that they come from the same sample, and each matrix has ~15,000 genes, we would have expected a high overlap between matrices, yielding ~18,000 genes in the combined matrix if we assume a difference of +/- 500 genes per batch.</p>
       </li>
       <li>
-        <p>We observe ~6,200 genes, very little overlap between batches of the same organism.</p>
+        <p>We observe 20,800 genes, giving less overlap between batches of the same organism than we originally thought.</p>
       </li>
       <li>
-        <p>The batches were sequenced at different time points along the organisms development, and therefore different genes were expressed/detected at different time points. For early development data, this is normal.</p>
+        <p>The batches were sequenced at different time points along the organisms development, and therefore different genes were expressed/detected at different time points. For early development data, the overlap can be very sparse.</p>
       </li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>In the new combined matrix we see that we have more than 750 cells, but this number is greatly overestimated.  This is because <em>not all batches use the same barcodes</em>, and yet we applied the full set of 192 barcodes against our FASTQ data during the <a href="#barcode-extraction"><em>Barcode Extraction</em></a> stage previously.</p>
+<p>In the new combined matrix we see that we have 1536 cells, but this number is greatly overestimated.  This is because <em>not all batches use the same barcodes</em>, and yet we applied the full set of 192 barcodes against our FASTQ data during the <a href="#barcode-extraction"><em>Barcode Extraction</em></a> stage previously.</p>
 
 <p>The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the <a href="/training-material/topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html"><em>Plates, Batches, and Barcodes</em></a> slides 26-52.</p>
 
@@ -1472,10 +1490,10 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 <ol>
   <li>A full list of barcodes</li>
   <li>Which barcodes apply to which batches</li>
-  <li>Which batches apply to which plates.</li>
+  <li>Which batches apply to which plates</li>
 </ol>
 
-<p>Since we the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.</p>
+<p>Since the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.</p>
 
 <blockquote class="details">
   <h3 id="details-details-plating-protocol"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Plating protocol</h3>
@@ -1584,7 +1602,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
                   <ul>
                     <li><em>“Barcode Range: Start”</em>:<code class="highlighter-rouge">1</code></li>
                     <li><em>“Barcode Range: End”</em>:<code class="highlighter-rouge">96</code></li>
-                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">1,3</code></li>
+                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">1,3,5,7</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1595,7 +1613,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
                   <ul>
                     <li><em>“Barcode Range: Start”</em>:<code class="highlighter-rouge">97</code></li>
                     <li><em>“Barcode Range: End”</em>:<code class="highlighter-rouge">192</code></li>
-                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">2,4</code></li>
+                    <li><em>“Batches utilizing this Range”</em>:<code class="highlighter-rouge">2,4,6,8</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1609,7 +1627,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
                 <li><em>“1: Plate Format”</em>:
                   <ul>
                     <li><em>“Plate Number”</em>:<code class="highlighter-rouge">1</code></li>
-                    <li><em>“Batches within this Plate Number”</em>:<code class="highlighter-rouge">1,2</code></li>
+                    <li><em>“Batches within this Plate Number”</em>:<code class="highlighter-rouge">1,2,3,4</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1619,7 +1637,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
                 <li><em>“2: Plate Format”</em>:
                   <ul>
                     <li><em>“Plate Number”</em>:<code class="highlighter-rouge">2</code></li>
-                    <li><em>“Batches within this Plate Number”</em>:<code class="highlighter-rouge">3,4</code></li>
+                    <li><em>“Batches within this Plate Number”</em>:<code class="highlighter-rouge">5,6,7,8</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1630,8 +1648,7 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
     </li>
     <li>Expand the <em>“RegEx Parameters”</em> section:
       <ul>
-        <li><em>“RegEx to extract Plate, Batch, and Barcodes from headers”</em>:<code class="highlighter-rouge">.*P(\\d)_B(\\d)_([ACTG]+)</code>
-<small>(<strong>Attention! Take note of the ‘B’</strong>)</small></li>
+        <li><em>“RegEx to extract Plate, Batch, and Barcodes from headers”</em>:<code class="highlighter-rouge">.*P(\\d)_B(\\d)_([ACTG]+)</code></li>
         <li><em>“RegEx to replace Plate, Batch, and Barcodes from headers”</em>:<code class="highlighter-rouge">P\\1_B\\2_\\3</code></li>
       </ul>
     </li>
@@ -1663,19 +1680,24 @@ https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
 <blockquote class="question">
   <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <p>The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?</p>
+  <ol>
+    <li>The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?</li>
+    <li>Which batches yield worrying levels of cross-contamination?</li>
+    <li>Which batches should we remove from all further analysis?</li>
+  </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Because only half the barcodes in each batch were real. The <em>UMI-tools extract</em> took the entire barcodes file to filter against each batch, and the <em>UMI-tools count</em> also took the entire barcodes file to count against each batch.</p>
-
-    <p>Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of <script type="math/tex">4 * 192 = 768</script> cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in <script type="math/tex">384</script> cells.</p>
-
+    <ol>
+      <li>Because only half the barcodes in each batch were real. The <em>UMI-tools extract</em> took the entire barcodes file to filter against each batch, and the <em>UMI-tools count</em> also took the entire barcodes file to count against each batch. Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of <script type="math/tex">8 * 192 = 1536</script> cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in <script type="math/tex">768</script> cells.</li>
+      <li>Batch 4 and Batch 6 both appear to have a significant number of mid-to-high range counts in cells under the <em>False Positives</em> section in these batches. This means that the cell barcodes that we should <em>not</em> be detecting in those batches, did in fact detect cells.</li>
+      <li>Batch 4 does still have a good number of <em>True Positives</em>, despite the many mid-level <em>False Positives</em> so we could still perhaps use the cells from that Batch. Batch 6 on the other hand appears to derive most of its counts from the <em>False Positives</em>, and therefore is likely not so suitable for further analysis.</li>
+    </ol>
   </blockquote>
 </blockquote>
 
-<p>With this, we now have a count-matrix that can be used for further downstream analysis.</p>
+<p>All <em>False Positives</em> from all batches are filtered out, leaving only the <em>True Positives</em> (or ‘Real’ barcodes) in the remaining filtered matrix. It is up to the user to filter further based on the contamination information that they derive from this step. With this, a QC filtered count-matrix is produced that can then be used for further downstream analysis.</p>
 
 <!--
 Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
@@ -1686,7 +1708,6 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 <p>In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.</p>
 
 <figure id="figure-10"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" /><figcaption><span class="figcaption-prefix">Figure 10:</span> A recap of the entire workflow</figcaption></figure>
-
 
 
 
