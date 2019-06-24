@@ -252,7 +252,7 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 
 ## Remapping using Minimap2
 
-The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format. Remapping is done on the miniasm assembly to map the original reads on the assembly to provide the nucleotides per position. This is used by racon for consensus construction. 
+The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format. Remapping is done on the miniasm assembly to map the original reads on the assembly to provide the nucleotides per position. This is used by racon for consensus construction.
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
@@ -405,8 +405,8 @@ Additionaly, PlasFlow produces fasta files containing input sequences binned to 
 
 ## Scans genome contigs for antimicrobial resistance genes
 
-To determine whether the contigs contain antimirocbial resistance genes (AMR) staramr can be used.
-Staramr (*AMR) scans bacterial genome contigs against both the ResFinder and PointFinder databases (used by the ResFinder webservice)
+To determine whether the contigs contain antimirocbial resistance genes (AMR) [staramr](https://github.com/phac-nml/staramr) can be used.
+**Staramr** {% icon tool %} (*AMR) scans bacterial genome contigs against both the ResFinder ({% cite Zankari2012 %}), PointFinder ({% cite Zankari2017 %}) and PlasmidFinder ({% cite Carattoli2014 %})  databases (used by the ResFinder webservice)
 and compiles a summary report of detected antimicrobial resistance genes.
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/StarAmr.png)
