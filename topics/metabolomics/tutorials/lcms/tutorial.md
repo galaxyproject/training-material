@@ -62,7 +62,7 @@ This workflow takes as input **TODO** and perform several steps: pre-processing,
 The first step in the workflow is the pre-processing of the raw data with XCMS ({% cite Smith2006 %}).
 
 XCMS is a free and open source software dedicated to pre-processing of any types of mass spectrometry acquisition files from low to
-high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gaz). This software is
+high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
 used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software.
@@ -81,9 +81,9 @@ adapted to define workflows, one of the key points of Galaxy:
 In metabolomics studies, the number of samples can vary a lot (from a few ones to hundreds). Thus, extracting your
 data from the raw files can be very fast as well as take quite a long time. To optimise as much as possible the
 computing time, W4M core team chose to propose modules that can run single raw files for the first steps of
-pre-processing, since the initial actions in the extraction process treat files independantly.
+pre-processing, since the initial actions in the extraction process treat files independently.
 
-Since the first steps can be run on each file, the use of **Dataset collection** is recommanded in Galaxy to avoid
+Since the first steps can be run on each file, the use of **Dataset collection** is recommended in Galaxy to avoid
 launching jobs manually for each sample. You can consider the Dataset collection option from the very beginning, while
 uploading your data into Galaxy.
 
@@ -158,12 +158,12 @@ independently. The idea here is, for each peak, to proceed to chromatographic pe
 The XCMS solution provides two different algorithms to perform chromatographic peak detection: *matchedFilter* and
 *centWave*. The matchedFilter strategy is the first one provided by the XCMS R package. It is compatible with any
 LC-MS device, but was developed at a time when high resolution mass spectrometry was not common standard yet. On the
-other side, the centWave algorithm was specifically developped for high resolution mass spectrometry, dedicated to
-data in centroid mode. In this tutorial, you are goning to practice using the centWave algorithm.
+other side, the centWave algorithm was specifically developed for high resolution mass spectrometry, dedicated to
+data in centroid mode. In this tutorial, you will practice using the centWave algorithm.
 
 **Overview of how centWave works**
 
-Remember that these steps are performed for each of your data files independantly.
+Remember that these steps are performed for each of your data files independently.
  - Firstly, the algorithm detects series of scans with close values of m over z. They are called 'region of interest' (ROI).
 The m over z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
  - On these Regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
@@ -181,7 +181,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 >
 > Execute **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
 >    - *"RData file"*:
->        - Click on the folder icon to select the Dataset collection: `The one from the previous 'MSnbase readMSData' step`
+>        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
 >        - *"Min,Max peak width in seconds"*: `5,20`
@@ -200,7 +200,7 @@ ranges, or *Noise filter* (as in this hands-on) not to use low intensity measure
 >
 {: .hands_on}
 
-At this step, you obtained a dataset collection containing one RData file per sample, with independant lists of ions. Although this
+At this step, you obtained a dataset collection containing one RData file per sample, with independent lists of ions. Although this
 is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
 To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
 need to group your individual RData files into a single one. And by the way you may also want to get a grasp of your samples'
@@ -216,7 +216,7 @@ depending of your analytical sequence, you may want to treat part of your sample
 
 This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
 extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that
-these blank samples have different caracteristics compared to your biological samples can be of importance when setting parameters of
+these blank samples have different characteristics compared to your biological samples can be of importance when setting parameters of
 your grouping step. You will see what this is all about in the 'grouping' section of this tutorial, but in the workflow order, it is
 at this step that you need to provide the needed information if you want distinction in your grouping step.
 
@@ -254,7 +254,7 @@ an optional hands-on if you want to check how to get a template to fill, with th
 > > Execute **xcms get a sampleMetadata file** {% icon tool %}. You only need to give
 the dataset collection you obtained from the previous 'xcms findChromPeaks (xcmsSet)' step:
 > >    - *"RData file"*:
-> >        - Click on the folder icon to select the Dataset collection: `The one from the previous 'findChromPeaks' step`
+> >        - Click on the folder icon to select the Dataset collection: `sacurine.raw.xset.RData`
 > >
 > > An easy step for an easy sampleMetadata filling!
 > >
@@ -272,7 +272,7 @@ second column called *class* which is empty for the moment (only '.' for each sa
 #### Prepare your sampleMetadata file
 
 The sampleMetadata file is a tabulation-separated table, in text format. This table have to be filled by the user. You can use any
-software you find appropriate to contruct your table, as long as you save your file in a compatible format. For example, you can
+software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
 use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
 > ### {% icon comment %} Comment
@@ -288,7 +288,7 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > For this tutorial, we already provide the sampleMetadata file, so you only have to get the table and upload it to Galaxy. Here we
 simply present how we filled the provided file from the template we generated in Galaxy.
 >
-> First, we used the 'xcms get a sampleMetadata file' module as mentionned in the previous tip box. We obtained the following table:
+> First, we used the 'xcms get a sampleMetadata file' module as mentioned in the previous tip box. We obtained the following table:
 >
 > sample_name | class
 > --- | ---
@@ -361,7 +361,7 @@ be uploaded into Galaxy.
 >    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
 it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file
 not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
->    > Thus, we highly recommand that you always take a second to check the data type after the upload. This way you can handle the problem
+>    > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
 right away if you appear to get one of these obvious issues.
 >    {: .comment}
 >
@@ -374,7 +374,7 @@ right away if you appear to get one of these obvious issues.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. At least 2, with the identifers and the class column. But as many as you need to describe the potential variablity of your samples
+> > 1. At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
 (*e.g.* the person in charge of the sample preparation, the temperature...). The statistical analysis will expose the relevant parameters.
 > > 2. Sample, QC, blank... The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
 So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don't have any specific class
@@ -404,7 +404,7 @@ the Merger module.
 >
 > Execute **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
 >    - *"RData file"*:
->        - Click on the folder icon to select the Dataset collection: `The one from the previous 'findChromPeaks' step`
+>        - Click on the folder icon to select the Dataset collection: `sacurine.raw.xset.RData`
 >    - *"Sample metadata file"*:
 >        - Leave this parameter to `Nothing selected`
 >
@@ -423,8 +423,8 @@ ranges that you may want to discard from the very beginning.
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
 > Execute **xcms plot chromatogram** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'Merger' step`
->    - *"Sample metadata file"*: `The sampleMetadata file you uploaded previously`
+>    - *"RData file"*: `xset.merged.RData`
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -454,30 +454,29 @@ mass domain. The size of the bins is called width of overlapping m/z slices. You
 Then, a kernel density estimator algorithm is used to detect region of retention time with high density of ions. This algorithm uses a gaussian
 model to group together peaks with similar retention time.
 
-The inclusion of ions in a group is defined by the standard deviation of the gaussian model, called bandwith. This parameter has a large weight
+The inclusion of ions in a group is defined by the standard deviation of the gaussian model, called bandwidth. This parameter has a large weight
 on the resulting matrix. It must be chosen according to the quality of the chromatography. To be valid, the number of ions in a group must be greater
 than a given number of samples. Either a percentage of the total number of samples or an absolute value of samples can be given. This is defined by the user.
 
 > ### {% icon hands_on %} Hands-on: xcms groupChromPeaks (group)
 >
 > Execute **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'Merger' step`
+>    - *"RData file"*: `xset.merged.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
 >        - *"Width of overlapping m/z slices"*: `0.01`
->    - *"Get the Peak List"*: `No`
 >
 > You can leave the other parameters to zero.
 >
 {: .hands_on}
 
 
-This gouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses.
+This grouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses.
 User has to check the effect of parameter values on the result.
 
 In order to check the result of group function, a pdf file is created and provides for all m/z slices the gaussian model which width is
-defined by the bandwith parameter. Each red dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line
-width corresponds to the bandwith parameter.
+defined by the bandwidth parameter. Each red dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line
+width corresponds to the bandwidth parameter.
 
 Hear is an example of two m/z slides obtained from the hands-on:
 
@@ -510,19 +509,19 @@ inject large sequences of samples.
 This optional step aims to correct retention time drift for each peak among samples. The correction is based on what is called *well behaved peaks*,
 that are peaks found in all samples or at least in most of the samples.
 
-Sometimes it is difficult to find enough peaks present in allsamples. The user can define a percentage of the total number of samples in which
+Sometimes it is difficult to find enough peaks present in all samples. The user can define a percentage of the total number of samples in which
 a peak should be found to be considered a well behaved peak. This parameter is called *minimum required fraction of samples*.
 
 On the contrary, you may have peak groups with more detected peaks than the total number of samples. Those peaks are called *additional peaks*.
 You can filter those ions defining the maximal number of additional peaks, for a peak to be considered a well behaved peak.
 
-The algorithm uses statistical smothing methods. You can choose between linear or loess regression.
+The algorithm uses statistical smoothing methods. You can choose between linear or loess regression.
 
 
 > ### {% icon hands_on %} Hands-on: xcms adjustRtime (retcor)
 >
 > Execute **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'groupChromPeaks' step`
+>    - *"RData file"*: `xset.merged.groupChromPeaks.RData`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.8299`
 >        - *"Smooth method"*: `loess - non-linear alignment`
@@ -539,12 +538,12 @@ time correction.
 {: .hands_on}
 
 
-This module generates a plot output that you can use to visualise how retention time was apply accross the samples and along the chromatogram.
-It also allows you to check whether the well behaved peaks were distributed homogeniously along the chromatogram.
+This module generates a plot output that you can use to visualise how retention time was apply across the samples and along the chromatogram.
+It also allows you to check whether the well behaved peaks were distributed homogeneously along the chromatogram.
 
 > ### {% icon tip %} Tip: Check the impact of RT correction using 'xcms plot chromatogram'
 >
-> Appart from the plots generated by the adjustRtime module, you can check the impact of the retention time
+> Apart from the plots generated by the adjustRtime module, you can check the impact of the retention time
 correction by comparing the chromatogram you obtained previously to a new one generated after correction.
 >
 > > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
@@ -585,7 +584,7 @@ lower a little the bandwidth parameter.
 >    > ### {% icon comment %} Comment
 >    >
 >    > When performing this second grouping (or at the first one if you do not plan to perform retention time correction),
-you can take this opporunity to check how you peaktable looks like at this point of the XCMS extraction. For this, you can
+you can take this opportunity to check how you peaktable looks like at this point of the XCMS extraction. For this, you can
 set the 'Get the Peak List' option to `Yes`.
 >    {: .comment}
 >
@@ -624,7 +623,7 @@ of NAs in your data. Indeed, this will allow you to check whether your results a
 may want to go back to some of your parameter choices in previous XCMS steps.
 > To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
 with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information
-anout the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
+about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
 {: .comment}
 
 
@@ -647,8 +646,8 @@ chromatographic peak for this ion was identified.
 >    >
 >    > The *"Reported intensity values"* parameter is important here. It defines how the intensity will be computed. You have three choices:
 >    > - into : integration of peaks (*i.e.* areas under the peaks)
->    > - maxo : maximum heigth of peaks
->    > - intb : integration of peaks with baseline substraction
+>    > - maxo : maximum height of peaks
+>    > - intb : integration of peaks with baseline subtraction
 >    {: .comment}
 >
 {: .hands_on}
@@ -675,7 +674,7 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
  sample metadata uploaded with your sample files.
  - You can define how many significant ions will be used for extracted ions chromatogram (EIC) plot. These plots will be included in a pdf file.
 
- Appart from the PDF file, the main three outcome from the CAMERA.annotate module are three columns added in the variableMetadata file:
+ Apart from the PDF file, the main three outcome from the CAMERA.annotate module are three columns added in the variableMetadata file:
  - isotopes: the name says everything
  - adduct: same here; this column is filled only in the iAll functions' mode
  - pcgroup: this stands for Pearson's correlation group; it corresponds to groups of ions that match regarding retention time and intensity
@@ -721,16 +720,16 @@ Concerning the sampleMetadata file, for the next steps of the workflow, there ar
  - your variable of interest: here we will consider as an example the Body Mass Index (`bmi`)
 
 The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis.
-It can also generates several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommand,
+It can also generates several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommend,
 at this step of the metabolomic workflow, to split your analysis by beginning a new Galaxy history with only the 3 tables you need. This will help
-you in limiting selecting the wrong dataset in further analyses, and bring a little tidyness for future review of your analysis process.
+you in limiting selecting the wrong dataset in further analyses, and bring a little tidiness for future review of your analysis process.
 
-To begin a new history with the 3 tables from your current history, you can use the functionnality 'copy dataset' and copy it into a new history.
+To begin a new history with the 3 tables from your current history, you can use the functionality 'copy dataset' and copy it into a new history.
 
-We also recommand you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that
-the XCMS modules generate output names that contain the different XCMS steps you used, allowing easy traceability while brownsing your history.
+We also recommend you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that
+the XCMS modules generate output names that contain the different XCMS steps you used, allowing easy traceability while browsing your history.
 However, knowing that the next steps of analysis are also going to extend the 3 tables' names, if you keep the original names it will become very
-long and thus may reduce the names' readability. Hence, we highly recommand you to rename them with something short, *e.g.* 'sampleMetadata',
+long and thus may reduce the names' readability. Hence, we highly recommend you to rename them with something short, *e.g.* 'sampleMetadata',
 'variableMetadata' and 'dataMatrix', or anything not too long that you may find convenient.
 
 
@@ -753,7 +752,7 @@ In the previous step of LC-MS workflow, you saw how to extract features from you
 shaped in a format allowing the use of various standard statistical methods. However, being able to perform a
 statistical analysis does not mean necessarily being able to highlight relevant information. Indeed, data are often affected
 by various sources of unwanted variability. It can limit the effectiveness of statistical methods, leading sometimes to
-difficulties in revealing investigated effects. Identifying such variability can help analysing your data at its full potential.
+difficulties in revealing investigated effects. Identifying such variability can help analyzing your data at its full potential.
 
 In this tutorial, we chose to limit the data processing to 3 steps:
  - overview of the variability in the data
@@ -831,12 +830,12 @@ the dataset may be due to the signal drift.
 >
 {: .question}
 
-## Step 2: handling the signal drift observed althrough the analytical sequence
+## Step 2: handling the signal drift observed although the analytical sequence
 
 It is known that when injecting successively a large number of samples, the system tends to get dirty, and this may cause a measure drift.
 To prevent inability to catch signal anymore, in case of large injection series, the sequence is generally divided into several batches
 and the source is cleaned between batches. Unfortunately, these signal drift and batch design can add significant variability in data,
-making sample comparison complicated. In case data is impacted by these effects, it is highly recommanded to normalise the data to get
+making sample comparison complicated. In case data is impacted by these effects, it is highly recommended to normalise the data to get
 rid of these unwanted effects.
 
 In our case study, we saw that the data seemed to be affected by signal drift. Thus, we will use the **Batch_correction** module to
@@ -864,17 +863,17 @@ get rid of it.
 
 **What transformation have this module done to the ions' intensities?**
 
-For each ion independently, the normalisation process works as described in the folowing picture:
+For each ion independently, the normalisation process works as described in the following picture:
 
 ![How this works](../../images/BC_theo.png)
 
 The methodology is meant to correct for signal drift. In the module, it is combined with a correction for batch effect. Thus, if your
-sequence is divided into several batches, the idea is to obtain something like the folowing:
+sequence is divided into several batches, the idea is to obtain something like the following:
 
 ![Before/after picture](../../images/BC_theo2.png)
 
 In the case of *linear* regression model, the module performs some tests before applying the normalisation for quality purposes.
-For some ions, if the normalisation process would have led to unconsistant results, the concerned ions are not corrected for signal drift.
+For some ions, if the normalisation process would have led to inconsistant results, the concerned ions are not corrected for signal drift.
 This kind of quality checks depends on the type of regression model you use. Please refer to the module's help section for more information!
 
 
@@ -945,7 +944,7 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 
 > ### {% icon question %} Questions
 >
-> 1. What does the *1.0* threshold mean in the hands-on exercice you just executed?
+> 1. What does the *1.0* threshold mean in the hands-on exercise you just executed?
 > 2. How many variables are left in your dataset? How many samples?
 >
 > > ### {% icon solution %} Solution
@@ -969,13 +968,13 @@ the decision of no action on data. Once you applied your customed processing pro
 statistical analysis.
 
 There is a large variety of statistical analysis methods that you can apply on metabolomic LC-MS data. The most standard
-strategy is a combination of univariate analysis (such as applying a Mann-Whitney-Wilcoxon test on each ion indepedently)
+strategy is a combination of univariate analysis (such as applying a Mann-Whitney-Wilcoxon test on each ion indepedentely)
 and multivariate analysis (such as constructing a PLS model using all your ions at once). What you should keep in mind is
 that the choice of your statistical analysis strategy depends on both your data characteristics (such as colinearity or
 dataset size) and your study design. You should think carefully about what is appropriate for your own project.
 
 In this tutorial, we will take the example of univariate analysis, using the `bmi` column of the **sampleMetadata file** as
-our variable of interest (body mass index). Since this variable is quantitative, we will chose in this example to mesure
+our variable of interest (body mass index). Since this variable is quantitative, we will chose in this example to measure
 the link between the BMI and the measured ions using **statistical correlation calculation**. For more examples of
 statistical analysis performed on LC-MS data, you can take a few minutes to watch the usemetabo.org open course video
 [here](https://usemetabo.org/courses/w4mlc-ms-statistical-analysis).
@@ -1061,7 +1060,7 @@ absolute value above 0.9.
 {: .hands_on}
 
 With this filter you obtain a subset of your data, supposedly ions that may present an interest regarding your study. If the goal
-is to find biomarkers, then you have a subset of biomarker candidates. If you aim for mechanism explaination, you obtain a subset
+is to find biomarkers, then you have a subset of biomarker candidates. If you aim for mechanism explanation, you obtain a subset
 of ions to identify and replace in a biological context.
 
 In this tutorial, the statistical filtering led to 25 remaining ions, linked to the BMI values by high correlation coefficients.
@@ -1070,7 +1069,7 @@ In this tutorial, the statistical filtering led to 25 remaining ions, linked to 
 # Annotation
 
 Now that you have a short list of interesting ions, you may be interested in knowing from which molecules these ions come from.
-Identification in generally a difficult and time-consumming step. To help you in that process or to get a potential first glance
+Identification in generally a difficult and time-consuming step. To help you in that process or to get a potential first glance
 of the nature of your selected subset, annotation can be a first valuable step.
 
 Annotation is not identification. It is only meant to try matching your data with hypotheses based on known information. Nonetheless,
@@ -1082,8 +1081,8 @@ to proceed to the matching. The use of 'only' is tricky here, since the subset o
 step of the workflow (if you consider the previous steps are all cleared now).
 
 For example, what may be the reference bank that you need for the annotation step? This is a crucial question. It exists a variety
-of online resources with well-known reference banks, but which one to choose? Some banks may have overlaping content, but also
-specific one. In fact, the appropriate bank may depend on the analytical technique used, the type of sample analysed, the nature of
+of online resources with well-known reference banks, but which one to choose? Some banks may have overlapping content, but also
+specific one. In fact, the appropriate bank may depend on the analytical technique used, the type of sample analyzed, the nature of
 individuals/organisms from which you got your biological samples... If you are working on widely studied organism, you may find
 an adequate reference bank online. However, it is also possible that none of the provided banks is relevant for your study. In that
 case, you may need to construct your own database other time, to be able to search for relevant matching for your ions of interest.
@@ -1112,10 +1111,10 @@ module.
 >
 {: .hands_on}
 
-Here, we tried to provide a Mass-to-charge ratio (*i.e.* a mass delta) based on what we globaly know about the technique used to
-analyse the samples. Even if this parameter may seems simple, it is important to settle with a relevant value. If you provide a
+Here, we tried to provide a Mass-to-charge ratio (*i.e.* a mass delta) based on what we globally know about the technique used to
+analyze the samples. Even if this parameter may seems simple, it is important to settle with a relevant value. If you provide a
 value that is too low, you may not be able to have matches for your ions eventhough the original molecule is present in the database.
-On the opposite, if the value provided is too high, you may end with a huge number of matches, which could be time-consumming to
+On the opposite, if the value provided is too high, you may end with a huge number of matches, which could be time-consuming to
 review to identify relevant proposed annotation.
 
 
@@ -1148,7 +1147,7 @@ review to identify relevant proposed annotation.
 
 
 Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures.
-For now, Galaxy4Metabolomics stops here but we have various perspectives of additionnal modules for the future (a little bit of
+For now, Galaxy4Metabolomics stops here but we have various perspectives of additional modules for the future (a little bit of
 [MetExplore](https://metexplore.toulouse.inra.fr/index.html/) for example?).
 
 # Conclusion
