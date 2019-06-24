@@ -709,15 +709,42 @@ step in the pipeline, but since CAMERA uses the outputs of XCMS, if you want to 
 corresponding information in your variableMetadata file for later use. 
 
 
-# W4M 3-tables format
+# Stopover: debriefing and preparation for next steps
 
-To do: add a complement about the 3-table format, depending on the information already given in xcms part.
-In particular, a focus on mandatory information for the present tutorial.
+From the first big step in a metabolomic workflow (Preprocessing), you obtained three tabulation-separated tables: a dataMatrix file, a sampleMetadata 
+file and a variableMetadata file. Two of the tables were obtained directly from the workflow, while one needed to be completed by the user. 
 
-Adding a Hands-on to:
-- copy the 3 tables into a new history (with question: what are the 3 datasets you need to copy)
-- rename the 3 tables into something shorter
+Concerning the sampleMetadata file, for the next steps of the workflow, there are four columns that are mandatory to go through all the analysis:
+ – injectionOrder: a numerical column of injection order
+ – sampleType: specifies if a QC pool or a sample (coded `pool` or `sample`)
+ – batch: a categorical column indicating the batches of analysis (if only one, must be a constant)
+ - your variable of interest: here we will consider as an example the Body Mass Index (`bmi`)
 
+The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis. 
+It can also generates several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommand, 
+at this step of the metabolomic workflow, to split your analysis by beginning a new Galaxy history with only the 3 tables you need. This will help 
+you in limiting selecting the wrong dataset in further analyses, and bring a little tidyness for future review of your analysis process. 
+
+To begin a new history with the 3 tables from your current history, you can use the functionnality 'copy dataset' and copy it into a new history. 
+
+We also recommand you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that 
+the XCMS modules generate output names that contain the different XCMS steps you used, allowing easy traceability while brownsing your history. 
+However, knowing that the next steps of analysis are also going to extend the 3 tables' names, if you keep the original names it will become very 
+long and thus may reduce the names' readability. Hence, we highly recommand you to rename them with something short, *e.g.* 'sampleMetadata', 
+'variableMetadata' and 'dataMatrix', or anything not too long that you may find convenient. 
+
+
+> ### {% icon hands_on %} Hands-on: Copying the 3 tables into a new history and renaming them
+>
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Au cas ou tu veux en mettre. Tu peux aussi prevoir une section question style "quelles sont les 3 tables a copier" si tu veux, avec
+en reponse SM complete par le user, DM en output de fillpeaks et VM en output de soit fillpeaks, soit Camera. 
+>    {: .comment}
+>
+{: .hands_on}
 
 
 # Data processing: quality checks, normalisation, data filtering
