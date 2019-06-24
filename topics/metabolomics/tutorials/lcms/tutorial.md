@@ -15,9 +15,9 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
-- jfrancoismartin
-- lecorguille
 - melpetera
+- lecorguille
+- jfrancoismartin
 - yguitton
 
 ---
@@ -208,7 +208,7 @@ chromatograms before going any further (note that you can also plot chromatogram
 detection).
 
 
-## Going from a dataset collection to a single file and checking chromatograms
+## Merge the different samples in one dataset
 
 A dedicated tool exist to merge the different RData files into a single one. Although you can simply take as
 input your dataset collection alone, the module also provides de possibility to take into account a sampleMetadata file. Indeed,
@@ -386,7 +386,7 @@ that you want to consider in XCMS preprocessing, just fill everywhere with `samp
 
 
 
-### Going from a dataset collection to a single file
+### The merging step
 
 To merge your individual RData files into one single RData to be used for the grouping step that will follow, you need to use the
 **xcms findChromPeaks Merger** module. For this step, you only need your dataset collection, plus a sampleMetadata **if you want to
@@ -412,7 +412,7 @@ the Merger module.
 
 The module generates a single RData file containing information from all the samples in your dataset collection input.
 
-### Getting an overview of your samples' chromatograms
+## Getting an overview of your samples' chromatograms
 
 You may be interested in getting an overview of what your samples' chromatograms look like, for example to see if some of
 your samples have distinct overall characteristics (unexpected chromatographic peaks, huge overall intensity...).
@@ -501,7 +501,7 @@ previous peak group, thus not assigned to any peak group due to the 0.5 minimum 
 {: .question}
 
 
-## Optional step: *retention time correction*
+## Optional XCMS step: *retention time correction*
 
 Sometimes with LC-MS techniques, a deviation in retention time occurs from a sample to another. In particular, this is likely to be observed when you
 inject large sequences of samples.
@@ -563,7 +563,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 
 
 The retention time correction step is not mandatory. However, when it is used retention time are modified.
-Consequently, applying this step on your data requires to complete it with an additional 'grouping' step.
+Consequently, applying this step on your data requires to complete it with an additional 'grouping' step: **xcms groupChromPeaks (group)**
 
 Parameters for this second group step are expected to be similar to the first group step. Nonetheless,
 since retention times are supposed to be less variable inside a same peak group now, in some cases it can be relevant to
@@ -662,7 +662,7 @@ Nonetheless, before proceeding with the next step in the workflow (processing an
 with the *CAMERA.annotate* module. This tool uses the CAMERA R package to perform a first annotation of your data based on XCMS outputs.
 
 
-## Optional step: annotation with CAMERA
+## Annotation with CAMERA [Optional]
 
 This last step provides annotation of isotopes, adducts and neutral losses. It gives also some basic univariate statistics in case you
 considered several groups for your XCMS extraction.
@@ -710,8 +710,8 @@ corresponding information in your variableMetadata file for later use.
 
 # Stopover: debriefing and preparation for next steps
 
-From the first big step in a metabolomic workflow (Preprocessing), you obtained three tabulation-separated tables: a dataMatrix file, a sampleMetadata
-file and a variableMetadata file. Two of the tables were obtained directly from the workflow, while one needed to be completed by the user.
+From the first big step in a metabolomic workflow (Preprocessing), you obtained three tabulation-separated tables: a **dataMatrix file**, a **sampleMetadata**
+file and a **variableMetadata** file. Two of the tables were obtained directly from the workflow, while one needed to be completed by the user.
 
 Concerning the sampleMetadata file, for the next steps of the workflow, there are four columns that are mandatory to go through all the analysis:
  – injectionOrder: a numerical column of injection order
@@ -968,7 +968,7 @@ the decision of no action on data. Once you applied your customed processing pro
 statistical analysis.
 
 There is a large variety of statistical analysis methods that you can apply on metabolomic LC-MS data. The most standard
-strategy is a combination of univariate analysis (such as applying a Mann-Whitney-Wilcoxon test on each ion indepedentely)
+strategy is a combination of univariate analysis (such as applying a Mann-Whitney-Wilcoxon test on each ion independently)
 and multivariate analysis (such as constructing a PLS model using all your ions at once). What you should keep in mind is
 that the choice of your statistical analysis strategy depends on both your data characteristics (such as colinearity or
 dataset size) and your study design. You should think carefully about what is appropriate for your own project.
