@@ -643,6 +643,13 @@ chromatographic peak for this ion was identified.
 >
 > You can leave other parameters to default values. 
 >
+>    > ### {% icon comment %} Comment
+>    >
+>    > The *"Reported intensity values"* parameter is important here. It defines how the intensity will be computed. You have three choices: 
+>    > - into : integration of peaks (*i.e.* areas under the peaks)
+>    > - maxo : maximum heigth of peaks
+>    > - intb : integration of peaks with baseline substraction
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -658,11 +665,26 @@ with the *CAMERA.annotate* module. This tool uses the CAMERA R package to perfor
 
 ## Optional step: annotation with CAMERA
 
-Blablabla
+This last step provides annotation of isotopes, adducts and neutral losses. It gives also some basic univariate statistics in case you 
+considered several groups for your XCMS extraction.
+
+There is a huge number of parameters that will not be detailed in this short tutorial. However most of the default values are suitable 
+to run this function for a first attempt. Nevertheless, a few parameters have to be set at each run:
+ - The polarity has to be set since it affects annotation.
+ - For statistical analysis, you have to define if you have two or more conditions to compare. These conditions had to be defined in the 
+ sample metadata uploaded with your sample files. 
+ - You can define how many significant ions will be used for extracted ions chromatogram (EIC) plot. These plots will be included in a pdf file.
+ 
+ Appart from the PDF file, the main three outcome from the CAMERA.annotate module are three columns added in the variableMetadata file:
+ - isotopes: the name says everything 
+ - adduct: same here; this column is filled only in the iAll functions' mode
+ - pcgroup: this stands for Pearson's correlation group; it corresponds to groups of ions that match regarding retention time and intensity 
+ correlations, leading to think that maybe they could come from the same original metabolite. 
 
 > ### {% icon hands_on %} Hands-on: CAMERA.annotate
 >
-> 1. **CAMERA.annotate** {% icon tool %} with the following parameters:
+> Execute **CAMERA.annotate** {% icon tool %} with the following parameters:
+>    - *"RData file"*: `The RData file from the 'fillChromPeaks' step`
 >    - In *"Annotate Isotopes [findIsotopes]"*:
 >        - *"Max. ion charge"*: `2`
 >    - *"Mode"*: `Only groupFWHM and findIsotopes functions [quick]`
@@ -671,35 +693,20 @@ Blablabla
 >    - In *"Export options"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >        - *"Number of decimal places for retention time values reported in ions' identifiers."*: `2`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> You can leave other parameters to default values
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > As said previously, there are quite a few parameters in this module, some of them having very high impact on your annotations. 
+In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise). 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The information given by this module is not mandatory for the next step of the metabolomic workflow. Commonly, annotation is considered a later 
+step in the pipeline, but since CAMERA uses the outputs of XCMS, if you want to use it you better do it at this step, allowing you to have the 
+corresponding information in your variableMetadata file for later use. 
 
 
 # W4M 3-tables format
