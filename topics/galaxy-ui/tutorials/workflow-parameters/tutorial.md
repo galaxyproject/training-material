@@ -58,6 +58,9 @@ of the select first tool.
 
 Instead of selecting a specific number of lines we can choose to insert a workflow parameter
 that allows the user to set this parameter when running the workflow.
+
+![Button for selecting connections](../../images/connection-module.png)
+
 To do that click on the `Select first` tool in the workflow and find the `Number of lines`
 parameter in the `Details` panel on the right hand side of the workflow.
 If you hover over the second symbol you will see a small text box appearing that says
@@ -87,7 +90,7 @@ If you run the workflow you will now see the new parameter that needs to be set 
 It is often necessary to create a text parameter that is flanked by additional text.
 Take for instance a regular expression that finds `foo` in a string and replaces it
 with `foobar` as in `s/(foo)/\1bar/`.
-The Galaxy tool ``Regex Find And Replace`` can be used to tun such a regular expression. The find part of the regex (`s/(foo)/`) can be defined in the `Find regex` parameter and the replacement part can be entered in the `Replacement` parameter.
+The Galaxy tool ``Regex Find And Replace`` can be used to tune such a regular expression. The find part of the regex (`s/(foo)/`) can be defined in the `Find regex` parameter and the replacement part can be entered in the `Replacement` parameter.
 If we want to make the `foo` part of the regular expression configurable we can
 compose this text parameter using the `Compose text parameter value` tool.
 
