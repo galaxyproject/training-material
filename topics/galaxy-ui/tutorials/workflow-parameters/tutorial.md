@@ -21,7 +21,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an anlysis together.
+Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.
 To make a workflow reusable with slightly different settings you can define and use workflow parameters.
 
 > ### Agenda
@@ -62,7 +62,7 @@ If you hover over the second symbol you will see a small text box appearing that
 appeared in the `Select first` tool in the editor.
 
 To insert the workflow parameter click on Inputs in the tool panel on the right side of the workflow editor
-and select `Simple inputs used for workflow logic`. This will insert a new box into the workfow editor.
+and select `Simple inputs used for workflow logic`. This will insert a new box into the workflow editor.
 
 If you click on the Input parameter box in the editor you will see in the `Details panel` that the `Parameter type`
 is set to `Text`. If you try to connect this parameter to the `Number of lines` parameter you will see that
@@ -76,7 +76,7 @@ If you run the workflow you will now see the new parameter that needs to be set 
 
 > ### {% icon tip %} Tip: You can use a single parameter multiple times
 > 
-> * You can connect a parameter to multiple steps or to mulitple parameters within a step
+> * You can connect a parameter to multiple steps or to multiple parameters within a step
 {: .tip}
 
 # Create a text parameter from multiple parameters
@@ -113,7 +113,7 @@ If you run this workflow on the dataset and you select `wunder` as the newly def
 
 # Read a parameter from a dataset
 
-Often times it is necessary to calculate a parameter in one step of a workflow and then to use it in another step of the same workflow. This can be accomplished by reading the parameter from a dataset (As long as it is a text, integert, float, boolean or color parameter).
+Often times it is necessary to calculate a parameter in one step of a workflow and then to use it in another step of the same workflow. This can be accomplished by reading the parameter from a dataset (As long as it is a text, integer, float, boolean or color parameter).
 In this example we will construct a workflow where we calculate the sum of all values in a dataset and then divide the values in this dataset by the sum calculated in the previous step.
 
 ## Construct example workflow for reading parameters from a file
@@ -156,5 +156,5 @@ first column.
 
 Galaxy Workflows chain together different steps of an analysis. To make your workflows
 more useful to your colleagues you can add workflow parameters. Sometimes a parameter is not
-known in advance, but can be calculated as part of the workfow. Now you know how to read these
+known in advance, but can be calculated as part of the workflow. Now you know how to read these
 parameters from datasets!
