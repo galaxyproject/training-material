@@ -67,6 +67,9 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 
 # Obtaining and preparing data
 
+We are interested in the reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
+We will use the plasmid dataset created by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
+
 
 > ### {% icon comment %} Background: Nanopore sequencing
 >
@@ -81,12 +84,6 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 > (Image credit: [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
 {: .comment}
 
-
-## Understanding our input data
-
-In this tutorial we are interested in reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
-
-As training data we use plasmid dataset used by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
 
 ## Importing the data into Galaxy
@@ -115,7 +112,7 @@ As training data we use plasmid dataset used by {% cite LiXie2018 %} for their e
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
-> 3. **Build a list collection** containing all 12 fasta files.
+> 3. **Build a list collection** containing all 12 fasta files. Name it `Plasmids`
 >
 >    {% include snippets/build_list_collection.md %}
 >
@@ -136,12 +133,15 @@ report page.
 >
 > 1. **NanoPlot** {% icon tool %} with the following parameters
 >   - *"Type of the file(s) to work on"*: `fasta`
->   - *"files"*: `Data list` you just created
+>   - *"files"*: The `Plasmids` dataset collection you just created
+>
+>     {% include snippets/select_collection.md %}
 >
 {: .hands_on}
 
-The `Histogram Read Length` gives an overview of the read distribution of all files in the given data collection.
-![NanoPlot Output](../../images/plasmid-metagenomics-nanopore/NanoPlot_output.png) <br><br>
+The `HTML report` gives an overview of various QC metrics for each sample. For example, it will
+plot the read length distribution of each sample:
+![NanoPlot Output](../../images/plasmid-metagenomics-nanopore/NanoPlot_output.png)
 
 
 > ### {% icon question %} Question
@@ -159,7 +159,7 @@ The `Histogram Read Length` gives an overview of the read distribution of all fi
 For more information on the topic of quality control, please see our training materials
 [here]({{site.baseurl}}/topics/sequence-analysis/)
 
-# De Novo Assembly
+# De-novo Assembly
 
 ## Pairwise alignment using Minimap2
 
@@ -173,7 +173,7 @@ between two closely related species with divergence below ~15%.
 
 Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
 therefore widely used for Nanopore aligning. Detailed evaluations of Minimap2 are available from
-the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
+the Minimap2 publication ({% cite Li2018 %}).
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Minimap2.png)
 
@@ -181,10 +181,15 @@ the [Minimap2 paper](https://doi.org/10.1093/bioinformatics/bty191).
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
 > 1. **Map with minimap2** {% icon tool %} with the following parameters
->   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->   - *"Use the following data collection as the reference sequence"*: `Created dataset collection`
->   - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
->   - *"Select an output format"*: `paf`
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - *"Use the following data collection as the reference sequence"*: `Created dataset collection`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - *"Select fastq dataset"*: The `Plasmids` dataset collection
+>    - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
+>    - Section **Set advanced output options**
+>      - *"Select an output format"*: `paf`
+>
+>    {% include snippets/select_collection.md %}
 >
 {: .hands_on}
 
@@ -217,8 +222,8 @@ channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	251	1328	+	channe
 
 ## Ultrafast de novo assembly using Miniasm
 
-The mapped reads are ready to be assembled with Miniasm. Miniasm is a very fast Overlap Layout Consensus based de novo assembler for noisy long reads.
-It takes all-vs-all read self-mappings (typically by Minimap2) as input and outputs an assembly graph in the GFA format.
+The mapped reads are ready to be assembled with **Miniasm** {% icon tool%} ({% cite Li2016 %}). Miniasm is a very fast Overlap Layout Consensus based de novo assembler for noisy long reads.
+It takes all-vs-all read self-mappings (typically by **Minimap2** {% icon tool%}) as input and outputs an assembly graph in the GFA format.
 Different from mainstream assemblers, miniasm does not have a consensus step.
 It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
@@ -228,8 +233,8 @@ Thus the per-base error rate is similar to the raw input reads.
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
 > 1. **miniasm** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: `Input dataset collection`
->   - *"PAF file"*: `Output Minimap dataset collection` created by the Minimap2 tool
+>   - *"Sequence Reads"*: The `Plasmids` dataset collection
+>   - *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
 >
 {: .hands_on}
 
