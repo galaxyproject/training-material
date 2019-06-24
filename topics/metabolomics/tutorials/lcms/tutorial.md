@@ -522,7 +522,7 @@ The algorithm uses statistical smothing methods. You can choose between linear o
 > ### {% icon hands_on %} Hands-on: xcms adjustRtime (retcor)
 >
 > Execute **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'group' step`
+>    - *"RData file"*: `The RData file from the 'groupChromPeaks' step`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.8299`
 >        - *"Smooth method"*: `loess - non-linear alignment`
@@ -573,84 +573,94 @@ lower a little the bandwidth parameter.
 > ### {% icon hands_on %} Hands-on: second 'xcms groupChromPeaks (group)'
 >
 > Execute **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'retcor' step`
+>    - *"RData file"*: `The RData file from the 'adjustRtime' step`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
 >        - *"Width of overlapping m/z slices"*: `0.01`
 >    - *"Get the Peak List"*: `Yes`
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >        - *"Number of decimal places for retention time values reported in ions' identifiers."*: `2`
->        - *"Replace the remain NA by 0 in the dataMatrix"*: `Yes`
->
+>        - *"Replace the remain NA by 0 in the dataMatrix"*: `No`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Un commentaire sur l'interet de generer la table la
+>    > When performing this second grouping (or at the first one if you do not plan to perform retention time correction),
+you can take this opporunity to check how you peaktable looks like at this point of the XCMS extraction. For this, you can 
+set the 'Get the Peak List' option to `Yes`.
 >    {: .comment}
 >
 {: .hands_on}
 
-courte description de variableMetadata et dataMatrix
+It is possible to use the retention time correction and grouping step in an iterative way if needed. Once you perform your 
+last adjustRtime step and thus your last grouping step, you will obtain your final peak list (*i.e.* final list of ions). 
 
 > ### {% icon question %} Questions
 >
-> 1. Question1? how many ions
-> 2. Question2? open the dataMatrix; what do you notice when looking at the first ion and the first sample
+> 1. How many ions did you obtained with the final grouping step?
+> 2. Open the dataMatrix file you obtained with the final grouping. This table corresponds to intensities for each ion and each 
+samples. What do you notice when looking at the intensity of the first ion regarding the first sample?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The final grouping step led to 5815 ions.
+> > 2. The first ion (M58T69) has an 'NA' value for the first sample (QC1_014). This is also the case for several other ions 
+and samples. 
 > >
 > {: .solution}
 >
 {: .question}
 
+At this point of the XCMS extraction workflow, the peak list may contain NA when peaks where not considered peaks in only some 
+of the samples in the first 'findChromPeaks' step. This does not necessary means that no peak exist for these samples. For example, 
+sometimes peaks are of very low intensities for some samples and were not kept as peaks because of that in the first 'findChromPeaks' 
+step. 
 
+To be able to get the information that may actually exist behind NAs, there is an additional XCMS step that is call *fillChromPeaks*.
 
-## Sub-step with **xcms fillChromPeaks (fillPeaks)**
-
-Intro concernant les NA. 
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon comment %} Comment
 >
-> 1. **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
+> Before performing the 'fillChromPeaks' step, it is highly recommended to first have a look of your data concerning the distribution 
+of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you 
+may want to go back to some of your parameter choices in previous XCMS steps. 
+> To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step 
+with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information 
+anout the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample. 
+{: .comment}
+
+
+## Final XCMS step: *integrating areas of missing peaks*
+
+The idea of the XCMS step is to integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no 
+chromatographic peak for this ion was identified. 
+
+> ### {% icon hands_on %} Hands-on: xcms fillChromPeaks (fillPeaks)
+>
+> Execute **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
+>    - *"RData file"*: `The RData file from the last 'groupChromPeaks' step`
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >        - *"Number of decimal places for retention time values reported in ions' identifiers."*: `2`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
+> You can leave other parameters to default values. 
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+With this 'fillChromPeaks' step, you obtain your final intensity table. At this step, you have everything mandatory to begin analysing 
+your data: 
+ - a sampleMetadata file (if not done yep, to be completed with information about your samples)
+ - a dataMatrix file (with the intensities)
+ - a variableMEtadata file (with information about ions such as retention times, m/z)
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+Nonetheless, before proceeding with the next step in the workflow (processing and filtering of your data), you can add an optional step 
+with the *CAMERA.annotate* module. This tool uses the CAMERA R package to perform a first annotation of your data based on XCMS outputs. 
 
-## Sub-step with **CAMERA.annotate**
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Optional step: annotation with CAMERA
+
+Blablabla
+
+> ### {% icon hands_on %} Hands-on: CAMERA.annotate
 >
 > 1. **CAMERA.annotate** {% icon tool %} with the following parameters:
 >    - In *"Annotate Isotopes [findIsotopes]"*:
