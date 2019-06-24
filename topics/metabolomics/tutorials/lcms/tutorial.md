@@ -441,7 +441,7 @@ hands-on), you obtain two plots: one with colours based on provided groups, one 
 
 
 
-## Second XCMS step: determining shared ions across samples
+## Second XCMS step: *determining shared ions across samples*
 
 The first peak picking step gave us lists of ions for each sample. However, what we want now is a single matrix of ions intensities for all samples.
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called 
@@ -657,7 +657,7 @@ With this 'fillChromPeaks' step, you obtain your final intensity table. At this 
 your data: 
  - a sampleMetadata file (if not done yep, to be completed with information about your samples)
  - a dataMatrix file (with the intensities)
- - a variableMEtadata file (with information about ions such as retention times, m/z)
+ - a variableMetadata file (with information about ions such as retention times, m/z)
 
 Nonetheless, before proceeding with the next step in the workflow (processing and filtering of your data), you can add an optional step 
 with the *CAMERA.annotate* module. This tool uses the CAMERA R package to perform a first annotation of your data based on XCMS outputs. 
