@@ -271,7 +271,7 @@ Four histograms are generated with the top line giving the raw expression data f
 
 > ### {% icon details %} Details: Why the Same Number of Features
 >
-> * RaceID normalizes the data to compare all cells using the the same features, as it is difficult to make a meaningful comparison comparison otherwise. Selected features must be *meaningful*, describing or contributing to the biological variation in the data, and therefore must be differentially expressed between cells.
+> * RaceID normalizes the data to compare all cells using the the same features, as it is difficult to make a meaningful comparison otherwise. Selected features must be *meaningful*, describing or contributing to the biological variation in the data, and therefore must be differentially expressed between cells.
 >
 > * Cells remaining after filtering will *still* contain some genes which have count values of zero. As comparing against zero values is difficult, a value of 0.1 is added to the count data so that these features are not lost during the analysis. This assumes the gene *is* detectable for that cell (i.e. no errors during sequencing), but that the transcript was very lowly expressed.
 >
