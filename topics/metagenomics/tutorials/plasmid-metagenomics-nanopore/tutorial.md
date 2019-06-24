@@ -186,7 +186,7 @@ the Minimap2 publication ({% cite Li2018 %}).
 >    - *"Single or Paired-end reads"*: `Single`
 >    - *"Select fastq dataset"*: The `Plasmids` dataset collection
 >    - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
->    - Section **Set advanced output options**
+>    - In the section **Set advanced output options**:
 >      - *"Select an output format"*: `paf`
 >
 >    {% include snippets/select_collection.md %}
@@ -257,12 +257,14 @@ The Assembly graph created can be used for mapping again with minimap2, but firs
 >   - *"Input GFA file"*: the `Assembly Graph` (collection) created by the Miniasm tool
 >
 > 2. **Map with minimap2** {% icon tool %} with the following parameters
->   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->   - *"Use the following dataset as the reference sequence"*: `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
->   - *"Single or Paired-end reads"*: `single`
->   - *"Select fastq dataset"*: The `Plasmids` collection
->   - Section **Set advanced output options**
->     - *"Select an output format"*: `paf`
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - *"Use the following dataset as the reference sequence"*: `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
+>    - *"Single or Paired-end reads"*: `single`
+>    - *"Select fastq dataset"*: The `Plasmids` collection
+>    - *"Select analysis mode (sets default)"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
+>    - In the section **Set advanced output options**:
+>       - *"Select an output format"*: `paf`
+>
 >
 >     {% include snippets/select_collection.md %}
 >
@@ -323,7 +325,7 @@ It relies on the neural network models trained on full genome and plasmid sequen
 > ### {% icon hands_on %} Hands-on: Prediction of plasmid sequences
 >
 > 1. **PlasFlow** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: the `contig file` created by the Racon tool
+>   - *"Sequence Reads"*: the `contig file` collection created by **Racon** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
