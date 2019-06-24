@@ -518,9 +518,9 @@
       <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
       <li><a href="#postgresql" id="markdown-toc-postgresql">PostgreSQL</a></li>
       <li><a href="#galaxy" id="markdown-toc-galaxy">Galaxy</a></li>
-      <li><a href="#proftpd" id="markdown-toc-proftpd">ProFTPD</a></li>
+      <li><a href="#supervisord" id="markdown-toc-supervisord">Supervisord</a></li>
+      <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
       <li><a href="#disaster-strikes" id="markdown-toc-disaster-strikes">Disaster Strikes!</a></li>
-      <li><a href="#optional-securing-your-instance" id="markdown-toc-optional-securing-your-instance">(Optional) Securing your Instance</a></li>
     </ol>
   </li>
   <li><a href="#final-notes" id="markdown-toc-final-notes">Final Notes</a></li>
@@ -674,19 +674,18 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>To proceed from here it is expected that:</p>
 
-<ul>
-  <li>
-    <p>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on your local machine</p>
-
+<ol>
+  <li>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on your local machine
     <blockquote class="comment">
       <h3 id="comment-comment-running-ansible-on-your-remote-machine"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Running Ansible on your remote machine</h3>
-      <p>It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to point to localhost, and pass the <code class="highlighter-rouge">-c local</code> parameter. Be <strong>certain</strong> that the playbook that you’re building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.</p>
+      <p>It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to pass <code class="highlighter-rouge">ansible_connection=local</code>. Be <strong>certain</strong> that the playbook that you’re building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.</p>
     </blockquote>
   </li>
-  <li>
-    <p>You have an <a href="../ansible/tutorial.html#inventory-file">inventory file</a> with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as “galaxyservers.” You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.</p>
-  </li>
-</ul>
+  <li>Your <code class="highlighter-rouge">ansible</code> version is <code class="highlighter-rouge">&gt;=2.7</code>, you can check by running <code class="highlighter-rouge">ansible --version</code></li>
+  <li>You have an <a href="../ansible/tutorial.html#inventory-file">inventory file</a> with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as “galaxyservers.” You can use a different name if you prefer or are working on an existing playbook, just be sure to update all references later on.</li>
+  <li>In your inventory file, it uses the full DNS hostname that has been provided, and <strong>not</strong> <code class="highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
+  <li>Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.</li>
+</ol>
 
 <h2 id="requirements">Requirements</h2>
 
@@ -702,13 +701,18 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Create a new file in your working directory called <code class="highlighter-rouge">requirements.yml</code> and include the following contents:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">galaxyproject.repos</span>
-<span class="pi">-</span> <span class="s">galaxyproject.galaxy</span>
-<span class="pi">-</span> <span class="s">geerlingguy.nginx</span>
-<span class="pi">-</span> <span class="s">natefoo.postgresql_objects</span>
-<span class="pi">-</span> <span class="s">galaxyproject.postgresql</span>
-<span class="pi">-</span> <span class="s">galaxyproject.proftpd</span>
-<span class="pi">-</span> <span class="s">geerlingguy.pip</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">galaxyproject.galaxy</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.8.4</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">galaxyproject.nginx</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.6.0</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">galaxyproject.postgresql</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.1</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.1</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">geerlingguy.pip</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">uchida.miniconda</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.3.0</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/usegalaxy-eu/ansible-role-supervisor</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">usegalaxy-eu.supervisor</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/usegalaxy-eu/ansible-certbot</span>
@@ -719,7 +723,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>In the same directory, run <code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code>. This will install all of the required modules for this training into the <code class="highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
     </li>
     <li>
-      <p>Create the <code class="highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="highlighter-rouge">[galaxyservers]</code> with the address of the host where you want to install Galaxy.</p>
+      <p>Create the <code class="highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="highlighter-rouge">[galaxyservers]</code> with the address of the host where you want to install Galaxy. Remember, if you are running ansible on the same machine as Galaxy will be installed to, you should set <code class="highlighter-rouge">ansible_connection=local</code>.</p>
     </li>
     <li>
       <p>Inspect the contents of the newly created <code class="highlighter-rouge">roles</code> directory in your working directory.</p>
@@ -755,7 +759,6 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <ul>
         <li>Add a pre-task to install the necessary dependency, <code class="highlighter-rouge">python-psycopg2</code></li>
-        <li>A role for <code class="highlighter-rouge">galaxyproject.repos</code>. This will add the additional repositories that are needed by Galaxy in various places.</li>
         <li>A role for <code class="highlighter-rouge">galaxyproject.postgresql</code>. This will handle the installation of PostgreSQL.</li>
         <li>A role for <code class="highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="highlighter-rouge">become</code>/<code class="highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
       </ul>
@@ -775,7 +778,6 @@ best practices and knowledge from previous admins codified for you.</p>
       <span class="na">package</span><span class="pi">:</span>
         <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">python-psycopg2'</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
     <span class="pi">-</span> <span class="s">galaxyproject.postgresql</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
       <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
@@ -840,8 +842,9 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Open <code class="highlighter-rouge">playbook.yml</code> with your text editor and set the following:</p>
 
       <ul>
-        <li>Amend the dependency installation pre-task to install additional necessary dependencies: git, python-virtualenv, make</li>
-        <li>Add the role <code class="highlighter-rouge">galaxyproject.galaxy</code> to the roles to be executed, at the end</li>
+        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install additional necessary dependencies: <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">python-virtualenv</code>, <code class="highlighter-rouge">make</code></li>
+        <li>Add the role <code class="highlighter-rouge">galaxyproject.galaxy</code>  to the roles</li>
+        <li>Add the role <code class="highlighter-rouge">uchida.miniconda</code> at the end</li>
       </ul>
 
       <blockquote class="question">
@@ -853,17 +856,18 @@ best practices and knowledge from previous admins codified for you.</p>
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
       <span class="na">package</span><span class="pi">:</span>
         <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">]</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
     <span class="pi">-</span> <span class="s">galaxyproject.postgresql</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
       <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
       <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
     <span class="pi">-</span> <span class="s">galaxyproject.galaxy</span>
+    <span class="pi">-</span> <span class="s">uchida.miniconda</span>
 </code></pre></div>          </div>
 
         </blockquote>
@@ -921,8 +925,8 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
           <tr>
             <td><code class="highlighter-rouge">galaxy_commit_id</code></td>
-            <td><code class="highlighter-rouge">release_18.09</code></td>
-            <td>The git reference to check out, which in this case is the <br />branch for Galaxy release 18.09.</td>
+            <td><code class="highlighter-rouge">release_19.05</code></td>
+            <td>The git reference to check out, which in this case is the branch for Galaxy Release 19.05</td>
           </tr>
           <tr>
             <td><code class="highlighter-rouge">galaxy_config_style</code></td>
@@ -935,9 +939,9 @@ best practices and knowledge from previous admins codified for you.</p>
             <td>If we make any modifications to the Galaxy codebase, they will be removed. This way we know we’re getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">check_migrate_tools</code></td>
-            <td><code class="highlighter-rouge">false</code></td>
-            <td>Must be set to false in this case due to a new install of Galaxy</td>
+            <td><code class="highlighter-rouge">miniconda_prefix</code></td>
+            <td><code class="highlighter-rouge">{{ galaxy_tool_dependency_dir }}/_conda</code></td>
+            <td>We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.</td>
           </tr>
         </tbody>
       </table>
@@ -955,8 +959,9 @@ best practices and knowledge from previous admins codified for you.</p>
       <ol>
         <li><code class="highlighter-rouge">admin_users</code> to the email address you will use with this Galaxy.</li>
         <li><code class="highlighter-rouge">brand</code> to something fun!</li>
-        <li><code class="highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="highlighter-rouge">postgresql:///galaxy?host=/var/run/postgresql</code>)</li>
+        <li><code class="highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="highlighter-rouge">postgresql:///galaxy?host=/var/run/postgresql</code>).</li>
         <li><code class="highlighter-rouge">file_path</code> to a place to store data, <code class="highlighter-rouge">/data</code> for this lesson.</li>
+        <li><code class="highlighter-rouge">check_migrate_tools</code> must be set to <code class="highlighter-rouge">false</code> due to a new installation of Galaxy.</li>
       </ol>
 
       <blockquote class="question">
@@ -983,12 +988,12 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="na">galaxy_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
 <span class="na">galaxy_root</span><span class="pi">:</span> <span class="s">/srv/galaxy</span>
 <span class="na">galaxy_file_path</span><span class="pi">:</span> <span class="s">/data</span>
-<span class="na">galaxy_user</span><span class="pi">:</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
-  <span class="na">shell</span><span class="pi">:</span> <span class="s">/bin/bash</span>
-<span class="na">galaxy_commit_id</span><span class="pi">:</span> <span class="s">release_18.09</span>
+<span class="na">galaxy_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv">galaxy</span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
+<span class="na">galaxy_commit_id</span><span class="pi">:</span> <span class="s">release_19.05</span>
 <span class="na">galaxy_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
 <span class="na">galaxy_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">galaxy_file_path</span><span class="pi">:</span> <span class="s">/data</span>
+<span class="na">miniconda_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_tool_dependency_dir</span><span class="nv"> </span><span class="s">}}/_conda"</span>
 
 <span class="na">galaxy_config</span><span class="pi">:</span>
   <span class="na">galaxy</span><span class="pi">:</span>
@@ -1006,32 +1011,35 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="highlighter-rouge">galaxy_config</code> variable:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
-  <span class="c1"># Default values</span>
-  <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
-  <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
-  <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
-  <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
-  <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
-  <span class="na">static-map</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
-    <span class="pi">-</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
-  <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
-  <span class="na">module</span><span class="pi">:</span> <span class="s">galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
-  <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">hook-master-start</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-    <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
-  <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="c1"># Our additions</span>
-  <span class="na">mule</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
-    <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
-  <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+  <span class="s">...</span>
+  <span class="na">uwsgi</span><span class="pi">:</span>
+    <span class="c1"># Default values</span>
+    <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
+    <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
+    <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
+    <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
+    <span class="na">static-map</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
+      <span class="pi">-</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
+    <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
+    <span class="na">module</span><span class="pi">:</span> <span class="s">galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
+    <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">hook-master-start</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
+      <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
+    <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="c1"># Our additions</span>
+    <span class="na">mule</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+      <span class="pi">-</span> <span class="s">lib/galaxy/main.py</span>
+    <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
 </code></pre></div>      </div>
 
       <blockquote class="question">
@@ -1102,7 +1110,7 @@ best practices and knowledge from previous admins codified for you.</p>
   <p>For users running with the local connection, you can specify this in your <code class="highlighter-rouge">hosts</code> inventory file:</p>
 
   <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[galaxyservers]</span>
-<span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+<span class="err">your.host.name</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1121,7 +1129,7 @@ best practices and knowledge from previous admins codified for you.</p>
   </ol>
 </blockquote>
 
-<h3 id="supervisord">Supervisord</h3>
+<h2 id="supervisord">Supervisord</h2>
 
 <p>Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, <a href="http://supervisord.org/">supervisord</a>. If you’re familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy’s use cases better and was fully featured long before SystemD became common.</p>
 
@@ -1134,6 +1142,8 @@ best practices and knowledge from previous admins codified for you.</p>
     </li>
     <li>
       <p>Supervisor defines <code class="highlighter-rouge">programs</code> which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.</p>
+
+      <p>Add the following to your <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
@@ -1153,7 +1163,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Here we’ve defined a <code class="highlighter-rouge">galaxy</code> command that should be <code class="highlighter-rouge">present</code>. It will run the command <code class="highlighter-rouge">uwsgi ...</code> and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as <code class="highlighter-rouge">running</code>. It starts as the <code class="highlighter-rouge">galaxy</code> user with a umask of <code class="highlighter-rouge">022</code> (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.</p>
     </li>
     <li>
-      <p>Now that we have defined a process manager for Galaxy, we can also instruct <code class="highlighter-rouge">galaxyproject.galaxy</code> to use Supervisor to restart it when Galaxy is upgraded or config changes are made. To do so, open <code class="highlighter-rouge">playbook.yml</code> and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a task to restart Galaxy using the <a href="https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html">supervisorctl Ansible module</a>. Handlers are structured just like tasks:</p>
+      <p>Now that we have defined a process manager for Galaxy, we can also instruct <code class="highlighter-rouge">galaxyproject.galaxy</code> to use Supervisor to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open <code class="highlighter-rouge">playbook.yml</code> and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a task to restart Galaxy using the <a href="https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html">supervisorctl Ansible module</a>. Handlers are structured just like tasks:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
@@ -1176,6 +1186,9 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="na">supervisor_socket_chown</span><span class="pi">:</span> <span class="s">galaxy</span>
 <span class="na">galaxy_restart_handler_name</span><span class="pi">:</span> <span class="s">Restart Galaxy</span>
 </code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
     </li>
     <li>
       <p>Log in and check the status with <code class="highlighter-rouge">supervisorctl status</code> (remember to change to the Galaxy user)</p>
@@ -1214,7 +1227,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)</p>
 
-<h3 id="nginx">NGINX</h3>
+<h2 id="nginx">NGINX</h2>
 
 <p>With this we have:</p>
 
@@ -1227,17 +1240,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="highlighter-rouge">/</code> and Galaxy at <code class="highlighter-rouge">/galaxy</code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">External Authentication</a> tutorial.</p>
 
-<p>For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache</p>
-
-<p>NGINX plugins are dynamic shared objects since <a href="https://www.nginx.com/blog/compiling-dynamic-modules-nginx-plus/">1.9.11</a>. Debian/Ubuntu provide multiple nginx “flavors”:</p>
-
-<ul>
-  <li><code class="highlighter-rouge">nginx-light</code>: minimal set of core modules</li>
-  <li><code class="highlighter-rouge">nginx-full</code>: full set of core modules</li>
-  <li><code class="highlighter-rouge">nginx-extras</code>: full set of core modules and extras (3rd party modules)</li>
-</ul>
-
-<p><a href="https://developers.google.com/speed/pagespeed/insights/">Google’s PageSpeed Tools</a> can identify any compression or caching improvements you can make.</p>
+<p>For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache. <a href="https://developers.google.com/speed/pagespeed/insights/">Google’s PageSpeed Tools</a> can identify any compression or caching improvements you can make.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-nginx"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NGINX</h3>
@@ -1247,132 +1250,127 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Edit your <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>, we will update the line that <code class="highlighter-rouge">http: 0.0.0.0:8080</code> to be <code class="highlighter-rouge">socket: 127.0.0.1:8080</code>. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.</p>
     </li>
     <li>
-      <p>Add the role <code class="highlighter-rouge">geerlingguy.nginx</code> to your playbook and have it run as root.</p>
+      <p>Add the role <code class="highlighter-rouge">galaxyproject.nginx</code> to your playbook and have it run as root.</p>
     </li>
     <li>
-      <p>In our group variables file, we will set a convenience variable, <code class="highlighter-rouge">hostname</code>, to refer to our VM. If you have a DNS entry for your server, add <code class="highlighter-rouge">hostname: &lt;your server name&gt;</code> to your group variables. Otherwise, add <code class="highlighter-rouge">hostname: "{{ ansible_hostname }}"</code>.</p>
-    </li>
-    <li>
-      <p>We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration.</p>
+      <p>We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by <a href="https://certbot.eff.org/">certbot</a>.</p>
 
       <p>Add the following to your group variables file:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_package_name</span><span class="pi">:</span> <span class="s">nginx-full</span> <span class="c1"># nginx-galaxy on RHEL/CentOS</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Certbot</span>
+<span class="na">certbot_auto_renew_hour</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">23</span><span class="nv"> </span><span class="s">|random(seed=inventory_hostname)</span><span class="nv">  </span><span class="s">}}"</span>
+<span class="na">certbot_auto_renew_minute</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">59</span><span class="nv"> </span><span class="s">|random(seed=inventory_hostname)</span><span class="nv">  </span><span class="s">}}"</span>
+<span class="na">certbot_auth_method</span><span class="pi">:</span> <span class="s">--webroot</span>
+<span class="na">certbot_install_method</span><span class="pi">:</span> <span class="s">virtualenv</span>
+<span class="na">certbot_auto_renew</span><span class="pi">:</span> <span class="s">yes</span>
+<span class="na">certbot_auto_renew_user</span><span class="pi">:</span> <span class="s">root</span>
+<span class="na">certbot_environment</span><span class="pi">:</span> <span class="s">production</span>
+<span class="na">certbot_well_known_root</span><span class="pi">:</span> <span class="s">/srv/nginx/_well-known_root</span>
+<span class="na">certbot_share_key_users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">nginx</span>
+<span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
+    <span class="no">systemctl restart nginx || true</span>
+<span class="na">certbot_domains</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="na">certbot_agree_tos</span><span class="pi">:</span> <span class="s">--agree-tos</span>
+
+<span class="c1"># NGINX</span>
+<span class="na">nginx_selinux_allow_local_connections</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">nginx_servers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">redirect-ssl</span>
+<span class="na">nginx_enable_default_server</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">nginx_ssl_servers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">galaxy</span>
+<span class="na">nginx_conf_http</span><span class="pi">:</span>
+  <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">1g</span>
 <span class="na">nginx_remove_default_vhost</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">nginx_server_names_hash_bucket_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128"</span>
-<span class="na">nginx_vhosts</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">80"</span>
-    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">root</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">index</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.html"</span>
-    <span class="na">access_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/access.log"</span>
-    <span class="na">error_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/error.log"</span>
-    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">present"</span>
-    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.conf"</span>
-    <span class="na">extra_parameters</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">client_max_body_size 10G; # aka max upload size, defaults to 1M</span>
-        <span class="no">uwsgi_read_timeout 2400;</span>
-
-        <span class="no">location / {</span>
-            <span class="no">uwsgi_pass      127.0.0.1:8080;</span>
-            <span class="no">uwsgi_param UWSGI_SCHEME $scheme;</span>
-            <span class="no">include         uwsgi_params;</span>
-        <span class="no">}</span>
-
-
-        <span class="no">location /static {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static/style {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/style/blue;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static/scripts {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/scripts;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /robots.txt {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/robots.txt;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /favicon.ico {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/favicon.ico;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static/welcome.html {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
-        <span class="no">}</span>
+<span class="na">nginx_ssl_role</span><span class="pi">:</span> <span class="s">usegalaxy-eu.certbot</span>
+<span class="na">nginx_conf_ssl_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/fullchain.pem</span>
+<span class="na">nginx_conf_ssl_certificate_key</span><span class="pi">:</span> <span class="s">/etc/ssl/user/privkey-nginx.pem</span>
 </code></pre></div>      </div>
 
       <p>This is a lot of configuration but it is not very complex to understand. We’ll go through it step by step:</p>
+    </li>
+    <li>
+      <p>The configuration variables we added in our group variables file has the following block:</p>
 
-      <p>This snippet says that the role should install the nginx-full package rather than the normal <code class="highlighter-rouge">nginx</code> package. Earlier we added the role <code class="highlighter-rouge">galaxyproject.repos</code>, this role gave us access to the Galaxy Project’s APT and YUM repositories.</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_package_name</span><span class="pi">:</span> <span class="s">nginx-full</span> <span class="c1"># nginx-galaxy on RHEL/CentOS</span>
-<span class="na">nginx_remove_default_vhost</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">nginx_server_names_hash_bucket_size</span><span class="pi">:</span> <span class="s2">"</span><span class="s">128"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_servers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">redirect-ssl</span>
+<span class="na">nginx_ssl_servers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">galaxy</span>
 </code></pre></div>      </div>
 
-      <p>Here we define a virtual host, usually used to respond on multiple hostnames with different content. In our case we only have a single virtualhost.</p>
+      <p>The <code class="highlighter-rouge">galaxyproject.galaxy</code> role expects to find two files with these names in <code class="highlighter-rouge">templates/nginx/redirect-ssl.j2</code> and <code class="highlighter-rouge">templates/nginx/galaxy.j2</code></p>
 
-      <p>The value of <code class="highlighter-rouge">server_name</code> does not need to be a valid domain name in our case, because we only have a single virtualhost. Normally NGINX will try and match the hostname to the server_name, but in the case there is no match it will route it to the default server for that port, which is the first one defined.</p>
+      <p>Create the <code class="highlighter-rouge">redirect-ssl.j2</code> with the following contents:</p>
 
-      <p>Additionally we specify log files and a directory for static files which will never be used.</p>
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="s">[::]:80</span> <span class="s">default_server</span><span class="p">;</span>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_vhosts</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">80"</span>
-    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">root</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">index</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.html"</span>
-    <span class="na">access_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/access.log"</span>
-    <span class="na">error_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/error.log"</span>
-    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">present"</span>
-    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.conf"</span>
+    <span class="kn">server_name</span> <span class="s">"</span><span class="p">{</span><span class="err">{</span> <span class="kn">inventory_hostname</span> <span class="err">}}</span><span class="s">"</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="n">/.well-known/</span> <span class="p">{</span>
+        <span class="kn">root</span> <span class="p">{</span><span class="err">{</span> <span class="kn">certbot_well_known_root</span> <span class="err">}}</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="kn">return</span> <span class="mi">302</span> <span class="s">https://</span><span class="nv">$host$request_uri</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p>Lastly we specify the “extra parameters” for this virtualhost which are included within the configuration file.</p>
+      <p>This will redirect all requests to use HTTPS.</p>
+    </li>
+    <li>
+      <p>Create <code class="highlighter-rouge">templates/nginx/galaxy.j2</code> with the following contents:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">extra_parameters</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">client_max_body_size 10G; # aka max upload size, defaults to 1M</span>
-        <span class="no">uwsgi_read_timeout 2400;  # Wait up to 40 minutes for requests to timeout.</span>
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##
+## This file is maintained by Ansible - CHANGES WILL BE OVERWRITTEN
+##
+</span><span class="k">server</span> <span class="p">{</span>
+    <span class="kn">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
+    <span class="kn">server_name</span>   <span class="s">"</span><span class="p">{</span><span class="err">{</span> <span class="kn">inventory_hostname</span> <span class="err">}}</span><span class="s">"</span><span class="p">;</span>
 
-        <span class="no">location / {</span>
-            <span class="no">uwsgi_pass      127.0.0.1:8080;    # Proxy our requests to port 8080, just like we defined in our Galaxy group variables for the uWSGI configuration</span>
-            <span class="no">uwsgi_param UWSGI_SCHEME $scheme;  # Passes the scheme (http or https) to the uWSGI application. Used in generating links.</span>
-            <span class="no">include         uwsgi_params;      # Include some default uwsgi settings</span>
-        <span class="no">}</span>
+    <span class="kn">access_log</span>  <span class="n">/var/log/nginx/access.log</span><span class="p">;</span>
+    <span class="kn">error_log</span>   <span class="n">/var/log/nginx/error.log</span><span class="p">;</span>
 
-        <span class="no"># Proxy any requests for static content directly to their folders on disk</span>
-        <span class="no">location /static {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
+        <span class="kn">uwsgi_param</span> <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
+        <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        <span class="no">location /static/style {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/style/blue;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
+    <span class="kn">location</span> <span class="n">/static</span> <span class="p">{</span>
+        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn">galaxy_server_dir</span> <span class="err">}}</span><span class="n">/static</span><span class="p">;</span>
+        <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        <span class="no">location /static/scripts {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/scripts;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
+    <span class="kn">location</span> <span class="n">/static/style</span> <span class="p">{</span>
+        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn">galaxy_server_dir</span> <span class="err">}}</span><span class="n">/static/style/blue</span><span class="p">;</span>
+        <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        <span class="no">location /robots.txt {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/robots.txt;</span>
-        <span class="no">}</span>
+    <span class="kn">location</span> <span class="n">/static/scripts</span> <span class="p">{</span>
+        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn">galaxy_server_dir</span> <span class="err">}}</span><span class="n">/static/scripts</span><span class="p">;</span>
+        <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        <span class="no">location /favicon.ico {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/favicon.ico;</span>
-        <span class="no">}</span>
+    <span class="c1"># serve visualization and interactive environment plugin static content
+</span>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/plugins/(?&lt;plug_type&gt;[^/]+?)/((?&lt;vis_d&gt;[^/_]*)_?)?(?&lt;vis_name&gt;[^/]*?)/static/(?&lt;static_file&gt;.*?)$</span> <span class="p">{</span>
+        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn">galaxy_server_dir</span> <span class="err">}}</span><span class="n">/config/plugins/</span><span class="nv">$plug_type</span><span class="n">/</span><span class="p">;</span>
+        <span class="kn">try_files</span> <span class="nv">$vis_d</span><span class="n">/</span>$<span class="p">{</span><span class="kn">vis_d</span><span class="err">}</span><span class="s">_</span>$<span class="p">{</span><span class="kn">vis_name</span><span class="err">}</span><span class="n">/static/</span><span class="nv">$static_file</span>
+                  <span class="nv">$vis_d</span><span class="n">/static/</span><span class="nv">$static_file</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
+    <span class="p">}</span>
 
-        <span class="no">location /static/welcome.html {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
-        <span class="no">}</span>
+    <span class="kn">location</span> <span class="n">/robots.txt</span> <span class="p">{</span>
+        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn">galaxy_server_dir</span> <span class="err">}}</span><span class="n">/static/robots.txt</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kn">location</span> <span class="n">/favicon.ico</span> <span class="p">{</span>
+        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn">galaxy_server_dir</span> <span class="err">}}</span><span class="n">/static/favicon.ico</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1390,72 +1388,6 @@ changed: [galaxy.example.org]
     </li>
   </ol>
 
-</blockquote>
-
-<h2 id="proftpd">ProFTPD</h2>
-
-<p>With a large Galaxy instance, users will often request FTP access in order to upload large data sets. The <a href="http://proftpd.org/">ProFTPD</a> server works well for Galaxy, it can leverage an SQL authentication module, to allow users to login to the FTP server with their normal Galaxy username and password.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-proftpd"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: ProFTPD</h3>
-
-  <ol>
-    <li>
-      <p>Add the role <code class="highlighter-rouge">galaxyproject.proftpd</code> to your playbook and have it run as root.</p>
-    </li>
-    <li>
-      <p>Add a <code class="highlighter-rouge">pre_task</code> to <a href="https://docs.ansible.com/ansible/2.5/modules/file_module.html#file-module">create the FTP directory</a>, owned by galaxy:galaxy, with mode <code class="highlighter-rouge">0750</code>.</p>
-    </li>
-    <li>
-      <p>Edit the group variables file, we will define some variables for the proftpd role:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_ftp_upload_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_root</span><span class="nv"> </span><span class="s">}}/ftp"</span>
-<span class="na">proftpd_display_connect</span><span class="pi">:</span> <span class="pi">|</span>
-  <span class="no">Unauthorized access is prohibited</span>
-<span class="na">proftpd_galaxy_auth</span><span class="pi">:</span> <span class="s">yes</span>
-<span class="na">__galaxy_user_name</span><span class="pi">:</span> <span class="s">galaxy</span>
-<span class="na">proftpd_options</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">User</span><span class="pi">:</span> <span class="s">galaxy</span>
-  <span class="pi">-</span> <span class="na">Group</span><span class="pi">:</span> <span class="s">galaxy</span>
-<span class="na">proftpd_sql_user</span><span class="pi">:</span> <span class="s">galaxy</span>
-<span class="na">proftpd_sql_db</span><span class="pi">:</span> <span class="s">galaxy@/var/run/postgresql</span>
-
-<span class="na">proftpd_virtualhosts</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">galaxy</span>
-    <span class="na">address</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">options</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">ServerAdmin</span><span class="pi">:</span> <span class="s">admin@example.org</span>
-      <span class="pi">-</span> <span class="na">ServerName</span><span class="pi">:</span> <span class="s">Galaxy FTP</span>
-      <span class="pi">-</span> <span class="na">TransferLog</span><span class="pi">:</span> <span class="s">/var/log/proftpd/xfer.log</span>
-      <span class="pi">-</span> <span class="na">MaxLoginAttempts</span><span class="pi">:</span> <span class="s">3</span>
-      <span class="pi">-</span> <span class="na">RequireValidShell</span><span class="pi">:</span> <span class="s">no</span>
-      <span class="pi">-</span> <span class="na">AllowOverwrite</span><span class="pi">:</span> <span class="s">yes</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>And additionally two changes to the Galaxy configuration portion:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
-<span class="na">galaxy_config</span><span class="pi">:</span>
-  <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="s">...</span>
-    <span class="s">ftp_upload_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_ftp_upload_dir</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">ftp_upload_site</span><span class="pi">:</span> <span class="s2">"</span><span class="s">ftp://{{</span><span class="nv"> </span><span class="s">hostname}}"</span>
-    <span class="s">...</span>
-  <span class="na">uwsgi</span><span class="pi">:</span> <span class="s">...</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Apply the playbook.</p>
-    </li>
-  </ol>
-</blockquote>
-
-<p>With this, users can see an “Upload via FTP” button in their upload interface, and they can upload their data using Filezilla or other preferred FTP client.</p>
-
-<blockquote class="comment">
-  <h3 id="comment-active-vs-passive"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Active vs Passive</h3>
-  <p>If connecting does not work, try forcing your client to use active FTP, university firewalls often have issues with passive FTP.</p>
 </blockquote>
 
 <h2 id="disaster-strikes">Disaster Strikes!</h2>
@@ -1511,189 +1443,6 @@ changed: [galaxy.example.org]
   <p>We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.</p>
 
   <p>We’ve experienced these incidents and we know how horribly stressful it can be if an important service like Galaxy goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.</p>
-
-</blockquote>
-
-<h2 id="optional-securing-your-instance">(Optional) Securing your Instance</h2>
-
-<p>Now that you’ve gotten through the worst case scenario, we’ll attack the next worst case scenario, auditors! They’ve shown up and demanded that everything have valid SSL certificates.</p>
-
-<p>This step uses <a href="https://letsencrypt.org/">Let’s Encrypt</a> for generating certificates, so it assumes that:</p>
-
-<ol>
-  <li>Your machine is publicly accessible</li>
-  <li>It has a publicly resolvable DNS entry</li>
-</ol>
-
-<p>If you do not meet these requirements, you should read through them to see the changes that are required.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-ssl-certificates-with-lets-encrypt-le"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SSL Certificates with Let’s Encrypt (LE)!</h3>
-
-  <ol>
-    <li>
-      <p>We need to configure NGINX to proxy requests to LE, because LE needs to authenticate on 443 or 80, and nginx is already bound to 80. Add this configuration to the top of your <code class="highlighter-rouge">nginx_vhosts</code> &gt; <code class="highlighter-rouge">extra_parameters</code> section in your group variables file:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">location /.well-known/ {</span>
-    <span class="s">proxy_set_header           Host $host:$server_port;</span>
-    <span class="s">proxy_set_header           X-Real-IP $remote_addr;</span>
-    <span class="s">proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;</span>
-    <span class="s">proxy_set_header           X-Forwarded-Proto $scheme;</span>
-    <span class="s">proxy_pass                 http://127.0.0.1:8118;</span>
-    <span class="s">proxy_pass_request_headers on;</span>
-<span class="err">}</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Run the playbook</p>
-    </li>
-    <li>
-      <p>Add the role <code class="highlighter-rouge">usegalaxy-eu.certbot</code> to your playbook and have it run as root.</p>
-    </li>
-    <li>
-      <p>We need to add some variables for this:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_auto_renew</span><span class="pi">:</span> <span class="s">yes</span>
-<span class="na">certbot_auto_renew_user</span><span class="pi">:</span> <span class="s">root</span>
-<span class="na">certbot_auto_renew_hour</span><span class="pi">:</span>    <span class="c1"># Pick a number between 0 and 23, inclusive</span>
-<span class="na">certbot_auto_renew_minute</span><span class="pi">:</span>  <span class="c1"># Pick a number between 0 and 59, inclusive</span>
-<span class="na">certbot_auto_renew_extra</span><span class="pi">:</span> <span class="s2">"</span><span class="s">--preferred-challenges</span><span class="nv"> </span><span class="s">http-01</span><span class="nv"> </span><span class="s">--http-01-port</span><span class="nv"> </span><span class="s">8118"</span>
-<span class="na">certbot_environment</span><span class="pi">:</span> <span class="s">staging</span>
-<span class="na">certbot_domains</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-<span class="na">certbot_agree_tos</span><span class="pi">:</span> <span class="s">--agree-tos</span>
-<span class="na">certbot_admin_email</span><span class="pi">:</span> <span class="c1"># Put YOUR email here</span>
-<span class="na">certbot_share_key_users</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">nginx</span>
-<span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="no">systemctl restart nginx || true</span>
-</code></pre></div>      </div>
-
-      <p>Be sure to pick a actual value for <code class="highlighter-rouge">certbot_auto_renew_minute</code> and <code class="highlighter-rouge">certbot_auto_renew_hour</code>
-as noted in the commands above.</p>
-    </li>
-    <li>
-      <p>Run the playbook</p>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>And now we should have valid SSL certificates! We just need to go back and update our various services to support this.</p>
-
-<blockquote class="comment">
-  <h3 id="comment-issues-on-centos"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Issues on CentOS</h3>
-  <p>Check that setenforce is permissive, or allow nginx to connect back to localhost on a non-standard port.</p>
-</blockquote>
-
-<p>Out-of-the-box SSL settings are often insecure. Use the <a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/">Mozilla SSL config generator</a> to create a default config and <a href="https://www.ssllabs.com/ssltest/analyze.html">Qualys SSL Server Test</a> to check it.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-securing-nginx"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Securing NGINX</h3>
-
-  <ol>
-    <li>
-      <p>Open your group variables, we need to re-structure the NGINX configuration to look like the following. As before we will show you the necessary configuration.</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_vhosts</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">80"</span>
-    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">return</span><span class="pi">:</span> <span class="s2">"</span><span class="s">301</span><span class="nv"> </span><span class="s">https://{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}$request_uri"</span>
-    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.80.conf"</span>
-
-  <span class="pi">-</span> <span class="na">listen</span><span class="pi">:</span> <span class="s2">"</span><span class="s">443</span><span class="nv"> </span><span class="s">ssl"</span>
-    <span class="na">server_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">root</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/www/{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">index</span><span class="pi">:</span> <span class="s2">"</span><span class="s">index.html"</span>
-    <span class="na">access_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/access.log"</span>
-    <span class="na">error_log</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/var/log/nginx/error.log"</span>
-    <span class="na">state</span><span class="pi">:</span> <span class="s2">"</span><span class="s">present"</span>
-    <span class="na">filename</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">hostname</span><span class="nv"> </span><span class="s">}}.conf"</span>
-    <span class="na">extra_parameters</span><span class="pi">:</span> <span class="pi">|</span>
-        <span class="no">client_max_body_size 10G; # aka max upload size, defaults to 1M</span>
-        <span class="no">uwsgi_read_timeout 2400;</span>
-
-        <span class="no">location / {</span>
-            <span class="no">uwsgi_pass      127.0.0.1:8080;</span>
-            <span class="no">uwsgi_param UWSGI_SCHEME $scheme;</span>
-            <span class="no">include         uwsgi_params;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /.well-known/ {</span>
-            <span class="no">proxy_set_header           Host $host:$server_port;</span>
-            <span class="no">proxy_set_header           X-Real-IP $remote_addr;</span>
-            <span class="no">proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;</span>
-            <span class="no">proxy_set_header           X-Forwarded-Proto $scheme;</span>
-            <span class="no">proxy_pass                 http://127.0.0.1:8118;</span>
-            <span class="no">proxy_pass_request_headers on;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static/style {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/style/blue;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static/scripts {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/scripts;</span>
-                <span class="no">expires 24h;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /robots.txt {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/robots.txt;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /favicon.ico {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/favicon.ico;</span>
-        <span class="no">}</span>
-
-        <span class="no">location /static/welcome.html {</span>
-                <span class="no">alias {{ galaxy_server_dir }}/static/welcome.html.sample;</span>
-        <span class="no">}</span>
-        <span class="no">ssl_certificate /etc/ssl/certs/fullchain.pem;</span>
-        <span class="no">ssl_certificate_key /etc/ssl/private/privkey-nginx.pem;</span>
-
-        <span class="no">ssl_protocols TLSv1.2;# Requires nginx &gt;= 1.13.0 else use TLSv1.2</span>
-        <span class="no">ssl_prefer_server_ciphers on;</span>
-        <span class="no">ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;</span>
-        <span class="no">ssl_ecdh_curve secp384r1;</span>
-        <span class="no">ssl_session_timeout  10m;</span>
-        <span class="no">ssl_session_cache shared:SSL:10m;</span>
-        <span class="no">ssl_session_tickets off;</span>
-        <span class="no">#ssl_stapling on;</span>
-        <span class="no">#ssl_stapling_verify on;</span>
-
-        <span class="no">resolver 8.8.8.8 8.8.4.4 valid=300s;</span>
-        <span class="no">resolver_timeout 5s;</span>
-        <span class="no">add_header X-Content-Type-Options nosniff;</span>
-        <span class="no">add_header X-XSS-Protection "1; mode=block";</span>
-        <span class="no">add_header X-Robots-Tag none;</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Add the following proftpd configuration:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">proftpd_tls_cipher_suite</span><span class="pi">:</span> <span class="s">AES128+EECDH:AES128+EDH</span>
-<span class="na">proftpd_tls_protocol</span><span class="pi">:</span> <span class="s">TLSv1.2</span>
-<span class="na">proftpd_conf_ssl_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/cert.pem</span>
-<span class="na">proftpd_conf_ssl_certificate_key</span><span class="pi">:</span> <span class="s">/etc/ssl/private/privkey.pem</span>
-<span class="na">proftpd_conf_ssl_ca_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/fullchain.pem</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Run the playbook</p>
-    </li>
-    <li>
-      <p>You are now running with staging certificates. You will need production certificates
-for most applications, so now change the <code class="highlighter-rouge">certbot_environment</code> group variable to
-<code class="highlighter-rouge">production</code>, wipe out the existing certifacts with <code class="highlighter-rouge">sudo rm -rf /etc/letsencrypt</code>,
-and re-run the playbook.</p>
-    </li>
-  </ol>
 
 </blockquote>
 

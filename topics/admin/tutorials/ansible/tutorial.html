@@ -634,6 +634,9 @@ Ansible provides some flags which can help you identify changes before they’re
 
   <ol>
     <li>
+      <p>Decide where you will install and run Ansible? On your laptop? Or on the remote machine/VM you will manage? All of the following steps should be done in the one location you pick.</p>
+    </li>
+    <li>
       <p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Install Ansible.</a></p>
     </li>
     <li>
@@ -642,24 +645,54 @@ Ansible provides some flags which can help you identify changes before they’re
     <li>
       <p>Create your inventory file, name it <code class="highlighter-rouge">hosts</code>, in the folder you have just entered.</p>
 
-      <ol>
-        <li>Identify a host you have <code class="highlighter-rouge">SSH</code> access to. If you do not have access to any remote machines, <code class="highlighter-rouge">localhost</code> is fine.</li>
-        <li>Make sure you can SSH into it. Test it now.</li>
-        <li>We will call our group “my_hosts”.</li>
-        <li>Populate the inventory file with the group <code class="highlighter-rouge">my_hosts</code> and the host you have chosen.</li>
-      </ol>
+      <ul>
+        <li>
+          <p>You are installing ansible on the machine it will be used to manage</p>
 
-      <blockquote class="solution">
-        <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-        <p>The <code class="highlighter-rouge">hosts</code> file should look like:</p>
+          <ol>
+            <li>
+              <p>Make sure you can SSH into it. Test it now.</p>
+            </li>
+            <li>
+              <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
+            </li>
+            <li>
+              <p>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and your host.</p>
 
-        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
+              <blockquote class="solution">
+                <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+                <p>The file should look like:</p>
+
+                <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
 <span class="err">your.host</span>
-</code></pre></div>        </div>
+</code></pre></div>                </div>
+                <p>Remember that if you SSH in with a username different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
+              </blockquote>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <p>You are installing ansible on a machine that will manage a second, remote machine</p>
 
-        <p>Remember that if you SSH in with a username different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
+          <ol>
+            <li>
+              <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
+            </li>
+            <li>
+              <p>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and <code class="highlighter-rouge">localhost ansible_connection=local</code>, which tells ansible to not use SSH, and just use the local connection.</p>
 
-      </blockquote>
+              <blockquote class="solution">
+                <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+                <p>The file should look like:</p>
+
+                <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
+<span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+</code></pre></div>                </div>
+              </blockquote>
+            </li>
+          </ol>
+        </li>
+      </ul>
     </li>
     <li>
       <p>Create the roles directory, your role, and the tasks folder: <code class="highlighter-rouge">mkdir -p roles/my-role/tasks/</code></p>
@@ -706,7 +739,7 @@ Ansible provides some flags which can help you identify changes before they’re
         <p>How does your file tree look now? Use <code class="highlighter-rouge">find</code> or <code class="highlighter-rouge">tree</code>.</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 ├── hosts
@@ -738,7 +771,7 @@ Ansible provides some flags which can help you identify changes before they’re
         <p>How does the output look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>The important thing is <code class="highlighter-rouge">failed=0</code></p>
 
@@ -824,7 +857,7 @@ ok: [localhost]
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
             <li>
@@ -909,7 +942,7 @@ ok: [localhost]
         <p>How does it look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>The file should look like:</p>
 
@@ -949,7 +982,7 @@ to show how a person using <code class="highlighter-rouge">my-role</code> would 
         <p>How does the output look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> ansible-playbook -i hosts playbook.yml -c local --check --diff
 <span class="p">PLAY [my_hosts] ******************************************
@@ -1007,7 +1040,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
         <p>Did something go wrong?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
 The solution to this is to set <code class="highlighter-rouge">become: true</code>. Edit your playbook.yml and add <code class="highlighter-rouge">become: true</code> just below <code class="highlighter-rouge">hosts: my_hosts</code>.</p>
