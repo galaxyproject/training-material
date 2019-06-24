@@ -41,8 +41,12 @@ can be added.
 > ### {% icon hands_on %} Hands-on: Import integer workflow
 >
 > 1. Click on Workflow in the top menu
-> 2. Click on the import workflow button on the right
-> 3. Enter `https://github.com/galaxyproject/training-material/raw/master/topics/galaxy-ui/tutorials/workflow-parameters/workflows/goenrichment-workflow.ga` into the Archived Workflow URL box
+> 2. Click on the {% icon galaxy-upload %} import workflow button on the right
+> 3. Enter the following URL into the "Archived Workflow" URL box
+>
+>    ```
+>    https://github.com/galaxyproject/training-material/raw/master/topics/galaxy-ui/tutorials/workflow-parameters/workflows/goenrichment-workflow.ga
+>    ```
 > 4. Click on import workflow
 {: .hands_on}
 
