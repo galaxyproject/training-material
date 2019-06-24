@@ -132,6 +132,7 @@ report page.
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
 > 1. **NanoPlot** {% icon tool %} with the following parameters
+>   - *"Select multifile mode"*: `batch`
 >   - *"Type of the file(s) to work on"*: `fasta`
 >   - *"files"*: The `Plasmids` dataset collection you just created
 >
@@ -151,7 +152,7 @@ plot the read length distribution of each sample:
 > > ### {% icon solution %} Solution
 > > 4906.3
 > >
-> > This can be determined by looking at the NanoStats or HTML output of NanoPlot.
+> > This can be determined by looking at the NanoStats or HTML output of NanoPlot RB01.
 > {: .solution }
 {: .question}
 
@@ -182,7 +183,7 @@ the Minimap2 publication ({% cite Li2018 %}).
 >
 > 1. **Map with minimap2** {% icon tool %} with the following parameters
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->    - *"Use the following data collection as the reference sequence"*: `Created dataset collection`
+>    - *"Use the following data collection as the reference sequence"*: `Created dataset collection (Plasmids)`
 >    - *"Single or Paired-end reads"*: `Single`
 >    - *"Select fastq dataset"*: The `Plasmids` dataset collection
 >    - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
@@ -236,6 +237,8 @@ Thus the per-base error rate is similar to the raw input reads.
 >   - *"Sequence Reads"*: The `Plasmids` dataset collection
 >   - *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
 >
+>    {% include snippets/select_collection.md %}
+>
 {: .hands_on}
 
 The `Assembly Graph` output file gives information about the steps taken in the asssembly.
@@ -249,12 +252,12 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 
 ## Remapping using Minimap2
 
-The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format
+The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format. Remapping is done on the miniasm assembly to map the original reads on the assembly to provide the nucleotides per position. This is used by racon for consensus construction. 
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
 > 1. **GFA to Fasta** {% icon tool %} with the following parameters
->   - *"Input GFA file"*: the `Assembly Graph` created by the Miniasm tool
+>   - *"Input GFA file"*: the `Assembly Graph Collection` created by the Miniasm tool
 >
 > 2. **Map with minimap2** {% icon tool %} with the following parameters
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
