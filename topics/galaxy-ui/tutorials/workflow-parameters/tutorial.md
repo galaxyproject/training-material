@@ -95,8 +95,8 @@ If we want to make the `foo` part of the regular expression configurable we can
 compose this text parameter using the `Compose text parameter value` tool.
 
 > ### {% icon hands_on %} Hands-on: Compose a text parameter
-> 1. **Add a data input to the workflow**
-> 2. **Add a `Simple inputs used for workflow logic` to the workflow**
+> 1. Add an Inputs → **Input Dataset** to the workflow
+> 2. Add an Inputs → **Simple inputs used for workflow logic** to the workflow
 >    - {% icon param-select %} *"Parameter type"*: `Text`
 > 3. **Add the `Compose text parameter value` to the workflow** {% icon tool %}
 >     - Add three repeats
