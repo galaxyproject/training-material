@@ -55,6 +55,7 @@ can be added.
 This workflow takes an input dataset and outputs the first 10 lines of that input dataset.
 The number of lines that should be output can be set using the `Number of lines` parameter
 of the select first tool.
+
 Instead of selecting a specific number of lines we can choose to insert a workflow parameter
 that allows the user to set this parameter when running the workflow.
 To do that click on the `Select first` tool in the workflow and find the `Number of lines`
@@ -77,7 +78,7 @@ If you run the workflow you will now see the new parameter that needs to be set 
 ![Animation of simple integer workflow parameter](../../images/workflow_integer_param.gif "Integer workflow parameter")
 
 > ### {% icon tip %} Tip: You can use a single parameter multiple times
-> 
+>
 > * You can connect a parameter to multiple steps or to multiple parameters within a step
 {: .tip}
 
