@@ -77,9 +77,9 @@ If you run the workflow you will now see the new parameter that needs to be set 
 
 ![Animation of simple integer workflow parameter](../../images/workflow_integer_param.gif "Integer workflow parameter")
 
-> ### {% icon tip %} Tip: You can use a single parameter multiple times
+> ### {% icon tip %} Tip: Parameter Reuse
 >
-> * You can connect a parameter to multiple steps or to multiple parameters within a step
+> You can connect a parameter to multiple steps or to multiple parameters within a step, everywhere you need to use it.
 {: .tip}
 
 # Create a text parameter from multiple parameters
