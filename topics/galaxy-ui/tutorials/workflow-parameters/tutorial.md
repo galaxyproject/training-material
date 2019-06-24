@@ -11,7 +11,7 @@ objectives:
 - Learn how to use Workflow Parameters to improve your Workflows
 time_estimation: "10m"
 key_points:
-- Use Workflow Parameters to make your Workflows more useful
+- Use Workflow Parameters to make your Workflows more versatile
 contributors:
 - mvdbeek
 
@@ -37,8 +37,6 @@ To make a workflow reusable with slightly different settings you can define and 
 
 We will import a simple workflow and then demonstrate how workflow parameters
 can be added.
-
-## Get data
 
 > ### {% icon hands_on %} Hands-on: Import integer workflow
 >
@@ -88,25 +86,26 @@ The Galaxy tool ``Regex Find And Replace`` can be used to tun such a regular exp
 If we want to make the `foo` part of the regular expression configurable we can
 compose this text parameter using the `Compose text parameter value` tool.
 
-## Compose a text parameter
-1. **Add a data input to the workflow**
-2. **Add a `Simple inputs used for workflow logic` to the workflow**
-   - {% icon param-select %} *"Parameter type"*: `Text`
-3. **Add the `Compose text parameter value` to the workflow** {% icon tool %}
-    - Add three repeats
-    - In the first repeat:
-      - {% icon param-text %} *"Enter text that should be part of the computed value"*: `/(`
-    - In the second repeat:
-      - {% icon param-text %} *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module".
-    - In the third repeat:
-      - {% icon param-text %} *"Enter text that should be part of the computed value"*: `)/`.
-    - Connect the `Simple inputs used for workflow logic` to the `Compose text parameter value` parameter input
-4. **Add the `Regex Find And Replace` to the workflow**
-    - Click on `Insert Check`
-    - Click on `Add connection to module` for the `Find Regex` parameter
-    - *"Replacement"*: `\1bar`
-    - Connect the output of the  `Compose text parameter value` tool to the `Find Regex` parameter.
-    - Connect the data input to the `Select lines from` input of the `Regex Find And Replace` tool
+> ### {% icon hands_on %} Hands-on: Compose a text parameter
+> 1. **Add a data input to the workflow**
+> 2. **Add a `Simple inputs used for workflow logic` to the workflow**
+>    - {% icon param-select %} *"Parameter type"*: `Text`
+> 3. **Add the `Compose text parameter value` to the workflow** {% icon tool %}
+>     - Add three repeats
+>     - In the first repeat:
+>       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `/(`
+>     - In the second repeat:
+>       - {% icon param-text %} *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module".
+>     - In the third repeat:
+>       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `)/`.
+>     - Connect the `Simple inputs used for workflow logic` to the `Compose text parameter value` parameter input
+> 4. **Add the `Regex Find And Replace` to the workflow**
+>     - Click on `Insert Check`
+>     - Click on `Add connection to module` for the `Find Regex` parameter
+>     - *"Replacement"*: `\1bar`
+>     - Connect the output of the  `Compose text parameter value` tool to the `Find Regex` parameter.
+>     - Connect the data input to the `Select lines from` input of the `Regex Find And Replace` tool
+{: .hands_on}
 
 Now upload a text dataset with the contents `wunder`
 If you run this workflow on the dataset and you select `wunder` as the newly defined parameter  you will see 2 new datasets in your history. The first dataset has the data type ``expression.json`` and contains the composed parameter value `(wunder)`, the second dataset will contain the output of the `Regex Find And Replace` step. A click on the `i` button will show the used parameters. You will see that the `Find Regex` parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is `wunderbar`.
@@ -116,29 +115,30 @@ If you run this workflow on the dataset and you select `wunder` as the newly def
 Often times it is necessary to calculate a parameter in one step of a workflow and then to use it in another step of the same workflow. This can be accomplished by reading the parameter from a dataset (As long as it is a text, integer, float, boolean or color parameter).
 In this example we will construct a workflow where we calculate the sum of all values in a dataset and then divide the values in this dataset by the sum calculated in the previous step.
 
-## Construct example workflow for reading parameters from a file
-
-1. **Add a data input to a new workflow** {% icon tool %}
-2. **Add the `Datamash` tool to the workflow and connect the data input** {% icon tool %}
-    - {% icon param-repeat %} **Operation to perform in each group**
-      - {% icon param-select %} *"Type"*: `sum`
-      - {% icon param-text %} *"On column"*: `1`
-3. **Add the `Parse parameter value` tool to the workflow** {% icon tool %}
-    - *"Select type of parameter to parse"*: integer
-    - Connect `Datamash` output to `Parse parameter value` input
-4.  **Add the `Compose text parameter value` tool to the workflow** {% icon tool %}
-    - Click `Insert Repat`
-    - In the first repeat:
-      - {% icon param-select %} *"Choose the type of parameter for this field"*: Text Parameter
-      - {% icon param-text %} *"Enter text that should be part of the computed value"*: c1/
-    - In the second repeat:
-      - {% icon param-select %} *"Choose the type of parameter for this field"*: Integer Parameter
-      - *"Enter integer that should be part of the computed value"*: Click on `Add connection to module`
-      - Connect `Parse parameter value` output to input
-5. **Add the `Compute an expression on every row ` tool to the workflow**
-    - *"Add expression as a new column to"*: Click on `Add connection to module`
-    - Connect data input to tool
-    - Connect `Compose text parameter value` output parameter to `Add expression` parameter input
+> ### {% icon hands_on %} Hands-on: Construct Workflow with Parameters read from a dataset
+>
+> 1. **Add a data input to a new workflow** {% icon tool %}
+> 2. **Add the `Datamash` tool to the workflow and connect the data input** {% icon tool %}
+>     - {% icon param-repeat %} **Operation to perform in each group**
+>       - {% icon param-select %} *"Type"*: `sum`
+>       - {% icon param-text %} *"On column"*: `1`
+> 3. **Add the `Parse parameter value` tool to the workflow** {% icon tool %}
+>     - *"Select type of parameter to parse"*: integer
+>     - Connect `Datamash` output to `Parse parameter value` input
+> 4.  **Add the `Compose text parameter value` tool to the workflow** {% icon tool %}
+>     - Click `Insert Repat`
+>     - In the first repeat:
+>       - {% icon param-select %} *"Choose the type of parameter for this field"*: Text Parameter
+>       - {% icon param-text %} *"Enter text that should be part of the computed value"*: c1/
+>     - In the second repeat:
+>       - {% icon param-select %} *"Choose the type of parameter for this field"*: Integer Parameter
+>       - *"Enter integer that should be part of the computed value"*: Click on `Add connection to module`
+>       - Connect `Parse parameter value` output to input
+> 5. **Add the `Compute an expression on every row ` tool to the workflow**
+>     - *"Add expression as a new column to"*: Click on `Add connection to module`
+>     - Connect data input to tool
+>     - Connect `Compose text parameter value` output parameter to `Add expression` parameter input
+{: .hands_on}
 
 If run on a tabular dataset this workflow will produce a new dataset, where the last column
 will be the result of dividing the value in the first column by the sum of all values in the
