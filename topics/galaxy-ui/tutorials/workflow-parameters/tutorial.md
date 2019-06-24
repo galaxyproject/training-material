@@ -61,21 +61,29 @@ that allows the user to set this parameter when running the workflow.
 
 ![Button for selecting connections](../../images/connection-module.png)
 
-To do that click on the `Select first` tool in the workflow and find the `Number of lines`
-parameter in the `Details` panel on the right hand side of the workflow.
-If you hover over the second symbol you will see a small text box appearing that says
-"Add connection to module". Click on this symbol and you will see that a new input with the text `Number of lines` has
-appeared in the `Select first` tool in the editor.
-
-To insert the workflow parameter click on Inputs in the tool panel on the right side of the workflow editor
-and select `Simple inputs used for workflow logic`. This will insert a new box into the workflow editor.
-
-If you click on the Input parameter box in the editor you will see in the `Details panel` that the `Parameter type`
-is set to `Text`. If you try to connect this parameter to the `Number of lines` parameter you will see that
-the noodle turns orange and that you cannot create a connection. If you change the parameter type to
-`Integer` on the right hand side you will be able to connect the workflow parameter to the `Number of lines` parameter.
-Make sure to also set a descriptive label and annotation, and save the workflow by clicking on the `save` icon.
-If you run the workflow you will now see the new parameter that needs to be set before the workflow can be run.
+> ### {% icon hands_on %} Hands-on: Updating the Workflow
+>
+> 1. Click the **Select first** {% icon tool %} tool in your workflow
+> 2. Find the **Number of lines** parameter in the right hand panel.
+> 3. Click on the workflow connection button {% icon galaxy-wf-connection %} to convert the Number of lines parameter into a workflow parameter connection
+>
+>    You will see that a new input with the text `Number of lines` has appeared on the **Select first** tool in the editor.
+>
+> 4. Add a **Simple inputs used for workflow logic**, found under the Inputs section of your toolbox
+> 5. If you click on the Input parameter box in the editor you will see in the `Details panel` that the **Parameter type** is set to `Text`. If you try to connect this parameter to the "Number of lines" parameter you will see that the noodle turns orange and that you cannot create a connection.
+>
+> 6. Click on Input parameter, and change the **Parameter type** to **Integer**
+>
+> 7. Connect *"output"* from Input parameter {% icon tool %} to the *"Number of lines"* input of the Select first {% icon tool %}.
+>
+> 8. Save {% icon galaxy-save %} your workflow
+>
+> 9. Run your workflow
+>
+>    {% include snippets/run_workflow.md %}
+>
+>    Notice the new input that can be changed before the workflow is run
+{: .hands_on }
 
 
 ![Animation of simple integer workflow parameter](../../images/workflow_integer_param.gif "Integer workflow parameter")
@@ -95,10 +103,11 @@ If we want to make the `foo` part of the regular expression configurable we can
 compose this text parameter using the `Compose text parameter value` tool.
 
 > ### {% icon hands_on %} Hands-on: Compose a text parameter
+> 1. Create a new workflow
 > 1. Add an Inputs → **Input Dataset** to the workflow
 > 2. Add an Inputs → **Simple inputs used for workflow logic** to the workflow
 >    - {% icon param-select %} *"Parameter type"*: `Text`
-> 3. **Add the `Compose text parameter value` to the workflow** {% icon tool %}
+> 3. Add **Compose text parameter value** {% icon tool %} to the workflow
 >     - Add three repeats
 >     - In the first repeat:
 >       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `/(`
@@ -106,17 +115,31 @@ compose this text parameter using the `Compose text parameter value` tool.
 >       - {% icon param-text %} *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module".
 >     - In the third repeat:
 >       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `)/`.
->     - Connect the `Simple inputs used for workflow logic` to the `Compose text parameter value` parameter input
-> 4. **Add the `Regex Find And Replace` to the workflow**
+>
+> 4. Add the **Regex Find And Replace** {% icon tool %} to the workflow
 >     - Click on `Insert Check`
 >     - Click on `Add connection to module` for the `Find Regex` parameter
 >     - *"Replacement"*: `\1bar`
 >     - Connect the output of the  `Compose text parameter value` tool to the `Find Regex` parameter.
 >     - Connect the data input to the `Select lines from` input of the `Regex Find And Replace` tool
+>
+> 5. **Save** {% icon galaxy-save %} your workflow
 {: .hands_on}
 
-Now upload a text dataset with the contents `wunder`
-If you run this workflow on the dataset and you select `wunder` as the newly defined parameter  you will see 2 new datasets in your history. The first dataset has the data type ``expression.json`` and contains the composed parameter value `(wunder)`, the second dataset will contain the output of the `Regex Find And Replace` step. A click on the `i` button will show the used parameters. You will see that the `Find Regex` parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is `wunderbar`.
+You've now built a workflow with a parameterised input! It's time to test it out.
+
+> ### {% icon hands_on %} Hands-on: Running the workflow
+>
+> 1. Upload a text dataset with the contents `wunder`
+>
+> 2. Run your workflow with the following parameters
+>
+>    {% include snippets/run_workflow.md %}
+>
+> 3. Examine the outputs
+{: .hands_on }
+
+> If you run this workflow on the dataset and you select `wunder` as the newly defined parameter  you will see 2 new datasets in your history. The first dataset has the data type ``expression.json`` and contains the composed parameter value `(wunder)`, the second dataset will contain the output of the `Regex Find And Replace` step. A click on the `i` button will show the used parameters. You will see that the `Find Regex` parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is `wunderbar`.
 
 # Read a parameter from a dataset
 
