@@ -733,13 +733,17 @@
 
 <p>The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via <a href="/training-material/topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.html">scRNA pre-processing methods</a> using the <a href="/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html">CelSeq2 protocol</a>.</p>
 
-<blockquote class="details">
-  <h3 id="details-details-tidy-data"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Tidy Data</h3>
+<blockquote class="comment">
+  <h3 id="comment-comment-tidy-data"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Tidy Data</h3>
   <p>The <a href="https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html">tidy data</a> convention prevalent amongst the R data analysis community assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).</p>
 
 </blockquote>
 
-<p>Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript <a href="https://www.nature.com/articles/nmeth.2930#methods">count alteration</a> to correct against UMI errors, yielding decimal values instead. This correction is not that necessary in most datasets but it is used here.</p>
+<blockquote class="details">
+  <h3 id="details-details-count-correction"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Count Correction</h3>
+  <p>Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript <a href="https://www.nature.com/articles/nmeth.2930#methods">count alteration</a> to correct against UMI errors, yielding decimal values instead. This correction is not that necessary in most datasets but it is used here.</p>
+
+</blockquote>
 
 <p>This tutorial will perform cell clustering and lineage construction, as well as exploring some genes of interest.</p>
 
@@ -781,9 +785,9 @@
 
 <h1 id="initial-count-matrix">Initial Count Matrix</h1>
 
-<p>Every single-cell RNA analysis begins with a count matrix, which contains the raw data required for the downstream analysis. Annotation data such as cell phenotype or gene annotations are sometimes also used to enrich the analysis, but these are typically only useful later, and can be generated from external databases if required.</p>
+<p>Every single-cell RNA analysis begins with a count matrix, which contains the raw data required for the downstream analysis. Annotation data such as cell phenotype or gene annotations are often used to enrich and validate the analysis. Cell annotations can sometimes be encoded directly in the cell labelling, as we will later explore in this count matrix.</p>
 
-<p>For now we will work with the count matrix alone.</p>
+<p>First, let’s setup our history and initial dataset.</p>
 
 <h2 id="get-data">Get data</h2>
 
@@ -909,9 +913,11 @@
 
 <h2 id="inspecting-the-cell-labelling">Inspecting the Cell Labelling</h2>
 
-<p>We can inspect the dataset by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>  symbol. Immediately we can see that the header of this file contains cell names, following a naming convention that separates the cells into 5 phenotypes: <em>I5d, II5d, III5d, IV5d</em>, and <em>V5d</em></p>
+<p>Cell labels usually encode which plate, batch, or cell barcode was used to delineate cell. Sometimes all three sources of information are used, which can be valuable information to have when looking for batch effects.</p>
 
-<p>We can see this for ourselves by extracting the headers, and reformatting them to see how many unique types we can detect:</p>
+<p>We can inspect the labels of this dataset by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol. Immediately we can see that the header of this file contains cell names, following a naming convention that separates the cells into 5 batches: <em>I5d, II5d, III5d, IV5d</em>, and <em>V5d</em></p>
+
+<p>Is each batch equally populated? We can investigate this ourselves by extracting the headers, and reformatting them to see how many unique types we can detect:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
@@ -1011,7 +1017,7 @@
 
 <h2 id="inspecting-the-quality-of-the-count-matrix">Inspecting the Quality of the Count Matrix</h2>
 
-<p>Low quality cells and genes are often caught at the preprocessing stage and removed, but sometimes more filtering is required to remove unwanted noise from the data.</p>
+<p>Low quality cells and genes are often caught at the pre-processing stage and removed, but sometimes more filtering is required to remove unwanted noise from the data.</p>
 
 <p>A gene with a low number of total counts across multiple cells might be differentially expressed across those cells, however differential gene expression and log fold change do not necessarily denote significant change. 1 count in CellA and 10 counts in CellB yields an LFC of 10, but is not as significant as an LFC of 10 from 100 counts in CellA vs 1000 counts in CellB.</p>
 
@@ -1124,17 +1130,20 @@
 </blockquote>
 
 <blockquote class="details">
-  <h3 id="details-details-why-the-same-number-of-features"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Why the Same Number of Features</h3>
+  <h3 id="details-details-why-the-same-number-of-features"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: Why the Same Number of Features?</h3>
 
   <ul>
     <li>
-      <p>RaceID normalizes the data to compare all cells using the the same features, as it is difficult to make a meaningful comparison otherwise. Selected features must be <em>meaningful</em>, describing or contributing to the biological variation in the data, and therefore must be differentially expressed between cells.</p>
+      <p>RaceID normalises the data to compare all cells using the same set of features. Selected features must be <em>meaningful</em>, describing or contributing to the biological variation in the data. Therefore features should be the most differentially expressed genes across different cells.</p>
     </li>
     <li>
-      <p>Cells remaining after filtering will <em>still</em> contain some genes which have count values of zero. As comparing against zero values is difficult, a value of 0.1 is added to the count data so that these features are not lost during the analysis. This assumes the gene <em>is</em> detectable for that cell (i.e. no errors during sequencing), but that the transcript was very lowly expressed.</p>
+      <p>The cells that still remain after filtering will have some genes with count values of zero. In some cases this will give a median value of zero, which can make normalisation strategies difficult (e.g. dividing by the median value of a gene may require dividing by zero). For this reason, a value of 0.1 is added to the count data so that these features are not lost during the analysis.</p>
     </li>
     <li>
-      <p>However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more ‘realistic’ distribution of features, re-run the tool with <em>“Count filtered features greater than or equal to 1”</em> enabled.</p>
+      <p>It should be noted that this then assumes that the gene <em>is</em> detectable for that cell (i.e. no errors during sequencing), but that the transcript was very lowly expressed.</p>
+    </li>
+    <li>
+      <p>The flat square plot (bottom-right) for the post-filtered number of features is square because it shows that the dataset is still a rectangular matrix with C number of cells and G number of genes. For a more ‘realistic’ distribution of features, re-run the tool with <em>“Count filtered features greater than or equal to 1”</em> enabled.</p>
     </li>
   </ul>
 
@@ -1159,8 +1168,10 @@
       <li>2089 genes remain (10%)</li>
       <li><strong>Yes</strong>
         <ul>
-          <li><em>Cells:</em> These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.</li>
-          <li><em>Genes:</em> As the variables of the dataset, the more genes included, the more complex the model. Discovering the few variables that are relevant to the final model, then,  is the aim. Genes <em>not</em> differentially expressed between cells will not affect the final model, but serve as stable background metrics against which to measure significantly differentially expressed genes in the initial matrix. It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.</li>
+          <li><em>Cells:</em>
+These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.</li>
+          <li><em>Genes:</em>
+As the variables of the dataset, the more genes included, the more complex the model. Discovering the few variables that are relevant to the final model, then,  is the aim. Genes <em>not</em> differentially expressed between cells will not affect the final model, but serve as stable background metrics against which to measure significantly differentially expressed genes in the initial matrix. It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.</li>
         </ul>
       </li>
     </ol>
@@ -1290,12 +1301,18 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 </ul>
 
 <blockquote class="details">
-  <h3 id="details-details-raceid-plots"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: RaceID plots</h3>
-  <p>The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a “saturation point” (blue) is reached where the change in dispersion no longer decreases for an increase in k.</p>
-
-  <p>For example, if <em>k=2</em>, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of <em>k</em> may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of <em>k</em>. As <em>k</em> increases, the reduction in this dispersion is measured for each increase of <em>k</em> until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at <em>k=12</em>, which is chosen to the be the number of clusters detected in our data for all further analysis.</p>
-
-  <p>The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the Jaccard distance, which is a fractional quantity that measures the dissimilarity between two sets as measured by overlap divided by the union of both sets.</p>
+  <h3 id="details-details-raceid-plots"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: RaceID Plots</h3>
+  <ul>
+    <li>
+      <p>The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a “saturation point” (blue) is reached where the change in dispersion no longer decreases for an increase in k.</p>
+    </li>
+    <li>
+      <p>For example, if <em>k=2</em>, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of <em>k</em> may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of <em>k</em>. As <em>k</em> increases, the reduction in this dispersion is measured for each increase of <em>k</em> until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at <em>k=12</em>, which is chosen to the be the number of clusters detected in our data for all further analysis.</p>
+    </li>
+    <li>
+      <p>The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the Jaccard distance, which is a fractional quantity that measures the dissimilarity between two sets as measured by overlap divided by the union of both sets.</p>
+    </li>
+  </ul>
 
 </blockquote>
 
@@ -1307,7 +1324,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <p><script type="math/tex">d_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}</script>
 <!-- This seems to be visible when collapsed...? --></p>
 
-  <p>In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on it’s similarity to other sets.</p>
+  <p>In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on its similarity to other sets.</p>
 
   <figure id="figure-7"><img src="/training-material/topics/transcriptomics/images/raceid_jaccard.svg" alt="Jaccard" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example Jaccard Distance calculation</figcaption></figure>
 
@@ -1340,17 +1357,21 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <blockquote class="details">
   <h3 id="details-details-raceid-outlier-identification"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: RaceID Outlier Identification</h3>
   <ul>
-    <li>
-      <p>(Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that <em>most</em> genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.</p>
-    </li>
-    <li>
-      <p>As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
- <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 --></p>
+    <li>(Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by the average expression of a gene across all cells in a cluster, along with a dispersion parameter.
+      <ul>
+        <li>The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that:
+          <ol>
+            <li>Most genes are not differentially expressed between clusters</li>
+            <li>True biological variability is located within a handful of genes</li>
+          </ol>
+        </li>
+        <li>In the background model, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes. <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 --></li>
+      </ul>
     </li>
     <li>(Top-Right) Outlier cells are detected if the probability for that cell <script type="math/tex">c</script> that a minimum number of genes <script type="math/tex">G_{min}</script> of observing total counts <script type="math/tex">T_{G_{min}}</script> is less than a specific threshold <script type="math/tex">P_{thr}</script>, as given by the red dotted line.
-      <blockquote>
-        <p>This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to <script type="math/tex">1 \cdot 10^{-3}</script> by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).</p>
-      </blockquote>
+      <ul>
+        <li>This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to <script type="math/tex">1 \cdot 10^{-3}</script> by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).</li>
+      </ul>
     </li>
     <li>(Bottom-Left) A bar plot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.</li>
   </ul>
@@ -1398,6 +1419,33 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </tbody>
 </table>
 
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What is the most significant differentially expressed gene in Cluster 5?</li>
+    <li>Which cluster has the most genes with a fold-change greater than 30?
+      <blockquote class="tip">
+        <h3 id="tip-tip"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+        <p>One way to answer is this is to scroll through the list and make a mental note of all the genes with a high fold-change value…</p>
+
+        <p>…but a <em>better</em> way is to sort the data in descending order on Column 5 using the <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Sort</strong> tool.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>The <em>Genes per Cluster</em> dataset is already sorted by cluster number and then by the adjusted p-value. Scrolling down to the first gene that is in cluster 5, we see that <em>Dmbt11</em> is the most significant gene in that cluster with an adjusted p-value of <code class="highlighter-rouge">2e-30</code>.</li>
+      <li>Cluster 11 appears to have the most genes with a fold-change greater than 30.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
 <h2 id="heatmaps">Heatmaps</h2>
 
 <p>The remainder of the plots are heatmaps derived from k-medoids clustering, showing the similarity between clusters for both the initial clustering and the final (post outlier detection) clustering.</p>
@@ -1429,14 +1477,14 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <p>In terms of single-cell data, for <em>G</em> genes, each datapoint is a G-dimensional cell. The distances between cells are computed using a <a href="#performing-the-clustering">given metric</a>, and the k points are G-dimensional points indicating the centre of cluster. The k points are then updated for each iteration of the algorithm.</p>
 
   <blockquote class="question">
-    <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+    <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
     <p>Why use G dimensions?</p>
 
     <p>Why not use 2 dimensions as given in the graphic above?</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
       <p>Using 2 dimensions will not capture all the variability in the data, and so the clustering will be based on whatever those 2 chosen dimensions are biased towards.</p>
 
@@ -1453,7 +1501,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <p>The difference shown between the initial and final clustering is sometimes subtle depending which of the clusters the new clusters have been extracted from.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Which new clusters have been added?</li>
@@ -1461,7 +1509,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li><code class="highlighter-rouge">c13</code> and <code class="highlighter-rouge">c14</code></li>
@@ -1479,7 +1527,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <p>The top 10 defining genes from each cluster (above only <code class="highlighter-rouge">c1</code>-<code class="highlighter-rouge">c4</code> are shown) give us an idea of how unique these genes are to the cluster.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>Which clusters are <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> highly expressed in?</li>
@@ -1488,7 +1536,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>(Top-Left Heatmap) <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> are highly expressed in <code class="highlighter-rouge">c1</code> and <code class="highlighter-rouge">c6</code></li>
@@ -1569,7 +1617,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <p>The figure above displays the initial (left top/bottom) clusters detected during the clustering stage, as well as the final (right top/bottom) clusters determined during the outlier detection stage, projected using tSNE and Fruchterman-Rheingold graph layouts.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>What has changed between the initial and final plots?</li>
@@ -1578,7 +1626,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Two extra clusters are added in the final plots <code class="highlighter-rouge">c13</code> and <code class="highlighter-rouge">c14</code></li>
@@ -1687,7 +1735,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <p>The genes shown as grey dots are not labelled because they are not so differentially expressed between the two clusters, but the genes as labelled red dots on the fringes do display significant variability between the clusters.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How do we interpret this plot?</li>
@@ -1695,7 +1743,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Interpretation of plot:
@@ -1746,7 +1794,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <blockquote class="question">
   <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <p>Observe the above expression plot and the overall clustering plot generated during the “<em>Visualising All Clusters</em>” stage.</p>
+  <p>Observe the above expression plot and the clustering plot generated during the “<em>Visualising All Clusters</em>” step.</p>
 
   <p>Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?</p>
 
@@ -1766,7 +1814,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </blockquote>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>They appear to overlap <code class="highlighter-rouge">c6</code> which is in close proximity to <code class="highlighter-rouge">c1</code>. There are two reasons why this might be the case:</p>
     <ol>
@@ -1849,37 +1897,59 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <h3 id="details-details-stemid-lineage-plots"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: StemID Lineage Plots</h3>
 
   <ul>
-    <li>
-      <p>The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or <em>pseudo-time</em> analysis of each link. This is important, because by ordering the cells by lineage pseudo-time we can trace the up or down regulation of a gene as discrete time points. The interval between each time point is of course hard to accurately determine, but the order of events is still important.</p>
+    <li>(Top-Left) A minimum spanning tree that summarises the most likely connections between clusters.</li>
+    <li>(Top-Right) The same tree but with cells projected along the links given by StemID.
+      <ul>
+        <li>Ordering the cells along each link in such a way to suggest a time series, or <em>pseudo-time</em> analysis of each link. By ordering the cells by lineage pseudo-time we can trace the up/down regulation of a gene as discrete time points. The interval between each time point is hard to accurately determine, but the order of events is still important.</li>
+      </ul>
     </li>
-    <li>
-      <p>The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by <strong>StemID</strong>. Here, blue clusters indicate a higher level of cluster entropy (associated with progenitor cell types), and red with low entropy (for mature types). The link colouring is red for more significant links between clusters, than green, and the width is indicative of the number of cells in the cluster sharing that link to another cluster.</p>
+    <li>(Bottom-Left) The degree of significance between clusters, with:
+      <ol>
+        <li>Node Colour, indicating the level of significance between clusters
+          <ul>
+            <li>Blue: Higher level of cluster entropy (associated with progenitor cell types)</li>
+            <li>Red: Lower level of cluster entropy (associated with mature types)</li>
+          </ul>
+        </li>
+        <li>Link Width, indicating the link score computed by <strong>StemID</strong>.
+          <ul>
+            <li>Indicates the number of cells in the cluster sharing the link to other.</li>
+          </ul>
+        </li>
+        <li>Link Colour, indicating link significance
+          <ul>
+            <li>Red: Stronger link level</li>
+            <li>Green: Weaker link level</li>
+          </ul>
+        </li>
+      </ol>
     </li>
-    <li>
-      <p>The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.</p>
-    </li>
-    <li>
-      <p>This is clarified slightly better with the heatmap (bottom-right) that shows the link scores between each cluster-cluster pair. To see how the link score is actually calculated, the image below provides some context:</p>
-    </li>
+    <li>(Bottom-Right) The link scores between each cluster-cluster pair.</li>
   </ul>
 
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>Based on the above plots, which cluster is most likely to be the main progenitor of the others?</p>
+  <ol>
+    <li>Which cluster pairs are likely to be biologically significant?</li>
+    <li>Based on the above plots, which cluster is most likely to be the main progenitor of the others?</li>
+  </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-13"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>On first glance, it appears that <code class="highlighter-rouge">c2</code> would be the progenitor, due to the number of links it has and its more central position in the cluster plot.</p>
-
-    <ul>
+    <ol>
+      <li>The thick red link between clusters 2-4, 3-5, and 3-1-6 are assumed to have a high level of biological significance.</li>
       <li>
-        <p><em>Cluster Tree Diagram:</em></p>
+        <p>On first glance, it appears that <code class="highlighter-rouge">c2</code> would be the progenitor, due to the number of links it has and its more central position in the cluster plot.</p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c2
+        <ul>
+          <li>
+            <p><em>Cluster Tree Diagram:</em></p>
+
+            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c2
   ├─ c4
   ├─ c9
   ├─ c8
@@ -1890,25 +1960,33 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
      ├─ c5
      └─ c1
         └─ c6
-</code></pre></div>        </div>
+</code></pre></div>            </div>
+          </li>
+        </ul>
       </li>
-    </ul>
+    </ol>
 
   </blockquote>
 
 </blockquote>
 
+<p>To see how the link score is actually calculated, the image below provides some context:</p>
+
 <figure id="figure-19"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_linkscores.png" alt="Link scores" /><figcaption><span class="figcaption-prefix">Figure 19:</span> StemID Link scores between branches.</figcaption></figure>
 
-<p>The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the “Delta-Entropy” which measures the variability of gene expression values within a cluster as the number of potential states (or cell types) it could produce, where clusters with more variability are less likely to be mature cell types due to the sheer “noise” that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.</p>
+<p>The top of the three charts shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types.</p>
+
+<p>The middle chart describes the “Delta-Entropy” which measures the variability of gene expression values within a cluster as the number of potential states (or cell types) it could produce, where clusters with more variability are less likely to be mature cell types due to the sheer “noise” that they exhibit that is to be expected of a cell type that could potentially give rise to other types.</p>
+
+<p>The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-13"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <p>With this new information, which cluster is now most likely to be the sole progenitor?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-13"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-14"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p><code class="highlighter-rouge">c3</code> has both the most number of links as well as the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, despite having the same number of links as <code class="highlighter-rouge">c2</code>. The more centred position of <code class="highlighter-rouge">c2</code> in the plots has no bearing on it being the initial progenitor type.</p>
 
@@ -1986,7 +2064,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 <p>The vertical names along the heatmap are the cells from <code class="highlighter-rouge">c3</code> being compared to all other clusters.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-13"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How does the heatmap correlate to the minimum spanning tree (MST)?</li>
@@ -1995,7 +2073,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-14"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-15"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>Each <code class="highlighter-rouge">c3</code> cell in the heatmap is “pulled” towards different clusters along a straight line in the MST. The degree to which it is pulled is given by the strength of the correlation of that cell to that cluster. For example cell <em>I5d_45</em> has a very strong correlation to <code class="highlighter-rouge">c12</code> and <code class="highlighter-rouge">c10</code>, and so it appears on the MST as a single (3) lying in between the <code class="highlighter-rouge">c3</code>,<code class="highlighter-rouge">c12</code>,<code class="highlighter-rouge">c10</code> triangle.</li>
@@ -2070,7 +2148,7 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
 <p>The heatmaps generated depict the same data, but at different “heat” scales to better colourise the map. The genes here are not genes, but are gene expression modules, which can be interpreted as gene motifs that are present in both <code class="highlighter-rouge">c1</code> and <code class="highlighter-rouge">c5</code>, but at different levels of expression.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-15"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>To which trajectory are gene modules 1-17 up regulated?</li>
@@ -2078,7 +2156,7 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-15"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-16"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>We can see a significant up-regulation in the expression of the 1-17 modules along the 3 to 1 trajectory, which does not exist in the 3 to 5 trajectory.</li>

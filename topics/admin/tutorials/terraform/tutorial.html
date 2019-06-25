@@ -1477,7 +1477,7 @@ Queue 10
       <p>Create a file <code class="highlighter-rouge">test.sh</code> with the following:</p>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="nb">echo</span> <span class="s2">"</span><span class="k">$(</span><span class="nb">hostname</span><span class="k">)</span><span class="s2">"</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">hostname</span><span class="si">)</span><span class="s2">"</span>
 <span class="nb">sleep </span>1
 </code></pre></div>      </div>
     </li>
@@ -1595,10 +1595,10 @@ Do you want to perform these actions?
 <p>Sometimes, immediately terminating the VM is not ideal behaviour. Especially if you’re managing a cluster like HTCondor which can gracefully terminate jobs, you might want to permit that. Terraform provides ‘destroy-time provisioners’, code snippets that are run before the VM is destroyed. If they return successfully, destruction continues. If they exit with an error code, then destruction is halted. We can write a simple one for HTCondor like so:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span> <span class="nt">-ex</span>
-condor_drain <span class="k">$(</span><span class="nb">hostname</span><span class="k">)</span> <span class="o">||</span> <span class="nb">true</span><span class="p">;</span>
-<span class="nv">my_ip</span><span class="o">=</span><span class="k">$(</span>/sbin/ifconfig eth0 | <span class="nb">grep</span> <span class="s1">'inet '</span> | <span class="nb">awk</span> <span class="s1">'{print $2}'</span><span class="k">)</span>
+condor_drain <span class="si">$(</span><span class="nb">hostname</span><span class="si">)</span> <span class="o">||</span> <span class="nb">true</span><span class="p">;</span>
+<span class="nv">my_ip</span><span class="o">=</span><span class="si">$(</span>/sbin/ifconfig eth0 | <span class="nb">grep</span> <span class="s1">'inet '</span> | <span class="nb">awk</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
 <span class="c"># Find slots which have an address associated with us.</span>
-<span class="nv">slots</span><span class="o">=</span><span class="k">$(</span>condor_status <span class="nt">-autoformat</span> Name State MyAddress | <span class="nb">grep</span> <span class="s2">"&lt;</span><span class="k">${</span><span class="nv">my_ip</span><span class="k">}</span><span class="s2">?9618"</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="k">)</span>
+<span class="nv">slots</span><span class="o">=</span><span class="si">$(</span>condor_status <span class="nt">-autoformat</span> Name State MyAddress | <span class="nb">grep</span> <span class="s2">"&lt;</span><span class="k">${</span><span class="nv">my_ip</span><span class="k">}</span><span class="s2">?9618"</span> | <span class="nb">wc</span> <span class="nt">-l</span><span class="si">)</span>
 <span class="c"># If there are more than one slots, leave it.</span>
 <span class="k">if</span> <span class="o">((</span> slots <span class="o">&gt;</span> 1 <span class="o">))</span><span class="p">;</span> <span class="k">then
     </span><span class="nb">exit </span>1<span class="p">;</span>
