@@ -90,7 +90,7 @@ uploading your data into Galaxy.
 > ### {% icon hands_on %} Hands-on: Data upload the mzXML with **Get data**
 >
 > 1. Create a new history for this tutorial
-> 2. Import the 9 mzXML files from [Zenodo](http://doi.org/10.5281/zenodo.3244991) or a shared data library inside a collection
+> 2. Import the 9 mzXML files from [Zenodo: Sacurine toy dataset - 6 samples / 3 QC](http://doi.org/10.5281/zenodo.3244991) or a shared data library inside a collection
 >    - HU_neg_048.mzML
 >    - HU_neg_090.mzML
 >    - HU_neg_123.mzML
@@ -113,7 +113,7 @@ uploading your data into Galaxy.
 >    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="mzml" collection_name="sacurine"%}
+>    {% include snippets/import_via_link.md collection=true collection_type="mzml" collection_name="sacurine" renaming=false %}
 >    {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
@@ -465,7 +465,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 >        - *"Bandwidth"*: `5.0`
 >        - *"Width of overlapping m/z slices"*: `0.01`
 >
-> You can leave the other parameters to zero.
+> You can leave the other parameters with their default values.
 >
 {: .hands_on}
 
@@ -548,7 +548,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 > > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 > >
 > > Execute **xcms plot chromatogram** {% icon tool %} with the following parameters:
-> >    - *"RData file"*: `The RData file from the 'adjustRtime' step`
+> >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 > >
 > >    > ### {% icon comment %} Comment
 > >    >
@@ -571,7 +571,7 @@ lower a little the bandwidth parameter.
 > ### {% icon hands_on %} Hands-on: second 'xcms groupChromPeaks (group)'
 >
 > Execute **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'adjustRtime' step`
+>    - *"RData file"*: `xset.merged.groupChromPeaks.RData` or `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
 >        - *"Width of overlapping m/z slices"*: `0.01`
@@ -634,7 +634,7 @@ chromatographic peak for this ion was identified.
 > ### {% icon hands_on %} Hands-on: xcms fillChromPeaks (fillPeaks)
 >
 > Execute **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the last 'groupChromPeaks' step`
+>    - *"RData file"*: `xset.merged.groupChromPeaks.*.RData`
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >        - *"Number of decimal places for retention time values reported in ions' identifiers."*: `2`
@@ -682,7 +682,7 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
 > ### {% icon hands_on %} Hands-on: CAMERA.annotate
 >
 > Execute **CAMERA.annotate** {% icon tool %} with the following parameters:
->    - *"RData file"*: `The RData file from the 'fillChromPeaks' step`
+>    - *"RData file"*: `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
 >    - In *"Annotate Isotopes [findIsotopes]"*:
 >        - *"Max. ion charge"*: `2`
 >    - *"Mode"*: `Only groupFWHM and findIsotopes functions [quick]`
@@ -715,10 +715,10 @@ At the end of the Preprocessing, you should have three tabulation-separated tabl
  - a **variableMetadata** from either XCMS.fillChromPeaks or CAMERA.annotate
 
 Concerning the **sampleMetadata** file, for the next steps of the workflow, there are four columns that are mandatory to go through all the analysis:
- - injectionOrder: a numerical column of injection order
- - sampleType: specifies if a QC pool or a sample (coded `pool` or `sample`)
- - batch: a categorical column indicating the batches of analysis (if only one, must be a constant)
- - your variable of interest: here we will consider as an example the Body Mass Index (`bmi`)
+ - `injectionOrder`: a numerical column of injection order
+ - `sampleType`: specifies if a QC pool or a sample (coded `pool` or `sample`)
+ - `batch`: a categorical column indicating the batches of analysis (if only one, must be a constant)
+ - your variable(s) of interest: here we will consider as an example the Body Mass Index (`bmi`)
 
 > ### {% icon comment %} Comment
 >
@@ -741,16 +741,17 @@ long and thus may reduce the names' readability. Hence, we highly recommend you 
 
 > ### {% icon hands_on %} Hands-on: Copying the 3 tables into a new history and renaming them
 >
->    > ### {% icon comment %} Comment
->    >
->    > Au cas ou tu veux en mettre. Tu peux aussi prevoir une section question style "quelles sont les 3 tables a copier" si tu veux, avec
-en reponse SM complete par le user, DM en output de fillpeaks et VM en output de soit fillpeaks, soit Camera.
->    {: .comment}
+> 1. Create a new history with the 3 tables
+> {% include snippets/copy_dataset_in_new_history.md history_name="Sacurine Processing" %}
+> 2. Rename the 3 tables with shorter names:
+>    - xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillpeaks.dataMatrix.tsv -> **dataMatrix.tsv**
+>    - xset.merged.groupChromPeaks.
+*
+.fillChromPeaks.annotate.variableMetadata.tsv -> **variableMetadata.tsv**
 >
->    {% include snippets/rename_dataset.md %}
->    
+> {% include snippets/rename_dataset.md %}
+>
 {: .hands_on}
-
 
 # Data processing: quality checks, normalisation, data filtering
 
@@ -781,9 +782,9 @@ over useful information using the Quality Metrics tool.
 > ### {% icon hands_on %} Hands-on: Using **Quality Metrics** to get an overview of your data
 >
 > Execute **Quality Metrics** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `The one from 'xcms fillChromPeaks' outputs`
->    - *"Sample metadata file"*: `Your original completed sampleMetadata file`
->    - *"Variable metadata file"*: `The one from 'xcms fillChromPeaks' or 'CAMERA.annotate' outputs`
+>    - *"Data matrix file"*: `dataMatrix.tsv`
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
+>    - *"Variable metadata file"*: `variableMetadata.tsv`
 >
 >
 >    > ### {% icon comment %} Comment
@@ -900,7 +901,7 @@ by biological variability. Thus, we can filter the ions that do not respect this
 >
 > Execute **Quality Metrics** {% icon tool %} with the following parameters:
 >    - *"Data matrix file"*: `The one from Batch_correction outputs`
->    - *"Sample metadata file"*: `Your original completed sampleMetadata file`
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 >    - *"Variable metadata file"*: `The one from Batch_correction outputs`
 >
 >
@@ -920,7 +921,7 @@ your data using the **Generic_Filter** module.
 >
 > Execute **Generic_Filter** {% icon tool %} with the following parameters:
 >    - *"Data matrix file"*: `The one from Batch_correction outputs`
->    - *"Sample metadata file"*: `Your original completed sampleMetadata file or the one from Quality_Metrics outputs`
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` or `the one from Quality_Metrics outputs`
 >    - *"Variable metadata file"*: `The one from Quality_Metrics outputs`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
