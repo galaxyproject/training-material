@@ -70,7 +70,7 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 # Obtaining and preparing data
 
 We are interested in the reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
-We will use the plasmid dataset created by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing strains were selected for plasmid extraction, including *E. coli, S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
+We will use the plasmid dataset created by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including *E. coli*, *S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
 
 > ### {% icon comment %} Background: Nanopore sequencing
