@@ -81,9 +81,9 @@ We will use the plasmid dataset created by {% cite LiXie2018 %} for their evalua
 > 2. Long-read sequencing gives the ability to **span repetitive genomic regions**
 > 3. Long-read sequencing makes it possible to **identify large structural variations**
 >
-> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample.") <br><br>
+> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
 >
-> (Image credit: [Nanopore sequencing: The advantages of long reads for genome assembly](https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512 ))
+>
 {: .comment}
 
 
