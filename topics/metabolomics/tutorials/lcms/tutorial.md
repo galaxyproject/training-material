@@ -263,8 +263,7 @@ the dataset collection you obtained from the previous 'xcms findChromPeaks (xcms
 >
 >
 > From this module, you will obtain a 'tabular' file (meaning a tabulation-separated text file) with a first column of identifiers and a
-second column called *class* which is empty for the moment (only '.' for each sample). You can download this file using the
-***y a-t-il une icone disquette prevue dans les GTN ??*** icon.
+second column called *class* which is empty for the moment (only '.' for each sample). You can now download this file by clicking on the {% icon galaxy-save %}.
 >
 {: .tip}
 
@@ -710,32 +709,37 @@ corresponding information in your variableMetadata file for later use.
 
 # Stopover: debriefing and preparation for next steps
 
-From the first big step in a metabolomic workflow (Preprocessing), you obtained three tabulation-separated tables: a **dataMatrix file**, a **sampleMetadata**
-file and a **variableMetadata** file. Two of the tables were obtained directly from the workflow, while one needed to be completed by the user.
+At the end of the Preprocessing, you should have three tabulation-separated tables:
+ - a **sampleMetadata**: given and completed by the user
+ - a **dataMatrix**: from XCMS.fillChromPeaks
+ - a **variableMetadata** from either XCMS.fillChromPeaks or CAMERA.annotate
 
-Concerning the sampleMetadata file, for the next steps of the workflow, there are four columns that are mandatory to go through all the analysis:
- – injectionOrder: a numerical column of injection order
- – sampleType: specifies if a QC pool or a sample (coded `pool` or `sample`)
- – batch: a categorical column indicating the batches of analysis (if only one, must be a constant)
+Concerning the **sampleMetadata** file, for the next steps of the workflow, there are four columns that are mandatory to go through all the analysis:
+ - injectionOrder: a numerical column of injection order
+ - sampleType: specifies if a QC pool or a sample (coded `pool` or `sample`)
+ - batch: a categorical column indicating the batches of analysis (if only one, must be a constant)
  - your variable of interest: here we will consider as an example the Body Mass Index (`bmi`)
 
-The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis.
-It can also generates several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommend,
+> ### {% icon comment %} Comment
+>
+> The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis.
+> It can also generates several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommend,
 at this step of the metabolomic workflow, to split your analysis by beginning a new Galaxy history with only the 3 tables you need. This will help
 you in limiting selecting the wrong dataset in further analyses, and bring a little tidiness for future review of your analysis process.
-
-To begin a new history with the 3 tables from your current history, you can use the functionality 'copy dataset' and copy it into a new history.
-
-We also recommend you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that
+>
+> To begin a new history with the 3 tables from your current history, you can use the functionality 'copy dataset' and copy it into a new history.
+>
+> We also recommend you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that
 the XCMS modules generate output names that contain the different XCMS steps you used, allowing easy traceability while browsing your history.
 However, knowing that the next steps of analysis are also going to extend the 3 tables' names, if you keep the original names it will become very
 long and thus may reduce the names' readability. Hence, we highly recommend you to rename them with something short, *e.g.* 'sampleMetadata',
 'variableMetadata' and 'dataMatrix', or anything not too long that you may find convenient.
+{: .comment}
+
+
 
 
 > ### {% icon hands_on %} Hands-on: Copying the 3 tables into a new history and renaming them
->
->
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -743,6 +747,8 @@ long and thus may reduce the names' readability. Hence, we highly recommend you 
 en reponse SM complete par le user, DM en output de fillpeaks et VM en output de soit fillpeaks, soit Camera.
 >    {: .comment}
 >
+>    {% include snippets/rename_dataset.md %}
+>    
 {: .hands_on}
 
 
