@@ -175,7 +175,7 @@ Typical other use cases for Minimap2 include: (1) mapping PacBio or Oxford Nanop
 between two closely related species with divergence below ~15%.
 
 Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
-therefore widely used for Nanopore aligning. Detailed evaluations of Minimap2 are available from
+therefore widely used for Nanopore alignment. Detailed evaluations of Minimap2 are available from
 the Minimap2 publication ({% cite Li2018 %}).
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Minimap2.png)
