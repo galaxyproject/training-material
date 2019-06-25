@@ -41,9 +41,9 @@ Due to the high prevalence of repeat sequences and inserts in plasmids, using tr
 In this tutorial we will recreate the analysis described in the paper by {% cite LiXie2018 %} entitled *Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data*. We will use data sequenced by the [Nanopore](https://nanoporetech.com/) MinION sequencer.
 
 The assembly is performed with **Minimap2** {% icon tool %} ({% cite Li2018 %}),
-**Miniasm** {% icon tool %} ({% cite Li2016 %}) and **Racon** {% icon tool %} ({% cite Vaser2017 %}).
+**Miniasm** {% icon tool %} ({% cite Li2016 %}), **Racon** {% icon tool %} ({% cite Vaser2017 %}) and **Unicycler** {% icon tool %} ({% cite Wick2017 %}).
 The downstream analysis is done with **Nanoplot** {% icon tool %} ({% cite DeCoster2018 %}),
-**Bandage** {% icon tool %} ({% cite Wick2015 %}) and **PlasFlow** {% icon tool %} ({% cite Krawczyk2018 %}).
+**Bandage** {% icon tool %} ({% cite Wick2015 %}), **PlasFlow** {% icon tool %} ({% cite Krawczyk2018 %}) and **starmr** {% icon tool %} ([GitHub](https://github.com/phac-nml/staramr)).
 
 A schematic view of the workflow we will perform in this tutorial is given below:
 
@@ -312,14 +312,62 @@ The output of RB04 should look like:
 AATGCAGCTATGGCGCGTGCGGTGCCAAGAAAGCCCGCAGATATTCCGCTTCCTCGCTCATTGACTCGTCTCGCTCGGTCGTTCGGCTGCGGCGAGCGAGGGAACAGAGACGATAAGCCATAGGCAATGAGAGAGAAGATGGAGAAGCAACAAGAAAGGCCGCGGCGTTGCCGGTTTTCCATAGGCTCGCGCCCCCTGACCAAGCATCACAGAATCTGACGCTCAAATCAGTGGTGGCGAAACCCGACAGGACTATAAAGATACCGGGCGTTTCCCTGGTGGCTCCCTCGTGCGCTCTCCTGTTCCTGCCTTTCGGTTTACCGGTGTCATTCCGCTGTTATGGCCGCGTTTGTCTCATTCCACGCCTGACACTCTCAGTTCCGGCAGGCAGTTCGCTCAAGCTGGACTGTATGCAATGAACCCCGTTCAGTTCGACCGCTGCGCCTGCCCGGTAATATCGTCTTGAGTCCAACCTGAGAAGGCACGACAAGCGCCACTGGCAGCAGCAGCCACTGAAACTGATTTAGAGGAGTATTCAAGTTGTGCGCCTGTTTGGCTAAACTGAAAGAACAAGTTTTGGTGACTAGACCTCAAGCCAGTTACCCTCCGGTTCAAAGTTGGTAGCTCAGAGAATTTTGAAAAACCACCGGTGGTAGCGGTGGATTTTCTTTCTTTGCAGAAGACAAGATTAAGCTCTGTGTAACATCAGAGTCAATGAATCTTCATACCGATGTTGTGGCGGGTGGCGAAGGAATCGGTGTAGAAGCCTTGGATTAATTGGCGTCCCAGATGGAACGGCTACTTGAGCTTCAGCATCTGTTTTGTGTTACTAATGAAAATATCCGCCACGGACGATTTTCAAAATCCACATAACTATCAATAAACTGTATATCAATATGATTCTTTATACTTCGTTGAATATTTCTCCGCATTACCTTTATCCTTCCTTTCATCTGTAGAAAAAGAAGAACTTATGATATCTCCTTGGTGAAACCCCTTCAAAGGACTCAAATAAAACCTTACCACTTTCGTTAACTTCAGTTATTGCATCATCGTGCAAACTCTAAAGCTAAGCTTTTTCATAAGGTTCAATGTAAACAACTTTATTGATACCAACAGCAACAATATGTCTCGCACAATTATGACAGGGAACGTAGTTGTATATAAAACCTTATCTTCAAACCACCATTCCCGAGTCTAGCAAGAGATGTAATAGCATCCATTTCAGCATGAATAGAGCGAGAGTACTCAATGATTGATGATACAGAGTACCTTAATAGATTATTCCAGCAACCTTTTCTGCTTGTTCTTGAGTTAACTGAACAGACAACTCCTTAACCTATCAGAAAGCAATATTTGCTGTATTTTATCTTTTATTTTTTAATTTTCTTACTTCATTGTAACATTTGCCACCTTTGTAGACACAGCGATGATCATTCACTCCATCATCAGCACTATAAAGGCCACCGTTAAATTTAGGAACATCATTGCGCCCAACAGCAATTAAATTTCCTTTATATCTAAATAGCAGCACCTACCTGTCTGGGAAAGACATGCAGATTGTAAAGAGGCAGAATGAGCTGTACATGCCCTTTCCTCATGCGCTGTTTCTCATTAAGCCCATGAATTGTGACCCAAGAAAGTGTTTAACTTTAGATTTAAGGTGAGCTTGATTAATAAAAATAGACAAGAAAGCGTTTCGTACTGTCATCTTCTCATGCGCGTTTATTAGGCCATTAAGCCCTTTGTGAGCTCTCTGGCCTTGATTATTTTTACATAATGGCATCAAATTATAGCTTTTTTGCTGTTTGCTGGCCTTAAGGGTGCTCAGACTTCCTGTCATGATGGATGATTACTCAACTTCAGATTTGCTTAAACCCTCATCTCGATTTCTTTTCTTTCAGTCTCGCTCCTAATAACACCTAATAAATAGAAATTATGTTGATAGACCATTCTAAGCAACTCAATTTCATCTTGGTGCTTTTAGTTGATCTATAAGGAAAGCTCGTTTCTTTAACTCTTTTGATTTTTCTCCTTCTAGATTTTTTTCTCTTTATTTCATATGAATTGCAAGCTTCAGCTAGTATGTGGGTAGTACTTACATCATAAGGAATCACCAAAATCCTGCAAAGAATTATATCTTTTGAATGGAGTAGATGTATCCCCACACCACTCAGAAAAAAGTTTCTGCAAGATCGCTAACTCTTATCCTATATACTTCGTATCCTAAATCTTCCAGTTCTTCTTCAGTTACATCTACAATTGACTTAATACTGAACCAACAGCCCCACAGAAAACCTATAATAATATCCATGGATTGCCTCTAGATGTAATCTGATCATATACTATCGATATATTCAGAAATATCTTCATTGGCACTACCATTGGAGTGCTCTTTTCCTTTAACTTCCTAGCTGTGCTCATAACGCCTCTCAATCACCATTTTAATGATTTAGAATCTTCAATTATCCTTTATAGCTTCTTCTCTTTTGCGCCTTAATAACTCCAACTCCAAATCATAAACATTTCCATGAACCACTCCTTTCATGAACTACCCCTCTTTCAAAGAGGACGAAACTCTATTGGAAATACGATTTAGTGATAGCTCTTTGCTCATATTTTCTCCTGCGAAACGCATGGATTTTACTGTTATCTTTATAACAGGCAACCACAAACAGGCGTAATGCGCAGAAGTTTTTTTTTGCTTAGAACACTGTGCAAAAAGAGTGAAAACTACACAAGTCTATGAAATAAATAAAAAGCTCTCGCATATTATGATTTTTAGTCTAGTTTAAGACTCTAAACATCGTGCTTAAGCACTCTCCCTGACTGCTTCATAGACCAGATGAAGCCCAAAACAAATCATGGCGAGAGGCACTCCCCATTCAACGTTTCCAGAAGAAACCCCTGAGCTCTCTAATAGGTGAAAGCCAGCAAGCAAAAACAAATAACCCCAGAAACATAATATCCTCCTAATCATCATTAGCAGCAAGAATCATACGGATACTTTCTGGGACAGTTTCACCTAGCGATAAAAGCAAACGAGCGGCCGTAGAGGCTTTTCTATGCTGACGAGCAACAGCGACAGCATGCCTCTGCTGACTAAACTGATACTCACGACGGTTGTAATAGTCATCAATGGCTTCTTGAGACAAATACGCAGACACGAACATACTCACCATCGCGGCTGATCTTCATGCTCAAAACAGGAACAAGAAGTGTTGTTGATGTGACTCAATCACCCGCCCTGATCATCGTAAAGGCGAATTTCTTCAGCACTCAGAAACTCTTTATCGAGAAGGCGGTTTAAAACACGAACGGCGTTAGCATAACGAGGGAGTAGTTAAAAGCTCTCATTGAGCACCTCCGCATACAAAAAAAAAGCAGAATGCAAGACGCGGCACGTTTGTGCATAGAAAGAATGGTAATGCCTGCACAGCACAAAATGCAGATTTTTAGGATCATGCTCAATCATGGAGACATCTCCGTTTTAAAAGAAAATTGTCACCCATATAGCAAAGTTGGCTGGAAACGGCGTCAATATTGAAGAGAAATGTATAAATATTGGTGTAGACGCGAACGCGTTTTTCACCATAATATGCCCCAAAGACATGACGTATGTCTTAACCAAACCCATGCAATATAGCTGCGGTACAGGGACTTTGAAGCGAGCTTGGCGGTTGCGTAGCTTCAAAGTCCCTTTGTTTTGTCCCTATAAGGGAACTTTTCGAGTGTACCATAACCTAGCTAGAGCCTGTTACTCTGCATCGTTAAAAATACAAGAATGCCATTTAAGCGCCTCTAAATAGCGCTGTATTGAGTTTTCATCTACCTTAATGGTAAACCATGAACCATCAAACAGTCGCTTCTTATAGCAGCATTCATGTGCTTTTTTTAGATGTTCTAAACGAGTCTCAAACCCTGAAAACTTGCATTGGCATACTTACCAACGGGCTATTTACCATAACATCCGTTGCCCGCACCATCTCAGACTCCCTCAGGGCATTTCTGCGTCCTCCTGCCTATTTCCGGCATCTTTCCTGTCCATATCGTGAAAAAACGCGCCTGATGATTTCTTCGCGTCTGCATGGCTATGCACGAACGCATGGACGTCATTTGCGGCTAAATCTGGCGAGCGCCCTGAAAGCCACCACGAACCCCACCGATAACGGTGAAAGGGTGCGCAGTTTACTGTGCGACCGTGAGGCGTTGGCCGTGCCGTCAGGCATGGCAGGATTTATTGCTAAGGGGGTCGGATTTAACCGATTAATCAGCACACAGTGATGAACGGATTCGAAGGGGCACTCTTTGGCGCGGCGATGTATACATCGCTAACGTGCCTTGGTCATTTATTGCAAGAAGGAGAGGTAGCATTTTGATAGCAAAAAAAGTAGCAAAAGGATAGCAACCGAAAGACCAGAAGACTCTGAGATAGCAAAAAGTAGCAAAATGGTAGCAAAAGATAGCAAACATGCGGGAGCTTCAACCAGAGTCTTTAGCGGGCCGGCGGCACCCAAAAAAACCACATCTTGTCCCGCTGTTTTGTGAATAAGCCAGCATAGCTGTGGGCACAAAACATTTCCCCTGTCCGCTGCTTTAACCTTTGTAATCCAGAACGTCAGGTGACGTCACTTTGCGGCATCGTATTAAAAT
 ```
 
-## Unicycler assembly pipeline for bacterial genomes
-The previous described tools are all implemented in Unicycler.
+## Visualize assemblies using Bandage
 
-Unicycler has a couple of advantages over running the tools separately:
+To get a sense of how well our data assembled, and to determine whether the contigs are chomosomal or plasmid DNA (the former being linear sequences while plasmids are circular molecules), **Bandage** {% icon tool %} can give a clear view of the assembly.
 
-1. The first modification is to help circular replicons assemble into circular string graphs.
-2. Racon polishing is carried out in multiple rounds to improve the sequence accuracy. It will polish until the assembly stops improving, as measured by the agreement between the reads and the assembly.
-3. Circular replicons are 'rotated' (have their starting position shifted) between rounds of polishing to ensure that no part of the sequence is left unpolished.
+**Bandage** {% icon tool%} ({% cite Wick2015 %}) (a **B**ioinformatics **A**pplication for **N**avigating **D**e novo **A**ssembly **G**raphs **E**asily), is a program that creates visualisations of assembly graphs.
+Sequence assembler programs (such as **Miniasm** {% icon tool %} ({% cite Li2016 %}), **Velvet** {% icon tool %} ({% cite Zerbino2008 %}), **SPAdes** {% icon tool %} ({% cite Bankevich2012 %}), **Trinity** {% icon tool %} ({% cite Grabherr2011 %}) and **MEGAHIT** {% icon tool %} {% cite Li2015 %}) carry out assembly by building a graph, from which contigs are generated.
+By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
+
+![Bandage GUI](../../images/plasmid-metagenomics-nanopore/Bandage.png)
+
+
+> ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
+>
+> 1. **Bandage image** {% icon tool %} with the following parameters
+>   - *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
+>
+> 2. Explore {% icon galaxy-eye %} the output images
+>
+> > ### {% icon question %} Question
+> >
+> > In how many samples were the full plasmid sequences assembled?
+> >
+> > Hint: what shape do you expect plasmid molecules to be?
+> >
+> > > ### {% icon solution %} Solution
+> > > Ideally, we want to see circular assemblies, indicating the full plasmid sequence was resolved.
+> > > This is not the case for most of the samples, but we will improve our assemblies in the next section!
+> > {: .solution }
+> {: .question}
+>
+{: .hands_on}
+
+
+For example, the assembly for sample RB01 looks something like this (your assembly will look a bit different due to randomness in several of the tools):
+
+
+![Bandage output for sample RB01](../../images/plasmid-metagenomics-nanopore/bandage_pre_unicycler.png "Bandage output for sample RB01. Large fragments were assembled, but not the full circular plasmid molecules.")
+
+
+As you can see from these Bandage outputs, we were able to assemble our data into fairly large fragments, but were not quite successful in assembling the full (circular) plasmid sequences.
+
+However, all the tools we used to do the assembly have many different parameters that we did not explore, and multiple rounds of mapping and cleaning could improve our data as well. Choosing these parameters carefully could potentially improve our assembly, but this is also a lot of work and not an easy task. This is where **Unicycler** {% icon tool %} ({% cite Wick2017 %}) can help us out.
+
+
+## Optimizing assemblies using Unicycler
+
+The assembly tools we used in this tutorial are all implemented in **Unicycler** {% icon tool %}, which will repeatedly run these tools on your data using different parameter settings, in order to find the optimal assembly.
+
+**Unicycler** {% icon tool %} has a couple of advantages over running the tools separately:
+
+1. The first modification is to **help circular replicons assemble** into circular string graphs.
+2. **Racon** {% icon tool %} polishing is carried out in **multiple rounds to improve the sequence accuracy**. It will polish until the assembly stops improving, as measured by the agreement between the reads and the assembly.
+3. Circular replicons are 'rotated' (have their starting position shifted) between rounds of polishing to ensure that **no part of the sequence is left unpolished**.
+
+
+Let's try it on our data!
 
 > ### {% icon hands_on %} Hands-on: Unicycler assembly
 >
@@ -327,40 +375,33 @@ Unicycler has a couple of advantages over running the tools separately:
 >   - *"Paired or Single end data"*: `None`
 >   - *"Select long reads. If there are no long reads, leave this empty"*: The `Plasmids` dataset collection
 >
-{: .hands_on}
-
-# Species and plasmids
-
-## Visualising de novo assembly graphs using Bandage
-
-To determine whether the contigs are chomosomal or plasmid DNA Bandage can give a clear view of the assembly.
-
-Bandage (a Bioinformatics Application for Navigating De novo Assembly Graphs Easily), is a program that creates visualisations of assembly graphs.
-Sequence assembler programs (such as Miniasm, Velvet, SPAdes, Trinity and MEGAHIT) carry out assembly by building a graph, from which contigs are generated.
-By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
-![Bandage gui](../../images/plasmid-metagenomics-nanopore/Bandage.png)
-
-To show that Unicycler improves the quality of the assembly we'll visualise both assembly outputs.
-
-> ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
->
-> 1. **Bandage image** {% icon tool %} with the following parameters
->   - *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
->
 > 2. **Bandage image** {% icon tool %} with the following parameters
 >   - *"Graphical Fragment Assembly"*: the `Final Assembly Graph` collection created by **Unicycler** {% icon tool %}
 >
+> 3. Examine {% icon galaxy-eye %} the output images again
+>
+> > ### {% icon question %} Question
+> >
+> > For which samples has the plasmid assembly improved?
+> >
+> > > ### {% icon solution %} Solution
+> > > Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.
+> > {: .solution }
+> {: .question}
+>
 {: .hands_on}
 
-The Assembly graph image of the RB01 assembly with **miniasm** {% icon tool %} shows one unclear hypothetical plasmid, where the output of **Unicycler** {% icon tool %} shows two clear plasmids, as shown by {% cite LiXie2018 %}.
+The Assembly graph image of the RB01 assembly with **miniasm** {% icon tool %} shows one unclear hypothetical plasmid, where the output of **Unicycler** {% icon tool %} shows two clear plasmids, as also shown by {% cite LiXie2018 %}.
+
 ![Bandage output](../../images/plasmid-metagenomics-nanopore/Bandage_output.png)
+
+# Species and plasmids
 
 ## Prediction of plasmid sequences and classes using PlasFlow
 
-To determine whether the contigs represent chomosomal or plasmid DNA, **PlasFlow** {% icon tool %} ({% cite Krawczyk2018 %}) can be used. Furthermore, it
-assigns the contigs to a bacterial class.
+To automatically determine whether the contigs represent chomosomal or plasmid DNA, **PlasFlow** {% icon tool %} ({% cite Krawczyk2018 %}) can be used, also in the case where a full circular plasmid sequence was not assembled. Furthermore, it assigns the contigs to a bacterial class.
 
-PlasFlow is a set of scripts used for prediction of plasmid sequences in metagenomic contigs.
+**PlasFlow** {% icon tool %} is a set of scripts used for prediction of plasmid sequences in metagenomic contigs.
 It relies on the neural network models trained on full genome and plasmid sequences and is able to differentiate between plasmids and chromosomes with accuracy reaching 96%.
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/PlasFlow.png)
