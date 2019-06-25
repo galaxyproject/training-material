@@ -487,7 +487,7 @@ The summary file is most important and gives all the resistance genes found.
 ## CARD database
 To get more information about these antibiotic resistant genes, you can check the [CARD database](https://card.mcmaster.ca) (**C**omprehensive **A**ntibiotic **R**esistance **D**atabase) ({% cite Jia2016 %})
 
-![Screenshot of the CARD database](../../images/plasmid-metagenomics-nanopore/card_database.png "Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as link to relevant publications.")
+![Screenshot of the CARD database](../../images/plasmid-metagenomics-nanopore/card_database.png "Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.")
 
 
 
