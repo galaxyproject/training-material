@@ -482,7 +482,7 @@ There are 5 different output files produced by **staramr** {% icon tool %}:
 4. `settings.txt`: The command-line, database versions, and other settings used to run `staramr`.
 5. `results.xlsx`: An Excel spreadsheet containing the previous 4 files as separate worksheets.
 
-The summary file is most important and gives all the resistance genes found.
+The summary file is most important and provides all the resistance genes found.
 
 ## CARD database
 To get more information about these antibiotic resistant genes, you can check the [CARD database](https://card.mcmaster.ca) (**C**omprehensive **A**ntibiotic **R**esistance **D**atabase) ({% cite Jia2016 %})
