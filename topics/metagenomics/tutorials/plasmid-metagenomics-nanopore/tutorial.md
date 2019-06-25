@@ -275,12 +275,12 @@ The Assembly graph created can be used for mapping again with minimap2, but firs
 >
 >     > ### {% icon question %} Question
 >     >
->     > How many contigs do we have for the RB01 sample after the use of **Minimap2** {% icon tool %} and **Miniasm** {% icon tool %}?
->     >
+>     > How many contigs do we have for the RB05 sample after the use of **Minimap2** {% icon tool %} and **Miniasm** {% icon tool %}?
+>     > <br><br>
 >     > Hint: run **Nanoplot** {% icon tool %} on the output of **GFA to Fasta** {% icon tool %}
 >     >
 >     > > ### {% icon solution %} Solution
->     > > 456
+>     > > 22
 >     > >
 >     > > This can be determined by looking at the NanoStats output of NanoPlot.
 >     > {: .solution }
