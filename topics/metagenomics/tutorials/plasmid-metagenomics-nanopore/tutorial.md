@@ -427,7 +427,7 @@ It relies on the neural network models trained on full genome and plasmid sequen
 {: .hands_on}
 
 
-The most important output of **PlasFlow** {% icon tool %} is a tabular file containing all predictions (specified with `--output` option), consisting of several columns including:
+The most important output of **PlasFlow** {% icon tool %} is a tabular file containing all predictions, consisting of several columns including:
 
 ```
 contig_id 	contig_name 	contig_length 	id 	label 	...
