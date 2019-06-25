@@ -175,7 +175,7 @@ Typical other use cases for Minimap2 include: (1) mapping PacBio or Oxford Nanop
 between two closely related species with divergence below ~15%.
 
 Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
-therefore widely used for Nanopore alignment. Detailed evaluations of Minimap2 are available from
+therefore widely used for Nanopore alignment. Detailed evaluations of Minimap2 are available in
 the Minimap2 publication ({% cite Li2018 %}).
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Minimap2.png)
@@ -321,7 +321,7 @@ To get a sense of how well our data assembled, and to determine whether the cont
 
 **Bandage** {% icon tool%} ({% cite Wick2015 %}) (a **B**ioinformatics **A**pplication for **N**avigating **D**e novo **A**ssembly **G**raphs **E**asily), is a program that creates visualisations of assembly graphs.
 Sequence assembler programs (such as **Miniasm** {% icon tool %} ({% cite Li2016 %}), **Velvet** {% icon tool %} ({% cite Zerbino2008 %}), **SPAdes** {% icon tool %} ({% cite Bankevich2012 %}), **Trinity** {% icon tool %} ({% cite Grabherr2011 %}) and **MEGAHIT** {% icon tool %} {% cite Li2015 %}) carry out assembly by building a graph, from which contigs are generated.
-By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
+By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve the assemblies.
 
 ![Bandage GUI](../../images/plasmid-metagenomics-nanopore/Bandage.png)
 
