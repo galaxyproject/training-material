@@ -851,9 +851,9 @@ get rid of it.
 > ### {% icon hands_on %} Hands-on: Data normalisation using the **Batch_correction** module
 >
 > Execute **Batch_correction** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `The one from 'xcms fillChromPeaks' outputs`
->    - *"Sample metadata file"*: `Your original completed sampleMetadata file`
->    - *"Variable metadata file"*: `The one from 'xcms fillChromPeaks' or 'CAMERA.annotate' outputs`
+>    - *"Data matrix file"*: `dataMatrix.tsv`
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
+>    - *"Variable metadata file"*: `variableMetadata.tsv`
 >    - *"Type of regression model "*: `linear`
 >        - *"Factor of interest "*: `gender`
 >
@@ -900,9 +900,9 @@ by biological variability. Thus, we can filter the ions that do not respect this
 > ### {% icon hands_on %} Hands-on: CV calculation using the **Quality Metrics** module
 >
 > Execute **Quality Metrics** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `The one from Batch_correction outputs`
+>    - *"Data matrix file"*: `Batch_correction_linear_dataMatrix.tsv`
 >    - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
->    - *"Variable metadata file"*: `The one from Batch_correction outputs`
+>    - *"Variable metadata file"*: `Batch_correction_linear_variableMatrix.tsv`
 >
 >
 >    > ### {% icon comment %} Comment
@@ -920,9 +920,9 @@ your data using the **Generic_Filter** module.
 > ### {% icon hands_on %} Hands-on: Data filtering using the **Generic_Filter** module
 >
 > Execute **Generic_Filter** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `The one from Batch_correction outputs`
->    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` or `the one from Quality_Metrics outputs`
->    - *"Variable metadata file"*: `The one from Quality_Metrics outputs`
+>    - *"Data matrix file"*: `Batch_correction_linear_dataMatrix.tsv`
+>    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` or `Quality Metrics_sampleMetadata_completed.tsv`
+>    - *"Variable metadata file"*: `Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
 >            - *"On file"*: `Variable metadata`
@@ -994,9 +994,9 @@ and the ions that we have in our dataset. For this calculation we can use the **
 > ### {% icon hands_on %} Hands-on: Statistical analysis using the **Univariate** module
 >
 > Execute **Univariate** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `The one from Generic_filter outputs`
->    - *"Sample metadata file"*: `The one from Generic_filter outputs`
->    - *"Variable metadata file"*: `The one from Generic_filter outputs`
+>    - *"Data matrix file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+>    - *"Sample metadata file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+>    - *"Variable metadata file"*: `Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
 >    - *"Factor of interest"*: `bmi`
 >    - *"Test"*: `Spearman correlation rank test (quantitative)`
 >    - *"Method for multiple testing correction"*: `none`
@@ -1046,9 +1046,9 @@ absolute value above 0.9.
 > ### {% icon hands_on %} Hands-on: Variable filtering using the **Generic_Filter** module
 >
 > 1. **Generic_Filter** {% icon tool %} with the following parameters:
->    - *"Data matrix file"*: `The one from the previous Generic_filter's outputs`
->    - *"Sample metadata file"*: `The one from the previous Generic_filter's outputs`
->    - *"Variable metadata file"*: `The one from Univariate outputs`
+>    - *"Data matrix file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+>    - *"Sample metadata file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+>    - *"Variable metadata file"*: `Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
 >            - *"On file"*: `Variable metadata`
@@ -1103,7 +1103,7 @@ module.
 >
 > Execute **HMDB MS search** {% icon tool %} with the following parameters:
 >    - *"Would you use a file "*: `YES`
->        - *"File of masses (Variable Metadata) "*: `The one from the last Generic_filter's outputs`
+>        - *"File of masses (Variable Metadata) "*: `Generic_Filter_Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
 >        - *"Do you have a header "*: `YES`
 >        - *"Column of masses "*: `c3`
 >    - *"Mass-to-charge ratio "*: `0.005`
