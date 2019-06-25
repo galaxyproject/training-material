@@ -255,7 +255,9 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 
 ## Remapping using Minimap2
 
-The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format. Remapping is done on the miniasm assembly to map the original reads on the assembly to provide the nucleotides per position. This is used by **Racon** {% icon tool %} for consensus construction.
+The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format.
+
+Remapping is done with the original reads, using the miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by **Racon** {% icon tool %} for consensus construction.
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
