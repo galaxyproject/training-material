@@ -449,7 +449,7 @@ Additionally, PlasFlow produces FASTA files containing input sequences binned to
 ## Scan genome contigs for antimicrobial resistance genes
 
 To determine whether the contigs contain antimircobial resistance genes (AMR) [staramr](https://github.com/phac-nml/staramr) can be used.
-**Staramr** {% icon tool %} (*AMR) scans bacterial genome contigs against both the ResFinder ({% cite Zankari2012 %}), PointFinder ({% cite Zankari2017 %}) and PlasmidFinder ({% cite Carattoli2014 %})  databases (used by the ResFinder webservice)
+**Staramr** {% icon tool %} (*AMR) scans bacterial genome contigs against both the **ResFinder** {% icon tool %} ({% cite Zankari2012 %}), **PointFinder** {% icon tool %} ({% cite Zankari2017 %}) and **PlasmidFinder** {% icon tool %} ({% cite Carattoli2014 %})  databases (used by the ResFinder webservice)
 and compiles a summary report of detected antimicrobial resistance genes.
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/StarAmr.png)
@@ -474,7 +474,18 @@ and compiles a summary report of detected antimicrobial resistance genes.
 > {: .question}
 {: .hands_on}
 
-To get more information about these genes, you can check the [CARD database](https://card.mcmaster.ca) (**C**omprehensive **A**ntibiotic **R**esistance **D**atabase) ({% cite Jia2016 %})
+There are 5 different output files produced by **staramr** {% icon tool %}:
+
+1. `summary.tsv`:  A summary of all detected AMR genes/mutations in each genome, one genome per line.
+2. `resfinder.tsv`: A tabular file of each AMR gene and additional BLAST information from the **ResFinder** database, one gene per line.
+3. `pointfinder.tsv`: A tabular file of each AMR point mutation and additional BLAST information from the **PointFinder** database, one gene per line.
+4. `settings.txt`: The command-line, database versions, and other settings used to run `staramr`.
+5. `results.xlsx`: An Excel spreadsheet containing the previous 4 files as separate worksheets.
+
+The summary file is most important and gives all the resistance genes found.
+
+## CARD database
+To get more information about these antibiotic resistant genes, you can check the [CARD database](https://card.mcmaster.ca) (**C**omprehensive **A**ntibiotic **R**esistance **D**atabase) ({% cite Jia2016 %})
 
 ![Screenshot of the CARD database](../../images/plasmid-metagenomics-nanopore/card_database.png "Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as link to relevant publications.")
 
@@ -494,15 +505,7 @@ To get more information about these genes, you can check the [CARD database](htt
 {: .question}
 
 
-There are 5 different output files produced by **staramr** {% icon tool %}:
 
-1. `summary.tsv`:  A summary of all detected AMR genes/mutations in each genome, one genome per line.
-2. `resfinder.tsv`: A tabular file of each AMR gene and additional BLAST information from the **ResFinder** database, one gene per line.
-3. `pointfinder.tsv`: A tabular file of each AMR point mutation and additional BLAST information from the **PointFinder** database, one gene per line.
-4. `settings.txt`: The command-line, database versions, and other settings used to run `staramr`.
-5. `results.xlsx`: An Excel spreadsheet containing the previous 4 files as separate worksheets.
-
-The summary file is most important and gives all the resistance genes found.
 
 # Conclusion
 You have now seen how to perform an assembly on Nanopore sequencing data, and classify the type and species of the sequences, as well as determined the presence of potential antibiotic resistance genes.
