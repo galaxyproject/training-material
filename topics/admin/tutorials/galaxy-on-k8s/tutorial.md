@@ -157,7 +157,7 @@ chart later in this tutorial.
 The Galaxy Helm chart also comes with a more comprehensive set of configuration
 options that leverage more of the Galaxy project ecosystem. In practice this
 means deploying Galaxy with the same toolset as that of
-_[usegalaxy.org](usegalaxy.org)_ right out of the box. It's important to note
+_[usegalaxy.org](https://usegalaxy.org/)_ right out of the box. It's important to note
 that this deployment configuration leverages all the same chart components but
 just defines more configuration options. Namely, we attach to the
 [Galaxy CVMFS][CVMFS] ready-only file system for retrieving the tool
