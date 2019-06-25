@@ -15,7 +15,7 @@ objectives:
   - "Perform a scan for antimicrobial resistance genes with Staramr"
 time_estimation: "3h"
 key_points:
-  - "Minimap2, Miniasm and Racon can be used for creating a fast assembly of Nanopore sequences"
+  - "Minimap2, Miniasm, and Racon can be used for quickly assembling Nanopore data"
   - "Unicycler can be used to optimize settings of assembly tools"
   - "Nanopore sequencing is useful for reconstruction of genomes"
   - "Antimicrobial resistance genes are detectable after fast assembly"
