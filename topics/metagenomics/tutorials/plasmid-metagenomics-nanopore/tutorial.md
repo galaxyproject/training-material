@@ -10,7 +10,7 @@ questions:
   - "How do I get more information about the antimicrobial resistance genes?"
 objectives:
   - "Perform Quality control on your reads"
-  - "Perform a genome assembly with Minimap2/Miniasm/Racon"
+  - "Assemble a genome with Minimap2/Miniasm/Racon"
   - "Determine the structure of the genome(s)"
   - "Perform a scan for antimicrobial resistance genes with Staramr"
 time_estimation: "3h"
