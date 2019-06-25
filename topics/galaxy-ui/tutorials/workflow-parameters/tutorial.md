@@ -14,7 +14,8 @@ key_points:
 - Use Workflow Parameters to make your Workflows more versatile
 contributors:
 - mvdbeek
-
+- erasche
+level: Intermediate
 ---
 
 
@@ -59,7 +60,7 @@ of the select first tool.
 Instead of selecting a specific number of lines we can choose to insert a workflow parameter
 that allows the user to set this parameter when running the workflow.
 
-![Button for selecting connections](../../images/connection-module.png)
+![Button for selecting connections](../../images/connection-module.png "The new button for creating a workflow parameter connection. When you click this, it will add a new 'input' to the tool that can be connected, just like other tools in workflows.")
 
 > ### {% icon hands_on %} Hands-on: Updating the Workflow
 >
@@ -104,24 +105,28 @@ compose this text parameter using the `Compose text parameter value` tool.
 
 > ### {% icon hands_on %} Hands-on: Compose a text parameter
 > 1. Create a new workflow
+>
+>    {% include snippets/create_new_workflow.md %}
+>
 > 1. Add an Inputs → **Input Dataset** to the workflow
 > 2. Add an Inputs → **Simple inputs used for workflow logic** to the workflow
 >    - {% icon param-select %} *"Parameter type"*: `Text`
 > 3. Add **Compose text parameter value** {% icon tool %} to the workflow
->     - Add three repeats
+>     - Add two more repeats, you will need three "Repeat" blocks in total.
 >     - In the first repeat:
->       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `/(`
+>       - *"Enter text that should be part of the computed value"*: `/(`
 >     - In the second repeat:
->       - {% icon param-text %} *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module".
+>       - *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module" {% icon galaxy-wf-connection %}
+>       - Connect the output of the **Input parameter** {% icon tool %} to this new input
 >     - In the third repeat:
->       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `)/`.
+>       - *"Enter text that should be part of the computed value"*: `)/`
 >
 > 4. Add the **Regex Find And Replace** {% icon tool %} to the workflow
 >     - Click on `Insert Check`
->     - Click on `Add connection to module` for the `Find Regex` parameter
+>     - *"Find Regex"*: Click "Add connection to module" {% icon galaxy-wf-connection %}
 >     - *"Replacement"*: `\1bar`
->     - Connect the output of the  `Compose text parameter value` tool to the `Find Regex` parameter.
->     - Connect the data input to the `Select lines from` input of the `Regex Find And Replace` tool
+>     - Connect the output of the **Compose text parameter value** {% icon tool %} to the *"Find Regex"* parameter of **Regex Find And Replace** {% icon tool %}.
+>     - Connect the output of the **Input dataset** {% icon tool %} to the *"Select lines from"* input of the **Regex Find And Replace** {% icon tool %}.
 >
 > 5. **Save** {% icon galaxy-save %} your workflow
 {: .hands_on}
@@ -130,16 +135,20 @@ You've now built a workflow with a parameterised input! It's time to test it out
 
 > ### {% icon hands_on %} Hands-on: Running the workflow
 >
-> 1. Upload a text dataset with the contents `wunder`
+> 1. Upload a dataset using "Paste/Fetch data" with the contents `wunder`
 >
 > 2. Run your workflow with the following parameters
+>
+>    - *"Input parameter"*: `wunder`
+>
+>      This is the value that will be looked for in your input dataset.
 >
 >    {% include snippets/run_workflow.md %}
 >
 > 3. Examine the outputs
 {: .hands_on }
 
-> If you run this workflow on the dataset and you select `wunder` as the newly defined parameter  you will see 2 new datasets in your history. The first dataset has the data type ``expression.json`` and contains the composed parameter value `(wunder)`, the second dataset will contain the output of the `Regex Find And Replace` step. A click on the `i` button will show the used parameters. You will see that the `Find Regex` parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is `wunderbar`.
+You should see two new datasets in your history. The first dataset has the data type `expression.json` and contains the composed parameter value `(wunder)`, the second dataset will contain the output of the **Regex Find And Replace** {% icon tool %} step. A click on the information {% icon details %} button will show the parameters for the tool. You will see that the *"Find Regex"* parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is `wunderbar`.
 
 # Read a parameter from a dataset
 
@@ -148,32 +157,62 @@ In this example we will construct a workflow where we calculate the sum of all v
 
 > ### {% icon hands_on %} Hands-on: Construct Workflow with Parameters read from a dataset
 >
-> 1. **Add a data input to a new workflow** {% icon tool %}
-> 2. **Add the `Datamash` tool to the workflow and connect the data input** {% icon tool %}
+> 1. Create a new workflow
+> 1. Add an **Input dataset** {% icon tool %}
+> 2. Add **Datamash** (operations on tabular data) {% icon tool %} to the workflow
+>     - {% icon wf-input %} *"Input tabular dataset"*: Connect the noodle from the output of the **Input dataset** {% icon tool %} to this input
 >     - {% icon param-repeat %} **Operation to perform in each group**
 >       - {% icon param-select %} *"Type"*: `sum`
 >       - {% icon param-text %} *"On column"*: `1`
-> 3. **Add the `Parse parameter value` tool to the workflow** {% icon tool %}
+> 3. Add **Parse parameter value** {% icon tool %} to the workflow
 >     - *"Select type of parameter to parse"*: integer
->     - Connect `Datamash` output to `Parse parameter value` input
-> 4.  **Add the `Compose text parameter value` tool to the workflow** {% icon tool %}
->     - Click `Insert Repat`
+>     - {% icon wf-input %} *"Input file containing parameter to parse out of"*: Connect the **Datamash** {% icon tool %} output to this input
+> 4.  Add **Compose text parameter value** {% icon tool %} to the workflow
 >     - In the first repeat:
 >       - {% icon param-select %} *"Choose the type of parameter for this field"*: Text Parameter
->       - {% icon param-text %} *"Enter text that should be part of the computed value"*: c1/
+>       - {% icon param-text %} *"Enter text that should be part of the computed value"*: `c1/`
+>     - Click Insert Repeat
 >     - In the second repeat:
 >       - {% icon param-select %} *"Choose the type of parameter for this field"*: Integer Parameter
->       - *"Enter integer that should be part of the computed value"*: Click on `Add connection to module`
->       - Connect `Parse parameter value` output to input
-> 5. **Add the `Compute an expression on every row ` tool to the workflow**
->     - *"Add expression as a new column to"*: Click on `Add connection to module`
->     - Connect data input to tool
->     - Connect `Compose text parameter value` output parameter to `Add expression` parameter input
+>       - *"Enter integer that should be part of the computed value"*: Click on `Add connection to module` {% icon galaxy-wf-connection %}
+>       - {% icon wf-input %} *"Input"*: Connect the output of the **Parse parameter value** {% icon tool %}
+> 5. Add **Compute an expression on every row** {% icon tool %} to the workflow
+>     - *"Add expression as a new column to"*: click on `Add connection to module`, then connect the output of **Compose text parameter value** {% icon tool %}
+>     - *"as a new column to"*: Select the output of the **Input dataset** {% icon tool %}
 {: .hands_on}
 
-If run on a tabular dataset this workflow will produce a new dataset, where the last column
-will be the result of dividing the value in the first column by the sum of all values in the
-first column.
+With this you're ready to run the workflow!
+
+> ### {% icon hands_on %} Hands-on: Running the workflow
+>
+> 1. Upload a dataset using "Paste/Fetch data" with the contents, and set the filetype manually to "tabular" during upload
+>
+>    ```
+>    16378
+>    16014
+>    2831
+>    5702
+>    149
+>    24383
+>    12220
+>    4488
+>    11500
+>    24724
+>    ```
+>
+> 2. Run your workflow with the following parameters
+>
+>    - *"Input dataset"*: the table you have just uploaded
+>
+>    {% include snippets/run_workflow.md %}
+>
+> 3. Examine the outputs
+{: .hands_on }
+
+This workflow will produce a new dataset, where the last column will be the
+result of dividing the value in the first column by the sum of all values in
+the first column.
+
 
 > ### {% icon tip %} Tip: You can try many different parameter values at once
 >
