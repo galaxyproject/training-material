@@ -1115,38 +1115,12 @@ value that is too low, you may not be able to have matches for your ions eventho
 On the opposite, if the value provided is too high, you may end with a huge number of matches, which could be time-consuming to
 review to identify relevant proposed annotation.
 
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon hands_on %} Hands-on: ???
->
-> Some exercise(s) based on obtained results?
->
->    > ### {% icon comment %} Comment
->    >
->    > why not a comment?
->    {: .comment}
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures.
+> ### {% icon comment %} Comment
+> Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures.
 For now, Galaxy4Metabolomics stops here but we have various perspectives of additional modules for the future (a little bit of
 [MetExplore](https://metexplore.toulouse.inra.fr/index.html/) for example?).
+{: .comment}
+
 
 # Conclusion
 {:.no_toc}
