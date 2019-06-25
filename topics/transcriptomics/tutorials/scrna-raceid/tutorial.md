@@ -49,13 +49,15 @@ The data provided here as part of this tutorial analyses single-cell RNA-seq dat
 
 The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via [scRNA pre-processing methods]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
 
-> ### {% icon details %} Details: Tidy Data
->The [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
+> ### {% icon comment %} Comment: Tidy Data
+> The [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
+>
+{: .comment}
+
+> ### {% icon details %} Details: Count Correction
+> Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript [count alteration](https://www.nature.com/articles/nmeth.2930#methods) to correct against UMI errors, yielding decimal values instead. This correction is not that necessary in most datasets but it is used here.
 >
 {: .details}
-
-
-Normally a count matrix consists of integers, but this matrix has undergone an UMI-to-transcript [count alteration](https://www.nature.com/articles/nmeth.2930#methods) to correct against UMI errors, yielding decimal values instead. This correction is not that necessary in most datasets but it is used here.
 
 This tutorial will perform cell clustering and lineage construction, as well as exploring some genes of interest.
 
@@ -71,9 +73,9 @@ This tutorial will perform cell clustering and lineage construction, as well as 
 
 # Initial Count Matrix
 
-Every single-cell RNA analysis begins with a count matrix, which contains the raw data required for the downstream analysis. Annotation data such as cell phenotype or gene annotations are sometimes also used to enrich the analysis, but these are typically only useful later, and can be generated from external databases if required.
+Every single-cell RNA analysis begins with a count matrix, which contains the raw data required for the downstream analysis. Annotation data such as cell phenotype or gene annotations are often used to enrich and validate the analysis. Cell annotations can sometimes be encoded directly in the cell labelling, as we will later explore in this count matrix.
 
-For now we will work with the count matrix alone.
+First, let's setup our history and initial dataset.
 
 ## Get data
 
@@ -120,9 +122,11 @@ For now we will work with the count matrix alone.
 
 ## Inspecting the Cell Labelling
 
-We can inspect the dataset by clicking on the {% icon galaxy-eye %}  symbol. Immediately we can see that the header of this file contains cell names, following a naming convention that separates the cells into 5 phenotypes: *I5d, II5d, III5d, IV5d*, and *V5d*
+Cell labels usually encode which plate, batch, or cell barcode was used to delineate cell. Sometimes all three sources of information are used, which can be valuable information to have when looking for batch effects.
 
-We can see this for ourselves by extracting the headers, and reformatting them to see how many unique types we can detect:
+We can inspect the labels of this dataset by clicking on the {% icon galaxy-eye %} symbol. Immediately we can see that the header of this file contains cell names, following a naming convention that separates the cells into 5 batches: *I5d, II5d, III5d, IV5d*, and *V5d*
+
+Is each batch equally populated? We can investigate this ourselves by extracting the headers, and reformatting them to see how many unique types we can detect:
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -192,7 +196,7 @@ With these types already labelled in the header of our data, we can validate the
 
 ## Inspecting the Quality of the Count Matrix
 
-Low quality cells and genes are often caught at the preprocessing stage and removed, but sometimes more filtering is required to remove unwanted noise from the data.
+Low quality cells and genes are often caught at the pre-processing stage and removed, but sometimes more filtering is required to remove unwanted noise from the data.
 
 A gene with a low number of total counts across multiple cells might be differentially expressed across those cells, however differential gene expression and log fold change do not necessarily denote significant change. 1 count in CellA and 10 counts in CellB yields an LFC of 10, but is not as significant as an LFC of 10 from 100 counts in CellA vs 1000 counts in CellB.
 
@@ -269,13 +273,15 @@ Four histograms are generated with the top line giving the raw expression data f
 >
 {: .comment}
 
-> ### {% icon details %} Details: Why the Same Number of Features
+> ### {% icon details %} Details: Why the Same Number of Features?
 >
-> * RaceID normalizes the data to compare all cells using the the same features, as it is difficult to make a meaningful comparison otherwise. Selected features must be *meaningful*, describing or contributing to the biological variation in the data, and therefore must be differentially expressed between cells.
+> * RaceID normalises the data to compare all cells using the same set of features. Selected features must be *meaningful*, describing or contributing to the biological variation in the data. Therefore features should be the most differentially expressed genes across different cells.
 >
-> * Cells remaining after filtering will *still* contain some genes which have count values of zero. As comparing against zero values is difficult, a value of 0.1 is added to the count data so that these features are not lost during the analysis. This assumes the gene *is* detectable for that cell (i.e. no errors during sequencing), but that the transcript was very lowly expressed.
+> * The cells that still remain after filtering will have some genes with count values of zero. In some cases this will give a median value of zero, which can make normalisation strategies difficult (e.g. dividing by the median value of a gene may require dividing by zero). For this reason, a value of 0.1 is added to the count data so that these features are not lost during the analysis.
 >
-> * However, it is important to see the flat square plot (bottom-right) for the post-filtered number of features, since it shows that the dataset is primed correctly for analysis with C number of cells and G number of genes. For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
+> * It should be noted that this then assumes that the gene *is* detectable for that cell (i.e. no errors during sequencing), but that the transcript was very lowly expressed.
+>
+> * The flat square plot (bottom-right) for the post-filtered number of features is square because it shows that the dataset is still a rectangular matrix with C number of cells and G number of genes. For a more 'realistic' distribution of features, re-run the tool with *"Count filtered features greater than or equal to 1"* enabled.
 >
 {: .details}
 
@@ -292,8 +298,10 @@ Four histograms are generated with the top line giving the raw expression data f
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
 > > 3. **Yes**
-> >    * *Cells:* These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.
-> >    * *Genes:* As the variables of the dataset, the more genes included, the more complex the model. Discovering the few variables that are relevant to the final model, then,  is the aim. Genes *not* differentially expressed between cells will not affect the final model, but serve as stable background metrics against which to measure significantly differentially expressed genes in the initial matrix. It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.
+> >    * *Cells:*
+> >      These are the observations of your dataset, and the more observations you have, the better the model will be. At minimum, 60% of your initial cells should be retained, though this will depend on the quality of your dataset.
+> >    * *Genes:*
+> >      As the variables of the dataset, the more genes included, the more complex the model. Discovering the few variables that are relevant to the final model, then,  is the aim. Genes *not* differentially expressed between cells will not affect the final model, but serve as stable background metrics against which to measure significantly differentially expressed genes in the initial matrix. It is perfectly acceptable to perform a single-cell RNA-seq analysis with as few as 500 (differentially expressed) genes.
 > >
 > {: .solution}
 >
@@ -392,14 +400,12 @@ The first three plots in the PDF report tell us about the stability/reliability 
 
 * (Bottom-Left) Stability for each cluster using [Jaccard distance](https://en.wikipedia.org/wiki/Jaccard_index).
 
-> ### {% icon details %} Details: RaceID plots
->   The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a "saturation point" (blue) is reached where the change in dispersion no longer decreases for an increase in k.
+> ### {% icon details %} Details: RaceID Plots
+>   * The first plot measures the levels of dispersion within each cluster and displays the mean dispersion over all clusters for each k value. The grey points indicate the mean change in dispersion for that k values, and the red bars show this dispersion as a box plot, which get smaller and smaller until a "saturation point" (blue) is reached where the change in dispersion no longer decreases for an increase in k.
 >
+>  * For example, if *k=2*, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of *k* may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of *k*. As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis.
 >
->  For example, if *k=2*, then all cells will be sorted into 2 clusters, and the variance of the gene expression in each cluster will be measured and averaged to give a score for the clustering at that k value. Certain values of *k* may cluster the cells of the same type better, with the expectation that the average dispersion of expression values across all clusters will be minimised for some value of *k*. As *k* increases, the reduction in this dispersion is measured for each increase of *k* until the change in the mean within-cluster dispersion no longer changes. Here we can see that reduction saturates at *k=12*, which is chosen to the be the number of clusters detected in our data for all further analysis.
->
->
->   The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the Jaccard distance, which is a fractional quantity that measures the dissimilarity between two sets as measured by overlap divided by the union of both sets.
+>  * The third plot measures the direct stability of each of the derived (in this case, 12) clusters using the Jaccard distance, which is a fractional quantity that measures the dissimilarity between two sets as measured by overlap divided by the union of both sets.
 >
 {: .details}
 
@@ -410,7 +416,7 @@ The first three plots in the PDF report tell us about the stability/reliability 
 > $$d_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}$$
 > <!-- This seems to be visible when collapsed...? -->
 >
-> In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on it's similarity to other sets.
+> In the case of single-cell data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on its similarity to other sets.
 >
 > ![Jaccard]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_jaccard.svg %} "Example Jaccard Distance calculation")
 >
@@ -439,16 +445,15 @@ The next three plots attempts to do this by describing the variation of the gene
 
 
 > ### {% icon details %} Details: RaceID Outlier Identification
-> * (Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by a mean (average expression of a gene across all cells in a cluster), and a dispersion parameter. The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that *most* genes are not differentially expressed between clusters, and that true biological variability should exceed this assumption.
+> * (Top-Left) A background model is calibrated and outliers are identified based on the distribution of transcript counts within a cluster. The counts for each gene are assumed to follow a negative binomial distribution determined by the average expression of a gene across all cells in a cluster, along with a dispersion parameter.
+>     * The dispersion is derived from the average variance-mean dependence, modelled as a logarithmic second order polynomial under the assumption that:
+>         1. Most genes are not differentially expressed between clusters
+>         1. True biological variability is located within a handful of genes
 >
->
-> * As we can see from the Background plot, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes.
-   <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 -->
->
+>     * In the background model, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes. <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 -->
 >
 > * (Top-Right) Outlier cells are detected if the probability for that cell $$c$$ that a minimum number of genes $$G_{min}$$ of observing total counts $$T_{G_{min}}$$ is less than a specific threshold $$P_{thr}$$, as given by the red dotted line.
->>This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1 \cdot 10^{-3}$$ by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
->
+>     * This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to $$1 \cdot 10^{-3}$$ by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).
 >
 > * (Bottom-Left) A bar plot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.
 >
@@ -467,6 +472,25 @@ The most differentially expressed genes (below a maximum p-value cutoff) in each
  | **pv** | Inferred p-value for differential expression |
  | **padj** | Adjusted p-value using the Benjami-Hochberg correction for the false discovery rate |
 
+
+> ### {% icon question %} Questions
+>
+> 1. What is the most significant differentially expressed gene in Cluster 5?
+> 2. Which cluster has the most genes with a fold-change greater than 30?
+>    > ### {% icon tip %} Tip
+>    > One way to answer is this is to scroll through the list and make a mental note of all the genes with a high fold-change value...
+>    >
+>    > ...but a *better* way is to sort the data in descending order on Column 5 using the {%icon tool %} **Sort** tool.
+>    >
+>    {: .tip}
+>
+> > ### {% icon solution %} Solution
+> > 1. The *Genes per Cluster* dataset is already sorted by cluster number and then by the adjusted p-value. Scrolling down to the first gene that is in cluster 5, we see that *Dmbt11* is the most significant gene in that cluster with an adjusted p-value of `2e-30`.
+> > 1. Cluster 11 appears to have the most genes with a fold-change greater than 30.
+> >
+> {: .solution}
+>
+{: .question}
 
 
 ## Heatmaps
@@ -731,7 +755,7 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 
 > ### {% icon question %} Question
 >
-> Observe the above expression plot and the overall clustering plot generated during the "*Visualising All Clusters*" stage.
+> Observe the above expression plot and the clustering plot generated during the "*Visualising All Clusters*" step.
 >
 > Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?
 >
@@ -794,37 +818,46 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 
 > ### {% icon details %} Details: StemID Lineage Plots
 >
-> * The first (top-left) plot shows a minimum spanning tree that summarises the most likely connections between clusters. The second plot (top-right) elucidates this lineage hierarchy by projecting the cells along the links given by StemID, ordering the cells along each link in such a way to suggest a time series, or *pseudo-time* analysis of each link. This is important, because by ordering the cells by lineage pseudo-time we can trace the up or down regulation of a gene as discrete time points. The interval between each time point is of course hard to accurately determine, but the order of events is still important.
+> * (Top-Left) A minimum spanning tree that summarises the most likely connections between clusters.
+> * (Top-Right) The same tree but with cells projected along the links given by StemID.
+>     * Ordering the cells along each link in such a way to suggest a time series, or *pseudo-time* analysis of each link. By ordering the cells by lineage pseudo-time we can trace the up/down regulation of a gene as discrete time points. The interval between each time point is hard to accurately determine, but the order of events is still important.
+> * (Bottom-Left) The degree of significance between clusters, with:
+>     1. Node Colour, indicating the level of significance between clusters
+>         * Blue: Higher level of cluster entropy (associated with progenitor cell types)
+>         * Red: Lower level of cluster entropy (associated with mature types)
+>     1. Link Width, indicating the link score computed by **StemID**.
+>         * Indicates the number of cells in the cluster sharing the link to other.
+>     1. Link Colour, indicating link significance
+>         * Red: Stronger link level
+>         * Green: Weaker link level
 >
-> * The third (bottom-left) displays the degree of significance between clusters, where the colour indicates the level of significance between clusters, and the width indicates the link score computed by **StemID**. Here, blue clusters indicate a higher level of cluster entropy (associated with progenitor cell types), and red with low entropy (for mature types). The link colouring is red for more significant links between clusters, than green, and the width is indicative of the number of cells in the cluster sharing that link to another cluster.
->
-> * The thick red link between clusters 2-4, 3-5, and 3-1-6 have therefore a high level of significance attached to each of these.
->
-> * This is clarified slightly better with the heatmap (bottom-right) that shows the link scores between each cluster-cluster pair. To see how the link score is actually calculated, the image below provides some context:
+> * (Bottom-Right) The link scores between each cluster-cluster pair.
 >
 {: .details}
 
 > ### {% icon question %} Questions
 >
-> Based on the above plots, which cluster is most likely to be the main progenitor of the others?
+> 1. Which cluster pairs are likely to be biologically significant?
+> 1. Based on the above plots, which cluster is most likely to be the main progenitor of the others?
 >
 > > ### {% icon solution %} Solution
 > >
-> > On first glance, it appears that `c2` would be the progenitor, due to the number of links it has and its more central position in the cluster plot.
+> > 1. The thick red link between clusters 2-4, 3-5, and 3-1-6 are assumed to have a high level of biological significance.
+> > 1. On first glance, it appears that `c2` would be the progenitor, due to the number of links it has and its more central position in the cluster plot.
 > >
-> > - *Cluster Tree Diagram:*
+> >     - *Cluster Tree Diagram:*
 > >
-> >         c2
-> >         ├─ c4
-> >         ├─ c9
-> >         ├─ c8
-> >         │  ├─ c11
-> >         │  └─ c12
-> >         │     └─ c10
-> >         └─ c3
-> >            ├─ c5
-> >            └─ c1
-> >               └─ c6
+> >             c2
+> >             ├─ c4
+> >             ├─ c9
+> >             ├─ c8
+> >             │  ├─ c11
+> >             │  └─ c12
+> >             │     └─ c10
+> >             └─ c3
+> >                ├─ c5
+> >                └─ c1
+> >                   └─ c6
 > >
 > >
 > {: .solution}
@@ -832,9 +865,16 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 {: .question}
 
 
+To see how the link score is actually calculated, the image below provides some context:
+
+
 ![Link scores]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_stemid_linkscores.png %} "StemID Link scores between branches.")
 
-The top chart shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types. The middle chart describes the "Delta-Entropy" which measures the variability of gene expression values within a cluster as the number of potential states (or cell types) it could produce, where clusters with more variability are less likely to be mature cell types due to the sheer "noise" that they exhibit that is to be expected of a cell type that could potentially give rise to other types. The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.
+The top of the three charts shows the number of links above a threshold that each cluster exhibits to another. The more links a cluster has, the more evidence that the cluster describes a progenitor cell type that gives rise to other more mature types.
+
+The middle chart describes the "Delta-Entropy" which measures the variability of gene expression values within a cluster as the number of potential states (or cell types) it could produce, where clusters with more variability are less likely to be mature cell types due to the sheer "noise" that they exhibit that is to be expected of a cell type that could potentially give rise to other types.
+
+The bottom chart is simply the top chart multiplied by the middle chart, which adds both pieces of evidence together to yield the link score.
 
 > ### {% icon question %} Questions
 >
