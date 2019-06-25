@@ -320,7 +320,7 @@ To get a sense of how well our data assembled, and to determine whether the cont
 
 **Bandage** {% icon tool%} ({% cite Wick2015 %}) (a **B**ioinformatics **A**pplication for **N**avigating **D**e novo **A**ssembly **G**raphs **E**asily), is a program that creates visualisations of assembly graphs.
 Sequence assembler programs (such as **Miniasm** {% icon tool %} ({% cite Li2016 %}), **Velvet** {% icon tool %} ({% cite Zerbino2008 %}), **SPAdes** {% icon tool %} ({% cite Bankevich2012 %}), **Trinity** {% icon tool %} ({% cite Grabherr2011 %}) and **MEGAHIT** {% icon tool %} {% cite Li2015 %}) carry out assembly by building a graph, from which contigs are generated.
-By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot and improve their assemblies.
+By visualisation of these assembly graphs, Bandage allows users to better understand, troubleshoot, and improve their assemblies.
 
 ![Bandage GUI](../../images/plasmid-metagenomics-nanopore/Bandage.png)
 
