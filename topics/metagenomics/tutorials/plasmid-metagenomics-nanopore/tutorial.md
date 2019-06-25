@@ -12,7 +12,7 @@ objectives:
   - "Perform Quality control on your reads"
   - "Assemble a genome with Minimap2/Miniasm/Racon"
   - "Determine the structure of the genome(s)"
-  - "Perform a scan for antimicrobial resistance genes with Staramr"
+  - "Scan for antimicrobial resistance genes with Staramr"
 time_estimation: "3h"
 key_points:
   - "Minimap2, Miniasm, and Racon can be used for quickly assembling Nanopore data"
@@ -42,9 +42,9 @@ Due to the high prevalence of repeat sequences and inserts in plasmids, using tr
 
 In this tutorial we will recreate the analysis described in the paper by {% cite LiXie2018 %} entitled *Efficient generation of complete sequences of MDR-encoding plasmids by rapid assembly of MinION barcoding sequencing data*. We will use data sequenced by the [Nanopore](https://nanoporetech.com/) MinION sequencer.
 
-The assembly is performed with **Minimap2** {% icon tool %} ({% cite Li2018 %}),
+The assembly will be performed with **Minimap2** {% icon tool %} ({% cite Li2018 %}),
 **Miniasm** {% icon tool %} ({% cite Li2016 %}), **Racon** {% icon tool %} ({% cite Vaser2017 %}) and **Unicycler** {% icon tool %} ({% cite Wick2017 %}).
-The downstream analysis is done with **Nanoplot** {% icon tool %} ({% cite DeCoster2018 %}),
+The downstream analysis will use **Nanoplot** {% icon tool %} ({% cite DeCoster2018 %}),
 **Bandage** {% icon tool %} ({% cite Wick2015 %}), **PlasFlow** {% icon tool %} ({% cite Krawczyk2018 %}) and **starmr** {% icon tool %} ([GitHub](https://github.com/phac-nml/staramr)).
 
 A schematic view of the workflow we will perform in this tutorial is given below:
@@ -216,7 +216,7 @@ following predefined fields:
 |11 |int   |Alignment block length                    |
 |12 |int   |Mapping quality (0-255; 255 for missing)  |
 
-View the outcome of RB12, it should look something like this:
+View the output of **Minimap2** {% icon tool %} of the collection against RB12, it should look something like this:
 ```
 channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	114	2613	+	channel_139_250c7e7b-f063-4313-8564-d3efbfa7e38d_template	3657	206	2732	273	2605	0	tp:A:S	cm:i:29	s1:i:240	dv:f:0.2016	rl:i:1516
 channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	148	1212	+	channel_313_35f447cb-7e4b-4c3d-977e-dc0de2717a4d_template	3776	2433	3450	218	1064	0	tp:A:S	cm:i:31	s1:i:210	dv:f:0.1291	rl:i:1516
@@ -254,7 +254,7 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 
 ## Remapping using Minimap2
 
-The Assembly graph created can be used for mapping again with minimap2, but first the graph should be transformed to FASTA format. Remapping is done on the miniasm assembly to map the original reads on the assembly to provide the nucleotides per position. This is used by **Racon** {% icon tool %} for consensus construction.
+The assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format. Remapping is done on the Miniasm assembly to map the original reads on the assembly to provide the nucleotides per position. This is used by **Racon** {% icon tool %} for consensus construction.
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
@@ -316,7 +316,7 @@ AATGCAGCTATGGCGCGTGCGGTGCCAAGAAAGCCCGCAGATATTCCGCTTCCTCGCTCATTGACTCGTCTCGCTCGGTC
 
 ## Visualize assemblies using Bandage
 
-To get a sense of how well our data assembled, and to determine whether the contigs are chomosomal or plasmid DNA (the former being linear sequences while plasmids are circular molecules), **Bandage** {% icon tool %} can give a clear view of the assembly.
+To get a sense of how well our data was assembled, and to determine whether the contigs are chomosomal or plasmid DNA (the former being linear sequences while plasmids are circular molecules), **Bandage** {% icon tool %} can give a clear view of the assembly.
 
 **Bandage** {% icon tool%} ({% cite Wick2015 %}) (a **B**ioinformatics **A**pplication for **N**avigating **D**e novo **A**ssembly **G**raphs **E**asily), is a program that creates visualisations of assembly graphs.
 Sequence assembler programs (such as **Miniasm** {% icon tool %} ({% cite Li2016 %}), **Velvet** {% icon tool %} ({% cite Zerbino2008 %}), **SPAdes** {% icon tool %} ({% cite Bankevich2012 %}), **Trinity** {% icon tool %} ({% cite Grabherr2011 %}) and **MEGAHIT** {% icon tool %} {% cite Li2015 %}) carry out assembly by building a graph, from which contigs are generated.
