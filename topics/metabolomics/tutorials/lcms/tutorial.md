@@ -41,7 +41,7 @@ the chosen diversity of sample will allow you to explore the bases of a metabolo
 We chose a subset of 9 samples, composed of 6 biological samples and 3 quality-control pooled samples (QC pools - mix of all
 biological samples).
 
-To analyze these data, we will the follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
+To analyze these data, we will then follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 **TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc).
 This workflow takes as input **TODO** and perform several steps: pre-processing, statistics and annotation.
@@ -166,7 +166,7 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 Remember that these steps are performed for each of your data files independently.
  - Firstly, the algorithm detects series of scans with close values of m over z. They are called 'region of interest' (ROI).
 The m over z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
- - On these Regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
+ - On these regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
 the extract ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation
 of the gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
 
@@ -653,7 +653,7 @@ chromatographic peak for this ion was identified.
 
 With this 'fillChromPeaks' step, you obtain your final intensity table. At this step, you have everything mandatory to begin analysing
 your data:
- - a sampleMetadata file (if not done yep, to be completed with information about your samples)
+ - a sampleMetadata file (if not done yet, to be completed with information about your samples)
  - a dataMatrix file (with the intensities)
  - a variableMetadata file (with information about ions such as retention times, m/z)
 
@@ -673,7 +673,7 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
  sample metadata uploaded with your sample files.
  - You can define how many significant ions will be used for extracted ions chromatogram (EIC) plot. These plots will be included in a pdf file.
 
- Apart from the PDF file, the main three outcome from the CAMERA.annotate module are three columns added in the variableMetadata file:
+ Apart from the PDF file, the main three outcomes from the CAMERA.annotate module are three columns added in the variableMetadata file:
  - isotopes: the name says everything
  - adduct: same here; this column is filled only in the iAll functions' mode
  - pcgroup: this stands for Pearson's correlation group; it corresponds to groups of ions that match regarding retention time and intensity
