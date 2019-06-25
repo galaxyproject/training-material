@@ -449,7 +449,7 @@ Additionally, PlasFlow produces FASTA files containing input sequences binned to
 ## Scan genome contigs for antimicrobial resistance genes
 
 To determine whether the contigs contain antimircobial resistance genes (AMR) [staramr](https://github.com/phac-nml/staramr) can be used.
-**Staramr** {% icon tool %} (*AMR) scans bacterial genome contigs against both the **ResFinder** {% icon tool %} ({% cite Zankari2012 %}), **PointFinder** {% icon tool %} ({% cite Zankari2017 %}) and **PlasmidFinder** {% icon tool %} ({% cite Carattoli2014 %})  databases (used by the ResFinder webservice)
+**Staramr** {% icon tool %} scans bacterial genome contigs against both the **ResFinder** {% icon tool %} ({% cite Zankari2012 %}), **PointFinder** {% icon tool %} ({% cite Zankari2017 %}), and **PlasmidFinder** {% icon tool %} ({% cite Carattoli2014 %}) databases (used by the ResFinder webservice)
 and compiles a summary report of detected antimicrobial resistance genes.
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/StarAmr.png)
