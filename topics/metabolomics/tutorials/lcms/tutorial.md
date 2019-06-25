@@ -122,7 +122,7 @@ You should have in your history a green Dataset collection (`sacurine`) with 9 d
 
 Their size can be checked in their information panel (i)
 
-## Data preparation for XCMS
+## Data preparation for XCMS: *MSnbase readMSData*
 
 This first step is only meant to read your mzXML and generate an object usable by XCMS.
 
@@ -150,81 +150,7 @@ This first step is only meant to read your mzXML and generate an object usable b
 >
 {: .question}
 
-## First XCMS step: *peak picking*
-
-Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
-independently. The idea here is, for each peak, to proceed to chromatographic peak detection.
-
-The XCMS solution provides two different algorithms to perform chromatographic peak detection: *matchedFilter* and
-*centWave*. The matchedFilter strategy is the first one provided by the XCMS R package. It is compatible with any
-LC-MS device, but was developed at a time when high resolution mass spectrometry was not common standard yet. On the
-other side, the centWave algorithm was specifically developed for high resolution mass spectrometry, dedicated to
-data in centroid mode. In this tutorial, you will practice using the centWave algorithm.
-
-**Overview of how centWave works**
-
-Remember that these steps are performed for each of your data files independently.
- - Firstly, the algorithm detects series of scans with close values of m over z. They are called 'region of interest' (ROI).
-The m over z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
- - On these regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
-the extract ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation
-of the gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
-
-At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
-of your sample; if an existing peak is not considered a peak at this step, then it can not be considered in the next steps of
-pre-processing.
-
-Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSet)** module.
-
-
-> ### {% icon hands_on %} Hands-on: xcms findChromPeaks (xcmsSet)
->
-> Execute **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
->    - *"RData file"*:
->        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
->    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
->        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
->        - *"Min,Max peak width in seconds"*: `5,20`
->        - In *"Advanced Options"*:
->            - *"Prefilter step for for the first analysis step (ROI detection)"*: `3,5000`
->            - *"Noise filter"*: `1000`
->
-> You can leave the other parameters with their default values.
->
->    > ### {% icon comment %} Comment
->    >
->    > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
-rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z
-ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
->    {: .comment}
->
-{: .hands_on}
-
-At this step, you obtained a dataset collection containing one RData file per sample, with independent lists of ions. Although this
-is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
-To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
-need to group your individual RData files into a single one. And by the way you may also want to get a grasp of your samples'
-chromatograms before going any further (note that you can also plot chromatograms *before* even performing you chromatographic peak
-detection).
-
-
-## Merge the different samples in one dataset
-
-A dedicated tool exist to merge the different RData files into a single one. Although you can simply take as
-input your dataset collection alone, the module also provides de possibility to take into account a sampleMetadata file. Indeed,
-depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to the grouping step.
-
-This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
-extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that
-these blank samples have different characteristics compared to your biological samples can be of importance when setting parameters of
-your grouping step. You will see what this is all about in the 'grouping' section of this tutorial, but in the workflow order, it is
-at this step that you need to provide the needed information if you want distinction in your grouping step.
-
-You can also use the sampleMedata file we mentioned to add some group colors to your samples when visualising your chromatograms.
-In this tutorial, we are not going to use distinct sample groups in the XCMS 'grouping' step. Nevertheless, we will provide a
-sampleMetadata file for chromatogram visualisation purpose. Thus, you will find here how to import such a file into your Galaxy history.
-
-### Importing a sample metadata file
+## Importing a sample metadata file
 
 What we referenced here as a sampleMetadata file corresponds to a table containing information about your samples (= sample metadata).  
 
@@ -384,45 +310,25 @@ that you want to consider in XCMS preprocessing, just fill everywhere with `samp
 {: .question}
 
 
-
-### The merging step
-
-To merge your individual RData files into one single RData to be used for the grouping step that will follow, you need to use the
-**xcms findChromPeaks Merger** module. For this step, you only need your dataset collection, plus a sampleMetadata **if you want to
-consider groups in the *xcms groupChromPeaks (group)* step that will follow**.
-
-If you do not have specific reasons to consider groups in your extraction process, then you do not need a sampleMetadata file at this step.
-**Please note that if you provide a sampleMetadata file with the second column reporting several groups, this group information is then taken into
-consideration during the grouping step.**
-
-In the case of our tutorial data, we do not want to separate the samples according to groups, so we do not provide the sampleMetadata when executing
-the Merger module.
-
-
-> ### {% icon hands_on %} Hands-on: xcms findChromPeaks Merger
->
-> Execute **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
->    - *"RData file"*:
->        - Click on the folder icon to select the Dataset collection: `sacurine.raw.xset.RData`
->    - *"Sample metadata file"*:
->        - Leave this parameter to `Nothing selected`
->
-{: .hands_on}
-
-The module generates a single RData file containing information from all the samples in your dataset collection input.
-
 ## Getting an overview of your samples' chromatograms
 
 You may be interested in getting an overview of what your samples' chromatograms look like, for example to see if some of
 your samples have distinct overall characteristics (unexpected chromatographic peaks, huge overall intensity...).
 
-Note that you can also check the chromatograms right after the 'MSnbase readMSData' step. In particular, this can help you defining retention time
-ranges that you may want to discard from the very beginning.
+You can also use the sampleMedata file we mentioned to add some group colors to your samples when visualising your chromatograms.
+In this tutorial, we are not going to use distinct sample groups in the XCMS 'grouping' step. Nevertheless, we will provide a
+sampleMetadata file for chromatogram visualisation purpose. Thus, you will find here how to import such a file into your Galaxy history.
+
+Note that you can also check the chromatograms right at any moment during the workflow:
+ - *MSnbase readMSData*: defining retention time ranges that you may want to discard from the very beginning -> **Specta Filters** in *findChromPeaks*
+ - *findChromPeaks*: defining retention time -> *adjustRtime*
+ - *adjustRtime*: check the result of the correction -> rerun *adjustRtime* with other settings
 
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
 > Execute **xcms plot chromatogram** {% icon tool %} with the following parameters:
->    - *"RData file"*: `xset.merged.RData`
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
 >    - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
 >    > ### {% icon comment %} Comment
@@ -439,6 +345,91 @@ hands-on), you obtain two plots: one with colours based on provided groups, one 
 ![Base Peak Intensity Chromatograms](../../images/BPC_9samp.png)
 
 
+## First XCMS step: *peak picking*
+
+Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
+independently. The idea here is, for each peak, to proceed to chromatographic peak detection.
+
+The XCMS solution provides two different algorithms to perform chromatographic peak detection: *matchedFilter* and
+*centWave*. The matchedFilter strategy is the first one provided by the XCMS R package. It is compatible with any
+LC-MS device, but was developed at a time when high resolution mass spectrometry was not common standard yet. On the
+other side, the centWave algorithm was specifically developed for high resolution mass spectrometry, dedicated to
+data in centroid mode. In this tutorial, you will practice using the centWave algorithm.
+
+**Overview of how centWave works**
+
+Remember that these steps are performed for each of your data files independently.
+ - Firstly, the algorithm detects series of scans with close values of m over z. They are called 'region of interest' (ROI).
+The m over z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
+ - On these regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
+the extract ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation
+of the gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
+
+At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
+of your sample; if an existing peak is not considered a peak at this step, then it can not be considered in the next steps of
+pre-processing.
+
+Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSet)** module.
+
+
+> ### {% icon hands_on %} Hands-on: xcms findChromPeaks (xcmsSet)
+>
+> Execute **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
+>    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
+>        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
+>        - *"Min,Max peak width in seconds"*: `5,20`
+>        - In *"Advanced Options"*:
+>            - *"Prefilter step for for the first analysis step (ROI detection)"*: `3,5000`
+>            - *"Noise filter"*: `1000`
+>
+> You can leave the other parameters with their default values.
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
+rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z
+ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
+>    {: .comment}
+>
+{: .hands_on}
+
+At this step, you obtained a dataset collection containing one RData file per sample, with independent lists of ions. Although this
+is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
+To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
+need to group your individual RData files into a single one. And by the way you may also want to get a grasp of your samples'
+chromatograms before going any further (note that you can also plot chromatograms *before* even performing you chromatographic peak
+detection).
+
+
+## Merge the different samples in one dataset
+
+A dedicated tool exist to merge the different RData files into a single one: **xcms findChromPeaks Merger**. Although you can simply take as
+input your dataset collection alone, the module also provides de possibility to take into account a sampleMetadata file. Indeed,
+depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to the grouping step *xcms groupChromPeaks (group)*.
+
+This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
+extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that
+these blank samples have different characteristics compared to your biological samples can be of importance when setting parameters of
+your grouping step. You will see what this is all about in the 'grouping' section of this tutorial, but in the workflow order, it is
+at this step that you need to provide the needed information if you want distinction in your grouping step.
+
+**In the case of our tutorial data**, we do not want to separate the samples according to groups, so we do not provide the sampleMetadata when executing
+the Merger module.
+
+
+> ### {% icon hands_on %} Hands-on: xcms findChromPeaks Merger
+>
+> Execute **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+>    - *"RData file"*:
+>        - Click on the folder icon to select the Dataset collection: `sacurine.raw.xset.RData`
+>    - *"Sample metadata file"*:
+>        - Leave this parameter to `Nothing selected`
+>
+{: .hands_on}
+
+The module generates a single RData file containing information from all the samples in your dataset collection input.
 
 ## Second XCMS step: *determining shared ions across samples*
 
