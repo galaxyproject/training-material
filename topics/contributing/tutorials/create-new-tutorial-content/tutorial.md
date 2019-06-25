@@ -574,6 +574,51 @@ Rendered:
 > Something really bad can happen here!
 {: .warning}
 
+
+## Tables and Matrices
+
+Tables in tutorials normally take the full width of the page:
+
+{% raw %}
+```markdown
+|  | Obs1 | Obs2 | Obs3 |
+|--|--------------------|
+| Feat1 | 0 | 1 | 2 |
+| Feat2 | 1 | 2 | 3 |
+| Feat3 | 2 | 3 | 4 |
+```
+{% endraw %}
+
+Rendered:
+
+|  | Obs1 | Obs2 | Obs3 |
+|--|--------------------|
+| Feat1 | 0 | 1 | 2 |
+| Feat2 | 1 | 2 | 3 |
+| Feat3 | 2 | 3 | 4 |
+
+This does not appear to be visually appealing when representing matrices, which is why a matrix box can be used instead:
+
+{% raw %}
+```markdown
+> |  | Obs1 | Obs2 | Obs3 |
+> |--|--------------------|
+> | Feat1 | 0 | 1 | 2 |
+> | Feat2 | 1 | 2 | 3 |
+> | Feat3 | 2 | 3 | 4 |
+{: .matrix}
+```
+
+Rendered:
+
+> |  | Obs1 | Obs2 | Obs3 |
+> |--|--------------------|
+> | Feat1 | 0 | 1 | 2 |
+> | Feat2 | 1 | 2 | 3 |
+> | Feat3 | 2 | 3 | 4 |
+{: .matrix}
+
+
 ## Nested boxes
 
 Boxes can be nested, *e.g.* for having tips inside a hands-on:
