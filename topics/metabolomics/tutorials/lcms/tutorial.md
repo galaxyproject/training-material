@@ -27,7 +27,17 @@ contributors:
 # Introduction
 {:.no_toc}
 
-**TODO** Explain why metabolomics, what do you want to do
+You may already know that there are different types of omic sciences; metabolomics is the closest to phenotypes. 
+It studies different types of matrices, as blood, urines, tissues, including plants of course, and focus on studying really small molecules 
+which are called metabolites, to better understand matters linked to the metabolism. However, studying metabolites is not a piece of cake 
+since it requires several critical steps which still have some major bottlenecks. Metabolomics is still quite a young science, and has many 
+kinds of specific matters. 
+
+One of the three main technologies used to perform metabolomic analysis is Liquid-Chromatography Mass Spectrometry (LC-MS). Data analysis 
+for this technology requires a large variety of steps, going from the way to extract information from your raw data to statistical analysis 
+and annotation. To be able to perform a complete LC-MS analysis in a single environment, the [Wokflow4Metabolomics](http://workflow4metabolomics.org/) 
+team profides Galaxy modules dedicated to metabolomics. Here is a tutorial aiming at explaining what the main steps of untargetted LC-MS data processing 
+for metabolomic analysis are, and how to conduct metabolomic data analysis from preprocessing to annotation using Galaxy. 
 
 To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze
 the inﬂuence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
@@ -44,8 +54,9 @@ biological samples).
 
 To analyze these data, we will then follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
-**TODO** Introduce with one or two sentence the workflow (explanation of the meaning of LC-MS, the big steps, etc).
-This workflow takes as input **TODO** and perform several steps: pre-processing, statistics and annotation.
+It is composed of 4 main parts: the preprocessing part that extracts ions from raw data, the data processing part that checks the quality of data 
+and transforms it to something relevant, the statistical part that higlight intresting information inside the data, and the annotation part 
+that helps putting a name on selected variables.  
 
 
 > ### Agenda
@@ -71,7 +82,7 @@ This software is based on different algorithms that have been published, and is 
 XCMS is able to read files with open format as mzXML, mzMl, mzData and netCDF which are independent of the constructors' formats.
 
 It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
-adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus being particularly well
+adducts and fragments using the R package CAMERA. This set of functions gives modularity, thus is particularly well
 adapted to define workflows, one of the key points of Galaxy:
 
 ![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
@@ -114,12 +125,12 @@ uploading your data into Galaxy.
 >    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="mzml" collection_name="sacurine" renaming=false %}
+>    {% include snippets/import_via_link.md collection=true format="mzml" collection_name="sacurine" renaming=false %}
 >    {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
-You should have in your history a green Dataset collection (`sacurine`) with 9 datasets with as format mzml.
+You should have in your history a green Dataset collection (`sacurine`) with 9 datasets in mzml format.
 
 Their size can be checked in their information panel (i)
 
@@ -144,12 +155,22 @@ This first step is only meant to read your mzXML and generate an object usable b
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. A **Dataset collection** containing 9 dataset
-> > 2. The dataset are some RData object with the datatype **rdata.msnbase.raw**
+> > 1. A **Dataset collection** containing 9 dataset.
+> > 2. The datasets are some RData objects with the **rdata.msnbase.raw** datatype.
 > >
 > {: .solution}
 >
 {: .question}
+
+Now that you have prepared your data, you can begin with the first XCMS extraction step: peakpicking. However, before beginning to 
+extract meaningful information from your raw data, you may be interested in visualising your chromatograms. This can be of particular 
+interest if you want to check whether you should consider discarding some range of your analytical sequence (some scan or *retention 
+time* (RT) ranges). 
+
+To do so, you can use a tool that is called *xcms plot chromatogram* that will plot each sample's chromatogram (see dedicated section 
+further). However, to use this module, you may need additional information about your samples for colouring purpose. Thus, you may need 
+to upload into Galaxy a table containing metadata of your samples (a *sampleMetadata* file). 
+
 
 ## Importing a sample metadata file
 
@@ -174,14 +195,14 @@ Note that you can either:
 > In the case of this tutorial, we already prepared a sampleMetadata file with all the needed information. Nevertheless, we provide here
 an optional hands-on if you want to check how to get a template to fill, with the two following advantages:
 > - you will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
-> - you will have a file with the right format (tabulation-separated text file) that only need to be filled with the information you want.
+> - you will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.
 >
 > > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
 > >
 > > Execute **xcms get a sampleMetadata file** {% icon tool %}. You only need to give
-the dataset collection you obtained from the previous 'xcms findChromPeaks (xcmsSet)' step:
+the dataset collection you obtained from the previous 'MSnbase readMSData' step:
 > >    - *"RData file"*:
-> >        - Click on the folder icon to select the Dataset collection: `sacurine.raw.xset.RData`
+> >        - Click on the folder icon to select the Dataset collection: `sacurine.raw.RData`
 > >
 > > An easy step for an easy sampleMetadata filling!
 > >
@@ -228,8 +249,8 @@ simply present how we filled the provided file from the template we generated in
 > HU_neg_090 | .
 > HU_neg_048 | .
 >
-> We used a spreadsheet software to open the file. First, we completed the class column. We do not plan to use this column to process
-XCMS by groups, but we do plan to use it to plot coloured chromatograms.
+> We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this 
+second column matters. 
 >
 > sample_name | class
 > --- | ---
@@ -243,7 +264,7 @@ XCMS by groups, but we do plan to use it to plot coloured chromatograms.
 > HU_neg_090 | sample
 > HU_neg_048 | sample
 >
-> This way, we will be able to colour the samples depending on the sample type (QC or sample).
+> With this column, we will be able to colour the samples depending on the sample type (QC or sample).
 > Next, we added columns with interesting or needed information, as following:
 >
 > sample_name | class | polarity | sampleType | injectionOrder | batch | osmolality | sampling | age | bmi | gender
@@ -316,14 +337,12 @@ that you want to consider in XCMS preprocessing, just fill everywhere with `samp
 You may be interested in getting an overview of what your samples' chromatograms look like, for example to see if some of
 your samples have distinct overall characteristics (unexpected chromatographic peaks, huge overall intensity...).
 
-You can also use the sampleMedata file we mentioned to add some group colors to your samples when visualising your chromatograms.
-In this tutorial, we are not going to use distinct sample groups in the XCMS 'grouping' step. Nevertheless, we will provide a
-sampleMetadata file for chromatogram visualisation purpose. Thus, you will find here how to import such a file into your Galaxy history.
+You can use the sampleMedata file we previously uploaded to add some group colours to your samples when visualising your chromatograms. 
+The module takes automatically the second column as colour groups when a file is provided. 
 
-Note that you can also check the chromatograms right at any moment during the workflow:
- - *MSnbase readMSData*: defining retention time ranges that you may want to discard from the very beginning -> **Specta Filters** in *findChromPeaks*
- - *findChromPeaks*: defining retention time -> *adjustRtime*
- - *adjustRtime*: check the result of the correction -> rerun *adjustRtime* with other settings
+Note that you can also check the chromatograms at any moment during the workflow, in particular at the following steps:
+ - after *MSnbase readMSData*: to help you to define retention time ranges that you may want to discard from the very beginning -> **Specta Filters** in *findChromPeaks*
+ - after *adjustRtime*: to check the result of the correction -> rerun *adjustRtime* with other settings
 
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
@@ -334,8 +353,8 @@ Note that you can also check the chromatograms right at any moment during the wo
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > If you provided in the Merger step a sampleMetadata with a second column containing groups, you will get colouring according to
-these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
+>    > If you use this module at a later step of XCMS workflow and provided in the Merger step a sampleMetadata with a second column containing groups 
+(see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
 >    {: .comment}
 >
 {: .hands_on}
@@ -360,10 +379,10 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 **Overview of how centWave works**
 
 Remember that these steps are performed for each of your data files independently.
- - Firstly, the algorithm detects series of scans with close values of m over z. They are called 'region of interest' (ROI).
-The m over z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
+ - Firstly, the algorithm detects series of scans with close values of m/z. They are called 'region of interest' (ROI).
+The m/z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
  - On these regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
-the extract ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation
+the extracted ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation
 of the gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
 
 At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
@@ -399,14 +418,12 @@ ranges, or *Noise filter* (as in this hands-on) not to use low intensity measure
 At this step, you obtained a dataset collection containing one RData file per sample, with independent lists of ions. Although this
 is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
 To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
-need to group your individual RData files into a single one. And by the way you may also want to get a grasp of your samples'
-chromatograms before going any further (note that you can also plot chromatograms *before* even performing you chromatographic peak
-detection).
+need to group your individual RData files into a single one. 
 
 
 ## Merge the different samples in one dataset
 
-A dedicated tool exist to merge the different RData files into a single one: **xcms findChromPeaks Merger**. Although you can simply take as
+A dedicated tool exists to merge the different RData files into a single one: **xcms findChromPeaks Merger**. Although you can simply take as
 input your dataset collection alone, the module also provides de possibility to take into account a sampleMetadata file. Indeed,
 depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to the grouping step *xcms groupChromPeaks (group)*.
 
@@ -438,7 +455,7 @@ The first peak picking step gave us lists of ions for each sample. However, what
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called
 'grouping'.
 
-The group function aligns ions extracted with close retention time and close 'm over z' (m/z) values in the different samples. In order to define this
+The group function aligns ions extracted with close retention time and close m/z values in the different samples. In order to define this
 similarity, we have to define on one hand a m/z windows and on the other hand a retention time window. A binning is then performed in the
 mass domain. The size of the bins is called width of overlapping m/z slices. You have to set it according to your mass spectrometer resolution.
 
@@ -465,9 +482,9 @@ than a given number of samples. Either a percentage of the total number of sampl
 This grouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses.
 User has to check the effect of parameter values on the result.
 
-In order to check the result of group function, a pdf file is created and provides for all m/z slices the gaussian model which width is
-defined by the bandwidth parameter. Each red dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line
-width corresponds to the bandwidth parameter.
+In order to check the result of the grouping function, a pdf file is created. It provides one plot per m/z slice found in the data. Each picture 
+represents the peak density accross samples, ploting the corresponding gaussian model which width is defined by the bandwidth parameter. Each red 
+dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line width is associated with the bandwidth parameter.
 
 Hear is an example of two m/z slides obtained from the hands-on:
 
@@ -504,7 +521,8 @@ Sometimes it is difficult to find enough peaks present in all samples. The user 
 a peak should be found to be considered a well behaved peak. This parameter is called *minimum required fraction of samples*.
 
 On the contrary, you may have peak groups with more detected peaks than the total number of samples. Those peaks are called *additional peaks*.
-You can filter those ions defining the maximal number of additional peaks, for a peak to be considered a well behaved peak.
+If you do not want to consider peak groups with too much additional peaks as 'well behaved peaks', you can use the 'maximal number of additional 
+peaks' parameter to put them aside.
 
 The algorithm uses statistical smoothing methods. You can choose between linear or loess regression.
 
@@ -515,7 +533,6 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    - *"RData file"*: `xset.merged.groupChromPeaks.RData`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.8299`
->        - *"Smooth method"*: `loess - non-linear alignment`
 >
 > You can leave the other parameters to default values.
 >
@@ -563,7 +580,7 @@ lower a little the bandwidth parameter.
 > ### {% icon hands_on %} Hands-on: second 'xcms groupChromPeaks (group)'
 >
 > Execute **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
->    - *"RData file"*: `xset.merged.groupChromPeaks.RData` or `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.RData`
+>    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
 >        - *"Width of overlapping m/z slices"*: `0.01`
@@ -588,7 +605,7 @@ last adjustRtime step and thus your last grouping step, you will obtain your fin
 >
 > 1. How many ions did you obtained with the final grouping step?
 > 2. Open the dataMatrix file you obtained with the final grouping. This table corresponds to intensities for each ion and each
-samples. What do you notice when looking at the intensity of the first ion regarding the first sample?
+sample. What do you notice when looking at the intensity of the first ion regarding the first sample?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -601,15 +618,15 @@ and samples.
 {: .question}
 
 At this point of the XCMS extraction workflow, the peak list may contain NA when peaks where not considered peaks in only some
-of the samples in the first 'findChromPeaks' step. This does not necessary means that no peak exist for these samples. For example,
-sometimes peaks are of very low intensities for some samples and were not kept as peaks because of that in the first 'findChromPeaks'
+of the samples in the first 'findChromPeaks' step. This does not necessary means that no peak exists for these samples. For example,
+sometimes peaks are of very low intensity for some samples and were not kept as peaks because of that in the first 'findChromPeaks'
 step.
 
-To be able to get the information that may actually exist behind NAs, there is an additional XCMS step that is call *fillChromPeaks*.
+To be able to get the information that may actually exist behind NAs, there is an additional XCMS step that is called *fillChromPeaks*.
 
 > ### {% icon comment %} Comment
 >
-> Before performing the 'fillChromPeaks' step, it is highly recommended to first have a look of your data concerning the distribution
+> Before performing the 'fillChromPeaks' step, it is highly recommended to first have a look at your data concerning the distribution
 of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
 may want to go back to some of your parameter choices in previous XCMS steps.
 > To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
@@ -667,7 +684,7 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
 
  Apart from the PDF file, the main three outcomes from the CAMERA.annotate module are three columns added in the variableMetadata file:
  - isotopes: the name says everything
- - adduct: same here; this column is filled only in the iAll functions' mode
+ - adduct: same here; this column is filled only in the 'All functions' mode
  - pcgroup: this stands for Pearson's correlation group; it corresponds to groups of ions that match regarding retention time and intensity
  correlations, leading to think that maybe they could come from the same original metabolite.
 
@@ -678,8 +695,6 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
 >    - In *"Annotate Isotopes [findIsotopes]"*:
 >        - *"Max. ion charge"*: `2`
 >    - *"Mode"*: `Only groupFWHM and findIsotopes functions [quick]`
->    - In *"Statistics and results export: [diffreport]"*:
->        - *"Number of condition"*: `One condition`
 >    - In *"Export options"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >        - *"Number of decimal places for retention time values reported in ions' identifiers."*: `2`
