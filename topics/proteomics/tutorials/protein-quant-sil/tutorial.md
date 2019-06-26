@@ -65,15 +65,18 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 
 # Peptide and Protein Identification
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}. 
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}.
 
-A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Most search engines allow for some adaptation of the monoisotopic peak and we will use this by leaving `By default, misassignment to the first and second isotopic 13C peak are also considered` at `No`. 
+A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Most search engines allow for some adaptation of the monoisotopic peak and we will use this by leaving `By default, misassignment to the first and second isotopic 13C peak are also considered` at `No`.
 
 [//]: # TODO: Read about monoisotopic peak problem, give citation to review!
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this SILAC Proteome exercise
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the mzml file, containing the measured mass spectra from [Zenodo](https://doi.org/10.5281/zenodo.1051552) or a data library:
 >
 >    ```
@@ -137,7 +140,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 > ### {% icon hands_on %} Hands-on: MS1 Feature Detection
 >
 > 1. Run **FeatureFinderMultiplex** {% icon tool %} with
->   - {% icon param-file %} *"LC-MS dataset in centroid or profile mode"*: mzML file 
+>   - {% icon param-file %} *"LC-MS dataset in centroid or profile mode"*: mzML file
 >   - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`,
 >   - *"m/z tolerance for search of peak patterns"*: `10`
 >   - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
@@ -157,8 +160,8 @@ The next step is to map the MS2-based peptide identifications to the quantified 
 For labelled data, it is necessary to map peptide identifications to *consensus* features (i.e. a pair of one light peptide feature with one matching heavy feature in the correct m/z distance).
 For `consensusXML`, IDMapper uses the consensus centroids, not the feature boundaries for mapping. Therefore, the RT tolerance has to be set higher than for mapping to `featureXML`. A good starting value is half the expected typical retention time.
 
-Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature. 
-Another refinement of the quantitative result is obtained by removing falsely mapped identifications e.g. light identification mapped to heavy feature. This step is performed by the **MultiplexResolver** {% icon tool %} that returns a first file with the correctly mapped peptides and as a second output the falsly mapped peptides.  
+Sometimes several peptide identifications are mapped to a feature. The tool [IDConflictResolver](http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_IDConflictResolver.html) filters the mapping so that only the identification with the best score is associated to each feature.
+Another refinement of the quantitative result is obtained by removing falsely mapped identifications e.g. light identification mapped to heavy feature. This step is performed by the **MultiplexResolver** {% icon tool %} that returns a first file with the correctly mapped peptides and as a second output the falsly mapped peptides.
 
 Finally, the correctly mapped peptides will be combined into protein quantifications with the **ProteinQuantifier** {% icon tool %}.
 
@@ -260,7 +263,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 > 1. Run **FileFilter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: `mzML` file
 >   - *"Retention time range to extract"*: `2000:2200`
-> 
+>
 > 2. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
@@ -268,7 +271,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 > 4. Run **FileFilter** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: **IDConflictResolver** output
 >   - *"Remove features without annotations"*: `Yes`
-> 
+>
 > 5. Rename the **FileFilter** output to `Annotated features`
 >
 >    {% include snippets/rename_dataset.md %}
@@ -398,10 +401,10 @@ In the test dataset, several peptides were identified, but not quantified. Some 
 >
 > 1. Run the whole workflow again:
 >    - Change the **FeatureFinderMultiplex** parameter *"Range of isotopes per peptide in the sample"* from `3:6` to `2:6`.
-> 2. Integrate the **HighResPrecursorMassCorrector** {% icon tool %} into the workflow. 
+> 2. Integrate the **HighResPrecursorMassCorrector** {% icon tool %} into the workflow.
 >    - Use the mzML file and the featureXML from the **FeatureFinderMultiplex** {% icon tool %} as input
 >    - Set **Additional retention time tolerance added to feature boundaries** between `0.0` and `10.0`
->    - Connect the output with the search engine. 
+>    - Connect the output with the search engine.
 > 3. Compare the number of identified proteins, unmatched features and unmapped peptides for each parameter setting.
 > 4. Visualize the results with TOPPView to check for correct feature detection and feature-to-peptide mapping.
 >

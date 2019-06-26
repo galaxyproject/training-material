@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "A short introduction to Galaxy"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
+level: Introductory
 questions:
   - "How to get started in Galaxy"
 objectives:
@@ -89,9 +90,9 @@ Your "History" is in the panel at the right.
 Your "Tools" are in the panel at the left.
 
 > ### {% icon hands_on %} Hands-on: Upload a file from URL
-> 1. Go to the **Tools** panel (on the left)
-> 2. Click **Get Data** (at the top of the list)
-> 3. Click **Upload File**
+> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
+>
+>    ![upload button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
@@ -258,13 +259,14 @@ You can re-run a tool many times with different settings. Each time you re-run t
 Let's create a new history.
 
 > ### {% icon hands_on %} Hands-on: New history
-> 1. Click on the {% icon galaxy-gear %} (gear) icon (**History options**) in the History panel
+> 1. Create a new history
 >
->    ![cog](../../images/cog.png)
+>    {% include snippets/create_new_history.md %}
 >
-> 2. Select **Create New**
-> 3. Name your history, *e.g.* "Next-analysis"
-> 4. Press <kbd>Enter</kbd>
+> 2. Rename your history, *e.g.* "Next-analysis"
+>
+>    {% include snippets/rename_history.md %}
+>
 {: .hands_on}
 
 This new history does not have any files in it yet.
@@ -288,7 +290,7 @@ Where is your first history, called "my-analysis"?
 >
 > 3. Click on **Analyze Data** in the top panel to go back to your analysis window
 >
-> ![view-all-hist](../../images/view-all-hist.png)
+> ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
 >
 {: .hands_on}
 

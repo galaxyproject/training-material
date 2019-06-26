@@ -78,6 +78,9 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 > We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `mzML`. If **msconvert** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input and continue with step 5 of the following hands-on training.
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Load one of the example datasets into your history from Zenodo
 >
 >    ```
@@ -93,7 +96,7 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >    - {% icon param-file %} *"Input unrefined MS data"*: imported `raw` file
 >    - *"Do you agree to the vendor licenses"*: set to `Yes`
 >    - *"Output Type"*: set to `mzML`
->  
+>
 > 5. Run **PeakPickerHiRes** {% icon tool %} on the resulting file
 >    - {% icon param-file %} *"input profile data file": output of **msconvert** or `mzML` file
 >    - In *"param_algorithm_ms_levels"*
@@ -122,7 +125,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
-> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({{ site.baseurl }}{% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view 
+> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({{ site.baseurl }}{% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
 >
 >   > ### {% icon comment %} You did not run the Database Handling first?
 >   > You can upload the ready-made database from Zenodo
@@ -131,7 +134,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 >   > https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
 >   > ```
 >   {: .comment}
->    
+>
 > 2. Run the tool **XTandemAdapter** {% icon tool %} with:
 >   - {% icon param-file %} *"Input file containing MS2 spectra"*: MS2-centroided mzML file
 >   - {% icon param-file %} *"FASTA file"*: FASTA protein database
@@ -168,7 +171,7 @@ In proteomics, this decision is typically done by calculating false discovery ra
 The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.
 
-We will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool **PeptideIndexer** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. We will then filter PSMs for 1 % FDR and set the score back to PEP. 
+We will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool **PeptideIndexer** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. We will then filter PSMs for 1 % FDR and set the score back to PEP.
 
 > ### {% icon hands_on %} Hands-On: Peptide FDR filtering
 >
@@ -310,7 +313,7 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 > 3. Run **IDPosteriorErrorProbability** {% icon tool %} with
 >    - {% icon param-file %} *"input file"*: **MSGFPlusAdapter** output
 >    - *"If set scores will be calculated as '1 - ErrorProbabilities' and can be interpreted as probabilities for correct identifications"*: `No`
-> 
+>
 > 4. Run **IDMerger** {% icon tool %}
 >    - *"Reduce collectons"*: `reduce collections by aggregating single files of multiple collections`
 >      - In *"inputs"*
@@ -318,7 +321,7 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 >          - {% icon param-file %} *"Input files separated by blanks"*: output of **IDScoreSwitcher** based on **XTandemAdapter**
 >        - In *"2: Repeat"*
 >          - {% icon param-file %} *"Input files separated by blanks"*: output of **IDScoreSwitcher** based on **MSGFPlusAdapter**
->  
+>
 > 5. Run **ConsensusID** {% icon tool %}
 >    - {% icon param-file %} *"input file"*: **IDMerger** output
 >

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy Reports"
+title: "Galaxy Monitoring with Reports"
 zenodo_link: ""
 questions:
   - How to monitor a Galaxy service with the Reports?

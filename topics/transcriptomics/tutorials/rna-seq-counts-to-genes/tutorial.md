@@ -77,6 +77,10 @@ We will use three files for this analysis:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >     To import the files, there are two options:
@@ -114,7 +118,7 @@ The `sampleinfo` file contains basic information about the samples that we will 
 
 ## Format the data
 
-Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample.
+Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
 
 > ### {% icon hands_on %} Hands-on: Format the counts data
 >
@@ -125,7 +129,11 @@ Let’s create a new file, `countdata`, that contains only the counts for the 12
 > 2. **Replace Text in entire line** {% icon tool %} with the following parameters:
 >      - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
 >      - {% icon param-text %} *"Find pattern"*: `_B[A-Z0-9_]+`
-> 3. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
+> 3. **Replace Text in entire line** {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File to process"*: output of **Replace Text** {% icon tool %}
+>      - {% icon param-text %} *"Find pattern"*: `-`
+>      - {% icon param-text %} *"Replace with"*: `.`
+> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
 >    ![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file (after formatting)")
 {: .hands_on}
 
