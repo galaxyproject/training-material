@@ -136,8 +136,8 @@ data, the shortened analysis from premapped reads may suit your time frame
 better, and will avoid redundancy if you have previously worked through other
 tutorials demonstrating NGS quality control and read mapping, like the
 dedicated
-[Quality control](../../../sequence-analysis/tutorials/quality-control/tutorial.html)
-and [Mapping](../../../sequence-analysis/tutorials/mapping/tutorial.html)
+[Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+and [Mapping]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
 tutorials.
 
 The following hands-on section will guide you through obtaining the right
@@ -319,7 +319,7 @@ of time spent on analyzing low-quality data that is not worth the effort.
 Here, we will perform a standard quality check on our input data and only point
 out a few interesting aspects about that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
-tutorial on [Quality control](../../../sequence-analysis/tutorials/quality-control/tutorial.html).
+tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on each of your six fastq datasets
@@ -385,7 +385,7 @@ reference genome.
 We assume here that you are at least vaguely familiar with the concept of read
 mapping and only illustrate the concrete steps necessary  to map our specific
 NGS reads datasets to the human reference genome. We recommend you to follow
-the dedicated [Mapping tutorial](../../../sequence-analysis/tutorials/mapping/tutorial.html), if you need a general introduction to read mapping.
+the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}), if you need a general introduction to read mapping.
 
 > ### {% icon hands_on %} Hands-on: Read Mapping
 > 1. **Map with BWA-MEM** {% icon tool %} to map the reads from the **father** sample to the reference genome
