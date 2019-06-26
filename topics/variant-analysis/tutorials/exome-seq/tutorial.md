@@ -89,12 +89,19 @@ possible to search for variants following any kind of Mendelian inheritance
 scheme compatible with the observed inheritance pattern of the disease, or to
 detect possibly causative *de-novo* mutations or *loss-of-heterozygosity* (LOH) events.
 
-> ### {% icon details %} Related tutorial
+> ### {% icon details %} Related tutorials
 >
 > This tutorial focuses on the practical aspects of analyzing real-world
 > patient data. If you are more interested in the theoretical aspects of
 > variant calling, you may want to have a look at the related tutorial on
 > [Calling variants in diploid systems](../dip/tutorial.html).
+>
+> The tutorial on [Somatic variant calling](../somatic-variants/tutorial.html)
+> follows an analysis workflow that is rather similar to the one here, but
+> tries to identify tumor variants by comparing a tumor sample to healthy
+> tissue from the same patient. Together, the two tutorials are intended to get
+> you started with genomics medicine using Galaxy.
+>
 {: .details}
 
 > ### Agenda
@@ -175,10 +182,10 @@ data for either analysis.
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Check that the newly created datasets in your history have their
->    datatypes assigned correctly, and fix any missing or wrong
->    datatype assignment
+>    datatypes assigned correctly to `fastqsanger.gz`, and fix any missing or
+>    wrong datatype assignment
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% include snippets/change_datatype.md datatype="fastqsanger.gz" %}
 >
 >    {% icon trophy %} Congratulations for obtaining the datasets required for
 >    an analysis including reads mapping. You should now
@@ -208,7 +215,7 @@ data for either analysis.
 >    {% include snippets/import_from_data_library.md %}
 >
 > 5. Check that the newly created datasets in your history have their
->    datatypes assigned correctly, and fix any missing or wrong
+>    datatypes assigned correctly to `bam`, and fix any missing or wrong
 >    datatype assignment
 >
 >    {% include snippets/change_datatype.md datatype="bam" %}
@@ -243,7 +250,7 @@ data for either analysis.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 8. Add appropriate tags to the datasets
+> 8. Add #father/#mother/#child tags to the datasets
 >
 >    Parts of the analysis in this tutorial will consist of identical steps
 >    performed on the data of each family member.
@@ -254,10 +261,8 @@ data for either analysis.
 >    automatically propagate to any new dataset derived from the tagged
 >    dataset.
 >
->    Before starting our analysis it is, thus, a good idea to tag each of our
->    datasets with the family member it provides data for, *e.g.*, you
->    may want to use the tags `#father`, `#mother`, `#child` on the
->    corresponding datasets.
+>    Tags are supposed to help you identify the origin of datasets quickly,
+>    but you can choose them as you like.
 >
 >    {% include snippets/add_tag.md %}
 >
@@ -303,6 +308,19 @@ the sections on *Quality control* and *Read mapping*, and conitnue with
 
 # Quality control
 
+This step serves the purpose of identifying possible issues with the raw
+sequenced reads input data before embarking on any "real" analysis steps.
+
+Some of the typical problems with NGS data can be mitigated by preprocessing
+affected sequencing reads before trying to map them to the reference genome.
+Detecting some other, more severe problems early on may at least save you a lot
+of time spent on analyzing low-quality data that is not worth the effort.
+
+Here, we will perform a standard quality check on our input data and only point
+out a few interesting aspects about that data. For a more thorough explanation
+of NGS data quality control, you may want to have a look at the dedicated
+tutorial on [Quality control](../../../sequence-analysis/tutorials/quality-control/tutorial.html).
+
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on each of your six fastq datasets
 >       - {% icon param-files %} *"Short read data from your current history"*: all 6 FASTQ  datasets selected with **Multiple datasets**
@@ -327,7 +345,7 @@ the sections on *Quality control* and *Read mapping*, and conitnue with
 >    >
 >    > 1. Based on the report, do you think preprocessing of the reads
 >    >    (trimming and/or filtering) will be necessary before mapping?
->    > 2. Why do all samples show a non-normal GC content distribution and
+>    > 2. Why do all samples show a non-normal GC content distribution, and
 >    >    should you be worried?
 >    >
 >    > > ### {% icon solution %} Solution
@@ -345,7 +363,7 @@ the sections on *Quality control* and *Read mapping*, and conitnue with
 >    > >    at possible contamination.
 >    > >    Here, however, we are dealing with sequencing data from captured
 >    > >    exomes, *i.e*, the reads are not representing random sequences from
->    > >    a genome, but rather an arbitrary selection.
+>    > >    a genome, but rather a biased selection.
 >    > >
 >    > >    A bimodal GC content distribution, like for the samples at hand, is
 >    > >    a characteristic feature of many exome capture methods and has also
@@ -359,6 +377,15 @@ the sections on *Quality control* and *Read mapping*, and conitnue with
 {: .hands_on}
 
 # Read mapping
+
+Now that you confirmed that the quality of the input data is good enough to
+warrant further analysis, it is time to map the sequenced reads to the
+reference genome.
+
+We assume here that you are at least vaguely familiar with the concept of read
+mapping and only illustrate the concrete steps necessary  to map our specific
+NGS reads datasets to the human reference genome. We recommend you to follow
+the dedicated [Mapping tutorial](../../../sequence-analysis/tutorials/mapping/tutorial.html), if you need a general introduction to read mapping.
 
 > ### {% icon hands_on %} Hands-on: Read Mapping
 > 1. **Map with BWA-MEM** {% icon tool %} to map the reads from the **father** sample to the reference genome
@@ -378,28 +405,56 @@ the sections on *Quality control* and *Read mapping*, and conitnue with
 >         forward reads (R1) dataset of the **father** sample
 >       - {% icon param-file %} *"Select second set of reads"*: the
 >         reverse reads (R2) dataset of the **father** sample
+>
+>      > ### {% icon tip %} No FASTQ datasets selectable?
+>      > Please confirm that the problematic datasets declare *format*:
+>      > `fastqsanger.gz`.
+>      >
+>      > Most Galaxy tools that accept FASTQ input expect the data to be
+>      > formatted as *FASTQ with Sanger-scaled quality values*, the most
+>      > widely spread version of the FASTQ format. To make this requirement
+>      > explicit (instead of generating possibly wrong results) these tools
+>      > require you to set the dataset type to `fastqsanger` (`fastqsanger.gz`
+>      > for data compressed with gzip). You can do so either on data upload
+>      > or later from the *Edit dataset attributes* view (which you can reach
+>      > by clicking on the {% icon galaxy-pencil %} pencil icon.
+>      {: .tip}
+>
 >    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group identifier (ID)"*: `000`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `father`
 >
->    > ### {% icon comment %} More on read group identifiers and sample names
->    > In general, you are free to choose ID and SM values to your liking,
->    > but the ID should unambiguously identify the sequencing run that
->    > produced the reads, while the SM value should identify the
->    > biological sample.
+>    > ### {% icon warning %} Read group IDs and sample names - choose, but choose wisely
+>    > In general, you are free to choose ID and SM values to your liking, but
+>    > ...
+>    >
+>    > The **ID** should **unambiguously identify** the sequencing run that
+>    > produced the reads. At the very least, no two input datasets in any
+>    > given analysis should define the same ID twice, or tools like
+>    > *FreeBayes*, which we are going to use in the next step, will refuse
+>    > to work with the data.
+>    >
+>    > The **SM** value, on the other hand, should identify the biological
+>    > sample represented by the data and is used by many tools (like *GEMINI*
+>    > which we will use later) to let you refer to one specifc sample in a
+>    > multisample analysis. Choose descriptive, but short and easy to
+>    > remember sample names since you will have to type them in again!
+>    >
 >    {: .comment}
 >
+> {% icon hands_on %} Next, try to map the reads from the **mother** and
+> **proband/child** samples. Configure jobs like for the *father* sample above,
+> but
+> - select the appropriate read[Somatic variant calling tutorial](../somatic-variants/tutorial.html)s datasets for the **mother** and **child**
+>   samples, respectively
+> - provide **unique** read group identifiers
+> - use `mother` and `proband` as the respective sample names (we will assume
+>   you have chosen these names later in the tutorial so if you decide for
+>   different names, take a note of it!)
+>
 {: .hands_on}
-
-{% icon hands_on %} Next, try to map the reads from the **mother** and
-**proband/child** samples. Configure jobs like for the *father* sample above,
-but
-- select the appropriate reads datasets for the **mother** and **child**
-  samples, respectively
-- provide unique read group identifiers, and `mother` and `proband` as the
-  respective sample names
 
 # Mapped reads postprocessing
 
@@ -407,7 +462,7 @@ At this point in the analysis you should have obtained three mapped reads
 datasets in `bam` format. Ideally, these would carry `#father`, `#mother` and
 `#child` tags for quick identification of the samples they provide data for.
 
-In principal, you could use these datasets directly for variant calling, and in
+In principle, you could use these datasets directly for variant calling, and in
 many cases, including this one, this would be sufficient to identify the
 sought-after variants.
 
@@ -427,9 +482,21 @@ The optimal set of postprocessing steps required depends on the variant calling
 software used at the next step. The **FreeBayes** variant caller that we are
 going to use in this tutorial is particularly well suited for use with minimal mapped reads postprocessing pipelines, so all we are going to do here is:
 
-- filter the paired-end reads of all samples to retain only those that are
-  mapped in proper pairs
+- filter the paired-end reads of all samples to retain only those read pairs,
+  for which both the forward and the reverse read have been mapped to the
+  reference successfully
+
+  For such *proper pairs of reads*, we can be extra confident that they don't
+  come from some non-human contaminant DNA or represent a sequencing artefact
+  of some sort.
+
 - deduplicate reads
+
+  Duplicate reads, which typically arise from PCR-overamplification of genomic
+  fragments during sequencing library preparation, can, to some extent, lead to
+  wrong genotype assignments at variant sites (if, for example, a sample is
+  heterozygous for a variant, but fragments with one of the two alleles get
+  amplified more efficiently than the others).
 
 > ### {% icon comment %} More postprocessing steps
 > The [Somatic variant calling tutorial](../somatic-variants/tutorial.html)
@@ -443,7 +510,7 @@ going to use in this tutorial is particularly well suited for use with minimal m
 To produce new filtered BAM datasets with only those reads retained that are
 mapped in a proper pair:
 
-> ### {% icon hands_on %} Hands-on: Filtering for mapping status and quality
+> ### {% icon hands_on %} Hands-on: Filtering for read pair mapping status
 >
 > 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %} with the following
 > parameters (leaving non-mentioned ones at their defaults):
@@ -475,6 +542,17 @@ trio.
 
 # Variant calling
 
+With the sequenced reads of all samples mapped and postprocessed, we can start
+looking for evidence of sequence deviations, *i.e.* variants, between the
+sequenced genomic samples and the reference genome.
+
+This task has been automated and optimized continuously over the last decade,
+and modern variant calling software hides much of the complexity involved in
+it. At least a basic understanding of the underlying concepts is still highly
+recommended though and, if you are new to variant calling, the tutorial on
+[Calling variants in diploid systems](../dip/tutorial.html) may be a good
+starting point for you.
+
 ## Generating FreeBayes calls
 
 We will use **FreeBayes** to call our variants. **FreeBayes** is a Bayesian
@@ -490,7 +568,7 @@ alignment.
 >    - *"Choose the source for the reference genome"*: `Locally cached`
 >      - *"Run in batch mode?"*: `Merge output VCFs`
 >        - {% icon param-files %} *"BAM dataset(s)"*: all three mapped reads
->          datasets of the family trio
+>          datasets of the family trio; the outputs of **RmDup**
 >      - *"Using reference genome"*: `Human: hg19` (or a similarly named option)
 >
 >      > ### {% icon comment %} Using the imported `hg19` sequence
@@ -522,6 +600,63 @@ information about the variant. This includes but is not limited to:
 - measures of the reliability of the variant call and of all individual
   genotype calls
 
+> ### {% icon hands_on %} Optional hands-on: Inspect the VCF output produced by FreeBayes
+>
+> 1. Display the VCF dataset:
+>    - Click the {% icon galaxy-eye %} icon next to the VCF dataset generated
+>      by FreeBayes to display its contents.
+>
+>      VCF is a tabular plain text format though its information density makes
+>      it complicated to  understand.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > Can you locate at least some of the above-listed information in the
+>    > dataset?
+>    >
+>    > Hints:
+>    > - Lines starting with `##` are comment lines explaining the content of
+>    >   the file.
+>    > - Diploid genotypes at biallelic sites are encoded using `0/0`, `0/1`
+>    >   and `1/1` to represent homozygous reference, heterozygous and
+>    >   homozygous variant states, respectively.
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > - The position of each variant with respect to the reference genome is
+>    > >   stored in the first two columns (labeled `CHROM` and `POS`).
+>    > >
+>    > > - The sequence change associated with the variant is provided by
+>    > >   columns 4 and 5 (`REF` and `ALT`).
+>    > >
+>    > >   The first of these lists the sequence found at the variant site in
+>    > >   the reference genome, the second the variant sequence.
+>    > >
+>    > > - The genotypes of the samples are stored as part of columns 10 and
+>    > >   up.
+>    > >
+>    > >   Column 9 (`FORMAT`) provides the legend for understanding the
+>    > >   sample-specific columns following it and tells us that the first
+>    > >   element (before the first `:` separator) of each sample column holds
+>    > >   the sample genotype (`GT`).
+>    > >
+>    > > - The variant call quality (a measure of the reliability of the
+>    > >   variant existing in any of the samples, *i.e.* it being real) is
+>    > >   stored in column 6 (`QUAL`).
+>    > >   The values are [Phred-scaled](https://en.wikipedia.org/wiki/Phred_quality_score)
+>    > >   like sequenced reads base qualities.
+>    > >
+>    > >   The (log10-scaled) likelihoods of individual genotype calls are
+>    > >   stored as the last element (`GL`) in every sample column.
+>    > >
+>    > > If you are eager to learn all the details about the format, you could
+>    > > consult the excellent (but also long) official
+>    > > [VCF specification](http://samtools.github.io/hts-specs/VCFv4.3.pdf).
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
 ## Post-processing FreeBayes calls
 
 Before starting to analyze the detected variants, we need to post-process the
@@ -534,9 +669,18 @@ analysis tools. In particular, we want to:
   This will allow us to annotate each record with information about the impact
   of one specific variant allele further on.
 
-- Make sure that indels are represented in left-aligned and normalized, *i.e.*,
-  shortest form because this is the form that should be used by annotation
-  databases.
+- Make sure that indels are represented in left-aligned and normalized form
+  because this is how known indels are stored in public annotation databases.
+
+  > ### {% icon details %} Indel normalization
+  > Indel normalization is a surprisingly complex topic, which is explained
+  > really well and in detail in
+  > [Tan et al., 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481842/).
+  > The following figure illustrates the various possibilities to represent
+  > an indel, only one of which is the *normalized* form:
+  > ![different ways to represent the same indel](../../images/indel_normalization.png "The many ways to represent an indel (from: https://genome.sph.umich.edu/wiki/Variant_Normalization").
+  >
+  {: .details}
 
 A tool that can do this and also ensures that a VCF dataset conforms to
 standards in some other, less important respects is **bcftools norm**.
@@ -568,7 +712,18 @@ standards in some other, less important respects is **bcftools norm**.
 >        We want to split both, multiallelic SNP and indel records.
 >    - *"output_type"*: `uncompressed VCF`
 >
+>      We would like to keep the results human-readable. VCF is also what tools
+>      like *SnpEff* and *GEMINI* expect as input. Compressed, binary BCF is
+>      interesting for space-efficient long-term storage of large lists of
+>      variants.
+>
 {: .hands_on}
+
+You could try to look for the differences between the original and the
+normalized VCF dataset, but for convenience **bcftools norm** reports a brief
+summary of the actions it performed. Expand the dataset in the history (by
+clicking on its name) to see this output listing the total number of variant
+lines processed, along with the number of split, realigned and skipped records.
 
 # Variant annotation and reporting
 
@@ -645,25 +800,33 @@ which is rather simple to generate manually.
 >
 >     Use **SnpEff Download** {% icon tool %} to download genome annotation
 >     database `hg19`.
-> 2. Create a PED-formatted pedigree dataset like this
+> 2. Create a PED-formatted pedigree dataset describing our single-family sample trio:
 >
 >    ```
->    FAM    father     0         0         1    1
->    FAM    mother     0         0         2    1
->    FAM    proband    father    mother    1    2
+>    #family_id    name     paternal_id    maternal_id    sex    phenotype
+>    FAM           father   0              0              1      1
+>    FAM           mother   0              0              2      1
+>    FAM           proband  father         mother         1      2
 >    ```
 >
->    {% include snippets/create_new_file.md %}
+>    and set its datatype to `tabular`.
 >
->    > ### {% icon warning %} Caveat: Use the right sample names
+>    {% include snippets/create_new_file.md format="tabular" %}
+>
+>    > ### {% icon warning %} Remember those sample names
 >    >
->    > For GEMINI to be able to connect this pedigree information with actual
->    > samples mentioned in your VCF variants list, it is important that you
->    > use matching sample names.
+>    > The above content of the pedigree dataset assumes you chose `father`,
+>    > `mother`, `proband` as the sample names at the read mapping step
+>    > (if you haven't mapped the reads yourself, but started with the
+>    > premapped data, you can safely skip this warning section).
+>    > By now, these sample names will have been propagated through *BWA-MEM*
+>    > and *Freebayes* to the VCF dataset of variants. It is **important** that
+>    > you use matching sample names in the pedigree and in the VCF dataset, or
+>    > GEMINI will not be able to connect the information in them.
 >    >
->    > If you started this tutorial from the original sequenced reads and have
->    > performed the read mapping yourself, make sure that the PED sample names
->    > match the ones you declared in your BWA-MEM jobs.
+>    > If you have chosen different sample names before, you have to adjust
+>    > the pedigree dataset accordingly!
+>    >
 >    {: .warning}
 >
 >    > ### {% icon details %} More on PED files
@@ -707,6 +870,37 @@ report, which contains some interesting general metrics such as a distribution
 of variants across gene features. The other one is the main annotation result -
 a VCF like the input, but with annotations of variant effects added to the INFO
 column.
+
+> ### {% icon hands_on %} Optional hands-on: Inspect the Summary Stats output produced by SnpEff
+>
+> 1. Display the dataset:
+>    - Click the {% icon galaxy-eye %} icon next to the HTML dataset generated
+>      by SnpEff to display its contents.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > One section in the report is **Number of effects by type and region**.
+>    > Given that you are analyzing exome data, what is the most surprising
+>    > aspect in this section? Do you have an idea how to explain it?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > According to the report, intronic variants make up 50% of all
+>    > > variants detected!
+>    > >
+>    > > Exome capture kits are designed to capture exons plus a bit of
+>    > > surrounding sequence to ensure proper coverage of the exon ends
+>    > > including splice junction sites.
+>    > >
+>    > > Thus, even though intronic sequences are underrepresented in exome
+>    > > sequencing data, not all of them are eliminated. Since mutations
+>    > > in most intron bases are neutral, they can accumulate at higher
+>    > > frequency than most mutations in exons and, thus, still represent a
+>    > > relevant fraction of all detected variants.
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
 
 ## Generating a GEMINI database of variants for further annotation and efficient variant queries
 
@@ -910,6 +1104,12 @@ you think could plausibly be causative for the child's disease.
 >    {: .comment}
 >
 {: .hands_on}
+
+> > ### {% icon question %} Question
+> >
+> > From the GEMINI reports you generated, can you identify the most likely
+> > candidate variant responsible for the child's disease?
+> {: .question}
 
 > > ### {% icon details %} More GEMINI usage examples
 > >
