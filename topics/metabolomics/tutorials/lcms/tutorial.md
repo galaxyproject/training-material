@@ -19,6 +19,7 @@ contributors:
 - lecorguille
 - jfrancoismartin
 - yguitton
+- workflow4metabolomics
 
 ---
 
