@@ -444,15 +444,35 @@ the dedicated [Mapping tutorial](../../../sequence-analysis/tutorials/mapping/tu
 >    >
 >    {: .comment}
 >
-> {% icon hands_on %} Next, try to map the reads from the **mother** and
-> **proband/child** samples. Configure jobs like for the *father* sample above,
-> but
-> - select the appropriate read[Somatic variant calling tutorial](../somatic-variants/tutorial.html)s datasets for the **mother** and **child**
->   samples, respectively
-> - provide **unique** read group identifiers
-> - use `mother` and `proband` as the respective sample names (we will assume
->   you have chosen these names later in the tutorial so if you decide for
->   different names, take a note of it!)
+> 2. **Map with BWA-MEM** {% icon tool %} to map the reads from the **mother** sample to the reference genome **using the same parameters as before** except
+>
+>    - *"Single or Paired-end reads"*: `Paired`
+>       - {% icon param-file %} *"Select first set of reads"*: the
+>         forward reads (R1) dataset of the **mother** sample
+>       - {% icon param-file %} *"Select second set of reads"*: the
+>         reverse reads (R2) dataset of the **mother** sample
+>
+>    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
+>      - *"Auto-assign"*: `No`
+>        - *"Read group identifier (ID)"*: `001`
+>      - *"Auto-assign"*: `No`
+>        - *"Read group sample name (SM)"*: `mother`
+> 
+> 3. **Map with BWA-MEM** {% icon tool %} to map the reads from the **child** sample to the reference genome **using the same parameters as before** except
+>
+>    - *"Single or Paired-end reads"*: `Paired`
+>       - {% icon param-file %} *"Select first set of reads"*: the
+>         forward reads (R1) dataset of the **child** sample
+>       - {% icon param-file %} *"Select second set of reads"*: the
+>         reverse reads (R2) dataset of the **child** sample
+>
+>    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
+>      - *"Auto-assign"*: `No`
+>        - *"Read group identifier (ID)"*: `003`
+>      - *"Auto-assign"*: `No`
+>        - *"Read group sample name (SM)"*: `proband`
+>
+>           We will assume you have chosen this names later in the tutorial so if you decide for different names, take a note of it!
 >
 {: .hands_on}
 
