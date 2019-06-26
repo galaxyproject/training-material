@@ -89,6 +89,11 @@ check-workflows: build ## validate Workflows
 		bash bin/validate-json.sh
 .PHONY: check-workflows
 
+check-references: build ## validate no missing references
+	$(ACTIVATE_ENV) && \
+		bash bin/validate-references.sh
+.PHONY: check-references
+
 check-html-internal: build ## validate HTML (internal links only)
 	$(ACTIVATE_ENV) && \
 		htmlproofer \
@@ -121,8 +126,15 @@ check-yaml: ## lint yaml files
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows ## run all checks
+check-snippets: ## lint snippets
+	./bin/check-for-trailing-newline
+.PHONY: check-snippets
+
+check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
+
+lint: check-yaml check-frontmatter check-workflows check-references check-snippets ## run all linting checks
+.PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 	$(ACTIVATE_ENV) && \

@@ -34,9 +34,9 @@ There are two distinct audiences for these materials.
 
 The content of this website is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/).
 
-## How can I cite this effort?
+## How can I cite this project?
 
-We wrote an [article](https://www.biorxiv.org/content/early/2018/04/05/225680) about our efforts.
+We wrote an [article](https://doi.org/10.1016/j.cels.2018.05.012) about our efforts.
 
 ## How can I advertise the training materials on my posters?
 

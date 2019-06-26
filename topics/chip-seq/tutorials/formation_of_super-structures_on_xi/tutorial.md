@@ -53,7 +53,7 @@ It has been also observed that the Xi reconfigures uniquely into a specific chro
 
 The structural-maintenance-of-chromosomes hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It may be the potential actor in the shape of Xi and the change in gene expression there.
 
-[Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
+{% cite Wang2018 %} investigates the mechanism by which the SMCHD1 gene shapes the Xi and represses the expression of the genes on Xi in mouse.
 
 Their idea was to identify the differences which could be observed between the Xi and activated X chromosome, on both wild-type and SMCHD1 gene knockdown samples to study the SMCHD1 effect.
 In different experiments, they targeted histones with H3K27me3 or H3K4me3 and CTCF using ChIP-seq experiments.
@@ -62,7 +62,7 @@ In different experiments, they targeted histones with H3K27me3 or H3K4me3 and CT
 
 They obtained sequences corresponding to a portion of DNA linked to histones with H3K27me3, H3K4me3 or CTCF. Using this information, they could identify if there are differences in the H3K27me3, H3K4me3 and CTCF between the X (active or inactive) chromosomes and the potentially influenced genes.
 
-In the upcoming tutorial, we will only use the wild type data from [Wang et al. (2018)](https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1) and analyze the ChIP-seq data step by step:
+In the upcoming tutorial, we will only use the wild type data from {% cite Wang2018 %} and analyze the ChIP-seq data step by step:
 
 - CTCF with 2 replicates: `wt_CTCF_rep1` and `wt_CTCF_rep2`
 - H3K4me3 with 2 replicates: `wt_H3K4me3_rep1` and `wt_H3K4me3_rep2`

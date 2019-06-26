@@ -36,11 +36,7 @@ contributors:
 >
 {: .agenda}
 
-This tutorial is based on [I-Hsuan Lin et al.: 'Hierarchical Clustering of Breast Cancer Methylomes Revealed Differentially Methylated and Expressed Breast Cancer Genes'](https://doi.org/10.1371/journal.pone.0118453).
-
-The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
-
-
+This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 
 # Load data and quality control
 > ### {% icon hands_on %} Hands-on: Get the data and look at the quality

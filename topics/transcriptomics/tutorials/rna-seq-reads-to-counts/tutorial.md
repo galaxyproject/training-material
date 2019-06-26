@@ -101,6 +101,10 @@ In order to get these files into Galaxy, we will want to do a few things:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the files from Figshare using Galaxy's Rule-based Uploader.
 >    - Open the Galaxy Upload Manager
 >    - Click the tab **Rule-based**
@@ -420,13 +424,13 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 ## QC: duplicate reads
 
-Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the **Picard MarkDuplicates** tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps.
+Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the **Picard MarkDuplicates** tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps. In general, we consider normal to obtain up to 50% of duplication.
 
 > ### {% icon hands_on %} Hands-on: Check duplicate reads with **MarkDuplicates**
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `Picard`
 >               - {% icon param-select %} *"Type of Picard output?"*: `Markdups`
@@ -495,7 +499,7 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
 >        - {% icon param-collection %} *"Input .bam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `gene_body_coverage`
@@ -534,7 +538,7 @@ We can also check the distribution of reads across known gene features, such as 
 > 1. **Read Distribution** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam/.sam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `reference genes` (Input dataset)
-> 2. **MultiQC* {% icon tool %} with the following parameters:
+> 2. **MultiQC** {% icon tool %} with the following parameters:
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `read_distribution`
