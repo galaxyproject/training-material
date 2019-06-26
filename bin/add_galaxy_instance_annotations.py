@@ -13,7 +13,7 @@ import yaml
 def extract_public_galaxy_servers():
     """Extract list of public Galaxy servers"""
 
-    serverlist = json.loads(requests.get('https://galaxyproject.org/use/feed.json').text)
+    serverlist = requests.get('https://galaxyproject.org/use/feed.json').json()
     for server in serverlist:
         yield { 'name': server['title'], 'url': server['url'] }
 
