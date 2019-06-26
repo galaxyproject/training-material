@@ -11,14 +11,11 @@ import yaml
 
 
 def extract_public_galaxy_servers():
-    """Extract a pandas Data frame with the public Galaxy servers"""
-    r = requests.get('https://raw.githubusercontent.com/martenson/public-galaxy-servers/master/servers.csv')
-    f = io.StringIO(r.text)
-    reader = csv.reader(f, delimiter=",")
-    header = next(reader)
-    for row in reader:
-        yield dict(zip(header, row))
+    """Extract list of public Galaxy servers"""
 
+    serverlist = json.loads(requests.get('https://galaxyproject.org/use/feed.json').text)
+    for server in serverlist:
+        yield { 'name': server['title'], 'url': server['url'] }
 
 def fetch_and_extract_individual_server_tools(server):
     # request the tools via the API
