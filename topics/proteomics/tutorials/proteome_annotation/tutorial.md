@@ -28,7 +28,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) by Lacombe *et al., European Journal of Breath, 2018*.
+[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) {% cite Lacombe2018 %}.
 
 
 Once identified and/or quantified using a MS-based approach, interpreting the proteome in a sample is an important step to characterize its content in terms of functional properties in order to extend the biological knowledge related to this sample. In this activity, we illustrate the annotation and the exploration of the human exhaled breath condensate (EBC) proteome by performing the following steps:
@@ -42,29 +42,24 @@ Once identified and/or quantified using a MS-based approach, interpreting the pr
 
 # Get Input Datasets
 
-For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from Lacombe *et al.* and two others EBC proteomes previously published.
+For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published.
+
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a name
 >   {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org) or from the shared data library (ask your instructors).
+> 2. Import the files from [Zenodo](https://zenodo.org) or from a shared data library (ask your instructors).
 >
->   The datasets are available on Zenodo under the references: [2650868](https://zenodo.org/record/2650868) for Lacombe et
->   al., [2650874](https://zenodo.org/record/2650874) for Mucilli and [2650872](https://zenodo.org/record/2650872) for
->   Bredberg.
->
-> You can import the 3 data files directly with these links in the galaxy upload menu :
-> ```
-> https://zenodo.org/record/2650868/files/Lacombe_et_al_2017_OK.txt
-> https://zenodo.org/record/2650874/files/Mucilli.txt
-> https://zenodo.org/record/2650872/files/Bredberg.txt
-> ```
+>    ```
+>    https://zenodo.org/record/2650868/files/Lacombe_et_al_2017_OK.txt
+>    https://zenodo.org/record/2650874/files/Mucilli.txt
+>    https://zenodo.org/record/2650872/files/Bredberg.txt
+>    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
->
 >
 {: .hands_on}
 
