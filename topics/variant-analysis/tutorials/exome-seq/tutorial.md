@@ -468,11 +468,9 @@ the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analy
 >
 >    - *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
 >      - *"Auto-assign"*: `No`
->        - *"Read group identifier (ID)"*: `003`
+>        - *"Read group identifier (ID)"*: `002`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `proband`
->
->           We will assume you have chosen this names later in the tutorial so if you decide for different names, take a note of it!
 >
 {: .hands_on}
 
