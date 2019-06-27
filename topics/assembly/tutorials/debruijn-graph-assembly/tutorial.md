@@ -48,6 +48,9 @@ We will be using the same data that we used in the introductory tutorial, so if 
 > ### {% icon hands_on %} Hands-on: Getting the data
 >
 > 1. Create and name a new history for this tutorial.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the sequence read raw data (\*.fastq) from [Zenodo](https://zenodo.org/record/582600)
 >
 >    ```

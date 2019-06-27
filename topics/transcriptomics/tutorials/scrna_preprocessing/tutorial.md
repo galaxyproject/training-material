@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Pre-processing of Single-Cell RNA Data"
-zenodo_link: "https://zenodo.org/record/2581041"
+zenodo_link: "https://zenodo.org/record/3253142"
 tags:
   - single-cell
 questions:
@@ -114,22 +114,22 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq single batch tutorial)
 >
->    {% include snippets/history_create_new.md %}
+>    {% include snippets/create_new_history.md %}
 >
-> 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
+> 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/2581041/files/SRR5683689_1.subset.fastq
->    https://zenodo.org/record/2581041/files/SRR5683689_2.subset.fastq
+>    https://zenodo.org/record/3253142/files/SRR5683689_1.subset.fastq
+>    https://zenodo.org/record/3253142/files/SRR5683689_2.subset.fastq
 >    ```
 >
 >    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
-> 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
+> 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/2581041/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
->    https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
+>    https://zenodo.org/record/3253142/files/Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf
+>    https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 >    ```
 >
 > 4. Set the datatype of the `celseq_barcodes.192.tabular` to `tabular`
@@ -406,7 +406,7 @@ Let us annotate our BAM file with desired gene tags.
 > ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
 >
 > 1. **FeatureCounts** {%icon tool %} with the following parameters:
->    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **Filter BAM** {% icon tool %})
 >    - *"Specify strand information"*:`Unstranded`
 >    - *"Gene annotation file"*: `in your history`
 >        - {% icon param-file %} *"Gene annotation file"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`
@@ -519,7 +519,7 @@ The first step merely requires us to run the same workflow on each of our batche
 
 ### Data upload and organisation
 
-The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/2581041).
+The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at [`Zenodo`](https://zenodo.org/record/3253142).
 
 Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
@@ -527,15 +527,19 @@ Once again, file naming is important, and so we will rename our matrix files app
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
 >
-> 1. Import the four matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/2581041) or from the data library (ask your instructor)
+> 1. Import the eight matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >    - Set the datatype of the tabular files to **tabular**
 >
 >    ```
->    https://zenodo.org/record/2581041/files/P1_B1.tabular
->    https://zenodo.org/record/2581041/files/P1_B2.tabular
->    https://zenodo.org/record/2581041/files/P2_B3.tabular
->    https://zenodo.org/record/2581041/files/P2_B4.tabular
->    https://zenodo.org/record/2581041/files/celseq_barcodes.192.tabular
+>    https://zenodo.org/record/3253142/files/P1_B1.tabular
+>    https://zenodo.org/record/3253142/files/P1_B2.tabular
+>    https://zenodo.org/record/3253142/files/P1_B3.tabular
+>    https://zenodo.org/record/3253142/files/P1_B4.tabular
+>    https://zenodo.org/record/3253142/files/P2_B5.tabular
+>    https://zenodo.org/record/3253142/files/P2_B6.tabular
+>    https://zenodo.org/record/3253142/files/P2_B7.tabular
+>    https://zenodo.org/record/3253142/files/P2_B8.tabular
+>    https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -580,12 +584,15 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 {: .question}
 
 
-Let us now merge our matrices from different batches.
+Let us now merge our matrices from different batches. In order to ensure that our batches are merged in the order that we wish, we should first create a list of datasets so that our matrices are merged in the order given by the list.
 
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
+> 1. **Create a Dataset List**
+>    {% include snippets/build_dataset_list.md %}
+>
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
->   - *"Tabular Files"*: (Select each of the matrices that you wish to join)
+>   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)
 >   - *"Identifier column"*:`1`
 >   - *"Number of Header lines in each item"*:`1`
 >   - *"Keep original column header"*:`Yes`
@@ -607,15 +614,15 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Given that they come from the same sample, and each matrix has ~2,500 genes, we would have expected a high overlap between matrices, yielding ~3,000 genes in the combined matrix.
+> > 1. Given that they come from the same sample, and each matrix has ~15,000 genes, we would have expected a high overlap between matrices, yielding ~18,000 genes in the combined matrix if we assume a difference of +/- 500 genes per batch.
 > >
-> > 2. We observe ~6,200 genes, very little overlap between batches of the same organism.
+> > 2. We observe 20,800 genes, giving less overlap between batches of the same organism than we originally thought.
 > >
-> > 3. The batches were sequenced at different time points along the organisms development, and therefore different genes were expressed/detected at different time points. For early development data, this is normal.
+> > 3. The batches were sequenced at different time points along the organisms development, and therefore different genes were expressed/detected at different time points. For early development data, the overlap can be very sparse.
 > {: .solution}
 {: .question}
 
-In the new combined matrix we see that we have more than 750 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the [*Barcode Extraction*](#barcode-extraction) stage previously.
+In the new combined matrix we see that we have 1536 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the [*Barcode Extraction*](#barcode-extraction) stage previously.
 
 The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
 
@@ -626,9 +633,9 @@ There are multiple possible ways to configure a plate for sequencing multiple ba
 
 1. A full list of barcodes
 2. Which barcodes apply to which batches
-3. Which batches apply to which plates.
+3. Which batches apply to which plates
 
-Since we the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.
+Since the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.
 
 > ### {% icon details %} Details: Plating protocol
 >
@@ -678,24 +685,23 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >           - *"1: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`1`
 >              - *"Barcode Range: End"*:`96`
->              - *"Batches utilizing this Range"*:`1,3`
+>              - *"Batches utilizing this Range"*:`1,3,5,7`
 >        - Select `+ Insert Barcode Format`:
 >           - *"2: Barcode Format"*:
 >              - *"Barcode Range: Start"*:`97`
 >              - *"Barcode Range: End"*:`192`
->              - *"Batches utilizing this Range"*:`2,4`
+>              - *"Batches utilizing this Range"*:`2,4,6,8`
 >     - *"Under 'Plate Format'"*:
 >        - Select `+ Insert Plate Format`:
 >           - *"1: Plate Format"*:
 >              - *"Plate Number"*:`1`
->              - *"Batches within this Plate Number"*:`1,2`
+>              - *"Batches within this Plate Number"*:`1,2,3,4`
 >        - Select `+ Insert Plate Format`:
 >           - *"2: Plate Format"*:
 >              - *"Plate Number"*:`2`
->              - *"Batches within this Plate Number"*:`3,4`
+>              - *"Batches within this Plate Number"*:`5,6,7,8`
 >  - Expand the *"RegEx Parameters"* section:
 >     - *"RegEx to extract Plate, Batch, and Barcodes from headers"*:`.*P(\\d)_B(\\d)_([ACTG]+)`
->       <small>(**Attention! Take note of the 'B'**)
 >     - *"RegEx to replace Plate, Batch, and Barcodes from headers"*:`P\\1_B\\2_\\3`
 >
 {: .hands_on}
@@ -720,18 +726,19 @@ Two things to take note of:
 
 > ### {% icon question %} Question
 >
-> The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?
+> 1. The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?
+> 1. Which batches yield worrying levels of cross-contamination?
+> 1. Which batches should we remove from all further analysis?
 >
 > > ### {% icon solution %} Solution
 > >
-> > Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch.
-> >
-> > Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$4 * 192 = 768$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$384$$ cells.
-> >
+> > 1. Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch. Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$768$$ cells.
+> > 1. Batch 4 and Batch 6 both appear to have a significant number of mid-to-high range counts in cells under the *False Positives* section in these batches. This means that the cell barcodes that we should *not* be detecting in those batches, did in fact detect cells.
+> > 1. Batch 4 does still have a good number of *True Positives*, despite the many mid-level *False Positives* so we could still perhaps use the cells from that Batch. Batch 6 on the other hand appears to derive most of its counts from the *False Positives*, and therefore is likely not so suitable for further analysis.
 > {: .solution}
 {: .question}
 
-With this, we now have a count-matrix that can be used for further downstream analysis.
+All *False Positives* from all batches are filtered out, leaving only the *True Positives* (or 'Real' barcodes) in the remaining filtered matrix. It is up to the user to filter further based on the contamination information that they derive from this step. With this, a QC filtered count-matrix is produced that can then be used for further downstream analysis.
 
 <!--
 Factoid: We can convert the number of UMIs to the number of molecules using a transformation script.
@@ -743,4 +750,3 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
 ![Recap of workflow]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
-
