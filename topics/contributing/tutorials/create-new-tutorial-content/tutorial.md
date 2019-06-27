@@ -227,40 +227,82 @@ The generated tutorial is structured with:
 >
 {: .hands_on}
 
-> ### {% icon comment %} Adding images with captions
-> To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
->
-> We have also added a small plugin to handle captions for each image:
->
-> ![A textual description of the image](../../images/image_caption_screenshot.png "Example of an image with a caption ")<!-- Adding a space to the caption to not trigger figurigy skip_titles -->
->
-> The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
->
-> ```markdown
-> ![A textual description of the image](../images/image.png "Example of an image with a caption")
-> ```
->
-> We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
-{: .comment}
+## Adding images with captions
+To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
+
+We have also added a small plugin to handle captions for each image:
+
+![A textual description of the image](../../images/image_caption_screenshot.png "Example of an image with a caption ")<!-- Adding a space to the caption to not trigger figurigy skip_titles -->
+
+The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
+
+```markdown
+![A textual description of the image](../images/image.png "Example of an image with a caption")
+```
+
+We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
 
-> ### {% icon comment %} Writing mathematical expressions
->
-> Mathematical expressions can be written in LaTeX, and are automatically rendered with [MathJax](https://www.mathjax.org/).
->
-> Surround your math expression with two `$` signs on each side (like in LaTeX math blocks):
->
-> - inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
-> - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
->
->    $$ 5 + 5 $$
->
-> Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
->
->
-> LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
-> This can be avoided by using the `\vert` command instead of `|`
-{: .comment}
+## Writing mathematical expressions
+
+Mathematical expressions can be written in LaTeX, and are automatically rendered with [MathJax](https://www.mathjax.org/).
+
+Surround your math expression with two `$` signs on each side (like in LaTeX math blocks):
+
+- inline expressions, *e.g.* `$$ 5 + 5 $$` will be rendered as $$ 5 + 5 $$
+- block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
+
+   $$ 5 + 5 $$
+
+Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
+
+
+LaTeX code that uses the pipe symbol `|` in inline math statements may lead to a line being recognized as a table line by the templating system.
+This can be avoided by using the `\vert` command instead of `|`
+
+## Tables and Matrices
+
+Tables in tutorials normally take the full width of the page:
+
+{% raw %}
+```markdown
+|       | Obs1 | Obs2 | Obs3 |
+|------ |--------------------|
+| Feat1 | 0    | 1    | 2    |
+| Feat2 | 1    | 2    | 3    |
+| Feat3 | 2    | 3    | 4    |
+```
+{% endraw %}
+
+Rendered:
+
+|       | Obs1 | Obs2 | Obs3 |
+|------ |--------------------|
+| Feat1 | 0    | 1    | 2    |
+| Feat2 | 1    | 2    | 3    |
+| Feat3 | 2    | 3    | 4    |
+
+This does not appear to be visually appealing when representing matrices, which is why a matrix box can be used instead:
+
+{% raw %}
+```markdown
+> |       | Obs1 | Obs2 | Obs3 |
+> | ----- |--------------------|
+> | Feat1 | 0    | 1    | 2    |
+> | Feat2 | 1    | 2    | 3    |
+> | Feat3 | 2    | 3    | 4    |
+{: .matrix}
+```
+
+Rendered:
+
+> |       | Obs1 | Obs2 | Obs3 |
+> | ----- |--------------------|
+> | Feat1 | 0    | 1    | 2    |
+> | Feat2 | 1    | 2    | 3    |
+> | Feat3 | 2    | 3    | 4    |
+{: .matrix}
+
 
 # Improving the learning experience
 
@@ -573,50 +615,6 @@ Rendered:
 > ### {% icon warning %} Danger: You can lose data!
 > Something really bad can happen here!
 {: .warning}
-
-
-## Tables and Matrices
-
-Tables in tutorials normally take the full width of the page:
-
-{% raw %}
-```markdown
-|  | Obs1 | Obs2 | Obs3 |
-|--|--------------------|
-| Feat1 | 0 | 1 | 2 |
-| Feat2 | 1 | 2 | 3 |
-| Feat3 | 2 | 3 | 4 |
-```
-{% endraw %}
-
-Rendered:
-
-|  | Obs1 | Obs2 | Obs3 |
-|--|--------------------|
-| Feat1 | 0 | 1 | 2 |
-| Feat2 | 1 | 2 | 3 |
-| Feat3 | 2 | 3 | 4 |
-
-This does not appear to be visually appealing when representing matrices, which is why a matrix box can be used instead:
-
-{% raw %}
-```markdown
-> |  | Obs1 | Obs2 | Obs3 |
-> |--|--------------------|
-> | Feat1 | 0 | 1 | 2 |
-> | Feat2 | 1 | 2 | 3 |
-> | Feat3 | 2 | 3 | 4 |
-{: .matrix}
-```
-
-Rendered:
-
-> |  | Obs1 | Obs2 | Obs3 |
-> |--|--------------------|
-> | Feat1 | 0 | 1 | 2 |
-> | Feat2 | 1 | 2 | 3 |
-> | Feat3 | 2 | 3 | 4 |
-{: .matrix}
 
 
 ## Nested boxes
