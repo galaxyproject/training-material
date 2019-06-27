@@ -142,9 +142,11 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
-> Use **MSnbase readMSData** {% icon tool %} with the following parameters:
->    - *"File(s) from your history containing your chromatograms"*:
->        - Click on the folder icon to select the Dataset collection: `sacurine`
+> 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
+>   - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
+>
+>   {% include snippets/select_collection.md %}
+>
 >
 >  > ### {% icon question %} Question
 >  >
