@@ -30,19 +30,19 @@ contributors:
 
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate](https://www.ncbi.nlm.nih.gov/pubmed/29189203) {% cite Lacombe2018 %}.
 
-
 Once identified and/or quantified using a MS-based approach, interpreting the proteome in a sample is an important step to characterize its content in terms of functional properties in order to extend the biological knowledge related to this sample. In this activity, we illustrate the annotation and the exploration of the human exhaled breath condensate (EBC) proteome by performing the following steps:
+
 > ### Agenda
->
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
+
 # Get Input Datasets
 
-For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published.
+For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published ( {% Bredberg2011 %} and {% cite Muccilli2015 %}).
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -66,19 +66,16 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 
 # Filtering out technical contaminants
 
-A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in [_Lacombe et al. 2018_](https://www.ncbi.nlm.nih.gov/pubmed/29189203)) and have to be removed from the initial dataset.
+A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in {% cite Lacombe2018 %} and have to be removed from the initial dataset.
 
 > ### {% icon hands_on %} Hands-on: Remove the contaminants
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017.txt` (Input dataset)
->    - Keep default option `Yes` for *"Does file contain header?"*
+>    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017_OK.txt` (Input dataset)
 >    - *"Operation"*: `Discard`. We want to remove technical contaminants.
->    - Keep the `OR` option (by default) for the **operator** parameter. We don't need that parameter for a single filter.
->    - First add a  {% icon param-repeat %} *"Insert Filter by keywords"* box with a list of keywords to be filtered out.   In this case, keywords are list of Uniprot accession numbers.
->    - The *"Column number on which to apply the filter"*, in this case is the column that contains Uniprot accession numbers (`c1` as by default).
->    - *"Search for exact match ?"* You can perform exact or partial match with the keywords entered. Partial match is set by default. We keep default option `No` in this tutorial.
->    - To *"Enter keywords"*, you can either copy and paste list of keywords to the text area or choose a file that contains keywords in text format, in which each lines contains a keyword. Here we choose to `copy/paste` the following list of Uniprot accession number `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
+>    - {% icon param-repeat %} *"Insert Filter by keywords"*
+>      - *"Column number on which to apply the filter"*: `c1`
+>      - *"Copy/paste keywords to find (keep or discard)"*: `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
 >
 >    > ### {% icon comment %} Outputs
 >    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
@@ -91,7 +88,7 @@ A group of 10 proteins were identified in both “technical” control samples w
 
 # Check for the presence of biological contaminants
 
-As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the expression pattern for each protein of the "core" EBC proteome using the Human Protein Atlas (HPA). As HPA is indexed by Ensembl gene identifier (ENSG) we first need to convert Uniprot ID to Ensembl gene (ENSG). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.
+As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the expression pattern for each protein of the "core" EBC proteome using the Human Protein Atlas (HPA). As HPA is indexed by Ensembl gene identifier (`ENSG`) we first need to convert Uniprot ID to Ensembl gene (`ENSG`). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.
 
 > ### {% icon hands_on %} Hands-on: Convert Uniprot ID to Ensembl gene ID
 >
