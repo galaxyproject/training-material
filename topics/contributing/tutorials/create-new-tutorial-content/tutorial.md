@@ -262,7 +262,7 @@ This can be avoided by using the `\vert` command instead of `|`
 
 ## Tables and Matrices
 
-Tables in tutorials normally take the full width of the page:
+Tables can be generated using markdown by using the `|` symbol to indicate column dividers, and `--` for table headers:
 
 {% raw %}
 ```markdown
@@ -274,7 +274,7 @@ Tables in tutorials normally take the full width of the page:
 ```
 {% endraw %}
 
-Rendered:
+When rendered, they will take the full width of the page:
 
 |       | Obs1 | Obs2 | Obs3 |
 |------ |--------------------|
@@ -294,7 +294,7 @@ This does not appear to be visually appealing when representing matrices, which 
 {: .matrix}
 ```
 
-Rendered:
+The rendered table is then given as a minimum-width and centred matrix:
 
 > |       | Obs1 | Obs2 | Obs3 |
 > | ----- |--------------------|
@@ -302,54 +302,6 @@ Rendered:
 > | Feat2 | 1    | 2    | 3    |
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
-
-
-
-> ### {% icon comment %} Tables and Matrices
->
-> Tables can be generated using markdown by using the `|` symbol to indicate column dividers, and `--` for table headers:
->
-> {% raw %}
-> ```markdown
-> |  | Obs1 | Obs2 | Obs3 |
-> |--|--------------------|
-> | Feat1 | 0 | 1 | 2 |
-> | Feat2 | 1 | 2 | 3 |
-> | Feat3 | 2 | 3 | 4 |
-> ```
-> {% endraw %}
->
-> When rendered, they will take the full width of the page:
->
-> |  | Obs1 | Obs2 | Obs3 |
-> |--|--------------------|
-> | Feat1 | 0 | 1 | 2 |
-> | Feat2 | 1 | 2 | 3 |
-> | Feat3 | 2 | 3 | 4 |
->
-> This may not appear visually appealing when representing small matrices, which is why a matrix box can be used instead:
->
-> {% raw %}
-> ```markdown
-> > |  | Obs1 | Obs2 | Obs3 |
-> > |--|--------------------|
-> > | Feat1 | 0 | 1 | 2 |
-> > | Feat2 | 1 | 2 | 3 |
-> > | Feat3 | 2 | 3 | 4 |
-> {: .matrix}
-> ```
->
-> The rendered table is then given as a minimum-width and centred matrix:
->
-> > |  | Obs1 | Obs2 | Obs3 |
-> > |--|--------------------|
-> > | Feat1 | 0 | 1 | 2 |
-> > | Feat2 | 1 | 2 | 3 |
-> > | Feat3 | 2 | 3 | 4 |
-> {: .matrix}
->
-{: .comment}
-
 
 # Improving the learning experience
 
