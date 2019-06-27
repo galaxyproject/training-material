@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Workflows: Using Workflow Parameters</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Workflows: Using Workflow Parameters" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/galaxy-ui" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> User Interface and Features
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-ui%2Ftutorials%2Fworkflow-parameters%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-ui%2Ftutorials%2Fworkflow-parameters%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-ui%2Ftutorials%2Fworkflow-parameters%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-ui%2Ftutorials%2Fworkflow-parameters%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-ui%2Ftutorials%2Fworkflow-parameters%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/galaxy-ui/tutorials/workflow-parameters/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Workflows: Using Workflow Parameters",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "galaxy-ui / workflow-parameters / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Workflows: Using Workflow Parameters' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Workflows: Using Workflow Parameters",
+    "description": "Workflows: Using Workflow Parameters",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/galaxy-ui/tutorials/workflow-parameters/tutorial.html",
+  "timeRequired": "PT10M",
+  "description": "Workflows: Using Workflow Parameters\\nThe questions this  addresses are:\n - What are Workflow Parameters\n - How can I define and use Workflow Parameters\n - How can I read Parameters from Datasets\n\n\\nThe objectives are:\n - Learn how to use Workflow Parameters to improve your Workflows\n\n",
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "",
+      "name": "Training data for Workflows: Using Workflow Parameters tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "User Interface and Features",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface",
+      "url": "https://galaxyproject.github.io//training-material/topics/galaxy-ui/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Workflows: Using Workflow Parameters</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#mvdbeek" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek">Marius van den Beek</a>, <a href="/training-material/hall-of-fame#erasche" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erasche" alt="Helena Rasche">Helena Rasche</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What are Workflow Parameters</li>
+            
+            <li>How can I define and use Workflow Parameters</li>
+            
+            <li>How can I read Parameters from Datasets</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Learn how to use Workflow Parameters to improve your Workflows</li>
+            
+            </ul>
+
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 10 minutes</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+
+
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+
+                    
+
+                    
+                    <div>
+                        
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/galaxy-ui/tutorials/workflow-parameters/workflows/" title="Workflows" alt="Workflows: Using Workflow Parameters workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                    </div>
+                    
+                    
+
+
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.
+To make a workflow reusable with slightly different settings you can define and use workflow parameters.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#add-workflow-parameters-to-a-workflow" id="markdown-toc-add-workflow-parameters-to-a-workflow">Add workflow parameters to a workflow</a></li>
+  <li><a href="#add-an-integer-workflow-parameter" id="markdown-toc-add-an-integer-workflow-parameter">Add an integer workflow parameter</a></li>
+  <li><a href="#create-a-text-parameter-from-multiple-parameters" id="markdown-toc-create-a-text-parameter-from-multiple-parameters">Create a text parameter from multiple parameters</a></li>
+  <li><a href="#read-a-parameter-from-a-dataset" id="markdown-toc-read-a-parameter-from-a-dataset">Read a parameter from a dataset</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="add-workflow-parameters-to-a-workflow">Add workflow parameters to a workflow</h1>
+
+<p>We will import a simple workflow and then demonstrate how workflow parameters
+can be added.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-integer-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import integer workflow</h3>
+
+  <ol>
+    <li>Click on Workflow in the top menu</li>
+    <li>Click on the <i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import workflow button on the right</li>
+    <li>
+      <p>Enter the following URL into the “Archived Workflow” URL box</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/galaxyproject/training-material/master/topics/galaxy-ui/tutorials/workflow-parameters/workflows/cut_n_lines.ga
+</code></pre></div>      </div>
+    </li>
+    <li>Click on import workflow</li>
+  </ol>
+</blockquote>
+
+<h1 id="add-an-integer-workflow-parameter">Add an integer workflow parameter</h1>
+
+<p>This workflow takes an input dataset and outputs the first 10 lines of that input dataset.
+The number of lines that should be output can be set using the <code class="highlighter-rouge">Number of lines</code> parameter
+of the select first tool.</p>
+
+<p>Instead of selecting a specific number of lines we can choose to insert a workflow parameter
+that allows the user to set this parameter when running the workflow.</p>
+
+<figure id="figure-1"><img src="../../images/connection-module.png" alt="Button for selecting connections" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The new button for creating a workflow parameter connection. When you click this, it will add a new 'input' to the tool that can be connected, just like other tools in workflows.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-updating-the-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Updating the Workflow</h3>
+
+  <ol>
+    <li>Click the <strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool in your workflow</li>
+    <li>Find the <strong>Number of lines</strong> parameter in the right hand panel.</li>
+    <li>
+      <p>Click on the workflow connection button <i class="fa fa-arrows-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span> to convert the Number of lines parameter into a workflow parameter connection</p>
+
+      <p>You will see that a new input with the text <code class="highlighter-rouge">Number of lines</code> has appeared on the <strong>Select first</strong> tool in the editor.</p>
+    </li>
+    <li>Add a <strong>Simple inputs used for workflow logic</strong>, found under the Inputs section of your toolbox</li>
+    <li>
+      <p>If you click on the Input parameter box in the editor you will see in the <code class="highlighter-rouge">Details panel</code> that the <strong>Parameter type</strong> is set to <code class="highlighter-rouge">Text</code>. If you try to connect this parameter to the “Number of lines” parameter you will see that the noodle turns orange and that you cannot create a connection.</p>
+    </li>
+    <li>
+      <p>Click on Input parameter, and change the <strong>Parameter type</strong> to <strong>Integer</strong></p>
+    </li>
+    <li>
+      <p>Connect <em>“output”</em> from Input parameter <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <em>“Number of lines”</em> input of the Select first <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+    </li>
+    <li>
+      <p>Save <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow</p>
+    </li>
+    <li>
+      <p>Run your workflow</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a workflow</h3>
+        <ul>
+          <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+          <li>Click on the dropdown menu <i class="fa fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> next to your workflow
+            <ul>
+              <li>Select <strong>Run</strong> from the list</li>
+            </ul>
+          </li>
+          <li>Configure the workflow as needed</li>
+          <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+
+      <p>Notice the new input that can be changed before the workflow is run</p>
+    </li>
+  </ol>
+</blockquote>
+
+<figure id="figure-2"><img src="../../images/workflow_integer_param.gif" alt="Animation of simple integer workflow parameter" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Integer workflow parameter</figcaption></figure>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-parameter-reuse"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Parameter Reuse</h3>
+
+  <p>You can connect a parameter to multiple steps or to multiple parameters within a step, everywhere you need to use it.</p>
+</blockquote>
+
+<h1 id="create-a-text-parameter-from-multiple-parameters">Create a text parameter from multiple parameters</h1>
+
+<p>It is often necessary to create a text parameter that is flanked by additional text.
+Take for instance a regular expression that finds <code class="highlighter-rouge">foo</code> in a string and replaces it
+with <code class="highlighter-rouge">foobar</code> as in <code class="highlighter-rouge">s/(foo)/\1bar/</code>.
+The Galaxy tool <code class="highlighter-rouge">Regex Find And Replace</code> can be used to tune such a regular expression. The find part of the regex (<code class="highlighter-rouge">s/(foo)/</code>) can be defined in the <code class="highlighter-rouge">Find regex</code> parameter and the replacement part can be entered in the <code class="highlighter-rouge">Replacement</code> parameter.
+If we want to make the <code class="highlighter-rouge">foo</code> part of the regular expression configurable we can
+compose this text parameter using the <code class="highlighter-rouge">Compose text parameter value</code> tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compose-a-text-parameter"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compose a text parameter</h3>
+  <ol>
+    <li>
+      <p>Create a new workflow</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-workflow"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new workflow</h3>
+
+        <ol>
+          <li>Click <strong>Workflow</strong> on the top bar</li>
+          <li>Click the new workflow <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-new</span> button</li>
+          <li>Give it a clear and memorable name</li>
+          <li>Clicking <strong>Save</strong> will take you directly into the workflow editor for that workflow</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Add an Inputs → <strong>Input Dataset</strong> to the workflow</li>
+    <li>Add an Inputs → <strong>Simple inputs used for workflow logic</strong> to the workflow
+      <ul>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Parameter type”</em>: <code class="highlighter-rouge">Text</code></li>
+      </ul>
+    </li>
+    <li>Add <strong>Compose text parameter value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
+      <ul>
+        <li>Add two more repeats, you will need three “Repeat” blocks in total.</li>
+        <li>In the first repeat:
+          <ul>
+            <li><em>“Enter text that should be part of the computed value”</em>: <code class="highlighter-rouge">/(</code></li>
+          </ul>
+        </li>
+        <li>In the second repeat:
+          <ul>
+            <li><em>“Enter text that should be part of the computed value”</em>: Leave empty and click “Add connection to module” <i class="fa fa-arrows-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span></li>
+            <li>Connect the output of the <strong>Input parameter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to this new input</li>
+          </ul>
+        </li>
+        <li>In the third repeat:
+          <ul>
+            <li><em>“Enter text that should be part of the computed value”</em>: <code class="highlighter-rouge">)/</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Add the <strong>Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
+      <ul>
+        <li>Click on <code class="highlighter-rouge">Insert Check</code></li>
+        <li><em>“Find Regex”</em>: Click “Add connection to module” <i class="fa fa-arrows-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span></li>
+        <li><em>“Replacement”</em>: <code class="highlighter-rouge">\1bar</code></li>
+        <li>Connect the output of the <strong>Compose text parameter value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <em>“Find Regex”</em> parameter of <strong>Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
+        <li>Connect the output of the <strong>Input dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <em>“Select lines from”</em> input of the <strong>Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
+      </ul>
+    </li>
+    <li><strong>Save</strong> <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow</li>
+  </ol>
+</blockquote>
+
+<p>You’ve now built a workflow with a parameterised input! It’s time to test it out.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-the-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the workflow</h3>
+
+  <ol>
+    <li>
+      <p>Upload a dataset using “Paste/Fetch data” with the contents <code class="highlighter-rouge">wunder</code></p>
+    </li>
+    <li>
+      <p>Run your workflow with the following parameters</p>
+
+      <ul>
+        <li>
+          <p><em>“Input parameter”</em>: <code class="highlighter-rouge">wunder</code></p>
+
+          <p>This is the value that will be looked for in your input dataset.</p>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a workflow</h3>
+        <ul>
+          <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+          <li>Click on the dropdown menu <i class="fa fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> next to your workflow
+            <ul>
+              <li>Select <strong>Run</strong> from the list</li>
+            </ul>
+          </li>
+          <li>Configure the workflow as needed</li>
+          <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Examine the outputs</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>You should see two new datasets in your history. The first dataset has the data type <code class="highlighter-rouge">expression.json</code> and contains the composed parameter value <code class="highlighter-rouge">(wunder)</code>, the second dataset will contain the output of the <strong>Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step. A click on the information <i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> button will show the parameters for the tool. You will see that the <em>“Find Regex”</em> parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is <code class="highlighter-rouge">wunderbar</code>.</p>
+
+<h1 id="read-a-parameter-from-a-dataset">Read a parameter from a dataset</h1>
+
+<p>Often times it is necessary to calculate a parameter in one step of a workflow and then to use it in another step of the same workflow. This can be accomplished by reading the parameter from a dataset (As long as it is a text, integer, float, boolean or color parameter).
+In this example we will construct a workflow where we calculate the sum of all values in a dataset and then divide the values in this dataset by the sum calculated in the previous step.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-construct-workflow-with-parameters-read-from-a-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Construct Workflow with Parameters read from a dataset</h3>
+
+  <ol>
+    <li>Create a new workflow</li>
+    <li>Add an <strong>Input dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+    <li>Add <strong>Datamash</strong> (operations on tabular data) <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
+      <ul>
+        <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><span class="visually-hidden">wf-input</span> <em>“Input tabular dataset”</em>: Connect the noodle from the output of the <strong>Input dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to this input</li>
+        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Operation to perform in each group</strong>
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type”</em>: <code class="highlighter-rouge">sum</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“On column”</em>: <code class="highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Add <strong>Parse parameter value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
+      <ul>
+        <li><em>“Select type of parameter to parse”</em>: integer</li>
+        <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><span class="visually-hidden">wf-input</span> <em>“Input file containing parameter to parse out of”</em>: Connect the <strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output to this input</li>
+      </ul>
+    </li>
+    <li>Add <strong>Compose text parameter value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
+      <ul>
+        <li>In the first repeat:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the type of parameter for this field”</em>: Text Parameter</li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter text that should be part of the computed value”</em>: <code class="highlighter-rouge">c1/</code></li>
+          </ul>
+        </li>
+        <li>Click Insert Repeat</li>
+        <li>In the second repeat:
+          <ul>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the type of parameter for this field”</em>: Integer Parameter</li>
+            <li><em>“Enter integer that should be part of the computed value”</em>: Click on <code class="highlighter-rouge">Add connection to module</code> <i class="fa fa-arrows-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span></li>
+            <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i><span class="visually-hidden">wf-input</span> <em>“Input”</em>: Connect the output of the <strong>Parse parameter value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Add <strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
+      <ul>
+        <li><em>“Add expression as a new column to”</em>: click on <code class="highlighter-rouge">Add connection to module</code>, then connect the output of <strong>Compose text parameter value</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“as a new column to”</em>: Select the output of the <strong>Input dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>With this you’re ready to run the workflow!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-the-workflow-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the workflow</h3>
+
+  <ol>
+    <li>
+      <p>Upload a dataset using “Paste/Fetch data” with the contents, and set the filetype manually to “tabular” during upload</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>16378
+16014
+2831
+5702
+149
+24383
+12220
+4488
+11500
+24724
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run your workflow with the following parameters</p>
+
+      <ul>
+        <li><em>“Input dataset”</em>: the table you have just uploaded</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a workflow</h3>
+        <ul>
+          <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+          <li>Click on the dropdown menu <i class="fa fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> next to your workflow
+            <ul>
+              <li>Select <strong>Run</strong> from the list</li>
+            </ul>
+          </li>
+          <li>Configure the workflow as needed</li>
+          <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Examine the outputs</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This workflow will produce a new dataset, where the last column will be the
+result of dividing the value in the first column by the sum of all values in
+the first column.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-you-can-try-many-different-parameter-values-at-once"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: You can try many different parameter values at once</h3>
+
+  <ul>
+    <li>Often times you need to try a couple of different parameter values and pick the best one.
+You can create or compute a dataset for each parameter you would like to try and run the
+<code class="highlighter-rouge">Parse parameter value</code> tool on it, running all downstream tools once for each parameter.</li>
+  </ul>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Galaxy Workflows chain together different steps of an analysis. To make your workflows
+more useful to your colleagues you can add workflow parameters. Sometimes a parameter is not
+known in advance, but can be calculated as part of the workflow. Now you know how to read these
+parameters from datasets!</p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+                        <ul>
+                            
+                            <li>Use Workflow Parameters to make your Workflows more versatile</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Workflows: Using Workflow Parameters (User Interface and Features)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Workflows: Using Workflow Parameters (User Interface and Features)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Marius van den Beek, Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/galaxy-ui/tutorials/workflow-parameters/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+</html>
