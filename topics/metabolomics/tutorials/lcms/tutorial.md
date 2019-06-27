@@ -4,17 +4,17 @@ layout: tutorial_hands_on
 title: 'Mass spectrometry: LC-MS analysis'
 zenodo_link: 'http://doi.org/10.5281/zenodo.3244991'
 questions:
-- What are the main steps of untargetted LC-MS data processing for metabolomic analysis?
+- What are the main steps of untargeted LC-MS data processing for metabolomic analysis?
 - How to conduct metabolomic data analysis from preprocessing to annotation using Galaxy?
 objectives:
 - To comprehend the diversity of LC-MS metabolomic data analysis.
-- To get familiar with the main steps constituting a metabolomic workflow for untargetted LC-MS analysis.
+- To get familiar with the main steps constituting a metabolomic workflow for untargeted LC-MS analysis.
 - To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data.
 time_estimation: '3h'
 key_points:
 - To process untargeted LC-MS metabolomic data, you need a large variety of steps and tools.
 - Although main steps are standard, various ways to combined tools exist, depending on your data.
-- Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevent analysis. 
+- Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis.
 contributors:
 - melpetera
 - lecorguille
@@ -28,20 +28,20 @@ contributors:
 # Introduction
 {:.no_toc}
 
-You may already know that there are different types of omic sciences; metabolomics is the closest to phenotypes. 
-It studies different types of matrices, as blood, urines, tissues, including plants of course, and focus on studying really small molecules 
-which are called metabolites, to better understand matters linked to the metabolism. However, studying metabolites is not a piece of cake 
-since it requires several critical steps which still have some major bottlenecks. Metabolomics is still quite a young science, and has many 
-kinds of specific matters. 
+You may already know that there are different types of *omic* sciences; metabolomics is the closest to phenotypes.
+It studies different types of matrices, as blood, urines, tissues, including plants of course, and focus on studying really small molecules
+which are called metabolites, to better understand matters linked to the metabolism. However, studying metabolites is not a piece of cake
+since it requires several critical steps which still have some major bottlenecks. Metabolomics is still quite a young science, and has many
+kinds of specific matters.
 
-One of the three main technologies used to perform metabolomic analysis is Liquid-Chromatography Mass Spectrometry (LC-MS). Data analysis 
-for this technology requires a large variety of steps, going from the way to extract information from your raw data to statistical analysis 
-and annotation. To be able to perform a complete LC-MS analysis in a single environment, the [Wokflow4Metabolomics](http://workflow4metabolomics.org/) 
-team profides Galaxy modules dedicated to metabolomics. Here is a tutorial aiming at explaining what the main steps of untargetted LC-MS data processing 
-for metabolomic analysis are, and how to conduct metabolomic data analysis from preprocessing to annotation using Galaxy. 
+One of the three main technologies used to perform metabolomic analysis is Liquid-Chromatography Mass Spectrometry (LC-MS). Data analysis
+for this technology requires a large variety of steps, going from the way to extract information from your raw data to statistical analysis
+and annotation. To be able to perform a complete LC-MS analysis in a single environment, the [Wokflow4Metabolomics](http://workflow4metabolomics.org/)
+team provides Galaxy modules dedicated to metabolomics. Here is a tutorial aiming at explaining what the main steps of untargeted LC-MS data processing
+for metabolomic analysis are, and how to conduct metabolomic data analysis from preprocessing to annotation using Galaxy.
 
 To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze
-the inﬂuence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
+the influence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
 from 183 employees from the French Alternative Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap
 (negative ionization mode) (**TODO** explain the terms).
 
@@ -55,9 +55,9 @@ biological samples).
 
 To analyze these data, we will then follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/), ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
-It is composed of 4 main parts: the preprocessing part that extracts ions from raw data, the data processing part that checks the quality of data 
-and transforms it to something relevant, the statistical part that higlight intresting information inside the data, and the annotation part 
-that helps putting a name on selected variables.  
+It is composed of 4 main parts: the preprocessing part that extracts ions from raw data, the data processing part that checks the quality of data
+and transforms it to something relevant, the statistical part that highlight interesting information inside the data, and the annotation part
+that helps putting a name on selected variables.
 
 
 > ### Agenda
@@ -163,19 +163,19 @@ This first step is only meant to read your mzXML and generate an object usable b
 >
 {: .question}
 
-Now that you have prepared your data, you can begin with the first XCMS extraction step: peakpicking. However, before beginning to 
-extract meaningful information from your raw data, you may be interested in visualising your chromatograms. This can be of particular 
-interest if you want to check whether you should consider discarding some range of your analytical sequence (some scan or *retention 
-time* (RT) ranges). 
+Now that you have prepared your data, you can begin with the first XCMS extraction step: peakpicking. However, before beginning to
+extract meaningful information from your raw data, you may be interested in visualising your chromatograms. This can be of particular
+interest if you want to check whether you should consider discarding some range of your analytical sequence (some scan or *retention
+time* (RT) ranges).
 
-To do so, you can use a tool that is called *xcms plot chromatogram* that will plot each sample's chromatogram (see dedicated section 
-further). However, to use this module, you may need additional information about your samples for colouring purpose. Thus, you may need 
-to upload into Galaxy a table containing metadata of your samples (a *sampleMetadata* file). 
+To do so, you can use a tool that is called *xcms plot chromatogram* that will plot each sample's chromatogram (see dedicated section
+further). However, to use this module, you may need additional information about your samples for colouring purpose. Thus, you may need
+to upload into Galaxy a table containing metadata of your samples (a *sampleMetadata* file).
 
 
 ## Importing a sample metadata file
 
-What we referenced here as a sampleMetadata file corresponds to a table containing information about your samples (= sample metadata).  
+What we referenced here as a sampleMetadata file corresponds to a table containing information about your samples (= sample metadata).
 
 A sample metadata file contains various information for each of your raw files:
 - classes which will be used during the preprocessing steps
@@ -250,8 +250,8 @@ simply present how we filled the provided file from the template we generated in
 > HU_neg_090 | .
 > HU_neg_048 | .
 >
-> We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this 
-second column matters. 
+> We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
+second column matters.
 >
 > sample_name | class
 > --- | ---
@@ -338,8 +338,8 @@ that you want to consider in XCMS preprocessing, just fill everywhere with `samp
 You may be interested in getting an overview of what your samples' chromatograms look like, for example to see if some of
 your samples have distinct overall characteristics (unexpected chromatographic peaks, huge overall intensity...).
 
-You can use the sampleMedata file we previously uploaded to add some group colours to your samples when visualising your chromatograms. 
-The module takes automatically the second column as colour groups when a file is provided. 
+You can use the sampleMedata file we previously uploaded to add some group colours to your samples when visualising your chromatograms.
+The module takes automatically the second column as colour groups when a file is provided.
 
 Note that you can also check the chromatograms at any moment during the workflow, in particular at the following steps:
  - after *MSnbase readMSData*: to help you to define retention time ranges that you may want to discard from the very beginning -> **Specta Filters** in *findChromPeaks*
@@ -354,7 +354,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > If you use this module at a later step of XCMS workflow and provided in the Merger step a sampleMetadata with a second column containing groups 
+>    > If you use this module at a later step of XCMS workflow and provided in the Merger step a sampleMetadata with a second column containing groups
 (see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
 >    {: .comment}
 >
@@ -382,9 +382,9 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 Remember that these steps are performed for each of your data files independently.
  - Firstly, the algorithm detects series of scans with close values of m/z. They are called 'region of interest' (ROI).
 The m/z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
- - On these regions of interest, a second derivative of a gaussian model is applied to these consecutive scans in order to define
-the extracted ion chromatographic peak. The gaussian model is defined by the peak width which corresponds to the standard deviation
-of the gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
+ - On these regions of interest, a second derivative of a Gaussian model is applied to these consecutive scans in order to define
+the extracted ion chromatographic peak. The Gaussian model is defined by the peak width which corresponds to the standard deviation
+of the Gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.
 
 At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
 of your sample; if an existing peak is not considered a peak at this step, then it can not be considered in the next steps of
@@ -419,7 +419,7 @@ ranges, or *Noise filter* (as in this hands-on) not to use low intensity measure
 At this step, you obtained a dataset collection containing one RData file per sample, with independent lists of ions. Although this
 is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
 To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
-need to group your individual RData files into a single one. 
+need to group your individual RData files into a single one.
 
 
 ## Merge the different samples in one dataset
@@ -448,7 +448,7 @@ the Merger module.
 >
 {: .hands_on}
 
-The module generates a single RData file containing information from all the samples in your dataset collection input.
+The module generates a single `RData` file containing information from all the samples in your dataset collection input.
 
 ## Second XCMS step: *determining shared ions across samples*
 
@@ -460,10 +460,10 @@ The group function aligns ions extracted with close retention time and close m/z
 similarity, we have to define on one hand a m/z windows and on the other hand a retention time window. A binning is then performed in the
 mass domain. The size of the bins is called width of overlapping m/z slices. You have to set it according to your mass spectrometer resolution.
 
-Then, a kernel density estimator algorithm is used to detect region of retention time with high density of ions. This algorithm uses a gaussian
+Then, a kernel density estimator algorithm is used to detect region of retention time with high density of ions. This algorithm uses a Gaussian
 model to group together peaks with similar retention time.
 
-The inclusion of ions in a group is defined by the standard deviation of the gaussian model, called bandwidth. This parameter has a large weight
+The inclusion of ions in a group is defined by the standard deviation of the Gaussian model, called bandwidth. This parameter has a large weight
 on the resulting matrix. It must be chosen according to the quality of the chromatography. To be valid, the number of ions in a group must be greater
 than a given number of samples. Either a percentage of the total number of samples or an absolute value of samples can be given. This is defined by the user.
 
@@ -483,8 +483,8 @@ than a given number of samples. Either a percentage of the total number of sampl
 This grouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses.
 User has to check the effect of parameter values on the result.
 
-In order to check the result of the grouping function, a pdf file is created. It provides one plot per m/z slice found in the data. Each picture 
-represents the peak density accross samples, ploting the corresponding gaussian model which width is defined by the bandwidth parameter. Each red 
+In order to check the result of the grouping function, a pdf file is created. It provides one plot per m/z slice found in the data. Each picture
+represents the peak density across samples, plotting the corresponding Gaussian model which width is defined by the bandwidth parameter. Each red
 dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line width is associated with the bandwidth parameter.
 
 Hear is an example of two m/z slides obtained from the hands-on:
@@ -522,7 +522,7 @@ Sometimes it is difficult to find enough peaks present in all samples. The user 
 a peak should be found to be considered a well behaved peak. This parameter is called *minimum required fraction of samples*.
 
 On the contrary, you may have peak groups with more detected peaks than the total number of samples. Those peaks are called *additional peaks*.
-If you do not want to consider peak groups with too much additional peaks as 'well behaved peaks', you can use the 'maximal number of additional 
+If you do not want to consider peak groups with too much additional peaks as 'well behaved peaks', you can use the 'maximal number of additional
 peaks' parameter to put them aside.
 
 The algorithm uses statistical smoothing methods. You can choose between linear or loess regression.
@@ -775,7 +775,7 @@ In this tutorial, we chose to limit the data processing to 3 steps:
  - filtering of unreliable variables based on coefficients of variation
 
 > ### {% icon comment %} Comments
-> To get a little more information regarding data processing, do not hesitate to visit the usemetabo.oc plateform:
+> To get a little more information regarding data processing, do not hesitate to visit the usemetabo.oc platform:
 > [Link to LC-MS processing step](https://usemetabo.org/courses/w4mlc-ms-processing)
 {: .comment}
 
@@ -888,7 +888,7 @@ sequence is divided into several batches, the idea is to obtain something like t
 ![Before/after picture](../../images/BC_theo2.png)
 
 In the case of *linear* regression model, the module performs some tests before applying the normalisation for quality purposes.
-For some ions, if the normalisation process would have led to inconsistant results, the concerned ions are not corrected for signal drift.
+For some ions, if the normalisation process would have led to inconsistent results, the concerned ions are not corrected for signal drift.
 This kind of quality checks depends on the type of regression model you use. Please refer to the module's help section for more information!
 
 
@@ -979,7 +979,7 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 # Statistical analysis to find variables of interest
 
 The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to
-the decision of no action on data. Once you applied your customed processing procedure, your tables are ready for the
+the decision of no action on data. Once you applied your customized processing procedure, your tables are ready for the
 statistical analysis.
 
 There is a large variety of statistical analysis methods that you can apply on metabolomic LC-MS data. The most standard
@@ -1022,7 +1022,7 @@ indices.
 {: .hands_on}
 
 The module provides different types of output. You will find statistical indices in the *variableMetadata output* (such as
-p-values and statistical indicators). 'Significant' results are illustrated by graphics in the *Univariate_figure.pdf* file.  
+p-values and statistical indicators). 'Significant' results are illustrated by graphics in the *Univariate_figure.pdf* file.
 
 > ### {% icon question %} Questions
 >
@@ -1128,7 +1128,7 @@ module.
 
 Here, we tried to provide a Mass-to-charge ratio (*i.e.* a mass delta) based on what we globally know about the technique used to
 analyze the samples. Even if this parameter may seems simple, it is important to settle with a relevant value. If you provide a
-value that is too low, you may not be able to have matches for your ions eventhough the original molecule is present in the database.
+value that is too low, you may not be able to have matches for your ions even though the original molecule is present in the database.
 On the opposite, if the value provided is too high, you may end with a huge number of matches, which could be time-consuming to
 review to identify relevant proposed annotation.
 
@@ -1142,9 +1142,9 @@ For now, Galaxy4Metabolomics stops here but we have various perspectives of addi
 # Conclusion
 {:.no_toc}
 
-This tutorial allowed you to get a glance at what data analysis in Metabolomics could look like when dealing with LC-MS data. 
-The workflow used here as an example is only one of many that you can already construct using Galaxy. For each of the four main steps described 
-here, you can find a variety of combinations and tools to use, to try to reach the highest potential of Galaxy when dealing with 
-LC-MS metabolomic data. Now that you know that tools exist and are available in this accessible, reproducible and transparent resource 
-that Galaxy is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics, 
+This tutorial allowed you to get a glance at what data analysis in Metabolomics could look like when dealing with LC-MS data.
+The workflow used here as an example is only one of many that you can already construct using Galaxy. For each of the four main steps described
+here, you can find a variety of combinations and tools to use, to try to reach the highest potential of Galaxy when dealing with
+LC-MS metabolomic data. Now that you know that tools exist and are available in this accessible, reproducible and transparent resource
+that Galaxy is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics,
 and create, run and share!
