@@ -12,8 +12,9 @@ objectives:
 - To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data.
 time_estimation: '3h'
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- To process untargeted LC-MS metabolomic data, you need a large variety of steps and tools.
+- Although main steps are standard, various ways to combined tools exist, depending on your data.
+- Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevent analysis. 
 contributors:
 - melpetera
 - lecorguille
@@ -1141,5 +1142,9 @@ For now, Galaxy4Metabolomics stops here but we have various perspectives of addi
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This tutorial allowed you to get a glance at what data analysis in Metabolomics could look like when dealing with LC-MS data. 
+The workflow used here as an example is only one of many that you can already construct using Galaxy. For each of the four main steps described 
+here, you can find a variety of combinations and tools to use, to try to reach the highest potential of Galaxy when dealing with 
+LC-MS metabolomic data. Now that you know that tools exist and are available in this accessible, reproducible and transparent resource 
+that Galaxy is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics, 
+and create, run and share!
