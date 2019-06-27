@@ -304,6 +304,53 @@ Rendered:
 {: .matrix}
 
 
+
+> ### {% icon comment %} Tables and Matrices
+>
+> Tables can be generated using markdown by using the `|` symbol to indicate column dividers, and `--` for table headers:
+>
+> {% raw %}
+> ```markdown
+> |  | Obs1 | Obs2 | Obs3 |
+> |--|--------------------|
+> | Feat1 | 0 | 1 | 2 |
+> | Feat2 | 1 | 2 | 3 |
+> | Feat3 | 2 | 3 | 4 |
+> ```
+> {% endraw %}
+>
+> When rendered, they will take the full width of the page:
+>
+> |  | Obs1 | Obs2 | Obs3 |
+> |--|--------------------|
+> | Feat1 | 0 | 1 | 2 |
+> | Feat2 | 1 | 2 | 3 |
+> | Feat3 | 2 | 3 | 4 |
+>
+> This may not appear visually appealing when representing small matrices, which is why a matrix box can be used instead:
+>
+> {% raw %}
+> ```markdown
+> > |  | Obs1 | Obs2 | Obs3 |
+> > |--|--------------------|
+> > | Feat1 | 0 | 1 | 2 |
+> > | Feat2 | 1 | 2 | 3 |
+> > | Feat3 | 2 | 3 | 4 |
+> {: .matrix}
+> ```
+>
+> The rendered table is then given as a minimum-width and centred matrix:
+>
+> > |  | Obs1 | Obs2 | Obs3 |
+> > |--|--------------------|
+> > | Feat1 | 0 | 1 | 2 |
+> > | Feat2 | 1 | 2 | 3 |
+> > | Feat3 | 2 | 3 | 4 |
+> {: .matrix}
+>
+{: .comment}
+
+
 # Improving the learning experience
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content.
