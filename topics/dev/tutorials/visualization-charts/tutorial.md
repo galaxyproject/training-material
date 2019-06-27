@@ -1,30 +1,38 @@
 ---
 layout: tutorial_hands_on
 
-title: "Visualizations: Javascript plugins"
+title: "Visualizations: JavaScript plugins"
 questions:
-  - "How can I make a custom plugin for Galaxy?"
+  - "How can I make a custom visualization plugin for Galaxy?"
 objectives:
-  - "Learn how to add custom javascript plugins to the visualization framework"
+  - "Learn how to add JavaScript plugins to Galaxy using the Charts visualization framework"
 time_estimation: "1h"
 key_points:
-  - "Demonstrating a pluggable extension system for JS-only visualisations"
-  - "With only 3 files we can integrate any JS-only visualizations into Galaxy"
+  - "Demonstrating a pluggable extension system for JavaScript visualizations"
+  - "With three primary files we can integrate any JavaScript visualization into Galaxy"
 contributors:
   - shiltemann
   - yhoogstrate
   - bgruening
   - guerler
+  - dannon
 ---
 
 ## Introduction
 {:.no_toc}
 
-In this tutorial we are going to demonstrate how to add a 3rd-party visualization to Galaxy and what the benefits are. The plugin we select for this purpose is the [*PV-Javascript Protein Viewer*](https://biasmv.github.io/pv/). It is an open source, protein structure viewer for `PDB`-files. There are many other popular protein structure viewers available for the visualization of `PDB`-files such as e.g. [NGL](https://arose.github.io/ngl/) (also available in Galaxy) and [JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
+In this tutorial we are going to demonstrate how to add a third party
+JavaScript-based visualization to Galaxy, and we'll talk about what the benefits
+are. The plugin we've selected for this exercise is the [*PV-Javascript Protein
+Viewer*](https://biasmv.github.io/pv/). It is an open source protein structure
+viewer for `PDB`-files. There are many other popular protein structure viewers
+available for the visualization of `PDB`-files such as e.g.
+[NGL](https://arose.github.io/ngl/) (also available in Galaxy) and
+[JSMol](https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm).
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) file format?
 >
-> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
+> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
 >
 > ```bash
@@ -66,7 +74,11 @@ In this tutorial we are going to demonstrate how to add a 3rd-party visualizatio
 >   - [https://www.wwpdb.org/documentation/file-format ](http://www.wwpdb.org/documentation/file-format)
 {: .details}
 
-As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at [https://biasmv.github.io/pv/ ](https://biasmv.github.io/pv/) to get familiar with the plugin.
+As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in
+this tutorial. Now that we have learned about the underlying file format, let us
+continue by visiting the protein viewer developer site at
+[https://biasmv.github.io/pv/](https://biasmv.github.io/pv/) to get familiar
+with the plugin.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -91,7 +103,10 @@ As mentioned above we will be focusing on the *PV-Javascript Protein Viewer* in 
 ## Section 1 - Basic plugin setup
 ### 1.1 Directory and plugin preparations
 
-In this section we will download the viewer and add it to a local *Galaxy* instance. All development takes place within the *Galaxy* codebase. The first thing we are going to do is to clone a *Galaxy* instance and prepare the directory structure for the new visualization plugin.
+In this section we will download the viewer and add it to a local *Galaxy*
+instance. All development takes place within the *Galaxy* codebase. The first
+thing we are going to do is to clone a *Galaxy* instance and prepare the
+directory structure for the new visualization plugin.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -100,7 +115,7 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 >    $ git clone https://github.com/galaxyproject/galaxy
 >    ```
 >
-> 2. Navigate to the visualization framework's root:
+> 2. Navigate to the visualization plugin directory:
 >    ```bash
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations
 >    ```
@@ -112,17 +127,24 @@ In this section we will download the viewer and add it to a local *Galaxy* insta
 >
 {: .hands_on}
 
-Now that the directory structure is in place, let us review the example visualization. Each visualization contains a set of <b>3</b> files:
+This example visualization provides a great place to start with most of the
+basics already in place.  Now that the directory structure is in place, let us
+review the example visualization. Each visualization contains a set of <b>3</b>
+files:
 
 - Logo (`static/logo.png`) which will appear in *Chart*'s plugin selection interface.
 - Configuration (`config/example.xml`) describing input parameters and options.
 - Wrapper (`src/script.js`) which serves as a bridge between *Galaxy* and our 3rd-party plugin.
 
-In the following sections we are going to discuss these files in more detail and modify them to incorporate a new visualization. Let's start with the logo for our visualization.
+In the following sections we are going to discuss these files in more detail and
+modify them to incorporate a new visualization. Let's start with the logo for
+our visualization.
 
 ### 1.2 Your visualization needs a logo
 
-Each visualization is represented by a logo in the Galaxy interface. This makes it easier for users to find and configure their visualization. The logo should be in the `png`-file format. It will appear with a width of 120 pixels.
+Each visualization is represented by a logo in the Galaxy interface. This makes
+it easier for users to find and configure their visualization. The logo should
+be in the `png`-file format. It will appear with a width of 120 pixels.
 
 Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 
@@ -137,7 +159,11 @@ Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 
 ### 1.3 Configure the visualization
 
-Each visualization has a configuration file. In this case it is named `example.xml`. This file has conceptual similarities with a Tool's XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.
+Each visualization has a configuration file. In this case it is named
+`example.xml`. This file has conceptual similarities with a Tool's XML-file. It
+allows developers to specify a variety of attributes and input parameters for
+their visualization. Throughout this tutorial we are going to gradually augment
+this file but for now we keep it simple.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -166,7 +192,7 @@ You should now see your visualization in the `Galaxy > Visualize > Create Visual
 >
 > 1. Open the file named `config/myviz.xml` and find the `<data_source>` section.
 >
-> 2. Replace the existing two `<test>` section with:
+> 2. Replace the existing two `<test>` sections with:
 >
 > `<test type="isinstance" test_attr="datatype" result_type="datatype">molecules.PDB</test>`
 >
@@ -174,18 +200,25 @@ You should now see your visualization in the `Galaxy > Visualize > Create Visual
 >
 {: .hands_on}
 
-This links the plugin's to the `PDB`-file format, which means that for any history item of these file type the plugin will automatically become available.
+This links the plugins to the `PDB`-file format, which means that for any
+history item of this file type the plugin will automatically be available.
 
 ### 1.4 Modifying the wrapper
 
-Now we let us take a look at the wrapper which connects our visualization with Galaxy. The wrapper consists of a module written in *JavaScript* and is available at `src/script.js`:
- The wrapper receives an `options` dictionary with the following <b>four</b> components:
+Now let's take a look at the wrapper which connects our visualization with
+Galaxy. The wrapper consists of a module written in *JavaScript* and is
+available at `src/script.js`:
+
+The wrapper receives an `options` dictionary with the following <b>four</b> components:
  - *charts*: The model of the current visualization with attributes, settings etc.
  - *process*: A [jQuery.Deferred()](https://api.jquery.com/jquery.deferred/) object to allow asynchronous data requests within the wrapper
  - *dataset*: Details on the selected datasets such as url, ids etc. which can be used to access the dataset
  - *targets*: The DOM ids of the container elements to draw into
 
-In this tutorial we will implement the *PV-Viewer* plugin. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the *PV-Viewer* comes with both. Let's take a look at the [documentation](https://pv.readthedocs.io/).
+In this tutorial we will implement the *PV-Viewer* plugin. In order to execute a
+3rd-party plugin we need to figure out how it works. This can be done by finding
+a working example or documentation. Fortunately the *PV-Viewer* comes with both.
+Let's take a look at the [documentation](https://pv.readthedocs.io/).
 
 > ### {% icon hands_on %} Question and answer
 >
@@ -201,7 +234,7 @@ Now that we have learned the basics on how the viewer plugin works, we can edit 
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. Access your visualizations `myviz/src` directory.
+> 1. Access your visualization's `myviz/src` directory.
 >    ```bash
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations/myviz
 >    ```
@@ -211,52 +244,65 @@ Now that we have learned the basics on how the viewer plugin works, we can edit 
 >    yarn add bio-pv
 >    ```
 >
-> 3. Modify `src/script.js` by adding the following code into the `load` call:
->
+> 3. Modify your plugin's entrypoint script `src/script.js` to import the new `bio-pv` library we just added, add this at the top of the file:
 >    ```js
->    var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
->        width       : 'auto',
->        height      : 'auto',
->        antialias   : true,
->        outline     : true
->    });
->    $.ajax( {
->        url     : options.dataset.download_url,
->        success : function( response ) {
->            var structure = pv.io.pdb( response );
->            viewer.clear();
->            viewer.renderAs( 'protein', structure, 'cartoon', {} );
->            viewer.centerOn( structure );
->            viewer.autoZoom();
->            options.chart.state('ok', 'Chart drawn.');
->            options.process.resolve();
->        }
->    });
+>    import * as 'pv' from 'bio-pv';
 >    ```
+>
+> 4. Lastly, replace the `load` function contents in the same entrypoint file with the following code that will set up the protein viewer:
+>     ```js
+>     var viewer = pv.Viewer( document.getElementById( options.targets[ 0 ] ), {
+>         width       : 'auto',
+>         height      : 'auto',
+>         antialias   : true,
+>         outline     : true
+>     });
+>     $.ajax( {
+>         url     : options.dataset.download_url,
+>         success : function( response ) {
+>             var structure = pv.io.pdb( response );
+>             viewer.clear();
+>             viewer.renderAs( 'protein', structure, 'cartoon', {} );
+>             viewer.centerOn( structure );
+>             viewer.autoZoom();
+>             options.chart.state('ok', 'Chart drawn.');
+>             options.process.resolve();
+>         }
+>     });
+>     ```
 {: .hands_on}
 
 ### 1.5 Build the package
 
-Now that we have completed the plugin definition, it is time to bundle the scripts and libraries into a single module file using [*parcel*](https://parceljs.org). Once packed the plugin will be accessible through *Galaxy*'s user interface. Packing modules does not require restarting your *Galaxy* instance, just make sure to properly refresh your browser.
+Now that we have completed the basic plugin definition, it is time to build the
+scripts and libraries into a single bundle that Galaxy can use.  Galaxy
+visualizations typically use [*Parcel*](https://parceljs.org) for this due to
+its simplicity, and this is how the example project is already configured.  If
+you're interested in more details, take a look at the `package.json` file in
+your `myviz` plugin directory.
+
+After it has been built and staged the plugin will be accessible through
+*Galaxy*'s user interface. This process not require restarting your *Galaxy*
+instance, just make sure to properly refresh your browser.
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. Navigate to your visualizations root directory:
+> 1. Navigate to your visualization's root directory:
 >    ```bash
 >    $ cd $GALAXY_ROOT/config/plugins/visualizations/myviz
 >    ```
 >
-> 2. Install the necessary `node-modules`, unless already available:
+> 2. Install any necessary JavaScript dependencies:
 >    ```bash
 >    $ yarn install
 >    ```
 >
-> 3. Run `parcel` to build the plugin:
+> 3. Run the plugin build process using yarn:
 >    ```bash
->    $ parcel build src/script.js -d static/
+>    $ yarn run build
 >    ```
 >
-> 4. Repack the scripts and run Galaxy:
+> 4. Stage the scripts and run Galaxy:
 >    ```bash
 >    $ cd $GALAXY_ROOT
 >    $ make client
@@ -269,7 +315,7 @@ Lets test this.
 
 ### 1.6 Test the visualization
 
-In this section we will select a `PDB`-file from the Protein Databank and visualize it with our new plugin.
+In this section we will select a `PDB`-file from the Protein Data Bank and visualize it with our new plugin.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -288,13 +334,13 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 >    $ run.sh
 >    ```
 >
-> 4. Open the uploader dialog, paste the above link and click on *Start*.
+> 4. Open the uploade dialog, paste the above link and click on *Start*.
 >
 > 5. Close the upload dialog, and select the file from the history panel on the right.
 >
 > 6. Click on the *diagram* icon. (You must be logged in)
 >
-> 7. Find your visualization and double-click on its logo.
+> 7. Find your visualization and click on its logo.
 >
 {: .hands_on}
 
@@ -302,7 +348,12 @@ In this section we will select a `PDB`-file from the Protein Databank and visual
 
 ## Section 2 - Allow different rendering modes
 
-In this section we are going to augment the visualization such that users may select different rendering modes. Similar to a Tool's XML file, developers may specify input parameters which then will be presented to the user. The definition of Tool and Visualization input parameters are similar, however the latter is provided in *JavaScript* and not as XML.
+In this section we are going to augment the visualization such that users may
+select different rendering modes. Similar to a Tool's XML file, developers may
+specify input parameters which then will be presented to the user. The
+definition of Tool and Visualization input parameters are similar, however the
+latter is provided in *JavaScript* and not as XML.
+
 More information on parameters can be found in the [wiki](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
 > ### {% icon hands_on %} Hands-on
@@ -335,7 +386,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 >    </settings>
 >    ```
 >
-> 2. Change the following line in `wrapper.js`:
+> 2. Change the following line in `script.js`:
 >    ```js
 >    viewer.renderAs( 'protein', structure, 'cartoon', {} );
 >    ```
@@ -349,7 +400,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 > 3. Rebuild the plugin
 >
 >    ```bash
->    $ parcel build src/script.js -d static/
+>    $ yarn run build
 >    $ cd $GALAXY_ROOT
 >    $ make client
 >    ```
@@ -363,4 +414,5 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 ## Conclusion
 {:.no_toc}
 
-First of all, thank you for completing this tutorial. We have learned how to add visualizations to the Galaxy framework and how to build a custom visualization form.
+First of all, thank you for completing this tutorial. We have learned how to add
+JavaScript visualizations to Galaxy utilizing the Charts framework.
