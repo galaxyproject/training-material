@@ -184,7 +184,9 @@ this file but for now we keep it simple.
 >
 {: .hands_on}
 
-You should now see your visualization in the `Galaxy > Visualize > Create Visualization` section.
+Your visualization should now be loaded.  You can verify that now by clicking
+on `Visualize > Create Visualization` in the top menu bar of Galaxy and finding
+your plugin with its new logo in the list there.
 
 ### 1.4 Assign a new datatype to your visualization
 
