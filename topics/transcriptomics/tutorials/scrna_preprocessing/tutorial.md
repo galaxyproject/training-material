@@ -595,7 +595,7 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 >   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)
 >   - *"Identifier column"*:`1`
 >   - *"Number of Header lines in each item"*:`1`
->   - *"Keep original column header"*:`Yes`
+>   - *"Add column name to header"*:`Yes`
 >   - *"Fill character"*:`0`
 >
 {: .hands_on}
