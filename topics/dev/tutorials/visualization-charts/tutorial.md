@@ -32,10 +32,10 @@ available for the visualization of `PDB`-files such as e.g.
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) file format?
 >
-> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
+> The `PDB`-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank ([https://www.rcsb.org](https://www.rcsb.org)). Proteins are usually labeled by a four-letter code.
 > Here is an example of a `PDB`-file for a hydrolase bond to its inhibitor (PDB: [1ACB](https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)):
 >
-> ```bash
+> ```
 > HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB
 > TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
 > TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION
@@ -169,7 +169,7 @@ this file but for now we keep it simple.
 >
 > 1. Rename the file to `config/myviz.xml`
 >
-> 2. Edit the file named `config/example.xml` and change the name and description.
+> 2. Edit the file named `config/myviz.xml` and change the name and description.
 >
 > 3. Go to the your Galaxy root directory and repack the scripts
 >    ```bash
@@ -194,7 +194,7 @@ You should now see your visualization in the `Galaxy > Visualize > Create Visual
 >
 > 2. Replace the existing two `<test>` sections with:
 >
-> `<test type="isinstance" test_attr="datatype" result_type="datatype">molecules.PDB</test>`
+>    `<test type="isinstance" test_attr="datatype" result_type="datatype">molecules.PDB</test>`
 >
 > 3. Remove the `<specs>` and `<groups>` sections.
 >
@@ -246,7 +246,7 @@ Now that we have learned the basics on how the viewer plugin works, we can edit 
 >
 > 3. Modify your plugin's entrypoint script `src/script.js` to import the new `bio-pv` library we just added, add this at the top of the file:
 >    ```js
->    import * as 'pv' from 'bio-pv';
+>    import * as pv from 'bio-pv';
 >    ```
 >
 > 4. Lastly, replace the `load` function contents in the same entrypoint file with the following code that will set up the protein viewer:
@@ -331,10 +331,10 @@ In this section we will select a `PDB`-file from the Protein Data Bank and visua
 >
 >    ```bash
 >    $ cd $GALAXY_ROOT
->    $ run.sh
+>    $ ./run.sh
 >    ```
 >
-> 4. Open the uploade dialog, paste the above link and click on *Start*.
+> 4. Open the upload dialog, paste the above link and click on *Start*.
 >
 > 5. Close the upload dialog, and select the file from the history panel on the right.
 >
@@ -359,7 +359,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 > ### {% icon hands_on %} Hands-on
 >
 > 1. Add the following block into the `myviz.xml` file:
->    ```js
+>    ```xml
 >    <settings>
 >       <input>
 >           <name>mode</name>
