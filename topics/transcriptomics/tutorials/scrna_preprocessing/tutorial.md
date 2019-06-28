@@ -527,18 +527,18 @@ Once again, file naming is important, and so we will rename our matrix files app
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
 >
-> 1. Import the eight matrices (`P1_B1.tabular`, `P1_B2.tabular`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
->    - Set the datatype of the tabular files to **tabular**
+> 1. Import the eight matrices (`P1_B1.tsv`, `P1_B2.tsv`, etc.) and the barcodes file from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
+>    - Set the datatype of the files to **tabular**
 >
 >    ```
->    https://zenodo.org/record/3253142/files/P1_B1.tabular
->    https://zenodo.org/record/3253142/files/P1_B2.tabular
->    https://zenodo.org/record/3253142/files/P1_B3.tabular
->    https://zenodo.org/record/3253142/files/P1_B4.tabular
->    https://zenodo.org/record/3253142/files/P2_B5.tabular
->    https://zenodo.org/record/3253142/files/P2_B6.tabular
->    https://zenodo.org/record/3253142/files/P2_B7.tabular
->    https://zenodo.org/record/3253142/files/P2_B8.tabular
+>    https://zenodo.org/record/3253142/files/P1_B1.tsv
+>    https://zenodo.org/record/3253142/files/P1_B2.tsv
+>    https://zenodo.org/record/3253142/files/P1_B3.tsv
+>    https://zenodo.org/record/3253142/files/P1_B4.tsv
+>    https://zenodo.org/record/3253142/files/P2_B5.tsv
+>    https://zenodo.org/record/3253142/files/P2_B6.tsv
+>    https://zenodo.org/record/3253142/files/P2_B7.tsv
+>    https://zenodo.org/record/3253142/files/P2_B8.tsv
 >    https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 >    ```
 >
@@ -546,11 +546,11 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    {% include snippets/import_from_data_library.md %}
 >
 > 1. Rename a matrix
->    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tabular`* file
+>    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tsv`* file
 >    - Set the Name field such that it is affixed with "_P1_B1" (e.g. 'multibatch_P1_B1')
 >    - Click *Save*
 > 1. Repeat for all matrices
->    **Pay attention to the Plate number which changes after Batch 2**
+>    **Pay attention to the Plate number which changes after Batch 4**
 >
 {: .hands_on}
 
