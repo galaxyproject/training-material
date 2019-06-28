@@ -357,7 +357,12 @@
 
 <ol id="markdown-toc">
   <li><a href="#metadata" id="markdown-toc-metadata">Metadata</a></li>
-  <li><a href="#content" id="markdown-toc-content">Content</a></li>
+  <li><a href="#content" id="markdown-toc-content">Content</a>    <ol>
+      <li><a href="#adding-images-with-captions" id="markdown-toc-adding-images-with-captions">Adding images with captions</a></li>
+      <li><a href="#writing-mathematical-expressions" id="markdown-toc-writing-mathematical-expressions">Writing mathematical expressions</a></li>
+      <li><a href="#tables-and-matrices" id="markdown-toc-tables-and-matrices">Tables and Matrices</a></li>
+    </ol>
+  </li>
   <li><a href="#improving-the-learning-experience" id="markdown-toc-improving-the-learning-experience">Improving the learning experience</a>    <ol>
       <li><a href="#overview-box" id="markdown-toc-overview-box"><strong>Overview</strong> box</a></li>
       <li><a href="#agenda-box" id="markdown-toc-agenda-box"><strong>Agenda</strong> box</a></li>
@@ -613,43 +618,128 @@ blabla
 
 </blockquote>
 
-<blockquote class="comment">
-  <h3 id="comment-adding-images-with-captions"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Adding images with captions</h3>
-  <p>To add an image in Markdown file, we need to use the markdown syntax for this: <code class="highlighter-rouge">![](../../images/image.png)</code>.</p>
+<h2 id="adding-images-with-captions">Adding images with captions</h2>
+<p>To add an image in Markdown file, we need to use the markdown syntax for this: <code class="highlighter-rouge">![](../../images/image.png)</code>.</p>
 
-  <p>We have also added a small plugin to handle captions for each image:</p>
+<p>We have also added a small plugin to handle captions for each image:</p>
 
-  <figure id="figure-1"><img src="../../images/image_caption_screenshot.png" alt="A textual description of the image" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of an image with a caption </figcaption></figure>
-  <!-- Adding a space to the caption to not trigger figurigy skip_titles -->
+<figure id="figure-1"><img src="../../images/image_caption_screenshot.png" alt="A textual description of the image" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of an image with a caption </figcaption></figure>
+<!-- Adding a space to the caption to not trigger figurigy skip_titles -->
 
-  <p>The prefix “Figure 1.” is automatically added before its caption. This is done with the following Markdown syntax:</p>
+<p>The prefix “Figure 1.” is automatically added before its caption. This is done with the following Markdown syntax:</p>
 
-  <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">A textual description of the image</span><span class="p">](</span><span class="sx">../images/image.png</span> <span class="nn">"Example of an image with a caption"</span><span class="p">)</span>
-</code></pre></div>  </div>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">![</span><span class="nv">A textual description of the image</span><span class="p">](</span><span class="sx">../images/image.png</span> <span class="nn">"Example of an image with a caption"</span><span class="p">)</span>
+</code></pre></div></div>
 
-  <p>We can also cross-reference images inside our Markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (changing <code class="highlighter-rouge">nb</code> with the image’s number).</p>
-</blockquote>
+<p>We can also cross-reference images inside our Markdown with an anchor. For example, we can link to <a href="#figure-1">the previous figure</a> using <code class="highlighter-rouge">[the display text](#figure-nb)</code> (changing <code class="highlighter-rouge">nb</code> with the image’s number).</p>
 
-<blockquote class="comment">
-  <h3 id="comment-writing-mathematical-expressions"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Writing mathematical expressions</h3>
+<h2 id="writing-mathematical-expressions">Writing mathematical expressions</h2>
 
-  <p>Mathematical expressions can be written in LaTeX, and are automatically rendered with <a href="https://www.mathjax.org/">MathJax</a>.</p>
+<p>Mathematical expressions can be written in LaTeX, and are automatically rendered with <a href="https://www.mathjax.org/">MathJax</a>.</p>
 
-  <p>Surround your math expression with two <code class="highlighter-rouge">$</code> signs on each side (like in LaTeX math blocks):</p>
+<p>Surround your math expression with two <code class="highlighter-rouge">$</code> signs on each side (like in LaTeX math blocks):</p>
 
-  <ul>
-    <li>inline expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered as <script type="math/tex">5 + 5</script></li>
-    <li>
-      <p>block expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered in its own line block as</p>
+<ul>
+  <li>inline expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered as <script type="math/tex">5 + 5</script></li>
+  <li>
+    <p>block expressions, <em>e.g.</em> <code class="highlighter-rouge">$$ 5 + 5 $$</code> will be rendered in its own line block as</p>
 
-      <script type="math/tex; mode=display">5 + 5</script>
-    </li>
-  </ul>
+    <script type="math/tex; mode=display">5 + 5</script>
+  </li>
+</ul>
 
-  <p>Dollar signs are therefore <em>reserved characters</em> for instructing the templating system to open/close LaTeX math blocks. If you want to use a <code class="highlighter-rouge">$</code> within your expression, you will need to <em>escape</em> it: <code class="highlighter-rouge">$$ a + 3\$ = 5\$ $$</code> will be rendered as: <script type="math/tex">a + 3\$ = 5\$</script></p>
+<p>Dollar signs are therefore <em>reserved characters</em> for instructing the templating system to open/close LaTeX math blocks. If you want to use a <code class="highlighter-rouge">$</code> within your expression, you will need to <em>escape</em> it: <code class="highlighter-rouge">$$ a + 3\$ = 5\$ $$</code> will be rendered as: <script type="math/tex">a + 3\$ = 5\$</script></p>
 
-  <p>LaTeX code that uses the pipe symbol <code class="highlighter-rouge">|</code> in inline math statements may lead to a line being recognized as a table line by the templating system.
+<p>LaTeX code that uses the pipe symbol <code class="highlighter-rouge">|</code> in inline math statements may lead to a line being recognized as a table line by the templating system.
 This can be avoided by using the <code class="highlighter-rouge">\vert</code> command instead of <code class="highlighter-rouge">|</code></p>
+
+<h2 id="tables-and-matrices">Tables and Matrices</h2>
+
+<p>Tables can be generated using markdown by using the <code class="highlighter-rouge">|</code> symbol to indicate column dividers, and <code class="highlighter-rouge">--</code> for table headers:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|       | Obs1 | Obs2 | Obs3 |
+|------ |--------------------|
+| Feat1 | 0    | 1    | 2    |
+| Feat2 | 1    | 2    | 3    |
+| Feat3 | 2    | 3    | 4    |
+</code></pre></div></div>
+
+<p>When rendered, they will take the full width of the page:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Obs1</th>
+      <th>Obs2</th>
+      <th>Obs3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Feat1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>Feat2</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Feat3</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This does not appear to be visually appealing when representing matrices, which is why a matrix box can be used instead:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; |       | Obs1 | Obs2 | Obs3 |</span>
+<span class="gt">&gt; | ----- |--------------------|</span>
+<span class="gt">&gt; | Feat1 | 0    | 1    | 2    |</span>
+<span class="gt">&gt; | Feat2 | 1    | 2    | 3    |</span>
+<span class="gt">&gt; | Feat3 | 2    | 3    | 4    |</span>
+{: .matrix}
+</code></pre></div></div>
+
+<p>The rendered table is then given as a minimum-width and centred matrix:</p>
+
+<blockquote class="matrix">
+  <table>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Obs1</th>
+        <th>Obs2</th>
+        <th>Obs3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Feat1</td>
+        <td>0</td>
+        <td>1</td>
+        <td>2</td>
+      </tr>
+      <tr>
+        <td>Feat2</td>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+      </tr>
+      <tr>
+        <td>Feat3</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+      </tr>
+    </tbody>
+  </table>
 </blockquote>
 
 <h1 id="improving-the-learning-experience">Improving the learning experience</h1>
@@ -658,6 +748,7 @@ This can be avoided by using the <code class="highlighter-rouge">\vert</code> co
 
 <p>These boxes are defined always with the same structure:</p>
 
+<p>{% raw %}</p>
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon an_icon %} Type of box: Name of the box</span>
 <span class="gt">&gt; list</span>
 {: .type_of_box}
