@@ -372,9 +372,8 @@ To identify the location of each TA site to the count them, the first step is to
 >    - *"Is this library mate-paired?"*: `Single-end`
 >      - {% icon param-collection %} *"FASTQ file"*: collection output of the last **Cutadapt**
 >      - *"Bowtie settings to use"*: `Full parameters list`
->        - *"Alignment mode"*: `Maq-like`
->          - *"Skip the first n reads (-s)"*: `0`
->          - *"Maximum number of mismatches permitted in the seed (-n)"*: `0`
+>      - *"Skip the first n reads (-s)"*: `0`
+>      - *"Maximum number of mismatches permitted in the seed (-n)"*: `0`
 >
 >            > ### {% icon question %} Questions
 >            >
@@ -385,9 +384,9 @@ To identify the location of each TA site to the count them, the first step is to
 >            > {: .solution }
 >            {: .question}
 >
->          - *"Seed length (-l)"*: `17`
->       - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"*: `Use best`
->         - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
+>      - *"Seed length (-l)"*: `17`
+>      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
+>      - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"*: `Use best`
 >
 > 2. Rename your collection for better clarity
 >
@@ -427,8 +426,8 @@ As you can see on the [previous figure](#figure-4), the read can cover one side 
 > 1. **Nucleotide subsequence search** {% icon tool %} with:
 >    - {% icon param-file %} *Nucleotide sequence to be searched"*: `staph_aur.fasta`
 >    - *"Search with a"*: `user defined pattern`
->      - *"Search pattern"*: `TA`
->    - *"Search pattern on"*: `both strand`
+>    - *"Search pattern"*: `TA`
+>    - *"Search pattern on"*: `forward strand`
 > 4. Inspect the generated file
 {: .hands_on}
 
@@ -443,53 +442,36 @@ The only information we need here are the positions of the 5' end of each TA sit
 
 > ### {% icon hands_on %} Hands-on: Get forward and reverse strand positions
 >
-> 1. **Filter** {% icon tool %} with:
->    - {% icon param-file %} *"Filter"*: output of **Nucleotide subsequence search**
->    - *"With following condition"*: `c6=='+'`
 >
-> 2. Add the `#forward` tag to the output
+> 1. **Cut columns from a table** {% icon tool %} with:
+>    - Cut columns : `c2`
+>    - *"Delimited by"*: `tab`
+>    - {% icon param-file %} *"From"*: output of **Nucleotide subsequence search**
+>
+> 4. Add the `#forward` tag to the output
 >
 >    {% include snippets/add_tag.md %}
 >
-> 3. **Cut columns from a table (cut)** {% icon tool %} with:
->    - {% icon param-file %} *"File to cut"*: output of **Filter**
->    - *"Operation"*: `Keep`
+> 2. **Cut columns from a table** {% icon tool %} with:
+>    - Cut columns : `c1,c3`
 >    - *"Delimited by"*: `tab`
->    - *"Cut by"*: `fields`
->    - *"List of Fields"*: `Column: 1` and `Column: 2` (to get forward strand coordinate)
->   
-> 4. **Filter** {% icon tool %} with:
->    - {% icon param-file %} *"Filter"*: output of **Nucleotide subsequence search**
->    - *"With following condition"*: `c6=='-'`
+>    - {% icon param-file %} *"From"*: output of **Nucleotide subsequence search**
 >
-> 5. Add the `#reverse` tag to the output
->
-> 3. **Cut columns from a table (cut)** {% icon tool %} with:
->    - {% icon param-file %} *File to cut"*: output of **Filter**
->    - *"Operation"*: `Keep`
->    - *"Delimited by"*: `tab`
->    - *"Cut by"*: `fields`
->    - *"List of Fields"*: `Column: 1` and `Column: 5` (to get reverse strand coordinate)
->
-{: .hands_on}
-
-The coordinates provided by **Nucleotide subsequence search** are based on count 1: the first nucleotide is counted as number 1. However, **bamCoverage** counts the first nucleotide as nucleotide number 0. To be able to compare the two results, we need to shift the TA site positions by 1.
-
-> ### {% icon hands_on %} Hands-on:  Shift TA sites positions
->
-> 1. **Compute an expression on every row** {% icon tool %} to shift the positions of TA sites with:
->    - *Add expression"*: `c2-1` (to shift the position by 1)
->    - {% icon param-files %} *"as a new column to"*: outputs of **cut** with the tags `forward` and `reverse`
+> 3. **Compute an expression on every row** {% icon tool %} to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
+>    - *Add expression"*: `c2-1`
+>    - {% icon param-files %} *"as a new column to"*: output of **cut**
 >    - *"Round result?"*: `yes`
 >
-> 2. **Cut columns from a table (cut)** {% icon tool %} to keep only the new coordinates with:
->    - {% icon param-files %} *File to cut"*: outputs of **Compute** with the tags `forward` and `reverse`
->    - *"Operation"*: `Keep`
+>
+> 4. **Cut columns from a table** {% icon tool %} with:
+>    - Cut columns : `c3`
 >    - *"Delimited by"*: `tab`
->    - *"Cut by"*: `fields`
->    - *"List of Fields"*: `Column: 3` (to get the new coordinates)
+>    - {% icon param-file %} *"From"*: output of **Compute**
+>
+> 8. Add the `#reverse` tag to the output
 >
 {: .hands_on}
+
 
 ## Merge overall coverage and positions of TA sites to get the coverage of each TA sites
 
@@ -510,12 +492,11 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 >
 >    {% include snippets/add_tag_to_collection.md %}
 >
-> 4. **Cut columns from a table (cut)** {% icon tool %} with:
->    - {% icon param-collection %} *File to cut"*: output **Join two file** with the `forward` tag
->    - *"Operation"*: `Keep`
+> 3. **Cut columns from a table** {% icon tool %} with:
+>    - Cut columns : `c1,c4`
 >    - *"Delimited by"*: `tab`
->    - *"Cut by"*: `fields`
->    - *"List of Fields"*: `Column: 1` and `Column: 4` (to keep only position and coverage)
+>    - {% icon param-file %} *"From"*: output of**Join two file** with the `forward` tag
+>
 >
 > 5. Repeat the same steps for `reverse`
 >
@@ -559,12 +540,11 @@ We now have a read count for each nucleotide at the different TA sites. The inse
 >    - {% icon param-collection %} *"as a new column to"*: output of **Join two files** with the tags `reverse` and `forward`
 >    - *"Round result?"*: `yes`
 >
-> 8. **Cut columns from a table (cut)** {% icon tool %} to get a file with only the position and total count with:
->    - {% icon param-collection %} *File to cut"*: output of the last **Compute**
->    - *"Operation"*: `Keep`
+>
+> 2. **Cut columns from a table** {% icon tool %} with:
+>    - *"Cut columns"*: `c1,c4`
 >    - *"Delimited by"*: `tab`
->    - *"Cut by"*: `fields`
->    - *"List of Fields"*: `Column: 1` and `Column: 4` (to keep only position and total counts)
+>    - {% icon param-collection %} *File to cut"*:output of the last **Compute**
 >
 > 9. **Sort data in ascending or descending order** {% icon tool %} with:
 >    - {% icon param-collection %} *Sort Query"*: output of the last **Cut**
