@@ -307,4 +307,139 @@ rollback our change to understand how Helm manages configuration.
 >
 {: .hands_on}
 
+# Scaling Galaxy
 
+In Galaxy k8s, there are two containers by default, one web handler and one
+job handler. We will now look at how these can be scaled.
+
+> ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
+>
+> 1. View the `values-cvmfs.yaml` file in your helm chart and note down the
+>    number of web and job handlers.
+>
+>    {% raw %}
+>    ```yaml
+>    webHandlers:
+>        replicaCount: 1
+>    jobHandlers:
+>        replicaCount: 1
+>    ```
+>    {% endraw %}
+>
+> 2. Let’s increase the number of web handlers by simply setting new values for the number of replicas.
+>
+>    {% raw %}
+>    ```console
+>    helm upgrade --reuse-values --set webHandlers.replicaCount=2 galaxy cloudve/galaxy
+>    ```
+>    {% endraw %}
+>
+> 3. Check whether the new replicas have been created. 
+>
+>    {% raw %}
+>    ```console
+>    kubectl get pods
+>    NAME                          READY   STATUS    RESTARTS   AGE
+>    galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
+>    galaxy-job-5cc75c6588-8dsbg   1/1     Running   0          7m13s
+>    galaxy-web-7c9576cf89-49nlm   1/1     Running   0          7m13s
+>    galaxy-web-7c9576cf89-r6rcj   0/1     Running   0          9s
+>    ```
+>    {% endraw %}
+>
+> 4. Follow the pod logs and check whether the new handler is receiving web requests
+>    as expected.
+>
+>    {% raw %}
+>    ```console
+>    kubectl logs -f galaxy-web-7c9576cf89-r6rcj
+>    ```
+>    {% endraw %}
+>
+>    You will notice that k8s automatically load balances requests between the
+>    available web handler replicas in a round-robin fashion.
+>
+{: .hands_on}
+
+# Testing k8s resilience
+
+To observe how k8s handles failures, let’s exec into a running container and
+manually kill a process to simulate a possible process failure. k8s
+continuously monitors running containers, and attempts to bring the environment
+back to the “desired” state. The moment it notices a failure, it will respawn
+a new pod to replace the failed one. Typically, a k8s container will also
+have a [liveness probe][k8sliveness] defined. A liveness probe can be an http
+request to a port, or even a manually executed shell script, which will test
+whether the relevant container is healthy, and if not, k8s will immediately
+provision a new replacement.
+
+> ### {% icon hands_on %} Hands-on: Handling failures
+>
+> 1. First list the available pods.
+>
+>    {% raw %}
+>    ```console
+>    kubectl get pods
+>    NAME                          READY   STATUS    RESTARTS   AGE
+>    galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
+>    galaxy-job-5cc75c6588-8dsbg   1/1     Running   0          14m
+>    galaxy-web-7c9576cf89-49nlm   1/1     Running   0          14m
+>    galaxy-web-7c9576cf89-r6rcj   0/1     Running   1          7m36s
+>    ```
+>    {% endraw %}
+>
+>    Then exec into one:
+>    {% raw %}
+>    ```console
+>    kubectl exec -it galaxy-web-7c9576cf89-r6rcj /bin/bash
+>    ```
+>    {% endraw %}
+>
+> 2. Now kill the main container process. 
+>
+>    {% raw %}
+>    ```console
+>    kill 1
+>    ```
+>    {% endraw %}
+>
+> 3. Notice how k8s immediately starts a new pod to replace the failed one,
+>    bringing the environment back to the desired state. Take a look at the
+>    liveness probe defined for the galaxy web container in your helm chart
+>    source code (templates/deployment_web.yaml).
+>
+{: .hands_on}
+
+# Deleting Galaxy
+
+Finally, let’s take a look at how we can uninstall Galaxy and remove all
+related containers.
+
+> ### {% icon hands_on %} Hands-on: Deleting Galaxy
+>
+> 1. To permanently delete the Galaxy release, run:
+>
+>    {% raw %}
+>    ```console
+>    helm delete --purge galaxy
+>    ```
+>    {% endraw %}
+>
+>    The purge flag instructs helm to permanently remove galaxy from its history.
+>
+> 2. Use `kubectl get pods` to verify that the pods have been deleted.
+>
+{: .hands_on}
+# Next Steps
+This tutorial provided an overview of some common Galaxy administration tasks.
+Advanced customizations would include running custom shell scripts on Galaxy
+startup to perform additional tasks, running additional containers on
+startup, administering and managing storage, building custom Galaxy containers
+with desired modifications etc. For more info on some of these
+topics, take a look at the [Galaxy Helm chart] repository as well as
+[other tutorials](../..) tagged with _kubernetes_. Also, feel free to reach out
+on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG]. 
+
+
+[fedG]: https://gitter.im/galaxyproject/FederatedGalaxy
+[k8sliveness]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
