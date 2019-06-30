@@ -153,13 +153,9 @@ In order to get these files into Galaxy, we will want to do a few things:
 > 3. **Click** `Apply`, and you should see your new column definitions listed as in the following screenshot.
 >    ![screenshot](../../images/rules/rules_example_1_6_mapping_set.png)
 >
-> 4. **Click** the `Type` selection box at the bottom left of the upload dialog
->     - Change the datatype from `Auto-detect` to `fastqsanger`.
->    ![screenshot](../../images/rules/rules_example_1_7_extension_set.png)
->
 >    You are now ready to start the upload
 >
-> 5. **Click** the `Upload` button
+> 4. **Click** the `Upload` button
 >
 >    After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.
 {: .hands_on}
