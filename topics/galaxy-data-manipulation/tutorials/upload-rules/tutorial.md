@@ -191,7 +191,7 @@ This example will demonstrate using such history datasets as the source for coll
 >    - From **Rules** menu, select `Add / Modify Column Definitions`
 >        - `Add Definition`, `URL`, Select Column `D`
 >        - `Add Definition`, `List Identifier(s)`, Column `C`
->    - *"Type"*: `fastqsanger`
+>    - *"Type"*: `fastqsanger.gz`
 >
 >    ![screenshot](../../images/rules/rules_example_2_3_rules.png)
 >
@@ -239,7 +239,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >        - *"Filter how many rows?"*: `1`
 >    - From **Rules** menu, select `Add / Modify Column Definitions`
 >        - `Add Definition`, `List Identifier(s)`, Column `C`
->    - *"Type"*: `fastqsanger`
+>    - *"Type"*: `fastqsanger.gz`
 >
 >    In this dataset, column `D` contains two URLs, separated by a semicolon `;`. So we cannot define that column as the URL directly, we will need to split it into two columns first.
 >    We will build a regular expression that captures two "groups" from this column with two URLs - one group for everything before the `;` and one group for everything after.
