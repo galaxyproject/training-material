@@ -64,7 +64,7 @@ a Galaxy deployment on Kubernetes, including
 
 ## Prerequisites
 This tutorial builds on the material of the previous
-[tutorial]({{ site.baseurl }}/topics/admin/tutorials/galaxy-on-k8s/tutorial.html)
+[tutorial]({{ site.baseurl }}/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html)
 and we recommend following it first to setup the required environment.
 You must have some familiarity with Helm commands, know how to change values
 in a Helm Chart and how to use the `kubectl` command.
