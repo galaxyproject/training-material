@@ -427,7 +427,7 @@
 
 <p>This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the <a href="https://www.ebi.ac.uk/ena">European Nucleotide Archive</a>. We will be using the data from a study of <a href="https://www.ebi.ac.uk/ena/data/view/PRJDA60709">16s ribosomal RNA</a>.</p>
 
-<blockquote class="notranslate hands_on">
+<blockquote>
   <h3 id="hands_on-hands-on-downloading-data-from-ena"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Downloading Data from ENA</h3>
   <p>To start, navigate to the above study and click the option to “Select columns”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.</p>
 
@@ -494,15 +494,17 @@
   <p>Download the resulting tabular data describing the files by clicking the “TEXT” link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly <a href="https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;download=txt">here</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.</p>
 </blockquote>
 
-<p>You can now open the resulting spreadsheet in your local spreadsheet program, a text editor, or in your web browser and select all the data and copy to your clipboard.</p>
+<p class="hands_on">Unfortunately the ENA ftp server is not operational at this moment,
+so we have to use a backup from zenodo.
+You can select all the data below and copy them to your clipboard.</p>
 
 <div id="example-1-metadata" class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDA60709	SAMD00016379	DRX000475	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000770/DRR000770.fastq.gz
-PRJDA60709	SAMD00016383	DRX000476	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000771/DRR000771.fastq.gz
-PRJDA60709	SAMD00016380	DRX000477	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000772/DRR000772.fastq.gz
-PRJDA60709	SAMD00016378	DRX000478	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000773/DRR000773.fastq.gz
-PRJDA60709	SAMD00016381	DRX000479	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000774/DRR000774.fastq.gz
-PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/DRR000775.fastq.gz
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
 </code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
@@ -526,12 +528,12 @@ As you can see in this dialog, data can be selected from a history dataset or pa
       </ul>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDA60709	SAMD00016379	DRX000475	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000770/DRR000770.fastq.gz
-PRJDA60709	SAMD00016383	DRX000476	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000771/DRR000771.fastq.gz
-PRJDA60709	SAMD00016380	DRX000477	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000772/DRR000772.fastq.gz
-PRJDA60709	SAMD00016378	DRX000478	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000773/DRR000773.fastq.gz
-PRJDA60709	SAMD00016381	DRX000479	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000774/DRR000774.fastq.gz
-PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/DRR000775.fastq.gz
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
 </code></pre></div>      </div>
 
       <p><img src="../../images/rules/rules_example_1_2_paste.png" alt="screenshot" /></p>
@@ -598,12 +600,6 @@ PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/
     <li>
       <p><strong>Click</strong> <code class="highlighter-rouge">Apply</code>, and you should see your new column definitions listed as in the following screenshot.
 <img src="../../images/rules/rules_example_1_6_mapping_set.png" alt="screenshot" /></p>
-    </li>
-    <li><strong>Click</strong> the <code class="highlighter-rouge">Type</code> selection box at the bottom left of the upload dialog
-      <ul>
-        <li>Change the datatype from <code class="highlighter-rouge">Auto-detect</code> to <code class="highlighter-rouge">fastqsanger</code>.
-<img src="../../images/rules/rules_example_1_7_extension_set.png" alt="screenshot" /></li>
-      </ul>
 
       <p>You are now ready to start the upload</p>
     </li>
@@ -660,7 +656,7 @@ PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/
             <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">C</code></li>
           </ul>
         </li>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">fastqsanger</code></li>
+        <li><em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
       </ul>
 
       <p><img src="../../images/rules/rules_example_2_3_rules.png" alt="screenshot" /></p>
@@ -696,13 +692,13 @@ PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/
           <p><strong>Paste</strong> the following table</p>
 
           <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDB3920	SAMD00034150	DRX036147	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036148	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036149	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036150	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_2.fastq.gz
-PRJDB3920	SAMD00034150	DRX036151	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_2.fastq.gz
-PRJDB3920	SAMD00034153	DRX036152	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_2.fastq.gz
-PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_2.fastq.gz
+PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_2.fastq.gz
+PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_2.fastq.gz
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -724,7 +720,7 @@ PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/D
             <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">C</code></li>
           </ul>
         </li>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">fastqsanger</code></li>
+        <li><em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
       </ul>
 
       <p>In this dataset, column <code class="highlighter-rouge">D</code> contains two URLs, separated by a semicolon <code class="highlighter-rouge">;</code>. So we cannot define that column as the URL directly, we will need to split it into two columns first.
