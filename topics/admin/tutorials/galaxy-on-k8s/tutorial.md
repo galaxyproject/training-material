@@ -168,8 +168,8 @@ configurations while leveraging [BioContainers] for resolving tool dependencies.
 > 1. If you are following this tutorial sequentially and have a release of
 >    Galaxy already running, let's delete it (assuming that's fine and you have
 >    no data to keep). More details about the deletion process are available in
->    the [Deleting a Deployment section](#deleting-a-deployment). If you're
->    just playing around, run `helm delete --purge galaxy`.
+>    the [Deleting a Deployment section](#deleting-a-deployed-helm-release). If
+>    you're just playing around, run `helm delete --purge galaxy`.
 >
 > 2. The CVMFS variant of the Galaxy chart has an additional dependency on the
 >    [Galaxy CVMFS chart](https://github.com/CloudVE/galaxy-cvmfs-csi-chart).
@@ -207,7 +207,7 @@ configurations while leveraging [BioContainers] for resolving tool dependencies.
 >
 {: .hands_on}
 
-## Deleting a Deployed Helm Relase
+## Deleting a Deployed Helm Release
 After we're done experimenting with an installation of the chart, we can just
 as easily delete all the resources as we've created them. However, that may
 not be desirable so make sure you understand the system you're working on to
