@@ -564,7 +564,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >
 >    This will install the new role into your `roles` folder, alongside your own role.
 >
-> 2. Edit your playbook.yml and add the role at the bottom, after `my-role`
+> 2. Edit your playbook.yml and add the role `geerlingguy.git` at the bottom, after `my-role`
 >
 > 3. Run the playbook
 >
