@@ -139,7 +139,7 @@ Hansen, J. P. 2014 highly recommended to remove the probes that contain either a
 
 The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
 
-fr the next step we will need an additional file that annotates illumina450K with genomic features, which we can obtain from UCSC.
+from the next step we will need an additional file that annotates illumina450K with genomic features, which we can obtain from UCSC.
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
