@@ -414,7 +414,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_commit_id: release_19.05
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
->    > > galaxy_file_path: /data
 >    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    > >
 >    > > galaxy_config:
