@@ -542,7 +542,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 3. Change directory into `/srv/galaxy/server`
 > 4. Activate virtualenv (`. ../venv/bin/activate`)
 > 5. `uwsgi --yaml ../config/galaxy.yml`
-> 6. Accces at port `<ip address>:8080` once the server has started
+> 6. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
 ## Supervisord
