@@ -43,7 +43,7 @@ for metabolomic analysis, and shows how to conduct metabolomic data analysis fro
 To illustrate this approach, we will use data from {% cite Thvenot2015 %}. The objectives of this paper was to analyze
 the influence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
 from 183 employees from the French Alternative Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap
-(negative ionization mode) (**TODO** explain the terms).
+(negative ionization mode).
 
 Since the original dataset takes a few hours to be processed, we chose to take a limited subset of individuals for this tutorial.
 This will allow you to perform an example of metabolomic workflow, from pre-processing to annotation, in a limited time, even though
