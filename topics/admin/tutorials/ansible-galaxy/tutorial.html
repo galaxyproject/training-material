@@ -807,7 +807,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
 </blockquote>
 
-<p>You can now login and access the database, but only as the <code class="highlighter-rouge">postgres</code> user. You will need to <code class="highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="highlighter-rouge">psql galaxy</code>. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.</p>
+<p>You can now log in and access the database, but only as the <code class="highlighter-rouge">postgres</code> user. You will need to <code class="highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="highlighter-rouge">psql galaxy</code>. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.</p>
 
 <h2 id="galaxy">Galaxy</h2>
 
@@ -940,7 +940,7 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
           <tr>
             <td><code class="highlighter-rouge">miniconda_prefix</code></td>
-            <td><code class="highlighter-rouge">{{ galaxy_tool_dependency_dir }}/_conda</code></td>
+            <td><code class="highlighter-rouge">"{{ galaxy_tool_dependency_dir }}/_conda"</code></td>
             <td>We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.</td>
           </tr>
         </tbody>
@@ -949,7 +949,7 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Again edit the group variables file and add a variable for <code class="highlighter-rouge">galaxy_config</code>. It will be a hash with one key, <code class="highlighter-rouge">galaxy</code> which will also be a hash. Inside here you can place all of your Galaxy configuration.</p>
 
-      <p>So tthe structure looks like:</p>
+      <p>So the structure looks like:</p>
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
    <span class="na">galaxy</span><span class="pi">:</span>
        <span class="na">key</span><span class="pi">:</span> <span class="s">value</span>
@@ -1124,7 +1124,7 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>Change directory into <code class="highlighter-rouge">/srv/galaxy/server</code></li>
     <li>Activate virtualenv (<code class="highlighter-rouge">. ../venv/bin/activate</code>)</li>
     <li><code class="highlighter-rouge">uwsgi --yaml ../config/galaxy.yml</code></li>
-    <li>Accces at port <code class="highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
+    <li>Access at port <code class="highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
   </ol>
 </blockquote>
 
@@ -1299,7 +1299,7 @@ best practices and knowledge from previous admins codified for you.</p>
   <span class="pi">-</span> <span class="s">galaxy</span>
 </code></pre></div>      </div>
 
-      <p>The <code class="highlighter-rouge">galaxyproject.galaxy</code> role expects to find two files with these names in <code class="highlighter-rouge">templates/nginx/redirect-ssl.j2</code> and <code class="highlighter-rouge">templates/nginx/galaxy.j2</code></p>
+      <p>The <code class="highlighter-rouge">galaxyproject.galaxy</code> role expects to find two files with these names in <code class="highlighter-rouge">templates/nginx/redirect-ssl.j2</code> and <code class="highlighter-rouge">templates/nginx/galaxy.j2</code>. Please be advised that that <code class="highlighter-rouge">templates</code> directory is at the main directory level (at the same level of the <code class="highlighter-rouge">roles</code> directory).</p>
 
       <p>Create the <code class="highlighter-rouge">redirect-ssl.j2</code> with the following contents:</p>
 
@@ -1425,7 +1425,7 @@ changed: [galaxy.example.org]
 
 </blockquote>
 
-<p>And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to login with your old account, everything should just work.</p>
+<p>And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to log in with your old account, and everything should just work.</p>
 
 <p>Ansible can save you from some really bad scenarios, <em>if and only if</em>:</p>
 
