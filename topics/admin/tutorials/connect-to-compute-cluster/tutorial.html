@@ -668,8 +668,13 @@ be taken into consideration when choosing where to run jobs and what parameters 
     <span class="na">slurm_roles</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">controller'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">exec'</span><span class="pi">]</span>
     <span class="na">slurm_nodes</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">localhost</span>
-      <span class="na">CPUs</span><span class="pi">:</span> <span class="s">???</span> <span class="c1"># Here you need to figure out how many cores your machine has. (Hint, `htop`)</span>
+      <span class="na">CPUs</span><span class="pi">:</span> <span class="s">2</span>                              <span class="c1"># Here you would need to figure out how many cores your machine has. (Hint, `htop`)</span>
+    <span class="na">slurm_config</span><span class="pi">:</span>
+      <span class="na">FastSchedule</span><span class="pi">:</span> <span class="s">2</span>                      <span class="c1"># Ignore errors if the host actually has cores != 2</span>
+      <span class="na">SelectType</span><span class="pi">:</span> <span class="s">select/cons_res</span>
+      <span class="na">SelectTypeParameters</span><span class="pi">:</span> <span class="s">CR_CPU_Memory</span>  <span class="c1"># Allocate individual cores/memory instead of entire node</span>
   <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
     <span class="pi">-</span> <span class="s">galaxyproject.slurm</span>
 </code></pre></div>      </div>
     </li>
@@ -679,6 +684,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
   </ol>
 
 </blockquote>
+
+<p>Note that the above Slurm config options are only those that are useful for this training exercise. In production, you would want to use a more appropriate configuration specific to your cluster (and setting <code class="highlighter-rouge">FastSchedule</code> to <code class="highlighter-rouge">2</code> is not recommended).</p>
 
 <p>Installed with Slurm is MUNGE (MUNGE Uid ‘N Gid Emporium…) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in <code class="highlighter-rouge">/etc/munge/munge.key</code>) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you’ll run jobs only on a single host.</p>
 
@@ -1158,7 +1165,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook, and restart Galaxy with <code class="highlighter-rouge">sudo supervisorctl restart all</code>.</p>
+      <p>Run the playbook. Because we modified <code class="highlighter-rouge">job_conf.xml</code>, Galaxy will be restarted to reread its config files.</p>
     </li>
     <li>
       <p>Click the rerun button on the last history item, or click <strong>Testing Tool</strong> in the tool panel, and then click the tool’s Execute button.</p>
@@ -1290,7 +1297,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
   <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="na">tool_destinations_config_file</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_config_dir</span> <span class="pi">}}</span><span class="s">/tool_destinations.yml</span>
+    <span class="na">tool_destinations_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/tool_destinations.yml"</span>
 <span class="nn">...</span>
 <span class="na">galaxy_config_files</span><span class="pi">:</span>
     <span class="s">...</span>
@@ -1408,7 +1415,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
     &lt;tool id="testing" destination="slurm-2c"/&gt;
     &lt;tool id="testing" destination="dtd"/&gt;
     --&gt;</span>
-    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"testing"</span> <span class="na">destination=</span><span class="s">"dynamic_cores_time"</span> <span class="na">resources=</span><span class="s">"testing_resources"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"testing"</span> <span class="na">destination=</span><span class="s">"dynamic_cores_time"</span> <span class="na">resources=</span><span class="s">"testing"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/tools&gt;</span>
 </code></pre></div>      </div>
     </li>
