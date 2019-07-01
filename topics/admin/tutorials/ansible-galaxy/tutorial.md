@@ -373,7 +373,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
->    So tthe structure looks like:
+>    So the structure looks like:
 >    ```yaml
 >    galaxy_config:
 >       galaxy:
