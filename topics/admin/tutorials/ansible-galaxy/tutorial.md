@@ -291,7 +291,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 {: .hands_on}
 
-You can now login and access the database, but only as the `postgres` user. You will need to `sudo -iu postgres` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
+You can now log in and access the database, but only as the `postgres` user. You will need to `sudo -iu postgres` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
 
 
 ## Galaxy
@@ -373,7 +373,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
->    So tthe structure looks like:
+>    So the structure looks like:
 >    ```yaml
 >    galaxy_config:
 >       galaxy:
@@ -542,7 +542,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 3. Change directory into `/srv/galaxy/server`
 > 4. Activate virtualenv (`. ../venv/bin/activate`)
 > 5. `uwsgi --yaml ../config/galaxy.yml`
-> 6. Accces at port `<ip address>:8080` once the server has started
+> 6. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
 ## Supervisord
@@ -823,7 +823,7 @@ But not you! You spent the day writing this Ansible playbook that describes your
 >
 {: .hands_on}
 
-And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to login with your old account, everything should just work.
+And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to log in with your old account, and everything should just work.
 
 Ansible can save you from some really bad scenarios, *if and only if*:
 
