@@ -240,7 +240,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 4. Create your inventory file, name it `hosts`, in the folder you have just entered.
 >
->    - You are installing ansible on the machine it will be used to manage
+>    - You are installing ansible on a machine that will manage a second, remote machine
 >
 >      1. Make sure you can SSH into it. Test it now.
 >
@@ -258,7 +258,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >         > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
 >         {: .solution }
 >
->    - You are installing ansible on a machine that will manage a second, remote machine
+>    - You are installing ansible on the machine it will be used to manage
 >
 >      1. We will call our group `my_hosts`
 >
