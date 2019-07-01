@@ -83,11 +83,9 @@ used worldwide by a huge community of specialists in metabolomics using mass spe
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software.
 
-**XCMS** {% icon tool %} is able to read files with open format as `mzXML`, `mzMl`, `mzData` and `netCDF`, which are independent of the constructors' formats. It is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
+**MSnbase readMSData** {% icon tool %}, prior to **XCMS** {% icon tool %} is able to read files with open format as `mzXML`, `mzMl`, `mzData` and `netCDF`, which are independent of the constructors' formats. The **XCMS** {% icon tool %} package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
 adducts and fragments using the R package CAMERA ({% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well
-adapted to define workflows, one of the key points of Galaxy:
-
-![Preprocessing of the raw data with XCMS (in blue)](../../images/tutorial-lcms-data-import-run-workflow.png)
+adapted to define workflows, one of the key points of Galaxy.
 
 
 ## Importing the LC/MS data into Galaxy
