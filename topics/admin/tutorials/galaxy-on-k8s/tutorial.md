@@ -96,8 +96,8 @@ for the time being.
 >
 >   {% raw %}
 >   ```console
->   git clone https://github.com/CloudVE/galaxy-kubernetes
->   cd galaxy-kubernetes/galaxy
+>   git clone https://github.com/galaxyproject/galaxy-helm
+>   cd galaxy-helm/galaxy
 >   ```
 >   {% endraw %}
 {: .hands_on}
@@ -261,7 +261,7 @@ topics, take a look at the [Galaxy Helm chart] repository as well as
 on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG].
 
 
-[Galaxy Helm chart]: https://github.com/CloudVE/galaxy-kubernetes
+[Galaxy Helm chart]: https://github.com/galaxyproject/galaxy-helm
 [DfD]: https://www.docker.com/products/kubernetes
 [SC]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [PV]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
