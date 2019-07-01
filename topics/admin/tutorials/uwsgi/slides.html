@@ -194,18 +194,40 @@ Press `P` again to switch presenter notes off
 
 # What is uWSGI?
 
-- Web/application/WSGI server
-- Works around the GIL without manually managing multiple Galaxy processes
+- HTTP server
+- WSGI (Web Server Gateway Interface) client
+- Application framework
+- Process manager
+
+---
+
+# Why do we need uWSGI?
+
+- Galaxy is a Python web application without a web server
+- Implements standard Python WSGI
+- Some other application does the web serving
+- Technically we could use any HTTP/WSGI interface (traditionally [Python Paste](https://github.com/cdent/paste/))
+
+---
+
+# What is uWSGI used for?
+
+- In a production Galaxy server, to start, manage, and scale web workers
+- Optionally, to start, manage, and scale job handlers
+
+---
+
+# Why uWSGI?
 
 ![Python GIL](../../images/gil.png)
 
 .footnote[Image credit: [Dariusz Fryta](http://www.tivix.com/blog/lets-go-python/)]
 
 ---
+
 # Why uWSGI?
 
 - Isolate job functions from web functions
-  - Can be done with Paste, but uWSGI does it better/simpler
 - Built in load balancing
 - Speak native high performance uWSGI protocol to nginx
 - Uninterrupted restarting
@@ -263,7 +285,7 @@ Behind the scenes, `run.sh` calls `scripts/get_uwsgi_args.py`, which:
 - determines the flags needed to run Galaxy
 
 You can take &quot;full control&quot; over this process by skipping `run.sh` and simply
-calling `uwsgi` directly.
+calling `uwsgi` directly, e.g. `uwsgi --yaml config/galaxy.yml`.
 
 ---
 # uWSGI communication
@@ -370,22 +392,6 @@ The uWSGI wheel is built differently than when built from source with `pip insta
   - The only way to precompile uWSGI in a way that does not require libpython2.7.so or ship CPython
 
 ---
-class: middle, top-title, largeish
-
-## uWSGI Wheel
-
-What does this all mean?
-
-Usefulness of the wheel for production servers:
-- You aren't redeploying Galaxy repeatedly
-- Performing `pip install uwsgi` and waiting 10 seconds is no big deal
-- You can also install uWSGI from the system package manager
-
-We have found, reported, and fixed a few bugs with uWSGI-as-shared-library, there are still some outstanding
-
-Installing uWSGI from source via `pip` or the system package manager is still a reasonable approach for production servers
-
----
 class: middle, top-title
 
 ## uWSGI
@@ -399,7 +405,7 @@ class: middle, top-title
 
 uWSGI will run and control a configured number of *anonymous processes* to **serve web requests**
 
-These processes **do not** handle jobs. For this, we start additional processes called *job handlers*
+These processes **do not** handle jobs unless using the default job config. For this, we start additional processes called *job handlers*
 
 Job handlers are run as [uWSGI Mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html)
 
@@ -473,7 +479,7 @@ class: middle, top-title, largeish
 1. Master process loads Galaxy
 2. Master `fork()`s web worker processes
 3. Master `fork()`s job handler mules
-4. Mules reload Galaxy as job handlers
+4. Mules reload Galaxy application as job handlers
 5. The first mule to fully initialize grabs a lock on the message queue
 6. All additional mules wait on the lock
 7. A web worker receives a request for a new job
@@ -486,22 +492,22 @@ class: middle, top-title, largeish
 ---
 class: middle, top-title, center
 
-## Mule Messaging Implementation
+## Job Configuration
 
-Mule messaging is simply a socket open between the processes - it is up to you to implement the protocol
+All of the handler-mapping functionality available with webless servers is also supported by mules
 
-For this, we developed a generic JSON-based message format and routing system so that any Galaxy component can utilize mules
-
-This leaves many possibilities for offloading work across Galaxy
+Tools can be statically or dynamically mapped to specific mules
 
 ---
 class: middle, top-title, center
 
-## Job Configuration
+## Advanced: Job Handler Assignment Methods
 
-All of the previous handler-mapping functionality is still supported with mules
+Galaxy 19.01 and later has the ability to use a queue-like structure for job handler assignment for traditional webless servers
 
-Tools can be statically or dynamically mapped to specific mules
+See [Job Handler Assignment Methods](https://docs.galaxyproject.org/en/master/admin/scaling.html#job-handler-assignment-methods) for details.
+
+Mules are preferred in scenarios where webless handlers are not needed.
 
 
 ---
