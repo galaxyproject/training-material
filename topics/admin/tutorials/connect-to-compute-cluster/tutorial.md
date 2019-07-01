@@ -536,7 +536,9 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >        </tools>
 >    ```
 >
-> 3. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
+> 3. Run the playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
+>
+> 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
 >    > ### {% icon question %} Question
 >    >
