@@ -353,7 +353,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > > TASK [my-role : Copy] **************************
 >     > > changed: [localhost]
 >     > > PLAY RECAP *************************************
->     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0
+>     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 >     > > ```
 >     > >
 >     > > You can re-run this and it should say `changed=0`
