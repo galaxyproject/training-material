@@ -754,7 +754,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >        <tool id="testing" destination="slurm-2c"/>
 >        <tool id="testing" destination="dtd"/>
 >        -->
->        <tool id="testing" destination="dynamic_cores_time" resources="testing_resources"/>
+>        <tool id="testing" destination="dynamic_cores_time" resources="testing"/>
 >    </tools>
 >    ```
 > 5. We have assigned the `testing` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination in your job conf:
