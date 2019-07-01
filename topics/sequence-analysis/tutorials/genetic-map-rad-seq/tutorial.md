@@ -130,7 +130,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. Here, the catalog is made with 459 tags, 425 coming from the "reference individual", a female. Some of these 425 can be shared with the other parent.
->    > > 2. 3500
+>    > > 2. 35 / 34 / 390
 >    > {: .solution }
 >    {: .question}
 >    `sstacks`
