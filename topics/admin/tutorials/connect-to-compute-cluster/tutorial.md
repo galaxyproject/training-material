@@ -648,7 +648,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```yml
 >    galaxy_config:
 >      galaxy:
->        tool_destinations_config_file: {% raw %}{{ galaxy_config_dir }}/tool_destinations.yml{% endraw %}
+>        tool_destinations_config_file: {% raw %}"{{ galaxy_config_dir }}/tool_destinations.yml"{% endraw %}
 >    ...
 >    galaxy_config_files:
 >        ...
