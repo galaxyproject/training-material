@@ -291,7 +291,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 {: .hands_on}
 
-You can now login and access the database, but only as the `postgres` user. You will need to `sudo -iu postgres` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
+You can now log in and access the database, but only as the `postgres` user. You will need to `sudo -iu postgres` first, and then you can run `psql galaxy`. The database will currently be empty as Galaxy has never connected to it yet. Once you install Galaxy in the next step, the database will be populated.
 
 
 ## Galaxy
@@ -824,7 +824,7 @@ But not you! You spent the day writing this Ansible playbook that describes your
 >
 {: .hands_on}
 
-And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to login with your old account, everything should just work.
+And with that, Galaxy should be up and running again. If you log in, you should see the results of any jobs you ran earlier, you should still be able to log in with your old account, everything should just work.
 
 Ansible can save you from some really bad scenarios, *if and only if*:
 
