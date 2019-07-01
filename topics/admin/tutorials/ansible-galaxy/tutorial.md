@@ -703,7 +703,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >      - galaxy
 >    ```
 >
->    The `galaxyproject.galaxy` role expects to find two files with these names in `templates/nginx/redirect-ssl.j2` and `templates/nginx/galaxy.j2`
+>    The `galaxyproject.galaxy` role expects to find two files with these names in `templates/nginx/redirect-ssl.j2` and `templates/nginx/galaxy.j2`. Please be advised that that `templates` directory is at the main directory level (at the same level of the `roles` directory).
 >
 >    Create the `redirect-ssl.j2` with the following contents:
 >
