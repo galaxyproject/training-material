@@ -1,7 +1,11 @@
 
 > ### {% icon tip %} Tip: Add Mapped reads track to IGV from Galaxy
-> - Have IGV installed and running on your computer with the genome you used to perform you alignment.
-> - Unfold the `bam` dataset of your genome in the history
-> - Click `display with IGV local`
-> - You can look at your IGV instance, the mapped reads track should appear. (Be careful that all your files have the same genome ID)
+> 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)
+> 2. Launch IGV on your computer
+> 3. Check if the reference genome is available on the IGV instance
+> 4. Expand the BAM dataset with the mapped reads in the history
+> 5. Click on the `local` in `display with IGV` to load the reads into the IGV browser
+> 6. Switch to the IGV instance
+> 
+>    The mapped reads track should appear. Be sure that all files have the same genome ID
 {: .tip}

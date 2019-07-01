@@ -174,7 +174,7 @@ This fasta file contains the barcodes for each condition:
 
 We can see 2 barcodes there: one for control and one for condition.
 
-> ### {% icon comment %} Hands-on: Barcode symbols used by **Cutadapt**
+> ### {% icon comment %} Comment: Barcode symbols used by **Cutadapt**
 >
 > The `^` at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by **Cutadapt**, you check the [**Cutadapt** manual](https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types).
 {: .comment}
