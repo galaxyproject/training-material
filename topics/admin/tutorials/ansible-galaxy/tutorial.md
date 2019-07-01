@@ -594,7 +594,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >        ...
 >    ```
 >
-> 4. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform `galaxyproject.galaxy` what the name of our new handler is. Add the following to your group variables file:
+> 4. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform `galaxyproject.galaxy` what the name of our new handler is. Add the following to the bottom of your group variables file:
 >
 >    ```yaml
 >    supervisor_socket_user: galaxy
