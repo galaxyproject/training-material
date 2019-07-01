@@ -27,14 +27,14 @@ tags:
   - kubernetes
 ---
 
-# Managing Galaxy on k8s
+# Managing Galaxy on Kubernetes
 
 ## Overview
 {:.no_toc}
 
-A primary advantage of Galaxy on Kubernetes is the ease with which common
+A primary advantage of Galaxy on Kubernetes (K8s) is the ease with which common
 administrative tasks can be performed reliably and without disruption of
-service. In particular, because of containerization, k8s provides a significant
+service. In particular, because of containerization, Kubernetes provides a significant
 advantage over managing individual virtual machines, where updates to system
 libraries or components can cause unexpected breakage of dependent components.
 With containerization, this becomes a simpler problem of swapping out a
@@ -48,8 +48,8 @@ performed on the underlying node without disruption of service.
 
 In this section, we will look at how to perform common management tasks on
 a Galaxy deployment on Kubernetes, including
-- how to upgrade a deployment
-- change the configuration of a running Galaxy instance
+- How to upgrade a deployment
+- Change the configuration of a running Galaxy instance
 - Map arbitrary files into Galaxy's config folder
 - Rollback changes in the case of an error
 - Scale the number of job and web handlers
@@ -64,12 +64,12 @@ a Galaxy deployment on Kubernetes, including
 
 ## Prerequisites
 This tutorial builds on the material of the previous
-[tutorial]({{ site.baseurl }}/topics/admin/tutorials/galaxy-on-k8s/tutorial.md)
+[tutorial]({{ site.baseurl }}/topics/admin/tutorials/galaxy-on-k8s/tutorial.html)
 and we recommend following it first to setup the required environment.
 You must have some familiarity with Helm commands, know how to change values
-in a Helm Chart and how to use the kubectl command.
+in a Helm Chart and how to use the `kubectl` command.
 
-# Changing the configuration of a Galaxy instance 
+# Changing the configuration of a Galaxy instance
 We will start off by looking at how to change the configuration of a Galaxy
 instance. We will first reduce the number of tools that are loaded for faster
 startup, and then change some common settings in `galaxy.yml`.
@@ -149,7 +149,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >
 >    Note that the content below is the same as the `configs` section of `values-cvmfs.yaml`
 >    in your helm chart, except that the `tool_config_file` entry is pointing to your custom
->    tool list instead of the full list from cvmfs.
+>    tool list instead of the full list from CVMFS.
 >
 >    {% raw %}
 >    ```yaml
@@ -201,7 +201,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    option will set the value of the `configs.my_tool_conf.xml`
 >    key in your values file to the contents of the specified file, as a text
 >    string. Each file under `configs` is automatically mapped into galaxy's config
->    directory within the docker container. 
+>    directory within the docker container.
 >
 > 4. Notice that while the chart is upgrading, the existing version continues
 >    to function. The change over will occur when the new container is online
@@ -242,7 +242,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    ```
 >    {% endraw %}
 >
->    Now run `ls /galaxy/server/config/` and note that the galaxy.yml contains
+>    Now run `ls /galaxy/server/config/` and note that the `galaxy.yml` contains
 >    the content that you've provided and that `my_tool_conf.xml` has also been
 >    mapped into the config folder. In this same way, any of Galaxy's config
 >    files can be overridden by simply mapping in the relevant file into the
@@ -251,7 +251,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 
 ## Setting the admin user and changing the brand
 
-Next, we will set the admin user and change the brand in galaxy.yml. We will
+Next, we will set the admin user and change the brand in `galaxy.yml`. We will
 rollback our change to understand how Helm manages configuration.
 
 > ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
@@ -281,7 +281,7 @@ rollback our change to understand how Helm manages configuration.
 >    ```
 >    {% endraw %}
 >
-> 4. List the installed helm charts again and note that the revision of the chart has changed as expected.
+> 4. List the installed Helm charts again and note that the revision of the chart has changed as expected.
 >
 >    {% raw %}
 >    ```console
@@ -309,8 +309,8 @@ rollback our change to understand how Helm manages configuration.
 
 # Scaling Galaxy
 
-In Galaxy k8s, there are two containers by default, one web handler and one
-job handler. We will now look at how these can be scaled.
+In Galaxy deployment on Kubernetes, there are two containers by default, one
+web handler and one job handler. We will now look at how these can be scaled.
 
 > ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
 >
@@ -334,7 +334,7 @@ job handler. We will now look at how these can be scaled.
 >    ```
 >    {% endraw %}
 >
-> 3. Check whether the new replicas have been created. 
+> 3. Check whether the new replicas have been created.
 >
 >    {% raw %}
 >    ```console
@@ -356,21 +356,21 @@ job handler. We will now look at how these can be scaled.
 >    ```
 >    {% endraw %}
 >
->    You will notice that k8s automatically load balances requests between the
+>    You will notice that Kubernetes automatically load balances requests between the
 >    available web handler replicas in a round-robin fashion.
 >
 {: .hands_on}
 
-# Testing k8s resilience
+# Testing Kubernetes resilience
 
-To observe how k8s handles failures, let’s exec into a running container and
-manually kill a process to simulate a possible process failure. k8s
+To observe how Kubernetes handles failures, let’s exec into a running container and
+manually kill a process to simulate a possible process failure. Kubernetes
 continuously monitors running containers, and attempts to bring the environment
 back to the “desired” state. The moment it notices a failure, it will respawn
-a new pod to replace the failed one. Typically, a k8s container will also
+a new pod to replace the failed one. Typically, a Kubernetes container will also
 have a [liveness probe][k8sliveness] defined. A liveness probe can be an http
 request to a port, or even a manually executed shell script, which will test
-whether the relevant container is healthy, and if not, k8s will immediately
+whether the relevant container is healthy, and if not, Kubernetes will immediately
 provision a new replacement.
 
 > ### {% icon hands_on %} Hands-on: Handling failures
@@ -395,7 +395,7 @@ provision a new replacement.
 >    ```
 >    {% endraw %}
 >
-> 2. Now kill the main container process. 
+> 2. Now kill the main container process.
 >
 >    {% raw %}
 >    ```console
@@ -403,10 +403,10 @@ provision a new replacement.
 >    ```
 >    {% endraw %}
 >
-> 3. Notice how k8s immediately starts a new pod to replace the failed one,
+> 3. Notice how Kubernetes immediately starts a new pod to replace the failed one,
 >    bringing the environment back to the desired state. Take a look at the
 >    liveness probe defined for the galaxy web container in your helm chart
->    source code (templates/deployment_web.yaml).
+>    source code (`templates/deployment_web.yaml`).
 >
 {: .hands_on}
 
@@ -438,7 +438,7 @@ startup, administering and managing storage, building custom Galaxy containers
 with desired modifications etc. For more info on some of these
 topics, take a look at the [Galaxy Helm chart] repository as well as
 [other tutorials](../..) tagged with _kubernetes_. Also, feel free to reach out
-on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG]. 
+on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG].
 
 
 [fedG]: https://gitter.im/galaxyproject/FederatedGalaxy

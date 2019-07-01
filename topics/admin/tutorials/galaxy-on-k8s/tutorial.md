@@ -207,7 +207,7 @@ configurations while leveraging [BioContainers] for resolving tool dependencies.
 >
 {: .hands_on}
 
-## Deleting a Deployment
+## Deleting a Deployed Helm Relase
 After we're done experimenting with an installation of the chart, we can just
 as easily delete all the resources as we've created them. However, that may
 not be desirable so make sure you understand the system you're working on to
@@ -216,7 +216,7 @@ generally not a problem where the processes will just respawn and everything wil
 interfere here with all the application data being potentially lost. This
 predominantly depends on how the relevant storage class was configured.
 
-> ### {% icon hands_on %} Hands-on: Deleting a Deployment
+> ### {% icon hands_on %} Hands-on: Deleting a Deployed Helm Release
 >
 > 1. Before we delete a deployment, let's ensure we understand what will happen
 >    with the underlying storage used by Galaxy.
