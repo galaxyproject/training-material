@@ -61,7 +61,7 @@ The workflow is composed of 4 main parts:
   3. **Statistical Analysis** highlights interesting information inside the data
   4. **Annotation** puts a name on selected variables
 
-![The full tutorial workflow](../../images/tutorial-lcms-workflow.png)
+[![The full tutorial workflow](../../images/tutorial-lcms-workflow.png)](../../images/tutorial-lcms-workflow.png)
 
 > ### Agenda
 >
