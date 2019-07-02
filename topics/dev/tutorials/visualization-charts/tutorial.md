@@ -101,7 +101,8 @@ with the plugin.
 
 
 ## Section 1 - Basic plugin setup
-### 1.1 Directory and plugin preparations
+
+### Directory and plugin preparations
 
 In this section we will download the viewer and add it to a local *Galaxy*
 instance. All development takes place within the *Galaxy* codebase. The first
@@ -140,7 +141,7 @@ In the following sections we are going to discuss these files in more detail and
 modify them to incorporate a new visualization. Let's start with the logo for
 our visualization.
 
-### 1.2 Your visualization needs a logo
+### Your visualization needs a logo
 
 Each visualization is represented by a logo in the Galaxy interface. This makes
 it easier for users to find and configure their visualization. The logo should
@@ -157,7 +158,7 @@ Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 > 2. Copy it to the `myviz/static` directory and name it `logo.png`.
 {: .hands_on}
 
-### 1.3 Configure the visualization
+### Configure the visualization
 
 Each visualization has a configuration file. In this case it is named
 `example.xml`. This file has conceptual similarities with a Tool's XML-file. It
@@ -188,7 +189,7 @@ Your visualization should now be loaded.  You can verify that now by clicking
 on `Visualize > Create Visualization` in the top menu bar of Galaxy and finding
 your plugin with its new logo in the list there.
 
-### 1.4 Assign a new datatype to your visualization
+### Assign a new datatype to your visualization
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -205,7 +206,7 @@ your plugin with its new logo in the list there.
 This links the plugins to the `PDB`-file format, which means that for any
 history item of this file type the plugin will automatically be available.
 
-### 1.4 Modifying the wrapper
+### Modifying the wrapper
 
 Now let's take a look at the wrapper which connects our visualization with
 Galaxy. The wrapper consists of a module written in *JavaScript* and is
@@ -274,7 +275,7 @@ Now that we have learned the basics on how the viewer plugin works, we can edit 
 >     ```
 {: .hands_on}
 
-### 1.5 Build the package
+### Build the package
 
 Now that we have completed the basic plugin definition, it is time to build the
 scripts and libraries into a single bundle that Galaxy can use.  Galaxy
@@ -315,7 +316,7 @@ instance, just make sure to properly refresh your browser.
 
 Lets test this.
 
-### 1.6 Test the visualization
+### Test the visualization
 
 In this section we will select a `PDB`-file from the Protein Data Bank and visualize it with our new plugin.
 
