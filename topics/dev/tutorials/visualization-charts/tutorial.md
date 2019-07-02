@@ -225,7 +225,7 @@ In this tutorial we will implement the *PV-Viewer* plugin. In order to execute a
 a working example or documentation. Fortunately the *PV-Viewer* comes with both.
 Let's take a look at the [documentation](https://pv.readthedocs.io/).
 
-> ### {% icon hands_on %} Question and answer
+> ### {% icon hands_on %} Exploring the PV-Viewer
 >
 > 1. Identify the parameter which is needed to initialize the plugin when calling [*pv.Viewer()*](https://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer).
 >
