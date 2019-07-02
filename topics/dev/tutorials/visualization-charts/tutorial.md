@@ -172,9 +172,11 @@ this file but for now we keep it simple.
 >
 > 2. Edit the file named `config/myviz.xml` and change the name and description.
 >
-> 3. Go to the your Galaxy root directory and repack the scripts
+> 3. Go to the Galaxy root directory to install dependencies, activate the virtual environment, and invoke the Galaxy client build.
 >    ```bash
 >    $ cd $GALAXY_ROOT
+>    $ make setup-venv
+>    $ source .venv/bin/activate
 >    $ make client
 >    ```
 >
