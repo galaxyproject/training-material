@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Galaxy Installation on Kubernetes"
+level: "Intermediate"
 questions:
 - How do I deploy Galaxy on Kubernetes using Helm?
 - How can I create a simple replica of usegalaxy.org?
@@ -20,6 +21,11 @@ contributors:
   - ic4f
 tags:
   - kubernetes
+follow_up_training:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - k8s-managing-galaxy
 ---
 
 # Galaxy Helm Chart
@@ -95,7 +101,7 @@ for the time being.
 >   Galaxy and change into the chart directory.
 >
 >   {% raw %}
->   ```console
+>   ```bash
 >   git clone https://github.com/galaxyproject/galaxy-helm
 >   cd galaxy-helm/galaxy
 >   ```
@@ -129,7 +135,7 @@ chart later in this tutorial.
 >    charts and integrating them into the Galaxy chart.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm dependency update
 >    ```
 >    {% endraw %}
@@ -140,7 +146,7 @@ chart later in this tutorial.
 >    Helm release (i.e., chart installation) called `galaxy`.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm install --name galaxy .
 >    ```
 >    {% endraw %}
@@ -178,7 +184,7 @@ configurations while leveraging [BioContainers] for resolving tool dependencies.
 >    repository instead of its GitHub repo.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl create namespace cvmfs
 >    helm repo add cloudve https://raw.githubusercontent.com/CloudVE/helm-charts/master/
 >    helm repo update
@@ -191,7 +197,7 @@ configurations while leveraging [BioContainers] for resolving tool dependencies.
 >    (where the `values.yaml`, and `values-cvmfs.yaml`, files reside).
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm install --name galaxy -f values-cvmfs.yaml cloudve/galaxy
 >    ```
 >    {% endraw %}
@@ -222,7 +228,7 @@ predominantly depends on how the relevant storage class was configured.
 >    with the underlying storage used by Galaxy.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    $ kubectl get pv
 >    NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                                   STORAGECLASS      REASON   AGE
 >    cvmfs-cache-pv                             1000Mi     RWX            Retain           Bound    cvmfs/cvmfs-cache-pvc                   manual                     31m
@@ -244,7 +250,7 @@ predominantly depends on how the relevant storage class was configured.
 >
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm delete --purge galaxy
 >    helm delete --purge cvmfs
 >    ```

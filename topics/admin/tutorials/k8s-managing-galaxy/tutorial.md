@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Managing Galaxy on Kubernetes"
+level: "Intermediate"
 questions:
 - How do I change Galaxy configs?
 - How can I upgrade to a new version?
@@ -25,6 +26,11 @@ contributors:
   - ic4f
 tags:
   - kubernetes
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - k8s-deploying-galaxy
 ---
 
 # Managing Galaxy on Kubernetes
@@ -32,7 +38,7 @@ tags:
 ## Overview
 {:.no_toc}
 
-A primary advantage of Galaxy on Kubernetes (K8s) is the ease with which common
+A primary advantage of Galaxy on [Kubernetes](https://kubernetes.io/) is the ease with which common
 administrative tasks can be performed reliably and without disruption of
 service. In particular, because of containerization, Kubernetes provides a significant
 advantage over managing individual virtual machines, where updates to system
@@ -191,7 +197,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    `galaxy.yml` by running the helm upgrade command.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm upgrade --reuse-values --set-file "configs.my_tool_conf\.xml"=my_configs/my_tool_conf.xml --set-file "configs.galaxy\.yml"=my_configs/galaxy.yml galaxy cloudve/galaxy
 >    ```
 >    {% endraw %}
@@ -214,7 +220,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    our changes if they are incorrect. This will be covered in a later section.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm list
 >    NAME  	REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
 >    cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	galaxy-cvmfs-csi-1.0.1	1.0        	cvmfs
@@ -226,7 +232,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    mapped in. First, let's get a list of running pods.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl get pods
 >    NAME                          READY   STATUS    RESTARTS   AGE
 >    galaxy-galaxy-postgres-0      1/1     Running   0          2d6h
@@ -237,7 +243,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >
 >    Exec into the web pod by running:
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl exec -it galaxy-web-7568c58b94-jzkvm /bin/bash
 >    ```
 >    {% endraw %}
@@ -259,7 +265,7 @@ rollback our change to understand how Helm manages configuration.
 > 1. Modify the following entries in your `galaxy.yml`.
 >
 >    {% raw %}
->    ```console
+>    ```
 >    brand: "Hello GCC2019"
 >    admin_users: "admin@mydomain.com"
 >    ```
@@ -268,7 +274,7 @@ rollback our change to understand how Helm manages configuration.
 > 2. Now, let’s upgrade the chart to apply the new configuration.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm upgrade --reuse-values --set-file "configs.galaxy\.yml"=my_configs/galaxy.yml galaxy cloudve/galaxy
 >    ```
 >    {% endraw %}
@@ -276,7 +282,7 @@ rollback our change to understand how Helm manages configuration.
 > 3. Inspect the currently set helm values by:
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm get values galaxy
 >    ```
 >    {% endraw %}
@@ -284,7 +290,7 @@ rollback our change to understand how Helm manages configuration.
 > 4. List the installed Helm charts again and note that the revision of the chart has changed as expected.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm list
 >    NAME  	REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
 >    cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	galaxy-cvmfs-csi-1.0.1	1.0        	cvmfs
@@ -295,7 +301,7 @@ rollback our change to understand how Helm manages configuration.
 > 5. Let’s now roll back to the previous revision.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm rollback galaxy 2
 >    ```
 >    {% endraw %}
@@ -329,7 +335,7 @@ web handler and one job handler. We will now look at how these can be scaled.
 > 2. Let’s increase the number of web handlers by simply setting new values for the number of replicas.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm upgrade --reuse-values --set webHandlers.replicaCount=2 galaxy cloudve/galaxy
 >    ```
 >    {% endraw %}
@@ -337,7 +343,7 @@ web handler and one job handler. We will now look at how these can be scaled.
 > 3. Check whether the new replicas have been created.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl get pods
 >    NAME                          READY   STATUS    RESTARTS   AGE
 >    galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
@@ -351,7 +357,7 @@ web handler and one job handler. We will now look at how these can be scaled.
 >    as expected.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl logs -f galaxy-web-7c9576cf89-r6rcj
 >    ```
 >    {% endraw %}
@@ -378,7 +384,7 @@ provision a new replacement.
 > 1. First list the available pods.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl get pods
 >    NAME                          READY   STATUS    RESTARTS   AGE
 >    galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
@@ -390,7 +396,7 @@ provision a new replacement.
 >
 >    Then exec into one:
 >    {% raw %}
->    ```console
+>    ```bash
 >    kubectl exec -it galaxy-web-7c9576cf89-r6rcj /bin/bash
 >    ```
 >    {% endraw %}
@@ -398,7 +404,7 @@ provision a new replacement.
 > 2. Now kill the main container process.
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    kill 1
 >    ```
 >    {% endraw %}
@@ -420,7 +426,7 @@ related containers.
 > 1. To permanently delete the Galaxy release, run:
 >
 >    {% raw %}
->    ```console
+>    ```bash
 >    helm delete --purge galaxy
 >    ```
 >    {% endraw %}
@@ -443,3 +449,4 @@ on Gitter: [https://gitter.im/galaxyproject/FederatedGalaxy][fedG].
 
 [fedG]: https://gitter.im/galaxyproject/FederatedGalaxy
 [k8sliveness]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+[Galaxy Helm chart]: https://github.com/galaxyproject/galaxy-helm
