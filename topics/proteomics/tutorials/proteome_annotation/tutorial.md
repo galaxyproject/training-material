@@ -42,7 +42,7 @@ Once identified and/or quantified using a MS-based approach, interpreting the pr
 
 # Get Input Datasets
 
-For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published ( {% Bredberg2011 %} and {% cite Muccilli2015 %}).
+For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published ( {% cite Bredberg2011 %} and {% cite Muccilli2015 %}).
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
