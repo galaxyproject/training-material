@@ -521,7 +521,7 @@ name: bioblend
 - http://docs.python-requests.org/
 - https://bioblend.readthedocs.org/
 - C. Sloggett, N. Goonasekera, E. Afgan. BioBlend: automating pipeline analyses within Galaxy and CloudMan. *Bioinformatics* 29(13), 1685-1686, 2013, doi:[10.1093/bioinformatics/btt199](https://doi.org/10.1093/bioinformatics/btt199)
-- S. Leo, L. Pireddu, G. Cuccuru, L. Lianas, N. Soranzo, E. Afgan, G. Zanetti. BioBlend.objects: metacomputing with Galaxy. *Bioinformatics* 30 (19), 2816-2817, 2014, [doi:10.1093/bioinformatics/btu386](https://doi.org/10.1093/bioinformatics/btt199)
+- S. Leo, L. Pireddu, G. Cuccuru, L. Lianas, N. Soranzo, E. Afgan, G. Zanetti. BioBlend.objects: metacomputing with Galaxy. *Bioinformatics* 30 (19), 2816-2817, 2014, [doi:10.1093/bioinformatics/btu386](https://doi.org/10.1093/bioinformatics/btu386)
 
 ---
 
@@ -573,24 +573,11 @@ name: familiar
 name: launch
 ## Launching a Galaxy job
 
-* Understanding the **run_tool** method:
-  * The help command lets the user know what the arguments are
-    ```python
-    help(gi.tools.run_tool)
-    ```
-    ```python
-    run_tool(self, history_id, tool_id, tool_inputs)
-      Runs tool specified by tool_id in history indicated
-      by history_id with inputs from dict tool_inputs
-      :param history_id: encoded ID of the history in which to run the tool
-      :param tool_id: ID of the tool to be run
-      :param tool_inputs: dictionary of input datasets and parameters
-          for the tool (see below)
-      The tool_inputs dict should contain input datasets and parameters
-      in the (largely undocumented) format used by the Galaxy API.
-    ```
-
-* To recap, in this first part, we need to retrieve:
+* Let's look at the help for the **run_tool** method:
+  ```python
+  help(gi.tools.run_tool)
+  ```
+* The help should tell you that `run_tool` needs 3 inputs:
   1. A *history_id*, where the input data is and where the output data will be
   2. A *tool_id*, which will tell Galaxy which tool to execute
   3. *tool_inputs*, a dictionary storing the data used to run the tool
@@ -775,23 +762,10 @@ name: workflow
 ## Workflows Object (1/2)
 
 * We are going to use the same process now to launch a workflow
-* To know what are the elements needed:
+* To know what are the inputs needed:
 
   ```python
   help(gi.workflows.run_workflow)
-  ```
-
---
-
-  ```python
-  run_workflow(self, workflow_id, dataset_map=None, params=None, history_id=None,
-      history_name=None, import_inputs_to_history=False, replacement_params=None)
-      method of bioblend.galaxy.workflows.WorkflowClient instance
-      Run the workflow identified by ``workflow_id``
-
-      :type workflow_id: string : Encoded workflow ID
-
-      :type dataset_map: string or dict : A mapping of workflow inputs to datasets.
   ```
 
 --
