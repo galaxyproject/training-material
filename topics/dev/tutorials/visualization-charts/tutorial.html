@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Visualizations: charts plugins</title>
+        <title>Visualizations: JavaScript plugins</title>
         
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -29,7 +29,7 @@
         
         
         <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
-        <meta property="og:title" content="Galaxy Training: Visualizations: charts plugins" />
+        <meta property="og:title" content="Galaxy Training: Visualizations: JavaScript plugins" />
         <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -171,7 +171,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Visualizations: charts plugins",
+  "headline": "Visualizations: JavaScript plugins",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -200,11 +200,11 @@
   },
   "courseCode": "dev / visualization-charts / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Visualizations: charts plugins' tutorial",
+  "name": "Hands-on for 'Visualizations: JavaScript plugins' tutorial",
   "isPartOf": {
     "@type": "Course",
-    "name": "Visualizations: charts plugins",
-    "description": "Visualizations: charts plugins",
+    "name": "Visualizations: JavaScript plugins",
+    "description": "Visualizations: JavaScript plugins",
     "learningResourceType": "tutorial",
     "interactivityType": "expositive",
     "provider": {
@@ -216,7 +216,7 @@
   },
   "url": "https://galaxyproject.github.io//training-material/topics/dev/tutorials/visualization-charts/tutorial.html",
   "timeRequired": "PT1H",
-  "description": "Visualizations: charts plugins\\nThe questions this  addresses are:\n - How can I make a custom plugin for Charts?\n\n\\nThe objectives are:\n - Learn how to add custom javascript plugins to the Galaxy Charts framework\n\n",
+  "description": "Visualizations: JavaScript plugins\\nThe questions this  addresses are:\n - How can I make a custom visualization plugin for Galaxy?\n\n\\nThe objectives are:\n - Learn how to add JavaScript plugins to Galaxy using the Charts visualization framework\n\n",
   "hasPart": [
 
   ],
@@ -239,6 +239,10 @@
     {
       "@type": "Person",
       "name": "Aysam Guerler"
+    },
+    {
+      "@type": "Person",
+      "name": "Dannon Baker"
     }
   ],
   "contributor": [
@@ -257,6 +261,10 @@
     {
       "@type": "Person",
       "name": "Aysam Guerler"
+    },
+    {
+      "@type": "Person",
+      "name": "Dannon Baker"
     }
   ],
   "about": [
@@ -271,10 +279,10 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>Visualizations: charts plugins</h1>
+        <h1 data-toc-skip>Visualizations: JavaScript plugins</h1>
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#yhoogstrate" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yhoogstrate" alt="Youri Hoogstrate">Youri Hoogstrate</a>, <a href="/training-material/hall-of-fame#bgruening" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>, <a href="/training-material/hall-of-fame#guerler" class="contributor-badge"><img src="https://avatars.githubusercontent.com/guerler" alt="Aysam Guerler">Aysam Guerler</a>
+<a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#yhoogstrate" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yhoogstrate" alt="Youri Hoogstrate">Youri Hoogstrate</a>, <a href="/training-material/hall-of-fame#bgruening" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>, <a href="/training-material/hall-of-fame#guerler" class="contributor-badge"><img src="https://avatars.githubusercontent.com/guerler" alt="Aysam Guerler">Aysam Guerler</a>, <a href="/training-material/hall-of-fame#dannon" class="contributor-badge"><img src="https://avatars.githubusercontent.com/dannon" alt="Dannon Baker">Dannon Baker</a>
 
 </div>
         <blockquote class="overview">
@@ -282,14 +290,14 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li>How can I make a custom plugin for Charts?</li>
+            <li>How can I make a custom visualization plugin for Galaxy?</li>
             
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li>Learn how to add custom javascript plugins to the Galaxy Charts framework</li>
+            <li>Learn how to add JavaScript plugins to Galaxy using the Charts visualization framework</li>
             
             </ul>
 
@@ -342,15 +350,22 @@
                 <div class="col-sm-10">
                     <h2 class="no_toc" id="introduction">Introduction</h2>
 
-<p>In this tutorial we are going to demonstrate how to add a 3rd-party visualization to <em>Charts</em> and what the benefits are. The plugin we select for this purpose is the <a href="https://biasmv.github.io/pv/"><em>PV-Javascript Protein Viewer</em></a>. It is an open source, protein structure viewer for <code class="highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers available for the visualization of <code class="highlighter-rouge">PDB</code>-files such as e.g. <a href="https://arose.github.io/ngl/">NGL</a> (also available in <em>Charts</em>) and <a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
+<p>In this tutorial we are going to demonstrate how to add a third party
+JavaScript-based visualization to Galaxy, and we’ll talk about what the benefits
+are. The plugin we’ve selected for this exercise is the <a href="https://biasmv.github.io/pv/"><em>PV-Javascript Protein
+Viewer</em></a>. It is an open source protein structure
+viewer for <code class="highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers
+available for the visualization of <code class="highlighter-rouge">PDB</code>-files such as e.g.
+<a href="https://arose.github.io/ngl/">NGL</a> (also available in Galaxy) and
+<a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
 
 <blockquote class="details">
   <h3 id="details-background-what-is-the-pdb-protein-data-bank-file-format"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Background: What is the PDB (Protein Data Bank) file format?</h3>
 
-  <p>The <code class="highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial cyrstallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Databank (https://www.rcsb.org). Proteins are usually labeled by a four-letter code.
+  <p>The <code class="highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank (<a href="https://www.rcsb.org">https://www.rcsb.org</a>). Proteins are usually labeled by a four-letter code.
 Here is an example of a <code class="highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
 
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB
 TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
 TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION
 ...
@@ -362,23 +377,23 @@ REMARK   1 REFERENCE 1
 REMARK   1  AUTH   M.BOLOGNESI,L.PUGLIESE,G.GATTI,F.FRIGERIO,A.CODA,L.ANTOLINI,
 REMARK   1  AUTH 2 H.P.SCHNEBLI,E.MENEGATTI,G.AMICONI,P.ASCENZI
 REMARK   1  TITL   X-RAY CRYSTAL STRUCTURE OF THE BOVINE
-REMARK   1  TITL 2 ALPHA-CHYMOTRYPSIN<span class="o">(</span>SLASH<span class="o">)</span>EGLIN C COMPLEX AT 2.6 ANGSTROMS
+REMARK   1  TITL 2 ALPHA-CHYMOTRYPSIN(SLASH)EGLIN C COMPLEX AT 2.6 ANGSTROMS
 ...
 SEQRES   1 E  245  CYS GLY VAL PRO ALA ILE GLN PRO VAL LEU SER GLY LEU
 SEQRES   2 E  245  SER ARG ILE VAL ASN GLY GLU GLU ALA VAL PRO GLY SER
 SEQRES   3 E  245  TRP PRO TRP GLN VAL SER LEU GLN ASP LYS THR GLY PHE
 ...
-ATOM      1  N   CYS E   1       2.323 <span class="nt">-16</span>.405  18.812  1.00 43.48           N
-ATOM      2  CA  CYS E   1       3.017 <span class="nt">-15</span>.136  18.786  1.00 35.11           C
-ATOM      3  C   CYS E   1       4.134 <span class="nt">-15</span>.068  19.799  1.00 32.90           C
-ATOM      4  O   CYS E   1       4.173 <span class="nt">-15</span>.810  20.772  1.00 41.38           O
-ATOM      5  CB  CYS E   1       2.052 <span class="nt">-13</span>.969  19.139  1.00 31.14           C
-ATOM      6  SG  CYS E   1       1.246 <span class="nt">-14</span>.085  20.788  1.00 34.72           S
-ATOM      7  N   GLY E   2       4.993 <span class="nt">-14</span>.081  19.607  1.00 21.94           N
+ATOM      1  N   CYS E   1       2.323 -16.405  18.812  1.00 43.48           N
+ATOM      2  CA  CYS E   1       3.017 -15.136  18.786  1.00 35.11           C
+ATOM      3  C   CYS E   1       4.134 -15.068  19.799  1.00 32.90           C
+ATOM      4  O   CYS E   1       4.173 -15.810  20.772  1.00 41.38           O
+ATOM      5  CB  CYS E   1       2.052 -13.969  19.139  1.00 31.14           C
+ATOM      6  SG  CYS E   1       1.246 -14.085  20.788  1.00 34.72           S
+ATOM      7  N   GLY E   2       4.993 -14.081  19.607  1.00 21.94           N
 ...
 HETATM 2292  O   HOH E 406      12.343   1.842  12.901  0.86 18.70           O
-HETATM 2293  O   HOH E 407      <span class="nt">-4</span>.767  17.237  10.630  1.00 59.78           O
-HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  0.96 20.00           O
+HETATM 2293  O   HOH E 407      -4.767  17.237  10.630  1.00 59.78           O
+HETATM 2294  O   HOH E 408      11.489  -6.278  18.740  0.96 20.00           O
 ...
 </code></pre></div>  </div>
 
@@ -390,7 +405,11 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
   </ul>
 </blockquote>
 
-<p>As mentioned above we will be focusing on the <em>PV-Javascript Protein Viewer</em> in this tutorial. Now that we have learned about the underlying file format, let us continue by visiting the viewers developer site at <a href="https://biasmv.github.io/pv/">https://biasmv.github.io/pv/ </a> to get familiar with the plugin.</p>
+<p>As mentioned above we will be focusing on the <em>PV-Javascript Protein Viewer</em> in
+this tutorial. Now that we have learned about the underlying file format, let us
+continue by visiting the protein viewer developer site at
+<a href="https://biasmv.github.io/pv/">https://biasmv.github.io/pv/</a> to get familiar
+with the plugin.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -417,15 +436,18 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 <ol id="markdown-toc">
   <li><a href="#section-1---basic-plugin-setup" id="markdown-toc-section-1---basic-plugin-setup">Section 1 - Basic plugin setup</a></li>
   <li><a href="#section-2---allow-different-rendering-modes" id="markdown-toc-section-2---allow-different-rendering-modes">Section 2 - Allow different rendering modes</a></li>
-  <li><a href="#section-3---adding-more-options" id="markdown-toc-section-3---adding-more-options">Section 3 - Adding more options</a></li>
 </ol>
 
 </blockquote>
 
 <h2 id="section-1---basic-plugin-setup">Section 1 - Basic plugin setup</h2>
-<h3 id="11-directory-and-plugin-preparations">1.1 Directory and plugin preparations</h3>
 
-<p>In this section we will download the viewer and add it to a local <em>Galaxy</em> instance. All development takes place within the <em>Galaxy</em> codebase. The first thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the directory structure for the new visualization plugin.</p>
+<h3 id="directory-and-plugin-preparations">Directory and plugin preparations</h3>
+
+<p>In this section we will download the viewer and add it to a local <em>Galaxy</em>
+instance. All development takes place within the <em>Galaxy</em> codebase. The first
+thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the
+directory structure for the new visualization plugin.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -435,39 +457,38 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/galaxyproject/galaxy
 </code></pre></div>      </div>
     </li>
-    <li>Navigate to the <em>Charts</em> repository root:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts/static/repository
+    <li>Navigate to the visualization plugin directory:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
 </code></pre></div>      </div>
     </li>
-    <li>Register your visualization by adding a new item to <code class="highlighter-rouge">registry.json</code>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"myviz"</span> : <span class="o">[</span> <span class="s2">"pdb"</span> <span class="o">]</span>
-</code></pre></div>      </div>
-    </li>
-    <li>Create a new directory:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> visualizations/myviz/pdb
-<span class="nv">$ </span><span class="nb">cd </span>visualizations/myviz/pdb
-</code></pre></div>      </div>
-    </li>
-    <li>Download the minified plugin code for <em>PV-Viewer</em> from <a href="https://github.com/biasmv/pv">Github</a>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://raw.githubusercontent.com/biasmv/pv/master/bio-pv.min.js <span class="nt">-o</span> plugin.js
+    <li>Copy the existing example into a new directory:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-r</span> example myviz
 </code></pre></div>      </div>
     </li>
   </ol>
+
 </blockquote>
 
-<p>Now that the directory structure is in place and the 3rd-party code has been made available, we will continue with building our <em>Chart</em> plugin. Each <em>Charts</em> visualization contains <b>3</b> files:</p>
+<p>This example visualization provides a great place to start with most of the
+basics already in place.  Now that the directory structure is in place, let us
+review the example visualization. Each visualization contains a set of <b>3</b>
+files:</p>
 
 <ul>
-  <li>Logo (<code class="highlighter-rouge">logo.png</code>) which will appear in <em>Chart</em>’s plugin selection interface.</li>
-  <li>Configuration (<code class="highlighter-rouge">config.js</code>) describing input parameters and options.</li>
-  <li>Wrapper (<code class="highlighter-rouge">wrapper.js</code>) which serves as a bridge between <em>Galaxy</em> and our 3rd-party plugin.</li>
+  <li>Logo (<code class="highlighter-rouge">static/logo.png</code>) which will appear in <em>Chart</em>’s plugin selection interface.</li>
+  <li>Configuration (<code class="highlighter-rouge">config/example.xml</code>) describing input parameters and options.</li>
+  <li>Wrapper (<code class="highlighter-rouge">src/script.js</code>) which serves as a bridge between <em>Galaxy</em> and our 3rd-party plugin.</li>
 </ul>
 
-<p>In the following sections we are going to discuss these files in more detail, create and place them into our plugin directory at <code class="highlighter-rouge">myviz/pdb</code>. Let’s start with the logo for our visualization.</p>
+<p>In the following sections we are going to discuss these files in more detail and
+modify them to incorporate a new visualization. Let’s start with the logo for
+our visualization.</p>
 
-<h3 id="12-your-visualization-needs-a-logo">1.2 Your visualization needs a logo</h3>
+<h3 id="your-visualization-needs-a-logo">Your visualization needs a logo</h3>
 
-<p>Each visualization is represented by a logo in the <em>Charts</em> interface. This makes it easier for users to find and configure their visualization. The logo should be in the <code class="highlighter-rouge">png</code>-file format. It will appear with a width of 120 pixels.</p>
+<p>Each visualization is represented by a logo in the Galaxy interface. This makes
+it easier for users to find and configure their visualization. The logo should
+be in the <code class="highlighter-rouge">png</code>-file format. It will appear with a width of 120 pixels.</p>
 
 <p>Here’s an example <a href="../../files/charts-plugins/pdb/logo.png">logo</a>:</p>
 
@@ -481,46 +502,79 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
       <p>Find an arbitrary image in <code class="highlighter-rouge">PNG</code>-file format. Possibly using <em>Google</em>’s <a href="https://images.google.com">image search</a>.</p>
     </li>
     <li>
-      <p>Copy it to the <code class="highlighter-rouge">myviz/pdb</code> directory and name it <code class="highlighter-rouge">logo.png</code>.</p>
+      <p>Copy it to the <code class="highlighter-rouge">myviz/static</code> directory and name it <code class="highlighter-rouge">logo.png</code>.</p>
     </li>
   </ol>
 </blockquote>
 
-<h3 id="13-configure-the-visualization">1.3 Configure the visualization</h3>
+<h3 id="configure-the-visualization">Configure the visualization</h3>
 
-<p>Each visualization has a configuration file named <code class="highlighter-rouge">config.js</code>. This file has conceptual similarities with a Tool’s XML-file. It allows developers to specify a variety of attributes and input parameters for their visualization. Throughout this tutorial we are going to gradually augment this file but for now we keep it simple.</p>
+<p>Each visualization has a configuration file. In this case it is named
+<code class="highlighter-rouge">example.xml</code>. This file has conceptual similarities with a Tool’s XML-file. It
+allows developers to specify a variety of attributes and input parameters for
+their visualization. Throughout this tutorial we are going to gradually augment
+this file but for now we keep it simple.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
-      <p>Create a file named <code class="highlighter-rouge">config.js</code> with the following content:</p>
-
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="na">title</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">A PDB viewer</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">library</span>     <span class="p">:</span> <span class="dl">'</span><span class="s1">My Visualization</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">description</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Displays Protein Structures.</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">datatypes</span>   <span class="p">:</span> <span class="p">[</span> <span class="dl">'</span><span class="s1">pdb</span><span class="dl">'</span> <span class="p">],</span>
-        <span class="na">keywords</span>    <span class="p">:</span> <span class="p">[]</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>      </div>
+      <p>Rename the file to <code class="highlighter-rouge">config/myviz.xml</code></p>
     </li>
     <li>
-      <p>Place it into your plugins directory at <code class="highlighter-rouge">myviz/pdb</code>.</p>
+      <p>Edit the file named <code class="highlighter-rouge">config/myviz.xml</code> and change the name and description.</p>
+    </li>
+    <li>Go to the Galaxy root directory to install dependencies, activate the virtual environment, and invoke the Galaxy client build.
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+<span class="nv">$ </span>make setup-venv
+<span class="nv">$ </span><span class="nb">source</span> .venv/bin/activate
+<span class="nv">$ </span>make client
+</code></pre></div>      </div>
+    </li>
+    <li>Run Galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./run.sh
+</code></pre></div>      </div>
     </li>
   </ol>
 
 </blockquote>
 
-<p>This configures the plugin’s name and a description which will appear on the <em>Charts</em> selection interface. It also links the plugin to the <code class="highlighter-rouge">PDB</code>-file format, which means that for any history item of these file type the plugin will automatically become available. Keywords are optional and can help to improve the annotation.</p>
+<p>Your visualization should now be loaded.  You can verify that now by clicking
+on <code class="highlighter-rouge">Visualize &gt; Create Visualization</code> in the top menu bar of Galaxy and finding
+your plugin with its new logo in the list there.</p>
 
-<h3 id="14-adding-a-wrapper">1.4 Adding a wrapper</h3>
+<h3 id="assign-a-new-datatype-to-your-visualization">Assign a new datatype to your visualization</h3>
 
-<p>Now we will add a wrapper to connect <em>Charts</em> with the <em>PV-Viewer</em> plugin. The wrapper consists of a <a href="http://backbonejs.org"><em>Backbone</em></a> module written in <em>JavaScript</em>:
- The wrapper receives an <code class="highlighter-rouge">options</code> dictionary with the following <b>four</b> components:</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li>
+      <p>Open the file named <code class="highlighter-rouge">config/myviz.xml</code> and find the <code class="highlighter-rouge">&lt;data_source&gt;</code> section.</p>
+    </li>
+    <li>
+      <p>Replace the existing two <code class="highlighter-rouge">&lt;test&gt;</code> sections with:</p>
+
+      <p><code class="highlighter-rouge">&lt;test type="isinstance" test_attr="datatype" result_type="datatype"&gt;molecules.PDB&lt;/test&gt;</code></p>
+    </li>
+    <li>
+      <p>Remove the <code class="highlighter-rouge">&lt;specs&gt;</code> and <code class="highlighter-rouge">&lt;groups&gt;</code> sections.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This links the plugins to the <code class="highlighter-rouge">PDB</code>-file format, which means that for any
+history item of this file type the plugin will automatically be available.</p>
+
+<h3 id="modifying-the-wrapper">Modifying the wrapper</h3>
+
+<p>Now let’s take a look at the wrapper which connects our visualization with
+Galaxy. The wrapper consists of a module written in <em>JavaScript</em> and is
+available at <code class="highlighter-rouge">src/script.js</code>:</p>
+
+<p>The wrapper receives an <code class="highlighter-rouge">options</code> dictionary with the following <b>four</b> components:</p>
 <ul>
   <li><em>charts</em>: The model of the current visualization with attributes, settings etc.</li>
   <li><em>process</em>: A <a href="https://api.jquery.com/jquery.deferred/">jQuery.Deferred()</a> object to allow asynchronous data requests within the wrapper</li>
@@ -528,29 +582,13 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
   <li><em>targets</em>: The DOM ids of the container elements to draw into</li>
 </ul>
 
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
-
-  <ol>
-    <li>Create a file named <code class="highlighter-rouge">wrapper.js</code> which returns a <em>Backbone</em> model:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">define</span><span class="p">(</span> <span class="p">[</span> <span class="dl">'</span><span class="s1">visualizations/myviz/pdb/plugin</span><span class="dl">'</span> <span class="p">],</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">pv</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-        <span class="na">initialize</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">options</span> <span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// Add code to configure and execute the plugin here.</span>
-        <span class="p">}</span>
-    <span class="p">});</span>
-<span class="p">});</span>
-</code></pre></div>      </div>
-    </li>
-    <li>Place it into your plugins directory at <code class="highlighter-rouge">myviz/pdb</code>.</li>
-  </ol>
-
-</blockquote>
-
-<p>The above wrapper does not do much yet, except requesting the minified plugin code which we downloaded earlier. In order to execute a 3rd-party plugin we need to figure out how it works. This can be done by finding a working example or documentation. Fortunately the <em>PV-Viewer</em> comes with both. Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a>.</p>
+<p>In this tutorial we will implement the <em>PV-Viewer</em> plugin. In order to execute a
+3rd-party plugin we need to figure out how it works. This can be done by finding
+a working example or documentation. Fortunately the <em>PV-Viewer</em> comes with both.
+Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-exploring-the-pv-viewer"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Exploring the PV-Viewer</h3>
 
   <ol>
     <li>
@@ -566,58 +604,81 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 </blockquote>
 
-<p>Now that we have learned the basics on how the viewer plugin works, we can initialize and load it in <code class="highlighter-rouge">wrapper.js</code>.</p>
+<p>Now that we have learned the basics on how the viewer plugin works, we can edit it and adjust  <code class="highlighter-rouge">script.js</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li>
-      <p>Modify <code class="highlighter-rouge">wrapper.js</code> by adding the following code into the <code class="highlighter-rouge">initialize</code> call:</p>
-
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
-    <span class="na">width</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">height</span>      <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">antialias</span>   <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="na">outline</span>     <span class="p">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span> <span class="p">{</span>
-    <span class="na">url</span>     <span class="p">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">download_url</span><span class="p">,</span>
-    <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">structure</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">pdb</span><span class="p">(</span> <span class="nx">response</span> <span class="p">);</span>
-        <span class="nx">viewer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-        <span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
-        <span class="nx">viewer</span><span class="p">.</span><span class="nx">centerOn</span><span class="p">(</span> <span class="nx">structure</span> <span class="p">);</span>
-        <span class="nx">viewer</span><span class="p">.</span><span class="nx">autoZoom</span><span class="p">();</span>
-        <span class="nx">options</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+    <li>Access your visualization’s <code class="highlighter-rouge">myviz/src</code> directory.
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/myviz
+</code></pre></div>      </div>
+    </li>
+    <li>Install the package for the <em>PV-Viewer</em>:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add bio-pv
+</code></pre></div>      </div>
+    </li>
+    <li>Modify your plugin’s entrypoint script <code class="highlighter-rouge">src/script.js</code> to import the new <code class="highlighter-rouge">bio-pv</code> library we just added, add this at the top of the file:
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">pv</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">bio-pv</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>Lastly, replace the <code class="highlighter-rouge">load</code> function contents in the same entrypoint file with the following code that will set up the protein viewer:
+      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
+     <span class="na">width</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
+     <span class="na">height</span>      <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
+     <span class="na">antialias</span>   <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+     <span class="na">outline</span>     <span class="p">:</span> <span class="kc">true</span>
+ <span class="p">});</span>
+ <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span> <span class="p">{</span>
+     <span class="na">url</span>     <span class="p">:</span> <span class="nx">options</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">download_url</span><span class="p">,</span>
+     <span class="na">success</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">response</span> <span class="p">)</span> <span class="p">{</span>
+         <span class="kd">var</span> <span class="nx">structure</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">pdb</span><span class="p">(</span> <span class="nx">response</span> <span class="p">);</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nx">centerOn</span><span class="p">(</span> <span class="nx">structure</span> <span class="p">);</span>
+         <span class="nx">viewer</span><span class="p">.</span><span class="nx">autoZoom</span><span class="p">();</span>
+         <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">state</span><span class="p">(</span><span class="dl">'</span><span class="s1">ok</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Chart drawn.</span><span class="dl">'</span><span class="p">);</span>
+         <span class="nx">options</span><span class="p">.</span><span class="nx">process</span><span class="p">.</span><span class="nx">resolve</span><span class="p">();</span>
+     <span class="p">}</span>
+ <span class="p">});</span>
 </code></pre></div>      </div>
     </li>
   </ol>
 </blockquote>
 
-<h3 id="15-build-the-package">1.5 Build the package</h3>
+<h3 id="build-the-package">Build the package</h3>
 
-<p>Now that we have completed the <em>Charts</em> plugin definition, it is time to bundle the scripts and libraries into a single module file using <a href="https://webpack.github.io"><em>webpack</em></a>. Once packed the plugin will be accessible through <em>Galaxy</em>’s user interface. Packing modules does not require restarting your <em>Galaxy</em> instance, just make sure to properly refresh your browser.</p>
+<p>Now that we have completed the basic plugin definition, it is time to build the
+scripts and libraries into a single bundle that Galaxy can use.  Galaxy
+visualizations typically use <a href="https://parceljs.org"><em>Parcel</em></a> for this due to
+its simplicity, and this is how the example project is already configured.  If
+you’re interested in more details, take a look at the <code class="highlighter-rouge">package.json</code> file in
+your <code class="highlighter-rouge">myviz</code> plugin directory.</p>
+
+<p>After it has been built and staged the plugin will be accessible through
+<em>Galaxy</em>’s user interface. This process not require restarting your <em>Galaxy</em>
+instance, just make sure to properly refresh your browser.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-6"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li>Navigate to <em>Chart</em>’s root directory:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/charts
+    <li>Navigate to your visualization’s root directory:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/myviz
 </code></pre></div>      </div>
     </li>
-    <li>Install the necessary <code class="highlighter-rouge">node-modules</code>, unless already available:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span>
+    <li>Install any necessary JavaScript dependencies:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn <span class="nb">install</span>
 </code></pre></div>      </div>
     </li>
-    <li>Run <code class="highlighter-rouge">webpack</code> to build the plugin:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>webpack
-
-<span class="c"># If webpack is not available on your PATH, use the following command:</span>
-<span class="nv">$ </span>node_modules/webpack/bin/webpack.js
+    <li>Run the plugin build process using yarn:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn run build
+</code></pre></div>      </div>
+    </li>
+    <li>Stage the scripts and run Galaxy:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+<span class="nv">$ </span>make client
+<span class="nv">$ </span>./run.sh
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -626,12 +687,12 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <p>Lets test this.</p>
 
-<h3 id="16-test-the-visualization">1.6 Test the visualization</h3>
+<h3 id="test-the-visualization">Test the visualization</h3>
 
-<p>In this section we will select a <code class="highlighter-rouge">PDB</code>-file from the Protein Databank and visualize it with our new plugin.</p>
+<p>In this section we will select a <code class="highlighter-rouge">PDB</code>-file from the Protein Data Bank and visualize it with our new plugin.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
@@ -647,11 +708,11 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
       <p>Start your Galaxy instance</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
-<span class="nv">$ </span>run.sh
+<span class="nv">$ </span>./run.sh
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Open the uploader dialog, paste the above link and click on <em>Start</em>.</p>
+      <p>Open the upload dialog, paste the above link and click on <em>Start</em>.</p>
     </li>
     <li>
       <p>Close the upload dialog, and select the file from the history panel on the right.</p>
@@ -660,7 +721,7 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
       <p>Click on the <em>diagram</em> icon. (You must be logged in)</p>
     </li>
     <li>
-      <p>Find your visualization and double-click on its logo.</p>
+      <p>Find your visualization and click on its logo.</p>
     </li>
   </ol>
 
@@ -670,110 +731,74 @@ HETATM 2294  O   HOH E 408      11.489  <span class="nt">-6</span>.278  18.740  
 
 <h2 id="section-2---allow-different-rendering-modes">Section 2 - Allow different rendering modes</h2>
 
-<p>In this section we are going to augment the visualization such that users may select different rendering modes. This is one of the major advantages of using the <em>Charts</em> framework. Similar to a Tool’s XML file, developers may specify input parameters which then will be presented to the user. The definition of Tool and Visualization input parameters are similar, however the latter is provided in <em>JavaScript</em> and not as XML.
-More information on parameters can be found in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">wiki</a>.</p>
+<p>In this section we are going to augment the visualization such that users may
+select different rendering modes. Similar to a Tool’s XML file, developers may
+specify input parameters which then will be presented to the user. The
+definition of Tool and Visualization input parameters are similar, however the
+latter is provided in <em>JavaScript</em> and not as XML.</p>
+
+<p>More information on parameters can be found in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">wiki</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-9"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li>Add the following block into the <code class="highlighter-rouge">config.js</code> file:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">settings</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nl">mode</span> <span class="p">:</span> <span class="p">{</span>
-        <span class="nl">label</span>   <span class="p">:</span> <span class="dl">'</span><span class="s1">Render as:</span><span class="dl">'</span><span class="p">,</span>
-        <span class="nx">help</span>    <span class="p">:</span> <span class="dl">'</span><span class="s1">Select the rendering mode.</span><span class="dl">'</span><span class="p">,</span>
-        <span class="nx">type</span>    <span class="p">:</span> <span class="dl">'</span><span class="s1">select</span><span class="dl">'</span><span class="p">,</span>
-        <span class="nx">display</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">radio</span><span class="dl">'</span><span class="p">,</span>
-        <span class="nx">value</span>   <span class="p">:</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span>
-        <span class="nx">data</span>    <span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Cartoon</span><span class="dl">'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Lines</span><span class="dl">'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">lines</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Points</span><span class="dl">'</span><span class="p">,</span>         <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">points</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Spheres</span><span class="dl">'</span><span class="p">,</span>        <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">spheres</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Trace</span><span class="dl">'</span><span class="p">,</span>          <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">trace</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Trace (line)</span><span class="dl">'</span><span class="p">,</span>   <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">lineTrace</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Trace (smooth)</span><span class="dl">'</span><span class="p">,</span> <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">sline</span><span class="dl">'</span> <span class="p">},</span>
-                    <span class="p">{</span> <span class="na">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Tube</span><span class="dl">'</span><span class="p">,</span>           <span class="na">value</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">tube</span><span class="dl">'</span> <span class="p">}</span> <span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <li>Add the following block into the <code class="highlighter-rouge">myviz.xml</code> file:
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;settings&gt;</span>
+   <span class="nt">&lt;input&gt;</span>
+       <span class="nt">&lt;name&gt;</span>mode<span class="nt">&lt;/name&gt;</span>
+       <span class="nt">&lt;label&gt;</span>Display mode<span class="nt">&lt;/label&gt;</span>
+       <span class="nt">&lt;type&gt;</span>select<span class="nt">&lt;/type&gt;</span>
+       <span class="nt">&lt;display&gt;</span>radio<span class="nt">&lt;/display&gt;</span>
+       <span class="nt">&lt;value&gt;</span>cartoon<span class="nt">&lt;/value&gt;</span>
+       <span class="nt">&lt;help&gt;</span>Select the rendering mode.<span class="nt">&lt;/help&gt;</span>
+       <span class="nt">&lt;data&gt;</span>
+           <span class="nt">&lt;data&gt;</span>
+               <span class="nt">&lt;value&gt;</span>cartoon<span class="nt">&lt;/value&gt;</span>
+               <span class="nt">&lt;label&gt;</span>Cartoon<span class="nt">&lt;/label&gt;</span>
+           <span class="nt">&lt;/data&gt;</span>
+           <span class="nt">&lt;data&gt;</span>
+               <span class="nt">&lt;value&gt;</span>lines<span class="nt">&lt;/value&gt;</span>
+               <span class="nt">&lt;label&gt;</span>Lines<span class="nt">&lt;/label&gt;</span>
+           <span class="nt">&lt;/data&gt;</span>
+           <span class="nt">&lt;data&gt;</span>
+                <span class="nt">&lt;value&gt;</span>points<span class="nt">&lt;/value&gt;</span>
+                <span class="nt">&lt;label&gt;</span>Points<span class="nt">&lt;/label&gt;</span>
+           <span class="nt">&lt;/data&gt;</span>
+       <span class="nt">&lt;/data&gt;</span>
+   <span class="nt">&lt;/input&gt;</span>
+<span class="nt">&lt;/settings&gt;</span>
 </code></pre></div>      </div>
     </li>
-    <li>Change the following line in <code class="highlighter-rouge">wrapper.js</code>:
+    <li>Change the following line in <code class="highlighter-rouge">script.js</code>:
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre></div>      </div>
       <p>to</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">chart</span><span class="p">.</span><span class="nx">settings</span><span class="p">;</span>
-<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mode</span><span class="dl">'</span> <span class="p">),</span> <span class="nx">settings</span><span class="p">.</span><span class="nx">attributes</span> <span class="p">);</span>
+<span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="nx">settings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span> <span class="dl">'</span><span class="s1">mode</span><span class="dl">'</span> <span class="p">),</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Rebuild the plugin</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm </span>static/repository/build/myviz_pdb.js
-<span class="nv">$ </span>webpack
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn run build
+<span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
+<span class="nv">$ </span>make client
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Refresh your browser.</p>
     </li>
-    <li>Load <em>Charts</em> and test different rendering modes in the <em>Customization</em> tab of your visualization.</li>
-  </ol>
-
-</blockquote>
-
-<h2 id="section-3---adding-more-options">Section 3 - Adding more options</h2>
-
-<p>From the <em>PV-Viewer</em> documentation we can see that there are more settings available such as e.g. ‘pointSize’, ‘lineWidth’ and ‘radius’. In this section we are going to further enhance the visualizations user interface to incorporate these input parameters</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-10"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
-
-  <ol>
-    <li>Add the following block into the <code class="highlighter-rouge">settings</code> of your <code class="highlighter-rouge">config.js</code> file:
-      <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pointSize</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Point size</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">Specify the point size.</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">float</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">max</span>   <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="nx">value</span> <span class="p">:</span> <span class="mi">1</span>
-<span class="p">},</span>
-<span class="nx">lineWidth</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nl">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Line width</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">Specify the line width.</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">float</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">max</span>   <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="nx">value</span> <span class="p">:</span> <span class="mi">4</span>
-<span class="p">},</span>
-<span class="nx">radius</span> <span class="p">:</span> <span class="p">{</span>
-    <span class="nl">label</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">Radius</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">help</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">Radius of tube profile. Also influences the profile thickness for helix and strand profiles.</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">type</span>  <span class="p">:</span> <span class="dl">'</span><span class="s1">float</span><span class="dl">'</span><span class="p">,</span>
-    <span class="nx">min</span>   <span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-    <span class="nx">max</span>   <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="nx">value</span> <span class="p">:</span> <span class="mf">0.3</span>
-<span class="p">}</span>
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Rebuild the plugin</p>
-
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm </span>static/repository/build/myviz_pdb.js
-<span class="nv">$ </span>webpack
-</code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Refresh your browser.</p>
-    </li>
-    <li>Load <em>Charts</em> and test new options in the <em>Customization</em> tab of your visualization.</li>
+    <li>Load your visualization and test different rendering modes in the <em>Customization</em> tab of your visualization.</li>
   </ol>
 
 </blockquote>
 
 <h2 class="no_toc" id="conclusion">Conclusion</h2>
 
-<p>First of all, thank you for completing this tutorial. We have learned how to add visualizations to the <em>Charts</em> framework and how to build a custom visualization form.</p>
+<p>First of all, thank you for completing this tutorial. We have learned how to add
+JavaScript visualizations to Galaxy utilizing the Charts framework.</p>
 
 
 
@@ -783,9 +808,9 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
 
                         <ul>
                             
-                            <li>Charts is a pluggable extension system for JS-only visualisations</li>
+                            <li>Demonstrating a pluggable extension system for JavaScript visualizations</li>
                             
-                            <li>With only 3 files we can integrate any JS-only visualizations into Galaxy</li>
+                            <li>With three primary files we can integrate any JavaScript visualization into Galaxy</li>
                             
                         </ul>
                     </blockquote>
@@ -808,12 +833,12 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
         <hr>
         <br>
 
-        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Visualizations: charts plugins (Development in Galaxy)">Loading...
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Visualizations: JavaScript plugins (Development in Galaxy)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Visualizations: charts plugins (Development in Galaxy)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Visualizations: JavaScript plugins (Development in Galaxy)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
@@ -824,7 +849,7 @@ More information on parameters can be found in the <a href="https://docs.galaxyp
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann, Youri Hoogstrate, Björn Grüning, Aysam Guerler)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann, Youri Hoogstrate, Björn Grüning, Aysam Guerler, Dannon Baker)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
