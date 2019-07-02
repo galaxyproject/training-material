@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Managing Galaxy on Kubernetes</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Managing Galaxy on Kubernetes" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fk8s-managing-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fk8s-managing-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fk8s-managing-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fk8s-managing-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fk8s-managing-galaxy%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/k8s-managing-galaxy/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Managing Galaxy on Kubernetes",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "admin / k8s-managing-galaxy / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Managing Galaxy on Kubernetes' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Managing Galaxy on Kubernetes",
+    "description": "Managing Galaxy on Kubernetes",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/k8s-managing-galaxy/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "kubernetes",
+  "description": "Managing Galaxy on Kubernetes\\nThe questions this  addresses are:\n - How do I change Galaxy configs?\n - How can I upgrade to a new version?\n - How do I rollback my changes?\n - How do I scale Galaxy?\n\n\\nThe objectives are:\n - Have an understanding of how to modify Galaxy configuration\n - Be able to upgrade and scale galaxy\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html",
+      "name": "Galaxy Installation on Kubernetes",
+      "description": "Hands-on for 'Galaxy Installation on Kubernetes' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Nuwan Goonasekera"
+    },
+    {
+      "@type": "Person",
+      "name": "Enis Afgan"
+    },
+    {
+      "@type": "Person",
+      "name": "Alex Mahmoud"
+    },
+    {
+      "@type": "Person",
+      "name": "Pablo Moreno"
+    },
+    {
+      "@type": "Person",
+      "name": "Sergey Golitsynskiy"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Nuwan Goonasekera"
+    },
+    {
+      "@type": "Person",
+      "name": "Enis Afgan"
+    },
+    {
+      "@type": "Person",
+      "name": "Alex Mahmoud"
+    },
+    {
+      "@type": "Person",
+      "name": "Pablo Moreno"
+    },
+    {
+      "@type": "Person",
+      "name": "Sergey Golitsynskiy"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://galaxyproject.github.io//training-material/topics/admin/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Managing Galaxy on Kubernetes</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#nuwang" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nuwang" alt="Nuwan Goonasekera">Nuwan Goonasekera</a>, <a href="/training-material/hall-of-fame#afgane" class="contributor-badge"><img src="https://avatars.githubusercontent.com/afgane" alt="Enis Afgan">Enis Afgan</a>, <a href="/training-material/hall-of-fame#almahmoud" class="contributor-badge"><img src="https://avatars.githubusercontent.com/almahmoud" alt="Alex Mahmoud">Alex Mahmoud</a>, <a href="/training-material/hall-of-fame#pcm32" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pcm32" alt="Pablo Moreno">Pablo Moreno</a>, <a href="/training-material/hall-of-fame#ic4f" class="contributor-badge"><img src="https://avatars.githubusercontent.com/ic4f" alt="Sergey Golitsynskiy">Sergey Golitsynskiy</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>How do I change Galaxy configs?</li>
+            
+            <li>How can I upgrade to a new version?</li>
+            
+            <li>How do I rollback my changes?</li>
+            
+            <li>How do I scale Galaxy?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Have an understanding of how to modify Galaxy configuration</li>
+            
+            <li>Be able to upgrade and scale galaxy</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation on Kubernetes:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+
+
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+                    <div>
+                        <a class="topic-icon" href="/training-material/topics/admin/slides/introduction.html" title="Introduction slides">
+                            <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction Slides
+                        </a>
+                    </div>
+                    
+
+                    
+
+                    
+                    
+
+
+                    
+                    
+                    <div>
+                        
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+
+                    </div>
+                    
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 id="managing-galaxy-on-kubernetes">Managing Galaxy on Kubernetes</h1>
+
+<h2 class="no_toc" id="overview">Overview</h2>
+
+<p>A primary advantage of Galaxy on <a href="https://kubernetes.io/">Kubernetes</a> is the ease with which common
+administrative tasks can be performed reliably and without disruption of
+service. In particular, because of containerization, Kubernetes provides a significant
+advantage over managing individual virtual machines, where updates to system
+libraries or components can cause unexpected breakage of dependent components.
+With containerization, this becomes a simpler problem of swapping out a
+container and replacing it with an updated version. It also reduces reliance
+on the underlying operating system, allowing the OS to be upgraded and
+have the latest security patches applied without having to worry about
+how it will affect the applications running within. Kubernetes has built-in
+functionality for draining a node of all containers and for transparently
+moving those containers to a different node, allowing maintenance tasks to be
+performed on the underlying node without disruption of service.</p>
+
+<p>In this section, we will look at how to perform common management tasks on
+a Galaxy deployment on Kubernetes, including</p>
+<ul>
+  <li>How to upgrade a deployment</li>
+  <li>Change the configuration of a running Galaxy instance</li>
+  <li>Map arbitrary files into Galaxy’s config folder</li>
+  <li>Rollback changes in the case of an error</li>
+  <li>Scale the number of job and web handlers</li>
+  <li>Delete a deployment</li>
+</ul>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#managing-galaxy-on-kubernetes" id="markdown-toc-managing-galaxy-on-kubernetes">Managing Galaxy on Kubernetes</a>    <ol>
+      <li><a href="#prerequisites" id="markdown-toc-prerequisites">Prerequisites</a></li>
+    </ol>
+  </li>
+  <li><a href="#changing-the-configuration-of-a-galaxy-instance" id="markdown-toc-changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a Galaxy instance</a>    <ol>
+      <li><a href="#changing-tool-configuration" id="markdown-toc-changing-tool-configuration">Changing tool configuration</a></li>
+      <li><a href="#setting-the-admin-user-and-changing-the-brand" id="markdown-toc-setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</a></li>
+    </ol>
+  </li>
+  <li><a href="#scaling-galaxy" id="markdown-toc-scaling-galaxy">Scaling Galaxy</a></li>
+  <li><a href="#testing-kubernetes-resilience" id="markdown-toc-testing-kubernetes-resilience">Testing Kubernetes resilience</a></li>
+  <li><a href="#deleting-galaxy" id="markdown-toc-deleting-galaxy">Deleting Galaxy</a></li>
+  <li><a href="#next-steps" id="markdown-toc-next-steps">Next Steps</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This tutorial builds on the material of the previous
+<a href="/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html">tutorial</a>
+and we recommend following it first to setup the required environment.
+You must have some familiarity with Helm commands, know how to change values
+in a Helm Chart and how to use the <code class="highlighter-rouge">kubectl</code> command.</p>
+
+<h1 id="changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a Galaxy instance</h1>
+<p>We will start off by looking at how to change the configuration of a Galaxy
+instance. We will first reduce the number of tools that are loaded for faster
+startup, and then change some common settings in <code class="highlighter-rouge">galaxy.yml</code>.</p>
+
+<h2 id="changing-tool-configuration">Changing tool configuration</h2>
+<p>We will change the Galaxy configuration to limit the initial list of tools
+that Galaxy will use by pointing to our custom <code class="highlighter-rouge">tool_conf.xml</code>. This will make
+your chart start up much faster for the remainder of this tutorial, as the
+default configuration loads the full list of tools used by <code class="highlighter-rouge">usegalaxy.org</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-a-custom-tool-set"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a custom tool set</h3>
+
+  <ol>
+    <li>
+      <p>First, let’s create a simpler list of tools by saving the following tool
+config as <code class="highlighter-rouge">my_tool_conf.xml</code> in a folder named <code class="highlighter-rouge">my_configs</code>.</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
+<span class="nt">&lt;toolbox</span> <span class="na">tool_path=</span><span class="s">"/cvmfs/main.galaxyproject.org/shed_tools"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"chip_seq"</span> <span class="na">name=</span><span class="s">"ChIP-seq"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/1b9a9409831d/chipseeker/chipseeker.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/chipseeker/1.18.0+galaxy1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>chipseeker<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>rnateam<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>1b9a9409831d<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/chipseeker/1.18.0+galaxy1<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.18.0+galaxy1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/tool&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"fastq_quality_control"</span> <span class="na">name=</span><span class="s">"FASTQ Quality Control"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/51b771646466/trimmomatic/trimmomatic.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.6"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>trimmomatic<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>pjbriggs<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>51b771646466<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.6<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.36.6<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/tool&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"fastq_quality_control"</span> <span class="na">name=</span><span class="s">"FASTQ Quality Control"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/fastqc/e7b2202befea/fastqc/rgFastQC.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>fastqc<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>devteam<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>e7b2202befea<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.72+galaxy1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/tool&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"convert_formats"</span> <span class="na">name=</span><span class="s">"Convert Formats"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/c24014d80001/intermine_galaxy_exchange/intermine_galaxy_exchange.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>intermine_galaxy_exchange<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>iuc<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>c24014d80001<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.0.1<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/tool&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"fasta_fastq"</span> <span class="na">name=</span><span class="s">"FASTA/FASTQ"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/d882a0a75759/find_subsequences/find_subsequences.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/bg_find_subsequences/0.2"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>find_subsequences<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>bgruening<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>d882a0a75759<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/bg_find_subsequences/0.2<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.2<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/tool&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
+<span class="nt">&lt;/toolbox&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Next, let’s create a new <code class="highlighter-rouge">galaxy.yml</code> file that uses this <code class="highlighter-rouge">my_tool_conf.xml</code>.
+To do so, create a new file named <code class="highlighter-rouge">galaxy.yml</code> and place that in your <code class="highlighter-rouge">my_configs</code>
+folder.</p>
+
+      <p>Note that the content below is the same as the <code class="highlighter-rouge">configs</code> section of <code class="highlighter-rouge">values-cvmfs.yaml</code>
+in your helm chart, except that the <code class="highlighter-rouge">tool_config_file</code> entry is pointing to your custom
+tool list instead of the full list from CVMFS.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
+  <span class="na">virtualenv</span><span class="pi">:</span> <span class="s">/galaxy/server/.venv</span>
+  <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
+  <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
+  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style=/galaxy/server/static/style/blue</span>
+  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/galaxy/server/static</span>
+  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=/galaxy/server/static/favicon.ico</span>
+  <span class="na">pythonpath</span><span class="pi">:</span> <span class="s">/galaxy/server/lib</span>
+  <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">mount</span><span class="pi">:</span> <span class="pi">{{</span><span class="nv">.Values.ingress.path</span><span class="pi">}}</span><span class="s">=galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
+  <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
+  <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
+  <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
+  <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
+  <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">galaxy</span><span class="pi">:</span>
+  <span class="na">database_connection</span><span class="pi">:</span> <span class="s1">'</span><span class="s">postgresql://{{.Values.postgresql.galaxyDatabaseUser}}:{{.Values.postgresql.galaxyDatabasePassword}}@{{</span><span class="nv"> </span><span class="s">template</span><span class="nv"> </span><span class="s">"galaxy-postgresql.fullname"</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">}}/galaxy'</span>
+  <span class="na">integrated_tool_panel_config</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/integrated_tool_panel.xml"</span>
+  <span class="na">sanitize_whitelist_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/sanitize_whitelist.txt"</span>
+  <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/galaxy/server/config/my_tool_conf.xml"</span>
+  <span class="na">tool_data_table_config_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">.Values.cvmfs.main.mountPath</span><span class="nv"> </span><span class="s">}}/config/shed_tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/managed/location/tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/byhand/location/tool_data_table_conf.xml"</span>
+  <span class="na">tool_dependency_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/deps"</span>
+  <span class="na">builds_file_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.cvmfs.data.mountPath}}/managed/location/builds.txt"</span>
+  <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">.Values.cvmfs.main.mountPath</span><span class="nv"> </span><span class="s">}}/config/datatypes_conf.xml"</span>
+  <span class="na">containers_resolvers_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/container_resolvers_conf.xml"</span>
+  <span class="na">workflow_schedulers_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/workflow_schedulers_conf.xml"</span>
+  <span class="na">build_sites_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/build_sites.yml"</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now, let’s upgrade the chart to use your custom <code class="highlighter-rouge">my_tool_conf.xml</code> and
+<code class="highlighter-rouge">galaxy.yml</code> by running the helm upgrade command.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.my_tool_conf</span><span class="se">\.</span><span class="s2">xml"</span><span class="o">=</span>my_configs/my_tool_conf.xml <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>my_configs/galaxy.yml galaxy cloudve/galaxy
+</code></pre></div>      </div>
+
+      <p>Note the <code class="highlighter-rouge">--reuse-values</code> flag, which instructs helm to reuse any
+previously set values, and apply the new ones on top.  The <code class="highlighter-rouge">--set-file</code>
+option will set the value of the <code class="highlighter-rouge">configs.my_tool_conf.xml</code>
+key in your values file to the contents of the specified file, as a text
+string. Each file under <code class="highlighter-rouge">configs</code> is automatically mapped into galaxy’s config
+directory within the docker container.</p>
+    </li>
+    <li>
+      <p>Notice that while the chart is upgrading, the existing version continues
+to function. The change over will occur when the new container is online
+and signals readiness to Kubernetes by responding to web requests on
+the relevant port. Log into the Kubernetes dashboard and watch the logs
+as the new pods come online.</p>
+    </li>
+    <li>
+      <p>List the installed helm charts again and note that the revision of the chart
+has changed. These revisions are useful because it allows us to rollback
+our changes if they are incorrect. This will be covered in a later section.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm list
+NAME  	REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
+cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	galaxy-cvmfs-csi-1.0.1	1.0        	cvmfs
+galaxy	2       	Wed Jun 26 14:51:17 2019	DEPLOYED	galaxy-3.0.0          	v19.05     	default
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s now exec into the running container and check where the files were
+mapped in. First, let’s get a list of running pods.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
+NAME                          READY   STATUS    RESTARTS   AGE
+galaxy-galaxy-postgres-0      1/1     Running   0          2d6h
+galaxy-job-69864b6797-zs5mn   1/1     Running   0          2d6h
+galaxy-web-7568c58b94-jzkvm   1/1     Running   0          2d6h
+</code></pre></div>      </div>
+
+      <p>Exec into the web pod by running:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> galaxy-web-7568c58b94-jzkvm /bin/bash
+</code></pre></div>      </div>
+
+      <p>Now run <code class="highlighter-rouge">ls /galaxy/server/config/</code> and note that the <code class="highlighter-rouge">galaxy.yml</code> contains
+the content that you’ve provided and that <code class="highlighter-rouge">my_tool_conf.xml</code> has also been
+mapped into the config folder. In this same way, any of Galaxy’s config
+files can be overridden by simply mapping in the relevant file into the
+config folder.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</h2>
+
+<p>Next, we will set the admin user and change the brand in <code class="highlighter-rouge">galaxy.yml</code>. We will
+rollback our change to understand how Helm manages configuration.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-admin-user-and-changing-the-brand"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting admin user and changing the brand</h3>
+
+  <ol>
+    <li>
+      <p>Modify the following entries in your <code class="highlighter-rouge">galaxy.yml</code>.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brand: "Hello GCC2019"
+admin_users: "admin@mydomain.com"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now, let’s upgrade the chart to apply the new configuration.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>my_configs/galaxy.yml galaxy cloudve/galaxy
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Inspect the currently set helm values by:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm get values galaxy
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>List the installed Helm charts again and note that the revision of the chart has changed as expected.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm list
+NAME  	REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
+cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	galaxy-cvmfs-csi-1.0.1	1.0        	cvmfs
+galaxy	3       	Wed Jun 26 14:51:17 2019	DEPLOYED	galaxy-3.0.0          	v19.05     	default
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s now roll back to the previous revision.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm rollback galaxy 2
+</code></pre></div>      </div>
+
+      <p>Use <code class="highlighter-rouge">helm get values</code> again to observe that the values have reverted to
+the previous revision. After a short while, once the new container is up
+and running, kubernetes will automatically switch over to it and you can
+see that the previous configuration has been restored.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="scaling-galaxy">Scaling Galaxy</h1>
+
+<p>In Galaxy deployment on Kubernetes, there are two containers by default, one
+web handler and one job handler. We will now look at how these can be scaled.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-admin-user-and-changing-the-brand-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting admin user and changing the brand</h3>
+
+  <ol>
+    <li>
+      <p>View the <code class="highlighter-rouge">values-cvmfs.yaml</code> file in your helm chart and note down the
+number of web and job handlers.</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">webHandlers</span><span class="pi">:</span>
+    <span class="na">replicaCount</span><span class="pi">:</span> <span class="s">1</span>
+<span class="na">jobHandlers</span><span class="pi">:</span>
+    <span class="na">replicaCount</span><span class="pi">:</span> <span class="s">1</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Let’s increase the number of web handlers by simply setting new values for the number of replicas.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set</span> webHandlers.replicaCount<span class="o">=</span>2 galaxy cloudve/galaxy
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Check whether the new replicas have been created.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
+NAME                          READY   STATUS    RESTARTS   AGE
+galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
+galaxy-job-5cc75c6588-8dsbg   1/1     Running   0          7m13s
+galaxy-web-7c9576cf89-49nlm   1/1     Running   0          7m13s
+galaxy-web-7c9576cf89-r6rcj   0/1     Running   0          9s
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Follow the pod logs and check whether the new handler is receiving web requests
+as expected.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl logs <span class="nt">-f</span> galaxy-web-7c9576cf89-r6rcj
+</code></pre></div>      </div>
+
+      <p>You will notice that Kubernetes automatically load balances requests between the
+available web handler replicas in a round-robin fashion.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="testing-kubernetes-resilience">Testing Kubernetes resilience</h1>
+
+<p>To observe how Kubernetes handles failures, let’s exec into a running container and
+manually kill a process to simulate a possible process failure. Kubernetes
+continuously monitors running containers, and attempts to bring the environment
+back to the “desired” state. The moment it notices a failure, it will respawn
+a new pod to replace the failed one. Typically, a Kubernetes container will also
+have a <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/">liveness probe</a> defined. A liveness probe can be an http
+request to a port, or even a manually executed shell script, which will test
+whether the relevant container is healthy, and if not, Kubernetes will immediately
+provision a new replacement.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-handling-failures"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Handling failures</h3>
+
+  <ol>
+    <li>
+      <p>First list the available pods.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
+NAME                          READY   STATUS    RESTARTS   AGE
+galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
+galaxy-job-5cc75c6588-8dsbg   1/1     Running   0          14m
+galaxy-web-7c9576cf89-49nlm   1/1     Running   0          14m
+galaxy-web-7c9576cf89-r6rcj   0/1     Running   1          7m36s
+</code></pre></div>      </div>
+
+      <p>Then exec into one:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> galaxy-web-7c9576cf89-r6rcj /bin/bash
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now kill the main container process.</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">kill </span>1
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Notice how Kubernetes immediately starts a new pod to replace the failed one,
+bringing the environment back to the desired state. Take a look at the
+liveness probe defined for the galaxy web container in your helm chart
+source code (<code class="highlighter-rouge">templates/deployment_web.yaml</code>).</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="deleting-galaxy">Deleting Galaxy</h1>
+
+<p>Finally, let’s take a look at how we can uninstall Galaxy and remove all
+related containers.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-deleting-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Deleting Galaxy</h3>
+
+  <ol>
+    <li>
+      <p>To permanently delete the Galaxy release, run:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm delete <span class="nt">--purge</span> galaxy
+</code></pre></div>      </div>
+
+      <p>The purge flag instructs helm to permanently remove galaxy from its history.</p>
+    </li>
+    <li>
+      <p>Use <code class="highlighter-rouge">kubectl get pods</code> to verify that the pods have been deleted.</p>
+    </li>
+  </ol>
+
+</blockquote>
+<h1 id="next-steps">Next Steps</h1>
+<p>This tutorial provided an overview of some common Galaxy administration tasks.
+Advanced customizations would include running custom shell scripts on Galaxy
+startup to perform additional tasks, running additional containers on
+startup, administering and managing storage, building custom Galaxy containers
+with desired modifications etc. For more info on some of these
+topics, take a look at the <a href="https://github.com/galaxyproject/galaxy-helm">Galaxy Helm chart</a> repository as well as
+<a href="../..">other tutorials</a> tagged with <em>kubernetes</em>. Also, feel free to reach out
+on Gitter: <a href="https://gitter.im/galaxyproject/FederatedGalaxy">https://gitter.im/galaxyproject/FederatedGalaxy</a>.</p>
+
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+                        <ul>
+                            
+                            <li>Modifying configuration is a matter of having some local config files that are mapped in their entirety into the Galaxy container.</li>
+                            
+                            <li>Scaling is a simple matter of changing the number of replicas.</li>
+                            
+                            <li>K8S enables zero downtime upgrades and sets the stage for continuous delivery</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Managing Galaxy on Kubernetes (Galaxy Server administration)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Managing Galaxy on Kubernetes (Galaxy Server administration)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Nuwan Goonasekera, Enis Afgan, Alex Mahmoud, Pablo Moreno, Sergey Golitsynskiy)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/k8s-managing-galaxy/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+</html>
