@@ -64,6 +64,7 @@ We have now a tabular file with about 10,001 lines and many columns.
 > > 1. Each line represent an observation of Chrysemys picta, with its location, and some other metadata
 > > 2. Column 1 is the name, column 2 the longitude of the observation of Chrysemys picta, column 3 the latitude and column 50 the country code of the location
 > {: .solution }
+{: .question }
 
 We would to extraction the 4 columns previously cited and keep only occurrence records from US.
 
@@ -80,12 +81,12 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    - *"Number of header lines to skip"*: `1`
 > 3. Inspect the generated files
 >
->    > ### {% icon question %} Questions
+>    > ### {% icon question %} Question
 >    >
 >    > How many occurrences have been conserved?
 >    >
->    > ### {% icon solution %} Solution
->    > 71.18% of the occurrences (7,118) are conserved
+>    > > ### {% icon solution %} Solution
+>    > > 71.18% of the occurrences (7,118) are conserved
 >    > {: .solution }
 >    {: .question}
 >
@@ -221,10 +222,10 @@ By partitioning data, a dataset is divided into subsets (i.e. bins). A model is 
 
 There is 2 possible way to partition data:
 
-1. Non-spatial Partition: a partition used when there is no bias due to space, time or sampling method
+1. **Non-spatial Partition**: a partition used when there is no bias due to space, time or sampling method
     1. Jakknife (k=n): each occurrence in the dataset is considered as equal to a bin. This is usually used when you have a small dataset with no known bias
     2. Random k-fold: partition the data randomly in a number of bins set by the user with the option `Number of Folds`
-2. Spatial Partition: a partition used when there could be bias due to time, space or sampling method
+2. **Spatial Partition**: a partition used when there could be bias due to time, space or sampling method
     1. Block (k=4): the area is divided in four and the different occurrences are put equally into four bins
     2. Checkerboard 1 (k=2): two bins are used according to the position of the occurrence on the grid
     3. Checkerboard 2 (k=4): four bins are used according to the position of the occurrence on the grid. This require an aggregation factor, which is the size of a second grid put on a first one. For example, with a factor 4, the grids size will be 4x4
@@ -249,7 +250,7 @@ For both of these techniques the number of occurrences into each bin may vary.
 Wallace can build different models using either:
 
 1. The presence-only approach BIOCLIM (Module BIOCLIM)
-2. The presence-background (presense-pseudo absence) algorithm Maxent (Module Maxent)
+2. The presence-background (presence-pseudo absence) algorithm Maxent (Module Maxent)
 
 To evaluate these models, Wallace computes the performance on a hold-out dataset (data not used for training) and provide evaluation metrics as the AUC (Area Under the Curve) mean. As a rule of thumb, an AUC of 0.75 and above is considered good, and closer to 1 is better.
 
