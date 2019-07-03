@@ -249,7 +249,7 @@ For both of these techniques the number of occurrences into each bin may vary.
 
 Wallace can build different models using either:
 
-1. The presence-only approach BIOCLIM (Module BIOCLIM)
+1. The presence-only approach BIOCLIM (Module BIOCLIM) ({% cite booth2018 %})
 2. The presence-background (presence-pseudo absence) algorithm Maxent (Module Maxent)
 
 To evaluate these models, Wallace computes the performance on a hold-out dataset (data not used for training) and provide evaluation metrics as the AUC (Area Under the Curve) mean. As a rule of thumb, an AUC of 0.75 and above is considered good, and closer to 1 is better.
@@ -355,9 +355,9 @@ Following this tutorial, we have been able here to load a dataset of occurrences
 
 > ### {% icon details %} Some useful references
 >
-> - Guissan, A. et *al.*, Predicting species distributions for conservation decisions. Ecology Letters, 16, 1424–1435  (2013).
-> -Booth, T. H. et *al.*, BIOCLIM: the first species distribution modelling package, its early applications and relevance to most current MAXENT studies. Diversity and Distributions, 20, 1–9 (2014).
-> - Muscarella, R. et *al.*, ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. British Ecological Society, Methods in Ecology and Evolution, 5, 1198–1205 (2014).
+> - Predicting species distributions for conservation decisions ({% cite guisan2013 %}).
+> - BIOCLIM: the first species distribution modelling package, its early applications and relevance to most current MAXENT studies. Diversity and Distributions ({% cite booth2018 %}).
+> - ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. ({% cite muscarella2014 %}).
 >
 > [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
 {: .details}
