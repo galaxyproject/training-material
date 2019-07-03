@@ -4,11 +4,11 @@ title: "Species distribution modeling"
 questions:
     - "How to build & evaluate a niche model, visualize and project it ?"
 objectives:
-    - "Find and download occurences data from GBIF"
+    - "Find and download occurrences data from GBIF"
     - "Find and download environmental data"
-    - "Process both occurences and environmental"
-    - "Partition occurence data"
-    - "Model a theorical ecological niche and predict species distribution in a future climate scneario by using SDM"
+    - "Process both occurrences and environmental"
+    - "Partition occurrence data"
+    - "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
 requirements:
 time_estimation: "1h"
 key_points:
@@ -22,9 +22,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurences (observations) with a set of environmental data (such as temperature and precipitation).
+Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurrences (observations) with a set of environmental data (such as temperature and precipitation).
 
-The goal of this tutorial is to model a theorical ecological niche and predict species distribution in a future climate scenario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) from the North America region.
+The goal of this tutorial is to model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) from the North America region.
 
 > ### Agenda
 >
@@ -85,7 +85,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    > How many occurrences have been conserved?
 >    >
 >    > ### {% icon solution %} Solution
->    > 71.18% of the occurences (7,118) are conserved
+>    > 71.18% of the occurrences (7,118) are conserved
 >    > {: .solution }
 >    {: .question}
 >
@@ -121,6 +121,7 @@ In the main panel of Wallace, the data will load. They can now be inspected usin
 
 You now have your occurrence records on Wallace!
 
+<!--
 > ### {% icon question %} Questions
 >
 > *TODO: Add a questio<F4>n related to the data there*
@@ -129,7 +130,7 @@ You now have your occurrence records on Wallace!
 > >
 > {: .solution }
 {: .question}
-
+-->
 
 ## Process occurrence data
 
@@ -182,7 +183,7 @@ This module provides a raster with environmental variables from online sources. 
 > 3. Click on the **Load Env Data**
 {: .hands_on}
 
-**TODO: comment the output / add a question to explain why the next step**
+<!-- **TODO: comment the output / add a question to explain why the next step** -->
 
 ## Process environmental Data
 
@@ -212,7 +213,7 @@ Wallace will now associate environmental data and occurrences data to train a mo
 > 6. Click on **Sample**
 {: .hands_on}
 
-**TODO: comment the output / add a question to explain why the next step**
+<!-- **TODO: comment the output / add a question to explain why the next step** -->
 
 ## Partition Occurrence Data
 
@@ -241,7 +242,7 @@ For both of these techniques the number of occurrences into each bin may vary.
 > 4. Click on **Partition**
 {: .hands_on}
 
-**TODO: comment the output / add a question to explain why the next step**
+<!-- **TODO: comment the output / add a question to explain why the next step** -->
 
 ## Build and Evaluate Niche Model
 
@@ -259,7 +260,7 @@ To evaluate these models, Wallace computes the performance on a hold-out dataset
 > 4. Click on **Run**
 {: .hands_on}
 
-**TODO: comment the output / add a question to explain why the next step**
+<!-- **TODO: comment the output / add a question to explain why the next step** -->
 
 ## Visualize Model Results
 
@@ -294,7 +295,7 @@ To visualize the suitability on the map, we can use the map prediction module.
 
 ![map prediction](../../images/species-distribution-modeling/map_prediction.png)
 
-**TODO: comment the output / add a question to explain why the next step**
+<!-- **TODO: comment the output / add a question to explain why the next step** -->
 
 ## Project Model
 
@@ -342,10 +343,10 @@ We would like now to compare the prediction for RCP value of 8.5 (**what does th
 
 ![CCM4 with a 8.5 RCP](../../images/species-distribution-modeling/GCM_CCSM4_RPC_8.5.png)
 
-**TODO: comment the output / add a question to compare the 2 predictions**
+<!-- **TODO: comment the output / add a question to compare the 2 predictions**
 
 
-**TODO: add a section on how to save / download**
+**TODO: add a section on how to save / download** -->
 
 # Conclusion
 
