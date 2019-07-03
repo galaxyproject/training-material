@@ -18,7 +18,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial is based on the analysis described in [publication](http://www.genetics.org/content/188/4/799). 
+This tutorial is based on the analysis described in [publication](http://www.genetics.org/content/188/4/799).
 Further information about the pipeline is available from [the official STACKS website](http://catchenlab.life.illinois.edu/stacks).
 The authors developed a genetic map in the spotted gar and presented data from a single linkage group.
 The gar genetic map is an F1 pseudotest cross between two parents and 94 of their F1 progeny. They took the markers that
@@ -43,45 +43,45 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RAD-seq exercise. 
+> 1. Create a new history for this RAD-seq exercise.
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import Fasta files from parents and 20 progeny.
 >
 >    > ### {% icon comment %} Comments
 >    > If you are using the [GenOuest Galaxy instance](https://galaxy.genouest.org), you can load the dataset using 'Shared Data' -> 'Data Libraries' -> '1 Galaxy teaching folder' -> 'EnginesOn' -> 'RADseq' -> 'Genetic map'
 >    {: .comment}
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the following links into the text field
->    >  ```
->    > https://zenodo.org/record/1219888/files/female
->    > https://zenodo.org/record/1219888/files/male
->    > https://zenodo.org/record/1219888/files/progeny_1
->    > https://zenodo.org/record/1219888/files/progeny_2
->    > https://zenodo.org/record/1219888/files/progeny_3
->    > https://zenodo.org/record/1219888/files/progeny_4
->    > https://zenodo.org/record/1219888/files/progeny_5
->    > https://zenodo.org/record/1219888/files/progeny_6
->    > https://zenodo.org/record/1219888/files/progeny_7
->    > https://zenodo.org/record/1219888/files/progeny_8
->    > https://zenodo.org/record/1219888/files/progeny_9
->    > https://zenodo.org/record/1219888/files/progeny_10
->    > https://zenodo.org/record/1219888/files/progeny_11
->    > https://zenodo.org/record/1219888/files/progeny_12
->    > https://zenodo.org/record/1219888/files/progeny_13
->    > https://zenodo.org/record/1219888/files/progeny_14
->    > https://zenodo.org/record/1219888/files/progeny_15
->    > https://zenodo.org/record/1219888/files/progeny_16
->    > https://zenodo.org/record/1219888/files/progeny_17
->    > https://zenodo.org/record/1219888/files/progeny_18
->    > https://zenodo.org/record/1219888/files/progeny_19
->    > https://zenodo.org/record/1219888/files/progeny_20
->    > ```
->    > * Press **Start**  
->    {: .tip}
+>    All of the data for this tutorial is on Zenodo:
+>
+>    ```
+>    https://zenodo.org/record/1219888/files/female
+>    https://zenodo.org/record/1219888/files/male
+>    https://zenodo.org/record/1219888/files/progeny_1
+>    https://zenodo.org/record/1219888/files/progeny_2
+>    https://zenodo.org/record/1219888/files/progeny_3
+>    https://zenodo.org/record/1219888/files/progeny_4
+>    https://zenodo.org/record/1219888/files/progeny_5
+>    https://zenodo.org/record/1219888/files/progeny_6
+>    https://zenodo.org/record/1219888/files/progeny_7
+>    https://zenodo.org/record/1219888/files/progeny_8
+>    https://zenodo.org/record/1219888/files/progeny_9
+>    https://zenodo.org/record/1219888/files/progeny_10
+>    https://zenodo.org/record/1219888/files/progeny_11
+>    https://zenodo.org/record/1219888/files/progeny_12
+>    https://zenodo.org/record/1219888/files/progeny_13
+>    https://zenodo.org/record/1219888/files/progeny_14
+>    https://zenodo.org/record/1219888/files/progeny_15
+>    https://zenodo.org/record/1219888/files/progeny_16
+>    https://zenodo.org/record/1219888/files/progeny_17
+>    https://zenodo.org/record/1219888/files/progeny_18
+>    https://zenodo.org/record/1219888/files/progeny_19
+>    https://zenodo.org/record/1219888/files/progeny_20
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name. It does not link the dataset to a database or a reference genome.
 >
@@ -130,7 +130,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. Here, the catalog is made with 459 tags, 425 coming from the "reference individual", a female. Some of these 425 can be shared with the other parent.
->    > > 2. 3500
+>    > > 2. 35 / 34 / 390
 >    > {: .solution }
 >    {: .question}
 >    `sstacks`

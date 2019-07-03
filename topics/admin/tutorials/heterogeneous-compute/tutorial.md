@@ -237,9 +237,9 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 {: .hands_on}
 
 
-> ### {% icon tip %} Tip: Running non-conda tools
+> ### {% icon details %} Running non-conda tools
 > If the tool you want to run on Pulsar doesn't have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
-{: .tip}
+{: .details}
 
 
 > ### {% icon hands_on %} Hands-on: Run the Playbook

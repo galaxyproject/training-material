@@ -45,40 +45,33 @@ We will use two files for this analysis:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq volcano plot`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the differentially results table.
 >
->     To import the file, there are two options:
->     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Zenodo](https://zenodo.org/record/2529117)
+>    To import the file, there are two options:
+>    - Option 1: From a shared data library if available (ask your instructor)
+>    - Option 2: From [Zenodo](https://zenodo.org/record/2529117)
 >
->         > ### {% icon tip %} Tip: Importing data via links
->         >
->         > * Copy the link location
->         > * Open the Galaxy Upload Manager
->         > * Select **Paste/Fetch Data**
->         > * Paste the link into the text field
->         > * Press **Start**
->         {: .tip}
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
->         - You can paste the links below into the **Paste/Fetch** box:
+>    - You can paste the links below into the **Paste/Fetch** box:
 >
->           ```
->       https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
->       https://zenodo.org/record/2529117/files/volcano_genes
->           ```
+>      ```
+>      https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
+>      https://zenodo.org/record/2529117/files/volcano_genes
+>      ```
 >
->         - Select *"Genome"*: `mm10`
+>    - Select *"Genome"*: `mm10`
 >
 > 2. Name the limma-voom_luminalpregnant-luminallactate file `DE results` and the volcano genes file `volcano genes` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
->    > ### {% icon tip %} Tip: Changing the datatype
->    > * Click on the {% icon galaxy-pencil %} (pencil) icon displayed in your dataset in the history
->    > * Choose **Datatype** on the top
->    > * Select `tabular`
->    > * Press **Save**
->    {: .tip}
+>    {% include snippets/change_datatype.md datatype="tabular" %}
 {: .hands_on}
 
 Click on the {% icon galaxy-eye %} (eye) icon and take a look at the `DE results` file. It should look like below, with 8 columns.

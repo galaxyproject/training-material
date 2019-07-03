@@ -49,6 +49,13 @@ class: center, middle, inverse
 
 <div class="my-header"><span>
 <a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+{% if page.type == "introduction" %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+{% else %}
+  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+{% endif %}
+<a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
 </span></div>
 
 <div class="my-footer"><span>
@@ -76,6 +83,14 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 {% endif %}
 
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
 ---
 
 {{ content | xml_escape }}
@@ -84,7 +99,13 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 ## Thank you!
 
-This material is the result of a collaborative work. Thanks the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors {% if tutorial.contributors %}{% capture contributors %}{% for c in tutorial.contributors %}, [{{ contributors[c].name | default: c }}]({{ site.baseurl }}/hall-of-fame#{{ c }}){% endfor %}{% endcapture %} ({{ contributors | remove_first: ', ' }}) {% endif %}!
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+{% if tutorial.contributors %}
+<div class="contributors-line">
+{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+</div>
+{% endif %}
 
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
@@ -98,9 +119,17 @@ This material is the result of a collaborative work. Thanks the [Galaxy Training
     </textarea>
     <script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript">
     </script>
+    <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript">
       var slideshow = remark.create({navigation: {scroll: false,}});
       var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
     </script>
   </body>
 </html>

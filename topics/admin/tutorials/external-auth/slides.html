@@ -3,6 +3,13 @@ layout: base_slides
 logo: "GTN"
 
 title: "External Authentication"
+questions:
+- How can I connect Galaxy with CAS, SAML, etc.
+objectives:
+- be familiar with configuring Galaxy to use an upstream (proxy) authentication provider
+- be able to log in to your Galaxy server with a file-configured user.
+key_points:
+- Remote auth is not complex to set up and can help you meet institutional requirements
 contributors:
   - martenson
   - nsoranzo
@@ -96,11 +103,6 @@ The value of `auth_pam_service_name` must match the filename of the pam configur
 Dedicated Galaxy with Nginx [documentation](https://galaxyproject.org/admin/config/nginx-external-user-auth/).
 
 ---
-# Upstream Auth Exercise
-
-[Upstream Authentication in Galaxy - Exercise](https://github.com/galaxyproject/dagobah-training/blob/2018-oslo/sessions/13-external-auth/ex2-upstream-auth.md)
-
----
 # Apache httpd
 
 The authentication module (basic authentication, `mod_auth_kerb`, `mod_authnz_ldap`, `mod_auth_cas`, `Cosign`, etc.) is responsible for providing a username, which we will pass through the proxy to Galaxy as `$REMOTE_USER`.
@@ -119,8 +121,3 @@ Available [provider modules](https://github.com/galaxyproject/galaxy/tree/dev/li
 - Local Galaxy DB (default)
 - LDAP/Active Directory
 - [System (Linux) PAM](http://www.linux-pam.org/)
-
----
-# Galaxy PAM Exercise
-
-[PAM Authentication in Galaxy - Exercise](https://github.com/galaxyproject/dagobah-training/blob/2018-oslo/sessions/13-external-auth/ex1-pam-auth.md)

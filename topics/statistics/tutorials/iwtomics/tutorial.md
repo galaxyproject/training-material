@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-IWTomics implements the Interval-Wise Testing (IWT) for omics data. This
+IWTomics ({% cite Cremona2018 %}) implements the Interval-Wise Testing (IWT; {% cite Pini2017 %}) for omics data. This
 inferential procedure tests for differences in "Omics" data between two groups
 of genomic regions, and does not require fixing location and scale at the
 outset.
@@ -58,11 +58,14 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 > ### {% icon hands_on %} Hands-on: Get the data
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import datasets:
 >    - Fixed ETn (`ETn_fixed.bed`) regions
 >    - Control (`Control.bed`) regions
 >    - Recombination Hotspot (`Recombination_hotspots.txt`) content
->     
+>
 >    ```
 >    https://zenodo.org/record/1288429/files/ETn_fixed.bed
 >    https://zenodo.org/record/1288429/files/Control.bed
@@ -121,7 +124,7 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 > ![Recombination hotspot IWT results scale 8](../../images/plot_with_threshold_on_test_scale_output.png)
 {: .hands_on}
 
-> ### {% icon tip %} Additional resources:
+> ### {% icon details %} Additional resources
 >
 > Read more about **IWTomics** [here](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
-{:.tip}  
+{:.details}

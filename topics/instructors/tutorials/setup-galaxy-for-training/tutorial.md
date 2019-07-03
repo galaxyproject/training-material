@@ -99,7 +99,7 @@ In order to install the tutorial requirements, we will need the API key of an ad
 >
 > 1. Register an account on Galaxy using the email address you added to the `config/galaxy.yml` file
 >    - Once logged in, verify that you have a menu item named `Admin` in your top menu bar.
-> 2. Go to your `User -> preferences -> Manage API key` in the top menu bar
+> 2. Go to your `User -> Preferences` in the top menu bar, then click on `Manage API key`
 > 3. Click on `Create a new key` to generate an API key
 >    - Copy your API key to somewhere convenient, you will need it throughout this tutorial
 >
