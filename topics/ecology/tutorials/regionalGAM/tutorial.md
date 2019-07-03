@@ -257,13 +257,13 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 >    - *"How should the results be sorted?"*: `By the values being counted`
 > 2. Inspect and expand the output data from **Count occurrences of each record** {% icon tool %}
 >
-> > ### {% icon question %} Questions
-> >
-> > What can you see in this file?
-> >
-> > > ### {% icon solution %} Solution
-> > > A list of the years and the number of occurrence for each year which should match the number of days for each year.
-> > {: .solution }
+>    > ### {% icon question %} Questions
+>    >
+>    > What can you see in this file?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > A list of the years and the number of occurrence for each year which should match the number of days for each year.
+>    > {: .solution }
 >    {: .question}
 >
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
