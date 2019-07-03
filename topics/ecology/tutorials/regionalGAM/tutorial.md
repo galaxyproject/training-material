@@ -6,7 +6,7 @@ edam_ontology: "topic_0610"
 questions:
     - "What are abundance and trends of a butterfly species?"
 objectives:
-    - "Obtain and filter/manipulate occurence data"
+    - "Obtain and filter/manipulate occurrence data"
     - "Compute and visualize phenology of a species through the years"
     - "Compute temporal abundance trends"
 time_estimation: "2h30m"
@@ -56,7 +56,7 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >    ```
 >    https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv
 >    ```
->   
+>
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
@@ -84,15 +84,15 @@ The current dataset contains a lot of data (exact site names for 5 butterfly mon
 
 Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.
 
-> ### {% icon hands_on %} Hands-on: Downsample and hide some information   
+> ### {% icon hands_on %} Hands-on: Downsample and hide some information
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
 >       - *"AWK Program"*:
 >
->              
+>
 >              NR == 1 { print }
 >              /NLBMS/ { print }
->              
+>
 >
 > The first line will skip and print the header and the second will print all the lines where NLBMS is found
 >
@@ -170,7 +170,7 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 > 3. Check that the dataset is for one species only
 {: .hands_on}
 
-> ### {% icon details %} Datasets containings information about more than one species
+> ### {% icon details %} Datasets containing information about more than one species
 >
 > If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.
 >
@@ -202,8 +202,8 @@ As the dataset is quite big and may countain heterogeneous information, we need 
 > > 1. Copy the name of the species you are interested in (for example: "Aglais io").
 > > 2. **Filter data on any column using simple expressions** {% icon tool %}
 > >      - {% icon param-file %} *"Filter"*: output of **Text reformatting with awk** {% icon tool %}
-> >      - *"With following condition"*: `c1=='"Aglais io"'` or (another species name)  
-> >      - *"Number of header lines to skip"*: `1`  
+> >      - *"With following condition"*: `c1=='"Aglais io"'` or (another species name)
+> >      - *"Number of header lines to skip"*: `1`
 > >
 > >    You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them containing a different species.
 > >
@@ -256,7 +256,7 @@ This graph displays the modeled flight curve of *Pyronia tithonus* over the year
 >    - *"Delimited by"*: `Tab`
 >    - *"How should the results be sorted?"*: `By the values being counted`
 > 2. Inspect and expand the output data from **Count occurrences of each record** {% icon tool %}
->   
+>
 > > ### {% icon question %} Questions
 > >
 > > What can you see in this file?
@@ -321,7 +321,7 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 >    - *"Type of plot"*: `Line only`
 >    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
 >    - *"Color schemes to differentiate your groups"*: `set 3` or any set of color with more than 10 colors as there are 10 years in our dataset.
->   
+>
 {: .hands_on}
 
 ![Stacked Phenology chart](../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png)
@@ -349,7 +349,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 > >   {: .comment}
 > {: .hands_on}
 >
-> If your input dataset contains information about more than one species, you can now generate char for the multispecies:
+> If your input dataset contains information about more than one species, you can now generate a chart for the multi-species dataset:
 >
 > > ### {% icon hands_on %} Hands-on:
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
@@ -370,7 +370,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 > >     -  *"Values for y-axis"*: `Column corresponding to nm of the species 2`
 > > 7. You may repeat "Insert data series" as many times as needed depending on the number of different species you want to represent on your chart.
 > > 8. Click on **Customize**
-> >     -  *"X-Axis label"*: `Week and Year`  
+> >     -  *"X-Axis label"*: `Week and Year`
 > >     -  *"Y-Axis label"*: `nm values`
 > >     -  *"Use multi-panels"*: click on `No`(or you will have separated charts, one for each species)
 > > 9. Click on **Save** if you are willing to keep it
@@ -383,9 +383,9 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 
 We now would like to create a file showing the abundance index per year of a chosen species in a certain site.
 
-> ### {% icon hands_on %} Hands-on: Generate an adundance index
+> ### {% icon hands_on %} Hands-on: Generate an abundance index
 > 1. **Abundance index** {% icon tool %} with the following parameters:
->     -  *"Count file"*: output from **Tabular to CSV**, that should be named `Counting file` and/or tagged `Count`  
+>     -  *"Count file"*: output from **Tabular to CSV**, that should be named `Counting file` and/or tagged `Count`
 >     -  *"Flight curve output"*: output from **flight curve**
 {: .hands_on}
 
@@ -399,10 +399,10 @@ We now would like to create a file showing the abundance index per year of a cho
 
 ## Compute a collated index for each year and estimates the temporal trend
 
-The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the futur.
+The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the future.
 
 > ### {% icon hands_on %} Hands-on: Expected temporal trend
-> 1. **Expected temporal trend** {% icon tool %} with the the following parameters:
+> 1. **Expected temporal trend** {% icon tool %} with the following parameters:
 >    -  *"Tabular file generated by the ab_index tool"*: output of **abundance index**
 {: .hands_on}
 
@@ -413,7 +413,7 @@ The expected temporal trend allows you to have an overview of the evolution of a
 
 2. A table with values of "x", the collated index value by year
 
-Sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurences on your dataset must lie between the month of April and the end of the month of September.
+Sometimes the expected temporal trend can't be done on dataset. If you want this action to work, the occurrences on your dataset must lie between the month of April and the end of the month of September.
 
 ## Model temporal trend
 
