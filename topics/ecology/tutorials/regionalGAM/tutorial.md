@@ -309,7 +309,7 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 >    - *"Plot title"*: add a meaningful title (e.g. `Pyronia tithonus phenology stacked visualization`)
 >    - *"Label for x axis"*: add a meaningful label (e.g. `Day number`)
 >    - *"Label for y axis"*: add a meaningful label <!-- TODO (e.g. ????? Ask Benjamin or Reto to know more)-->
->    - *"Type of plot"*: `Line only`
+>    - *"Type of plot"*: `Line only` (e.g. `nm value`)
 >    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
 >    - *"Color schemes to differentiate your groups"*: `set 3` or any set of color with more than 10 colors as there are 10 years in our dataset.
 >
