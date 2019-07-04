@@ -316,7 +316,7 @@ Wallace can use the trained model to predict possible species distributions in a
 
 We can also predict not only for a different area, but also different timing and climate. The [Global Circulation Model (GCM)](https://en.wikipedia.org/wiki/General_circulation_model#Atmospheric_and_oceanic_models) are used here to predict atmospheric fluctuation and then study climate change. Each model is different and use parameters like ocean atmosphere and others. The prediction need also a RCP scenario, a scenarios about the amount of greenhouse gases emitted in the near future. This scenario may have different predicted presence models.
 
-We would like to predict the presence of Chrysemys Picta in Canada in 2050, given the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation, and a RCP value of 2.6 (**what does that represent?**)
+We would like to predict the presence of Chrysemys Picta in Canada in 2050, given the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation, and a RCP value of 2.6 <!--(**TODO: what does that represent?**)-->
 
 > ### {% icon hands_on %} Hands-on: Visualize Model Results with a 2.6 RCP
 > 2. In **Project Model**
@@ -330,7 +330,7 @@ We would like to predict the presence of Chrysemys Picta in Canada in 2050, give
 
 ![CCM4 with a 2.6 RCP](../../images/species-distribution-modeling/GCM_CCSM4_RCP_2.6.png)
 
-We would like now to compare the prediction for RCP value of 8.5 (**what does that represent?**).
+We would like now to compare the prediction for RCP value of 8.5 <!--(**TODO: what does that represent?**)-->.
 
 > ### {% icon hands_on %} Hands-on: Visualize Model Results with a 8.5 RCP
 > 2. In **Project Model**
