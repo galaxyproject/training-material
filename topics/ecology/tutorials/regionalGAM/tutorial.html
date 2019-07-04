@@ -1,0 +1,1189 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Regional GAM</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Regional GAM" />
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Ecology
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FregionalGAM%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FregionalGAM%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FregionalGAM%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FregionalGAM%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FregionalGAM%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/ecology/tutorials/regionalGAM/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Regional GAM",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "ecology / regionalGAM / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Regional GAM' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Regional GAM",
+    "description": "Regional GAM",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/ecology/tutorials/regionalGAM/tutorial.html",
+  "timeRequired": "PT2H30M",
+  "description": "Regional GAM\\nThe questions this  addresses are:\n - What are abundance and trends of a butterfly species?\n\n\\nThe objectives are:\n - Obtain and filter/manipulate occurrence data\n - Compute and visualize phenology of a species through the years\n - Compute temporal abundance trends\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/1324204#.W2BmRn7fNE4",
+      "name": "Training data for Regional GAM tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Clara Urfer"
+    },
+    {
+      "@type": "Person",
+      "name": "Elisa Michon"
+    },
+    {
+      "@type": "Person",
+      "name": "Yvan Le Bras"
+    },
+    {
+      "@type": "Person",
+      "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Benateau"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Clara Urfer"
+    },
+    {
+      "@type": "Person",
+      "name": "Elisa Michon"
+    },
+    {
+      "@type": "Person",
+      "name": "Yvan Le Bras"
+    },
+    {
+      "@type": "Person",
+      "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Benateau"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://galaxyproject.github.io//training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Regional GAM</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#claraurf" class="contributor-badge"><img src="https://avatars.githubusercontent.com/claraurf" alt="Clara Urfer">Clara Urfer</a>, <a href="/training-material/hall-of-fame#emichn" class="contributor-badge"><img src="https://avatars.githubusercontent.com/emichn" alt="Elisa Michon">Elisa Michon</a>, <a href="/training-material/hall-of-fame#yvanlebras" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Yvan Le Bras">Yvan Le Bras</a>, <a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>, <a href="/training-material/hall-of-fame#sbenateau" class="contributor-badge"><img src="https://avatars.githubusercontent.com/sbenateau" alt="Simon Benateau">Simon Benateau</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li>What are abundance and trends of a butterfly species?</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li>Obtain and filter/manipulate occurrence data</li>
+            
+            <li>Compute and visualize phenology of a species through the years</li>
+            
+            <li>Compute temporal abundance trends</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours 30 minutes</p>
+            
+
+            
+
+
+
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+
+                    
+                    <div>
+                        
+<a class="topic-icon" href="https://zenodo.org/record/1324204#.W2BmRn7fNE4">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+
+                    </div>
+                    
+
+                    
+                    <div>
+                        
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/ecology/tutorials/regionalGAM/workflows/" title="Workflows" alt="Regional GAM workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                    </div>
+                    
+                    
+
+
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This tutorial will show you how to study species abundance through the computation of a flight curve, abundance index, and trends. It will explain you how to use different <a href="https://github.com/RetoSchmucki/regionalGAM">regionalGAM</a> tools on Galaxy allowing you to deal with datasets containing abundance information for various species per site and per date through a couple of years.</p>
+
+<p>After a certain number of steps, you will be able to extract single species data and study related abundance through the years. The goal of this exercise is to be able to create abundance trend over time and biodiversity indicators. Following these indicators allow to follow trends in terms of population dynamics. You could for example try to predict the occurrences of one specific species in a certain type of environment using the prediction model of climate evolution. Based on charts that you will generate, you could try to explain the evolution of a species with environmental data (temperatures variations, modifications of the environmental conditions).</p>
+
+<p>You will basically learn how to create a file on the basis of which you can create a visual material that can be quite easily understood and therefore be efficient for a large audience.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#step-1-pre-processing" id="markdown-toc-step-1-pre-processing">Step 1: Pre-processing</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#prepare-the-data" id="markdown-toc-prepare-the-data">Prepare the data</a></li>
+      <li><a href="#check-that-the-dataset-contains-only-one-species" id="markdown-toc-check-that-the-dataset-contains-only-one-species">Check that the dataset contains only one species</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-2-analyze-phenology-of-a-species-through-the-years" id="markdown-toc-step-2-analyze-phenology-of-a-species-through-the-years">Step 2: Analyze phenology of a species through the years</a>    <ol>
+      <li><a href="#compute-and-visualize-the-phenology" id="markdown-toc-compute-and-visualize-the-phenology">Compute and visualize the phenology</a></li>
+      <li><a href="#compute-abundance-index-across-sites-and-years" id="markdown-toc-compute-abundance-index-across-sites-and-years">Compute Abundance Index across sites and years</a></li>
+      <li><a href="#compute-a-collated-index-for-each-year-and-estimates-the-temporal-trend" id="markdown-toc-compute-a-collated-index-for-each-year-and-estimates-the-temporal-trend">Compute a collated index for each year and estimates the temporal trend</a></li>
+      <li><a href="#model-temporal-trend" id="markdown-toc-model-temporal-trend">Model temporal trend</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="step-1-pre-processing">Step 1: Pre-processing</h1>
+
+<p>The goal of the first step is to upload and prepare the file so that it will be usable for the <em>regional GAM</em> analysis.</p>
+
+<h2 id="data-upload">Data upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name like <code class="highlighter-rouge">regionalGAM tutorial</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the CSV dataset file with only one species from <a href="https://zenodo.org/record/1324204#.W2BmRn7fNE4">Zenodo</a> or from the data library (ask your instructor)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check that the file contains a header corresponding to: <code class="highlighter-rouge">"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"</code>, and that all the non numeric content are between double quotes as “x” and that separators are “,”</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names (“SPECIES”), observation site (“SITE”), date of the observation (“YEAR”,”MONTH”,”DAY”) and number of indivudals (“COUNT”). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.</p>
+
+<figure id="figure-1"><img src="../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg" alt="Gatekeeper (Pironia tithonus)" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Gatekeeper (Pironia tithonus) Charles J Sharp</figcaption></figure>
+
+<h2 id="prepare-the-data">Prepare the data</h2>
+
+<p>The downstream tools require Tabular file and not CSV. So we need first to convert our CSV file to a tabular</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-convert-csv-to-tabular"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert CSV to Tabular</h3>
+  <ol>
+    <li>Run <strong>CSV to tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“CSV file”</em>: imported dataset</li>
+        <li><em>“Separator”</em>: “,”</li>
+        <li><em>“Header in file”</em>: Yes</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header <code class="highlighter-rouge">SITE</code> of the dataset you are using is really long and the <code class="highlighter-rouge">SITES</code> are classified into sub-sites (like <code class="highlighter-rouge">ESBMS.12</code>, <code class="highlighter-rouge">ESBMS.28</code>, <code class="highlighter-rouge">ESBMS.55</code>, etc).</p>
+
+<p>Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-downsample-and-hide-some-information"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Downsample and hide some information</h3>
+  <ol>
+    <li><strong>Text reformatting with awk</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: output of <strong>CSV to tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>
+          <p><em>“AWK Program”</em>:</p>
+
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> NR == 1 { print }
+ /NLBMS/ { print }
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>The first line will skip and print the header and the second will print all the lines where NLBMS is found</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>How many sites do you have before and after removing the sites from outside the Netherlands?</p>
+
+  <p>You may need to use a tool like <strong>Count occurrences of each record</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. If you want to run the same tool with same parameters to several input files, you can directly specify the <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> option on the tool form for the <em>“from dataset”</em> parameter).</p>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-select-multiple-datasets"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+    <ol>
+      <li>Click on <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+      <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The dataset contains 280 sites now against 1143 before down-sampling.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-if-your-original-data-is-in-rdata-format"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> If your original data is in RData format</h3>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-data-upload-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload.</h3>
+    <ol>
+      <li>
+        <p>Import the RData</p>
+
+        <p>For example, you can upload:</p>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData
+</code></pre></div>        </div>
+      </li>
+      <li><strong>RData binary file reader</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+        <ul>
+          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Rdata binary file to explore”</em>: imported RData</li>
+        </ul>
+      </li>
+      <li><strong>RData parser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+        <ul>
+          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Rdata file to explore”</em>: imported RData</li>
+          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with .Rdata content details”</em>: output of <strong>RData binary file reader</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Select which attribute(s) you want to extract”</em>: select everything but “trend”</li>
+          <li><em>“Bind variables in a single tabular when its possible”</em>: <code class="highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>If the tool <strong>RData parser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> don’t succeed to create a single tabular file, it generates separate files, each of them containing one column. The file with the <code class="highlighter-rouge">TREND</code> header can be let aside as we don’t need it for what will follow.</p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>If Rdata parser fails to generate a single unified tabular file, can you propose a way to regenerate such a dataset ?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>You can do that using:</p>
+      <ol>
+        <li><strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“paste”</em>: output from <strong>RData parser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> headed with “SPECIES”</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“and”</em>: output from <strong>RData parser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with headed with “SITE”</li>
+          </ul>
+        </li>
+        <li>Repeat <strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> executions as many times as there are separated files in order to create a final dataset with all the columns:
+          <ol>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 2 columns with the one headed by <code class="highlighter-rouge">YEAR</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 3 columns with the one headed by <code class="highlighter-rouge">MONTH</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 4 columns with the one headed by <code class="highlighter-rouge">DAY</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 5 columns with the one headed by <code class="highlighter-rouge">COUNT</code></li>
+          </ol>
+        </li>
+      </ol>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="check-that-the-dataset-contains-only-one-species">Check that the dataset contains only one species</h2>
+
+<p>The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.</p>
+
+<p>As the dataset is quite big and may countain heterogeneous information, we need to know whether the data are about one species or more.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-how-many-species-are-taken-into-account-in-this-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: How many species are taken into account in this dataset?</h3>
+
+  <ol>
+    <li><strong>Count occurrences of each record</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: output of <strong>Text reformatting with awk</strong></li>
+        <li><em>“Count occurrences of values in column(s)”</em>: <code class="highlighter-rouge">Column: 1</code>, the <code class="highlighter-rouge">SPECIES</code> column</li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><em>“How should the results be sorted?”</em>: <code class="highlighter-rouge">With the most common values first</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon (<strong>View data</strong>)</li>
+    <li>Check that the dataset is for one species only</li>
+  </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-datasets-containing-information-about-more-than-one-species"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Datasets containing information about more than one species</h3>
+
+  <p>If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.</p>
+
+  <p>As the dataset is quite big and contains heterogeneous information, you want to know whether the data are about one species or more. So the first step consists to count how many species are taken into account in this dataset.</p>
+
+  <p>To test these steps, you can use the following dataset:</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
+</code></pre></div>  </div>
+
+  <blockquote class="question">
+    <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>How many species does your initial dataset take into account ?</li>
+      <li>What are their names ?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solutions"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solutions</h3>
+
+      <ol>
+        <li>The dataset contains information on 2 different species</li>
+        <li>Their names are “Pyronia tithonus” and “Aglais io”.</li>
+      </ol>
+
+    </blockquote>
+  </blockquote>
+
+  <p>We now need to create a new file containing the data for only one species</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-creating-a-new-file-containing-only-the-data-from-one-species"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a new file containing only the data from one species</h3>
+    <ol>
+      <li>Copy the name of the species you are interested in (for example: “Aglais io”).</li>
+      <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+        <ul>
+          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of <strong>Text reformatting with awk</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“With following condition”</em>: <code class="highlighter-rouge">c1=='"Aglais io"'</code> or (another species name)</li>
+          <li><em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+        </ul>
+
+        <p>You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them containing a different species.</p>
+      </li>
+      <li>Repeat the last step on all the different <code class="highlighter-rouge">outputs</code> from <strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that you have, one by species</li>
+      <li>Tag your new dataset with an explicit tags as “Count” and “Aglais io” and/or rename this dataset like “Aglais io count file”.</li>
+    </ol>
+  </blockquote>
+
+  <p>If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.</p>
+</blockquote>
+
+<h1 id="step-2-analyze-phenology-of-a-species-through-the-years">Step 2: Analyze phenology of a species through the years</h1>
+
+<h2 id="compute-and-visualize-the-phenology">Compute and visualize the phenology</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Phenology">Phenology</a>, as described in Wikipedia, is the study of periodic plant and animal life cycle events and how these are influenced by seasonal and inter-annual variations in climate, as well as habitat factors (such as elevation).</p>
+
+<p>Now you have a file containing all the data on the species of interest. The main goal of this step is to model one phenology per year using a general additive model (GAM) with time and sites as explanatory variables. This model will be used to predict values for missing counts at local sites in order to improve the quality of the abundance indices.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-phenology"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Phenology</h3>
+  <ol>
+    <li><strong>Flight curve</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count file”</em>: output file you just generated with the <strong>Text reformatting with awk</strong> or <strong>Filter data on any column using simple expressions</strong> if your file was containing more than one species <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Generate the chart using the visualization
+      <ol>
+        <li>Inspect and expand the output data from <strong>Flight curve</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Click on the <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</li>
+        <li>Select <strong>Line chart (NVD3)</strong> as visualization type</li>
+        <li>Give it a proper name, e.g. <code class="highlighter-rouge">Pyronia tithonus phenology raw simple vizu</code></li>
+        <li>On <strong>Select data</strong> area, specify:
+          <ul>
+            <li><em>“Provide a label”</em>: <code class="highlighter-rouge">Pyronia tithonus phenology from 2003 to 2012</code> for example</li>
+            <li><em>“Pick a series color”</em>: Choose a color for the line</li>
+            <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column 1</code></li>
+            <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column 2</code></li>
+            <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column 6</code></li>
+          </ul>
+        </li>
+        <li>On <strong>Change settings</strong>, specify:
+          <ul>
+            <li><em>“X-Axis label”</em>: <code class="highlighter-rouge">Year</code></li>
+            <li><em>“Y-Axis label”</em>: <code class="highlighter-rouge">nm values</code></li>
+          </ul>
+        </li>
+        <li>Click on <strong>Save</strong></li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/regionalGAM/phenology_year.png" alt="Phenology chart" /></p>
+
+<p>This graph displays the modeled flight curve of <em>Pyronia tithonus</em> over the years. But the first year is “null”, probably a left-over of the 1st line with the header, and the week number is not shown.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-new-column-of-the-dataset-containing-the-week-and-the-year"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a new column of the dataset containing the week and the year</h3>
+  <ol>
+    <li><strong>Count occurrences of each record</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: output from <strong>Flight curve</strong></li>
+        <li><em>“Select”</em>: <code class="highlighter-rouge">Column: 2</code> (the column with the year)</li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><em>“How should the results be sorted?”</em>: <code class="highlighter-rouge">By the values being counted</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect and expand the output data from <strong>Count occurrences of each record</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What can you see in this file?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>A list of the years and the number of occurrence for each year which should match the number of days for each year.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>Column Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output file from <strong>flight curve</strong>.</li>
+        <li><em>“in column”</em>: <code class="highlighter-rouge">Column 2</code> (the column with the year)</li>
+        <li>Click on <em>“Insert Check”</em></li>
+        <li><em>“Find pattern”</em>: <code class="highlighter-rouge">(20[0-9][0-9])</code></li>
+        <li><em>“Replace with”</em>: <code class="highlighter-rouge">-\1</code></li>
+      </ul>
+    </li>
+    <li>Inspect the file and check if all the years are now written with a <code class="highlighter-rouge">-</code> before the digits.</li>
+    <li><strong>Merge Columns together</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: output from the last <strong>Column Regex Find And Replace</strong>.</li>
+        <li><em>“Merge column”</em>: <code class="highlighter-rouge">Column: 3</code> (the column with the week)</li>
+        <li><em>“with column”</em>: <code class="highlighter-rouge">Column: 2</code> (the column with the year)</li>
+      </ul>
+    </li>
+    <li><strong>Column Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to recreate the original content for the year column:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output file from <strong>Merge Columns together</strong>.</li>
+        <li><em>“in column”</em>: <code class="highlighter-rouge">Column 2</code> (the column with the year)</li>
+        <li><em>“Find pattern”</em>: <code class="highlighter-rouge">-(20[0-9][0-9])</code></li>
+        <li><em>“Replace with”</em>: <code class="highlighter-rouge">\1</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Remove beginning of a file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove first line (to avoid header in the visualization)</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-dataset-with-information-about-more-than-one-species"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Dataset with information about more than one species</h3>
+        <p>If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.</p>
+      </blockquote>
+    </li>
+    <li>Generate the chart using the visualization with the x-axis corresponding to your column <code class="highlighter-rouge">"week""year"</code>.
+      <ol>
+        <li>Inspect and expand the output data from <strong>Remove beginning of a file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Click on the <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</li>
+        <li>Select <strong>Line chart (NVD3)</strong> as visualization type</li>
+        <li>Give it a proper name, e.g. <code class="highlighter-rouge">Pyronia tithonus phenology simple vizu</code></li>
+        <li>On <strong>Select data</strong> area, specify:
+          <ul>
+            <li><em>“Provide a label”</em>: <code class="highlighter-rouge">Pyronia tithonus phenology from 2003 to 2012</code> for example</li>
+            <li><em>“Pick a series color”</em>: Choose a color for the line</li>
+            <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column 6</code> (the nm column) or another one</li>
+            <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column 7</code> (the “week-year” column)</li>
+            <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column 6</code> (the nm column)</li>
+          </ul>
+        </li>
+        <li>On <strong>Customize</strong>, specify:
+          <ul>
+            <li><em>“X-Axis label”</em>: <code class="highlighter-rouge">Week-Year</code></li>
+            <li><em>“Y-Axis label”</em>: <code class="highlighter-rouge">nm values</code></li>
+          </ul>
+        </li>
+        <li>Click on <strong>Save</strong></li>
+      </ol>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/regionalGAM/Pyronia_tithonus_phenology_explicit_ID.png" alt="Phenology chart" /></p>
+
+<p>This shows the abundance of <em>Pyronia tithonus</em>, over the weeks. We can see there is a peak every year as expected and we can notice some differences in the values between the weeks and years, but not how the weeks overlap between the years. We will plot a stalked version of this visualization to check if there are no unexpected changes and have an idea of the quality of the reconstructed phenology.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualize-the-years-on-a-stacked-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize the years on a stacked graph</h3>
+  <ol>
+    <li><strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: output from <strong>Flight curve</strong></li>
+        <li><em>“Column to plot on x-axis”</em>: <code class="highlighter-rouge">4</code> (the column with the year)</li>
+        <li><em>“Column to plot on y-axis”</em>: <code class="highlighter-rouge">6</code></li>
+        <li><em>“Plot title”</em>: add a meaningful title (e.g. <code class="highlighter-rouge">Pyronia tithonus phenology stacked visualization</code>)</li>
+        <li><em>“Label for x axis”</em>: add a meaningful label (e.g. <code class="highlighter-rouge">Day number</code>)</li>
+        <li><em>“Label for y axis”</em>: add a meaningful label <!-- TODO (e.g. ????? Ask Benjamin or Reto to know more)--></li>
+        <li><em>“Type of plot”</em>: <code class="highlighter-rouge">Line only</code></li>
+        <li><em>“Plotting multiple groups”</em>: <code class="highlighter-rouge">Plot multiple groups of data on one plot</code> to superimpose years</li>
+        <li><em>“Color schemes to differentiate your groups”</em>: <code class="highlighter-rouge">set 3</code> or any set of color with more than 10 colors as there are 10 years in our dataset.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/regionalGAM/Pyronia_tithonus_phenology_stacked_explicit_ID.png" alt="Stacked Phenology chart" /></p>
+
+<p>With this graph, we can see that <em>Pyronia tithonus</em> records are always around the same weeks every year. We can also see small differences between years but overall the phenology is quite stable and the results of this step seem good and allow us to continue with the calculation of the abundance index.</p>
+
+<blockquote class="details">
+  <h3 id="details-working-with-more-than-one-species"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Working with more than one species</h3>
+
+  <p>If you are working with more than one species, you should follow the next steps</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+    <ol>
+      <li><strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+        <ul>
+          <li><em>“Paste”</em>: <code class="highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset for species 1)</li>
+          <li><em>“and”</em>: <code class="highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset for species 2)</li>
+          <li><em>“Delimited by”</em>: tabulation</li>
+        </ul>
+      </li>
+    </ol>
+
+    <blockquote class="comment">
+
+      <h3 id="comment-comment-you-can-add-other-species"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: You can add other species.</h3>
+      <p>In order to do so you will have to do as explained below:</p>
+      <ol>
+        <li><strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+          <ul>
+            <li><em>“Paste”</em>: the <code class="highlighter-rouge">output</code> from <strong>Paste two files side by side</strong> (with the dataset containing species 1 and 2)</li>
+            <li><em>“and”</em>: <code class="highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset containing species 3)</li>
+            <li><em>“Delimited by”</em>: tabulation</li>
+          </ul>
+        </li>
+        <li>Repeat <strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the output from <strong>Paste two files side by side</strong> (with the data containing species 1, 2 and 3) and with the output from <strong>Merge Columns together</strong> (with the dataset containing species 4) and so on.</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+  <p>If your input dataset contains information about more than one species, you can now generate a chart for the multi-species dataset:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+    <ol>
+      <li>Inspect and expand the output data from <strong>flight curve</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      <li>Click on the <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</li>
+      <li>Select a visualization: <code class="highlighter-rouge">line chart (NVD3)</code></li>
+      <li>Give it a proper name like <code class="highlighter-rouge">Aglais io &amp; Pyronia tithonus phenology</code></li>
+      <li>Select data
+        <ul>
+          <li><em>“Provide a label”</em>: The name of the first species, for example <code class="highlighter-rouge">Aglais io</code></li>
+          <li><em>“Pick a series color”</em>: Choose a color</li>
+          <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column corresponding to the name of the species 1</code></li>
+          <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column corresponding to the "week and year" of the species 1</code></li>
+          <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column corresponding to nm of the species 1</code></li>
+        </ul>
+      </li>
+      <li>Insert data series:
+        <ul>
+          <li>*“Provide a label”: he name of the second species, for example <code class="highlighter-rouge">Pyronia tithonus</code></li>
+          <li><em>“Pick a series color”</em>: Choose a different color</li>
+          <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column corresponding to the name of the species 2</code></li>
+          <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column corresponding to the "week and year" of the species 2</code></li>
+          <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column corresponding to nm of the species 2</code></li>
+        </ul>
+      </li>
+      <li>You may repeat “Insert data series” as many times as needed depending on the number of different species you want to represent on your chart.</li>
+      <li>Click on <strong>Customize</strong>
+        <ul>
+          <li><em>“X-Axis label”</em>: <code class="highlighter-rouge">Week and Year</code></li>
+          <li><em>“Y-Axis label”</em>: <code class="highlighter-rouge">nm values</code></li>
+          <li><em>“Use multi-panels”</em>: click on <code class="highlighter-rouge">No</code>(or you will have separated charts, one for each species)</li>
+        </ul>
+      </li>
+      <li>Click on <strong>Save</strong> if you are willing to keep it</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="compute-abundance-index-across-sites-and-years">Compute Abundance Index across sites and years</h2>
+
+<p>We now would like to create a file showing the abundance index per year of a chosen species in a certain site.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-an-abundance-index"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate an abundance index</h3>
+  <ol>
+    <li><strong>Abundance index</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Count file”</em>: output from <strong>Tabular to CSV</strong>, that should be named <code class="highlighter-rouge">Counting file</code> and/or tagged <code class="highlighter-rouge">Count</code></li>
+        <li><em>“Flight curve output”</em>: output from <strong>flight curve</strong></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><strong>Abundance index</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> generates a table with 5 columns:</p>
+<ul>
+  <li>Site</li>
+  <li>Species</li>
+  <li>Year</li>
+  <li>Regional GAM</li>
+  <li>prop_pheno_sampled</li>
+</ul>
+
+<h2 id="compute-a-collated-index-for-each-year-and-estimates-the-temporal-trend">Compute a collated index for each year and estimates the temporal trend</h2>
+
+<p>The expected temporal trend allows you to have an overview of the evolution of a species in a certain type of environment in the future.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-expected-temporal-trend"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Expected temporal trend</h3>
+  <ol>
+    <li><strong>Expected temporal trend</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Tabular file generated by the ab_index tool”</em>: output of <strong>abundance index</strong></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><strong>Expected temporal trend</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> generates 2 files”</p>
+<ol>
+  <li>
+    <p>The graph like:</p>
+
+    <p><img src="../../images/regionalGAM/Expected_temporal_trend.png" alt="Expected temporal trend" /></p>
+  </li>
+  <li>
+    <p>A table with values of “x”, the collated index value by year</p>
+  </li>
+</ol>
+
+<p>Sometimes the expected temporal trend can’t be done on dataset. If you want this action to work, the occurrences on your dataset must lie between the month of April and the end of the month of September.</p>
+
+<h2 id="model-temporal-trend">Model temporal trend</h2>
+
+<p>We would like to know if the year has an influence on the abundance of a species. We will use a linear regression to do that.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-model-temporal-trend-with-linear-regression"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend with linear regression</h3>
+  <ol>
+    <li><strong>Model temporal trend with a simple linear regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File generated by the glmmpql/Expected temporal trend tool”</em>: tabular output of <strong>temporal trend</strong></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File generated by the ab_index tool”</em>: output from <strong>abundance index</strong></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Have a look at the text file result. This is the output of the linear model applied in R.</p>
+
+<blockquote>
+
+  <blockquote class="question">
+    <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>What are the estimates of the regression coefficients?</li>
+      <li>Can we use this model to make good predictions?</li>
+      <li>Is the test p-value significant?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solutions-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solutions</h3>
+
+      <ol>
+        <li>Intercept is 183.33852 and the slope (Year) is -0.08952.</li>
+        <li>No, the residual standard error is high.</li>
+        <li>Yes (0.0282 &lt; 0.05).</li>
+      </ol>
+
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<p>We can also test for autocorrelation in the data.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend taking into account autocorrelation of residuals</h3>
+  <ol>
+    <li><strong>Autocorrelation test check for temporal autocorrelation in the residuals</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gls model”</em>: tabular output of <strong>Model temporal trend</strong></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><img src="../../images/regionalGAM/Autocorrelation_test.png" alt="Autocorrelation test graph" /></p>
+
+<p>Have a look at this plot.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend taking into account autocorrelation of residuals</h3>
+  <ol>
+    <li><strong>Plot abundance with trend line</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File generated by the ab_index tool”</em>: output from <strong>abundance index</strong></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“gls model”</em>: outputs of <strong>Model temporal trend with a simple linear regression</strong>.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p><img src="../../images/regionalGAM/trend_simple.png" alt="Plot of temporal trend with trend line" /></p>
+
+<p>Here you can see the temporal trends modeled from the simple regression. You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.</p>
+
+<h1 class="no_toc" id="conclusions">Conclusions</h1>
+
+<p>In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data for one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to assess the abundance of species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.</p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+
+                        <ul>
+                            
+                            <li></li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Regional GAM (Ecology)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Regional GAM (Ecology)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Clara Urfer, Elisa Michon, Yvan Le Bras, Bérénice Batut, Simon Benateau)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/ecology/tutorials/regionalGAM/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+</html>
