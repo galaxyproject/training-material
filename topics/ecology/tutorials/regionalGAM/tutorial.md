@@ -71,15 +71,6 @@ This dataset gathers years of records of the presence of butterfly species per s
 
 ## Prepare the data
 
-The downstream tools require Tabular file and not CSV. So we need first to convert our CSV file to a tabular
-
-> ### {% icon hands_on %} Hands-on: Convert CSV to Tabular
-> 1. Run **CSV to tabular** {% icon tool %} with the following parameters:
->       - {% icon param-file %} *"CSV file"*: imported dataset
->       - *"Separator"*: ","
->       - *"Header in file"*: Yes
-{: .hands_on}
-
 The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
 Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.
