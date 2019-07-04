@@ -52,7 +52,7 @@ GSM1588707 | resistant   | BRAFi
 
 # 450K Array Data Upload
 
-The first step of EWAS data anyalysis is the raw methylation data loading (intensity information files for each two color micro array)
+The first step of EWAS data analysis is the raw methylation data loading (intensity information files for each two color micro array)
 
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
