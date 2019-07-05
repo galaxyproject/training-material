@@ -96,17 +96,7 @@ Some image can be added there to support the theory explanation:
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+The first step is to check the quality of the reads and the presence of the Nextera adapters. We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We can remove the adapters with Cutadapt.
 
 
 ## Sub-step with **FastQC**
@@ -141,6 +131,8 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+To trim the adapters we provide the sequences to Cutadapt. The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 30). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
 
 ## Sub-step with **Cutadapt**
 
@@ -194,6 +186,8 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+Next we map the trimmed reads to the reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
+
 ## Sub-step with **Bowtie2**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -237,6 +231,8 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+We apply some filters to the reads after mapping. ATAC-seq datasets can have a lot of reads mapping to mitchondria and we remove these reads. We also remove reads with low mapping quality and that are not properly paired.
 
 ## Sub-step with **Filter**
 
@@ -323,6 +319,8 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+We check the fragment sizes (the sizes of the pieces of DNA that were sequenced) with Picard CollectInsertSizeMetrics.
+
 ## Sub-step with **CollectInsertSizeMetrics**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -359,6 +357,8 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+We convert the BAM file to BED format because when shifting reads with MACS2 will only consider one of the read pairs.
+
 ## Sub-step with **Convert, Merge, Randomize**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -393,6 +393,9 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+
+We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS2.
 
 ## Sub-step with **MACS2 callpeak**
 
