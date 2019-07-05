@@ -453,10 +453,10 @@ Templates give you greater control over the files you are deploying to the remot
 >
 >    ```yaml
 >    ---
->    my_role_key: deadbeefcafe
+>    server_name: Cats!
 >    ```
 >
->    This will define a variable `my_role_key` that can then be used in templates.
+>    This will define a variable `server_name` that can then be used in templates.
 >
 > 4. Create and edit `roles/my-role/templates/test.ini.j2`
 >
@@ -465,7 +465,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    {% raw %}
 >    ```ini
 >    [example]
->    api_key = {{ my_role_key }}
+>    server_name = {{ server_name }}
 >    listen = {{ ansible_default_ipv4.address }}
 >    ```
 >    {% endraw %}
@@ -493,7 +493,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    > >
 >    > > ```ini
 >    > > [example]
->    > > api_key = deadbeefcafe
+>    > > server_name = Cats!
 >    > > listen = 192.168.0.2
 >    > > ```
 >    > >
@@ -504,7 +504,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    {: .question}
 >
 >    Now that this has worked successfully, we will setup a `group_vars` folder
->    to show how a person using `my-role` would override the `my_role_key` variable.
+>    to show how a person using `my-role` would override the `server_name` variable.
 >
 > 9. Create the folder `group_vars/` (in the root of your directory)
 >
@@ -514,7 +514,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 >     ```yaml
 >     ---
->     my_role_key: my_super_secret_api_key
+>     server_name: Dogs!
 >     ```
 >
 > 12. Run the playbook again, but imagine you are worried about this change, and supply the `--check --diff` flag to see what changes are made before committing to make them.
@@ -537,15 +537,15 @@ Templates give you greater control over the files you are deploying to the remot
 >     > > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
 >     > > @@ -1,3 +1,3 @@
 >     > >  [example]
->     > > -api_key = deadbeefcafe
->     > > +api_key = my_super_secret_api_key
+>     > > -server_name = Cats!
+>     > > +server_name = Dogs!
 >     > >  listen = 192.168.0.25
 >     > > changed: [localhost]
 >     > > PLAY RECAP **********************************************
 >     > > localhost                  : ok=3    changed=1    unreachable=0    failed=0
 >     > > ```
 >     > >
->     > > Here you can see that the api_key value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
+>     > > Here you can see that the server_name value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
 >     > {: .solution }
 >     {: .question}
 >
