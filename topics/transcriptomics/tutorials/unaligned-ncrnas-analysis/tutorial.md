@@ -20,12 +20,18 @@ key_points:
 contributors:
 - bebatut
 - pavanvidem
+- eggzilla
 ---
 
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+Non coding RNAs (ncRNA) that are homologous, meaning that they share a common ancestor RNA, can be identified
+by sharing a common sequence or structure. Since the biological function depends on the
+spatial structure of a molecule, it is often strongly conserved for ncRNAs.
+
+This workflow investigates a set of sequences for their sequence and structure conservation and for
+their alignability.
 
 ***TODO***: *Add a general introduction to the topic*
 
