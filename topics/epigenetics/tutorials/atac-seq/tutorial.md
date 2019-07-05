@@ -13,7 +13,7 @@ objectives:
 - They are single sentences describing what a learner should be able to do once they
   have completed the tutorial
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+time_estimation: ''
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
@@ -243,7 +243,6 @@ A big step can have several subsections or sub steps:
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output` (output of **Bowtie2** {% icon tool %})
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Insert Condition"*
 >            - In *"Filter"*:
@@ -360,17 +359,55 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+## Sub-step with **Convert, Merge, Randomize**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Convert, Merge, Randomize** {% icon tool %} with the following parameters:
+>    - *"Select BAM manipulation"*: `Convert`
+>        - *""*: `BED`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
 ## Sub-step with **MACS2 callpeak**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
+>        - {% icon param-file %} *"ChIP-Seq Treatment File"*: `out_file1` (output of **Convert, Merge, Randomize** {% icon tool %})
 >    - *"Do you have a Control File?"*: `No`
+>    - *"Format of Input Files"*: `Single-end BED`
 >    - *"Effective genome size"*: `H. sapiens (2.7e9)`
 >    - *"Build Model"*: `Do not build the shifting model (--nomodel)`
->        - *"Set shift size"*: `100`
+>        - *"Set shift size"*: `-100`
 >    - *"Peak detection based on"*: `q-value`
+>    - *"Additional Outputs"*: ``
 >    - In *"Advanced Options"*:
 >        - *"Composite broad regions"*: `No broad regions`
 >            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
