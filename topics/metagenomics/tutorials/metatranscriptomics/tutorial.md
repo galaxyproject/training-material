@@ -21,6 +21,8 @@ contributors:
 - pratikdjagtap
 - subinamehta
 - jraysajulga
+- bebatut
+- emmaleith
 
 ---
 
