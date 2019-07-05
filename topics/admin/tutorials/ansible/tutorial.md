@@ -481,7 +481,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 7. Run the playbook again.
 >
-> 8. Login to the remote machine and check the contents of `/tmp/test.ini`
+> 8. Check the contents of `/tmp/test.ini`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -603,6 +603,76 @@ Picking the best role for a task from Ansible Galaxy is not always a trivial tas
 These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, [`ansible-cvmfs`](https://github.com/galaxyproject/ansible-cvmfs) is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.
 
 Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
+
+# (Optional) Ansible Vault
+
+Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets.
+
+> ### {% icon hands_on %} Hands-on: Setting up secrets
+>
+> 0. Run `mkdir -p secret_group_vars`
+>
+> 1. Now we'll create a strong password: `openssl rand -base64 24 > vault-password.txt`
+>
+> 2. Run `ansible-vault create secret_group_vars/all.yml --vault-password-file=vault-password.txt`
+>
+>    This will open `secret_group_vars/all.yml` in your text editor.
+>
+> 3. In this file, enter the following contents and save it:
+>
+>    ```yaml
+>    apikey: super-secret-api-key-wow!
+>    ```
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How does your file look? Is it readable? Run `cat secret_group_vars/all.yml`
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.
+>    > > ```
+>    > > $ cat secret_group_vars/all.yml
+>    > > $ANSIBLE_VAULT;1.1;AES256
+>    > > 64373665366130333437393639343534653134346538636239393363373062393830653333323966
+>    > > 3134333366363130326139323162323131643763336236320a393262303938316262643764323862
+>    > > 36393161666663353231366336613838633866323230303031313465646333613862363264323139
+>    > > 3263383530626262370a666139666462663938343531656432353239346532316630366165376566
+>    > > 34313765353766666330366632303836353863396430343264303032363739666139383830323565
+>    > > 6133663637356331613062353834646561653366386665623930
+>    > > ```
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 4. Use the new variable in our `.ini` file from earlier. Edit `roles/my-role/templates/test.ini.j2` and add the line `apikey = {{ apikey }}`
+>
+> 5. Run the playbook
+>
+> 6. Check the contents of `/tmp/test.ini`
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How does it look?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file should look like:
+>    > >
+>    > > ```ini
+>    > > [example]
+>    > > server_name = Cats!
+>    > > listen = 192.168.0.2
+>    > > apikey = super-secret-api-key-wow!
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+Ansible Vault is really useful to include encrypted secrets in your playbook repository. In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your `.gitignore` (or VCS appropriate file.)
 
 # Other Stuff
 
