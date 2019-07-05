@@ -4,19 +4,16 @@ layout: tutorial_hands_on
 title: Metatranscriptomics analysis using microbiome RNA-seq data
 zenodo_link: https://zenodo.org/record/3269404
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- "How to analyze metatranscriptomics data?"
+- "What information can be extracted of metatranscriptomics data?"
+- "How to assign taxa and function to the identified sequences?"
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- "Choosing the best approach to analyze metatranscriptomics data"
+- "Visualisation of a community structure"
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
+- "Metatranscriptomics data analyses are complex and time-consuming"
 contributors:
 - pratikdjagtap
 - subinamehta
@@ -229,6 +226,24 @@ A big step can have several subsections or sub steps:
 >    - *"Alignment report"*: `Do not report alignments`
 >
 >    ***TODO***: *Check parameter descriptions*
+**Filter with SortMeRNA** {% icon tool %} with the following parameters:
+>   - {% icon param-select %} *”Sequencing type”*: ‘Reads are paired’
+>   - {% icon param-file %} *”Forward reads”*: ‘Read 1: trimmed’
+>   - {% icon param-file %} *”Reverse reads”*: ‘Read 2: trimmed’
+>   - {% icon param-check %} *”If one of the paired-end reads aligns and the other one does not”*: ‘Output both reads to rejected file (--paired_out)’
+>   - {% icon param-select %} *”Which strands to search”*: ‘Search both strands’
+>   - {% icon param-select %} *”Databases to query”*: ‘Public pre-indexed ribosomal databases’
+>   - {% icon param-check %} *”rRNA databases”*: ‘Select all’
+>   - {% icon param-select %} *”Include aligned reads in FASTA/FASTQ format?”*: ‘Yes (--fastx)’
+>   - {% icon param-check %} *”Include rejected reads file?”*: ‘Yes’
+>   - {% icon param-check %} *”Generate statistics file”*: ‘No’
+>   - {% icon param-select %} *”Alignment report”*: ‘Do not report alignments’
+>   - {% icon param-text %} *”E-value threshold”*: ‘1’
+>   - {% icon param-text %} *”SW score for a match”*: ‘2’
+>   - {% icon param-text %} *”SW penalty for a mismatch”*: ‘-3’
+>   - {% icon param-text %} *”SW penalty for introducing a gap”*: ‘5’
+>   - {% icon param-text %} *”SW penalty for extending a gap”*: ‘2’
+>   - {% icon param-text %} *”SW penalty for ambiguous letters (N’s)”*: ‘-3’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -263,6 +278,9 @@ A big step can have several subsections or sub steps:
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-select %} *”Type of paired-end datasets”*: ‘2 separate datasets’
+>   - {% icon param-file %} *”Left-hand mates”*: ‘File’
+>   - {% icon param-file %} *”Right-hand mates”*: ‘File’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -297,6 +315,9 @@ A big step can have several subsections or sub steps:
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-select %} *”Type of paired-end datasets”*: ‘2 separate datasets’
+>   - {% icon param-file %} *”Left-hand mates”*: ‘File’
+>   - {% icon param-file %} *”Right-hand mates”*: ‘File’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -331,6 +352,19 @@ A big step can have several subsections or sub steps:
 >    - *"Database with clade-specific marker genes"*: `Locally cached`
 >    - *"Type of analysis to perform"*: `Profiling a metagenomes in terms of relative abundances`
 >
+**MetaPhlAn2** {% icon tool %} with the following parameters:
+>   - {% icon param-tool %} *”Input file”*: ‘FASTQ interlacer output’
+>   - {% icon param-select %} *”Database with clade-specific marker genes”*: ‘Locally cached’
+>   - {% icon param-select %} *”Cached database with clade-specific marker genes”*: ‘MetaPhlAn2 clade-specific marker genes’
+>   - {% icon param-select %} *”Type of analysis to perform”*: ‘Profiling a metagenomes in terms of relative abundances’
+>   - {% icon param-select %} *”Taxonomic level for the relative abundance output”*: ‘All taxonomic levels’
+>   - {% icon param-text %} *”Minimum total nucleotide length for the markers in a clade for estimating the abundance without considering sub-clade abundances”*: ‘2000’
+>   - {% icon param-text %} *”Sam records for aligned reads with the longest subalignment length smaller than this threshold will be discarded”*: ‘0’
+>   - {% icon param-check %} *”Profile viral organisms?”*: ‘Yes’
+>   - {% icon param-check %} *”Profile eukaryotic organisms?”*: ‘Yes’
+>   - {% icon param-check %} *”Profile bacteria organisms?”*: ‘Yes’
+>   - {% icon param-check %} *”Profile archea organisms?”*: ‘Yes’
+>   - {% icon param-text %} *”Quantile value for the robust average”*: ‘0.1’
 >    ***TODO***: *Check parameter descriptions*
 >
 >    ***TODO***: *Consider adding a comment or tip box*
@@ -432,6 +466,21 @@ A big step can have several subsections or sub steps:
 >    - *"Use a custom taxonomic profile?"*: `Yes`
 >    - *"Nucleotide database"*: `Locally cached`
 >    - *"Protein database"*: `Locally cached`
+1. **HUMAnN2** {% icon tool %} with
+>    - "Input sequence file" to the imported sequence file
+>    - "Use of a custom taxonomic profile" to `Yes`
+>    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn2`
+>    - "Nucleotide database" to `Locally cached`
+>    - "Nucleotide database" to `Full`
+>    - "Protein database" to `Locally cached`
+>    - "Protein database" to `Full UniRef50`
+>    - "Search for uniref50 or uniref90 gene families?" to `uniref50`
+>    - "Database to use for pathway computations" to `MetaCyc`
+>    - "Advanced Options"
+>    - "Remove stratification from output" to `Yes`
+>
+>    This step is long so we generated the output for you!
+>
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -467,6 +516,34 @@ A big step can have several subsections or sub steps:
 > 1. **Export to GraPhlAn** {% icon tool %} with the following parameters:
 >    - *"Use a LEfSe output file as input?"*: `No`
 >
+>   - {% icon param-file %} *”Input file”*: ‘MetaPhlAn2 Community file’
+>   - {% icon param-select %} *”Use a LEfSe output file as input?”*: ‘No’
+>   - {% icon param-text %} *”List which levels should be annotated in the tree”*: ‘’
+>   - {% icon param-text %} *”List which levels should use the external legend for the annotation”*: ‘’
+>   - {% icon param-text %} *”List which levels should be highlight with a shaded background”*: ‘’
+>   - {% icon param-text %} *”List which of the clades that should be highlight with a shaded background”*: ‘’
+>   - {% icon param-text %} *”List of color to use for the shaded background”*: ‘’
+>   - {% icon param-text %} *”Title of the GraPhlAn plot”*: ‘’
+>   - {% icon param-text %} *”Title font size”*: ‘15’
+>   - {% icon param-text %} *”Default size  for clades that are not found as biomarkers”*: ‘10’
+>   - {% icon param-text %} *”Minimum value of clades that are biomarkers”*: ‘20’
+>   - {% icon param-text %} *”Maximum value of clades that are biomarkers”*: ‘200’
+>   - {% icon param-text %} *”Default font size”*: ‘10’
+>   - {% icon param-text %} *”Minimum font size”*: ‘8’
+>   - {% icon param-text %} *”Maximum font size”*: ‘12’
+>   - {% icon param-text %} *”Font size for the annotation legend”*: ‘10’
+>   - {% icon param-text %} *”Minimum abundance value for a clade to be annotated”*: ‘20.0’
+>   - {% icon param-text %} *”Number of clades to highlight”*: ‘’
+>   - {% icon param-text %} *”Minimum number of biomarkers to extract”*: ‘’
+>   - {% icon param-text %} *”Row number containing the names of the features”*: ‘0’
+>   - {% icon param-text %} *”Row containing the names of the samples”*: ‘0’
+>   - {% icon param-text %} *”Row number to use as metadata”*: ‘’
+>   - {% icon param-text %} *”Row number to skip from the input file”*: ‘’
+>   - {% icon param-text %} *”Percentile of sample value distribution for sample selection”*: ‘’
+>   - {% icon param-text %} *”Percentile of feature value distribution for sample selection”*: ‘’
+>   - {% icon param-text %} *”Number of top samples to select”*: ‘’
+>   - {% icon param-text %} *”Number of top features to select”*: ‘’
+
 >    ***TODO***: *Check parameter descriptions*
 >
 >    ***TODO***: *Consider adding a comment or tip box*
@@ -477,6 +554,8 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
+**Format MetaPhlAn2 output** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *”Input file (MetaPhlAN2 output)”*: ‘MetaPhlAn2 Community File’
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
@@ -502,6 +581,10 @@ A big step can have several subsections or sub steps:
 >    - *"What is the type of your input data"*: `Tabular`
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-select %} *”What is the type of your input data”*: ‘Tabular’
+>   - {% icon param-file %} *”Input file”*: ‘Format MetaPhlAn2 Krona output’
+>   - {% icon param-text %} *”Provide a name for the basal rank”*: ‘Root’
+>   - {% icon param-check %} *”Combine data from multiple datasets”*: ‘No’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -535,6 +618,10 @@ A big step can have several subsections or sub steps:
 > 1. **Group abundances** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-file %} *”HUMAnN2 output with UniRef 50 gene family abundance”*: ‘HUMAnN2 Gene families and their abundance file’
+>   - {% icon param-check %} *”Use a custom Gene Ontology file?”*: ‘No’
+>   - {% icon param-check %} *”Use a custom slim Gene Ontology file?”*: ‘No’
+>   - {% icon param-check %} *”Use a custom correspondence between UniReg50 and precise GO?”*: ‘No’   
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -568,6 +655,7 @@ A big step can have several subsections or sub steps:
 > 1. **Create a genus level gene families file** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-file %} *”Gene families input table”*: ‘HUMAnN2 Gene families and their abundance file’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -601,6 +689,10 @@ A big step can have several subsections or sub steps:
 > 1. **Combine MetaPhlAn2 and HUMAnN2 outputs** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
+**Combine MetaPhlAn2 and HUMAnN2 outputs** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *”Input file corresponding to MetaPhlAN2 output”*: ‘MetaPhlAn2 Community File’
+>   - {% icon param-file %} *”Input file corresponding HUMAnN2 output”*: ‘HUMAnN2 Gene families and their abundance file’
+>   - {% icon param-select %} *”Type of characteristics in HUMAnN2 file”*: ‘Gene families’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -635,6 +727,9 @@ A big step can have several subsections or sub steps:
 >    - *"Type of characteristics in HUMAnN2 file"*: `Pathways`
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-file %} *”Input file corresponding to MetaPhlAN2 output”*: ‘MetaPhlAn2 Community File’
+>   - {% icon param-file %} *”Input file corresponding HUMAnN2 output”*: ‘HUMAnN2 Pathways and their abundance file’
+>   - {% icon param-select %} *”Type of characteristics in HUMAnN2 file”*: ‘Gene families’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
@@ -668,7 +763,8 @@ A big step can have several subsections or sub steps:
 > 1. **Generation, personalization and annotation of tree** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
->
+>   - {% icon param-file %} *”Input tree”*: ‘Export to GraPhlAn Tree output’
+>   - {% icon param-file %} *”Annotation file”*: ‘Export to GraPhlAn Annotation output’
 >    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
@@ -702,6 +798,11 @@ A big step can have several subsections or sub steps:
 >    - *"Output format"*: `PNG`
 >
 >    ***TODO***: *Check parameter descriptions*
+>   - {% icon param-file %} *”Input tree”*: ‘Generation, personalization and annotation of tree output’
+>   - {% icon param-select %} *”Output format”*: ‘PNG’
+>   - {% icon param-text %} *”Dpi of the output image”*: ‘’
+>   - {% icon param-text %} *”Size of the output image”*: ‘7’
+>   - {% icon param-text %} *”Distance between the most external graphical element and the border of the image”*: ‘’
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
