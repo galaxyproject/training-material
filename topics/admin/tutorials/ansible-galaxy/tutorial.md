@@ -368,6 +368,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_config_style`        | `yaml`                             | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                             | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`           | `{{ galaxy_tool_dependency_dir }}/_conda` | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
+>    `shed_tool_data_dir`         | `{{ galaxy_mutable_data_dir }}/tool-data` | When tools are installed, due to privilege separation, we need to move this into a directory Galaxy can actually write into.
 >    {% endraw %}
 >
 >
@@ -666,7 +667,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    certbot_install_method: virtualenv
 >    certbot_auto_renew: yes
 >    certbot_auto_renew_user: root
->    certbot_environment: production
+>    certbot_environment: staging
 >    certbot_well_known_root: /srv/nginx/_well-known_root
 >    certbot_share_key_users:
 >      - nginx
@@ -692,20 +693,43 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```
 >    {% endraw %}
 >
->    This is a lot of configuration but it is not very complex to understand. We'll go through it step by step:
+>    > ### {% icon details %} Certbot details
+>    >
+>    > This is a lot of configuration but it is not very complex to understand. We'll go through it step by step:
+>    >
+>    > - `certbot_auto_renew_hour/minute`: Certbot certificates are short lived, they only last 90 days. As a consequence, automated renewal is a significant part of the setup and well integrated. The certbot role installs a cron job which checks if the certificate needs to be renewed (when it has <30 days of lifetime left) and attempts to renew the certificate as needed. In order to reduce load on the certbot servers, we randomly set the time when the request will be made, so not all of the requests occur simultaneously. For training VMs this will likely never be reached. For real-life machines, this is more important.
+>    > - `certbot_auth_method`: [Multiple authentication methods](https://certbot.eff.org/docs/using.html) are supported, we will use the webroot method since that integrates nicely with `galaxyproject.nginx`. This writes out a file onto the webserver's root (that we specify in `certbot_well_known_root`) which certbot's servers will check.
+>    > - `certbot_auto_renew`: Automatically attempt renewing the certificate as the `certbot_auto_renew_user`
+>    > - `certbot_environment`: The options here are `production` and `staging`, we will set this to staging and obtain a verified but invalid certificate as browsers are intentionally not configured to trust the certbot staging certificates. The staging environment has higher [rate limits](https://letsencrypt.org/docs/rate-limits/) and allows requesting more certificates during trainings. If you are deploying on a production machine you should set this to `production`.
+>    > - `certbot_share_key_users`: This variable automatically shares the certificates with any system users that might need to access them. Here just nginx needs access.
+>    > - `certbot_post_renewal`: Often services need to be notified or restarted once the certificates have been updated.
+>    > - `certbot_domains`: These are the domains that are requested for verification. Any entries you place here **must** all be publicly resolvable.
+>    > - `certbot_agree_tos`: We automatically agree to the certbot TOS. You can read the current one on [their website](https://letsencrypt.org/repository/)
+>    {: .details}
 >
-> 4. The configuration variables we added in our group variables file has the following block:
+>    > ### {% icon details %} Nginx details
+>    >
+>    > Likewise the nginx configuration has a couple of important points
+>    > - `nginx_selinux_allow_local_connections`: Specific to CentOS hosts where Nginx will need to access Galaxy
+>    > - `nginx_enable_default_server/vhost`: Most Nginx packages come with a default configuration for the webserver. We do not want this.
+>    > - `nginx_conf_http`: Here we can write any extra configuration we have, `client_max_body_size: 1g` increases the POST limit to 1Gb which makes uploads easier.
+>    >
+>    > These control the SSL configuration
+>    > - `nginx_conf_ssl_certificate/key`: Location of the certificate / private key.
+>    >
+>    > The configuration variables we added in our group variables file has the following variables
+>    > ```yaml
+>    > nginx_servers:
+>    >   - redirect-ssl
+>    > nginx_ssl_servers:
+>    >   - galaxy
+>    > ```
+>    >
+>    > The `galaxyproject.galaxy` role expects to find two files with these names in `templates/nginx/redirect-ssl.j2` and `templates/nginx/galaxy.j2`
+>    >
+>    {: .details}
 >
->    ```yaml
->    nginx_servers:
->      - redirect-ssl
->    nginx_ssl_servers:
->      - galaxy
->    ```
->
->    The `galaxyproject.galaxy` role expects to find two files with these names in `templates/nginx/redirect-ssl.j2` and `templates/nginx/galaxy.j2`
->
->    Create the `redirect-ssl.j2` with the following contents:
+> 4. Create the `templates/nginx/redirect-ssl.j2` with the following contents:
 >
 >    {% raw %}
 >    ```nginx
@@ -732,34 +756,49 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    {% raw %}
 >    ```nginx
->    ##
->    ## This file is maintained by Ansible - CHANGES WILL BE OVERWRITTEN
->    ##
 >    server {
+>        # Listen on port 443
 >        listen        *:443 ssl default_server;
+>        # The virtualhost is our domain name
 >        server_name   "{{ inventory_hostname }}";
 >
+>        # Our log files will go here.
 >        access_log  /var/log/nginx/access.log;
 >        error_log   /var/log/nginx/error.log;
 >
+>        # The most important location block, by default all requests are sent to uWSGI
 >        location / {
+>            # This is the backend to send the requests to.
 >            uwsgi_pass 127.0.0.1:8080;
 >            uwsgi_param UWSGI_SCHEME $scheme;
 >            include uwsgi_params;
 >        }
 >
+>        # Static files can be more efficiently served by Nginx. Why send the
+>        # request to uWSGI which should be spending its time doing more useful
+>        # things like serving Galaxy!
 >        location /static {
 >            alias {{ galaxy_server_dir }}/static;
 >            expires 24h;
 >        }
 >
+>        # The style directory is in a slightly different location
 >        location /static/style {
 >            alias {{ galaxy_server_dir }}/static/style/blue;
 >            expires 24h;
 >        }
 >
+>        # Likewise for compiled JS, these need to be accesses in a specific location.
 >        location /static/scripts {
 >            alias {{ galaxy_server_dir }}/static/scripts;
+>            expires 24h;
+>        }
+>
+>        # In Galaxy instances started with run.sh, many config files are
+>        # automatically copied around. The welcome page is one of them. In
+>        # production, this step is skipped, so we will manually alias that.
+>        location /static/welcome.html {
+>            alias {{ galaxy_server_dir }}/static/welcome.html.sample;
 >            expires 24h;
 >        }
 >
