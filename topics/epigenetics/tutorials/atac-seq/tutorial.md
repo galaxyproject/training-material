@@ -38,6 +38,8 @@ and technical) key concepts they will learn.
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
+![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -147,7 +149,11 @@ The first step is to check the quality of the reads and the presence of the Next
 
 ## Sub-step with **Cutadapt**
 
-To trim the adapters we provide the sequences to Cutadapt. The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 30). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
+To trim the adapters we provide the Nextera adapter sequences to Cutadapt. Thesse adapters are shown in the image below.
+
+![Nextera adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera adapters")
+
+The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 30). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
