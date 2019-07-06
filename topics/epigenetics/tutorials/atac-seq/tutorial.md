@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: ATAC-Seq data analysis
-zenodo_link: https://zenodo.org/record/3270536
+zenodo_link: "https://zenodo.org/record/3270536"
 questions:
 - Which DNA regions are accesible in the human lymphoblastoid cell line GM12878?
 - How to analyse and visualise ATAC-Seq data?
@@ -10,7 +10,7 @@ objectives:
 - Apply appropriate analysis and quality control steps for ATAC-Seq
 - Visualise coverage and peaks of specific regions
 - Generate heatmaps
-time_estimation: '3h'
+time_estimation: 'No idea'
 key_points:
 - ATAC-Seq can be used to identify accessible gene promoters and enhancers
 - ATAC-seq analysis uses similar to ChIP-Seq but different parameters
@@ -39,6 +39,8 @@ and technical) key concepts they will learn.
 
 ![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
 
+The original dataset had 2 x 200 million reads. This would be too long to be processed in a training session. So, we downsampled the original dataset to 200 000 reads but added about 200 000 reads pairs that will map to chr22 to have a good profile on this chromosome similar to a 2 x 20 million reads original fastq.
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -50,14 +52,16 @@ and technical) key concepts they will learn.
 
 # Preprocessing
 
-Give some background about what the trainees will be doing in the section.
-
+We first need to download the dataset that we downsampled as well as other annotations files. Then, to increase the number of reads that will map to the assembly (here Human genome version 38), we need to preprocess the reads.
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) or from the shared data library
 >
 >    ```
@@ -68,38 +72,39 @@ Give some background about what the trainees will be doing in the section.
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype is fasqsanger.gz
+> 3. By default, galaxy will give as name the full path. Rename the datasets to keep only the file names.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Check that the datatype of the 2 fastq files is fasqsanger.gz
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
+> > ### {% icon details %} FASTQ format
+> > If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+{: .details}
 {: .hands_on}
+
+***TODO***: Add the bed files links.
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-
 ## Quality control
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We can remove the adapters with Cutadapt.
+The first step is to check the quality of the reads and the presence of the Nextera adapters.
+> ### {% icon details %} Presence of adapters
+> When we do ATAC-Seq, two transposase could cut the DNA about 40 bp apart. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end these reads. 
+{: .details}
+We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **FastQC** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
+> 1. **FastQC** {% icon tool %} with the default parameters:
+>       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1.fastq.gz` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1.fastq.gz` and `SRR891268_R2.fastq.gz`.
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
-> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check which are the adaptors found at the end of the reads.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -111,67 +116,88 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > >
 >    > {: .solution}
 >    >
+>    >
+>    > How many reads are in the fastq?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > There are 285247 reads.
+>    > >
+>    > {: .solution}
+>    >
+>    >
+>    > Which are the steps which have a warning?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1) Per base sequence content
+>    > > > ### {% icon details %} Tn5 sequence bias
+>    > > > It is well known that the tn5 have a strong sequence bias at the insersion site. You can have more information about it reading [Green et al. 2012]({% link https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3 %})
+{: .details}
+>    > > 2) Sequence Duplication Levels
+>    > > 3) Overrepresented sequences
+>    > >
+>    > {: .solution}
+>    >
 >    {: .question}
 
+This is what you should expect from the adapter section:
+![FastQC screenshot on the adapter content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the adapter content section")
 
 ## Trimming reads
 
 To trim the adapters we provide the Nextera adapter sequences to Cutadapt. Thesse adapters are shown in the image below.
 
-![Nextera adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera adapters")
+![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera library with the sequence of adapters")
 
-The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 20). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
+The forward and reverse adapters are slightly different.We will also trim low quality bases at the ends of reads (quality less than 20). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short to be mapped.
 
 > ### {% icon hands_on %} Hands-on: Trim reads
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1.fastq.gz`
+>        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2.fastq.gz`
 >        - In *"Read 1 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
->                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
+>                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
+>                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
 >        - In *"Read 2 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
->                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
+>                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
+>                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
 >    - In *"Filter Options"*:
->        - *"Minimum length"*: `20`
+>        - {% icon param-text %} *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*:
->        - *"Quality cutoff"*: `20`
+>        - {% icon param-text %} *"Quality cutoff"*: `20`
 >    - In *"Output Options"*:
 >        - *"Report"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you should see:
+![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Which portion of reads contains adapters?
+> 2. How many reads were still longer than 20 after the trimming?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 15%
+> > 2. 284,864 (99.9%)
 > >
 > {: .solution}
 >
 {: .question}
 
+ If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. 
 
 # Mapping
 
