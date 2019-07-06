@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
+title: ATAC-Seq data analysis
 zenodo_link: https://zenodo.org/record/3270536
 questions:
 - Which biological questions are addressed by the tutorial?
