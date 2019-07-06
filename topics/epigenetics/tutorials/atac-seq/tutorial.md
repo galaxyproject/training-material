@@ -4,19 +4,16 @@ layout: tutorial_hands_on
 title: ATAC-Seq data analysis
 zenodo_link: https://zenodo.org/record/3270536
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Which DNA regions are accesible in the human lymphoblastoid cell line GM12878?
+- How to analyse and visualise ATAC-Seq data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: ''
+- Apply appropriate analysis and quality control steps for ATAC-Seq
+- Visualise coverage and peaks of specific regions
+- Generate heatmaps
+time_estimation: '3h'
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- ATAC-Seq can be used to identify accessible gene promoters and enhancers
+- ATAC-seq analysis uses similar to ChIP-Seq but different parameters
 contributors:
 - lldelisle
 - mblue9
