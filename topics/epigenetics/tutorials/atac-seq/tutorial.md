@@ -186,39 +186,6 @@ The forward and reverse adapters are slightly different. If we run FastQC again 
 >
 {: .question}
 
-## Sub-step with **Convert GTF to BED12**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Convert GTF to BED12** {% icon tool %} with the following parameters:
->    - *"Advanced options"*: `Use default options`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 # Mapping
 
@@ -241,39 +208,6 @@ Next we map the trimmed reads to the human reference genome. We could use BWA or
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
 >    - *"Do you want to tweak SAM/BAM Options?"*: `No`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **bedtools SortBED**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **bedtools SortBED** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
