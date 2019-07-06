@@ -29,6 +29,8 @@ Velvet is one of a number of *de novo* assemblers that use short read sets as in
 
 For this tutorial, we have a set of reads from an imaginary *Staphylococcus aureus* bacterium with a miniature genome (197,394 bp). Our mutant strain read set was sequenced with the whole genome shotgun method, using an Illumina DNA sequencing instrument. From these reads, we would like to rebuild our imaginary *Staphylococcus aureus* bacterium via a *de novo* assembly of a short read set using the Velvet assembler.
 
+We also have a sequence for a reference genome that we will use later in the tutorial.
+
 > ### Agenda
 >
 > In this tutorial, we will deal with:
@@ -51,6 +53,7 @@ We will now import the data that we will use for the tutorial.
 > 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.582600) or from the data library the files:
 >    - [`mutant_R1.fastq`](https://zenodo.org/record/582600/files/mutant_R1.fastq)
 >    - [`mutant_R2.fastq`](https://zenodo.org/record/582600/files/mutant_R2.fastq)
+>    - [`wildtype.fna`](https://zenodo.org/record/582600/files/wildtype.fna)
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >
@@ -58,11 +61,11 @@ We will now import the data that we will use for the tutorial.
 >    > * Open the Galaxy Upload Manager
 >    > * Select **Paste/Fetch Data**
 >    > * Paste the link into the text field
->    > * Change the data-type to **fastqsanger**
+>    > * For the read files, change the data-type to **fastqsanger**
 >    > * Press **Start**
 >    {: .tip}
 >
-> 3. Change the name of the files to `mutant_R1` and `mutant_R2`.
+> 3. Change the name of the files to `mutant_R1`, `mutant_R2` and `wildtype.fna`.
 >
 >    As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
