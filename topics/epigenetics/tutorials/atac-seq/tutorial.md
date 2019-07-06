@@ -51,7 +51,7 @@ and technical) key concepts they will learn.
 >
 {: .agenda}
 
-# Title for your first section
+# Preprocessing
 
 Give some background about what the trainees will be doing in the section.
 
@@ -76,9 +76,6 @@ have fun!
 >    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
 >    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -114,40 +111,31 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **FastQC**
+## Quality control
 
 The first step is to check the quality of the reads and the presence of the Nextera adapters. We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We can remove the adapters with Cutadapt.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
+>       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
->    ***TODO***: *Check parameter descriptions*
+>    {% include snippets/select_multiple_datasets.md %}
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+>    > What is the read length?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The read length is 50 bp.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Cutadapt**
 
@@ -155,9 +143,9 @@ To trim the adapters we provide the Nextera adapter sequences to Cutadapt. Thess
 
 ![Nextera adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera adapters")
 
-The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 30). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
+The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 20). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Trim reads
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
@@ -176,7 +164,7 @@ The forward and reverse adapters are slightly different. If we run FastQC again 
 >    - In *"Filter Options"*:
 >        - *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*:
->        - *"Quality cutoff"*: `30`
+>        - *"Quality cutoff"*: `20`
 >    - In *"Output Options"*:
 >        - *"Report"*: `Yes`
 >
@@ -241,11 +229,12 @@ The forward and reverse adapters are slightly different. If we run FastQC again 
 >
 {: .question}
 
-## Sub-step with **Bowtie2**
+# Mapping
 
-Next we map the trimmed reads to the reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
+Next we map the trimmed reads to the human reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+> ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
 > 1. **Bowtie2** {% icon tool %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
@@ -738,13 +727,6 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 >
 {: .question}
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
