@@ -55,15 +55,6 @@ and technical) key concepts they will learn.
 
 Give some background about what the trainees will be doing in the section.
 
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
 
 ## Get data
 
@@ -98,8 +89,6 @@ have fun!
 > But to describe more details, it is possible to use the detail boxes which are expandable
 >
 {: .details}
-
-A big step can have several subsections or sub steps:
 
 
 ## Quality control
