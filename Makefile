@@ -66,7 +66,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
-check-frontmatter: build ## Validate the frontmatter
+check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
 	    xargs -n1 ruby bin/validate-frontmatter.rb
