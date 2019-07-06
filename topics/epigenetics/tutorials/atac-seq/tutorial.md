@@ -87,7 +87,6 @@ We first need to download the dataset that we downsampled as well as other annot
 
 ***TODO***: Add the bed files links.
 
-***TODO***: *Consider adding a detail box to expand the theory*
 
 ## Quality control
 
@@ -95,6 +94,7 @@ The first step is to check the quality of the reads and the presence of the Next
 > ### {% icon details %} Presence of adapters
 > When we do ATAC-Seq, two transposase could cut the DNA about 40 bp apart. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end these reads. 
 {: .details}
+
 We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -142,11 +142,12 @@ We can do this with FastQC. The FastQC web page Adapter Content section shows th
 >    {: .question}
 
 This is what you should expect from the adapter section:
+
 ![FastQC screenshot on the adapter content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the adapter content section")
 
 ## Trimming reads
 
-To trim the adapters we provide the Nextera adapter sequences to Cutadapt. Thesse adapters are shown in the image below.
+To trim the adapters we provide the Nextera adapter sequences to Cutadapt. These adapters are shown in the image below.
 
 ![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera library with the sequence of adapters")
 
@@ -181,6 +182,7 @@ The forward and reverse adapters are slightly different.We will also trim low qu
 {: .hands_on}
 
 This is what you should see:
+
 ![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
 
 > ### {% icon question %} Questions
@@ -197,7 +199,10 @@ This is what you should see:
 >
 {: .question}
 
- If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. 
+ If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. Indeed this is what we got when we ran it:
+
+ ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
+
 
 # Mapping
 
