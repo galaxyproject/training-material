@@ -5,10 +5,11 @@ title: "Galaxy 101 for everyone"
 zenodo_link: ""
 level: Introductory
 questions:
-  - "Which journals have the highest number of galaxy-related publications"
+  - "What are the differences between the Iris species?"
 objectives:
   - "Familiarize yourself with the basics of Galaxy"
   - "Learn how to obtain data from external sources"
+  - "Learn how to tag datasets"
   - "Learn how to run tools"
   - "Learn how histories work"
   - "Learn how to create a workflow"
@@ -35,8 +36,6 @@ contributors:
 
 <!-- This is a comment. -->
 
-This tutorial is a work in progress.
-
 This practical aims to familiarize you with the Galaxy user interface. 
 It will teach you how to perform basic tasks such as importing data, 
 running tools, working with histories, 
@@ -54,7 +53,13 @@ creating workflows, and sharing your work.
 >
 {: .agenda}
 
-#Create a new history
+> ### {% icon comment %} Background
+> The Iris flower data set or Fisher’s Iris data set is a multivariate data set introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}). 
+> Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
+> For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
+{: .comment}
+
+# Create a new history
 
 Galaxy allows you to create histories.
 They are the pipeline of operations performed on a certain dataset in order to achieve the desired result.
@@ -66,35 +71,47 @@ Overall a history represent and experimental lab book, or a recipe.
 A workflow is the concatenation of one or multiple histories as a series of building blocks 
 for replicating an experimetal result or a recipe.
 
-## Import data journals from the Galaxy publishing library
+## Inspect Iris dataset
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial, and give it a self-explanatory name.
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 1. Create a new history for this tutorial and give it a proper name such as `Galaxy 101 for everyone`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
+> 2. Import `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
 >
 >    ```
->    
+>    https://zenodo.org/record/1319069/files/iris.csv
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>    As default, Galaxy takes the link as name, so rename them.
+>
+> 3. Rename the dataset to `iris`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Check the datatype 
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 5. Add the tag `iris` to the dataset
 >
 >    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
-# Count the number of journals by... 
+# What does the dataset contain?
+
+Now we are going to inspect the dataset and count how many different species are in the dataset and how many sample for each species.
+
+## How many different species are in the dataset?
+
+## How many sample for each species?
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
