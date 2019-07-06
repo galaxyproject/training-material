@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Title of the tutorial
-zenodo_link: ''
+zenodo_link: "https://zenodo.org/record/3270536"
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
@@ -66,20 +66,18 @@ have fun!
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) or from the shared data library
 >
 >    ```
->    
+>    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
+>    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
+> 4. Check that the datatype is fasqsanger.gz
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
