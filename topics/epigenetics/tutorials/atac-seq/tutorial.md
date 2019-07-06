@@ -91,15 +91,6 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
 ***TODO***: *Consider adding a detail box to expand the theory*
 
 > ### {% icon details %} More details about the theory
@@ -137,7 +128,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >    {: .question}
 
 
-## Sub-step with **Cutadapt**
+## Trimming reads
 
 To trim the adapters we provide the Nextera adapter sequences to Cutadapt. Thesse adapters are shown in the image below.
 
@@ -231,6 +222,8 @@ The forward and reverse adapters are slightly different. If we run FastQC again 
 
 # Mapping
 
+## Mapping reads to reference genome
+
 Next we map the trimmed reads to the human reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
 
 
@@ -309,7 +302,9 @@ Next we map the trimmed reads to the human reference genome. We could use BWA or
 >
 {: .question}
 
-## Sub-step with **Filter**
+# Filtering mapped reads
+
+## Filter uninformative reads
 
 We apply some filters to the reads after mapping. ATAC-seq datasets can have a lot of reads mapping to mitchondria and we remove these reads. We also remove reads with low mapping quality and that are not properly paired.
 
@@ -357,7 +352,7 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 >
 {: .question}
 
-## Sub-step with **MarkDuplicates**
+## Filter duplicate reads
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -396,7 +391,7 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 >
 {: .question}
 
-## Sub-step with **CollectInsertSizeMetrics**
+## Check fragment sizes
 
 We check the fragment sizes (the sizes of the pieces of DNA that were sequenced) with Picard CollectInsertSizeMetrics.
 
@@ -434,7 +429,9 @@ We check the fragment sizes (the sizes of the pieces of DNA that were sequenced)
 >
 {: .question}
 
-## Sub-step with **Convert, Merge, Randomize**
+# Peak calling
+
+## Prepare input reads
 
 We convert the BAM file to BED format because when shifting reads with MACS2 will only consider one of the read pairs.
 
@@ -471,7 +468,7 @@ We convert the BAM file to BED format because when shifting reads with MACS2 wil
 >
 {: .question}
 
-## Sub-step with **MACS2 callpeak**
+## Call peaks
 
 We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS2.
 
@@ -518,44 +515,11 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 >
 {: .question}
 
-## Sub-step with **Wig/BedGraph-to-bigWig**
+# Visualisation of coverage
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: `output_treat_pileup` (output of **MACS2 callpeak** {% icon tool %})
->    - *"Converter settings to use"*: `Default`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+## Visualise region of interest
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cut**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
 >
 > 1. **Cut** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `output_narrowpeaks` (output of **MACS2 callpeak** {% icon tool %})
@@ -589,48 +553,7 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 >
 {: .question}
 
-## Sub-step with **computeMatrix**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
->    - In *"Select regions"*:
->        - {% icon param-repeat %} *"Insert Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: `output` (output of **bedtools SortBED** {% icon tool %})
->    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: `out_file1` (output of **Wig/BedGraph-to-bigWig** {% icon tool %})
->    - *"computeMatrix has two main output options"*: `reference-point`
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `no`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **pyGenomeTracks**
+## Visualise region with **pyGenomeTracks**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -691,7 +614,86 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 >
 {: .question}
 
-## Sub-step with **plotHeatmap**
+## Create heatmap of genes
+
+### Convert BedGraph to bigWig
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Convert"*: `output_treat_pileup` (output of **MACS2 callpeak** {% icon tool %})
+>    - *"Converter settings to use"*: `Default`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Generate computeMatrix
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
+>    - In *"Select regions"*:
+>        - {% icon param-repeat %} *"Insert Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: `output` (output of **bedtools SortBED** {% icon tool %})
+>    - *"Sample order matters"*: `No`
+>        - {% icon param-file %} *"Score file"*: `out_file1` (output of **Wig/BedGraph-to-bigWig** {% icon tool %})
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `no`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+### Run **plotHeatmap**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
