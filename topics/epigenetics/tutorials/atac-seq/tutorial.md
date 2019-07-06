@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Title of the tutorial
-zenodo_link: "https://zenodo.org/record/3270536"
+zenodo_link: https://zenodo.org/record/3270536
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
@@ -72,6 +72,9 @@ have fun!
 >    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
 >    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
 >    ```
+>    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>
+>    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -94,10 +97,22 @@ Some image can be added there to support the theory explanation:
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We can remove the adapters with Cutadapt.
+The idea is to keep the theory description before quite simple to focus more on the practical part.
+
+***TODO***: *Consider adding a detail box to expand the theory*
+
+> ### {% icon details %} More details about the theory
+>
+> But to describe more details, it is possible to use the detail boxes which are expandable
+>
+{: .details}
+
+A big step can have several subsections or sub steps:
 
 
 ## Sub-step with **FastQC**
+
+The first step is to check the quality of the reads and the presence of the Nextera adapters. We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We can remove the adapters with Cutadapt.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -130,9 +145,9 @@ The first step is to check the quality of the reads and the presence of the Next
 >
 {: .question}
 
-To trim the adapters we provide the sequences to Cutadapt. The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 30). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
-
 ## Sub-step with **Cutadapt**
+
+To trim the adapters we provide the sequences to Cutadapt. The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 30). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -184,9 +199,43 @@ To trim the adapters we provide the sequences to Cutadapt. The forward and rever
 >
 {: .question}
 
-Next we map the trimmed reads to the reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
+## Sub-step with **Convert GTF to BED12**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Convert GTF to BED12** {% icon tool %} with the following parameters:
+>    - *"Advanced options"*: `Use default options`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Sub-step with **Bowtie2**
+
+Next we map the trimmed reads to the reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -230,9 +279,42 @@ Next we map the trimmed reads to the reference genome. We could use BWA or Bowti
 >
 {: .question}
 
-We apply some filters to the reads after mapping. ATAC-seq datasets can have a lot of reads mapping to mitchondria and we remove these reads. We also remove reads with low mapping quality and that are not properly paired.
+## Sub-step with **bedtools SortBED**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **bedtools SortBED** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Sub-step with **Filter**
+
+We apply some filters to the reads after mapping. ATAC-seq datasets can have a lot of reads mapping to mitchondria and we remove these reads. We also remove reads with low mapping quality and that are not properly paired.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -317,9 +399,9 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 >
 {: .question}
 
-We check the fragment sizes (the sizes of the pieces of DNA that were sequenced) with Picard CollectInsertSizeMetrics.
-
 ## Sub-step with **CollectInsertSizeMetrics**
+
+We check the fragment sizes (the sizes of the pieces of DNA that were sequenced) with Picard CollectInsertSizeMetrics.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -355,9 +437,9 @@ We check the fragment sizes (the sizes of the pieces of DNA that were sequenced)
 >
 {: .question}
 
-We convert the BAM file to BED format because when shifting reads with MACS2 will only consider one of the read pairs.
-
 ## Sub-step with **Convert, Merge, Randomize**
+
+We convert the BAM file to BED format because when shifting reads with MACS2 will only consider one of the read pairs.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -392,16 +474,14 @@ We convert the BAM file to BED format because when shifting reads with MACS2 wil
 >
 {: .question}
 
+## Sub-step with **MACS2 callpeak**
 
 We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS2.
-
-## Sub-step with **MACS2 callpeak**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
->        - {% icon param-file %} *"ChIP-Seq Treatment File"*: `out_file1` (output of **Convert, Merge, Randomize** {% icon tool %})
 >    - *"Do you have a Control File?"*: `No`
 >    - *"Format of Input Files"*: `Single-end BED`
 >    - *"Effective genome size"*: `H. sapiens (2.7e9)`
@@ -413,6 +493,215 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 >        - *"Composite broad regions"*: `No broad regions`
 >            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
 >        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Wig/BedGraph-to-bigWig**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Convert"*: `output_treat_pileup` (output of **MACS2 callpeak** {% icon tool %})
+>    - *"Converter settings to use"*: `Default`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Cut**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Cut** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `output_narrowpeaks` (output of **MACS2 callpeak** {% icon tool %})
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `c1-3`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **computeMatrix**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
+>    - In *"Select regions"*:
+>        - {% icon param-repeat %} *"Insert Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: `output` (output of **bedtools SortBED** {% icon tool %})
+>    - *"Sample order matters"*: `No`
+>        - {% icon param-file %} *"Score file"*: `out_file1` (output of **Wig/BedGraph-to-bigWig** {% icon tool %})
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `no`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **pyGenomeTracks**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **pyGenomeTracks** {% icon tool %} with the following parameters:
+>    - *"Region of the genome to limit the operation"*: `chr22:20,477,597-20,545,090`
+>    - In *"Include tracks in your plot"*:
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track `
+>                - *"Plot title"*: `coverage from macs2 (extended +/-100bp)`
+>                - {% icon param-file %} *"Track file bedgraph format"*: `output_treat_pileup` (output of **MACS2 callpeak** {% icon tool %})
+>                - *"Color of track"*: `#c0504d`
+>                - *"height"*: `5.0`
+>                - *"Show visualization of data range"*: `Yes`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Peaks from macs2 (extended +/-100bp)`
+>                - {% icon param-file %} *"Track file bed format"*: `output` (output of **Cut** {% icon tool %})
+>                - *"Color of track"*: `#c0504d`
+>                - *"Plot labels"*: `Yes`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Genes`
+>                - {% icon param-file %} *"Track file bed format"*: `output` (output of **bedtools SortBED** {% icon tool %})
+>                - *"Type"*: `genes`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `CTCF peaks`
+>                - {% icon param-file %} *"Track file bed format"*: `output` (Input dataset)
+>                - *"Color of track"*: `#4bacc6`
+>                - *"Plot labels"*: `Yes`
+>    - *"Configure x-axis"*: `Yes`
+>        - *"Where to place the x-axis"*: `Bottom`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **plotHeatmap**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **plotHeatmap** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `outFileName` (output of **computeMatrix** {% icon tool %})
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `no`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
