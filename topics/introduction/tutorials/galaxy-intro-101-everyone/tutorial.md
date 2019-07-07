@@ -58,18 +58,31 @@ Not everyone has the same background and that's ok!
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
 
+## What does Galaxy look like?
 
 > ### {% icon hands_on %} Hands-on: Log in or register
-> Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts:
+> Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
+> 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
+> 2. Browse to your Galaxy instance
+> 3. Log in or register
 >
-> 1. The available tools are listed on the left
-> 2. Your analysis history is recorded on the right
-> 3. The central panel will let you run analyses and view outputs
-> ![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+>   > ### {% icon comment %} Different Galaxy servers
+>   > The particular Galaxy server that you are using may look slightly different. Don't worry!
+>   {: .comment}
 >
 {: .hands_on}
 
-# Create a new history
+
+The Galaxy interface consists of three main parts:
+
+1. The available tools are listed on the left
+2. Your analysis history is recorded on the right
+3. The central panel will let you run analyses and view outputs
+
+![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+
+
+# Create a history
 
 Galaxy allows you to create histories. They gather all the operations performed on certain datasets in order to achieve the desired results. 
 Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
