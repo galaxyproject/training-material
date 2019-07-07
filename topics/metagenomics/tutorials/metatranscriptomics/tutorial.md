@@ -63,6 +63,13 @@ depending on the specifics of your tutorial.
 
 have fun!
 
+# Metatranscriptomics for characterizing microbial communities
+
+**Metatranscriptomics:** One branch of a multi-omic approach to studying microbiomes.
+
+###  Multi-omics
+
+
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
