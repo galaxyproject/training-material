@@ -71,6 +71,13 @@ have fun!
 
 ![meta-momics diagram](../../images/meta-omics.png)
 
+Microbiomes play a critical role in host health, disease, and the environment. Microbiome dynamics, especially at the taxonomy and functional level requires studying the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics). Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population.
+
+Batut ​et al.​(​10.1093/gigascience/giy057​) developed ASaiM (Auvergne Sequence analysis of intestinal Microbiota) an open-source Galaxy-based workflow that enables microbiome analyses. ASaiM workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. In this tutorial, we demonstrate the use of an updated version of the ASaiM workflow. This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input; preprocess it; extract taxonomic and functional information and combines them to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.
+
+In this ASaiM metatranscriptomics tutorial, the fastqsanger files are used as input dataset. We have used a trimmed version of the original fastq file in this tutorial for the purpose of saving time and resources.
+
+
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
