@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Refining Manual Genome Annotations with Apollo
+title: Refining Manual Genome Annotations with Apollo v2
 zenodo_link: https://zenodo.org/record/3270822
 questions:
 - Which biological questions are addressed by the tutorial?
@@ -18,8 +18,7 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
-- contributor1
-- contributor2
+- nathandunn
 
 ---
 

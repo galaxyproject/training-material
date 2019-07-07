@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Apollo
-zenodo_link: https://doi.org/10.5281/zenodo.3270821
+zenodo_link: https://doi.org/10.5281/zenodo.3270822
 tags:
   - eukaryote
 questions:
