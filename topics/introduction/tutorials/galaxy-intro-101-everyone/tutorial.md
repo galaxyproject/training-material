@@ -37,9 +37,8 @@ contributors:
 <!-- This is a comment. -->
 
 This practical aims to familiarize you with the Galaxy user interface. 
-It will teach you how to perform basic tasks such as importing data, 
-running tools, working with histories, 
-creating workflows, and sharing your work.
+It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
+Not everyone has the same background and that's ok! 
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
@@ -59,21 +58,41 @@ creating workflows, and sharing your work.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
 
+
+> ### {% icon hands_on %} Hands-on: Log in or register
+> Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts:
+>
+> 1. The available tools are listed on the left
+> 2. Your analysis history is recorded on the right
+> 3. The central panel will let you run analyses and view outputs
+> ![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+>
+{: .hands_on}
+
 # Create a new history
 
 Galaxy allows you to create histories. They gather all the operations performed on certain datasets in order to achieve the desired results. 
 Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
-a cake, you would first sift flour and then mix it with egg as it would be impossible to sift flour after.
+a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
 That is what we call a pipeline.
 
-After that your pipeline has been tested and leads to the correct result, 
-it can be serialized as a workflow.
-A workflow allows to obtain the same result with a different dataset, just by changing the input. 
-
-A workflow is the concatenation of one or multiple histories as a series of building blocks 
+Then the finalized pipeline can be serialized as a workflow.A workflow is the concatenation of one or multiple histories as a series of building blocks 
 for replicating an experimental result or a recipe. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
+In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input. 
+
+> ### {% icon hands_on %} Hands-on: Create history
+>
+> 1. Make sure you start from an empty analysis history.
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101 for everyone** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
+>
+>![Rename the history]({{ site.baseurl }}{% link shared/images/rename_history.png %})
+>
+{: .hands_on}
 
 ## Inspect Iris dataset
 
