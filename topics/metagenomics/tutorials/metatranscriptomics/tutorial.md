@@ -69,6 +69,7 @@ have fun!
 
 ###  Multi-omics
 
+![meta-momics diagram](../../images/meta-omics.png)
 
 ## Get data
 
