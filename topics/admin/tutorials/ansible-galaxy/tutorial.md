@@ -788,12 +788,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >            expires 24h;
 >        }
 >
->        # Likewise for compiled JS, these need to be accesses in a specific location.
->        location /static/scripts {
->            alias {{ galaxy_server_dir }}/static/scripts;
->            expires 24h;
->        }
->
 >        # In Galaxy instances started with run.sh, many config files are
 >        # automatically copied around. The welcome page is one of them. In
 >        # production, this step is skipped, so we will manually alias that.
