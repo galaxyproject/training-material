@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Galaxy 101 for everyone"
-zenodo_link: ""
+zenodo_link: https://zenodo.org/record/1319069/files/iris.csv
 level: Introductory
 questions:
   - "What are the differences between the Iris species?"
@@ -61,15 +61,19 @@ creating workflows, and sharing your work.
 
 # Create a new history
 
-Galaxy allows you to create histories.
-They are the pipeline of operations performed on a certain dataset in order to achieve the desired result.
+Galaxy allows you to create histories. They gather all the operations performed on certain datasets in order to achieve the desired results. 
+Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
+(pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
+The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
+a cake, you would first sift flour and then mix it with egg as it would be impossible to sift flour after.
+That is what we call a pipeline.
+
 After that your pipeline has been tested and leads to the correct result, 
 it can be serialized as a workflow.
-A workflow allows to obtain the same result with a different dataset, just by changing the input.
+A workflow allows to obtain the same result with a different dataset, just by changing the input. 
 
-Overall a history represent and experimental lab book, or a recipe. 
 A workflow is the concatenation of one or multiple histories as a series of building blocks 
-for replicating an experimetal result or a recipe.
+for replicating an experimental result or a recipe. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
 
 ## Inspect Iris dataset
 
@@ -113,6 +117,8 @@ Now we are going to inspect the dataset and count how many different species are
 
 ## How many sample for each species?
 
+# Title of the section usually corresponding to a big step in the analysis
+
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
 
@@ -131,13 +137,326 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **My Tool**
+## Sub-step with **csv_to_tabular**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **My Tool** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: File
->    - *"Parameter"*: `a value`
+> 1. **csv_to_tabular** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Remove beginning**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Remove beginning** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Datamash**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Datamash** {% icon tool %} with the following parameters:
+>    - *"Group by fields"*: `5`
+>    - *"Input file has a header line"*: `Yes`
+>    - *"Print header line"*: `Yes`
+>    - *"Sort input"*: `Yes`
+>    - *"Ignore case when grouping"*: `Yes`
+>    - In *"Operation to perform on each group"*:
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c1`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviantion`
+>            - *"On column"*: `c1`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c2`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviantion`
+>            - *"On column"*: `c2`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c3`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviantion`
+>            - *"On column"*: `c3`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c4`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviantion`
+>            - *"On column"*: `c4`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Datamash**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Datamash** {% icon tool %} with the following parameters:
+>    - *"Group by fields"*: `5`
+>    - *"Input file has a header line"*: `Yes`
+>    - *"Print header line"*: `Yes`
+>    - *"Sort input"*: `Yes`
+>    - *"Ignore case when grouping"*: `Yes`
+>    - In *"Operation to perform on each group"*:
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c1`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c2`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c3`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c4`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Grouping1**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Grouping1** {% icon tool %} with the following parameters:
+>    - *"Group by column"*: `c5`
+>    - *"Ignore case while grouping?"*: `Yes`
+>    - *"Ignore lines beginning with these characters"*: ``
+>    - In *"Operation"*:
+>        - {% icon param-repeat %} *"Insert Operation"*
+>            - *"Type"*: ``
+>            - *"On column"*: `c[`
+>            - *"Round result to nearest integer?"*: ``
+>            - *"Replace non numeric data"*: `[`
+>        - {% icon param-repeat %} *"Insert Operation"*
+>            - *"Type"*: ``
+>            - *"On column"*: `c]`
+>            - *"Round result to nearest integer?"*: ``
+>            - *"Replace non numeric data"*: `]`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Grouping1**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Grouping1** {% icon tool %} with the following parameters:
+>    - *"Group by column"*: `c5`
+>    - *"Ignore case while grouping?"*: `Yes`
+>    - *"Ignore lines beginning with these characters"*: ``
+>    - In *"Operation"*:
+>        - {% icon param-repeat %} *"Insert Operation"*
+>            - *"Type"*: `Count`
+>            - *"On column"*: `c5`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Scatterplot w ggplot2**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>    - *"Column to plot on x-axis"*: `1`
+>    - *"Column to plot on y-axis"*: `2`
+>    - *"Plot title"*: `Sepal length as a function of sepal width`
+>    - *"Label for x axis"*: `Sepal length`
+>    - *"Label for y axis"*: `sepal width`
+>    - In *"Advanced Options"*:
+>        - *"Data point options"*: `User defined point options`
+>            - *"relative size of points"*: `2.0`
+>        - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+>            - *"column differentiating the different groups"*: `5`
+>            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete (discrete, max=8 colors)`
+>        - *"Axis title options"*: `Default`
+>        - *"Axis text options"*: `Default`
+>        - *"Plot title options"*: `Default`
+>        - *"Axis scaling"*: `Automatic axis scaling`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Transpose**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Transpose** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
