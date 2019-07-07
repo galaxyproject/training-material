@@ -2,21 +2,21 @@
 layout: tutorial_hands_on
 
 title: Genome annotation with Apollo
-zenodo_link: 
+zenodo_link: https://doi.org/10.5281/zenodo.3270821
 tags:
   - eukaryote
 questions:
-  - How to annotate an eukaryotic genome?
+  - How to manually annotate an eukaryotic genome?
   - How to evaluate and visualize annotated genomic features?
 objectives:
   - Load genome into Galaxy
-  - Annotate genome with Maker
-  - Evaluate annotation quality with BUSCO
+  - Manually Annotate genome with Apollo
   - View annotations in JBrowse
-time_estimation: 4h
+time_estimation: 2h
 key_points:
   - Maker allows to annotate a eukaryotic genome.
-  - BUSCO and JBrowse allow to inspect the quality of an annotation.
+  - Use Apollo allow to inspect the quality of an annotation.
+  - Use Apollo annotate annotations within your group.
 contributors:
   - nathandunn
 ---
