@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: ATAC-Seq data analysis
-zenodo_link: https://zenodo.org/record/3270536
+zenodo_link: "https://zenodo.org/record/3270536"
 questions:
 - Which DNA regions are accesible in the human lymphoblastoid cell line GM12878?
 - How to analyse and visualise ATAC-Seq data?
@@ -10,7 +10,7 @@ objectives:
 - Apply appropriate analysis and quality control steps for ATAC-Seq
 - Visualise coverage and peaks of specific regions
 - Generate heatmaps
-time_estimation: '3h'
+time_estimation: 'No idea'
 key_points:
 - ATAC-Seq can be used to identify accessible gene promoters and enhancers
 - ATAC-seq analysis uses similar to ChIP-Seq but different parameters
@@ -39,6 +39,8 @@ and technical) key concepts they will learn.
 
 ![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
 
+The original dataset had 2 x 200 million reads. This would be too long to be processed in a training session. So, we downsampled the original dataset to 200 000 reads but added about 200 000 reads pairs that will map to chr22 to have a good profile on this chromosome similar to a 2 x 20 million reads original fastq.
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -50,14 +52,16 @@ and technical) key concepts they will learn.
 
 # Preprocessing
 
-Give some background about what the trainees will be doing in the section.
-
+We first need to download the dataset that we downsampled as well as other annotations files. Then, to increase the number of reads that will map to the assembly (here Human genome version 38), we need to preprocess the reads.
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) or from the shared data library
 >
 >    ```
@@ -68,38 +72,39 @@ Give some background about what the trainees will be doing in the section.
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype is fasqsanger.gz
+> 3. By default, galaxy will give as name the full path. Rename the datasets to keep only the file names.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Check that the datatype of the 2 fastq files is fasqsanger.gz
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
+> > ### {% icon details %} FASTQ format
+> > If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+{: .details}
 {: .hands_on}
 
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
+***TODO***: Add the bed files links.
 
 
 ## Quality control
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We can remove the adapters with Cutadapt.
+The first step is to check the quality of the reads and the presence of the Nextera adapters.
+> ### {% icon details %} Presence of adapters
+> When we do ATAC-Seq, two transposase could cut the DNA about 40 bp apart. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end these reads. 
+{: .details}
+
+We can do this with FastQC. The FastQC web page Adapter Content section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **FastQC** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
+> 1. **FastQC** {% icon tool %} with the default parameters:
+>       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1.fastq.gz` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1.fastq.gz` and `SRR891268_R2.fastq.gz`.
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
-> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check which are the adaptors found at the end of the reads.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -111,79 +116,107 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > >
 >    > {: .solution}
 >    >
+>    >
+>    > How many reads are in the fastq?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > There are 285247 reads.
+>    > >
+>    > {: .solution}
+>    >
+>    >
+>    > Which are the steps which have a warning?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1) Per base sequence content
+>    > > > ### {% icon details %} Tn5 sequence bias
+>    > > > It is well known that the tn5 have a strong sequence bias at the insersion site. You can have more information about it reading [Green et al. 2012]({% link https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3 %})
+{: .details}
+>    > > 2) Sequence Duplication Levels
+>    > > 3) Overrepresented sequences
+>    > >
+>    > {: .solution}
+>    >
 >    {: .question}
 
+This is what you should expect from the adapter section:
+
+![FastQC screenshot on the adapter content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the adapter content section")
 
 ## Trimming reads
 
-To trim the adapters we provide the Nextera adapter sequences to Cutadapt. Thesse adapters are shown in the image below.
+To trim the adapters we provide the Nextera adapter sequences to Cutadapt. These adapters are shown in the image below.
 
-![Nextera adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera adapters")
+![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera library with the sequence of adapters")
 
-The forward and reverse adapters are slightly different. If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. We will also trim low quality bases at the ends of reads (quality less than 20). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short.
+The forward and reverse adapters are slightly different.We will also trim low quality bases at the ends of reads (quality less than 20). We will only keep reads that are 20 bases or more after trimming so we don't have reads that are too short to be mapped.
 
 > ### {% icon hands_on %} Hands-on: Trim reads
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1.fastq.gz`
+>        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2.fastq.gz`
 >        - In *"Read 1 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
->                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
+>                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional if Multiple output is 'No')"*: `Nextera R1`
+>                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTCCGAGCCCACGAGAC`
 >        - In *"Read 2 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
 >                    - *"Source"*: `Enter custom sequence`
->                        - *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
->                        - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
+>                        - {% icon param-text %} *"Enter custom 3' adapter name (Optional)"*: `Nextera R2`
+>                        - {% icon param-text %} *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCTGACGCTGCCGACGA`
 >    - In *"Filter Options"*:
->        - *"Minimum length"*: `20`
+>        - {% icon param-text %} *"Minimum length"*: `20`
 >    - In *"Read Modification Options"*:
->        - *"Quality cutoff"*: `20`
+>        - {% icon param-text %} *"Quality cutoff"*: `20`
 >    - In *"Output Options"*:
 >        - *"Report"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you should see:
+
+![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Which portion of reads contains adapters?
+> 2. How many reads were still longer than 20 after the trimming?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 15%
+> > 2. 284,864 (99.9%)
 > >
 > {: .solution}
 >
 {: .question}
+
+ If we run FastQC again we should see under Adapter Content that the Nextera adapters are no longer present. Indeed this is what we got when we ran it:
+
+ ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
 
 
 # Mapping
 
 ## Mapping reads to reference genome
 
-Next we map the trimmed reads to the human reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use the settings...
+Next we map the trimmed reads to the human reference genome. We could use BWA or Bowtie to do this, here we will use Bowtie2. We use extended the maximum fragment length from 500 to 1000 because we know some valid pairs goes to this fragment length. We use the present `--very-sensitive` to have more chance to get the best match even if it is a bit longer. We run the end-to-end mode because we trimmed the adapters so we do not expect the read not to map fully.
 
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
 > 1. **Bowtie2** {% icon tool %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
+>        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Cutadapt** {% icon tool %} *"Read 1 Output"*
+>        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Cutadapt** {% icon tool %} *"Read 2 Output"*
 >        - *"Do you want to set paired-end options?"*: `Yes`
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
@@ -195,32 +228,30 @@ Next we map the trimmed reads to the human reference genome. We could use BWA or
 >    - *"Do you want to tweak SAM/BAM Options?"*: `No`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats.
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you should see:
+
+![Mapping statistics of bowtie2](../../images/atac-seq/Screenshot_bowtie2MappingStats.png "Mapping statistics of bowtie2")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is the proportion of pairs which mapped concordantly?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 53.85+43.40=97.25%
 > >
 > {: .solution}
 >
 {: .question}
+
+> ### {% icon comment %} Comment on the number of uniquely mapped.
+>
+> You could be surprised by the number of uniquely mapped compared to the number of multi-mapped reads.
+> One of the reason why is because we used the parameter `--very-sensitive`. Bowtie2 consider a read as multi-mapped even if the second hit has a much lower quality than the first one.
+{: .comment}
 
 # Filtering mapped reads
 
@@ -230,7 +261,8 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Filter** {% icon tool %} with the following parameters:
+> 1. **Filter** BAM datasets on a variety of attributes {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Insert Condition"*
 >            - In *"Filter"*:
@@ -245,28 +277,36 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 >                        - *"Filter on the reference name for the read"*: `!chrM`
 >    - *"Would you like to set rules?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > It would be maybe interesting to remove reads which mapped to different locations with the same score but we did not find a proper tool to do it. So we used the MAPQ threshold of 30 to greatly reduce them.
 >    {: .comment}
+> 2. Click on the input and the output BAM files of the filtering step. Check the size of the files.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Based on the files size what proportion of alignment were removed?
+> 2. Which parameter should be modified if I am interested in repetitive regions?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The original BAM file is 28 MB, the filtered one is 14.8 MB. Approximately half of the alignments were removed.
+> > > ### {% icon tip %} Tip: Getting the number of reads which mapped on chrM
+> > >
+> > > To get the number of reads per chromosome you can run **Samtools idxstats** {% icon tool %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
+> > > The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
+> > > The first 2 lines of the result would be (after sorting):
+> > >
+> > > ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
+> > >
+> > > There are 221 000 reads which map to chrM and 170 000 which map to chr22.
+> > {: .tip}
+> >
+> > Most of these alignments removed are chrM mapped reads.
+> > 
+> > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
 > {: .solution}
 >
@@ -274,38 +314,48 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 
 ## Filter duplicate reads
 
-> ### {% icon hands_on %} Hands-on: Task description
+As the library is made by PCR, there might be PCR biases which would over amplifies some products. As the Tn5 insertion is random within an accessible region we do not expect to see fragments with the exact same extremities. We consider that such fragments would be PCR duplicates artefacts. We will remove them using a tool of the Picard tool suite.
+
+> ### {% icon hands_on %} Hands-on: Remove duplicates
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
->    - In *"Comment"*:
->        - {% icon param-repeat %} *"Insert Comment"*
->            - *"Add this comment to BAM dataset"*: `[`
->        - {% icon param-repeat %} *"Insert Comment"*
->            - *"Add this comment to BAM dataset"*: `]`
+>    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to be able to filter them afterward. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
 >    {: .comment}
 >
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the MarkDuplicate metrics.
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you should see:
+
+![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDup.png "Metrics of MarkDuplicates")
+
+Unfortunately, the header does not align with the data...
+
+> ### {% icon tip %} Tip: Getting the header for the data of the MarkDuplicate metrics
+> You can copy/paste the 2 lines with header and data on an excel sheet.
+> Replace `Unknown Library` by `Unknown_Library` in the second line.
+> Then do Text to Columns, it is delimited data, the delimiter is Space and you should check the box for Treat consecutive delimiters as one.
+> To make is easy to read, you can copy and paste special to transpose the table.
+> Now you should have:
+>
+> ![Metrics of MarkDuplicates in Excel](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates in Excel")
+>
+{: .tip}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many pairs were in the input?
+> 2. How many pairs are duplicates?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 132911
+> > 2. 3515
 > >
 > {: .solution}
 >
@@ -313,41 +363,35 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 
 ## Check fragment sizes
 
-We check the fragment sizes (the sizes of the pieces of DNA that were sequenced) with Picard CollectInsertSizeMetrics.
+We check the fragment sizes (the sizes of the pieces of DNA that were sequenced) with Picard CollectInsertSizeMetrics. This is a very good indication of the quality of the ATAC-Seq.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
 > 1. **CollectInsertSizeMetrics** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
 >    - *"Load reference genome from"*: `Local cache`
 >        - *"Using reference genome"*: `Human Dec. 2013 (GRCh38/hg38) (hg38)`
->    - *"The level(s) at which to accumulate metrics"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the upper one of the 2 outputs (the pdf file).
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you should see:
+
+![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Except the first peak which correspond to accessible chromatin, other peaks correspond to events surrounding nucleosomes. Could you guess the size of the DNA protected by a nucleosome?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. A bit less than 200bp 
 > >
 > {: .solution}
 >
 {: .question}
+
+***TODO***: *Provide examples of good and bad profiles, make a comment on the fr and rf*
 
 # Peak calling
 
