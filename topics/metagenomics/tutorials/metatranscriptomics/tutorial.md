@@ -9,6 +9,8 @@ questions:
 - "How to assign taxa and function to the identified sequences?"
 objectives:
 - "Choosing the best approach to analyze metatranscriptomics data"
+- "Exposure to functional microbiome characterization using metatranscriptomic results"
+- "Learn where metatranscriptomics fits in 'multi-omic' analysis of microbiomes"
 - "Visualisation of a community structure"
 time_estimation: 3H
 key_points:
