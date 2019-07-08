@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Refining Manual Genome Annotations with Apollo v2
+title: Refining Manual Genome Annotations with Apollo
 zenodo_link: https://zenodo.org/record/3270822
 questions:
 - Which biological questions are addressed by the tutorial?
@@ -34,6 +34,19 @@ scheme to sum up the pipeline used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
 and technical) key concepts they will learn.
 
+You may want to cite some publications; this can be done by adding citations to the
+bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
+must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
+get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+
+With the example you will find in the `tutorial.bib` file, you can add a citation to
+this article here in your tutorial like this:
+{% raw %} `{% cite Batut2018 %}`{% endraw %}.
+This will be rendered like this: {% cite Batut2018 %}, and links to a
+[bibliography section](#bibliography) which will automatically be created at the end of the
+tutorial.
+
+
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
@@ -49,7 +62,14 @@ and technical) key concepts they will learn.
 # Title for your first section
 
 Give some background about what the trainees will be doing in the section.
+Remember that many people reading your materials will likely be novices,
+so make sure to explain all the relevant concepts.
 
+## Title for a subsection
+Section and subsection titles will be displayed in the tutorial index on the left side of
+the page, so try to make them informative and concise!
+
+# Hands-on Sections
 Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
 as breaking the tutorial into sections, we encourage you to make such changes as you
@@ -124,6 +144,7 @@ A big step can have several subsections or sub steps:
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
@@ -131,6 +152,7 @@ A big step can have several subsections or sub steps:
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `output` (Input dataset)
 >                        - *"This is match/match_part data"*: `Yes`
 >                        - *"JBrowse Track Type [Advanced]"*: `Neat HTML Features`
 >                        - In *"JBrowse Feature Score Scaling & Coloring Options [Advanced]"*:
@@ -142,6 +164,7 @@ A big step can have several subsections or sub steps:
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BAM Pileups`
+>                        - {% icon param-file %} *"BAM Track Data"*: `output` (Input dataset)
 >                        - *"Autogenerate SNP Track"*: `Yes`
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BigWig XY`
@@ -182,6 +205,7 @@ A big step can have several subsections or sub steps:
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Create or Update Organism** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"JBrowse HTML Output"*: `output` (output of **JBrowse** {% icon tool %})
 >    - *"Organism Common Name Source"*: `Direct Entry`
 >        - *"Organism Common Name"*: `Honeybee`
 >    - *"Genus"*: `Apis`
@@ -222,6 +246,7 @@ A big step can have several subsections or sub steps:
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Annotate** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Apollo Organism Listing"*: `output` (output of **Create or Update Organism** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
