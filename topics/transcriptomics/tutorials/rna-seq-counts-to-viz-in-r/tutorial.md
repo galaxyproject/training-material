@@ -20,6 +20,7 @@ questions:
 - How do I get started with tabular data (e.g. spreadsheets) in R?
 - What are some best practices for reading data into R?
 - How do I save tabular data generated in R?
+- How can I manipulate data frames without repeating myself?
 objectives:
 - Know advantages of analyzing data in R
 - Know advantages of using RStudio
@@ -31,7 +32,7 @@ objectives:
 - How do I get started with tabular data (e.g. spreadsheets) in R?
 - What are some best practices for reading data into R?
 - How do I save tabular data generated in R?
-- How can I manipulate dataframes without repeating myself?
+- How can I manipulate data frames without repeating myself?
 - Know advantages of analyzing data in R
 - Know advantages of using RStudio
 - Create an RStudio project, and know the benefits of working within a project
@@ -57,13 +58,24 @@ objectives:
 - Be able to apply an arithmetic function to a data frame
 - Be able to coerce the class of an object (including variables in a data frame)
 - Be able to save a data frame as a delimited file
+- Describe what the `dplyr` package in R is used for.
+- Apply common `dplyr` functions to manipulate data in R.
+- Employ the ‘pipe’ operator to link together a sequence of functions.
+- Employ the ‘mutate’ function to apply other chosen functions to existing columns and create new columns of data.
+- Employ the ‘split-apply-combine’ concept to split the data into groups, apply analysis to each group, and combine the results.
 time_estimation: 3H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
+- Use the `dplyr` package to manipulate datan frames.
+- Use `select()` to choose variables from a data frame.
+- Use `filter()` to choose data based on values.
+- Use `group_by()` and `summarize()` to work with subsets of data.
+- Use `mutate()` to create new variables.
 contributors:
 - bebatut
 - fpsom
+- tobyhodges
 ---
 
 
@@ -335,7 +347,7 @@ We can explicitly set the digits parameter when we call the function.
 >    > round(3.14159, digits = 2)
 >    [1] 3.14
 >    ```
->   
+>
 > 2. Call `round` with 2 arguments
 >    1. 3.14159
 >    2. 2
@@ -664,7 +676,7 @@ The created object seems to a character object.
 > >
 > >    3. `spock`: logical
 > >    4. `pilot`: `Error in mode(pilot): object 'pilot' not found`
-> >       
+> >
 > >       If `Earhart` did exist, then the mode of `pilot` would be whatever the mode of `Earhart` was originally.
 > >
 > {: .solution}
@@ -812,7 +824,7 @@ You can also retrieve a range of numbers:
 >    ```R
 >    # get the 1st through 3rd value in the snp_genes vector
 >    snp_genes[1:3]
->    [1] "OXTR"  "ACTN3" "AR"  
+>    [1] "OXTR"  "ACTN3" "AR"
 >    ```
 >
 > 2. Get the 1st, 3rd, and 4th value in the `snp_genes` vector
@@ -897,21 +909,21 @@ Notice in the operation above that R inserts an `NA` value to extend our vector 
 > ### {% icon question %} Exercise: Examining and subsetting vectors
 >
 > Which of the following are true of vectors in R?
-> 1. All vectors have a mode **or** a length  
-> 2. All vectors have a mode **and** a length  
-> 3. Vectors may have different lengths  
-> 4. Items within a vector may be of different modes  
-> 5. You can use the `c()` to one or more items to an existing vector  
-> 6. You can use the `c()` to add a vector to an exiting vector  
+> 1. All vectors have a mode **or** a length
+> 2. All vectors have a mode **and** a length
+> 3. Vectors may have different lengths
+> 4. Items within a vector may be of different modes
+> 5. You can use the `c()` to one or more items to an existing vector
+> 6. You can use the `c()` to add a vector to an exiting vector
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. False: vectors have both of these properties  
-> > 2. True  
-> > 3. True  
+> > 1. False: vectors have both of these properties
+> > 2. True
+> > 3. True
 > > 4. False: vectors have only one mode (e.g. numeric, character); all items in a vector must be of this mode.
-> > 5. True  
-> > 6. True  
+> > 5. True
+> > 6. True
 > >
 > {: .solution}
 {: .question}
@@ -1019,8 +1031,8 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 > ### {% icon question %} Questions
 >
 > 1. What data types/modes are the following vectors?
->    1. `snps`  
->    2. `snp_chromosomes`  
+>    1. `snps`
+>    2. `snp_chromosomes`
 >    3. `snp_positions`
 >
 >    > ### {% icon solution %} Solution
@@ -1056,7 +1068,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    {: .solution}
 >
 > 3. Make the following change to the `snp_genes` vector:
->    1. Create a new version of `snp_genes` that does not contain CYP1A1 and then  
+>    1. Create a new version of `snp_genes` that does not contain CYP1A1 and then
 >    2. Add 2 NA values to the end of `snp_genes`
 >
 >    > ### {% icon solution %} Solution
@@ -1065,7 +1077,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > snp_genes <- snp_genes[-5]
 >    > snp_genes <- c(snp_genes, NA, NA)
 >    > snp_genes
->    > [1] "OXTR"  "ACTN3" "AR"    "OPRM1" NA      "APOA5" NA      NA    
+>    > [1] "OXTR"  "ACTN3" "AR"    "OPRM1" NA      "APOA5" NA      NA
 >    > ```
 >    >
 >    {: .solution}
@@ -1238,6 +1250,354 @@ Congratulations! You've successfully loaded your data into RStudio!
 
 
 # Aggregating and Analyzing Data with dplyr
+
+Bracket subsetting is handy, but it can be cumbersome and difficult to read, especially for complicated operations.
+
+Luckily, the [`dplyr`](https://cran.r-project.org/package=dplyr)
+package provides a number of very useful functions for manipulating data frames
+in a way that will reduce repetition, reduce the probability of making
+errors, and probably even save you some typing. As an added bonus, you might
+even find the `dplyr` grammar easier to read.
+
+Here we're going to cover 6 of the most commonly used functions as well as using
+pipes (`%>%`) to combine them.
+
+1. `select()`
+2. `filter()`
+3. `group_by()`
+4. `summarize()`
+5. `mutate()`
+
+Packages are sets of additional functions that let you do more
+stuff in R. The functions we've been using so far, like `str()`, come built into R;
+packages give you access to more functions. You need to install a package and
+then load it to be able to use it.
+
+```
+install.packages("dplyr") ## install
+```
+
+You might get asked to choose a CRAN mirror -- this is asking you to
+choose a site to download the package from. The choice doesn't matter too much; I'd recommend choosing the RStudio mirror.
+
+```
+library("dplyr")          ## load
+```
+
+You only need to install a package once per computer, but you need to load it
+every time you open a new R session and want to use that package.
+
+## What is dplyr?
+
+The package `dplyr` is a fairly new (2014) package that tries to provide easy
+tools for the most common data manipulation tasks. It is built to work directly
+with data frames. The thinking behind it was largely inspired by the package
+`plyr` which has been in use for some time but suffered from being slow in some
+cases.` dplyr` addresses this by porting much of the computation to C++. An
+additional feature is the ability to work with data stored directly in an
+external database. The benefits of doing this are that the data can be managed
+natively in a relational database, queries can be conducted on that database,
+and only the results of the query returned.
+
+This addresses a common problem with R in that all operations are conducted in
+memory and thus the amount of data you can work with is limited by available
+memory. The database connections essentially remove that limitation in that you
+can have a database of many 100s GB, conduct queries on it directly and pull
+back just what you need for analysis in R.
+
+### Selecting columns and filtering rows
+
+To select columns of a
+data frame, use `select()`. The first argument to this function is the data
+frame (`annotatedDEgenes`), and the subsequent arguments are the columns to keep.
+
+```r
+select(annotatedDEgenes, GeneID, Start, End, Strand)
+```
+
+```
+GeneID    Start      End Strand
+1   FBgn0039155 24141394 24147490      +
+2   FBgn0003360 10780892 10786958      -
+3   FBgn0026562 26869237 26871995      -
+4   FBgn0025111 10778953 10786907      -
+5   FBgn0029167 13846053 13860001      +
+6   FBgn0039827 31196915 31203722      +
+7   FBgn0035085 24945138 24946636      +
+8   FBgn0034736 22550093 22552113      +
+9   FBgn0264475   820758   821512      +
+10  FBgn0000071  6762592  6765261      +
+# ... with 120 more rows
+```
+
+To select all columns *except* certain ones, put a "-" in front of
+the variable to exclude it.
+
+```r
+select(variants, -Chromosome)
+```
+
+```
+GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj    Start End Strand        Feature    Gene.Name
+1   FBgn0039155  1086.97430 -4.148450 0.13494887 -30.740902 1.617921e-207 1.387691e-203 24141394  24147490      + protein_coding         Kal1
+2   FBgn0003360  6409.57713 -2.999777 0.10434506 -28.748628 9.422382e-182 4.040788e-178 10780892  10786958      - protein_coding         sesB
+3   FBgn0026562 65114.84056 -2.380164 0.08432692 -28.225437 2.850473e-175 8.149503e-172 26869237  26871995      - protein_coding  BM-40-SPARC
+4   FBgn0025111  2192.32237  2.699939 0.09794457  27.565988 2.846764e-167 6.104174e-164 10778953  10786907      - protein_coding         Ant2
+5   FBgn0029167  5430.06728 -2.105062 0.09254660 -22.745964 1.573283e-114 2.698810e-111 13846053  13860001      + protein_coding          Hml
+6   FBgn0039827   390.90178 -3.503014 0.16002962 -21.889786 3.250384e-106 4.646424e-103 31196915  31203722      + protein_coding       CG1544
+7   FBgn0035085   928.26381 -2.414074 0.11518516 -20.958204  1.579343e-97  1.935147e-94 24945138   24946636      + protein_coding       CG3770
+8   FBgn0034736   330.38302 -3.018179 0.15815418 -19.083774  3.444661e-81  3.693107e-78 22550093   22552113      + protein_coding       CG6018
+9   FBgn0264475   955.45445 -2.334486 0.12423003 -18.791643  8.840041e-79  8.424559e-76   820758   821512      +        lincRNA      CR43883
+10  FBgn0000071   468.05793  2.360017 0.13564397  17.398615  8.452137e-68  7.249398e-65  6762592   6765261      + protein_coding          Ama
+# ... with 120 more rows
+```
+
+`dplyr` also provides useful functions to select columns based on their names. For instance, `starts_with()` allows you to select columns that ends with specific letters. For instance, if you wanted to select columns that end with the letter "B":
+
+```r
+select(annotatedDEgenes, starts_with("P."))
+```
+
+```
+P.value         P.adj
+1   1.617921e-207 1.387691e-203
+2   9.422382e-182 4.040788e-178
+3   2.850473e-175 8.149503e-172
+4   2.846764e-167 6.104174e-164
+5   1.573283e-114 2.698810e-111
+6   3.250384e-106 4.646424e-103
+7    1.579343e-97  1.935147e-94
+8    3.444661e-81  3.693107e-78
+9    8.840041e-79  8.424559e-76
+10   8.452137e-68  7.249398e-65
+# ... with 120 more rows
+```
+
+> ### {% icon question %} Selecting on multiple conditions
+>
+> Create a table that contains all the columns with the letter "s" in their name except for
+> the column "Wald.Stats", and the column "End". Hint: look at the help
+> for the function `starts_with()` we've just covered.
+>
+>> ### {% icon solution %} Solution
+>>
+>> ```r
+>> select(annotatedDEgenes, contains("s"), -Wald.Stats, End)
+>> ```
+> {: .solution}
+{: .challenge}
+
+
+To choose rows, use `filter()`:
+
+```r
+filter(annotatedDEgenes, Strand == "+")
+```
+
+```
+GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome Start      End Strand        Feature    Gene.Name
+1  FBgn0039155  1086.97430 -4.148450 0.13494887 -30.740902 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding         Kal1
+2  FBgn0029167  5430.06728 -2.105062 0.09254660 -22.745964 1.573283e-114 2.698810e-111      chr3L 13846053 13860001      + protein_coding          Hml
+3  FBgn0039827   390.90178 -3.503014 0.16002962 -21.889786 3.250384e-106 4.646424e-103      chr3R 31196915 31203722      + protein_coding       CG1544
+4  FBgn0035085   928.26381 -2.414074 0.11518516 -20.958204  1.579343e-97  1.935147e-94      chr2R 24945138 24946636      + protein_coding       CG3770
+5  FBgn0034736   330.38302 -3.018179 0.15815418 -19.083774  3.444661e-81  3.693107e-78      chr2R 22550093 22552113      + protein_coding       CG6018
+6  FBgn0264475   955.45445 -2.334486 0.12423003 -18.791643  8.840041e-79  8.424559e-76      chr3L 820758   821512      +        lincRNA      CR43883
+7  FBgn0000071   468.05793  2.360017 0.13564397  17.398615  8.452137e-68  7.249398e-65      chr3R 6762592  6765261      + protein_coding          Ama
+8  FBgn0038832   429.85033 -2.340711 0.15483651 -15.117308  1.245307e-51  8.900828e-49      chr3R 20842139 20844981      + protein_coding      CG15695
+9  FBgn0037754   394.46410 -2.071994 0.14494069 -14.295459  2.335613e-46  1.540966e-43      chr3R 9784652  9789323      + protein_coding       CG8500
+10 FBgn0034897  1340.88978 -1.795107 0.12629203 -14.213934  7.508655e-46  4.293449e-43      chr2R 23713899 23734846      + protein_coding         Sesn
+# ... with 120 more rows
+```
+
+Note that this is equivalent to the base R code below,
+but is easier to read!
+
+```r
+annotatedDEgenes[annotatedDEgenes$Strand == "+",]
+```
+
+`filter()` will keep all the rows that match the conditions that are provided. Here are a few examples:
+
+```r
+## rows for genes in Chromosome X or 2R
+filter(annotatedDEgenes, Chromosome %in% c("chrX", "chr2R"))
+## rows where the log2 fold change is greater than 2
+filter(annotatedDEgenes, log2.FC >= 2)
+```
+
+`filter()` allows you to combine multiple conditions. You can separate them using a `,` as arguments to the function, they will be combined using the `&` (AND) logical operator. If you need to use the `|` (OR) logical operator, you can specify it explicitly:
+
+```r
+## this is equivalent to:
+##   filter(annotatedDEgenes, Chromosome == "chrX" & P.adj <= 1e-100)
+filter(annotatedDEgenes, Chromosome == "chrX", P.adj <= 1e-100)
+## using `|` logical operator
+filter(annotatedDEgenes, Chromosome == "chrX", (log2.FC <= -2 | log2.FC >= 2))
+```
+
+> ### {% icon question %} Practising with conditionals
+>
+> Select all the rows for genes that start after position 1e6 (one million)
+> and before position 2e6 (included) in their chromosome, which have a log2
+> fold change (`log2.FC`) greater than 1 or an adjusted p-value (`P.adj`)
+> less than 10^-75.
+>
+>> ### {% icon solution %} Solution
+>>
+>> ```r
+>> filter(annotatedDEgenes, Start >= 1e6 & End <= 2e6, (log2.FC > 1 | P.adj < 1e-75)
+>> ```
+> {: .solution}
+{: .challenge}
+
+
+### Pipes
+
+But what if you wanted to select and filter? We can do this with pipes. Pipes, are a fairly recent addition to R. They let you
+take the output of one function and send it directly to the next, which is
+useful when you need to do many things to the same data set. It was
+possible to do this before pipes were added to R, but it was
+much messier and more difficult. Pipes in R look like
+`%>%` and are made available via the `magrittr` package, which is installed as
+part of `dplyr`. If you use RStudio, you can type the pipe with
+<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a PC,
+or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac.
+
+```r
+annotatedDEgenes %>%
+  filter(Strand == "+") %>%
+  select(GeneID, Start, End, Chromosome) %>%
+  head()
+```
+
+In the above code, we use the pipe to send the `annotatedDEgenes` dataset first through
+`filter()`, to keep rows for genes on the '+' strand of their chromosome, and then through `select()` to
+keep only the `GeneID`, `Start`, `End`, and `Chromosome` columns. Since `%>%` takes
+the object on its left and passes it as the first argument to the function on
+its right, we don't need to explicitly include the data frame as an argument
+to the `filter()` and `select()` functions any more. We then pipe the results
+to the `head()` function so that we only see the first six rows of data.
+
+Some may find it helpful to read the pipe like the word "then". For instance,
+in the above example, we took the data frame `annotatedDEgenes`, *then* we `filter`ed
+for rows where `Strand` was +, *then* we `select`ed the `GeneID`, `Start`, `End`, and `Chromosome` columns, *then* we showed only the first six rows.
+The **`dplyr`** functions by themselves are somewhat simple,
+but by combining them into linear workflows with the pipe, we can accomplish
+more complex manipulations of data frames.
+
+If we want to create a new object with this smaller version of the data we
+can do so by assigning it a new name:
+
+```r
+plus_strand_genes <- annotatedDEgenes %>%
+  filter(Strand == "+") %>%
+  select(GeneID, Start, End, Chromosome)
+```
+
+This new object includes all of the data from this sample. Let's look at just
+the first six rows to confirm it's what we want:
+
+```r
+head(plus_strand_genes)
+```
+
+> ## {% icon question %} Pipes and up-regulation
+>
+> Starting with the `annotatedDEgenes` data frame, use pipes to subset the data
+> to include only observations from chromosome 3L,
+> where the log2 fold change is at least 2.
+> Retain only the columns `GeneID`, `P.adj`, and `log2.FC`.
+>
+>
+>> ## {% icon solution %} Solution
+>> ```r
+>>  annotatedDEgenes %>%
+>>  filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
+>>  select(GeneID, P.adj, log2.FC)
+>> ```
+> {: .solution}
+{: .challenge}
+
+### Mutate
+
+Frequently you'll want to create new columns based on the values in existing
+columns, for example to do unit conversions or find the ratio of values in two
+columns. For this we'll use the `dplyr` function `mutate()`.
+
+We have a column titled "log2.FC". This is a logarithmically-adjusted
+representation of the fold-change observed in expression of the gene
+in the transcriptomic experiment from which this data is derived.
+We can the observed expression level relative to the reference according to the formula:
+
+fold change = 2 ^ log2.FC
+
+Let's add a column (`ratio.FC`) to our `annotatedDEgenes` data frame that shows
+the observed expression as a multiple of the reference level.
+
+```r
+annotatedDEgenes %>%
+  mutate(ratio.FC = 2 ** log2.FC %>%
+  head()
+```
+
+> ### {% icon question %} Selected mutation
+> There are a lot of columns in our dataset, so let's just look at the
+> `GeneID`, `P.adj`, `log2.FC`, and `ratio.FC` columns for now. Add a
+> line to the above code to only show those columns.
+>
+>> ### {% icon solution %} Solution
+>> ```r
+>> annotatedDEgenes %>%
+>>   mutate(ratio.FC = 2 ** log2.FC %>%
+>>   select(GeneID, P.adj, log2.FC, ratio.FC)
+>> ```
+> {: .solution}
+{: .challenge}
+
+### Split-apply-combine data analysis and the summarize() function
+
+Many data analysis tasks can be approached using the "split-apply-combine"
+paradigm: split the data into groups, apply some analysis to each group, and
+then combine the results. `dplyr` makes this very easy through the use of the
+`group_by()` function, which splits the data into groups. When the data is
+grouped in this way `summarize()` can be used to collapse each group into
+a single-row summary. `summarize()` does this by applying an aggregating
+or summary function to each group. For example, if we wanted to group
+by `Chromosome` and find the number of rows of data for each
+chromosome, we would do:
+
+```r
+variants %>%
+  group_by(Chromosome) %>%
+  summarize(n())
+```
+
+Here the summary function used was `n()` to find the count for each
+group. We can also apply many other functions  to individual columns
+to get other summary statistics. For example,
+we can use built-in functions like
+`mean()`, `median()`, `min()`, and `max()`. These are called
+"built-in functions" because they come with R and don't require that you install any additional packages.
+
+> ### {% icon comment %} Watch out for missing data
+> By default, all **R functions
+> operating on vectors that contain missing data will return NA**.
+> It's a way to make sure that users know they have missing
+> data, and make a conscious decision on how to deal with it. When
+> dealing with simple statistics like the mean, the easiest way to
+> ignore `NA` (the missing data) is to use `na.rm = TRUE` (`rm` stands for
+> remove).
+{: .comment}
+
+So to view the highest fold change (`log2.FC`) for each chromsome:
+
+```r
+annotatedDEgenes %>%
+  group_by(Chromosome) %>%
+  summarize(max(log2.FC))
+```
+
+*Much of this lesson was copied or adapted from Jeff Hollister's [materials](http://usepa.github.io/introR/2015/01/14/03-Clean/). You may find [this cheatsheet for `dplyr`](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) handy.*
 
 
 
