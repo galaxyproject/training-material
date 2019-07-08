@@ -64,6 +64,9 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. Create a new history for this tutorial and give it a proper name
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import `patient1_input_good_outcome` from [Zenodo](https://zenodo.org/record/892432/files/patient1_input_good_outcome.fastq) or from the data library into the history
 >
 >    > ### {% icon tip %} Tip: Importing data via links
@@ -251,19 +254,19 @@ To save time, we already did that and we can now work directly on the BAM files 
 >    - "Bam file" to the 8 imported BAM files
 >    - "Choose computation mode" to `Bins`
 >    - "Bin size in bp" to `100`
->       
+>
 >       This corresponds to the length of the fragments that were sequenced; it is not the read length!
 >
 >    - "Distance between bins" to `500000` (to reduce the computation time for the tutorial)
 >    - "Region of the genome to limit the operation to" to `chr1` (to reduce the computation time for the tutorial)
->  
+>
 >    Using these parameters, the tool will take bins of 100 bp separated by 500,000. For each bin the overlapping reads in each sample will be computed
 >
 > 4. **plotCorrelation** {% icon tool %} with
 >    - "Matrix file from the multiBamSummary tool" to the generated multiBamSummary output
->    
+>
 >    To compute and visualize the sample correlation we use plotCorrelation from deepTools. This is a fast process that allows the user to quickly try different color combinations and outputs. Feel free to try different parameters.
->    
+>
 {: .hands_on}
 
 > ### {% icon question %} Questions

@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Collections: Rule Based Uploader"
 zenodo_link: ""
+level: Advanced
 questions:
   - "How to use the rule based uploader to create complex collections"
 objectives:
@@ -65,18 +66,21 @@ This approach could be used to manipulate lists of uploads coming from many diff
 > PRJDA60709      | SAMD00016382     | DRX000480            | File 1
 >
 > Download the resulting tabular data describing the files by clicking the "TEXT" link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly [here](https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&download=txt). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
+
 {: .hands_on}
 
-You can now open the resulting spreadsheet in your local spreadsheet program, a text editor, or in your web browser and select all the data and copy to your clipboard.
+Unfortunately the ENA ftp server is not operational at this moment,
+so we have to use a backup from zenodo.
+You can select all the data below and copy them to your clipboard.
 
 ```
 study_accession	sample_accession	experiment_accession	fastq_ftp
-PRJDA60709	SAMD00016379	DRX000475	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000770/DRR000770.fastq.gz
-PRJDA60709	SAMD00016383	DRX000476	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000771/DRR000771.fastq.gz
-PRJDA60709	SAMD00016380	DRX000477	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000772/DRR000772.fastq.gz
-PRJDA60709	SAMD00016378	DRX000478	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000773/DRR000773.fastq.gz
-PRJDA60709	SAMD00016381	DRX000479	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000774/DRR000774.fastq.gz
-PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/DRR000775.fastq.gz
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
 ```
 {:#example-1-metadata}
 
@@ -96,12 +100,12 @@ PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/
 >
 >    ```
 >    study_accession	sample_accession	experiment_accession	fastq_ftp
->    PRJDA60709	SAMD00016379	DRX000475	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000770/DRR000770.fastq.gz
->    PRJDA60709	SAMD00016383	DRX000476	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000771/DRR000771.fastq.gz
->    PRJDA60709	SAMD00016380	DRX000477	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000772/DRR000772.fastq.gz
->    PRJDA60709	SAMD00016378	DRX000478	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000773/DRR000773.fastq.gz
->    PRJDA60709	SAMD00016381	DRX000479	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000774/DRR000774.fastq.gz
->    PRJDA60709	SAMD00016382	DRX000480	ftp.sra.ebi.ac.uk/vol1/fastq/DRR000/DRR000775/DRR000775.fastq.gz
+>    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+>    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+>    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+>    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+>    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+>    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
 >    ```
 >
 >    ![screenshot](../../images/rules/rules_example_1_2_paste.png)
@@ -149,13 +153,9 @@ In order to get these files into Galaxy, we will want to do a few things:
 > 3. **Click** `Apply`, and you should see your new column definitions listed as in the following screenshot.
 >    ![screenshot](../../images/rules/rules_example_1_6_mapping_set.png)
 >
-> 4. **Click** the `Type` selection box at the bottom left of the upload dialog
->     - Change the datatype from `Auto-detect` to `fastqsanger`.
->    ![screenshot](../../images/rules/rules_example_1_7_extension_set.png)
->
 >    You are now ready to start the upload
 >
-> 5. **Click** the `Upload` button
+> 4. **Click** the `Upload` button
 >
 >    After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.
 {: .hands_on}
@@ -191,7 +191,7 @@ This example will demonstrate using such history datasets as the source for coll
 >    - From **Rules** menu, select `Add / Modify Column Definitions`
 >        - `Add Definition`, `URL`, Select Column `D`
 >        - `Add Definition`, `List Identifier(s)`, Column `C`
->    - *"Type"*: `fastqsanger`
+>    - *"Type"*: `fastqsanger.gz`
 >
 >    ![screenshot](../../images/rules/rules_example_2_3_rules.png)
 >
@@ -220,13 +220,13 @@ For this next example we will again use ENA data, this time corresponding to the
 >
 >      ```
 >      study_accession	sample_accession	experiment_accession	fastq_ftp
->      PRJDB3920	SAMD00034150	DRX036147	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039919/DRR039919_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036148	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039920/DRR039920_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036149	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039921/DRR039921_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036150	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039922/DRR039922_2.fastq.gz
->      PRJDB3920	SAMD00034150	DRX036151	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039923/DRR039923_2.fastq.gz
->      PRJDB3920	SAMD00034153	DRX036152	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039924/DRR039924_2.fastq.gz
->      PRJDB3920	SAMD00034152	DRX036164	ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_1.fastq.gz;ftp.sra.ebi.ac.uk/vol1/fastq/DRR039/DRR039936/DRR039936_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_2.fastq.gz
+>      PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_2.fastq.gz
+>      PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_2.fastq.gz
+>      PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_2.fastq.gz
 >      ```
 >
 >
@@ -239,7 +239,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >        - *"Filter how many rows?"*: `1`
 >    - From **Rules** menu, select `Add / Modify Column Definitions`
 >        - `Add Definition`, `List Identifier(s)`, Column `C`
->    - *"Type"*: `fastqsanger`
+>    - *"Type"*: `fastqsanger.gz`
 >
 >    In this dataset, column `D` contains two URLs, separated by a semicolon `;`. So we cannot define that column as the URL directly, we will need to split it into two columns first.
 >    We will build a regular expression that captures two "groups" from this column with two URLs - one group for everything before the `;` and one group for everything after.

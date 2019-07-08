@@ -44,8 +44,8 @@ Ansible runs commands on local or remote computers. It can move files around, cr
 
 Some terms that you should know first:
 
-host files
-:    An Ansible-specific file that defines groups of hosts (not be confused with `/etc/hosts`).
+Inventory file
+:    An Ansible-specific file that defines the systems ("hosts") and groups of hosts on which Ansible should operate.
 
 Ansible module
 :    A piece of Python code that converts some parameters into an invocation. An example would be the `command` module which converts parameters like `command: ls` into a command line that is executed. There are pre-built modules for just about everything.
@@ -64,7 +64,7 @@ vault
 
 Looking at each of these briefly:
 
-## Hosts file
+## Inventory file
 
 ```ini
 [webservers]
@@ -78,7 +78,7 @@ db_1.example.org ansible_user=root
 Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to specify which user to connect with.
 
 > ### {% icon details %} Ansible Inventory Documentation
-> For more advanced features of the hosts file or "inventory", check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
+> For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
 {: .details}
 
 ## Roles
@@ -232,34 +232,54 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon hands_on %} Hands-on: Setting up our workspace
 >
-> 1. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+> 1. Decide where you will install and run Ansible? On your laptop? Or on the remote machine/VM you will manage? All of the following steps should be done in the one location you pick.
 >
-> 2. Create an empty directory and `cd` into it
+> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 >
-> 2. Create your hosts file, name it `hosts`, in the folder you have just entered.
+> 3. Create an empty directory and `cd` into it
 >
->    1. Identify a host you have `SSH` access to. If you do not have access to any remote machines, `localhost` is fine.
->    2. Make sure you can SSH into it. Test it now.
->    3. We will call our group "my_hosts".
->    4. Create a hosts file with the group `my_hosts` and the host you have chosen.
+> 4. Create your inventory file, name it `hosts`, in the folder you have just entered.
 >
->    > ### {% icon solution %} Solution
->    > The file should look like:
->    >
->    > ```ini
->    > [my_hosts]
->    > your.host
->    > ```
->    >
->    > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
->    >
->    {: .solution }
+>    - You are installing ansible on a machine that will manage a second, remote machine
 >
-> 3. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
+>      1. Make sure you can SSH into it. Test it now.
 >
-> 4. Create a YAML file in that directory, `roles/my-role/tasks/main.yml` and open it for editing
+>      2. We will call our group `my_hosts`
 >
-> 5. Define a `copy` task like below:
+>      3. Create a hosts file with the group `my_hosts` and your host.
+>
+>         > ### {% icon solution %} Solution
+>         > The file should look like:
+>         >
+>         > ```ini
+>         > [my_hosts]
+>         > your.host
+>         > ```
+>         > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
+>         {: .solution }
+>
+>    - You are installing ansible on the machine it will be used to manage
+>
+>      1. We will call our group `my_hosts`
+>
+>      2. Create a hosts file with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
+>
+>
+>         > ### {% icon solution %} Solution
+>         > The file should look like:
+>         >
+>         > ```ini
+>         > [my_hosts]
+>         > localhost ansible_connection=local
+>         > ```
+>         {: .solution }
+>
+>
+> 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
+>
+> 6. Create a YAML file in that directory, `roles/my-role/tasks/main.yml` and open it for editing
+>
+> 7. Define a `copy` task like below:
 >
 >    ```yaml
 >    ---
@@ -276,72 +296,72 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .details }
 >
-> 6. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
+> 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
 >
-> 7. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
+> 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
 >
-> 8. Open `playbook.yml` for editing in the root folder. Place the following content in there:
+> 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
 >
->    ```yaml
->    ---
->    - hosts: my_hosts
->      roles:
->        - my-role
->    ```
+>     ```yaml
+>     ---
+>     - hosts: my_hosts
+>       roles:
+>         - my-role
+>     ```
 >
->    > ### {% icon question %} Question
->    >
->    > How does your file tree look now? Use `find` or `tree`.
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```
->    > > .
->    > > ├── hosts
->    > > ├── playbook.yml
->    > > └── roles
->    > >     └── my-role
->    > >         ├── files
->    > >         │   └── test.txt
->    > >         └── tasks
->    > >             └── main.yml
->    > > ```
->    > >
->    > {: .solution }
->    {: .question}
+>     > ### {% icon question %} Question
+>     >
+>     > How does your file tree look now? Use `find` or `tree`.
+>     >
+>     > > ### {% icon solution %} Solution
+>     > >
+>     > > ```
+>     > > .
+>     > > ├── hosts
+>     > > ├── playbook.yml
+>     > > └── roles
+>     > >     └── my-role
+>     > >         ├── files
+>     > >         │   └── test.txt
+>     > >         └── tasks
+>     > >             └── main.yml
+>     > > ```
+>     > >
+>     > {: .solution }
+>     {: .question}
 >
-> 9. Run one of the following command, whichever is appropriate:
+> 11. Run one of the following command, whichever is appropriate:
 >
->    - Real remote host: `ansible-playbook -i hosts playbook.yml`
->    - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
+>     - Real remote host: `ansible-playbook -i hosts playbook.yml`
+>     - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
 >
->    Even local users can run the 'real remote host' command, Ansible will just issue a warning. Running with `-c local` silences this warning.
+>     Even local users can run the 'real remote host' command, Ansible will just issue a warning. Running with `-c local` silences this warning.
 >
->    > ### {% icon question %} Question
->    >
->    > How does the output look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > The important thing is `failed=0`
->    > >
->    > > ```
->    > > $ ansible-playbook -i hosts playbook.yml -c local
->    > > PLAY [my_hosts] *********************************
->    > > TASK [Gathering Facts] *************************
->    > > ok: [localhost]
->    > > TASK [my-role : Copy] **************************
->    > > changed: [localhost]
->    > > PLAY RECAP *************************************
->    > > localhost                  : ok=2    changed=1    unreachable=0    failed=0
->    > > ```
->    > >
->    > > You can re-run this and it should say `changed=0`
->    > {: .solution }
->    {: .question}
+>     > ### {% icon question %} Question
+>     >
+>     > How does the output look?
+>     >
+>     > > ### {% icon solution %} Solution
+>     > >
+>     > > The important thing is `failed=0`
+>     > >
+>     > > ```
+>     > > $ ansible-playbook -i hosts playbook.yml -c local
+>     > > PLAY [my_hosts] *********************************
+>     > > TASK [Gathering Facts] *************************
+>     > > ok: [localhost]
+>     > > TASK [my-role : Copy] **************************
+>     > > changed: [localhost]
+>     > > PLAY RECAP *************************************
+>     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+>     > > ```
+>     > >
+>     > > You can re-run this and it should say `changed=0`
+>     > {: .solution }
+>     {: .question}
 >
 >
-> 10. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
+> 12. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
 >
 {: .hands_on}
 
@@ -389,7 +409,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 >
 > 1. Run the command `ansible -i hosts -c local -m setup my_hosts`.
 >
->    The `my_hosts` at the end refers to the group we defined in our hosts file.
+>    The `my_hosts` at the end of the command refers to the group we defined in our `hosts` inventory file.
 >
 > 2. Investigate the output. See what sort of information is made available to you.
 >
@@ -544,7 +564,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >
 >    This will install the new role into your `roles` folder, alongside your own role.
 >
-> 2. Edit your playbook.yml and add the role at the bottom, after `my-role`
+> 2. Edit your playbook.yml and add the role `geerlingguy.git` at the bottom, after `my-role`
 >
 > 3. Run the playbook
 >

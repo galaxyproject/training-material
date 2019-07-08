@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Introduction to Genomics and Galaxy"
 zenodo_link: ""
+level: Introductory
 questions:
   - "Do genes on opposite strands ever overlap?  If so, how often?"
 objectives:

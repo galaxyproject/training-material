@@ -52,7 +52,7 @@ testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topic
 There are three ways to set group tags:
   - Using the rule builder / apply_rules tool
   - Using the "Tag elements from file" tool
-  - Manually
+  - Manually adding dataset tags with the prefix `group:`
 
 We will use the first two methods in this tutorial.
 The second method works at any step during the analysis.
@@ -62,6 +62,9 @@ The second method works at any step during the analysis.
 > ### {% icon hands_on %} Hands-on: Set group tags during upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
 > 3. Click on **Rule-based** on the top
 >
@@ -102,6 +105,8 @@ The second method works at any step during the analysis.
 >    - Click **Build**
 >
 > 8. Expand the generated collection and the files in it and check their names and tags
+>
+>    ![Group tags in Galaxy UI are prefixed with group:](../../images/group-tags/group-tags.png)
 {: .hands_on}
 
 ## Set group tags using the "Tag elements from file" tool
@@ -165,6 +170,10 @@ select datasets corresponding to factors, or use group tags
 to specify factors. We will use the grop tags present in
 our collection to specify factors.
 
+The tool interface will prompt you with the group tags that are available for your inputs:
+
+![Group tags in the tool UI](../../images/group-tags/tool-ui.png)
+
 > ### {% icon hands_on %} Hands-on: Running **DESeq2** with group tags
 >
 > 1. **DESeq2** {% icon tool %} with the following parameters:
@@ -176,20 +185,20 @@ our collection to specify factors.
 >              - In *"Factor level"*:
 >                  - In *"1: Factor level"*:
 >                      - *"Specify a factor level"*: `treat`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: treat`
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `untreat`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: untreat`
 >          - {% icon param-repeat %} Click on *"Insert Factor"* (not on "Insert Factor level")
 >          - In "2: Factor"
 >              - "Specify a factor name" to `Sequencing`
 >              - In *"Factor level"*:
 >                  - In *"1: Factor level"*:
 >                      - *"Specify a factor level"*: `paired`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: paired`
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `single`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: single`
 >    - *"Files have header?"*: `No`
 >    - *"Output normalized counts table"*: `Yes`
 {: .hands_on}
