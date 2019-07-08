@@ -12,6 +12,14 @@ requirements:
 questions:
 - How can I manipulate data using R in Galaxy?
 - How can I create neat visualizations of the data?
+- Why use R?
+- Why use RStudio and how does it differ from R?
+- What will these lessons not cover?
+- What are the basic features of the R language?
+- What are the most common objects in R?
+- How do I get started with tabular data (e.g. spreadsheets) in R?
+- What are some best practices for reading data into R?
+- How do I save tabular data generated in R?
 objectives:
 - Know advantages of analyzing data in R
 - Know advantages of using RStudio
@@ -24,6 +32,33 @@ objectives:
 - What are some best practices for reading data into R?
 - How do I save tabular data generated in R?
 - How can I manipulate dataframes without repeating myself?
+
+- Know advantages of analyzing data in R
+- Know advantages of using RStudio
+- Create an RStudio project, and know the benefits of working within a project
+- Be able to customize the RStudio layout
+- Be able to locate and change the current working directory with getwd() and setwd()
+- Compose an R script file containing comments and commands
+- Understand what an R function is
+- Locate help for an R function using ?, ??, and args()
+- Be able to create the most common R objects including vectors
+- Understand that vectors have modes, which correspond to the type of data they contain
+- Be able to use arithmetic operators on R objects
+- Be able to retrieve (subset), name, or replace, values from a vector
+- Be able to use logical operators in a subsetting operation
+- Understand that lists can hold data of more than one mode and can be indexed
+- Explain the basic principle of tidy datasets
+- Be able to load a tabular dataset using base R functions
+- Be able to determine the structure of a data frame including its dimensions and the datatypes of variables
+- Be able to subset/retrieve values from a data frame
+- Understand how R may coerce data into different modes
+- Be able to change the mode of an object
+- Understand that R uses factors to store and manipulate categorical data
+- Be able to manipulate a factor, including subsetting and reordering
+- Be able to apply an arithmetic function to a data frame
+- Be able to coerce the class of an object (including variables in a data frame)
+- Be able to import data from Excel
+- Be able to save a data frame as a delimited file
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -52,7 +87,7 @@ R is one of the most widely-used and powerful programming languages in bioinform
 At more than 20 years old, R is fairly mature and [growing in popularity](https://www.tiobe.com/tiobe-index/r/). However, programming isn’t a popularity contest. Here are key advantages of analyzing data in R:
 
  - **R is [open source](https://en.wikipedia.org/wiki/Open-source_software)**
- 
+
     This means R is free - an advantage if you are at an institution where you have to pay for your own MATLAB or SAS license. Open source, is important to your colleagues in parts of the world where expensive software in inaccessible. It also means that R is actively developed by a community (see [r-project.org](https://www.r-project.org/)), and there are regular updates.
 
  - **R is widely used**
@@ -111,7 +146,7 @@ Before we go any further, you should save your script.
 > 2. In the **Save File** window that opens, name your file `genomics_r_basics`
 {: .hands_on}
 
-The new script `genomics_r_basics.R` should appear under **Files** in the output panel. 
+The new script `genomics_r_basics.R` should appear under **Files** in the output panel.
 
 By convention, R scripts end with the file extension `.R`.
 
@@ -127,10 +162,10 @@ Here are the major windows (or panels) of the RStudio environment:
 
 - **Console/Terminal**: This is actually where you see the execution of commands
 
-    This is the same display you would see if you were using R at the command line without RStudio. You can work interactively (i.e. enter R commands here), but for the most part we will run a script (or lines in a script) in the source pane and watch their execution and output here. 
+    This is the same display you would see if you were using R at the command line without RStudio. You can work interactively (i.e. enter R commands here), but for the most part we will run a script (or lines in a script) in the source pane and watch their execution and output here.
 
-- **Environment/History**: RStudio will show here you what datasets and objects (variables) you have created and which are defined in memory. 
-    
+- **Environment/History**: RStudio will show here you what datasets and objects (variables) you have created and which are defined in memory.
+
     You can also see some properties of objects/datasets such as their type and dimensions. The **History** tab contains a history of the R commands you've executed R.
 
 - **Files/Plots/Packages/Help**: This multipurpose panel will show you the contents of directories on your computer
@@ -145,11 +180,11 @@ All of the panels in RStudio have configuration options. For example, you can mi
 
 > ### {% icon comment %} Working with R at the terminal
 > Although we won't be working with R at the terminal, there are lots of reasons
-> to. 
+> to.
 >
 > For example, once you have written an RScript, you can run it at any Linux
 > or Windows terminal without the need to start up RStudio. We don't want
-> you to get confused - RStudio runs R, but R is not RStudio. 
+> you to get confused - RStudio runs R, but R is not RStudio.
 >
 > For more on
 > running an R Script at the terminal see this [Software Carpentry lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
@@ -157,7 +192,7 @@ All of the panels in RStudio have configuration options. For example, you can mi
 
 ## How to call functions in R, without needing to master them?
 
-A function in R (or any computing language) is a short program that takes some input and returns some output. 
+A function in R (or any computing language) is a short program that takes some input and returns some output.
 
 > ### {% icon hands_on %} Hands-on: Calling a function in R
 >
@@ -197,7 +232,7 @@ We would like now to keep information about this function
 > ### {% icon hands_on %} Hands-on: Comment in a script
 >
 > 1. Write on the line before `date()` a comment:
-> 
+>
 >    ```R
 >    # Gives the current date
 >    ```
@@ -253,7 +288,7 @@ What if you wanted to round to one significant digit, `round()` can do this, but
 > ### {% icon hands_on %} Hands-on: Get help
 >
 > 1. Add a `?` in front of the function name to see the help
-> 
+>
 >    ```R
 >    > ?round()
 >    ```
@@ -272,7 +307,7 @@ The **Help** tab will show you information. In R, this help sometimes also calle
 > ### {% icon hands_on %} Hands-on: Get the function arguments
 >
 > 1. Type `args()` to see a function's argument
-> 
+>
 >    ```R
 >    > args(round)
 >    function (x, digits = 0)
@@ -285,10 +320,10 @@ The **Help** tab will show you information. In R, this help sometimes also calle
 
 1. `x`: the number to be rounded
 2. `digits`
-    
+
     The `=` sign indicates that a default (in this case 0) is already set.
-    
-Since `x` is not set, `round()` requires we provide it, in contrast to `digits` where R will use the default value 0 unless you explicitly provide a different value. 
+
+Since `x` is not set, `round()` requires we provide it, in contrast to `digits` where R will use the default value 0 unless you explicitly provide a different value.
 
 We can explicitly set the digits parameter when we call the function.
 
@@ -297,7 +332,7 @@ We can explicitly set the digits parameter when we call the function.
 > 1. Call `round` with 2 arguments
 >    - *x*: `3.14159`
 >    - *digits*: `2`
-> 
+>
 >    ```R
 >    > round(3.14159, digits = 2)
 >    [1] 3.14
@@ -325,15 +360,15 @@ Finally, what if you are using `?` to get help for a function in a package not i
 >
 >    ```R
 >    > ?geom_point()
->    Error in .helpForCall(topicExpr, parent.frame()) : 
+>    Error in .helpForCall(topicExpr, parent.frame()) :
 >      no methods for ‘geom_point’ and no documentation for it as a function
 >    ```
-> 
+>
 > 3. Type `??geom_point()`
 > 4. Check the **Help** tab
 {: .hands_on}
 
-Using the two question marks (here `??geom_point()`), R returns results from a search of the documentation for packages you have installed on your computer in the **Help** tab. 
+Using the two question marks (here `??geom_point()`), R returns results from a search of the documentation for packages you have installed on your computer in the **Help** tab.
 
 Finally, if you think there should be a function, for example a statistical test, but you aren't sure what it is called in R, or what functions may be available.
 
@@ -369,13 +404,13 @@ We will discuss more on where to look for the libraries and packages that contai
 
 ## RStudio contextual help
 
-Here is one last bonus we will mention about RStudio. It's difficult to remember all of the arguments and definitions associated with a given function. 
+Here is one last bonus we will mention about RStudio. It's difficult to remember all of the arguments and definitions associated with a given function.
 
 > ### {% icon hands_on %} Hands-on: Search for a function
 >
 > 1. Type `lm` in the **Script** panel
 > 2. Hit <kbd>Tab</kbd>
-> 
+>
 >    RStudio displays functions and associated help
 >
 >    ![rstudio contextual help](../../images/rna-seq-counts-to-viz-in-r/studio_contexthelp1.png)
@@ -387,7 +422,7 @@ Here is one last bonus we will mention about RStudio. It's difficult to remember
 >    RStudio the function's arguments and provide additional help for each of these arguments:
 >
 >    ![rstudio contextual help](../../images/rna-seq-counts-to-viz-in-r/studio_contexthelp2.png)
-> 
+>
 {: .hands_on}
 
 # R Basics
@@ -445,9 +480,9 @@ What might be called a variable in many languages is called an **object** in R.
 >
 > 3. Select the lines
 > 4. Execute them
-> 
+>
 >    > ### {% icon tip %} Tip: Execute from a script
->    > - Click on the **Run the current line or selection** 
+>    > - Click on the **Run the current line or selection**
 >    > - Type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)
 >    {: .tip}
 >
@@ -515,8 +550,8 @@ There are a few more suggestions about naming and style you may want to learn mo
 
 > ### {% icon comment %} Pay attention to warnings in the script console
 >
-> If you enter a line of code in your script that contains an error, RStudio may give you an error message and underline this mistake. Sometimes these messages are easy to understand, but often the messages may need some figuring out. Paying attention to these warnings will help you avoid mistakes. 
-> 
+> If you enter a line of code in your script that contains an error, RStudio may give you an error message and underline this mistake. Sometimes these messages are easy to understand, but often the messages may need some figuring out. Paying attention to these warnings will help you avoid mistakes.
+>
 > In the example below, the object name has a space, which is not allowed in R. The error message does not say this directly, but R is "not sure" about how to assign the name to `human_ chr_number` when the object name we want is `human_chr_number`.
 >
 > ![rstudio script warning](../../images/rna-seq-counts-to-viz-in-r/rstudio_script_warning.png)
@@ -632,7 +667,7 @@ The created object seems to a character object.
 > >    3. `spock`: logical
 > >    4. `pilot`: `Error in mode(pilot): object 'pilot' not found`
 > >       
-> >       If `Earhart` did exist, then the mode of `pilot` would be whatever the mode of `Earhart` was originally. 
+> >       If `Earhart` did exist, then the mode of `pilot` would be whatever the mode of `Earhart` was originally.
 > >
 > {: .solution}
 {: .question}
@@ -674,7 +709,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >
 > $$\frac{1 + \sqrt{5}}{2}$$
 >
-> Compute the golden ratio to 3 digits of precision using the `sqrt()` and `round()` functions. 
+> Compute the golden ratio to 3 digits of precision using the `sqrt()` and `round()` functions.
 >
 > Hint: remember the `round()` function can take 2 arguments.
 >
@@ -704,7 +739,7 @@ One of the most common ways to create a vector is to use the `c()` function - th
 >    # Create the SNP gene name vector
 >    snp_genes <- c("OXTR", "ACTN3", "AR", "OPRM1")
 >    ```
-> 
+>
 > 2. Check how this object is stored in the **Environment** panel
 {: .hands_on}
 
@@ -719,7 +754,7 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    mode(snp_genes)
 >    [1] "character"
 >    ```
-> 
+>
 > 2. Check the mode of `snp_genes` length
 >
 >    ```R
@@ -727,7 +762,7 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    length(snp_genes)
 >    [1] "4"
 >    ```
-> 
+>
 > 3. Check both properties using `str` function
 >
 >    ```R
@@ -759,7 +794,7 @@ Once we have vectors, one thing we may want to do is specifically retrieve one o
 >    snp_chromosomes <- c('3', '11', 'X', '6')
 >    snp_positions <- c(8762685, 66560624, 67545785, 154039662)
 >    ```
-> 
+>
 > 2. Get the 3rd value in the `snp_genes` vector
 >
 >    ```R
@@ -769,7 +804,7 @@ Once we have vectors, one thing we may want to do is specifically retrieve one o
 >    ```
 {: .hands_on}
 
-In R, every item your vector is indexed, starting from the first item (1) through to the final number of items in your vector. 
+In R, every item your vector is indexed, starting from the first item (1) through to the final number of items in your vector.
 
 You can also retrieve a range of numbers:
 
@@ -781,9 +816,9 @@ You can also retrieve a range of numbers:
 >    snp_genes[1:3]
 >    [1] "OXTR"  "ACTN3" "AR"  
 >    ```
-> 
+>
 > 2. Get the 1st, 3rd, and 4th value in the `snp_genes` vector
-> 
+>
 >    ```R
 >    # get the 1st, 3rd, and 4th value in the snp_genes vector
 >    snp_genes[c(1, 3, 4)]
@@ -885,9 +920,9 @@ Notice in the operation above that R inserts an `NA` value to extend our vector 
 
 ### Logical Subsetting
 
-There is one last set of cool subsetting capabilities we want to introduce. It is possible within R to retrieve items in a vector based on a logical evaluation or numerical comparison. 
+There is one last set of cool subsetting capabilities we want to introduce. It is possible within R to retrieve items in a vector based on a logical evaluation or numerical comparison.
 
-For example, let's say we wanted get 
+For example, let's say we wanted get
 
 > ### {% icon hands_on %} Hands-on: Subset logically vectors
 > 1. Extract all of the SNPs in our vector of SNP positions (`snp_positions`) that were greater than 100,000,000
@@ -904,7 +939,7 @@ In the square brackets you place the name of the vector followed by the comparis
 - `<=`: less than or equal to
 - `>`: greater than
 - `>=`: greater than or equal to
-- `==`: exactly equal to 
+- `==`: exactly equal to
 - `!=`: not equal to
 - `!x`: not x
 - `a | b`: a or b
@@ -1036,7 +1071,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > ```
 >    >
 >    {: .solution}
-> 
+>
 > 4. Using indexing, create a new vector named `combined` that contains:
 >    - 1st value in `snp_genes`
 >    - 1st value in `snps`
@@ -1103,7 +1138,7 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >    ```
 >
 > 4. Get the first value in the `position` object
-> 
+>
 >    ```R
 >    snp_data$position[1]
 >    [1] 8762685
@@ -1112,6 +1147,56 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 
 # R Basics continued - factors and data frames
 
+A substantial amount of the data we work with in genomics will be tabular data, this is data arranged in rows and columns - also known as spreadsheets. There is a whole lesson from the [Carpentries](https://carpentries.org/) on how to [work with spreadsheets effectively](https://datacarpentry.org/organization-genomics/). For our purposes, we want to remind you of a few principles before we work with our first set of example data:
+
+**1) Keep raw data separate from analyzed data**
+
+This is principle number one because if you can’t tell which files are the original raw data, you risk making some serious mistakes (e.g. drawing conclusion from data which have been manipulated in some unknown way).
+
+**2) Keep spreadsheet data Tidy**
+
+The simplest principle of Tidy data is that we have one row in our spreadsheet for each observation or sample, and one column for every variable that we measure or report on. As simple as this sounds, it’s very easily violated. Most data scientists agree that significant amounts of their time is spent tidying data for analysis. Read more about data organization in the [Carpentries lesson](https://datacarpentry.org/organization-genomics/) and in [this paper](https://www.jstatsoft.org/article/view/v059i10).
+
+**3) Trust but verify**
+
+Finally, while you don’t need to be paranoid about data, you should have a plan for how you will prepare it for analysis. **This a focus of this lesson**. You probably already have a lot of intuition, expectations, assumptions about your data - the range of values you expect, how many values should have been recorded, etc. Of course, as the data get larger our human ability to keep track will start to fail (and yes, it can fail for small data sets too). R will help you to examine your data so that you can have greater confidence in your analysis, and its reproducibility.
+
+> ### {% icon comment %} Tip: Keeping you raw data separate
+> When you work with data in R, you are not changing the original file you loaded that data from. This is different than (for example) working with a spreadsheet program where changing the value of the cell leaves you one “save”-click away from overwriting the original file. You have to purposely use a writing function (e.g. `write.csv()`) to save data loaded into R. In that case, be sure to save the manipulated data into a new file. More on this later in the lesson.
+{: .comment}
+
+## Importing tabular data into R
+
+There are several ways to import data into R. For our purpose here, we will focus on using the tools every R installation comes with (so called "base" R) to import a comma-delimited file containing the results of our variant calling workflow. We will need to load the sheet using a function called `read.csv()`.
+
+> ### {% icon question %} Review the arguments of the `read.csv()` function
+>
+> Before using the `read.csv()` function, use R's help feature to answer the following questions.
+>
+> *Hint*: Entering `?` before the function name and then running that line will bring up the help documentation. Also, when reading this particular help be careful to pay attention to the `read.csv` expression under the 'Usage' heading. Other answers will be in the 'Arguments' heading.
+>
+> A) What is the default parameter for 'header' in the `read.csv()` function?
+>
+> B) What argument would you have to change to read a file that was delimited by semicolons (`;`) rather than commas?
+>
+> C) What argument would you have to change to read file in which numbers used commas for decimal separation (i.e. 1,00)?
+>
+> D) What argument would you have to change to read in only the first 10,000 rows of a very large file?
+>
+> > ### {% icon solution %} Solution
+> >
+> >A) The `read.csv() `function has the argument 'header' set to TRUE by default, this means the function always assumes the first row is header information, (i.e. column names)
+> >
+> >B) The `read.csv()` function has the argument 'sep' set to ",". This means the function assumes commas are used as delimiters, as you would expect. Changing this parameter (e.g. `sep=";"`) would now interpret semicolons as delimiters.
+> >
+> >C) Although it is not listed in the `read.csv()` usage, `read.csv()` is a "version" of the function `read.table()` and accepts all its arguments. If you set `dec=","` you could change the decimal operator. We'd probably assume the delimiter is some other character.
+> >
+> >D) You can set `nrow` to a numeric value (e.g. `nrow=10000`) to choose how many rows of a file you read in. This may be useful for very large files where not all the data is needed to test some data cleaning steps you are applying.
+> >
+> >Hopefully, this exercise gets you thinking about using the provided help documentation in R. There are many arguments that exist, but which we wont have time to cover. Look here to get familiar with functions you use frequently, you may be surprised at what you find they can do.
+> >
+> {: .solution}
+{: .question}
 
 
 # Aggregating and Analyzing Data with dplyr
