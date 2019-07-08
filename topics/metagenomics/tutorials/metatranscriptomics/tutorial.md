@@ -383,7 +383,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **HUMAnN2**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: HUMAnN2 is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data. For creating the input for HUMAnN2, we interlaced the output from SortmeRNA into a single FASTQ file. This interlaced file and the MetaPhlAn2 output (taxonomic profile) is used as the HUMAnN2 input. For functional profiling, it uses multiple databases that are locally cached nucleotide or protein databases.
 >
 > 1. **HUMAnN2** {% icon tool %} with the following parameters:
 >    - *"Use a custom taxonomic profile?"*: `Yes`
@@ -536,7 +536,8 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Group abundances**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: This tool groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms. Custom databases can be provided: a custom Gene Ontology file with the core ontology, a custom slim Gene Ontology with description of slim GO terms to use, and a custom mapping file for mapping UniRef50 gene families to GO terms.
+
 >
 > 1. **Group abundances** {% icon tool %} with the following parameters:
 >
