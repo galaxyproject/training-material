@@ -168,7 +168,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Cutadapt**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Cutadapt helps finding and removing adapter sequences, primers, poly-A tails or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. It also has additional features of modifying and filtering reads.
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
@@ -202,7 +202,8 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Filter with SortMeRNA**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: SortMeRNA is a tool used to filter ribosomal RNA fragments from metatranscriptomic data produced by next-generation sequencers. It is capable of handling large RNA databases and sorting out all fragments matching to the database with high accuracy and specificity. It can take paired-end reads as well as single-end reads.
+
 >
 > 1. **Filter with SortMeRNA** {% icon tool %} with the following parameters:
 >    - *"Sequencing type"*: `Reads are paired`
@@ -260,7 +261,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **FASTQ interlacer**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: This tool joins paired-end FASTQ reads from two separate files, one with the forward reads and one with the reverse reads, into a single files where forward alternate with their reverse reads. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
 >
 > 1. **FASTQ interlacer** {% icon tool %} with the following parameters:
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
@@ -334,7 +335,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **MetaPhlAn2**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: MetaPhlAn2 is a computational tool used to profile the structure and the composition of microbial communities (Bacteria, Archaea, Eukaryotes and Viruses) from metagenomic shotgun sequencing data with species level resolution. MetaPhlAn2 takes as input a sequence file, in this case the FASTQ interlacer output. The output is a tab-separated file with the predicted taxon relative abundances.
 >
 > 1. **MetaPhlAn2** {% icon tool %} with the following parameters:
 >    - *"Database with clade-specific marker genes"*: `Locally cached`
@@ -382,7 +383,8 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Format MetaPhlAn2**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: This tool formats the community profile, which is a MetaPhlAn2 output, to represent all taxonomic levels (from kingdom to strains) in a columnar view. Nine files are generated: one file per taxonomic levels (eight levels) with abundance for corresponding clades and one overall file combining all taxonomic levels and corresponding abundances.
+
 >
 > 1. **Format MetaPhlAn2** {% icon tool %} with the following parameters:
 >
