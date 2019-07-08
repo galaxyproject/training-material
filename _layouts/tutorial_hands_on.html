@@ -165,14 +165,14 @@ layout: base
             <strong>{% icon question %} Questions</strong>
             <ul>
             {% for question in page.questions %}
-            <li>{{ question }}</li>
+            <li>{{ question | markdownify }}</li>
             {% endfor %}
             </ul>
 
             <strong>{% icon objectives %} Objectives</strong>
             <ul>
             {% for objective in page.objectives %}
-            <li>{{ objective }}</li>
+            <li>{{ objective | markdownify }}</li>
             {% endfor %}
             </ul>
 
@@ -208,7 +208,7 @@ layout: base
 
             <ul>
                 {% for key_point in page.key_points %}
-                <li>{{ key_point }}</li>
+                <li>{{ key_point | markdownify }}</li>
                 {% endfor %}
             </ul>
         </blockquote>
