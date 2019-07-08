@@ -39,7 +39,7 @@ and technical) key concepts they will learn.
 
 ## ASaiM Workflow
 
-![ASaiM diagram](../../images/asaim-wf.png)
+![ASaiM diagram](../../images/asaim-wf.png "The Auvergne Sequence analysis of intestinal Microbiota (ASaiM)")
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
@@ -73,7 +73,7 @@ have fun!
 
 A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system:
 
-![meta-momics diagram](../../images/meta-omics.png)
+![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.)
 
 Microbiomes play a critical role in host health, disease, and the environment. Microbiome dynamics, especially at the taxonomy and functional level requires studying the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics). Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population.
 
