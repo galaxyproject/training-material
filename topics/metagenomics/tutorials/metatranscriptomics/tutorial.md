@@ -682,7 +682,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Generation, personalization and annotation of tree**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: This tool takes the Export to GraphlAn output ( tree and annotation ) and creates a phylogenetic tree (format: phyloxml).
 >
 > 1. **Generation, personalization and annotation of tree** {% icon tool %} with the following parameters:
 >
@@ -716,7 +716,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **GraPhlAn**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: GraPhlAn is a software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes the input from the Generation, personalization and annotation of tree for Graphlan tool to create these .png images.
 >
 > 1. **GraPhlAn** {% icon tool %} with the following parameters:
 >    - *"Output format"*: `PNG`
