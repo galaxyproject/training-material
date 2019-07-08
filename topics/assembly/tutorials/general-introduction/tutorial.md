@@ -253,11 +253,12 @@ This table is limitted, but we will now collect more basic statistics on our ass
 >
 > 1. **Quast** {% icon tool %} with
 >    - "Contigs/scaffolds output file" to the output of **velvetg**
->    - "Type of data" to `contig`
->    - "Reference File" to `wildtype.fna`
+>    - "Type of assembly" to `Genome`
+>    - "Use a reference genome?" to `Yes`
+>    - "Reference genome" to `wildtype.fna`
 >    - "Type of organism" to `Prokaryotes`
 >    - "Lower Threshold" to `500`
->    - "Thresholds" to `0,1000`
+>    - "Comma-separated list of contig length thresholds" to `0,1000`
 {: .hands_on}
 
 This tool generates 5 output files, but we will focus on the HTML report and the Icarus viewer.
