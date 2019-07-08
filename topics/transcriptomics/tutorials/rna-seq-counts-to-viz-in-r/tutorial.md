@@ -32,7 +32,6 @@ objectives:
 - What are some best practices for reading data into R?
 - How do I save tabular data generated in R?
 - How can I manipulate dataframes without repeating myself?
-
 - Know advantages of analyzing data in R
 - Know advantages of using RStudio
 - Create an RStudio project, and know the benefits of working within a project
@@ -57,7 +56,6 @@ objectives:
 - Be able to manipulate a factor, including subsetting and reordering
 - Be able to apply an arithmetic function to a data frame
 - Be able to coerce the class of an object (including variables in a data frame)
-- Be able to import data from Excel
 - Be able to save a data frame as a delimited file
 time_estimation: 3H
 key_points:
@@ -1185,7 +1183,7 @@ There are several ways to import data into R. For our purpose here, we will focu
 >
 > > ### {% icon solution %} Solution
 > >
-> >A) The `read.csv() `function has the argument 'header' set to TRUE by default, this means the function always assumes the first row is header information, (i.e. column names)
+> >A) The `read.csv() `function has the argument `header` set to `TRUE` by default, this means the function always assumes the first row is header information, (i.e. column names)
 > >
 > >B) The `read.csv()` function has the argument 'sep' set to ",". This means the function assumes commas are used as delimiters, as you would expect. Changing this parameter (e.g. `sep=";"`) would now interpret semicolons as delimiters.
 > >
@@ -1197,6 +1195,46 @@ There are several ways to import data into R. For our purpose here, we will focu
 > >
 > {: .solution}
 {: .question}
+
+***TODO***: *Description on how to add the file from Galaxy to RStudio*
+
+Now, let's read the file with the annotated differentially expressed genes that was produced by the end of the "[Reference-based RNA-Seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html)" lesson. The file will be located in **`/fix/this/url/too`**. Call this data `annotatedDEgenes`. The first argument to pass to our `read.csv()` function is the file path for our data. The file path must be in quotes and now is a good time to remember to use tab autocompletion. If you use tab autocompletion you avoid typos and errors in file paths. Use it!
+
+```R
+## read in a CSV file and save it as 'variants'
+
+annotatedDEgenes <- read.csv("Galaxy35-_Annotate_DESeq2_DEXSeq_output_tables_on_data_34_and_data_28_.tabular")
+```
+
+One of the first things you should notice is that in the Environment window, you have the variants object, listed as 129 obs. (observations/rows) of 1 variable (column) - so the command worked (sort of)! Double-clicking on the name of the object will open a view of the data in a new tab. As you can see, there is a problem with how the data has been loaded. The table should containg 130 observations of 13 variables.
+
+> ### {% icon question %} Fixing the problem
+>
+> By double-clicking on the objects name in the Environment tab and looking at the content, try to answer the following two questions:
+>
+> A) What is wrong?
+>
+> B) How should you adjust the parameters for `read.csv()` in order to produce the intended output?
+>
+> > ### {% icon solution %} Solution
+> >
+> > A) The data file was not delimited by commas (`,`) which is the default expected delimiter for `read.csv()`. Instead it seems like it's delimited by "white space", i.e. spaces and/or tabs. Moreover, the first line of data in the file is being considered as a header.
+> >
+> > B) There are two issues to be addressed. The delimiter can be set by the parameter `sep` that we saw in the previous exercises. Given that we are not sure what the actual delimiter is, we could try both options, i.e. `sep=" "` (*space*) and `sep="\t"` (*tab*). The second issue arises because `read.csv()` expects the first line of the file to contain the names of the columns; instead your file contains only rows of observations (i.e. doesn't have such a line). You can change this behavior by setting the parameter `header` to `FALSE`. The final command would be
+> >
+> >
+```
+annotatedDEgenes <- read.csv("Galaxy35-_Annotate_DESeq2_DEXSeq_output_tables_on_data_34_and_data_28_.tabular", sep = "\t", header = FALSE)
+```
+> >
+> {: .solution}
+{: .question}
+
+Congratulations! You've successfully loaded your data into RStudio!
+
+## Summarizing and determining the structure of a data frame.
+
+
 
 
 # Aggregating and Analyzing Data with dplyr
