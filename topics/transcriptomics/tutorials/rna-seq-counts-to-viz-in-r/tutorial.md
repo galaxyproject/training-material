@@ -57,6 +57,16 @@ objectives:
 - Be able to apply an arithmetic function to a data frame
 - Be able to coerce the class of an object (including variables in a data frame)
 - Be able to save a data frame as a delimited file
+
+- Describe the role of data, aesthetics, and geoms in ggplot functions.
+- Choose the correct aesthetics and alter the geom parameters for a scatter plot, histogram, or box plot.
+- Layer multiple geometries in a single plot.
+- Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation.
+- Apply a facet to a plot.
+- Apply additional ggplot2-compatible plotting libraries.
+- Save a ggplot to a file.
+- List several resources for getting help with ggplot.
+- List several resources for creating informative scientific plots.
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -1201,9 +1211,9 @@ There are several ways to import data into R. For our purpose here, we will focu
 Now, let's read the file with the annotated differentially expressed genes that was produced by the end of the "[Reference-based RNA-Seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html)" lesson. The file will be located in **`/fix/this/url/too`**. Call this data `annotatedDEgenes`. The first argument to pass to our `read.csv()` function is the file path for our data. The file path must be in quotes and now is a good time to remember to use tab autocompletion. If you use tab autocompletion you avoid typos and errors in file paths. Use it!
 
 ```R
-## read in a CSV file and save it as 'variants'
+## read in a CSV file and save it as 'annotatedDEgenes'
 
-annotatedDEgenes <- read.csv("Galaxy35-_Annotate_DESeq2_DEXSeq_output_tables_on_data_34_and_data_28_.tabular")
+> annotatedDEgenes <- read.csv("Galaxy35-_Annotate_DESeq2_DEXSeq_output_tables_on_data_34_and_data_28_.tabular")
 ```
 
 One of the first things you should notice is that in the Environment window, you have the variants object, listed as 129 obs. (observations/rows) of 1 variable (column) - so the command worked (sort of)! Double-clicking on the name of the object will open a view of the data in a new tab. As you can see, there is a problem with how the data has been loaded. The table should containg 130 observations of 13 variables.
@@ -1220,28 +1230,704 @@ One of the first things you should notice is that in the Environment window, you
 > >
 > > A) The data file was not delimited by commas (`,`) which is the default expected delimiter for `read.csv()`. Instead it seems like it's delimited by "white space", i.e. spaces and/or tabs. Moreover, the first line of data in the file is being considered as a header.
 > >
-> > B) There are two issues to be addressed. The delimiter can be set by the parameter `sep` that we saw in the previous exercises. Given that we are not sure what the actual delimiter is, we could try both options, i.e. `sep=" "` (*space*) and `sep="\t"` (*tab*). The second issue arises because `read.csv()` expects the first line of the file to contain the names of the columns; instead your file contains only rows of observations (i.e. doesn't have such a line). You can change this behavior by setting the parameter `header` to `FALSE`. The final command would be
+> > B) There are two issues to be addressed. The delimiter can be set by the parameter `sep` that we saw in the previous exercises. Given that we are not sure what the actual delimiter is, we could try both options, i.e. `sep=" "` (*space*) and `sep="\t"` (*tab*). The second issue arises because `read.csv()` expects the first line of the file to contain the names of the columns. This file doesn't contain such a line (which is another problem that we'll fix next); instead your file contains only rows of observations. You can change this behavior by setting the parameter `header` to `FALSE`. The final command would be:
 > >
 > >
-```
-annotatedDEgenes <- read.csv("Galaxy35-_Annotate_DESeq2_DEXSeq_output_tables_on_data_34_and_data_28_.tabular", sep = "\t", header = FALSE)
-```
+> > ```
+> > annotatedDEgenes <- read.csv("Galaxy35-_Annotate_DESeq2_DEXSeq_output_tables_on_data_34_and_data_28_.tabular", sep = "\t", header = FALSE)
+> > ```
 > >
 > {: .solution}
 {: .question}
 
+Now that we've loaded the data, we can use the `colnames()` function to retrieve the names of the columns, as following:
+
+```R
+## get the names of the columns
+
+> colnames(annotatedDEgenes)
+ [1] "V1"  "V2"  "V3"  "V4"  "V5"  "V6"  "V7"  "V8"  "V9"  "V10" "V11" "V12" "V13"
+```
+
+We see that R has given each column arbitrary names (i.e. V1, V2, V3 - `V` stands for `variable`). Although useful, this is not as informative as we'd like. So let's update the column names to make them more useful! `colnames()`can also be used to change the column names, by assigning a new vector with the same number of names to it. We already know the content of each column, so we can create the new vector and assign it as follows:
+
+```R
+## Rename the columns of the 'annotatedDEgenes'
+
+> colnames(annotatedDEgenes) <- c("GeneID", "Base.mean", "log2.FC", "StdErr", "Wald.Stats", "P.value", "P.adj", "Seqname", "Chr", "Start", "End", "Strand", "Gene.Name")
+```
 Congratulations! You've successfully loaded your data into RStudio!
 
 ## Summarizing and determining the structure of a data frame.
 
+A **data frame is the standard way in R to store tabular data**. A data fame could also be thought of as a collection of vectors, all of which have the same length. Using only two functions, we can learn a lot about out data frame including some summary statistics as well as well as the “structure” of the data frame. Let’s examine what each of these functions can tell us:
+
+```R
+## get summary statistics on a data frame
+
+> summary(annotatedDEgenes)
+
+GeneID            Base.mean          log2.FC           StdErr            Wald.Stats     
+FBgn0000071:  1   Min.   :   19.15   Min.   :-4.1485   Min.   :0.08433   Min.   :-30.741  
+FBgn0000079:  1   1st Qu.:  100.29   1st Qu.:-1.3363   1st Qu.:0.12849   1st Qu.:-10.005  
+FBgn0000116:  1   Median :  237.99   Median :-1.0272   Median :0.16370   Median : -4.982  
+FBgn0000406:  1   Mean   : 1911.27   Mean   :-0.2074   Mean   :0.16432   Mean   : -1.901  
+FBgn0000567:  1   3rd Qu.:  948.66   3rd Qu.: 1.2203   3rd Qu.:0.19866   3rd Qu.:  7.692  
+FBgn0001137:  1   Max.   :65114.84   Max.   : 2.6999   Max.   :0.23292   Max.   : 27.566  
+(Other)    :124                                                                           
+P.value             P.adj               Seqname    Start              End                Strand
+Min.   :0.000e+00   Min.   :0.000e+00   chr2L:24   Min.   :  127448   Min.   :  140340   -:58  
+1st Qu.:0.000e+00   1st Qu.:0.000e+00   chr2R:31   1st Qu.: 7277516   1st Qu.: 7279063   +:72  
+Median :0.000e+00   Median :0.000e+00   chr3L:27   Median :13161546   Median :13166253         
+Mean   :4.201e-07   Mean   :9.321e-06   chr3R:32   Mean   :13436843   Mean   :13446444         
+3rd Qu.:7.000e-12   3rd Qu.:3.700e-10   chrX :16   3rd Qu.:19250429   3rd Qu.:19284637         
+Max.   :9.418e-06   Max.   :1.951e-04              Max.   :31196915   Max.   :31203722         
+
+Feature              Gene.Name  
+lincRNA       :  3   Ama        :  1  
+protein_coding:126   Amy-p      :  1  
+pseudogene    :  1   Ant2       :  1  
+                     Argk       :  1  
+                     BM-40-SPARC:  1  
+                     bou        :  1  
+                     (Other)    :124
+```
+
+Our data frame had 13 variables, so we get 13 fields that summarize the data. The `Base.mean`, `log2.FC` and `P.value` variables (and several others) are numerical data and so you get summary statistics on the min and max values for these columns, as well as mean, median, and interquartile ranges. Many of the other variables (e.g. `Strand`) are treated as categorical data (which have special treatment in R - more on this in a bit). The most frequent 6 different categories and the number of times they appear (e.g. the `Strand` called `-` appeared 58 times) are displayed. Another example is the `protein_coding` value for `Feature` which appeared in 126 observations.
+
+Before we operate on the data, we also need to know a little more about the data frame structure to do that we use the `str()` function:
+
+```R
+## get the structure of a data frame
+
+> str(annotatedDEgenes)
+
+'data.frame':	130 obs. of  13 variables:
+ $ GeneID    : Factor w/ 130 levels "FBgn0000071",..: 87 12 28 26 31 96 65 62 125 1 ...
+ $ Base.mean : num  1087 6410 65115 2192 5430 ...
+ $ log2.FC   : num  -4.15 -3 -2.38 2.7 -2.11 ...
+ $ StdErr    : num  0.1349 0.1043 0.0843 0.0979 0.0925 ...
+ $ Wald.Stats: num  -30.7 -28.7 -28.2 27.6 -22.7 ...
+ $ P.value   : num  1.62e-207 9.42e-182 2.85e-175 2.85e-167 1.57e-114 ...
+ $ P.adj     : num  1.39e-203 4.04e-178 8.15e-172 6.10e-164 2.70e-111 ...
+ $ Seqname   : Factor w/ 5 levels "chr2L","chr2R",..: 4 5 4 5 3 4 2 2 3 4 ...
+ $ Start     : int  24141394 10780892 26869237 10778953 13846053 31196915 24945138 22550093 820758 6762592 ...
+ $ End       : int  24147490 10786958 26871995 10786907 13860001 31203722 24946636 22552113 821512 6765261 ...
+ $ Strand    : Factor w/ 2 levels "-","+": 2 1 1 1 2 2 2 2 2 2 ...
+ $ Feature   : Factor w/ 3 levels "lincRNA","protein_coding",..: 2 2 2 2 2 2 2 2 1 2 ...
+ $ Gene.Name : Factor w/ 130 levels "Ama","Amy-p",..: 88 113 5 3 84 26 41 53 69 1 ...
+```
+
+Ok, thats a lot up unpack! Some things to notice.
+- the object type `data.frame` is displayed in the first row along with its dimensions, in this case 130 observations (rows) and 13 variables (columns)
+- Each variable (column) has a name (e.g. `GeneID`). This is followed by the object mode (e.g. `factor`, `int`, `num`, etc.). Notice that before each variable name there is a `$` - this will be important later.
+
+## Introducing Factors
+
+Factors are the final major data structure we will introduce in our "RNA Seq Counts to Viz in R" lesson. Factors can be thought of as vectors which are specialized for categorical data. Given R's specialization for statistics, this make sense since categorial and continuous variables usually have different treatments. Sometimes you may want to have data treated as a factor, but in other cases, this may be undesirable.
+
+Since some of the data in our data frame are factors, lets see how factors work. First, we’ll extract one of the columns of our data frame to a new object, so that we don’t end up modifying the variants object by mistake.
+
+```R
+## extract the "Feature" column to a new object
+
+> Feature <- annotatedDEgenes$Feature
+```
+
+Let’s look at the first few items in our factor using `head()`:
+
+```R
+> head(Feature)
+
+[1] protein_coding protein_coding protein_coding protein_coding protein_coding protein_coding
+Levels: lincRNA protein_coding pseudogene
+```
+
+What we get back are the items in our factor, and also something called "Levels". **Levels are the different categories contained in a factor**. By default, R will organize the levels in a factor in alphabetical order. So the first level in this factor is "lincRNA".
+
+Lets look at the contents of a factor in a slightly different way using `str()`:
+
+```R
+> str(Feature)
+
+Factor w/ 3 levels "lincRNA","protein_coding",..: 2 2 2 2 2 2 2 2 1 2 ...
+```
+For the sake of efficiency, R stores the content of a factor as a vector of integers, which an integer is assigned to each of the possible levels. Recall levels are assigned in alphabetical order. In this case, the first item in our "Feature" object is "protein_coding", which happens to be the 2nd level of our factor, ordered alphabeticaly. The 9th item in the list is "lincRNA", which is the 1st level of our factor.
+
+## Plotting and ordering factors
+
+One of the most common uses for factors will be when you plot categorical values. For example, suppose we want to know how many of our differentially expressed genes correspond to different features? We could generate a plot:
+
+```R
+> plot(Feature)
+```
+
+![feature plot](../../images/rna-seq-counts-to-viz-in-r/featurePlot.png "Feature plot")
+
+This isn't a particularly pretty example of a plot. We'll be learning much more about creating nice, publication-quality graphics later in this lesson.
+
+## Subsetting data frames
+
+Next, we are going to talk about how you can get specific values from data frames, and where necessary, change the mode of a column of values.
+
+The first thing to remember is that a data frame is two-dimensional (rows and columns). Therefore, to select a specific value we will once again use `[]` (bracket) notation, but we will specify more than one value (except in some cases where we are taking a range).
+
+> ### {% icon question %} Subsetting a data frame
+>
+> Try the following indices and functions and try to figure out what they return
+>
+> a. `annotatedDEgenes[1, 1]`
+>
+> b. `annotatedDEgenes[2, 4]`
+>
+> c. `annotatedDEgenes[130, 13]`
+>
+> d. `annotatedDEgenes[2, ]`
+>
+> e. `annotatedDEgenes[-1, ]`
+>
+> f. `annotatedDEgenes[1:4, 1]`
+>
+> g. `annotatedDEgenes[1:10, c("Feature", "Gene.Name")]`
+>
+> h. `annotatedDEgenes[, c("Gene.Name")]`
+>
+> i. `head(annotatedDEgenes)`
+>
+> j. `tail(annotatedDEgenes)`
+>
+> k. `annotatedDEgenes$GeneID`
+>
+> l. `annotatedDEgenes[annotatedDEgenes$Feature == "pseudogene", ]`
+>
+> > ### {% icon solution %} Solution
+> >
+> > a.
+> >
+> > ```
+> > > annotatedDEgenes[1,1]
+> >
+> > [1] FBgn0039155
+> > 130 Levels: FBgn0000071 FBgn0000079 FBgn0000116 FBgn0000406 FBgn0000567 FBgn0001137 ... FBgn0267635
+> > ```
+> >
+> > b.
+> >
+> > ```
+> > > annotatedDEgenes[2, 4]
+> >
+> > [1] 0.1043451
+> > ```
+> >
+> > c.
+> >
+> > ```
+> > > annotatedDEgenes[130,13]
+> >
+> > [1] CG10440
+> > 130 Levels: Ama Amy-p Ant2 Argk BM-40-SPARC bou bves CAHbeta cbt CG10063 CG10365 CG10440 ... zye
+> > ```
+> >
+> > d.
+> >
+> > ```
+> > > annotatedDEgenes[2, ]
+> >
+> > GeneID Base.mean   log2.FC    StdErr Wald.Stats       P.value         P.adj Seqname    Start
+> > 2 FBgn0003360  6409.577 -2.999777 0.1043451  -28.74863 9.422382e-182 4.040788e-178    chrX 10780892
+> > End Strand        Feature Gene.Name
+> > 2 10786958      - protein_coding      sesB
+> > ```
+> >
+> > e.
+> >
+> > ```
+> > > annotatedDEgenes[-1, ]
+> >
+> > GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Seqname
+> > 2  FBgn0003360  6409.57713 -2.999777 0.10434506 -28.748628 9.422382e-182 4.040788e-178    chrX
+> > 3  FBgn0026562 65114.84056 -2.380164 0.08432692 -28.225437 2.850473e-175 8.149503e-172   chr3R
+> > 4  FBgn0025111  2192.32237  2.699939 0.09794457  27.565988 2.846764e-167 6.104174e-164    chrX
+> > 5  FBgn0029167  5430.06728 -2.105062 0.09254660 -22.745964 1.573283e-114 2.698810e-111   chr3L
+> > 6  FBgn0039827   390.90178 -3.503014 0.16002962 -21.889786 3.250384e-106 4.646424e-103   chr3R
+> > 7  FBgn0035085   928.26381 -2.414074 0.11518516 -20.958204  1.579343e-97  1.935147e-94   chr2R
+> > 8  FBgn0034736   330.38302 -3.018179 0.15815418 -19.083774  3.444661e-81  3.693107e-78   chr2R
+> > 9  FBgn0264475   955.45445 -2.334486 0.12423003 -18.791643  8.840041e-79  8.424559e-76   chr3L
+> > 10 FBgn0000071   468.05793  2.360017 0.13564397  17.398615  8.452137e-68  7.249398e-65   chr3R
+# ... with 120 more rows
+> > Start      End Strand        Feature   Gene.Name
+> > 2  10780892 10786958      - protein_coding        sesB
+> > 3  26869237 26871995      - protein_coding BM-40-SPARC
+> > 4  10778953 10786907      - protein_coding        Ant2
+> > 5  13846053 13860001      + protein_coding         Hml
+> > 6  31196915 31203722      + protein_coding      CG1544
+> > 7  24945138 24946636      + protein_coding      CG3770
+> > 8  22550093 22552113      + protein_coding      CG6018
+> > 9    820758   821512      +        lincRNA     CR43883
+> > 10  6762592  6765261      + protein_coding         Ama
+# ... with 120 more rows
+> > ```
+> >
+> > f.
+> >
+> > ```
+> > > annotatedDEgenes[1:4,1]
+> >
+> > [1] FBgn0039155 FBgn0003360 FBgn0026562 FBgn0025111
+> > 130 Levels: FBgn0000071 FBgn0000079 FBgn0000116 FBgn0000406 FBgn0000567 FBgn0001137 ... FBgn0267635
+> > ```
+> >
+> > g.
+> >
+> > ```
+> > > annotatedDEgenes[1:10,c("Feature","Gene.Name")]
+> >
+> > Feature   Gene.Name
+> > 1  protein_coding        Kal1
+> > 2  protein_coding        sesB
+> > 3  protein_coding BM-40-SPARC
+> > 4  protein_coding        Ant2
+> > 5  protein_coding         Hml
+> > 6  protein_coding      CG1544
+> > 7  protein_coding      CG3770
+> > 8  protein_coding      CG6018
+> > 9         lincRNA     CR43883
+> > 10 protein_coding         Ama
+> > ```
+> >
+> > h.
+> >
+> > ```
+> > > annotatedDEgenes[,c("Gene.Name")]
+> >
+> > [1] Kal1         sesB         BM-40-SPARC  Ant2         Hml          CG1544       CG3770      
+> > [8] CG6018       CR43883      Ama          CG3168       CG15695      CG8500       Rgk1        
+> > [15] Sesn         CG9119       Sema-2a      l(1)G0196    lectin-28C   Sox100B      Hsp27       
+> > [22] CG34330      Ugt58Fa      Src64B       Tequila      CG32407      LpR2         CG12290     
+> > [29] ps           CG8157       nemy         bves         CG8468       CR43855      CG13315     
+> > [36] CG1124       Reg-2        CG5261       Treh         Hsp23        Gale         PPO1        
+> > [43] Picot        RpS24        CG14946      CG10365      NimC4        CG42694      CG33307     
+> > [50] CG6006       grk          CG42369      GILT1        CG5001       Hsp26        MtnA        
+> > [57] CG6330       l(3)neo38    Cyt-b5-r     CG12116      PPO2         zye          tnc         
+> > [64] CG14257      GstE2        olf413       CG31642      Nxf3         CG8292       CG5397      
+> > [71] Mctp         CG7777       CG4019       ChLD3        Argk         bou          Mct1        
+> > [78] CG9416       CG12512      CG32625      Npc2b        CG30463      Eip74EF      CAHbeta     
+> > [85] CG14326      Cyp6w1       CG3457       wdp          cbt          CrebA        Cyp4d20     
+> > [92] CR45973      Sr-CIV       SPH93        Cyp9h1       sug          CG14516      Ggamma30A   
+> > [99] CG4297       CG9503       CG10063      CG8501       CG43336      stet         CG8852      
+> > [106] CG15080      Amy-p        sn           CG9989       mlt          CG2444       CG17189     
+> > [113] RhoGAP1A     CG13743      TwdlU        Galphaf      CG32335      E(spl)m3-HLH CG16749     
+> > [120] CG34434      CG43799      Pde6         Sr-CIII      NimC2        CG5895       SP1173      
+> > [127] CG1311       CG14856      CG6356       CG10440     
+> > 130 Levels: Ama Amy-p Ant2 Argk BM-40-SPARC bou bves CAHbeta cbt CG10063 CG10365 CG10440 ... zye
+> > ```
+> >
+> > i.
+> >
+> > ```
+> > > head(annotatedDEgenes)
+> >
+> > GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Seqname    Start
+> > 1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203   chr3R 24141394
+> > 2 FBgn0003360  6409.5771 -2.999777 0.10434506  -28.74863 9.422382e-182 4.040788e-178    chrX 10780892
+> > 3 FBgn0026562 65114.8406 -2.380164 0.08432692  -28.22544 2.850473e-175 8.149503e-172   chr3R 26869237
+> > 4 FBgn0025111  2192.3224  2.699939 0.09794457   27.56599 2.846764e-167 6.104174e-164    chrX 10778953
+> > 5 FBgn0029167  5430.0673 -2.105062 0.09254660  -22.74596 1.573283e-114 2.698810e-111   chr3L 13846053
+> > 6 FBgn0039827   390.9018 -3.503014 0.16002962  -21.88979 3.250384e-106 4.646424e-103   chr3R 31196915
+> > End Strand        Feature   Gene.Name
+> > 1 24147490      + protein_coding        Kal1
+> > 2 10786958      - protein_coding        sesB
+> > 3 26871995      - protein_coding BM-40-SPARC
+> > 4 10786907      - protein_coding        Ant2
+> > 5 13860001      + protein_coding         Hml
+> > 6 31203722      + protein_coding      CG1544
+> > ```
+> >
+> > j.
+> >
+> > ```
+> > > tail(annotatedDEgenes)
+> >
+> > GeneID Base.mean   log2.FC    StdErr Wald.Stats      P.value        P.adj Seqname    Start
+> > 125 FBgn0036560  27.71424  1.089000 0.2327527   4.678786 2.885785e-06 6.671531e-05   chr3L 16035484
+> > 126 FBgn0035710  26.16177  1.048979 0.2329221   4.503559 6.682472e-06 1.436480e-04   chr3L  6689326
+> > 127 FBgn0035523  70.99820  1.004819 0.2237625   4.490560 7.103600e-06 1.523189e-04   chr3L  4277961
+> > 128 FBgn0038261  44.27058  1.006264 0.2241243   4.489756 7.130482e-06 1.525141e-04   chr3R 14798985
+> > 129 FBgn0039178  23.55006  1.040917 0.2326264   4.474631 7.654326e-06 1.629061e-04   chr3R 24283954
+> > 130 FBgn0034636  24.77052 -1.028531 0.2321678  -4.430119 9.418101e-06 1.951185e-04   chr2R 21560245
+> > End Strand        Feature Gene.Name
+> > 125 16037227      + protein_coding    CG5895
+> > 126  6703521      - protein_coding    SP1173
+> > 127  4281585      + protein_coding    CG1311
+> > 128 14801163      + protein_coding   CG14856
+> > 129 24288617      + protein_coding    CG6356
+> > 130 21576035      - protein_coding   CG10440
+> > ```
+> >
+> > k.
+> >
+> > ```
+> > > annotatedDEgenes$GeneID
+> >
+> > [1] FBgn0039155 FBgn0003360 FBgn0026562 FBgn0025111 FBgn0029167 FBgn0039827 FBgn0035085 FBgn0034736
+> > [9] FBgn0264475 FBgn0000071 FBgn0029896 FBgn0038832 FBgn0037754 FBgn0264753 FBgn0034897 FBgn0035189
+> > [17] FBgn0011260 FBgn0027279 FBgn0040099 FBgn0024288 FBgn0001226 FBgn0085359 FBgn0040091 FBgn0262733
+> > [25] FBgn0023479 FBgn0052407 FBgn0051092 FBgn0039419 FBgn0261552 FBgn0034010 FBgn0261673 FBgn0031150
+> > [33] FBgn0033913 FBgn0264437 FBgn0040827 FBgn0037290 FBgn0016715 FBgn0031912 FBgn0003748 FBgn0001224
+> > [41] FBgn0035147 FBgn0261362 FBgn0024315 FBgn0261596 FBgn0032405 FBgn0039109 FBgn0260011 FBgn0261584
+> > [49] FBgn0053307 FBgn0063649 FBgn0001137 FBgn0259715 FBgn0038149 FBgn0031322 FBgn0001225 FBgn0002868
+> > [57] FBgn0039464 FBgn0265276 FBgn0000406 FBgn0030041 FBgn0033367 FBgn0036985 FBgn0039257 FBgn0039479
+> > [65] FBgn0063498 FBgn0037153 FBgn0051642 FBgn0263232 FBgn0032004 FBgn0031327 FBgn0034389 FBgn0033635
+> > [73] FBgn0034885 FBgn0032598 FBgn0000116 FBgn0261284 FBgn0023549 FBgn0034438 FBgn0031703 FBgn0052625
+> > [81] FBgn0038198 FBgn0050463 FBgn0000567 FBgn0037646 FBgn0038528 FBgn0033065 FBgn0024984 FBgn0034718
+> > [89] FBgn0043364 FBgn0004396 FBgn0035344 FBgn0267635 FBgn0031547 FBgn0032638 FBgn0033775 FBgn0033782
+> > [97] FBgn0039640 FBgn0267252 FBgn0031258 FBgn0030598 FBgn0035727 FBgn0033724 FBgn0263041 FBgn0020248
+> > [105] FBgn0031548 FBgn0034391 FBgn0000079 FBgn0003447 FBgn0039593 FBgn0265512 FBgn0030326 FBgn0039485
+> > [113] FBgn0025836 FBgn0033368 FBgn0037223 FBgn0010223 FBgn0063667 FBgn0002609 FBgn0037678 FBgn0250904
+> > [121] FBgn0264343 FBgn0038237 FBgn0020376 FBgn0028939 FBgn0036560 FBgn0035710 FBgn0035523 FBgn0038261
+> > [129] FBgn0039178 FBgn0034636
+> > 130 Levels: FBgn0000071 FBgn0000079 FBgn0000116 FBgn0000406 FBgn0000567 FBgn0001137 ... FBgn0267635
+> > ```
+> >
+> > l.
+> >
+> > ```
+> > > annotatedDEgenes[annotatedDEgenes$Feature == "pseudogene",]
+> >
+> > GeneID Base.mean   log2.FC    StdErr Wald.Stats      P.value        P.adj Seqname   Start
+> > 115 FBgn0037223  37.00783 -1.161706 0.2297393  -5.056627 4.267378e-07 1.192225e-05   chr3R 4243605
+> > End Strand    Feature Gene.Name
+> > 115 4245511      + pseudogene     TwdlU
+> > ```
+> >
+> {: .solution}
+{: .question}
+
+The subsetting notation is very similar to what we learned for vectors. The key differences include:
+- Typically provide two values separated by commas: `data.frame[row, column]`
+- In cases where you are taking a continuous range of numbers use a colon between the numbers (`start:stop, inclusive`)
+- For a non continuous set of numbers, pass a vector using `c()`
+- Index using the name of a column(s) by passing them as vectors using `c()`
+
+Finally, in all of the subsetting exercises above, we printed values to the screen. You can create a new data frame object by assigning them to a new object name:
+
+```R
+# create a new data frame containing only observations from the "+" strand
+> annotatedDEgenes_plusStrand <- annotatedDEgenes[annotatedDEgenes$Strand == "+",]
+
+# check the dimension of the data frame
+
+> dim(annotatedDEgenes_plusStrand)
+
+[1] 72 13
+
+# get a summary of the data frame
+> summary(annotatedDEgenes_plusStrand)
+
+GeneID           Base.mean           log2.FC          StdErr            Wald.Stats     
+FBgn0000071: 1   Min.   :   23.55   Min.   :-4.1485   Min.   :0.08603   Min.   :-30.741  
+FBgn0001224: 1   1st Qu.:   96.04   1st Qu.:-1.3664   1st Qu.:0.12523   1st Qu.:-11.223  
+FBgn0001226: 1   Median :  275.91   Median :-1.0739   Median :0.15648   Median : -5.290  
+FBgn0002609: 1   Mean   : 1365.34   Mean   :-0.3133   Mean   :0.16087   Mean   : -2.729  
+FBgn0003447: 1   3rd Qu.:  988.33   3rd Qu.: 1.1856   3rd Qu.:0.19743   3rd Qu.:  7.592  
+FBgn0003748: 1   Max.   :28915.90   Max.   : 2.3600   Max.   :0.23275   Max.   : 17.399  
+(Other)    :66                                                                           
+P.value             P.adj              Seqname    Start              End               Strand
+Min.   :0.000e+00   Min.   :0.000e+00   chr2L:12   Min.   :  127448   Min.   :  140340   -: 0  
+1st Qu.:0.000e+00   1st Qu.:0.000e+00   chr2R:14   1st Qu.: 7377082   1st Qu.: 7379907   +:72  
+Median :0.000e+00   Median :0.000e+00   chr3L:15   Median :14068548   Median :14070644         
+Mean   :4.556e-07   Mean   :1.013e-05   chr3R:24   Mean   :14422245   Mean   :14431849         
+3rd Qu.:6.000e-12   3rd Qu.:3.200e-10   chrX : 7   3rd Qu.:21339535   3rd Qu.:21378634         
+Max.   :7.654e-06   Max.   :1.629e-04              Max.   :31196915   Max.   :31203722         
+
+Feature             Gene.Name
+lincRNA       : 2   Ama    : 1  
+protein_coding:69   bou    : 1  
+pseudogene    : 1   bves   : 1  
+                    CAHbeta: 1  
+                    CG10365: 1  
+                    CG1124 : 1  
+                    (Other):66
+```
+
+## Coercing values in data frames
+
+> ### {% icon comment %} Tip: coercion isn’t limited to data frames
+> While we are going to address coercion in the context of data frames most of these methods apply to other data structures, such as vectors
+{: .comment}
+
+Sometimes, it is possible that R will misinterpret the type of data represented in a data frame, or store that data in a mode which prevents you from operating on the data the way you wish. For example, a long list of gene names isn’t usually thought of as a categorical variable, the way that your experimental condition (e.g. control, treatment) might be. More importantly, some R packages you use to analyze your data may expect characters as input, not factors. At other times (such as plotting or some statistical analyses) a factor may be more appropriate. Ultimately, you should know how to change the mode of an object.
+
+First, its very important to recognize that coercion happens in R all the time. This can be a good thing when R gets it right, or a bad thing when the result is not what you expect. Consider:
 
 
+
+```R
+> snp_chromosomes <- c('3', '11', 'X', '6')
+> typeof(snp_chromosomes)
+
+[1] "character"
+```
+
+Although there are several numbers in our vector, they are all in quotes, so we have explicitly told R to consider them as characters. However, even if we removed the quotes from the numbers, R would coerce everything into a character:
+
+```R
+> snp_chromosomes_2 <- c(3, 11, 'X', 6)
+> typeof(snp_chromosomes_2)
+
+[1] "character"
+
+> snp_chromosomes_2[1]
+
+[1] "3"
+```
+
+We can use the `as.` functions to explicitly coerce values from one form into another. Consider the following vector of characters, which all happen to be valid numbers:
+
+```R
+> snp_positions_2 <- c("8762685", "66560624", "67545785", "154039662")
+> typeof(snp_positions_2)
+
+[1] "character"
+
+> snp_positions_2[1]
+
+[1] "8762685"
+```
+
+Now we can coerce `snp_positions_2` into a numeric type using `as.numeric()`:
+
+```R
+> snp_positions_2 <- as.numeric(snp_positions_2)
+> typeof(snp_positions_2)
+
+[1] "double"
+
+> snp_positions_2[1]
+
+[1] 8762685
+```
+
+Sometimes coercion is straight forward, but what would happen if we tried using `as.numeric()` on `snp_chromosomes_2`
+
+```R
+> snp_chromosomes_2 <- as.numeric(snp_chromosomes_2)
+
+Warning message:
+NAs introduced by coercion
+```
+
+If we check, we will see that an `NA` value (R's default value for missing data) has been introduced.
+
+```R
+> snp_chromosomes_2
+
+[1]  3 11 NA  6
+```
+
+Trouble can really start when we try to coerce a factor. For example, when we try to coerce the `sample_id` column in our data frame into a numeric mode look at the result:
+
+```R
+> as.numeric(annotatedDEgenes$Feature)
+
+[1] 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+[49] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2
+[97] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+```
+
+Strangely, it works! Almost. Instead of giving an error message, R returns numeric values, which in this case are the integers assigned to the levels in this factor. This kind of behavior can lead to hard-to-find bugs, for example when we do have numbers in a factor, and we get numbers from a coercion. If we don't look carefully, we may not notice a problem.
+
+If you need to coerce an entire column you can overwrite it using an expression like this one:
+
+```R
+# make the 'Feature' column a character type column
+
+> annotatedDEgenes$Feature <- as.character(annotatedDEgenes$Feature)
+# check the type of the column
+> typeof(annotatedDEgenes$Feature)
+
+[1] "character"
+```
+
+## StringsAsFactors = FALSE
+
+Lets summarize this section on coercion with a few take home messages.
+
+- When you explicitly coerce one data type into another (this is known as **explicit coercion**), be careful to check the result. Ideally, you should try to see if its possible to avoid steps in your analysis that force you to coerce.
+- R will sometimes coerce without you asking for it. This is called (appropriately) **implicit coercion**. For example when we tried to create a vector with multiple data types, R chose one type through implicit coercion.
+- Check the structure (`str()`) of your data frames before working with them!
+
+Regarding the first bullet point, one way to avoid needless coercion when importing a data frame using any one of the `read.table()` functions such as `read.csv()` is to set the argument `StringsAsFactors` to `FALSE`. By default, this argument is `TRUE`. Setting it to `FALSE` will treat any non-numeric column to a character type. Going through the `read.csv() `documentation, you will also see you can explicitly type your columns using the `colClasses` argument. Other R packages (such as the Tidyverse `readr`) don’t have this particular conversion issue, but many packages will still try to guess a data type.
+
+## Data frame bonus material: math, sorting, renaming
+
+Here are a few operations that don’t need much explanation, but which are good to know.
+
+There are lots of arithmetic functions you may want to apply to your data frame, covering those would be a course in itself (there is some starting material [here](https://swcarpentry.github.io/r-novice-inflammation/15-supp-loops-in-depth/)). The Carpentry lessons will cover some additional summary statistical functions in a subsequent lesson, but here we will focus on data cleaning and visualization.
+
+You can use functions like `mean()`, `min()`, `max()` on an individual column. Let’s look at the "Base.mean". This value is the mean of normalized counts of all samples, normalizing for sequencing depth.
+
+```R
+> max(annotatedDEgenes$Base.mean)
+
+[1] 65114.84
+```
+
+You can sort a data frame using the `order()` function:
+
+```R
+> sorted_by_BaseMean <- annotatedDEgenes[order(annotatedDEgenes$Base.mean), ]
+> head(sorted_by_BaseMean$Base.mean)
+
+[1] 19.15076 23.55006 24.77052 26.16177 27.71424 31.58769
+```
+
+> ### {% icon question %} Changing the order
+>
+> The `order()` function lists values in increasing order by default. Look at the documentation for this function and change sorted_by_BaseMean to start with differentially expressed means with the greatest base mean.
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```
+> > > sorted_by_BaseMean <- annotatedDEgenes[order(annotatedDEgenes$Base.mean, decreasing = TRUE), ]
+> > > head(sorted_by_BaseMean$Base.mean)
+> >
+> > [1] 65114.841 28915.903 24584.306 22435.886  8903.630  8573.815
+> > ```
+> >
+> {: .solution}
+{: .question}
+
+You can rename columns:
+
+```R
+> max(annotatedDEgenes$Base.mean)
+
+[1] 65114.84
+```
+
+You can sort a data frame using the `order()` function:
+
+```R
+> colnames(annotatedDEgenes)[colnames(annotatedDEgenes) == "Chrom"] <- "chromosome"
+
+# check the column name (hint names are returned as a vector)
+> colnames(annotatedDEgenes)
+
+[1] "GeneID"     "Base.mean"  "log2.FC"    "StdErr"     "Wald.Stats" "P.value"    "P.adj"     
+[8] "chromosome" "Start"      "End"        "Strand"     "Feature"    "Gene.Name"
+```
+
+## Saving your data frame to a file
+
+***TODO***: *Description on how to save a file from RStudio to Galaxy*
+
+We can save data to a file. We will save our `annotatedDEgenes_plusStrand` object to a `.csv` file using the `write.csv()` function:
+
+```R
+> write.csv(annotatedDEgenes_plusStrand, file = "annotatedDEgenes_plusStrand.csv")
+```
+
+The `write.csv()` function has some additional arguments listed in the help, but at a minimum you need to tell it what data frame to write to file, and give a path to a file name in quotes (if you only provide a file name, the file will be written in the current working directory).
 
 # Aggregating and Analyzing Data with dplyr
 
 
 
 # Data Visualization with ggplot2
+
+We start by loading the package ggplot2.
+
+```R
+> library(ggplot2)
+```
+
+## Plotting with `ggplot2`
+
+`ggplot2` is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a more programmatic interface for specifying what variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes if the underlying data change or if we decide to change from a bar plot to a scatter plot. This helps in creating publication quality plots with minimal amounts of adjustments and tweaking.
+
+`ggplot2` functions like data in the ‘long’ format, i.e., a column for every dimension, and a row for every observation. Well-structured data will save you lots of time when making figures with `ggplot2`
+
+`ggplot2` graphics are built step by step by adding new elements. Adding layers in this fashion allows for extensive flexibility and customization of plots.
+
+To build a `ggplot`, we will use the following basic template that can be used for different types of plots:
+
+```R
+> ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
+```
+
+- use the `ggplot()` function and bind the plot to a specific data frame using the data argument
+
+```R
+> ggplot(data = annotatedDEgenes)
+```
+
+- define a mapping (using the aesthetic (`aes`) function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = P.value))
+```
+
+- add `geoms` – graphical representations of the data in the plot (points, lines, bars). `ggplot2` offers many different `geoms`; we will use some common ones today, including:
+  * `geom_point()` for scatter plots, dot plots, etc.
+  * `geom_boxplot()` for, well, boxplots!
+  * `geom_line()` for trend lines, time series, etc.  
+
+To add a `geom` to the plot use the `+` operator. Because we have two continuous variables, let's use `geom_point()` first:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = P.value)) +
+    geom_point(
+```
+
+![Our first ggplot2 plot](../../images/rna-seq-counts-to-viz-in-r/firstPlot.png "Our first ggplot2 plot")
+
+This is not really informative, mostly due to the number of extremely small numbers. In order to resolve this, we will apply `-log10()` to the `y` axis values, creating a "volcano plot" in the process.
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+    geom_point(
+```
+
+![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png "Volcano Plot version 0")
+
+The `+` in the `ggplot2` package is particularly useful because it allows you to modify existing `ggplot` objects. This means you can easily set up plot templates and conveniently explore different types of plots, so the above plot can also be generated with code like this:
+
+```R
+# Assign plot to a variable
+> de_genes_plot <- ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value)))
+
+# Draw the plot
+> de_genes_plot +
+    geom_point()
+```
+
+**Notes**
+
+- Anything you put in the `ggplot()` function can be seen by any `geom` layers that you add (i.e., these are universal plot settings). This includes the `x-` and `y-axis` mapping you set up in `aes()`.
+- You can also specify mappings for a given `geom` independently of the mappings defined globally in the `ggplot()` function.
+- The `+` sign used to add new layers must be placed at the end of the line containing the previous layer. If, instead, the `+` sign is added at the beginning of the line containing the new layer, `ggplot2` will not add the new layer and will return an error message.
+
+```R
+# This is the correct syntax for adding layers
+> de_genes_plot +
+    geom_point()
+
+# This will not add the new layer and will return an error message
+> de_genes_plot
+    + geom_point()
+```
+
+## Building your plots iteratively
+
+Building plots with `ggplot2` is typically an iterative process. We start by defining the dataset we'll use, lay out the axes, and choose a `geom`:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+    geom_point(
+```
+
+![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png "Volcano Plot version 0")
 
 
 # Conclusion
