@@ -69,9 +69,9 @@ have fun!
 
 # Metatranscriptomics for characterizing microbial communities
 
-**Metatranscriptomics:** One branch of a multi-omic approach to studying microbiomes.
-
 ###  Multi-omics
+
+A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system:
 
 ![meta-momics diagram](../../images/meta-omics.png)
 
