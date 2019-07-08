@@ -19,7 +19,7 @@ key_points:
   - "Multiple learning tasks can be performed using Galaxy's machine learning tools."
   - "For the classification and regression tasks, data is divided into training and test sets."
   - "Each sample/record in the training data has a category/class/label."
-  - "A machine learning algorithm learns features from the training data and do predictions on the test data."
+  - "A machine learning algorithm learns features from the training data and predicts the class of each sample in the test data."
 
 contributors:
   - anuprulez
@@ -29,11 +29,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[Machine learning](https://en.wikipedia.org/wiki/Machine_learning) uses the techniques from statistics, mathematics and computer science to make computer programs learn from data. It is one of the most popular fields of computer science and finds applications in multiple streams of data analysis like [classification](https://en.wikipedia.org/wiki/Statistical_classification), [regression](https://en.wikipedia.org/wiki/Regression_analysis), [clustering](https://en.wikipedia.org/wiki/Cluster_analysis), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), [density estimation](https://en.wikipedia.org/wiki/Density_estimation) and many more. Some real-life applications are spam filtering, medical diagnosis, autonomous driving, recommendation systems, facial recognition, stock prices prediction and many more. The following image shows a basic flow of any machine learning task. A user has data and it is given to a machine learning algorithm for analysis.
+[Machine learning](https://en.wikipedia.org/wiki/Machine_learning) uses the techniques from statistics, mathematics and computer science to make computer programs learn from data. It is one of the most popular fields of computer science and finds applications in multiple areas of data analysis such as [classification](https://en.wikipedia.org/wiki/Statistical_classification), [regression](https://en.wikipedia.org/wiki/Regression_analysis), [clustering](https://en.wikipedia.org/wiki/Cluster_analysis), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction) and [density estimation](https://en.wikipedia.org/wiki/Density_estimation). Some real-life applications include spam filtering, medical diagnosis, autonomous driving, recommendation systems, facial recognition and stock prices prediction. The following image shows a basic flow of any machine learning task. A user has data and it is given to a machine learning algorithm for analysis.
 
 >    ![data](images/ml_basics.png "Flow of a machine learning task.")
 
-There are multiple ways in which machine learning can be used to perform data analysis. They depend on the nature of data and the kind of data analysis. The following image shows the most popular ones. In [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) techniques, the categories of data records are known beforehand. But in [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning), the categories of data records are not known.
+There are multiple ways in which machine learning can be used to perform data analysis. They depend on the nature of data and the kind of data analysis. The following image shows the most popular ones. In [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) techniques, the categories of data records are known beforehand. In [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning), the categories of data records are not known.
 
 >    ![data](images/variants_ml.png "Different types of machine learning.")
 
@@ -58,7 +58,7 @@ This tutorial shows how to use a machine learning module implemented as a Galaxy
 
 # Data upload
 
-The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column as `target`. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column.
+The datasets required for this tutorial contain 9 features of breast cancer which include the thickness of clump, cell-size, cell-shape and so on ([more information](https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w)). In addition to these features, the training dataset contains one more column named `target`. The `target` column labels the data. It has a binary value (0 or 1) for each row. `0` indicates no breast cancer and `1` indicates breast cancer. The test dataset does not contain the `target` column.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -91,22 +91,23 @@ The datasets required for this tutorial contain 9 features of breast cancer whic
 
 
 # Train a classifier
-In this step, we will use [SVM (support vector machine)](https://scikit-learn.org/stable/modules/svm.html#svm-classification) classifier for training on `breast-w_train` dataset. . The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. Rest of the data points can thrown away. We will use `LinearSVC` variant of SVM which is faster. Other variants `SVC` and `NuSVC` have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.
+In this step, we will use [SVM (support vector machine)](https://scikit-learn.org/stable/modules/svm.html#svm-classification) classifier for training on the `breast-w_train` dataset. The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. We will use `LinearSVC` variant of SVM which is faster. Other variants `SVC` and `NuSVC` have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of each sample/row in an unseen data set.
 
 > ### {% icon hands_on %} Hands-on: Train a classifier
 >
-> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters to train:
+> **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters to train:
 >    - *"Select a Classification Task"*: `Train a model`
 >        - *"Classifier type"*: `Linear Support Vector Classification`
 >        - *"Select input type"*: `tabular data`
 >        - {% icon param-file %} *"Training samples dataset"*: `breast-w_train` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
->        - *"Choose how to select data by column"*: `All columns but by column header name(s)`
->        - *"Type header name(s)"*: `target`
+>        - *"Choose how to select data by column"*: `Select columns by column index number(s)`
+>        - *"Check Select/Unselect  and ensure all columns are selected"*:
+>        - *"Deselect the column name(s)"*: `c10: target`
 >        - {% icon param-file %} *"Dataset containing class labels"*: `breast-w_train` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
->        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
->        - *"Select target column(s)"*: `target`
+>        - *"Choose how to select data by column"*: `Select columns by column index number(s)`
+>        - *"Select target column(s)"*: `c10: target`
 >
 {: .hands_on}
 
@@ -116,10 +117,10 @@ The previous step produced a trained model (`zip` file) which we will use to pre
 
 > ### {% icon hands_on %} Hands-on: Predict using a trained model
 >
-> **SVM Classifier (Support vector machine)** {% icon tool %} with the following parameters
+> **Support vector machines (SVMs) for classification** {% icon tool %} with the following parameters:
 >
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-file %} *"Models"*: `Zipped `file (output of **SVM Classifier (Support vector machine)** {% icon tool %})
+>        - {% icon param-file %} *"Models"*: `Zipped `file (output of **Support vector machines (SVMs) for classification** {% icon tool %})
 >        - {% icon param-file %} *"Data (tabular)"*: `breast-w_test` file
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Select the type of prediction"*: `Predict class labels`
@@ -128,13 +129,16 @@ The previous step produced a trained model (`zip` file) which we will use to pre
 
 
 # See predictions
-The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category.
+The last column of the predicted dataset shows the category of each row. A row either gets `0` (no breast cancer) or `1` (breast cancer) as its predicted category. The first few rows are predicted as '0' or non-affected (no breast cancer).
 
 > ### {% icon hands_on %} Hands-on: See the predicted column
 > 1. Click on `view data` link of the dataset created after executing the previous step.
 > 2. The last column of the `tabular` data shows the predicted category (`target`) for each row.
 >
 {: .hands_on}
+
+# Conclusion
+A simple SVM based machine learning was completed. Visit the [classification and regression]({{ site.baseurl }}{% link topics/statistics/tutorials/classification_regression/tutorial.md %}) tutorial to continue learning about machine learning in Galaxy.
 
 
 > ### {% icon details %} Additional ML Resources
