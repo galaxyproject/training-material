@@ -12,28 +12,32 @@ questions:
 objectives:
   - Load genome into Galaxy
   - View annotations in JBrowse
-  - Manually Annotate genome with Apollo
-  - Export genomes
-time_estimation: 2h
+  - Learn how to load JBrowse data into Apollo
+  - Learn how to manually refine genome annotations within Apollo
+  - Export refined genome annotations
+time_estimation: 2H
 key_points:
-  - Apollo allows a group to manually annotate a eukaryotic genome.
-  - Use Apollo allow to inspect the quality of an annotation.
-  - Use Apollo to edit annotations within your group.
-  - Export manual annotations as GFF3.
+- Apollo allows a group to view and manually refine predicged genome annotations
+- Use Apollo to edit annotations within your group.
+- Export manual annotations as GFF3.
 contributors:
-  - nathandunn
+- nathandunn
 ---
 
 
 # Introduction
 {:.no_toc}
 
-After automatically editing annotations using [Prokker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html) or [Maker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html), its important to visualize and then manually refine any additional data. 
+After automatically editing annotations using 
+[Prokker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html) or 
+[Maker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html),
+ its important to visualize and then manually refine any additional data. 
 
 This process is most often done as part of a group.  
 
 This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. 
 
+{% raw %} `{% cite Dunn2019 %}`{% endraw %}
 
 > ### Agenda
 >

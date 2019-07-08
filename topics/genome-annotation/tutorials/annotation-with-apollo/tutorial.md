@@ -3,20 +3,23 @@ layout: tutorial_hands_on
 
 title: Refining Manual Genome Annotations with Apollo
 zenodo_link: https://zenodo.org/record/3270822
+tags:
+- eukaryote
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How to visualize your genome after automated annotations have been performed?
+- How to manually annotate genome after automated annotations have been performed?
+- How to evaluate and visualize annotated genomic features?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Load genome into Galaxy
+- View annotations in JBrowse
+- Learn how to load JBrowse data into Apollo
+- Learn how to manually refine genome annotations within Apollo
+- Export refined genome annotations
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Apollo allows a group to view and manually refine predicged genome annotations
+- Use Apollo to edit annotations within your group.
+- Export manual annotations as GFF3.
 contributors:
 - nathandunn
 
@@ -26,25 +29,16 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+After automatically editing annotations using 
+[Prokker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html) or 
+[Maker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html),
+ its important to visualize and then manually refine any additional data. 
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+This process is most often done as part of a group.  
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. 
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+{% raw %} `{% cite Dunn2019 %}`{% endraw %}
 
 
 **Please follow our
