@@ -1,39 +1,54 @@
 ---
 layout: tutorial_hands_on
 
-title: Genome annotation with Apollo
-zenodo_link: https://doi.org/10.5281/zenodo.3270822
-tags:
-  - eukaryote
+title: Refining Manual Genome Annotations with Apollo
+zenodo_link: https://zenodo.org/record/3270822
 questions:
-  - How to visualize your genome after automated annotations have been performed?
-  - How to manually annotate genome after automated annotations have been performed?
-  - How to evaluate and visualize annotated genomic features?
+- Which biological questions are addressed by the tutorial?
+- Which bioinformatics techniques are important to know for this type of data?
 objectives:
-  - Load genome into Galaxy
-  - View annotations in JBrowse
-  - Manually Annotate genome with Apollo
-  - Export genomes
-time_estimation: 2h
+- The learning objectives are the goals of the tutorial
+- They will be informed by your audience and will communicate to them and to yourself
+  what you should focus on during the course
+- They are single sentences describing what a learner should be able to do once they
+  have completed the tutorial
+- You can use Bloom's Taxonomy to write effective learning objectives
+time_estimation: 3H
 key_points:
-  - Apollo allows a group to manually annotate a eukaryotic genome.
-  - Use Apollo allow to inspect the quality of an annotation.
-  - Use Apollo to edit annotations within your group.
-  - Export manual annotations as GFF3.
+- The take-home messages
+- They will appear at the end of the tutorial
 contributors:
-  - nathandunn
+- nathandunn
+
 ---
 
 
 # Introduction
 {:.no_toc}
 
-After automatically editing annotations using [Prokker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html) or [Maker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html), its important to visualize and then manually refine any additional data. 
+<!-- This is a comment. -->
 
-This process is most often done as part of a group.  
+General introduction about the topic and then an introduction of the
+tutorial (the questions and the objectives). It is nice also to have a
+scheme to sum up the pipeline used during the tutorial. The idea is to
+give to trainees insight into the content of the tutorial and the (theoretical
+and technical) key concepts they will learn.
 
-This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. 
+You may want to cite some publications; this can be done by adding citations to the
+bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
+must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
+get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
 
+With the example you will find in the `tutorial.bib` file, you can add a citation to
+this article here in your tutorial like this:
+{% raw %} `{% cite Batut2018 %}`{% endraw %}.
+This will be rendered like this: {% cite Batut2018 %}, and links to a
+[bibliography section](#bibliography) which will automatically be created at the end of the
+tutorial.
+
+
+**Please follow our
+[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -44,166 +59,232 @@ This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github
 >
 {: .agenda}
 
-# Data upload
+# Title for your first section
 
-To annotate a genome using Maker, you need the following files:
+Give some background about what the trainees will be doing in the section.
+Remember that many people reading your materials will likely be novices,
+so make sure to explain all the relevant concepts.
 
-- The genome sequence in fasta format
-- A set of transcripts or [EST sequences](https://en.wikipedia.org/wiki/Expressed_sequence_tag), preferably from the same organism.
-- A set of protein sequences, usually from closely related species or from a curated sequence database like UniProt/SwissProt.
+## Title for a subsection
+Section and subsection titles will be displayed in the tutorial index on the left side of
+the page, so try to make them informative and concise!
 
- Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.
+# Hands-on Sections
+Below are a series of hand-on boxes, one for each tool in your workflow file.
+Often you may wish to combine several boxes into one or make other adjustments such
+as breaking the tutorial into sections, we encourage you to make such changes as you
+see fit, this is just a starting point :)
+
+Anywhere you find the word "***TODO***", there is something that needs to be changed
+depending on the specifics of your tutorial.
+
+have fun!
+
+## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create and name a new history for this tutorial.
->
->    {% include snippets/create_new_history.md %}
->
-> 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.1488687) or from the shared data library
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]() or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_1.tar.gz
->    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_2.tar.gz
->    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_chrIII.fasta
->    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_genome.fasta
->    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_trinity_assembly.fasta
->    https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S_pombe.fasta
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/Amel_4.5_scaffolds.fa.gz
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2_cds.fa.gz
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2.gff3.gz
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2_pep.fa.gz
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam.bai
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager.bw
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam.bai
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/yeast_chr1%2B2.gff3
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/yeast.fa
 >    ```
+>    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>
+>    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype for `augustus_training_1.tar.gz` an `augustus_training_2.tar.gz` are set to `augustus`
+> 4. Check that the datatype
 >
->    {% include snippets/change_datatype.md datatype="augustus" %}
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-{: .hands_on}
-
-You have four main datasets:
-
-- `S_pombe_trinity_assembly.fasta` contains the EST sequences
-- `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
-- `S_pombe_genome.fasta` contains the full genome sequence
-- `S_pombe_chrIII.fasta` contains only the third chromosome from the full genome
-
-
-> ### {% icon hands_on %} Hands-on: Choose your Genome
+> 5. Add to each database a tag corresponding to ...
 >
-> 1. You need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`:
->
->    - If you have time: use the full genome (`S_pombe_genome.fasta`), it will take more computing time, but the results will be closer to real-life data.
->    - If you want to get results faster: use the chromosome III (`S_pombe_chrIII.fasta`).
->
-> 2. Rename the file you will use to `genome.fasta`. E.g. if you are using `S_pombe_chrIII.fasta`, rename it to `genome.fa`
->
->    {% include snippets/rename_dataset.md name="genome.fa" %}
+>    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
-The two other datasets (`augustus_training_1.tar.gz` an `augustus_training_2.tar.gz`) will be used later in the tutorial.
+# Title of the section usually corresponding to a big step in the analysis
+
+It comes first a description of the step: some background and some theory.
+Some image can be added there to support the theory explanation:
+
+![Alternative text](../../images/image_name "Legend of the image")
+
+The idea is to keep the theory description before quite simple to focus more on the practical part.
+
+***TODO***: *Consider adding a detail box to expand the theory*
+
+> ### {% icon details %} More details about the theory
+>
+> But to describe more details, it is possible to use the detail boxes which are expandable
+>
+{: .details}
+
+A big step can have several subsections or sub steps:
 
 
-# Visualising the results
+## Sub-step with **JBrowse**
 
-With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene.
-
-> ### {% icon hands_on %} Hands-on: Visualize annotations in JBrowse
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
+>        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - In *"Track Group"*:
->        - Click on *"Insert Track Group"*:
->        - In *"1: Track Group"*:
->            - *"Track Category"*: `Maker annotation`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `OGS 3.2`
 >            - In *"Annotation Track"*:
->                - Click on *"Insert Annotation Track"*:
->                - In *"1: Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each **Maker** {% icon tool %} run
->                    - *"This is match/match_part data"*: `No`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `output` (Input dataset)
+>                        - *"This is match/match_part data"*: `Yes`
+>                        - *"JBrowse Track Type [Advanced]"*: `Neat HTML Features`
+>                        - In *"JBrowse Feature Score Scaling & Coloring Options [Advanced]"*:
+>                            - *"Color Score Algorithm"*: `Ignore score`
+>                                - *"Color Selection"*: `Automatically selected`
+>                        - *"Track Visibility"*: `On for new users`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Reads`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BAM Pileups`
+>                        - {% icon param-file %} *"BAM Track Data"*: `output` (Input dataset)
+>                        - *"Autogenerate SNP Track"*: `Yes`
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BigWig XY`
+>                        - *"Track Scaling"*: `Autoscale (local)`
+>                        - In *"JBrowse Color Options [Advanced]"*:
+>                            - *"Color Specification"*: `Automatically selected`
+>                            - *"Bicolor Pivot"*: `Zero`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
 >
 {: .hands_on}
 
-Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> Navigate to the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `41800` and `45200` (or between `143850` and `148763` if you used the full genome sequence sequence).
-> ![JBrowse navigation](../../images/jbrowse_navigate.png "Navigating to the given sequence and positions.")
-> 1. How did the annotation improved in this region after each Maker round?
+> 1. Question1?
+> 2. Question2?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. At the end of the first round, no gene model was predicted by Maker in this region, because not enough EST or protein could be aligned there.
-> > After the second round, Maker was able to predict a first gene model with no intron. Notice the name of the model beginning with `snap_masked`: it means that Maker used mainly a gene prediction from SNAP to construct this gene model.
-> > After the third round, there are two gene models, more complex as they contain introns. Training Augustus and SNAP allowed to refine the gene structures and to detect a new gene.
+> > 1. Answer for question1
+> > 2. Answer for question2
 > >
 > {: .solution}
 >
 {: .question}
 
-## More visualisation
+## Sub-step with **Create or Update Organism**
 
-You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST alignments, protein alignments, ab-initio predictions, ...) by using JBrowse too.
-
-> ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
->    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
->    - *"JBrowse-in-Galaxy Action"*: `Update existing JBrowse Instance`
->    - *"Previous JBrowse Instance"*: select the result from the previous **JBrowse** {% icon tool %} run
->    - In *"Track Group"*:
->        - Click on *"Insert Track Group"*:
->        - In *"1: Track Group"*:
->            - *"Track Category"*: `Maker evidences`
->            - In *"Annotation Track"*:
->                - Click on *"Insert Annotation Track"*:
->                - In *"1: Annotation Track"*:
->                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each **Maker** {% icon tool %} run
->                    - *"This is match/match_part data"*: `Yes`
->                        - *"Match Part Feature Type"*: Leave empty
+> 1. **Create or Update Organism** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"JBrowse HTML Output"*: `output` (output of **JBrowse** {% icon tool %})
+>    - *"Organism Common Name Source"*: `Direct Entry`
+>        - *"Organism Common Name"*: `Honeybee`
+>    - *"Genus"*: `Apis`
+>    - *"Species"*: `Mellifera`
+>    - *"Is Organism Public"*: `Yes`
+>    - *"Grant access to a user group"*: ``
+>    - *"Remove old data directory"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
 >
 {: .hands_on}
 
-You will now see three new tracks displaying all the evidences used by Maker to generate consensus gene models.
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-## Create an Organism from Apollo sequences 
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
-(can we use the maker data or should we use the other data library?)
+## Sub-step with **Annotate**
 
-## Create refinements
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Annotate** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Apollo Organism Listing"*: `output` (output of **Create or Update Organism** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
-View data at a particular position
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-### Create structural edits
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
-Drag exons, create isoforms, etc. create introns, split transcripts.
 
-### Create structural variations
+## Re-arrange
 
-View data in many ways
+To create the template, each step of the workflow had its own subsection.
 
-### Edit functional data. 
-
-
-### Edit names, etc. 
-
-
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
+Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Congratulations, you finished this tutorial! You learned how to manually refine predicted eukaryotic genomes using Apollo and export them to other forms.
-
-# What's next?
-
-After generating your refined genome, you'll want to merge it back into the official gene sets.  
-
-If a de novo set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
-
+Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+pipeline used.
