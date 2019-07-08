@@ -1,47 +1,126 @@
 ---
 ---
 
+$font-size: 15px;
+$tutorial-box-spacing: 1rem;
+
+// palette
 $white: #fff;
 $gray: #777;
 $light-gray: #ddd;
-$bg-color: #2c3143;
-$menu-color: #9d9d9d;
 $text-color: #292b2c;
-$font-size: 15px;
-$overview-color: $bg-color;
-$agenda-color: $bg-color;
-$keypoints-color: #1D243D;
-$tip-color: #587177;
 
-$warning-color: #FAA632;
+$red: #f00000;
+$orange: #f06d00;
+$yellow: #be9900;
+$green: #339e3a;
+$blue: #009090;
+$dark-blue: #2c3143;
+$light-blue: #5daadd;
+$purple: #882d60;
+$mid-gray: #9d9d9d;
 
-$comment-color: #4aafcd;
-$handson-color: #190F2F;
-$question-color: #474E67;
-$solution-color: #c6c6c6;
-$details-color: #c6c6c6;
-$tutorial-box-spacing: 1rem;
+// colors general
+$bg-color: $dark-blue;
+$menu-color: $dark-blue;
 
-@mixin tutorial-box ($bg-color, $color: $white) {
-    margin-top: $tutorial-box-spacing;
-    padding: 0 $tutorial-box-spacing $tutorial-box-spacing;
+// colors tutorial boxes
+$overview-color: #8A9AD0;
+$agenda-color: #86D486;
+$keypoints-color: #FFA1A1;
+$tip-color: #FFE19E;
+$warning-color: #de8875;
+$comment-color: #ffecc1;
+$handson-color: #dfe5f9;
+$question-color: #8A9AD0;
+$solution-color: #B8C3EA;
+$details-color: $light-gray;
+$feedback-color: #86D486;
+
+
+@mixin matrix-table (){
+  table {
+      width:unset;
+      margin-left:auto;
+      margin-right:auto;
+  }
+
+  table thead th {
+      border-bottom: 2px solid #777;
+      text-align: left;
+  }
+
+  table td:first-child, table th:first-child  {
+      border-right: 2px solid #777;
+      font-weight: bold;
+      text-align: left;
+  }
+
+  table td:not(first-child), table th:not(first-child) {
+      text-align: center;
+      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+  }
+}
+
+@mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
+    margin-top: 3 * $tutorial-box-spacing;
+    padding: $tutorial-box-spacing $tutorial-box-spacing - 0.11rem $tutorial-box-spacing;
     border: 1px solid $bg-color;
-    border-top: none;
-
+    box-shadow: 3px 3px $bg-color;
     & > h3 {
         font-size: $font-size + 3;
-        margin-top: 0;
         margin-left: -$tutorial-box-spacing;
         margin-right: -$tutorial-box-spacing;
-        padding: $tutorial-box-spacing / 2;
+        margin-top: -3.30rem;
+        padding-top: $tutorial-box-spacing / 2;
+        padding-bottom: $tutorial-box-spacing / 2;
+        padding-left: $tutorial-box-spacing;
+        padding-right: $tutorial-box-spacing;
         background-color: $bg-color;
         color: $color;
+        vertical-align: 1em;
+        float: left;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+
+        .fa {
+            padding-right: $tutorial-box-spacing / 5;
+        }
     }
 }
+
+@mixin matrix-table (){
+  table {
+      width:unset;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top: 20pt;
+  }
+
+  table thead th {
+      border-bottom: 2px solid #777;
+      text-align: left;
+  }
+
+  table td:first-child, table th:first-child  {
+      border-right: 2px solid #777;
+      font-weight: bold;
+      text-align: left;
+  }
+
+  table td:not(first-child), table th:not(first-child) {
+      text-align: center;
+      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+  }
+}
+
 
 body {
     font-size: $font-size;
     word-wrap: break-word;
+    position: relative;
 }
 
 h1,
@@ -52,7 +131,8 @@ h4 {
 }
 
 img {
-    max-width: 100%;
+    max-width: 95%;
+    margin: 2.5%;
 }
 
 pre {
@@ -71,6 +151,10 @@ figure {
   .figcaption-prefix {
       font-weight: 600;
   }
+
+  figcaption {
+    text-align: justify;
+  }
 }
 
 footer {
@@ -78,6 +162,12 @@ footer {
     text-align: center;
     color: $gray;
     font-size: $font-size - 2;
+}
+
+.follow-up {
+    p {
+        font-size: 18px;
+    }
 }
 
 .navbar {
@@ -102,7 +192,11 @@ footer {
     .fa {
         font-size: $font-size + 5;
     }
-    
+
+}
+
+.topic-icon {
+    padding: .5rem .75rem;
 }
 
 .training-network-map {
@@ -112,7 +206,7 @@ footer {
 
 .tutorial {
     & > h1:first-child {
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
     }
 
     table {
@@ -145,48 +239,67 @@ footer {
         }
 
         &.agenda {
-            @include tutorial-box($agenda-color);
+            @include tutorial-box($agenda-color, $text-color);
         }
 
         &.tip {
-            @include tutorial-box($tip-color);
+            @include tutorial-box($tip-color, $text-color);
         }
 
         &.question {
-            @include tutorial-box($question-color);
+            @include tutorial-box($question-color, $text-color);
         }
 
         &.solution {
-            @include tutorial-box($solution-color);
+            @include tutorial-box($solution-color, $text-color);
         }
 
         &.comment {
-            @include tutorial-box($comment-color);
+            @include tutorial-box($comment-color, $text-color);
         }
 
         &.hands_on {
-            @include tutorial-box($handson-color);
+            @include tutorial-box($handson-color, $text-color);
         }
 
         &.key_points {
-            @include tutorial-box($keypoints-color);
+            @include tutorial-box($keypoints-color, $text-color);
         }
 
         &.overview {
-            @include tutorial-box($overview-color);
+            @include tutorial-box($overview-color, $text-color);
         }
 
-        &.warning-box {
-            @include tutorial-box($warning-color);
+        &.warning {
+            @include tutorial-box($warning-color, $text-color);
         }
 
         &.details {
-            @include tutorial-box($details-color);
+            @include tutorial-box($details-color, $text-color);
+        }
+
+        &.quote {
+            border-left: 5px solid #eee;
+            padding-left: 1em;
+        }
+
+        &.matrix {
+            @include matrix-table();
+        }
+
+        &.feedback{
+            @include tutorial-box($feedback-color, $text-color);
         }
     }
 
     .fold-unfold {
-        margin-left: 5px;
+        margin-left: $tutorial-box-spacing;
+    }
+
+    .google-form {
+        width: 100%;
+        height: 1100px;
+        border: 0;
     }
 }
 
@@ -214,6 +327,12 @@ footer {
             font-size: 0.7em;
         }
     }
+}
+
+.contributors-line {
+    color: $gray;
+    font-size: 1.2em;
+    margin-bottom: 5rem;
 }
 
 .hall-of-fame {
@@ -270,7 +389,7 @@ footer {
 
 // This applies a "dark" style to the dropdown menus on small devices since
 // Bootstrap v4 does not do that by default.
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
             background-color: transparent;
@@ -329,4 +448,176 @@ footer {
 
 .label-default {
     background-color: #999999;
+}
+
+.level {
+    color: lightgray;
+    margin-right: 0.5em;
+
+    .fa {
+        font-size: 0.9em;
+    }
+    &.introductory i:first-of-type {
+        color: green;
+    }
+    &.intermediate i:not(:last-of-type) {
+        color: orange;
+    }
+    &.advanced {
+        color: red;
+    }
+}
+
+
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+/* WCAG Contrast. These aim to pass AA level for normal sized text. */
+a {
+    color: #0070e8;
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: #004590;
+    }
+}
+
+code {
+    color: #8b3035;
+}
+
+
+nav[data-toggle='toc'] {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    .nav {
+        li {
+            a {
+                padding-left: 0px;
+                &:hover,
+                &:focus,
+                &:active{
+                    padding-left: 0px;
+                    color: #004590;
+                    border-left: none;
+                }
+            }
+
+            .active {
+                padding-left: 0px;
+                color: #004590;
+                border-left: none;
+            }
+        }
+
+        .nav li {
+            a,
+            .active {
+                padding-left: 10px;
+                &:hover,
+                &:focus,
+                &:active{
+                    padding-left: 10px;
+                }
+            }
+
+            &:hover,
+            &:focus,
+            &:active{
+                padding-left: 10px;
+            }
+        }
+    }
+
+    .nav-link.active:hover {
+        padding-left: 0px;
+        color: #004590;
+        border-left: none;
+    }
+}
+
+.col-sm-2 {
+    padding-left: 0px;
+}
+
+/* small screens */
+@media screen and (max-width: 768px) {
+    nav[data-toggle='toc'] {
+        display: none !important;
+    }
+
+    .col-sm-10 {
+        max-width: 100%;
+    }
+}
+
+.contributor-badge {
+    /* prevent breaking across lines */
+    white-space: nowrap;
+
+    img {
+        height: 1.25em;
+        border-radius: 50%;
+        margin: 0.25em;
+    }
+}
+
+
+div.highlight {
+	position: relative;
+}
+div.highlight .btn{
+	-webkit-transition:opacity .3s ease-in-out;
+	-o-transition:opacity .3s ease-in-out;
+	transition:opacity .3s ease-in-out;
+	opacity:0;
+	padding:2px 6px;
+	position:absolute;
+	right:4px;
+	top:4px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+div.highlight:hover .btn,div.highlight .btn:focus{
+	opacity:1
+}
+
+#supporting_materials ul li {
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        div {
+            a.topic-icon {
+                padding: 0 .5rem 0 .5rem;
+            }
+
+            a.topic-icon.btn {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        div:first-child {
+            a.topic-icon {
+                padding-left: 0;
+            }
+        }
+
+        div:not(:first-child):before {
+            content: " - ";
+        }
+    }
 }

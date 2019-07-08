@@ -1,0 +1,626 @@
+﻿---
+id: non-dip
+name: Calling variants in non-diploid systems
+description: >-
+  In this tutorial, we will see how to call variants by comparing reads against
+  an existing genome assembly.
+title_default: non-dip
+steps:
+  - title: Introduction
+    content: >-
+      The majority of life on Earth is non-diploid and represented by
+      prokaryotes, viruses and their derivatives such as our own mitochondria or
+      plant’s chloroplasts. In non-diploid systems allele frequencies can range
+      anywhere between 0 and 100% and there could be multiple (not just two)
+      alleles per locus. The main challenge associated with non-diploid variant
+      calling is the difficulty in distinguishing between sequencing noise
+      (abundant in all NGS platforms) and true low frequency variants. Some of
+      the early attempts to do this well have been accomplished on human
+      mitochondrial DNA although the same approaches will work equally good on
+      viral and bacterial genomes:<ul>
+        <li>2014 - <a href="http://www.pnas.org/content/111/43/15474.abstract">Maternal age effect and severe germ-line bottleneck in the inheritance of human mitochondrial DNA</a></li>
+        <li>2015 - <a href="http://www.pnas.org/content/112/8/2491.abstract">Extensive tissue-related and allele-related mtDNA heteroplasmy suggests positive selection for somatic mutations</a>.</li>
+      </ul>    
+    backdrop: true
+  - title: Introduction
+    content: >-
+      As an example of non-diploid system we will be using human mitochondrial
+      genome as an example. However, this approach will also work for most
+      bacterial and viral genomes as well.<br> There are two ways one can call
+      variants:<ul>
+        <li>By comparing reads against an existing genome assembly</li>
+        <li>By assembling genome first and then mapping against that assembly</li></ul>      
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In this tutorials we will take the <i>first</i> path is which we map reads
+      against an existing assembly. Later in the course (after we learn about
+      assembly approaches) we will try the second approach as well. <br><br>The
+      goal of this example is to detect heteroplasmies (variants within
+      mitochondrial DNA). Mitochondria is transmitted maternally and
+      heteroplasmy frequencies may change dramatically and unpredictably during
+      the transmission, due to a germ-line bottleneck <a
+      href="https://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html">Cree:2008</a>.
+      As we mentioned above the procedure for finding variants in bacterial or
+      viral genomes will be essentially the same. <br><br>Zenodo contains <a
+      href="https://doi.org/10.5281/zenodo.1251112">datasets representing a
+      child and a mother</a>. These datasets are obtained by paired-end Illumina
+      sequencing of human genomic DNA enriched for mitochondria. The enrichment
+      was performed using long-range PCR with two primer pairs that amplify the
+      entire mitochondrial genome. This means that these samples still contain a
+      lot of DNA from the nuclear genome, which, in this case, is a contaminant.
+    backdrop: true
+  - title: Importing example datasets
+    content: >-
+      For this tutorial we have prepared a subset of data previously <a
+      href="http://www.pnas.org/content/111/43/15474.abstract">published</a> by
+      our group. Let’s import these data into Galaxy.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      We will start the analyses by creating a new history. Click on this button
+      and then "Create New"
+    placement: left
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      Insert the links here from <a
+      href="https://zenodo.org/record/1251112">zenodo</a>.
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1251112/files/raw_child-ds-1.fq?download=1
+      https://zenodo.org/record/1251112/files/raw_child-ds-2.fq?download=1
+      https://zenodo.org/record/1251112/files/raw_mother-ds-1.fq?download=1
+      https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq?download=1
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: QC’ing the data
+    content: >-
+      Before proceeding with the analysis, we need to find out how good the data
+      actually is. For this will use <b>FastQC</b> tool.
+    backdrop: true
+  - title: Quality control of the data
+    element: '#tool-search-query'
+    content: Search for "FastQC" tool
+    placement: right
+    textinsert: FastQC
+  - title: Quality control of the data
+    element: '#tool-search'
+    content: Click on the "FastQC" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72"]
+        .tool-old-link
+  - title: Quality control of the data
+    element: '#tool-search'
+    content: Execute the tool with the default parameters on the input data.
+    position: left
+  - title: Quality control of the data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Once <b>FastQC</b> job runs, you will be able to look at the HTML reports
+      generated by this tool. The data have generally high quality in this
+      example: <br><b>FastQC</b> plot for one of the mitochondrial datasets
+      shows that qualities are acceptable for 250 bp reads (mostly in the green,
+      which is at or above <a
+      href="https://en.wikipedia.org/wiki/Phred_quality_score">phred score</a>
+      of 30).
+    position: left
+  - title: Mapping the reads
+    content: >-
+      Our reads are long (250 bp) and as a result we will be using <a
+      href="https://arxiv.org/pdf/1303.3997v2.pdf">bwa mem</a> to align them
+      against the reference genome as it has good mapping performance for longer
+      reads (100bp and up).
+    backdrop: true
+  - title: Mapping with bwa mem
+    element: '#tool-search-query'
+    content: Search for "bwa mem" tool
+    placement: right
+    textinsert: bwa mem
+  - title: Mapping with bwa mem
+    element: '#tool-search'
+    content: Click on the "bwa mem" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.1"]
+        .tool-old-link
+  - title: Mapping with bwa mem
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Using reference genome" to 'hg38'</li>
+        <li>"Single or Paired-end reads" to 'Paired'<ul>
+          <li>"Select first set of reads" to 'raw_child-ds-1' and 'raw_mother-ds-1'</li>
+          <li>"Select second set of reads" to 'raw_child-ds-2' and 'raw_mother-ds-2'</li>
+        </ul></li>
+        <li>"Set read groups information?" to 'Set read groups (SAM/BAM specification)'<ul>
+          <li>"Auto-assign" to 'Yes'</li>
+          <li>"Auto-assign" to 'Yes'</li>
+          <li>"Auto-assign" to 'Yes'</li>
+        </ul></li>
+        </ul>
+    position: left
+  - title: Merging BAM datasets
+    content: >-
+      Because we have set read groups, we can now merge the two BAM dataset into
+      one. This is because read groups label each read as belonging to either
+      <i>mother</i> or <i>child</i>.
+
+      We can BAM dataset using <b>NGS: Picard → MergeSAMFiles tool</b>.
+    backdrop: true
+  - title: Merging BAM datasets
+    element: '#tool-search-query'
+    content: Search for "MergeSamFiles" tool
+    placement: right
+    textinsert: MergeSamFiles
+  - title: Merging BAM datasets
+    element: '#tool-search'
+    content: Click on the "MergeSamFiles" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MergeSamFiles%2F2.18.2.1"]
+        .tool-old-link
+  - title: Merging BAM datasets
+    element: '#tool-search'
+    content: >-
+      Execute the tool with the default parameters on the two outputs from
+      <b>bwa-mem</b>.
+    position: left
+  - title: Removing duplicates
+    content: >-
+      Preparation of sequencing libraries (at least at the time of writing) for
+      technologies such as Illumina (used in this example) involves PCR
+      amplification. It is required to generate sufficient number of sequencing
+      templates so that a reliable detection can be performed by base callers.
+      Yet PCR has its own biases, which are especially profound in cases of
+      multi-template PCR used for construction of sequencing libraries (Kanagawa
+      et al. <a
+      href="https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530">2003</a>).
+
+      <br><br>Duplicates can be identified based on their outer alignment
+      coordinates or using sequence-based clustering. One of the common ways for
+      identification of duplicate reads is the <b>MarkDuplicates</b> utility
+      from <a
+      href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a>
+      package. It is designed to identify both PCR and optical duplicates (the
+      following is an excerpt from Picard documentation):
+    backdrop: true
+  - title: Removing duplicates
+    content: >-
+      <i>Duplicates are identified as read pairs having identical 5’ positions
+      (coordinate and strand) for both reads in a mate pair (and optionally,
+      matching unique molecular identifier reads; see BARCODE_TAG option).
+      Optical, or more broadly Sequencing, duplicates are duplicates that appear
+      clustered together spatially during sequencing and can arise from
+      optical/imagine-processing artifacts or from bio-chemical processes during
+      clonal amplification and sequencing; they are identified using the
+      READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The
+      tool’s main output is a new SAM or BAM file in which duplicates have been
+      identified in the SAM flags field, or optionally removed (see
+      REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked
+      with a duplicate type in the ‘DT’ optional attribute. In addition, it also
+      outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED,
+      UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES,
+      READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example:
+      java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam
+      M=marked_dup_metrics.txt.</i>
+    backdrop: true
+  - title: De-duplicating mapped data
+    element: '#tool-search-query'
+    content: Search for "MarkDuplicates" tool
+    placement: right
+    textinsert: MarkDuplicates
+  - title: De-duplicating mapped data
+    element: '#tool-search'
+    content: Click on the "MarkDuplicates" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fpicard%2Fpicard_MarkDuplicates%2F2.18.2.1"]
+        .tool-old-link
+  - title: De-duplicating mapped data
+    element: '#tool-search'
+    content: >-
+      Execute the tool with the default parameters on the output from the
+      merging step.
+    position: left
+  - title: De-duplicating mapped data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      <b>MarkDuplicates</b> produces a BAM dataset with duplicates removed and
+      also a metrics file. Let’s take a look at the metrics data:<br>
+
+      <pre><code>raw_child-ds- 55 27551 55 50 1658 0 0.061026 219628
+
+      raw_mother-ds- 96 54972 96 90 4712 0 0.086459 302063</code></pre>
+
+      In other words the two datasets had ~6% and ~9% duplicates, respectively.
+    position: left
+  - title: Left-aligning indels
+    content: >-
+      Left aligning of indels (a variant of re-aligning) is extremely important
+      for obtaining accurate variant calls. This concept, while not difficult,
+      requires some explanation. For illustrating how left-aligning works we
+      expanded on an example provided by Tan:2015. Suppose you have a reference
+      sequence and a sequencing read:
+
+      <pre><code>Reference GGGCACACACAGGG
+
+      Read      GGGCACACAGGG</code></pre>
+
+      If you look carefully you will see that the read is simply missing a
+      <b>CA</b> repeat. But it is not apparent to a mapper, so some of possible
+      alignments and corresponding variant calls include:
+
+      <pre><code>
+
+      Alignment                 Variant Call
+
+
+      GGGCACACACAGGG            Ref: CAC
+
+      GGGCAC--ACAGGG            Alt: C
+
+
+      GGGCACACACAGGG            Ref: ACA
+
+      GGGCA--CACAGGG            Alt: A
+
+
+      GGGCACACACAGGG            Ref: GCA
+
+      GGG--CACACAGGG            Alt: G
+
+      </pre></code>
+
+      The last of these is left-aligned. In this case gaps (dashes) as moved as
+      far left as possible (for a formal definition of left-alignment and
+      variant normalization see <a
+      href="https://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract">Tan:2015</a>).
+    backdrop: true
+  - title: Left-aligning indels
+    element: '#tool-search-query'
+    content: Search for "BamLeftAlign" tool
+    placement: right
+    textinsert: BamLeftAlign
+  - title: Left-aligning indels
+    element: '#tool-search'
+    content: Click on the "BamLeftAlign" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Fbamleftalign%2F1.1.0.46-0"]
+  - title: Left-aligning indels
+    element: '#tool-search'
+    content: >-
+      Execute the tool with the following parameter on the output from the
+      previous step<ul>
+        <li>"Using reference genome" to 'hg38'</li></ul>
+    position: left
+  - title: Filtering reads
+    content: >-
+      Remember that we are trying to call variants in mitochondrial genome. Let
+      focus only on the reads derived from mitochondria genome by filtering
+      everything else out.
+    backdrop: true
+  - title: Filtering reads
+    element: '#tool-search-query'
+    content: Search for "Filter BAM" tool
+    placement: right
+    textinsert: Filter BAM
+  - title: Filtering reads
+    element: '#tool-search'
+    content: Click on the "Filter BAM" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbamtools_filter%2FbamFilter%2F2.4.1"]
+        .tool-old-link
+  - title: Filtering reads
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Select BAM property to filter on" to 'mapQuality'<ul>
+          <li>"Filter on read mapping quality (phred scale)" to '20'</li></ul>
+        </li>
+        <li>Click on "+Insert Filter"</li>
+        <li>"Select BAM property to filter on" to 'isPaired'<ul>
+          <li>"Select paired reads" to 'Yes'</li></ul></li>
+        <li>"Select BAM property to filter on" to 'isProperPair'<ul>
+          <li>"Select properly paired reads" to 'Yes'</li></ul></li>
+        <li>"Select BAM property to filter on" to 'reference'<ul>
+          <li>"Filter on the reference name for the read" to 'chrM'</li></ul></li>
+      </ul>
+    position: left
+  - title: Filtering reads
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      We filtered on the following cases:<ul>
+        <li><b>mapQuality</b> is set to ⋝ 20. Mapping quality reflects the probability that the read is placed incorrectly. It uses <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scale</a>. Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ⋝ 20 we will keep all reads that have 1% or less probability of being mapped incorrectly.</li>
+        <li><b>isPaired</b> will eliminate singleton (unpaired) reads</li>
+        <li><b>isProperPair</b> will only keep reads that map to the same chromosome and are properly placed</li>
+        </ul>
+    position: left
+  - title: Calling non-diploid variants with FreeBayes
+    content: >-
+      FreeBayes is widely used for calling variants in diploid systems. However,
+      it can also be used for calling variants in pooled samples where the
+      number of samples is not known. This is the exact scenario we have here:
+      in our sample we have multiple mitochondrial (or bacterial or viral)
+      genomes but we do not know exactly how many. Thus we will use the
+      <code>--pooled-continuous</code> option of FreeBayes to generate
+      <i>frequency-based</i> variant calls.
+    backdrop: true
+  - title: Running FreeBayes
+    element: '#tool-search-query'
+    content: Search for "FreeBayes" tool
+    placement: right
+    textinsert: FreeBayes
+  - title: Running FreeBayes
+    element: '#tool-search'
+    content: Click on the "FreeBayes" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffreebayes%2Ffreebayes%2F1.1.0.46-0"]
+        .tool-old-link
+  - title: Running FreeBayes 1/2
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"BAM dataset" to the Filter output</li>
+        <li>"Using reference genome" to 'hg38'</li>
+        <li>"Limit variant calling to a set of regions?" to 'Limit to region'<ul>
+          <li>"Region Chromosome" to 'chrM'</li>
+          <li>"Region Start" to '1'</li>
+          <li>"Region end" to '16000'</li></ul></li>
+        <li>"Choose parameter selection level" to '5.Full list of options'<ul>
+          <li>"Population model options" to 'Set population model options'<ul>
+            <li>"Set ploidy for the analysis" to '1'</li>
+            <li>"Assume that samples result from pooled sequencing" to 'Yes'</li>
+            <li>"Output all alleles which pass input filters, regardles of genotyping outcome or model" to 'Yes'</li></ul></li>
+        </ul></li>
+      </ul>
+    position: left
+  - title: Running FreeBayes 2/2
+    element: '#tool-search'
+    content: |-
+      more parameters<ul>
+        <li>In "5.Full list of options"<ul>
+          <li>"Allelic scope options" to 'Set alleic scope options'<ul>
+            <li>"Ignore multi-nucleotide polymorphisms, MNPs" to 'Yes'</li>
+            <li>"Ignore complex events (composites of other classes)" to 'Yes'</li></ul></li>
+          <li>"Input filters" to 'Set input filters'<ul>
+            <li>"Exclude alignments from analysis if they have a mapping quality less than" to '20'</li>
+            <li>"Exclude alleles from analysis if their supporting base quality less than" to '30'</li></ul></li>
+        </ul></li>
+      </ul>
+    position: left
+  - title: Running FreeBayes
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      This will produce a <a
+      href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">VCF dataset</a>.
+      It lists 30 sites of interest (everything starting with a # is a comment)
+    position: left
+  - title: Filtering VCF data
+    content: >-
+      After filtering the data with stringent input parameters (restricting base
+      quality to a minimum of 30 and mapping quality to a minimum of 20) a
+      considerable amount variants due to read-alignment bias exits.
+
+      <br><br>A robust tool set for processing VCF data is provided by <A
+      href="https://github.com/vcflib/vcflib">vcflib</a> developed by Erik
+      Garrison, the author of FreeBayes. One way to filter VCF is using
+      <code>INFO</code> fields of the VCF dataset. Each VCF record contains a
+      list of <code>INFO</code> tags describing a wide range of properties for
+      each VCF record. You will see that FreeBayes and NVC differ significantly
+      in the number and types of <code>INFO</code> fields each of these caller
+      generates. This why the two require different filtering strategies.
+    backdrop: true
+  - title: Filtering VCF data
+    element: '#tool-search-query'
+    content: Search for "VCFfilter" tool
+    placement: right
+    textinsert: VCFfilter
+  - title: Filtering VCF data
+    element: '#tool-search'
+    content: Click on the "VCFfilter" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fvcffilter%2Fvcffilter2%2F1.0.0_rc1%2Bgalaxy1"]
+        .tool-old-link
+  - title: Filtering VCF data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>Click on "+Insert Add filters"<ul>
+          <li>"Select the filter type" to 'Info filter (-f)'</li>
+          <li>"Specify filterting value" to 'DP>10'</li></ul></li>
+        <li>Click on "+Insert Add filters"<ul>
+          <li>"Select the filter type" to 'Info filter (-f)'</li>
+          <li>"Specify filterting value" to 'SRP>20'</li></ul></li>
+        <li>Click on "+Insert Add filters"<ul>
+          <li>"Select the filter type" to 'Info filter (-f)'</li>
+          <li>"Specify filterting value" to 'SAP>20'</li></ul></li>
+        <li>Click on "+Insert Add filters"<ul>
+          <li>"Select the filter type" to 'Info filter (-f)'</li>
+          <li>"Specify filterting value" to 'EPP>20'</li></ul></li>
+        <li>Click on "+Insert Add filters"<ul>
+          <li>"Select the filter type" to 'Info filter (-f)'</li>
+          <li>"Specify filterting value" to 'QUAL>30'</li></ul></li>
+      </ul>
+    position: left
+  - title: Filtering VCF data
+    element: '.history-right-panel .list-items > *:first'
+    content: The resulting VCF only contains five variants.
+    position: left
+  - title: Looking at the data
+    content: >-
+      For visualizing VCFs Galaxy relies on the two external tools. The first is
+      called <a href="http://vcf.iobio.io/">VCF.IOBIO</a> and is developed by <a
+      href="http://marthlab.org/">Gabor Marth’s group</a> at the University of
+      Utah. The second is called <a
+      href="http://software.broadinstitute.org/software/igv/">IGV</a> developed
+      by Broad Institute.
+    backdrop: true
+  - title: Displaying data in VCF.IOBIO
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Expand the resulted dataset by clicking on it. At the bottom there is a
+      link <b>display at vcf.iobio</b> Clicking on this link will start indexing
+      of VCF datasets, which is required to display them. After indexing
+      VCF.IOBIO will open.
+    position: left
+  - title: Displaying data in IGV
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Similarly to VCF.BIOIO expanding a history item representing a VCF dataset
+      will reveal an IGV link: <b>display at IGV: local Human hg38</b>. The
+      difference between “local” and “Human hg38” links is explained in the
+      following <a href="https://vimeo.com/123414437">video</a>.
+    position: left
+  - title: Digging into the data
+    content: >-
+      Visualizing VCF dataset may be a good way to get an overall idea of the
+      data, but it does not tell a lot of details. For example, above we have
+      visualized site 3,243 using IGV. It is interesting but we need to find out
+      more. One thing we can do is to convert VCF dataset into a tab-delimited
+      representation and play a bit more with it.
+    backdrop: true
+  - title: From VCF to Tab-delimited data
+    element: '#tool-search-query'
+    content: Search for "VCFtoTab" tool
+    placement: right
+    textinsert: VCFtoTab
+  - title: From VCF to Tab-delimited data
+    element: '#tool-search'
+    content: Click on the "VCFtoTab" tool to open it
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fvcf2tsv%2Fvcf2tsv%2F1.0.0_rc1%2Bgalaxy0"]
+        .tool-old-link
+  - title: From VCF to Tab-delimited data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Report data per sample" to 'Yes'</li>
+      </ul>
+    position: left
+  - title: From VCF to Tab-delimited data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      There are 53 columns in this dataset. The columns in the above dataset
+      represent INFO and Genotype fields on the original VCF dataset. Let’s
+      restrict ourselves to just a few:<ul>
+        <li>2 <code>POS</code> - position along mitochondrial genome</li>
+        <li>4 <code>REF</code> - reference allele</li>
+        <li>5 <code>ALT</code> - alternative allele</li>
+        <li>50 <code>SAMPLE</code> - name of the sample</li>
+        <li>51 <code>AO</code> - number of alternative observations (how many times do we see the alternative allele at this position in this sample)</li>
+        <li>52 <code>DP</code> - depth of coverage at this site for this sample</li></ul>
+      Now let's extract these columns.
+    position: left
+  - title: Cutting columns from a file
+    element: '#tool-search-query'
+    content: Search for "cut columns" tool
+    placement: right
+    textinsert: cut columns
+  - title: Cutting columns from a file
+    element: '#tool-search'
+    content: Click on the "cut columns" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: Cutting columns from a file
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Cut columns" to 'c2,c4,c5,c50,c51,c52'</li>
+      </ul>
+    position: left
+  - title: Cutting columns from a file
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      This will generate the following dataset:
+      <pre><code>
+      POS  REF ALT     SAMPLE       AO    DP
+      --------------------------------------
+      3243  A   G   raw_child-ds-  841  1068
+      3243  A   G   raw_mother-ds- 767  1558
+      3483  G   C   raw_child-ds-   40   208
+      3483  G   C   raw_mother-ds-  87   342
+      3488  T   A   raw_child-ds-   40   206
+      3488  T   A   raw_mother-ds-  90   340
+      5539  A   G   raw_child-ds-   89   338
+      5539  A   G   raw_mother-ds- 325   526
+      8557  G   C   raw_child-ds-  181   724
+      8557  G   C   raw_mother-ds- 265   946
+      </code></pre>
+    position: left
+  - title: Cutting columns from a file
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Let’s look at site 4,243. At this site Mother has 841 <code>G</code>s
+      (since <code>G</code> is an alternative allele) and 1,068-841=227
+      <code>A</code>s. This child has 767 Gs and 1,558-767=791
+      <code>A</code>s:<pre><code>
+
+      Allele     A     G
+
+      -------------------
+
+      Mother   227   841
+
+      Child    791   767</code></pre>
+
+      Thus the <i>major</i> allele in mother (<code>G</code>) becomes the
+      <i>minor</i> allele in child – a remarkable frequency change due to
+      mitochondrial bottleneck!
+    position: left
+  - title: Take a look at the whole thing
+    content: >-
+      Now you know how to call variants in non-diploid system, so try it on
+      bacteria, viruses etc…
+    backdrop: true
+  - title: Key points
+    content: |-
+      <ul>
+        <li>Variation in human mitochondria is a proxy for other haploid systems.</li>
+        <li>Nucleotide variants in haploid systems may have any frequency between 0 and 1.</li>
+        <li>Distinguishing true variants from noise is not easy and requires accounting for strand bias and read placement bias.</li>
+        <li>FreeBayes can be effectively used to call variants in haploid systems.</li></ul>
+    backdrop: true

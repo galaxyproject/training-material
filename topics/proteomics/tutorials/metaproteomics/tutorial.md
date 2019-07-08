@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: metaproteomics
+
+title: "Metaproteomics tutorial"
+edam_ontology: "topic_0121"
+zenodo_link: "https://doi.org/10.5281/zenodo.839701"
+questions:
+  - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
+  - "How can I perform taxonomy analysis and visualize metaproteomics data?"
+  - "How can I perform functional analysis on this metaproteomics data?"
+objectives:
+  - "A taxonomy and functional analysis of metaproteomic mass spectrometry data."
+time_estimation: "2h"
+key_points:
+  - "Use dataset collections"
+  - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
+  - "Learning the basics of SQL queries can pay off"
+contributors:
+  - timothygriffin
+  - pratikdjagtap
+  - jj-umn
+  - blankclemens
 ---
 
 # Introduction
@@ -30,9 +48,9 @@ Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). 
 
 ## Data upload
 
-There are a many ways how you can upload your data. Three among these are:
+There are three ways to upload your data.
 
-*   Upload the files from your computer
+*   Upload/Import the files from your computer
 *   Using a direct link
 *   Import from the data library if your instance provides the files
 
@@ -41,16 +59,13 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field. You can add multiple links, each on a separate line.
->    > * Press **Start**
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -73,7 +88,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 ## Match peptide sequences
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). A contaminant database was added.
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
@@ -96,12 +111,12 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    Section **Search Engine Options**:
 >
->    - **B-Search Engines**: `X!Tandem`
+>    - **Search Engines**: `X!Tandem`
 >
 >    > ### {% icon comment %} Comment
 >    >
 >    > The section **Search Engine Options** contains a selection of sequence database searching
->    > programs that are available in SearchGUI. Any combination of these programs can be used for
+>    > algorithms that are available in SearchGUI. Any combination of these programs can be used for
 >    > generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be used.
 >    {: .comment}
 >
@@ -160,7 +175,7 @@ outputs.
 > results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
 > all peptide sequence matching information and can be utilized by compatible downstream
 > software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
-> as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken. 
+> as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
 > More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 {: .comment}
 
@@ -193,8 +208,8 @@ in the PeptideShaker parameters. Most relevant for this tutorial is the PSM repo
 
 ![Display of the PSM report tabular file](../../images/psm_report.png "The PSM report")
 
-Scrolling at the bottom to the left will show the sequence for the PSM that matched to these
-metapeptide entries. Column 3 is the sequence matched for each PSM entry. Every PSM is a
+Scrolling towards left will show the sequence for the PSM that matched to these
+metapeptide entries. Column 3 is the sequence matched for each PSM entry. Every identified PSM is a
 new row in the tabular output.
 
 In the following steps of this tutorial, selected portions of this output will be extracted and used for
@@ -214,14 +229,14 @@ about structure and function of the protein. The UniPept web resource developed
 by Ghent University will be used to match the sample peptides to proteins. UniPept indexes all Uniprot
 proteins and provides a fast matching algorithm for peptides.
 
-> ### {% icon tip %} Tip: Unipept
+> ### {% icon comment %} Unipept
 >
 > Users can access UniPept via a [web page](https://unipept.ugent.be) and paste peptide
-> sequences into the search form to retrieve protein information. But we`ll use a Galaxy
+> sequences into the search form to retrieve protein information. But we`ll use the Galaxy
 > *Unipept* tool to automate the process. The *Unipept* tool sends the peptide list to the
 > UniPept REST API service, then transforms the results into datasets that can be further analyzed
 > or operated on within Galaxy.
-{: .tip}
+{: .comment}
 
 #### Recieving the list of peptides: Query Tabular
 
@@ -261,12 +276,12 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **Save the sqlite database in your history**: `Yes`
 >
->        > ### {% icon tip %} Tip
+>        > ### {% icon comment %} Querying SQLite Databases
 >        >
 >        > * **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
 >        > will store the created database in the history, allowing to reuse it directly.
 >        >
->        {: .tip}
+>        {: .comment}
 >
 >    - **SQL Query to generate tabular output**:
 >
@@ -285,10 +300,10 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >    > 1. What does `FROM psm` mean?
 >    > 2. What need to be changed if we only want peptides with a confidence higher then 98%?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    > 1. We want to read from table "psm". We defined the name before in the "Specify Name for Table" option.
->    >    > 2. We need to change the value in line 3: "WHERE validation IS NOT 'Confident' AND confidence >= 98"
->    >    {: .solution }
+>    > > ### {% icon solution %} Solution
+>    > > 1. We want to read from table "psm". We defined the name before in the "Specify Name for Table" option.
+>    > > 2. We need to change the value in line 3: "WHERE validation IS NOT 'Confident' AND confidence >= 98"
+>    > {: .solution }
 >    {: .question}
 >
 >    - **include query result column headers**: `No`
@@ -434,7 +449,7 @@ community based on expressed microbial proteome.
 In the following chapter, a functional analysis will be performed using the **UniPept** application `pept2prot` in order to match the list of peptides with the correlated Gene Ontology terms.
 This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data.
 
-> ### {% icon comment %} Gene Ontology Consortium
+> ### {% icon comment %} Gene Ontology (GO) Consortium
 >
 > The [Gene Ontology Consortium](http://www.geneontology.org/) provides with its Ontology a framework for the model of biology.
 > The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
@@ -481,7 +496,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Creating your own Gene Ontology list
+> ### {% icon details %} Creating your own Gene Ontology list
 >
 > The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
 > `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
@@ -490,7 +505,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 > one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
 >
-{: .tip}
+{: .details}
 
 #### Retrieve GO IDs for peptides: Unipept
 
@@ -660,11 +675,11 @@ With this we have combined all the data into a single database which we can now 
 >    - **SQLite Database**: The created SQLite database from the former step
 >    - **SQL Query**:
 >
->          SELECT go.description, 
+>          SELECT go.description,
 >
->          count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms" 
+>          count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
 >
->          FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN 
+>          FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN
 >
 >          bering_psms ON bering_prot.peptide = bering_psms.sequence
 >
@@ -679,7 +694,7 @@ With this we have combined all the data into a single database which we can now 
 >
 {: .hands_on}
 
-With these three resulting files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides. 
+With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.
 
 > ### {% icon comment %} References
 >
@@ -691,5 +706,8 @@ With these three resulting files the functional analysis of this tutorial is fin
 >
 > - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
 >
+> - [Galaxy-P Metaproteomics instance](http://z.umn.edu/metaproteomicsgateway)
+>
+> - [Metaproteomics video](http://z.umn.edu/mpvideo2018)
 {: .comment}
 

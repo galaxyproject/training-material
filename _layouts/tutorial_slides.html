@@ -3,36 +3,52 @@ layout: base_slides
 ---
 
 {% assign topic = site.data[page.topic_name] %}
-{% for tuto in topic.material %}
+{% assign topic_material = site.pages | topic_filter:page.topic_name %}
+{% for tuto in topic_material %}
     {% if tuto.name == page.tutorial_name %}
         {% assign tutorial = tuto %}
         {% assign title = tutorial.title %}
     {% endif %}
 {% endfor %}
 
+### {% icon question %} Questions
 
-### :grey_question: Questions
-
-{% for question in tutorial.questions %}
+{% for question in page.questions %}
 - {{ question }}
 {% endfor %}
 
 ---
 
-### :dart: Objectives
+{% if page.objectives %}
+### {% icon objectives %} Objectives
 
-{% for objective in tutorial.objectives %}
+{% for objective in page.objectives %}
 - {{ objective }}
 {% endfor %}
 
 ---
+{% endif %}
 
 {{ content }}
 
+
+{% if page.key_points %}
 ---
+### {% icon keypoints %} Key points
 
-### :grey_exclamation: Key points
-
-{% for key_point in tutorial.key_points %}
+{% for key_point in page.key_points %}
 - {{ key_point }}
 {% endfor %}
+{% endif %}
+
+
+{% if page.follow_up_training %}
+---
+### {% icon curriculum %} Do you want to extend your knowledge? 
+
+
+Follow one of our recommended follow-up trainings:
+
+{% include snippets/display_extra_training_slides.md extra_trainings=page.follow_up_training %}
+
+{% endif %}

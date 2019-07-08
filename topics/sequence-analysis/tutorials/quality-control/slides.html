@@ -1,11 +1,41 @@
 ---
 layout: tutorial_slides
-topic_name: sequence-analysis
-tutorial_name: quality-control
 logo: "GTN"
+
+title: "Quality Control"
+zenodo_link: "https://doi.org/10.5281/zenodo.61771"
+questions:
+  - How to control quality of NGS data?
+  - What are the quality parameters to check for each dataset?
+  - How to improve the quality of a sequence dataset?
+objectives:
+  - Manipulate FASTQ files
+  - Control quality from a FASTQ file
+  - Use FastQC tool
+  - Understand FastQC output
+  - Use tools for quality correction
+requirements:
+time_estimation: "1h"
+key_points:
+  - Run quality control on every sequencing dataset before any other analyses
+  - Choose QC parameters carefully
+  - Re-run FastQC to check the impact of the quality control
+contributors:
+  - bebatut
 ---
 
 # Why Quality Control?
+
+???
+
+Potential audience poll ideas:
+
+- Sequenced something or assembled a genome or transcriptome?
+- Can guess why we need to do QC on our data?
+
+Comments:
+
+- Process of removing low quality sequences that might corrupt downstream analyses
 
 ---
 
@@ -15,6 +45,15 @@ logo: "GTN"
 
 <small>[*Ecker et al, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pubmed/22955614)</small>
 
+???
+
+- Many sequencing techniques
+- [Huge diversity in protocols](https://www.illumina.com/science/sequencing-method-explorer.html)
+- Knowledge about source of data (+expectations of how it looks) is important in QC process
+- What is/isn't normal for your data
+
+Segue: Might be concerned about different processing for each
+
 ---
 
 ### From experiments to data
@@ -23,22 +62,65 @@ logo: "GTN"
 
 Quality control = First step of the bioinformatics analyses
 
+???
+
+- But no matter what technique used, same file format
+- Always should go through QC
+
+Segue: So let's look at how that data is stored
+
 ---
 
-### My sequences? <br>Fasta
+### Sequences: FASTA
 
 ```
-> Identifier1 (comment)
+>Identifier1 (comment)
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-> Identifier2 (comment)
+>Identifier2 (comment)
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 XX
 ```
+
+???
+
+- familiar if you've seen genomic data before
+- Starts with greater-than sign
+- Then an identifier with no spaces
+- Everything after a space is a comment
+- Newline
+- Everything up to next greater-than is sequence data (wrapping unnecessary)
+
+Segue: But this is just sequence, and we have data from a sequencer, which includes quality
+
+---
+
+### Sequences: FASTQ
+
+```
+@Identifier1 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
++
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+@Identifier2 (comment)
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
++
+QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+```
+
+???
+
+- Four lines
+- @ + identifier on first line, just like fasta
+- sequence
+- +
+- quality score characters
+
+Segue: so what do the quality chars mean?
 
 ---
 
@@ -59,11 +141,19 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 </small>
 
+???
+
+- Logarithmic scale
+
 ---
 
 ### Quality score
 
 ![](../../images/quality_score.png)
+
+???
+
+- Solexa uses slightly different measure
 
 ---
 
@@ -71,32 +161,46 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ![](../../images/quality_score_encoding.png)
 
----
+???
 
-### My sequences?
-#### FastQ
-
-```
-@ Identifier1 (comment)
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-+
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-@ Identifier2 (comment)
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-+
-QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-```
+- Earlier saw sequence + quality were same length of text
+- Each score encoded as a single character
+- Uses ASCII (common computer encoding, maps numbers to characters)
+- Each technology has a different mapping
+- Mostly see illumina 1.8 these days, others only if historical
 
 ---
 
-## How to check the quality of my sequences?
+## Identifying Potential Quality Issues
 
 ---
 
-class: packed
+### FastQC
 
-### Quality score
-#### Per-base sequence quality
+![](../../images/fastqc-report.png)
+
+???
+
+- Analyses your fastq files
+- Has many modules
+- They report on different aspects of the sequence
+
+- Modules include:
+  - Basic Statistics
+  - Per base sequence quality
+  - Per sequence quality scores
+  - Per base sequence content
+  - Per base GC content
+  - Per sequence GC content
+  - Per base N content
+  - Sequence Length Distribution
+  - Sequence Duplication Levels
+  - Overrepresented sequences
+  - Kmer Content
+
+---
+
+### Quality score: Per-base
 
 ![](../../images/per_base_sequence_quality_good.png)
 
@@ -104,8 +208,8 @@ class: packed
 
 ---
 
-### Quality score
-#### Per-base sequence quality
+
+### Per-base Quality
 
 ![](../../images/per_base_sequence_quality_bad.png)
 
@@ -113,10 +217,7 @@ class: packed
 
 ---
 
-class: packed
-
-### Quality score
-#### Per-base sequence quality
+### Per-base Quality
 
 ![](../../images/per_base_sequence_quality_medium.png)
 
@@ -124,15 +225,13 @@ class: packed
 
 ---
 
-### Quality score
-#### Per-sequence quality scores
+### Per-sequence Quality
 
 ![](../../images/per_sequence_quality.png)
 
 ---
 
-### Quality score
-#### Per-tile sequence quality
+### Per-tile Quality
 
 ![](../../images/per_tile_quality.png)
 
@@ -145,8 +244,7 @@ This graph will only appear with Illumina libraries which retain their original 
 
 ---
 
-### Also to check: Sequence content
-#### Per-base sequence content
+### Per-base Sequence Content
 
 ![](../../images/per_base_sequence_content.png)
 
@@ -162,8 +260,7 @@ There are a number of common scenarios for these issues:
 
 ---
 
-### Also to check: Sequence content
-#### Per-sequence GC content
+### Per-sequence GC content
 
 ![](../../images/per_sequence_GC_content.png)
 
@@ -174,8 +271,7 @@ Issues in the GC content distribution usually indicate a problem with the librar
 
 ---
 
-### Also to check: Sequence content
-#### Per-base N content
+### Per-base N content
 
 ![](../../images/per_base_N_content.png)
 
@@ -186,21 +282,20 @@ If a sequencer is unable to make a base call with sufficient confidence then it 
 
 ---
 
-### Also to check: Sequence length
-#### Sequence length distribution
+### Sequence length distribution
 
 ![](../../images/sequence_length_distribution.png)
 
 ???
 Some high throughput sequencers generate sequence fragments of uniform length, while others can output reads of wildly varying lengths. The length distribution can be then used as quality measure. You would expect a normal distribution for the best result. However, most sequencing results show a slowly increasing and then a steep falling distribution.
 
-FastQC generates a graph showing the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FastQ files this will show the relative amounts of each different size of sequence fragment.
+FastQC generates a graph showing the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
 
 This module will raise a warning if all sequences are not the same length. This module will raise an error if any of the sequences have zero length.
 
 ---
 
-### Also to check: Duplicated sequences
+### Duplicated sequences
 
 ![](../../images/sequence_duplication_levels.png)
 
@@ -215,8 +310,7 @@ This module issues a warning if non-unique sequences make up for more than 20% o
 
 ---
 
-### Also to check: Tag sequences
-#### Adapter contamination
+### Tag sequences: Adapter contamination
 
 ![](../../images/adapter_content.png)
 
@@ -227,25 +321,20 @@ To investigate tag or adapter content, FastQC generates a plot showing a cumulat
 
 ---
 
-### Also to check: Tag sequences
-#### K-mer content
+### Tag sequences: K-mer content
 
 ![](../../images/kmer_content.png)
 
 ???
 Another way to find tag sequences is to look at the K-mer content, and find those which do not have even coverage through the length of your reads and could correspond to tag sequences.
 
-K-mers with positionally biased enrichment are reported. The top 6 most biased K-mer are additionally plotted to show their distribution. 
+K-mers with positionally biased enrichment are reported. The top 6 most biased K-mer are additionally plotted to show their distribution.
 
-Over-represented K-mers will appear as sharp spikes at a single point in the sequence, deviating from what should be a progressive or broad enrichment. 
-
----
-
-## How to improve the quality of my sequences?
+Over-represented K-mers will appear as sharp spikes at a single point in the sequence, deviating from what should be a progressive or broad enrichment.
 
 ---
 
-### Sequence quality improvements
+## Improving the quality of sequences
 
 - Filtering of sequences
     - with small mean quality score

@@ -22,20 +22,24 @@ env:
 matrix:
   fast_finish: true
   include:
-    - env: CHECK=yamllint
+    - env: CHECK=lint
       if: branch != gh-pages
     - env: CHECK=slides
       if: branch != gh-pages
     - env: CHECK=site-build
       if: branch != gh-pages
     - env: CHECK=htmlproofer
+    - env: CHECK=htmlproofer-internal
+    - env: CHECK=pdf-generation
   allow_failures:
     - env: CHECK=htmlproofer
     - env: CHECK=slides
-  
+    - env: CHECK=pdf-generation
+
 install:
   - sudo apt-get update
   - sudo update-ca-certificates
+  - sudo pip install awscli
   - make install-conda
   - export PATH="$HOME/miniconda3/bin:$PATH"
   - conda config --set always_yes yes --set changeps1 no
@@ -57,15 +61,21 @@ script:
       if [ "$CHECK" == "htmlproofer" ]
       then
         make check-html
-      elif [ "$CHECK" == "yamllint" ]
+      elif [ "$CHECK" == "htmlproofer-internal" ]
       then
-        make check-yaml
+        make check-html-internal
+      elif [ "$CHECK" == "lint" ]
+      then
+        make lint
       elif [ "$CHECK" == "slides" ]
       then
         make check-slides
       elif [ "$CHECK" == "site-build" ]
       then
         make build
+      elif [ "$CHECK" == "pdf-generation" ]
+      then
+        make pdf
       fi
     fi
 
@@ -73,5 +83,12 @@ after_success:
   - |
     if [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_BRANCH" == "master" -a "$CHECK" == "site-build" ]
     then
+      # update badges and instances and rebuild
+      make annotate
+      make build
       bin/publish
+    elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
+    then
+      # Do not publish old versions live, and do not update badges since not pushing to gh-pages.
+      bin/publish-archive
     fi

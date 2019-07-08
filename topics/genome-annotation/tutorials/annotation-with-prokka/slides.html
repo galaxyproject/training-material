@@ -1,8 +1,26 @@
 ---
 layout: tutorial_slides
-topic_name: genome-annotation
-tutorial_name: annotation-with-prokka
 logo: "GTN"
+
+title: "Genome annotation with Prokka"
+zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
+tags:
+  - prokaryote
+questions:
+  - "How to annotate a bacterial genome?"
+  - "How to visualize annoted genomic features?"
+objectives:
+  - "Load genome into Galaxy"
+  - "Annotate genome with Prokka"
+  - "View annotations in JBrowse"
+time_estimation: "1h"
+key_points:
+  - "Prokka is a useful tool to annotate a bacterial genome."
+  - "JBrowse can be used to inspect the annotation of a genome."
+contributors:
+  - annasyme
+  - tseemann
+  - slugger70
 ---
 
 <!--
@@ -14,28 +32,46 @@ display the other window
 
 ### Overview
 
-- What is genome annotation
+- What is genome annotation?
+
 - Tools for genome annotation
+
 - The tool "Prokka"
 
 ---
+### What is Annotation?
 
-### Annotation
+- Classifying and describing parts of the genome sequence
 
-![annotation pic](images/seq_annotation.jpg)
+- Annotations are biological or other features on a genome, *e.g.*
 
-???
+    - a ribosome binding site: a biological feature
 
-- Annotations are biological or other features on a genome
-- e.g. ribosome binding site: a biological feature
-- e.g. the TTTTTT homopolymer: may or may not be biological but could be interesting
+    - a sequence of TTTTTT: may/may not be biological but could be interesting
+
+- We can name features by type and location, *e.g.* gene, pseudogene, repeat
+
+- We can hypothesise functions, *e.g.* antioxidant activity
 ---
-
-### Annotation
-
-![annotation pic](images/annotation_details.png)
+### First: assemble the genome
+![annotation pic](../../images/contigs.png)
 ---
+### Then: annotate
+![annotation pic](../../images/seq_annotation.jpg)
+---
+### Annotation
+![annotation pic](../../images/annotation_details.png)
+---
+### How do we annotate? many different ways:
 
+- sequence: does it match known sequences in databases?
+
+- sequence structure: *e.g.* does it look like an exon (start and stop codons)?
+
+- use other data: *e.g.* do lab experiments to investigate biological function
+---
 ### Prokka
-
-![annotation pic](images/prokka_pipeline.png)
+![annotation pic](../../images/prokka_pipeline.png)
+---
+### More information
+Galaxy Training Network Slides: Introduction to Genome Annotation

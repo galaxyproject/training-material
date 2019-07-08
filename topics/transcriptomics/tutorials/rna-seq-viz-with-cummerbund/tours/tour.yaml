@@ -1,0 +1,308 @@
+﻿---
+id: rna-seq-viz-with-cummerbund
+name: Visualization of RNA-Seq results with CummeRbund
+description: >-
+  In this tutorial we will visualize RNA-Seq results in order to make sense of
+  the available RNA-Seq data, and overview the condition-specific gene
+  expression levels of the provided samples.
+title_default: rna-seq-viz-with-cummerbund
+steps:
+  - title: Introduction
+    content: >-
+      In this tutorial we will visualize RNA-Seq results in order to make sense
+      of the available RNA-Seq data, and overview the condition-specific gene
+      expression levels of the provided samples.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      RNA-Seq analysis helps researchers annotate new genes and splice variants,
+      and provides cell- and context-specific quantification of gene expression.
+      RNA-Seq data, however, are complex and require both computer science and
+      mathematical knowledge to be managed and interpreted.
+      <br><br>Visualization techniques are key to overcome the complexity of
+      RNA-Seq data, and represent valuable tools to gather information and
+      insights.
+    backdrop: true
+  - title: Reasons for visualizing RNA-Seq results
+    content: >-
+      To make sense of the available RNA-Seq data, and overview the
+      condition-specific gene expression levels of the provided samples, we need
+      to visualize our results. Here we will use <a
+      href="http://compbio.mit.edu/cummeRbund/">CummeRbund</a>.
+    backdrop: true
+  - title: CummeRbund
+    content: >-
+      CummeRbund is an open-source tool that simplifies the analysis of a
+      CuffDiff RNA-Seq output. In particular, it helps researchers:<ul>
+        <li>managing, integrating, and visualizing the data produced by CuffDiff</li>
+        <li>simplifying data exploration</li>
+        <li>providing a bird’s-eye view of the expression analysis by describing relationships betweeen genes, transcripts, transcription start sites, and protein-coding regions</li>
+        <li>exploring subfeatures of individual genes or gene-sets</li>
+        <li>creating publication-ready plots</li></ul>
+      CummeRbund reads your RNA-Seq results from a <a
+      href="https://www.sqlite.org/">SQLite</a> database. This database has to
+      be created using CuffDiff’s SQLite output option.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      Create a new history for this exercise. Click on this button and then
+      "Create New"
+    placement: left
+  - title: Importing data via links
+    content: 'Import files from <a href="https://zenodo.org/record/1001880">Zenodo</a>.'
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      The corresponding <a
+      href="https://zenodo.org/record/1001880/files/CuffDiff_SQLite_database.sqlite">link</a>
+      should be provided in this field
+    placement: right
+    textinsert: 'https://zenodo.org/record/1001880/files/CuffDiff_SQLite_database.sqlite'
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded datasets is in the history, but its name corresponds to the
+      link. We want to rename them it to something more meaningful, e.g.
+      "RNA-Seq SQLite result data"<br><br>  <ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+      </ul>
+    position: left
+  - title: Extract CuffDiff results
+    content: >-
+      CuffDiff’s output data is organized in a SQLite database, so we need to
+      extract it to be able to see what it looks like.<br><br> For this
+      tutorial, we are interested in CuffDiff’s tested transcripts for
+      differential expression.
+    backdrop: true
+  - title: Extract CuffDiff results
+    element: '#tool-search-query'
+    content: Search for 'Extract CuffDiff' tool.
+    placement: right
+    textinsert: Extract CuffDiff
+  - title: Extract CuffDiff results
+    element: '#tool-search'
+    content: Click on the 'Extract CuffDiff' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcummerbund_to_tabular%2Fcummerbund_to_cuffdiff%2F1.0.1"]
+        .tool-old-link
+  - title: Extract CuffDiff results
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>“Select tables to output” to `Transcript differential expression
+      testing`</li>
+
+      </ul>
+    position: right
+  - title: Extract CuffDiff results
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Inspect the table by clicking in the eye (“View data”) on the right of the
+      file name in the history.
+
+      <br>Each entry represents a differentially expressed gene, but not all are
+      significant. We want to keep only those that are reported as significant
+      differentially expressed.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How to retain only the significant differentially expressed genes?</li>
+        <li>Which column stores this information?</li>
+      </ul>
+    backdrop: false
+  - title: Filtering and sorting
+    content: >-
+      We now want to first highlight the most significant differentially
+      expressed genes in our analysis, and then obtain informative
+      visualizations.
+    backdrop: true
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '#tool-search-query'
+    content: Search for 'Filter' tool.
+    placement: right
+    textinsert: Filter
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '#tool-search'
+    content: Click on the 'Filter' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=Filter1"]
+        .tool-old-link
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+      <li>“Filter” to the extracted table from the previous step</li>
+      <li>“With following condition” to `c14=='yes'`</li>
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What column stores the information of significance for each record?</li>
+        <li>Which conditional expression has to be set to filter all records on the selected column?</li>
+        <li>What happened to the records in the original table?</li>
+      </ul>
+    backdrop: false
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Look at your data. The differential expression values are stored on column
+      10, we will sort (descending) all records on the basis of their value at
+      the 10th column
+    position: left
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '#tool-search-query'
+    content: Search for 'Sort' tool.
+    placement: right
+    textinsert: Sort
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '#tool-search'
+    content: Click on the 'Sort' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=sort1"]
+        .tool-old-link
+  - title: Extract CuffDiff’s most significant differentially expressed genes
+    element: '#tool-search'
+    content: |-
+      Run the tool with the following parameters:<ul>
+      <li>“Sort Dataset” to the filtered table</li>
+      <li>“on column" to 'c10'</li>
+      <li>"with flavor" to 'Numerical sort'</li>
+      <li>"everything in" to 'Descending order'</li>
+      </ul>
+    position: right
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Since the start of our filtering process, how many records now represent the significant subset for extracting informations?</li>
+        <li>What does this shrinking of the number of lines represent?</li>
+      </ul>
+    backdrop: false
+  - title: CummeRbund
+    content: >-
+      With CummeRbund we can visualize our RNA-Seq results of interest.<br><br>
+
+      CummeRbund generates always two outputs:<ul>
+        <li>the plot</li>
+        <li>the R script responsible for generating the plot</li></ul>
+      We are interested in visualizing all expression values of all transcripts
+      relative to the most significant differentially expressed gene we found in
+      the previous section.
+    backdrop: true
+  - title: Visualization
+    element: '#tool-search-query'
+    content: Search for 'CummeRbund' tool.
+    placement: right
+    textinsert: CummeRbund
+  - title: Visualization
+    element: '#tool-search'
+    content: Click on the 'CummeRbund' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="https://galaxy.uni-freiburg.de/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fcummerbund%2FcummeRbund%2F2.16.0"]
+        .tool-old-link
+  - title: Visualization
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul>
+
+      <li>"Select backend database (sqlite)" to the corresponding result
+      file</li>
+
+      <li>Click on “Insert plot”</li>
+
+      <li>"The width of the image" to `800`</li>
+
+      <li>"The height of the image" to `600`</li>
+
+      <li>"Plot type" to `Expression Plot`</li>
+
+      <li>"Gene ID" to 'NDUFV1'</li>
+
+      </ul>
+    position: right
+  - title: Visualization
+    element: '.history-right-panel .list-items > *:first'
+    content: |-
+      Inspect the output "Expression plot":<ul>
+        <li>The Expression Plot represents the expression of all isoforms of a single gene (NDUFV1) with replicate FPKMs exposed.</li>
+        <li>Our plot has a modest number of isoforms, and is therefore already readable. However, in case of 5 or 6 isoforms, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot.</li><ul>
+    position: left
+  - title: Visualization
+    element: '.history-right-panel .list-items > *:first'
+    content: Re-run the tool again by clicking on "Run this job again" button
+    position: left
+  - title: Visualization
+    element: '#tool-search'
+    content: |-
+      Re-run the tool changing the parameter:<ul>
+      <li>Click on “Insert plot”</li>
+      <li>"Plot type" to `Expression Bar Plot`</li>
+      <li>"Expression levels to plot" to 'Isoforms'</li>
+      </ul>
+    position: right
+  - title: Visualization
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      Expression Bar Plot of a single gene (NDUFV1) with replicate FPKMs
+      exposed.
+    position: left
+  - title: Conclusion
+    content: >-
+      Visualization tools help researchers making sense of data, providing a
+      bird’s-eye view of the underlying analysis results. In this tutorial we
+      overviewed the advantages of visualizing RNA-Seq results with CummeRbund,
+      and gained insights on CuffDiff’s big-data output by plotting informations
+      relative to the most significant differentially expressed genes in our
+      RNA-Seq analysis.
+    backdrop: true
+  - title: Key points
+    content: >-
+      <ul><li>Extract informations from a SQLite CuffDiff database</li>
+
+      <li>Filter and sort results to highlight differential expressed genes of
+      interest</li>
+
+      <li>Generate publication-ready visualizations for RNA-Seq analysis
+      results</il></ul>
+    backdrop: true

@@ -1,7 +1,25 @@
 ---
 layout: tutorial_hands_on
-topic_name: dev
-tutorial_name: visualization-generic
+
+title: "Visualizations: generic plugins"
+questions:
+  - "How can visualization plugins benefit science?"
+objectives:
+  - "Implement a first Galaxy visualization"
+  - "Understand the client side vs. server side principle"
+requirements:
+  -
+    title: "Javascript knowledge"
+    type: "none"
+time_estimation: "90m"
+key_points:
+  - "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access"
+  - "Interactivity is what makes visualizations different from static tools"
+  - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
+  - "Performance is more important than for static Galaxy tools"
+contributors:
+  - shiltemann
+  - yhoogstrate
 ---
 
 # Introduction
@@ -231,25 +249,25 @@ Let's put this all together.
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
 >        root     = h.url_for( '/' )
->    
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
+>
 >        ## Ensure BAI index is symlinked
 >        bai_target = hda.file_name+'.bai'
->    
+>
 >        if not os.path.isfile(bai_target):
 >            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>
 >        ## Extract idxstats
 >        import pysam
 >        bam_idxstats_data = pysam.idxstats(hda.file_name)
@@ -263,19 +281,19 @@ Let's put this all together.
 >        </body>
 >    </html>
 >    ```
->    
+>
 >    We are now ready to test this very basic visualization, we just need a (small) BAM file for it.
 >
 > 3. Download [the example BAM file](https://zenodo.org/record/248730/files/tutorial.bam)
 > 4. Go the galaxy root directory and start Galaxy:
->    
+>
 >    ```bash
 >    $ cd $GALAXY_ROOT
 >    $ ./run.sh
 >    ```
 >
 > 5. Upload the example BAM file to your history
->    
+>
 >    If everything went well, our plugin has appeared as a visualization option for the dataset
 >
 >    > ### {% icon comment %} Comments
@@ -340,34 +358,34 @@ functional changes to the mako files.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Change the mako file to the following:
->    
+>
 >    ```html
 >    <!DOCTYPE HTML>
 >    <%
 >        import os
->    
+>
 >        ## Generates hash (hdadict['id']) of history item
 >        hdadict = trans.security.encode_dict_ids( hda.to_dict() )
->    
+>
 >        ## Finds the parent directory of galaxy (/, /galaxy, etc.)
 >        root     = h.url_for( '/' )
->    
+>
 >        ## Determines the exposed URL of the ./static directory
 >        app_root = root + 'plugins/visualizations/'+visualization_name+'/static/'
->    
+>
 >        ## Actual file URL:
 >        file_url = os.path.join(root, 'datasets', hdadict['id'], "display?to_ext="+hda.ext)
->    
+>
 >        ## Ensure BAI index is symlinked
 >        bai_target = hda.file_name+'.bai'
->    
+>
 >        if not os.path.isfile(bai_target):
 >            os.symlink(hda.metadata.bam_index.file_name, bai_target)
->    
+>
 >        ## Extract idxstats
 >        import pysam
 >        bam_idxstats_data = pysam.idxstats(hda.file_name)
->    
+>
 >    %>
 >    <html>
 >        <head>
@@ -379,7 +397,7 @@ functional changes to the mako files.
 >                    for(var i = 0; i < data.length ; i++) {
 >                        var line = data[i];
 >                        var chunks = line.split("\t");
->    
+>
 >                        if(chunks[0].split("_").length == 1) { // only if it does not contain underscore
 >                            output[chunks[0]] = parseInt(chunks[2]);
 >                        }
@@ -394,7 +412,7 @@ functional changes to the mako files.
 >    </html>
 >    ```
 >
-> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press [Enter]
+> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press <kbd>Enter</kbd>
 >   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
 >
 {: .hands_on}
@@ -408,7 +426,7 @@ chromosome.
 
 ![Example visualization](../../images/vis_plugins_example.png)
 
-The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github_repository }}/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
+The full contents of this plugin are provided in the [GitHub repository related to this material in `tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot).
 To try out this example, simply copy this folder to the `$GALAXY_ROOT/config/plugins/visualizations/` folder
 on your (local) Galaxy and restart Galaxy.
 
@@ -542,14 +560,14 @@ All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
 using static Galaxy tools.
 
-> ### {% icon tip %} Tip: Static files
+> ### {% icon comment %} Static files
 >
 > In the example we included Javascript and CSS into the HTML website.
 > Remember that for every new invocation of the visualization the entire CSS en JS are copied
 > and transferred as well. This is a waste of (redundant) bandwidth as we could save the
 > files in the static directory and refer to them within the HTML. The browser shall check
 > it's cache for the presence of libs and style sheets and only update them if they have changed.
-{: .tip}
+{: .comment}
 
 ### Improvements
 

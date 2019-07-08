@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: contributing
-tutorial_name: create-new-topic
+
+title: "Including a new topic"
+questions:
+  - "How to include a new topic?"
+objectives:
+  - "Create a new topic"
+  - "Set up the metadata for a topic"
+time_estimation: "30m"
+key_points:
+  - "A new topic can be easily added for new tutorials"
+contributors:
+  - bebatut
 ---
 
 # Introduction
@@ -21,7 +31,6 @@ Each training material is related to a topic. All training materials (slides, tu
 │   ├── tutorial1
 │   │   ├── tutorial.md
 │   │   ├── slides.html
-│   │   ├── tools.yaml
 │   │   ├── data-library.yaml
 │   │   ├── workflows
 │   │   │   ├── workflow.ga
@@ -54,7 +63,7 @@ The templates for the tutorials are different from the other pages to help users
 
 The content of each tutorial is generated with [Jekyll](https://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
-> Want to contribute to a tutorial? [Check out our training materials about that]({{ site.baseurl }}/topics/contributing/)
+> Want to contribute to a tutorial? Check out [our training materials about that]({{ site.baseurl }}{% link topics/contributing/index.md %}).
 
 Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
 
@@ -63,7 +72,7 @@ Sometimes, an hands-on tutorial is not the most appropriate format for a tutoria
 
 For each topic, a flavored Docker image must integrate the tools needed for
 the tutorials. The corresponding image must be based on official Galaxy Docker
-images. We recommend to use the content of [`templates/docker`]({{ site.github_repository }}/tree/master/templates/docker) as a template.
+images.
 
 The `docker` image will also integrate the Galaxy tours available for each topics and the workflows.
 
@@ -93,45 +102,81 @@ When we structured the repository, we decided to use as topics the categories th
 >    >
 >    > In which topic will you put the new tutorial?
 >    >
->    >    > ### {% icon solution %} Solution
->    >    >
->    >    > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
->    >    > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    >    {: .solution}
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
+>    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
 In this tutorial, we want to add a new topic called about "my-favorite-topic".
 
-# Creating the directory for the topic
+# Creating the skeleton for the topic
 
 Once the topic name has been chosen, we can create it.
 
-> ### {% icon hands_on %} Hands-on: Copy the required files
+> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
 >
-> 1. Copy the `templates` directory in `topics`
-> 2. Rename the copied directory to `my-favorite-topic`
-> 3. Update the index.md file in the new directory to match your topic's name.
+> 1. Open a terminal
+> 2. Run (by adapting the information between the quotes)
+>
+>    ```
+>    $ planemo training_init \
+>             --topic_name "my-favorite-topic" \
+>             --topic_title "Test" \
+>             --topic_target "use" \
+>             --topic_summary "Summary of the topic"
+>    ```
+>
+> 3. Check that a new directory has been generated in `topics`
+> 4. Check that a YAML file with your topic name has been generated in `metadata` folder
+> 5. Make sure that Jekyll is running
+>
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>
+> 6. Check if the topic has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
+>
 {: .hands_on}
 
-# Make the templating system aware about the topic
+# Adapt the metadata for your topic
 
-We use Jekyll to generate the website out of the Markdown and YAML files. We need to tell Jekyll that there is a new topic by adding a symbolic link to the `metadata.yaml` inside the `metadata` folder.
+Several metadata are defined in `metadata.yaml` file in your topic folder to :
 
-> ### {% icon hands_on %} Hands-on: Add the new topic to the website
+- `name`: name of the topic (name of the folder)
+- `title`: title of the topic (the one displayed on the webpage)
+- `type`: target for the topic ('use', 'admin-dev', 'instructors')
+- `summary`: summary of the focus of the topic
+- `requirements`: list of resources that the reader of the material should be familiar with before starting any tutorial in this topic:
+    - `type`: the type of link (`internal` or `external`)
+
+    For internal, i.e. inside the Galaxy Training Material:
+    - `topic_name`: name of the topic
+    - `tutorials`: list of required tutorials inside of the topic
+
+    For external:
+    - `title`: title of the external resource
+    - `link`: URL to the external resource
+
+- `docker_image`: name of the Docker image for the topic
+
+    If no Docker image exists for this topic, let this information empty
+
+- `maintainers`: GitHub username of people maintaining the topic
+
+> ### {% icon hands_on %} Hands-on: Update the new topic to the website
 >
-> 1. Go the `metadata` folder using the terminal: `cd metadata`
-> 2. Add a symbolic link to the `metadata.yaml` file on our new topic: `ln -s ../topics/my-favorite-topic/metadata.yaml my-favorite-topic.yaml`
-> 3. Move back to the root: `cd ..`
-> 2. Make sure that Jekyll is running
+> 1. Open the `metadata.yaml` file in your topic folder
+> 2. Fill the correct metadata of the topic
+> 3. Make sure that Jekyll is running
 >
->    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}/topics/contributing/tutorials/running-jekyll/tutorial.html)
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >
-> 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
+> 4. Check how it changes the local website
 >
 {: .hands_on}
 
 # Conclusion
 {:.no_toc}
 
-We just created a new topic. We can now fill it with new tutorials.
+We just created a new topic. We can now fill it by [creating new tutorials]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %})
