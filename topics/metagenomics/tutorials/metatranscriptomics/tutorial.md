@@ -133,7 +133,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **FASTQ Groomer**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: The FASTQ Groomer tool provides the user with several formatting options related to the input FASTQ file. In the Default option, the output will be sanger formatted (i.e. file.fastqsanger). If you choose the Advanced option, the user has the capability to choose between any format and force quality scoring i.e. if the score falls outside the target score range, it will be converted to the closest available value.
 >
 > 1. **FASTQ Groomer** {% icon tool %} with the following parameters:
 >    - *"Advanced Options"*: `Hide Advanced Options`
@@ -165,39 +165,6 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **FASTQ Groomer**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FASTQ Groomer** {% icon tool %} with the following parameters:
->    - *"Advanced Options"*: `Hide Advanced Options`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Cutadapt**
 
