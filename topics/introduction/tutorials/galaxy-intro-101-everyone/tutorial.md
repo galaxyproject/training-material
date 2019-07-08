@@ -61,13 +61,13 @@ Not everyone has the same background and that's ok!
 ## What does Galaxy look like?
 
 > ### {% icon hands_on %} Hands-on: Log in or register
-> Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
+> Browse to your [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
 > 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
 > 2. Browse to your Galaxy instance
 > 3. Log in or register
 >
 >   > ### {% icon comment %} Different Galaxy servers
->   > The particular Galaxy server that you are using may look slightly different. Don't worry!
+>   > The particular Galaxy server that you are using may look slightly different than the one shown in this training. Don't worry!
 >   {: .comment}
 >
 {: .hands_on}
@@ -97,26 +97,20 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
-> 1. Make sure you start from an empty analysis history.
+> Make sure you start from an empty analysis history.
 >
 >    {% include snippets/create_new_history.md %}
->
-> 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101 for everyone** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
->
 >![Rename the history]({{ site.baseurl }}{% link shared/images/rename_history.png %})
->
+
+> **Rename your history** to be meaningful and easy to find. 
+>    {% include snippets/rename_history.md %}
 {: .hands_on}
 
-## Inspect Iris dataset
+## Upload Iris dataset
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial and give it a proper name such as `Galaxy 101 for everyone`
->
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
->
-> 2. Import `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. Import `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv
@@ -127,23 +121,65 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the dataset to `iris`
+> 2. Rename the dataset to `iris`
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check the datatype 
+> 3. Check the datatype 
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add the tag `iris` to the dataset
+> 4. Add the tag `iris` to the dataset
 >
 >    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
+# Pre-processing
+
+A pre-processing step can be required to proceed analysis. In this case, format convertion and header removal have to be processed.
+
+
+## Convert dataset **csv_to_tabular**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **csv_to_tabular** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Remove header
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Remove header** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+
 # What does the dataset contain?
 
-Now we are going to inspect the dataset and count how many different species are in the dataset and how many sample for each species.
+Now we are going to inspect the dataset and count the number of different species and how many sample by species are present in the dataset.
 
 ## How many different species are in the dataset?
 
@@ -166,74 +202,6 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .details}
 
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **csv_to_tabular**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **csv_to_tabular** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Remove beginning**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Remove beginning** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Datamash**
 
