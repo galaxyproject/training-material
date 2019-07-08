@@ -56,6 +56,9 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 
 > ### {% icon hands_on %} Hands-on: Data upload
 > 1. Create and name a new history for this tutorial.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the following files from [Zenodo](https://zenodo.org/record/1327423).
 >
 >    ```
