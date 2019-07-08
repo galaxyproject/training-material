@@ -37,6 +37,10 @@ scheme to sum up the pipeline used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
 and technical) key concepts they will learn.
 
+## ASaiM Workflow
+
+![ASaiM diagram](../../images/asaim-wf.png)
+
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
