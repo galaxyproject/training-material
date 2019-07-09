@@ -110,21 +110,7 @@ But what does this quality mean?
 
 The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 
-```
- SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS...............................  Sanger
- ..........................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  Solexa
- ...............................IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII  Illumina 1.3+
- .................................JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ  Illumina 1.5+
- LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL..............................  Illumina 1.8+
- !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefgh
- |                         |    |        |                              |
-33                        59   64       73                            104
- 0........................26...31.......40
-                          -5....0........9.............................40
-                                0........9.............................40
-                                   3.....9.............................40
- 0.2......................26...31........41
-```
+![](../../images/quality_score_encoding.png)
 
 So each nucleotide is assigned an ASCII character, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
 
@@ -170,124 +156,283 @@ To estimate sequence quality along all sequences, we now use [FastQC](https://ww
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> Which Phred encoding is used in the FASTQ file for these sequences?
+>
+> > ### {% icon solution %} Solution
+> > The Phred scores are encoded using `Sanger / Illumina 1.9` (`Encoding` in the top table).
+> {: .solution }
+{: .question}
+
+## Per base sequence quality
+
 Rather than looking at quality scores for each individual read, FastQC looks at quality collectively across all reads within a sample:
 
 ![Per base sequence quality](../../images/quality-control/per_base_sequence_quality.png "Per base sequence quality")
 
-On the x-axis are the base position in the read, and on the y-axis quality scores. In this example, the sample contains reads that are 37 bp long. For each position, there is a box plotted to illustrate the distribution of values (with the whiskers indicating the 90th and 10th percentile scores). The blue line represents the mean score at the postion. The plot background is color-coded to identify good (green), acceptable (yellow), and bad (red) quality scores.
+On the x-axis are the base position in the read. In this example, the sample contains reads that are 37 bp long.
+
+> ### {% icon comment %} Non uniform X-axis
+>
+> The X-axis is not uniform. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows. 
+{: .comment}
+
+For each position, a boxplot (BoxWhisker type ) is drawn with:
+
+- the median value, represented by the central red line
+- the inter-quartile range (25-75%), represented by the yellow box
+- the 10% and 90% points in the upper and lower whiskers
+- the mean quality in the blue line
+
+The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores, scores of reasonable quality (orange), and reads of poor quality (red).
+
+It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will after steadily drop over the length of the read. This is often due to signal decay or phasing during the sequencing run:
+
+- Signal decay
+
+  The fluorescent signal intensity decays with each cycle of the sequencing process. Due to the degrading fluorophores, a proportion of the strands in the cluster are not being elongated. The proportion of signal being emitted continues to decrease with each cycle, yielding to a decrease of quality scores at the 3' end of the read. 
+
+- Phasing
+
+  The signal starts to blur as the number of cycles increases because the cluster loses synchronicity. As the cycles progress, some strands get random failure of nucleotides to incorporate due to:
+
+  - Incomplete removal of the 3' terminators and fluorophores
+  - Incorporation of nucleotides without effective 3' terminators
+
+  It yields to a decrease in quality scores at the 3' end of the read. 
+
+Newer chemistry has improved this somewhat, but reads are now longer than ever. 
+
+> ### {% icon details %} Other sequencing error profiles
+> 
+> - Overclustering
+>
+>   Sequencing facilities can overcluster the flow cells. It results in small distances between clusters and an overlap in the signals. Two clusters can be interpreted as a single cluster with mixed fluorescent signals being detected, decreasing signal purity. It generates lower quality scores across the entire read.
+>
+> - Instrumentation breakdown
+>
+>   Some issues can occasionally happen with the sequencing instruments during a run. Any sudden drop in quality or a large percentage of low quality reads across the read could indicate a problem at the facility. Some examples of such issues:
+>
+>    - Manifold burst
+>
+>      ![Manifold burst](../../images/quality-control/per_base_sequence_quality_manifold_burst.png)
+>
+>    - Cycles loss
+>
+>      ![Cycles loss](../../images/quality-control/per_base_sequence_quality_cycle_loss.png)
+>
+>    - Read 2 failure
+>
+>      ![Cycles loss](../../images/quality-control/per_base_sequence_quality_read2_failure.png)
+>
+>    With such data, the sequencing facility should be contacted for resolution, if possible
+>
+{: .details}
 
 > ### {% icon question %} Questions
 >
-> 1. Which Phred encoding is used in the FASTQ file for these sequences?
-> 2. How is the mean score changing along the sequence?
-> 3. Is this tendency seen in all sequences?
+> 1. How is the mean score changing along the sequence?
+> 2. Is this tendency seen in all sequences?
 >
 > > ### {% icon solution %} Solution
-> > 1. The Phred scores are encoded using `Sanger / Illumina 1.9` (`Encoding` in the top table)
-> > 2. The mean score over the sequence is dropping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
-> > 3. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
+> > 1. The mean score over the sequence is dropping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
+> > 2. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
 > >
 > {: .solution }
 {: .question}
 
+When the median quality is to a phred score of ~20, we should consider trimming the sequence at that point, since sequence with lower quality than that is likely to cause more problems than it fixes. We will explain that process in the next section
+
 FastQC produces other diagnostic plots to assess sample quality.
 
-> ### {% icon details %} More details about the other FastQC plots
->
-> The explanation is adapted from [FastQC documentation](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/))
->
-> - **Per sequence quality scores**
->
->     ![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores.png "Per sequence quality scores")
->
->     The per sequence quality score reports if a subset of the sequences have universally low quality values. It is often the case that a subset of sequences will have universally poor quality, often because they are poorly imaged (on the edge of the field of view etc), however these should represent only a small percentage of the total sequences.
->
-> - **Per tile sequence quality**
->
->     ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality.png "Per tile sequence quality")
->
->      This graph will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The graph enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.
->
->      The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at, or above, the average for that base in the run, and hotter colours indicate that a tile had worse qualities than other tiles for that base. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
->
-> - **Per base sequence content**
->
->     ![Per base sequence content](../../images/quality-control/per_base_sequence_content.png "Per base sequence content")
->
->     Per Base Sequence Content plots out the proportion of each of the four DNA bases (T, C, A, G) at each position along the reads.
->
->     In a random library we would expect that there would be little to no difference between the four bases, so the lines in this plot should run parallel with each other. The relative amount of each base should reflect the overall amount of these bases in the genome, but in any case they should not be hugely imbalanced from each other.
->
->     It's worth noting that some types of library will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start. This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
->
-> - **Per sequence GC content**
->
->     ![Per sequence GC content](../../images/quality-control/per_sequence_gc_content.png "Per sequence GC content")
->
->     This plot displays the GC content across the whole length of each sequence in a file and compares it to a modelled normal distribution of GC content.
->
->     In a normal random library we would expect to see a roughly normal distribution of GC content, where the central peak corresponds to the overall GC content of the underlying genome. Since we don't know the GC content of the genome the modal GC content is calculated from the observed data and used to build a reference distribution.
->
->     An unusually-shaped distribution could indicate a contaminated library or some other kind of biased subset. A normal distribution which is shifted indicates some systematic bias, which is independent of base position. If there is a systematic bias which creates a shifted normal distribution then this won't be flagged as an error by the module since it doesn't know what your genome's GC content should be.
->
-> - **Per base N content**
->
->     ![Per base N content](../../images/quality-control/per_base_n_content.png "Per base N content")
->
->     If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base call.
->
->     It plots out the percentage of base calls at each position for which an N was called.
->
->     It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. However, if this proportion rises above a few percent it suggests that the analysis pipeline was unable to interpret the data well enough to make valid base calls.
->
-> - **Sequence length distribution**
->
->     ![Sequence length distribution](../../images/quality-control/sequence_length_distribution.png "Sequence > length distribution")
->
->     Some high throughput sequencers generate sequence fragments of uniform length, but others can contain reads of wildly varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end.
->
->     This graph shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
->
-> - **Sequence Duplication Levels**
->
->     ![Sequence Duplication Levels](../../images/quality-control/sequence_duplication_levels.png "Sequence Duplication Levels")
->
->     In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias (eg PCR over amplification).
->
->     FastQC counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication.
->
->     There are two lines on the plot. The blue line takes the full sequence set and shows how its duplication levels are distributed. In the red plot the sequences are de-duplicated and the proportions shown are the proportions of the deduplicated set which come from different duplication levels in the original data.
->
->     In a properly diverse library most sequences should fall into the far left of the plot in both the red and blue lines. A general level of enrichment, indicating broad oversequencing in the library will tend to flatten the lines, lowering the low end and generally raising other categories. More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the blue trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.
->
-> - **Overrepresented sequences**
->
->      A normal high-throughput library will contain a diverse set of sequences, with no individual sequence making up a tiny fraction of the whole. Finding that a single sequence is very overrepresented in the set either means that it is highly biologically significant, or indicates that the library is contaminated, or not as diverse as you expected.
->
->      FastQC lists all of the sequence which make up more than 0.1% of the total. For each overrepresented sequence FastQC will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn't necessarily mean that this is the source of the contamination, but may point you in the right direction. It's also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn't technically correct, but which has very similar sequence to the actual match.
->
-> - **Adapter Content**
->
->     ![Adapter Content](../../images/quality-control/adapter_content.png "Adapter Content")
->
->     FastQC does a generic analysis of all of the Kmers in the library to find those which do not have even coverage through the length of your reads. This can find a number of different sources of bias in the library which can include the presence of read-through adapter sequences building up on the end of your sequences.
->
->     The presence of any overrepresented sequences in your library (such as adapter dimers) causes the Kmer plot to be dominated by the Kmers these sequences contain, and then it's not always easy to see if there are other biases present in which you might be interested.
->
->     The plot shows a cumulative percentage count of the proportion of your library which has seen each of the adapter sequences at each position. Once a sequence has been seen in a read it is counted as being present right through to the end of the read so the percentages you see will only increase as the read length goes on.
->
-{: .details}
+## Per sequence quality scores
 
+It plots the average quality score over full length of reads on the x-axis and the total number of reads with this score on the y-axis:
+
+![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores.png "Per sequence quality scores")
+
+The distribution of average read quality should be fairly tight in the upper range of the plot. It can also report if a subset of the sequences have universally low quality values: it can happen because some sequences are poorly imaged (on the edge of the field of view etc), however these should represent only a small percentage of the total sequences.
+
+## Per base sequence content
+
+![Per base sequence content](../../images/quality-control/per_base_sequence_content.png "Per base sequence content for a DNA library")
+
+Per Base Sequence Content plots out the percentage of each of the four nucleotides (T, C, A, G) at each position across all reads in the input.  As for the per base sequence quality, the X-axis is non-uniform.
+
+In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with `%A=%T` and `%G=%C`, and the lines in this plot should run parallel with each other. 
+
+> ### {% icon details %} Biases by library type
+> 
+> It's worth noting that some types of library will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries as in the previous plot), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
+>
+> ![Per base sequence content for RNA-seq data](../../images/quality-control/per_base_sequence_content_rnaseq.png)
+> 
+> ChIP-seq data can also encounter read start sequence biases in this plot if fragmenting with transposases. With bisulphite converted data, e.g. HiC data, a separation of G from C and A from T is expected:
+> 
+> ![Per base sequence content for Bisulphite data](../../images/quality-control/per_base_sequence_content_bisulphite.png)
+>
+> At the end, there is an overall shift in the sequence composition. This correlated with a loss of sequencing quality so the suspicion is that miscalls get made with a more even sequence bias than bisulphite converted libraries. Trimming the sequences fixed this problem, but if this hadn't been done it would have had a dramatic effect on the methylation calls which were made. 
+{: .details}
 
 > ### {% icon question %} Questions
 >
-> Why is there a warning for the per-base sequence content and the per-sequence GC content graphs?
+> Why is there a warning for the per-base sequence content graphs?
 >
 > > ### {% icon solution %} Solution
-> > In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal. For the GC content, the distribution is slightly shifted on the left, and too high.
+> > In the beginning of sequences, the sequence content per base is not really good and the percentages are not equal, as expected for RNA-seq data.
 > {: .solution }
 {: .question}
 
+
+## Per sequence GC content
+
+![Per sequence GC content](../../images/quality-control/per_sequence_gc_content.png "Per sequence GC content")
+
+This plot displays the number of reads vs. GC% per read. It is compared it to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.
+
+An unusually-shaped distribution could indicate a contaminated library or some other kind of biased subset. A normal distribution which is shifted indicates some systematic bias, which is independent of base position. If there is a systematic bias which creates a shifted normal distribution then this won't be flagged as an error by the module since it doesn't know what your genome's GC content should be.
+
+But there are also other situations in which an unusually-shaped distribution may occur. For example, with RNA sequencing there may be a greater or lesser distribution of mean GC content among transcripts causing the observed plot to be wider or narrower than an idealized normal distribution.
+
+> ### {% icon question %} Questions
+>
+> Why is there a warning for the per sequence GC content graphs?
+>
+> > ### {% icon solution %} Solution
+> > The distribution is slightly shifted on the left, and too high.
+> {: .solution }
+{: .question}
+
+## Sequence Duplication Levels
+
+It plots in blue the percentage of reads of a given sequence in the file which are present a given number of times in the file:
+
+![Sequence Duplication Levels](../../images/quality-control/sequence_duplication_levels.png "Sequence Duplication Levels")
+
+In a diverse library most sequences will occur only once in the final set. A low level of duplication may indicate a very high level of coverage of the target sequence, but a high level of duplication is more likely to indicate some kind of enrichment bias.
+
+Two sources of duplicate reads can be found:
+- PCR duplication in which library fragments have been over represented due to biased PCR enrichment
+
+  It is a concern because PCR duplicates misrepresent the true proportion of sequences in the input. 
+
+- Truly over represented sequences such as very abundant transcripts in an RNA-Seq library
+
+  It is an expected case and not of concern because it does faithfully represent the input.
+
+FastQC counts the degree of duplication for every sequence in a library and creates a plot showing the relative number of sequences with different degrees of duplication. There are two lines on the plot:
+- Blue line: distribution of the duplication levels for the full sequence set
+- Red line: distribution for the de-duplicated sequences with the proportions of the deduplicated set which come from different duplication levels in the original data.
+
+For whole genome shotgun data it is expected that nearly 100% of your reads will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing is extremely deep (e.g. > 100X the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence reads which can be obtained from any given input DNA sample. 
+
+More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the red trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.
+
+It is usually the case for RNA sequencing where there is some very highly abundant transcripts and some lowly abundant. It is expected that duplicate reads will be observed for high abundance transcripts:
+
+![Sequence Duplication Levels for RNA-seq](../../images/quality-control/sequence_duplication_levels_rna_seq.png)
+
+## Overrepresented sequences
+
+A normal high-throughput library will contain a diverse set of sequences, with no individual sequence making up a tiny fraction of the whole. Finding that a single sequence is very overrepresented in the set either means that it is highly biologically significant, or indicates that the library is contaminated, or not as diverse as you expected.
+
+FastQC lists all of the sequence which make up more than 0.1% of the total. For each overrepresented sequence FastQC will look for matches in a database of common contaminants and will report the best hit it finds. Hits must be at least 20bp in length and have no more than 1 mismatch. Finding a hit doesn't necessarily mean that this is the source of the contamination, but may point you in the right direction. It's also worth pointing out that many adapter sequences are very similar to each other so you may get a hit reported which isn't technically correct, but which has very similar sequence to the actual match.
+
+With DNA sequencing data no single sequence should be present at a high enough frequency to be listed, but we can sometimes see a small percentage of adapter reads. RNA sequencing data may have some transcripts that are so abundant that they register as overrepresented sequence.
+
+> ### {% icon details %} More details about other FastQC plots
+>
+> #### Per tile sequence quality
+> 
+> ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality.png "Per tile sequence quality")
+> 
+> This graph will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The graph enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.
+>   
+> The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at, or above, the average for that base in the run, and hotter colours indicate that a tile had worse qualities than other tiles for that base. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
+>
+> #### Per base N content
+>
+> ![Per base N content](../../images/quality-control/per_base_n_content.png "Per base N content")
+>
+> If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.
+>
+> It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. But this curve should never rises noticeably above zero. If it does this indicates a problem occurred during the sequencing run. In the example below, an error caused the instrument to be unable to call a base for approximately 20% of the reads at position 29:
+>
+> ![Per base N content](../../images/quality-control/per_base_n_content_error.png)
+> 
+> #### Sequence length distribution
+>
+> ![Sequence length distribution](../../images/quality-control/sequence_length_distribution.png "Sequence length distribution")
+>
+> Some high throughput sequencers generate sequence fragments of uniform length, but others can contain reads of wildly varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end.
+>
+> This graph shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
+>
+> #### Adapter Content
+>
+> ![Adapter Content](../../images/quality-control/adapter_content.png "Adapter Content")
+>
+> The plot shows a cumulative percentage count of the proportion of your library which has seen each of the adapter sequences at each position. Once a sequence has been seen in a read it is counted as being present right through to the end of the read so the percentages only increases as the read length goes on. Only adapters specific to the library type are searched. 
+>
+> Ideally Illumina sequence data should not have any adapter sequence present. But with when using long read, some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3' end of the read. This is more likely to occur with RNA-Seq libraries where the distribution of library insert sizes is more varied and likely to include some short inserts. In the example below, a high quality RNA-Seq library have a small percentage of the library with inserts smaller than 150bp:
+>
+> ![Adapter Content](../../images/quality-control/adapter_content_rna_seq.png)
+>
+> #### Kmer Content
+>
+> FastQC does a generic analysis of all of the short nucleotide of length k (kmer, with k = 7 by default) starting at each positon along the read in the library to find those which do not have even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read. 
+>
+> FastQC will report the list of kmers which appear at specific positions with greater than expected frequency are reported. This can find a number of different sources of bias in the library which can include the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer these sequences contain, and then it's not always easy to see if there are other interesintg biases are present.
+>
+> The following example is from a high quality DNA-Seq library. The biased Kmers near the start of the read likely are due to slight, sequence dependent efficiency of DNA shearing or a result of random priming:
+>
+> ![Adapter Content](../../images/quality-control/kmer_content.png "Kmer content")
+>
+> This module can be very difficult to interpret. RNA-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the [FastQC Kmer Content documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html).
+>
+{: .details}
+
+> ### {% icon details %} Specific problem for alternate library types
+>
+> #### Small/micro RNA
+> 
+> In small RNA libraries, we typically have a relatively small set of unique, short sequences. Small RNA libraries are not randomly sheared before adding sequencing adapters to their ends: all the reads for specific classes of micro RNA will be identical. It will result in:
+> 
+> - Extremely biased per base sequence content
+> - Extremely narrow distribution of GC content
+> - Very high sequence duplication levels
+> - Abundance of overrepresented sequences
+> - Read through into adapters
+>
+> #### Amplicon
+> 
+> Amplicon libraries are prepared by PCR amplification of a specific target. For example, the V4 hypervariable region of the bacterial 16S rRNA gene. All reads from this type of library are expected to be nearly identical. It will result in:
+>
+> - Extremely biased per base sequence content
+> - Extremely narrow distribution of GC content
+> - Very high sequence duplication levels
+> - Abundance of overrepresented sequences
+>
+> #### Bisulfite or Methylation sequencing
+>
+> With Bisulfite or methylation sequencing, the majority of the cytosine (C) bases are converted to thymine (T). It will result in:
+>
+> - Biased per base sequence content
+> - Biased per sequence GC content
+>
+> #### Adapter dimer contamination
+>
+> Any library type may contain a very small percentage of adapter dimer (i.e. no insert) fragments. They are more likely to be found in amplicon libraries constructed entirely by PCR (by formation of PCR primer-dimers) than in DNA-Seq or RNA-Seq libraries constructed by adapter ligation. If a sufficient fraction of the library is adapter dimer it will become noticeable in the FastQC report:
+>
+> - Drop in per base sequence quality after base 60
+> - Possible bi-modal distribution of per sequence quality scores
+> - Distinct pattern observed in per bases sequence content up to base 60
+> - Spike in per sequence GC content
+> - Overrepresented sequence matching adapter
+> - Adapter content > 0% starting at base 1
+>
+{: .details}
 
 # Filter and Trim
 
@@ -435,22 +580,22 @@ Let's first have a look at the quality of our reads!
 >
 > 5. Inspect the webpage output from MultiQC
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. What do you think of the quality of the sequences?
->    > 2. What should we do?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads: lower mean quality of the sequences and stronger decrease at the end (mean value below 28). Lower-quality reverse reads .
->    > > 2. We should trim the end of the sequences and filter them with **Cutadapt** {% icon tool %}
->    > >
->    > {: .solution}
->    {: .question}
->
 {: .hands_on}
 
-It is usual that the quality of the sequences is worse for the reverse than for the forward reads. Therefore it is important to treat the forward and reverse reads together.
+> ### {% icon question %} Questions
+>
+> 1. What do you think of the quality of the sequences?
+> 2. What should we do?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads: lower mean quality of the sequences and stronger decrease at the end (mean value below 28). Lower-quality reverse reads .
+> > 2. We should trim the end of the sequences and filter them with **Cutadapt** {% icon tool %}
+> >
+> {: .solution}
+{: .question}
+
+With paired end reads the average quality scores for forward reads will almost always be higher than for reverse reads. Therefore it is important to treat the forward and reverse reads together for trimming and cutting.
 
 > ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end data
 > 1. **Cutadapt** {% icon tool %} with the following parameters
