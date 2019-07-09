@@ -12,66 +12,18 @@ requirements:
 questions:
 - How can I manipulate data using R in Galaxy?
 - How can I create neat visualizations of the data?
-- Why use R?
-- Why use RStudio and how does it differ from R?
-- What will these lessons not cover?
-- What are the basic features of the R language?
-- What are the most common objects in R?
-- How do I get started with tabular data (e.g. spreadsheets) in R?
-- What are some best practices for reading data into R?
-- How do I save tabular data generated in R?
-- How can I manipulate data frames without repeating myself?
+- What are the basic features and objects of the R language?
+- How do I get started with tabular data from Galaxy in R?
 objectives:
-- Know advantages of analyzing data in R
-- Know advantages of using RStudio
-- Create an RStudio project, and know the benefits of working within a project
-- Why use R?
-- Why use RStudio and how does it differ from R?
-- What are the basic features of the R language?
-- What are the most common objects in R?
-- How do I get started with tabular data (e.g. spreadsheets) in R?
-- What are some best practices for reading data into R?
-- How do I save tabular data generated in R?
-- How can I manipulate data frames without repeating myself?
-- Know advantages of analyzing data in R
-- Know advantages of using RStudio
-- Create an RStudio project, and know the benefits of working within a project
-- Be able to customize the RStudio layout
-- Be able to locate and change the current working directory with getwd() and setwd()
-- Compose an R script file containing comments and commands
-- Understand what an R function is
-- Locate help for an R function using ?, ??, and args()
-- Be able to create the most common R objects including vectors
-- Understand that vectors have modes, which correspond to the type of data they contain
-- Be able to use arithmetic operators on R objects
-- Be able to retrieve (subset), name, or replace, values from a vector
-- Be able to use logical operators in a subsetting operation
-- Understand that lists can hold data of more than one mode and can be indexed
-- Explain the basic principle of tidy datasets
-- Be able to load a tabular dataset using base R functions
-- Be able to determine the structure of a data frame including its dimensions and the datatypes of variables
-- Be able to subset/retrieve values from a data frame
-- Understand how R may coerce data into different modes
-- Be able to change the mode of an object
-- Understand that R uses factors to store and manipulate categorical data
-- Be able to manipulate a factor, including subsetting and reordering
-- Be able to apply an arithmetic function to a data frame
-- Be able to coerce the class of an object (including variables in a data frame)
-- Be able to save a data frame as a delimited file
-- Describe what the `dplyr` package in R is used for.
+- Know advantages of analyzing data using R within Galaxy.
+- Compose an R script file containing comments, commands, objects, and functions.
+- Be able to work with objects (i.e. applying mathematical and logical operators, subsetting, retrieving values, etc).
+- Be able to load and explore the shape and contents of a tabular dataset using base R functions.
+- Understand factors and how they can be used to store and work with categorical data.
 - Apply common `dplyr` functions to manipulate data in R.
 - Employ the ‘pipe’ operator to link together a sequence of functions.
-- Employ the ‘mutate’ function to apply other chosen functions to existing columns and create new columns of data.
-- Employ the ‘split-apply-combine’ concept to split the data into groups, apply analysis to each group, and combine the results.
-- Describe the role of data, aesthetics, and geoms in ggplot functions.
-- Choose the correct aesthetics and alter the geom parameters for a scatter plot, histogram, or box plot.
-- Layer multiple geometries in a single plot.
+- Describe the role of data, aesthetics, geoms, and layers in `ggplot` functions.
 - Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation.
-- Apply a facet to a plot.
-- Apply additional ggplot2-compatible plotting libraries.
-- Save a ggplot to a file.
-- List several resources for getting help with ggplot.
-- List several resources for creating informative scientific plots.
 time_estimation: 3H
 key_points:
 - The take-home messages
