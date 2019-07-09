@@ -22,7 +22,6 @@ key_points:
 - Export manual annotations as GFF3.
 contributors:
 - nathandunn
-
 ---
 
 
@@ -53,50 +52,37 @@ This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github
 >
 {: .agenda}
 
-# Title for your first section
+# Data upload
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+To annotate a genome using Apollo, you simply need the reference genome sequence in FASTA format.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+We will also need to provide evidence for our refined annotations.  
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+This will result in several types of evidence:
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+- If not *de novo*, then this could include a previous released official genome annotation.
+- A set of prior gene predictions or other genomic feature types if available (provided for this example) typically as GFF3.  
+- Individual read files in BAM format if available.
+- Additional visual data to help indicate things like read density such as BigWig files.
 
-have fun!
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3270822) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/Amel_4.5_scaffolds.fa.gz
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2_cds.fa.gz
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2.gff3.gz
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2_pep.fa.gz
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam.bai
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager.bw
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam
 >    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam.bai
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/yeast_chr1%2B2.gff3
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/yeast.fa
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse.bw
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -112,24 +98,32 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Setup Apollo for Annotation
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+Refining genomes happens in multiple steps:
 
+- register a user, injecting the user from Galaxy into Apollo
+- create a viewable genome or organism from the reference genome FASTA file
+- add genomic evidence
+- refine the genome (more on that)
+- export the refined genome annotations
+
+
+(SCREEN SHOT TO ADD of imporection)
 ![Alternative text](../../images/image_name "Legend of the image")
 
 The idea is to keep the theory description before quite simple to focus more on the practical part.
 
-***TODO***: *Consider adding a detail box to expand the theory*
+> ### {% icon details %} Why bother?
+>
+> Automated annotation programs continue to improve, however a simple score may not provide the visual evidence necessary to confirm an accurate prediction.
+> Therefore, it is necessary to both visually inspect as well as fix any issues with the predicted genomes.
+> 
+> Additionally, many times assemblies are less than perfect or read depth and quality may be insufficient.
+> 
 
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
 {: .details}
 
-A big step can have several subsections or sub steps:
 
 
 ## Sub-step with **JBrowse**
@@ -171,28 +165,16 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > ### {% icon comment %} JBrowse is highly configurable
+>    > 
+>    > JBrowse is highly configurable and can be run standalone.   
+>    > A refined genome can be published separate from Apollo or used as further evidence.
 >    {: .comment}
->
+
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+You will now see three new tracks displaying all the evidences used by Maker to generate consensus gene models.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Create or Update Organism**
 
@@ -208,32 +190,7 @@ A big step can have several subsections or sub steps:
 >    - *"Grant access to a user group"*: ``
 >    - *"Remove old data directory"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Annotate**
 
@@ -242,9 +199,6 @@ A big step can have several subsections or sub steps:
 > 1. **Annotate** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Apollo Organism Listing"*: `output` (output of **Create or Update Organism** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -253,32 +207,50 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why DO we bother?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Annotation depth may be insufficient and assemblies may be incorrect.
 > >
 > {: .solution}
 >
 {: .question}
 
+# Create refinements
 
-## Re-arrange
+View data at a particular position
 
-To create the template, each step of the workflow had its own subsection.
+## Create structural edits
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+
+Drag exons, create isoforms, etc. create introns, split transcripts.
+
+## Edit functional data. 
+
+
+## Edit names, etc. 
+
+
+# Export refinements
+
+
+
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Congratulations, you finished this tutorial! You learned how to manually refine predicted eukaryotic genomes using Apollo and export them to other forms.
+
+By using Apollo and JBrowse you can inspect and refine genome annotations with other researchers. 
+When refinement is sufficient an updated or new version of the genome may be exported as GFF3 as well as published as a new JBrowse directory for inspection.
+
+# What's next?
+
+After generating your refined genome, you'll want to merge it back into the official gene sets.  
+
+If a de novo set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
+
