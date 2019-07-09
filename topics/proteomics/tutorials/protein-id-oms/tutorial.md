@@ -16,11 +16,17 @@ requirements:
     type: "internal"
     topic_name: proteomics
     tutorials:
-    - protein-quant-sil
+    - database-handling
 key_points:
   - "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers."
   - "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats."
   - "OpenMS provides several thirdparty search engines and Fido for protein inference."
+follow_up_training:
+-
+  type: "internal"
+  topic_name: proteomics
+  tutorials:
+    - protein-quant-sil
 contributors:
   - stortebecker
   - bgruening
