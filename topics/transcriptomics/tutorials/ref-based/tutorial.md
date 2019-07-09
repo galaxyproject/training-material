@@ -838,6 +838,33 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > For more complex setup, e.g. with many samples, it is possible to use a collection with tags to specify the factors and levels. Check our ["Group tags for complex experimental designs" tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %}), explaining how to do that.
 {: .comment}
 
+## Annotate the extracted genes
+
+In the summary file, the information about the genes are only their ids on the reference databases we used. They are not really informative. Usually, we are also interested in the gene names but also their location (chromosome, start, end, strand).
+
+This information is available to in the GTF we used for mapping and counting. We will use it to annotate the summary file with the following values for each gene
+
+> ### {% icon hands_on %} Hands-on: Annotate the most differentially expressed genes
+>
+> 1. Move the GTF file from the previous history 
+> 2. **Annotate DESeq2/DEXSeq output tables** {% icon tool %}:
+>    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: the summary file from **DESeq2** {% icon tool %})
+>    - *"Input file type"*: `DESeq2/edgeR/limma`
+>    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported GTF file
+> 3. Inspect the generated file
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> What is the name and where on the genome is located the gene with smallest fold-change?
+>
+> > ### {% icon solution %} Solution
+> >
+> > The gene with smallest fold-change is on the 1st line: `Kal1`. It is located on chr3R, between	24,141,394 bp and 24,147,490 and `+` strand.
+> >
+> {: .solution}
+{: .question}
+
 ## Extract differentially expressed genes
 
 Now we would like to extract the most differentially expressed genes due to the treatment, and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.
@@ -892,35 +919,7 @@ We proceed in several steps:
 
 We now have a table with 130 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its id, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
 
-### Annotate the extracted genes
-
-The gene ids in the table with the differentially expressed genes are not really informative.
-Usually, we are also interested in the gene names but also their location (chromosome, start, end, strand).
-
-This information is available to in the GTF we used for mapping and counting. We will use it to annotate our list of most differentially expressed genes.
-
-> ### {% icon hands_on %} Hands-on: Annotate the most differentially expressed genes
->
-> 1. Move the GTF file from the previous history 
-> 2. **Annotate DESeq2/DEXSeq output tables** {% icon tool %}:
->    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: the most differentially expressed genes (output of last **Filter** {% icon tool %})
->    - *"Input file type"*: `DESeq2/edgeR/limma`
->    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported GTF file
-> 3. Inspect the generated file
-{: .hands_on}
-
-> ### {% icon question %} Question
->
-> What is the name and where on the genome is located the gene with smallest fold-change?
->
-> > ### {% icon solution %} Solution
-> >
-> > The gene with smallest fold-change is on the 1st line: `Kal1`. It is located on chr3R, between	24,141,394 bp and 24,147,490 and `+` strand.
-> >
-> {: .solution}
-{: .question}
-
-### Visualize the expression of extracted genes
+## Visualize the normalized counts for the differentially expressed genes
 
 We could plot the $$log_{2} FC$$ for the different genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
 
