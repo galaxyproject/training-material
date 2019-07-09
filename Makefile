@@ -66,7 +66,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
-check-frontmatter: build ## Validate the frontmatter
+check-frontmatter:  ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
 	    xargs -n1 ruby bin/validate-frontmatter.rb
@@ -129,6 +129,11 @@ check-yaml: ## lint yaml files
 check-snippets: ## lint snippets
 	./bin/check-for-trailing-newline
 .PHONY: check-snippets
+
+check-framework:
+	$(ACTIVATE_ENV) && \
+		ruby _plugins/jekyll-notranslate.rb
+.PHONY: check-framework
 
 check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
