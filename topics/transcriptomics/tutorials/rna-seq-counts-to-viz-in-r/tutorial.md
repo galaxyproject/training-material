@@ -184,6 +184,7 @@ You should obtain something like:
 >
 > ```R
 > > date()
+>
 > [1] "Tue Mar 26 15:12:24 2019"
 > ```
 {: .comment}
@@ -249,6 +250,7 @@ An argument may be a specific input for your function and/or may modify the func
 ```R
 # This will round a number to the nearest integer
 > round(3.14)
+
 [1] 3
 ```
 
@@ -281,6 +283,7 @@ The **Help** tab will show you information. In R, this help sometimes also calle
 >
 >    ```R
 >    > args(round)
+>
 >    function (x, digits = 0)
 >    NULL
 >    ```
@@ -306,6 +309,7 @@ We can explicitly set the digits parameter when we call the function.
 >
 >    ```R
 >    > round(3.14159, digits = 2)
+>
 >    [1] 3.14
 >    ```
 >
@@ -315,6 +319,7 @@ We can explicitly set the digits parameter when we call the function.
 >
 >    ```R
 >    > round(3.14159, 2)
+>
 >    [1] 3.14
 >    ```
 {: .hands_on}
@@ -331,6 +336,7 @@ Finally, what if you are using `?` to get help for a function in a package not i
 >
 >    ```R
 >    > ?geom_point()
+>
 >    Error in .helpForCall(topicExpr, parent.frame()) :
 >      no methods for ‘geom_point’ and no documentation for it as a function
 >    ```
@@ -624,6 +630,7 @@ The created object seems to a character object.
 > >    > chr_position <- '1001701'
 > >    > spock <- TRUE
 > >    > pilot <- Earhart
+> >
 > >    [1] Error in eval(expr, envir, enclos): object 'Earhart' not found
 > >    ```
 > >
@@ -660,6 +667,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >
 >    ```R
 >    > (1 + (5 ** 0.5))/2
+>
 >    [1] 1.618034
 >    ```
 >
@@ -669,6 +677,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >    > human_chr_number <- 23
 >    # multiply the object 'human_chr_number' by 2
 >    > human_chr_number * 2
+>
 >    [1] 46
 >    ```
 >
@@ -688,6 +697,7 @@ Once an object exists (which by definition also means it has a mode), R can appr
 > >
 > > ```R
 > > > round((1 + sqrt(5))/2, digits = 3)
+> >
 > > [1] 1.618
 > > ```
 > >
@@ -723,6 +733,7 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    ```R
 >    # Check the mode of 'snp_genes'
 >    > mode(snp_genes)
+>
 >    [1] "character"
 >    ```
 >
@@ -731,6 +742,7 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    ```R
 >    # Check the mode of 'snp_genes'
 >    > length(snp_genes)
+>
 >    [1] "4"
 >    ```
 >
@@ -739,6 +751,7 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    ```R
 >    # Check the structure of 'snp_genes'
 >    > str(snp_genes)
+>
 >    [1] chr [1:4] "OXTR" "ACTN3" "AR" "OPRM1"
 >    ```
 {: .hands_on}
@@ -771,6 +784,7 @@ Once we have vectors, one thing we may want to do is specifically retrieve one o
 >    ```R
 >    # get the 3rd value in the snp_genes vector
 >    > snp_genes[3]
+>
 >    [1] "AR"
 >    ```
 {: .hands_on}
@@ -785,6 +799,7 @@ You can also retrieve a range of numbers:
 >    ```R
 >    # get the 1st through 3rd value in the snp_genes vector
 >    > snp_genes[1:3]
+>
 >    [1] "OXTR"  "ACTN3" "AR"
 >    ```
 >
@@ -793,6 +808,7 @@ You can also retrieve a range of numbers:
 >    ```R
 >    # get the 1st, 3rd, and 4th value in the snp_genes vector
 >    > snp_genes[c(1, 3, 4)]
+>
 >    [1] "OXTR"  "AR"    "OPRM1"
 >    ```
 {: .hands_on}
@@ -809,6 +825,7 @@ examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)). Also
 >    # get the 1st through the 3rd value, and 4th value in the snp_genes vector
 >    # yes, this is a little silly in a vector of only 4 values.
 >    > snp_genes[c(1:3,4)]
+>
 >    [1] "OXTR"  "ACTN3" "AR"    "OPRM1"
 >    ```
 {: .hands_on}
@@ -830,6 +847,7 @@ Once you have an existing vector, you may want to add a new item to it. To do so
 >
 >    ```R
 >    > snp_genes
+>
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" "APOA5"
 >    ```
 {: .hands_on}
@@ -841,6 +859,7 @@ To remove a value from a vection, we can use a negative index that will return a
 >
 >    ```R
 >    > snp_genes[-6]
+>
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1"
 >    ```
 >
@@ -849,6 +868,7 @@ To remove a value from a vection, we can use a negative index that will return a
 >    ```R
 >    > snp_genes <- snp_genes[-6]
 >    > snp_genes
+>
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1"
 >    ```
 {: .hands_on}
@@ -861,6 +881,7 @@ We can also explicitly rename or add a value to our index using double bracket n
 >    ```R
 >    > snp_genes[[7]]<- "APOA5"
 >    > snp_genes
+>
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" NA       "APOA5"
 >    ```
 {: .hands_on}
@@ -900,6 +921,7 @@ For example, let's say we wanted get
 >
 >    ```R
 >    > snp_positions[snp_positions > 100000000]
+>
 >    [1] 154039662
 >    ```
 {: .hands_on}
@@ -920,6 +942,7 @@ The reason why the expression `snp_positions[snp_positions > 100000000]` works c
 
 ```R
 > snp_positions > 100000000
+
 [1] FALSE FALSE FALSE  TRUE
 ```
 
@@ -927,6 +950,7 @@ The output above is a logical vector, the 4th element of which is `TRUE`. When y
 
 ```R
 > snp_positions[c(FALSE, FALSE, FALSE, TRUE)]
+
 [1] 154039662
 ```
 
@@ -937,6 +961,7 @@ If you have never coded before, this type of situation starts to expose the "mag
 >
 >    ```R
 >    > which(snp_positions > 100000000)
+>
 >    [1] 4
 >    ```
 {: .hands_on}
@@ -950,6 +975,7 @@ If you have never coded before, this type of situation starts to expose the "mag
 > ```R
 > > snp_marker_cutoff <- 100000000
 > > snp_positions[snp_positions > snp_marker_cutoff]
+>
 > [1] 154039662
 > ```
 >
@@ -968,6 +994,7 @@ Finally, there are a few other common retrieve or replace operations you may wan
 >    # current value of 'snp_genes':
 >    # chr [1:7] "OXTR" "ACTN3" "AR" "OPRM1" "CYP1A1" NA "APOA5"
 >    > is.na(snp_genes)
+>
 >    [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
 >    ```
 >
@@ -984,6 +1011,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    # test to see if "ACTN3" or "APO5A" is in the snp_genes vector
 >    # if you are looking for more than one value, you must pass this as a vector
 >    > c("ACTN3","APOA5") %in% snp_genes
+>
 >    [1] TRUE TRUE
 >    ```
 >
@@ -1000,10 +1028,15 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    >
 >    > ```R
 >    > > typeof(snps)
+>    >
 >    > [1] "character"
+>    >
 >    > > typeof(snp_chromosomes)
+>    >
 >    > [1] "character"
+>    >
 >    > > typeof(snp_positions)
+>    >
 >    > [1] "double"
 >    > ```
 >    {: .solution}
@@ -1018,12 +1051,17 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > ```R
 >    > > snps <- c(snps, 'rs662799')
 >    > > snps
+>    >
 >    > [1] "rs53576"   "rs1815739" "rs6152"    "rs1799971" "rs662799"
+>    >
 >    > > snp_chromosomes <- c(snp_chromosomes, "11") # did you use quotes?
 >    > > snp_chromosomes
+>    >
 >    > [1] "3"  "11" "X"  "6"  "11"
+>    >
 >    > > snp_positions <- c(snp_positions, 116792991)
 >    > > snp_positions
+>    >
 >    > [1]   8762685  66560624  67545785 154039662 116792991
 >    > ```
 >    {: .solution}
@@ -1038,6 +1076,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > > snp_genes <- snp_genes[-5]
 >    > > snp_genes <- c(snp_genes, NA, NA)
 >    > > snp_genes
+>    >
 >    > [1] "OXTR"  "ACTN3" "AR"    "OPRM1" NA      "APOA5" NA      NA
 >    > ```
 >    >
@@ -1054,6 +1093,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > ```R
 >    > > combined <- c(snp_genes[1], snps[1], snp_chromosomes[1], snp_positions[1])
 >    > > combined
+>    >
 >    > [1] "OXTR"    "rs53576" "3"       "8762685"
 >    > ```
 >    >
@@ -1065,6 +1105,7 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    >
 >    > ```R
 >    > > typeof(combined)
+>    >
 >    > [1] "character"
 >    > ```
 >    >
@@ -1094,6 +1135,7 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >
 >    ```R
 >    > str(snp_data)
+>
 >    List of 4
 >     $ genes         : chr [1:8] "OXTR" "ACTN3" "AR" "OPRM1" ...
 >     $ refference_snp: chr [1:5] "rs53576" "rs1815739" "rs6152" "rs1799971" ...
@@ -1105,6 +1147,7 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >
 >    ```R
 >    > snp_data$position
+>
 >    [1]   8762685  66560624  67545785 154039662 116792991
 >    ```
 >
@@ -1112,6 +1155,7 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >
 >    ```R
 >    > snp_data$position[1]
+>
 >    [1] 8762685
 >    ```
 {: .hands_on}
@@ -1209,6 +1253,7 @@ Now that we've loaded the data, we can use the `colnames()` function to retrieve
 ## get the names of the columns
 
 > colnames(annotatedDEgenes)
+
  [1] "V1"  "V2"  "V3"  "V4"  "V5"  "V6"  "V7"  "V8"  "V9"  "V10" "V11" "V12" "V13"
 ```
 
@@ -1229,6 +1274,7 @@ A **data frame is the standard way in R to store tabular data**. A data fame cou
 ## get summary statistics on a data frame
 
 > summary(annotatedDEgenes)
+
 GeneID            Base.mean          log2.FC           StdErr            Wald.Stats
 FBgn0000071:  1   Min.   :   19.15   Min.   :-4.1485   Min.   :0.08433   Min.   :-30.741
 FBgn0000079:  1   1st Qu.:  100.29   1st Qu.:-1.3363   1st Qu.:0.12849   1st Qu.:-10.005
@@ -1300,6 +1346,7 @@ Let’s look at the first few items in our factor using `head()`:
 
 ```R
 > head(Feature)
+
 [1] protein_coding protein_coding protein_coding protein_coding protein_coding protein_coding
 Levels: lincRNA protein_coding pseudogene
 ```
@@ -1310,6 +1357,7 @@ Lets look at the contents of a factor in a slightly different way using `str()`:
 
 ```R
 > str(Feature)
+
 Factor w/ 3 levels "lincRNA","protein_coding",..: 2 2 2 2 2 2 2 2 1 2 ...
 ```
 For the sake of efficiency, R stores the content of a factor as a vector of integers, which an integer is assigned to each of the possible levels. Recall levels are assigned in alphabetical order. In this case, the first item in our "Feature" object is "protein_coding", which happens to be the 2nd level of our factor, ordered alphabeticaly. The 9th item in the list is "lincRNA", which is the 1st level of our factor.
@@ -1366,6 +1414,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[1,1]
+> >
 > > [1] FBgn0039155
 > > 130 Levels: FBgn0000071 FBgn0000079 FBgn0000116 FBgn0000406 FBgn0000567 FBgn0001137 ... FBgn0267635
 > > ```
@@ -1374,6 +1423,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[2, 4]
+> >
 > > [1] 0.1043451
 > > ```
 > >
@@ -1381,6 +1431,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[130,13]
+> >
 > > [1] CG10440
 > > 130 Levels: Ama Amy-p Ant2 Argk BM-40-SPARC bou bves CAHbeta cbt CG10063 CG10365 CG10440 ... zye
 > > ```
@@ -1389,6 +1440,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[2, ]
+> >
 > >        GeneID Base.mean   log2.FC    StdErr Wald.Stats       P.value         P.adj Seqname    Start
 > > 2 FBgn0003360  6409.577 -2.999777 0.1043451  -28.74863 9.422382e-182 4.040788e-178    chrX 10780892
 > >        End Strand        Feature Gene.Name
@@ -1399,6 +1451,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[-1, ]
+> >
 > >         GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Seqname
 > > 2  FBgn0003360  6409.57713 -2.999777 0.10434506 -28.748628 9.422382e-182 4.040788e-178    chrX
 > > 3  FBgn0026562 65114.84056 -2.380164 0.08432692 -28.225437 2.850473e-175 8.149503e-172   chr3R
@@ -1427,6 +1480,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[1:4,1]
+> >
 > > [1] FBgn0039155 FBgn0003360 FBgn0026562 FBgn0025111
 > > 130 Levels: FBgn0000071 FBgn0000079 FBgn0000116 FBgn0000406 FBgn0000567 FBgn0001137 ... FBgn0267635
 > > ```
@@ -1435,6 +1489,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[1:10,c("Feature","Gene.Name")]
+> >
 > >           Feature   Gene.Name
 > > 1  protein_coding        Kal1
 > > 2  protein_coding        sesB
@@ -1452,6 +1507,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[,c("Gene.Name")]
+> >
 > > [1] Kal1         sesB         BM-40-SPARC  Ant2         Hml          CG1544       CG3770
 > > [8] CG6018       CR43883      Ama          CG3168       CG15695      CG8500       Rgk1
 > > [15] Sesn         CG9119       Sema-2a      l(1)G0196    lectin-28C   Sox100B      Hsp27
@@ -1478,6 +1534,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > head(annotatedDEgenes)
+> >
 > >        GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Seqname    Start
 > > 1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203   chr3R 24141394
 > > 2 FBgn0003360  6409.5771 -2.999777 0.10434506  -28.74863 9.422382e-182 4.040788e-178    chrX 10780892
@@ -1498,6 +1555,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > tail(annotatedDEgenes)
+> >
 > >          GeneID Base.mean   log2.FC    StdErr Wald.Stats      P.value        P.adj Seqname    Start
 > > 125 FBgn0036560  27.71424  1.089000 0.2327527   4.678786 2.885785e-06 6.671531e-05   chr3L 16035484
 > > 126 FBgn0035710  26.16177  1.048979 0.2329221   4.503559 6.682472e-06 1.436480e-04   chr3L  6689326
@@ -1518,6 +1576,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes$GeneID
+> >
 > > [1] FBgn0039155 FBgn0003360 FBgn0026562 FBgn0025111 FBgn0029167 FBgn0039827 FBgn0035085 FBgn0034736
 > > [9] FBgn0264475 FBgn0000071 FBgn0029896 FBgn0038832 FBgn0037754 FBgn0264753 FBgn0034897 FBgn0035189
 > > [17] FBgn0011260 FBgn0027279 FBgn0040099 FBgn0024288 FBgn0001226 FBgn0085359 FBgn0040091 FBgn0262733
@@ -1542,6 +1601,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > > ```R
 > > > annotatedDEgenes[annotatedDEgenes$Feature == "pseudogene",]
+> >
 > > GeneID Base.mean   log2.FC    StdErr Wald.Stats      P.value        P.adj Seqname   Start
 > > 115 FBgn0037223  37.00783 -1.161706 0.2297393  -5.056627 4.267378e-07 1.192225e-05   chr3R 4243605
 > > End Strand    Feature Gene.Name
@@ -1565,10 +1625,12 @@ Finally, in all of the subsetting exercises above, we printed values to the scre
 
 # check the dimension of the data frame
 > dim(annotatedDEgenes_plusStrand)
+
 [1] 72 13
 
 # get a summary of the data frame
 > summary(annotatedDEgenes_plusStrand)
+
 GeneID           Base.mean           log2.FC          StdErr            Wald.Stats
 FBgn0000071: 1   Min.   :   23.55   Min.   :-4.1485   Min.   :0.08603   Min.   :-30.741
 FBgn0001224: 1   1st Qu.:   96.04   1st Qu.:-1.3664   1st Qu.:0.12523   1st Qu.:-11.223
@@ -1608,6 +1670,7 @@ First, its very important to recognize that coercion happens in R all the time. 
 ```R
 > snp_chromosomes <- c('3', '11', 'X', '6')
 > typeof(snp_chromosomes)
+
 [1] "character"
 ```
 
@@ -1616,9 +1679,11 @@ Although there are several numbers in our vector, they are all in quotes, so we 
 ```R
 > snp_chromosomes_2 <- c(3, 11, 'X', 6)
 > typeof(snp_chromosomes_2)
+
 [1] "character"
 
 > snp_chromosomes_2[1]
+
 [1] "3"
 ```
 
@@ -1627,8 +1692,11 @@ We can use the `as.` functions to explicitly coerce values from one form into an
 ```R
 > snp_positions_2 <- c("8762685", "66560624", "67545785", "154039662")
 > typeof(snp_positions_2)
+
 [1] "character"
+
 > snp_positions_2[1]
+
 [1] "8762685"
 ```
 
@@ -1637,8 +1705,11 @@ Now we can coerce `snp_positions_2` into a numeric type using `as.numeric()`:
 ```R
 > snp_positions_2 <- as.numeric(snp_positions_2)
 > typeof(snp_positions_2)
+
 [1] "double"
+
 > snp_positions_2[1]
+
 [1] 8762685
 ```
 
@@ -1646,6 +1717,7 @@ Sometimes coercion is straight forward, but what would happen if we tried using 
 
 ```R
 > snp_chromosomes_2 <- as.numeric(snp_chromosomes_2)
+
 Warning message:
 NAs introduced by coercion
 ```
@@ -1654,6 +1726,7 @@ If we check, we will see that an `NA` value (R's default value for missing data)
 
 ```R
 > snp_chromosomes_2
+
 [1]  3 11 NA  6
 ```
 
@@ -1661,6 +1734,7 @@ Trouble can really start when we try to coerce a factor. For example, when we tr
 
 ```R
 > as.numeric(annotatedDEgenes$Feature)
+
 [1] 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 [49] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2
 [97] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
@@ -1675,6 +1749,7 @@ If you need to coerce an entire column you can overwrite it using an expression 
 > annotatedDEgenes$Feature <- as.character(annotatedDEgenes$Feature)
 # check the type of the column
 > typeof(annotatedDEgenes$Feature)
+
 [1] "character"
 ```
 
@@ -1698,6 +1773,7 @@ You can use functions like `mean()`, `min()`, `max()` on an individual column. L
 
 ```R
 > max(annotatedDEgenes$Base.mean)
+
 [1] 65114.84
 ```
 
@@ -1706,6 +1782,7 @@ You can sort a data frame using the `order()` function:
 ```R
 > sorted_by_BaseMean <- annotatedDEgenes[order(annotatedDEgenes$Base.mean), ]
 > head(sorted_by_BaseMean$Base.mean)
+
 [1] 19.15076 23.55006 24.77052 26.16177 27.71424 31.58769
 ```
 
@@ -1718,6 +1795,7 @@ You can sort a data frame using the `order()` function:
 > > ```R
 > > > sorted_by_BaseMean <- annotatedDEgenes[order(annotatedDEgenes$Base.mean, decreasing = TRUE), ]
 > > > head(sorted_by_BaseMean$Base.mean)
+> >
 > > [1] 65114.841 28915.903 24584.306 22435.886  8903.630  8573.815
 > > ```
 > >
@@ -1728,6 +1806,7 @@ You can rename columns:
 
 ```R
 > max(annotatedDEgenes$Base.mean)
+
 [1] 65114.84
 ```
 
@@ -1737,6 +1816,7 @@ You can sort a data frame using the `order()` function:
 > colnames(annotatedDEgenes)[colnames(annotatedDEgenes) == "Chrom"] <- "chromosome"
 # check the column name (hint names are returned as a vector)
 > colnames(annotatedDEgenes)
+
 [1] "GeneID"     "Base.mean"  "log2.FC"    "StdErr"     "Wald.Stats" "P.value"    "P.adj"
 [8] "chromosome" "Start"      "End"        "Strand"     "Feature"    "Gene.Name"
 ```
@@ -1817,6 +1897,7 @@ frame (`annotatedDEgenes`), and the subsequent arguments are the columns to keep
 
 ```R
 > select(annotatedDEgenes, GeneID, Start, End, Strand)
+
          GeneID    Start      End Strand
 1   FBgn0039155 24141394 24147490      +
 2   FBgn0003360 10780892 10786958      -
@@ -1836,6 +1917,7 @@ the variable to exclude it.
 
 ```R
 > select(variants, -Chromosome)
+
          GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj    Start End Strand        Feature    Gene.Name
 1   FBgn0039155  1086.97430 -4.148450 0.13494887 -30.740902 1.617921e-207 1.387691e-203 24141394  24147490      + protein_coding         Kal1
 2   FBgn0003360  6409.57713 -2.999777 0.10434506 -28.748628 9.422382e-182 4.040788e-178 10780892  10786958      - protein_coding         sesB
@@ -1854,6 +1936,7 @@ the variable to exclude it.
 
 ```R
 > select(annotatedDEgenes, starts_with("P."))
+
           P.value         P.adj
 1   1.617921e-207 1.387691e-203
 2   9.422382e-182 4.040788e-178
@@ -1887,6 +1970,7 @@ To choose rows, use `filter()`:
 
 ```R
 > filter(annotatedDEgenes, Strand == "+")
+
         GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome Start      End Strand        Feature    Gene.Name
 1  FBgn0039155  1086.97430 -4.148450 0.13494887 -30.740902 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding         Kal1
 2  FBgn0029167  5430.06728 -2.105062 0.09254660 -22.745964 1.573283e-114 2.698810e-111      chr3L 13846053 13860001      + protein_coding          Hml
@@ -1957,9 +2041,10 @@ or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac.
 
 ```R
 > annotatedDEgenes %>%
-+   filter(Strand == "+") %>%
-+   select(GeneID, Start, End, Chromosome) %>%
-+   head()
+    filter(Strand == "+") %>%
+    select(GeneID, Start, End, Chromosome) %>%
+    head()
+
        GeneID    Start      End Chromosome
 1 FBgn0039155 24141394 24147490      chr3R
 2 FBgn0029167 13846053 13860001      chr3L
@@ -1989,8 +2074,8 @@ can do so by assigning it a new name:
 
 ```R
 > plus_strand_genes <- annotatedDEgenes %>%
-+   filter(Strand == "+") %>%
-+   select(GeneID, Start, End, Chromosome)
+    filter(Strand == "+") %>%
+    select(GeneID, Start, End, Chromosome)
 ```
 
 This new object includes all of the data from this sample. Let's look at just
@@ -1998,6 +2083,7 @@ the first six rows to confirm it's what we want:
 
 ```R
 > head(plus_strand_genes)
+
        GeneID    Start      End Chromosome
 1 FBgn0039155 24141394 24147490      chr3R
 2 FBgn0029167 13846053 13860001      chr3L
@@ -2018,8 +2104,8 @@ the first six rows to confirm it's what we want:
 >> ### {% icon solution %} Solution
 >> ```R
 >>  > annotatedDEgenes %>%
->>  +   filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
->>  +   select(GeneID, P.adj, log2.FC)
+>>      filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
+>>      select(GeneID, P.adj, log2.FC)
 >> ```
 > {: .solution}
 {: .question}
@@ -2042,8 +2128,9 @@ the observed expression as a multiple of the reference level.
 
 ```R
 > annotatedDEgenes %>%
-+   mutate(ratio.FC = 2 ** log2.FC) %>%
-+   head()
+    mutate(ratio.FC = 2 ** log2.FC) %>%
+    head()
+
        GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome  Start      End Strand        Feature   Gene.Name   ratio.FC
 1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding        Kal1 0.05638871
 2 FBgn0003360  6409.5771 -2.999777 0.10434506  -28.74863 9.422382e-182 4.040788e-178       chrX 10780892 10786958      - protein_coding        sesB 0.12501930
@@ -2061,8 +2148,8 @@ the observed expression as a multiple of the reference level.
 >> ### {% icon solution %} Solution
 >> ```R
 >> > annotatedDEgenes %>%
->> +   mutate(ratio.FC = 2 ** log2.FC) %>%
->> +   select(GeneID, P.adj, log2.FC, ratio.FC)
+>>     mutate(ratio.FC = 2 ** log2.FC) %>%
+>>     select(GeneID, P.adj, log2.FC, ratio.FC)
 >> ```
 > {: .solution}
 {: .question}
@@ -2081,8 +2168,9 @@ chromosome, we would do:
 
 ```R
 > annotatedDEgenes %>%
-+   group_by(Chromosome) %>%
-+   summarize(n())
+    group_by(Chromosome) %>%
+    summarize(n())
+
 # A tibble: 5 x 2
   Chromosome `n()`
   <fct>      <int>
@@ -2104,8 +2192,9 @@ So to view the highest fold change (`log2.FC`) for each chromsome:
 
 ```R
 > annotatedDEgenes %>%
-+   group_by(Chromosome) %>%
-+   summarize(max(log2.FC))
+    group_by(Chromosome) %>%
+    summarize(max(log2.FC))
+
 # A tibble: 5 x 2
   Chromosome `max(log2.FC)`
   <fct>               <dbl>
@@ -2125,11 +2214,11 @@ So to view the highest fold change (`log2.FC`) for each chromsome:
 >>
 >> ```R
 >> > annotatedDEgenes %>%
->> +   mutate(GeneLength = abs(End-Start)) %>%
->> +   group_by(Chromosome) %>%
->> +   summarize(
->> +     max_length = max(GeneLength))
->> +   )
+>>     mutate(GeneLength = abs(End-Start)) %>%
+>>     group_by(Chromosome) %>%
+>>     summarize(
+>>       max_length = max(GeneLength))
+>>     )
 >> ```
 > {: .solution}
 {: .question}
@@ -2151,10 +2240,11 @@ It is often useful to calculate how many observations are present in each group.
 
 ```R
 > annotatedDEgenes %>%
-+   group_by(Chromosome) %>%
-+   summarize(
-+     n = n()
-+   )
+    group_by(Chromosome) %>%
+    summarize(
+      n = n()
+    )
+
 # A tibble: 5 x 2
   Chromosome     n
   <fct>      <int>
@@ -2169,7 +2259,8 @@ Because it's a common operation, the `dplyr` verb, `count()` is a "shortcut" tha
 
 ```R
 > annotatedDEgenes %>%
-+   count(Chromosome)
+    count(Chromosome)
+
 # A tibble: 5 x 2
   Chromosome     n
   <fct>      <int>
@@ -2191,7 +2282,7 @@ Because it's a common operation, the `dplyr` verb, `count()` is a "shortcut" tha
 >>
 >> ```R
 >> > annotatedDEgenes %>%
->> +   count(Chromosome, Strand)
+>>     count(Chromosome, Strand)
 >> ```
 > {: .solution}
 {: .question}
@@ -2211,6 +2302,7 @@ While the tidy format is useful to analyze and plot data in R, it can sometimes 
 +   ) %>%
 +   spread(Strand, n)
 > annotatedDEgenes_wide
+
 # A tibble: 5 x 3
 # Groups:   Chromosome [5]
   Chromosome   `+`   `-`
@@ -2226,7 +2318,7 @@ The opposite operation of `spread()` is taken care by `gather()`. We specify the
 
 ```R
 > annotatedDEgenes_wide %>%
-+   gather(Strand, n, -Chromosome)
+    gather(Strand, n, -Chromosome)
 ```
 
 > ### {% icon question %} Categorising expression levels
@@ -2240,12 +2332,12 @@ The opposite operation of `spread()` is taken care by `gather()`. We specify the
 >>
 >> ```R
 >> > annotatedDEgenes %>%
->> +   mutate(exp_cat = case_when(
->> +     log2.FC >=  1 ~ "up-regulated",
->> +     log2.FC <= -1 ~ "down-regulated"
->> +   )) %>%
->> +   count(Chromosome, exp_cat) %>%
->> +   spread(exp_cat, n)
+>>     mutate(exp_cat = case_when(
+>>       log2.FC >=  1 ~ "up-regulated",
+>>       log2.FC <= -1 ~ "down-regulated"
+>>     )) %>%
+>>     count(Chromosome, exp_cat) %>%
+>>     spread(exp_cat, n)
 >> ```
 >>
 >> **Bonus question:** how could the code above be improved?
@@ -2309,7 +2401,7 @@ To add a `geom` to the plot use the `+` operator. Because we have two continuous
 
 ```R
 > ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = P.value)) +
-+   geom_point(
+    geom_point(
 ```
 
 ![Our first ggplot2 plot](../../images/rna-seq-counts-to-viz-in-r/firstPlot.png "Our first ggplot2 plot")
@@ -2318,7 +2410,7 @@ This is not really informative, mostly due to the number of extremely small numb
 
 ```R
 > ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
-+   geom_point(
+    geom_point(
 ```
 
 ![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png "Volcano Plot version 0")
@@ -2331,7 +2423,7 @@ The `+` in the `ggplot2` package is particularly useful because it allows you to
 
 # Draw the plot
 > de_genes_plot +
-+   geom_point()
+    geom_point()
 ```
 
 **Notes**
@@ -2347,7 +2439,7 @@ The `+` in the `ggplot2` package is particularly useful because it allows you to
 
 # This will not add the new layer and will return an error message
 > de_genes_plot
-+   + geom_point()
+    + geom_point()
 ```
 
 ## Building your plots iteratively
@@ -2356,7 +2448,7 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 
 ```R
 > ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
-+   geom_point(
+    geom_point(
 ```
 
 ![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png "Volcano Plot version 0")
