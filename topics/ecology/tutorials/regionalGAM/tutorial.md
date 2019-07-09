@@ -308,7 +308,7 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 >    - *"Column to plot on y-axis"*: `6`
 >    - *"Plot title"*: add a meaningful title (e.g. `Pyronia tithonus phenology stacked visualization`)
 >    - *"Label for x axis"*: add a meaningful label (e.g. `Day number`)
->    - *"Label for y axis"*: add a meaningful label  (e.g. `nm value`)<!-- TODO (e.g. ????? Ask Benjamin or Reto to know more)-->
+>    - *"Label for y axis"*: add a meaningful label  (e.g. `nm value`)
 >    - *"Type of plot"*: `Line only`
 >    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
 >    - *"column differentiating the different groups"*: `2` to affect one coulor by year
