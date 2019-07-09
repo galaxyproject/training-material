@@ -381,18 +381,6 @@ This is what you should see:
 
 ![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
 
-This fragment size distribution is a good indication if your experiment worked or not.
-In absence of chromatin (without nucleosome), this is the profiles you would get:
-
-![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA") | ![Fragment size distribution of another purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked2.png "Fragment size distribution of another purified DNA")
-
-Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:
-
-![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq") | ![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another failed ATAC-Seq")
-
-A final example of a Fragment size distribution of a very good ATAC-Seq even if we cannot see the third nucleosome "peak".
-![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
-
 > ### {% icon question %} Questions
 >
 > 1. Except the first peak which corresponds to fragments where both Tn5 cuts were in the same accessible chromatin depleted of nucleosome, other peaks correspond to events where there was at least one nucleosome in between the 2 cuts of Tn5. Could you guess the size of the DNA protected by a nucleosome?
@@ -405,7 +393,23 @@ A final example of a Fragment size distribution of a very good ATAC-Seq even if 
 >
 {: .question}
 
-***TODO***: *Provide examples of good and bad profiles, make a comment on the fr and rf*
+This fragment size distribution is a good indication if your experiment worked or not.
+In absence of chromatin (without nucleosome), this is the profiles you would get:
+
+![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA") | ![Fragment size distribution of another purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked2.png "Fragment size distribution of another purified DNA")
+
+Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:
+
+![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq") | ![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another failed ATAC-Seq")
+
+A final example of a Fragment size distribution of a very good ATAC-Seq even if we cannot see the third nucleosome "peak".
+![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
+
+> ### {% icon comment %} Comment on fr and rf
+>
+> You may wonder how it is possible to have rf reads which means that instead of beeing -> <- the paired reads were <- ->. It is just that for the small insert size a lot of pairs have the R1 and the R2 which are mapping exactly to the same place (in reverse orientation). Bowtie2 considered them as concordant but the Picard tools did not know what was the expectation so it classifies half of the reads as fr and half as rf.
+> You should just ignore this part or imagine it is the double of what you see.
+{: .comment}
 
 # Peak calling
 
