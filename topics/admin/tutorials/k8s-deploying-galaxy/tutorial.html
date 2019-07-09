@@ -457,7 +457,8 @@ easily achieved by installing
 <p>For production deployments, we’ll also need some storage resources for data
 persistence. This can be done by either defining a <a href="https://kubernetes.io/docs/concepts/storage/storage-classes/">storage class</a> or
 creating a <a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">Persistent Volume and a corresponding Persistent Volume Claim</a>.
-Once created, just keep a note of the resources ID and we’ll use those later.</p>
+Once created, just keep a note of the resources Persistent Volume Claim ID and
+to use later.</p>
 
 <p>For the CVMFS-enabled version of the chart (more on this below), it is also
 necessary to run Kubernetes version 1.13 or newer because we’ll be using the
@@ -517,7 +518,7 @@ charts and integrating them into the Galaxy chart.</p>
     <li>
       <p>We can now deploy Galaxy via the Chart. Before running this command make
 sure you are in the chart source code directory (where <code class="highlighter-rouge">values.yaml</code> file
-resides) and note the trailing dot. Running this command will a new
+resides) and note the trailing dot. Running this command will create a new
 Helm release (i.e., chart installation) called <code class="highlighter-rouge">galaxy</code>.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install</span> <span class="nt">--name</span> galaxy <span class="nb">.</span>
@@ -563,28 +564,27 @@ nicely grouped. We’ll also fetch the chart from a packaged chart
 repository instead of its GitHub repo.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl create namespace cvmfs
-helm repo add cloudve https://raw.githubusercontent.com/CloudVE/helm-charts/master/
+helm repo add galaxy https://raw.githubusercontent.com/CloudVE/helm-charts/master/
 helm repo update
-helm <span class="nb">install</span> <span class="nt">--name</span> cvmfs <span class="nt">--namespace</span> cvmfs cloudve/galaxy-cvmfs-csi
+helm <span class="nb">install</span> <span class="nt">--name</span> cvmfs <span class="nt">--namespace</span> cvmfs galaxy/galaxy-cvmfs-csi
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We can now install the CVMFS-enabled set of values. Before running the
-install command, make sure you are in the Galaxy chart source directory
-(where the <code class="highlighter-rouge">values.yaml</code>, and <code class="highlighter-rouge">values-cvmfs.yaml</code>, files reside).</p>
+      <p>We can now install the CVMFS-enabled set of values.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install</span> <span class="nt">--name</span> galaxy <span class="nt">-f</span> values-cvmfs.yaml cloudve/galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm <span class="nb">install</span> <span class="nt">--name</span> galaxy galaxy/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Again, it will take a few minutes for Galaxy to start up. This time most of
-the waiting is due to the tools loading into the tool panel. We can check
-the status of the deployment by running <code class="highlighter-rouge">helm status galaxy</code>. We can also
-watch the boot process by tailing the logs of the relevant container with a
-command similar to <code class="highlighter-rouge">kubectl logs -f galaxy-web-7568c58b94-hjl9w</code> where the
-last argument is the name of the desired pod, as printed following the
-<code class="highlighter-rouge">helm install</code> command. Once the boot process has completed, we can access
-Galaxy at <code class="highlighter-rouge">/galaxy/</code> URI (note the trailing <code class="highlighter-rouge">/</code>; it’s significant).</p>
+the waiting is due to the tool definition files to be cached on CVMFS and
+loaded into the tool panel. We can check the status of the deployment by
+running <code class="highlighter-rouge">helm status galaxy</code>. We can also watch the boot process by tailing
+the logs of the relevant container with a command similar to
+<code class="highlighter-rouge">kubectl logs -f galaxy-web-7568c58b94-hjl9w</code> where the last argument is
+the name of the desired pod, as printed following the <code class="highlighter-rouge">helm install</code>
+command. Once the boot process has completed, we can access Galaxy at
+<code class="highlighter-rouge">/galaxy/</code> URI (note the trailing <code class="highlighter-rouge">/</code>; it’s significant).</p>
     </li>
   </ol>
 

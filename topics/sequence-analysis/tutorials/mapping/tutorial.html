@@ -577,8 +577,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -731,48 +729,9 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
 <p>We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.</p>
 
-<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality.</p>
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality.</p>
 
-<blockquote class="comment">
-  <h3 id="comment-required-knowledge-quality-control-basics"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Required Knowledge: Quality Control basics</h3>
-  <p>In order to understand the tools we run in the next step, and how to interpret their outputs, you must have completed the <a href="../quality-control/tutorial.html">quality control</a> tutorial.</p>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
-  <ol>
-    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on both datasets
-      <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: Both fastq files that you uploaded</li>
-      </ul>
-    </li>
-    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the outputs of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
-      <ul>
-        <li>In <em>“Results”</em>
-          <ul>
-            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
-            <li>In <em>“FastQC output”</em>
-              <ul>
-                <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
-                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">Raw data</code> files (output of both <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><strong>Trim Galore!</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the paired-end datasets
-      <ul>
-        <li><em>“Is this paired- or single-end”</em>: <code class="highlighter-rouge">Paired-end</code>
-          <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format #1”</em>: <code class="highlighter-rouge">wt_H3K4me3_read1.fastq.gz</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format #2”</em>: <code class="highlighter-rouge">wt_H3K4me3_read2.fastq.gz</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ol>
-</blockquote>
+<p>There is a dedicated tutorial for <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">quality control</a> of sequencing data. We will not repeat the steps there. You should follow the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">tutorial</a> and apply it to your data before going further.</p>
 
 <h1 id="map-reads-on-a-reference-genome">Map reads on a reference genome</h1>
 

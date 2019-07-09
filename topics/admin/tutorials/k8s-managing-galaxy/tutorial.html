@@ -525,7 +525,7 @@ moving those containers to a different node, allowing maintenance tasks to be
 performed on the underlying node without disruption of service.</p>
 
 <p>In this section, we will look at how to perform common management tasks on
-a Galaxy deployment on Kubernetes, including</p>
+a Galaxy deployment on Kubernetes, including:</p>
 <ul>
   <li>How to upgrade a deployment</li>
   <li>Change the configuration of a running Galaxy instance</li>
@@ -572,7 +572,8 @@ startup, and then change some common settings in <code class="highlighter-rouge"
 <p>We will change the Galaxy configuration to limit the initial list of tools
 that Galaxy will use by pointing to our custom <code class="highlighter-rouge">tool_conf.xml</code>. This will make
 your chart start up much faster for the remainder of this tutorial, as the
-default configuration loads the full list of tools used by <code class="highlighter-rouge">usegalaxy.org</code>.</p>
+default configuration loads the full list of tools used by
+<a href="https://usegalaxy.org/">https://usegalaxy.org/</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-a-custom-tool-set"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a custom tool set</h3>
@@ -580,10 +581,13 @@ default configuration loads the full list of tools used by <code class="highligh
   <ol>
     <li>
       <p>First, let’s create a simpler list of tools by saving the following tool
-config as <code class="highlighter-rouge">my_tool_conf.xml</code> in a folder named <code class="highlighter-rouge">my_configs</code>.</p>
+config as a file called <code class="highlighter-rouge">custom_tool_conf.xml</code>.</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
 <span class="nt">&lt;toolbox</span> <span class="na">tool_path=</span><span class="s">"/cvmfs/main.galaxyproject.org/shed_tools"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"get_data"</span> <span class="na">name=</span><span class="s">"Get Data"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"data_source/upload.xml"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/section&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"chip_seq"</span> <span class="na">name=</span><span class="s">"ChIP-seq"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/1b9a9409831d/chipseeker/chipseeker.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/chipseeker/1.18.0+galaxy1"</span><span class="nt">&gt;</span>
             <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
@@ -614,37 +618,16 @@ config as <code class="highlighter-rouge">my_tool_conf.xml</code> in a folder na
             <span class="nt">&lt;version&gt;</span>0.72+galaxy1<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/tool&gt;</span>
     <span class="nt">&lt;/section&gt;</span>
-    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"convert_formats"</span> <span class="na">name=</span><span class="s">"Convert Formats"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/c24014d80001/intermine_galaxy_exchange/intermine_galaxy_exchange.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
-            <span class="nt">&lt;repository_name&gt;</span>intermine_galaxy_exchange<span class="nt">&lt;/repository_name&gt;</span>
-            <span class="nt">&lt;repository_owner&gt;</span>iuc<span class="nt">&lt;/repository_owner&gt;</span>
-            <span class="nt">&lt;installed_changeset_revision&gt;</span>c24014d80001<span class="nt">&lt;/installed_changeset_revision&gt;</span>
-            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.0.1<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/tool&gt;</span>
-    <span class="nt">&lt;/section&gt;</span>
-    <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"fasta_fastq"</span> <span class="na">name=</span><span class="s">"FASTA/FASTQ"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/d882a0a75759/find_subsequences/find_subsequences.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/bg_find_subsequences/0.2"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
-            <span class="nt">&lt;repository_name&gt;</span>find_subsequences<span class="nt">&lt;/repository_name&gt;</span>
-            <span class="nt">&lt;repository_owner&gt;</span>bgruening<span class="nt">&lt;/repository_owner&gt;</span>
-            <span class="nt">&lt;installed_changeset_revision&gt;</span>d882a0a75759<span class="nt">&lt;/installed_changeset_revision&gt;</span>
-            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/bg_find_subsequences/0.2<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.2<span class="nt">&lt;/version&gt;</span>
-        <span class="nt">&lt;/tool&gt;</span>
-    <span class="nt">&lt;/section&gt;</span>
 <span class="nt">&lt;/toolbox&gt;</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Next, let’s create a new <code class="highlighter-rouge">galaxy.yml</code> file that uses this <code class="highlighter-rouge">my_tool_conf.xml</code>.
-To do so, create a new file named <code class="highlighter-rouge">galaxy.yml</code> and place that in your <code class="highlighter-rouge">my_configs</code>
-folder.</p>
+      <p>Next, let’s create a new <code class="highlighter-rouge">galaxy.yml</code> file that uses this <code class="highlighter-rouge">custom_tool_conf.xml</code>.</p>
 
-      <p>Note that the content below is the same as the <code class="highlighter-rouge">configs</code> section of <code class="highlighter-rouge">values-cvmfs.yaml</code>
-in your helm chart, except that the <code class="highlighter-rouge">tool_config_file</code> entry is pointing to your custom
-tool list instead of the full list from CVMFS.</p>
+      <p>Note that the content below is the same as the <code class="highlighter-rouge">configs</code> section of
+<code class="highlighter-rouge">values-cvmfs.yaml</code> file from the Galaxy Helm chart with one exception:
+<code class="highlighter-rouge">tool_config_file</code> entry is pointing to our custom tool list instead of the
+full list from CVMFS.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
   <span class="na">virtualenv</span><span class="pi">:</span> <span class="s">/galaxy/server/.venv</span>
@@ -669,7 +652,7 @@ tool list instead of the full list from CVMFS.</p>
   <span class="na">database_connection</span><span class="pi">:</span> <span class="s1">'</span><span class="s">postgresql://{{.Values.postgresql.galaxyDatabaseUser}}:{{.Values.postgresql.galaxyDatabasePassword}}@{{</span><span class="nv"> </span><span class="s">template</span><span class="nv"> </span><span class="s">"galaxy-postgresql.fullname"</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">}}/galaxy'</span>
   <span class="na">integrated_tool_panel_config</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/integrated_tool_panel.xml"</span>
   <span class="na">sanitize_whitelist_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/sanitize_whitelist.txt"</span>
-  <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/galaxy/server/config/my_tool_conf.xml"</span>
+  <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/galaxy/server/config/custom_tool_conf.xml"</span>
   <span class="na">tool_data_table_config_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">.Values.cvmfs.main.mountPath</span><span class="nv"> </span><span class="s">}}/config/shed_tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/managed/location/tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/byhand/location/tool_data_table_conf.xml"</span>
   <span class="na">tool_dependency_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/deps"</span>
   <span class="na">builds_file_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.cvmfs.data.mountPath}}/managed/location/builds.txt"</span>
@@ -680,22 +663,22 @@ tool list instead of the full list from CVMFS.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Now, let’s upgrade the chart to use your custom <code class="highlighter-rouge">my_tool_conf.xml</code> and
-<code class="highlighter-rouge">galaxy.yml</code> by running the helm upgrade command.</p>
+      <p>Now, let’s upgrade the chart to use <code class="highlighter-rouge">custom_tool_conf.xml</code> and
+<code class="highlighter-rouge">galaxy.yml</code> by running the <code class="highlighter-rouge">helm upgrade</code> command.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.my_tool_conf</span><span class="se">\.</span><span class="s2">xml"</span><span class="o">=</span>my_configs/my_tool_conf.xml <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>my_configs/galaxy.yml galaxy cloudve/galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.custom_tool_conf</span><span class="se">\.</span><span class="s2">xml"</span><span class="o">=</span>custom_tool_conf.xml <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>configs/galaxy.yml galaxy galaxy/galaxy
 </code></pre></div>      </div>
 
-      <p>Note the <code class="highlighter-rouge">--reuse-values</code> flag, which instructs helm to reuse any
+      <p>Note the <code class="highlighter-rouge">--reuse-values</code> flag, which instructs Helm to reuse any
 previously set values, and apply the new ones on top.  The <code class="highlighter-rouge">--set-file</code>
-option will set the value of the <code class="highlighter-rouge">configs.my_tool_conf.xml</code>
+option will set the value of the <code class="highlighter-rouge">configs.custom_tool_conf.xml</code>
 key in your values file to the contents of the specified file, as a text
-string. Each file under <code class="highlighter-rouge">configs</code> is automatically mapped into galaxy’s config
-directory within the docker container.</p>
+string. Each file under <code class="highlighter-rouge">configs</code> key in <code class="highlighter-rouge">values.yaml</code> is automatically
+mapped into Galaxy’s <code class="highlighter-rouge">config</code> directory within the running container.</p>
     </li>
     <li>
       <p>Notice that while the chart is upgrading, the existing version continues
-to function. The change over will occur when the new container is online
+to function. The changeover will occur when the new container is online
 and signals readiness to Kubernetes by responding to web requests on
 the relevant port. Log into the Kubernetes dashboard and watch the logs
 as the new pods come online.</p>
@@ -728,7 +711,7 @@ galaxy-web-7568c58b94-jzkvm   1/1     Running   0          2d6h
 </code></pre></div>      </div>
 
       <p>Now run <code class="highlighter-rouge">ls /galaxy/server/config/</code> and note that the <code class="highlighter-rouge">galaxy.yml</code> contains
-the content that you’ve provided and that <code class="highlighter-rouge">my_tool_conf.xml</code> has also been
+the content that you’ve provided and that <code class="highlighter-rouge">custom_tool_conf.xml</code> has also been
 mapped into the config folder. In this same way, any of Galaxy’s config
 files can be overridden by simply mapping in the relevant file into the
 config folder.</p>
@@ -737,7 +720,6 @@ config folder.</p>
 </blockquote>
 
 <h2 id="setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</h2>
-
 <p>Next, we will set the admin user and change the brand in <code class="highlighter-rouge">galaxy.yml</code>. We will
 rollback our change to understand how Helm manages configuration.</p>
 
@@ -746,20 +728,21 @@ rollback our change to understand how Helm manages configuration.</p>
 
   <ol>
     <li>
-      <p>Modify the following entries in your <code class="highlighter-rouge">galaxy.yml</code>.</p>
+      <p>Modify the following entries in your <code class="highlighter-rouge">galaxy.yml</code>. Make sure to add these
+keys under the <code class="highlighter-rouge">galaxy:</code> section of the file.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brand: "Hello GCC2019"
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brand: "Hello World"
 admin_users: "admin@mydomain.com"
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Now, let’s upgrade the chart to apply the new configuration.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>my_configs/galaxy.yml galaxy cloudve/galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>galaxy.yml galaxy galaxy/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Inspect the currently set helm values by:</p>
+      <p>Inspect the currently set Helm values by:</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm get values galaxy
 </code></pre></div>      </div>
@@ -781,7 +764,7 @@ galaxy	3       	Wed Jun 26 14:51:17 2019	DEPLOYED	galaxy-3.0.0          	v19.05 
 
       <p>Use <code class="highlighter-rouge">helm get values</code> again to observe that the values have reverted to
 the previous revision. After a short while, once the new container is up
-and running, kubernetes will automatically switch over to it and you can
+and running, Kubernetes will automatically switch over to it and you can
 see that the previous configuration has been restored.</p>
     </li>
   </ol>
@@ -789,7 +772,6 @@ see that the previous configuration has been restored.</p>
 </blockquote>
 
 <h1 id="scaling-galaxy">Scaling Galaxy</h1>
-
 <p>In Galaxy deployment on Kubernetes, there are two containers by default, one
 web handler and one job handler. We will now look at how these can be scaled.</p>
 
@@ -798,7 +780,7 @@ web handler and one job handler. We will now look at how these can be scaled.</p
 
   <ol>
     <li>
-      <p>View the <code class="highlighter-rouge">values-cvmfs.yaml</code> file in your helm chart and note down the
+      <p>View the <code class="highlighter-rouge">values-cvmfs.yaml</code> file in the Galaxy Helm chart and note down the
 number of web and job handlers.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">webHandlers</span><span class="pi">:</span>
@@ -810,7 +792,7 @@ number of web and job handlers.</p>
     <li>
       <p>Let’s increase the number of web handlers by simply setting new values for the number of replicas.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set</span> webHandlers.replicaCount<span class="o">=</span>2 galaxy cloudve/galaxy
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set</span> webHandlers.replicaCount<span class="o">=</span>2 galaxy galaxy/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
@@ -839,7 +821,6 @@ available web handler replicas in a round-robin fashion.</p>
 </blockquote>
 
 <h1 id="testing-kubernetes-resilience">Testing Kubernetes resilience</h1>
-
 <p>To observe how Kubernetes handles failures, let’s exec into a running container and
 manually kill a process to simulate a possible process failure. Kubernetes
 continuously monitors running containers, and attempts to bring the environment
@@ -877,17 +858,17 @@ galaxy-web-7c9576cf89-r6rcj   0/1     Running   1          7m36s
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Notice how Kubernetes immediately starts a new pod to replace the failed one,
-bringing the environment back to the desired state. Take a look at the
-liveness probe defined for the galaxy web container in your helm chart
-source code (<code class="highlighter-rouge">templates/deployment_web.yaml</code>).</p>
+      <p>If we run <code class="highlighter-rouge">kubectl get pods</code>, we can notice how Kubernetes immediately
+starts a new pod to replace the failed one, bringing the environment back to
+the desired state. Take a look at the liveness probe defined for the galaxy
+web container in the helm chart source code
+(<code class="highlighter-rouge">templates/deployment-web.yaml</code>).</p>
     </li>
   </ol>
 
 </blockquote>
 
 <h1 id="deleting-galaxy">Deleting Galaxy</h1>
-
 <p>Finally, let’s take a look at how we can uninstall Galaxy and remove all
 related containers.</p>
 
@@ -909,6 +890,7 @@ related containers.</p>
   </ol>
 
 </blockquote>
+
 <h1 id="next-steps">Next Steps</h1>
 <p>This tutorial provided an overview of some common Galaxy administration tasks.
 Advanced customizations would include running custom shell scripts on Galaxy
