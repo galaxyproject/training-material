@@ -1897,7 +1897,7 @@ memory. The database connections essentially remove that limitation in that you
 can have a database of many 100s GB, conduct queries on it directly and pull
 back just what you need for analysis in R.
 
-### Selecting columns and filtering rows
+## Selecting columns and filtering rows
 
 To select columns of a
 data frame, use `select()`. The first argument to this function is the data
@@ -1977,7 +1977,7 @@ P.value         P.adj
 >> select(annotatedDEgenes, contains("s"), -Wald.Stats, End)
 >> ```
 > {: .solution}
-{: .challenge}
+{: .question}
 
 
 To choose rows, use `filter()`:
@@ -2012,9 +2012,9 @@ but is easier to read!
 
 ```r
 ## rows for genes in Chromosome X or 2R
-filter(annotatedDEgenes, Chromosome %in% c("chrX", "chr2R"))
+> filter(annotatedDEgenes, Chromosome %in% c("chrX", "chr2R"))
 ## rows where the log2 fold change is greater than 2
-filter(annotatedDEgenes, log2.FC >= 2)
+> filter(annotatedDEgenes, log2.FC >= 2)
 ```
 
 `filter()` allows you to combine multiple conditions. You can separate them using a `,` as arguments to the function, they will be combined using the `&` (AND) logical operator. If you need to use the `|` (OR) logical operator, you can specify it explicitly:
@@ -2022,9 +2022,9 @@ filter(annotatedDEgenes, log2.FC >= 2)
 ```r
 ## this is equivalent to:
 ##   filter(annotatedDEgenes, Chromosome == "chrX" & P.adj <= 1e-100)
-filter(annotatedDEgenes, Chromosome == "chrX", P.adj <= 1e-100)
+> filter(annotatedDEgenes, Chromosome == "chrX", P.adj <= 1e-100)
 ## using `|` logical operator
-filter(annotatedDEgenes, Chromosome == "chrX", (log2.FC <= -2 | log2.FC >= 2))
+> filter(annotatedDEgenes, Chromosome == "chrX", (log2.FC <= -2 | log2.FC >= 2))
 ```
 
 > ### {% icon question %} Practising with conditionals
@@ -2040,10 +2040,10 @@ filter(annotatedDEgenes, Chromosome == "chrX", (log2.FC <= -2 | log2.FC >= 2))
 >> filter(annotatedDEgenes, Start >= 1e6 & End <= 2e6, (log2.FC > 1 | P.adj < 1e-75)
 >> ```
 > {: .solution}
-{: .challenge}
+{: .question}
 
 
-### Pipes
+## Pipes
 
 But what if you wanted to select and filter? We can do this with pipes. Pipes, are a fairly recent addition to R. They let you
 take the output of one function and send it directly to the next, which is
@@ -2056,10 +2056,20 @@ part of `dplyr`. If you use RStudio, you can type the pipe with
 or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac.
 
 ```r
-annotatedDEgenes %>%
-  filter(Strand == "+") %>%
-  select(GeneID, Start, End, Chromosome) %>%
-  head()
+> annotatedDEgenes %>%
+    filter(Strand == "+") %>%
+    select(GeneID, Start, End, Chromosome) %>%
+    head()
+```
+
+```
+GeneID    Start      End Chromosome
+1 FBgn0039155 24141394 24147490      chr3R
+2 FBgn0029167 13846053 13860001      chr3L
+3 FBgn0039827 31196915 31203722      chr3R
+4 FBgn0035085 24945138 24946636      chr2R
+5 FBgn0034736 22550093 22552113      chr2R
+6 FBgn0264475   820758   821512      chr3L
 ```
 
 In the above code, we use the pipe to send the `annotatedDEgenes` dataset first through
@@ -2081,9 +2091,9 @@ If we want to create a new object with this smaller version of the data we
 can do so by assigning it a new name:
 
 ```r
-plus_strand_genes <- annotatedDEgenes %>%
-  filter(Strand == "+") %>%
-  select(GeneID, Start, End, Chromosome)
+> plus_strand_genes <- annotatedDEgenes %>%
+    filter(Strand == "+") %>%
+    select(GeneID, Start, End, Chromosome)
 ```
 
 This new object includes all of the data from this sample. Let's look at just
@@ -2093,7 +2103,17 @@ the first six rows to confirm it's what we want:
 > head(plus_strand_genes)
 ```
 
-> ## {% icon question %} Pipes and up-regulation
+```
+GeneID    Start      End Chromosome
+1 FBgn0039155 24141394 24147490      chr3R
+2 FBgn0029167 13846053 13860001      chr3L
+3 FBgn0039827 31196915 31203722      chr3R
+4 FBgn0035085 24945138 24946636      chr2R
+5 FBgn0034736 22550093 22552113      chr2R
+6 FBgn0264475   820758   821512      chr3L
+```
+
+> ### {% icon question %} Pipes and up-regulation
 >
 > Starting with the `annotatedDEgenes` data frame, use pipes to subset the data
 > to include only observations from chromosome 3L,
@@ -2101,16 +2121,16 @@ the first six rows to confirm it's what we want:
 > Retain only the columns `GeneID`, `P.adj`, and `log2.FC`.
 >
 >
->> ## {% icon solution %} Solution
+>> ### {% icon solution %} Solution
 >> ```r
->>  annotatedDEgenes %>%
->>  filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
->>  select(GeneID, P.adj, log2.FC)
+>>  > annotatedDEgenes %>%
+>>      filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
+>>      select(GeneID, P.adj, log2.FC)
 >> ```
 > {: .solution}
-{: .challenge}
+{: .question}
 
-### Mutate
+## Mutate
 
 Frequently you'll want to create new columns based on the values in existing
 columns, for example to do unit conversions or find the ratio of values in two
@@ -2127,9 +2147,19 @@ Let's add a column (`ratio.FC`) to our `annotatedDEgenes` data frame that shows
 the observed expression as a multiple of the reference level.
 
 ```r
-annotatedDEgenes %>%
-  mutate(ratio.FC = 2 ** log2.FC %>%
-  head()
+> annotatedDEgenes %>%
+    mutate(ratio.FC = 2 ** log2.FC) %>%
+    head()
+```
+
+```
+GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome  Start      End Strand        Feature   Gene.Name   ratio.FC
+1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding        Kal1 0.05638871
+2 FBgn0003360  6409.5771 -2.999777 0.10434506  -28.74863 9.422382e-182 4.040788e-178       chrX 10780892 10786958      - protein_coding        sesB 0.12501930
+3 FBgn0026562 65114.8406 -2.380164 0.08432692  -28.22544 2.850473e-175 8.149503e-172      chr3R 26869237 26871995      - protein_coding BM-40-SPARC 0.19208755
+4 FBgn0025111  2192.3224  2.699939 0.09794457   27.56599 2.846764e-167 6.104174e-164       chrX 10778953 10786907      - protein_coding        Ant2 6.49774366
+5 FBgn0029167  5430.0673 -2.105062 0.09254660  -22.74596 1.573283e-114 2.698810e-111      chr3L 13846053 13860001      + protein_coding         Hml 0.23244132
+6 FBgn0039827   390.9018 -3.503014 0.16002962  -21.88979 3.250384e-106 4.646424e-103      chr3R 31196915 31203722      + protein_coding      CG1544 0.08820388
 ```
 
 > ### {% icon question %} Selected mutation
@@ -2139,14 +2169,14 @@ annotatedDEgenes %>%
 >
 >> ### {% icon solution %} Solution
 >> ```r
->> annotatedDEgenes %>%
->>   mutate(ratio.FC = 2 ** log2.FC %>%
->>   select(GeneID, P.adj, log2.FC, ratio.FC)
+>> > annotatedDEgenes %>%
+>>     mutate(ratio.FC = 2 ** log2.FC) %>%
+>>     select(GeneID, P.adj, log2.FC, ratio.FC)
 >> ```
 > {: .solution}
-{: .challenge}
+{: .question}
 
-### Split-apply-combine data analysis and the summarize() function
+## Split-apply-combine data analysis and the summarize() function
 
 Many data analysis tasks can be approached using the "split-apply-combine"
 paradigm: split the data into groups, apply some analysis to each group, and
@@ -2159,9 +2189,20 @@ by `Chromosome` and find the number of rows of data for each
 chromosome, we would do:
 
 ```r
-variants %>%
-  group_by(Chromosome) %>%
-  summarize(n())
+> annotatedDEgenes %>%
+    group_by(Chromosome) %>%
+    summarize(n())
+```
+
+```
+# A tibble: 5 x 2
+  Chromosome `n()`
+  <fct>      <int>
+1 chr2L         24
+2 chr2R         31
+3 chr3L         27
+4 chr3R         32
+5 chrX          16
 ```
 
 Here the summary function used was `n()` to find the count for each
@@ -2171,27 +2212,181 @@ we can use built-in functions like
 `mean()`, `median()`, `min()`, and `max()`. These are called
 "built-in functions" because they come with R and don't require that you install any additional packages.
 
-> ### {% icon comment %} Watch out for missing data
-> By default, all **R functions
-> operating on vectors that contain missing data will return NA**.
-> It's a way to make sure that users know they have missing
-> data, and make a conscious decision on how to deal with it. When
-> dealing with simple statistics like the mean, the easiest way to
+So to view the highest fold change (`log2.FC`) for each chromsome:
+
+```r
+> annotatedDEgenes %>%
+    group_by(Chromosome) %>%
+    summarize(max(log2.FC))
+```
+
+```
+# A tibble: 5 x 2
+  Chromosome `max(log2.FC)`
+  <fct>               <dbl>
+1 chr2L                2.15
+2 chr2R                2.41
+3 chr3L                2.43
+4 chr3R                2.36
+5 chrX                 2.70
+```
+
+> ### {% icon question %} Summarizing groups
+>
+> What are the longest genes in each chromosome? Hint: the function `abs()`
+> returns the absolute value.
+>
+>> ### {% icon solution %} Solution
+>>
+>> ```r
+>> > annotatedDEgenes %>%
+>>     mutate(GeneLength = abs(End-Start)) %>%
+>>     group_by(Chromosome) %>%
+>>     summarize(
+>>       max_length = max(GeneLength))
+>>     )
+>> ```
+> {: .solution}
+{: .question}
+
+> ### {% icon comment %} Missing data and built-in functions
+>
+> R has many built-in functions like `mean()`, `median()`, `min()`, and `max()`
+> that are useful to compute summary statistics. These are called "built-in
+> functions" because they come with R and don't require that you install any
+> additional packages. By default, all **R functions operating on vectors that
+> contains missing data will return NA**. It's a way to make sure that users
+> know they have missing data, and make a conscious decision on how to deal with
+> it. When dealing with simple statistics like the mean, the easiest way to
 > ignore `NA` (the missing data) is to use `na.rm = TRUE` (`rm` stands for
 > remove).
 {: .comment}
 
-So to view the highest fold change (`log2.FC`) for each chromsome:
+It is often useful to calculate how many observations are present in each group. The function `n()` helps you do that:
 
 ```r
-annotatedDEgenes %>%
-  group_by(Chromosome) %>%
-  summarize(max(log2.FC))
+> annotatedDEgenes %>%
+    group_by(Chromosome) %>%
+    summarize(
+      n = n()
+    )
 ```
 
-*Much of this lesson was copied or adapted from Jeff Hollister's [materials](http://usepa.github.io/introR/2015/01/14/03-Clean/).
+```
+# A tibble: 5 x 2
+  Chromosome     n
+  <fct>      <int>
+1 chr2L         24
+2 chr2R         31
+3 chr3L         27
+4 chr3R         32
+5 chrX          16
+```
 
-You may find [this cheatsheet for `dplyr`](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) handy.*
+Because it's a common operation, the `dplyr` verb, `count()` is a "shortcut" that combines these 2 commands:
+
+```r
+> annotatedDEgenes %>%
+    count(Chromosome)
+```
+
+```
+# A tibble: 5 x 2
+  Chromosome     n
+  <fct>      <int>
+1 chr2L         24
+2 chr2R         31
+3 chr3L         27
+4 chr3R         32
+5 chrX          16
+```
+
+`group_by()` (and therfore `count()`) can also take multiple column names.
+
+
+> ### {% icon question %} Counting
+>
+> * How many genes are found in on each strand of each chromosome?
+>
+>> ### {% icon solution %} Solution
+>>
+>> ```r
+>> annotatedDEgenes %>%
+>>   count(Chromosome, Strand)
+>> ```
+> {: .solution}
+{: .question}
+
+## Reshaping data frames
+
+While the tidy format is useful to analyze and plot data in R, it can sometimes be useful to transform the "long" tidy format, into the wide format. This transformation can be done with the `spread()` function provided by the `tidyr` package (also part of the `tidyverse`).
+
+`spread()` takes a data frame as the first argument, and two subsequent arguments: the name of the column whose values will become the column names and the name of the column whose values will fill the cells in the wide data.
+
+```r
+> library('tidyr')
+> annotatedDEgenes_wide <- annotatedDEgenes %>%
+    group_by(Chromosome, Strand) %>%
+    summarize(
+      n = n()
+    ) %>%
+    spread(Strand, n)
+> annotatedDEgenes_wide
+```
+
+```
+# A tibble: 5 x 3
+# Groups:   Chromosome [5]
+  Chromosome   `+`   `-`
+  <fct>      <int> <int>
+1 chr2L         12    12
+2 chr2R         14    17
+3 chr3L         15    12
+4 chr3R         24     8
+5 chrX           7     9
+```
+
+The opposite operation of `spread()` is taken care by `gather()`. We specify the names of the new columns, and here add `-Chromosome` as this column shouldn't be affected by the reshaping:
+
+```r
+> annotatedDEgenes_wide %>%
+    gather(Strand, n, -Chromosome)
+```
+
+> ## {% icon question %} Categorising expression levels
+>
+> Classify each gene as either "up-regulated" (fold change > 1)
+> or "down-regulated" (fold change < 1) and create a table with `Chromosome`
+> as rows, the two new labels as columns, and the number of genes in
+> the cells.
+>
+>> ## {% icon solution %} Solution
+>>
+>> ```r
+>> annotatedDEgenes %>%
+>>   mutate(exp_cat = case_when(
+>>     log2.FC >=  1 ~ "up-regulated",
+>>     log2.FC <= -1 ~ "down-regulated"
+>>   )) %>%
+>>   count(Chromosome, exp_cat) %>%
+>>   spread(exp_cat, n)
+>> ```
+>>
+>> **Bonus question:** how could the code above be improved?
+>> (Hint: think about the assumptions that we made about
+>> the data when writing this solution.)
+> {: .solution}
+{: .question}
+
+## Exporting data
+
+Once we have finished exploring and re-shaping our data,
+we can export this new dataset for further use in Galaxy using FIXME:
+
+## Notes
+
+- Much of this lesson was copied or adapted from Jeff Hollister's [materials](http://usepa.github.io/introR/2015/01/14/03-Clean/).
+- You may find [this cheatsheet for `dplyr`](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) handy.
 
 
 
