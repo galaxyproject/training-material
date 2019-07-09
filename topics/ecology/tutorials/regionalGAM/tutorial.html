@@ -538,21 +538,6 @@
 
 <h2 id="prepare-the-data">Prepare the data</h2>
 
-<p>The downstream tools require Tabular file and not CSV. So we need first to convert our CSV file to a tabular</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-convert-csv-to-tabular"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert CSV to Tabular</h3>
-  <ol>
-    <li>Run <strong>CSV to tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“CSV file”</em>: imported dataset</li>
-        <li><em>“Separator”</em>: “,”</li>
-        <li><em>“Header in file”</em>: Yes</li>
-      </ul>
-    </li>
-  </ol>
-</blockquote>
-
 <p>The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header <code class="highlighter-rouge">SITE</code> of the dataset you are using is really long and the <code class="highlighter-rouge">SITES</code> are classified into sub-sites (like <code class="highlighter-rouge">ESBMS.12</code>, <code class="highlighter-rouge">ESBMS.28</code>, <code class="highlighter-rouge">ESBMS.55</code>, etc).</p>
 
 <p>Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.</p>
@@ -887,9 +872,10 @@
         <li><em>“Column to plot on y-axis”</em>: <code class="highlighter-rouge">6</code></li>
         <li><em>“Plot title”</em>: add a meaningful title (e.g. <code class="highlighter-rouge">Pyronia tithonus phenology stacked visualization</code>)</li>
         <li><em>“Label for x axis”</em>: add a meaningful label (e.g. <code class="highlighter-rouge">Day number</code>)</li>
-        <li><em>“Label for y axis”</em>: add a meaningful label <!-- TODO (e.g. ????? Ask Benjamin or Reto to know more)--></li>
+        <li><em>“Label for y axis”</em>: add a meaningful label  (e.g. <code class="highlighter-rouge">nm value</code>)</li>
         <li><em>“Type of plot”</em>: <code class="highlighter-rouge">Line only</code></li>
         <li><em>“Plotting multiple groups”</em>: <code class="highlighter-rouge">Plot multiple groups of data on one plot</code> to superimpose years</li>
+        <li><em>“column differentiating the different groups”</em>: <code class="highlighter-rouge">2</code> to affect one coulor by year</li>
         <li><em>“Color schemes to differentiate your groups”</em>: <code class="highlighter-rouge">set 3</code> or any set of color with more than 10 colors as there are 10 years in our dataset.</li>
       </ul>
     </li>
