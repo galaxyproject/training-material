@@ -229,6 +229,34 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/proteomics/tutorials/database-handling/tutorial.html",
+      "name": "Protein FASTA Database Handling",
+      "description": "Hands-on for 'Protein FASTA Database Handling' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://galaxyproject.github.io//training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html",
+      "name": "Peptide and Protein ID using OpenMS tools",
+      "description": "Hands-on for 'Peptide and Protein ID using OpenMS tools' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -283,7 +311,8 @@
       "termCode": "topic_0121",
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
     }
-  ]
+  ],
+  "skillLevel": "Intermediate"
 }
     </script>
 
@@ -335,6 +364,95 @@
     </li>
 
             
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/proteomics">Proteomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Protein FASTA Database Handling:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Peptide and Protein ID using OpenMS tools:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
             </ul>
             
 
@@ -342,6 +460,14 @@
             <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
             
 
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
             
 
 
@@ -753,7 +879,7 @@ A detailed description of the full dataset is available in the <a href="">PRIDE 
   <h3 id="comment-comment-multiple-labels-per-peptide"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Multiple labels per peptide</h3>
   <p>When using SILAC-KR or dimethyl-labelling and trypsin digestion, exactly one labelled amino acid per peptide is expected. The only labelled amino acids are lysine (K) and arginine (R) and trypsin cuts after each of them. However, a small percentage of missed cleavage normally occur also in those datasets. Setting <em>“Maximum number of missed cleavages due to incomplete digestion”</em> to <code class="highlighter-rouge">1</code> will be sufficient to deal with most missed cleavages.</p>
 
-  <p>When using other enzymes (e.g. Lys-C) or other labels (e.g. <script type="math/tex">^{18}O</script>), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter <strong>Maximum number of missed cleavages due to incomplete digestion</strong>.</p>
+  <p>When using other enzymes (e.g. Lys-C) or other labels (e.g. <script type="math/tex">^{18}O</script>), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter <em>“Maximum number of missed cleavages due to incomplete digestion”</em>.</p>
 </blockquote>
 
 <h1 id="mapping-identifications-to-features">Mapping Identifications to Features</h1>
@@ -775,7 +901,7 @@ Another refinement of the quantitative result is obtained by removing falsely ma
     <li>Run <strong>IDMapper</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein/peptide identifications file”</em>: output of <strong>IDFilter</strong></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Feature map/consensus map file”</em>: the <code class="highlighter-rouge">consensusXML</code> output of <strong>FeatureFinderMultiplex</strong></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Feature map/consensus map file”</em>: the <code class="highlighter-rouge">consensusXML</code> output of <strong>FeatureFinderMultiplex</strong></li>
         <li><em>“RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features”</em>: <code class="highlighter-rouge">20</code></li>
         <li><em>“m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features”</em>: <code class="highlighter-rouge">10</code></li>
         <li><em>“Match using RT and m/z of sub-features instead of consensus RT and m/z”</em>: <code class="highlighter-rouge">Yes</code></li>
@@ -798,9 +924,9 @@ Another refinement of the quantitative result is obtained by removing falsely ma
     </li>
     <li>Run <strong>MultiplexResolver</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Peptide multiplets with assigned sequence information”</em>: output of <strong>IDConflictResolver</strong>
-       - <em>“Labels used for labelling the samples”</em>: <code class="highlighter-rouge">[ ][Arg6,Lys6]</code>
-       - <em>“Maximum number of missed cleavages due to incomplete digestion”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Peptide multiplets with assigned sequence information”</em>: output of <strong>IDConflictResolver</strong></li>
+        <li><em>“Labels used for labelling the samples”</em>: <code class="highlighter-rouge">[ ][Arg6,Lys6]</code></li>
+        <li><em>“Maximum number of missed cleavages due to incomplete digestion”</em>: <code class="highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li>Run <strong>ProteinQuantifier</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -829,20 +955,20 @@ A simple sum-of-intensities algorithm provided the best estimates of true protei
 For proteins, we added a log-transformed ratio to the output, which is saved in column 8 of the protein table. The ratio is calculated as <strong>log2 (abundance2/abundance1)</strong>, which is sometimes called the <em>fold change (FC)</em> ratio.</p>
 
 <p>To get a quick overview of the results, you can calculate basic descriptive statistics and plot the data as a histogram.
-Comment lines in the beginning of a <code class="highlighter-rouge">tabular</code> file may sometimes cause errors, therefore we will remove them with the tool <strong>Select last (tail)</strong>.</p>
+Comment lines in the beginning of a <code class="highlighter-rouge">tabular</code> file may sometimes cause errors, therefore we will remove them with the tool <strong>Select last lines from a dataset (tail)</strong>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-descriptive-statistics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Descriptive Statistics</h3>
   <ol>
     <li>Run <strong>Summary Statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: protein table output of <strong>ProteinQuantifier</strong></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: protein table output (first file) of <strong>ProteinQuantifier</strong></li>
         <li><em>“Column or expression”</em>: <code class="highlighter-rouge">c8</code></li>
       </ul>
     </li>
-    <li>Run <strong>Select last</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <strong>Select last (tail)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: protein table output of <strong>ProteinQuantifier</strong></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text file”</em>: protein table output (first file) of <strong>ProteinQuantifier</strong></li>
         <li><em>“Operation”</em>: <code class="highlighter-rouge">Keep everything from this line on</code></li>
         <li><em>“Number of lines”</em>: <code class="highlighter-rouge">4</code></li>
       </ul>
