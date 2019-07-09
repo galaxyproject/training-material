@@ -184,7 +184,6 @@ You should obtain something like:
 >
 > ```R
 > > date()
->
 > [1] "Tue Mar 26 15:12:24 2019"
 > ```
 {: .comment}
@@ -250,7 +249,6 @@ An argument may be a specific input for your function and/or may modify the func
 ```R
 # This will round a number to the nearest integer
 > round(3.14)
-
 [1] 3
 ```
 
@@ -283,7 +281,6 @@ The **Help** tab will show you information. In R, this help sometimes also calle
 >
 >    ```R
 >    > args(round)
->
 >    function (x, digits = 0)
 >    NULL
 >    ```
@@ -309,7 +306,6 @@ We can explicitly set the digits parameter when we call the function.
 >
 >    ```R
 >    > round(3.14159, digits = 2)
->
 >    [1] 3.14
 >    ```
 >
@@ -319,7 +315,6 @@ We can explicitly set the digits parameter when we call the function.
 >
 >    ```R
 >    > round(3.14159, 2)
->
 >    [1] 3.14
 >    ```
 {: .hands_on}
@@ -336,7 +331,6 @@ Finally, what if you are using `?` to get help for a function in a package not i
 >
 >    ```R
 >    > ?geom_point()
->
 >    Error in .helpForCall(topicExpr, parent.frame()) :
 >      no methods for ‘geom_point’ and no documentation for it as a function
 >    ```
@@ -630,7 +624,6 @@ The created object seems to a character object.
 > >    > chr_position <- '1001701'
 > >    > spock <- TRUE
 > >    > pilot <- Earhart
-> >
 > >    [1] Error in eval(expr, envir, enclos): object 'Earhart' not found
 > >    ```
 > >
@@ -667,7 +660,6 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >
 >    ```R
 >    > (1 + (5 ** 0.5))/2
->
 >    [1] 1.618034
 >    ```
 >
@@ -677,7 +669,6 @@ Once an object exists (which by definition also means it has a mode), R can appr
 >    > human_chr_number <- 23
 >    # multiply the object 'human_chr_number' by 2
 >    > human_chr_number * 2
->
 >    [1] 46
 >    ```
 >
@@ -697,7 +688,6 @@ Once an object exists (which by definition also means it has a mode), R can appr
 > >
 > > ```R
 > > > round((1 + sqrt(5))/2, digits = 3)
-> >
 > > [1] 1.618
 > > ```
 > >
@@ -733,7 +723,6 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    ```R
 >    # Check the mode of 'snp_genes'
 >    > mode(snp_genes)
->
 >    [1] "character"
 >    ```
 >
@@ -742,7 +731,6 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    ```R
 >    # Check the mode of 'snp_genes'
 >    > length(snp_genes)
->
 >    [1] "4"
 >    ```
 >
@@ -751,7 +739,6 @@ Vectors always have a **mode** and a **length**. In the **Environment** panel, w
 >    ```R
 >    # Check the structure of 'snp_genes'
 >    > str(snp_genes)
->
 >    [1] chr [1:4] "OXTR" "ACTN3" "AR" "OPRM1"
 >    ```
 {: .hands_on}
@@ -784,7 +771,6 @@ Once we have vectors, one thing we may want to do is specifically retrieve one o
 >    ```R
 >    # get the 3rd value in the snp_genes vector
 >    > snp_genes[3]
->
 >    [1] "AR"
 >    ```
 {: .hands_on}
@@ -799,7 +785,6 @@ You can also retrieve a range of numbers:
 >    ```R
 >    # get the 1st through 3rd value in the snp_genes vector
 >    > snp_genes[1:3]
->
 >    [1] "OXTR"  "ACTN3" "AR"
 >    ```
 >
@@ -808,7 +793,6 @@ You can also retrieve a range of numbers:
 >    ```R
 >    # get the 1st, 3rd, and 4th value in the snp_genes vector
 >    > snp_genes[c(1, 3, 4)]
->
 >    [1] "OXTR"  "AR"    "OPRM1"
 >    ```
 {: .hands_on}
@@ -825,7 +809,6 @@ examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)). Also
 >    # get the 1st through the 3rd value, and 4th value in the snp_genes vector
 >    # yes, this is a little silly in a vector of only 4 values.
 >    > snp_genes[c(1:3,4)]
->
 >    [1] "OXTR"  "ACTN3" "AR"    "OPRM1"
 >    ```
 {: .hands_on}
@@ -847,7 +830,6 @@ Once you have an existing vector, you may want to add a new item to it. To do so
 >
 >    ```R
 >    > snp_genes
->
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" "APOA5"
 >    ```
 {: .hands_on}
@@ -859,7 +841,6 @@ To remove a value from a vection, we can use a negative index that will return a
 >
 >    ```R
 >    > snp_genes[-6]
->
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1"
 >    ```
 >
@@ -868,7 +849,6 @@ To remove a value from a vection, we can use a negative index that will return a
 >    ```R
 >    > snp_genes <- snp_genes[-6]
 >    > snp_genes
->
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1"
 >    ```
 {: .hands_on}
@@ -881,7 +861,6 @@ We can also explicitly rename or add a value to our index using double bracket n
 >    ```R
 >    > snp_genes[[7]]<- "APOA5"
 >    > snp_genes
->
 >    [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" NA       "APOA5"
 >    ```
 {: .hands_on}
@@ -921,7 +900,6 @@ For example, let's say we wanted get
 >
 >    ```R
 >    > snp_positions[snp_positions > 100000000]
->
 >    [1] 154039662
 >    ```
 {: .hands_on}
@@ -942,7 +920,6 @@ The reason why the expression `snp_positions[snp_positions > 100000000]` works c
 
 ```R
 > snp_positions > 100000000
-
 [1] FALSE FALSE FALSE  TRUE
 ```
 
@@ -950,7 +927,6 @@ The output above is a logical vector, the 4th element of which is `TRUE`. When y
 
 ```R
 > snp_positions[c(FALSE, FALSE, FALSE, TRUE)]
-
 [1] 154039662
 ```
 
@@ -961,7 +937,6 @@ If you have never coded before, this type of situation starts to expose the "mag
 >
 >    ```R
 >    > which(snp_positions > 100000000)
->
 >    [1] 4
 >    ```
 {: .hands_on}
@@ -975,7 +950,6 @@ If you have never coded before, this type of situation starts to expose the "mag
 > ```R
 > > snp_marker_cutoff <- 100000000
 > > snp_positions[snp_positions > snp_marker_cutoff]
->
 > [1] 154039662
 > ```
 >
@@ -994,7 +968,6 @@ Finally, there are a few other common retrieve or replace operations you may wan
 >    # current value of 'snp_genes':
 >    # chr [1:7] "OXTR" "ACTN3" "AR" "OPRM1" "CYP1A1" NA "APOA5"
 >    > is.na(snp_genes)
->
 >    [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
 >    ```
 >
@@ -1011,7 +984,6 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    # test to see if "ACTN3" or "APO5A" is in the snp_genes vector
 >    # if you are looking for more than one value, you must pass this as a vector
 >    > c("ACTN3","APOA5") %in% snp_genes
->
 >    [1] TRUE TRUE
 >    ```
 >
@@ -1028,15 +1000,10 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    >
 >    > ```R
 >    > > typeof(snps)
->    >
 >    > [1] "character"
->    >
 >    > > typeof(snp_chromosomes)
->    >
 >    > [1] "character"
->    >
 >    > > typeof(snp_positions)
->    >
 >    > [1] "double"
 >    > ```
 >    {: .solution}
@@ -1051,17 +1018,12 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > ```R
 >    > > snps <- c(snps, 'rs662799')
 >    > > snps
->    >
 >    > [1] "rs53576"   "rs1815739" "rs6152"    "rs1799971" "rs662799"
->    >
 >    > > snp_chromosomes <- c(snp_chromosomes, "11") # did you use quotes?
 >    > > snp_chromosomes
->    >
 >    > [1] "3"  "11" "X"  "6"  "11"
->    >
 >    > > snp_positions <- c(snp_positions, 116792991)
 >    > > snp_positions
->    >
 >    > [1]   8762685  66560624  67545785 154039662 116792991
 >    > ```
 >    {: .solution}
@@ -1076,7 +1038,6 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > > snp_genes <- snp_genes[-5]
 >    > > snp_genes <- c(snp_genes, NA, NA)
 >    > > snp_genes
->    >
 >    > [1] "OXTR"  "ACTN3" "AR"    "OPRM1" NA      "APOA5" NA      NA
 >    > ```
 >    >
@@ -1093,7 +1054,6 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    > ```R
 >    > > combined <- c(snp_genes[1], snps[1], snp_chromosomes[1], snp_positions[1])
 >    > > combined
->    >
 >    > [1] "OXTR"    "rs53576" "3"       "8762685"
 >    > ```
 >    >
@@ -1105,7 +1065,6 @@ Sometimes, you may wish to find out if a specific value (or several values) is p
 >    >
 >    > ```R
 >    > > typeof(combined)
->    >
 >    > [1] "character"
 >    > ```
 >    >
@@ -1135,7 +1094,6 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >
 >    ```R
 >    > str(snp_data)
->
 >    List of 4
 >     $ genes         : chr [1:8] "OXTR" "ACTN3" "AR" "OPRM1" ...
 >     $ refference_snp: chr [1:5] "rs53576" "rs1815739" "rs6152" "rs1799971" ...
@@ -1147,7 +1105,6 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >
 >    ```R
 >    > snp_data$position
->
 >    [1]   8762685  66560624  67545785 154039662 116792991
 >    ```
 >
@@ -1155,7 +1112,6 @@ Lists are quite useful in R, but we won't be using them in the genomics lessons.
 >
 >    ```R
 >    > snp_data$position[1]
->
 >    [1] 8762685
 >    ```
 {: .hands_on}
@@ -1253,7 +1209,6 @@ Now that we've loaded the data, we can use the `colnames()` function to retrieve
 ## get the names of the columns
 
 > colnames(annotatedDEgenes)
-
  [1] "V1"  "V2"  "V3"  "V4"  "V5"  "V6"  "V7"  "V8"  "V9"  "V10" "V11" "V12" "V13"
 ```
 
@@ -1463,6 +1418,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > > 9  FBgn0264475   955.45445 -2.334486 0.12423003 -18.791643  8.840041e-79  8.424559e-76   chr3L
 > > 10 FBgn0000071   468.05793  2.360017 0.13564397  17.398615  8.452137e-68  7.249398e-65   chr3R
 # ... with 120 more rows
+> >
 > >       Start      End Strand        Feature   Gene.Name
 > > 2  10780892 10786958      - protein_coding        sesB
 > > 3  26869237 26871995      - protein_coding BM-40-SPARC
@@ -1542,6 +1498,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > > 4 FBgn0025111  2192.3224  2.699939 0.09794457   27.56599 2.846764e-167 6.104174e-164    chrX 10778953
 > > 5 FBgn0029167  5430.0673 -2.105062 0.09254660  -22.74596 1.573283e-114 2.698810e-111   chr3L 13846053
 > > 6 FBgn0039827   390.9018 -3.503014 0.16002962  -21.88979 3.250384e-106 4.646424e-103   chr3R 31196915
+> >
 > > End Strand        Feature   Gene.Name
 > > 1 24147490      + protein_coding        Kal1
 > > 2 10786958      - protein_coding        sesB
@@ -1563,6 +1520,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > > 128 FBgn0038261  44.27058  1.006264 0.2241243   4.489756 7.130482e-06 1.525141e-04   chr3R 14798985
 > > 129 FBgn0039178  23.55006  1.040917 0.2326264   4.474631 7.654326e-06 1.629061e-04   chr3R 24283954
 > > 130 FBgn0034636  24.77052 -1.028531 0.2321678  -4.430119 9.418101e-06 1.951185e-04   chr2R 21560245
+> >
 > > End Strand        Feature Gene.Name
 > > 125 16037227      + protein_coding    CG5895
 > > 126  6703521      - protein_coding    SP1173
@@ -1639,6 +1597,7 @@ FBgn0002609: 1   Mean   : 1365.34   Mean   :-0.3133   Mean   :0.16087   Mean   :
 FBgn0003447: 1   3rd Qu.:  988.33   3rd Qu.: 1.1856   3rd Qu.:0.19743   3rd Qu.:  7.592
 FBgn0003748: 1   Max.   :28915.90   Max.   : 2.3600   Max.   :0.23275   Max.   : 17.399
 (Other)    :66
+
 P.value             P.adj              Seqname    Start              End               Strand
 Min.   :0.000e+00   Min.   :0.000e+00   chr2L:12   Min.   :  127448   Min.   :  140340   -: 0
 1st Qu.:0.000e+00   1st Qu.:0.000e+00   chr2R:14   1st Qu.: 7377082   1st Qu.: 7379907   +:72
@@ -1747,6 +1706,7 @@ If you need to coerce an entire column you can overwrite it using an expression 
 ```R
 # make the 'Feature' column a character type column
 > annotatedDEgenes$Feature <- as.character(annotatedDEgenes$Feature)
+
 # check the type of the column
 > typeof(annotatedDEgenes$Feature)
 
@@ -2041,9 +2001,9 @@ or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac.
 
 ```R
 > annotatedDEgenes %>%
-    filter(Strand == "+") %>%
-    select(GeneID, Start, End, Chromosome) %>%
-    head()
+   filter(Strand == "+") %>%
+   select(GeneID, Start, End, Chromosome) %>%
+   head()
 
        GeneID    Start      End Chromosome
 1 FBgn0039155 24141394 24147490      chr3R
@@ -2074,8 +2034,8 @@ can do so by assigning it a new name:
 
 ```R
 > plus_strand_genes <- annotatedDEgenes %>%
-    filter(Strand == "+") %>%
-    select(GeneID, Start, End, Chromosome)
+   filter(Strand == "+") %>%
+   select(GeneID, Start, End, Chromosome)
 ```
 
 This new object includes all of the data from this sample. Let's look at just
@@ -2104,8 +2064,8 @@ the first six rows to confirm it's what we want:
 >> ### {% icon solution %} Solution
 >> ```R
 >>  > annotatedDEgenes %>%
->>      filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
->>      select(GeneID, P.adj, log2.FC)
+>>     filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
+>>     select(GeneID, P.adj, log2.FC)
 >> ```
 > {: .solution}
 {: .question}
@@ -2128,8 +2088,8 @@ the observed expression as a multiple of the reference level.
 
 ```R
 > annotatedDEgenes %>%
-    mutate(ratio.FC = 2 ** log2.FC) %>%
-    head()
+   mutate(ratio.FC = 2 ** log2.FC) %>%
+   head()
 
        GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome  Start      End Strand        Feature   Gene.Name   ratio.FC
 1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding        Kal1 0.05638871
@@ -2148,8 +2108,8 @@ the observed expression as a multiple of the reference level.
 >> ### {% icon solution %} Solution
 >> ```R
 >> > annotatedDEgenes %>%
->>     mutate(ratio.FC = 2 ** log2.FC) %>%
->>     select(GeneID, P.adj, log2.FC, ratio.FC)
+>>    mutate(ratio.FC = 2 ** log2.FC) %>%
+>>    select(GeneID, P.adj, log2.FC, ratio.FC)
 >> ```
 > {: .solution}
 {: .question}
@@ -2168,8 +2128,8 @@ chromosome, we would do:
 
 ```R
 > annotatedDEgenes %>%
-    group_by(Chromosome) %>%
-    summarize(n())
+   group_by(Chromosome) %>%
+   summarize(n())
 
 # A tibble: 5 x 2
   Chromosome `n()`
@@ -2192,8 +2152,8 @@ So to view the highest fold change (`log2.FC`) for each chromsome:
 
 ```R
 > annotatedDEgenes %>%
-    group_by(Chromosome) %>%
-    summarize(max(log2.FC))
+   group_by(Chromosome) %>%
+   summarize(max(log2.FC))
 
 # A tibble: 5 x 2
   Chromosome `max(log2.FC)`
@@ -2214,11 +2174,11 @@ So to view the highest fold change (`log2.FC`) for each chromsome:
 >>
 >> ```R
 >> > annotatedDEgenes %>%
->>     mutate(GeneLength = abs(End-Start)) %>%
->>     group_by(Chromosome) %>%
->>     summarize(
->>       max_length = max(GeneLength))
->>     )
+>>    mutate(GeneLength = abs(End-Start)) %>%
+>>    group_by(Chromosome) %>%
+>>    summarize(
+>>      max_length = max(GeneLength))
+>>    )
 >> ```
 > {: .solution}
 {: .question}
@@ -2240,10 +2200,10 @@ It is often useful to calculate how many observations are present in each group.
 
 ```R
 > annotatedDEgenes %>%
-    group_by(Chromosome) %>%
-    summarize(
-      n = n()
-    )
+   group_by(Chromosome) %>%
+   summarize(
+     n = n()
+   )
 
 # A tibble: 5 x 2
   Chromosome     n
@@ -2259,7 +2219,7 @@ Because it's a common operation, the `dplyr` verb, `count()` is a "shortcut" tha
 
 ```R
 > annotatedDEgenes %>%
-    count(Chromosome)
+   count(Chromosome)
 
 # A tibble: 5 x 2
   Chromosome     n
@@ -2282,7 +2242,7 @@ Because it's a common operation, the `dplyr` verb, `count()` is a "shortcut" tha
 >>
 >> ```R
 >> > annotatedDEgenes %>%
->>     count(Chromosome, Strand)
+>>    count(Chromosome, Strand)
 >> ```
 > {: .solution}
 {: .question}
@@ -2296,11 +2256,12 @@ While the tidy format is useful to analyze and plot data in R, it can sometimes 
 ```R
 > library('tidyr')
 > annotatedDEgenes_wide <- annotatedDEgenes %>%
-+   group_by(Chromosome, Strand) %>%
-+   summarize(
-+     n = n()
-+   ) %>%
-+   spread(Strand, n)
+   group_by(Chromosome, Strand) %>%
+   summarize(
+     n = n()
+   ) %>%
+   spread(Strand, n)
+
 > annotatedDEgenes_wide
 
 # A tibble: 5 x 3
@@ -2318,7 +2279,7 @@ The opposite operation of `spread()` is taken care by `gather()`. We specify the
 
 ```R
 > annotatedDEgenes_wide %>%
-    gather(Strand, n, -Chromosome)
+   gather(Strand, n, -Chromosome)
 ```
 
 > ### {% icon question %} Categorising expression levels
@@ -2332,12 +2293,12 @@ The opposite operation of `spread()` is taken care by `gather()`. We specify the
 >>
 >> ```R
 >> > annotatedDEgenes %>%
->>     mutate(exp_cat = case_when(
->>       log2.FC >=  1 ~ "up-regulated",
->>       log2.FC <= -1 ~ "down-regulated"
->>     )) %>%
->>     count(Chromosome, exp_cat) %>%
->>     spread(exp_cat, n)
+>>    mutate(exp_cat = case_when(
+>>      log2.FC >=  1 ~ "up-regulated",
+>>      log2.FC <= -1 ~ "down-regulated"
+>>    )) %>%
+>>    count(Chromosome, exp_cat) %>%
+>>    spread(exp_cat, n)
 >> ```
 >>
 >> **Bonus question:** how could the code above be improved?
@@ -2355,7 +2316,6 @@ we can export this new dataset for further use in Galaxy using TODO (duplicate o
 
 - Much of this lesson was copied or adapted from Jeff Hollister's [materials](http://usepa.github.io/introR/2015/01/14/03-Clean/).
 - You may find [this cheatsheet for `dplyr`](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) handy.
-
 
 
 # Data Visualization with ggplot2
@@ -2401,7 +2361,7 @@ To add a `geom` to the plot use the `+` operator. Because we have two continuous
 
 ```R
 > ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = P.value)) +
-    geom_point(
+      geom_point(
 ```
 
 ![Our first ggplot2 plot](../../images/rna-seq-counts-to-viz-in-r/firstPlot.png "Our first ggplot2 plot")
@@ -2410,7 +2370,7 @@ This is not really informative, mostly due to the number of extremely small numb
 
 ```R
 > ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
-    geom_point(
+     geom_point(
 ```
 
 ![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png "Volcano Plot version 0")
@@ -2435,7 +2395,7 @@ The `+` in the `ggplot2` package is particularly useful because it allows you to
 ```R
 # This is the correct syntax for adding layers
 > de_genes_plot +
-    geom_point()
+      geom_point()
 
 # This will not add the new layer and will return an error message
 > de_genes_plot
@@ -2448,11 +2408,174 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 
 ```R
 > ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
-    geom_point(
+    geom_point()
 ```
 
 ![Volcano Plot version 0](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png "Volcano Plot version 0")
 
+Then, we start modifying this plot to extract more information from it. For instance, we can add transparency (`alpha`) to avoid overplotting:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+    geom_point(alpha = 0.5)
+```
+
+![Volcano Plot version 1](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v1.png "Volcano Plot version 1")
+
+We can also add colors for all the points:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+    geom_point(alpha = 0.5, color = "blue")
+```
+
+![Volcano Plot version 2](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v2.png "Volcano Plot version 2")
+
+Or to color each point in the plot differently based on strand, you could use a vector as an input to the argument color. `ggplot2` will provide a different color corresponding to different values in the vector. Here is an example where we color with `Strand`:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+    geom_point(alpha = 0.5)
+```
+
+![Volcano Plot version 3](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v3.png "Volcano Plot version 3")
+
+Notice that we can change the geom layer and colors will be still determined by `Strand`:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+    geom_jitter(alpha = 0.5)
+```
+
+![Volcano Plot version 4](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v4.png "Volcano Plot version 4")
+
+To make our plot more readable, we can add axis labels:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+    geom_jitter(alpha = 0.5) +
+      labs(x = "log2(Fold Change)",
+           y = "-log10(P-Value)")
+```
+
+![Volcano Plot version 5](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v5.png "Volcano Plot version 5")
+
+> ### {% icon question %} Working on plotting
+>
+> Use what you just learned to create a scatter plot of the standard error over the `-log10` of the adjusted `P-value` with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```
+> > > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = chromosome)) +
+> >   geom_point() +
+> >      labs(x = "-log10(P.adj)",
+> >           y = "StdErr")
+> > ```
+> > ![Exercise Plot 1](../../images/rna-seq-counts-to-viz-in-r/ggplotExercise01.png "Exercise Plot 1")
+> >
+> {: .solution}
+{: .question}
+
+## Faceting
+
+`ggplot2` has a special technique called faceting that allows the user to split one plot into multiple plots based on a factor included in the dataset. We will use it to split our mapping quality plot into five panels, one for each chromosome.
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+  geom_point() +
+  labs(x = "log2(Fold Change)",
+       y = "-log10(P-Value)") +
+  facet_grid(. ~ chromosome)
+```
+
+![Volcano Plot version 6](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v6.png "Volcano Plot version 6")
+
+This looks ok, but it would be easier to read if the plot facets were stacked vertically rather than horizontally. The `facet_grid` geometry allows you to explicitly specify how you want your plots to be arranged via formula notation (`rows ~ columns`; a `.` can be used as a placeholder that indicates only one row or column).
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+  geom_point() +
+  labs(x = "log2(Fold Change)",
+       y = "-log10(P-Value)") +
+  facet_grid(chromosome ~ .)
+```
+
+![Volcano Plot version 7](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v7.png "Volcano Plot version 7")
+
+Usually plots with white background look more readable when printed. We can set the background to white using the function `theme_bw()`. Additionally, you can remove the grid:
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+  geom_point() +
+  labs(x = "log2(Fold Change)",
+       y = "-log10(P-Value)") +
+  facet_grid(chromosome ~ .) +
+  theme_bw() +
+  theme(panel.grid = element_blank())
+```
+
+![Volcano Plot version 8](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v8.png "Volcano Plot version 8")
+
+> ### {% icon question %} Working on plotting part 2
+>
+> Use what you just learned to create a scatter plot of the standard error over the `-log10` of the adjusted `P-value` with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```
+> > > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = chromosome)) +
+> >  geom_point() +
+> >  labs(x = "-log10(P.adj)",
+> >       y = "StdErr") +
+> >  facet_grid(Strand ~ .)
+> > ```
+> > ![Exercise Plot 2](../../images/rna-seq-counts-to-viz-in-r/ggplotExercise02.png "Exercise Plot 2")
+> >
+> {: .solution}
+{: .question}
+
+## Barplots
+
+We can create barplots using the `geom_bar` geom. Let’s make a barplot showing the number of differentially expressed genes for each chromosome that fall under each `Feature` type, one plot per chromosome.
+
+```R
+> ggplot(data = annotatedDEgenes, aes(x = Feature, fill = chromosome)) +
+  geom_bar() +
+  facet_grid(chromosome ~ .)
+```
+
+![Bar plot 1](../../images/rna-seq-counts-to-viz-in-r/barPlot_v1.png "Bar Plot version 1")
+
+> ### {% icon question %} Working on plotting part 3
+>
+> Since we already have the `chromosome` labels on the individual plot facets, we don’t need the legend. Use the help file for `geom_bar` and any other online resources you want to use to remove the legend from the plot.
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```
+> > > ggplot(data = annotatedDEgenes, aes(x = Feature, fill = chromosome)) +
+> >  geom_bar(show.legend = F) +
+> >  facet_grid(chromosome ~ .)
+> > ```
+> > ![Bar plot 2](../../images/rna-seq-counts-to-viz-in-r/barPlot_v2.png "Bar Plot version 2")
+> >
+> {: .solution}
+{: .question}
+
+## `ggplot2` themes
+
+In addition to `theme_bw()`, which changes the plot background to white, `ggplot2` comes with several other themes which can be useful to quickly change the look of your visualization. The complete list of themes is available at [https://ggplot2.tidyverse.org/reference/ggtheme.html](https://ggplot2.tidyverse.org/reference/ggtheme.html). `theme_minimal()` and `theme_light() `are popular, and `theme_void()` can be useful as a starting point to create a new hand-crafted theme.
+
+The `ggthemes` package provides a wide variety of options (including an Excel 2003 theme). The [`ggplot2` extensions website](https://www.ggplot2-exts.org/) provides a list of packages that extend the capabilities of `ggplot2`, including additional themes.
+
+> ### {% icon hands_on %} Hands-on: Create a R script
+>
+> With all of this information in hand, please take another five minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own. Use the [RStudio `ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) for inspiration. Here are some ideas:
+> 1. See if you can change the size or shape of the plotting symbol.
+> 2. Can you find a way to change the name of the legend? What about its labels?
+> 3. Try using a different color palette (see the [cookbook here](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)).
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
@@ -2461,4 +2584,4 @@ Working with a programming language (especially if it’s your first time) often
 
 Why learn to code **(TODO: connect this somehow to working interactively within Galaxy...)**? Bioinformatics – like biology – is messy. Different organisms, different systems, different conditions, all behave differently. Experiments at the bench require a variety of approaches – from tested protocols to trial-and-error. Bioinformatics is also an experimental science, otherwise we could use the same software and same parameters for every genome assembly. Learning to code opens up the full possibilities of computing, especially given that most bioinformatics tools exist only at the command line. Think of it this way: if you could only do molecular biology using a kit, you could probably accomplish a fair amount. However, if you don’t understand the biochemistry of the kit, how would you troubleshoot? How would you do experiments for which there are no kits?
 
-Finally, we won’t lie; R is not the easiest-to-learn programming language ever created. So, don’t get discouraged! The truth is that even with the modest amount of R we will cover today, you can start using some sophisticated R software packages, and have a general sense of how to interpret an R script. Get through these lessons, and you are on your way to being an accomplished R user!
+Finally, we won’t lie; R is not the easiest-to-learn programming language ever created. So, don’t get discouraged! The truth is that even with the modest amount of R covered today, you can start using some sophisticated R software packages, and have a general sense of how to interpret an R script. Get through these lessons, and you are on your way to being an accomplished R user!
