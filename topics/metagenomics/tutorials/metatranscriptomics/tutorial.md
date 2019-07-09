@@ -29,13 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+This tutorial is an updated version of the ASaiM workflow developed by the GalaxyP team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets. The datasets used in this tutorial are the trimmed versions of the original file. 
 
 ## ASaiM Workflow
 
@@ -52,20 +46,6 @@ and technical) key concepts they will learn.
 > {:toc}
 >
 {: .agenda}
-
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
 
 # Metatranscriptomics for characterizing microbial communities
 
