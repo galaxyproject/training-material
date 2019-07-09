@@ -251,6 +251,8 @@ This is what you should see:
 >
 > You could be surprised by the number of uniquely mapped compared to the number of multi-mapped reads.
 > One of the reason why is because we used the parameter `--very-sensitive`. Bowtie2 consider a read as multi-mapped even if the second hit has a much lower quality than the first one.
+> The second one is that reads that map to mitochondria has a lot of other places where they can map so they mostly are multimapped reads.
+>
 {: .comment}
 
 # Filtering mapped reads
@@ -275,7 +277,7 @@ We apply some filters to the reads after mapping. ATAC-seq datasets can have a l
 >                - {% icon param-repeat %} *"Insert Filter"*
 >                    - *"Select BAM property to filter on"*: `reference`
 >                        - *"Filter on the reference name for the read"*: `!chrM`
->    - *"Would you like to set rules?"*: `Yes`
+>    - *"Would you like to set rules?"*: `No`
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -379,9 +381,21 @@ This is what you should see:
 
 ![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
 
+This fragment size distribution is a good indication if your experiment worked or not.
+In absence of chromatin (without nucleosome), this is the profiles you would get:
+
+![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA") | ![Fragment size distribution of another purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked2.png "Fragment size distribution of another purified DNA")
+
+Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:
+
+![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq") | ![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another failed ATAC-Seq")
+
+A final example of a Fragment size distribution of a very good ATAC-Seq even if we cannot see the third nucleosome "peak".
+![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
+
 > ### {% icon question %} Questions
 >
-> 1. Except the first peak which correspond to accessible chromatin, other peaks correspond to events surrounding nucleosomes. Could you guess the size of the DNA protected by a nucleosome?
+> 1. Except the first peak which corresponds to fragments where both Tn5 cuts were in the same accessible chromatin depleted of nucleosome, other peaks correspond to events where there was at least one nucleosome in between the 2 cuts of Tn5. Could you guess the size of the DNA protected by a nucleosome?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -399,34 +413,23 @@ This is what you should see:
 
 We convert the BAM file to BED format because when shifting reads with MACS2 will only consider one of the read pairs.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Convert BAMPE to BED file
 >
-> 1. **Convert, Merge, Randomize** {% icon tool %} with the following parameters:
+> 1. **Convert, Merge, Randomize** BAM datasets {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"BAM dataset(s) to filter"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
 >    - *"Select BAM manipulation"*: `Convert`
->        - *""*: `BED`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>        - *"format_type_selector"*: `BED`
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the output.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why each read name (for example `HWI-ST281:266:C1LTTACXX:4:1305:8913:58531`) appears twice?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Because we have one line for R1 and one line for R2, they have the same read name.
 > >
 > {: .solution}
 >
@@ -434,145 +437,147 @@ We convert the BAM file to BED format because when shifting reads with MACS2 wil
 
 ## Call peaks
 
-We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS2.
+We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS2. What is very important here is that we will specify to MACS2 that the coverage to use to determine peaks should be centered on the 5' extermity of the read (where the Tn5 cut). This is very important because if a fragment overlap a nucleosome, you want your peaks around the nucleosomes and not on the nucleosomes:
+![Scheme of ATAC-seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-seq reads relative to nucleosomes")
+If we only make a coverage of 5' extremities, the data would be too parse and it would be impossible to call peaks except if you sequence billions of reads... Thus, we will make a coverage of 5' extremities extended to 100 bp in each direction.
+
+> ### {% icon comment %} Comment on Tn5 insertion
+>
+> When Tn5 staggers to an accessible chromatin locus, it will join the Mosaic Ends (which will be used to make the library) to the top and bottom 3'OH extremity of a 9 bp DNA molecule  [Kia et al. 2017]({% link https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1 %}):
+> ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
+> This means that the 5' extremity of the read is not really the center of the staggered position but reads on the positive strand should be shifted 5 bp to the right and reads on the negative strands should be shifted 4 bp to the left. Here we are focusing on broad regions so we will not apply these shifts.
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
+>    - {% icon param-file %} *"ChIP-Seq Treatment File"*: Select the output of  **Convert, Merge, Randomize** {% icon tool %}
 >    - *"Do you have a Control File?"*: `No`
 >    - *"Format of Input Files"*: `Single-end BED`
 >    - *"Effective genome size"*: `H. sapiens (2.7e9)`
 >    - *"Build Model"*: `Do not build the shifting model (--nomodel)`
+>        - *"Set extension size"*: `200`
 >        - *"Set shift size"*: `-100`
->    - *"Peak detection based on"*: `q-value`
 >    - *"Additional Outputs"*: ``
+>        - {% icon param-check %} *"Peaks as tabular file"*: `yes`
+>        - {% icon param-check %} *"Peak summits"*: `yes`
+>        - {% icon param-check %} *"Scores in bedGraph files (--bdg)"*: `yes`
 >    - In *"Advanced Options"*:
 >        - *"Composite broad regions"*: `No broad regions`
 >            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
 >        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Comments on MACS2 options
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > MACS2 uses the 5' of the read as the reference for shifting and extending.
+>    > ![MACS2 options](../../images/atac-seq/MACS2Options.jpg "MACS2 options")
+>    >
+>    > We need to set --keep-dup to `all` because by default MACS would eliminate reads which have the same 5' end to keep only one. Whereas here we had the R1/R2 information and we used these 2 information to filter duplicates with **MarkDuplicates** {% icon tool %} in a previous step.
+>    >
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> ### {% icon comment %} Comment on MACS2 narrowPeak
+>
+> The ENCODE narrowPeak format is a BED6+4 format. It includes classical 6 first BED columns (chrom, start, end, name, score, strand).
+> The score is `int(-10*log10qvalue)`.
+> The 7th column is fold-change, the 8th: -log10pvalue, the 9th: -log10qvalue and the 10th is the relative summit position to peak start.
+> When multiple summits are found into the same peak, there will be multiple lines for the same chrom, start, end and the names will be suffixed by a, b, c...
+> 
+{: .comment}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 # Visualisation of coverage
 
-## Visualise region of interest
+## Prepare the datasets
 
-> ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
+Thanks to MACS2 output we now have a coverage which represent the coverage of the 5' reads extremities extended 100 bp each side.
+The output of MACS2 is in a bedgraph format. It is easily readable for human (4 columns text format) but it can be very large and the access to a specific region is quite slow.
+We will change it to bigwig format which is a binary format where we can access very quickly any region of the genome.
+
+### Convert BedGraph to bigWig
+
+> ### {% icon hands_on %} Hands-on: Convert the MACS2 coverage to bigWig.
 >
-> 1. **Cut** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `output_narrowpeaks` (output of **MACS2 callpeak** {% icon tool %})
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c1-3`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Convert"*: Select the output of **MACS2 callpeak** {% icon tool %} *"Bedgraph Treatment"*.
+>    - *"Converter settings to use"*: `Default`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+### Convert narrowPeak to BED3
+In order to visualize a specific region (here *YDJC* surroundings), we can either use a genome browser like IGV or UCSC browser or use pyGenomeTracks to make publishable figures. For the moment, pyGenomeTracks require specific formats. To be able to display peaks, we will convert the narrowPeak file from **MACS2 callpeak** {% icon tool %} into a BED3 format (only 3 columns).
 
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
 >
-> 1. Question1?
-> 2. Question2?
+> 1. **Cut** columns from a table {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c1,c2,c3`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: Select the output of **MACS2 callpeak** {% icon tool %} *"narrow Peaks"*.
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+> 2. Change the datatype from intervals to bed.
 >
-{: .question}
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
+{: .hands_on}
 
 ## Visualise region with **pyGenomeTracks**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **pyGenomeTracks** {% icon tool %} with the following parameters:
->    - *"Region of the genome to limit the operation"*: `chr22:20,477,597-20,545,090`
+>    - *"Region of the genome to limit the operation"*: `chr22:21,620,000-21,660,000`
 >    - In *"Include tracks in your plot"*:
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `Bedgraph track `
->                - *"Plot title"*: `coverage from macs2 (extended +/-100bp)`
->                - {% icon param-file %} *"Track file bedgraph format"*: `output_treat_pileup` (output of **MACS2 callpeak** {% icon tool %})
->                - *"Color of track"*: `#c0504d`
+>            - *"Choose style of the track"*: `Bigwig track `
+>                - *"Plot title"*: `Coverage from macs2 (extended +/-100bp)`
+>                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Minimum value"*: `0`
+>                - *"Maximum value"*: `40.0`
 >                - *"height"*: `5.0`
->                - *"Show visualization of data range"*: `Yes`
+>                - *"data_range"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Peaks from macs2 (extended +/-100bp)`
->                - {% icon param-file %} *"Track file bed format"*: `output` (output of **Cut** {% icon tool %})
->                - *"Color of track"*: `#c0504d`
->                - *"Plot labels"*: `Yes`
+>                - {% icon param-file %} *"Track file bed format"*: Select the output of **Cut** {% icon tool %}.
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Plot labels"*: `No`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file bed format"*: `output` (output of **bedtools SortBED** {% icon tool %})
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
+>                - *"Color of track"*: Select the color of your choice
+>                - *"height"*: `5.0`
 >                - *"Type"*: `genes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: `output` (Input dataset)
->                - *"Color of track"*: `#4bacc6`
->                - *"Plot labels"*: `Yes`
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `CTCF_peaks.bed.gz`
+>                - *"Color of track"*: Select the color of your choice
+>                - *"Plot labels"*: `No`
 >    - *"Configure x-axis"*: `Yes`
 >        - *"Where to place the x-axis"*: `Bottom`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the output.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you could see:
+
+![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
 
 > ### {% icon question %} Questions
+> On this selected regions we see peaks on both TSS (middle track) and CTCF binding loci (bottom track).
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many TSS are accessible in the displayed region?
+> 2. How many CTCF binding loci are accessible in the displayed region?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. We can see 7 TSS for 9 transcripts. 2 of them correspond to ATAC-Seq peaks and the TSS of YDJC has a high signal even though it is not significant.
+> > 2. We can see 8 CTCF peaks. Only 1 of them is also called significantly by MACS2 in the ATAC-Seq dataset. The TSS of YDJC has high signal and is also a CTCF bound locus but it is not called a peak by the MACS2 algorithm.
 > >
 > {: .solution}
 >
@@ -580,118 +585,61 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 
 ## Create heatmap of genes
 
-### Convert BedGraph to bigWig
+You might also be interested in summarizing what is happening at a specific category of locus in only one figure. For this, you can compute a heatmap. We will use the deepTools tool plotHeatmap. As an example, we will here make a heatmap centered on the TSS and using the orientation of the gene (if the gene is coded on the reverse strand, the coverage will be plotted in the orientation of the gene not in the orientation of the chromosome).
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: `output_treat_pileup` (output of **MACS2 callpeak** {% icon tool %})
->    - *"Converter settings to use"*: `Default`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+### Generate computeMatrix
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The input of plotHeatmap is a matrix in a hdf5 format. To generate it you will use the tool compute Matrix which will evaluate the coverage at each locus you are interested in.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Generate computeMatrix
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Generate the matrix
 >
 > 1. **computeMatrix** {% icon tool %} with the following parameters:
 >    - In *"Select regions"*:
->        - {% icon param-repeat %} *"Insert Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: `output` (output of **bedtools SortBED** {% icon tool %})
+>        - 1. *"Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
 >    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: `out_file1` (output of **Wig/BedGraph-to-bigWig** {% icon tool %})
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
 >    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
 >    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `no`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Show advanced options"*: `yes`
+>        - *"Convert missing values to 0?"*: `yes`
+>        - *"Labels for the samples (each bigwig)"*: `ATAC-seq`
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ### Run **plotHeatmap**
 
-> ### {% icon hands_on %} Hands-on: Task description
+We will now generate a heatmap. Each line will be a transcript. The coverage, will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. On top the of heatmap will be represented the mean signal at TSS.
+
+> ### {% icon hands_on %} Hands-on: Generate the heatmap
 >
 > 1. **plotHeatmap** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `outFileName` (output of **computeMatrix** {% icon tool %})
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `no`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+This is what you could see:
+
+![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is the mean value in genes?
+> 2. Is the coverage symetric?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. A bit more than 5.
+> > 2. No it is higher on the left which is expected as usually the promoter is accessible.
 > >
 > {: .solution}
 >
 {: .question}
+
+
 
 
 # Conclusion
@@ -699,3 +647,5 @@ We call peaks with a peak caller such as MACS2 or Genrich. Here we will use MACS
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
