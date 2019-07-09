@@ -26,17 +26,17 @@ objectives:
 - Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-- Use the `dplyr` package to manipulate datan frames.
-- Use `select()` to choose variables from a data frame.
-- Use `filter()` to choose data based on values.
-- Use `group_by()` and `summarize()` to work with subsets of data.
-- Use `mutate()` to create new variables.
+- TODO: something about why it's helpful to be able to work with R interactively within Galaxy...
+- It is important to understand how data are organised by R in a given object type (e.g. numeric, character, logical, etc.) and how the mode of that type determines how R will operate on that data.
+- It is easy to import data into R from tabular formats. However, you still need to check that R has imported and interpreted your data correctly.
+- Just like Galaxy, base R's capabilities can be further enhanced by software packages developed by the user community.
+- Use the `dplyr` package to manipulate data frames.
+- Pipes can be used to combine simple operations into complex procedures.
+- When creating plots with `ggplot2`, think about the graphics in layers: aesthetics, geometry, statistics, scale transformation, and grouping.
 contributors:
-- bebatut
-- fpsom
-- tobyhodges
+  - bebatut
+  - fpsom
+  - tobyhodges
 ---
 
 
