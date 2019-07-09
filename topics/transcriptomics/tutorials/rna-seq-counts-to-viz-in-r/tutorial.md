@@ -2365,5 +2365,8 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Working with a programming language (especially if it’s your first time) often feels intimidating, but the rewards outweigh any frustrations. An important secret of coding is that even experienced programmers find it difficult and frustrating at times – so if even the best feel that way, why let intimidation stop you? Given time and practice* you will soon find it easier and easier to accomplish what you want.
+
+Why learn to code **(TODO: connect this somehow to working interactively within Galaxy...)**? Bioinformatics – like biology – is messy. Different organisms, different systems, different conditions, all behave differently. Experiments at the bench require a variety of approaches – from tested protocols to trial-and-error. Bioinformatics is also an experimental science, otherwise we could use the same software and same parameters for every genome assembly. Learning to code opens up the full possibilities of computing, especially given that most bioinformatics tools exist only at the command line. Think of it this way: if you could only do molecular biology using a kit, you could probably accomplish a fair amount. However, if you don’t understand the biochemistry of the kit, how would you troubleshoot? How would you do experiments for which there are no kits?
+
+Finally, we won’t lie; R is not the easiest-to-learn programming language ever created. So, don’t get discouraged! The truth is that even with the modest amount of R we will cover today, you can start using some sophisticated R software packages, and have a general sense of how to interpret an R script. Get through these lessons, and you are on your way to being an accomplished R user!
