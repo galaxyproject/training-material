@@ -37,6 +37,8 @@ This process is most often done as part of a group.
 
 This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. 
 
+***TODO***: *Add links to the Apollo User's Gropu and GGA*
+
 {% raw %} `{% cite Dunn2019 %}`{% endraw %}
 
 
@@ -223,21 +225,92 @@ You will now see three new tracks displaying all the evidences used by Maker to 
 
 View data at a particular position
 
+## Search for a gene
+
+Enter the gene XXX into the gene box.  
+
+Zoom in to the proper region.
+
 ## Create structural edits
 
+Drag annotation from evidence to HTML region. 
+ 
+Conversely, if you right-click you can any type of genome feature annotation.
+
+(SCREEN SHOT TO ADD of imperfection)
+![Alternative text](../../images/image_name "Legend of the image")
+
+Additional isoforms may be dragged up from the evidence.
+
+## Edit structure
+
+### Update exon position
+Once isoforms have been created, the edges may be dragged to best match the biological evidence.   
+
+CDS's are automatically updated. 
+
+Conversely by selecting "choose the annotation" the individual code view is selected. 
+
+You will also notice that overlapping isoforms are highlighted.
+
+(SCREEN SHOT of isoforms and dragging exons)
+![Alternative text](../../images/image_name "Legend of the image")
+
+Genes will automatically be predicted based on CDS overlap.  This can be unassigned by deselecting on the right-click menu.
+
+By right-clicking on the refined genome feature the details of the genome feature can be retrieved quite readily. 
+
+(SCREEN SHOT of right-click menu)
+![Alternative text](../../images/image_name "Legend of the image")
+
+### View structured data
+
+Selecting the features allows us to view the gene directly.
+
+(SCREEN SHOT of feature menu)
+![Alternative text](../../images/image_name "Legend of the image")
 
 
-Drag exons, create isoforms, etc. create introns, split transcripts.
+### Edit structured data
 
-## Edit functional data. 
+There are various structured data options from the figure.
+
+All structured data 
 
 
-## Edit names, etc. 
+#### Editing and reverting history
+
+
+
+(SCREEN SHOT of history menu)
+![Alternative text](../../images/image_name "Legend of the image")
+
+
+### Edit functional data
+
+There is various functional data.
+
+
+#### Edit names, etc. 
+
+
+#### Add comments, keys, and values
+
+
+
+#### Show GO Annotations
+
 
 
 # Export refinements
 
 
+
+# Add users to help with the refinement 
+
+
+
+***TODO***: *Add to workflow*
 
 
 # Conclusion
