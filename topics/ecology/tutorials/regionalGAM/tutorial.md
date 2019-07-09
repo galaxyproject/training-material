@@ -71,15 +71,6 @@ This dataset gathers years of records of the presence of butterfly species per s
 
 ## Prepare the data
 
-The downstream tools require Tabular file and not CSV. So we need first to convert our CSV file to a tabular
-
-> ### {% icon hands_on %} Hands-on: Convert CSV to Tabular
-> 1. Run **CSV to tabular** {% icon tool %} with the following parameters:
->       - {% icon param-file %} *"CSV file"*: imported dataset
->       - *"Separator"*: ","
->       - *"Header in file"*: Yes
-{: .hands_on}
-
 The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
 Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.
@@ -317,9 +308,10 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 >    - *"Column to plot on y-axis"*: `6`
 >    - *"Plot title"*: add a meaningful title (e.g. `Pyronia tithonus phenology stacked visualization`)
 >    - *"Label for x axis"*: add a meaningful label (e.g. `Day number`)
->    - *"Label for y axis"*: add a meaningful label <!-- TODO (e.g. ????? Ask Benjamin or Reto to know more)-->
+>    - *"Label for y axis"*: add a meaningful label  (e.g. `nm value`)
 >    - *"Type of plot"*: `Line only`
 >    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
+>    - *"column differentiating the different groups"*: `2` to affect one coulor by year
 >    - *"Color schemes to differentiate your groups"*: `set 3` or any set of color with more than 10 colors as there are 10 years in our dataset.
 >
 {: .hands_on}
