@@ -600,7 +600,7 @@ The main output of **featureCounts** is a table.
 > ### {% icon question %} Question
 >
 > 1. What information does the generated table contain?
-> 2. Which feature has the most counts for both samples? (Hint: Use the Sort tool)
+> 2. Which feature has the most counts for both samples? (Hint: Use the **Sort** {% icon tool %} tool)
 >
 > > ### {% icon solution %} Solution
 > >
@@ -610,38 +610,47 @@ The main output of **featureCounts** is a table.
 > {: .solution}
 {: .question}
 
-## Viewing datasets side by side using the Scratchbook
-
-Comparing output is easier if we can view more than one dataset simultaneously. The Scratchbook allows us to build
-up a collection of datasets that will be shown on the screen together.
-
-> ### {% icon hands_on %} (Optional) View the sorted featureCounts using the Scratchbook
->
-> 1. The **Scratchbook** is enabled by clicking the nine-blocks icon seen on the right of the Galaxy top menubar:
->
->    ![scratchbook icon](../../images/ref-based/menubarWithScratchbook.png "Menu bar with Scratchbook icon")
->
-> 2. When the Scratchbook is **enabled** datasets being viewed are added to the Scratchbook:
->
->    ![scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png "Menu bar with Scratchbook icon enabled")
->
-> 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts**. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
->
->    ![scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
->
-> 4. When a dataset is shown **click in the main interface** to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:
->
->    ![scratchbook one saved view](../../images/ref-based/scratchbookOneSavedView.png "Menu bar with one saved dataset view in Scratchbook")
->
-> 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts**. The two datasets can now be seen side by side:
->
->    ![scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
->
-> 6. To **leave** Scratchbook selection mode, click on the **Scratchbook icon** again. Your saved view will still remain for future viewing:
->
->    ![scratchbook disabled datasets saved](../../images/ref-based/scratchbookDisabledWithSavedDatasets.png "Scratchbook disabled with two datasets saved")
->
-{: .hands_on}
+> ### {% icon tip %} Tip: Viewing datasets side by side using the Scratchbook
+> 
+> Comparing output is easier if we can view more than one dataset simultaneously. The Scratchbook allows us to build
+> up a collection of datasets that will be shown on the screen together.
+> 
+> > ### {% icon hands_on %} (Optional) View the sorted featureCounts using the Scratchbook
+> >
+> > 1. Enable the **Scratchbook** by clicking the {% icon galaxy-scratchbook %} (nine-blocks) icon seen on the right of the Galaxy top menubar:
+> >
+> >    ![scratchbook icon](../../images/ref-based/menubarWithScratchbook.png)
+> >
+> >    When the Scratchbook is **enabled** datasets being viewed are added to the Scratchbook:
+> >
+> >    ![scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png)
+> >
+> > 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts**
+> >
+> >    Instead of occupying the entire middle bar the dataset view is now shown an overlay:
+> >
+> >    ![scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png)
+> >
+> > 4. Click in the main interface when a dataset is shown to prepare to select another dataset
+> >
+> >    The interface now shows that there is one saved view in the Scratchbook:
+> >
+> >    ![scratchbook one saved view](../../images/ref-based/scratchbookOneSavedView.png)
+> >
+> > 5. Click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts**
+> >
+> >    The two datasets can now be seen side by side:
+> >
+> >    ![scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png)
+> >
+> > 6. Click on the {% icon galaxy-scratchbook %} icon again to **leave** scratchbook selection mode
+> >
+> >    Your saved view will still remain for future viewing:
+> >
+> >    ![scratchbook disabled datasets saved](../../images/ref-based/scratchbookDisabledWithSavedDatasets.png)
+> >
+> {: .hands_on}
+{: .tip}
 
 ## Identification of the differentially expressed features
 
