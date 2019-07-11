@@ -67,6 +67,8 @@ detached-serve: ## run a local server in detached mode (You can specify PORT=, H
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
