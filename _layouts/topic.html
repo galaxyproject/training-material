@@ -24,8 +24,11 @@ layout: base
         </ul>
         {% endif %}
 
+        <div id="tutorial_list">
         <h2 id="material">Material</h2>
+        <div class="search_box"> {% icon search %}<input data-search-type="tutorial_title" class="search" placeholder="Search" /> </div>
         <table class="table table-responsive table-striped">
+            <thead>
             <tr>
                 <th>Lesson</th>
                 <th>Slides</th>
@@ -41,14 +44,15 @@ layout: base
                 <th>Galaxy instances</th>
                 {% endif %}
             </tr>
-
+            </thead>
+            <tbody class="list">
             {% for material in topic_material %}
                 {% if material.enable == nil or material.enable == true %}
                         <script type="application/ld+json">
                             {% include _includes/material.jsonld material=material topic=topic site=site %}
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             {{ material.title }}
                             <div class="">
                             {% if material.level %}
@@ -56,7 +60,7 @@ layout: base
                             {% endif %}
                             {% if material.tags %}
                                   {% for tag in material.tags %}
-                                       <span class="label label-default" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+                                       <span class="label label-default" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
                                   {% endfor %}
                             {% endif %}
                         </div>
@@ -104,8 +108,9 @@ layout: base
                     </tr>
                 {% endif %}
             {% endfor %}
+            </tbody>
         </table>
-
+        </div>
         {% if topic.type == "use" %}
             <h2 id="docker_image">Galaxy instances</h2>
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
@@ -154,5 +159,23 @@ layout: base
         {% endif %}
     </section>
 </div>
+
+<script src="{{ site.baseurl }}/assets/js/list.js"></script>
+<script type="text/javascript">
+var options = {
+  valueNames: ['tutorial_title']
+};
+var tutoList = new List('tutorial_list', options)
+
+tutoList.filter(function(item) {
+if (item.values().id > 1) {
+   return true;
+} else {
+   return false;
+}
+}); // Only items with id > 1 are shown in list
+
+tutoList.filter(); // Remove all filters
+</script>
 
 {% include _includes/default-footer.html %}
