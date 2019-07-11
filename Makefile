@@ -53,15 +53,15 @@ install: clean ## install dependencies
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	$(ACTIVATE_ENV) && \
-		mv Gemfile Gemfile.backup && \ ## we use conda stack, move Gemfiles out of the way
-		mv Gemfile.lock Gemfile.lock.backup && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
 detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
-		mv Gemfile Gemfile.backup && \ ## we use conda stack, move Gemfiles out of the way
-		mv Gemfile.lock Gemfile.lock.backup && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: detached-serve
 
