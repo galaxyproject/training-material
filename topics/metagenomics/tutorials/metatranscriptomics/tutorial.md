@@ -35,8 +35,6 @@ This tutorial is an updated version of the ASaiM workflow developed by the Galax
 
 ![ASaiM diagram](../../images/asaim-wf.png "The Auvergne Sequence analysis of intestinal Microbiota (ASaiM)")
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -55,11 +53,10 @@ A multi-omic approach to studying microbiomes can cover the various taxa and fun
 
 ![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
 
-Microbiomes play a critical role in host health, disease, and the environment. Microbiome dynamics, especially at the taxonomy and functional level requires studying the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics). Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population.
+![Multiomics](../../images/Why_MT.png)
 
-Batut ​et al.​(​10.1093/gigascience/giy057​) developed ASaiM (Auvergne Sequence analysis of intestinal Microbiota) an open-source Galaxy-based workflow that enables microbiome analyses. ASaiM workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. In this tutorial, we demonstrate the use of an updated version of the ASaiM workflow. This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input; preprocess it; extract taxonomic and functional information and combines them to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.
+Here is an exhaustive picture of taxonomy and functional pathways and their dynamics. It provides users with the confirmation of predicted open‐reading frames (ORFs) and potential identification novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.
 
-In this ASaiM metatranscriptomics tutorial, the fastqsanger files are used as input dataset. We have used a trimmed version of the original fastq file in this tutorial for the purpose of saving time and resources.
 
 
 ## Get data
@@ -90,19 +87,15 @@ In this ASaiM metatranscriptomics tutorial, the fastqsanger files are used as in
 
 # ASaiM Workflow
 
+Microbiomes play a critical role in host health, disease, and the environment. Microbiome dynamics, especially at the taxonomy and functional level requires studying the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics). Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population.
+
+Batut ​et al.​(​10.1093/gigascience/giy057​) developed ASaiM (Auvergne Sequence analysis of intestinal Microbiota) an open-source Galaxy-based workflow that enables microbiome analyses. ASaiM workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. In this tutorial, we demonstrate the use of an updated version of the ASaiM workflow. This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input; preprocess it; extract taxonomic and functional information and combines them to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.
+
+In this ASaiM metatranscriptomics tutorial, the fastqsanger files are used as input dataset. We have used a trimmed version of the original fastq file in this tutorial for the purpose of saving time and resources.
 Here we are providing users with step by step ASaiM workflow to analyze metatranscriptomics data.
 
 ![ASaiM workflow](../../images/asaim-galaxy-wf.png)
 
-
-> ### {% icon details %} More details about the theory
->
-> ASaiM is an Open-Source Galaxy-based framework dedicated to microbiota data analyses. ASaiM offers sophisticated analyses to 
-> scientists without command-line knowledge. ASaiM provides a powerful framework to easily and quickly explore microbiota data > in a reproducible and transparent environment.
-> The ASaiM workflow as mentioned before was created to analyse metagenomic data. The GalaxyP team has customized the 
-> ASaiM workflow so that it can be used to analyse metatranscriptomic data.
->
-{: .details}
 
 Please follow these steps once you have uploaded the files from zenodo to your galaxy instance. 
 
@@ -124,21 +117,6 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 >    {: .comment}
 >
 {: .hands_on}
-
-
-> ### {% icon question %} Questions
->
-> 1. What is the reason behind using FASTQ Groomer?
-> 2. Are there any other tools which can perform similar function?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## **Cutadapt**
@@ -179,7 +157,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 ## **Filter with SortMeRNA**
 
 > ### {% icon hands_on %} Hands-on: SortMeRNA is a tool used to filter ribosomal RNA fragments from metatranscriptomic data produced by next-generation sequencers. It is capable of handling large RNA databases and sorting out all fragments matching to the database with high accuracy and specificity. It can take paired-end reads as well as single-end reads.
-
+![SortMeRNA](../../images/SORTMERNA.png)
 >
 > 1. **Filter with SortMeRNA** {% icon tool %} with the following parameters:
 >
@@ -259,6 +237,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 ## **MetaPhlAn2**
 
 > ### {% icon hands_on %} Hands-on: MetaPhlAn2 is a computational tool used to profile the structure and the composition of microbial communities (Bacteria, Archaea, Eukaryotes and Viruses) from metagenomic shotgun sequencing data with species level resolution. MetaPhlAn2 takes as input a sequence file, in this case the FASTQ interlacer output. The output is a tab-separated file with the predicted taxon relative abundances.
+![MetaPhlAn2](../../images/Metaphlan2.png)
 >
 > 1. **MetaPhlAn2** {% icon tool %} with the following parameters:
 >   - {% icon param-tool %} *”Input file”*: `FASTQ interlacer output`
@@ -358,6 +337,7 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
  ## **Format MetaPhlAn2 output** 
 > ### {% icon hands_on %} Hands-on: This step provides tabular output per taxonomic level with its abundance.
 >
+![Format MetaPhlAn2 output](../../images/FormatMetaphlan.png)
 > 1. **Format MetaPhlAn2 output** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input file (MetaPhlAN2 output)”*: ‘MetaPhlAn2 Community File’
 > 2. **Execute**
@@ -402,7 +382,7 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
 ## **Krona Pie chart** 
 
 > ### {% icon hands_on %} Hands-on: This tool renders results of a metagenomic profiling as a zoomable pie chart using Krona.
-
+![Krona](../../images/Krona.png)
 >
 > 1. **Krona pie chart** {% icon tool %} with the following parameters:
 >   - {% icon param-select %} *”What is the type of your input data”*: `Tabular`
@@ -496,6 +476,7 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 ## **GraPhlAn**
 
 > ### {% icon hands_on %} Hands-on: GraPhlAn is a software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes the input from the Generation, personalization and annotation of tree for Graphlan tool to create these .png images.
+![GraPhlAn](../../images/Graphlan.png)
 >
 > 1. **GraPhlAn** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input tree”*: `Generation, personalization and annotation of tree output`
