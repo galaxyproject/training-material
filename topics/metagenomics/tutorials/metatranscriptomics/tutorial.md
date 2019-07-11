@@ -31,11 +31,6 @@ contributors:
 
 This tutorial is an updated version of the ASaiM workflow developed by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets. The datasets used in this tutorial are the trimmed versions of the original file. 
 
-## ASaiM Workflow
-
-![ASaiM diagram](../../images/asaim-wf.png "The Auvergne Sequence analysis of intestinal Microbiota (ASaiM)")
-
-
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -50,7 +45,7 @@ This tutorial is an updated version of the ASaiM workflow developed by the **Gal
 
 ###  Multi-omics
 A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system.
-
+![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
 
 Here is an exhaustive picture of taxonomy and functional pathways and their dynamics. It provides users with the confirmation of predicted open‐reading frames (ORFs) and potential identification novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.
 ![Multiomics](../../images/Why_MT.png)
@@ -483,6 +478,6 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 # Conclusion
 {:.no_toc}
 
-![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
+![ASaiM diagram](../../images/asaim-wf.png "The Auvergne Sequence analysis of intestinal Microbiota (ASaiM)")
 
 Congratulations, you have now successfully completed the ASaiM tutorial modified for metatranscriptomics analysis.
