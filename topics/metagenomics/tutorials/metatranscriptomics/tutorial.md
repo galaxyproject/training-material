@@ -88,24 +88,23 @@ In this ASaiM metatranscriptomics tutorial, the fastqsanger files are used as in
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# ASaiM Workflow
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+Here we are providing users with step by step ASaiM workflow to analyze metatranscriptomics data.
 
-![Alternative text](../../images/image_name "Legend of the image")
+![ASaiM workflow](../../images/asaim-galaxy-wf.png)
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
 
 > ### {% icon details %} More details about the theory
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> ASaiM is an Open-Source Galaxy-based framework dedicated to microbiota data analyses. ASaiM offers sophisticated analyses to 
+> scientists without command-line knowledge. ASaiM provides a powerful framework to easily and quickly explore microbiota data > in a reproducible and transparent environment.
+> The ASaiM workflow as mentioned before was created to analyse metagenomic data. The GalaxyP team has customized the 
+> ASaiM workflow so that it can be used to analyse metatranscriptomic data.
 >
 {: .details}
 
-A big step can have several subsections or sub steps:
+Please follow these steps once you have uploaded the files from zenodo to your galaxy instance. 
 
 
 ## **FASTQ Groomer**
@@ -126,7 +125,6 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -164,9 +162,7 @@ A big step can have several subsections or sub steps:
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
+>
 > ### {% icon question %} Questions
 >
 > 1. Are there any other tool which can perform similar functions?
@@ -205,7 +201,7 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-text %} *”SW penalty for extending a gap”*: `2`
 >   - {% icon param-text %} *”SW penalty for ambiguous letters (N’s)”*: `-3`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. **Execute**
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -237,8 +233,6 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-file %} *”Right-hand mates”*:`Cutadapt on data 4 and data 3: Read 2 Output`
 >
 > 2. **Execute**
-
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -254,13 +248,13 @@ A big step can have several subsections or sub steps:
 >
 > 1. **FASTQ interlacer** {% icon tool %} with the following parameters: For HUMANn2
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
->
->    ***TODO***: *Check parameter descriptions*
 >   - {% icon param-select %} *”Type of paired-end datasets”*: ‘2 separate datasets’
 >   - {% icon param-file %} *”Left-hand mates”*: `Filter with sortmeRNA: Unaligned Forward reads`
 >   - {% icon param-file %} *”Right-hand mates”*: `Filter with sortmeRNA: Unaligned Reverse reads`
 >
-
+> 2. **Execute**
+>
+{: .hands_on}
 
 ## **MetaPhlAn2**
 
@@ -280,28 +274,15 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-check %} *”Profile archea organisms?”*: `Yes`
 >   - {% icon param-text %} *”Quantile value for the robust average”*: `0.1`
 >
+> 2. **Execute**
+>
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you want to know more about MetaPhlAn2, you can check out by clicking on this [link] (https://bitbucket.org/biobakery/metaphlan2/src/default/)
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## **HUMAnN2**
 
@@ -320,32 +301,21 @@ A big step can have several subsections or sub steps:
 >    - "Advanced Options"
 >    - "Remove stratification from output" to `Yes`
 >
+> 2. **Execute**
+>
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This step might take some time. Please have patience or get some coffee!!!
+>    > 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ##  **Export to GraPhlAn**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: export2graphlan is a conversion software tool to produce both annotation and tree file for GraPhlAn. It can convert MetaPhlAn, LEfSe, and/or HUMAnN output to GraPhlAn input format.
+
+In particular, the annotation file tries to highlight specific sub-trees deriving automatically from input file what nodes are important.
 >
 > 1. **Export to GraPhlAn** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input file”*: `MetaPhlAn2 Community file`
@@ -376,6 +346,8 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-text %} *”Number of top samples to select”*: `blank`
 >   - {% icon param-text %} *”Number of top features to select”*: `blank`
 >
+> 2. **Execute**
+>
 >    > ### {% icon comment %} Comment
 >    >
 >    > It is a conversion tool to produce both annotation and tree file that can serve as an input to GraPhlAn.
@@ -383,26 +355,54 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-**Format MetaPhlAn2 output** {% icon tool %} with the following parameters:
+ ## **Format MetaPhlAn2 output** 
+> ### {% icon hands_on %} Hands-on: This step provides tabular output per taxonomic level with its abundance.
+>
+> 1. **Format MetaPhlAn2 output** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input file (MetaPhlAN2 output)”*: ‘MetaPhlAn2 Community File’
-
+> 2. **Execute**
+{: .hands_on}
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What does Format MetaPhlAn2 do??
+> 2. What is the need for formatting the data?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. This tool format output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).9 files are generated: one file per taxonomic levels with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
+> >
+> > 2. This tool helps in simplifying the data for easy interpretation.
 > >
 > {: .solution}
 >
 {: .question}
 
-## **Krona pie chart**
 
-> ### {% icon hands_on %} Hands-on: Task description
+ ## **Format MetaPhlAn2 output for Krona** 
+> ### {% icon hands_on %} Hands-on:This step just creates a tabular output that is easily readable by Krona (visualization).
+>
+> 1.**Format MetaPhlAn2 output for Krona** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *”Input file (MetaPhlAN2 output)”*: ‘MetaPhlAn2 Community File’
+>
+> 2. **Execute**
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. What does Format MetaPhlAn2 do??
+>
+> > ### {% icon solution %} Solution
+> > 1. This tool formats MetaPhlAn2 output to be ready for Krona.
+> >
+> {: .solution}
+>
+{: .question}
+
+## **Krona Pie chart** 
+
+> ### {% icon hands_on %} Hands-on: This tool renders results of a metagenomic profiling as a zoomable pie chart using Krona.
+
 >
 > 1. **Krona pie chart** {% icon tool %} with the following parameters:
 >   - {% icon param-select %} *”What is the type of your input data”*: `Tabular`
@@ -410,32 +410,11 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-text %} *”Provide a name for the basal rank”*: `Root`
 >   - {% icon param-check %} *”Combine data from multiple datasets”*: `No`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. **Execute**
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Group abundances**
+## **Group abundances**
 
 > ### {% icon hands_on %} Hands-on: This tool groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms. Custom databases can be provided: a custom Gene Ontology file with the core ontology, a custom slim Gene Ontology with description of slim GO terms to use, and a custom mapping file for mapping UniRef50 gene families to GO terms.
 
@@ -446,94 +425,45 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-check %} *”Use a custom slim Gene Ontology file?”*: `No`
 >   - {% icon param-check %} *”Use a custom correspondence between UniReg50 and precise GO?”*: `No`  
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. **Execute**
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > 3 outputs are generated from executing this tool : abundances of GO slim terms grouped in 3 groups (molecular functions, biological processes and cellular components).Each file is a tabular file with 3 columns: GO slim term id, name and abundance.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## **Create a genus level gene families file**
 
-## Sub-step with **Create a genus level gene families file**
+> ### {% icon hands_on %} Hands-on: The gene families and pathways output files from HUMAnN2 are species level by default. This tool generates genus level gene families
 
-> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Create a genus level gene families file** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Gene families input table”*: `HUMAnN2 Gene families and their abundance file`
-
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. **Execute**
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## **Combine MetaPhlAn2 and HUMAnN2 outputs**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: This tool combine MetaPhlAn2 outputs and HUMANnN2 outputs.
+
+For each gene families/pathways and the corresponding taxonomic stratification, you get relative abundance of this gene family/pathway and the relative abundance of corresponding species and genus.
+
 >
 > 1. **Combine MetaPhlAn2 and HUMAnN2 outputs** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input file corresponding to MetaPhlAN2 output”*: `MetaPhlAn2 Community File`
 >   - {% icon param-file %} *”Input file corresponding HUMAnN2 output”*: `HUMAnN2 Gene families and their abundance file`
 >   - {% icon param-select %} *”Type of characteristics in HUMAnN2 file”*: `Gene families`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. **Execute**
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Combine MetaPhlAn2 and HUMAnN2 outputs**
 
@@ -543,31 +473,10 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-file %} *”Input file corresponding to MetaPhlAN2 output”*: `MetaPhlAn2 Community File`
 >   - {% icon param-file %} *”Input file corresponding HUMAnN2 output”*: `HUMAnN2 Pathways and their abundance file`
 >   - {% icon param-select %} *”Type of characteristics in HUMAnN2 file”*: `Gene families`
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. **Execute**
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ##**Generation, personalization and annotation of tree**
 
@@ -576,29 +485,13 @@ A big step can have several subsections or sub steps:
 > 1. **Generation, personalization and annotation of tree** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input tree”*: `Export to GraPhlAn Tree output`
 >   - {% icon param-file %} *”Annotation file”*: `Export to GraPhlAn Annotation output`
-
+> 2. **Execute**
 >    > ### {% icon comment %} Comment
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## **GraPhlAn**
 
@@ -611,30 +504,8 @@ A big step can have several subsections or sub steps:
 >   - {% icon param-text %} *”Size of the output image”*: `7`
 >   - {% icon param-text %} *”Distance between the most external graphical element and the border of the image”*: `blank`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 # Conclusion
