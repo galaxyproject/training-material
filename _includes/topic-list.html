@@ -1,0 +1,84 @@
+        <table class="table table-responsive table-striped">
+            <tr>
+                <th>Lesson</th>
+                <th>Slides</th>
+                <th>Hands-on</th>
+            </tr>
+
+            {% for material in include.material %}
+                {% assign case1 = false %}
+                {% assign case4 = false %}
+
+                {% if include.tag %}
+                    {% if material.tags contains include.tag %}
+                        {% assign case1 = true %}
+                    {% endif %}
+                {% else %}
+                    {% assign case4 = true %}
+
+                    {% if material.tags %}
+                        {% if material.tags contains 'core' %}
+                            {% assign case4 = false %}
+                        {% endif %}
+
+                        {% if material.tags contains 'features' %}
+                            {% assign case4 = false %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+
+                {% if case1 or case4 %}
+                {% if material.enable == nil or material.enable == true %}
+                        <script type="application/ld+json">
+                            {% include _includes/material.jsonld material=material topic=topic site=site %}
+                        </script>
+                    <tr>
+                        <td>
+                            {{ material.title }}
+                            <div class="">
+                            {% if material.level %}
+                                {% include _includes/difficulty-indicator.html level=material.level %}
+                            {% endif %}
+                            {% if material.tags %}
+                                 {% for tag in material.tags %}
+                                    {% if tag == 'core' %}
+                                    {% else %}
+                                        {% if tag == 'features' %}
+                                        {% else %}
+                                            <span class="label label-default" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+                                        {% endif %}
+                                    {% endif %}
+                                 {% endfor %}
+                            {% endif %}
+                        </div>
+                        </td>
+                        {% if material.type == "introduction" %}
+                            <td>
+                                {% if material.slides %}
+                                <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">
+                                  {% icon slides %}
+                                </a>
+                                {% endif %}
+                            </td>
+                            <td></td>
+                            {% if topic.type == "use" %}
+                                <td></td>
+                                <td></td>
+                            {% endif %}
+                            {% if instances[topic.name].supported %}
+                                <td></td>
+                            {% endif %}
+                        {% elsif material.type == "tutorial" %}
+                            <td>
+                                {% include _includes/resource-slides.html material=material topic=topic.name %}
+                            </td>
+                            <td>
+                                {% include _includes/resource-handson.html material=material topic=topic.name %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+                {% endif %}
+            {% endfor %}
+        </table>
+
