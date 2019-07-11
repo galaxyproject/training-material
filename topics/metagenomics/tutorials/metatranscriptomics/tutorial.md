@@ -49,8 +49,6 @@ This tutorial is an updated version of the ASaiM workflow developed by the **Gal
 # Metatranscriptomics for characterizing microbial communities
 
 ###  Multi-omics
-![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
-
 A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system.
 
 
@@ -485,5 +483,6 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
+
+Congratulations, you have now successfully completed the ASaiM tutorial modified for metatranscriptomics analysis.
