@@ -26,7 +26,7 @@ layout: base
 
         <div id="tutorial_list">
         <h2 id="material">Material</h2>
-        <div class="search_box"> {% icon search %}<input data-search-type="tutorial_title" class="search" placeholder="Search" /> </div>
+        <div class="search_box"> {% icon search %}<input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" /> <span onclick="javascript:var sb=document.getElementById('tutorial_search'); sb.value = '';sb.dispatchEvent(new KeyboardEvent('keyup', {'key':13}));"> {% icon galaxy-cross %}</span></div>
         <table class="table table-responsive table-striped">
             <thead>
             <tr>
@@ -60,7 +60,7 @@ layout: base
                             {% endif %}
                             {% if material.tags %}
                                   {% for tag in material.tags %}
-                                       <span class="label label-default" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+                                       <span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" onclick="javascript:var sb=document.getElementById('tutorial_search'); sb.value = '{{ tag }}';sb.dispatchEvent(new KeyboardEvent('keyup', {'key':13}));">{{ tag  }}</span>
                                   {% endfor %}
                             {% endif %}
                         </div>
@@ -176,6 +176,7 @@ if (item.values().id > 1) {
 }); // Only items with id > 1 are shown in list
 
 tutoList.filter(); // Remove all filters
+
 </script>
 
 {% include _includes/default-footer.html %}
