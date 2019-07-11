@@ -45,6 +45,9 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean ## install dependencies
 	$(ACTIVATE_ENV) && \
+		## we are using conda stack, move the ruby Gemfiles out of the way
+		mv Gemfile Gemfile.backup && \
+		mv Gemfile.lock Gemfile.lock.backup && \
 		npm install decktape && \
 		gem update --system && \
 		gem install nokogiri:'1.10.0' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib && \
