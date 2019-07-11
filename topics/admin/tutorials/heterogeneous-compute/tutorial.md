@@ -19,7 +19,8 @@ contributors:
   - mvdbeek
   - erasche
 tags:
-  - ansible
+  - features
+  - jobs
 requirements:
   - type: "internal"
     topic_name: admin

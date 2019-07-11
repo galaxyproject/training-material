@@ -20,7 +20,7 @@ contributors:
   - erasche
   - shiltemann
 tags:
-  - ansible
+  - core
 ---
 
 # Overview

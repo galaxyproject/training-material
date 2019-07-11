@@ -18,7 +18,8 @@ contributors:
   - slugger70
   - shiltemann
 tags:
-  - ansible
+  - core
+  - deploying
 requirements:
   - type: "internal"
     topic_name: admin

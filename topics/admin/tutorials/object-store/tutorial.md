@@ -15,7 +15,8 @@ contributors:
   - natefoo
   - erasche
 tags:
- - ansible
+  - features
+  - data
 requirements:
  - type: "internal"
    topic_name: admin

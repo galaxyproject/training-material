@@ -17,7 +17,8 @@ key_points:
 contributors:
   - erasche
 tags:
-  - ansible
+  - features
+  - monitoring
 ---
 
 # Overview

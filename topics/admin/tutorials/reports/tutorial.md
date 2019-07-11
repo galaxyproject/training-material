@@ -17,7 +17,8 @@ contributors:
   - slugger70
   - erasche
 tags:
-  - ansible
+  - features
+  - monitoring
 requirements:
   - type: "internal"
     topic_name: admin

@@ -15,7 +15,8 @@ contributors:
   - nsoranzo
   - erasche
 tags:
-  - ansible
+  - features
+  - authentication
 requirements:
   - type: "internal"
     topic_name: admin
