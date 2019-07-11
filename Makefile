@@ -61,6 +61,9 @@ serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set th
 
 detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
+		## we are using conda stack, move the ruby Gemfiles out of the way
+		mv Gemfile Gemfile.backup && \
+		mv Gemfile.lock Gemfile.lock.backup && \
 		${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: detached-serve
 
