@@ -45,9 +45,6 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean ## install dependencies
 	$(ACTIVATE_ENV) && \
-		## we are using conda stack, move the ruby Gemfiles out of the way
-		mv Gemfile Gemfile.backup && \
-		mv Gemfile.lock Gemfile.lock.backup && \
 		npm install decktape && \
 		gem update --system && \
 		gem install nokogiri:'1.10.0' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib && \
@@ -56,6 +53,9 @@ install: clean ## install dependencies
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	$(ACTIVATE_ENV) && \
+		## we are using conda stack, move the ruby Gemfiles out of the way
+		mv Gemfile Gemfile.backup && \
+		mv Gemfile.lock Gemfile.lock.backup && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 

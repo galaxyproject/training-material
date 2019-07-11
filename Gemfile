@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 source "https://rubygems.org"
 gem 'nokogiri'
 gem 'addressable'
@@ -11,5 +10,3 @@ gem 'csl-styles'
 gem 'awesome_bot'
 gem 'html-proofer'
 gem 'pkg-config'
-# gem 'addressable', '2.5.2'
-# gem 'nokogiri', '1.10.0'
