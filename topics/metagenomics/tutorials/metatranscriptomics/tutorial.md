@@ -29,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial is an updated version of the ASaiM workflow developed by the GalaxyP team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets. The datasets used in this tutorial are the trimmed versions of the original file. 
+This tutorial is an updated version of the ASaiM workflow developed by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets. The datasets used in this tutorial are the trimmed versions of the original file. 
 
 ## ASaiM Workflow
 
@@ -40,7 +40,8 @@ This tutorial is an updated version of the ASaiM workflow developed by the Galax
 >
 > In this tutorial, we will cover:
 >
-> 1. TOC
+> 1. Hands on training on using metatranscriptomics tools.
+> 2. Visualization of the data
 > {:toc}
 >
 {: .agenda}
@@ -48,15 +49,13 @@ This tutorial is an updated version of the ASaiM workflow developed by the Galax
 # Metatranscriptomics for characterizing microbial communities
 
 ###  Multi-omics
-
-A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system:
-
 ![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
 
-![Multiomics](../../images/Why_MT.png)
+A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system.
+
 
 Here is an exhaustive picture of taxonomy and functional pathways and their dynamics. It provides users with the confirmation of predicted open‐reading frames (ORFs) and potential identification novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.
-
+![Multiomics](../../images/Why_MT.png)
 
 
 ## Get data
@@ -71,18 +70,12 @@ Here is an exhaustive picture of taxonomy and functional pathways and their dyna
 >    https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/REVERSE_T4A_R.fastqsanger
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
->
 > 3. Rename the datasets
-> 4. Check that the datatype
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
+>    > ### {% icon tip %} TIP
+>    >
+>    > The files can also be imported through shared Data libraries in usegalaxy.eu. The files will be labelled as Metatranscriptomics_GTN_input.
+>    {: .tip}
 {: .hands_on}
 
 # ASaiM Workflow
@@ -124,7 +117,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 > ### {% icon hands_on %} Hands-on: Cutadapt helps finding and removing adapter sequences, primers, poly-A tails or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. It also has additional features of modifying and filtering reads.
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
->    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>  - {% icon param-select %} *"Single-end or Paired-end reads?"*: `Paired-end`
 >  - {% icon param-select %} *”FASTQ/A file #1 ”*: `FASTQ groomer on data 1` 
 >  - {% icon param-select %} *”FASTQ/A file #2 ”*:`FASTQ groomer on data 2`
 >  - {% icon param-select %} *”Adapter options ”*: `Default`
@@ -188,19 +181,17 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 >
 {: .hands_on}
 
+The next step is the interlacing step wherein we join the two separate files (forward and reverse) to create a single output.There are two FASTQ interlacers in this workflow. The first one is for MetaPhlAn2 input and the other for HUMANn2 input.
 
-
+>    > ### {% icon comment %} Comment
+>    > Please pay attention to which interlacing step you are performing. Provide appropriate inputs.
+>    > 
+>    {: .comment}
 
 ## **FASTQ interlacer**
 
 > ### {% icon hands_on %} Hands-on: This tool joins paired-end FASTQ reads from two separate files, one with the forward reads and one with the reverse reads, into a single files where forward alternate with their reverse reads. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
 
->    > ### {% icon comment %} Comment
->    >
->    > There are two FASTQ interlacers in this workflow. The first one is for MetaPhlAn2 input and the other for HUMANn2 input.
->    {: .comment}
->
-{: .hands_on}
 >
 > 1. **FASTQ interlacer** {% icon tool %} with the following parameters: For MetaPhlAn2
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
@@ -211,6 +202,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 >   - {% icon param-file %} *”Right-hand mates”*:`Cutadapt on data 4 and data 3: Read 2 Output`
 >
 > 2. **Execute**
+> 3. Rename the output to MetaPhlAn2 input.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -222,7 +214,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 
 ## **FASTQ interlacer**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **FASTQ interlacer** {% icon tool %} with the following parameters: For HUMANn2
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
@@ -232,6 +224,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 >
 > 2. **Execute**
 >
+> 3. Rename the output to HUMANn2 input
 {: .hands_on}
 
 ## **MetaPhlAn2**
@@ -240,7 +233,7 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 ![MetaPhlAn2](../../images/Metaphlan2.png)
 >
 > 1. **MetaPhlAn2** {% icon tool %} with the following parameters:
->   - {% icon param-tool %} *”Input file”*: `FASTQ interlacer output`
+>   - {% icon param-tool %} *”Input file”*: `MetaPhlAn2 input`
 >   - {% icon param-select %} *”Database with clade-specific marker genes”*: `Locally cached`
 >   - {% icon param-select %} *”Cached database with clade-specific marker genes”*: `MetaPhlAn2 clade-specific marker genes`
 >   - {% icon param-select %} *”Type of analysis to perform”*: `Profiling a metagenomes in terms of relative abundances`
@@ -268,22 +261,22 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 > ### {% icon hands_on %} Hands-on: HUMAnN2 is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data. For creating the input for HUMAnN2, we interlaced the output from SortmeRNA into a single FASTQ file. This interlaced file and the MetaPhlAn2 output (taxonomic profile) is used as the HUMAnN2 input. For functional profiling, it uses multiple databases that are locally cached nucleotide or protein databases.
 >
 > 1. **HUMAnN2** {% icon tool %} with the following parameters:
->    - "Input sequence file" to the imported sequence file
->    - "Use of a custom taxonomic profile" to `Yes`
->    - "Taxonomic profile file" to `Community profile` output of `MetaPhlAn2`
->    - "Nucleotide database" to `Locally cached`
->    - "Nucleotide database" to `Full`
->    - "Protein database" to `Locally cached`
->    - "Protein database" to `Full UniRef50`
->    - "Search for uniref50 or uniref90 gene families?" to `uniref50`
->    - "Database to use for pathway computations" to `MetaCyc`
->    - "Advanced Options"
->    - "Remove stratification from output" to `Yes`
+>   - {% icon param-tool %} *"Input sequence file"*: `HUMANn2 input`
+>   - {% icon param-check %} *"Use of a custom taxonomic profile"*: `Yes`
+>   - {% icon param-select %} *"Taxonomic profile file"*: `Community profile` output of `MetaPhlAn2`
+>   - {% icon param-select %} *"Nucleotide database"*: `Locally cached`
+>   - {% icon param-select %} *"Nucleotide database"*: `Full`
+>   - {% icon param-select %} *"Protein database"*: `Locally cached`
+>   - {% icon param-select %} *"Protein database"*: `Full UniRef50`
+>   - {% icon param-select %} *"Search for uniref50 or uniref90 gene families?"*: `uniref50`
+>   - {% icon param-select %} *"Database to use for pathway computations"*: `MetaCyc`
+>   - {% icon param-select %} *"Advanced Options"*:`Default`
+>   - {% icon param-select %} *"Remove stratification from output"*: `Yes`
 >
 > 2. **Execute**
 >
 >    > ### {% icon comment %} Comment
->    > This step might take some time. Please have patience or get some coffee!!!
+>    > This step might take some time. Please have patience or get take a coffee/tea break!!!
 >    > 
 >    {: .comment}
 >
