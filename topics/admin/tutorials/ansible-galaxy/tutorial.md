@@ -598,7 +598,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >        ...
 >    ```
 >
-> 4. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform `galaxyproject.galaxy` what the name of our new handler is. Add the following to the bottom of your group variables file:
+> 4. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform `galaxyproject.galaxy` what the name of our new handler is. Add the following to the bottom of your group variables file:
 >
 >    ```yaml
 >    supervisor_socket_user: galaxy
@@ -712,7 +712,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    > ### {% icon details %} Nginx details
 >    >
->    > Likewise the nginx configuration has a couple of important points
+>    > Likewise the nginx configuration has a couple of important points:
 >    > - `nginx_selinux_allow_local_connections`: Specific to CentOS hosts where Nginx will need to access Galaxy
 >    > - `nginx_enable_default_server/vhost`: Most Nginx packages come with a default configuration for the webserver. We do not want this.
 >    > - `nginx_conf_http`: Here we can write any extra configuration we have, `client_max_body_size: 1g` increases the POST limit to 1Gb which makes uploads easier.
@@ -788,12 +788,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >        # The style directory is in a slightly different location
 >        location /static/style {
 >            alias {{ galaxy_server_dir }}/static/style/blue;
->            expires 24h;
->        }
->
->        # Likewise for compiled JS, these need to be accesses in a specific location.
->        location /static/scripts {
->            alias {{ galaxy_server_dir }}/static/scripts;
 >            expires 24h;
 >        }
 >
