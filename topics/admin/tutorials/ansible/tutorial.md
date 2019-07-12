@@ -232,48 +232,52 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon hands_on %} Hands-on: Setting up our workspace
 >
-> 1. Decide where you will install and run Ansible? On your laptop? Or on the remote machine/VM you will manage? All of the following steps should be done in the one location you pick.
+> 1. In this training we will run Ansible on the machine it will modify. This is not best practice, but it is convenient for trainings. You should probably run this in a VM either on the Cloud or in VirtualBox or similar
 >
-> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+>    All of the steps are the same, no matter which machine Ansible will manage and where you run it. The only difference is the connection setup
 >
-> 3. Create an empty directory and `cd` into it
+> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) where you will run it
 >
-> 4. Create your inventory file, name it `hosts`, in the folder you have just entered.
+> 3. Create an directory named `intro` and `cd` into it
 >
->    - You are installing ansible on a machine that will manage a second, remote machine
+> 4. Create your inventory file (named `hosts`) in this folder
 >
->      1. Make sure you can SSH into it. Test it now.
+>    1. We will call our group `my_hosts`
 >
->      2. We will call our group `my_hosts`
+>    2. Create [an inventory file](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
 >
->      3. Create a hosts file with the group `my_hosts` and your host.
+>       > ### {% icon solution %} Solution
+>       > The file should look like:
+>       >
+>       > ```ini
+>       > [my_hosts]
+>       > localhost ansible_connection=local
+>       > ```
+>       {: .solution }
 >
->         > ### {% icon solution %} Solution
->         > The file should look like:
->         >
->         > ```ini
->         > [my_hosts]
->         > your.host
->         > ```
->         > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
->         {: .solution }
->
->    - You are installing ansible on the machine it will be used to manage
->
->      1. We will call our group `my_hosts`
->
->      2. Create a hosts file with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
->
->
->         > ### {% icon solution %} Solution
->         > The file should look like:
->         >
->         > ```ini
->         > [my_hosts]
->         > localhost ansible_connection=local
->         > ```
->         {: .solution }
->
+>    > ### {% icon details %} Running Ansible on a different machine
+>    >
+>    > The best practice is to have playbooks in git, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machine is one of the strengths of Ansible.
+>    >
+>    > In order to run remotely:
+>    >
+>    > 1. Make sure you can SSH into it. (Test it now)
+>    >
+>    > 2. We will call our group `my_hosts`
+>    >
+>    > 3. Create a hosts file with the group `my_hosts` and your host.
+>    >
+>    >    > ### {% icon solution %} Solution
+>    >    > The file should look like:
+>    >    >
+>    >    > ```ini
+>    >    > [my_hosts]
+>    >    > your.host.fqdn.or.ip
+>    >    > ```
+>    >    > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
+>    >    {: .solution }
+>    >
+>    {: .details}
 >
 > 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
 >
