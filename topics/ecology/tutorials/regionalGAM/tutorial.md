@@ -77,7 +77,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 
 > ### {% icon hands_on %} Hands-on: Downsample and hide some information
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
->       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
+>       - {% icon param-file %} *"Select cells from"*: Uploaded CSV dataset file {% icon tool %}
 >       - *"AWK Program"*:
 >
 >
@@ -86,6 +86,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >
 >
 > The first line will skip and print the header and the second will print all the lines where NLBMS is found
+> Warning: depending on the Galaxy instance your are using, this tool can not appear on the tool panel. Another solution can be to use **Select lines that match an expression** {% icon tool %} to select lines matching 'NLBMS' pattern in addition to **Select first lines from a dataset** {% icon tool %} specifying keeping the first line, so the header, then **Concatenate datasets tail-to-head** {% icon tool %} to recreate a CSV file from concatenating the header and NLBMS lines of the original csv file.
 >
 {: .hands_on}
 
