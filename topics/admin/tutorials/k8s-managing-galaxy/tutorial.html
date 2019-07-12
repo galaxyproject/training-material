@@ -631,7 +631,7 @@ full list from CVMFS.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
   <span class="na">virtualenv</span><span class="pi">:</span> <span class="s">/galaxy/server/.venv</span>
-  <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
+  <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
   <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
   <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style=/galaxy/server/static/style/blue</span>
   <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/galaxy/server/static</span>
@@ -640,9 +640,9 @@ full list from CVMFS.</p>
   <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">mount</span><span class="pi">:</span> <span class="pi">{{</span><span class="nv">.Values.ingress.path</span><span class="pi">}}</span><span class="s">=galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
-  <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
-  <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
-  <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
+  <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
+  <span class="na">offload-threads</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">threads</span><span class="pi">:</span> <span class="m">4</span>
   <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
@@ -784,9 +784,9 @@ web handler and one job handler. We will now look at how these can be scaled.</p
 number of web and job handlers.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">webHandlers</span><span class="pi">:</span>
-    <span class="na">replicaCount</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="na">replicaCount</span><span class="pi">:</span> <span class="m">1</span>
 <span class="na">jobHandlers</span><span class="pi">:</span>
-    <span class="na">replicaCount</span><span class="pi">:</span> <span class="s">1</span>
+    <span class="na">replicaCount</span><span class="pi">:</span> <span class="m">1</span>
 </code></pre></div>      </div>
     </li>
     <li>

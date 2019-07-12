@@ -689,9 +689,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
     <span class="na">slurm_roles</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">controller'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">exec'</span><span class="pi">]</span>
     <span class="na">slurm_nodes</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">localhost</span>
-      <span class="na">CPUs</span><span class="pi">:</span> <span class="s">2</span>                              <span class="c1"># Here you would need to figure out how many cores your machine has. (Hint, `htop`)</span>
+      <span class="na">CPUs</span><span class="pi">:</span> <span class="m">2</span>                              <span class="c1"># Here you would need to figure out how many cores your machine has. (Hint, `htop`)</span>
     <span class="na">slurm_config</span><span class="pi">:</span>
-      <span class="na">FastSchedule</span><span class="pi">:</span> <span class="s">2</span>                      <span class="c1"># Ignore errors if the host actually has cores != 2</span>
+      <span class="na">FastSchedule</span><span class="pi">:</span> <span class="m">2</span>                      <span class="c1"># Ignore errors if the host actually has cores != 2</span>
       <span class="na">SelectType</span><span class="pi">:</span> <span class="s">select/cons_res</span>
       <span class="na">SelectTypeParameters</span><span class="pi">:</span> <span class="s">CR_CPU_Memory</span>  <span class="c1"># Allocate individual cores/memory instead of entire node</span>
   <span class="na">roles</span><span class="pi">:</span>
@@ -917,8 +917,8 @@ sleep </span>30
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
     <span class="s">...</span>
     <span class="na">configuration</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">...</span>
-      <span class="no">environment=HOME="{{ galaxy_mutable_data_dir }}",VIRTUAL_ENV="{{ galaxy_venv_dir }}",PATH="{{ galaxy_venv_dir }}/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"</span>
+      <span class="s">...</span>
+      <span class="s">environment=HOME="{{ galaxy_mutable_data_dir }}",VIRTUAL_ENV="{{ galaxy_venv_dir }}",PATH="{{ galaxy_venv_dir }}/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1294,7 +1294,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
   <span class="na">testing</span><span class="pi">:</span>
     <span class="na">rules</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">rule_type</span><span class="pi">:</span> <span class="s">file_size</span>
-        <span class="na">lower_bound</span><span class="pi">:</span> <span class="s">16</span>
+        <span class="na">lower_bound</span><span class="pi">:</span> <span class="m">16</span>
         <span class="na">upper_bound</span><span class="pi">:</span> <span class="s">Infinity</span>
         <span class="na">destination</span><span class="pi">:</span> <span class="s">slurm-2c</span>
     <span class="na">default_destination</span><span class="pi">:</span> <span class="s">slurm</span>

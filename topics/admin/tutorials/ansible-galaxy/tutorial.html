@@ -716,7 +716,7 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">galaxyproject.postgresql</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.1</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">1.1</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="m">1.1</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">geerlingguy.pip</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">uchida.miniconda</span>
@@ -1024,10 +1024,10 @@ best practices and knowledge from previous admins codified for you.</p>
   <span class="na">uwsgi</span><span class="pi">:</span>
     <span class="c1"># Default values</span>
     <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
-    <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
-    <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
-    <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
-    <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
+    <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
+    <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
+    <span class="na">threads</span><span class="pi">:</span> <span class="m">4</span>
+    <span class="na">offload-threads</span><span class="pi">:</span> <span class="m">2</span>
     <span class="na">static-map</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
       <span class="pi">-</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
@@ -1157,14 +1157,14 @@ best practices and knowledge from previous admins codified for you.</p>
     <span class="na">state</span><span class="pi">:</span> <span class="s">present</span>
     <span class="na">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml</span>
     <span class="na">configuration</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">autostart=true</span>
-      <span class="no">autorestart=true</span>
-      <span class="no">startretries=1</span>
-      <span class="no">startsecs=10</span>
-      <span class="no">user=galaxy</span>
-      <span class="no">umask=022</span>
-      <span class="no">directory={{ galaxy_server_dir }}</span>
-      <span class="no">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
+      <span class="s">autostart=true</span>
+      <span class="s">autorestart=true</span>
+      <span class="s">startretries=1</span>
+      <span class="s">startsecs=10</span>
+      <span class="s">user=galaxy</span>
+      <span class="s">umask=022</span>
+      <span class="s">directory={{ galaxy_server_dir }}</span>
+      <span class="s">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
 </code></pre></div>      </div>
 
       <p>Here we’ve defined a <code class="highlighter-rouge">galaxy</code> command that should be <code class="highlighter-rouge">present</code>. It will run the command <code class="highlighter-rouge">uwsgi ...</code> and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as <code class="highlighter-rouge">running</code>. It starts as the <code class="highlighter-rouge">galaxy</code> user with a umask of <code class="highlighter-rouge">022</code> (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.</p>
@@ -1276,7 +1276,7 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="na">certbot_share_key_users</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">nginx</span>
 <span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="no">systemctl restart nginx || true</span>
+    <span class="s">systemctl restart nginx || true</span>
 <span class="na">certbot_domains</span><span class="pi">:</span>
  <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
 <span class="na">certbot_agree_tos</span><span class="pi">:</span> <span class="s">--agree-tos</span>

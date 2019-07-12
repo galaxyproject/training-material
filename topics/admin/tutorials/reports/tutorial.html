@@ -614,10 +614,10 @@
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
     <span class="na">socket</span><span class="pi">:</span> <span class="s">127.0.0.1:9001</span>
-    <span class="na">buffer-size</span><span class="pi">:</span> <span class="s">16384</span>
-    <span class="na">processes</span><span class="pi">:</span> <span class="s">1</span>
-    <span class="na">threads</span><span class="pi">:</span> <span class="s">4</span>
-    <span class="na">offload-threads</span><span class="pi">:</span> <span class="s">2</span>
+    <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
+    <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
+    <span class="na">threads</span><span class="pi">:</span> <span class="m">4</span>
+    <span class="na">offload-threads</span><span class="pi">:</span> <span class="m">2</span>
     <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
     <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
     <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=static/favicon.ico</span>
@@ -658,14 +658,14 @@
     <span class="s">state</span><span class="pi">:</span> <span class="s">present</span>
     <span class="s">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ galaxy_config_dir }}/reports.yml</span>
     <span class="s">configuration</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="no">autostart=true</span>
-      <span class="no">autorestart=true</span>
-      <span class="no">startretries=1</span>
-      <span class="no">startsecs=10</span>
-      <span class="no">user=galaxy</span>
-      <span class="no">umask=022</span>
-      <span class="no">directory={{ galaxy_server_dir }}</span>
-      <span class="no">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
+      <span class="s">autostart=true</span>
+      <span class="s">autorestart=true</span>
+      <span class="s">startretries=1</span>
+      <span class="s">startsecs=10</span>
+      <span class="s">user=galaxy</span>
+      <span class="s">umask=022</span>
+      <span class="s">directory={{ galaxy_server_dir }}</span>
+      <span class="s">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
 </code></pre></div>      </div>
     </li>
     <li>
