@@ -183,7 +183,9 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
 .PHONY: pdf
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
-	python bin/add_galaxy_instance_annotations.py
+	${ACTIVATE_ENV} && \
+	bash bin/workflow_to_tool_yaml.sh && \
+	python bin/add_galaxy_instance_annotations.py && \
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
 
