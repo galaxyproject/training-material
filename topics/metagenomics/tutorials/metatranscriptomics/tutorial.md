@@ -477,7 +477,7 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 
 # Conclusion
 {:.no_toc}
-
+This metatranscriptomics workflow was created by our team to handle any size of datasets. We are currently working on additional features that can help make the outputs more interactive and easy to manipulate. Here is a summary of our analysis.
 ![ASaiM diagram](../../images/asaim-wf.png "The Auvergne Sequence analysis of intestinal Microbiota (ASaiM)")
 
 Congratulations, you have now successfully completed the ASaiM tutorial modified for metatranscriptomics analysis.
