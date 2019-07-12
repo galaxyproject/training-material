@@ -555,7 +555,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 
 > ### {% icon hands_on %} Hands-on: Supervisord
 >
-> 1. Add the roles `geerlingguy.pip` and `usegalaxy-eu.supervisor` to your playbook, these need to install things and should run as the root user. Additionally, they shoould run **after** all of the roles we have already added so far.
+> 1. Add the roles `geerlingguy.pip` and `usegalaxy-eu.supervisor` to your playbook, these need to install things and should run as the root user. Additionally, they should run **after** all of the roles we have already added so far.
 >
 > 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.
 >
