@@ -77,7 +77,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 
 > ### {% icon hands_on %} Hands-on: Downsample and hide some information
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
->       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
+>       - {% icon param-file %} *"Select cells from"*: Uploaded CSV dataset file {% icon tool %}
 >       - *"AWK Program"*:
 >
 >
