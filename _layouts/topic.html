@@ -41,8 +41,10 @@ layout: base
                 {% include _includes/tutorial_list.html sub=subtopic %}
               {% endfor %}
               <h3> Other </h3>
+                {% include _includes/tutorial_list.html sub="other" %}
+            {% else %}
+               {% include _includes/tutorial_list.html %}
             {% endif %}
-           {% include _includes/tutorial_list.html %}
         </div>
 
         {% if topic.type == "use" %}

@@ -21,6 +21,8 @@
   {% for material in topic_material %}
     {% if include.sub and include.sub == material.subtopic %}
       {% assign show=true %}
+    {% elsif include.sub == "other" and material.subtopic == nil %}
+      {% assign show = true %}
     {% else %}
       {% assign show=false %}
     {% endif %}
