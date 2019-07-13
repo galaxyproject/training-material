@@ -25,12 +25,12 @@ layout: base
         {% endif %}
 
         <div id="tutorial_list">
-        <h2 id="material">Material</h2>
-        <div class="search_box">
-        {% icon search %}
-        <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
-        <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span></div>
-
+            <h2 id="material">Material</h2>
+            <div class="search_box">
+                {% icon search %}
+                <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+                <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
+            </div>
             {% if topic.subtopics %}
               {% for s in topic.subtopics %}
                 {% assign subtopic = s[0] %}
@@ -41,7 +41,7 @@ layout: base
               <h3> Other </h3>
             {% endif %}
            {% include _includes/tutorial_list.html %}
-            </div>
+        </div>
 
         {% if topic.type == "use" %}
             <h2 id="docker_image">Galaxy instances</h2>
