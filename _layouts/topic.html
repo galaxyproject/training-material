@@ -25,8 +25,8 @@ layout: base
         {% endif %}
 
         <div id="tutorial_list">
-            {% unless topic.subtopics %}
             <h2 id="material">Material</h2>
+            {% unless topic.subtopics %}
             <div class="search_box">
                 {% icon search %}
                 <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
@@ -37,7 +37,7 @@ layout: base
               {% for s in topic.subtopics %}
                 {% assign subtopic = s[0] %}
 		        <h3> {{ topic.subtopics[subtopic].title}}</h3>
-                {{ topic.subtopics[subtopic].description }}
+                {{ topic.subtopics[subtopic].description }} </br></br>
                 {% include _includes/tutorial_list.html sub=subtopic %}
               {% endfor %}
               <h3> Other </h3>
