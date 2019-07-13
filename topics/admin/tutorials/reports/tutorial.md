@@ -16,7 +16,7 @@ contributors:
   - bgruening
   - slugger70
   - erasche
-subtopics: features
+subtopic: features
 tags:
   - monitoring
 requirements:

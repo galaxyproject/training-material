@@ -14,7 +14,7 @@ key_points:
 contributors:
   - natefoo
   - erasche
-subtopics: features
+subtopic: features
 tags:
   - data
 requirements:
