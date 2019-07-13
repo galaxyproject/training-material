@@ -16,8 +16,8 @@ key_points:
   - new queries are welcome and easy to contribute
 contributors:
   - erasche
+subtopic: features
 tags:
-  - features
   - monitoring
 ---
 

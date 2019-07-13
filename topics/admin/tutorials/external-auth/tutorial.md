@@ -14,8 +14,8 @@ contributors:
   - natefoo
   - nsoranzo
   - erasche
+subtopic: features
 tags:
-  - features
   - authentication
 requirements:
   - type: "internal"

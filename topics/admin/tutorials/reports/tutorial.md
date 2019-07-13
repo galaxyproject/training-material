@@ -16,8 +16,8 @@ contributors:
   - bgruening
   - slugger70
   - erasche
+subtopic: features
 tags:
-  - features
   - monitoring
 requirements:
   - type: "internal"

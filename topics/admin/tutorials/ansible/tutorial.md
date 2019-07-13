@@ -19,8 +19,8 @@ key_points:
 contributors:
   - erasche
   - shiltemann
-tags:
-  - core
+subtopic: core
+
 ---
 
 # Overview

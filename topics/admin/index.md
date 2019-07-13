@@ -1,4 +1,4 @@
 ---
-layout: topic_admin
+layout: topic
 topic_name: admin
 ---
