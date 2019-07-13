@@ -26,7 +26,10 @@ layout: base
 
         <div id="tutorial_list">
         <h2 id="material">Material</h2>
-        <div class="search_box"> {% icon search %}<input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" /> <span id="clear_search"> {% icon galaxy-cross %}</span></div>
+        <div class="search_box">
+        {% icon search %}
+        <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+        <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span></div>
         <table class="table table-responsive table-striped">
             <thead>
             <tr>
@@ -60,7 +63,7 @@ layout: base
                             {% endif %}
                             {% if material.tags %}
                                   {% for tag in material.tags %}
-                                       <span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+                                       <span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show only tutorials with this tag">{{ tag  }}</span>
                                   {% endfor %}
                             {% endif %}
                         </div>
