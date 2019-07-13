@@ -14,8 +14,8 @@ key_points:
 contributors:
   - slugger70
   - erasche
+subtopic: features
 tags:
-  - features
   - data
 requirements:
   - type: "internal"

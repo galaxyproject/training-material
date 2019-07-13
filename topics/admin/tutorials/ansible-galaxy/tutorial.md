@@ -18,8 +18,8 @@ contributors:
   - slugger70
   - shiltemann
 tags:
-  - core
   - deploying
+subtopic: core
 requirements:
   - type: "internal"
     topic_name: admin

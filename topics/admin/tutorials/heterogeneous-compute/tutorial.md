@@ -18,8 +18,8 @@ contributors:
   - slugger70
   - mvdbeek
   - erasche
+subtopic: features
 tags:
-  - features
   - jobs
 requirements:
   - type: "internal"

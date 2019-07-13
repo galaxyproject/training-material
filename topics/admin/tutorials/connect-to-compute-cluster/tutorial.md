@@ -27,8 +27,8 @@ contributors:
   - bgruening
   - erasche
 tags:
-  - features
   - jobs
+subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
