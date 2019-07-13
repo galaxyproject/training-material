@@ -24,7 +24,7 @@ layout: base
         </ul>
         {% endif %}
 
-        <div id="tutorial_list">
+        {% unless topic.subtopics %}<div id="tutorial_list">{% endunless %}
             <h2 id="material">Material</h2>
             {% unless topic.subtopics %}
             <div class="search_box">
@@ -40,8 +40,15 @@ layout: base
                 {{ topic.subtopics[subtopic].description }} </br></br>
                 {% include _includes/tutorial_list.html sub=subtopic %}
               {% endfor %}
+              <div id="tutorial_list">
               <h3> Other </h3>
-                {% include _includes/tutorial_list.html sub="other" %}
+              <div class="search_box">
+                {% icon search %}
+                <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+                <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
+            </div>
+
+              {% include _includes/tutorial_list.html sub="other" %}
             {% else %}
                {% include _includes/tutorial_list.html %}
             {% endif %}
