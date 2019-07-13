@@ -25,12 +25,14 @@ layout: base
         {% endif %}
 
         <div id="tutorial_list">
+            {% unless topic.subtopics %}
             <h2 id="material">Material</h2>
             <div class="search_box">
                 {% icon search %}
                 <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
                 <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
             </div>
+            {% endunless %}
             {% if topic.subtopics %}
               {% for s in topic.subtopics %}
                 {% assign subtopic = s[0] %}
