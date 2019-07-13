@@ -18,12 +18,12 @@ tutoList.filter(); // remove filters
 $('#clear_search').click(function(){
     sb = document.getElementById('tutorial_search');
     sb.value = '';
-    sb.dispatchEvent(new KeyboardEvent('keyup', {'key':13}));
+    sb.dispatchEvent(new KeyboardEvent('keyup'));
 });
 
 // search by tutorial tag
 $('.tutorial_tag').click(function() {
     sb = document.getElementById('tutorial_search');
     sb.value = this.id;
-    sb.dispatchEvent(new KeyboardEvent('keyup', {'key':13}));
+    sb.dispatchEvent(new KeyboardEvent('keyup'));
 });
