@@ -182,7 +182,7 @@ if fn.include?('tutorial.md') then
   if data.key?('subtopic') then
     subtopic_ids = []
     topic_metadata['subtopics'].each{ |x|
-      subtopic_ids.append(x['id'])
+      subtopic_ids.push(x['id'])
     }
 
     if not subtopic_ids.include?(data['subtopic']) then
