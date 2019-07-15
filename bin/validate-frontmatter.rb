@@ -173,6 +173,25 @@ if fn.include?('tutorial.md') then
 
   # Check contributors
   errs = errs.concat(check_contributors(data))
+
+  # Load topic metadata
+  topic = fn.split('/')[1]
+  topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+
+  # Check subtopics
+  if data.key?('subtopic') then
+    subtopic_ids = []
+    topic_metadata['subtopics'].each{ |x|
+      subtopic_ids.append(x['id'])
+    }
+
+    if not subtopic_ids.include?(data['subtopic']) then
+      errs.push("Unknown subtopic: #{data['subtopic']} not in #{subtopic_ids}")
+    end
+  end
+
+
+# Validate Metadata
 elsif fn.include?('metadata.yaml') then
   data = YAML.load_file(fn)
 

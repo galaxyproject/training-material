@@ -15,8 +15,6 @@ contributors:
   - slugger70
   - erasche
 subtopic: features
-tags:
-  - data
 requirements:
   - type: "internal"
     topic_name: admin

@@ -16,7 +16,7 @@ contributors:
   - erasche
 subtopic: features
 tags:
-  - data
+  - storage
 requirements:
  - type: "internal"
    topic_name: admin
