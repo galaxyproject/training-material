@@ -1,5 +1,4 @@
----
-# Postgres
+# PostgreSQL
 postgresql_objects_users:
   - name: galaxy
     password: null
@@ -15,20 +14,21 @@ galaxy_layout: root-dir
 galaxy_root: /srv/galaxy
 galaxy_file_path: /data
 galaxy_user: {name: galaxy, shell: /bin/bash}
-galaxy_commit_id: release_18.09
+galaxy_commit_id: release_19.05
 galaxy_config_style: yaml
 galaxy_force_checkout: true
+miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 
 galaxy_config:
   galaxy:
     brand: "My Galaxy"
     admin_users: admin@example.org
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
-    file_path: /data
+    file_path: "{{ galaxy_file_path }}"
     check_migrate_tools: false
-    ftp_upload_dir: "{{ galaxy_ftp_upload_dir }}"
-    ftp_upload_site: "ftp://{{ hostname }}"
+    shed_tool_data_dir: "{{ galaxy_mutable_data_dir }}/tool-data"
   uwsgi:
+    # Default values
     socket: 127.0.0.1:8080
     buffer-size: 16384
     processes: 1
@@ -54,15 +54,17 @@ galaxy_config:
       - lib/galaxy/main.py
     farm: job-handlers:1,2
 
-# Supervisord
-supervisor_socket_user: 'galaxy'
-supervisor_socket_chown: 'galaxy'
-galaxy_restart_handler_name: galaxy restart
+# Automatically restart Galaxy by calling a handler named 'Restart
+# Galaxy', whenever the server changes.
+galaxy_restart_handler_name: Restart Galaxy
 
+# supervisord
+supervisor_socket_user: galaxy
+supervisor_socket_chown: galaxy
 supervisor_programs:
   - name: galaxy
     state: present
-    command: uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml
+    command: "uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml"
     configuration: |
       autostart=true
       autorestart=true
@@ -71,133 +73,36 @@ supervisor_programs:
       user=galaxy
       umask=022
       directory={{ galaxy_server_dir }}
-      environment=HOME={{ galaxy_root }},VIRTUALENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
-
-# NGINX
-nginx_package_name: nginx-full # nginx-galaxy on RHEL/CentOS
-nginx_remove_default_vhost: true
-nginx_server_names_hash_bucket_size: "128"
-
-nginx_vhosts:
-  - listen: "80"
-    server_name: "{{ hostname }}"
-    return: "301 https://{{ hostname }}$request_uri"
-    filename: "{{ hostname }}.80.conf"
-
-  - listen: "443 ssl"
-    server_name: "{{ hostname }}"
-    root: "/var/www/{{ hostname }}"
-    index: "index.html"
-    access_log: "/var/log/nginx/access.log"
-    error_log: "/var/log/nginx/error.log"
-    state: "present"
-    filename: "{{ hostname }}.conf"
-    extra_parameters: |
-        client_max_body_size 10G; # aka max upload size, defaults to 1M
-        uwsgi_read_timeout 2400;
-
-        location / {
-            uwsgi_pass      127.0.0.1:8080;
-            uwsgi_param UWSGI_SCHEME $scheme;
-            include         uwsgi_params;
-        }
-
-        location /.well-known/ {
-            proxy_set_header           Host $host:$server_port;
-            proxy_set_header           X-Real-IP $remote_addr;
-            proxy_set_header           X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header           X-Forwarded-Proto $scheme;
-            proxy_pass                 http://127.0.0.1:8118;
-            proxy_pass_request_headers on;
-        }
-
-        location /static {
-                alias {{ galaxy_server_dir }}/static;
-                expires 24h;
-        }
-
-        location /static/style {
-                alias {{ galaxy_server_dir }}/static/style/blue;
-                expires 24h;
-        }
-
-        location /static/scripts {
-                alias {{ galaxy_server_dir }}/static/scripts;
-                expires 24h;
-        }
-
-        location /robots.txt {
-                alias {{ galaxy_server_dir }}/static/robots.txt;
-        }
-
-        location /favicon.ico {
-                alias {{ galaxy_server_dir }}/static/favicon.ico;
-        }
-
-        location /static/welcome.html {
-                alias {{ galaxy_server_dir }}/static/welcome.html.sample;
-        }
-
-        ssl_certificate /etc/ssl/certs/cert.pem;
-        ssl_certificate_key /etc/ssl/private/privkey-nginx.pem;
-
-        ssl_protocols TLSv1.2;# Requires nginx >= 1.13.0 else use TLSv1.2
-        ssl_prefer_server_ciphers on;
-        ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
-        ssl_ecdh_curve secp384r1;
-        ssl_session_timeout  10m;
-        ssl_session_cache shared:SSL:10m;
-        ssl_session_tickets off;
-        #ssl_stapling on;
-        #ssl_stapling_verify on;
-
-        resolver 8.8.8.8 8.8.4.4 valid=300s;
-        resolver_timeout 5s;
-        add_header X-Content-Type-Options nosniff;
-        add_header X-XSS-Protection "1; mode=block";
-        add_header X-Robots-Tag none;
+      environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
 
 # Certbot
+certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+certbot_auth_method: --webroot
+certbot_install_method: virtualenv
 certbot_auto_renew: yes
 certbot_auto_renew_user: root
-certbot_auto_renew_hour: 23
-certbot_auto_renew_minute: 15
-certbot_auto_renew_extra: "--preferred-challenges http-01 --http-01-port 8118"
 certbot_environment: staging
-certbot_domains:
-  - "{{ hostname }}"
-certbot_agree_tos: --agree-tos
-certbot_admin_email: # Put YOUR email here
+certbot_well_known_root: /srv/nginx/_well-known_root
 certbot_share_key_users:
   - nginx
 certbot_post_renewal: |
     systemctl restart nginx || true
+certbot_domains:
+ - "{{ inventory_hostname }}"
+certbot_agree_tos: --agree-tos
 
-# ProFTPD
-galaxy_ftp_upload_dir: "{{ galaxy_root }}/ftp"
-proftpd_display_connect: |
-  Unauthorized access is prohibited
-proftpd_galaxy_auth: yes
-__galaxy_user_name: galaxy
-proftpd_options:
-  - User: galaxy
-  - Group: galaxy
-proftpd_sql_user: galaxy
-proftpd_sql_db: galaxy@/var/run/postgresql
+# NGINX
+nginx_selinux_allow_local_connections: true
+nginx_servers:
+  - redirect-ssl
+nginx_enable_default_server: false
+nginx_ssl_servers:
+  - galaxy
+nginx_conf_http:
+  client_max_body_size: 1g
+nginx_remove_default_vhost: true
+nginx_ssl_role: usegalaxy-eu.certbot
+nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 
-proftpd_tls_cipher_suite: AES128+EECDH:AES128+EDH
-proftpd_tls_protocol: TLSv1.2
-proftpd_conf_ssl_certificate:     "/etc/ssl/certs/cert.pem;"
-proftpd_conf_ssl_certificate_key: "/etc/ssl/private/privkey.pem"
-proftpd_conf_ssl_ca_certificate:  "/etc/ssl/certs/fullchain.pem"
-
-proftpd_virtualhosts:
-  - id: galaxy
-    address: "{{ hostname }}"
-    options:
-      - ServerAdmin: admin@usegalaxy.eu
-      - ServerName: UFR Galaxy FTP
-      - TransferLog: "/var/log/proftpd/xfer/{{ hostname }}"
-      - MaxLoginAttempts: 3
-      - RequireValidShell: no
-      - AllowOverwrite: yes
