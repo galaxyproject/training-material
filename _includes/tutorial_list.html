@@ -19,12 +19,12 @@
   <tbody class="list">
 
   {% for material in topic_material %}
-    {% if include.sub and include.sub == material.subtopic %}
-      {% assign show=true %}
-    {% elsif include.sub == "other" and material.subtopic == nil %}
+    {% if include.sub and include.sub.id == material.subtopic %}
+      {% assign show = true %}
+    {% elsif include.sub.id == "other" and material.subtopic == nil %}
       {% assign show = true %}
     {% else %}
-      {% assign show=false %}
+      {% assign show = false %}
     {% endif %}
 
     {% if include.sub == nil or show == true %}

@@ -34,10 +34,9 @@ layout: base
             </div>
             {% endunless %}
             {% if topic.subtopics %}
-              {% for s in topic.subtopics %}
-                {% assign subtopic = s[0] %}
-		        <h3> {{ topic.subtopics[subtopic].title}}</h3>
-                {{ topic.subtopics[subtopic].description }} </br></br>
+              {% for subtopic in topic.subtopics %}
+                <h3>{{ subtopic.title}}</h3>
+                {{ subtopic.description }} </br></br>
                 {% include _includes/tutorial_list.html sub=subtopic %}
               {% endfor %}
               <div id="tutorial_list">
