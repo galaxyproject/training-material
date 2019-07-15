@@ -621,16 +621,23 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 1. Add the roles `geerlingguy.pip` and `usegalaxy-eu.supervisor` to your playbook, these need to install things and should run as the root user. Additionally, they should run **after** all of the roles we have already added so far.
 >
-> 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like any other init system like SystemD. We will define a program for Galaxy which will directly invoke uWSGI, rather than run.sh, as run.sh does some additional tasks we do not need to do on every Galaxy start (e.g. rebuilding the client). For some setups like zerglings it is required that you use supervisord as you need to start multiple processes.
+> 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like SystemD or any other init system you may be familiar with. We will define a program for Galaxy which will directly invoke uWSGI, rather than `run.sh`, as `run.sh` does some extra tasks that are not needed in a true production environment. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Lastly, since we now define how the Galaxy processes will be managed, we can inform `galaxyproject.galaxy` how to automatically restart the server whenever it is changed.
 >
->    Add the following to your `group_vars/galaxyservers.yml`:
+>    Add the following to the bottom of your `group_vars/galaxyservers.yml` file:
 >
 >    {% raw %}
 >    ```yaml
+>    # Automatically restart Galaxy by calling a handler named 'Restart
+>    # Galaxy', whenever the server changes.
+>    galaxy_restart_handler_name: Restart Galaxy
+>
+>    # supervisord
+>    supervisor_socket_user: galaxy
+>    supervisor_socket_chown: galaxy
 >    supervisor_programs:
 >      - name: galaxy
 >        state: present
->        command: uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml
+>        command: "uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml"
 >        configuration: |
 >          autostart=true
 >          autorestart=true
@@ -662,17 +669,9 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >        ...
 >    ```
 >
-> 4. Open your group variables file and we'll add some variables for supervisor. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Additionally, we need to inform `galaxyproject.galaxy` what the name of our new handler is. Add the following to the bottom of your group variables file:
+> 4. Run the playbook
 >
->    ```yaml
->    supervisor_socket_user: galaxy
->    supervisor_socket_chown: galaxy
->    galaxy_restart_handler_name: Restart Galaxy
->    ```
->
-> 5. Run the playbook
->
-> 6. Log in and check the status with `supervisorctl status` (remember to change to the Galaxy user)
+> 5. Log in and check the status with `supervisorctl status` (remember to change to the Galaxy user)
 >
 >    > ### {% icon question %} Question
 >    >
@@ -692,15 +691,27 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    Take a look at the supervisor configs that have been written in `/etc/supervisor` and `/etc/supervisor/conf.d`.
 >
-> 7. Some things to note:
+> 6. Some things to note:
 >
->    1. Refreshing the page before Galaxy has restarted will hang, which is a nice feature of uWSGI
+>    1. Refreshing the page before Galaxy has restarted will hang until the process is ready, a nice feature of uWSGI
 >    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `supervisorctl restart galaxy`
 >    3. You can use `supervisorctl tail -f galaxy` and `supervisorctl tail -f galaxy stderr` to see the logs of Galaxy
 >
 {: .hands_on}
 
 Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
+
+> ### {% icon details %} Ansible, failures, and notifications
+>
+> Sometimes Ansible tasks will fail. Usually due to misconfiguration, but occasionally due to other issues like your coworker restarted the server while you were doing maintenance, or network failures, or any other possible error. It happens. An unfortunate side effect can be observed in specific situations:
+>
+> Let's say you're running a playbook that updates the `galaxy.yml`, which will in turn notify the handler `Restart Galaxy`. If this change is made, and notification triggered, but a failure occurs before Ansible can reach the step where it runs the handlers. The handlers will not run during this Ansible execution.
+>
+> The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run.) And so the `Restart Galaxy` handler will not run.
+>
+> If you encounter this situation you just have to be mindful of the fact, and remember to manually restart the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you're probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.
+>
+{: .details}
 
 ## NGINX
 
@@ -720,7 +731,21 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 1. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
-> 2. Add the role `galaxyproject.nginx` to your playbook and have it run as root.
+>    ```diff
+>    --- group_vars/galaxyservers.yml.orig
+>    +++ group_vars/galaxyservers.yml
+>    @@ -29,7 +29,7 @@
+>         shed_tool_data_dir: "{{ galaxy_mutable_data_dir }}/tool-data"
+>       uwsgi:
+>         # Default values
+>    -    http: 0.0.0.0:8080
+>    +    socket: 127.0.0.1:8080
+>         buffer-size: 16384
+>         processes: 1
+>         threads: 4
+>    ```
+>
+> 2. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
 >
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
@@ -796,7 +821,53 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
-> 4. Create the `templates/nginx/redirect-ssl.j2` with the following contents:
+>    > ### {% icon details %} Running this tutorial *without* SSL
+>    >
+>    > If you want, you can run this tutorial without SSL. We will provide a sketch of the configuration changes needed, but this is of course not recommended for production, so we will not go into detail here:
+>    >
+>    > Instead of the above step you should do:
+>    >
+>    > {% raw %}
+>    > ```yaml
+>    > # Certbot
+>    > # You can comment these out if you wish; they will never be used if no role tries to access them.
+>    > certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>    > certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>    > certbot_auth_method: --webroot
+>    > certbot_install_method: virtualenv
+>    > certbot_auto_renew: yes
+>    > certbot_auto_renew_user: root
+>    > certbot_environment: staging
+>    > certbot_well_known_root: /srv/nginx/_well-known_root
+>    > certbot_share_key_users:
+>    >   - nginx
+>    > certbot_post_renewal: |
+>    >     systemctl restart nginx || true
+>    > certbot_domains:
+>    >  - "{{ inventory_hostname }}"
+>    > certbot_agree_tos: --agree-tos
+>    >
+>    > # NGINX
+>    > nginx_selinux_allow_local_connections: true
+>    > nginx_servers:
+>    >   - galaxy # NOT redirect-ssl
+>    > nginx_enable_default_server: false
+>    > # nginx_ssl_servers:
+>    > #   - galaxy
+>    > nginx_conf_http:
+>    >   client_max_body_size: 1g
+>    > nginx_remove_default_vhost: true
+>    > # nginx_ssl_role: usegalaxy-eu.certbot
+>    > # nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>    > # nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    > ```
+>    > {% endraw %}
+>    >
+>    {: .details}
+>
+> 4. Create the directory `templates/nginx`, where we will place our configuration files which should be templated out to the server.
+>
+>    Create the `templates/nginx/redirect-ssl.j2` with the following contents:
 >
 >    {% raw %}
 >    ```nginx
@@ -881,6 +952,21 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```
 >    {% endraw %}
 >
+>    > ### {% icon details %} Running this tutorial *without* SSL
+>    >
+>    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
+>    >
+>    > {% raw %}
+>    > ```nginx
+>    > # Change this
+>    > listen        *:443 ssl default_server;
+>    > # to this
+>    > listen        *:80 default_server;
+>    > ```
+>    > {% endraw %}
+>    >
+>    {: .details}
+>
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    ```
@@ -888,14 +974,32 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    changed: [galaxy.example.org]
 >    ```
 >
+>    If you didn't, you might have missed the first step in this hands-on.
 >
-> 7. Check out the changes made to your server in `/etc/nginx`, particularly the directory containing the Galaxy virtualhost.
->
-> 8. Your Galaxy should now be accessible and served efficiently! Try registering (using the admin email from earlier) and maybe executing a couple of jobs. The author's favourite tool (speaking as an admin) is the `secure hash digest` tool, it's perfect for testing.
+> 7. Check out the changes made to your server in `/etc/nginx/sites-enabled/`, particularly the directory containing the Galaxy virtualhost.
 >
 {: .hands_on}
 
-## Disaster Strikes!
+> ### {% icon details %} "Potential Security Risk" / LetsEncrypt Staging Environment
+>
+> LetsEncrypt has rate limits on requesting trusted certificates to prevent abuse of their service.
+> In a training setting there is no need to request certificates that will be trusted by all browsers. So we will request a testing certificate to show how it works, and by changing `staging` to `production`, you can request browser trusted certificates.
+>
+> You will probably see an error like this, when trying to access your Galaxy:
+>
+> ![Browser warning for invalid certificate](../../images/ssl-warning0.png "A browser warning for an invalid certificate. But because we requested a staging certificate, we expected this.")
+>
+> If you view the details of the certificate, you can see that it is trusted, but by the Fake LE Intermediate, which browsers do not trust.
+>
+> ![Certificate information](../../images/ssl-warning1.png "Investigating the certificate a little, we can see that it was signed, just untrusted.")
+>
+> Clicking through the warnings (with full knowledge of why) we will see our secured Galaxy:
+>
+> ![The finally working Galaxy](../../images/working-galaxy.png "Galaxy is alive!")
+>
+{: .details}
+
+## Disaster Strikes! (Optional)
 
 Because you're an admin, you need to be prepared for any situation, including the worst case scenarios. So we're going to simulate a disaster and show you how you can recover from it. It'll be fun!
 
