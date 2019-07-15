@@ -195,7 +195,8 @@ The next step is the interlacing step wherein we join the two separate files (fo
 >   - {% icon param-file %} *”Right-hand mates”*:`Cutadapt on data 4 and data 3: Read 2 Output`
 >
 > 2. **Execute**
-> 3. Rename the Fastqinterlacer pairs output to MetaPhlAn2 input.
+> 3. Rename the Fastqinterlacer output to MetaPhlAn2 input.
+> 4. Change the datatype to FASTQ.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -217,7 +218,8 @@ The next step is the interlacing step wherein we join the two separate files (fo
 >
 > 2. **Execute**
 >
-> 3. Rename the Fastqinterlacer pairs output to HUMANn2 input
+> 3. Rename the Fastqinterlacer output to HUMANn2 input.
+> 4. Change the datatype to FASTQ.
 {: .hands_on}
 
 ## **MetaPhlAn2**
@@ -269,7 +271,7 @@ The next step is the interlacing step wherein we join the two separate files (fo
 > 2. **Execute**
 >
 >    > ### {% icon comment %} Comment
->    > This step might take some time. Please have patience or get take a coffee/tea break!!!
+>    > This step might take some time. Please have patience or take a coffee/tea break!!!
 >    > 
 >    {: .comment}
 >
