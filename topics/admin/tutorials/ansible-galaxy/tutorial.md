@@ -455,6 +455,21 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .question}
 >
+>    > ### {% icon comment %} Ansible Variable Templating
+>    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
+>    >
+>    > When Ansible runs:
+>    >
+>    > 1. It collects variables defined in group variables and other places
+>    > 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
+>    > 3. As roles are executed:
+>    >    1. Their defaults are added to the set of variables (the group variables having precedence over this)
+>    >    2. They can also dynamically define more variables which may not be set until that role is run
+>    >
+>    > So it is not always easy to tell what variables will be set or what their finaly value will be, without running the playbook. It is possible but non trivial.
+>    >
+>    {: .comment}
+>
 > 4. In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
 >
 >    {% raw %}
@@ -998,6 +1013,22 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 > ![The finally working Galaxy](../../images/working-galaxy.png "Galaxy is alive!")
 >
 {: .details}
+
+> ### {% icon comment %} Role Dependencies
+>
+> Throughout the playbook we added roles in a specific order. Partially this was to mimic the original training and build up a working Galaxy server from nothing, but partially this is also because of some hidden role dependencies on each other. Some must run before others, in order to set certain variables. Looking at the dependencies in detail:
+>
+>  Role                         | Role-Role Dependencies
+>  ----                         | ------------
+>  `galaxyproject.postgresql`   | None
+>  `natefoo.postgresql_objects` | None
+>  `galaxyproject.galaxy`       | None
+>  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
+>  `geerlingguy.pip`            | None
+>  `usegalaxy-eu.supervisor`    | This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
+>  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
+{: .comment}
+
 
 ## Disaster Strikes! (Optional)
 
