@@ -253,11 +253,11 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 >
 >    After the script has run, pulsar will be installed on the remote machines!
 >
-> 2. Log in to the machines and have a look in the `/mnt/pulsar` directory. You will see the venv and config directories. All the config files created can be perused.
+> 2. Log in to the machines and have a look in the `/mnt/pulsar` directory. You will see the venv and config directories. All the config files created by Ansible can be perused.
 >
 > 3. Run `journalctl -f -u pulsar`
 >
->    A log will now start scrolling, showing the startup of pulsar. You'll notice that it will be initializing and installing conda. Once it is complete and listening on the assigned port.
+>    A log will now start scrolling, showing the startup of pulsar. You'll notice that it will be initializing and installing conda. Once this is completed, Pulsar will be listening on the assigned port.
 >
 {: .hands_on}
 
