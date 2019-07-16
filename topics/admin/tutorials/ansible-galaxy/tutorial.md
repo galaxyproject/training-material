@@ -463,9 +463,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > 1. It collects variables defined in group variables and other places
 >    > 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
 >    > 3. As roles are executed:
->    >    1. Their defaults are added to the set of variables (the group variables having precedence over this)
+>    >    1. Their defaults are added to the set of variables (the group variables having precedence over these variables)
 >    >    2. They can also dynamically define more variables which may not be set until that role is run
->    >
+>    > 4. Before use (in templates, commands, etc.), variables are resolved to their final value
 >    > So it is not always easy to tell what variables will be set, or what their finaly value will be, without running the playbook. It is possible, but non trivial.
 >    >
 >    {: .comment}

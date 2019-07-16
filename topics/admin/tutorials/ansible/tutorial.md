@@ -556,6 +556,28 @@ Templates give you greater control over the files you are deploying to the remot
 > 13. Run the playbook again, without the `--check` flag to apply your changes.
 {: .hands_on}
 
+> ### {% icon comment %} Ansible Variable Templating
+> In this step we use some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
+>
+> It is common to see things like this in Ansible roles:
+>
+> ```yaml
+> root_dir = /opt/my-app
+> config_dir = "{{ root_dir }}/config"
+> ```
+>
+> When Ansible runs:
+>
+> 1. It collects variables defined in group variables and other places
+> 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
+> 3. When multiple roles execute in a playbook:
+>    1. Their defaults are added to the set of variables (the group variables having precedence over these variables)
+>    2. They can also dynamically define more variables which may not be set until that role is run
+> 4. Before use (in templates, commands, etc.), variables are resolved to their final value
+>
+>
+{: .comment}
+
 # Ansible Galaxy
 
 Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
