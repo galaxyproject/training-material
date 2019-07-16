@@ -87,7 +87,7 @@ after_success:
       make annotate
       make build
       bin/publish
-    elif ["TRAVIS_BRANCH" == "master" -a "TRAVIS_EVENT_TYPE" == "cron" -a "$CHECK" == "site-build" ]
+    elif [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_EVENT_TYPE" == "cron" -a "$CHECK" == "site-build" ]
     then
        # montly cron job to make release
        python bin/make_release.py
