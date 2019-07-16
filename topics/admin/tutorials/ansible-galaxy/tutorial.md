@@ -466,7 +466,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >    1. Their defaults are added to the set of variables (the group variables having precedence over this)
 >    >    2. They can also dynamically define more variables which may not be set until that role is run
 >    >
->    > So it is not always easy to tell what variables will be set or what their finaly value will be, without running the playbook. It is possible but non trivial.
+>    > So it is not always easy to tell what variables will be set, or what their finaly value will be, without running the playbook. It is possible, but non trivial.
 >    >
 >    {: .comment}
 >
@@ -667,7 +667,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    Here we've defined a `galaxy` command that should be `present`. It will run the command `uwsgi ...` and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as `running`. It starts as the `galaxy` user with a umask of `022` (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.
 >
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `galaxy.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a task to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `galaxy.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
 >
 >    ```yaml
 >    - hosts: galaxyservers
