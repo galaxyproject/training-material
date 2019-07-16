@@ -57,9 +57,6 @@ script:
     if [ "$TRAVIS_BRANCH" == "gh-pages" ]
     then
       make check-links-gh-pages
-    elif ["TRAVIS_BRANCH" == "master" && "TRAVIS_EVENT_TYPE" == "cron" ]
-    then
-       python bin/make_release.py
     else
       if [ "$CHECK" == "htmlproofer" ]
       then
@@ -90,6 +87,11 @@ after_success:
       make annotate
       make build
       bin/publish
+    elif ["TRAVIS_BRANCH" == "master" -a "TRAVIS_EVENT_TYPE" == "cron" -a "$CHECK" == "site-build" ]
+    then
+       # montly cron job to make release
+       python bin/make_release.py
+       bin/publish-archive
     elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
     then
       # Do not publish old versions live, and do not update badges since not pushing to gh-pages.
