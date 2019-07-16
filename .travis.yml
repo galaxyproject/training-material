@@ -58,6 +58,11 @@ script:
     then
       make check-links-gh-pages
     else
+      # if this is the monthly cron job on master, also add a tag/release (and trigger archive build)
+      if ["TRAVIS_BRANCH" == "master" && "TRAVIS_EVENT_TYPE" == "cron" ]
+      then
+        python bin/make_release.py
+      fi
       if [ "$CHECK" == "htmlproofer" ]
       then
         make check-html
