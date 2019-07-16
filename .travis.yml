@@ -86,16 +86,18 @@ after_success:
       # update badges and instances and rebuild
       make annotate
       make build
+
+      # monthly cron job to make release
+      if [ "$TRAVIS_EVENT_TYPE" == "cron" ]
+      then
+        python bin/make_release.py
+        bin/publish-archive
+      fi
+
+      # Publish to GH
       bin/publish
     elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
     then
       # Do not publish old versions live, and do not update badges since not pushing to gh-pages.
       bin/publish-archive
-    fi
-
-    # montly cron job to make release
-    if [ "$TRAVIS_BRANCH" == "master" -a "$TRAVIS_EVENT_TYPE" == "cron" -a "$CHECK" == "site-build" ]
-    then
-       python bin/make_release.py
-       bin/publish-archive
     fi
