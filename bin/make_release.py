@@ -11,7 +11,7 @@ gh_token = os.environ['GH_TOKEN_RELEASES']
 
 # create release name from today's date
 now = datetime.datetime.now()
-release_name = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+release_name = now.strftime("%Y-%m-%d")
 
 # prepare the release
 release = {
