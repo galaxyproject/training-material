@@ -22,6 +22,7 @@ tutorial_name: hhpred-analysis-of-proteins
 # Background: Using Protein Structure Prediction Tools to Predict Function
 
 ## Protein Structure Prediction
+
 There are a variety of tools that have been developed to predict protein structure using the amino acid sequence. Often these rely on protein alignments and usually threading through the published structures of similar proteins. These are incredibly computationally intensive tasks, and sometimes very wrong. For this reason, online servers typically limit the number of prediction jobs that can be run at a time, and we do not host them here in the CPT Galaxy. It is not very useful to run protein sequence through these tools if you have high confidence of its function based on high-confidence similarity to phage or bacterial proteins of known function, or with good domain hits and reasonable genomic context. Sometimes, the predicted structures, or similarity to structures of proteins with known function is helpful to making a novel phage protein functional prediction, but their use and interpretation should be done judiciously.
 
 ## Tools That Predict Protein Structure
@@ -107,7 +108,13 @@ HHPred on hypothetical proteins
 
 > * 95% probability = in the bag
 > * 50% probability = should be checked for reasonableness
-> * 30% probability AND in the top three hits = should be checked for reasonableness, but safer to ignore if there are no other reasonable lines of evidence from Apollo (other BLAST hits, InterPro domains, genomic context, expected synteny to a canonical phage). It is better practice in this case to ignore these and call your feature 'hypothetical protein'. Be conservative in your use of HHPred for functional prediction. Use it last and be *most* suspicious of its results.
+> * 30% probability AND in the top three hits = should be checked for reasonableness
+
+> ### {% icon question %} Questions About Interpreting Results?
+>    > ### {% icon solution %}
+>    > For answers to questions about looking at the results and more ("What is the meaning of the symbols (+.-|~)?" or, "What is the significance of upper vs. lowercase letters in both the consensus and ss_pred lines?"), see this document: https://github.com/soedinglab/hh-suite/wiki
+>    {: .solution}
+{: .question}
 
 What HHPred developers have to say about checking homology. Go to the documentation at [https://github.com/soedinglab/hh-suite/wiki](https://github.com/soedinglab/hh-suite/wiki) and search: **How can I verify if a database match is homologous?**
 
