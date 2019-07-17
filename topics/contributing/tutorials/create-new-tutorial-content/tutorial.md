@@ -293,6 +293,7 @@ This does not appear to be visually appealing when representing matrices, which 
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
 ```
+{% endraw %}
 
 The rendered table is then given as a minimum-width and centred matrix:
 

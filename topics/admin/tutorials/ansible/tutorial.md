@@ -232,48 +232,52 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon hands_on %} Hands-on: Setting up our workspace
 >
-> 1. Decide where you will install and run Ansible? On your laptop? Or on the remote machine/VM you will manage? All of the following steps should be done in the one location you pick.
+> 1. In this training we will run Ansible on the machine it will modify. This is not best practice, but it is convenient for trainings. You should probably run this in a VM either on the Cloud or in VirtualBox or similar
 >
-> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+>    All of the steps are the same, no matter which machine Ansible will manage and where you run it. The only difference is the connection setup
 >
-> 3. Create an empty directory and `cd` into it
+> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) where you will run it
 >
-> 4. Create your inventory file, name it `hosts`, in the folder you have just entered.
+> 3. Create an directory named `intro` and `cd` into it
 >
->    - You are installing ansible on a machine that will manage a second, remote machine
+> 4. Create your inventory file (named `hosts`) in this folder
 >
->      1. Make sure you can SSH into it. Test it now.
+>    1. We will call our group `my_hosts`
 >
->      2. We will call our group `my_hosts`
+>    2. Create [an inventory file](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
 >
->      3. Create a hosts file with the group `my_hosts` and your host.
+>       > ### {% icon solution %} Solution
+>       > The file should look like:
+>       >
+>       > ```ini
+>       > [my_hosts]
+>       > localhost ansible_connection=local
+>       > ```
+>       {: .solution }
 >
->         > ### {% icon solution %} Solution
->         > The file should look like:
->         >
->         > ```ini
->         > [my_hosts]
->         > your.host
->         > ```
->         > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
->         {: .solution }
->
->    - You are installing ansible on the machine it will be used to manage
->
->      1. We will call our group `my_hosts`
->
->      2. Create a hosts file with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
->
->
->         > ### {% icon solution %} Solution
->         > The file should look like:
->         >
->         > ```ini
->         > [my_hosts]
->         > localhost ansible_connection=local
->         > ```
->         {: .solution }
->
+>    > ### {% icon details %} Running Ansible on a different machine
+>    >
+>    > The best practice is to have playbooks in git, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machine is one of the strengths of Ansible.
+>    >
+>    > In order to run remotely:
+>    >
+>    > 1. Make sure you can SSH into it. (Test it now)
+>    >
+>    > 2. We will call our group `my_hosts`
+>    >
+>    > 3. Create a hosts file with the group `my_hosts` and your host.
+>    >
+>    >    > ### {% icon solution %} Solution
+>    >    > The file should look like:
+>    >    >
+>    >    > ```ini
+>    >    > [my_hosts]
+>    >    > your.host.fqdn.or.ip
+>    >    > ```
+>    >    > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
+>    >    {: .solution }
+>    >
+>    {: .details}
 >
 > 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
 >
@@ -453,10 +457,10 @@ Templates give you greater control over the files you are deploying to the remot
 >
 >    ```yaml
 >    ---
->    my_role_key: deadbeefcafe
+>    server_name: Cats!
 >    ```
 >
->    This will define a variable `my_role_key` that can then be used in templates.
+>    This will define a variable `server_name` that can then be used in templates.
 >
 > 4. Create and edit `roles/my-role/templates/test.ini.j2`
 >
@@ -465,7 +469,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    {% raw %}
 >    ```ini
 >    [example]
->    api_key = {{ my_role_key }}
+>    server_name = {{ server_name }}
 >    listen = {{ ansible_default_ipv4.address }}
 >    ```
 >    {% endraw %}
@@ -481,7 +485,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 > 7. Run the playbook again.
 >
-> 8. Login to the remote machine and check the contents of `/tmp/test.ini`
+> 8. Check the contents of `/tmp/test.ini`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -493,7 +497,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    > >
 >    > > ```ini
 >    > > [example]
->    > > api_key = deadbeefcafe
+>    > > server_name = Cats!
 >    > > listen = 192.168.0.2
 >    > > ```
 >    > >
@@ -504,7 +508,7 @@ Templates give you greater control over the files you are deploying to the remot
 >    {: .question}
 >
 >    Now that this has worked successfully, we will setup a `group_vars` folder
->    to show how a person using `my-role` would override the `my_role_key` variable.
+>    to show how a person using `my-role` would override the `server_name` variable.
 >
 > 9. Create the folder `group_vars/` (in the root of your directory)
 >
@@ -514,7 +518,7 @@ Templates give you greater control over the files you are deploying to the remot
 >
 >     ```yaml
 >     ---
->     my_role_key: my_super_secret_api_key
+>     server_name: Dogs!
 >     ```
 >
 > 12. Run the playbook again, but imagine you are worried about this change, and supply the `--check --diff` flag to see what changes are made before committing to make them.
@@ -537,20 +541,42 @@ Templates give you greater control over the files you are deploying to the remot
 >     > > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
 >     > > @@ -1,3 +1,3 @@
 >     > >  [example]
->     > > -api_key = deadbeefcafe
->     > > +api_key = my_super_secret_api_key
+>     > > -server_name = Cats!
+>     > > +server_name = Dogs!
 >     > >  listen = 192.168.0.25
 >     > > changed: [localhost]
 >     > > PLAY RECAP **********************************************
 >     > > localhost                  : ok=3    changed=1    unreachable=0    failed=0
 >     > > ```
 >     > >
->     > > Here you can see that the api_key value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
+>     > > Here you can see that the server_name value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
 >     > {: .solution }
 >     {: .question}
 >
 > 13. Run the playbook again, without the `--check` flag to apply your changes.
 {: .hands_on}
+
+> ### {% icon comment %} Ansible Variable Templating
+> In this step we use some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
+>
+> It is common to see things like this in Ansible roles:
+>
+> ```yaml
+> root_dir = /opt/my-app
+> config_dir = "{{ root_dir }}/config"
+> ```
+>
+> When Ansible runs:
+>
+> 1. It collects variables defined in group variables and other places
+> 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
+> 3. When multiple roles execute in a playbook:
+>    1. Their defaults are added to the set of variables (the group variables having precedence over these variables)
+>    2. They can also dynamically define more variables which may not be set until that role is run
+> 4. Before use (in templates, commands, etc.), variables are resolved to their final value
+>
+>
+{: .comment}
 
 # Ansible Galaxy
 
@@ -603,6 +629,76 @@ Picking the best role for a task from Ansible Galaxy is not always a trivial tas
 These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, [`ansible-cvmfs`](https://github.com/galaxyproject/ansible-cvmfs) is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.
 
 Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
+
+# (Optional) Ansible Vault
+
+Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets.
+
+> ### {% icon hands_on %} Hands-on: Setting up secrets
+>
+> 0. Run `mkdir -p secret_group_vars`
+>
+> 1. Now we'll create a strong password: `openssl rand -base64 24 > vault-password.txt`
+>
+> 2. Run `ansible-vault create secret_group_vars/all.yml --vault-password-file=vault-password.txt`
+>
+>    This will open `secret_group_vars/all.yml` in your text editor.
+>
+> 3. In this file, enter the following contents and save it:
+>
+>    ```yaml
+>    apikey: super-secret-api-key-wow!
+>    ```
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How does your file look? Is it readable? Run `cat secret_group_vars/all.yml`
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.
+>    > > ```
+>    > > $ cat secret_group_vars/all.yml
+>    > > $ANSIBLE_VAULT;1.1;AES256
+>    > > 64373665366130333437393639343534653134346538636239393363373062393830653333323966
+>    > > 3134333366363130326139323162323131643763336236320a393262303938316262643764323862
+>    > > 36393161666663353231366336613838633866323230303031313465646333613862363264323139
+>    > > 3263383530626262370a666139666462663938343531656432353239346532316630366165376566
+>    > > 34313765353766666330366632303836353863396430343264303032363739666139383830323565
+>    > > 6133663637356331613062353834646561653366386665623930
+>    > > ```
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 4. Use the new variable in our `.ini` file from earlier. Edit `roles/my-role/templates/test.ini.j2` and add the line `apikey = {{ apikey }}`
+>
+> 5. Run the playbook
+>
+> 6. Check the contents of `/tmp/test.ini`
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How does it look?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file should look like:
+>    > >
+>    > > ```ini
+>    > > [example]
+>    > > server_name = Cats!
+>    > > listen = 192.168.0.2
+>    > > apikey = super-secret-api-key-wow!
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+Ansible Vault is really useful to include encrypted secrets in your playbook repository. In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your `.gitignore` (or VCS appropriate file.)
 
 # Other Stuff
 
