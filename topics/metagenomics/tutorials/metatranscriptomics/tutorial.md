@@ -43,11 +43,13 @@ This tutorial is an updated version of the ASaiM workflow developed by the **Gal
 
 # Metatranscriptomics for characterizing microbial communities
 
-###  Multi-omics
+###  Microbiomics
 A multi-omic approach to studying microbiomes can cover the various taxa and functions in a system.
+
 ![meta-momics diagram](../../images/meta-omics.png "Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.")
 
 Here is an exhaustive picture of taxonomy and functional pathways and their dynamics. It provides users with the confirmation of predicted open‐reading frames (ORFs) and potential identification novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.
+
 ![Multiomics](../../images/Why_MT.png)
 
 
