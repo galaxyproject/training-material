@@ -304,7 +304,7 @@ For this purpose, we use the **Add protein features** {% icon tool %} ProteoRE t
 >        - *"Disease information"*: `Yes`
 >
 >   > ### Output
->   > **Add information from NextProt**: In this file (431 lines), 3 columns (columns 8, 9 and 10)
+>   > **Add information from NextProt**: In this file (115 lines), 3 columns (columns 8, 9 and 10)
 >   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info.
 >   {: .comment}
 {: .hands_on}
