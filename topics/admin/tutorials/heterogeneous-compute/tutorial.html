@@ -790,6 +790,7 @@
 <span class="na">pulsar_config_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/config</span>
 <span class="na">pulsar_staging_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/staging</span>
 <span class="na">pulsar_pip_install</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">pulsar_systemd</span><span class="pi">:</span> <span class="no">true</span>
 
 <span class="na">pulsar_host</span><span class="pi">:</span> <span class="s">0.0.0.0</span>
 <span class="na">pulsar_port</span><span class="pi">:</span> <span class="m">8913</span>
@@ -912,48 +913,12 @@
       <p>After the script has run, pulsar will be installed on the remote machines!</p>
     </li>
     <li>
-      <p>Log in to the machines and have a look in the <code class="highlighter-rouge">/mnt/pulsar</code> directory. You will see the venv and config directories. All the config files created can be perused.</p>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>Pulsar can now be started. We do that by first activating the virtualenv, then running it and telling it which webserver to use (Paster) and where the config files are.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-starting-pulsar"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Starting Pulsar</h3>
-
-  <ol>
-    <li>
-      <p>Login to your Pulsar server</p>
+      <p>Log in to the machines and have a look in the <code class="highlighter-rouge">/mnt/pulsar</code> directory. You will see the venv and config directories. All the config files created by Ansible can be perused.</p>
     </li>
     <li>
-      <p>Change directory into <code class="highlighter-rouge">/mnt/pulsar</code></p>
-    </li>
-    <li>
-      <p>Activate the virtualenv (<code class="highlighter-rouge">source venv/bin/activate</code>)</p>
-    </li>
-    <li>
-      <p>Run pulsar (<code class="highlighter-rouge">pulsar -m paster -c config/</code>)</p>
-    </li>
-  </ol>
+      <p>Run <code class="highlighter-rouge">journalctl -f -u pulsar</code></p>
 
-</blockquote>
-
-<p>A log will now start scrolling, showing the startup of pulsar. You’ll notice that it will be initializing and installing conda. Once it is complete and listening on the assigned port, you can stop the server with Ctrl-C.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-daemonizing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Daemonizing</h3>
-
-  <ol>
-    <li>
-      <p>This is a pretty gross way of running Pulsar and it can run in daemon mode. To do that, add <code class="highlighter-rouge">--daemon</code> to the end of the above command line.</p>
-    </li>
-    <li>
-      <p>Stopping the daemon is as simple as re-running the command with <code class="highlighter-rouge">--stop-daemon</code> instead.</p>
-    </li>
-    <li>
-      <p>Before proceeding, make sure your Pulsar is running in <code class="highlighter-rouge">--daemon</code> mode.</p>
+      <p>A log will now start scrolling, showing the startup of pulsar. You’ll notice that it will be initializing and installing conda. Once this is completed, Pulsar will be listening on the assigned port.</p>
     </li>
   </ol>
 
@@ -980,7 +945,7 @@
 
   <ol>
     <li>
-      <p>In your <code class="highlighter-rouge">job_conf.xml</code> file add the following job runner to the <code class="highlighter-rouge">&lt;plugins&gt;</code> section:</p>
+      <p>In your <code class="highlighter-rouge">files/galaxy/config/job_conf.xml</code> file add the following job runner to the <code class="highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.pulsar:PulsarRESTJobRunner"</span> <span class="nt">/&gt;</span>
 </code></pre></div>      </div>
@@ -1007,7 +972,7 @@ We need to know the full id of the tool in question, we can get this out of the 
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Restart Galaxy</p>
+      <p>Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.</p>
     </li>
   </ol>
 

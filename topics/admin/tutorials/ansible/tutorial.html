@@ -398,6 +398,7 @@
       <li><a href="#choosing-a-role" id="markdown-toc-choosing-a-role">Choosing a Role</a></li>
     </ol>
   </li>
+  <li><a href="#optional-ansible-vault" id="markdown-toc-optional-ansible-vault">(Optional) Ansible Vault</a></li>
   <li><a href="#other-stuff" id="markdown-toc-other-stuff">Other Stuff</a>    <ol>
       <li><a href="#with-items" id="markdown-toc-with-items">With Items</a></li>
       <li><a href="#when-changed" id="markdown-toc-when-changed">When Changed</a></li>
@@ -641,65 +642,67 @@ Ansible provides some flags which can help you identify changes before they’re
 
   <ol>
     <li>
-      <p>Decide where you will install and run Ansible? On your laptop? Or on the remote machine/VM you will manage? All of the following steps should be done in the one location you pick.</p>
-    </li>
-    <li>
-      <p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Install Ansible.</a></p>
-    </li>
-    <li>
-      <p>Create an empty directory and <code class="highlighter-rouge">cd</code> into it</p>
-    </li>
-    <li>
-      <p>Create your inventory file, name it <code class="highlighter-rouge">hosts</code>, in the folder you have just entered.</p>
+      <p>In this training we will run Ansible on the machine it will modify. This is not best practice, but it is convenient for trainings. You should probably run this in a VM either on the Cloud or in VirtualBox or similar</p>
 
-      <ul>
+      <p>All of the steps are the same, no matter which machine Ansible will manage and where you run it. The only difference is the connection setup</p>
+    </li>
+    <li>
+      <p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Install Ansible.</a> where you will run it</p>
+    </li>
+    <li>
+      <p>Create an directory named <code class="highlighter-rouge">intro</code> and <code class="highlighter-rouge">cd</code> into it</p>
+    </li>
+    <li>
+      <p>Create your inventory file (named <code class="highlighter-rouge">hosts</code>) in this folder</p>
+
+      <ol>
         <li>
-          <p>You are installing ansible on a machine that will manage a second, remote machine</p>
-
-          <ol>
-            <li>
-              <p>Make sure you can SSH into it. Test it now.</p>
-            </li>
-            <li>
-              <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
-            </li>
-            <li>
-              <p>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and your host.</p>
-
-              <blockquote class="solution">
-                <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-                <p>The file should look like:</p>
-
-                <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
-<span class="err">your.host</span>
-</code></pre></div>                </div>
-                <p>Remember that if you SSH in with a username different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
-              </blockquote>
-            </li>
-          </ol>
+          <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
         </li>
         <li>
-          <p>You are installing ansible on the machine it will be used to manage</p>
+          <p>Create <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="highlighter-rouge">my_hosts</code> and <code class="highlighter-rouge">localhost ansible_connection=local</code>, which tells ansible to not use SSH, and just use the local connection.</p>
 
-          <ol>
-            <li>
-              <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
-            </li>
-            <li>
-              <p>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and <code class="highlighter-rouge">localhost ansible_connection=local</code>, which tells ansible to not use SSH, and just use the local connection.</p>
+          <blockquote class="solution">
+            <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+            <p>The file should look like:</p>
 
-              <blockquote class="solution">
-                <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-                <p>The file should look like:</p>
-
-                <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
+            <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
 <span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
-</code></pre></div>                </div>
-              </blockquote>
-            </li>
-          </ol>
+</code></pre></div>            </div>
+          </blockquote>
         </li>
-      </ul>
+      </ol>
+
+      <blockquote class="details">
+        <h3 id="details-running-ansible-on-a-different-machine"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Running Ansible on a different machine</h3>
+
+        <p>The best practice is to have playbooks in git, then it doesn’t matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machine is one of the strengths of Ansible.</p>
+
+        <p>In order to run remotely:</p>
+
+        <ol>
+          <li>
+            <p>Make sure you can SSH into it. (Test it now)</p>
+          </li>
+          <li>
+            <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
+          </li>
+          <li>
+            <p>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and your host.</p>
+
+            <blockquote class="solution">
+              <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+              <p>The file should look like:</p>
+
+              <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
+<span class="err">your.host.fqdn.or.ip</span>
+</code></pre></div>              </div>
+              <p>Remember that if you SSH in with a username different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
+            </blockquote>
+          </li>
+        </ol>
+
+      </blockquote>
     </li>
     <li>
       <p>Create the roles directory, your role, and the tasks folder: <code class="highlighter-rouge">mkdir -p roles/my-role/tasks/</code></p>
@@ -912,10 +915,10 @@ ok: [localhost]
       <p>Insert the following content:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">my_role_key</span><span class="pi">:</span> <span class="s">deadbeefcafe</span>
+<span class="na">server_name</span><span class="pi">:</span> <span class="s">Cats!</span>
 </code></pre></div>      </div>
 
-      <p>This will define a variable <code class="highlighter-rouge">my_role_key</code> that can then be used in templates.</p>
+      <p>This will define a variable <code class="highlighter-rouge">server_name</code> that can then be used in templates.</p>
     </li>
     <li>
       <p>Create and edit <code class="highlighter-rouge">roles/my-role/templates/test.ini.j2</code></p>
@@ -924,7 +927,7 @@ ok: [localhost]
       <p>Insert the following content:</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
-<span class="py">api_key</span> <span class="p">=</span> <span class="s">{{ my_role_key }}</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">{{ server_name }}</span>
 <span class="py">listen</span> <span class="p">=</span> <span class="s">{{ ansible_default_ipv4.address }}</span>
 </code></pre></div>      </div>
     </li>
@@ -941,7 +944,7 @@ ok: [localhost]
       <p>Run the playbook again.</p>
     </li>
     <li>
-      <p>Login to the remote machine and check the contents of <code class="highlighter-rouge">/tmp/test.ini</code></p>
+      <p>Check the contents of <code class="highlighter-rouge">/tmp/test.ini</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -954,7 +957,7 @@ ok: [localhost]
           <p>The file should look like:</p>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
-<span class="py">api_key</span> <span class="p">=</span> <span class="s">deadbeefcafe</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">Cats!</span>
 <span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
 </code></pre></div>          </div>
 
@@ -965,7 +968,7 @@ ok: [localhost]
       </blockquote>
 
       <p>Now that this has worked successfully, we will setup a <code class="highlighter-rouge">group_vars</code> folder
-to show how a person using <code class="highlighter-rouge">my-role</code> would override the <code class="highlighter-rouge">my_role_key</code> variable.</p>
+to show how a person using <code class="highlighter-rouge">my-role</code> would override the <code class="highlighter-rouge">server_name</code> variable.</p>
     </li>
     <li>
       <p>Create the folder <code class="highlighter-rouge">group_vars/</code> (in the root of your directory)</p>
@@ -977,7 +980,7 @@ to show how a person using <code class="highlighter-rouge">my-role</code> would 
       <p>Insert the following:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">my_role_key</span><span class="pi">:</span> <span class="s">my_super_secret_api_key</span>
+<span class="na">server_name</span><span class="pi">:</span> <span class="s">Dogs!</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1002,15 +1005,15 @@ TASK [my-role : Template the configuration file] ********
 </span><span class="gi">+++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
 </span><span class="p">@@ -1,3 +1,3 @@</span>
  [example]
-<span class="gd">-api_key = deadbeefcafe
-</span><span class="gi">+api_key = my_super_secret_api_key
+<span class="gd">-server_name = Cats!
+</span><span class="gi">+server_name = Dogs!
 </span> listen = 192.168.0.25
 <span class="p">changed: [localhost]
 PLAY RECAP **********************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0
 </span></code></pre></div>          </div>
 
-          <p>Here you can see that the api_key value will be changed. Despite Ansible reporting <code class="highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
+          <p>Here you can see that the server_name value will be changed. Despite Ansible reporting <code class="highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1018,6 +1021,32 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
       <p>Run the playbook again, without the <code class="highlighter-rouge">--check</code> flag to apply your changes.</p>
     </li>
   </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-ansible-variable-templating"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Variable Templating</h3>
+  <p>In this step we use some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: <code class="highlighter-rouge">listen = {{ ansible_default_ipv4.address }}</code>.</p>
+
+  <p>It is common to see things like this in Ansible roles:</p>
+
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">root_dir = /opt/my-app</span>
+<span class="s">config_dir = "/config"</span>
+</code></pre></div>  </div>
+
+  <p>When Ansible runs:</p>
+
+  <ol>
+    <li>It collects variables defined in group variables and other places</li>
+    <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
+    <li>When multiple roles execute in a playbook:
+      <ol>
+        <li>Their defaults are added to the set of variables (the group variables having precedence over these variables)</li>
+        <li>They can also dynamically define more variables which may not be set until that role is run</li>
+      </ol>
+    </li>
+    <li>Before use (in templates, commands, etc.), variables are resolved to their final value</li>
+  </ol>
+
 </blockquote>
 
 <h1 id="ansible-galaxy">Ansible Galaxy</h1>
@@ -1086,6 +1115,88 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 <p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
 
 <p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="highlighter-rouge">ansible-galaxy install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles">galaxyproject</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">usegalaxy.eu</a></p>
+
+<h1 id="optional-ansible-vault">(Optional) Ansible Vault</h1>
+
+<p>Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-secrets"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up secrets</h3>
+
+  <ol>
+    <li>
+      <p>Run <code class="highlighter-rouge">mkdir -p secret_group_vars</code></p>
+    </li>
+    <li>
+      <p>Now we’ll create a strong password: <code class="highlighter-rouge">openssl rand -base64 24 &gt; vault-password.txt</code></p>
+    </li>
+    <li>
+      <p>Run <code class="highlighter-rouge">ansible-vault create secret_group_vars/all.yml --vault-password-file=vault-password.txt</code></p>
+
+      <p>This will open <code class="highlighter-rouge">secret_group_vars/all.yml</code> in your text editor.</p>
+    </li>
+    <li>
+      <p>In this file, enter the following contents and save it:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apikey</span><span class="pi">:</span> <span class="s">super-secret-api-key-wow!</span>
+</code></pre></div>      </div>
+
+      <blockquote class="question">
+        <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does your file look? Is it readable? Run <code class="highlighter-rouge">cat secret_group_vars/all.yml</code></p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.</p>
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat secret_group_vars/all.yml
+$ANSIBLE_VAULT;1.1;AES256
+64373665366130333437393639343534653134346538636239393363373062393830653333323966
+3134333366363130326139323162323131643763336236320a393262303938316262643764323862
+36393161666663353231366336613838633866323230303031313465646333613862363264323139
+3263383530626262370a666139666462663938343531656432353239346532316630366165376566
+34313765353766666330366632303836353863396430343264303032363739666139383830323565
+6133663637356331613062353834646561653366386665623930
+</code></pre></div>          </div>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Use the new variable in our <code class="highlighter-rouge">.ini</code> file from earlier. Edit <code class="highlighter-rouge">roles/my-role/templates/test.ini.j2</code> and add the line <code class="highlighter-rouge">apikey = </code></p>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+    </li>
+    <li>
+      <p>Check the contents of <code class="highlighter-rouge">/tmp/test.ini</code></p>
+
+      <blockquote class="question">
+        <h3 id="question-question-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How does it look?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The file should look like:</p>
+
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">Cats!</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
+<span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
+</code></pre></div>          </div>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Ansible Vault is really useful to include encrypted secrets in your playbook repository. In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your <code class="highlighter-rouge">.gitignore</code> (or VCS appropriate file.)</p>
 
 <h1 id="other-stuff">Other Stuff</h1>
 
