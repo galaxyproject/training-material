@@ -152,6 +152,14 @@ For example, we could generate a small dataset by
     - Extracting one similar sequence found with Blast
     - Searching and extracting 2 other sequences of the same species using the [NCBI Nucleotide database](https://www.ncbi.nlm.nih.gov/nuccore)
 
+When the experiment takes a FASTQ as input and requires a lot of reads to be meaningful, you can use the following strategy:
+- Run the workflow until the mapping step on the full dataset (or big enough to have good results).
+- Select IDs of reads which map on the smallest chromosome (for example chr22 for human data).
+- In order to keep in the toy dataset enough diversity, you can also take randomly 1% of the reads IDs.
+- Concatenate the two lists and remove the duplicated IDs.
+- Use **seqtk_subseq** {% icon tool %} to sample your original FASTQ with the list of IDs.
+This technique was used for the ATAC-seq tutorial using [this workflow](https://raw.githubusercontent.com/lldelisle/myWorkflows/master/Galaxy-Workflow-MakeAFakeInput.ga).
+
 We would then develop the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets on [Zenodo](https://zenodo.org/) to store them on long-term and obtain a dedicated DOI in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20).
 
 > ### {% icon hands_on %} Hands-on: Upload the dataset to Zenodo
