@@ -1,11 +1,10 @@
 import datetime
-import json
 import os
 import requests
 
 
 # repository info
-repo = "https://api.github.com/repos/shiltemann/training-material/releases"
+repo = "https://api.github.com/repos/galaxyproject/training-material/releases"
 gh_token = os.environ['GH_TOKEN_RELEASES']
 
 
