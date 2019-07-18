@@ -156,11 +156,11 @@ Extracted sequences appear in the history as such:
 
 > 2. Next, rename it using the ["Fasta Sequence Renamer" tool.](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.rename) Do NOT put "raw" in this name, because this is the identifier that Galaxy will use to identify the contig, no matter how it is edited. This changes the header in the FASTA file on the first line after the >
 
-![](../../images/assembling-genome-sequences-screenshots/21_fasta_sequence_renamer.png)
+![](../../images/assembling-genome-sequences-screenshots/21_fasta_sequener_renamer.png)
 
-![](../../images/assembling-genome-sequences-screenshots/21_fasta_renamer_parameters.png)
+![](../../images/assembling-genome-sequences-screenshots/22_fasta_renamer_parameters.png)
 
-Run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to generate a report that suggests the type of genome ends.
+> * Run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to generate a report that suggests the type of genome ends.
 
 > * Choose the input files based on which dataset gave the contig for the phage genome. For the FASTQ **mandatory input** use the better set (usually R1). For the **optional input**, use the other dataset (usually R2).
 > * Name the output file with the phage name.
@@ -168,8 +168,8 @@ Run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to 
 > * When complete, open the output called report.
 
 > ### {% icon tip %} More Information
-> * Protocols on confirmation and closure are under development. CPT staff can read [this document](https://docs.google.com/document/d/1uoSG9o2J2oWQZbHIhVRVGyIwPkbryujdeSBB2HQXTSQ/edit).
-> * Protocols on polishing a genome after annotation to prepare for depositing in GenBank are also under development, but will vary from lab to lab. CPT staff can reference [this document](https://docs.google.com/document/d/1aXE01fphROysxygPMrYcWdkl4iU05H6jKvhtOalTh_A/edit#heading=h.lwwpw4ay44cb).
+> * A protocol for confirmation and closure is [here](https://cpt.tamu.edu/training-material/topics/de-novo-assembly/tutorials/genome-close-reopen/tutorial.html).
+> * Protocols on polishing a genome after annotation to prepare for depositing in GenBank will vary from lab to lab. CPT staff can reference [this document](https://docs.google.com/document/d/1aXE01fphROysxygPMrYcWdkl4iU05H6jKvhtOalTh_A/edit#heading=h.lwwpw4ay44cb).
 {: .tip}
 
 
