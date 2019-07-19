@@ -256,7 +256,7 @@ For the next times, you can make it quicker.
 >             --workflow_id "ID of the workflow on the Galaxy instance" \
 >             --zenodo_link "URL to the Zenodo record"
 >      ```
->    - option 2: from a local workflow file (`.ga`)
+>    - option 2: from a local workflow file (`.ga`) (use only if your workflow is composed of tools from the main ToolShed)
 >
 >      ```
 >      $ planemo training_init \
