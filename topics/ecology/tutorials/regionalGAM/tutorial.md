@@ -412,14 +412,15 @@ Sometimes the expected temporal trend can't be done on dataset. If you want this
 
 We would like to know if the year has an influence on the abundance of a species. We will use a linear regression to do that.
 
+
 > ### {% icon details %} More details about the statistics
 > The model fitted to the data is:
-> Yi = a + bxi + ei
-> with Yi = value of the dependent variable for the unit i
-> a = intercept
-> b = slope
-> xi = value of the explanatory variable for the unit i
-> ei = residual for the unit i
+> $$ Y_i = \alpha + \beta x_i + \epsilon_i $$  
+> with $$Y_i$$ = value of the dependent variable for the unit i  
+> $$\alpha$$ = intercept  
+> $$\beta$$ = slope  
+> $$x_i$$ = value of the explanatory variable for the unit i  
+> $$e_i$$ = residual for the unit i  
 >
 {: .details}
 
