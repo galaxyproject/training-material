@@ -66,9 +66,9 @@ Here is an exhaustive picture of taxonomy and functional pathways and their dyna
 >
 > 3. Rename the datasets
 >
->    > ### {% icon tip %} TIP
+>    > ### {% icon tip %} Tip
 >    >
->    > The files can also be imported through shared Data libraries in usegalaxy.eu. The files will be labelled as Metatranscriptomics_GTN_input.
+>    > The files can also be imported through shared Data libraries in usegalaxy.eu,labelled as Metatranscriptomics_GTN_input.
 >    {: .tip}
 {: .hands_on}
 
@@ -89,7 +89,9 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 
 ## **FASTQ Groomer**
 
-> ### {% icon hands_on %} Hands-on: The FASTQ Groomer tool provides the user with several formatting options related to the input FASTQ file. In the Default option, the output will be sanger formatted (i.e. file.fastqsanger). If you choose the Advanced option, the user has the capability to choose between any format and force quality scoring i.e. if the score falls outside the target score range, it will be converted to the closest available value.
+The FASTQ Groomer tool provides the user with several formatting options related to the input FASTQ file. In the Default option, the output will be sanger formatted (i.e. file.fastqsanger). If you choose the Advanced option, the user has the capability to choose between any format and force quality scoring i.e. if the score falls outside the target score range, it will be converted to the closest available value.
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **FASTQ Groomer** {% icon tool %} with the following parameters:
 >    - {% icon param-select %} *"File to groom”*: `T4A_F`
@@ -100,15 +102,27 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Perform this action on both the files (**Forward and Reverse(T4_R)**)
+>    > We have to erform this action on both the files (**Forward and Reverse(T4_R)**)
 >    {: .comment}
 >
 {: .hands_on}
 
+> ### {% icon hands_on %} Hands-on: 
+>
+> 1. **FASTQ Groomer** {% icon tool %} with the following parameters:
+>    - {% icon param-select %} *"File to groom”*: `T4A_R`
+>    - {% icon param-select %} *"Input FASTQ quality scores type"*:`Sanger & Illumina 1.8+`
+>    - *"Advanced Options"*: `Hide Advanced Options`
+>   
+> 2. **Execute**
+{: .hands_on}
 
 ## **Cutadapt**
 
-> ### {% icon hands_on %} Hands-on: Cutadapt helps finding and removing adapter sequences, primers, poly-A tails or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. It also has additional features of modifying and filtering reads.
+Cutadapt helps finding and removing adapter sequences, primers, poly-A tails or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. It also has additional features of modifying and filtering reads.
+
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >  - {% icon param-select %} *"Single-end or Paired-end reads?"*: `Paired-end`
@@ -133,17 +147,19 @@ Please follow these steps once you have uploaded the files from zenodo to your g
 > 1. Are there any other tool which can perform similar functions?
 > 2. Reason behind selecting Cutadapt??
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1.Yes, there are many tools such as Trimmomatic, Trim Galore, Clip, trim putative adapter sequences. etc.
-> > 2. The reason for choosing Cutadapt for this function is because it is error tolerant and the version is pretty stable.
-> {: .solution}
+>   > ### {% icon solution %} Solution
+>   >
+>   > 1. Yes, there are many tools such as Trimmomatic, Trim Galore, Clip, trim putative adapter sequences. etc.
+>   > 2. The reason for choosing Cutadapt for this function is because it is error tolerant and the version is pretty stable.
+      {: .solution}
 >
 {: .question}
 
 ## **Filter with SortMeRNA**
 
-> ### {% icon hands_on %} Hands-on: SortMeRNA is a tool used to filter ribosomal RNA fragments from metatranscriptomic data produced by next-generation sequencers. It is capable of handling large RNA databases and sorting out all fragments matching to the database with high accuracy and specificity. It can take paired-end reads as well as single-end reads.
+SortMeRNA is a tool used to filter ribosomal RNA fragments from metatranscriptomic data produced by next-generation sequencers. It is capable of handling large RNA databases and sorting out all fragments matching to the database with high accuracy and specificity. It can take paired-end reads as well as single-end reads.
+
+> ### {% icon hands_on %} Hands-on: 
 ![SortMeRNA](../../images/SORTMERNA.png)
 >
 > 1. **Filter with SortMeRNA** {% icon tool %} with the following parameters:
@@ -184,19 +200,20 @@ The next step is the interlacing step wherein we join the two separate files (fo
 
 ## **FASTQ interlacer**
 
-> ### {% icon hands_on %} Hands-on: This tool joins paired-end FASTQ reads from two separate files, one with the forward reads and one with the reverse reads, into a single files where forward alternate with their reverse reads. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
+This tool joins paired-end FASTQ reads from two separate files, one with the forward reads and one with the reverse reads, into a single files where forward alternate with their reverse reads. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
 
+> ### {% icon hands_on %} Hands-on: 
 >
-> 1. **FASTQ interlacer** {% icon tool %} with the following parameters: For MetaPhlAn2
+> 1. **FASTQ interlacer** {% icon tool %} with the following parameters: **For MetaPhlAn2**
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
->
->    ***TODO***: *Check parameter descriptions*
 >   - {% icon param-select %} *”Type of paired-end datasets”*: ‘2 separate datasets’
 >   - {% icon param-file %} *”Left-hand mates”*: `Cutadapt on data 4 and data 3: Read 1 Output`
 >   - {% icon param-file %} *”Right-hand mates”*:`Cutadapt on data 4 and data 3: Read 2 Output`
 >
 > 2. **Execute**
+>
 > 3. Rename the Fastqinterlacer output to MetaPhlAn2 input.
+>
 > 4. Change the datatype to FASTQ.
 >
 >    > ### {% icon comment %} Comment
@@ -211,8 +228,7 @@ The next step is the interlacing step wherein we join the two separate files (fo
 
 > ### {% icon hands_on %} Hands-on: 
 >
-> 1. **FASTQ interlacer** {% icon tool %} with the following parameters: For HUMANn2
->    - *"Type of paired-end datasets"*: `2 separate datasets`
+> 1. **FASTQ interlacer** {% icon tool %} with the following parameters: **For HUMANn2**
 >   - {% icon param-select %} *”Type of paired-end datasets”*: ‘2 separate datasets’
 >   - {% icon param-file %} *”Left-hand mates”*: `Filter with sortmeRNA: Unaligned Forward reads`
 >   - {% icon param-file %} *”Right-hand mates”*: `Filter with sortmeRNA: Unaligned Reverse reads`
@@ -220,16 +236,20 @@ The next step is the interlacing step wherein we join the two separate files (fo
 > 2. **Execute**
 >
 > 3. Rename the Fastqinterlacer output to HUMANn2 input.
+>
 > 4. Change the datatype to FASTQ.
 {: .hands_on}
 
 ## **MetaPhlAn2**
 
-> ### {% icon hands_on %} Hands-on: MetaPhlAn2 is a computational tool used to profile the structure and the composition of microbial communities (Bacteria, Archaea, Eukaryotes and Viruses) from metagenomic shotgun sequencing data with species level resolution. MetaPhlAn2 takes as input a sequence file, in this case the FASTQ interlacer output. The output is a tab-separated file with the predicted taxon relative abundances.
+MetaPhlAn2 is a computational tool used to profile the structure and the composition of microbial communities (Bacteria, Archaea, Eukaryotes and Viruses) from metagenomic shotgun sequencing data with species level resolution. MetaPhlAn2 takes as input a sequence file, in this case the FASTQ interlacer output. The output is a tab-separated file with the predicted taxon relative abundances.
 ![MetaPhlAn2](../../images/Metaphlan2.png)
+
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **MetaPhlAn2** {% icon tool %} with the following parameters:
->   - {% icon param-tool %} *”Input file”*: `MetaPhlAn2 input`
+>   - {% icon param-file %} *”Input file”*: `MetaPhlAn2 input`
 >   - {% icon param-select %} *”Database with clade-specific marker genes”*: `Locally cached`
 >   - {% icon param-select %} *”Cached database with clade-specific marker genes”*: `MetaPhlAn2 clade-specific marker genes`
 >   - {% icon param-select %} *”Type of analysis to perform”*: `Profiling a metagenomes in terms of relative abundances`
@@ -254,10 +274,11 @@ The next step is the interlacing step wherein we join the two separate files (fo
 
 ## **HUMAnN2**
 
-> ### {% icon hands_on %} Hands-on: HUMAnN2 is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data. For creating the input for HUMAnN2, we interlaced the output from SortmeRNA into a single FASTQ file. This interlaced file and the MetaPhlAn2 output (taxonomic profile) is used as the HUMAnN2 input. For functional profiling, it uses multiple databases that are locally cached nucleotide or protein databases.
+HUMAnN2 is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data. For creating the input for HUMAnN2, we interlaced the output from SortmeRNA into a single FASTQ file. This interlaced file and the MetaPhlAn2 output (taxonomic profile) is used as the HUMAnN2 input. For functional profiling, it uses multiple databases that are locally cached nucleotide or protein databases.
 >
+> ### {% icon hands_on %} Hands-on: 
 > 1. **HUMAnN2** {% icon tool %} with the following parameters:
->   - {% icon param-tool %} *"Input sequence file"*: `HUMANn2 input`
+>   - {% icon param-file %} *"Input sequence file"*: `HUMANn2 input`
 >   - {% icon param-check %} *"Use of a custom taxonomic profile"*: `Yes`
 >   - {% icon param-select %} *"Taxonomic profile file"*: `Community profile` output of `MetaPhlAn2`
 >   - {% icon param-select %} *"Nucleotide database"*: `Locally cached`
@@ -281,7 +302,9 @@ The next step is the interlacing step wherein we join the two separate files (fo
 
 ##  **Export to GraPhlAn**
 
-> ### {% icon hands_on %} Hands-on: export2graphlan is a conversion software tool to produce both annotation and tree file for GraPhlAn. It can convert MetaPhlAn, LEfSe, and/or HUMAnN output to GraPhlAn input format.
+export2graphlan is a conversion software tool to produce both annotation and tree file for GraPhlAn. It can convert MetaPhlAn, LEfSe, and/or HUMAnN output to GraPhlAn input format.
+
+> ### {% icon hands_on %} Hands-on: 
 
 In particular, the annotation file tries to highlight specific sub-trees deriving automatically from input file what nodes are important.
 >
@@ -324,32 +347,43 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
 {: .hands_on}
 
  ## **Format MetaPhlAn2 output** 
-> ### {% icon hands_on %} Hands-on: This step provides tabular output per taxonomic level with its abundance.
+
+ This step provides tabular output per taxonomic level with its abundance.
+
+
+> ### {% icon hands_on %} Hands-on: 
 >
 ![Format MetaPhlAn2 output](../../images/FormatMetaphlan.png)
 > 1. **Format MetaPhlAn2 output** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input file (MetaPhlAN2 output)”*: ‘MetaPhlAn2 Community File’
+>
 > 2. **Execute**
 {: .hands_on}
+
+
 > ### {% icon question %} Questions
 >
 > 1. What does Format MetaPhlAn2 do??
 > 2. What is the need for formatting the data?
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. This tool format output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).9 files are generated: one file per taxonomic levels with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
-> >
-> > 2. This tool helps in simplifying the data for easy interpretation.
-> >
-> {: .solution}
+>    > ### {% icon solution %} Solution
+>    >
+>    > 1. This tool format output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
+>    >    9 files are generated: one file per taxonomic levels with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
+>    >
+>    > 2. This tool helps in simplifying the data for easy interpretation.
+>    >
+>      {: .solution}
 >
 {: .question}
 
 
  ## **Format MetaPhlAn2 output for Krona** 
-> ### {% icon hands_on %} Hands-on:This step just creates a tabular output that is easily readable by Krona (visualization).
->
+
+ This step just creates a tabular output that is easily readable by Krona (visualization).
+
+
+> ### {% icon hands_on %} Hands-on:
 > 1.**Format MetaPhlAn2 output for Krona** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input file (MetaPhlAN2 output)”*: ‘MetaPhlAn2 Community File’
 >
@@ -361,16 +395,19 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
 >
 > 1. What does Format MetaPhlAn2 do??
 >
-> > ### {% icon solution %} Solution
-> > 1. This tool formats MetaPhlAn2 output to be ready for Krona.
-> >
-> {: .solution}
+>    > ### {% icon solution %} Solution
+>    > 1. This tool formats MetaPhlAn2 output to be ready for Krona.
+>    >
+>      {: .solution}
 >
 {: .question}
 
 ## **Krona Pie chart** 
 
-> ### {% icon hands_on %} Hands-on: This tool renders results of a metagenomic profiling as a zoomable pie chart using Krona.
+This tool renders results of a metagenomic profiling as a zoomable pie chart using Krona.
+
+
+> ### {% icon hands_on %} Hands-on: 
 ![Krona](../../images/Krona.png)
 >
 > 1. **Krona pie chart** {% icon tool %} with the following parameters:
@@ -380,12 +417,15 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
 >   - {% icon param-check %} *”Combine data from multiple datasets”*: `No`
 >
 > 2. **Execute**
+
 {: .hands_on}
 
 
 ## **Group abundances**
 
-> ### {% icon hands_on %} Hands-on: This tool groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms. Custom databases can be provided: a custom Gene Ontology file with the core ontology, a custom slim Gene Ontology with description of slim GO terms to use, and a custom mapping file for mapping UniRef50 gene families to GO terms.
+The group abundances tool groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms. Custom databases can be provided: a custom Gene Ontology file with the core ontology, a custom slim Gene Ontology with description of slim GO terms to use, and a custom mapping file for mapping UniRef50 gene families to GO terms.
+
+> ### {% icon hands_on %} Hands-on: 
 
 >
 > 1. **Group abundances** {% icon tool %} with the following parameters:
@@ -406,7 +446,10 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
 
 ## **Create a genus level gene families file**
 
-> ### {% icon hands_on %} Hands-on: The gene families and pathways output files from HUMAnN2 are species level by default. This tool generates genus level gene families
+The gene families and pathways output files from HUMAnN2 are species level by default. This tool generates genus level gene families
+
+
+> ### {% icon hands_on %} Hands-on: 
 
 >
 > 1. **Create a genus level gene families file** {% icon tool %} with the following parameters:
@@ -418,7 +461,10 @@ In particular, the annotation file tries to highlight specific sub-trees derivin
 
 ## **Combine MetaPhlAn2 and HUMAnN2 outputs**
 
-> ### {% icon hands_on %} Hands-on: This tool combine MetaPhlAn2 outputs and HUMANnN2 outputs.
+As the name suggests, this tool combine MetaPhlAn2 outputs and HUMANnN2 outputs.
+
+
+> ### {% icon hands_on %} Hands-on: 
 
 For each gene families/pathways and the corresponding taxonomic stratification, you get relative abundance of this gene family/pathway and the relative abundance of corresponding species and genus.
 
@@ -434,7 +480,7 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 {: .hands_on}
 
 
-## Sub-step with **Combine MetaPhlAn2 and HUMAnN2 outputs**
+## **Combine MetaPhlAn2 and HUMAnN2 outputs**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -449,7 +495,9 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 
 ##**Generation, personalization and annotation of tree**
 
-> ### {% icon hands_on %} Hands-on: This tool takes the Export to GraphlAn output ( tree and annotation ) and creates a phylogenetic tree (format: phyloxml).
+This tool takes the Export to GraphlAn output ( tree and annotation ) and creates a phylogenetic tree (format: phyloxml).
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **Generation, personalization and annotation of tree** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input tree”*: `Export to GraPhlAn Tree output`
@@ -464,8 +512,11 @@ For each gene families/pathways and the corresponding taxonomic stratification, 
 
 ## **GraPhlAn**
 
-> ### {% icon hands_on %} Hands-on: GraPhlAn is a software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes the input from the Generation, personalization and annotation of tree for Graphlan tool to create these .png images.
+GraPhlAn is a software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes the input from the Generation, personalization and annotation of tree for Graphlan tool to create these .png images.
 ![GraPhlAn](../../images/Graphlan.png)
+
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. **GraPhlAn** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *”Input tree”*: `Generation, personalization and annotation of tree output`
