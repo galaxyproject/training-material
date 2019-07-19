@@ -117,8 +117,14 @@
         </ul>
         
 
+        <div id="tutorial_list">
         <h2 id="material">Material</h2>
+        <div class="search_box">
+        <i class="fa fa fa-search" aria-hidden="true"></i><span class="visually-hidden">search</span>
+        <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+        <span id="clear_search" title="Clear filters"> <i class="fa fa-times" aria-hidden="true"></i><span class="visually-hidden">galaxy-cross</span> </span></div>
         <table class="table table-responsive table-striped">
+            <thead>
             <tr>
                 <th>Lesson</th>
                 <th>Slides</th>
@@ -134,7 +140,8 @@
                 <th>Galaxy instances</th>
                 
             </tr>
-
+            </thead>
+            <tbody class="list">
             
                 
                         <script type="application/ld+json">
@@ -266,7 +273,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Introduction to Genome Annotation
                             <div class="">
                             
@@ -446,17 +453,17 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Essential genes detection with Transposon insertion sequencing
                             <div class="">
                             
                             
                                   
-                                       <span class="label label-default" style="background-color: hsl(55, 80.0%, 85%); color: #333; border: 1px solid hsl(55, 80.0%, 45%)">bacteria</span>
+                                       <span class="label label-default tutorial_tag" id="bacteria" style="background-color: hsl(55, 80.0%, 85%); color: #333; border: 1px solid hsl(55, 80.0%, 45%)" title="Click to show only tutorials with this tag">bacteria</span>
                                   
-                                       <span class="label label-default" style="background-color: hsl(19, 80.0%, 85%); color: #333; border: 1px solid hsl(19, 80.0%, 45%)">tnseq</span>
+                                       <span class="label label-default tutorial_tag" id="tnseq" style="background-color: hsl(19, 80.0%, 85%); color: #333; border: 1px solid hsl(19, 80.0%, 45%)" title="Click to show only tutorials with this tag">tnseq</span>
                                   
-                                       <span class="label label-default" style="background-color: hsl(6, 80.0%, 85%); color: #333; border: 1px solid hsl(6, 80.0%, 45%)">essential genes</span>
+                                       <span class="label label-default tutorial_tag" id="essential genes" style="background-color: hsl(6, 80.0%, 85%); color: #333; border: 1px solid hsl(6, 80.0%, 45%)" title="Click to show only tutorials with this tag">essential genes</span>
                                   
                             
                         </div>
@@ -688,13 +695,13 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Genome Annotation
                             <div class="">
                             
                             
                                   
-                                       <span class="label label-default" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)">prokaryote</span>
+                                       <span class="label label-default tutorial_tag" id="prokaryote" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)" title="Click to show only tutorials with this tag">prokaryote</span>
                                   
                             
                         </div>
@@ -767,8 +774,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -1029,13 +1034,13 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Genome annotation with Maker
                             <div class="">
                             
                             
                                   
-                                       <span class="label label-default" style="background-color: hsl(124, 80.0%, 85%); color: #333; border: 1px solid hsl(124, 80.0%, 45%)">eukaryote</span>
+                                       <span class="label label-default tutorial_tag" id="eukaryote" style="background-color: hsl(124, 80.0%, 85%); color: #333; border: 1px solid hsl(124, 80.0%, 45%)" title="Click to show only tutorials with this tag">eukaryote</span>
                                   
                             
                         </div>
@@ -1172,7 +1177,9 @@
         
     
         
-    
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
         
     
         
@@ -1209,6 +1216,10 @@
     
         
     
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
         
     
         
@@ -1404,13 +1415,13 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Genome annotation with Prokka
                             <div class="">
                             
                             
                                   
-                                       <span class="label label-default" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)">prokaryote</span>
+                                       <span class="label label-default tutorial_tag" id="prokaryote" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)" title="Click to show only tutorials with this tag">prokaryote</span>
                                   
                             
                         </div>
@@ -1559,7 +1570,9 @@
         
     
         
-    
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
         
     
         
@@ -1596,6 +1609,10 @@
     
         
     
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
         
     
         
@@ -1629,8 +1646,9 @@
                     </tr>
                 
             
+            </tbody>
         </table>
-
+        </div>
         
             <h2 id="docker_image">Galaxy instances</h2>
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
@@ -1679,6 +1697,9 @@
 </footer>
 
 
+
+
+
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
@@ -1699,4 +1720,8 @@
         target:function(trigger){return trigger.nextElementSibling;
     }});
     </script>
+    
+    <script type="text/javascript" src="/training-material/assets/js/list.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/topic.js"></script>
+    
 </html>

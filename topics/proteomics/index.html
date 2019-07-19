@@ -117,8 +117,14 @@
         </ul>
         
 
+        <div id="tutorial_list">
         <h2 id="material">Material</h2>
+        <div class="search_box">
+        <i class="fa fa fa-search" aria-hidden="true"></i><span class="visually-hidden">search</span>
+        <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+        <span id="clear_search" title="Clear filters"> <i class="fa fa-times" aria-hidden="true"></i><span class="visually-hidden">galaxy-cross</span> </span></div>
         <table class="table table-responsive table-striped">
+            <thead>
             <tr>
                 <th>Lesson</th>
                 <th>Slides</th>
@@ -134,7 +140,8 @@
                 <th>Galaxy instances</th>
                 
             </tr>
-
+            </thead>
+            <tbody class="list">
             
                 
                         <script type="application/ld+json">
@@ -322,7 +329,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Biomarker candidate identification
                             <div class="">
                             
@@ -397,8 +404,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -679,7 +684,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Detection and quantitation of N-termini (degradomics) via N-TAILS
                             <div class="">
                             
@@ -932,12 +937,6 @@
         
         <a class="dropdown-item" href="http://huttenhower.sph.harvard.edu/galaxy/" title="Huttenhower Lab">
             Huttenhower Lab
-        </a>
-        
-    
-        
-        <a class="dropdown-item" href="http://irprofiler.med.auth.gr:8080/" title="IRProfiler">
-            IRProfiler
         </a>
         
     
@@ -1248,7 +1247,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Label-free versus Labelled - How to Choose Your Quantitation Method
                             <div class="">
                             
@@ -1482,7 +1481,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Mass spectrometry imaging: Loading and exploring MSI data
                             <div class="">
                             
@@ -1568,8 +1567,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -1889,7 +1886,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Metaproteomics tutorial
                             <div class="">
                             
@@ -1968,8 +1965,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -2264,7 +2259,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Peptide and Protein ID using OpenMS tools
                             <div class="">
                             
@@ -2347,8 +2342,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -2629,7 +2622,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Peptide and Protein ID using SearchGUI and PeptideShaker
                             <div class="">
                             
@@ -2769,8 +2762,6 @@
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
-        
-    
         
     
         
@@ -3052,7 +3043,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Peptide and Protein Quantification via Stable Isotope Labelling (SIL)
                             <div class="">
                             
@@ -3142,8 +3133,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -3425,7 +3414,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Protein FASTA Database Handling
                             <div class="">
                             
@@ -3511,8 +3500,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -3849,7 +3836,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Proteogenomics 1: Database Creation
                             <div class="">
                             
@@ -4156,7 +4143,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Proteogenomics 2: Database Search
                             <div class="">
                             
@@ -4235,8 +4222,6 @@
     </a>
     <ul class="dropdown-menu">
     
-    
-        
     
         
     
@@ -4569,7 +4554,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Proteogenomics 3: Novel peptide analysis
                             <div class="">
                             
@@ -4810,7 +4795,7 @@
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Secretome Prediction
                             <div class="">
                             
@@ -5071,12 +5056,6 @@
         
     
         
-        <a class="dropdown-item" href="http://irprofiler.med.auth.gr:8080/" title="IRProfiler">
-            IRProfiler
-        </a>
-        
-    
-        
         <a class="dropdown-item" href="http://math-galaxy.cgrb.oregonstate.edu:8080/" title="Koslicki Lab">
             Koslicki Lab
         </a>
@@ -5223,8 +5202,9 @@
                     </tr>
                 
             
+            </tbody>
         </table>
-
+        </div>
         
             <h2 id="docker_image">Galaxy instances</h2>
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
@@ -5304,6 +5284,9 @@
 </footer>
 
 
+
+
+
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
@@ -5324,4 +5307,8 @@
         target:function(trigger){return trigger.nextElementSibling;
     }});
     </script>
+    
+    <script type="text/javascript" src="/training-material/assets/js/list.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/topic.js"></script>
+    
 </html>

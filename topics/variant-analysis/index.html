@@ -195,8 +195,14 @@ genotypes.
         </ul>
         
 
+        <div id="tutorial_list">
         <h2 id="material">Material</h2>
+        <div class="search_box">
+        <i class="fa fa fa-search" aria-hidden="true"></i><span class="visually-hidden">search</span>
+        <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+        <span id="clear_search" title="Clear filters"> <i class="fa fa-times" aria-hidden="true"></i><span class="visually-hidden">galaxy-cross</span> </span></div>
         <table class="table table-responsive table-striped">
+            <thead>
             <tr>
                 <th>Lesson</th>
                 <th>Slides</th>
@@ -212,7 +218,8 @@ genotypes.
                 <th>Galaxy instances</th>
                 
             </tr>
-
+            </thead>
+            <tbody class="list">
             
                 
                         <script type="application/ld+json">
@@ -407,7 +414,7 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Introduction to Variant analysis
                             <div class="">
                             
@@ -650,7 +657,7 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Calling variants in diploid systems
                             <div class="">
                             
@@ -774,8 +781,6 @@ genotypes.
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
         </a>
-        
-    
         
     
         
@@ -1062,13 +1067,13 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Calling variants in non-diploid systems
                             <div class="">
                             
                             
                                   
-                                       <span class="label label-default" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)">prokaryote</span>
+                                       <span class="label label-default tutorial_tag" id="prokaryote" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)" title="Click to show only tutorials with this tag">prokaryote</span>
                                   
                             
                         </div>
@@ -1404,7 +1409,7 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Exome sequencing data analysis for diagnosing a genetic disease
                             <div class="">
                             
@@ -1528,8 +1533,6 @@ genotypes.
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
         </a>
-        
-    
         
     
         
@@ -1812,7 +1815,7 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Identification of somatic and germline variants from tumor and normal sample pairs
                             <div class="">
                             
@@ -2092,7 +2095,7 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Mapping and molecular identification of phenotype-causing mutations
                             <div class="">
                             
@@ -2220,8 +2223,6 @@ genotypes.
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
         </a>
-        
-    
         
     
         
@@ -2534,13 +2535,13 @@ genotypes.
 }
                         </script>
                     <tr>
-                        <td>
+                        <td class="tutorial_title">
                             Microbial Variant Calling
                             <div class="">
                             
                             
                                   
-                                       <span class="label label-default" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)">prokaryote</span>
+                                       <span class="label label-default tutorial_tag" id="prokaryote" style="background-color: hsl(271, 80.0%, 85%); color: #333; border: 1px solid hsl(271, 80.0%, 45%)" title="Click to show only tutorials with this tag">prokaryote</span>
                                   
                             
                         </div>
@@ -2723,8 +2724,6 @@ genotypes.
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
             UseGalaxy.eu
         </a>
@@ -2751,8 +2750,9 @@ genotypes.
                     </tr>
                 
             
+            </tbody>
         </table>
-
+        </div>
         
             <h2 id="docker_image">Galaxy instances</h2>
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
@@ -2851,6 +2851,9 @@ genotypes.
 </footer>
 
 
+
+
+
     </body>
     <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
     <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
@@ -2871,4 +2874,8 @@ genotypes.
         target:function(trigger){return trigger.nextElementSibling;
     }});
     </script>
+    
+    <script type="text/javascript" src="/training-material/assets/js/list.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/topic.js"></script>
+    
 </html>
