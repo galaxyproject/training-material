@@ -416,11 +416,11 @@ We would like to know if the year has an influence on the abundance of a species
 > ### {% icon details %} More details about the statistics
 > The model fitted to the data is:
 > $$ Y_i = \alpha + \beta x_i + \epsilon_i $$  
-> with $$Y_i$$ = value of the dependent variable for the unit i  
+> with $$Y_i$$ = value of the dependent variable for the unit $$i$$  
 > $$\alpha$$ = intercept  
 > $$\beta$$ = slope  
-> $$x_i$$ = value of the explanatory variable for the unit i  
-> $$e_i$$ = residual for the unit i  
+> $$x_i$$ = value of the explanatory variable for the unit $$i$$  
+> $$e_i$$ = residual for the unit $$i$$
 >
 {: .details}
 
