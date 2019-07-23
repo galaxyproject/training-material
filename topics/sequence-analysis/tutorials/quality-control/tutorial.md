@@ -436,19 +436,17 @@ With DNA sequencing data no single sequence should be present at a high enough f
 
 # Filter and Trim
 
-We will filter and trim the sequences based on the information provided by the quality graphs, the quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides.
+The quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analyis. In general, quality treatments include:
 
-Sequences must be treated to reduce bias in downstream analyis. In general, quality treatments include:
-
-- Filtering of sequences
+1. Cutting/Trimming/masking sequences
+    - from low quality score regions
+    - beginning/end of sequence
+    - removing adapters
+2. Filtering of sequences
     - with low mean quality score
     - too short
     - with too many ambiguous (N) bases
     - based on their GC content
-- Cutting/Trimming/masking sequences
-    - from low quality score regions
-    - beginning/end of sequence
-    - removing adapters
 
 To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html), a tool that enhances sequence quality by automating adapter trimming as well as quality control.
 
@@ -463,21 +461,21 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 >          {: .tip}
 >
 >       - In *Read 1 Options*
->
->          In this training, no adapters were already removed. If you know which adapter sequences were used during library preparation, provide their sequences there.
->
->    - In *"Adapter Options"*
->       - *"Minimum overlap length"*: `3`
+>          
+>          > ### {% icon comment %} Know adapters
+>          > In this dataset, no adapters were found as we saw in FastQC report. They were already removed. 
+>          > If you see or know which adapter sequences were used during library preparation, provide their sequences there.
+>          {: .comment}
 >
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
 >
->           To remove reads shorter than 20 bp
+>           It will remove reads that are shorter than 20 bp, after trimming of adapters and bad regions.
 >
 >    - In *"Read Modification Options"*
 >       - *"Quality cutoff"*: `20`
 >
->           To trim low-quality 3' ends (below 20) from reads in addition to adapter removal
+>           After adapter removal (if any), we choose to remove ends ( 5' and/or 3') with low-quality, here below 20 in quality).
 >
 >    - In *"Output Options"*
 >       - *"Report"*: `Yes`
@@ -519,130 +517,16 @@ The quality of the previous dataset was pretty good from the beginning and we im
 > You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything and you may lose too much information.
 {: .comment}
 
-# Process paired-end data
-
-With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known and therefore is additional information that can improve read mapping.
-
-With paired-end sequencing, more of each DNA fragment can be covered than with single-end sequencing (only forward orientation sequenced):
-
-```
-    ------>
-      ------>
-        ------>
-          ------>
-
-    ----------------------------- [fragment]
-
-    ------>         <------
-      ------>         <------
-        ------>         <------
-          ------>         <------
-```
-
-Paired-end sequencing generates 2 FASTQ files:
-- One file with the sequences corresponding to foward orientation of all the fragments
-- One file with the sequences corresponding to reverse orientation of all the fragments
-
-The data we analyzed in the previous step was not single-end data but the forward reads of paired-end data. We will now do the quality control on both forward and reverse reads together.
-
-> ### {% icon question %} Questions
+> ### {% icon details %} Trimming with Cutadapt
 >
-> Why is performing quality control on both forward and reverse reads together important?
->
-> > ### {% icon solution %} Solution
-> > During the filtering, some reads are eliminated because of their length. If one of the reverse reads is removed, its corresponding forward read should be removed too. So the forward and reverse reads should be processed together.
-> {: .solution }
-{: .question}
-
-Let's first have a look at the quality of our reads!
-
-> ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end data
->
-> 1. Import the reverse read `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
->
->    ```
->    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
->    ```
->
-> 2. Rename the file to `reads_2`
-> 3. **FastQC** {% icon tool %} with the reverse reads
->
->     FastQC has already been run on the forward reads
->
-> 4. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports
->      - In *"Results"*
->        - *"Which tool was used generate logs?"*: `FastQC`
->        - In *"FastQC output"*
->           - *"Type of FastQC output?"*: `Raw data`
->           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
->
->    {% include snippets/select_multiple_datasets.md %}
->
-> 5. Inspect the webpage output from MultiQC
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. What do you think of the quality of the sequences?
-> 2. What should we do?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads: lower mean quality of the sequences and stronger decrease at the end (mean value below 28). Lower-quality reverse reads .
-> > 2. We should trim the end of the sequences and filter them with **Cutadapt** {% icon tool %}
-> >
-> {: .solution}
-{: .question}
-
-With paired end reads the average quality scores for forward reads will almost always be higher than for reverse reads. Therefore it is important to treat the forward and reverse reads together for trimming and cutting.
-
-> ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end data
-> 1. **Cutadapt** {% icon tool %} with the following parameters
->    - *"Single-end or Paired-end reads?"*: `Paired-end`
->       - {% icon param-file %} *"FASTQ/A file #1"*: `reads_1` (Input dataset)
->       - {% icon param-file %} *"FASTQ/A file #2"*: `reads_2` (Input dataset)
->
->          The order is important here!
->
->       - In *Read 1 Options* or *Read 2 Options*
->
->         In this training, no adapters were already removed. When you process your own data, if you know which adapter sequences were used during library preparation, you should provide their sequences here.
->
->    - In *"Adapter Options"*
->       - *"Minimum overlap length"*: `3`
->    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->    - In *"Output Options"*
->       - *"Report"*: `Yes`
->
-> 2. Inspect the generated txt file (`Report`)
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many basepairs has been removed from the reads because of bad quality?
->    > 2. How many sequence pairs have been removed because they were too short?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. 44,164 bp (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
->    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
->    > {: .solution }
->    {: .question}
-{: .hands_on}
-
-
-> ### {% icon details %} Algorithmic details
->
-> One of the biggest advantage of cutadapt over other trimming tools is that it has nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
+> One of the biggest advantage of Cutadapt over other trimming tools is that it has nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
 >
 > Cutadapt quality trimming algorithm consists of three simple steps:
 >
-> 1. substract the chosen threshold value from the quality value of each position
-> 2. compute a partial sum of these differences from the end of the sequence to each position
+> 1. Substract the chosen threshold value from the quality value of each position
+> 2. Compute a partial sum of these differences from the end of the sequence to each position
 >    (as long as the partial sum is negative)
-> 3. cut at the minimum value of the partial sum
+> 3. Cut at the minimum value of the partial sum
 >
 > In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values
 >
@@ -675,13 +559,118 @@ With paired end reads the average quality scores for forward reads will almost a
 > Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
 >
 >
-> Alternatives to this procedure would be
+> Alternatives to this procedure would be:
 >
-> * to cut all positions with a quality smaller than the threshold
-> * a sliding window approach
+> * Cut all positions with a quality smaller than the threshold
+> * Sliding window approach
 >
-> The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
+>     The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
 {: .details}
+
+# Process paired-end data
+
+With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. More of each DNA fragment is then sequenced than with single-end sequencing:
+
+```
+    ------>                       [single-end]
+
+    ----------------------------- [fragment]
+
+    ------>               <------ [paired-end]
+```
+The distance between both reads is known and therefore is additional information that can improve read mapping.
+
+Paired-end sequencing generates 2 FASTQ files:
+- One file with the sequences corresponding to foward orientation of all the fragments
+- One file with the sequences corresponding to reverse orientation of all the fragments
+
+The data we analyzed in the previous step was not single-end data but the forward reads of paired-end data. We will now do the quality control on the reverse reads.
+
+> ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end reads
+>
+> 1. Import the reverse read `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
+>
+>    ```
+>    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
+>    ```
+>
+> 2. Rename the file to `reads_2`
+> 3. **FastQC** {% icon tool %} with the reverse reads>
+> 4. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports of both forward and reverse reads
+>      - In *"Results"*
+>        - *"Which tool was used generate logs?"*: `FastQC`
+>        - In *"FastQC output"*
+>           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
+>
+>    {% include snippets/select_multiple_datasets.md %}
+>
+> 5. Inspect the webpage output from MultiQC
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. What do you think of the quality of the sequences?
+> 2. What should we do?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads: 
+> >     - Per Sequence Quality Scores: distribution more on the left, i.e. a lower mean quality of the sequences
+> >     - Per base sequence quality: less smooth curve and stronger decrease at the end with a mean value below 28
+> >     - Per Base Sequence Content: stronger bias at the beginning and no clear distinction between C-G and A-T groups
+> >
+> >    The other indicators (adapters, duplication levels, etc) are similar.
+> >
+> > 2. We should trim the end of the sequences and filter them with **Cutadapt** {% icon tool %}
+> >
+> {: .solution}
+{: .question}
+
+With paired end reads the average quality scores for forward reads will almost always be higher than for reverse reads. 
+
+After trimming, reverse reads will be shorter because of their quality and then will be eliminated during the filtering step. If one of the reverse reads is removed, its corresponding forward read should be removed too. Otherwise we will get different number of reads in both files and in different order, and order is important for the next steps. Therefore **it is important to treat the forward and reverse reads together for trimming and filtering**.
+
+> ### {% icon hands_on %} Hands-on: Improving the quality of paired-end data
+> 1. **Cutadapt** {% icon tool %} with the following parameters
+>    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>       - {% icon param-file %} *"FASTQ/A file #1"*: `reads_1` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file #2"*: `reads_2` (Input dataset)
+>
+>          The order is important here!
+>
+>       - In *Read 1 Options* or *Read 2 Options*
+>
+>         As before, no adapters were found in these datasets. When you process your own data, if you know which adapter sequences were used during library preparation, you should provide their sequences here.
+>
+>    - In *"Filter Options"*
+>       - *"Minimum length"*: `20`
+>    - In *"Read Modification Options"*
+>       - *"Quality cutoff"*: `20`
+>    - In *"Output Options"*
+>       - *"Report"*: `Yes`
+>
+> 2. Inspect the generated txt file (`Report`)
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many basepairs has been removed from the reads because of bad quality?
+>    > 2. How many sequence pairs have been removed because they were too short?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. 44,164 bp (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
+>    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
+>    > {: .solution }
+>    {: .question}
+>
+{: .hands_on}
+
+In addition to the report, Cutadapt generates 2 files:
+- Read 1 with the trimmed and filtered forward reads
+- Read 2 with the trimmed and filtered reverse reads
+
+These datasets can be used for the downstream analysis, e.g. mapping.
 
 > ### {% icon question %} Questions
 >
@@ -695,7 +684,6 @@ With paired end reads the average quality scores for forward reads will almost a
 > >
 > {: .solution}
 {: .question}
-
 
 # Conclusion
 {:.no_toc}
