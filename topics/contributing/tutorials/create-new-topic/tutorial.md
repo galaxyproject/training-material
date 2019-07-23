@@ -159,8 +159,19 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
     - `link`: URL to the external resource
 
 - `docker_image`: name of the Docker image for the topic
-
     If no Docker image exists for this topic, let this information empty
+
+- `subtopics`: for large topics, we can define subtopics and create multiple tutorial lists:
+  ```
+  subtopics:
+    singlecell:
+      title: "Single Cell Analysis"
+      description: "These tutorials cover single cell analysis"
+    small:
+      title: "Small RNA"
+      description: "These Tutorial"
+  ```
+  tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
 
 - `maintainers`: GitHub username of people maintaining the topic
 

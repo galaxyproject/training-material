@@ -18,8 +18,9 @@ contributors:
   - slugger70
   - mvdbeek
   - erasche
+subtopic: features
 tags:
-  - ansible
+  - jobs
 requirements:
   - type: "internal"
     topic_name: admin

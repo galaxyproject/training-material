@@ -9,7 +9,8 @@ objectives:
   - Setup and start the Galaxy reports app.
 time_estimation: "30m"
 tags:
-  - ansible
+  - monitoring
+subtopic: features
 key_points:
   - Galaxy supports pluggable monitoring extensions.
   - Use grafana or the reports webapp to monitor your service.

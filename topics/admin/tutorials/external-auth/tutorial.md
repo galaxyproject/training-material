@@ -14,8 +14,9 @@ contributors:
   - natefoo
   - nsoranzo
   - erasche
+subtopic: features
 tags:
-  - ansible
+  - authentication
 requirements:
   - type: "internal"
     topic_name: admin
