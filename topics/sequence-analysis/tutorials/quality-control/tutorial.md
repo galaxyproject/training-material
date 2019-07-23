@@ -111,7 +111,7 @@ But what does this quality mean?
 
 The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 
-![](../../images/quality_score_encoding.png)
+![Encoding of the quality score with ASCII characters for different Phred encoding](../../images/quality_score_encoding.png)
 
 So each nucleotide is assigned an ASCII character, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
 
