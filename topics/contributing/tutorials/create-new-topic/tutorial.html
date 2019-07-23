@@ -486,9 +486,19 @@ We decided to put it in “Sequence analysis” because this is the most general
     </ul>
   </li>
   <li>
-    <p><code class="highlighter-rouge">docker_image</code>: name of the Docker image for the topic</p>
-
-    <p>If no Docker image exists for this topic, let this information empty</p>
+    <p><code class="highlighter-rouge">docker_image</code>: name of the Docker image for the topic
+  If no Docker image exists for this topic, let this information empty</p>
+  </li>
+  <li><code class="highlighter-rouge">subtopics</code>: for large topics, we can define subtopics and create multiple tutorial lists:
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subtopics:
+  singlecell:
+    title: "Single Cell Analysis"
+    description: "These tutorials cover single cell analysis"
+  small:
+    title: "Small RNA"
+    description: "These Tutorial"
+</code></pre></div>    </div>
+    <p>tutorials can be assigned to subtopics by adding e.g. <code class="highlighter-rouge">subtopic: singlecell</code> to the tutorial metadata. An example of this subtopic division can be found in the <a href="/training-material/topics/admin/">admin section</a></p>
   </li>
   <li><code class="highlighter-rouge">maintainers</code>: GitHub username of people maintaining the topic</li>
 </ul>
