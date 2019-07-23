@@ -11,7 +11,9 @@ objectives:
     - "Compute temporal abundance trends"
 time_estimation: "2h30m"
 key_points:
-    - ""
+    - "We sequencialy compute phenology, abundance index, trend and model this trend"
+    - "We learned how to interprete a trend using modelling and data vizualisation"
+    - "This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool"
 contributors:
     - claraurf
     - emichn
