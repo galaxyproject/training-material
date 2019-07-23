@@ -22,6 +22,7 @@ follow_up_training:
     tutorials:
       - mapping
 time_estimation: "1H"
+level: Introductory
 key_points:
   - Run quality control on every dataset before running any other bioinformatics analysis
   - Take care of the parameters used to improve the sequence quality
