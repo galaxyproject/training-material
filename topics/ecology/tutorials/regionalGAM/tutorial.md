@@ -11,8 +11,8 @@ objectives:
     - "Compute temporal abundance trends"
 time_estimation: "2h30m"
 key_points:
-    - "We sequencialy compute phenology, abundance index, trend and model this trend"
-    - "We learned how to interprete a trend using modelling and data vizualisation"
+    - "We sequentially computed phenology, abundance index, trend and model this trend"
+    - "We learned how to interpret a trend using modeling and data visualization"
     - "This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool"
 contributors:
     - claraurf
@@ -66,7 +66,7 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >
 {: .hands_on}
 
-This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.
+This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of individuals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.
 
 ![Gatekeeper (Pironia tithonus)](../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg "Gatekeeper (Pironia tithonus) Charles J Sharp")
 
@@ -151,7 +151,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 
 The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.
 
-As the dataset is quite big and may countain heterogeneous information, we need to know whether the data are about one species or more.
+As the dataset is quite big and may contain heterogeneous information, we need to know whether the data are about one species or more.
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset?
 >
@@ -470,7 +470,7 @@ We can also test for autocorrelation in the data.
 ![Autocorrelation test graph](../../images/regionalGAM/Autocorrelation_test.png)
 
 
-Have a look at this plot. We can see that one of the value is above the threshold (blue dashed line), therefore we observe autocorrelation in the data. We will now take into account the autocorrelation in te next model.
+Have a look at this plot. We can see that one of the value is above the threshold (blue dashed line), therefore we observe autocorrelation in the data. We will now take into account the autocorrelation in the next model.
 
 ## Take into account the autocorrelation
 
