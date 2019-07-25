@@ -1035,7 +1035,7 @@ absolute value above 0.9.
 >
 > 1. **Generic_Filter** {% icon tool %} with the following parameters:
 >    - *"Data matrix file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
->    - *"Sample metadata file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+>    - *"Sample metadata file"*: `Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv`
 >    - *"Variable metadata file"*: `Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
 >    - *"Deleting samples and/or variables according to Numerical values"*: `yes`
 >        - {% icon param-repeat %} *"Identify the parameter to filter "*
