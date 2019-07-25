@@ -983,7 +983,7 @@ and the ions that we have in our dataset. For this calculation we can use **Univ
 >
 > 1. **Univariate** {% icon tool %} with the following parameters:
 >    - *"Data matrix file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
->    - *"Sample metadata file"*: `Generic_Filter_Batch_correction_linear_dataMatrix.tsv`
+>    - *"Sample metadata file"*: `Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv`
 >    - *"Variable metadata file"*: `Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv`
 >    - *"Factor of interest"*: `bmi`
 >    - *"Test"*: `Spearman correlation rank test (quantitative)`
