@@ -433,6 +433,7 @@
       <li><a href="#compute-abundance-index-across-sites-and-years" id="markdown-toc-compute-abundance-index-across-sites-and-years">Compute Abundance Index across sites and years</a></li>
       <li><a href="#compute-a-collated-index-for-each-year-and-estimates-the-temporal-trend" id="markdown-toc-compute-a-collated-index-for-each-year-and-estimates-the-temporal-trend">Compute a collated index for each year and estimates the temporal trend</a></li>
       <li><a href="#model-temporal-trend" id="markdown-toc-model-temporal-trend">Model temporal trend</a></li>
+      <li><a href="#take-into-account-the-autocorrelation" id="markdown-toc-take-into-account-the-autocorrelation">Take into account the autocorrelation</a></li>
     </ol>
   </li>
 </ol>
@@ -532,7 +533,7 @@
 
 </blockquote>
 
-<p>This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names (“SPECIES”), observation site (“SITE”), date of the observation (“YEAR”,”MONTH”,”DAY”) and number of indivudals (“COUNT”). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.</p>
+<p>This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names (“SPECIES”), observation site (“SITE”), date of the observation (“YEAR”,”MONTH”,”DAY”) and number of individuals (“COUNT”). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.</p>
 
 <figure id="figure-1"><img src="../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg" alt="Gatekeeper (Pironia tithonus)" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Gatekeeper (Pironia tithonus) Charles J Sharp</figcaption></figure>
 
@@ -652,7 +653,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 
 <p>The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.</p>
 
-<p>As the dataset is quite big and may countain heterogeneous information, we need to know whether the data are about one species or more.</p>
+<p>As the dataset is quite big and may contain heterogeneous information, we need to know whether the data are about one species or more.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-how-many-species-are-taken-into-account-in-this-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: How many species are taken into account in this dataset?</h3>
@@ -1022,6 +1023,18 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 
 <p>We would like to know if the year has an influence on the abundance of a species. We will use a linear regression to do that.</p>
 
+<blockquote class="details">
+  <h3 id="details-more-details-about-the-statistics"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details about the statistics</h3>
+  <p>The model fitted to the data is:
+<script type="math/tex">Y_i = \alpha + \beta x_i + \epsilon_i</script><br />
+with <script type="math/tex">Y_i</script> = value of the dependent variable for the unit <script type="math/tex">i</script><br />
+<script type="math/tex">\alpha</script> = intercept<br />
+<script type="math/tex">\beta</script> = slope<br />
+<script type="math/tex">x_i</script> = value of the explanatory variable for the unit <script type="math/tex">i</script><br />
+<script type="math/tex">e_i</script> = residual for the unit <script type="math/tex">i</script></p>
+
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-model-temporal-trend-with-linear-regression"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend with linear regression</h3>
   <ol>
@@ -1034,37 +1047,49 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
   </ol>
 </blockquote>
 
-<p>Have a look at the text file result. This is the output of the linear model applied in R.</p>
+<p>Have a look at the text file result. This is the output of the linear model.</p>
 
-<blockquote>
+<p><img src="../../images/regionalGAM/output-simple-linear-regression.png" alt="Output from the &quot;model temporal trend with simple linear regression&quot; tool " /></p>
 
-  <blockquote class="question">
-    <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+<p>Details about the output from the tool</p>
 
-    <ol>
-      <li>What are the estimates of the regression coefficients?</li>
-      <li>Can we use this model to make good predictions?</li>
-      <li>Is the test p-value significant?</li>
-    </ol>
+<ol>
+  <li>The formula of the model following this format: “Model : dependent variable ~ explanatory variable”</li>
+  <li>The estimated values of the coefficients</li>
+  <li>The standard error of the coefficients</li>
+  <li>The value of the “hypothesis test statistic”</li>
+  <li>The probability value.
+    <blockquote>
 
-    <blockquote class="solution">
-      <h3 id="solution-solutions-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solutions</h3>
+      <blockquote class="question">
+        <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-      <ol>
-        <li>Intercept is 183.33852 and the slope (Year) is -0.08952.</li>
-        <li>No, the residual standard error is high.</li>
-        <li>Yes (0.0282 &lt; 0.05).</li>
-      </ol>
+        <ol>
+          <li>What are the estimates of the regression coefficients?</li>
+          <li>Can we use this model to make good predictions?</li>
+          <li>Is the test p-value significant?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solutions-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solutions</h3>
+
+          <ol>
+            <li>Intercept is 183.33852 and the slope (Year) is -0.08952.</li>
+            <li>No, the residual standard error is high.</li>
+            <li>Yes (0.0282 &lt; 0.05).</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
 
     </blockquote>
-  </blockquote>
-
-</blockquote>
+  </li>
+</ol>
 
 <p>We can also test for autocorrelation in the data.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend taking into account autocorrelation of residuals</h3>
+  <h3 id="hands_on-hands-on-check-if-there-is-autocorrelation-of-residuals"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check if there is autocorrelation of residuals</h3>
   <ol>
     <li><strong>Autocorrelation test check for temporal autocorrelation in the residuals</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
       <ul>
@@ -1076,10 +1101,39 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 
 <p><img src="../../images/regionalGAM/Autocorrelation_test.png" alt="Autocorrelation test graph" /></p>
 
-<p>Have a look at this plot.</p>
+<p>Have a look at this plot. We can see that one of the value is above the threshold (blue dashed line), therefore we observe autocorrelation in the data. We will now take into account the autocorrelation in the next model.</p>
+
+<h2 id="take-into-account-the-autocorrelation">Take into account the autocorrelation</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend taking into account autocorrelation of residuals</h3>
+  <h3 id="hands_on-hands-on-model-temporal-trend-taking-into-account-autocorrelation-of-residuals"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model temporal trend taking into account autocorrelation of residuals</h3>
+  <ol>
+    <li><strong>Linear regression ajusted for autocorrelation in the residuals</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File generated by the glmmpql/Expected temporal trend tool”</em>: tabular output of <strong>temporal trend</strong></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File generated by the ab_index tool”</em>: output from <strong>abundance index</strong></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>For this step you can use the scratchbook function in order to see the results of both models at the same time.</p>
+
+<blockquote class="details">
+  <h3 id="details-how-to-use-the-scratchbook"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to use the scratchbook</h3>
+  <p>You can follow this tutorial if you want to learn how to use the scratchbook.
+https://usegalaxy.org/tours/core.scratchbook</p>
+
+</blockquote>
+
+<p><img src="../../images/regionalGAM/output-both-models.png" alt="Plot of temporal trend with trend line" /></p>
+
+<p>Here you can compare the models using the AIC for Akaike information criterion. We can see that the AIC is lower in the model taking the autocorrelation into account. A lower AIC value is associated with less information loss.
+We will therefore, based on the AIC, select the model taking into account the autocorrelation.
+We can now represent the data with the trend line from the model.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plot-the-data-and-the-trend-line-from-the-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the data and the trend line from the model</h3>
   <ol>
     <li><strong>Plot abundance with trend line</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters.
       <ul>
@@ -1092,7 +1146,7 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
 
 <p><img src="../../images/regionalGAM/trend_simple.png" alt="Plot of temporal trend with trend line" /></p>
 
-<p>Here you can see the temporal trends modeled from the simple regression. You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.</p>
+<p>You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.</p>
 
 <h1 class="no_toc" id="conclusions">Conclusions</h1>
 
@@ -1104,7 +1158,13 @@ Warning: depending on the Galaxy instance your are using, this tool can not appe
                         <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li>
+                            <li><p>We sequentially computed phenology, abundance index, trend and model this trend</p>
+</li>
+                            
+                            <li><p>We learned how to interpret a trend using modeling and data visualization</p>
+</li>
+                            
+                            <li><p>This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool</p>
 </li>
                             
                         </ul>
