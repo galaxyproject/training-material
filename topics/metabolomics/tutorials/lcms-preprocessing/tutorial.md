@@ -26,6 +26,8 @@ contributors:
 # Introduction
 {:.no_toc}
 
+**TODO** Updating the intro to make it relevant with this tutorial. 
+
 You may already know that there are different types of *-omic* sciences; out of these, metabolomics is most closely related to phenotypes.
 Metabolomics involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. It  focuses on studying the very small molecules
 which are called *metabolites*, to better understand matters linked to the metabolism. However, studying metabolites is not a piece of cake
@@ -56,17 +58,7 @@ developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/)
 
 [![The full tutorial workflow](../../images/tutorial-lcms-workflow.png)](../../images/tutorial-lcms-workflow.png)
 
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-
-# Preprocessing with XCMS
+**Preprocessing with XCMS**
 
 The first step in the workflow is the pre-processing of the raw data with **XCMS** ({% cite Smith2006 %}).
 
@@ -79,6 +71,24 @@ This software is based on different algorithms that have been published, and is 
 **MSnbase readMSData** {% icon tool %}, prior to **XCMS** {% icon tool %} is able to read files with open format as `mzXML`, `mzMl`, `mzData` and `netCDF`, which are independent of the constructors' formats. The **XCMS** {% icon tool %} package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
 adducts and fragments using the R package CAMERA ({% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well
 adapted to define workflows, one of the key points of Galaxy.
+
+
+**TODO** Adding a comment providing a link to a published history for W4M user 
+"if you happen to be a W4M user and do not want to run the hands-on, you can find the entire histories here" 
+
+
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+
+
 
 
 ## Importing the LC/MS data into Galaxy
@@ -120,6 +130,12 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
 >    {% include snippets/create_dataset_collection.md %}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
+>   
 {: .hands_on}
 
 You should have in your history a green Dataset collection (`sacurine`) with 9 datasets in mzml format.
@@ -134,11 +150,15 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
-> 1. **MSnbase readMSData** {% icon tool %} with the following parameters:
+> **MSnbase readMSData** {% icon tool %} with the following parameters:
 >   - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
 >
 >   {% include snippets/select_collection.md %}
 >
+>  > ### {% icon comment %} Comment to W4M users
+>  >
+>  > **TODO** Giving the link to the step in published history to visualise the parameters. 
+>  {: .comment}
 >
 >  > ### {% icon question %} Question
 >  >
@@ -190,9 +210,14 @@ Note that you can either:
 >
 > > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
 > >
-> > 1. **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
+> > **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
 > >    - *"RData file"*: the `sacurine.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >      {% include snippets/select_collection.md %}
+> >
+> > > ### {% icon comment %} Comment to W4M users
+> > >
+> > > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> > {: .comment}
 > >
 > {: .hands_on}
 >
@@ -303,6 +328,11 @@ not following all the requirements about the format (*e.g.* wrong separator, or 
 right away if you appear to get one of these obvious issues.
 >     {: .comment}
 >
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
+>
 >
 > > ### {% icon question %} Question
 > >
@@ -336,7 +366,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
-> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> **xcms plot chromatogram** {% icon tool %} with the following parameters:
 >   - *"RData file"*: `sacurine.raw.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
@@ -347,6 +377,11 @@ Note that you can also check the chromatograms at any moment during the workflow
 >    > If you use this tool at a later step of XCMS workflow and provided in the Merger step a sampleMetadata with a second column containing groups
 (see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
 >    {: .comment}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -386,7 +421,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 
 > ### {% icon hands_on %} Hands-on: xcms findChromPeaks (xcmsSet)
 >
-> 1. **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+> **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
 >   - *"RData file"*: `sacurine.raw.RData` (collection)
 >   - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >     - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
@@ -403,6 +438,11 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z
 ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
 >    {: .comment}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -430,11 +470,16 @@ the Merger tool.
 
 > ### {% icon hands_on %} Hands-on: xcms findChromPeaks Merger
 >
-> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+> **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
 >   - *"RData file"*: `sacurine.raw.xset.RData` (collection)
 >   - *"Sample metadata file"*: `Nothing selected`
 >
 >     {% include snippets/select_collection.md %}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -459,11 +504,16 @@ than a given number of samples. Either a percentage of the total number of sampl
 
 > ### {% icon hands_on %} Hands-on: xcms groupChromPeaks (group)
 >
-> 1. **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
 >   - *"RData file"*: `xset.merged.RData`
 >   - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >     - *"Bandwidth"*: `5.0`
 >     - *"Width of overlapping m/z slices"*: `0.01`
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -518,7 +568,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 
 > ### {% icon hands_on %} Hands-on: xcms adjustRtime (retcor)
 >
-> 1. **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
+> **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.RData`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.8299`
@@ -531,6 +581,11 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
 time correction.
 >    {: .comment}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -545,13 +600,18 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 >
 > > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 > >
-> > 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> > **xcms plot chromatogram** {% icon tool %} with the following parameters:
 > >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 > >
 > >    > ### {% icon comment %} Comment
 > >    >
 > >    > As in the previous 'plot chromatogram', you can use your completed sampleMetadata file to get colours.
 > >    {: .comment}
+> >
+> > > ### {% icon comment %} Comment to W4M users
+> > >
+> > > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> > {: .comment}
 > >
 > {: .hands_on}
 >
@@ -568,7 +628,7 @@ lower a little the bandwidth parameter.
 
 > ### {% icon hands_on %} Hands-on: second 'xcms groupChromPeaks (group)'
 >
-> 1. **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
@@ -584,6 +644,11 @@ lower a little the bandwidth parameter.
 you can take this opportunity to check how your peak table looks like at this point of the XCMS extraction. For this, you can
 set the 'Get the Peak List' option to `Yes`.
 >    {: .comment}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -628,10 +693,22 @@ about the number of peaks detected for each ion. The dataMatrix files contains t
 
 The idea of the XCMS step is to integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no
 chromatographic peak for this ion was identified.
+To do so, you can use the *xcms fillChromPeaks (fillPeaks)*.
+
+However, before any automatic filling of missing values, you may be interested in an overview of the NA distribution in your data. 
+Indeed, depending on you extraction parameters, you may have an unexpectedly high proportion of NAs in your data. If that is the case, 
+you may consider reviewing your previous extraction parameters and re-running previous steps to obtain consistant results before 
+proceeding to the integration of missing peak areas. 
+
+To get an overview of your missing data, you can use the *Intensity check* module.
+**TODO** Adding the hands-on for Intensity checks. 
+
+
+
 
 > ### {% icon hands_on %} Hands-on: xcms fillChromPeaks (fillPeaks)
 >
-> 1. **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
+> **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.RData`
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
@@ -644,6 +721,11 @@ chromatographic peak for this ion was identified.
 >    > - maxo : maximum height of peaks
 >    > - intb : integration of peaks with baseline subtraction
 >    {: .comment}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
@@ -691,6 +773,11 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
 >    > As said previously, there are quite a few parameters in this tool, some of them having very high impact on your annotations.
 In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).
 >    {: .comment}
+>
+> > ### {% icon comment %} Comment to W4M users
+> >
+> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> {: .comment}
 >
 {: .hands_on}
 
