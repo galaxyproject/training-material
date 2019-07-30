@@ -36,7 +36,7 @@ requirements:
 # Overview
 {:.no_toc}
 
-Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significan ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
+Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
 
 
 > ### Agenda
@@ -535,12 +535,15 @@ Your graph should look something like the following:
 
 ## Monitoring
 
-Collecting all of this data is interesting to visualise but as an administrator you surely have more interesting things to do than to watch graphs all day. Many organisations like to display these dashboards on large monitors, but this assumes someome is watching it. Everyone has better things to do with their time! So we will setup monitoring on the most important aspects of our system. Doing monitoring effectively, without causing undue burden to the administrators (extraneous alerts), or the users (unnoticed downtime), is a very complex topic. Recommended reading here includes the [monitoring chapter](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/) of the Google SRE book {% cite Beyer:2016:SRE:3006357 %}.
+Collecting all of this data is interesting to visualise but as an administrator you surely have more interesting things to do than to watch graphs all day. Many organisations like to display these dashboards on large monitors, but again this assumes someone is watching it. Everyone has better things to do with their time! So we will setup monitoring on the most important aspects of our system.
 
-We cannot easily provide generic and applicable recommendations, that work across every system and every scale. Some of these performance bounds or features you will need to discover yourself, either adding new metrics in support of this, or changing monitoring thresholds to match the values you need.
+Doing monitoring effectively, without causing undue burden to the administrators (extraneous alerts that are not actionable), or the users (unexpected/unnoticed downtime), is a very complex topic. Recommended reading here includes the [monitoring chapter](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/) of the Google SRE book {% cite Beyer:2016:SRE:3006357 %} which can provide some general guidance on the topic and what metrics may be interesting or annoying to alert upon.
+
+> ### {% icon comment %} No generic advice
+> We cannot easily provide generic and applicable recommendations, that work across every system and every scale. Some of these performance bounds or features you will need to discover yourself, either adding new metrics in support of this, or changing monitoring thresholds to match the values you need.
+{: .comment }
 
 We will add an example alert, to make you familiar with the process. This is not an alert that will probably be useful in production.
-
 
 > ### {% icon hands_on %} Hands-on: Add a second query to an existing graph
 >
