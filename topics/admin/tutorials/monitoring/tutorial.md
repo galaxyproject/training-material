@@ -437,7 +437,7 @@ Importing dashboards is a good start, but it's more interesting to create our ow
 >    - Select:
 >      - *"field(value)"*: `field(mean)`
 >    - Group by:
->      - *"fill(null)": `fill(none)`
+>      - *"fill(null)"*: `fill(none)`
 >      - add new (+): `tag(path)`
 >    - Alias by: `[[tag_path]]`
 >
@@ -464,7 +464,7 @@ This will track how long it takes the interface to respond on various web routes
 >      - *"field(value)"*: `field(mean)`
 >      - add new (+): Selectors → percentile
 >    - Group by:
->      - *"fill(null)": `fill(none)`
+>      - *"fill(null)"*: `fill(none)`
 >    - Alias by: `percentile`
 >
 > 4. Remember to save the dashboard
@@ -566,6 +566,138 @@ We will add an example alert, to make you familiar with the process. This is not
 > 4. Save the dashboard
 >
 {: .hands_on}
+
+# Telegraf & `gxadmin`
+
+We need to setup gxadmin, and to configure Telegraf to have permissions to run it.
+
+> ### {% icon hands_on %} Hands-on: Installing gxadmin and configuring Telegraf
+>
+> 1. Edit your `requirements.yml` and add the following:
+>
+>    ```yml
+>    - src: https://github.com/usegalaxy-eu/ansible-gxadmin
+>      name: usegalaxy-eu.gxadmin
+>    ```
+>
+> 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
+>
+> 3. Add the role to your `galaxy.yml` playbook, it should run as root, and it should come before `dj-wasabi.telegraf` (as we will configure telegraf to call some gxadmin commands).
+>
+> 4. Edit the `group_vars/galaxyservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
+>
+>    ```yml
+>    # This should already exist!
+>    postgresql_objects_users:
+>      ...
+>      # Add this to create a telegraf user
+>      - name: telegraf
+>        password: null
+>
+>    # And this to grant telegraf privileges to
+>    # SELECT values from the Galaxy database
+>    postgresql_objects_privileges:
+>      - database: galaxy
+>        roles: telegraf
+>        privs: SELECT
+>        objs: ALL_IN_SCHEMA
+>
+>    # Configure locations for gxadmin that all
+>    # users can access
+>    gxadmin_bin: /opt/gxadmin
+>    gxadmin_bin_dir: /usr/bin
+>    ```
+>
+>
+> 5. Again edit the `group_vars/galaxyservers.yml`, we need to configure Telegraf to run `gxadmin`
+>
+>    Under `telegraf_plugins_extra`, where we already have set a Galaxy StatsD listener, add a stanza to monitor the Galaxy queue
+>
+>    ```yaml
+>    telegraf_plugins_extra:
+>      ...
+>      monitor_galaxy_queue:
+>        plugin: "exec"
+>        config:
+>          - commands = ["/usr/bin/env PGDATABASE=galaxy /usr/bin/gxadmin iquery queue-overview --short-tool-id"]
+>          - timeout = "10s"
+>          - data_format = "influx"
+>          - interval = "15s"
+>    ```
+>
+>    This one is slightly more complex in the configuration. The command block does several things:
+>
+>    - it wraps the command with `env` which allows setting environment variables for a single command
+>    - It sets the `PGDATABASE` to the Galaxy database, by default the `psql` will try and connect to a database with the same name of the user. So the `telegraf` user will attempt to connect to a (non-existent) `telegraf` database.
+>    - Then it calls the gxadmin command `queue-overview`. By using `iquery` instead of `query`, the output is automatically converted to InfluxDB line protocol.
+>    - The command is run every 15 seconds, and has a timeout of 10 seconds. If the command fails to finish in 10 seconds, it will be killed.
+>
+> 5. Run the Galaxy playbook
+>
+{: .hands_on}
+
+With this, Telegraf will start monitoring the Galaxy queue by calling the query every few seconds to check the status every 15 seconds. This monitoring *will* miss jobs that complete within the 15 second interval, but for most servers this is not an issue. Most jobs are running for more than 15 seconds, and if not, it still gives an accurate point-in-time view.
+
+We'll now create a graph for this, just like the one on [stats.galaxyproject.eu](https://stats.galaxyproject.eu)
+
+> ### {% icon hands_on %} Hands-on: Building the queue graph
+>
+> 1. Click the **new graph** button at the top of Grafana's interface, and *Add a Query*
+>
+> 2. Let's build a query:
+>    - From:
+>      - *"select measurement"*: `queue-overview`
+>    - Select:
+>      - *"field(value)"*: `field(count)`
+>      - add new (+): Aggregations → sum
+>    - Group by:
+>      - *"time(__interval)"*: `time(15s)`, because we set the interval to 15s
+>      - add new (+): `tag(tool_id)`
+>      - add new (+): `tag(tool_version)`
+>    - Alias by: `[[tag_tool_id]]/[[tag_tool_version]]`
+>
+> 3. In the second tab on the left, Visualisation:
+>
+>    Under the first section:
+>
+>    - Draw Modes:
+>      - *"Bars"*: `no`
+>      - *"Lines"*: `yes`
+>      - *"Points"*: `no`
+>    - Mode Options:
+>      - *"Staircase"*: `yes`
+>    - Stacking & Null Value
+>      - *"Stack"*: `yes`
+>      - *"Null Value"*: `null as zero`
+>
+>    Below, under the *Legend* section,
+>
+>    - Options:
+>      - *"Show"*: `yes`
+>      - *"As table"*: `yes`
+>      - *"To Right"*: `yes`
+>    - Values:
+>      - *"Max"*: `yes`
+>      - *"Avg"*: `yes`
+>      - *"Current"*: `yes`
+>    - Hide Series:
+>      - *"With only nulls"*: `yes`
+>      - *"With only zeros"*: `yes`
+>
+> 4. In the third tab, General settings:
+>
+>    - *"Title"*: `Galaxy Queue Overview`
+>
+> 5. You can hit <kbd>Escape</kbd> to exit out of the graph editor, and remember to save your dashboard.
+>
+{: .hands_on}
+
+Run some tools in Galaxy, try to generate a large number of jobs. It is relatively easy to upload a dataset, and then run the "Secure Hash / Message Digest" or another tool repeatedly, running it over every dataset in your history, repeating until you've generated a few dozen datasets. If you have a slower tool like `bwa` installed, this can be an option too.
+
+
+![Final Graph](../../images/grafana-final-graph.png "Final graphs generated from this tutorial.")
+
+You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}dashboard.json).
 
 # Conclusion
 
