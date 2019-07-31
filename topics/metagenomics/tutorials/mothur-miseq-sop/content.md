@@ -203,9 +203,7 @@ convention, so that our tools will know which files belong together. We do this 
 >    of files that differ only by a `_1` and `_2` part in their names. In our case however, these
 >    should be `_R1` and `_R2`.
 >
-> 3. Change these values accordingly
->    - Change `_1` to `_R1` in the text field on the top left
->    - Change `_2` to `_R2` om the text field on the top right
+> 3. Click on "Choose Filters" and select `Forward: _R1, Reverse: _R2` (note that you can also enter Filters manually in the text fields on the top)
 >
 >    You should now see a list of pairs suggested by Galaxy:
 >    ![List of suggested paired datasets](../../images/create_collection.png) <br><br>
@@ -289,10 +287,11 @@ Next, we want to improve the quality of our data. To this end we will run a work
    We know that the V4 region of the 16S gene is around 250 bp long. Anything significantly longer
    was likely a poorly assembled contig. We will remove any contigs longer than 275 base pairs using the **Screen.seqs** {% icon tool %} tool.
 2. **Remove low quality contigs** \\
-   We will also remove any contigs containing too many ambiguous base calls.
+   We will also remove any contigs containing any ambiguous base calls.
 3. **Deduplicate sequences** \\
    Since we are sequencing many of the same organisms, there will likely be many identical contigs. To speed up downstream analysis we will determine the set of unique contigs using **Unique.seqs** {% icon tool %}.
-
+4. **Counting sequences**
+   Finally we count how often each of the unique sequences occurs in the given samples. These counts are stored in the *count_table*.
 
 > ### {% icon hands_on %} Hands-on: Perform data cleaning
 >
@@ -475,7 +474,7 @@ the number of duplicates of this sequence observed in each sample.
 > From now on, we will only work with the set of *unique sequences*, but it's important to remember that these represent a larger
 > number of *total sequences*, which we keep track of in the *count table*.
 >
-> The **Summary.seqs** {% icon tool %} tool will
+> In the following we will use the *unique sequences* together with the *count table* as input to tools instead of the complete set of sequences. If this is done for the **Summary.seqs** {% icon tool %} tool it will
 > report both the number of unique *representative sequences* as well as the *total sequences* they represent.
 {: .comment}
 
@@ -487,7 +486,7 @@ the number of duplicates of this sequence observed in each sample.
 For more information on the topic of alignment, please see our training materials
 [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %})
 
-We are now ready to align our sequences to the reference. This is an important
+We are now ready to align our sequences to the reference alignment. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 
 
@@ -566,8 +565,9 @@ To ensure that all our reads overlap our region of interest, we will:
 1. Remove any reads not overlapping the region V4 region {% unless include.short %}(position 1968 to 11550){% endunless %} using **Screen.seqs** {% icon tool %}.
 2. Remove any overhang on either end of the V4 region to ensure our sequences overlap *only* the V4 region, using **Filter.seqs** {% icon tool %}.
 3. Clean our alignment file by removing any columns that have a gap character (`-`, or `.` for terminal gaps) at that position in every sequence (also using **Filter.seqs** {% icon tool %}).
-4. Group near-identical sequences together with **Pre.cluster** {% icon tool %}. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.
-{% if include.short %} 5. Remove Sequencing artefacts known as *chimeras* (discussed in next section). {% endif %}
+4. Remove redundancy in the aligned sequences that might have been introduced by filtering columns by running **Unique.seqs** once more.
+5. Group near-identical sequences together with **Pre.cluster** {% icon tool %}. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.
+{% if include.short %} 6. Remove Sequencing artefacts known as *chimeras* (discussed in next section) from the counts file using **Chimera.vsearch** and from the fasta file with **remove.seqs**. {% endif %}
 
 {% unless include.short %}
 
@@ -803,8 +803,8 @@ and want to remove them from our dataset.
 >
 > 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Cleaned sequences"*: the `fasta` output from **Remove.seqs** {% icon tool %}
->    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Remove.seqs** {% icon tool%}
+>    - {% icon param-file %} *"1: Cleaned sequences"*: the `fasta` output from **Remove.seqs** (i.e. pick.fasta) {% icon tool %}
+>    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Remove.seqs** (i.e. pick.count) {% icon tool%}
 >    - {% icon param-file %} *"3: Training set Taxonomy"*: `trainset9_032012.pds.tax` file you imported from Zenodo
 >    - {% icon param-file %} *"4: Training set FASTA"*: `trainset9_032012.pds.fasta` file from Zenodo
 >
