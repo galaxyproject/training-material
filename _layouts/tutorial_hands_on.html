@@ -114,8 +114,6 @@ layout: base
             {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
             {% endif %}
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -177,8 +175,9 @@ layout: base
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    {{ content
-                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
+                    {{ content 
+                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' 
+                        | no_translate:site.words_to_not_translate }}
 
                     {% if page.key_points %}
                     <blockquote class="key_points">
