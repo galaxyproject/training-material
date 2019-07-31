@@ -64,6 +64,9 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the FASTQ file pairs from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library:
 >   - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
 >   - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
@@ -382,11 +385,11 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > 3. **IGV** {% icon tool %}: Inspect the splice junctions using a **Sashimi plot**
 >
->    > ### {% icon tip %} Tip: Creation of a Sashimi plot
+>    > ### {% icon comment %} Creation of a Sashimi plot
 >    >
 >    > * Right click on the BAM file (in IGV)
 >    > * Select **Sashimi Plot** from the menu
->    {: .tip}
+>    {: .comment}
 >
 >    > ### {% icon question %} Question
 >    >
@@ -732,28 +735,41 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >
 > 3. Rename the datasets (if needed)
 > 4. **DESeq2** {% icon tool %} with the following parameters:
->    - In *"Factor"*:
->       - In "1: Factor"
->           - *"Specify a factor name"*: `Treatment`
->           - In *"Factor level"*:
->               - In *"1: Factor level"*:
->                   - *"Specify a factor level"*: `treated`
->                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
->               - In *"2: Factor level"*:
->                   - *"Specify a factor level"*: `untreated`
->                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
->       - Click on *"Insert Factor"* (not on "Insert Factor level")
->       - In "2: Factor"
->           - "Specify a factor name" to `Sequencing`
->           - In *"Factor level"*:
->               - In *"1: Factor level"*:
->                   - *"Specify a factor level"*: `PE`
->                   - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
->               - In *"2: Factor level"*:
->                   - *"Specify a factor level"*: `SE`
->                   - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>    - *"how"*: `Select datasets per level`
+>       - In *"Factor"*:
+>          - In "1: Factor"
+>              - *"Specify a factor name"*: `Treatment`
+>              - In *"Factor level"*:
+>                  - In *"1: Factor level"*:
+>                      - *"Specify a factor level"*: `treated`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>                  - In *"2: Factor level"*:
+>                      - *"Specify a factor level"*: `untreated`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>
+>          - Click on *"Insert Factor"* (not on "Insert Factor level")
+>          - In "2: Factor"
+>              - "Specify a factor name" to `Sequencing`
+>              - In *"Factor level"*:
+>                  - In *"1: Factor level"*:
+>                      - *"Specify a factor level"*: `PE`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>                  - In *"2: Factor level"*:
+>                      - *"Specify a factor level"*: `SE`
+>                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
 >    - *"Files have header?"*: `No`
 >    - *"Output normalized counts table"*: `Yes`
+>
+>    {% include snippets/select_multiple_datasets.md %}
+>
+>    > ### {% icon comment %} Comment: Using group tags for large sample sets
+>    >
+>    > If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
+>    > may be a lot of work. In these situations, **group tags** can make your life a lot easier.
+>    >
+>    > For more information about setting and using group tags, please see [this tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %})
+>    {: .comment}
+>
 {: .hands_on}
 
 **DESeq2** generated 3 outputs
@@ -817,6 +833,8 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > ### {% icon comment %} Comment
 >
 > For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
+>
+> For more complex setup, e.g. with many samples, it is possible to use a collection with tags to specify the factors and levels. Check our ["Group tags for complex experimental designs" tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %}), explaining how to do that.
 {: .comment}
 
 ## Visualization of the differentially expressed genes

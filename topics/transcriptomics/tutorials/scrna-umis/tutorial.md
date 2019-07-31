@@ -46,7 +46,7 @@ Barcodes are small oligonucleotides that are inserted into the captured sequence
  1. Which cell the sequence came from
  2. Which transcript the sequence came from
 
-When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitavely assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
+When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitatively assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) used in droplet-based single-cell RNA-seq.
 
@@ -54,7 +54,7 @@ Barcodes come in a variety of formats, and in this tutorial we will be looking a
 
 <small>[Back to previous](javascript:window.history.back())</small>
 
-CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite strands in order to sequence. Each primer has a specific role.
+CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite ends of a cDNA strand in order to sequence. Each primer has a specific role.
 
 In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 
@@ -73,11 +73,11 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 # Understanding Barcodes
 
-> ### {% icon tip %} Tip: Viewing the pre-requisite topic
+> ### {% icon comment %} Viewing the pre-requisite topic
 >
 > It is highly recommended that the material in the ***Plates, Batches, and Barcodes*** slides [here](../scrna-plates-batches-barcodes/slides.html) are first observed before proceeding with the rest of this tutorial.
 >
-{: .tip}
+{: .comment}
 
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
@@ -122,11 +122,11 @@ To fully explore the uniqueness of counts, we must discuss the inclusion of *UMI
 
 # Mitigating duplicate transcript counts with UMIs
 
-<small>***Note:*** Cell barcodes are not shown in any of these examples, we assume they were added to our transcripts previously. </small><br /><br />
-
 One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to 'see' it.
 
 Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.
+
+<small>***Note:*** Cell barcodes are not shown in any of the below examples, we assume they were added to our transcripts previously. </small><br /><br />
 
 ## Naive Amplification
 
@@ -151,7 +151,7 @@ How do we correct for this bias?
 
  ![Amplification Bias with UMIs](../../images/scrna_amplif_errors_umis.svg "A cell with four unique transcripts, two from Gene Red and two from Gene Blue")
 
- Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplificaiton, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
+ Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
 
 > |  | Reads in Cell 1 |
 > |--|-----------------|
@@ -187,15 +187,15 @@ This then provides us with the true count of the number of true transcripts for 
 
 
 > ### {% icon question %} Questions about UMIs
-> 
+>
 > 1. Are UMIs not specific to certain genes? Can the same UMI map to different genes?
 > 2. Can the same UMI map to different mRNA molecules of the same gene?
 >
 > > ### {% icon solution %} Solution
 > >
-> 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.  
+> 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
-> >  * One helpful way to think about how quantification is performed is to observe the following heirarchy of data `Cell Barcode → Gene → UMI`
+> >  * One helpful way to think about how quantification is performed is to observe the following hierarchy of data `Cell Barcode → Gene → UMI`
 > >
 > >   e.g.
 > >
@@ -222,8 +222,8 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >    1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
 >    1. Import the following files from [`Zenodo`](https://zenodo.org/record/2573177) or from the data library (ask your instructor)
 >    ```
->    https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R1.fastq.gz
->    https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
+> https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R1.fastq.gz
+> https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %} <br/>
@@ -238,10 +238,10 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 >
 >    1. Generate a list of reads to filter by creating a plain tabular file containing the following read names:
 >        ```
->        J00182:75:HTKJNBBXX:2:1114:12469:11073
->        J00182:75:HTKJNBBXX:2:2222:13301:35690
->        J00182:75:HTKJNBBXX:2:1203:25022:13763
->        J00182:75:HTKJNBBXX:2:1115:8501:46961
+>       J00182:75:HTKJNBBXX:2:1114:12469:11073
+>       J00182:75:HTKJNBBXX:2:2222:13301:35690
+>       J00182:75:HTKJNBBXX:2:1203:25022:13763
+>       J00182:75:HTKJNBBXX:2:1115:8501:46961
 >        ```
 >    1. Set the datatype of the file as **tabular**
 >
@@ -261,6 +261,10 @@ At this point we now have a history with two items: our paired FASTQ test data, 
 >      - **Column(s) containing sequence identifiers**
 >        - **Select/Unselect all**:(tick the box)
 >      - **Output positive matches, negative matches, or both?**:`Just positive matches (ID on list), as a single file`
+>
+> 1. Change the datatypes of the output pair to `fastqsanger` if not already set.
+>    {% include snippets/change_datatype.md %}
+>
 > 1. Viewing our 4 reads side-by-side
 >    - Activate the **Scratchbook** by clicking on the **Enable/Disable Scratchbook** icon on the main top toolbar
 >    - Click on the newly generated FastQ pair ending in *"with matched ID"* to expand the individual reads
@@ -288,50 +292,50 @@ Let us examine these four reads of interest which we have just sub-selected usin
 
 > ### {% icon details %} Forward Reads:
 >
->         @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
->         GGAAGAACCAGATTTTTTTTTTTTTTTTTT
->         +
->         AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
+>     @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
+>     GGAAGAACCAGATTTTTTTTTTTTTTTTTT
+>     +
+>     AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
 >
->         @J00182:75:HTKJNBBXX:2:1203:25022:13763 1:N:0:ATCACG
->         GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
->         +
->         AAFFFJJJJJJJJFFJJJJJJJJJFJ<FF-
+>     @J00182:75:HTKJNBBXX:2:1203:25022:13763 1:N:0:ATCACG
+>     GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
+>     +
+>     AAFFFJJJJJJJJFFJJJJJJJJJFJ<FF-
 >
->         @J00182:75:HTKJNBBXX:2:2222:13301:35690 1:N:0:ATCACG
->         GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
->         +
->         AAFFFJJJJJJJ<AFJJJJJFFJJFJJJFF
+>     @J00182:75:HTKJNBBXX:2:2222:13301:35690 1:N:0:ATCACG
+>     GTCCCAGGTAACTTTTTTTTTTTTTTTTTT
+>     +
+>     AAFFFJJJJJJJ<AFJJJJJFFJJFJJJFF
 >
->         @J00182:75:HTKJNBBXX:2:1114:12469:11073 1:N:0:ATCACG
->         CGGCGTGGTAACTTTTTTTTTTTTTTTTCC
->         +
->         AAFFFJJJJJJJFAFFJJJJJJJJF---<F
+>     @J00182:75:HTKJNBBXX:2:1114:12469:11073 1:N:0:ATCACG
+>     CGGCGTGGTAACTTTTTTTTTTTTTTTTCC
+>     +
+>     AAFFFJJJJJJJFAFFJJJJJJJJF---<F
 >
 >
 {: .details}
 
 > ### {% icon details %} Reverse Reads:
 >
->         @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
->         GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
->         +
->         A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+>     @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
+>     GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
+>     +
+>     A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 >
->         @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG
->         GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
->         +
->         ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
+>     @J00182:75:HTKJNBBXX:2:1203:25022:13763 2:N:0:ATCACG
+>     GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+>     +
+>     ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
 >
->         @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG
->         CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
->         +
->         <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
+>     @J00182:75:HTKJNBBXX:2:2222:13301:35690 2:N:0:ATCACG
+>     CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+>     +
+>     <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
 >
->         @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG
->         ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
->         +
->         A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+>     @J00182:75:HTKJNBBXX:2:1114:12469:11073 2:N:0:ATCACG
+>     ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
+>     +
+>     A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 >
 {: .details}
 
@@ -436,11 +440,11 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
 > >
 > > However if we consider their sequences, we can see that they contain different (but overlapping) sequences.
 > >
-> >          13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
-> >          35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+> >     13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+> >     35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 > >
 > > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as seperate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted seperately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -478,49 +482,49 @@ We should now be able to see the following reads:
 
 > ### {% icon details %} Forward Reads:
 >
->        @J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
->        TTTTTTTTTTTTTTTTTT
->        +
->        FFFJJJJJJJJJJJJJJJ
+>     @J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
+>     TTTTTTTTTTTTTTTTTT
+>     +
+>     FFFJJJJJJJJJJJJJJJ
 >
->        @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 1:N:0:ATCACG
->        TTTTTTTTTTTTTTTTTT
->        +
->        JFFJJJJJJJJJFJ<FF-
+>     @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 1:N:0:ATCACG
+>     TTTTTTTTTTTTTTTTTT
+>     +
+>     JFFJJJJJJJJJFJ<FF-
 >
->        @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 1:N:0:ATCACG
->        TTTTTTTTTTTTTTTTTT
->        +
->        <AFJJJJJFFJJFJJJFF
+>     @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 1:N:0:ATCACG
+>     TTTTTTTTTTTTTTTTTT
+>     +
+>     <AFJJJJJFFJJFJJJFF
 >
->        @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 1:N:0:ATCACG
->        TTTTTTTTTTTTTTTTCC
->        +
->        FAFFJJJJJJJJF---<F>
+>     @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 1:N:0:ATCACG
+>     TTTTTTTTTTTTTTTTCC
+>     +
+>     FAFFJJJJJJJJF---<F>
 >
 {: .details}
 
 > ### {% icon details %} Reverse Reads:
 >
->        @J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
->        GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
->        +
->        A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+>     @J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
+>     GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
+>     +
+>     A<<A-777F<AA<AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 >
->        @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 2:N:0:ATCACG
->        GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
->        +
->        ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
+>     @J00182:75:HTKJNBBXX:2:1203:25022:13763_GGTAAC_GTCCCA 2:N:0:ATCACG
+>     GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+>     +
+>     ---<----<A---77-7A-FJ<JJFFJJ<JJAJ7<-FAFFJJFF<FFJJFFAJFA-AFFFJFFFFFJAJJ
 >
->        @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 2:N:0:ATCACG
->        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
->        +
->        <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
+>     @J00182:75:HTKJNBBXX:2:2222:13301:35690_GGTAAC_GTCCCA 2:N:0:ATCACG
+>     CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
+>     +
+>     <<A-77--77F<----7AFJ-A--FJJJFAJF-AFAJAJ<JFJ<JJJFFJJJFJJJJJAAFJJJFJJJF-
 >
->        @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 2:N:0:ATCACG
->        ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
->        +
->        A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+>     @J00182:75:HTKJNBBXX:2:1114:12469:11073_GGTAAC_CGGCGT 2:N:0:ATCACG
+>     ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA
+>     +
+>     A-77AA-7FF<7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 >
 {: .details}
 

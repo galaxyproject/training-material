@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "gxadmin"
+title: "Galaxy Monitoring with gxadmin"
 zenodo_link: ""
 questions:
   - What is gxadmin
@@ -16,6 +16,9 @@ key_points:
   - new queries are welcome and easy to contribute
 contributors:
   - erasche
+subtopic: features
+tags:
+  - monitoring
 ---
 
 # Overview
@@ -34,7 +37,7 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 {: .agenda}
 
-# Installation
+## Installation with Ansible
 
 > ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
 >
@@ -47,19 +50,33 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
 >
-> 3. Add the role to your playbook with `become: true` and `become_user: galaxy`.
+> 3. Add the role to your playbook, it should run as root
 >
 > 4. Run the playbook
 >
 {: .hands_on}
 
-
-# Configuration
+## Configuration
 
 If `psql` runs without any additional arguments, and permits you to access your galaxy database then you do not need to do any more configuration for gxadmin.
 Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#query-setup)
 
-# Queries
+## Overview
+
+`gxadmin` has several categories of commands, each with different focuses. This is not a technically meaningful separation, it is just done to make the interface easier for end users.
+
+Category      | Keyword             | Purpose
+---           | --                  | --
+Configuration | `config`            | Commands relating to galaxy's configuration files like XML validation.
+Filters       | `filter`            | Transforming streams of text.
+Galaxy Admin  | `galaxy`            | Miscellaneous galaxy related commands like a cleanup wrapper.
+uWSGI         | `uwsgi`             | If you're using [SystemD for Galaxy](https://github.com/usegalaxy-eu/ansible-galaxy-systemd/) and a handler/zergling setup, then this lets you manage your handlers and zerglings.
+DB Queries    | `{csv,tsv,i,}query` | Queries against the database which return tabular output.
+Report        | `report`            | Queries which return more complex and structured markdown reports.
+Mutations     | `mutate`            | These are like queries, except they mutate the database. All other queries are read-only.
+Meta          | `meta`              | More miscellaneous commands, and a built-in updating function.
+
+## Admin Favourite Queries
 
 **@slugger70's favourite**: `gxadmin query old-histories`. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.
 
@@ -71,14 +88,6 @@ id  |        update-time         | user-id | email |           name           | 
 324 | 2013-02-22 15:57:54.500637 |     xxx | xxxx  | Exercise 5               | f         | f       | f      |          64
 315 | 2013-02-22 15:50:51.398894 |     xxx | xxxx  | day5 practical           | f         | f       | f      |          90
 314 | 2013-02-22 15:45:47.75967  |     xxx | xxxx  | 5. Tag Galaxy-Kurs       | f         | f       | f      |          78
-330 | 2013-02-22 15:44:11.099138 |     xxx | xxxx  | Day 4 practise           | f         | f       | f      |          92
-320 | 2013-02-22 15:29:07.426646 |     xxx | xxxx  | Day 5                    | f         | f       | f      |          55
-327 | 2013-02-22 15:24:32.155946 |     xxx | xxxx  | Galaxy course day 5 - 22 | f         | f       | f      |          41
-345 | 2013-02-22 15:22:04.899407 |     xxx | xxxx  | Day 5 - Question 2       | f         | f       | f      |           9
-346 | 2013-02-22 15:16:38.934597 |     xxx | xxxx  | Galaxy Course Day 5 - Q5 | f         | f       | f      |          46
-326 | 2013-02-22 14:43:10.233117 |     xxx | xxxx  | Day 5                    | f         | f       | f      |          22
-343 | 2013-02-22 14:10:29.035706 |     xxx | xxxx  | Unnamed history          | f         | f       | f      |           1
-246 | 2013-02-22 13:57:37.332747 |     xxx | xxxx  | Galaxy Course Day3       | f         | f       | f      |          35
 
 **@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be. The query can
 
@@ -97,19 +106,76 @@ id    |        create_time         | disk_usage | username | email | groups | ac
 3935  | 2019-01-27 10:13:01.499094 | 2072 kB    | xxxx     | xxxx  |        | t
 3934  | 2019-01-27 10:06:40.973938 | 0 bytes    | xxxx     | xxxx  |        | f
 3933  | 2019-01-27 10:01:22.562782 |            | xxxx     | xxxx  |        | f
-3932  | 2019-01-27 09:37:34.11496  | 8299 kB    | xxxx     | xxxx  |        | t
-3931  | 2019-01-27 05:53:33.072407 |            | xxxx     | xxxx  |        | t
-3930  | 2019-01-27 05:05:07.323792 | 85 GB      | xxxx     | xxxx  |        | t
-3929  | 2019-01-27 02:58:08.580324 | 795 MB     | xxxx     | xxxx  |        | t
-3928  | 2019-01-26 21:07:20.483847 |            | xxxx     | xxxx  |        | t
-3927  | 2019-01-26 20:24:20.016207 | 0 bytes    | xxxx     | xxxx  |        | t
-3926  | 2019-01-26 07:51:06.98045  | 331 GB     | xxxx     | xxxx  |        | t
-3925  | 2019-01-26 07:47:29.132961 | 0 bytes    | xxxx     | xxxx  |        | t
-3924  | 2019-01-26 06:48:04.093405 | 0 bytes    | xxxx     | xxxx  |        | f
-3923  | 2019-01-26 04:51:03.47129  | 15 GB      | xxxx     | xxxx  |        | t
-3922  | 2019-01-25 20:04:40.934584 | 7886 MB    | xxxx     | xxxx  |        | t
 
-**@erasche's favourite** `gxadmin iquery queue-overview`. `gxadmin` already supported `query`, `csvquery`, and `tsvquery` for requesting data from the Galaxy database in tables, CSV, or TSV formats, but we recently implemented `influx` queries which output data in a format that [Telegraf](https://github.com/influxdata/telegraf) can consume.
+**@erasche's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
+
+```text
+# Galaxy Job 5132146
+
+Property      | Value
+------------- | -----
+         Tool | toolshed.g2.bx.psu.edu/repos/bgruening/canu/canu/1.7
+        State | running
+      Handler | handler_main_2
+      Created | 2019-04-20 11:04:40.854975+02 (3 days 05:49:30.451719 ago)
+Job Runner/ID | condor / 568537
+        Owner | e08d6c893f5
+
+## Destination Parameters
+
+Key                     |   Value
+---                     |   ---
+description             |   `canu`
+priority                |   `-128`
+request_cpus            |   `20`
+request_memory          |   `64G`
+requirements            |   `GalaxyGroup == "compute"`
+tmp_dir                 |   `True`
+
+## Dependencies
+
+Name   |   Version   |   Dependency Type   |   Cacheable   |   Exact   |   Environment Path                          |   Model Class
+---    |   ---       |   ---               |   ---         |   ---     |   ---                                       |   ---
+canu   |   1.7       |   conda             |   false       |   true    |   /usr/local/tools/_conda/envs/__canu@1.7   |   MergedCondaDependency
+
+## Tool Parameters
+
+Name                 |   Settings
+---------            |   ------------------------------------
+minOverlapLength     |   500
+chromInfo            |   /opt/galaxy/tool-data/shared/ucsc/chrom/?.len
+stage                |   all
+contigFilter         |   {lowCovDepth: 5, lowCovSpan: 0.5, minLength: 0, minReads: 2, singleReadSpan: 1.0}
+s                    |   null
+mode                 |   -nanopore-raw
+dbkey                |   ?
+genomeSize           |   300000
+corOutCoverage       |   40
+rawErrorRate         |
+minReadLength        |   1000
+correctedErrorRate   |
+
+## Inputs
+
+Job ID    |   Name                |   Extension     |   hda-id    |   hda-state   |   hda-deleted   |   hda-purged   |   ds-id     |   ds-state   |   ds-deleted   |   ds-purged   |   Size
+----      |   ----                |   ----          |   ----      |   ----        |   ----          |   ----         |   ----      |   ----       |   ----         |   ----        |   ----
+4975404   |   Osur_record.fastq   |   fastqsanger   |   9517188   |               |   t             |   f            |   9015329   |   ok         |   f            |   f           |   3272 MB
+4975404   |   Osur_record.fastq   |   fastqsanger   |   9517188   |               |   t             |   f            |   9015329   |   ok         |   f            |   f           |   3272 MB
+
+## Outputs
+
+Name                                          |   Extension   |   hda-id    |   hda-state   |   hda-deleted   |   hda-purged   |   ds-id     |   ds-state   |   ds-deleted   |   ds-purged   |   Size
+----                                          |   ----        |   ----      |   ----        |   ----          |   ----         |   ----      |   ----       |   ----         |   ----        |   ----
+Canu assembler on data 41 (trimmed reads)     |   fasta.gz    |   9520369   |               |   f             |   f            |   9018510   |   running    |   f            |   f           |
+Canu assembler on data 41 (corrected reads)   |   fasta.gz    |   9520368   |               |   f             |   f            |   9018509   |   running    |   f            |   f           |
+Canu assembler on data 41 (unitigs)           |   fasta       |   9520367   |               |   f             |   f            |   9018508   |   running    |   f            |   f           |
+Canu assembler on data 41 (unassembled)       |   fasta       |   9520366   |               |   f             |   f            |   9018507   |   running    |   f            |   f           |
+Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |               |   f             |   f            |   9018506   |   running    |   f            |   f           |
+```
+
+# `gxadmin` for Monitoring
+
+`gxadmin` already supported `query`, `csvquery`, and `tsvquery` for requesting data from the Galaxy database in tables, CSV, or TSV formats, but we recently implemented `influx` queries which output data in a format that [Telegraf](https://github.com/influxdata/telegraf) can consume.
 
 So running `gxadmin query queue-overview` normally shows something like:
 
@@ -140,9 +206,192 @@ queue-overview,tool_id=ebi_sra_main,tool_version=1.0.1,state=running,handler=han
 
 And produce [some nice graphs](https://stats.galaxyproject.eu/) from it.
 
+You can use an influx configuration like:
+
+```toml
+[[inputs.exec]]
+    commands = ["/usr/bin/galaxy-queue-size"]
+    timeout = "10s"
+    data_format = "influx"
+    interval = "1m"
+```
+
+This often requires a wrapper script, because you'll need to pass environment variables to the `gxadmin` invocation, e.g.:
+
+```bash
+#!/bin/bash
+export PGUSER=galaxy
+export PGHOST=dbhost
+gxadmin iquery queue-overview --short-tool-id
+gxadmin iquery workflow-invocation-status
+```
+
 # Implementing a Query
 
-We will not do a proper hands-on, but instead show [@slugger70's PR to find old histories](https://github.com/usegalaxy-eu/gxadmin/pull/5/files#diff-f905e55928aae903b7e13cc72842af3c), he implemented a function, provided some help output in a formatted manner, and then wrote his SQL query. If you don't feel comfortable writing bash, just share any SQL you've written and we will help you add it.
+Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. `gxadmin` supports 'local' functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to `gxadmin` though, you'll never know who wants to know the same thing about their db.
+
+`gxadmin` will look for local functions in `~/.config/gxadmin-local.sh`
+
+## A basic function
+
+> ### {% icon hands_on %} Hands-on: Implementing a basic function
+>
+> 1. If `~/.config/` does not exist, create that directory with `mkdir -p ~/.config/`
+>
+> 2. Open `~/.config/gxadmin-local.sh` in a text editor.
+>
+> 3. Add the following to the file and save it.
+>
+>    ```bash
+>    local_hello() { ## hello: Says hi
+>    	echo "hi!"
+>    }
+>    ```
+>
+> 4. Run `gxadmin local`
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What do you see?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > It should look like:
+>    > >
+>    > > ```console
+>    > > gxadmin usage:
+>    > >
+>    > > Local: (These can be configured in /home/hxr/.config/gxadmin-local.sh)
+>    > >
+>    > >     local hello          Says hi
+>    > >
+>    > > help / -h / --help : this message. Invoke '--help' on any subcommand for help specific to that subcommand
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+> 5. Run `gxadmin local hello`
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What do you see?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > It should output 'hi!'
+>    > {: .solution}
+>    >
+>    {: .question}
+{: .hands_on}
+
+This is the simplest possible function you can add, and is pretty limited in its functionality. This can offer you a nice place to put all of your existing bash scripts, and have autogenerated help for them.
+
+## Adding help
+
+Every function is improved by documentation! Let's add that now:
+
+> ### {% icon hands_on %} Hands-on: Adding help
+>
+> 1. Open `~/.config/gxadmin-local.sh` in a text editor.
+>
+> 2. Update your function to add the `handle_help` call:
+>
+>    ```bash
+>    local_hello() { ## hello: Says hi
+>    	handle_help "$@" <<-EOF
+>    		Greets you
+>    	EOF
+>    	echo "hi!"
+>    }
+>    ```
+>
+> 4. Run `gxadmin local hello --help`
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What do you see?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > It should look like:
+>    > >
+>    > > ```console
+>    > > $ gxadmin local hello --help
+>    > > **NAME**
+>    > >
+>    > > local hello - Says hi
+>    > >
+>    > > **SYNOPSIS**
+>    > >
+>    > > gxadmin local hello
+>    > >
+>    > > **NOTES**
+>    > >
+>    > > Greets you
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+
+## Adding a query
+
+The bulk of gxadmin is not fnuctions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
+
+> ### {% icon hands_on %} Hands-on: Adding a query
+>
+> 1. Open `~/.config/gxadmin-local.sh` in a text editor.
+>
+> 2. Add a new function:
+>
+>    ```bash
+>    local_query-latest() { ## query-latest [jobs|10]: Queries latest N jobs (default to 10)
+>    	handle_help "$@" <<-EOF
+>    		Find information about the latest jobs on your server.
+>    	EOF
+>
+>    	# Value of first argument, or 10 if isn't supplied
+>    	job_limit=${1:-10}
+>
+>    	# Here we store the query in a bash variable named QUERY
+>    	read -r -d '' QUERY <<-EOF
+>    		SELECT
+>    			id, tool_id, tool_version, state
+>    		FROM job
+>    		ORDER BY id desc
+>    		LIMIT ${job_limit}
+>    	EOF
+>    }
+>    ```
+>
+> 4. Run `gxadmin local query-latest 5` to select
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What do you see?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > It should similar to the following, assuming you've run tools in your Galaxy
+>    > >
+>    > > ```console
+>    > > $ gxadmin local query-latest 5
+>    > >  id  |         tool_id          | tool_version | state
+>    > > -----+--------------------------+--------------+-------
+>    > >  103 | upload1                  | 1.1.6        | ok
+>    > >  102 | upload1                  | 1.1.6        | ok
+>    > >  101 | upload1                  | 1.1.6        | error
+>    > >  100 | circos                   | 0.91         | ok
+>    > >   99 | circos                   | 0.91         | ok
+>    > > (5 rows)
+>    > > ```
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+{: .hands_on}
 
 # Summary
 

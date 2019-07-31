@@ -1,10 +1,10 @@
 // Handle foldable challenges and solutions (on click and at start).
-$(".solution>h3,.details>h3").click(function(event) {
+$(".solution>h3,.details>h3,.tip>h3").click(function(event) {
     $(">*:not(h3)", $(this).parent()).toggle(400);
     $(">span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
 });
 
-$(".solution,.details").each(function() {
+$(".solution,.details,.tip").each(function() {
     $(">*:not(h3)", this).toggle();
     var h3 = $("h3:first", this);
     h3.append("<span class='fold-unfold fa fa-plus-square'></span>");

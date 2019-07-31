@@ -412,7 +412,7 @@ functional changes to the mako files.
 >    </html>
 >    ```
 >
-> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press [Enter]
+> 2. Retrigger the visualization and open the developers console of your browser: In the console, type: `bam_idxstats_data` and press <kbd>Enter</kbd>
 >   This should give the parsed contents as a dictionary, which can directly be used in Javascript.
 >
 {: .hands_on}
@@ -560,14 +560,14 @@ All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
 using static Galaxy tools.
 
-> ### {% icon tip %} Tip: Static files
+> ### {% icon comment %} Static files
 >
 > In the example we included Javascript and CSS into the HTML website.
 > Remember that for every new invocation of the visualization the entire CSS en JS are copied
 > and transferred as well. This is a waste of (redundant) bandwidth as we could save the
 > files in the static directory and refer to them within the HTML. The browser shall check
 > it's cache for the presence of libs and style sheets and only update them if they have changed.
-{: .tip}
+{: .comment}
 
 ### Improvements
 

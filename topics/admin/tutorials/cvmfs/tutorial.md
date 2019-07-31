@@ -14,38 +14,35 @@ key_points:
 contributors:
   - slugger70
   - erasche
-tags:
-  - ansible
+subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
     tutorials:
       - ansible
       - ansible-galaxy
-  - title: "A server/VM on which to deploy CVMFS"
-    type: "none"
-  - type: "external"
-    title: Ansible setup on your local machine
-    link: "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
 ---
 
 # Overview
 {:.no_toc}
 
-The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the **[Galaxy Project](https://galaxyproject.org)** for sharing things that a lot of Galaxy servers need. Namely:
+The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
 * **Reference Data**
     * Genome sequences for hundreds of useful species.
     * Indices for the genome sequences
     * Various bioinformatic tool indices for the available genomes
 * **Tool containers**
-    * **[Singularity](https://www.sylabs.io/)** containers of everything stored in **[Biocontainers](https://biocontainers.pro/)** (A bioinformatic tool container repository.) You get these for free every time you build a **[Bioconda](https://bioconda.github.io/)** recipe/package for a tool.
+    * [Singularity](https://www.sylabs.io/) containers of everything stored in [Biocontainers](https://biocontainers.pro/) (A bioinformatic tool container repository.) You get these for free every time you build a [Bioconda](https://bioconda.github.io/) recipe/package for a tool.
 * Others too..
 
 From the Cern website:
 
-*"The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs." - [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)*
+> The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs."
+>
+> -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
+{: .quote}
 
-A slideshow presentation on this subject can be found [here](https://galaxyproject.github.io/dagobah-training/2019-pennstate/05-reference-genomes/reference_genomes.html#28). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
+A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
 
 There are two sections to this exercise. The first shows you how to use ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.
 
@@ -68,6 +65,8 @@ The Galaxy project supports a few CVMFS repositories.
 | Reference Data and Indices | `data.galaxyproject.org`        | Genome sequences and their tool indices, Galaxy `.loc` files for them as well    |
 | Singularity Containers     | `singularity.galaxyproject.org` | Singularity containers for everything in Biocontainers for use in Galaxy systems |
 | Galaxy Main Configuration  | `main.galaxyproject.org`        | The configuration files etc for Galaxy Main (usegalaxy.org)                      |
+
+You can browse the contents of `data.galaxyproject.org` at the [datacache](http://datacache.galaxyproject.org/).
 
 ## Installing and configuring Galaxy's CVMFS reference data with ansible
 
@@ -229,9 +228,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >        - galaxyproject.galaxy
 >    ```
 >
-> > ### {% icon tip %} Ansible Heads-up
-> > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
-> {: .tip}
+>    > ### {% icon comment %} Ansible Heads-up
+>    > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
+>    {: .comment}
 >
 > 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
 >
@@ -247,15 +246,13 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 {: .hands_on}
 
-*That's all folks.. Hope it was useful!*
-
----
+You've now finished the tutorial, and you can [jump to the end](#feedback-google) or read on to learn about configuring CVMFS without Ansible.
 
 # CVMFS and Galaxy without Ansible
 
-> {% icon tip %} Tip: Manual version of Ansible Commands
+> ### {% icon comment %} Manual version of Ansible Commands
 > If you wish to perform the same thing that we've just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.
-{: .tip}
+{: .comment}
 
 We are going to setup a CVMFS mount to the Galaxy reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.
 

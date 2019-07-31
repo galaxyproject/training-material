@@ -19,22 +19,23 @@ requirements:
   -
     type: "internal"
     topic_name: sequence-analysis
-    tutorials: 
+    tutorials:
       - quality-control
 follow_up_training:
   -
     type: "internal"
     topic_name: transcriptomics
-    tutorials: 
+    tutorials:
       - ref-based
   -
     type: "internal"
     topic_name: chip-seq
-    tutorials: 
+    tutorials:
       - formation_of_super-structures_on_xi
 contributors:
   - joachimwolff
   - bebatut
+  - erasche
 ---
 
 # Introduction
@@ -86,17 +87,9 @@ In the following we will process a dataset with the mapper **Bowtie2** and we wi
 
 We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is to check their quality.
+During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality. 
 
-> ### {% icon comment %} Check the Quality control tutorial
-> The [quality control](../quality-control/tutorial.html) tutorial is explaining this step. We will not going into the details here, in particular for the parameters.
-{: .comment}
-
-> ### {% icon hands_on %} Hands-on: Quality control
-> 1. **FastQC** {% icon tool %} on both datasets
-> 2. **MultiQC** {% icon tool %} on the outputs of **FastQC** {% icon tool %}
-> 3. **Trim Galore!** {% icon tool %} on the paired-end datasets
-{: .hands_on}
+There is a dedicated tutorial for [quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further. 
 
 # Map reads on a reference genome
 
@@ -106,7 +99,7 @@ Read mapping is the process to align the reads on a reference genomes. A mapper 
 
 We need a reference genome to map the reads on.
 
-{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mices, so we will use mm10 (*Mus musculus*)."%}
+{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="This data comes from ChIP-seq of mice, so we will use mm10 (*Mus musculus*)."%}
 
 Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/), a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.
 
@@ -167,11 +160,10 @@ After that, you should have a look at the reads and inspect the BAM file where t
 So the BAM file integrates many information for each read, in particular the quality of mapping.
 
 > ### {% icon hands_on %} Hands-on: Summary of mapping quality
-> 1. **Stats generate statistics for BAM dataset** {% icon tool %} with the following parameters
+> 1. **Samtools stats - generate statistics for BAM dataset** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"BAM file"*: `aligned reads` (output of **Bowtie2** {% icon tool %})
->    - *"Use reference sequence"*: `Use reference`
->       - *"Choose a reference sequence for GC depth"*: `Locally cached`
->           - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
+>    - *"Use reference sequence"*: `Locally cached`
+>      - *"Using genome"*: `Mouse (Mus musculus): mm10 Full`
 >
 > 2. Inspect the {% icon param-file %} `Stats` file
 >
@@ -197,11 +189,18 @@ So the BAM file integrates many information for each read, in particular the qua
 >    {: .question}
 {: .hands_on}
 
-# Visualization using a Genome Browser
+# Visualization using a Genome Browser (IGV)
 
 The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following we will use it to visualize the mapped reads.
 
-{% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:91,053,413-91,055,345" %}
+{% include topics/sequence-analysis/tutorials/mapping/igv.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
+
+# Visualization using a Genome Browser (JBrowse)
+
+JBrowse is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We'll use it to visualise the mapped reads.
+
+{% include topics/sequence-analysis/tutorials/mapping/jbrowse.md tool="Bowtie2" region_to_zoom="chr2:98,666,236-98,667,473" %}
+
 
 # Conclusion
 {:.no_toc}

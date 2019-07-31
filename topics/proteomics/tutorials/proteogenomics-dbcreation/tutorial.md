@@ -67,6 +67,9 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > ### {% icon hands_on %} Hands-on: data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Proteogenomics DB creation*)
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger

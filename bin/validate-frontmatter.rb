@@ -5,15 +5,15 @@ fn = ARGV[0]
 
 # Required keys
 tutorial_required_keys = ['layout', 'title', 'time_estimation', 'contributors']
-tutorial_optional_keys = ['questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training']
+tutorial_optional_keys = ['level', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'subtopic']
 tutorial_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'hands_on', 'slides', 'workflows']
 
 slides_required_keys = ['layout', 'logo', 'title', 'contributors']
-slides_optional_keys = ['time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
+slides_optional_keys = ['level', 'time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
 slides_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'slides', 'workflows']
 
 metadata_required_keys = ['name', 'type', 'title', 'summary', 'maintainers']
-metadata_optional_keys = ['references', 'requirements', 'docker_image', 'edam_ontology']
+metadata_optional_keys = ['references', 'requirements', 'docker_image', 'edam_ontology', 'subtopics']
 metadata_deprecated_keys = ['material']
 
 # Contributors
@@ -53,6 +53,12 @@ def validate_non_empty_key_value(map, key)
       return ["Missing #{key} for requirement"]
     end
     return []
+end
+
+def validate_level(level)
+  if level != "Introductory" && level != "Intermediate" && level != "Advanced" then
+    return "Wrong level value: only 'Introductory', 'Intermediate' or 'Advanced' are accepted"
+  end
 end
 
 def validate_requirements(requirements)
@@ -142,6 +148,11 @@ if fn.include?('tutorial.md') then
     errs.push("layout should be 'tutorial_hands_on', not '#{data['layout']}'")
   end
 
+  # Check level
+  if data.key?('level') then
+    errs.push(*validate_level(data['level']))
+  end
+
   # Check time formatting
   if data.key?('time_estimation') then
     match = /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/.match(data['time_estimation'])
@@ -162,6 +173,25 @@ if fn.include?('tutorial.md') then
 
   # Check contributors
   errs = errs.concat(check_contributors(data))
+
+  # Load topic metadata
+  topic = fn.split('/')[1]
+  topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+
+  # Check subtopics
+  if data.key?('subtopic') then
+    subtopic_ids = []
+    topic_metadata['subtopics'].each{ |x|
+      subtopic_ids.push(x['id'])
+    }
+
+    if not subtopic_ids.include?(data['subtopic']) then
+      errs.push("Unknown subtopic: #{data['subtopic']} not in #{subtopic_ids}")
+    end
+  end
+
+
+# Validate Metadata
 elsif fn.include?('metadata.yaml') then
   data = YAML.load_file(fn)
 
@@ -210,6 +240,11 @@ elsif fn.include?('slides.html') then
       errs.push("Unknown key: #{x}")
     end
   }
+
+  # Check level
+  if data.key?('level') then
+    errs.push(*validate_level(data['level']))
+  end
 
   # Check requirements
   if data.key?('requirements') then

@@ -27,18 +27,14 @@ contributors:
   - bgruening
   - erasche
 tags:
-  - ansible
+  - jobs
+subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
     tutorials:
       - ansible
       - ansible-galaxy
-  - title: "A server/VM on which to deploy Slurm"
-    type: "none"
-  - type: "external"
-    title: Ansible setup on your local machine
-    link: "https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html"
 ---
 
 # Running Galaxy Jobs with Slurm
@@ -82,8 +78,13 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >        slurm_roles: ['controller', 'exec']
 >        slurm_nodes:
 >        - name: localhost
->          CPUs: ??? # Here you need to figure out how many cores your machine has. (Hint, `htop`)
+>          CPUs: 2                              # Here you would need to figure out how many cores your machine has. (Hint, `htop`)
+>        slurm_config:
+>          FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
+>          SelectType: select/cons_res
+>          SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >      roles:
+>        - galaxyproject.repos
 >        - galaxyproject.slurm
 >    ```
 >
@@ -91,6 +92,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 {: .hands_on}
 
+
+Note that the above Slurm config options are only those that are useful for this training exercise. In production, you would want to use a more appropriate configuration specific to your cluster (and setting `FastSchedule` to `2` is not recommended).
 
 Installed with Slurm is MUNGE (MUNGE Uid 'N Gid Emporium...) which authenticates users between cluster hosts. You would normally need to ensure the same Munge key is distributed across all cluster hosts (in `/etc/munge/munge.key`) - A great task for Ansible. However, the installation of the munge package has created a random key for you, and you will not need to distribute this since you'll run jobs only on a single host.
 
@@ -534,7 +537,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >        </tools>
 >    ```
 >
-> 3. Run the playbook, and restart Galaxy with `sudo supervisorctl restart all`.
+> 3. Run the playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
 >
 > 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
@@ -648,7 +651,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```yml
 >    galaxy_config:
 >      galaxy:
->        tool_destinations_config_file: {% raw %}{{ galaxy_config_dir }}/tool_destinations.yml{% endraw %}
+>        tool_destinations_config_file: {% raw %}"{{ galaxy_config_dir }}/tool_destinations.yml"{% endraw %}
 >    ...
 >    galaxy_config_files:
 >        ...
@@ -752,7 +755,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >        <tool id="testing" destination="slurm-2c"/>
 >        <tool id="testing" destination="dtd"/>
 >        -->
->        <tool id="testing" destination="dynamic_cores_time" resources="testing_resources"/>
+>        <tool id="testing" destination="dynamic_cores_time" resources="testing"/>
 >    </tools>
 >    ```
 > 5. We have assigned the `testing` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination in your job conf:

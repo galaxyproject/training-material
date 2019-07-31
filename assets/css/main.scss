@@ -151,6 +151,10 @@ figure {
   .figcaption-prefix {
       font-weight: 600;
   }
+
+  figcaption {
+    text-align: justify;
+  }
 }
 
 footer {
@@ -202,7 +206,7 @@ footer {
 
 .tutorial {
     & > h1:first-child {
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
     }
 
     table {
@@ -266,12 +270,17 @@ footer {
             @include tutorial-box($overview-color, $text-color);
         }
 
-        &.warning-box {
+        &.warning {
             @include tutorial-box($warning-color, $text-color);
         }
 
         &.details {
             @include tutorial-box($details-color, $text-color);
+        }
+
+        &.quote {
+            border-left: 5px solid #eee;
+            padding-left: 1em;
         }
 
         &.matrix {
@@ -280,10 +289,6 @@ footer {
 
         &.feedback{
             @include tutorial-box($feedback-color, $text-color);
-        }
-
-        &.matrix {
-            @include matrix-table();
         }
     }
 
@@ -322,6 +327,12 @@ footer {
             font-size: 0.7em;
         }
     }
+}
+
+.contributors-line {
+    color: $gray;
+    font-size: 1.2em;
+    margin-bottom: 5rem;
 }
 
 .hall-of-fame {
@@ -378,7 +389,7 @@ footer {
 
 // This applies a "dark" style to the dropdown menus on small devices since
 // Bootstrap v4 does not do that by default.
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
             background-color: transparent;
@@ -433,11 +444,32 @@ footer {
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25em;
+    cursor: pointer;
 }
 
 .label-default {
     background-color: #999999;
 }
+
+.level {
+    color: lightgray;
+    margin-right: 0.5em;
+
+    .fa {
+        font-size: 0.9em;
+    }
+    &.introductory i:first-of-type {
+        color: green;
+    }
+    &.intermediate i:not(:last-of-type) {
+        color: orange;
+    }
+    &.advanced {
+        color: red;
+    }
+}
+
+
 
 .visually-hidden {
     border: 0;
@@ -519,7 +551,7 @@ nav[data-toggle='toc'] {
 .col-sm-2 {
     padding-left: 0px;
 }
-  
+
 /* small screens */
 @media screen and (max-width: 768px) {
     nav[data-toggle='toc'] {
@@ -528,5 +560,79 @@ nav[data-toggle='toc'] {
 
     .col-sm-10 {
         max-width: 100%;
+    }
+}
+
+.contributor-badge {
+    /* prevent breaking across lines */
+    white-space: nowrap;
+
+    img {
+        height: 1.25em;
+        border-radius: 50%;
+        margin: 0.25em;
+    }
+}
+
+
+div.highlight {
+	position: relative;
+}
+div.highlight .btn{
+	-webkit-transition:opacity .3s ease-in-out;
+	-o-transition:opacity .3s ease-in-out;
+	transition:opacity .3s ease-in-out;
+	opacity:0;
+	padding:2px 6px;
+	position:absolute;
+	right:4px;
+	top:4px;
+	font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+div.highlight:hover .btn,div.highlight .btn:focus{
+	opacity:1
+}
+
+#supporting_materials ul li {
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        div {
+            a.topic-icon {
+                padding: 0 .5rem 0 .5rem;
+            }
+
+            a.topic-icon.btn {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+
+        div:first-child {
+            a.topic-icon {
+                padding-left: 0;
+            }
+        }
+
+        div:not(:first-child):before {
+            content: " - ";
+        }
+    }
+}
+
+
+#tutorial_list{
+    h2,h3 {
+        display: inline;
+    }
+    .search_box {
+        float: right;
+        i {padding-right: .5rem;}
+    }
+    #clear_search{
+        cursor: pointer;
     }
 }

@@ -114,7 +114,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 >    > >  3. There are no sequences filtered because of low quality. This is because radtags didn't apply quality related filtering since the corresponding advanced option (Discard reads with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (626265) or an ambiguous RAD-Tag (129493). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis
 >    > >  4. Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!
 >    > >
->    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each bar code sequence.
+>    > > In addition to the overall statistics the numbers of retained and removed reads are also given for each barcode sequence.
 >    > {: .solution}
 >    {: .question}
 >
@@ -148,8 +148,6 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 > Alternatively just copy/paste these lines on the Galaxy upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and Lowquality for example... Before Starting the upload, you can select the `Convert spaces to tabs` option through the `Upload configuration` wheel. If you did not pay attention to the order you can just sort the file using the first column.
 {: .hands_on}
 
-You can use the `Charts` functionality through the Visualize button to plot the data.
-
 And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!
 
 ```
@@ -158,6 +156,8 @@ NoScoreLimit	8139531		0		626265			129493			8895289
 Score10		7373160		766371		626265			129493			8895289
 Score20		2980543		5158988		626265			129493			8895289
 ```
+
+You can use the `Charts` functionality through the Visualize button to plot the data.
 
 ![The chart on the sorted file](../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG){: width="75%"}
 

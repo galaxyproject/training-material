@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy Reports"
+title: "Galaxy Monitoring with Reports"
 zenodo_link: ""
 questions:
   - How to monitor a Galaxy service with the Reports?
@@ -16,8 +16,9 @@ contributors:
   - bgruening
   - slugger70
   - erasche
+subtopic: features
 tags:
-  - ansible
+  - monitoring
 requirements:
   - type: "internal"
     topic_name: admin

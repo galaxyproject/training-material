@@ -1,7 +1,8 @@
 ---
 sudo: required
-language: python
-python: 3.6
+language: ruby
+rvm:
+  - 2.4.4
 branches:
   only:
     - gh-pages
@@ -22,7 +23,7 @@ env:
 matrix:
   fast_finish: true
   include:
-    - env: CHECK=yamllint
+    - env: CHECK=lint
       if: branch != gh-pages
     - env: CHECK=slides
       if: branch != gh-pages
@@ -64,10 +65,9 @@ script:
       elif [ "$CHECK" == "htmlproofer-internal" ]
       then
         make check-html-internal
-      elif [ "$CHECK" == "yamllint" ]
+      elif [ "$CHECK" == "lint" ]
       then
-        make check-yaml
-        make check-frontmatter
+        make lint
       elif [ "$CHECK" == "slides" ]
       then
         make check-slides
@@ -87,6 +87,18 @@ after_success:
       # update badges and instances and rebuild
       make annotate
       make build
+
+      # monthly cron job to make release
+      if [ "$TRAVIS_EVENT_TYPE" == "cron" ]
+      then
+        python bin/make_release.py
+        bin/publish-archive
+      fi
+
+      # Publish to GH
       bin/publish
+    elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
+    then
+      # Do not publish old versions live, and do not update badges since not pushing to gh-pages.
       bin/publish-archive
     fi

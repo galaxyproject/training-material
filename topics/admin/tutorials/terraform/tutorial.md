@@ -19,6 +19,8 @@ contributors:
   - erasche
 tags:
   - terraform
+  - deploying
+  - cloud
 ---
 
 # Overview
@@ -68,6 +70,14 @@ Some groups use Ansible or Bash scripts in order to launch VMs. This can be a be
 # Managing a Single VM
 
 We will start small, by managing a single VM in our cloud account. Make sure you have your OpenStack credentials available.
+
+> ### {% icon tip %} Obtaining credentials from OpenStack dashboard
+>
+> You can download the environment file with the credentials from the OpenStack dashboard.
+>
+> - Log in to the OpenStack dashboard, choose the project for which you want to download the OpenStack RC file, and click "Access & Security".
+> - Click "Download OpenStack RC File" and save the file.
+{: .tip}
 
 <!-- TODO(hxr): add example DO config? -->
 
@@ -143,23 +153,23 @@ We recommend the first option, as often Terraform plans are [made publicly avail
 
 We will start by managing your SSH keypair for the cloud as this is an easy thing to add.
 
-> ### {% icon tip %} Your Operating System
+> ### {% icon comment %} Your Operating System
 >
 > If you are on Windows and do not know your public key, please skip to the "Adding an Instance" section, as you probably do not have the tools installed to do this, and we cannot document how to do it. Instead you can simply reference the key by name later. We will point out this location.
 >
-{: .tip}
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Keypairs
 >
 > 1. Find the public key you will use for connecting to the your new VM. It is usually known as `id_rsa.pub`
 >
->    > ### {% icon tip %} No public key
+>    > ### {% icon comment %} No public key
 >    > If you can find the private key file (possibly a `cloud.pem` file you downloaded earlier from OpenStack), then you can find the public key by running the command:
 >    >
 >    > ```shell
 >    > $ ssh-keygen -y -f /path/to/key.pem
 >    > ```
->    {: .tip}
+>    {: .comment}
 >
 > 2. Create a new file, `main.tf` with the following structure. In `public_key`, write the complete value of your public key that you found in the first step.
 >
@@ -300,7 +310,7 @@ Lastly it informs us that we did not save our plan. Terraform can maintain a con
 >    ```
 >
 >
->    > ### {% icon tip %} Tip: "Key pair 'my-key' already exists"
+>    > ### {% icon comment %} "Key pair 'my-key' already exists"
 >    >
 >    > If you see an error message that says:
 >    >
@@ -309,7 +319,7 @@ Lastly it informs us that we did not save our plan. Terraform can maintain a con
 >    > ```
 >    >
 >    > Then you already have a keypair with this name. You should update the `name = "my-key"` to use a different name.
->    {: .tip}
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -323,7 +333,7 @@ We now have:
 - The OpenStack plugin intialized
 - A keypair in OpenStack
 
-> ### {% icon tip %} Tip: Doing this training outside of a training event
+> ### {% icon comment %} Doing this training outside of a training event
 > If you are doing this training outside of an event, then you will likely need to do some additional steps specific to your Cloud:
 >
 > 1. Identify a small image flavor that you can use for your testing.
@@ -331,7 +341,7 @@ We now have:
 > 2. Upload this `raw` format image available from [UseGalaxy.eu](https://usegalaxy.eu/static/vgcn/denbi-centos7-j10-2e08aa4bfa33-master.raw) to your OpenStack
 >
 > You will need to do both of these things before you can proceed.
-{: .tip}
+{: .comment}
 
 You are now ready to launch an instance!
 
@@ -341,7 +351,7 @@ You are now ready to launch an instance!
 >
 >    > ### {% icon warning %} Warning: Correct image/flavor/network/security_group names
 >    > The documentation below notes some specific values for the `image_name`, `flavor_name`, `security_groups`, and `network` properties. These *may not be correct* for your training, instead your instructor will provide these values to you.
->    {: .warning-box}
+>    {: .warning}
 >
 >    ```ini
 >    resource "openstack_compute_instance_v2" "test" {
@@ -699,9 +709,9 @@ These VMs that we have launched currently are all absolutely identical, except f
 [`cloud-init`](https://cloud-init.io/) is used for this process, it allows for injecting files and executing commands as part of the boot process.
 
 
-> ### {% icon tip %} Tip: Other actions
+> ### {% icon details %} Other actions
 > cloud-init allows for many more actions to be executed as well, you can read about them in [the documentation](https://cloudinit.readthedocs.io/en/latest/).
-{: .tip}
+{: .details}
 
 The `cloud-init` configuration is a YAML file. Here we can see an example of how it is used, we have a YAML array at the top level. Inside, a hash of `content`, `owner`, `path`, and `permissions`.
 
