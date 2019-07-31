@@ -626,7 +626,41 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 
       </blockquote>
     </li>
-    <li>Rename the datasets with more descriptive names (strip off the url prefixes)</li>
+    <li>Rename the datasets with more descriptive names (strip off the url prefixes)
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Make sure that the file <code class="highlighter-rouge">FASTQ_ProB_22List.fastqsanger</code>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">fastqsanger</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Make sure the Database/Build (dbkey) is set to <code class="highlighter-rouge">Mouse.Dec 2011 (GRCm38/mm10)(mm10)</code>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Database/Build</strong> field</li>
+          <li>Select your desired database key from the dropdown list: <code class="highlighter-rouge">Mouse.Dec 2011 (GRCm38/mm10)(mm10)</code></li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
   </ol>
 
 </blockquote>
@@ -648,6 +682,8 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify strand information”</em>: <code class="highlighter-rouge">Unstranded</code></li>
       </ul>
     </li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files</li>
+    <li>Rename the output to <code class="highlighter-rouge">HISAT_Output.BAM</code></li>
   </ol>
 
   <blockquote class="comment">
@@ -711,9 +747,10 @@ and RO fields in the VCF output.</p>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose parameter selection level”</em>: <code class="highlighter-rouge">Simple diploid calling</code></li>
       </ul>
     </li>
-    <li>Click <strong>Execute</strong> and inspect the resulting files</li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files.</li>
   </ol>
 
+  <p>Note: FreeBayes may take some time…be patient!!!!</p>
 </blockquote>
 
 <blockquote class="comment">
@@ -778,8 +815,8 @@ data manager to create these annotations to make them available for users.</p>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create RData file of variant protein coding sequences”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files</li>
   </ol>
-
 </blockquote>
 
 <p>Three FASTA files are generated through the CustomProDB tool:</p>
@@ -817,9 +854,34 @@ Platform (in-house visualization platform developed by Galaxy-P senior developer
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
             <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Reference transcripts only?”</em>: <code class="highlighter-rouge">No</code></li>
             <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output files for differential expression?”</em>: <code class="highlighter-rouge">No additional output</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output coverage file?”</em>: <code class="highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
+    </li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files.</li>
+    <li>Rename the output to <code class="highlighter-rouge">Stringtie_outut.gtf</code>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Make sure the datatype is <code class="highlighter-rouge">gtf</code>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select ``</li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
     </li>
   </ol>
 
@@ -920,15 +982,14 @@ no longer needed and is simply ignored when given).</p>
     <li><strong>Convert gffCompare annotated GTF to BED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF annotated by gffCompare”</em>: <code class="highlighter-rouge">output from gff compare</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“filter GffCompare class_codes to convert”</em>:
-          <ul>
-            <li><code class="highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code></li>
-            <li><code class="highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.</code></li>
-            <li><code class="highlighter-rouge">i : A transfrag falling entirely within a reference intron</code></li>
-            <li><code class="highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code></li>
-            <li><code class="highlighter-rouge">u : Unknown, intergenic transcript</code></li>
-          </ul>
-        </li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“filter GffCompare class_codes to convert”</em>:</li>
+      </ul>
+      <ul>
+        <li><code class="highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code></li>
+        <li><code class="highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.</code></li>
+        <li><code class="highlighter-rouge">i : A transfrag falling entirely within a reference intron</code></li>
+        <li><code class="highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code></li>
+        <li><code class="highlighter-rouge">u : Unknown, intergenic transcript</code></li>
       </ul>
 
       <p>Next, we translate transcripts from the input BED file into protein sequences.</p>
@@ -966,10 +1027,10 @@ no longer needed and is simply ignored when given).</p>
 
 <p>In this section we will perform the following tasks:</p>
 <ul>
-  <li>The <strong>Protein Database Downloader</strong> tool is used to download the FASTA database from UniProt and cRAP (<strong>c</strong>ommon <strong>R</strong>epository of <strong>A</strong>dventitious <strong>P</strong>roteins) database containing known/reference mouse proteins.</li>
-  <li>The <strong>Regex Text Manipulation</strong> tool is used to manipulate the FASTA file to make it SearchGUI-compatible.</li>
+  <li>The <strong>Protein Database Downloader</strong> tool is used to download the FASTA database from UniProt and cRAP (<strong>c</strong>ommon <strong>R</strong>epository of <strong>A</strong>dventitious <strong>P</strong>roteins) database containing known/reference mouse proteins. For the purpose of this tutorial, we will use the <code class="highlighter-rouge">Reference_5000_uniprot_cRAP.fasta</code> file as this database.</li>
   <li>The <strong>FASTA Merge Files and Filter Unique Sequences</strong> tool is used to merge the databases obtained from CustomProDB and “Translate BED” tool
 along with the UniProt and cRAP databases.</li>
+  <li>The <strong>Regex Text Manipulation</strong> tool is used to manipulate the FASTA file to make it SearchGUI-compatible.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -999,6 +1060,7 @@ along with the UniProt and cRAP databases.</li>
   <ul>
     <li>If the uniqueness criterion is “Accession and Sequence”, only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.</li>
     <li>The default accession parser will treat everything in the header before the first space as the accession.</li>
+    <li>Rename it as <strong>CustomProDB Merged Fasta</strong></li>
   </ul>
 </blockquote>
 
@@ -1023,7 +1085,19 @@ along with the UniProt and cRAP databases.</li>
   ORDER BY pro_name, cds_start, cds_end
 </code></pre></div>          </div>
         </li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Omit column headers from tabular output”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
+    </li>
+    <li>Rename output to <code class="highlighter-rouge">genomic_mapping_sqlite</code>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
 
       <p>The output is further processed so that the results are compatible with the Multiomics Visualization Platform.</p>
     </li>
@@ -1050,6 +1124,9 @@ along with the UniProt and cRAP databases.</li>
           </ul>
         </li>
       </ul>
+    </li>
+    <li>
+      <p>Rename the output to <code class="highlighter-rouge">SAV_INDEL</code></p>
 
       <p>This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.</p>
 
@@ -1057,10 +1134,10 @@ along with the UniProt and cRAP databases.</li>
     </li>
     <li><strong>Concatenate multiple datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous tool and the <code class="highlighter-rouge">Bed2protein_SJ_SAV_INDEL</code> output.</li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous tool named as <code class="highlighter-rouge">SAV_INDEL</code> and the output from the “bed to protein map” tool and concatenate the tool.</li>
       </ul>
 
-      <p>Output will be the “Genomic_Protein_map”</p>
+      <p>Output will be the “Genomic_Protein_map” rename it as that</p>
 
       <p>Now, we load this tabular datasets into an SQLite database.</p>
     </li>
@@ -1080,6 +1157,7 @@ along with the UniProt and cRAP databases.</li>
                     <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Index on columns”</em>: <code class="highlighter-rouge">name,cds_start,cds_end</code></li>
                   </ul>
                 </li>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Save the sqlite database in your history”</em>:<code class="highlighter-rouge">Yes</code></li>
               </ul>
             </li>
           </ul>
@@ -1159,6 +1237,7 @@ FROM variant_annotation
                 <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Index on columns”</em>: <code class="highlighter-rouge">name,cigar</code></li>
               </ul>
             </li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Save the sqlite database in your history”</em>:<code class="highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1173,6 +1252,38 @@ annotation information from the protein mapping file, will be utilized
 by MVP to visualize the genomic loci of any variant peptides.</p>
 
 <p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant" /></p>
+
+<p>Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.</p>
+
+<p>To do so:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Run in batch mode?”</em>: <code class="highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Custom ProDB Merged Fasta File output</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Translate BED transcripts Fasta output</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Reference_5000_uniprot_cRAP.fasta</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How are sequences judged to be unique?”</em>: <code class="highlighter-rouge">Accession and Sequence</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular Expression”</em>: <code class="highlighter-rouge">^&gt;([^ |]+).*$</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-tool-parameters-explained-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tool parameters explained</h3>
+  <p>This tool concatenates FASTA database files together.</p>
+  <ul>
+    <li>If the uniqueness criterion is “Accession and Sequence”, only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.</li>
+    <li>The default accession parser will treat everything in the header before the first space as the accession.</li>
+    <li>All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .</li>
+  </ul>
+</blockquote>
 
 
 
