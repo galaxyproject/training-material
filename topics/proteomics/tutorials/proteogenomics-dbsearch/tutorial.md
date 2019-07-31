@@ -132,21 +132,17 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >        {: .tip}
 >
 >    - Section **Advanced Options**:
->      - {% icon param-select %} **"X!Tandem Options"*: `Advanced`
->        - {% icon param-check %} **"X!Tandem: Quick Acetyl"*: `No`
->        - {% icon param-check %} **"X!Tandem: Quick Pyrolidone"*: `No`
->        - {% icon param-check %} **"X!Tandem: Protein stP Bias"*: `No`
->        - {% icon param-text %} **"X!Tandem: Maximum Valid Expectation Value"**: `100`
->
->    - Leave everything else as default
->    - Click **Execute**
->     
+>      - {% icon param-select %} *"X!Tandem Options"*: `Advanced`
+>        - {% icon param-check %} *"X!Tandem: Quick Acetyl"*: `No`
+>        - {% icon param-check %} *"X!Tandem: Quick Pyrolidone"*: `No`
+>        - {% icon param-check %} *"X!Tandem: Protein stP Bias"*: `No`
+>        - {% icon param-text %} *"X!Tandem: Maximum Valid Expectation Value"*: `100`
 >
 > Once the database search is completed, the SearchGUI tool will output a file (called a
-> SearchGUI archive file) that will serve as an input for the next section, PeptideShaker. 
+> SearchGUI archive file) that will serve as an input for the next section, PeptideShaker.
 > Rename the output as "**Compressed SearchGUI results**"
 >
->   
+>
 > > ### {% icon comment %} Comment:
 > > Note that sequence databases used for proteogenomics are usually much larger than
 > > the excerpt used in this tutorial. When using large databases, the peptide identification
@@ -196,8 +192,7 @@ outputs.
 >     >
 >     {: .comment}
 >
-> 2. Leave everything else as default and Click **Execute**
-> 3. Inspect the resulting files after they turned green with the **View data** icon
+> 2. Inspect {% icon galaxy-eye %} the resulting files
 >
 {: .hands_on}
 
@@ -468,10 +463,11 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 {: .hands_on}
 
 Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “**Novel peptides**”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.
->      > ### {% icon comment %} Comment:
->      >
->      > The tools are subjected to changes while being upgraded. 
->      > Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
->      
->      {: .comment}
+
+> ### {% icon comment %} Comment: Tool Versions
+>
+> The tools are subjected to changes while being upgraded.
+> Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
+>
+{: .comment}
 
