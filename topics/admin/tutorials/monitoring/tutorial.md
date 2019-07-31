@@ -46,7 +46,7 @@ Monitoring is an incredibly important part of server monitoring and maintenance.
 >
 {: .agenda}
 
-This tutorial explicitly assumes you are starting from a setup like what was created in the *Galaxy installation with Ansible* tutorial.
+This tutorial explicitly assumes you are starting with a setup like that created in the *Galaxy installation with Ansible* tutorial
 
 # Data Flow
 
@@ -59,13 +59,13 @@ Telegraf communicates with InfluxDB using a JSON based HTTP API, making it easy 
 
 # Infrastructure
 
-Setting up the infrastructure is quite simple thanks to the automation provided by Ansible. We will first setup a playbook for a "monitoring" machine where our data collection and visualisation, and then we will expand the Galaxy playbook to include Telegraf to monitor the machine and collect data on Galaxy. In this tutorial we will do everything on the same machine. In practice you can separate these services to different machines, if you wish. The only requirement is that Telegraf run on the machine from which you wish to collect data.
+Setting up the infrastructure is quite simple thanks to the automation provided by Ansible. We will first setup a playbook for a "monitoring" machine, which will collect and visualize our data using InfluxDB and Grafana. We will then expand the Galaxy playbook to include Telegraf on the machine to monitor both it and Galaxy itself. In this tutorial we will do everything on the same machine. In practice you can separate these services to different machines, if you wish. The only requirement is that Telegraf run on the machine from which you wish to collect data.
 
 ## InfluxDB
 
 [InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a <abbr title="Time Series Database">TSDB</abbr>, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
 
-The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains [several modules](https://docs.ansible.com/ansible/latest/modules/list_of_database_modules.html#influxdb) you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote [their own role](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml) for setting up their database, but this is not reusable enough that it has been split out into a separate role yet. If you plan to automate your entire setup, this can perhaps provide inspiration for writing your own role. Otherwise it is sufficient to manually create your users and retention policies as a one-off task.
+The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains [several modules](https://docs.ansible.com/ansible/latest/modules/list_of_database_modules.html#influxdb) you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote [their own role](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml) for setting up their InfluxDB database, but it is not reusable enough for it to be used here yet. If you plan to automate your entire setup, this tutorial can perhaps provide inspiration for writing your own Ansible role. However, in this case it is sufficient to manually create your users and retention policies as a one-off task.
 
 > ### {% icon hands_on %} Hands-on: Setting up InfluxDB
 >
@@ -97,7 +97,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    training-0.example.org ansible_connection=local
 >    ```
 >
->    Ensure that the hostname is the full hostname of your machine.
+>    **Ensure that the hostname is the full hostname of your machine.**
 >
 > 4. Run the playbook:
 >
@@ -140,11 +140,11 @@ tsm1_wal
 write
 ```
 
-This provides commands like `show databases` and others, but we will not use this interface very often. Telegraf will automatically try to create any database needed, and no interaction is required to setup Grafana to talk to the database.
+The `influx` command provides command line access to InfluxDB in a similar fashion to `psql` for Postgresql. It provides commands like `show databases` and others, but we will not use this interface very often. Telegraf will automatically try to create any database needed, and no interaction is required to setup Grafana to talk to the database.
 
 ## Grafana
 
-[Grafana](https://grafana.com/) provides a visual interface to our metrics. It provides a nice query builder that provides a uniform experience across multiple backend databases, and many attractive graphing options. Another benefit is that many of the UseGalaxy.\* servers share their publish their dashboards publicly, and you can easily copy these and use them on your own server.
+[Grafana](https://grafana.com/) provides a visual interface to our metrics. It includes a nice query builder that provides a uniform experience across multiple backend databases, along with many attractive graphing and other visualization options. Each page in the Grafana webserver display is called a "dashboard." Dashboards can each have multiple visualizations and graphs, all responding to the data collected by InfluxDB. Another benefit of using Grafana is that many of the UseGalaxy.\* servers share their dashboards publicly, and you can easily copy these and use them on your own server.
 
 There are some nice examples of dashboards available from the public Galaxies, we recommend that you peruse them to get an idea of the possibilities:
 
@@ -171,7 +171,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    grafana_url: "https://{{ inventory_hostname }}/grafana/"
 >
 >    grafana_security:
->        # Feel free to choose any other values here too
+>        # Please change at least the password to something more suitable
 >        admin_user: admin
 >        admin_password: password
 >
@@ -212,7 +212,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >
 {: .hands_on}
 
-This has now deployed Grafana on your domain under `/grafana/`, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured in Grafana. Grafana will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.
+This has now deployed Grafana on your domain under `/grafana/`, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.
 
 ## Telegraf
 
@@ -220,7 +220,8 @@ We use [Telegraf](https://github.com/influxdata/telegraf) for monitoring as it i
 
 ### Data Input
 
-They have extensive documentation on how to configure different types of monitoring, and Telegraf supports [a huge array of inputs](https://github.com/influxdata/telegraf#input-plugins). If Telegraf doesn't support a specific data source you wish to query, you can write a bash script to query this data, and have Telegraf [execute it regularly](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec). Telegraf supports several text formats here but the easiest to manage is the InfluxDB line protocol format. The InfluxDB format looks like:
+Telegraf has extensive documentation on how to configure different types of monitoring, and it supports [a huge array of inputs](https://github.com/influxdata/telegraf#input-plugins). If Telegraf doesn't support a specific data source you wish to query, you can write a bash script to query this data, and have Telegraf [execute it regularly](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec). Telegraf supports several text formats here but the easiest to manage is the InfluxDB line protocol format. The InfluxDB format looks like:
+
 
 ```
 weather,country=germany,city=freiburg temperature=25,wind=0 1453832006274169688
@@ -271,7 +272,7 @@ The values collected usually have quite self-explanatory names. Here there are `
 
 ### `gxadmin`
 
-In the Galaxy world, the InfluxDB line protocol format and exec plugin are commonly seen together in conjunction with [gxadmin](https://github.com/usegalaxy-eu/gxadmin) to run various database queries, and store the results into InfluxDB.
+In the Galaxy world, the InfluxDB line protocol format and [exec](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec) plugin are commonly seen together in conjunction with [gxadmin](https://github.com/usegalaxy-eu/gxadmin) to run various database queries, and store the results into InfluxDB.
 
 `gxadmin` provides various commands to inspect the database like `gxadmin query queue-detail`. It was written such that many of the queries can be automatically formatted for consumption by InfluxDB:
 
@@ -300,7 +301,8 @@ We capture information about what tool is running, the job state, and where it i
 
 ### Configuring Telegraf
 
-Setting up Telegraf again is just adding a single role and setting some variables
+Setting up Telegraf is again very simple. We just add a single role to our playbook and set some variables.
+
 
 > ### {% icon hands_on %} Hands-on: Dependencies
 >
@@ -397,7 +399,7 @@ The stats have been collecting in InfluxDB for a few minutes, so now we will now
 
 ## Importing a dashboard
 
-For any public Grafana dashboard, you can copy the dashboard for your own use. This is a nice features of Grafana that has really helped it spread in the Galaxy community, any cool thing one of builds, everyone else can copy and build upon.
+For any public Grafana dashboard, you can copy the dashboard for your own use. This is a nice feature of Grafana that has really helped it spread in the Galaxy community, any cool thing one of us builds, everyone else can copy and build upon.
 
 > ### {% icon hands_on %} Hands-on: Import a dashboard
 >
@@ -475,7 +477,7 @@ This will track how long it takes the interface to respond on various web routes
 >
 {: .hands_on}
 
-We should now have a graph that gives us not only individual data points, but also a more easily consumable overall representation. For many metrics there is so many data pooints individually collected that it can be overwhelming, and useful to come up with an aggregate representation that summarises the points into a more easily consumed value. We will touch upon this again under the monitoring section.
+We should now have a graph that gives us not only individual data points, but also a more easily consumable overall representation. For many metrics there are so many data points individually collected that it can be overwhelming and so it is often useful to come up with an aggregate representation that summarises the points into a more easily consumed value. We will touch upon this again under the monitoring section.
 
 ## Styling
 
