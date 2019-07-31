@@ -438,8 +438,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -622,11 +620,11 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.</p>
+<p>Volcano plots are commonly used to display the results of <span class="notranslate">RNA</span>-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.</p>
 
-<p>To generate a volcano plot of RNA-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a> tutorial. The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).</p>
+<p>To generate a volcano plot of <span class="notranslate">RNA</span>-seq results, we need a file of differentially expressed results which is provided for you here. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a> tutorial. The file used here was generated from limma-voom but you could use a file from any <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tool, such as edgeR or DESeq2, as long as it has the required columns (see below).</p>
 
-<p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.</p>
+<p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Here we will visualize the results of the luminal pregnant vs lactating comparison.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -661,7 +659,7 @@
 
   <ol>
     <li>
-      <p>Create a new history for this RNA-seq exercise e.g. <code class="highlighter-rouge">RNA-seq volcano plot</code></p>
+      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="highlighter-rouge"><span class="notranslate">RNA</span>-seq volcano plot</code></p>
 
       <blockquote class="tip">
 
@@ -671,7 +669,7 @@
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -703,7 +701,7 @@
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -715,7 +713,7 @@
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
 
@@ -723,7 +721,7 @@
 
         <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
 
-        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
 
         <ul>
           <li>
@@ -752,7 +750,7 @@ https://zenodo.org/record/2529117/files/volcano_genes
         </li>
       </ul>
     </li>
-    <li>Name the limma-voom_luminalpregnant-luminallactate file <code class="highlighter-rouge">DE results</code> and the volcano genes file <code class="highlighter-rouge">volcano genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (pencil) icon.</li>
+    <li>Name the limma-voom_luminalpregnant-luminallactate file <code class="highlighter-rouge">DE results</code> and the volcano genes file <code class="highlighter-rouge">volcano genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
     <li>
       <p>Check that the datatype is <code class="highlighter-rouge">tabular</code>.
 If the datatype is not <code class="highlighter-rouge">tabular</code>, please change the file type to <code class="highlighter-rouge">tabular</code>.</p>
@@ -761,8 +759,8 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
         <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
           <li>Select <code class="highlighter-rouge">tabular</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
@@ -772,7 +770,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 </blockquote>
 
-<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon and take a look at the <code class="highlighter-rouge">DE results</code> file. It should look like below, with 8 columns.</p>
+<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="highlighter-rouge">DE results</code> file. It should look like below, with 8 columns.</p>
 
 <figure id="figure-1"><img src="../../images/rna-seq-viz-with-volcanoplot/DE_results.png" alt="DE results file" /><figcaption><span class="figcaption-prefix">Figure 1:</span> DE results</figcaption></figure>
 
@@ -896,11 +894,11 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   </ol>
 </blockquote>
 
-<p>As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all the genes of interest are significant (red or blue) except for two genes. One is the authors’ gene of interest, Mcl1, and this result is expected, as they showed it’s expression did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105).</p>
+<p>As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. The genes of interest in the file we supplied are labelled and also coloured red or blue if they pass the thresholds. Here all the genes of interest are significant (red or blue) except for two genes. One is the authors’ gene of interest, Mcl1, and this result is expected, as they showed it’s <span class="notranslate">expression</span> did change, but it was not significant at the transcription level. The other gene Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105).</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have seen how a volcano plot can be generated from RNA-seq data and used to quickly visualize significant genes.</p>
+<p>In this tutorial we have seen how a volcano plot can be generated from <span class="notranslate">RNA</span>-seq data and used to quickly visualize significant genes.</p>
 
 
                     

@@ -465,8 +465,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -667,7 +665,7 @@
 <p>In this HiCExplorer tutorial we will generate and plot a Hi-C contact matrix.
 For this the following steps are necessary to be performed:</p>
 <ol>
-  <li>Map the Hi-C reads to the reference genome</li>
+  <li>Map the Hi-C <span class="notranslate">reads</span> to the reference genome</li>
   <li>Creation of a Hi-C matrix</li>
   <li>Plotting the Hi-C matrix</li>
   <li>Correction of Hi-C matrix</li>
@@ -683,7 +681,7 @@ For this the following steps are necessary to be performed:</p>
 
 <ol id="markdown-toc">
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
-  <li><a href="#reads-mapping" id="markdown-toc-reads-mapping">Reads mapping</a></li>
+  <li><a href="#reads-mapping" id="markdown-toc-reads-mapping"><span class="notranslate">Reads</span> <span class="notranslate">mapping</span></a></li>
   <li><a href="#creation-of-a-hi-c-matrix" id="markdown-toc-creation-of-a-hi-c-matrix">Creation of a Hi-C matrix</a></li>
   <li><a href="#plotting-the-hi-c-matrix" id="markdown-toc-plotting-the-hi-c-matrix">Plotting the Hi-C matrix</a></li>
   <li><a href="#correction-of-hi-c-matrix" id="markdown-toc-correction-of-hi-c-matrix">Correction of Hi-C matrix</a></li>
@@ -710,7 +708,7 @@ For this the following steps are necessary to be performed:</p>
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -723,7 +721,7 @@ For this the following steps are necessary to be performed:</p>
 
         <ol>
           <li>Copy the link location</li>
-          <li>Open the Galaxy Upload Manager</li>
+          <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>
           <li>
             <p>Select <strong>Paste/Fetch Data</strong></p>
 
@@ -740,7 +738,7 @@ https://zenodo.org/record/1183661/files/HiC_S2_1p_10min_lowU_R2.fastq.gz
     </li>
     <li>
       <p>Rename the data set to something meaningful, e.g. <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code>.
-By default, when data is imported via its link, Galaxy names it with its URL.</p>
+By default, when data is imported via its link, <span class="notranslate">Galaxy</span> names it with its URL.</p>
     </li>
   </ol>
 
@@ -752,19 +750,19 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
 
 </blockquote>
 
-<h1 id="reads-mapping">Reads mapping</h1>
+<h1 id="reads-mapping"><span class="notranslate">Reads</span> <span class="notranslate">mapping</span></h1>
 
 <p>Mates have to be mapped individually to avoid mapper specific heuristics designed for standard paired-end libraries.</p>
 
 <p>We have used the HiCExplorer successfully with bwa, bowtie2 and hisat2. In this tutorial we will be using <strong>Map with BWA-MEM</strong> tool. It is important to remember to:</p>
 <ul>
-  <li>use local mapping, in contrast to end-to-end. A fraction of Hi-C reads are chimeric and will not map end-to-end thus, local mapping is important to increase the number of mapped reads</li>
-  <li>tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned reads with gaps if they happen to be chimeric.</li>
-  <li>If bowtie2 or hisat2 are used, <code class="highlighter-rouge">--reorder</code> option and as a file format <code class="highlighter-rouge">bam_native</code> needs to be used. Regular <code class="highlighter-rouge">bam</code> files are sorted by Galaxy and can not be used as an input for HiCExplorer.</li>
+  <li>use local <span class="notranslate">mapping</span>, in contrast to end-to-end. A fraction of Hi-C <span class="notranslate">reads</span> are chimeric and will not map end-to-end thus, local <span class="notranslate">mapping</span> is important to increase the number of mapped <span class="notranslate">reads</span></li>
+  <li>tune the aligner parameters to penalize deletions and insertions. This is important to avoid aligned <span class="notranslate">reads</span> with gaps if they happen to be chimeric.</li>
+  <li>If bowtie2 or hisat2 are used, <code class="highlighter-rouge">--reorder</code> option and as a file format <code class="highlighter-rouge">bam_native</code> needs to be used. Regular <code class="highlighter-rouge">bam</code> files are sorted by <span class="notranslate">Galaxy</span> and can not be used as an input for HiCExplorer.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-mapping-reads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping reads</h3>
+  <h3 id="hands_on-hands-on-mapping-reads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> <span class="notranslate">reads</span></h3>
 
   <ol>
     <li><strong>Map with Bowtie</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run Bowtie on both strands <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R1</code> and <code class="highlighter-rouge">HiC_S2_1p_10min_lowU_R2</code> with:
@@ -785,7 +783,7 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
 
 <h1 id="creation-of-a-hi-c-matrix">Creation of a Hi-C matrix</h1>
 
-<p>Once the reads have been mapped the Hi-C matrix can be built.</p>
+<p>Once the <span class="notranslate">reads</span> have been mapped the Hi-C matrix can be built.</p>
 
 <p>For this step we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicBuildMatrix.html#hicbuildmatrix">hicBuildMatrix</a> tool, which builds the matrix of read counts over the bins in the genome, considering the sites around the given restriction site.</p>
 
@@ -805,13 +803,13 @@ It is important to have the forward and reverse strand individual as a FASTQ fil
           <blockquote class="comment">
             <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-            <p><em>hicBuildMatrix</em> creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of reads near the restriction fragment sites. In the QC folder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the reads are valid and used to build the Hi-C matrix mostly because of the reads that are on repetitive regions that need to be discarded.</p>
+            <p><em>hicBuildMatrix</em> creates two files, a bam file containing only the valid Hi-C read pairs and a matrix containing the Hi-C contacts at the given resolution. The bam file is useful to check the quality of the Hi-C library on the genome browser. A good Hi-C library should contain piles of <span class="notranslate">reads</span> near the restriction fragment sites. In the QC folder a html file is saved with plots containing useful information for the quality control of the Hi-C sample like the number of valid pairs, duplicated pairs, self-ligations etc. Usually, only 25%-40% of the <span class="notranslate">reads</span> are valid and used to build the Hi-C matrix mostly because of the <span class="notranslate">reads</span> that are on repetitive regions that need to be discarded.</p>
           </blockquote>
 
           <blockquote class="comment">
             <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-            <p>Normally 25% of the total reads are selected. The output matrices have counts for the genomic regions. The extension of output matrix files is .h5.
+            <p>Normally 25% of the total <span class="notranslate">reads</span> are selected. The output matrices have counts for the genomic regions. The extension of output matrix files is .h5.
 A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1_10kb_QC</code>, have a look at the report hicQC.html.</p>
           </blockquote>
         </li>
@@ -869,7 +867,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 
 <p><a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicCorrectMatrix.html#hiccorrectmatrix">hicCorrectMatrix</a> corrects the matrix counts in an iterative manner. For correcting the matrix, it’s important to remove the unassembled scaffolds (e.g. NT_) and keep only chromosomes, as scaffolds create problems with matrix correction. Therefore we use the chromosome names (chr2R, chr2L, chr3R, chr3L, chrX) here.</p>
 
-<p>Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of reads. The second steps removes the low scoring bins and does the correction.</p>
+<p>Matrix correction works in two steps: first a histogram containing the sum of contact per bin (row sum) is produced. This plot needs to be inspected to decide the best threshold for removing bins with lower number of <span class="notranslate">reads</span>. The second steps removes the low scoring bins and does the correction.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-matrix-diagnostic"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Matrix diagnostic</h3>
@@ -921,7 +919,7 @@ A quality report is created in e.g. <code class="highlighter-rouge">hicMatrix/R1
 This is often caused by bins of low counts. Use a more stringent filtering of bins.
 </code></pre></div></div>
 
-<p>This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosomes with 0 reads in its bins can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter ‘Include chromosomes’).</p>
+<p>This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosomes with 0 <span class="notranslate">reads</span> in its bins can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter ‘Include chromosomes’).</p>
 
 <h3 id="plotting-the-corrected-hi-c-matrix">Plotting the corrected Hi-C matrix</h3>
 
@@ -993,7 +991,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>.</p>
 
-<p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.bed</code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
+<p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.<span class="notranslate">bed</span></code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plotting-tads"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plotting TADs</h3>
@@ -1014,9 +1012,9 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
         </li>
         <li>“+Insert Include tracks in your plot”
           <ul>
-            <li>“Choose style of the track” to <code class="highlighter-rouge">Bedgraph matrix track</code></li>
+            <li>“Choose style of the track” to <code class="highlighter-rouge"><span class="notranslate">Bed</span>graph matrix track</code></li>
             <li>“Plot title” to <code class="highlighter-rouge">TAD separation score</code></li>
-            <li>“Track file bedgraph format” to <code class="highlighter-rouge">hicFindTads on data XX: TAD information in bm file</code></li>
+            <li>“Track file <span class="notranslate">bed</span>graph format” to <code class="highlighter-rouge">hicFindTads on data XX: TAD information in bm file</code></li>
             <li>“Width” to <code class="highlighter-rouge">4</code></li>
             <li>“Set type to lines” to ‘True’</li>
           </ul>
@@ -1074,7 +1072,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
           <ul>
             <li>“Choose style of the track” to <code class="highlighter-rouge">Gene track</code></li>
             <li>“Plot title” to <code class="highlighter-rouge">dm3 genes</code></li>
-            <li>“Track file bedgraph format” the imported .bed file</li>
+            <li>“Track file <span class="notranslate">bed</span>graph format” the imported .<span class="notranslate">bed</span> file</li>
             <li>“Width” to <code class="highlighter-rouge">3</code></li>
             <li>“Type” to <code class="highlighter-rouge">genes</code></li>
             <li>“Gene rows” to <code class="highlighter-rouge">15</code></li>
@@ -1091,7 +1089,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 <img src="../../images/plotTADs.png" alt="TAD plot" /></p>
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
+<p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric <span class="notranslate">reads</span> and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
 
 <p>To improve your learned skills we offer an additional tutorial based on mouse stem cells: <a href="http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html">following work</a>.</p>
 

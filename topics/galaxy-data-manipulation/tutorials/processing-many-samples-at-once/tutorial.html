@@ -301,8 +301,6 @@
 </p>
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -356,20 +354,20 @@
 
 <h1 id="processing-many-samples-at-once">Processing many samples at once</h1>
 
-<p>Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you’ve got hundreds - it becomes very annoying. In Galaxy we have introduced <strong>Dataset collections</strong> that allow you to combine numerous datasets in a single entity that can be easily manipulated.</p>
+<p>Here we will show <span class="notranslate">Galaxy</span> features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you’ve got hundreds - it becomes very annoying. In <span class="notranslate">Galaxy</span> we have introduced <strong>Dataset collections</strong> that allow you to combine numerous datasets in a single entity that can be easily manipulated.</p>
 
 <h4 id="in-this-tutorial-we-assume-the-following">In this tutorial we assume the following:</h4>
 
 <ul>
-  <li>you already have basic understanding of how Galaxy works (if you don’t see <a href="https://usegalaxy.org/galaxy101">Galaxy 101</a> tutorial;</li>
-  <li>you have an account in Galaxy (<a href="https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account">see this</a> if you don’t);</li>
+  <li>you already have basic understanding of how <span class="notranslate">Galaxy</span> works (if you don’t see <a href="https://usegalaxy.org/galaxy101"><span class="notranslate">Galaxy</span> 101</a> tutorial;</li>
+  <li>you have an account in <span class="notranslate">Galaxy</span> (<a href="https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account">see this</a> if you don’t);</li>
   <li>you have your browser configured as described <a href="https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out">here</a>.</li>
 </ul>
 
-<p><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> <em>At this time this tutorial is using Galaxy’s test server at https://test.galaxyproject.org. Once the main site is updated this tutorial will be edited.</em></p>
+<p><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> <em>At this time this tutorial is using <span class="notranslate">Galaxy</span>’s test server at https://test.<span class="notranslate">galaxy</span>project.org. Once the main site is updated this tutorial will be edited.</em></p>
 
 <h2 id="0-getting-data">0. Getting data</h2>
-<p><a href="https://test.galaxyproject.org/u/anton/h/collections-1">Here</a> is a history containing a few datasets we will be practicing with (as always with Galaxy tutorial you can upload your own data and play with it instead of the provided datasets):</p>
+<p><a href="https://test.galaxyproject.org/u/anton/h/collections-1">Here</a> is a history containing a few datasets we will be practicing with (as always with <span class="notranslate">Galaxy</span> tutorial you can upload your own data and play with it instead of the provided datasets):</p>
 
 <ul>
   <li><code class="highlighter-rouge">M117-bl_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
@@ -382,7 +380,7 @@
   <li><code class="highlighter-rouge">M117C1-ch_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
 </ul>
 
-<p>These datasets represent genomic DNA (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (<code class="highlighter-rouge">M117</code>) and her child (<code class="highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp reads; see our <a href="http://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>).</p>
+<p>These datasets represent genomic <span class="notranslate">DNA</span> (enriched for mitochondria via a long range PCR) isolated from blood and cheek (buccal swab) of mother (<code class="highlighter-rouge">M117</code>) and her child (<code class="highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp <span class="notranslate">reads</span>; see our <a href="http://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>).</p>
 
 <h2 id="1-creating-a-list-of-paired-datasets">1. Creating a list of paired datasets</h2>
 
@@ -402,7 +400,7 @@
 
 <p><img src="https://galaxyproject.org/tutorials/collections/collectionCreation.png" alt="collectionCreation" /></p>
 
-<p>In this case Galaxy automatically assigned pairs using the <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its virgin state:</p>
+<p>In this case <span class="notranslate">Galaxy</span> automatically assigned pairs using the <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its virgin state:</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/collectionCreationClean.png" alt="collectionCreationClean" /></p>
 
@@ -428,7 +426,7 @@
 
 <h2 id="20-using-collections">2.0. Using collections</h2>
 
-<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many Galaxy tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="highlighter-rouge">bwa-mem</code> mapper:</p>
+<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many <span class="notranslate">Galaxy</span> tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="highlighter-rouge">bwa-mem</code> mapper:</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/bwa_mem_collection_readGroups.png" alt="bwa_mem_collection_readGroups" /></p>
 
@@ -436,13 +434,13 @@
 
 <ul>
   <li>set <strong>Using reference genome</strong> to <code class="highlighter-rouge">hg38</code> (red outline);</li>
-  <li>set <strong>Single or Paired-end reads</strong> to <code class="highlighter-rouge">Paired collection</code> (blue outline);</li>
+  <li>set <strong>Single or Paired-end <span class="notranslate">reads</span></strong> to <code class="highlighter-rouge">Paired collection</code> (blue outline);</li>
   <li>select <code class="highlighter-rouge">M177-collection</code> from <strong>Select a paired collection</strong> dropdown (magenta outline);</li>
   <li>In <strong>Set read groups information</strong> select <code class="highlighter-rouge">Automatically assign ID</code> (green outline);</li>
   <li>scroll down and click <strong>Execute</strong>.</li>
 </ul>
 
-<p>You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that Galaxy has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by <code class="highlighter-rouge">bwa-mem</code>. As a result we have four <code class="highlighter-rouge">bwa-mem</code> runs:</p>
+<p>You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that <span class="notranslate">Galaxy</span> has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by <code class="highlighter-rouge">bwa-mem</code>. As a result we have four <code class="highlighter-rouge">bwa-mem</code> runs:</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/bwa_memCollectionRunning.png" alt="bwa_memCollectionRunning" /></p>
 
@@ -456,7 +454,7 @@
 
 <h2 id="3-processing-collection-as-a-single-entity">3. Processing collection as a single entity</h2>
 
-<p>Now that <code class="highlighter-rouge">bwa-mem</code> has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single Galaxy ‘<em>item</em>’.</p>
+<p>Now that <code class="highlighter-rouge">bwa-mem</code> has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single <span class="notranslate">Galaxy</span> ‘<em>item</em>’.</p>
 
 <h3 id="30-ensuring-consistency-of-bam-dataset">3.0. Ensuring consistency of BAM dataset</h3>
 
@@ -472,17 +470,17 @@
 
 <h3 id="31-retaining-proper-pairs">3.1. Retaining ‘proper pairs’</h3>
 
-<p>Now let’s clean the dataset further by only preserving truly paired reads (reads satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use <code class="highlighter-rouge">Filter SAM or BAM</code> tools from <strong>SAMTools</strong> collection:</p>
+<p>Now let’s clean the dataset further by only preserving truly paired <span class="notranslate">reads</span> (<span class="notranslate">reads</span> satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use <code class="highlighter-rouge">Filter SAM or BAM</code> tools from <strong>SAMTools</strong> collection:</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/filter.png" alt="filter" /></p>
 
-<p>parameters should be set as shown below. By setting mapping quality to <code class="highlighter-rouge">20</code> we avoid reads mapping to multiple locations and by using <strong>Filter on bitwise flag</strong> option we ensure that the resulting dataset will contain only properly paired reads. This operation will produce yet another collection containing now filtered datasets.</p>
+<p>parameters should be set as shown below. By setting <span class="notranslate">mapping</span> quality to <code class="highlighter-rouge">20</code> we avoid <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to multiple locations and by using <strong>Filter on bitwise flag</strong> option we ensure that the resulting dataset will contain only properly paired <span class="notranslate">reads</span>. This operation will produce yet another collection containing now filtered datasets.</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/filter_closeup.png" alt="filter_closeup" /></p>
 
 <h3 id="32-merging-collection-into-a-single-dataset">3.2. Merging collection into a single dataset</h3>
 
-<p>The beauty of BAM datasets is that they can be combined in a single entity using so called <em>Read group</em> (<a href="https://wiki.galaxyproject.org/Learn/GalaxyNGS101#Understanding_and_manipulating_SAM.2FBAM_datasets">learn more</a> about Read Groups on old wiki, which will be migrated here shortly). This allows to bundle reads from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with <em>read group</em> tags. So let’s finally reduce this collection to a single BAM dataset. For this we will use <code class="highlighter-rouge">MergeSamFiles</code> tool for the <code class="highlighter-rouge">Picard</code> suite:</p>
+<p>The beauty of BAM datasets is that they can be combined in a single entity using so called <em>Read group</em> (<a href="https://wiki.galaxyproject.org/Learn/GalaxyNGS101#Understanding_and_manipulating_SAM.2FBAM_datasets">learn more</a> about Read Groups on old wiki, which will be migrated here shortly). This allows to bundle <span class="notranslate">reads</span> from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with <em>read group</em> tags. So let’s finally reduce this collection to a single BAM dataset. For this we will use <code class="highlighter-rouge">MergeSamFiles</code> tool for the <code class="highlighter-rouge">Picard</code> suite:</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/merge.png" alt="merge" /></p>
 
@@ -490,7 +488,7 @@
 
 <p><img src="https://galaxyproject.org/tutorials/collections/merge_closeup.png" alt="merge_closeup" /></p>
 
-<p>This operation will <strong>not</strong> generate a collection. Instead, it will generate a single BAM dataset containing mapped reads from our four samples (<code class="highlighter-rouge">M117-bl</code>, <code class="highlighter-rouge">M117-ch</code>, <code class="highlighter-rouge">M117C1-bl</code>, and <code class="highlighter-rouge">M117C1-ch</code>).</p>
+<p>This operation will <strong>not</strong> generate a collection. Instead, it will generate a single BAM dataset containing mapped <span class="notranslate">reads</span> from our four samples (<code class="highlighter-rouge">M117-bl</code>, <code class="highlighter-rouge">M117-ch</code>, <code class="highlighter-rouge">M117C1-bl</code>, and <code class="highlighter-rouge">M117C1-ch</code>).</p>
 
 <h2 id="4-lets-look-at-what-weve-got">4. Let’s look at what we’ve got!</h2>
 
@@ -502,16 +500,16 @@
 
 <p><img src="https://galaxyproject.org/tutorials/collections/downsample_closeup.png" alt="downsample_closeup" /></p>
 
-<p>This will generate another BAM dataset containing only 5% of the original reads and much smaller as a result. Click on this dataset and you will see links to various genome browsers:</p>
+<p>This will generate another BAM dataset containing only 5% of the original <span class="notranslate">reads</span> and much smaller as a result. Click on this dataset and you will see links to various genome browsers:</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/browserLinks.png" alt="browserLinks" /></p>
 
-<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (<a href="https://wiki.galaxyproject.org/Learn/GalaxyNGS101#Visualizing_multiple_datasets_in_Integrated_Genome_Viewer_.28IGV.29">learn</a> more about displaying Galaxy data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="highlighter-rouge">M117-bl</code>.</p>
+<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (<a href="https://wiki.galaxyproject.org/Learn/GalaxyNGS101#Visualizing_multiple_datasets_in_Integrated_Genome_Viewer_.28IGV.29">learn</a> more about displaying <span class="notranslate">Galaxy</span> data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot <span class="notranslate">reads</span> are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="highlighter-rouge">M117-bl</code>.</p>
 
 <p><img src="https://galaxyproject.org/tutorials/collections/igv.png" alt="igv" /></p>
 
 <h2 id="5-we-did-not-fake-this">5. We did not fake this:</h2>
-<p>The two histories and the workflow described in this page are accessible directly from this page below:</p>
+<p>The two histories and the <span class="notranslate">workflow</span> described in this page are accessible directly from this page below:</p>
 
 <ul>
   <li>History <a href="https://test.galaxyproject.org/u/anton/h/collections-1"><strong>Collections</strong></a></li>
@@ -521,7 +519,7 @@
 <p>From there you can import histories to make them your own.</p>
 
 <h2 id="6-if-things-dont-work">6. If things don’t work…</h2>
-<p>…you need to complain. Use <a href="https://help.galaxyproject.org/">Galaxy’s Help Channel</a> to do this.</p>
+<p>…you need to complain. Use <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span>’s Help Channel</a> to do this.</p>
 
 
                     

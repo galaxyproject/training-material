@@ -547,8 +547,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -609,37 +607,37 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 id="running-galaxy-jobs-with-slurm">Running Galaxy Jobs with Slurm</h1>
+                    <h1 id="running-galaxy-jobs-with-slurm">Running <span class="notranslate">Galaxy</span> Jobs with Slurm</h1>
 
 <blockquote class="comment">
   <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
 
   <p>Your results may be slightly different from the ones presented in this tutorial
-due to differing versions of tools, reference data, external databases, or
+due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or
 because of stochastic processes in the algorithms.</p>
 
 </blockquote>
 
-<p>The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
-To account for this, Galaxy’s job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
+<p>The tools that are added to <span class="notranslate">Galaxy</span> can have a wide variance in the compute resources that they require and work efficiently on.
+To account for this, <span class="notranslate">Galaxy</span>’s job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
 <ol id="markdown-toc">
-  <li><a href="#running-galaxy-jobs-with-slurm" id="markdown-toc-running-galaxy-jobs-with-slurm">Running Galaxy Jobs with Slurm</a>    <ol>
+  <li><a href="#running-galaxy-jobs-with-slurm" id="markdown-toc-running-galaxy-jobs-with-slurm">Running <span class="notranslate">Galaxy</span> Jobs with Slurm</a>    <ol>
       <li><a href="#installing-slurm" id="markdown-toc-installing-slurm">Installing Slurm</a></li>
       <li><a href="#using-slurm" id="markdown-toc-using-slurm">Using Slurm</a></li>
       <li><a href="#slurm-drmaa" id="markdown-toc-slurm-drmaa">Slurm-DRMAA</a></li>
     </ol>
   </li>
-  <li><a href="#galaxy-and-slurm" id="markdown-toc-galaxy-and-slurm">Galaxy and Slurm</a>    <ol>
+  <li><a href="#galaxy-and-slurm" id="markdown-toc-galaxy-and-slurm"><span class="notranslate">Galaxy</span> and Slurm</a>    <ol>
       <li><a href="#running-a-job" id="markdown-toc-running-a-job">Running a Job</a></li>
       <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
     </ol>
   </li>
-  <li><a href="#galaxy-and-slurm---statically-mapping-a-job" id="markdown-toc-galaxy-and-slurm---statically-mapping-a-job">Galaxy and Slurm - Statically Mapping a Job</a>    <ol>
+  <li><a href="#galaxy-and-slurm---statically-mapping-a-job" id="markdown-toc-galaxy-and-slurm---statically-mapping-a-job"><span class="notranslate">Galaxy</span> and Slurm - Statically <span class="notranslate">Mapping</span> a Job</a>    <ol>
       <li><a href="#writing-a-testing-tool" id="markdown-toc-writing-a-testing-tool">Writing a testing tool</a></li>
       <li><a href="#running-with-more-resources" id="markdown-toc-running-with-more-resources">Running with more resources</a></li>
     </ol>
@@ -668,22 +666,22 @@ be taken into consideration when choosing where to run jobs and what parameters 
     <li>
       <p>Create and edit a file in your working directory called <code class="highlighter-rouge">requirements.yml</code> and include the following contents:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">galaxyproject.repos</span>
-<span class="pi">-</span> <span class="s">galaxyproject.slurm</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.repos</span>
+<span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.slurm</span>
 </code></pre></div>      </div>
 
-      <p>The <code class="highlighter-rouge">galaxyproject.repos</code> role adds the <a href="https://depot.galaxyproject.org/yum/">Galaxy Packages for Enterprise Linux (GPEL)</a> repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the <a href="https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa">Slurm-DRMAA PPA</a> (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).</p>
+      <p>The <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.repos</code> role adds the <a href="https://depot.galaxyproject.org/yum/"><span class="notranslate">Galaxy</span> Packages for Enterprise Linux (GPEL)</a> repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the <a href="https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa">Slurm-DRMAA PPA</a> (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).</p>
     </li>
     <li>
-      <p>In the same directory, run <code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code>. This will install all of the required modules for this training into the <code class="highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
+      <p>In the same directory, run <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code>. This will install all of the required modules for this training into the <code class="highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
     </li>
     <li>
-      <p>Create the hosts file if you have not done so, include a group for <code class="highlighter-rouge">[galaxyservers]</code> with the address of the host where you will install Slurm</p>
+      <p>Create the hosts file if you have not done so, include a group for <code class="highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you will install Slurm</p>
     </li>
     <li>
       <p>Create a playbook, <code class="highlighter-rouge">slurm.yml</code> which looks like the following:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">vars</span><span class="pi">:</span>
     <span class="na">slurm_roles</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">controller'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">exec'</span><span class="pi">]</span>
@@ -695,8 +693,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <span class="na">SelectType</span><span class="pi">:</span> <span class="s">select/cons_res</span>
       <span class="na">SelectTypeParameters</span><span class="pi">:</span> <span class="s">CR_CPU_Memory</span>  <span class="c1"># Allocate individual cores/memory instead of entire node</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.slurm</span>
+    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.repos</span>
+    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.slurm</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -779,7 +777,7 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
   <li><code class="highlighter-rouge">sbatch</code>: Run a batch job, with stdin closed and stdout/stderr redirected to a file.</li>
 </ul>
 
-<p>Galaxy runs <code class="highlighter-rouge">sbatch</code> jobs but we can use both <code class="highlighter-rouge">srun</code> and <code class="highlighter-rouge">sbatch</code> to test:</p>
+<p><span class="notranslate">Galaxy</span> runs <code class="highlighter-rouge">sbatch</code> jobs but we can use both <code class="highlighter-rouge">srun</code> and <code class="highlighter-rouge">sbatch</code> to test:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-running-commands-with-srun"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running commands with <code class="highlighter-rouge">srun</code></h3>
@@ -878,15 +876,15 @@ sleep </span>30
 
   <ol>
     <li>
-      <p>Add a <code class="highlighter-rouge">post_task</code> to your playbook to install <code class="highlighter-rouge">slurm-drmaa1</code> (Debian/Ubuntu) or <code class="highlighter-rouge">slurm-drmaa</code> (RedHat/CentOS), and additionally include the <code class="highlighter-rouge">galaxyproject.repos</code> role</p>
+      <p>Add a <code class="highlighter-rouge">post_task</code> to your playbook to install <code class="highlighter-rouge">slurm-drmaa1</code> (Debian/Ubuntu) or <code class="highlighter-rouge">slurm-drmaa</code> (RedHat/CentOS), and additionally include the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.repos</code> role</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">galaxyservers</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">vars</span><span class="pi">:</span>
     <span class="na">slurm_roles</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">controller'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">exec'</span><span class="pi">]</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.repos</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.slurm</span>
+    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.repos</span>
+    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.slurm</span>
   <span class="na">post_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install slurm-drmaa</span>
       <span class="na">package</span><span class="pi">:</span>
@@ -900,38 +898,38 @@ sleep </span>30
 
 </blockquote>
 
-<p>Moving one level further up the stack, we find DRMAA Python. This is a Galaxy framework <em>conditional dependency</em>. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. The <code class="highlighter-rouge">galaxyproject.galaxy</code> Ansible role will install these conditional dependencies, automatically.</p>
+<p>Moving one level further up the stack, we find DRMAA Python. This is a <span class="notranslate">Galaxy</span> framework <em>conditional dependency</em>. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. The <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> Ansible role will install these conditional dependencies, automatically.</p>
 
-<h1 id="galaxy-and-slurm">Galaxy and Slurm</h1>
+<h1 id="galaxy-and-slurm"><span class="notranslate">Galaxy</span> and Slurm</h1>
 
-<p>At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and Galaxy’s own documentation) instruct that you should set the <code class="highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because Galaxy runs under supervisor, the environment that Galaxy starts under is controlled by the <code class="highlighter-rouge">environment</code> option in <code class="highlighter-rouge">/etc/supervisor/conf.d/galaxy.conf</code>. The galaxy task should thus be updated to refer to the path to slurm-drmaa, which is <code class="highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
+<p>At the top of the stack sits <span class="notranslate">Galaxy</span>. <span class="notranslate">Galaxy</span> must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and <span class="notranslate">Galaxy</span>’s own documentation) instruct that you should set the <code class="highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because <span class="notranslate">Galaxy</span> runs under supervisor, the environment that <span class="notranslate">Galaxy</span> starts under is controlled by the <code class="highlighter-rouge">environment</code> option in <code class="highlighter-rouge">/etc/supervisor/conf.d/<span class="notranslate">galaxy</span>.conf</code>. The <span class="notranslate">galaxy</span> task should thus be updated to refer to the path to slurm-drmaa, which is <code class="highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-making-galaxy-aware-of-drmaa"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Making Galaxy aware of DRMAA</h3>
+  <h3 id="hands_on-hands-on-making-galaxy-aware-of-drmaa"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Making <span class="notranslate">Galaxy</span> aware of DRMAA</h3>
 
   <ol>
     <li>
       <p>Open your group variables and edit the supervisor task, update the environment variable:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">galaxy</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
     <span class="s">...</span>
     <span class="na">configuration</span><span class="pi">:</span> <span class="pi">|</span>
       <span class="s">...</span>
-      <span class="s">environment=HOME="{{ galaxy_mutable_data_dir }}",VIRTUAL_ENV="{{ galaxy_venv_dir }}",PATH="{{ galaxy_venv_dir }}/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"</span>
+      <span class="s">environment=HOME="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}",VIRTUAL_ENV="{{ <span class="notranslate">galaxy</span>_venv_dir }}",PATH="{{ <span class="notranslate">galaxy</span>_venv_dir }}/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We need to modify <code class="highlighter-rouge">job_conf.xml</code> to instruct Galaxy’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">type</code>, and <code class="highlighter-rouge">load</code> attributes. The entire <code class="highlighter-rouge">&lt;plugins&gt;</code> tag group should look like:</p>
+      <p>We need to modify <code class="highlighter-rouge">job_conf.xml</code> to instruct <span class="notranslate">Galaxy</span>’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">type</code>, and <code class="highlighter-rouge">load</code> attributes. The entire <code class="highlighter-rouge">&lt;plugins&gt;</code> tag group should look like:</p>
 
-      <p>If the folder does not exist, create <code class="highlighter-rouge">files/galaxy/config</code> next to your <code class="highlighter-rouge">playbook.yml</code> (<code class="highlighter-rouge">mkdir -p files/galaxy/config/</code>)</p>
+      <p>If the folder does not exist, create <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> next to your <code class="highlighter-rouge">playbook.yml</code> (<code class="highlighter-rouge">mkdir -p files/<span class="notranslate">galaxy</span>/config/</code>)</p>
 
-      <p>Create <code class="highlighter-rouge">files/galaxy/config/job_conf.xml</code> with the following contents:</p>
+      <p>Create <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
     <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
-        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"slurm"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.slurm:SlurmJobRunner"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"slurm"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/plugins&gt;</span>
     <span class="nt">&lt;destinations&gt;</span>
         <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
@@ -940,7 +938,7 @@ sleep </span>30
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Next, we need to add a new destination for the Slurm job runner. This is a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as <code class="highlighter-rouge">sbatch /path/to/job_script.sh</code>. Note that we also need to set a default destination now that more than one destination is defined. In a <code class="highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="highlighter-rouge">runner</code> attribute must match the <code class="highlighter-rouge">id</code> of defined plugin:</p>
+      <p>Next, we need to add a new destination for the Slurm job runner. This is a basic destination with no parameters, <span class="notranslate">Galaxy</span> will do the equivalent of submitting a job as <code class="highlighter-rouge">sbatch /path/to/job_script.sh</code>. Note that we also need to set a default destination now that more than one destination is defined. In a <code class="highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="highlighter-rouge">runner</code> attribute must match the <code class="highlighter-rouge">id</code> of defined plugin:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">/&gt;</span>
@@ -949,67 +947,67 @@ sleep </span>30
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Inform <code class="highlighter-rouge">galaxyproject.galaxy</code> of where you would like the <code class="highlighter-rouge">job_conf.xml</code> to reside in your group variables:</p>
+      <p>Inform <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="highlighter-rouge">job_conf.xml</code> to reside in your group variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
-  <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
 </code></pre></div>      </div>
 
-      <p>And then deploy the new config file using the <code class="highlighter-rouge">galaxy_config_files</code> var in your group vars</p>
+      <p>And then deploy the new config file using the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var in your group vars</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_files</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/job_conf.xml</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['job_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config['<span class="notranslate">galaxy</span>']['job_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
-      <p>The variable <code class="highlighter-rouge">galaxy_config_files</code> is an array of hashes, each with <code class="highlighter-rouge">src</code> and <code class="highlighter-rouge">dest</code>, the files from src will be copied to dest on the server. <code class="highlighter-rouge">galaxy_template_files</code> exist to template files out.</p>
+      <p>The variable <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> is an array of hashes, each with <code class="highlighter-rouge">src</code> and <code class="highlighter-rouge">dest</code>, the files from src will be copied to dest on the server. <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_template_files</code> exist to template files out.</p>
     </li>
     <li>
-      <p>Run your <em>Galaxy</em> playbook (<code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>)</p>
+      <p>Run your <em><span class="notranslate">Galaxy</span></em> playbook (<code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>)</p>
     </li>
     <li>
-      <p>Follow the logs with <code class="highlighter-rouge">supervisorctl tail -f galaxy stderr</code></p>
+      <p>Follow the logs with <code class="highlighter-rouge">supervisorctl tail -f <span class="notranslate">galaxy</span> stderr</code></p>
     </li>
     <li>
-      <p>Rerun the playbook. Because we updated the supervisor config, Galaxy will automatically be restarted.</p>
+      <p>Rerun the playbook. Because we updated the supervisor config, <span class="notranslate">Galaxy</span> will automatically be restarted.</p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Two sections of the log output are of interest. First, when Galaxy parses <code class="highlighter-rouge">job_conf.xml</code>:</p>
+<p>Two sections of the log output are of interest. First, when <span class="notranslate">Galaxy</span> parses <code class="highlighter-rouge">job_conf.xml</code>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs DEBUG 2016-11-05 14:07:12,649 Loading job configuration from /srv/galaxy/config/job_conf.xml
-galaxy.jobs DEBUG 2016-11-05 14:07:12,650 Read definition for handler 'handler0'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,651 Read definition for handler 'handler1'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,652 &lt;handlers&gt; default set to child with id or tag 'handlers'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,652 &lt;destinations&gt; default set to child with id or tag 'slurm'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,653 Done loading job configuration
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:12,649 Loading job configuration from /srv/<span class="notranslate">galaxy</span>/config/job_conf.xml
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:12,650 Read definition for handler 'handler0'
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:12,651 Read definition for handler 'handler1'
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:12,652 &lt;handlers&gt; default set to child with id or tag 'handlers'
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:12,652 &lt;destinations&gt; default set to child with id or tag 'slurm'
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:12,653 Done loading job configuration
 </code></pre></div></div>
 
-<p>Second, when Galaxy loads job runner plugins:</p>
+<p>Second, when <span class="notranslate">Galaxy</span> loads job runner plugins:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.manager DEBUG 2016-11-05 14:07:22,341 Starting job handler
-galaxy.jobs INFO 2016-11-05 14:07:22,347 Handler 'handler0' will load all configured runner plugins
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,355 Starting 4 LocalRunner workers
-galaxy.jobs DEBUG 2016-11-05 14:07:22,367 Loaded job runner 'galaxy.jobs.runners.local:LocalJobRunner' as 'local'
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs.manager DEBUG 2016-11-05 14:07:22,341 Starting job handler
+<span class="notranslate">galaxy</span>.jobs INFO 2016-11-05 14:07:22,347 Handler 'handler0' will load all configured runner plugins
+<span class="notranslate">galaxy</span>.jobs.runners DEBUG 2016-11-05 14:07:22,355 Starting 4 LocalRunner workers
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:22,367 Loaded job runner '<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner' as 'local'
 pulsar.managers.util.drmaa DEBUG 2016-11-05 14:07:22,434 Initializing DRMAA session from thread MainThread
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,443 Starting 4 SlurmRunner workers
-galaxy.jobs DEBUG 2016-11-05 14:07:22,455 Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
-galaxy.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: slurm:local
+<span class="notranslate">galaxy</span>.jobs.runners DEBUG 2016-11-05 14:07:22,443 Starting 4 SlurmRunner workers
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:22,455 Loaded job runner '<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
+<span class="notranslate">galaxy</span>.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: slurm:local
 </code></pre></div></div>
 
 <h2 id="running-a-job">Running a Job</h2>
 
-<p>You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.</p>
+<p>You should now be able to run a <span class="notranslate">Galaxy</span> job through Slurm. The simplest way to test is using the upload tool to upload some text.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-testing-a-slurm-job"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing a Slurm Job</h3>
 
   <ol>
     <li>If you’re not still following the log files with <code class="highlighter-rouge">tail</code>, do so now.</li>
-    <li>Click the upload button at the top of the tool panel (on the left side of the Galaxy UI).</li>
+    <li>Click the upload button at the top of the tool panel (on the left side of the <span class="notranslate">Galaxy</span> UI).</li>
     <li>In the resulting modal dialog, click the “Paste/Fetch data” button.</li>
     <li>Type some random characters into the text field that has just appeared.</li>
     <li>Click “Start” and then “Close”</li>
@@ -1019,42 +1017,42 @@ galaxy.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: sl
 
 <p>In your <code class="highlighter-rouge">tail</code> terminal window you should see the following messages:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs DEBUG 2016-11-05 14:07:22,862 (2) Persisting job destination (destination id: slurm)
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,958 Job [2] queued (328.180 ms)
-galaxy.jobs.handler INFO 2016-11-05 14:07:22,996 (2) Job dispatched
-galaxy.tools.deps DEBUG 2016-11-05 14:07:23,621 Building dependency shell command for dependency 'samtools'
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:22,862 (2) Persisting job destination (destination id: slurm)
+<span class="notranslate">galaxy</span>.jobs.runners DEBUG 2016-11-05 14:07:22,958 Job [2] queued (328.180 ms)
+<span class="notranslate">galaxy</span>.jobs.handler INFO 2016-11-05 14:07:22,996 (2) Job dispatched
+<span class="notranslate">galaxy</span>.tools.deps DEBUG 2016-11-05 14:07:23,621 Building dependency shell command for dependency 'samtools'
   ...
-galaxy.tools.deps WARNING 2016-11-05 14:07:23,631 Failed to resolve dependency on 'samtools', ignoring
-galaxy.jobs.command_factory INFO 2016-11-05 14:07:23,674 Built script [/srv/galaxy/server/database/jobs/000/2/tool_script.sh] for tool command[python /srv/galaxy/server/tools/data_source/upload.py /srv/galaxy/server /srv/galaxy/server/database/tmp/tmpkiMZKd /srv/galaxy/server/database/tmp/tmpJuSMo5 2:/srv/galaxy/server/database/jobs/000/2/dataset_2_files:/srv/galaxy/server/database/datasets/000/dataset_2.dat]
-galaxy.tools.deps DEBUG 2016-11-05 14:07:24,033 Building dependency shell command for dependency 'samtools'
+<span class="notranslate">galaxy</span>.tools.deps WARNING 2016-11-05 14:07:23,631 Failed to resolve dependency on 'samtools', ignoring
+<span class="notranslate">galaxy</span>.jobs.command_factory INFO 2016-11-05 14:07:23,674 Built script [/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/tool_script.sh] for tool command[python /srv/<span class="notranslate">galaxy</span>/server/tools/data_source/upload.py /srv/<span class="notranslate">galaxy</span>/server /srv/<span class="notranslate">galaxy</span>/server/database/tmp/tmpkiMZKd /srv/<span class="notranslate">galaxy</span>/server/database/tmp/tmpJuSMo5 2:/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/dataset_2_files:/srv/<span class="notranslate">galaxy</span>/server/database/datasets/000/dataset_2.dat]
+<span class="notranslate">galaxy</span>.tools.deps DEBUG 2016-11-05 14:07:24,033 Building dependency shell command for dependency 'samtools'
   ...
-galaxy.tools.deps WARNING 2016-11-05 14:07:24,038 Failed to resolve dependency on 'samtools', ignoring
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:24,052 (2) command is: mkdir -p working; cd working; /srv/galaxy/server/database/jobs/000/2/tool_script.sh; return_code=$?; cd '/srv/galaxy/server/database/jobs/000/2'; python "/srv/galaxy/server/database/jobs/000/2/set_metadata_CALKH0.py" "/srv/galaxy/server/database/tmp/tmpkiMZKd" "/srv/galaxy/server/database/jobs/000/2/working/galaxy.json" "/srv/galaxy/server/database/jobs/000/2/metadata_in_HistoryDatasetAssociation_2_nnti4M,/srv/galaxy/server/database/jobs/000/2/metadata_kwds_HistoryDatasetAssociation_2_sN3gVP,/srv/galaxy/server/database/jobs/000/2/metadata_out_HistoryDatasetAssociation_2_jIhXJJ,/srv/galaxy/server/database/jobs/000/2/metadata_results_HistoryDatasetAssociation_2_v4v_dv,/srv/galaxy/server/database/datasets/000/dataset_2.dat,/srv/galaxy/server/database/jobs/000/2/metadata_override_HistoryDatasetAssociation_2_OQwwTH" 5242880; sh -c "exit $return_code"
-galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,125 (2) submitting file /srv/galaxy/server/database/jobs/000/2/galaxy_2.sh
-galaxy.jobs.runners.drmaa INFO 2016-11-05 14:07:24,172 (2) queued as 7
-galaxy.jobs DEBUG 2016-11-05 14:07:24,172 (2) Persisting job destination (destination id: slurm)
-galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,539 (2/7) state change: job is queued and active
+<span class="notranslate">galaxy</span>.tools.deps WARNING 2016-11-05 14:07:24,038 Failed to resolve dependency on 'samtools', ignoring
+<span class="notranslate">galaxy</span>.jobs.runners DEBUG 2016-11-05 14:07:24,052 (2) command is: mkdir -p working; cd working; /srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/tool_script.sh; return_code=$?; cd '/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2'; python "/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/set_metadata_CALKH0.py" "/srv/<span class="notranslate">galaxy</span>/server/database/tmp/tmpkiMZKd" "/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/working/<span class="notranslate">galaxy</span>.json" "/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/metadata_in_HistoryDatasetAssociation_2_nnti4M,/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/metadata_kwds_HistoryDatasetAssociation_2_sN3gVP,/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/metadata_out_HistoryDatasetAssociation_2_jIhXJJ,/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/metadata_results_HistoryDatasetAssociation_2_v4v_dv,/srv/<span class="notranslate">galaxy</span>/server/database/datasets/000/dataset_2.dat,/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/metadata_override_HistoryDatasetAssociation_2_OQwwTH" 5242880; sh -c "exit $return_code"
+<span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,125 (2) submitting file /srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/<span class="notranslate">galaxy</span>_2.sh
+<span class="notranslate">galaxy</span>.jobs.runners.drmaa INFO 2016-11-05 14:07:24,172 (2) queued as 7
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:24,172 (2) Persisting job destination (destination id: slurm)
+<span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,539 (2/7) state change: job is queued and active
 </code></pre></div></div>
 
-<p>At this point the job has been accepted by Slurm and is awaiting scheduling on a node. Once it’s been sent to a node and starts running, Galaxy logs this event:</p>
+<p>At this point the job has been accepted by Slurm and is awaiting scheduling on a node. Once it’s been sent to a node and starts running, <span class="notranslate">Galaxy</span> logs this event:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:25,559 (2/7) state change: job is running
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2016-11-05 14:07:25,559 (2/7) state change: job is running
 </code></pre></div></div>
 
-<p>Finally, when the job is complete, Galaxy performs its job finalization process:</p>
+<p>Finally, when the job is complete, <span class="notranslate">Galaxy</span> performs its job finalization process:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:30,883 (2/7) state change: job finished normally
-galaxy.model.metadata DEBUG 2016-11-05 14:07:31,132 loading metadata from file for: HistoryDatasetAssociation 2
-galaxy.jobs INFO 2016-11-05 14:07:31,336 Collecting metrics for Job 2
-galaxy.jobs DEBUG 2016-11-05 14:07:31,370 job 2 ended (finish() executed in (411.821 ms))
-galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadata files
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2016-11-05 14:07:30,883 (2/7) state change: job finished normally
+<span class="notranslate">galaxy</span>.model.metadata DEBUG 2016-11-05 14:07:31,132 loading metadata from file for: HistoryDatasetAssociation 2
+<span class="notranslate">galaxy</span>.jobs INFO 2016-11-05 14:07:31,336 Collecting metrics for Job 2
+<span class="notranslate">galaxy</span>.jobs DEBUG 2016-11-05 14:07:31,370 job 2 ended (finish() executed in (411.821 ms))
+<span class="notranslate">galaxy</span>.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up exte<span class="notranslate">rna</span>l metadata files
 </code></pre></div></div>
 
 <p>Note a few useful bits in the output:</p>
 <ul>
-  <li><code class="highlighter-rouge">Persisting job destination (destination id: slurm)</code>: Galaxy has selected the <code class="highlighter-rouge">slurm</code> destination we defined</li>
-  <li><code class="highlighter-rouge">submitting file /srv/galaxy/server/database/jobs/000/2/galaxy_2.sh</code>: This is the path to the script that is submitted to Slurm as it would be with <code class="highlighter-rouge">sbatch</code></li>
-  <li><code class="highlighter-rouge">(2) queued as 7</code>: Galaxy job id “2” is Slurm job id “7”.</li>
+  <li><code class="highlighter-rouge">Persisting job destination (destination id: slurm)</code>: <span class="notranslate">Galaxy</span> has selected the <code class="highlighter-rouge">slurm</code> destination we defined</li>
+  <li><code class="highlighter-rouge">submitting file /srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/<span class="notranslate">galaxy</span>_2.sh</code>: This is the path to the script that is submitted to Slurm as it would be with <code class="highlighter-rouge">sbatch</code></li>
+  <li><code class="highlighter-rouge">(2) queued as 7</code>: <span class="notranslate">Galaxy</span> job id “2” is Slurm job id “7”.</li>
   <li>If <code class="highlighter-rouge">job &lt;id&gt; ended</code> is reached, the job should show as done in the UI</li>
 </ul>
 
@@ -1062,7 +1060,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> scontrol show job 7
 <span class="go">JobId=7 JobName=g2_upload1_anonymous_10_0_2_2
-   UserId=galaxy(999) GroupId=galaxy(999)
+   UserId=<span class="notranslate">galaxy</span>(999) GroupId=<span class="notranslate">galaxy</span>(999)
    Priority=4294901754 Nice=0 Account=(null) QOS=(null)
    JobState=COMPLETED Reason=None Dependency=(null)
    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
@@ -1081,10 +1079,10 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
    Features=(null) Gres=(null) Reservation=(null)
    Shared=0 Contiguous=0 Licenses=(null) Network=(null)
    Command=(null)
-   WorkDir=/srv/galaxy/server/database/jobs/000/2
-   StdErr=/srv/galaxy/server/database/jobs/000/2/galaxy_2.e
+   WorkDir=/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2
+   StdErr=/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/<span class="notranslate">galaxy</span>_2.e
    StdIn=StdIn=/dev/null
-   StdOut=/srv/galaxy/server/database/jobs/000/2/galaxy_2.o
+   StdOut=/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/<span class="notranslate">galaxy</span>_2.o
    Power= SICP=0
 </span></code></pre></div></div>
 
@@ -1093,7 +1091,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 <h2 id="further-reading">Further Reading</h2>
 
 <ul>
-  <li><a href="https://docs.galaxyproject.org/en/latest/admin/cluster.html">Galaxy’s cluster documentation</a> describes in detail alternative cluster configurations.</li>
+  <li><a href="https://docs.galaxyproject.org/en/latest/admin/cluster.html"><span class="notranslate">Galaxy</span>’s cluster documentation</a> describes in detail alte<span class="notranslate">rna</span>tive cluster configurations.</li>
   <li><a href="https://docs.galaxyproject.org/en/latest/admin/jobs.html">The job_conf.xml documentation</a> fully describes the syntax of the job configuration file.</li>
   <li>The <a href="https://www.drmaa.org/">Distributed Resource Management Application API (DRMAA)</a> page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.</li>
   <li>The <a href="http://slurm.schedmd.com/">Slurm documentation</a> is extensive and covers all the features and myriad of ways in which you can configure slurm.</li>
@@ -1102,7 +1100,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
   <li><a href="http://slurm.schedmd.com/accounting.html">Slurm Accounting documentation</a> explains how to set up SlurmDBD.</li>
 </ul>
 
-<h1 id="galaxy-and-slurm---statically-mapping-a-job">Galaxy and Slurm - Statically Mapping a Job</h1>
+<h1 id="galaxy-and-slurm---statically-mapping-a-job"><span class="notranslate">Galaxy</span> and Slurm - Statically <span class="notranslate">Mapping</span> a Job</h1>
 
 <p>We don’t want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination, we’ll create a fake tool.</p>
 
@@ -1113,11 +1111,11 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
   <ol>
     <li>
-      <p>Create the directory <code class="highlighter-rouge">files/galaxy/tools/</code> if it doesn’t exist and edit a new file in <code class="highlighter-rouge">files/galaxy/tools/testing.xml</code> with the following contents:</p>
+      <p>Create the directory <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/</code> if it doesn’t exist and edit a new file in <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/testing.xml</code> with the following contents:</p>
 
       <div class="language-xml question highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"testing"</span> <span class="na">name=</span><span class="s">"Multicore Tool"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;command&gt;</span>
-        <span class="cp">&lt;![CDATA[echo "Running with '\${GALAXY_SLOTS:-1}' threads" &gt; "$output1"]]&gt;</span>
+        <span class="cp">&lt;![CDATA[echo "Running with '\${<span class="notranslate">GALAXY</span>_SLOTS:-1}' th<span class="notranslate">reads</span>" &gt; "$output1"]]&gt;</span>
     <span class="nt">&lt;/command&gt;</span>
     <span class="nt">&lt;inputs&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"input1"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"Input Dataset"</span><span class="nt">/&gt;</span>
@@ -1129,9 +1127,9 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add the tool to the Ansible automated tool conf, <code class="highlighter-rouge">galaxy_local_tools</code></p>
+      <p>Add the tool to the Ansible automated tool conf, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_local_tools</code></p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_local_tools</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_local_tools</span><span class="pi">:</span>
 <span class="pi">-</span> <span class="s">testing.xml</span>
 </code></pre></div>      </div>
     </li>
@@ -1139,7 +1137,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool’s name in the tool panel, then click Execute.</p>
+      <p>Reload <span class="notranslate">Galaxy</span> in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool’s name in the tool panel, then click Execute.</p>
 
       <blockquote class="question">
         <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1149,7 +1147,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
         <blockquote class="solution">
           <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '1' threads
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '1' th<span class="notranslate">reads</span>
 </code></pre></div>          </div>
 
         </blockquote>
@@ -1159,7 +1157,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
   </ol>
 </blockquote>
 
-<p>Of course, this tool doesn’t actually <em>use</em> the allocated number of cores. In a real tool, you would call the tools’s underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as <code class="highlighter-rouge">samtools sort -@ \${GALAXY_SLOTS:-1}</code>.</p>
+<p>Of course, this tool doesn’t actually <em>use</em> the allocated number of cores. In a real tool, you would call the tools’s underlying command with whatever flag that tool provides to control the number of th<span class="notranslate">reads</span> or processes it starts, such as <code class="highlighter-rouge">samtools sort -@ \${<span class="notranslate">GALAXY</span>_SLOTS:-1}</code>.</p>
 
 <h2 id="running-with-more-resources">Running with more resources</h2>
 
@@ -1170,7 +1168,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
   <ol>
     <li>
-      <p>Edit your <code class="highlighter-rouge">files/galaxy/config/job_conf.xml</code> and add the following destination:</p>
+      <p>Edit your <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> and add the following destination:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"slurm-2c"</span> <span class="na">runner=</span><span class="s">"slurm"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"nativeSpecification"</span><span class="nt">&gt;</span>--nodes=1 --ntasks=2<span class="nt">&lt;/param&gt;</span>
@@ -1186,7 +1184,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook. Because we modified <code class="highlighter-rouge">job_conf.xml</code>, Galaxy will be restarted to reread its config files.</p>
+      <p>Run the playbook. Because we modified <code class="highlighter-rouge">job_conf.xml</code>, <span class="notranslate">Galaxy</span> will be restarted to reread its config files.</p>
     </li>
     <li>
       <p>Click the rerun button on the last history item, or click <strong>Testing Tool</strong> in the tool panel, and then click the tool’s Execute button.</p>
@@ -1199,7 +1197,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '2' threads
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '2' th<span class="notranslate">reads</span>
 </code></pre></div>          </div>
 
         </blockquote>
@@ -1212,37 +1210,37 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
 <h1 id="dynamic-job-destinations">Dynamic Job Destinations</h1>
 
-<p>Dynamic destinations allow you to write custom python code to dispatch jobs based on whatever rules you like. For example, UseGalaxy.eu at one point used a very complex custom dispatching configuration to handle sorting jobs between multiple clusters. Galaxy has <a href="https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping-python-method">extensive documentation</a> on how to write these sort of destinations.</p>
+<p>Dynamic destinations allow you to write custom python code to dispatch jobs based on whatever rules you like. For example, Use<span class="notranslate">Galaxy</span>.eu at one point used a very complex custom dispatching configuration to handle sorting jobs between multiple clusters. <span class="notranslate">Galaxy</span> has <a href="https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping-python-method">extensive documentation</a> on how to write these sort of destinations.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-writing-a-dynamic-job-destination"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Writing a dynamic job destination</h3>
 
   <ol>
     <li>
-      <p>Create and open <code class="highlighter-rouge">files/galaxy/dynamic_job_rules/my_rules.py</code></p>
+      <p>Create and open <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/my_rules.py</code></p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
-<span class="kn">from</span> <span class="nn">galaxy.jobs.mapper</span> <span class="kn">import</span> <span class="n">JobMappingException</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
+<span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">def</span> <span class="nf">admin_only</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
     <span class="c1"># Only allow the tool to be executed if the user is an admin
 </span>    <span class="n">admin_users</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s">"admin_users"</span><span class="p">,</span> <span class="s">""</span> <span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="s">","</span> <span class="p">)</span>
     <span class="k">if</span> <span class="n">user_email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">admin_users</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span><span class="s">"Unauthorized."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span><span class="p">(</span><span class="s">"Unauthorized."</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JobDestination</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="s">"slurm"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>This destination will check that the <code class="highlighter-rouge">user_email</code> is in the set of <code class="highlighter-rouge">admin_users</code> from your config file.</p>
     </li>
     <li>
-      <p>As usual, we need to instruct Galaxy of where to find this file:</p>
+      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
 
       <ul>
         <li>
           <p>Edit your group variables file and add the following:</p>
 
-          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_dynamic_job_rules</span><span class="pi">:</span>
+          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_dynamic_job_rules</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">my_rules.py</span>
 </code></pre></div>          </div>
         </li>
@@ -1257,7 +1255,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. Galaxy will load all python files in the <code class="highlighter-rouge">{{ galaxy_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="highlighter-rouge">my_rules.py</code> to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
+      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="highlighter-rouge">my_rules.py</code> to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
     </li>
     <li>
       <p>Finally, in <code class="highlighter-rouge">job_conf.xml</code>, update the <code class="highlighter-rouge">&lt;tool&gt;</code> definition and point it to this destination:</p>
@@ -1268,17 +1266,17 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook / restart Galaxy</p>
+      <p>Run the playbook / restart <span class="notranslate">Galaxy</span></p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can imagine extending this to complex logic for permissions, or for destination mapping depending on numerous factors. We did not cover it, but in the documentation you can add additional variables to your function signature, and they will be automatically supplied. Some useful variables are <code class="highlighter-rouge">tool</code>, <code class="highlighter-rouge">user</code>, <code class="highlighter-rouge">job</code>, and <code class="highlighter-rouge">app</code> if you need to load configuration information.</p>
+<p>Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can imagine extending this to complex logic for permissions, or for destination <span class="notranslate">mapping</span> depending on numerous factors. We did not cover it, but in the documentation you can add additional variables to your function signature, and they will be automatically supplied. Some useful variables are <code class="highlighter-rouge">tool</code>, <code class="highlighter-rouge">user</code>, <code class="highlighter-rouge">job</code>, and <code class="highlighter-rouge">app</code> if you need to load configuration information.</p>
 
 <h1 id="dynamically-map-a-tool-to-a-job-destination">Dynamically map a tool to a job destination</h1>
 
-<p>If you don’t want to write dynamic destinations yourself, Dynamic Tool Destinations (DTDs) utilize the dynamic job runner to provide dynamic job mapping functionality without having to explicitly write code to perform the mapping. The mapping functionality is mostly limited to input sizes, but often input size is the most important factor in deciding what resources to allocate for a job.</p>
+<p>If you don’t want to write dynamic destinations yourself, Dynamic Tool Destinations (DTDs) utilize the dynamic job runner to provide dynamic job <span class="notranslate">mapping</span> functionality without having to explicitly write code to perform the <span class="notranslate">mapping</span>. The <span class="notranslate">mapping</span> functionality is mostly limited to input sizes, but often input size is the most important factor in deciding what resources to allocate for a job.</p>
 
 <h2 id="writing-a-dynamic-tool-destination">Writing a Dynamic Tool Destination</h2>
 
@@ -1287,7 +1285,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
   <ol>
     <li>
-      <p>Dynamic tool destinations are configured via a YAML file. As before, we’ll use a fake example but this is extremely useful in real-life scenarios. Create the file <code class="highlighter-rouge">files/galaxy/config/tool_destinations.yml</code> with the following contents:</p>
+      <p>Dynamic tool destinations are configured via a YAML file. As before, we’ll use a fake example but this is extremely useful in real-life scenarios. Create the file <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml</code> with the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">tools</span><span class="pi">:</span>
@@ -1314,27 +1312,27 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
       </ul>
     </li>
     <li>
-      <p>We also need to inform Galaxy of the path to the file we’ve just created, which is done using the <code class="highlighter-rouge">tool_destinations_config_file</code> in <code class="highlighter-rouge">galaxy_config</code> &gt; <code class="highlighter-rouge">galaxy</code>. Additionally we need to add a <code class="highlighter-rouge">galaxy_config_files</code> entry to ensure it is deployed.</p>
+      <p>We also need to inform <span class="notranslate">Galaxy</span> of the path to the file we’ve just created, which is done using the <code class="highlighter-rouge">tool_destinations_config_file</code> in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> &gt; <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code>. Additionally we need to add a <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> entry to ensure it is deployed.</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
-  <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="na">tool_destinations_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/tool_destinations.yml"</span>
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="na">tool_destinations_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/tool_destinations.yml"</span>
 <span class="nn">...</span>
-<span class="na">galaxy_config_files</span><span class="pi">:</span>
+<span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
     <span class="s">...</span>
-    <span class="s">- src</span><span class="pi">:</span> <span class="s">files/galaxy/config/tool_destinations.yml</span>
-      <span class="s">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['tool_destinations_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="s">- src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/tool_destinations.yml</span>
+      <span class="s">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config['<span class="notranslate">galaxy</span>']['tool_destinations_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We need to update Galaxy’s job configuration to use this rule. Open <code class="highlighter-rouge">files/galaxy/config/job_conf.xml</code> and add a DTD destination:</p>
+      <p>We need to update <span class="notranslate">Galaxy</span>’s job configuration to use this rule. Open <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> and add a DTD destination:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"dtd"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>dtd<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
 
-      <p>Also, comment out the previous <code class="highlighter-rouge">&lt;tool&gt;</code> definition for the <code class="highlighter-rouge">testing</code> tool, and replace it with a mapping to the dtd destination like so:</p>
+      <p>Also, comment out the previous <code class="highlighter-rouge">&lt;tool&gt;</code> definition for the <code class="highlighter-rouge">testing</code> tool, and replace it with a <span class="notranslate">mapping</span> to the dtd destination like so:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tools&gt;</span>
 <span class="c">&lt;!--
@@ -1346,7 +1344,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook and restart Galaxy</p>
+      <p>Run the playbook and restart <span class="notranslate">Galaxy</span></p>
     </li>
   </ol>
 
@@ -1386,7 +1384,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
   <ol>
     <li>
-      <p>Create and open <code class="highlighter-rouge">files/galaxy/config/job_resource_params_conf.xml</code></p>
+      <p>Create and open <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml</code></p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;parameters&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Cores"</span> <span class="na">name=</span><span class="s">"cores"</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">help=</span><span class="s">"Number of cores to run job on."</span><span class="nt">&gt;</span>
@@ -1400,26 +1398,26 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
       <p>This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.</p>
     </li>
     <li>
-      <p>As usual, we need to instruct Galaxy of where to find this file:</p>
+      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
 
       <ul>
         <li>
           <p>Edit your group variables file and add the following:</p>
 
-          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
-  <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="na">job_resource_params_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/job_resource_params_conf.xml"</span>
+          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="na">job_resource_params_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_resource_params_conf.xml"</span>
 <span class="nn">...</span>
-<span class="na">galaxy_config_files</span><span class="pi">:</span>
+<span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
   <span class="s">...</span>
-  <span class="s">- src</span><span class="pi">:</span> <span class="s">files/galaxy/config/job_resource_params_conf.xml</span>
-    <span class="s">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config['galaxy']['job_resource_params_file']</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="s">- src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/job_resource_params_conf.xml</span>
+    <span class="s">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config['<span class="notranslate">galaxy</span>']['job_resource_params_file']</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>          </div>
         </li>
       </ul>
     </li>
     <li>
-      <p>Next, we define a new section in <code class="highlighter-rouge">job_conf.xml</code>: <code class="highlighter-rouge">&lt;resources&gt;</code>. This groups together parameters that should appear together on a tool form. Add the following section to your <code class="highlighter-rouge">files/galaxy/config/job_conf.xml</code>:</p>
+      <p>Next, we define a new section in <code class="highlighter-rouge">job_conf.xml</code>: <code class="highlighter-rouge">&lt;resources&gt;</code>. This groups together parameters that should appear together on a tool form. Add the following section to your <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;resources&gt;</span>
     <span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">"testing"</span><span class="nt">&gt;</span>cores,time<span class="nt">&lt;/group&gt;</span>
@@ -1449,7 +1447,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
 
-      <p>This will be another dynamic destination. Galaxy will load all python files in the <code class="highlighter-rouge">{{ galaxy_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="highlighter-rouge">dynamic_cores_time</code> to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
+      <p>This will be another dynamic destination. <span class="notranslate">Galaxy</span> will load all python files in the <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available <code class="highlighter-rouge">dynamic_cores_time</code> to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
     </li>
   </ol>
 
@@ -1479,10 +1477,10 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
   <ol>
     <li>
-      <p>Create and edit <code class="highlighter-rouge">files/galaxy/dynamic_job_rules/map_resources.py</code>. Create it with the following contents:</p>
+      <p>Create and edit <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/map_resources.py</code>. Create it with the following contents:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">galaxy.jobs.mapper</span> <span class="kn">import</span> <span class="n">JobMappingException</span>
+<span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
@@ -1490,7 +1488,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
     <span class="mi">1</span> <span class="p">:</span> <span class="s">'slurm'</span><span class="p">,</span>
     <span class="mi">2</span> <span class="p">:</span> <span class="s">'slurm-2c'</span>
 <span class="p">}</span>
-<span class="n">FAILURE_MESSAGE</span> <span class="o">=</span> <span class="s">'This tool could not be run because of a misconfiguration in the Galaxy job running system, please report this error'</span>
+<span class="n">FAILURE_MESSAGE</span> <span class="o">=</span> <span class="s">'This tool could not be run because of a misconfiguration in the <span class="notranslate">Galaxy</span> job running system, please report this error'</span>
 
 
 <span class="k">def</span> <span class="nf">dynamic_cores_time</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">tool</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
@@ -1514,7 +1512,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
     <span class="k">except</span><span class="p">:</span>
         <span class="c1"># resource param selector not sent with tool form, job_conf.xml misconfigured
 </span>        <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">'(</span><span class="si">%</span><span class="s">s) error, keys were: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">job</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">param_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="k">raise</span> <span class="n">JobMappingException</span><span class="p">(</span><span class="n">FAILURE_MESSAGE</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span><span class="p">(</span><span class="n">FAILURE_MESSAGE</span><span class="p">)</span>
 
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'returning destination: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">destination</span> <span class="ow">or</span> <span class="n">destination_id</span>
@@ -1523,13 +1521,13 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
       <p>It is important to note that <strong>you are responsible for parameter validation, including the job resource selector</strong>. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.</p>
     </li>
     <li>
-      <p>As usual, we need to instruct Galaxy of where to find this file:</p>
+      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
 
       <ul>
         <li>
           <p>Edit your group variables file and add the following:</p>
 
-          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_dynamic_job_rules</span><span class="pi">:</span>
+          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_dynamic_job_rules</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">my_rules.py</span>
   <span class="pi">-</span> <span class="s">map_resources.py</span>
 </code></pre></div>          </div>
@@ -1537,7 +1535,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
       </ul>
     </li>
     <li>
-      <p>Run the playbook, restart Galaxy</p>
+      <p>Run the playbook, restart <span class="notranslate">Galaxy</span></p>
     </li>
     <li>
       <p>Run the <strong>Multicore Tool</strong> with various resource parameter selections</p>
@@ -1561,7 +1559,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> scontrol show job 24
 <span class="go">JobId=24 JobName=g24_multi_anonymous_10_0_2_2
-   UserId=galaxy(999) GroupId=galaxy(999)
+   UserId=<span class="notranslate">galaxy</span>(999) GroupId=<span class="notranslate">galaxy</span>(999)
    Priority=4294901747 Nice=0 Account=(null) QOS=(null)
    JobState=COMPLETED Reason=None Dependency=(null)
    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
@@ -1580,10 +1578,10 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
    Features=(null) Gres=(null) Reservation=(null)
    Shared=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=(null)
-   WorkDir=/srv/galaxy/server/database/jobs/000/24
-   StdErr=/srv/galaxy/server/database/jobs/000/24/galaxy_24.e
+   WorkDir=/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/24
+   StdErr=/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/24/<span class="notranslate">galaxy</span>_24.e
    StdIn=StdIn=/dev/null
-   StdOut=/srv/galaxy/server/database/jobs/000/24/galaxy_24.o
+   StdOut=/srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/24/<span class="notranslate">galaxy</span>_24.o
    Power= SICP=0
 </span></code></pre></div></div>
 
@@ -1595,7 +1593,7 @@ galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadat
   <li>The <a href="https://github.com/galaxyproject/galaxy/blob/dev/config/tool_destinations.yml.sample">sample dynamic tool destination config file</a> fully describes the configuration language</li>
   <li><a href="https://docs.galaxyproject.org/en/latest/admin/jobs.html">Dynamic destination documentation</a></li>
   <li>Job resource parameters are not as well documented as they could be, but the <a href="https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml">sample configuration file</a> shows some of the possibilities.</li>
-  <li><a href="https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2">usegalaxy.org’s job_conf.xml</a> is publicly available for reference.</li>
+  <li><a href="https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2">use<span class="notranslate">galaxy</span>.org’s job_conf.xml</a> is publicly available for reference.</li>
 </ul>
 
 

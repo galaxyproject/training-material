@@ -526,8 +526,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -603,73 +601,73 @@
 
 <h1 id="setting-up-reports">Setting up Reports</h1>
 
-<p>The reports application is included with the Galaxy codebase and this tutorial assumes you’ve already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.</p>
+<p>The reports application is included with the <span class="notranslate">Galaxy</span> codebase and this tutorial assumes you’ve already done all of the setup required for <span class="notranslate">Galaxy</span>, Supervisord, uWSGI, and NGINX.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-setup-reports"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup Reports</h3>
 
   <ol>
     <li>
-      <p>First we add a basic configuration of the Reports app to the playbook templates. Create <code class="highlighter-rouge">templates/galaxy/config/</code> folder, if it doesn’t exist, and create <code class="highlighter-rouge">templates/galaxy/config/reports.yml</code> with the following contents:</p>
+      <p>First we add a basic configuration of the Reports app to the playbook templates. Create <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> folder, if it doesn’t exist, and create <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/reports.yml</code> with the following contents:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
     <span class="na">socket</span><span class="pi">:</span> <span class="s">127.0.0.1:9001</span>
     <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
     <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
-    <span class="na">threads</span><span class="pi">:</span> <span class="m">4</span>
-    <span class="na">offload-threads</span><span class="pi">:</span> <span class="m">2</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style={{ galaxy_server_dir }}/static/style/blue</span>
-    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static={{ galaxy_server_dir }}/static</span>
+    <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
+    <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
+    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue</span>
+    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
     <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=static/favicon.ico</span>
     <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">virtualenv</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_venv_dir</span> <span class="pi">}}</span>
-    <span class="na">pythonpath</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv">galaxy_server_dir</span> <span class="pi">}}</span><span class="s">/lib</span>
-    <span class="na">mount</span><span class="pi">:</span> <span class="s">/reports=galaxy.webapps.reports.buildapp:uwsgi_app()</span>
+    <span class="na">virtualenv</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv"><span class="notranslate">galaxy</span>_venv_dir</span> <span class="pi">}}</span>
+    <span class="na">pythonpath</span><span class="pi">:</span> <span class="pi">{{</span> <span class="nv"><span class="notranslate">galaxy</span>_server_dir</span> <span class="pi">}}</span><span class="s">/lib</span>
+    <span class="na">mount</span><span class="pi">:</span> <span class="s">/reports=<span class="notranslate">galaxy</span>.webapps.reports.buildapp:uwsgi_app()</span>
     <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">false</span>
     <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
     <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
     <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">reports</span><span class="pi">:</span>
     <span class="na">cookie-path</span><span class="pi">:</span> <span class="s">/reports</span>
-    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///galaxy?host=/var/run/postgresql"</span>
+    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
     <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
     <span class="na">filter-with</span><span class="pi">:</span> <span class="s">proxy-prefix</span>
-    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/compiled_templates"</span>
+    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/compiled_templates"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your <code class="highlighter-rouge">galaxyservers</code> group variables file, tell the playbook to deploy the reports configuration file:</p>
+      <p>In your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, tell the playbook to deploy the reports configuration file:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_templates</span><span class="pi">:</span>
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
 <span class="nn">...</span>
-<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/galaxy/config/reports.yml</span>
-  <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/reports.yml"</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/reports.yml</span>
+  <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/reports.yml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Similar to Galaxy we will again use Supervisor to manage the Reports process. In the same file (<code class="highlighter-rouge">galaxyservers</code> group variables file) edit the <code class="highlighter-rouge">supervisor_programs</code> section - add an entry for the Reports webapp:</p>
+      <p>Similar to <span class="notranslate">Galaxy</span> we will again use Supervisor to manage the Reports process. In the same file (<code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file) edit the <code class="highlighter-rouge">supervisor_programs</code> section - add an entry for the Reports webapp:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
   <span class="s">....</span>
   <span class="s">- name</span><span class="pi">:</span> <span class="s">reports</span>
     <span class="s">state</span><span class="pi">:</span> <span class="s">present</span>
-    <span class="s">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ galaxy_config_dir }}/reports.yml</span>
+    <span class="s">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ <span class="notranslate">galaxy</span>_config_dir }}/reports.yml</span>
     <span class="s">configuration</span><span class="pi">:</span> <span class="pi">|</span>
       <span class="s">autostart=true</span>
       <span class="s">autorestart=true</span>
       <span class="s">startretries=1</span>
       <span class="s">startsecs=10</span>
-      <span class="s">user=galaxy</span>
+      <span class="s">user=<span class="notranslate">galaxy</span></span>
       <span class="s">umask=022</span>
-      <span class="s">directory={{ galaxy_server_dir }}</span>
-      <span class="s">environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s</span>
+      <span class="s">directory={{ <span class="notranslate">galaxy</span>_server_dir }}</span>
+      <span class="s">environment=HOME={{ <span class="notranslate">galaxy</span>_mutable_data_dir }},VIRTUAL_ENV={{ <span class="notranslate">galaxy</span>_venv_dir }},PATH={{ <span class="notranslate">galaxy</span>_venv_dir }}/bin:%(ENV_PATH)s</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge">galaxyservers</code> group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:</p>
+      <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports</span> <span class="p">{</span>
     <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>

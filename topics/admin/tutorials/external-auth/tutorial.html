@@ -517,8 +517,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -581,7 +579,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>For this exercise we will use a basic password file method for authenticating - this is probably not a very useful method in production, but it demonstrates how the proxy server can be configured to provide the correct header to Galaxy, and how Galaxy integrates with upstream authentication providers. This same method can be used with NGINX and Apache modules for CAS or SAML authentication.</p>
+<p>For this exercise we will use a basic password file method for authenticating - this is probably not a very useful method in production, but it demonstrates how the proxy server can be configured to provide the correct header to <span class="notranslate">Galaxy</span>, and how <span class="notranslate">Galaxy</span> integrates with <span class="notranslate">upstream</span> authentication providers. This same method can be used with NGINX and Apache modules for CAS or SAML authentication.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -601,9 +599,9 @@
   <h3 id="hands_on-hands-on-configuring-everything"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuring everything</h3>
 
   <ol>
-    <li>Edit your <code class="highlighter-rouge">galaxyservers</code> group variables file and update the main location block defined for serving galaxy. Add the parameters:
+    <li>Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file and update the main location block defined for serving <span class="notranslate">galaxy</span>. Add the parameters:
       <ul>
-        <li><code class="highlighter-rouge">auth_basic galaxy;</code></li>
+        <li><code class="highlighter-rouge">auth_basic <span class="notranslate">galaxy</span>;</code></li>
         <li><code class="highlighter-rouge">auth_basic_user_file /etc/nginx/passwd;</code></li>
         <li><code class="highlighter-rouge">uwsgi_param HTTP_REMOTE_USER $reomte_user;</code></li>
       </ul>
@@ -614,18 +612,18 @@
         <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
         <span class="kn">uwsgi_param</span>          <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
         <span class="kn">include</span>              <span class="s">uwsgi_params</span><span class="p">;</span>
-        <span class="kn">auth_basic</span>           <span class="s">galaxy</span><span class="p">;</span>
+        <span class="kn">auth_basic</span>           <span class="s"><span class="notranslate">galaxy</span></span><span class="p">;</span>
         <span class="kn">auth_basic_user_file</span> <span class="n">/etc/nginx/passwd</span><span class="p">;</span>
         <span class="kn">uwsgi_param</span>          <span class="s">HTTP_REMOTE_USER</span> <span class="nv">$remote_user</span><span class="p">;</span>
         <span class="kn">uwsgi_param</span>          <span class="s">HTTP_GX_SECRET</span> <span class="s">SOME_SECRET_STRING</span><span class="p">;</span>
     <span class="p">}</span>
 </code></pre></div>      </div>
 
-      <p><code class="highlighter-rouge">auth_basic</code> enables validation of username and password using the “HTTP Basic Authentication” protocol. Its value <code class="highlighter-rouge">galaxy</code> is used as a realm name to be displayed to the user when prompting for credentials.
-<code class="highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps usernames and passwords.
-<code class="highlighter-rouge">uwsgi_param</code> adds <code class="highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to uwsgi, with value <code class="highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the username supplied with the Basic authentication.</p>
+      <p><code class="highlighter-rouge">auth_basic</code> enables validation of use<span class="notranslate">rna</span>me and password using the “HTTP Basic Authentication” protocol. Its value <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> is used as a realm name to be displayed to the user when prompting for credentials.
+<code class="highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps use<span class="notranslate">rna</span>mes and passwords.
+<code class="highlighter-rouge">uwsgi_param</code> adds <code class="highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to uwsgi, with value <code class="highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
 
-      <p><code class="highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent <code class="highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the <code class="highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having Galaxy listen on <code class="highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. For using sockets, we ins</p>
+      <p><code class="highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. For using sockets, we ins</p>
     </li>
     <li>
       <p>Add a pre_task using the <a href="https://docs.ansible.com/ansible/latest/modules/pip_module.html"><code class="highlighter-rouge">pip</code></a> module which installs the library <code class="highlighter-rouge">passlib</code>, which is required for <code class="highlighter-rouge">htpasswd</code>.</p>
@@ -643,7 +641,7 @@
     name: passlib
 - htpasswd:
     path: /etc/nginx/passwd
-    name: helena                    # Pick a username
+    name: helena                    # Pick a use<span class="notranslate">rna</span>me
     password: 'squeamish ossifrage' # and a password
     owner: www-data # nginx on centos
     group: root
@@ -654,11 +652,11 @@
       </blockquote>
     </li>
     <li>
-      <p>Galaxy needs to be instructed to expect authentication to come from the upstream proxy. In order to do this, set the following two options in your Galaxy group variables:</p>
+      <p><span class="notranslate">Galaxy</span> needs to be instructed to expect authentication to come from the <span class="notranslate">upstream</span> proxy. In order to do this, set the following two options in your <span class="notranslate">Galaxy</span> group variables:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
-<span class="na">galaxy_config</span><span class="pi">:</span>
-  <span class="na">galaxy</span><span class="pi">:</span>
+<span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
     <span class="s">...</span>
     <span class="s">use_remote_user</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">remote_user_maildomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
@@ -683,22 +681,22 @@
 
 <h1 id="testing">Testing</h1>
 
-<p>You should now be presented with a password dialog when attempting to load the Galaxy UI.</p>
+<p>You should now be presented with a password dialog when attempting to load the <span class="notranslate">Galaxy</span> UI.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-testing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing</h3>
 
   <ol>
     <li>
-      <p>Log in using the username and password you provided when creating the <code class="highlighter-rouge">passwd</code> file. If your username and the value of <code class="highlighter-rouge">remote_user_maildomain</code> match an existing user, you will be logged in to that account. If not, a new account will be created for that user.</p>
+      <p>Log in using the use<span class="notranslate">rna</span>me and password you provided when creating the <code class="highlighter-rouge">passwd</code> file. If your use<span class="notranslate">rna</span>me and the value of <code class="highlighter-rouge">remote_user_maildomain</code> match an existing user, you will be logged in to that account. If not, a new account will be created for that user.</p>
     </li>
     <li>
-      <p>Click on the “User” menu at the top, to see how the username appears.</p>
+      <p>Click on the “User” menu at the top, to see how the use<span class="notranslate">rna</span>me appears.</p>
     </li>
     <li>
       <p>Note that some user features are not available when remote user support is enabled.</p>
 
-      <p>Try logging out by selecting <strong>User</strong> -&gt; <strong>Logout</strong>. You will discover that when returning to the user interface, you are still logged in. This is because Galaxy has no way of logging you out of the proxy’s authentication system. Instead, you should set <code class="highlighter-rouge">remote_user_logout_href</code> in <code class="highlighter-rouge">galaxy.yml</code> to point to the URL of your authentication system’s logout page.</p>
+      <p>Try logging out by selecting <strong>User</strong> -&gt; <strong>Logout</strong>. You will discover that when returning to the user interface, you are still logged in. This is because <span class="notranslate">Galaxy</span> has no way of logging you out of the proxy’s authentication system. Instead, you should set <code class="highlighter-rouge">remote_user_logout_href</code> in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> to point to the URL of your authentication system’s logout page.</p>
     </li>
   </ol>
 
@@ -706,7 +704,7 @@
 
 <h1 id="api-access">API access</h1>
 
-<p>If you wish your Galaxy to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. Galaxy will still be secure and protected, but non-browser access will be permitted with an API key.</p>
+<p>If you wish your <span class="notranslate">Galaxy</span> to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. <span class="notranslate">Galaxy</span> will still be secure and protected, but non-browser access will be permitted with an API key.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /api/ {
     satisfy any;
@@ -716,7 +714,7 @@
 
 <h1 id="reverting">Reverting</h1>
 
-<p>We don’t want to leave Galaxy this way for the rest of our workshop.</p>
+<p>We don’t want to leave <span class="notranslate">Galaxy</span> this way for the rest of our workshop.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-reverting-the-changes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Reverting the changes</h3>

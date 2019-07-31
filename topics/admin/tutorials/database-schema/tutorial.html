@@ -306,8 +306,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -368,18 +366,18 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 id="galaxy-database-schema">Galaxy Database Schema</h1>
+                    <h1 id="galaxy-database-schema"><span class="notranslate">Galaxy</span> Database Schema</h1>
 
 <h1 id="requirements">Requirements</h1>
 
-<p>For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.</p>
+<p>For the hands-on examples you need access to a <span class="notranslate">Galaxy</span> server and access to its PostgreSQL database. You can set-up this yourself, or use the <span class="notranslate">Galaxy</span> Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-<span class="notranslate">galaxy</span>-stable). During this tutorial, we will work with the <span class="notranslate">Galaxy</span> Docker Image.</p>
 
-<p>Setting up Docker and using the Galaxy Docker Image:
+<p>Setting up Docker and using the <span class="notranslate">Galaxy</span> Docker Image:
 (please do this before the tutorial, preferably when you are still at home using a fast internet connection)</p>
 
 <p>Follow the instruction to install the Docker engine: https://docs.docker.com/engine/installation/ <br />
-Execute:  docker run -d -p 8080:80 bgruening/galaxy-stable
-(this will download the Galaxy Docker Image, when executed the first time, and
+Execute:  docker run -d -p 8080:80 bgruening/<span class="notranslate">galaxy</span>-stable
+(this will download the <span class="notranslate">Galaxy</span> Docker Image, when executed the first time, and
 start it)
 Test the Docker image in your web browser: http://localhost:8080
 (see first paragraph of Björn’s introduction, for special cases when using the
@@ -390,26 +388,26 @@ Docker Toolbox on Mac and Windows). Quit by: docker kill NAME (you get the name 
 <h2 id="database-versus-object-model">Database versus Object Model</h2>
 
 <p>The session description is database centric and we’ll be focusing on the relational
-database that backs Galaxy servers.  But that’s only half the picture of the this data.
+database that backs <span class="notranslate">Galaxy</span> servers.  But that’s only half the picture of the this data.
 The other is the object model which is the object-oriented view of this same data.
 The object model is used by the code to manipulate and access the database.
-The translation between the two worlds is handled by an object-relational mapping implemented with SQLAlchemy (https://www.sqlalchemy.org).</p>
+The translation between the two worlds is handled by an object-relational <span class="notranslate">mapping</span> implemented with SQLAlchemy (https://www.sqlalchemy.org).</p>
 
-<p>Today we are covering the database and how to access it with SQL.  We aren’t going to cover the corresponding object model or object relational mapping.</p>
+<p>Today we are covering the database and how to access it with SQL.  We aren’t going to cover the corresponding object model or object relational <span class="notranslate">mapping</span>.</p>
 
 <h2 id="database-platform">Database Platform</h2>
 
-<p>The default out-of-the-box Galaxy installation uses SQLite (https://www.sqlite.org).
-SQLite is a lightweight database management system (DBMS) that can be packaged inside Galaxy and does not require any additional steps at initial setup time.</p>
+<p>The default out-of-the-box <span class="notranslate">Galaxy</span> installation uses SQLite (https://www.sqlite.org).
+SQLite is a lightweight database management system (DBMS) that can be packaged inside <span class="notranslate">Galaxy</span> and does not require any additional steps at initial setup time.</p>
 
-<p>However, SQLite is not the recommended DBMS for running a Galaxy server. The recommended production DMBS for
-Galaxy is PostgreSQL (https://www.postgresql.org). PostgreSQL offers a full set of DBMS features and robust support for multiple simultaneous users.</p>
+<p>However, SQLite is not the recommended DBMS for running a <span class="notranslate">Galaxy</span> server. The recommended production DMBS for
+<span class="notranslate">Galaxy</span> is PostgreSQL (https://www.postgresql.org). PostgreSQL offers a full set of DBMS features and robust support for multiple simultaneous users.</p>
 
 <p>This workshop will be entirely based in PostgreSQL (also referred to as Postgres).</p>
 
-<h2 id="what-is-in-and-not-in-the-galaxy-database">What is in (and not in) the Galaxy database?</h2>
+<h2 id="what-is-in-and-not-in-the-galaxy-database">What is in (and not in) the <span class="notranslate">Galaxy</span> database?</h2>
 
-<p>The Galaxy database contains management information about your server.  The database tracks users, groups, jobs, histories, datasets, workflows and so on.</p>
+<p>The <span class="notranslate">Galaxy</span> database contains management information about your server.  The database tracks users, groups, jobs, histories, datasets, workflows and so on.</p>
 
 <p>What’s not in the database is the data. Datasets are stored outside the database. The database does keep metadata – information about the datasets such as data type. The tools themselves are not stored in the database either.</p>
 
@@ -420,7 +418,7 @@ Galaxy is PostgreSQL (https://www.postgresql.org). PostgreSQL offers a full set 
 <p>Entity-relationship diagrams are a way to understand tables and the relationships between them inside a relational database.  SchemaSpy (http://schemaspy.sourceforge.net/) is a free (and remarkable tool) for generating ER diagrams.  We’ve used it generate a description of the database backing the server in this container.  See</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- TODO: following link is broken, update with new link once fixed on Hub --&gt;
-https://galaxyproject.org/schema/SchemaSpy/index.html
+https://<span class="notranslate">galaxy</span>project.org/schema/SchemaSpy/index.html
 </code></pre></div></div>
 
 <p>The “Tables” tab is a good place to start learning the structure of the database.  Each table represents a different type of thing, and often that thing is itself a relationship. For example, each record in the dataset table has information about a specific dataset, while records in the history_dataset_association table have information about what histories that dataset is in.</p>
@@ -430,7 +428,7 @@ https://galaxyproject.org/schema/SchemaSpy/index.html
 <p>Also see the “Run SchemaSpy in this container” section below for how to install and then run SchemaSpy yourself.</p>
 
 <h4 id="database-conventions">Database conventions</h4>
-<p>The Galaxy database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.</p>
+<p>The <span class="notranslate">Galaxy</span> database uses a number of naming and design conventions.  Understanding these can make navigating the database much easier.</p>
 
 <h4 id="id-attributes">id attributes</h4>
 <p>Every table has an id column that uniquely identifies each row.  (The id column is the primary key in database terminology.) Beyond uniquely identifying a row in the table, ID values have no meaning.  ID values are unique within a table, but not across the database.</p>
@@ -439,7 +437,7 @@ https://galaxyproject.org/schema/SchemaSpy/index.html
 <p>Relationships between tables are implemented by exporting id columns from one table into another.  Imported ids are called foreign keys in database nomenclature, and are uniformly named
    table_the_id_came_from_id</p>
 
-<p>There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with galaxy_, for example, galaxy_user or galaxy_session, the  galaxy_ will be dropped from the column name.  For example, galaxy_user.id becomes user_id in the over 50 tables it is imported into</p>
+<p>There are a few notable exceptions to this rule.  If the ID is from a table that is prefixed with <span class="notranslate">galaxy</span>_, for example, <span class="notranslate">galaxy</span>_user or <span class="notranslate">galaxy</span>_session, the  <span class="notranslate">galaxy</span>_ will be dropped from the column name.  For example, <span class="notranslate">galaxy</span>_user.id becomes user_id in the over 50 tables it is imported into</p>
 
 <h4 id="relationship-tables">Relationship tables</h4>
 
@@ -451,24 +449,24 @@ https://galaxyproject.org/schema/SchemaSpy/index.html
 We have no idea.  In practice, they aren’t nulls in most of those columns.</p>
 
 <p>Why aren’t there comments, on anything?
-PostgreSQL supports comments to table definitions, but there are none shown in the SchemaSpy report. Why? The table definitions are actually generated by SQLAlchemy, the object-relational mapping software used by Galaxy, and SQLAlchemy does not support it.</p>
+PostgreSQL supports comments to table definitions, but there are none shown in the SchemaSpy report. Why? The table definitions are actually generated by SQLAlchemy, the object-relational <span class="notranslate">mapping</span> software used by <span class="notranslate">Galaxy</span>, and SQLAlchemy does not support it.</p>
 
 <p>There is nothing in the database that results from direct manipulation of the table definitions through DDL.  Everything comes in through SQLAlchemy.</p>
 
-<h2 id="start-docker-and-galaxy">Start Docker and Galaxy</h2>
+<h2 id="start-docker-and-galaxy">Start Docker and <span class="notranslate">Galaxy</span></h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <strong><em>Hands on!</em></strong></h3>
 
   <ol>
-    <li>Start the Galaxy Docker Image -  this time as an interactive session</li>
+    <li>Start the <span class="notranslate">Galaxy</span> Docker Image -  this time as an interactive session</li>
   </ol>
 
-  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">-p</span> 8080:80 bgruening/galaxy-stable /bin/bash
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">-p</span> 8080:80 bgruening/<span class="notranslate">galaxy</span>-stable /bin/bash
 </code></pre></div>  </div>
 
   <ol>
-    <li>Start Galaxy and its PostgreSQL server</li>
+    <li>Start <span class="notranslate">Galaxy</span> and its PostgreSQL server</li>
   </ol>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      startup <span class="o">&gt;</span> log 2&gt;&amp;1 &amp;
@@ -488,11 +486,11 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
   <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <strong><em>Hands on!</em></strong></h3>
 
   <ol>
-    <li>Connect to the PostgreSQL database (change to user galaxy first)</li>
+    <li>Connect to the PostgreSQL database (change to user <span class="notranslate">galaxy</span> first)</li>
   </ol>
 
-  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       su galaxy
-       psql <span class="nt">-d</span> galaxy <span class="nt">-U</span> galaxy
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       su <span class="notranslate">galaxy</span>
+       psql <span class="nt">-d</span> <span class="notranslate">galaxy</span> <span class="nt">-U</span> <span class="notranslate">galaxy</span>
 </code></pre></div>  </div>
 
   <ol>
@@ -505,21 +503,21 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
 <p>Enter <code class="highlighter-rouge">q</code> to exit the view results page, and space to see the next results page.</p>
 
-<h3 id="table-galaxy_user">Table “galaxy_user”</h3>
+<h3 id="table-galaxy_user">Table “<span class="notranslate">galaxy</span>_user”</h3>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
-  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n"><span class="notranslate">galaxy</span>_user</span><span class="p">;</span>
 </code></pre></div>  </div>
 </blockquote>
 
-<p>As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:</p>
+<p>As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@<span class="notranslate">galaxy</span>.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the <span class="notranslate">Galaxy</span> website. And check the database:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-3"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
-  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n"><span class="notranslate">galaxy</span>_user</span><span class="p">;</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -532,7 +530,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 </code></pre></div>  </div>
 </blockquote>
 
-<p>Run a few jobs on the galaxy website (e.g <em>upload file</em> a simple table and <em>add column</em> with ‘Iterate’ no and yes) and check the database again:</p>
+<p>Run a few jobs on the <span class="notranslate">galaxy</span> website (e.g <em>upload file</em> a simple table and <em>add column</em> with ‘Iterate’ no and yes) and check the database again:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -608,14 +606,14 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 
   <p>…and now include the user</p>
 
-  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n"><span class="notranslate">galaxy</span>_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="s1">'hansrudolf.hotz@fmi.ch'</span>
           <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span><span class="p">;</span>
 </code></pre></div>  </div>
 
-  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n"><span class="notranslate">galaxy</span>_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span>
@@ -641,7 +639,7 @@ all the users who have used the broken version, without alerting users who never
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_version</span> <span class="o">=</span> <span class="s1">'1.0.4quasr'</span><span class="p">;</span>
 </code></pre></div>  </div>
 
-  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+  <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n"><span class="notranslate">galaxy</span>_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'qAlign'</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_version</span> <span class="o">=</span> <span class="s1">'1.0.4quasr'</span><span class="p">;</span>
@@ -658,7 +656,7 @@ all the users who have used the broken version, without alerting users who never
 </span></code></pre></div>  </div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">value</span>
-          <span class="k">from</span> <span class="n">job_parameter</span> <span class="n">jp</span><span class="p">,</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n">galaxy_user</span> <span class="n">u</span>
+          <span class="k">from</span> <span class="n">job_parameter</span> <span class="n">jp</span><span class="p">,</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n"><span class="notranslate">galaxy</span>_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'iterate'</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'addValue'</span>
           <span class="k">and</span> <span class="n">jp</span><span class="p">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span>
@@ -689,7 +687,7 @@ all the users who have used the broken version, without alerting users who never
 
 <p>Slides: https://docs.google.com/presentation/d/1N3BDNQT3s7eQEO3BO89TQbTYwKp92fxHDRWQwC-T1kA</p>
 
-<p>https://wiki.galaxyproject.org/Community/Log/2015/MySQL2PostgreSQL</p>
+<p>https://wiki.<span class="notranslate">galaxy</span>project.org/Community/Log/2015/MySQL2PostgreSQL</p>
 
 <h4 id="is-there-ever-a-need-to-manually-change-the-contents-of-a-table">Is there ever a need to manually change the contents of a table</h4>
 
@@ -709,7 +707,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 </code></pre></div>  </div>
 
   <p>To run SchemaSpy:</p>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  java -jar schemaSpy_5.0.0.jar -t pgsql -db galaxy -u galaxy -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  java -jar schemaSpy_5.0.0.jar -t pgsql -db <span class="notranslate">galaxy</span> -u <span class="notranslate">galaxy</span> -host localhost -s public -dp /usr/share/java/postgresql-jdbc4-9.2.jar -o SpyOut
 </code></pre></div>  </div>
 
 </blockquote>
@@ -718,7 +716,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>There is a lot of information stored in the Galaxy database. Use this information for trouble shooting when necessary and use it as a source for extended user statistics.</p>
+<p>There is a lot of information stored in the <span class="notranslate">Galaxy</span> database. Use this information for trouble shooting when necessary and use it as a source for extended user statistics.</p>
 
 
                     

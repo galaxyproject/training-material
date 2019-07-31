@@ -330,8 +330,6 @@
 </p>
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -508,9 +506,9 @@
 
 <p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.</p>
 
-<p>Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">NAMD</a> and CHARMM (available in the <a href="https://github.com/scientificomputing/BRIDGE">docker container</a>).</p>
+<p>Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in <span class="notranslate">Galaxy</span> are <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">NAMD</a> and CHARMM (available in the <a href="https://github.com/scientificomputing/BRIDGE">docker container</a>).</p>
 
-<p>This is a introductory guide to using GROMACS <a class="citation" href="#abraham15">Abraham <i>et al.</i> 2015</a> in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.</p>
+<p>This is a introductory guide to using GROMACS <a class="citation" href="#abraham15">Abraham <i>et al.</i> 2015</a> in <span class="notranslate">Galaxy</span> to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.</p>
 
 <blockquote class="comment">
   <h3 id="comment-more-information"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> More information</h3>
@@ -537,7 +535,7 @@
     </ol>
   </li>
   <li><a href="#production-simulation" id="markdown-toc-production-simulation">Production simulation</a></li>
-  <li><a href="#workflow" id="markdown-toc-workflow">Workflow</a></li>
+  <li><a href="#workflow" id="markdown-toc-workflow"><span class="notranslate">Workflow</span></a></li>
 </ol>
 
 </blockquote>
@@ -554,12 +552,12 @@
   <li>Production simulation, which produces our trajectory.</li>
 </ol>
 
-<p>The trajectory is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein. We will discuss each step making up this workflow in more detail.</p>
+<p>The trajectory is a binary file that records the atomic coordinates at multiple time steps, and therefore shows the dynamic motion of the molecule. Using visualization software, we can display this trajectory as a film displaying the molecular motion of the protein. We will discuss each step making up this <span class="notranslate">workflow</span> in more detail.</p>
 
 <h1 id="getting-data">Getting data</h1>
 <p>To perform simulation, an initial PDB file is required. This should be ‘cleaned’ of solvent and any other non-protein atoms. Solvent will be re-added in a subsequent step.</p>
 
-<p>A prepared file is available via Zenodo. Alternatively, you can prepare the file yourself. Download a PDB structure file from the <a href="https://www.rcsb.org/">Protein Data Bank</a> and remove the unwanted atoms using the grep text processing tool. This simply removes the lines in the PDB file that refer to the unwanted atoms.</p>
+<p>A prepared file is available via Zenodo. Alte<span class="notranslate">rna</span>tively, you can prepare the file yourself. Download a PDB structure file from the <a href="https://www.rcsb.org/">Protein Data Bank</a> and remove the unwanted atoms using the grep text processing tool. This simply removes the lines in the PDB file that refer to the unwanted atoms.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-upload-an-initial-structure"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload an initial structure</h3>
@@ -575,12 +573,12 @@
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
     </li>
-    <li>Upload the file in Galaxy from the PDB:
+    <li>Upload the file in <span class="notranslate">Galaxy</span> from the PDB:
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://files.rcsb.org/download/1AKI.pdb
 </code></pre></div>      </div>
 
@@ -591,7 +589,7 @@
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -603,7 +601,7 @@
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
     </li>
@@ -611,7 +609,7 @@
       <ul>
         <li><em>“Select lines from”</em>: uploaded PDB file</li>
         <li><em>“that”</em>: <code class="highlighter-rouge">Don't Match</code></li>
-        <li><em>“Regular Expression”</em>: <code class="highlighter-rouge">HETATM</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">HETATM</code></li>
       </ul>
     </li>
   </ol>
@@ -619,8 +617,8 @@
 </blockquote>
 
 <blockquote class="comment">
-  <h3 id="comment-alternative-upload"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Alternative upload</h3>
-  <p>As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:</p>
+  <h3 id="comment-alternative-upload"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Alte<span class="notranslate">rna</span>tive upload</h3>
+  <p>As an alte<span class="notranslate">rna</span>tive option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:</p>
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2598415
 </code></pre></div>  </div>
 </blockquote>
@@ -709,7 +707,7 @@
 
 <p>To remove any steric clashes or unusual geometry which would artificially raise the energy of the system, we must relax the structure by running an energy minimization (EM) algorithm.</p>
 
-<p>Here, and in the later steps, two options are presented under ‘Parameter input’. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the Galaxy interface. Alternatively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in Galaxy (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found <a href="http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html">here</a>.</p>
+<p>Here, and in the later steps, two options are presented under ‘Parameter input’. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the <span class="notranslate">Galaxy</span> interface. Alte<span class="notranslate">rna</span>tively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in <span class="notranslate">Galaxy</span> (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found <a href="http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-energy-minimization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: energy minimization</h3>
@@ -843,17 +841,17 @@
   </ol>
 </blockquote>
 
-<h1 id="workflow">Workflow</h1>
+<h1 id="workflow"><span class="notranslate">Workflow</span></h1>
 
-<p>A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a PDB (Protein Data Bank) structure file as input and returns a MD trajectory.</p>
+<p>A GROMACS <span class="notranslate">workflow</span> is provided for this tutorial. Overall, the <span class="notranslate">workflow</span> takes a PDB (Protein Data Bank) structure file as input and returns a MD trajectory.</p>
 
-<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/workflow_gromacs.png" alt="GROMACS workflow" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The basic GROMACS workflow</figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/workflow_gromacs.png" alt="GROMACS workflow" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The basic GROMACS <span class="notranslate">workflow</span></figcaption></figure>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and <a href="/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html">analysis</a> tutorials for more information.</p>
+<p>After completing the steps, or running the <span class="notranslate">workflow</span>, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and <a href="/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html">analysis</a> tutorials for more information.</p>
 
-<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/traj.gif" alt="Trajectory" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Trajectory produced using the GROMACS workflow, visualized with the NGL viewer</figcaption></figure>
+<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/traj.gif" alt="Trajectory" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Trajectory produced using the GROMACS <span class="notranslate">workflow</span>, visualized with the NGL viewer</figcaption></figure>
 
 
 

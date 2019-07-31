@@ -343,8 +343,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -540,7 +538,7 @@
 
 <p>Pervasive use (and misuse) of antibiotics for human disease treatment, as well as for various agricultural purposes, has resulted in the evolution of multi-drug resistant (MDR) pathogenic bacteria. The <a href="https://www.cdc.gov/drugresistance/">Center for Disease Control estimates</a> that in the U.S. alone, every year at least 2 million people get an antibiotic-resistant infection, and at least 23,000 people die. Antibiotic resistance poses a major public health challenge, and its causes and mitigations are widely studied.</p>
 
-<p>Plasmids are small DNA molecules within a cell which are physically separated from chromosomal DNA and can replicate independently. They are most commonly found as small circular, double-stranded DNA molecules in bacteria.</p>
+<p>Plasmids are small <span class="notranslate">DNA</span> molecules within a cell which are physically separated from chromosomal <span class="notranslate">DNA</span> and can replicate independently. They are most commonly found as small circular, double-stranded <span class="notranslate">DNA</span> molecules in bacteria.</p>
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/plasmids.png" alt="Depiction of plasmids" /></p>
 
@@ -554,10 +552,10 @@
 
 <p>The assembly will be performed with <strong>Minimap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2018">Li 2018</a>),
 <strong>Miniasm</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li 2016</a>), <strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Vaser2017">Vaser <i>et al.</i> 2017</a>) and <strong>Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>).
-The downstream analysis will use <strong>Nanoplot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#DeCoster2018">Coster <i>et al.</i> 2018</a>),
+The <span class="notranslate">downstream</span> analysis will use <strong>Nanoplot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#DeCoster2018">Coster <i>et al.</i> 2018</a>),
 <strong>Bandage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2015">Wick <i>et al.</i> 2015</a>), <strong>PlasFlow</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a>) and <strong>starmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a href="https://github.com/phac-nml/staramr">GitHub</a>).</p>
 
-<p>A schematic view of the workflow we will perform in this tutorial is given below:</p>
+<p>A schematic view of the <span class="notranslate">workflow</span> we will perform in this tutorial is given below:</p>
 
 <p><img src="../../images/plasmid-metagenomics-nanopore/Workflow.png" alt="Workflow representation of this tutorial" /></p>
 
@@ -568,7 +566,7 @@ The downstream analysis will use <strong>Nanoplot</strong> <i class="fa fa-wrenc
 
 <ol id="markdown-toc">
   <li><a href="#obtaining-and-preparing-data" id="markdown-toc-obtaining-and-preparing-data">Obtaining and preparing data</a>    <ol>
-      <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into Galaxy</a></li>
+      <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></a></li>
     </ol>
   </li>
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a>    <ol>
@@ -578,7 +576,7 @@ The downstream analysis will use <strong>Nanoplot</strong> <i class="fa fa-wrenc
   <li><a href="#de-novo-assembly" id="markdown-toc-de-novo-assembly">De-novo Assembly</a>    <ol>
       <li><a href="#pairwise-alignment-using-minimap2" id="markdown-toc-pairwise-alignment-using-minimap2">Pairwise alignment using Minimap2</a></li>
       <li><a href="#ultrafast-de-novo-assembly-using-miniasm" id="markdown-toc-ultrafast-de-novo-assembly-using-miniasm">Ultrafast de novo assembly using Miniasm</a></li>
-      <li><a href="#remapping-using-minimap2" id="markdown-toc-remapping-using-minimap2">Remapping using Minimap2</a></li>
+      <li><a href="#remapping-using-minimap2" id="markdown-toc-remapping-using-minimap2">Re<span class="notranslate">mapping</span> using Minimap2</a></li>
       <li><a href="#ultrafast-consensus-module-using-racon" id="markdown-toc-ultrafast-consensus-module-using-racon">Ultrafast consensus module using Racon</a></li>
       <li><a href="#visualize-assemblies-using-bandage" id="markdown-toc-visualize-assemblies-using-bandage">Visualize assemblies using Bandage</a></li>
       <li><a href="#optimizing-assemblies-using-unicycler" id="markdown-toc-optimizing-assemblies-using-unicycler">Optimizing assemblies using Unicycler</a></li>
@@ -602,7 +600,7 @@ The downstream analysis will use <strong>Nanoplot</strong> <i class="fa fa-wrenc
   <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
 
   <p>Your results may be slightly different from the ones presented in this tutorial
-due to differing versions of tools, reference data, external databases, or
+due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or
 because of stochastic processes in the algorithms.</p>
 
 </blockquote>
@@ -625,12 +623,12 @@ We will use the plasmid dataset created by <a class="citation" href="#LiXie2018"
     <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li>
   </ol>
 
-  <figure id="figure-1"><img src="../../images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Using nanopore sequencing, a single molecule of <span class="notranslate">DNA</span> or <span class="notranslate">RNA</span> can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long <span class="notranslate">reads</span> for genome assembly</a>)</figcaption></figure>
   <p><br /><br /></p>
 
 </blockquote>
 
-<h2 id="importing-the-data-into-galaxy">Importing the data into Galaxy</h2>
+<h2 id="importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-obtaining-our-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
@@ -647,7 +645,7 @@ We will use the plasmid dataset created by <a class="citation" href="#LiXie2018"
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -673,7 +671,7 @@ https://zenodo.org/record/3247504/files/RB12.fasta
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -685,7 +683,7 @@ https://zenodo.org/record/3247504/files/RB12.fasta
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
     </li>
@@ -774,12 +772,12 @@ plot the read length distribution of each sample:
 
 <h2 id="pairwise-alignment-using-minimap2">Pairwise alignment using Minimap2</h2>
 
-<p>In this experiment we used Nanopore sequencing; this means that sequencing results in long reads with overlap.
+<p>In this experiment we used Nanopore sequencing; this means that sequencing results in long <span class="notranslate">reads</span> with overlap.
 To find this overlap, Minimap2 is used. Minimap2 is a sequence alignment program that can be used for different
-purposes, but in this case we’ll use it to find overlaps between long reads with an error rate up to ~15%.
-Typical other use cases for Minimap2 include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human genome;
-(2) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome;
-(3) aligning Illumina single- or paired-end reads; (4) assembly-to-assembly alignment; (5) full-genome alignment
+purposes, but in this case we’ll use it to find overlaps between long <span class="notranslate">reads</span> with an error rate up to ~15%.
+Typical other use cases for Minimap2 include: (1) <span class="notranslate">mapping</span> PacBio or Oxford Nanopore genomic <span class="notranslate">reads</span> to the human genome;
+(2) splice-aware alignment of PacBio Iso-Seq or Nanopore c<span class="notranslate">DNA</span> or Direct <span class="notranslate">RNA</span> <span class="notranslate">reads</span> against a reference genome;
+(3) aligning Illumina single- or paired-end <span class="notranslate">reads</span>; (4) assembly-to-assembly alignment; (5) full-genome alignment
 between two closely related species with divergence below ~15%.</p>
 
 <p>Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
@@ -796,9 +794,9 @@ the Minimap2 publication (<a class="citation" href="#Li2018">Li 2018</a>).</p>
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="highlighter-rouge">Use a genome from history and build index</code></li>
         <li><em>“Use the following data collection as the reference sequence”</em>: <code class="highlighter-rouge">Created dataset collection (Plasmids)</code></li>
-        <li><em>“Single or Paired-end reads”</em>: <code class="highlighter-rouge">Single</code></li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Single</code></li>
         <li><em>“Select fastq dataset”</em>: The <code class="highlighter-rouge">Plasmids</code> dataset collection</li>
-        <li><em>“Select analysis mode (sets default)”</em>: <code class="highlighter-rouge">Oxford Nanopore all-vs--all overlap mapping</code></li>
+        <li><em>“Select analysis mode (sets default)”</em>: <code class="highlighter-rouge">Oxford Nanopore all-vs--all overlap <span class="notranslate">mapping</span></code></li>
         <li>In the section <strong>Set advanced output options</strong>:
           <ul>
             <li><em>“Select an output format”</em>: <code class="highlighter-rouge">paf</code></li>
@@ -821,8 +819,8 @@ front of the input parameter you want to supply the collection to.</li>
 
 </blockquote>
 
-<p>This step maps the Nanopore sequence reads against itself to find overlaps. The result is a PAF file.
-PAF is a text format describing the approximate mapping positions between two
+<p>This step maps the Nanopore sequence <span class="notranslate">reads</span> against itself to find overlaps. The result is a PAF file.
+PAF is a text format describing the approximate <span class="notranslate">mapping</span> positions between two
 set of sequences. PAF is TAB-delimited with each line consisting of the
 following predefined fields:</p>
 
@@ -893,7 +891,7 @@ following predefined fields:</p>
     <tr>
       <td style="text-align: right">12</td>
       <td style="text-align: center">int</td>
-      <td style="text-align: left">Mapping quality (0-255; 255 for missing)</td>
+      <td style="text-align: left"><span class="notranslate">Mapping</span> quality (0-255; 255 for missing)</td>
     </tr>
   </tbody>
 </table>
@@ -906,13 +904,13 @@ channel_100_69f2ea89-01c5-45f4-8e1b-55a09acdb3f5_template	4518	251	1328	+	channe
 
 <h2 id="ultrafast-de-novo-assembly-using-miniasm">Ultrafast de novo assembly using Miniasm</h2>
 
-<p>The mapped reads are ready to be assembled with <strong>Miniasm</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li 2016</a>). Miniasm is a very fast Overlap Layout Consensus based de-novo assembler for noisy long reads.
-It takes all-vs-all read self-mappings (typically by <strong>Minimap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) as input and outputs an assembly graph in the GFA format.</p>
+<p>The mapped <span class="notranslate">reads</span> are ready to be assembled with <strong>Miniasm</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li 2016</a>). Miniasm is a very fast Overlap Layout Consensus based de-novo assembler for noisy long <span class="notranslate">reads</span>.
+It takes all-vs-all read self-<span class="notranslate">mapping</span>s (typically by <strong>Minimap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) as input and outputs an assembly graph in the GFA format.</p>
 
 <p>Different from mainstream assemblers, miniasm does not have a consensus step.
 It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
-Thus the per-base error rate is similar to the raw input reads.
+Thus the per-base error rate is similar to the raw input <span class="notranslate">reads</span>.
 <img src="../../images/plasmid-metagenomics-nanopore/Miniasm.png" alt="Pairwise alignment" /></p>
 
 <blockquote class="notranslate hands_on">
@@ -921,7 +919,7 @@ Thus the per-base error rate is similar to the raw input reads.
   <ol>
     <li><strong>miniasm</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Sequence Reads”</em>: The <code class="highlighter-rouge">Plasmids</code> dataset collection</li>
+        <li><em>“Sequence <span class="notranslate">Reads</span>”</em>: The <code class="highlighter-rouge">Plasmids</code> dataset collection</li>
         <li><em>“PAF file”</em>: <code class="highlighter-rouge">Output Minimap dataset collection</code> created by <strong>Minimap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
@@ -948,11 +946,11 @@ front of the input parameter you want to supply the collection to.</li>
 a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-4457	+	4357
 </code></pre></div></div>
 
-<h2 id="remapping-using-minimap2">Remapping using Minimap2</h2>
+<h2 id="remapping-using-minimap2">Re<span class="notranslate">mapping</span> using Minimap2</h2>
 
-<p>The Assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format.</p>
+<p>The Assembly graph created can be used for <span class="notranslate">mapping</span> again with Minimap2, but first the graph should be transformed to FASTA format.</p>
 
-<p>Remapping is done with the original reads, using the Miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by <strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for consensus construction.</p>
+<p>Re<span class="notranslate">mapping</span> is done with the original <span class="notranslate">reads</span>, using the Miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by <strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for consensus construction.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-pairwise-sequence-alignment-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Pairwise sequence alignment</h3>
@@ -967,9 +965,9 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="highlighter-rouge">Use a genome from history and build index</code></li>
         <li><em>“Use the following dataset as the reference sequence”</em>: <code class="highlighter-rouge">FASTA file</code> collection created by <strong>GFA to Fasta</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Single or Paired-end reads”</em>: <code class="highlighter-rouge">single</code></li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">single</code></li>
         <li><em>“Select fastq dataset”</em>: The <code class="highlighter-rouge">Plasmids</code> collection</li>
-        <li><em>“Select analysis mode (sets default)”</em>: <code class="highlighter-rouge">PacBio/Oxford Nanopore read to reference mapping (-Hk19)</code></li>
+        <li><em>“Select analysis mode (sets default)”</em>: <code class="highlighter-rouge">PacBio/Oxford Nanopore read to reference <span class="notranslate">mapping</span> (-Hk19)</code></li>
         <li>In the section <strong>Set advanced output options</strong>:
           <ul>
             <li><em>“Select an output format”</em>: <code class="highlighter-rouge">paf</code></li>
@@ -1008,7 +1006,7 @@ Hint: run <strong>Nanoplot</strong> <i class="fa fa-wrench" aria-hidden="true"><
 
 <h2 id="ultrafast-consensus-module-using-racon">Ultrafast consensus module using Racon</h2>
 
-<p>The mapped reads can be improved even more using <strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Vaser2017">Vaser <i>et al.</i> 2017</a>) to find a consensus sequence.
+<p>The mapped <span class="notranslate">reads</span> can be improved even more using <strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Vaser2017">Vaser <i>et al.</i> 2017</a>) to find a consensus sequence.
 Racon is a standalone consensus module to correct raw contigs generated by rapid assembly methods which do not include a consensus step.
 It supports data produced by both Pacific Biosciences and Oxford Nanopore Technologies.</p>
 
@@ -1039,7 +1037,7 @@ AATGCAGCTATGGCGCGTGCGGTGCCAAGAAAGCCCGCAGATATTCCGCTTCCTCGCTCATT [..]
 
 <h2 id="visualize-assemblies-using-bandage">Visualize assemblies using Bandage</h2>
 
-<p>To get a sense of how well our data was assembled, and to determine whether the contigs are chomosomal or plasmid DNA (the former being linear sequences while plasmids are circular molecules), <strong>Bandage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can give a clear view of the assembly.</p>
+<p>To get a sense of how well our data was assembled, and to determine whether the contigs are chomosomal or plasmid <span class="notranslate">DNA</span> (the former being linear sequences while plasmids are circular molecules), <strong>Bandage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can give a clear view of the assembly.</p>
 
 <p><strong>Bandage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2015">Wick <i>et al.</i> 2015</a>) (a <strong>B</strong>ioinformatics <strong>A</strong>pplication for <strong>N</strong>avigating <strong>D</strong>e novo <strong>A</strong>ssembly <strong>G</strong>raphs <strong>E</strong>asily), is a program that creates visualisations of assembly graphs.
 Sequence assembler programs (such as <strong>Miniasm</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Li2016">Li 2016</a>), <strong>Velvet</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Zerbino2008">Zerbino and Birney 2008</a>), <strong>SPAdes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a>), <strong>Trinity</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Grabherr2011">Grabherr <i>et al.</i> 2011</a>) and <strong>MEGAHIT</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <a class="citation" href="#Li2015">Li <i>et al.</i> 2015</a>) carry out assembly by building a graph, from which contigs are generated.</p>
@@ -1057,7 +1055,7 @@ Sequence assembler programs (such as <strong>Miniasm</strong> <i class="fa fa-wr
         <li><em>“Graphical Fragment Assembly”</em>: the <code class="highlighter-rouge">Assembly graph</code> collection created by <strong>Miniasm</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li>Explore <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output images</li>
+    <li>Explore <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output images</li>
   </ol>
 
   <blockquote class="question">
@@ -1082,7 +1080,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 <p>As you can see from these Bandage outputs, we were able to assemble our data into fairly large fragments, but were not quite successful in assembling the full (circular) plasmid sequences.</p>
 
-<p>However, all the tools we used to do the assembly have many different parameters that we did not explore, and multiple rounds of mapping and cleaning could improve our data as well. Choosing these parameters carefully could potentially improve our assembly, but this is also a lot of work and not an easy task. This is where <strong>Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>) can help us out.</p>
+<p>However, all the tools we used to do the assembly have many different parameters that we did not explore, and multiple rounds of <span class="notranslate">mapping</span> and cleaning could improve our data as well. Choosing these parameters carefully could potentially improve our assembly, but this is also a lot of work and not an easy task. This is where <strong>Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Wick2017">Wick <i>et al.</i> 2017</a>) can help us out.</p>
 
 <h2 id="optimizing-assemblies-using-unicycler">Optimizing assemblies using Unicycler</h2>
 
@@ -1092,7 +1090,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 <ol>
   <li>The first modification is to <strong>help circular replicons assemble</strong> into circular string graphs.</li>
-  <li><strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> polishing is carried out in <strong>multiple rounds to improve the sequence accuracy</strong>. It will polish until the assembly stops improving, as measured by the agreement between the reads and the assembly.</li>
+  <li><strong>Racon</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> polishing is carried out in <strong>multiple rounds to improve the sequence accuracy</strong>. It will polish until the assembly stops improving, as measured by the agreement between the <span class="notranslate">reads</span> and the assembly.</li>
   <li>Circular replicons are ‘rotated’ (have their starting position shifted) between rounds of polishing to ensure that <strong>no part of the sequence is left unpolished</strong>.</li>
 </ol>
 
@@ -1105,7 +1103,7 @@ This is not the case for most of the samples, but we will improve our assemblies
     <li><strong>Create assemblies with Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Paired or Single end data”</em>: <code class="highlighter-rouge">None</code></li>
-        <li><em>“Select long reads. If there are no long reads, leave this empty”</em>: The <code class="highlighter-rouge">Plasmids</code> dataset collection</li>
+        <li><em>“Select long <span class="notranslate">reads</span>. If there are no long <span class="notranslate">reads</span>, leave this empty”</em>: The <code class="highlighter-rouge">Plasmids</code> dataset collection</li>
       </ul>
     </li>
     <li><strong>Bandage image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1113,7 +1111,7 @@ This is not the case for most of the samples, but we will improve our assemblies
         <li><em>“Graphical Fragment Assembly”</em>: the <code class="highlighter-rouge">Final Assembly Graph</code> collection created by <strong>Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li>Examine <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output images again</li>
+    <li>Examine <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output images again</li>
   </ol>
 
   <blockquote class="question">
@@ -1137,7 +1135,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 
 <h2 id="prediction-of-plasmid-sequences-and-classes-using-plasflow">Prediction of plasmid sequences and classes using PlasFlow</h2>
 
-<p>To automatically determine whether the contigs represent chromosomal or plasmid DNA, <strong>PlasFlow</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a>) can be used, also in the case where a full circular plasmid sequence was not assembled. Furthermore, it assigns the contigs to a bacterial class.</p>
+<p>To automatically determine whether the contigs represent chromosomal or plasmid <span class="notranslate">DNA</span>, <strong>PlasFlow</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<a class="citation" href="#Krawczyk2018">Krawczyk <i>et al.</i> 2018</a>) can be used, also in the case where a full circular plasmid sequence was not assembled. Furthermore, it assigns the contigs to a bacterial class.</p>
 
 <p><strong>PlasFlow</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a set of scripts used for prediction of plasmid sequences in metagenomic contigs.
 It relies on the neural network models trained on full genome and plasmid sequences and is able to differentiate between plasmids and chromosomes with accuracy reaching 96%.</p>
@@ -1150,7 +1148,7 @@ It relies on the neural network models trained on full genome and plasmid sequen
   <ol>
     <li><strong>PlasFlow</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Sequence Reads”</em>: the <code class="highlighter-rouge">Final Assembly</code> collection created by <strong>Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Sequence <span class="notranslate">Reads</span>”</em>: the <code class="highlighter-rouge">Final Assembly</code> collection created by <strong>Unicycler</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ol>
@@ -1177,10 +1175,10 @@ It relies on the neural network models trained on full genome and plasmid sequen
 <p>where:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">contig_id</code>is an internal id of sequence used for the classification</li>
+  <li><code class="highlighter-rouge">contig_id</code>is an inte<span class="notranslate">rna</span>l id of sequence used for the classification</li>
   <li><code class="highlighter-rouge">contig_name</code> is a name of contig used in the classification</li>
   <li><code class="highlighter-rouge">contig_length</code> shows the length of a classified sequence</li>
-  <li><code class="highlighter-rouge">id</code> is an internal id of a produced label (classification)</li>
+  <li><code class="highlighter-rouge">id</code> is an inte<span class="notranslate">rna</span>l id of a produced label (classification)</li>
   <li><code class="highlighter-rouge">label</code> is the actual classification</li>
   <li><code class="highlighter-rouge">...</code> represents additional columns showing probabilities of assignment to each possible class</li>
 </ul>
@@ -1231,7 +1229,7 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
   <li><code class="highlighter-rouge">resfinder.tsv</code>: A tabular file of each AMR gene and additional BLAST information from the <strong>ResFinder</strong> database, one gene per line.</li>
   <li><code class="highlighter-rouge">pointfinder.tsv</code>: A tabular file of each AMR point mutation and additional BLAST information from the <strong>PointFinder</strong> database, one gene per line.</li>
   <li><code class="highlighter-rouge">settings.txt</code>: The command-line, database versions, and other settings used to run <code class="highlighter-rouge">staramr</code>.</li>
-  <li><code class="highlighter-rouge">results.xlsx</code>: An Excel spreadsheet containing the previous 4 files as separate worksheets.</li>
+  <li><code class="highlighter-rouge">results.xlsx</code>: An Excel sp<span class="notranslate">reads</span>heet containing the previous 4 files as separate worksheets.</li>
 </ol>
 
 <p>The summary file is most important and provides all the resistance genes found.</p>

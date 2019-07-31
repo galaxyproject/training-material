@@ -283,8 +283,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -345,11 +343,11 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.</p>
+                    <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped <span class="notranslate">reads</span>. The cover image above shows a screen dump of a SAM dataset.</p>
 
 <h1 id="getting-ngs-data-in">Getting NGS data in</h1>
 
-<p>You can upload data in Galaxy using one of five ways:</p>
+<p>You can upload data in <span class="notranslate">Galaxy</span> using one of five ways:</p>
 
 <h2 id="from-your-computer">From your computer</h2>
 
@@ -384,22 +382,22 @@
 <h3 id="try-it-yourself">Try it yourself</h3>
 
 <ul>
-  <li>Create a new Galaxy history at https://usegalaxy.org (don’t forget to log in).</li>
+  <li>Create a new <span class="notranslate">Galaxy</span> history at https://use<span class="notranslate">galaxy</span>.org (don’t forget to log in).</li>
   <li>Import the following two datasets (for help see the above video):
     <ul>
-      <li><a href="https://zenodo.org/record/583613/files/sample1-f.fq.gz">A set of Forward reads</a></li>
-      <li><a href="https://zenodo.org/record/583613/files/sample1-r.fq.gz">A set of Reverse reads</a></li>
+      <li><a href="https://zenodo.org/record/583613/files/sample1-f.fq.gz">A set of Forward <span class="notranslate">reads</span></a></li>
+      <li><a href="https://zenodo.org/record/583613/files/sample1-r.fq.gz">A set of Reverse <span class="notranslate">reads</span></a></li>
     </ul>
   </li>
 </ul>
 
-<p>These are paired end data (see below for explanation of what paired-end is) for a single Illumina run. Keep Galaxy history for later. We will need it again in a few minutes.</p>
+<p>These are paired end data (see below for explanation of what paired-end is) for a single Illumina run. Keep <span class="notranslate">Galaxy</span> history for later. We will need it again in a few minutes.</p>
 
 <h1 id="fastq-manipulation-and-quality-control">FASTQ manipulation and quality control</h1>
 
 <h2 id="what-is-fastq">What is FASTQ?</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a> (below you will explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>NGS: QC and manipulation</strong> section of Galaxy tools).</p>
+<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a> (below you will explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. <span class="notranslate">Galaxy</span> is using FASTQ Sanger as the only legitimate input for <span class="notranslate">downstream</span> processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>NGS: QC and manipulation</strong> section of <span class="notranslate">Galaxy</span> tools).</p>
 
 <p>The FASTQ format looks like this:</p>
 
@@ -443,7 +441,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
       <td><img src="../../images/pe_mp.png" alt="Paired-end and mate-pair reads" /></td>
     </tr>
     <tr>
-      <td><small><strong>Paired-end and mate-pair reads</strong>. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From “Understanding and improving high-throughput</small></td>
+      <td><small><strong>Paired-end and mate-pair <span class="notranslate">reads</span></strong>. In paired end sequencing (left) the actual ends of rather short <span class="notranslate">DNA</span> molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an inte<span class="notranslate">rna</span>l adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The inte<span class="notranslate">rna</span>l adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From “Understanding and improving high-throughput</small></td>
     </tr>
     <tr>
       <td>sequencing data production and analysis”, Ph.D. dissertation by <a href="https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf">Martin Kircher</a>)&lt;/small&gt;</td>
@@ -451,7 +449,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
   </tbody>
 </table>
 
-<p>Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:</p>
+<p>Thus in both cases (paired-end and mate-pair) a single physical piece of <span class="notranslate">DNA</span> (or <span class="notranslate">RNA</span> in the case of <span class="notranslate">RNA</span>-seq) is sequenced from two ends and so generates two <span class="notranslate">reads</span>. These can be represented as separate files (two FASTQ files with first and second <span class="notranslate">reads</span>) or a single file were <span class="notranslate">reads</span> for each end are interleaved. Here are examples:</p>
 
 <h4 id="two-single-files">Two single files</h4>
 
@@ -504,7 +502,7 @@ CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
 HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 </code></pre></div></div>
 
-<p>Here the first and the second reads are identified with <code class="highlighter-rouge">/1</code> and <code class="highlighter-rouge">/2</code> tags.</p>
+<p>Here the first and the second <span class="notranslate">reads</span> are identified with <code class="highlighter-rouge">/1</code> and <code class="highlighter-rouge">/2</code> tags.</p>
 
 <blockquote class="comment">
   <h3 id="comment-fastq-format-is-a-loose-standard"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> FASTQ format is a loose standard</h3>
@@ -523,14 +521,14 @@ HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 <p>The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, Paul Zumbo explains what base qualities are:</p>
 
 <blockquote class="comment">
-  <h3 id="comment-from-introduction-to-differential-gene-expression-analysis-using-rna-seq"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> From “Introduction to differential gene expression analysis using RNA-seq”</h3>
+  <h3 id="comment-from-introduction-to-differential-gene-expression-analysis-using-rna-seq"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> From “Introduction to differential gene <span class="notranslate">expression</span> analysis using <span class="notranslate">RNA</span>-seq”</h3>
   <p>Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling.</p>
 
-  <p>Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called <a href="http://www.phrap.com/phred/">Phred score</a>, <script type="math/tex">Q</script>, which is proportional to the probability <script type="math/tex">p</script> that a base call is incorrect, where <script type="math/tex">Q = −10lg(p)</script>. For example, a Phred score of 10 corresponds to one error in every ten base calls (<script type="math/tex">Q = −10lg(0.1)</script>), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base.</p>
+  <p>Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the <span class="notranslate">DNA</span> sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called <a href="http://www.phrap.com/phred/">Phred score</a>, <script type="math/tex">Q</script>, which is proportional to the probability <script type="math/tex">p</script> that a base call is incorrect, where <script type="math/tex">Q = −10lg(p)</script>. For example, a Phred score of 10 corresponds to one error in every ten base calls (<script type="math/tex">Q = −10lg(0.1)</script>), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base.</p>
 
   <p>To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At http://ascii-code.com/ you can see which characters are assigned to what number.</p>
 
-  <p>For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.</p>
+  <p>For raw <span class="notranslate">reads</span>, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with <span class="notranslate">downstream</span> sapplications that expect an upper limit of 41.</p>
 </blockquote>
 
 <p><img src="../../images/illumina_qs.png" alt="Illumina quality score" /></p>
@@ -550,7 +548,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/fastq_qs.png" alt="FASTQ quality score" /></td>
     </tr>
     <tr>
-      <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a></small></td>
+      <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing <span class="notranslate">reads</span> typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a></small></td>
     </tr>
   </tbody>
 </table>
@@ -578,7 +576,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </tbody>
 </table>
 
-<p>Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: <strong>A</strong> and <strong>B</strong>. The <strong>A</strong> dataset has long reads (250 bp) and very good quality profile with no qualities dropping below <a href="http://www.phrap.com/phred/">phred score</a> of 30. The <strong>B</strong> dataset is significantly worse with ends of the reads dipping below phred score of 20. The <strong>B</strong> reads may need to be trimmed for further processing.</p>
+<p>Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: <strong>A</strong> and <strong>B</strong>. The <strong>A</strong> dataset has long <span class="notranslate">reads</span> (250 bp) and very good quality profile with no qualities dropping below <a href="http://www.phrap.com/phred/">phred score</a> of 30. The <strong>B</strong> dataset is significantly worse with ends of the <span class="notranslate">reads</span> dipping below phred score of 20. The <strong>B</strong> <span class="notranslate">reads</span> may need to be trimmed for further processing.</p>
 
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123453134?portrait=0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>
 
@@ -586,9 +584,9 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>QC datasets you have uploaded before.</p>
 
-<h1 id="mapping-your-data">Mapping your data</h1>
+<h1 id="mapping-your-data"><span class="notranslate">Mapping</span> your data</h1>
 
-<p>Mapping of NGS reads against reference sequences is one of the key steps of the analysis. Now it is time to see how this is done in practice. Below is a list of key publications highlighting mainstream mapping tools:</p>
+<p><span class="notranslate">Mapping</span> of NGS <span class="notranslate">reads</span> against reference sequences is one of the key steps of the analysis. Now it is time to see how this is done in practice. Below is a list of key publications highlighting mainstream <span class="notranslate">mapping</span> tools:</p>
 
 <ul>
   <li>2009 Bowtie 1 - <a href="http://genomebiology.com/content/10/3/R25">Langmead et al.</a></li>
@@ -598,9 +596,9 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   <li>2013 BWA-MEM - <a href="https://arxiv.org/abs/1303.3997">Li</a></li>
 </ul>
 
-<h2 id="mapping-against-a-pre-computed-genome-index">Mapping against a pre-computed genome index</h2>
+<h2 id="mapping-against-a-pre-computed-genome-index"><span class="notranslate">Mapping</span> against a pre-computed genome index</h2>
 
-<p>Mappers usually compare reads against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before mapping begins. Galaxy instances typically store indexes for a number of publicly available genome builds.</p>
+<p>Mappers usually compare <span class="notranslate">reads</span> against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before <span class="notranslate">mapping</span> begins. <span class="notranslate">Galaxy</span> instances typically store indexes for a number of publicly available genome builds.</p>
 
 <table>
   <thead>
@@ -613,7 +611,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/cached_genome.png" alt="Cached genome" /></td>
     </tr>
     <tr>
-      <td><small>Mapping against a pre-computed index in Galaxy.</small></td>
+      <td><small><span class="notranslate">Mapping</span> against a pre-computed index in <span class="notranslate">Galaxy</span>.</small></td>
     </tr>
   </tbody>
 </table>
@@ -621,7 +619,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 <p>For example, the image above shows indexes for <code class="highlighter-rouge">hg38</code> version of the human genome. You can see that there are actually three choices: (1) <code class="highlighter-rouge">hg38</code>, (2) <code class="highlighter-rouge">hg38 canonical</code> and (3) <code class="highlighter-rouge">hg38 canonical female</code>. The <code class="highlighter-rouge">hg38</code> contains all chromosomes as well as all unplaced contigs. The <code class="highlighter-rouge">hg38 canonical</code> does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
 <code class="highlighter-rouge">hg38 canonical female</code> contains everything from the canonical set with the exception of chromosome Y.</p>
 
-<p>The following video show mapping using BWA:</p>
+<p>The following video show <span class="notranslate">mapping</span> using BWA:</p>
 
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123102338?portrait=0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>
 
@@ -631,7 +629,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <h2 id="what-if-pre-computed-index-does-not-exist">What if pre-computed index does not exist?</h2>
 
-<p>If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (<strong>Load reference genome</strong> is set to <code class="highlighter-rouge">History</code>).</p>
+<p>If <span class="notranslate">Galaxy</span> does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (<strong>Load reference genome</strong> is set to <code class="highlighter-rouge">History</code>).</p>
 
 <table>
   <thead>
@@ -644,20 +642,20 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/uploaded_genome.png" alt="Uploaded genome" /></td>
     </tr>
     <tr>
-      <td><small>Mapping against a pre-computed index in Galaxy </small></td>
+      <td><small><span class="notranslate">Mapping</span> against a pre-computed index in <span class="notranslate">Galaxy</span> </small></td>
     </tr>
   </tbody>
 </table>
 
-<p>In this case Galaxy will first create an index from this dataset and then run mapping analysis against it. The following video shows how this works in practice:</p>
+<p>In this case <span class="notranslate">Galaxy</span> will first create an index from this dataset and then run <span class="notranslate">mapping</span> analysis against it. The following video shows how this works in practice:</p>
 
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123108417?portrait=0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>
 
 <h1 id="sambam-datasets">SAM/BAM datasets</h1>
 
-<p>The <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM/BAM</a> format is an accepted standard for storing aligned reads (it can also store unaligned reads and some mappers such as BWA are accepting unaligned BAM as input). The binary form of the format (BAM) is compact and can be rapidly searched (if indexed). In Galaxy BAM datasets are always indexed (accompanies by a .bai file) and sorted in coordinate order. In the following duscussion I once again rely on <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</p>
+<p>The <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM/BAM</a> format is an accepted standard for storing aligned <span class="notranslate">reads</span> (it can also store unaligned <span class="notranslate">reads</span> and some mappers such as BWA are accepting unaligned BAM as input). The binary form of the format (BAM) is compact and can be rapidly searched (if indexed). In <span class="notranslate">Galaxy</span> BAM datasets are always indexed (accompanies by a .bai file) and sorted in coordinate order. In the following duscussion I once again rely on <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</p>
 
-<p>The Sequence Alignment/Map (SAM) format is, in fact, a generic nucleotide alignment format that describes the alignment of sequencing reads (or query sequences) to a reference. The human readable, TABdelimited SAM files can be compressed into the Binary Alignment/Map format. These BAM files are bigger than simply gzipped SAM files, because they have been optimized for fast random access rather than size reduction. Position-sorted BAM files can be indexed so that all reads aligning to a locus can be efficiently retrieved without loading the entire file into memory.</p>
+<p>The Sequence Alignment/Map (SAM) format is, in fact, a generic nucleotide alignment format that describes the alignment of sequencing <span class="notranslate">reads</span> (or query sequences) to a reference. The human readable, TABdelimited SAM files can be compressed into the Binary Alignment/Map format. These BAM files are bigger than simply gzipped SAM files, because they have been optimized for fast random access rather than size reduction. Position-sorted BAM files can be indexed so that all <span class="notranslate">reads</span> aligning to a locus can be efficiently retrieved without loading the entire file into memory.</p>
 
 <p>As shown below, SAM files typically contain a short header section and a very long alignment section where each row represents a single read alignment. The following sections will explain the SAM format in a bit more detail. For the most comprehensive and updated information go to https://github.com/samtools/hts-specs.</p>
 
@@ -679,7 +677,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <h2 id="sam-header">SAM Header</h2>
 
-<p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the reads were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
+<p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the <span class="notranslate">reads</span> were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
 @SQ SN:chr2 LN:1000
@@ -690,7 +688,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;RNAME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;<span class="notranslate">RNA</span>ME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
 </code></pre></div></div>
 
 <p>If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):</p>
@@ -698,13 +696,13 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
 </code></pre></div></div>
 
-<p>The following table explains the format and content of each field. The <code class="highlighter-rouge">FLAG</code>, <code class="highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
+<p>The following table explains the format and content of each field. The <code class="highlighter-rouge">FLAG</code>, <code class="highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between <span class="notranslate">reads</span> within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
 
 <p><img src="../../images/sam_fields.png" alt="SAM fields" /></p>
 
 <h3 id="flag-field"><code class="highlighter-rouge">FLAG</code> field</h3>
 
-<p>The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.</p>
+<p>The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE <span class="notranslate">reads</span>. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.</p>
 
 <p>The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).</p>
 
@@ -719,12 +717,12 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/sam_flag.png" alt="SAM flag" /></td>
     </tr>
     <tr>
-      <td><small>The <code class="highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="highlighter-rouge">FLAG</code> values associated with paired reads must be uneven decimal numbers. Conversely, if the <code class="highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="highlighter-rouge">0x2</code>, <code class="highlighter-rouge">0x8</code>, <code class="highlighter-rouge">0x20</code>, <code class="highlighter-rouge">0x40</code> and <code class="highlighter-rouge">0x80</code> because they refer to paired reads. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
+      <td><small>The <code class="highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="highlighter-rouge">FLAG</code> values associated with paired <span class="notranslate">reads</span> must be uneven decimal numbers. Conversely, if the <code class="highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="highlighter-rouge">0x2</code>, <code class="highlighter-rouge">0x8</code>, <code class="highlighter-rouge">0x20</code>, <code class="highlighter-rouge">0x40</code> and <code class="highlighter-rouge">0x80</code> because they refer to paired <span class="notranslate">reads</span>. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
     </tr>
   </tbody>
 </table>
 
-<p>In a run with single reads, the flags you most commonly see are:</p>
+<p>In a run with single <span class="notranslate">reads</span>, the flags you most commonly see are:</p>
 
 <ul>
   <li>0: This read has been mapped to the forward strand. (None of the bit-wise flags have been set.)</li>
@@ -732,7 +730,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   <li>16: The read is mapped to the reverse strand (<code class="highlighter-rouge">0x10</code> is set)</li>
 </ul>
 
-<p>(<code class="highlighter-rouge">0x100</code>, <code class="highlighter-rouge">0x200</code> and <code class="highlighter-rouge">0x400</code> are not used by most aligners/mappers, but could, in principle be set for single reads.) Some common <code class="highlighter-rouge">FLAG</code> values that you may see in a PE experiment include:</p>
+<p>(<code class="highlighter-rouge">0x100</code>, <code class="highlighter-rouge">0x200</code> and <code class="highlighter-rouge">0x400</code> are not used by most aligners/mappers, but could, in principle be set for single <span class="notranslate">reads</span>.) Some common <code class="highlighter-rouge">FLAG</code> values that you may see in a PE experiment include:</p>
 
 <table>
   <thead>
@@ -794,7 +792,7 @@ contains a so-called CIGAR string indicating which operations were necessary to 
   <li><strong>M</strong> - Alignment (can be a sequence match or mismatch!)</li>
   <li><strong>I</strong> - Insertion in the read compared to the reference</li>
   <li><strong>D</strong> - Deletion in the read compared to the reference</li>
-  <li><strong>N</strong> - Skipped region from the reference. For mRNA-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.</li>
+  <li><strong>N</strong> - Skipped region from the reference. For m<span class="notranslate">RNA</span>-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.</li>
   <li><strong>S</strong> - Soft clipping (clipped sequences are present in read); S may only have H operations between them and the ends of the string</li>
   <li><strong>H</strong> - Hard clipping (clipped sequences are NOT present in the alignment record); can only be present as the first and/or last operation</li>
   <li><strong>P</strong> - Padding (silent deletion from padded reference)</li>
@@ -833,7 +831,7 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
   <li><code class="highlighter-rouge">H</code> - Hex string</li>
 </ul>
 
-<p>The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, reads within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:</p>
+<p>The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, <span class="notranslate">reads</span> within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:</p>
 
 <ul>
   <li><code class="highlighter-rouge">AS:i</code> - Alignment score</li>
@@ -845,11 +843,11 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
   <li><code class="highlighter-rouge">RG:Z</code> - Read group (should match the entry after ID if @RG is present in the header.</li>
 </ul>
 
-<p>Thus, for example, we can use the NM:i:0 tag to select only those reads which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="highlighter-rouge">X</code>, <code class="highlighter-rouge">Y</code>, and <code class="highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="highlighter-rouge">XS</code>, for example, is used by TopHat (an RNA-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="highlighter-rouge">XS:i:</code> for reads with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="highlighter-rouge">XS:i:30</code>).</p>
+<p>Thus, for example, we can use the NM:i:0 tag to select only those <span class="notranslate">reads</span> which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="highlighter-rouge">X</code>, <code class="highlighter-rouge">Y</code>, and <code class="highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="highlighter-rouge">XS</code>, for example, is used by TopHat (an <span class="notranslate">RNA</span>-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="highlighter-rouge">XS:i:</code> for <span class="notranslate">reads</span> with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="highlighter-rouge">XS:i:30</code>).</p>
 
 <h2 id="read-groups">Read Groups</h2>
 
-<p>One of the key features of SAM/BAM format is the ability to label individual reads with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies downstream logistics: instead of dealing with multiple datasets one can handle just one. Many downstream analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.</p>
+<p>One of the key features of SAM/BAM format is the ability to label individual <span class="notranslate">reads</span> with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies <span class="notranslate">downstream</span> logistics: instead of dealing with multiple datasets one can handle just one. Many <span class="notranslate">downstream</span> analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.</p>
 
 <p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files">GATK support site</a>. We have gratefully stolen two tables describing the most important readgroup tags - <code class="highlighter-rouge">ID</code>, <code class="highlighter-rouge">SM</code>, <code class="highlighter-rouge">LB</code>, and <code class="highlighter-rouge">PL</code> - from GATK forum and provide them here:</p>
 
@@ -859,7 +857,7 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
 
 <p><img src="../../images/rg_example.png" alt="Read group example" /></p>
 
-<p>To see an example of read group manipulation in Galaxy see the following video:</p>
+<p>To see an example of read group manipulation in <span class="notranslate">Galaxy</span> see the following video:</p>
 
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123102338#t=1:40?portrait=0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>
 
@@ -868,7 +866,7 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
 <p>We support four major toolsets for processing of SAM/BAM datasets:</p>
 
 <ul>
-  <li><a href="https://deeptools.readthedocs.io">DeepTools</a> - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.</li>
+  <li><a href="https://deeptools.readthedocs.io">DeepTools</a> - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing <span class="notranslate">DNA</span> sequencing experiments.</li>
   <li><a href="http://www.htslib.org/">SAMtools</a> - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.</li>
   <li><a href="https://github.com/pezmaster31/bamtools/wiki/Tutorial_Toolkit_BamTools-1.0.pdf">BAMtools</a> - a toolkit for reading, writing, and manipulating BAM (genome alignment) files.</li>
   <li><a href="https://broadinstitute.github.io/picard/">Picard</a> - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.</li>
@@ -899,22 +897,22 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
       <td><img src="../../images/pcr-duplicates.png" alt="PCR duplicates" /></td>
     </tr>
     <tr>
-      <td><small>Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of <a href="https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf">Martin Kircher</a>).</small></td>
+      <td><small>Analyzing molecules aligning with the same outer coordinates, a <span class="notranslate">mapping</span> quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of <a href="https://www.qucosa.de/fileadmin/data/qucosa/documents/7110/pflichtexemplar_final.pdf">Martin Kircher</a>).</small></td>
     </tr>
   </tbody>
 </table>
 
-<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the <code class="highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
+<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate <span class="notranslate">reads</span> is the <code class="highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
 
 <div class="well well-lg">
 
-Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`
+Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both <span class="notranslate">reads</span> in a mate pair (and optionally, matching unique molecular identifier <span class="notranslate">reads</span>; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_<span class="notranslate">READS</span>, UNPAIRED_<span class="notranslate">READS</span>, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`
 
 </div>
 
 <h2 id="sampling-coincidence-duplicates">Sampling coincidence duplicates</h2>
 
-<p>However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small reads will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size:</p>
+<p>However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small <span class="notranslate">reads</span> will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size:</p>
 
 <table>
   <thead>
@@ -927,7 +925,7 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
       <td><img src="../../images/sampling-bias.png" alt="Sampling bias" /></td>
     </tr>
     <tr>
-      <td><small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="https://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</small></td>
+      <td><small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. <span class="notranslate">Reads</span> are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="https://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</small></td>
     </tr>
   </tbody>
 </table>

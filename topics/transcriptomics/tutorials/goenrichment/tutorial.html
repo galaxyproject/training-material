@@ -449,8 +449,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -633,7 +631,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?</p>
+<p>When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an <span class="notranslate">RNA</span>-Seq experiment, how do we extract biological meaning from it?</p>
 
 <p>One way to do so is to perform functional enrichment analysis. This method consists of applying statistical tests to verify if genes of interest are more often associated to certain biological functions than what would be expected in a random set of genes. In this tutorial you will learn about enrichment analysis and how to perform it.</p>
 
@@ -646,7 +644,7 @@ The <a href="http://www.geneontology.org/">Gene Ontology</a> (GO) is a structure
   <p><strong>Figure 1</strong> QuickGO - http://www.ebi.ac.uk/QuickGO</p>
 </blockquote>
 
-<p>The GO Ontology, like other ontologies, are usually coded in the <a href="http://www.geneontology.org/faq/what-obo-file-format">OBO</a> or the <a href="http://www.geneontology.org/faq/what-owl-file">OWL</a> formats. It can be downloaded from the <a href="http://geneontology.org/page/download-ontology">Gene Ontology website</a> or from the <a href="http://www.obofoundry.org/">OBO foundry</a>. You can also find in Galaxy tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.</p>
+<p>The GO Ontology, like other ontologies, are usually coded in the <a href="http://www.geneontology.org/faq/what-obo-file-format">OBO</a> or the <a href="http://www.geneontology.org/faq/what-owl-file">OWL</a> formats. It can be downloaded from the <a href="http://geneontology.org/page/download-ontology">Gene Ontology website</a> or from the <a href="http://www.obofoundry.org/">OBO foundry</a>. You can also find in <span class="notranslate">Galaxy</span> tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment:</h3>
@@ -690,7 +688,7 @@ Genes are associated to GO terms via GO annotations. Each gene can have multiple
   <p><img src="../../images/goenrichment_formula.png" alt="Go Enrichment Formula" /></p>
 </blockquote>
 
-<p>For this first exercise we will use data from <a href="https://www.ncbi.nlm.nih.gov/pubmed/22383036" title="Trapnell et al. data">Trapnell et al. 2014</a>. In this work, the authors created an artificial dataset of gene expression in <em>Drosophila melanogaster</em>, where 300 random genes were set (insilico) to be differentially expressed between two conditions.</p>
+<p>For this first exercise we will use data from <a href="https://www.ncbi.nlm.nih.gov/pubmed/22383036" title="Trapnell et al. data">Trapnell et al. 2014</a>. In this work, the authors created an artificial dataset of gene <span class="notranslate">expression</span> in <em>Drosophila melanogaster</em>, where 300 random genes were set (insilico) to be differentially expressed between two conditions.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
@@ -709,12 +707,12 @@ Genes are associated to GO terms via GO annotations. Each gene can have multiple
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
     </li>
-    <li><strong>Upload to the Galaxy</strong> the following files:
+    <li><strong>Upload to the <span class="notranslate">Galaxy</span></strong> the following files:
       <ul>
         <li>go.obo</li>
         <li>drosophila_gene_association.fb</li>
@@ -722,7 +720,7 @@ Genes are associated to GO terms via GO annotations. Each gene can have multiple
       </ul>
 
       <blockquote class="tip">
-        <h3 id="tip-tip-upload-data-to-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload data to Galaxy</h3>
+        <h3 id="tip-tip-upload-data-to-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload data to <span class="notranslate">Galaxy</span></h3>
         <ul>
           <li><strong>Click</strong> on the upload button in the upper left of the interface.</li>
         </ul>
@@ -739,17 +737,17 @@ Genes are associated to GO terms via GO annotations. Each gene can have multiple
       <p><strong>Rename</strong> the <em>go.obo</em> file to <code class="highlighter-rouge">GO</code> and <em>drosophila_gene_association.fb</em> file to <code class="highlighter-rouge">GO annotations Drosophila melanogaster</code>.</p>
 
       <blockquote>
-        <p>After you upload the files, and if you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of <code class="highlighter-rouge">trapnellPopulation.tab</code> it should look something like this:
+        <p>After you upload the files, and if you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of <code class="highlighter-rouge">trapnellPopulation.tab</code> it should look something like this:
 <img src="../../images/goenrichment_trapnellFile.png" alt="Trapnell File" />
 <strong>Figure 2</strong> Trapnell file</p>
       </blockquote>
 
       <blockquote class="comment">
         <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-        <p>The study set represents the differentially expressed genes. These were chosen as having an adjusted p-value for the differential expression test (last column) smaller than a given threshold. In this case, we want to select the genes with an adjusted p-value &lt; 0.05.</p>
+        <p>The study set represents the differentially expressed genes. These were chosen as having an adjusted p-value for the differential <span class="notranslate">expression</span> test (last column) smaller than a given threshold. In this case, we want to select the genes with an adjusted p-value &lt; 0.05.</p>
       </blockquote>
     </li>
-    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">trapnellPopulation.tab</code></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">c7 &lt; 0.05</code>
@@ -803,7 +801,7 @@ When we ask how many significant terms, we want to see GO terms that have a p-va
     </li>
   </ol>
 
-  <p>If you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the <em>Molecular Function</em> file (<code class="highlighter-rouge">MF Trapnell</code>) you should see something like this:</p>
+  <p>If you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the <em>Molecular Function</em> file (<code class="highlighter-rouge">MF Trapnell</code>) you should see something like this:</p>
 
   <p><img src="../../images/goenrichment_mfTrapnell.png" alt="GO Enrichment Trapnell MF" /></p>
 
@@ -822,7 +820,7 @@ The ~300 genes should be random, so we wouldn't expect to see any enriched term.
 <blockquote class="comment">
   <h3 id="comment-comments-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
 
-  <p>Let’s go back a little bit, and reopen the <code class="highlighter-rouge">trapnellPopulation.tab</code> file. If you go through the file, you’ll see genes with ‘NA’ as an adjusted p-value. This means that there are genes in our background population for which the differential expression test was not even performed (usually genes that were not expressed in any sample). These genes are irrelevant for this functional enrichment analysis. We also need to note that the study set does not include those genes!</p>
+  <p>Let’s go back a little bit, and reopen the <code class="highlighter-rouge">trapnellPopulation.tab</code> file. If you go through the file, you’ll see genes with ‘NA’ as an adjusted p-value. This means that there are genes in our background population for which the differential <span class="notranslate">expression</span> test was not even performed (usually genes that were not expressed in any sample). These genes are irrelevant for this functional enrichment analysis. We also need to note that the study set does not include those genes!</p>
 </blockquote>
 
 <p>Let’s remove the irrelevant genes from the background population (<code class="highlighter-rouge">trapnellPopulation.tab</code>), to see the differences in results.</p>
@@ -831,7 +829,7 @@ The ~300 genes should be random, so we wouldn't expect to see any enriched term.
   <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
 
   <ol>
-    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">trapnellPopulation.tab</code></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">c7 != 'NA'</code>
@@ -875,14 +873,14 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
 
 <h1 id="simplification-of-graphs">Simplification of graphs</h1>
 
-<p>Graphical views are essential, but sometimes the graph view can become overwhelming due to the size of the results. To exemplify this issue, we will next perform functional enrichment analysis using a more realistic dataset from a study using the mouse model organism. The original dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE30352">here</a>. In this <a href="https://www.nature.com/articles/nature10532">study</a>, the authors compared the gene expression of several tissues. Here, we will use results from the comparison between heart and brain.</p>
+<p>Graphical views are essential, but sometimes the graph view can become overwhelming due to the size of the results. To exemplify this issue, we will next perform functional enrichment analysis using a more realistic dataset from a study using the mouse model organism. The original dataset can be found <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE30352">here</a>. In this <a href="https://www.nature.com/articles/nature10532">study</a>, the authors compared the gene <span class="notranslate">expression</span> of several tissues. Here, we will use results from the comparison between heart and brain.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
 
   <p>For the first exercise we will use as a study set the differential genes (padjusted&lt;0.05).</p>
   <ol>
-    <li><strong>Upload to Galaxy</strong> the mouse_brain_vs_heart.txt, Mus_musculus_annotations_biomart_e92.tab and mouse_brain_vs_heart.difgenes.txt files.</li>
+    <li><strong>Upload to <span class="notranslate">Galaxy</span></strong> the mouse_brain_vs_heart.txt, Mus_musculus_annotations_biomart_e92.tab and mouse_brain_vs_heart.difgenes.txt files.</li>
     <li><strong>Rename</strong> the <em>mouse_brain_vs_heart.txt</em> file to <code class="highlighter-rouge">Mouse population</code>, <em>Mus_musculus_annotations_biomart_e92.tab</em> file to <code class="highlighter-rouge">GO annotations Mus musculus</code> and <em>mouse_brain_vs_heart.difgenes.txt</em> file to <code class="highlighter-rouge">Mouse diff</code>.</li>
     <li><strong>GOEnrichment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -950,7 +948,7 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
   <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
 
   <ol>
-    <li><strong>Upload to the Galaxy</strong> the goslim_generic.obo file.</li>
+    <li><strong>Upload to the <span class="notranslate">Galaxy</span></strong> the goslim_generic.obo file.</li>
     <li><strong>Rename</strong> the <em>goslim_generic.obo</em> file to <code class="highlighter-rouge">GO Slim</code>.</li>
     <li>Run <strong>GOSlimmer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -1018,7 +1016,7 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
 
   <ol>
     <li>
-      <p><strong>Upload to Galaxy</strong> the mouseOverexpressed.txt and the mouseUnderexpressed.txt files.</p>
+      <p><strong>Upload to <span class="notranslate">Galaxy</span></strong> the mouseOverexpressed.txt and the mouseUnderexpressed.txt files.</p>
 
       <blockquote class="comment">
         <h3 id="comment-comments-5"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
@@ -1045,7 +1043,7 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
         <details>
 
 <summary>Click to view answers</summary>
-The samples correspond to the expressions that occur in the tissues referring to the brain and heart, so the results in the tables (and also in the graphs) should correspond to the specific functions of each organ. When we analyze the tables of enriched functional terms, we can see that the results from underexpressed genes reveal functions related to the brain. While in the case of the genes overexpressed, we identify functions related to muscle / heart function.
+The samples correspond to the <span class="notranslate">expression</span>s that occur in the tissues referring to the brain and heart, so the results in the tables (and also in the graphs) should correspond to the specific functions of each organ. When we analyze the tables of enriched functional terms, we can see that the results from underexpressed genes reveal functions related to the brain. While in the case of the genes overexpressed, we identify functions related to muscle / heart function.
 </details>
       </blockquote>
     </li>

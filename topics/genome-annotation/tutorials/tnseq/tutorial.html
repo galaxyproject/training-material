@@ -333,8 +333,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -410,9 +408,9 @@
 
 <h2 class="no_toc" id="transposon-insertion-sequencing">Transposon insertion Sequencing</h2>
 
-<p>Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.</p>
+<p>Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete <span class="notranslate">DNA</span> segments that can relocate within the genome. They have a large influence on gene <span class="notranslate">expression</span> and can be used to determine the function of genes.</p>
 
-<p>When a transposon inserts itself in a gene, the gene’s function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.</p>
+<p>When a transposon inserts itself in a gene, the gene’s function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of <span class="notranslate">DNA</span> by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.</p>
 
 <figure id="figure-1"><img src="../../images/tnseq/principle_tnseq.png" alt="Illustration of tnseq Method" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Transposon insertion sequencing method (from <a href="#Chao2016"> Chao <i>et al.</i> 2016</a>)</figcaption></figure>
 
@@ -425,14 +423,14 @@
   <li>
     <p><strong>Analysis</strong> (<strong>b</strong> in the previous image)</p>
 
-    <p>The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of reads on each site. If a gene present several insertions, like the two leftmost genes in <em>Condition A</em>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <em>Condition A</em>, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene.</p>
+    <p>The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of <span class="notranslate">reads</span> on each site. If a gene present several insertions, like the two leftmost genes in <em>Condition A</em>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <em>Condition A</em>, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene.</p>
   </li>
 </ol>
 
 <p>Two type of transposon insertion methods exist:</p>
 <ul>
   <li>Gene disruption, where we analyze only the disruptions. This will covered by of this tutorial</li>
-  <li>Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. This method will be the subject of another tutorial.</li>
+  <li>Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene <span class="notranslate">expression</span> in addition to the disruption. This method will be the subject of another tutorial.</li>
 </ul>
 
 <h2 class="no_toc" id="building-a-tnseq-library">Building a TnSeq library</h2>
@@ -463,32 +461,32 @@
 
 <p>Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.</p>
 
-<p>After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the tranposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.</p>
+<p>After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the tranposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave <span class="notranslate">DNA</span> <span class="notranslate">downstream</span> of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.</p>
 
-<p>As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads and not a good coverage of the entire genome. Long reads are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise mapping on the genome <a class="citation" href="#Kwon2015">Kwon <i>et al.</i> 2015</a>. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.</p>
+<p>As we just want to identify the TA site affected by an insertion, we only need the location of the start of the <span class="notranslate">reads</span> and not a good coverage of the entire genome. Long <span class="notranslate">reads</span> are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise <span class="notranslate">mapping</span> on the genome <a class="citation" href="#Kwon2015">Kwon <i>et al.</i> 2015</a>. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.</p>
 
-<p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformely,</strong> with two specific regions used to specifically sequence the region upstream of the insertion <a class="citation" href="#Santiago2015">Santiago <i>et al.</i> 2015</a></p>
+<p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformely,</strong> with two specific regions used to specifically sequence the region <span class="notranslate">upstream</span> of the insertion <a class="citation" href="#Santiago2015">Santiago <i>et al.</i> 2015</a></p>
 
 <figure id="figure-2"><img src="../../images/tnseq/tranposon_structure.png" alt="Structure of the transposon containing several parcodes and adapters" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structure of the transposon containing several parcodes and adapters (from <a href="#Santiago2015"> Santiago <i>et al.</i> 2015</a>)</figcaption></figure>
 
-<p>The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp upstream the restriction site. These two site are the 5’ and 3’ limits to the genomic DNA we want to sequence.</p>
+<p>The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp <span class="notranslate">upstream</span> the restriction site. These two site are the 5’ and 3’ limits to the genomic <span class="notranslate">DNA</span> we want to sequence.</p>
 
 <ol>
   <li>
-    <p>After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream, where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.</p>
+    <p>After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site <span class="notranslate">upstream</span>, where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.</p>
   </li>
   <li>
-    <p>An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been added in the backbone to create different length construct, that can later be filtrated. Different promoters are added with an additional 3 bp barcode to analyze differential expression impact. This type of complex analysis will be covered in a follow-up tutorial.</p>
+    <p>An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been added in the backbone to create different length construct, that can later be filtrated. Different promoters are added with an additional 3 bp barcode to analyze differential <span class="notranslate">expression</span> impact. This type of complex analysis will be covered in a follow-up tutorial.</p>
   </li>
 </ol>
 
-<p>Because of this complex tranposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several step of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.</p>
+<p>Because of this complex tranposon structure, the <span class="notranslate">reads</span> obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several step of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.</p>
 
 <h2 class="no_toc" id="tnseq-analysis">Tnseq analysis</h2>
 
-<p>Once the genomic sequences are extracted from the initial reads (i.e. remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.</p>
+<p>Once the genomic sequences are extracted from the initial <span class="notranslate">reads</span> (i.e. remove non genomic sequences from the <span class="notranslate">reads</span>), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.</p>
 
-<p>We will apply this approach in this tutorial using a subset of TnSeq reads from <a class="citation" href="#Santiago2015">Santiago <i>et al.</i> 2015</a>.</p>
+<p>We will apply this approach in this tutorial using a subset of TnSeq <span class="notranslate">reads</span> from <a class="citation" href="#Santiago2015">Santiago <i>et al.</i> 2015</a>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -497,15 +495,15 @@
 
 <ol id="markdown-toc">
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
-  <li><a href="#remove-all-non-genomic-sequences-from-the-sequenced-reads" id="markdown-toc-remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced reads</a>    <ol>
-      <li><a href="#separate-reads-by-experimental-conditions" id="markdown-toc-separate-reads-by-experimental-conditions">Separate reads by experimental conditions</a></li>
+  <li><a href="#remove-all-non-genomic-sequences-from-the-sequenced-reads" id="markdown-toc-remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced <span class="notranslate">reads</span></a>    <ol>
+      <li><a href="#separate-reads-by-experimental-conditions" id="markdown-toc-separate-reads-by-experimental-conditions">Separate <span class="notranslate">reads</span> by experimental conditions</a></li>
       <li><a href="#remove-adapter-sequence" id="markdown-toc-remove-adapter-sequence">Remove Adapter sequence</a></li>
-      <li><a href="#separate-reads-from-different-transposon-constructs" id="markdown-toc-separate-reads-from-different-transposon-constructs">Separate reads from different transposon constructs</a></li>
+      <li><a href="#separate-reads-from-different-transposon-constructs" id="markdown-toc-separate-reads-from-different-transposon-constructs">Separate <span class="notranslate">reads</span> from different transposon constructs</a></li>
       <li><a href="#remove-the-remaining-transposon-sequence" id="markdown-toc-remove-the-remaining-transposon-sequence">Remove the remaining transposon sequence</a></li>
     </ol>
   </li>
   <li><a href="#count-the-number-of-insertion-per-ta-sites" id="markdown-toc-count-the-number-of-insertion-per-ta-sites">Count the number of insertion per TA sites</a>    <ol>
-      <li><a href="#align-the-reads-to-a-reference-genome" id="markdown-toc-align-the-reads-to-a-reference-genome">Align the reads to a reference genome</a></li>
+      <li><a href="#align-the-reads-to-a-reference-genome" id="markdown-toc-align-the-reads-to-a-reference-genome">Align the <span class="notranslate">reads</span> to a reference genome</a></li>
       <li><a href="#compute-coverage-of-the-genome" id="markdown-toc-compute-coverage-of-the-genome">Compute coverage of the genome</a></li>
       <li><a href="#identify-ta-sites-positions" id="markdown-toc-identify-ta-sites-positions">Identify TA sites positions</a></li>
       <li><a href="#merge-overall-coverage-and-positions-of-ta-sites-to-get-the-coverage-of-each-ta-sites" id="markdown-toc-merge-overall-coverage-and-positions-of-ta-sites-to-get-the-coverage-of-each-ta-sites">Merge overall coverage and positions of TA sites to get the coverage of each TA sites</a></li>
@@ -540,7 +538,7 @@
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -558,14 +556,14 @@
     </li>
     <li>Import from <a href="https://zenodo.org/record/2579335">Zenodo</a> or a data library (ask your instructor):
       <ul>
-        <li>FASTQ file with the Tnseq reads: <code class="highlighter-rouge">Tnseq-Tutorial-reads.fastqsanger.gz</code></li>
-        <li>Set of barcodes to separate reads from different experimental conditions: <code class="highlighter-rouge">condition_barcodes.fasta</code></li>
-        <li>Set of barcodes to separate reads from different transposon constructs: <code class="highlighter-rouge">construct_barcodes.fasta</code></li>
+        <li>FASTQ file with the Tnseq <span class="notranslate">reads</span>: <code class="highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz</code></li>
+        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different experimental conditions: <code class="highlighter-rouge">condition_barcodes.fasta</code></li>
+        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different transposon constructs: <code class="highlighter-rouge">construct_barcodes.fasta</code></li>
         <li>Genome file for <em>Staphylococcus aureus</em>: <code class="highlighter-rouge">staph_aur.fasta</code></li>
         <li>Annotation file for <em>Staphylococcus aureus</em>: <code class="highlighter-rouge">staph_aur.gff3</code></li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2579335/files/Tnseq-Tutorial-reads.fastqsanger.gz
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2579335/files/Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz
 https://zenodo.org/record/2579335/files/condition_barcodes.fasta
 https://zenodo.org/record/2579335/files/construct_barcodes.fasta
 https://zenodo.org/record/2579335/files/staph_aur.fasta
@@ -579,7 +577,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -591,7 +589,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
 
@@ -599,7 +597,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
         <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
 
-        <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
 
         <ul>
           <li>
@@ -622,7 +620,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
         <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field</li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -632,21 +630,21 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 </blockquote>
 
-<h1 id="remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced reads</h1>
+<h1 id="remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced <span class="notranslate">reads</span></h1>
 
-<p>Because of the experimental design for transposon insertion sequencing, the raw reads contain a lot of adapters and foreign sequences used to insert and target the transposon. To obtain the core reads that contain only genomic sequence, the reads have to go through several steps (using the <strong>Cutadapt</strong> tool) to remove them and divide the reads per experimental condition and type of transposon:</p>
+<p>Because of the experimental design for transposon insertion sequencing, the raw <span class="notranslate">reads</span> contain a lot of adapters and foreign sequences used to insert and target the transposon. To obtain the core <span class="notranslate">reads</span> that contain only genomic sequence, the <span class="notranslate">reads</span> have to go through several steps (using the <strong>Cutadapt</strong> tool) to remove them and divide the <span class="notranslate">reads</span> per experimental condition and type of transposon:</p>
 
 <figure id="figure-3"><img src="../../images/tnseq/preprocessing.png" alt="Workflow of data pre-processing" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Data pre-processing</figcaption></figure>
 
 <ol>
-  <li>We separate the reads of each experimental condition based on a 8 bp barcode at the beginning of each read. These barcodes were added to be able to pool different conditions together before the transposon insertion and sequencing.</li>
-  <li>The tail of each set of read is then removed. It immediately follows the 3 bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream</li>
-  <li>To be sure all our reads have been trimmed correctly we filter out the reads too large.</li>
-  <li>We then separate the reads per transposon construct</li>
+  <li>We separate the <span class="notranslate">reads</span> of each experimental condition based on a 8 bp barcode at the beginning of each read. These barcodes were added to be able to pool different conditions together before the transposon insertion and sequencing.</li>
+  <li>The tail of each set of read is then removed. It immediately follows the 3 bp barcode specific to transposon constructs, and contains illumina adapter sequence and <span class="notranslate">downstream</span></li>
+  <li>To be sure all our <span class="notranslate">reads</span> have been trimmed correctly we filter out the <span class="notranslate">reads</span> too large.</li>
+  <li>We then separate the <span class="notranslate">reads</span> per transposon construct</li>
   <li>We remove the remaining transposon sequence containing MmeI.</li>
 </ol>
 
-<h2 id="separate-reads-by-experimental-conditions">Separate reads by experimental conditions</h2>
+<h2 id="separate-reads-by-experimental-conditions">Separate <span class="notranslate">reads</span> by experimental conditions</h2>
 
 <p>First we divide the initial data set by experimental conditions using the 8 bp barcode added during the Illumina multiplexing protocol.</p>
 
@@ -675,17 +673,17 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <p>The <code class="highlighter-rouge">^</code> at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by <strong>Cutadapt</strong>, you check the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types"><strong>Cutadapt</strong> manual</a>.</p>
 </blockquote>
 
-<p>We would like now to split our Tnseq reads in <code class="highlighter-rouge">Tnseq-Tutorial-reads</code> given the barcodes.</p>
+<p>We would like now to split our Tnseq <span class="notranslate">reads</span> in <code class="highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code> given the barcodes.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-split-reads-by-condition-barcodes-using-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Split reads by condition barcodes using Cutadapt</h3>
+  <h3 id="hands_on-hands-on-split-reads-by-condition-barcodes-using-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Split <span class="notranslate">reads</span> by condition barcodes using Cutadapt</h3>
 
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="highlighter-rouge">Tnseq-Tutorial-reads</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code></li>
             <li>In <em>“Read 1 Options”</em>
               <ul>
                 <li>In <em>“5’ (Front) Adapters”</em>
@@ -714,7 +712,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li>In <em>“Output Options”</em>
           <ul>
             <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Multiple output”</em>: <code class="highlighter-rouge">Yes</code> (to separate the reads into one file per condition)</li>
+            <li><em>“Multiple output”</em>: <code class="highlighter-rouge">Yes</code> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
           </ul>
         </li>
       </ul>
@@ -729,16 +727,16 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>What percentage of reads has been trimmed for the adapter?</li>
-    <li>How many reads have been trimmed for each condition?</li>
-    <li>What should we change if our barcodes were at the end of the reads ?</li>
+    <li>What percentage of <span class="notranslate">reads</span> has been trimmed for the adapter?</li>
+    <li>How many <span class="notranslate">reads</span> have been trimmed for each condition?</li>
+    <li>What should we change if our barcodes were at the end of the <span class="notranslate">reads</span> ?</li>
   </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>100% of the reads were trimmed (line <code class="highlighter-rouge">Reads with adapters</code>)</li>
+      <li>100% of the <span class="notranslate">reads</span> were trimmed (line <code class="highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code>)</li>
       <li>2,847,018 for control (<code class="highlighter-rouge">CTCAGAAG</code> barcode) and 2,862,108 for condition (<code class="highlighter-rouge">GACGTCAT</code> barcode)</li>
       <li>We should use the option <em>“Insert 3’ (End) Adapters”</em> and anchored them at the end of the read with the symbol <code class="highlighter-rouge">$</code> in our fasta file containing the barcodes.</li>
     </ol>
@@ -748,7 +746,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="remove-adapter-sequence">Remove Adapter sequence</h2>
 
-<p>Our reads are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (<code class="highlighter-rouge">CGTTATGGCACGC</code>, here). To do so, we emove the adapter and everything downstream, using the end adapter option of <strong>Cutadapt</strong> and not anchor the sequence anywhere. To eliminate reads that might not have been trimmed because of too many mismatches or other reasons, we filter the reads by size, given the known approximate size of the remaining sequences (<strong>how is it computed??</strong>).</p>
+<p>Our <span class="notranslate">reads</span> are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (<code class="highlighter-rouge">CGTTATGGCACGC</code>, here). To do so, we emove the adapter and everything <span class="notranslate">downstream</span>, using the end adapter option of <strong>Cutadapt</strong> and not anchor the sequence anywhere. To eliminate <span class="notranslate">reads</span> that might not have been trimmed because of too many mismatches or other reasons, we filter the <span class="notranslate">reads</span> by size, given the known approximate size of the remaining sequences (<strong>how is it computed??</strong>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-adapter-with-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove Adapter with Cutadapt</h3>
@@ -756,7 +754,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove adapters with:
       <ul>
-        <li><em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -795,7 +793,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <p>What are the outputs at this step?</p>
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>The outputs are two collections: one containing the reads in both conditions, and one containing the <strong>Cutadapt</strong> reports for each condition.</p>
+          <p>The outputs are two collections: one containing the <span class="notranslate">reads</span> in both conditions, and one containing the <strong>Cutadapt</strong> reports for each condition.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -804,16 +802,16 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
       <blockquote class="question">
         <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-        <p>What percentage of the reads contained the adapter?</p>
+        <p>What percentage of the <span class="notranslate">reads</span> contained the adapter?</p>
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>More than 99% of the reads contained the adapter in both conditions (line <code class="highlighter-rouge">Reads with adapters</code> in the reports)</p>
+          <p>More than 99% of the <span class="notranslate">reads</span> contained the adapter in both conditions (line <code class="highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code> in the reports)</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter reads based on length with:
+    <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter <span class="notranslate">reads</span> based on length with:
       <ul>
-        <li><em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
           </ul>
@@ -836,10 +834,10 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
       <blockquote class="question">
         <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-        <p>How many reads where discarded after filtering?</p>
+        <p>How many <span class="notranslate">reads</span> where discarded after filtering?</p>
         <blockquote class="solution">
           <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>Less than 2% of the reads were discarded in both conditions (lines <code class="highlighter-rouge">Reads that were too short</code> and <code class="highlighter-rouge">Reads that were too long</code> in the reports)</p>
+          <p>Less than 2% of the <span class="notranslate">reads</span> were discarded in both conditions (lines <code class="highlighter-rouge"><span class="notranslate">Reads</span> that were too short</code> and <code class="highlighter-rouge"><span class="notranslate">Reads</span> that were too long</code> in the reports)</p>
         </blockquote>
       </blockquote>
     </li>
@@ -847,15 +845,15 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 </blockquote>
 
-<p>We can see that is both samples the reads have pass the filtering at more than 98%. If this percentage is very low, it means the previous trimming steps is incomplete or faulty.</p>
+<p>We can see that is both samples the <span class="notranslate">reads</span> have pass the filtering at more than 98%. If this percentage is very low, it means the previous trimming steps is incomplete or faulty.</p>
 
-<h2 id="separate-reads-from-different-transposon-constructs">Separate reads from different transposon constructs</h2>
+<h2 id="separate-reads-from-different-transposon-constructs">Separate <span class="notranslate">reads</span> from different transposon constructs</h2>
 
-<p>The constructs used in this experiment contain different strengths and directions of promoters. We use the different constructs as replicates, so we need now to separate the reads based on the construct specific 3 bp barcodes.</p>
+<p>The constructs used in this experiment contain different strengths and directions of promoters. We use the different constructs as replicates, so we need now to separate the <span class="notranslate">reads</span> based on the construct specific 3 bp barcodes.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-  <p>In addition of disrupting a gene at the location of the insertion, such constructs can modify the expression of either upstream or downstream regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis.</p>
+  <p>In addition of disrupting a gene at the location of the insertion, such constructs can modify the <span class="notranslate">expression</span> of either <span class="notranslate">upstream</span> or <span class="notranslate">downstream</span> regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -872,7 +870,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
         <blockquote class="solution">
           <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>It means the barcode is anchored at the end of the reads.</p>
+          <p>It means the barcode is anchored at the end of the <span class="notranslate">reads</span>.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -885,7 +883,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -915,7 +913,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li>In <em>“Output Options”</em>
           <ul>
             <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Multiple output”</em> : <code class="highlighter-rouge">Yes</code> (to separate the reads into one file per condition)</li>
+            <li><em>“Multiple output”</em> : <code class="highlighter-rouge">Yes</code> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
           </ul>
         </li>
       </ul>
@@ -926,11 +924,11 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
       <blockquote class="question">
         <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <p>Are the reads equally divided between constructs ?</p>
+        <p>Are the <span class="notranslate">reads</span> equally divided between constructs ?</p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>When you look at the reports, you can see that most of the reads have been assigned to the <em>blunt</em> construct (<code class="highlighter-rouge">TAC</code> barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won’t be a problem here as the tool we use for the essentiality prediction consider the sum of reads in the replicates.</p>
+          <p>When you look at the reports, you can see that most of the <span class="notranslate">reads</span> have been assigned to the <em>blunt</em> construct (<code class="highlighter-rouge">TAC</code> barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won’t be a problem here as the tool we use for the essentiality prediction consider the sum of <span class="notranslate">reads</span> in the replicates.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -942,7 +940,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="remove-the-remaining-transposon-sequence">Remove the remaining transposon sequence</h2>
 
-<p>The last remaining transposon sequence in the reads is the linker with the MmeI restriction site (<code class="highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code>).</p>
+<p>The last remaining transposon sequence in the <span class="notranslate">reads</span> is the linker with the MmeI restriction site (<code class="highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on--remove-linker-with-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Remove Linker with Cutadapt</h3>
@@ -950,7 +948,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end reads?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -988,21 +986,21 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   </ol>
 </blockquote>
 
-<p>Now that we isolated the genomic sequences from the initial reads, we want to align them to count how many insertion have been retained at each TA site.</p>
+<p>Now that we isolated the genomic sequences from the initial <span class="notranslate">reads</span>, we want to align them to count how many insertion have been retained at each TA site.</p>
 
 <h1 id="count-the-number-of-insertion-per-ta-sites">Count the number of insertion per TA sites</h1>
 
-<h2 id="align-the-reads-to-a-reference-genome">Align the reads to a reference genome</h2>
+<h2 id="align-the-reads-to-a-reference-genome">Align the <span class="notranslate">reads</span> to a reference genome</h2>
 
-<p>To identify the location of each TA site to the count them, the first step is to map the reads on the reference genome. We use the <strong>Bowtie</strong>.</p>
+<p>To identify the location of each TA site to the count them, the first step is to map the <span class="notranslate">reads</span> on the reference genome. We use the <strong>Bowtie</strong>.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-  <p>We could also use <strong>Bowtie2</strong> with an end-to-end option, but <strong>Bowtie</strong> is more suitable for very short reads like ours (16-17 bp).</p>
+  <p>We could also use <strong>Bowtie2</strong> with an end-to-end option, but <strong>Bowtie</strong> is more suitable for very short <span class="notranslate">reads</span> like ours (16-17 bp).</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-map-reads-with-bowtie"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map reads with Bowtie</h3>
+  <h3 id="hands_on-hands-on-map-reads-with-bowtie"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map <span class="notranslate">reads</span> with Bowtie</h3>
 
   <ol>
     <li><strong>Map with Bowtie for Illumina</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
@@ -1016,16 +1014,16 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file”</em>: collection output of the last <strong>Cutadapt</strong></li>
             <li><em>“Bowtie settings to use”</em>: <code class="highlighter-rouge">Full parameters list</code></li>
-            <li><em>“Skip the first n reads (-s)”</em>: <code class="highlighter-rouge">0</code></li>
+            <li><em>“Skip the first n <span class="notranslate">reads</span> (-s)”</em>: <code class="highlighter-rouge">0</code></li>
             <li>
               <p><em>“Maximum number of mismatches permitted in the seed (-n)”</em>: <code class="highlighter-rouge">0</code></p>
 
               <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;question&lt;/span&gt; Questions
 &gt;
-&gt; Why are we strictly enforcing no mismatch mapping?
+&gt; Why are we strictly enforcing no mismatch <span class="notranslate">mapping</span>?
 &gt;
 &gt; &gt; ### &lt;i class="fa fa-eye" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;solution&lt;/span&gt; Solution
-&gt; &gt; Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
+&gt; &gt; Our <span class="notranslate">reads</span> being very short, the smallest size needs precise <span class="notranslate">mapping</span>, allowing even one mismatch would risk having <span class="notranslate">reads</span> <span class="notranslate">mapping</span> in wrong positions.
 &gt; {: .solution }
 {: .question}
 </code></pre></div>              </div>
@@ -1058,11 +1056,11 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="compute-coverage-of-the-genome">Compute coverage of the genome</h2>
 
-<p>We have now our reads mapped on the reference genome. We can compute the genome coverage, i.e. how much the nucleotides of the genome are covered by reads. This information will be later crossed with our TA sites position.</p>
+<p>We have now our <span class="notranslate">reads</span> mapped on the reference genome. We can compute the genome coverage, i.e. how much the nucleotides of the genome are covered by <span class="notranslate">reads</span>. This information will be later crossed with our TA sites position.</p>
 
-<p>In our case, the sequenced reads cover the  5’ region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the 3’ end of the read:</p>
+<p>In our case, the sequenced <span class="notranslate">reads</span> cover the  5’ region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole <span class="notranslate">reads</span>, as it could cover several TA sites, but only the coverage at the 3’ end of the read:</p>
 
-<figure id="figure-4"><img src="../../images/tnseq/Map_cov.png" alt="A read align to the genome with its 3' end covering half of the TA site" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Mapping read and TA site coverage</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tnseq/Map_cov.png" alt="A read align to the genome with its 3' end covering half of the TA site" /><figcaption><span class="figcaption-prefix">Figure 4:</span> <span class="notranslate">Mapping</span> read and TA site coverage</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-compute-genome-coverage"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute genome coverage</h3>
@@ -1073,7 +1071,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM/CRAM file”</em>: collection output of the last <strong>Map with Bowtie for Illumina</strong></li>
         <li><em>“Bin size in bases”</em>: <code class="highlighter-rouge">1</code></li>
         <li><em>“Scaling/Normalization method”</em>: <code class="highlighter-rouge">Do not normalize or scale</code></li>
-        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge">bedgraph</code></li>
+        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge"><span class="notranslate">bed</span>graph</code></li>
         <li><em>“Show advanced options”</em>: <code class="highlighter-rouge">yes</code>
           <ul>
             <li><em>“Ignore missing data?”</em>: <code class="highlighter-rouge">Yes</code> (to get only region with read counts)</li>
@@ -1108,7 +1106,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   </ol>
 </blockquote>
 
-<p><strong>Nucleotide subsequence search</strong> generate one BED file with the coordinates of each TA on the genome:</p>
+<p><strong>Nucleotide subsequence search</strong> generate one <span class="notranslate">BED</span> file with the coordinates of each TA on the genome:</p>
 <ol>
   <li>Chrom</li>
   <li>Start</li>
@@ -1138,7 +1136,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <h3 id="tip-tip-adding-a-tag"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
         <ul>
           <li>Click on the dataset</li>
-          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
             <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
 
@@ -1156,9 +1154,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Nucleotide subsequence search</strong></li>
       </ul>
     </li>
-    <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
+    <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
       <ul>
-        <li><em>Add expression”</em>: <code class="highlighter-rouge">c2-1</code></li>
+        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c2-1</code></li>
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“as a new column to”</em>: output of <strong>cut</strong></li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
@@ -1231,9 +1229,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <h3 id="hands_on-hands-on-get-total-count-per-ta-site"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get total count per TA site</h3>
 
   <ol>
-    <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the positions of reverse strand counts with:
+    <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the positions of reverse strand counts with:
       <ul>
-        <li><em>Add expression”</em>: <code class="highlighter-rouge">c1-1</code> (to shift the position by 1)</li>
+        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c1-1</code> (to shift the position by 1)</li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: <strong>Cut</strong> output collection with the tags <code class="highlighter-rouge">reverse</code></li>
         <li><em>“Round result?”</em> : <code class="highlighter-rouge">yes</code></li>
       </ul>
@@ -1272,9 +1270,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="highlighter-rouge">.</code></li>
       </ul>
     </li>
-    <li><strong>Compute an expression on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get the total read count with:
+    <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get the total read count with:
       <ul>
-        <li><em>Add expression”</em>: <code class="highlighter-rouge">c2+c3</code> to get the total count</li>
+        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c2+c3</code> to get the total count</li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: output of <strong>Join two files</strong> with the tags <code class="highlighter-rouge">reverse</code> and <code class="highlighter-rouge">forward</code></li>
         <li><em>“Round result?”</em>: <code class="highlighter-rouge">yes</code></li>
       </ul>
@@ -1392,8 +1390,8 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
 
         <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
           <li>Select ``</li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
@@ -1467,7 +1465,7 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
   <h3 id="hands_on-hands-on--get-table-of-essential-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on : Get table of essential genes</h3>
 
   <ol>
-    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
+    <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Filter”</em>: output of the last <strong>Gumbel</strong></li>
         <li><em>With following condition”</em>: <code class="highlighter-rouge">c9=='E'</code> (to select essential genes)</li>
@@ -1601,15 +1599,15 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 <p>In this tutorial, we learned how to predict essential genes in different conditions. Although it seems to be a long process, keep in mind that the steps allowing to get the list of TA site does not need to be repeated for each analysis as long as you study the same genome.
-For repetitive analyses, the steps are fewer : mapping, coverage, attribution to TA sites, merging of strands and Transit analysis.</p>
+For repetitive analyses, the steps are fewer : <span class="notranslate">mapping</span>, coverage, attribution to TA sites, merging of strands and Transit analysis.</p>
 
-<p>This tutorial focused on simple gene essentiality prediction in individual samples. You could be interested in intergenic regions as well, or comparing many samples together. Other methods exist in transit for these goals, that follow the same workflow. It is important to look at your data and to perform quality control to evaluate the coverage and sparsity of your data. This will influence not only the choice of method (HMM does not manage sparse data well), but the choice of parameters for your analysis.</p>
+<p>This tutorial focused on simple gene essentiality prediction in individual samples. You could be interested in intergenic regions as well, or comparing many samples together. Other methods exist in transit for these goals, that follow the same <span class="notranslate">workflow</span>. It is important to look at your data and to perform quality control to evaluate the coverage and sparsity of your data. This will influence not only the choice of method (HMM does not manage sparse data well), but the choice of parameters for your analysis.</p>
 
 <p>Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.</p>
 
 <blockquote class="tip">
 
-  <h3 id="tip-tip-add-genome-and-annotations-to-igv-from-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Add genome and annotations to IGV from Galaxy</h3>
+  <h3 id="tip-tip-add-genome-and-annotations-to-igv-from-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Add genome and annotations to IGV from <span class="notranslate">Galaxy</span></h3>
 
   <ol>
     <li>Upload a FASTA file with the reference genome and a GFF3 file with its annotation in the history (if not already there)</li>
@@ -1635,24 +1633,24 @@ For repetitive analyses, the steps are fewer : mapping, coverage, attribution to
 
 <blockquote class="tip">
 
-  <h3 id="tip-tip-add-mapped-reads-track-to-igv-from-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Add Mapped reads track to IGV from Galaxy</h3>
+  <h3 id="tip-tip-add-mapped-reads-track-to-igv-from-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Add Mapped <span class="notranslate">reads</span> track to IGV from <span class="notranslate">Galaxy</span></h3>
   <ol>
     <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>
     <li>Launch IGV on your computer</li>
     <li>Check if the reference genome is available on the IGV instance</li>
-    <li>Expand the BAM dataset with the mapped reads in the history</li>
-    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
+    <li>Expand the BAM dataset with the mapped <span class="notranslate">reads</span> in the history</li>
+    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
     <li>
       <p>Switch to the IGV instance</p>
 
-      <p>The mapped reads track should appear. Be sure that all files have the same genome ID</p>
+      <p>The mapped <span class="notranslate">reads</span> track should appear. Be sure that all files have the same genome ID</p>
     </li>
   </ol>
 </blockquote>
 
-<p>When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.</p>
+<p>When looking at the read <span class="notranslate">mapping</span> at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all <span class="notranslate">mapping</span> to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of <span class="notranslate">reads</span>, possibly indicating a growth defect induced by the gene disruption.</p>
 
-<figure id="figure-6"><img src="../../images/tnseq/empty_gene.png" alt="Example of Essential gene with no reads mapped" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of Essential gene with no reads mapped</figcaption></figure>
+<figure id="figure-6"><img src="../../images/tnseq/empty_gene.png" alt="Example of Essential gene with no reads mapped" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of Essential gene with no <span class="notranslate">reads</span> mapped</figcaption></figure>
 <figure id="figure-7"><img src="../../images/tnseq/low_coverage_gene.png" alt="Example of Essential gene with depleted coverage" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of Essential gene with depleted coverage</figcaption></figure>
 
 <p>Once you have curated and confirm the genes that appear essential, comparing the annotation of essential genes with the condition of growth will allow you a better understanding of certain mechanism of interest, like the gene involved in resistance to stress for example.</p>

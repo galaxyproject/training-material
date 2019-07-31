@@ -401,8 +401,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -595,10 +593,10 @@
   <li>Protein inference</li>
 </ol>
 
-<p>A plethora of different software solutions exists for each step. In this tutorial, we will use <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  for raw data conversion and tools from the <a href="https://openms.de">OpenMS software suite</a> for all other steps. We will use one peptide search engine at first and later on show how to expand the workflow for using multiple search engines. Protein inference will be performed with the Fido algorithm (<a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Serang et al, JPR, (2010)</a>).
+<p>A plethora of different software solutions exists for each step. In this tutorial, we will use <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  for raw data conversion and tools from the <a href="https://openms.de">OpenMS software suite</a> for all other steps. We will use one peptide search engine at first and later on show how to expand the <span class="notranslate">workflow</span> for using multiple search engines. Protein inference will be performed with the Fido algorithm (<a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Serang et al, JPR, (2010)</a>).
 This tutorial covers peptide and protein <strong>identification</strong> only, but you may use the output of this tutorial for the <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">tutorial on protein quantitation</a>.</p>
 
-<p>For an alternative protein ID workflow using the <a href="https://compomics.com/">Compomics</a> tools <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> and <a href="https://compomics.github.io/projects/peptide-shaker.html">PeptideShaker</a>, please consult <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">this tutorial</a>.
+<p>For an alte<span class="notranslate">rna</span>tive protein ID <span class="notranslate">workflow</span> using the <a href="https://compomics.com/">Compomics</a> tools <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> and <a href="https://compomics.github.io/projects/peptide-shaker.html">PeptideShaker</a>, please consult <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">this tutorial</a>.
 The latter tutorial does not allow to continue with the tutorial on protein quantitation.</p>
 
 <h1 class="no_toc" id="input-data">Input data</h1>
@@ -624,7 +622,7 @@ You can find a prepared database, as well as the input LC-MS/MS data in differen
   <li><a href="#protein-inference" id="markdown-toc-protein-inference">Protein Inference</a></li>
   <li><a href="#analysis-of-contaminants" id="markdown-toc-analysis-of-contaminants">Analysis of Contaminants</a></li>
   <li><a href="#using-multiple-search-engines" id="markdown-toc-using-multiple-search-engines">Using multiple search engines</a></li>
-  <li><a href="#premade-workflow" id="markdown-toc-premade-workflow">Premade Workflow</a></li>
+  <li><a href="#premade-workflow" id="markdown-toc-premade-workflow">Premade <span class="notranslate">Workflow</span></a></li>
   <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
 </ol>
 
@@ -633,7 +631,7 @@ You can find a prepared database, as well as the input LC-MS/MS data in differen
 <h1 id="preparing-raw-data">Preparing Raw Data</h1>
 
 <p>Raw data conversion is the first step of any proteomic data analysis. The most common converter is MSConvert from the <a href="http://proteowizard.sourceforge.net/">ProteoWizard software suite</a>, the format to convert to is mzML.
-Due to licensing reasons, MSConvert runs only on windows systems and will not work on most Galaxy servers.</p>
+Due to licensing reasons, MSConvert runs only on windows systems and will not work on most <span class="notranslate">Galaxy</span> servers.</p>
 
 <p>Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the MS2 data have to be converted to centroid mode, a process called “peak picking” or “centroiding”.
 Machine vendors offer algorithms to extract peaks from profile raw data. Those are integrated in <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and can be run in parallel to the mzML conversion.
@@ -643,7 +641,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong>P
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-file-conversion-and-peak-picking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: File Conversion and Peak Picking</h3>
 
-  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">mzML</code>. If <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your Galaxy instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input and continue with step 5 of the following hands-on training.</p>
+  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">mzML</code>. If <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your <span class="notranslate">Galaxy</span> instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input and continue with step 5 of the following hands-on training.</p>
 
   <ol>
     <li>
@@ -657,7 +655,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong>P
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -676,7 +674,7 @@ https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -688,7 +686,7 @@ https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
     </li>
@@ -725,7 +723,7 @@ https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
 
   <blockquote class="comment">
     <h3 id="comment-comment-local-use-of-msconvert"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Local Use of MSConvert</h3>
-    <p>The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
+    <p>The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in <span class="notranslate">Galaxy</span> instances. If <strong>msconvert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your <span class="notranslate">Galaxy</span> instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your <span class="notranslate">Galaxy</span> history.</p>
   </blockquote>
 
 </blockquote>
@@ -803,7 +801,7 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 
 <blockquote class="comment">
   <h3 id="comment-comment-advanced-search-engine-parameters"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Advanced Search Engine Parameters</h3>
-  <p>The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a Galaxy wrapper. Afterwards, convert the search engine output to the OpenMS format <code class="highlighter-rouge">idXML</code> by running <strong>IDFileConverter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+  <p>The OpenMS adapters do not always allow to set every option of the underlying search engine. If an option is missing, you may also run the search engine locally or by using a <span class="notranslate">Galaxy</span> wrapper. Afterwards, convert the search engine output to the OpenMS format <code class="highlighter-rouge">idXML</code> by running <strong>IDFileConverter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
   <p>The search engine X!Tandem features some more advanced options than the ones reflected in the <strong>XTandemAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. If you need those advanced options, the <strong>XTandemAdapter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> allows for the optional input of a classic X!Tandem parameter file. Upload your parameter file to the history and use it as an input in the field <code class="highlighter-rouge">Default X!Tandem configuration file</code>. You may also set the option <em>“ignore_adapter_param”</em> to <code class="highlighter-rouge">Yes</code> to overwrite all options set by the GUI.</p>
 </blockquote>
@@ -942,14 +940,14 @@ It also enables you to check for contaminations in your samples.</p>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <strong>IDFilter</strong> output</li>
       </ul>
     </li>
-    <li>Run <strong>Select lines that match an expression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li>Run <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
         <li><em>“that”</em>: <code class="highlighter-rouge">Matching</code></li>
         <li><em>“the pattern”</em>: <code class="highlighter-rouge">CONTAMINANT</code></li>
       </ul>
     </li>
-    <li>Run <strong>Select lines that match an expression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove all non human proteins (e.g. bovine)
+    <li>Run <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove all non human proteins (e.g. bovine)
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
         <li><em>“that”</em>: <code class="highlighter-rouge">Matching</code></li>
@@ -1104,11 +1102,11 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
   </blockquote>
 </blockquote>
 
-<h1 id="premade-workflow">Premade Workflow</h1>
+<h1 id="premade-workflow">Premade <span class="notranslate">Workflow</span></h1>
 
-<p>A premade workflow for this tutorial can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">here</a>.</p>
+<p>A premade <span class="notranslate">workflow</span> for this tutorial can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">here</a>.</p>
 
-<p>A premade workflow using the search engines XTandem and MSGF+ can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga">here</a>.</p>
+<p>A premade <span class="notranslate">workflow</span> using the search engines XTandem and MSGF+ can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga">here</a>.</p>
 
 <h1 id="further-reading">Further Reading</h1>
 

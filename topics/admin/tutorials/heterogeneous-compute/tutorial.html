@@ -538,8 +538,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -602,7 +600,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>Pulsar is the Galaxy Project’s remote job running system. It was written by John Chilton (@jmchilton) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.</p>
+<p>Pulsar is the <span class="notranslate">Galaxy</span> Project’s remote job running system. It was written by John Chilton (@jmchilton) of the <span class="notranslate">Galaxy</span> Project. It is a python server application that can accept jobs from a <span class="notranslate">Galaxy</span> server, submit them to a local resource and then send the results back to the originating <span class="notranslate">Galaxy</span> server.</p>
 
 <p>More details on Pulsar can be found at:</p>
 
@@ -614,10 +612,10 @@
 
 <p>Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.</p>
 
-<p>At the Galaxy end, it is configured within the <code class="highlighter-rouge">job_conf.xml</code> file and uses one of two special Galaxy job runners.</p>
+<p>At the <span class="notranslate">Galaxy</span> end, it is configured within the <code class="highlighter-rouge">job_conf.xml</code> file and uses one of two special <span class="notranslate">Galaxy</span> job runners.</p>
 <ul>
-  <li><code class="highlighter-rouge">galaxy.jobs.runners.pulsar:PulsarRESTJobRunner</code> for the RESTful interface</li>
-  <li><code class="highlighter-rouge">galaxy.jobs.runners.pulsar:PulsarMQJobRunner</code> for the message passing interface.</li>
+  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> for the RESTful interface</li>
+  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner</code> for the message passing interface.</li>
 </ul>
 
 <p>In this tutorial, we will:</p>
@@ -628,7 +626,7 @@
       <li>We will configure the Pulsar server to run via the RESTful interface</li>
     </ul>
   </li>
-  <li>Configure our Galaxy servers to run a job there</li>
+  <li>Configure our <span class="notranslate">Galaxy</span> servers to run a job there</li>
   <li>Run a job remotely</li>
 </ul>
 
@@ -638,7 +636,7 @@
 <ol id="markdown-toc">
   <li><a href="#installing-the-pulsar-role" id="markdown-toc-installing-the-pulsar-role">Installing the Pulsar Role</a></li>
   <li><a href="#configuring-pulsar" id="markdown-toc-configuring-pulsar">Configuring Pulsar</a></li>
-  <li><a href="#configuring-galaxy" id="markdown-toc-configuring-galaxy">Configuring Galaxy</a></li>
+  <li><a href="#configuring-galaxy" id="markdown-toc-configuring-galaxy">Configuring <span class="notranslate">Galaxy</span></a></li>
   <li><a href="#testing-pulsar" id="markdown-toc-testing-pulsar">Testing Pulsar</a></li>
 </ol>
 
@@ -652,22 +650,22 @@
 
 <h1 id="installing-the-pulsar-role">Installing the Pulsar Role</h1>
 
-<p>We need to create a new ansible playbook to install Pulsar. We will be using a <em>role</em> written by Nate Coraor - <code class="highlighter-rouge">galaxyproject.pulsar</code></p>
+<p>We need to create a new ansible playbook to install Pulsar. We will be using a <em>role</em> written by Nate Coraor - <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-install-the-galaxyprojectpulsar-ansible-role"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install the <code class="highlighter-rouge">galaxyproject.pulsar</code> ansible role</h3>
+  <h3 id="hands_on-hands-on-install-the-galaxyprojectpulsar-ansible-role"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role</h3>
 
   <ol>
     <li>
       <p>From your ansible working directory, edit the <code class="highlighter-rouge">requirements.yml</code> file and add the following line:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">galaxyproject.pulsar</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Now install it with:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -676,7 +674,7 @@
 
 <h1 id="configuring-pulsar">Configuring Pulsar</h1>
 
-<p>From the <a href="https://github.com/galaxyproject/ansible-pulsar#role-variables"><code class="highlighter-rouge">galaxyproject.pulsar</code> ansible role documentation</a>, we need to specify some variables.</p>
+<p>From the <a href="https://github.com/galaxyproject/ansible-pulsar#role-variables"><code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role documentation</a>, we need to specify some variables.</p>
 
 <p>There is one required variable:</p>
 
@@ -705,8 +703,8 @@
     </tr>
     <tr>
       <td><code class="highlighter-rouge">pulsar_git_repo</code></td>
-      <td>Upstream git repository from which Pulsar should be cloned.</td>
-      <td>https://github.com/galaxyproject/pulsar</td>
+      <td><span class="notranslate">Upstream</span> git repository from which Pulsar should be cloned.</td>
+      <td>https://github.com/<span class="notranslate">galaxy</span>project/pulsar</td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">pulsar_changeset_id</code></td>
@@ -860,7 +858,7 @@
         <span class="na">mode</span><span class="pi">:</span> <span class="m">0755</span>
       <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.pulsar</span>
+    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
 </code></pre></div>      </div>
 
       <p>There are a couple of <em>pre-tasks</em> here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.</p>
@@ -869,7 +867,7 @@
 
 </blockquote>
 
-<p>We also need to create the dependency resolver file so pulsar knows how to find and install dependencies for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs similar to how Galaxy works. We need to create the file and put it where the <code class="highlighter-rouge">galaxyproject.pulsar</code> role can find it.</p>
+<p>We also need to create the dependency resolver file so pulsar knows how to find and install dependencies for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs similar to how <span class="notranslate">Galaxy</span> works. We need to create the file and put it where the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> role can find it.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-dependency-resolver-configuration"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating dependency resolver configuration</h3>
@@ -897,7 +895,7 @@
 
 <blockquote class="details">
   <h3 id="details-running-non-conda-tools"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Running non-conda tools</h3>
-  <p>If the tool you want to run on Pulsar doesn’t have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the <a href="https://pulsar.readthedocs.io/en/latest/">Pulsar documentation</a> for details.</p>
+  <p>If the tool you want to run on Pulsar doesn’t have a conda package, you will need to make alte<span class="notranslate">rna</span>tive arrangements! This is complex and beyond our scope here. See the <a href="https://pulsar.readthedocs.io/en/latest/">Pulsar documentation</a> for details.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -916,7 +914,7 @@
       <p>Log in to the machines and have a look in the <code class="highlighter-rouge">/mnt/pulsar</code> directory. You will see the venv and config directories. All the config files created by Ansible can be perused.</p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">journalctl -f -u pulsar</code></p>
+      <p>Run <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u pulsar</code></p>
 
       <p>A log will now start scrolling, showing the startup of pulsar. You’ll notice that it will be initializing and installing conda. Once this is completed, Pulsar will be listening on the assigned port.</p>
     </li>
@@ -924,30 +922,30 @@
 
 </blockquote>
 
-<h1 id="configuring-galaxy">Configuring Galaxy</h1>
+<h1 id="configuring-galaxy">Configuring <span class="notranslate">Galaxy</span></h1>
 
-<p>Now we have a Pulsar server up and running, we need to tell our Galaxy about it.</p>
+<p>Now we have a Pulsar server up and running, we need to tell our <span class="notranslate">Galaxy</span> about it.</p>
 
-<p>Galaxy talks to the Pulsar server via it’s <code class="highlighter-rouge">job_conf.xml</code> file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.</p>
+<p><span class="notranslate">Galaxy</span> talks to the Pulsar server via it’s <code class="highlighter-rouge">job_conf.xml</code> file. We need to let <span class="notranslate">Galaxy</span> know about Pulsar there and make sure <span class="notranslate">Galaxy</span> has loaded the requisite job runner, and has a destination set up.</p>
 
 <p>There are three things we need to do here:</p>
 
 <ul>
-  <li>We will need to create a job runner which uses the  <code class="highlighter-rouge">galaxy.jobs.runners.pulsar:PulsarRESTJobRunner</code> code.</li>
+  <li>We will need to create a job runner which uses the  <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> code.</li>
   <li>Create job destination which references the above job runner.</li>
-  <li>Tell Galaxy which tools to send to the job destination.</li>
+  <li>Tell <span class="notranslate">Galaxy</span> which tools to send to the job destination.</li>
 </ul>
 
 <p>(We will use bwa-mem)</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-configure-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure Galaxy</h3>
+  <h3 id="hands_on-hands-on-configure-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure <span class="notranslate">Galaxy</span></h3>
 
   <ol>
     <li>
-      <p>In your <code class="highlighter-rouge">files/galaxy/config/job_conf.xml</code> file add the following job runner to the <code class="highlighter-rouge">&lt;plugins&gt;</code> section:</p>
+      <p>In your <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> file add the following job runner to the <code class="highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"galaxy.jobs.runners.pulsar:PulsarRESTJobRunner"</span> <span class="nt">/&gt;</span>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner"</span> <span class="nt">/&gt;</span>
 </code></pre></div>      </div>
 
       <p>Then add the Pulsar destination. We will need the ip address of your pulsar server and the private_token string you used when you created it.</p>
@@ -961,18 +959,18 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Finally we need to tell Galaxy which tools to send to Pulsar. We will tell it to send bwa-mem jobs to it. We use the <code class="highlighter-rouge">&lt;tools&gt;</code> section of the <code class="highlighter-rouge">job_conf.xml</code> file.
-We need to know the full id of the tool in question, we can get this out of the <code class="highlighter-rouge">integrated_tool_panel.xml</code> file in the <code class="highlighter-rouge">mutable-config</code> directory. Then we tell Galaxy which destination to send it to (pulsar).</p>
+      <p>Finally we need to tell <span class="notranslate">Galaxy</span> which tools to send to Pulsar. We will tell it to send bwa-mem jobs to it. We use the <code class="highlighter-rouge">&lt;tools&gt;</code> section of the <code class="highlighter-rouge">job_conf.xml</code> file.
+We need to know the full id of the tool in question, we can get this out of the <code class="highlighter-rouge">integrated_tool_panel.xml</code> file in the <code class="highlighter-rouge">mutable-config</code> directory. Then we tell <span class="notranslate">Galaxy</span> which destination to send it to (pulsar).</p>
 
       <p>Add the following to the end of the <code class="highlighter-rouge">job_conf.xml</code> file (inside the <code class="highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tools&gt;</span>
-    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/tools&gt;</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.</p>
+      <p>Run the <span class="notranslate">Galaxy</span> playbook in order to deploy the updated job configuration, and to restart <span class="notranslate">Galaxy</span>.</p>
     </li>
   </ol>
 
@@ -1013,11 +1011,11 @@ We need to know the full id of the tool in question, we can get this out of the 
       </table>
     </li>
     <li>
-      <p>Now run the bwa-mem tool with the <code class="highlighter-rouge">wildtype.fna</code> file as the reference, and the two fastq files as the paired end reads. Leave everything default.</p>
+      <p>Now run the bwa-mem tool with the <code class="highlighter-rouge">wildtype.fna</code> file as the reference, and the two fastq files as the paired end <span class="notranslate">reads</span>. Leave everything default.</p>
 
-      <p>As soon as you press <em>execute</em> Galaxy will send the job to the pulsar server. You can watch the log in Galaxy using:</p>
+      <p>As soon as you press <em>execute</em> <span class="notranslate">Galaxy</span> will send the job to the pulsar server. You can watch the log in <span class="notranslate">Galaxy</span> using:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo supervisorctl tail -f galaxy stderr
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo supervisorctl tail -f <span class="notranslate">galaxy</span> stderr
 </code></pre></div>      </div>
 
       <p>You can watch the log in Pulsar by ssh’ing to it and tailing the log file with:</p>
@@ -1029,7 +1027,7 @@ We need to know the full id of the tool in question, we can get this out of the 
 
 </blockquote>
 
-<p>You’ll notice that the Pulsar server has received the job (all the way in Sydney!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run and the results will be returned to Galaxy!</p>
+<p>You’ll notice that the Pulsar server has received the job (all the way in Sydney!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run and the results will be returned to <span class="notranslate">Galaxy</span>!</p>
 
 <p>How awesome is that? :)</p>
 

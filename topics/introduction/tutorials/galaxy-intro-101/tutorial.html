@@ -355,8 +355,6 @@
 </p>
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -563,13 +561,13 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
+<p>This practical aims to familiarize you with the <span class="notranslate">Galaxy</span> user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
 
 <blockquote class="comment">
   <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
 
   <p>Your results may be slightly different from the ones presented in this tutorial
-due to differing versions of tools, reference data, external databases, or
+due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or
 because of stochastic processes in the algorithms.</p>
 
 </blockquote>
@@ -594,10 +592,10 @@ because of stochastic processes in the algorithms.</p>
       <li><a href="#displaying-data-in-ucsc-genome-browser" id="markdown-toc-displaying-data-in-ucsc-genome-browser">Displaying data in UCSC genome browser</a></li>
     </ol>
   </li>
-  <li><a href="#galaxy-management" id="markdown-toc-galaxy-management">Galaxy management</a>    <ol>
-      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a workflow</a></li>
-      <li><a href="#the-workflow-editor" id="markdown-toc-the-workflow-editor">The workflow editor</a></li>
-      <li><a href="#run-workflow-on-different-data" id="markdown-toc-run-workflow-on-different-data">Run workflow on different data</a></li>
+  <li><a href="#galaxy-management" id="markdown-toc-galaxy-management"><span class="notranslate">Galaxy</span> management</a>    <ol>
+      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></a></li>
+      <li><a href="#the-workflow-editor" id="markdown-toc-the-workflow-editor">The <span class="notranslate">workflow</span> editor</a></li>
+      <li><a href="#run-workflow-on-different-data" id="markdown-toc-run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</a></li>
       <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
     </ol>
   </li>
@@ -614,23 +612,23 @@ because of stochastic processes in the algorithms.</p>
   <p>Not everyone has the same background and that’s ok! You may have studied different organisms with different gene models, or you may not be familiar with the biological aspect at all. The biological background is not necessary for following this tutorial, we just like to provide research context for any tutorial. Here are brief explanations of some of the concepts mentioned in this tutorial:</p>
 
   <ul>
-    <li><strong>Nucleotides</strong> are the A, C, T, and Gs that make up DNA.</li>
-    <li>A <strong>Chromosomes</strong> can be thought of as a very long piece of DNA (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.</li>
+    <li><strong>Nucleotides</strong> are the A, C, T, and Gs that make up <span class="notranslate">DNA</span>.</li>
+    <li>A <strong>Chromosomes</strong> can be thought of as a very long piece of <span class="notranslate">DNA</span> (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.</li>
     <li><strong>Features</strong> are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.</li>
-    <li><strong>Genes</strong> are one kind of interesting feature, a region that will be <a href="https://en.wikipedia.org/wiki/Transcription_(biology)">transcribed</a> into RNA before being <a href="https://en.wikipedia.org/wiki/Translation_(biology)">translated</a> into proteins.</li>
+    <li><strong>Genes</strong> are one kind of interesting feature, a region that will be <a href="https://en.wikipedia.org/wiki/Transcription_(biology)">transcribed</a> into <span class="notranslate">RNA</span> before being <a href="https://en.wikipedia.org/wiki/Translation_(biology)">translated</a> into proteins.</li>
     <li>
-      <p><strong>Exons</strong> are part of the <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> gene <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">model</a>. A gene is a complex structure with numerous segments that are removed before the the gene is transcribed into an RNA. The exons are the coding regions, the regions that will appear in the final protein product.</p>
+      <p><strong>Exons</strong> are part of the <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> gene <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">model</a>. A gene is a complex structure with numerous segments that are removed before the the gene is transcribed into an <span class="notranslate">RNA</span>. The exons are the coding regions, the regions that will appear in the final protein product.</p>
 
-      <figure id="figure-1"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An original piece of <span class="notranslate">DNA</span> containing introns and exons has the introns cut out before the exons are joined together to form the m<span class="notranslate">RNA</span>. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)</figcaption></figure>
     </li>
     <li><strong>SNP</strong> stands for <a href="https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism">single-nucleotide polymorphism</a> and is pronounced like the English word “snip”. SNPs are single nucleotide differences between a sequenced individual compared to some reference sequence; where one individual might have an A, another could have a C in that position. Databases of SNPs have been created for many organisms and they include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. &gt;1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.</li>
   </ul>
 </blockquote>
 
 <p>You may be familiar with the <a href="https://genome.ucsc.edu/">UCSC Genome Browser</a> or another resource like it, and know that you can find the data there.
-But even with your data in hand, you stll have the question: “how do I actually compute this?” There is really a straightforward answer: <strong>Galaxy</strong>. So let’s try it…</p>
+But even with your data in hand, you stll have the question: “how do I actually compute this?” There is really a straightforward answer: <strong><span class="notranslate">Galaxy</span></strong>. So let’s try it…</p>
 
-<p>Browse to your favourite <a href="https://galaxyproject.org/use/">Galaxy instance</a> and log in or register. The Galaxy interface consists of three main parts:</p>
+<p>Browse to your favourite <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> and log in or register. The <span class="notranslate">Galaxy</span> interface consists of three main parts:</p>
 
 <ol>
   <li>The available tools are listed on the left</li>
@@ -655,13 +653,13 @@ But even with your data in hand, you stll have the question: “how do I actuall
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
     </li>
     <li>
-      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong>Galaxy 101</strong> as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.</p>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong><span class="notranslate">Galaxy</span> 101</strong> as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.</p>
 
       <p><img src="../../../../shared/images/rename_history.png" alt="Rename the history" /></p>
     </li>
@@ -671,7 +669,7 @@ But even with your data in hand, you stll have the question: “how do I actuall
 
 <h2 id="locating-exons">Locating Exons</h2>
 
-<p>First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.</p>
+<p>First we need to get some data into our history. You can upload files from your computer, or <span class="notranslate">Galaxy</span> can also fetch data directly from exte<span class="notranslate">rna</span>l sources. We know UCSC has exon locations for humans and we can use <span class="notranslate">Galaxy</span> to import the data for chromosome 22, directly from the UCSC table browser.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-from-ucsc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload from UCSC</h3>
@@ -697,8 +695,8 @@ But even with your data in hand, you stll have the question: “how do I actuall
         <li><em>“track”</em>: <code class="highlighter-rouge">GENCODE v29</code></li>
         <li><em>“table”</em>: <code class="highlighter-rouge">knownGene</code></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></li>
-        <li><em>“output format”</em> should be changed to <code class="highlighter-rouge">BED - browser extensible data</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="highlighter-rouge">Galaxy</code> checked</li>
+        <li><em>“output format”</em> should be changed to <code class="highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
       </ul>
     </li>
     <li>
@@ -706,18 +704,18 @@ But even with your data in hand, you stll have the question: “how do I actuall
 
       <p><img src="../../images/101_03.png" alt="`UCSC table browser` tool, second screen for exons" /></p>
 
-      <p>Change <strong>Create one BED record per</strong> to <code class="highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to Galaxy</strong> button.</p>
+      <p>Change <strong>Create one <span class="notranslate">BED</span> record per</strong> to <code class="highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to <span class="notranslate">Galaxy</span></strong> button.</p>
 
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-        <p>After this you will see your first history item in Galaxy’s right panel. It will go through
+        <p>After this you will see your first history item in <span class="notranslate">Galaxy</span>’s right panel. It will go through
 the gray (preparing/queued) and yellow (running) states to become green (success):</p>
 
         <p><img src="../../images/101_04.png" alt="`UCSC Main on Human: knownGene` dataset is green" /></p>
       </blockquote>
     </li>
     <li>
-      <p>When the dataset is green, click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
+      <p>When the dataset is green, click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
 
       <p><img src="../../images/101_exons.png" alt="Contents of the `UCSC Main on Human: knownGene` dataset" /></p>
 
@@ -726,7 +724,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>Let’s rename our dataset to something more recognizable.</p>
       <ul>
-        <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+        <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
         <li>In the central panel, change the <strong>Name</strong> field to <code class="highlighter-rouge">Exons</code></li>
         <li>Click the <strong>Save</strong> button</li>
       </ul>
@@ -751,7 +749,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <ul>
         <li><em>“group”</em> should be changed to <code class="highlighter-rouge">Variation</code></li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed again to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></li>
-        <li><em>“output format”</em> should be changed again to <code class="highlighter-rouge">BED - browser extensible data</code></li>
+        <li><em>“output format”</em> should be changed again to <code class="highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
       </ul>
 
       <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs" /></p>
@@ -763,7 +761,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs" /></p>
 
-      <p>Make sure that <em>“Create one BED record per”</em> is set to <code class="highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to Galaxy</strong>. A second item will appear in your analysis history.</p>
+      <p>Make sure that <em>“Create one <span class="notranslate">BED</span> record per”</em> is set to <code class="highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to <span class="notranslate">Galaxy</span></strong>. A second item will appear in your analysis history.</p>
     </li>
     <li>
       <p>Now <strong>rename</strong> your new dataset to <code class="highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</p>
@@ -772,7 +770,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
         <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field  to <code class="highlighter-rouge">SNPs</code></li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -791,7 +789,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 <blockquote class="comment">
   <h3 id="comment-search-bar"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Search bar</h3>
 
-  <p>Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
+  <p>Different <span class="notranslate">Galaxy</span> servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
 
   <p>Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you’ll need to search among the various options to find the one that works for you.</p>
 
@@ -816,13 +814,13 @@ tool named <code class="highlighter-rouge">Join - the intervals of two datasets 
 
       <blockquote class="tip">
         <h3 id="tip-how-do-i-use-this-tool"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> How do I use this tool?</h3>
-        <p>All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.</p>
+        <p>All <span class="notranslate">Galaxy</span> tools include documentation. If you scroll down on this page, you will find the help of the tool.</p>
       </blockquote>
     </li>
     <li>Click <strong>Execute</strong></li>
     <li>Wait for the job to finish</li>
     <li>
-      <p>View the resulting file (with the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
+      <p>View the resulting file (with the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
 
       <p><img src="../../images/101_joined.png" alt="Contents of the `Join` output dataset" /></p>
 
@@ -837,7 +835,7 @@ tool named <code class="highlighter-rouge">Join - the intervals of two datasets 
 
     <ul>
       <li>For both SNP and EXON: <em>“region”</em> is actually changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></li>
-      <li>For EXON: <em>“Create one BED record per”</em> <code class="highlighter-rouge">Coding Exons</code> is selected (<em>not</em> <code class="highlighter-rouge">Whole Gene</code> as for the SNP data)</li>
+      <li>For EXON: <em>“Create one <span class="notranslate">BED</span> record per”</em> <code class="highlighter-rouge">Coding Exons</code> is selected (<em>not</em> <code class="highlighter-rouge">Whole Gene</code> as for the SNP data)</li>
       <li>Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions</li>
     </ul>
   </blockquote>
@@ -1010,7 +1008,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <h2 id="recovering-exon-info">Recovering exon info</h2>
 
-<p>Congratulations! You have now determined which exons on chromosome 22 have the highest number of SNPs, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, Galaxy saves all of your data, so we can recover this information quite easily.</p>
+<p>Congratulations! You have now determined which exons on chromosome 22 have the highest number of SNPs, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, <span class="notranslate">Galaxy</span> saves all of your data, so we can recover this information quite easily.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-compare-two-datasets"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare two Datasets</h3>
@@ -1038,20 +1036,20 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <h2 id="displaying-data-in-ucsc-genome-browser">Displaying data in UCSC genome browser</h2>
 
-<p>A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. Galaxy can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.</p>
+<p>A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. <span class="notranslate">Galaxy</span> can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-ucsc-genome-browser"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: UCSC genome browser</h3>
 
   <ol>
     <li>
-      <p>First, check that the <strong>database</strong> of your latest history dataset is <code class="highlighter-rouge">hg38</code>. If not, click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> pencil icon and modify the <strong>Database/Build:</strong> field to <code class="highlighter-rouge">Human Dec. 2013 (GRCh38/hg38) (hg38)</code>.</p>
+      <p>First, check that the <strong>database</strong> of your latest history dataset is <code class="highlighter-rouge">hg38</code>. If not, click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> pencil icon and modify the <strong>Database/Build:</strong> field to <code class="highlighter-rouge">Human Dec. 2013 (GRCh38/hg38) (hg38)</code>.</p>
 
       <blockquote class="tip">
 
         <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Database/Build</strong> field</li>
           <li>Select your desired database key from the dropdown list: <code class="highlighter-rouge">hg38</code></li>
           <li>Click the <strong>Save</strong> button</li>
@@ -1072,17 +1070,17 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <p>UCSC provides a large number of tracks that can help you get a sense of your genomic area, it contains common SNPs, repeats, genes, and much more (scroll down to find all possible tracks).</p>
 
-<h1 id="galaxy-management">Galaxy management</h1>
+<h1 id="galaxy-management"><span class="notranslate">Galaxy</span> management</h1>
 
-<p>In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>History Options</strong> menu on the top of the history panel:</p>
+<p>In <span class="notranslate">Galaxy</span> your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>History Options</strong> menu on the top of the history panel:</p>
 
 <p><img src="../../images/history_options_menu.png" alt="History options menu" /></p>
 
-<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> Multi-history view, or choose <code class="highlighter-rouge">Saved Histories</code> from the history options menu and you will see a list of all your histories in the central panel:</p>
+<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> Multi-history view, or choose <code class="highlighter-rouge">Saved Histories</code> from the history options menu and you will see a list of all your histories in the central panel:</p>
 
 <p><img src="../../images/101_23.png" alt="`Saved Histories` list" /></p>
 
-<p>An alternative overview of your histories can be accessed by clicking on the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>View all histories</strong> button at top of your history panel.</p>
+<p>An alte<span class="notranslate">rna</span>tive overview of your histories can be accessed by clicking on the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> button at top of your history panel.</p>
 
 <p><img src="../../images/101_history-overview.png" alt="Overview of histories with their datasets" /></p>
 
@@ -1098,71 +1096,71 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <p>You can always return to your analysis view by clicking on <strong>Analyze Data</strong> in the top menu bar.</p>
 
-<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a workflow</h2>
+<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></h2>
 
-<p>When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn’t it be nice to just convert this history into a workflow that we will be able to execute again and again?</p>
+<p>When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with <span class="notranslate">Galaxy</span> preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn’t it be nice to just convert this history into a <span class="notranslate">workflow</span> that we will be able to execute again and again?</p>
 
-<p>Galaxy makes this very easy with the <code class="highlighter-rouge">Extract workflow</code> option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.</p>
+<p><span class="notranslate">Galaxy</span> makes this very easy with the <code class="highlighter-rouge">Extract <span class="notranslate">workflow</span></code> option. This means any time you want to build a <span class="notranslate">workflow</span>, you can just perform the steps once manually, and then convert it to a <span class="notranslate">workflow</span>, so that next time it will be a lot less work to do the same analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-extract-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract workflow</h3>
+  <h3 id="hands_on-hands-on-extract-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract <span class="notranslate">workflow</span></h3>
 
   <ol>
     <li>
-      <p><strong>Clean up</strong> your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the <code class="highlighter-rouge">x</code> button. This will make the creation of a workflow easier.</p>
+      <p><strong>Clean up</strong> your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the <code class="highlighter-rouge">x</code> button. This will make the creation of a <span class="notranslate">workflow</span> easier.</p>
     </li>
     <li>
-      <p>Go to the history <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> History Options menu and select the <code class="highlighter-rouge">Extract Workflow</code> option.</p>
+      <p>Go to the history <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> History Options menu and select the <code class="highlighter-rouge">Extract <span class="notranslate">Workflow</span></code> option.</p>
 
       <p><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>
 
-      <p>The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.</p>
+      <p>The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created <span class="notranslate">workflow</span>.</p>
 
       <p><img src="../../images/101_25.png" alt="Selection of steps for `Extract Workflow` from history" /></p>
     </li>
     <li>
-      <p><strong>Rename</strong> the workflow to something descriptive, for example <code class="highlighter-rouge">Find exons with the highest number of interactions</code>.</p>
+      <p><strong>Rename</strong> the <span class="notranslate">workflow</span> to something descriptive, for example <code class="highlighter-rouge">Find exons with the highest number of interactions</code>.</p>
 
-      <p>While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find those interactions as well.</p>
+      <p>While we created this <span class="notranslate">workflow</span> initially to analyse SNPs, if we had similarly formatted datasets we could use this <span class="notranslate">workflow</span> to find those interactions as well.</p>
 
-      <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them.</p>
+      <p>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them.</p>
     </li>
     <li>
-      <p>Click on the <strong>Create Workflow</strong> button near the top.</p>
+      <p>Click on the <strong>Create <span class="notranslate">Workflow</span></strong> button near the top.</p>
 
-      <p>You will get a message that the workflow was created. But where did it go?</p>
+      <p>You will get a message that the <span class="notranslate">workflow</span> was created. But where did it go?</p>
     </li>
     <li>
-      <p>Click on <strong>Workflow</strong> in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:</p>
+      <p>Click on <strong><span class="notranslate">Workflow</span></strong> in the top menu of <span class="notranslate">Galaxy</span>. Here you have a list of all your workflows. Your newly created <span class="notranslate">workflow</span> should be listed at the top:</p>
 
       <p><img src="../../images/101_26.png" alt="`Your workflows` list" /></p>
     </li>
   </ol>
 </blockquote>
 
-<h2 id="the-workflow-editor">The workflow editor</h2>
+<h2 id="the-workflow-editor">The <span class="notranslate">workflow</span> editor</h2>
 
-<p>We can examine the workflow in Galaxy’s workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
+<p>We can examine the <span class="notranslate">workflow</span> in <span class="notranslate">Galaxy</span>’s <span class="notranslate">workflow</span> editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-extract-workflow-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract workflow</h3>
+  <h3 id="hands_on-hands-on-extract-workflow-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract <span class="notranslate">workflow</span></h3>
 
   <ol>
     <li>
-      <p>Click on the triangle to the right of your workflow name.</p>
+      <p>Click on the triangle to the right of your <span class="notranslate">workflow</span> name.</p>
 
       <p><img src="../../images/101_27.png" alt="`Edit` option in the menu for the latest workflow" /></p>
     </li>
     <li>
-      <p>Select <strong>Edit</strong> to launch the workflow editor. You should see something like this:</p>
+      <p>Select <strong>Edit</strong> to launch the <span class="notranslate">workflow</span> editor. You should see something like this:</p>
 
       <p><img src="../../images/101_28.png" alt="Workflow editor" /></p>
 
-      <p>When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
+      <p>When you click on a <span class="notranslate">workflow</span> step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
 
       <blockquote class="tip">
         <h3 id="tip-hiding-intermediate-steps"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hiding intermediate steps</h3>
-        <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+        <p>When a <span class="notranslate">workflow</span> is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a <span class="notranslate">workflow</span> will be shown, but we can explicitly tell <span class="notranslate">Galaxy</span> which outputs to show and which to hide for a given <span class="notranslate">workflow</span>. This behaviour is controlled by the little asterisk next to every output dataset:
 <img src="../../../../shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p>
 
         <p>If you click on this asterisk for any of the output datasets, then <em>only</em> files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking <em>all</em> outputs has the same effect as clicking <em>none</em> of the outputs, in both cases all the datasets will be shown.)</p>
@@ -1171,14 +1169,14 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Click the <strong>asterisk</strong> for <code class="highlighter-rouge">out_file1</code> in the <code class="highlighter-rouge">Select First</code> and <code class="highlighter-rouge">Compare two Datasets</code> tools.</p>
 
-      <p>Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the <strong>minimap</strong> at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.</p>
+      <p>Now, when we run the <span class="notranslate">workflow</span>, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the <strong>minimap</strong> at the bottom-right corner of your screen will have a colour-coded view of your <span class="notranslate">workflow</span>, with orange boxes representing a tool with an output that will be shown.</p>
 
       <p><img src="../../images/101_31.png" alt="Workflow minimap" /></p>
 
       <p>In the image above, you see that the top input dataset (with the blue border) connects to the first input of the <code class="highlighter-rouge">Join</code> tool, so this corresponds to the exon data.</p>
     </li>
     <li>
-      <p>The box named <code class="highlighter-rouge">Exons</code> is named ok, but we want to change <code class="highlighter-rouge">SNPs</code> since this workflow is not specific to SNPs</p>
+      <p>The box named <code class="highlighter-rouge">Exons</code> is named ok, but we want to change <code class="highlighter-rouge">SNPs</code> since this <span class="notranslate">workflow</span> is not specific to SNPs</p>
 
       <ul>
         <li><strong>Click</strong> on the box corresponding to the <code class="highlighter-rouge">SNPs</code> input dataset</li>
@@ -1189,7 +1187,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p>Let’s also <strong>rename the outputs</strong>:</p>
 
       <ul>
-        <li>Click on the <code class="highlighter-rouge">Select first</code> tool in the workflow editor</li>
+        <li>Click on the <code class="highlighter-rouge">Select first</code> tool in the <span class="notranslate">workflow</span> editor</li>
         <li>In the menu on the right click on <code class="highlighter-rouge">Configure Output: 'out_file1'</code>
           <ul>
             <li>Under <code class="highlighter-rouge">Rename dataset</code>, and enter a descriptive name for the output dataset like <code class="highlighter-rouge">Top 5 exon IDs</code></li>
@@ -1203,7 +1201,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p><strong>Repeat</strong> this for the output of the <code class="highlighter-rouge">Compare two Datasets</code> tool, naming it <code class="highlighter-rouge">Top 5 exons</code></p>
     </li>
     <li>
-      <p><strong>Save your workflow</strong> (important!) by clicking on the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> icon at the top right of the screen.</p>
+      <p><strong>Save your <span class="notranslate">workflow</span></strong> (important!) by clicking on the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon at the top right of the screen.</p>
 
       <p><img src="../../images/workflow_editor_save.png" alt="Save option in the workflow editor menu" /></p>
     </li>
@@ -1216,15 +1214,15 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <blockquote class="comment">
   <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
-  <p>We could <strong>validate</strong> our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.</p>
+  <p>We could <strong>validate</strong> our newly built <span class="notranslate">workflow</span> by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.</p>
 </blockquote>
 
-<h2 id="run-workflow-on-different-data">Run workflow on different data</h2>
+<h2 id="run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</h2>
 
-<p>Now that we have built our workflow, let’s use it on some different data. For example, let’s find out which exons have the highest number of repeat elements.</p>
+<p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it on some different data. For example, let’s find out which exons have the highest number of repeat elements.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-run-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run workflow</h3>
+  <h3 id="hands_on-hands-on-run-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run <span class="notranslate">workflow</span></h3>
 
   <ol>
     <li>
@@ -1238,13 +1236,13 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
     </li>
     <li>
-      <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> history overview. Here you can just drag and drop datasets from one history to another.</p>
+      <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> history overview. Here you can just drag and drop datasets from one history to another.</p>
 
       <p><img src="../../images/101_copydataset.png" alt="Drag and drop of `Exons` dataset in the history overview" /></p>
     </li>
@@ -1259,27 +1257,27 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
         <li>leave the rest of the settings to the defaults</li>
       </ul>
 
-      <p>Click on <strong>get output</strong> and then <strong>Send query to Galaxy</strong> on the next screen.</p>
+      <p>Click on <strong>get output</strong> and then <strong>Send query to <span class="notranslate">Galaxy</span></strong> on the next screen.</p>
     </li>
     <li>
-      <p>Open the <strong>workflow menu</strong> (top menu bar). Find the workflow you made in the previous section, and select the option <code class="highlighter-rouge">Run</code>.</p>
+      <p>Open the <strong><span class="notranslate">workflow</span> menu</strong> (top menu bar). Find the <span class="notranslate">workflow</span> you made in the previous section, and select the option <code class="highlighter-rouge">Run</code>.</p>
 
       <p><img src="../../images/101_37.png" alt="`Run` option in the workflow menu" /></p>
 
-      <p>The central panel will change to allow you to configure and launch the workflow.</p>
+      <p>The central panel will change to allow you to configure and launch the <span class="notranslate">workflow</span>.</p>
     </li>
     <li>
-      <p>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="highlighter-rouge">Run workflow</code>.</p>
+      <p>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="highlighter-rouge">Run <span class="notranslate">workflow</span></code>.</p>
 
       <p><img src="../../images/101_38.png" alt="Settings for running the workflow" /></p>
 
       <blockquote class="comment">
-        <h3 id="comment-potential-workflow-issues"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Potential workflow issues</h3>
-        <p>Galaxy validates the workflow inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</p>
+        <h3 id="comment-potential-workflow-issues"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Potential <span class="notranslate">workflow</span> issues</h3>
+        <p><span class="notranslate">Galaxy</span> validates the <span class="notranslate">workflow</span> inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</p>
       </blockquote>
     </li>
     <li>
-      <p>Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
+      <p>Once the <span class="notranslate">workflow</span> has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
 
       <p><img src="../../images/101_39.png" alt="Datasets appearing in the history" /></p>
     </li>
@@ -1288,7 +1286,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <blockquote class="comment">
   <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-  <p>Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on “hidden”, just below the history name, or by selecting <code class="highlighter-rouge">Unhide Hidden Datasets</code> from the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> history options menu.</p>
+  <p>Because most intermediate steps of the <span class="notranslate">workflow</span> were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on “hidden”, just below the history name, or by selecting <code class="highlighter-rouge">Unhide Hidden Datasets</code> from the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> history options menu.</p>
 </blockquote>
 
 <blockquote class="question">
@@ -1298,14 +1296,14 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <h2 id="share-your-work">Share your work</h2>
 
-<p>One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.</p>
+<p>One of the most important features of <span class="notranslate">Galaxy</span> comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. <span class="notranslate">Galaxy</span> enables users to easily share their workflows and histories with others.</p>
 
-<p>To share a history, click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon in the history panel and select <code class="highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+<p>To share a history, click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon in the history panel and select <code class="highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
 
 <ol>
   <li><strong>Make History Accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
   <li><strong>Make History Accessible and Publish</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="highlighter-rouge">Shared Data → Histories</code> in the top menu.</li>
-  <li><strong>Share with a user</strong>. This will share the history only with specific users on the Galaxy instance.</li>
+  <li><strong>Share with a user</strong>. This will share the history only with specific users on the <span class="notranslate">Galaxy</span> instance.</li>
 </ol>
 
 <blockquote class="comment">
@@ -1316,18 +1314,18 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-share-history-and-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Share history and workflow</h3>
+  <h3 id="hands_on-hands-on-share-history-and-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Share history and <span class="notranslate">workflow</span></h3>
 
   <ol>
     <li>Share one of your histories with your neighbour.</li>
-    <li>See if you can do the same with your workflow!</li>
-    <li>Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> history menu under <code class="highlighter-rouge">Histories shared with me</code>.</li>
+    <li>See if you can do the same with your <span class="notranslate">workflow</span>!</li>
+    <li>Find the history and/or <span class="notranslate">workflow</span> shared by your neighbour. Histories shared with specific users can be accessed by those users in their <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> history menu under <code class="highlighter-rouge">Histories shared with me</code>.</li>
   </ol>
 </blockquote>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p><i class="fa fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.</p>
+<p><i class="fa fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in <span class="notranslate">Galaxy</span>. You also created a <span class="notranslate">workflow</span> from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.</p>
 
 
                     

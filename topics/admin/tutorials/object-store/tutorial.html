@@ -509,8 +509,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -573,11 +571,11 @@
                 <div class="col-sm-10">
                     <h1 id="expanding-storage">Expanding Storage</h1>
 
-<p class="no_toc">You may find that your Galaxy files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy’s hierarchical object store to add an additional file space for Galaxy.</p>
+<p class="no_toc">You may find that your <span class="notranslate">Galaxy</span> files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use <span class="notranslate">Galaxy</span>’s hierarchical object store to add an additional file space for <span class="notranslate">Galaxy</span>.</p>
 
-<p>Alternatively, you may wish to write new datasets to more than one filesystem. For this, you can use Galaxy’s distributed object store.</p>
+<p>Alte<span class="notranslate">rna</span>tively, you may wish to write new datasets to more than one filesystem. For this, you can use <span class="notranslate">Galaxy</span>’s distributed object store.</p>
 
-<p>This tutorial assumes you have done the “Ansible for installing Galaxy” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
+<p>This tutorial assumes you have done the “Ansible for installing <span class="notranslate">Galaxy</span>” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -592,7 +590,7 @@
 
 <h1 id="hierarchical-object-store">Hierarchical Object Store</h1>
 
-<p>First, note that your Galaxy datasets have been created thus far in the directory <code class="highlighter-rouge">/data</code>, due to <code class="highlighter-rouge">galaxy_config: galaxy: file_path</code>. In some cases, we run out of storage in a particular location. Galaxy allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
+<p>First, note that your <span class="notranslate">Galaxy</span> datasets have been created thus far in the directory <code class="highlighter-rouge">/data</code>, due to <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config: <span class="notranslate">galaxy</span>: file_path</code>. In some cases, we run out of storage in a particular location. <span class="notranslate">Galaxy</span> allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-adding-hierarchical-storage"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding Hierarchical Storage</h3>
@@ -601,21 +599,21 @@
     <li>
       <p>Open your group variables file and set the <code class="highlighter-rouge">object_store_config_file</code> variable:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
-  <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your group variables file, add it to the <code class="highlighter-rouge">galaxy_config_files</code> section:</p>
+      <p>In your group variables file, add it to the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> section:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_files</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/galaxy/config/object_store_conf.xml</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config.galaxy.object_store_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.object_store_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and edit <code class="highlighter-rouge">files/galaxy/config/object_store_conf.xml</code> with the following contents:</p>
+      <p>Create and edit <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"hierarchical"</span><span class="nt">&gt;</span>
@@ -636,10 +634,10 @@
       <p>Add a <code class="highlighter-rouge">pre_task</code> to create the <code class="highlighter-rouge">/data2</code> folder <a href="https://docs.ansible.com/ansible/latest/modules/file_module.html">using the file module</a>, exactly like for the <code class="highlighter-rouge">/data</code> folder.</p>
     </li>
     <li>
-      <p>Run the playbook and restart Galaxy</p>
+      <p>Run the playbook and restart <span class="notranslate">Galaxy</span></p>
     </li>
     <li>
-      <p>Run a couple of jobs after Galaxy has restarted, run a couple of jobs.</p>
+      <p>Run a couple of jobs after <span class="notranslate">Galaxy</span> has restarted, run a couple of jobs.</p>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -661,14 +659,14 @@
 
 <h1 id="distributed-object-store">Distributed Object Store</h1>
 
-<p>Rather than searching a hierarchy of object stores until the dataset is found, Galaxy can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows Galaxy to write to more than one object store for new datasets.</p>
+<p>Rather than searching a hierarchy of object stores until the dataset is found, <span class="notranslate">Galaxy</span> can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows <span class="notranslate">Galaxy</span> to write to more than one object store for new datasets.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-distributed-object-store"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Distributed Object Store</h3>
 
   <ol>
     <li>
-      <p>Edit your <code class="highlighter-rouge">files/galaxy/config/object_store_conf.xml</code> file and replace the contents with:</p>
+      <p>Edit your <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> file and replace the contents with:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"distributed"</span><span class="nt">&gt;</span>
@@ -686,7 +684,7 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook, restart Galaxy</p>
+      <p>Run the playbook, restart <span class="notranslate">Galaxy</span></p>
     </li>
     <li>
       <p>Run 4 or so jobs, and check where the output appear. You should see that they are split relatively evenly between the two data directories.</p>
@@ -695,7 +693,7 @@
 
 </blockquote>
 
-<p>Sites like UseGalaxy.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
+<p>Sites like Use<span class="notranslate">Galaxy</span>.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
 
 <blockquote class="details">
   <h3 id="details-more-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More documentation</h3>
@@ -706,17 +704,17 @@
 
 <blockquote class="warning">
   <h3 id="warning-warning-switching-object-store-types-will-cause-issues"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: switching object store types will cause issues</h3>
-  <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy’s database. Any datasets that were created as hierarchical will lack the <code class="highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
+  <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in <span class="notranslate">Galaxy</span>’s database. Any datasets that were created as hierarchical will lack the <code class="highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
 
   <ol>
     <li>
-      <p>Move the datasets to their new location: <code class="highlighter-rouge">sudo -u galaxy rsync -avr /hierarchical/000/ /distributed/000/</code></p>
+      <p>Move the datasets to their new location: <code class="highlighter-rouge">sudo -u <span class="notranslate">galaxy</span> rsync -avr /hierarchical/000/ /distributed/000/</code></p>
     </li>
     <li>
-      <p>Update the database: <code class="highlighter-rouge">sudo -Hu galaxy psql galaxy -c "UPDATE dataset SET object_store_id='data';" </code></p>
+      <p>Update the database: <code class="highlighter-rouge">sudo -Hu <span class="notranslate">galaxy</span> psql <span class="notranslate">galaxy</span> -c "UPDATE dataset SET object_store_id='data';" </code></p>
     </li>
     <li>
-      <p>Restart your Galaxy</p>
+      <p>Restart your <span class="notranslate">Galaxy</span></p>
     </li>
   </ol>
 

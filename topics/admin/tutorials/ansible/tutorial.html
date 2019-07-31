@@ -306,8 +306,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -370,7 +368,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>In this tutorial we have briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible">Galaxyproject Ansible roles</a>.</p>
+<p>In this tutorial we have briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible"><span class="notranslate">Galaxy</span>project Ansible roles</a>.</p>
 
 <p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.</p>
 
@@ -393,7 +391,7 @@
       <li><a href="#templates" id="markdown-toc-templates">Templates</a></li>
     </ol>
   </li>
-  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible Galaxy</a>    <ol>
+  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible <span class="notranslate">Galaxy</span></a>    <ol>
       <li><a href="#choosing-a-role" id="markdown-toc-choosing-a-role">Choosing a Role</a></li>
     </ol>
   </li>
@@ -422,7 +420,7 @@
   <dt>task</dt>
   <dd>A call to an Ansible module that should be executed and the configuration for this module.</dd>
   <dt>role</dt>
-  <dd>A folder containing some tasks, templates, files, and default values for variables. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a>.</dd>
+  <dd>A folder containing some tasks, templates, files, and default values for variables. People share roles on <a href="https://galaxy.ansible.com/">“Ansible <span class="notranslate">Galaxy</span>”</a>.</dd>
   <dt>playbook</dt>
   <dd>a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</dd>
   <dt>vault</dt>
@@ -492,7 +490,7 @@
     </tr>
     <tr>
       <td>meta</td>
-      <td>Only needed if you publish your role to Ansible Galaxy.</td>
+      <td>Only needed if you publish your role to Ansible <span class="notranslate">Galaxy</span>.</td>
     </tr>
     <tr>
       <td>tasks</td>
@@ -562,7 +560,7 @@
   <span class="na">vars</span><span class="pi">:</span>
     <span class="na">cvmfs_numfiles</span><span class="pi">:</span> <span class="m">4096</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
+    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
 </code></pre></div></div>
 
 <p>This is a quite minimal playbook. It selects a <code class="highlighter-rouge">hosts</code> group named <code class="highlighter-rouge">webservers</code>, overrides the variable <code class="highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
@@ -607,11 +605,11 @@
   <li><code class="highlighter-rouge">host_vars/&lt;host_name&gt;.yml</code>: if you run a playbook and it affects host (e.g.) <code class="highlighter-rouge">api01</code>, and <code class="highlighter-rouge">host_vars/api01.yml</code> exists, it will be loaded automatically.</li>
 </ul>
 
-<p>For a real-life example, UseGalaxy.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="highlighter-rouge">group_vars/</code> file.</p>
+<p>For a real-life example, Use<span class="notranslate">Galaxy</span>.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="highlighter-rouge">group_vars/</code> file.</p>
 
 <h2 id="vaults">Vaults</h2>
 
-<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html"><code class="highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">UseGalaxy.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
+<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html"><code class="highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">Use<span class="notranslate">Galaxy</span>.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
 
 <h1 id="your-first-playbook-and-first-role">Your First Playbook and First Role</h1>
 
@@ -627,7 +625,7 @@ Ansible provides some flags which can help you identify changes before they’re
     <dt><strong><code class="highlighter-rouge">--diff</code></strong></dt>
     <dd>This will show the difference whenever a file is changed.</dd>
     <dt><strong><code class="highlighter-rouge">--check</code></strong></dt>
-    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a downstream task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
+    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a <span class="notranslate">downstream</span> task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
   </dl>
 
   <p>In this tutorial we will write to files in <code class="highlighter-rouge">/tmp</code> as that is a <em>relatively</em> safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.</p>
@@ -696,7 +694,7 @@ Ansible provides some flags which can help you identify changes before they’re
               <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
 <span class="err">your.host.fqdn.or.ip</span>
 </code></pre></div>              </div>
-              <p>Remember that if you SSH in with a username different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
+              <p>Remember that if you SSH in with a use<span class="notranslate">rna</span>me different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
             </blockquote>
           </li>
         </ol>
@@ -1048,18 +1046,18 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
 
 </blockquote>
 
-<h1 id="ansible-galaxy">Ansible Galaxy</h1>
+<h1 id="ansible-galaxy">Ansible <span class="notranslate">Galaxy</span></h1>
 
-<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.</p>
+<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible <span class="notranslate">Galaxy</span> is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible <span class="notranslate">Galaxy</span>.</p>
 
 <p><strong>Warning</strong>: This will install git on the remote machine.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-installing-a-module-using-ansible-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing a module using ansible-galaxy</h3>
+  <h3 id="hands_on-hands-on-installing-a-module-using-ansible-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing a module using ansible-<span class="notranslate">galaxy</span></h3>
 
   <ol>
     <li>
-      <p>Run the command <code class="highlighter-rouge">ansible-galaxy install -p roles/ geerlingguy.git</code></p>
+      <p>Run the command <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles/ geerlingguy.git</code></p>
 
       <p>This will install the new role into your <code class="highlighter-rouge">roles</code> folder, alongside your own role.</p>
     </li>
@@ -1097,10 +1095,10 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <h2 id="choosing-a-role">Choosing a Role</h2>
 
-<p>Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
+<p>Picking the best role for a task from Ansible <span class="notranslate">Galaxy</span> is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
 
 <ul>
-  <li>The name should match the software you are using (I.e. ignore a role named <code class="highlighter-rouge">stackstorm</code> when you are trying to set up <code class="highlighter-rouge">rabbitmq</code>. Ansible Galaxy does not have perfect search.)</li>
+  <li>The name should match the software you are using (I.e. ignore a role named <code class="highlighter-rouge">stackstorm</code> when you are trying to set up <code class="highlighter-rouge">rabbitmq</code>. Ansible <span class="notranslate">Galaxy</span> does not have perfect search.)</li>
   <li><code class="highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice.</li>
   <li>Check the GitHub readme of each role you consider using. Look for:
     <ul>
@@ -1113,7 +1111,7 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
 
-<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="highlighter-rouge">ansible-galaxy install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles">galaxyproject</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">usegalaxy.eu</a></p>
+<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
 
 <h1 id="optional-ansible-vault">(Optional) Ansible Vault</h1>
 

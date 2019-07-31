@@ -343,8 +343,6 @@
 </p>
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -571,7 +569,7 @@
 
 <h2 id="get-data">Get data</h2>
 
-<p>The imzML composite file consists of two files. The first file contains the metadata in an XML file and has the extension .imzML. The second file contains the mass spectra data, is saved as a binary file and has the extension .ibd. To be valid, both files must have the same filename before the extension. More information about the imzML file structure can be found here: <a href="https://ms-imaging.org/wp/imzml/data-structure/">ms-imaging.org</a>. Galaxy provides a composite upload option for files consisting of several components.</p>
+<p>The imzML composite file consists of two files. The first file contains the metadata in an XML file and has the extension .imzML. The second file contains the mass spectra data, is saved as a binary file and has the extension .ibd. To be valid, both files must have the same filename before the extension. More information about the imzML file structure can be found here: <a href="https://ms-imaging.org/wp/imzml/data-structure/">ms-imaging.org</a>. <span class="notranslate">Galaxy</span> provides a composite upload option for files consisting of several components.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -588,7 +586,7 @@
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -599,7 +597,7 @@
       <blockquote class="tip">
         <h3 id="tip-tip-upload-via-the-composite-option"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload via the composite option</h3>
         <ul>
-          <li>Open the Galaxy Upload Manager(<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
+          <li>Open the <span class="notranslate">Galaxy</span> Upload Manager(<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>
           <li>Click on <strong>Composite</strong> on the top</li>
           <li>Set <strong>Composite Type</strong> to <code class="highlighter-rouge">imzml</code></li>
           <li>Expand the first <strong>Select</strong> button (for the imzML metadata component)</li>
@@ -623,14 +621,14 @@
         <h3 id="tip-tip-ftp-upload-for-large-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FTP upload for large files</h3>
         <ul>
           <li>In case one subfile is larger than 2 GB the uploading needs to be done via ftp.</li>
-          <li>The necessary steps are explained in this tutorial <a href="/training-material/topics/galaxy-data-manipulation/tutorials/get-data/slides.html">Getting data into Galaxy</a></li>
+          <li>The necessary steps are explained in this tutorial <a href="/training-material/topics/galaxy-data-manipulation/tutorials/get-data/slides.html">Getting data into <span class="notranslate">Galaxy</span></a></li>
         </ul>
       </blockquote>
 
       <blockquote class="tip">
         <h3 id="tip-tip-uploading-an-analyze75-file"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Uploading an Analyze7.5 file</h3>
         <ul>
-          <li><code class="highlighter-rouge">Analyze7.5</code> files are also supported by Galaxy.</li>
+          <li><code class="highlighter-rouge">Analyze7.5</code> files are also supported by <span class="notranslate">Galaxy</span>.</li>
           <li>The file consists of three components and is therefore uploaded via the ‘composite’ function, analogously to the imzML upload.</li>
           <li>The files to select in the <code class="highlighter-rouge">composite</code> tab are the header file <code class="highlighter-rouge">.hdr</code>, the m/z values file <code class="highlighter-rouge">.t2m</code> and the spectra file <code class="highlighter-rouge">.img</code>.</li>
         </ul>
@@ -642,7 +640,7 @@
       <blockquote class="tip">
         <h3 id="tip-tip-rename-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field to <code class="highlighter-rouge">ltpmsi-chilli</code></li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -698,7 +696,7 @@
      &lt;cvParam cvRef="MS" accession="MS:1000285" name="total ion current" value="2.42458e+008"/&gt;
 </code></pre></div>        </div>
 
-        <p>This means that the file consists of 4166 spectra (count=”4166”) and that the imzML type is ‘processed’ as the first spectrum (scan=”1”) has 11127 m/z values (defaultArrayLength=”11127) while the following spectra (not shown here) have different numbers of m/z values. In processed imzML files each spectrum has an individual m/z axis, in contrast to the continuous imzML type, where all spectra have the same m/z axis. In many software tools processed imzML files are not or only partly supported. The MSI tools in Galaxy are based on <a href="http://cardinalmsi.org/">Cardinal</a> and therefore support imzML files, but require a binning of the m/z values while reading the file. The bin size should be chosen according to the m/z accuracy of the mass spectrometer. For the chilli dataset we therefore use 0.1 m/z, as this results in m/z bins of 0.2 m/z which corresponds to the m/z step size that was used in the publication.</p>
+        <p>This means that the file consists of 4166 spectra (count=”4166”) and that the imzML type is ‘processed’ as the first spectrum (scan=”1”) has 11127 m/z values (defaultArrayLength=”11127) while the following spectra (not shown here) have different numbers of m/z values. In processed imzML files each spectrum has an individual m/z axis, in contrast to the continuous imzML type, where all spectra have the same m/z axis. In many software tools processed imzML files are not or only partly supported. The MSI tools in <span class="notranslate">Galaxy</span> are based on <a href="http://cardinalmsi.org/">Cardinal</a> and therefore support imzML files, but require a binning of the m/z values while reading the file. The bin size should be chosen according to the m/z accuracy of the mass spectrometer. For the chilli dataset we therefore use 0.1 m/z, as this results in m/z bins of 0.2 m/z which corresponds to the m/z step size that was used in the publication.</p>
 
         <p>Regarding the spectra, line 10 states that the spectra are in profile mode while the ‘run’ section defines spectrum 1 as a centroided spectrum. As the ‘run’ section is directly linked to the spectra in the ibd file, this is the information to trust. Furthermore, the ‘dataProcessingList’ element gives a hint that peak picking was performed, which is confirmed in the publication.</p>
       </blockquote>
@@ -850,10 +848,10 @@
         <h3 id="tip-tip-creating-a-new-file"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new file</h3>
 
         <ul>
-          <li>Open the Galaxy Upload Manager</li>
+          <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>Paste the file contents into the text field</li>
-          <li>From the settings menu <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> select <strong>Convert spaces to tabs</strong></li>
+          <li>From the settings menu <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> select <strong>Convert spaces to tabs</strong></li>
           <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li>
         </ul>
       </blockquote>
@@ -971,7 +969,7 @@
         <li><em>“Multiple output files can be selected”</em>: <code class="highlighter-rouge">mz feature output</code></li>
       </ul>
     </li>
-    <li><strong>Filter data on any column using simple expressions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">MSI data exporter on data 6: features</code> (output of <strong>MSI data exporter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“With following condition”</em>: <code class="highlighter-rouge">c2&gt;=55 and c2&lt;=65 or c2&gt;=75 and c2&lt;=85</code></li>
@@ -982,7 +980,7 @@
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="highlighter-rouge">yes</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. internal Calibrants)”</em>: <code class="highlighter-rouge">Filter on data</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. inte<span class="notranslate">rna</span>l Calibrants)”</em>: <code class="highlighter-rouge">Filter on data</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">column:2</code></li>
         <li><em>“Column with name of m/z values”</em>: <code class="highlighter-rouge">column:1</code></li>
         <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
@@ -1046,7 +1044,7 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
         <h3 id="tip-tip-creating-a-new-file-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new file</h3>
 
         <ul>
-          <li>Open the Galaxy Upload Manager</li>
+          <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>Paste the file contents into the text field</li>
           <li>Set Type to <strong>tabular</strong> instead of auto-detect</li>
@@ -1059,7 +1057,7 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">filtered imzML</code> (output of <strong>MSI filtering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Centroided input”</em>: <code class="highlighter-rouge">yes</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. internal Calibrants)”</em>: <code class="highlighter-rouge">mz features</code> (Input dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. inte<span class="notranslate">rna</span>l Calibrants)”</em>: <code class="highlighter-rouge">mz features</code> (Input dataset)</li>
         <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">column:1</code></li>
         <li><em>“Column with name of m/z values”</em>: <code class="highlighter-rouge">column:1</code></li>
         <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">No</code></li>
@@ -1102,7 +1100,7 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
 
 <p>This tutorial covered the steps to explore the properties of a dataset and visualize the morphological distribution of molecules.</p>
 
-<figure id="figure-9"><img src="../../images/msi_distribution_workflow.png" alt="workflow" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Workflow that was used during this tutorial.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/msi_distribution_workflow.png" alt="workflow" /><figcaption><span class="figcaption-prefix">Figure 9:</span> <span class="notranslate">Workflow</span> that was used during this tutorial.</figcaption></figure>
 
 
 

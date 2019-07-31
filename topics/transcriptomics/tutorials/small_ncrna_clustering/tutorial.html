@@ -450,8 +450,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -625,11 +623,11 @@
                 </div>
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
-<p>Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such as RNA splicing, translation, gene regulation. The small RNA-seq is a type of RNA-seq in which RNA fragments are size selected to capture only short RNAs. One of the most common applications of the small RNA-seq is discovering novel small ncRNAs. Mapping the small RNA-seq data reveals interesting patterns that represent the traces of the small RNA processing.</p>
+<p>Small Non-coding <span class="notranslate">RNA</span>s (nc<span class="notranslate">RNA</span>s) play a vital role in many cellular processes such as <span class="notranslate">RNA</span> splicing, translation, gene regulation. The small <span class="notranslate">RNA</span>-seq is a type of <span class="notranslate">RNA</span>-seq in which <span class="notranslate">RNA</span> fragments are size selected to capture only short <span class="notranslate">RNA</span>s. One of the most common applications of the small <span class="notranslate">RNA</span>-seq is discovering novel small nc<span class="notranslate">RNA</span>s. <span class="notranslate">Mapping</span> the small <span class="notranslate">RNA</span>-seq data reveals interesting patterns that represent the traces of the small <span class="notranslate">RNA</span> processing.</p>
 
-<p>For example, consider the miRNA biogenesis. The primary miRNA transcripts are processed by Drosha-complexes and results in hairpin precursor miRNAs. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the RNA strands bound by Argonaute proteins regulates the target mRNA while the other strand is degraded.</p>
+<p>For example, consider the mi<span class="notranslate">RNA</span> biogenesis. The primary mi<span class="notranslate">RNA</span> transcripts are processed by Drosha-complexes and results in hairpin precursor mi<span class="notranslate">RNA</span>s. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the <span class="notranslate">RNA</span> strands bound by Argonaute proteins regulates the target m<span class="notranslate">RNA</span> while the other strand is degraded.</p>
 
-<p>The following figure (bottom part of the figure is taken from <a href="https://doi.org/10.1038/nrg3162">DOI: 10.1038/nrg3162</a>) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a <em>read profile</em>. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.</p>
+<p>The following figure (bottom part of the figure is taken from <a href="https://doi.org/10.1038/nrg3162">DOI: 10.1038/nrg3162</a>) represents one of the small <span class="notranslate">RNA</span> processing patterns. The vertical block bars represent a mapped <span class="notranslate">reads</span> on reference genome. The height of the bars represents the number of <span class="notranslate">reads</span> mapped at that location. <span class="notranslate">Reads</span> in each bubble represent a <em>read profile</em>. In this case, they both are from mi<span class="notranslate">RNA</span>s. From the small <span class="notranslate">RNA</span>-seq, we often see the two processed mi<span class="notranslate">RNA</span> strands after <span class="notranslate">mapping</span>. The mi<span class="notranslate">RNA</span> strand which targets the m<span class="notranslate">RNA</span> is expressed and we see more <span class="notranslate">reads</span> compared to the degraded strand. The gap between those two piles of <span class="notranslate">reads</span> represents the missing hairpin.</p>
 
 <figure id="figure-1"><img src="../../images/blockclust_profiles.png" alt="read profiles" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Patterns of processing in read profiles</figcaption></figure>
 
@@ -644,12 +642,12 @@
   <li><a href="#preprocessing-of-the-data" id="markdown-toc-preprocessing-of-the-data">Preprocessing of the data</a>    <ol>
       <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
       <li><a href="#sort-bam-file" id="markdown-toc-sort-bam-file">Sort BAM file</a></li>
-      <li><a href="#bam-to-bed-of-tags" id="markdown-toc-bam-to-bed-of-tags">BAM to BED of tags</a></li>
+      <li><a href="#bam-to-bed-of-tags" id="markdown-toc-bam-to-bed-of-tags">BAM to <span class="notranslate">BED</span> of tags</a></li>
     </ol>
   </li>
-  <li><a href="#grouping-of-the-adjacent-reads-into-read-profiles" id="markdown-toc-grouping-of-the-adjacent-reads-into-read-profiles">Grouping of the adjacent reads into read profiles</a>    <ol>
-      <li><a href="#sort-the-bed-file-of-tags" id="markdown-toc-sort-the-bed-file-of-tags">Sort the BED file of tags</a></li>
-      <li><a href="#group-reads-into-blocks-and-blockgroups-using-blockbuster" id="markdown-toc-group-reads-into-blocks-and-blockgroups-using-blockbuster">Group reads into blocks and blockgroups using <strong>blockbuster</strong></a></li>
+  <li><a href="#grouping-of-the-adjacent-reads-into-read-profiles" id="markdown-toc-grouping-of-the-adjacent-reads-into-read-profiles">Grouping of the adjacent <span class="notranslate">reads</span> into read profiles</a>    <ol>
+      <li><a href="#sort-the-bed-file-of-tags" id="markdown-toc-sort-the-bed-file-of-tags">Sort the <span class="notranslate">BED</span> file of tags</a></li>
+      <li><a href="#group-reads-into-blocks-and-blockgroups-using-blockbuster" id="markdown-toc-group-reads-into-blocks-and-blockgroups-using-blockbuster">Group <span class="notranslate">reads</span> into blocks and blockgroups using <strong>blockbuster</strong></a></li>
     </ol>
   </li>
   <li><a href="#clustering-with-blockclust" id="markdown-toc-clustering-with-blockclust">Clustering with <strong>BlockClust</strong></a></li>
@@ -658,9 +656,9 @@
 </blockquote>
 
 <h1 id="preprocessing-of-the-data">Preprocessing of the data</h1>
-<p>The data is we use is from human cell line MCF-7 sequenced in single-end on Illumina Genome Analyzer II. Reads are 36nt long and should be sufficiently long enough for this type of data. We start with a BAM file as an input for this tutorial. This BAM file is a result of mapping the reads on human reference genome build hg19 using <strong>segemehl</strong>. If you want to use your own raw sequencing data, please clip the adapters and map to the reference genome.</p>
+<p>The data is we use is from human cell line MCF-7 sequenced in single-end on Illumina Genome Analyzer II. <span class="notranslate">Reads</span> are 36nt long and should be sufficiently long enough for this type of data. We start with a BAM file as an input for this tutorial. This BAM file is a result of <span class="notranslate">mapping</span> the <span class="notranslate">reads</span> on human reference genome build hg19 using <strong>segemehl</strong>. If you want to use your own raw sequencing data, please clip the adapters and map to the reference genome.</p>
 
-<p>In the first step, we convert the BAM file into BED file. This is not a plain file conversion. Hence we cannot use any kind of BAM to BED conversion tools. We use BlockClust tool in the pre-processing mode for this purpose. The resulting BED file contains tags (a tag is a unique read sequence in a deep-sequencing library) and their normalized expression (in column 5), i.e. the ratio of the read count per tag to the number of mappings on the reference genome.</p>
+<p>In the first step, we convert the BAM file into <span class="notranslate">BED</span> file. This is not a plain file conversion. Hence we cannot use any kind of BAM to <span class="notranslate">BED</span> conversion tools. We use BlockClust tool in the pre-processing mode for this purpose. The resulting <span class="notranslate">BED</span> file contains tags (a tag is a unique read sequence in a deep-sequencing library) and their normalized <span class="notranslate">expression</span> (in column 5), i.e. the ratio of the read count per tag to the number of <span class="notranslate">mapping</span>s on the reference genome.</p>
 
 <h2 class="hands_on" id="get-data">Get data</h2>
 
@@ -679,7 +677,7 @@
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -697,7 +695,7 @@
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -709,7 +707,7 @@
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
     </li>
@@ -720,19 +718,19 @@
 <blockquote class="question">
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>Why is it mandatory to clip the adapters from the small RNA-seq data?</p>
+  <p>Why is it mandatory to clip the adapters from the small <span class="notranslate">RNA</span>-seq data?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Generally, the processed RNA fragments from the small RNAs are about 18-30nt long. If the sequenced read length is longer than the fragment (which is usually the case), the sequencer reads into the 3’ adapter.</p>
+    <p>Generally, the processed <span class="notranslate">RNA</span> fragments from the small <span class="notranslate">RNA</span>s are about 18-30nt long. If the sequenced read length is longer than the fragment (which is usually the case), the sequencer <span class="notranslate">reads</span> into the 3’ adapter.</p>
 
   </blockquote>
 
 </blockquote>
 
 <h2 id="sort-bam-file">Sort BAM file</h2>
-<p>Before continue to BAM to BED conversion we need to sort the alignments in the input BAM file by their positions.</p>
+<p>Before continue to BAM to <span class="notranslate">BED</span> conversion we need to sort the alignments in the input BAM file by their positions.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-sort-bam"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Sort BAM</h3>
   <ol>
@@ -745,7 +743,7 @@
 
 </blockquote>
 
-<h2 id="bam-to-bed-of-tags">BAM to BED of tags</h2>
+<h2 id="bam-to-bed-of-tags">BAM to <span class="notranslate">BED</span> of tags</h2>
 <p>Now it is time to do the actual conversion.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-blockclust-preprocessing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <strong>BlockClust</strong> preprocessing</h3>
@@ -760,25 +758,25 @@
 
 </blockquote>
 
-<h1 id="grouping-of-the-adjacent-reads-into-read-profiles">Grouping of the adjacent reads into read profiles</h1>
+<h1 id="grouping-of-the-adjacent-reads-into-read-profiles">Grouping of the adjacent <span class="notranslate">reads</span> into read profiles</h1>
 
-<p>Now we group the adjacent reads into so-called blocks and blockgroups using blockbuster tool. In general, each blockgroup should represent a single ncRNA read profile.</p>
+<p>Now we group the adjacent <span class="notranslate">reads</span> into so-called blocks and blockgroups using blockbuster tool. In general, each blockgroup should represent a single nc<span class="notranslate">RNA</span> read profile.</p>
 
 <figure id="figure-2"><img src="../../images/blockclust_blocks.png" alt="blocks of a blockgroup" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Representation of blocks and blockgroups of a read profile</figcaption></figure>
 
 <blockquote class="details">
   <h3 id="details-more-details-about-the-theory"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More details about the theory</h3>
 
-  <p>The idea is to perform peak detection on the signal obtained by counting the number of reads per nucleotide. This signal, spanning adjacent loci, is then modeled with a mixture of Gaussians. An iterative greedy procedure is then used to collect reads that belong to the same block, starting from the largest Gaussian component, and removing them in successive iterations. The tool further assembles a sequence of adjacent blocks into a blockgroup if the blocks are either overlapping or are at a distance smaller than a user-defined threshold. A more detailed explanation is at <a href="http://hoffmann.bioinf.uni-leipzig.de/LIFE/blockbuster.html">the blockbuster website</a></p>
+  <p>The idea is to perform peak detection on the signal obtained by counting the number of <span class="notranslate">reads</span> per nucleotide. This signal, spanning adjacent loci, is then modeled with a mixture of Gaussians. An iterative greedy procedure is then used to collect <span class="notranslate">reads</span> that belong to the same block, starting from the largest Gaussian component, and removing them in successive iterations. The tool further assembles a sequence of adjacent blocks into a blockgroup if the blocks are either overlapping or are at a distance smaller than a user-defined threshold. A more detailed explanation is at <a href="http://hoffmann.bioinf.uni-leipzig.de/LIFE/blockbuster.html">the blockbuster website</a></p>
 
 </blockquote>
 
-<h2 id="sort-the-bed-file-of-tags">Sort the BED file of tags</h2>
+<h2 id="sort-the-bed-file-of-tags">Sort the <span class="notranslate">BED</span> file of tags</h2>
 
-<p>In order to run the blockbuster successfully the input BED file need to be sorted by chromosome, strand, start position and then end positions.</p>
+<p>In order to run the blockbuster successfully the input <span class="notranslate">BED</span> file need to be sorted by chromosome, strand, start position and then end positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-sort-the-bed-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Sort the BED file</h3>
+  <h3 id="hands_on-hands-on-sort-the-bed-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Sort the <span class="notranslate">BED</span> file</h3>
 
   <ol>
     <li><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -818,7 +816,7 @@
 
 </blockquote>
 
-<h2 id="group-reads-into-blocks-and-blockgroups-using-blockbuster">Group reads into blocks and blockgroups using <strong>blockbuster</strong></h2>
+<h2 id="group-reads-into-blocks-and-blockgroups-using-blockbuster">Group <span class="notranslate">reads</span> into blocks and blockgroups using <strong>blockbuster</strong></h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-blockbuster"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: blockbuster</h3>
@@ -826,8 +824,8 @@
   <ol>
     <li><strong>blockbuster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file containing read expressions”</em>: output of <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Type of output”</em>: <code class="highlighter-rouge">reads (blockbuster format)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">BED</span> file containing read <span class="notranslate">expression</span>s”</em>: output of <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Type of output”</em>: <code class="highlighter-rouge"><span class="notranslate">reads</span> (blockbuster format)</code></li>
       </ul>
     </li>
   </ol>
@@ -837,7 +835,7 @@
 <h1 id="clustering-with-blockclust">Clustering with <strong>BlockClust</strong></h1>
 <p>Here we use <strong>BlockClust</strong> in clustering mode. All you need here is the output of the <strong>blockbuster</strong>.</p>
 
-<p>Apart from clustering, <strong>BlockClust</strong> has built-in class specific discriminative models for C/D box snoRNA, H/ACA box snoRNA, miRNA, rRNA, snRNA, tRNA and Y_RNA. So it can also be used to predict if a read profile might belong to one of the known ncRNA class.</p>
+<p>Apart from clustering, <strong>BlockClust</strong> has built-in class specific discriminative models for C/D box sno<span class="notranslate">RNA</span>, H/ACA box sno<span class="notranslate">RNA</span>, mi<span class="notranslate">RNA</span>, r<span class="notranslate">RNA</span>, sn<span class="notranslate">RNA</span>, t<span class="notranslate">RNA</span> and Y_<span class="notranslate">RNA</span>. So it can also be used to predict if a read profile might belong to one of the known nc<span class="notranslate">RNA</span> class.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-clustering"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: clustering</h3>
 
@@ -860,15 +858,15 @@
 
 <p>The tool produces the following four output files.</p>
 
-<p>The <code class="highlighter-rouge">BlockClust: BED of predicted clusters</code> file is the result of Markov cluster algorithm. Each entry in this file represents a blockgroup. The 4th column contains is in the form of <em>annotation:blockgroup_id:cluster_id</em>. The <em>cluster_id</em> represents which cluster the blockgroup belongs to.</p>
+<p>The <code class="highlighter-rouge">BlockClust: <span class="notranslate">BED</span> of predicted clusters</code> file is the result of Markov cluster algorithm. Each entry in this file represents a blockgroup. The 4th column contains is in the form of <em>annotation:blockgroup_id:cluster_id</em>. The <em>cluster_id</em> represents which cluster the blockgroup belongs to.</p>
 
-<p>The <code class="highlighter-rouge">BlockClust: Model based predictions BED</code> file is the result of classification. Each entry in this file represents a blockgroup. The 4th column contains the annotation of the ncRNA which it overlaps. For the blockgroups which are not overlapped with any known ncRNAs, the prefix <code class="highlighter-rouge">predicted_</code> is added indicating that it is predicted by the <strong>BlockClust</strong> classification models.</p>
+<p>The <code class="highlighter-rouge">BlockClust: Model based predictions <span class="notranslate">BED</span></code> file is the result of classification. Each entry in this file represents a blockgroup. The 4th column contains the annotation of the nc<span class="notranslate">RNA</span> which it overlaps. For the blockgroups which are not overlapped with any known nc<span class="notranslate">RNA</span>s, the prefix <code class="highlighter-rouge">predicted_</code> is added indicating that it is predicted by the <strong>BlockClust</strong> classification models.</p>
 
 <p>The <code class="highlighter-rouge">BlockClust: Hierarchical clustering plot</code> file shows a dendrogram construced based on average linkage clustering.</p>
 
 <p>The <code class="highlighter-rouge">BlockClust: Pairwise similarities</code> file contains the pairwise similarities of all input blockgroups.</p>
 
-<p>Next, we will visualize the read profiles (from the BAM file) and the predictions (BED from <strong>BlockClust</strong>) together.</p>
+<p>Next, we will visualize the read profiles (from the BAM file) and the predictions (<span class="notranslate">BED</span> from <strong>BlockClust</strong>) together.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: visualization</h3>
@@ -877,9 +875,9 @@
     <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>
     <li>Start IGV locally</li>
     <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="highlighter-rouge">GSM769512.bam</code> file</li>
-    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
-    <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="highlighter-rouge">BlockClust: Model based predictions BED</code> file</li>
-    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
+    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
+    <li>Expand the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="highlighter-rouge">BlockClust: Model based predictions <span class="notranslate">BED</span></code> file</li>
+    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
     <li>Go to the location <code class="highlighter-rouge">chr4:90653059-90653141</code> in IGV.</li>
   </ol>
 
@@ -899,8 +897,8 @@
 
     <ol>
       <li>There is no annotated gene from RefSeq annotation on the same strand.</li>
-      <li>It resembles the miRNA profiles mentioned in the introduction section. One of the read piles looks like mature miRNA and the other like miRNA*.</li>
-      <li>Predicted as a miRNA.</li>
+      <li>It resembles the mi<span class="notranslate">RNA</span> profiles mentioned in the introduction section. One of the read piles looks like mature mi<span class="notranslate">RNA</span> and the other like mi<span class="notranslate">RNA</span>*.</li>
+      <li>Predicted as a mi<span class="notranslate">RNA</span>.</li>
     </ol>
 
   </blockquote>
@@ -919,7 +917,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we learned how to use <strong>BlockClust</strong> to cluster real small RNA sequencing read profiles based on their similarity. We also learned that the <strong>BlockClust</strong> can also be used to classify the read profiles based on pre-built classification models.</p>
+<p>In this tutorial, we learned how to use <strong>BlockClust</strong> to cluster real small <span class="notranslate">RNA</span> sequencing read profiles based on their similarity. We also learned that the <strong>BlockClust</strong> can also be used to classify the read profiles based on pre-built classification models.</p>
 
 
                     

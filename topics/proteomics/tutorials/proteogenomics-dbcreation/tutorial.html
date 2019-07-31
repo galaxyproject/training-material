@@ -359,8 +359,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -531,11 +529,11 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p><strong>Proteogenomics</strong> involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization</p>
+<p><strong>Proteogenomics</strong> involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene <span class="notranslate">expression</span>. In the first section of the tutorial, we will create a protein database (FASTA) using <span class="notranslate">RNA</span>-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization</p>
 
 <p><img src="../../images/potential_novel_publication.png" alt="Novel Peptides" /></p>
 
-<p>Proteogenomics integrates <strong>RNA-Seq</strong> data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. (Cancer Res. (2017); 77(21):e43-e46. doi: <a target="_blank" href="https://doi.org/10.1158/0008-5472.CAN-17-0331">10.1158/0008-5472.CAN-17-0331</a>).</p>
+<p>Proteogenomics integrates <strong><span class="notranslate">RNA</span>-Seq</strong> data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. (Cancer Res. (2017); 77(21):e43-e46. doi: <a target="_blank" href="https://doi.org/10.1158/0008-5472.CAN-17-0331">10.1158/0008-5472.CAN-17-0331</a>).</p>
 
 <p><img src="../../images/workflow_objective1.png" alt="Proteogenomics" /></p>
 
@@ -548,17 +546,17 @@
   <li><a href="#aligning-fastq-files-to-the-human-genome" id="markdown-toc-aligning-fastq-files-to-the-human-genome">Aligning FASTQ files to the human genome</a></li>
   <li><a href="#variant-analysis" id="markdown-toc-variant-analysis">Variant Analysis</a>    <ol>
       <li><a href="#variant-calling" id="markdown-toc-variant-calling">Variant Calling</a></li>
-      <li><a href="#variant-annotation-and-genome-mapping" id="markdown-toc-variant-annotation-and-genome-mapping">Variant annotation and Genome Mapping</a></li>
+      <li><a href="#variant-annotation-and-genome-mapping" id="markdown-toc-variant-annotation-and-genome-mapping">Variant annotation and Genome <span class="notranslate">Mapping</span></a></li>
     </ol>
   </li>
   <li><a href="#transcript-assembly" id="markdown-toc-transcript-assembly">Transcript Assembly</a>    <ol>
-      <li><a href="#rna-seq-to-transcripts" id="markdown-toc-rna-seq-to-transcripts">RNA-seq to transcripts</a></li>
+      <li><a href="#rna-seq-to-transcripts" id="markdown-toc-rna-seq-to-transcripts"><span class="notranslate">RNA</span>-seq to transcripts</a></li>
       <li><a href="#evaluate-the-assembly-with-annotated-transcripts" id="markdown-toc-evaluate-the-assembly-with-annotated-transcripts">Evaluate the assembly with annotated transcripts</a></li>
       <li><a href="#translate-transcripts" id="markdown-toc-translate-transcripts">Translate transcripts</a></li>
     </ol>
   </li>
   <li><a href="#creating-fasta-databases" id="markdown-toc-creating-fasta-databases">Creating FASTA Databases</a>    <ol>
-      <li><a href="#genomic-mapping-database" id="markdown-toc-genomic-mapping-database">Genomic mapping database</a></li>
+      <li><a href="#genomic-mapping-database" id="markdown-toc-genomic-mapping-database">Genomic <span class="notranslate">mapping</span> database</a></li>
       <li><a href="#variant-annotations-database" id="markdown-toc-variant-annotations-database">Variant Annotations database</a></li>
     </ol>
   </li>
@@ -568,15 +566,15 @@
 
 <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>This tutorial focuses on creating a <strong>FASTA</strong> database generated from RNA-seq data. There are two outputs from this workflow: (1) a <strong>sequence database</strong> consisting of variants and known reference sequences and (2) mapping files containing <strong>genomic</strong> and <strong>variant</strong> mapping data.</p>
+<p>This tutorial focuses on creating a <strong>FASTA</strong> database generated from <span class="notranslate">RNA</span>-seq data. There are two outputs from this <span class="notranslate">workflow</span>: (1) a <strong>sequence database</strong> consisting of variants and known reference sequences and (2) <span class="notranslate">mapping</span> files containing <strong>genomic</strong> and <strong>variant</strong> <span class="notranslate">mapping</span> data.</p>
 
 <p><img src="../../images/database_creation.png" alt="Database creation" /></p>
 
-<p>The first part of the tutorial deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the workflow helps in creating a FASTA file with transcript assemblies (splicing variants).</p>
+<p>The first part of the tutorial deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the <span class="notranslate">workflow</span> helps in creating a FASTA file with transcript assemblies (splicing variants).</p>
 
 <h1 id="data-upload">Data upload</h1>
 
-<p>In this tutorial, protein and the total RNA sample was obtained from the early development of B-cells from mice. It was obtained at two developmental stages of B-cells: <em>Ebf1</em> -/- pre-pro-B and <em>Rag2</em> -/- pro-B. Please refer to the original study  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4276347/">Heydarian, M. et al.</a>for details.</p>
+<p>In this tutorial, protein and the total <span class="notranslate">RNA</span> sample was obtained from the early development of B-cells from mice. It was obtained at two developmental stages of B-cells: <em>Ebf1</em> -/- pre-pro-B and <em>Rag2</em> -/- pro-B. Please refer to the original study  <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4276347/">Heydarian, M. et al.</a>for details.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-and-organization"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: data upload and organization</h3>
@@ -593,7 +591,7 @@
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -610,7 +608,7 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
         <ul>
           <li>Copy the link location</li>
           <li>
-            <p>Open the Galaxy Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -622,7 +620,7 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
           <li><strong>Close</strong> the window</li>
         </ul>
 
-        <p>By default, Galaxy uses the URL as the name, so rename the files with a more useful name.</p>
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
 
       </blockquote>
     </li>
@@ -631,7 +629,7 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 
         <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field</li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -642,8 +640,8 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 
         <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
           <li>Select <code class="highlighter-rouge">fastqsanger</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
@@ -654,7 +652,7 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 
         <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Database/Build</strong> field</li>
           <li>Select your desired database key from the dropdown list: <code class="highlighter-rouge">Mouse.Dec 2011 (GRCm38/mm10)(mm10)</code></li>
           <li>Click the <strong>Save</strong> button</li>
@@ -667,7 +665,7 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 
 <h1 id="aligning-fastq-files-to-the-human-genome">Aligning FASTQ files to the human genome</h1>
 
-<p>The first tool in the workflow is the <a href="http://ccb.jhu.edu/software/hisat"><strong>HISAT2</strong></a> alignment tool. It maps next-generation sequence (NGS) reads to the reference genome. This tool requires an RNA-seq file (.FASTQ) and a reference genome file in Gene transfer format (GTF). This .gtf file is obtained from the Ensembl database. When successful, this tool outputs a .bam file (binary version of a SAM: <strong>S</strong>equence <strong>A</strong>lignment/<strong>M</strong>ap).</p>
+<p>The first tool in the <span class="notranslate">workflow</span> is the <a href="http://ccb.jhu.edu/software/hisat"><strong>HISAT2</strong></a> alignment tool. It maps next-generation sequence (NGS) <span class="notranslate">reads</span> to the reference genome. This tool requires an <span class="notranslate">RNA</span>-seq file (.FASTQ) and a reference genome file in Gene transfer format (GTF). This .gtf file is obtained from the Ensembl database. When successful, this tool outputs a .bam file (binary version of a SAM: <strong>S</strong>equence <strong>A</strong>lignment/<strong>M</strong>ap).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-alignment-with-hisat2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Alignment with HISAT2</h3>
@@ -677,23 +675,23 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
       <ul>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for the reference genome”</em>: <code class="highlighter-rouge">Use a built-in genome</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a reference genome”</em>: <code class="highlighter-rouge">mm10</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or paired-end reads”</em>: <code class="highlighter-rouge">Single end</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Single end</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ files”</em>: <code class="highlighter-rouge">FASTQ_ProB_22LIST.fastqsanger</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify strand information”</em>: <code class="highlighter-rouge">Unstranded</code></li>
       </ul>
     </li>
-    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files</li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting files</li>
     <li>Rename the output to <code class="highlighter-rouge">HISAT_Output.BAM</code></li>
   </ol>
 
   <blockquote class="comment">
     <h3 id="comment-note-on-strandedness"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note on strandedness</h3>
-    <p>Note that if your reads are from a stranded library, you need to choose the appropriate
-setting for “Specify strand information” mentioned above. For single-end reads, use <code class="highlighter-rouge">F</code> or <code class="highlighter-rouge">R</code>.
+    <p>Note that if your <span class="notranslate">reads</span> are from a stranded library, you need to choose the appropriate
+setting for “Specify strand information” mentioned above. For single-end <span class="notranslate">reads</span>, use <code class="highlighter-rouge">F</code> or <code class="highlighter-rouge">R</code>.
 <code class="highlighter-rouge">F</code> means that a read corresponds to a forward transcript. <code class="highlighter-rouge">R</code> means that a read corresponds to the reverse
 complemented counterpart of a transcript.</p>
 
-    <p>For paired-end reads, use either <code class="highlighter-rouge">FR</code> or <code class="highlighter-rouge">RF</code>. With this
+    <p>For paired-end <span class="notranslate">reads</span>, use either <code class="highlighter-rouge">FR</code> or <code class="highlighter-rouge">RF</code>. With this
 option being used, every read alignment will have an XS attribute tag: <code class="highlighter-rouge">+</code> means a read
 belongs to a transcript on the positive <code class="highlighter-rouge">+</code> strand of the genome. <code class="highlighter-rouge">-</code> means a read belongs to a
 transcript on the negative <code class="highlighter-rouge">-</code> strand of the genome. (TopHat has a similar option, <code class="highlighter-rouge">--library--type</code> option,
@@ -713,7 +711,7 @@ where fr - first strand corresponds to R and RF; fr - second strand corresponds 
 <p>Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate
 a VCF dataset describing SNPs, indels, and complex variants in samples in the input
 alignments. By default, FreeBayes will consider variants supported by at least two observations
-in a single sample (<code class="highlighter-rouge">-C</code>) and also by at least 20% of the reads from a single sample (<code class="highlighter-rouge">-F</code>). These
+in a single sample (<code class="highlighter-rouge">-C</code>) and also by at least 20% of the <span class="notranslate">reads</span> from a single sample (<code class="highlighter-rouge">-F</code>). These
 settings are suitable for low to high depth sequencing in haploid and diploid samples, but
 users working with polyploid or pooled samples may adjust them depending on the characteristics
 of their sequencing data.</p>
@@ -747,7 +745,7 @@ and RO fields in the VCF output.</p>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose parameter selection level”</em>: <code class="highlighter-rouge">Simple diploid calling</code></li>
       </ul>
     </li>
-    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files.</li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting files.</li>
   </ol>
 
   <p>Note: FreeBayes may take some time…be patient!!!!</p>
@@ -756,7 +754,7 @@ and RO fields in the VCF output.</p>
 <blockquote class="comment">
   <h3 id="comment-freebayes-options"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> FreeBayes options</h3>
 
-  <p>Galaxy allows five levels of control over FreeBayes options, provided by the Choose
+  <p><span class="notranslate">Galaxy</span> allows five levels of control over FreeBayes options, provided by the Choose
    parameter selection level menu option. These are:</p>
   <ol>
     <li>
@@ -765,12 +763,12 @@ and RO fields in the VCF output.</p>
     </li>
     <li>
       <p>Simple diploid calling with filtering and coverage: Same as #1 plus two additional options:
-    (1) <code class="highlighter-rouge">-0</code> (standard filters: <code class="highlighter-rouge">--min-mapping-quality 30 --min-base-quality 20 --min-supporting-allele
+    (1) <code class="highlighter-rouge">-0</code> (standard filters: <code class="highlighter-rouge">--min-<span class="notranslate">mapping</span>-quality 30 --min-base-quality 20 --min-supporting-allele
     -qsum 0 --genotype-variant-threshold 0</code>) and (2) <code class="highlighter-rouge">--min-coverage</code>.</p>
     </li>
     <li>
       <p>Frequency-based pooled calling: This is equivalent to using FreeBayes with the following
-   options: <code class="highlighter-rouge">--haplotype-length 0 --min-alternate-count 1 --min-alternate-fraction 0 --pooled
+   options: <code class="highlighter-rouge">--haplotype-length 0 --min-alte<span class="notranslate">rna</span>te-count 1 --min-alte<span class="notranslate">rna</span>te-fraction 0 --pooled
    -continuous  --report- monomorphic</code>. This is the best choice for calling variants in mixtures
    such as viral, bacterial, or organellar genomes.</p>
     </li>
@@ -780,16 +778,16 @@ and RO fields in the VCF output.</p>
     </li>
   </ol>
 
-  <p>Complete list of all options: Gives you full control by exposing all FreeBayes options as Galaxy parameters.</p>
+  <p>Complete list of all options: Gives you full control by exposing all FreeBayes options as <span class="notranslate">Galaxy</span> parameters.</p>
 </blockquote>
 
-<h2 id="variant-annotation-and-genome-mapping">Variant annotation and Genome Mapping</h2>
+<h2 id="variant-annotation-and-genome-mapping">Variant annotation and Genome <span class="notranslate">Mapping</span></h2>
 
-<p><a href="http://dx.doi.org/10.1093/bioinformatics/btt543">CustomProDB</a> generates custom protein FASTA sequences files from exosome or transcriptome data. Once Freebayes creates the .vcf file, CustomProDB uses this file to generate a custom protein FASTA file from the transcriptome data. For this tool, we use Ensembl 89 mmusculus (GRm38.p5) (dbsnp142) as the genome annotation. We create three FASTA files from CustomProDB: (1) a variant FASTA file for short indels, (2) a Single Amino acid Variant (SAV) FASTA file, an SQLite database file (genome mapping and variant mapping) for mapping proteins to a genome and (3) an RData file for variant protein coding sequences.
-The reference protein set can be filtered by transcript expression level (RPKM calculated from a BAM file), and variant protein forms can be predicted based on variant calls (SNPs and indels reported in a VCF file).</p>
+<p><a href="http://dx.doi.org/10.1093/bioinformatics/btt543">CustomProDB</a> generates custom protein FASTA sequences files from exosome or transcriptome data. Once Freebayes creates the .vcf file, CustomProDB uses this file to generate a custom protein FASTA file from the transcriptome data. For this tool, we use Ensembl 89 mmusculus (GRm38.p5) (dbsnp142) as the genome annotation. We create three FASTA files from CustomProDB: (1) a variant FASTA file for short indels, (2) a Single Amino acid Variant (SAV) FASTA file, an SQLite database file (genome <span class="notranslate">mapping</span> and variant <span class="notranslate">mapping</span>) for <span class="notranslate">mapping</span> proteins to a genome and (3) an RData file for variant protein coding sequences.
+The reference protein set can be filtered by transcript <span class="notranslate">expression</span> level (RPKM calculated from a BAM file), and variant protein forms can be predicted based on variant calls (SNPs and indels reported in a VCF file).</p>
 
 <p>Annotations CustomProDB depends on a set of annotation files (in RData format) to
-create reference and variant protein sequences. Galaxy administrators can use the CustomProDB
+create reference and variant protein sequences. <span class="notranslate">Galaxy</span> administrators can use the CustomProDB
 data manager to create these annotations to make them available for users.</p>
 
 <p><img src="../../images/CustomProDB.png" alt="customproDB" /></p>
@@ -809,13 +807,13 @@ data manager to create these annotations to make them available for users.</p>
             <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Annotate somatic SNPs from COSMIC (human only)”</em>: <code class="highlighter-rouge">No</code></li>
           </ul>
         </li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Transcript Expression Cutoff (RPKM)”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Transcript <span class="notranslate">Expression</span> Cutoff (RPKM)”</em>: <code class="highlighter-rouge">1</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create a variant FASTA for short insertions and deletions”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create SQLite files for mapping proteins to genome and summarizing variant proteins”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create SQLite files for <span class="notranslate">mapping</span> proteins to genome and summarizing variant proteins”</em>: <code class="highlighter-rouge">Yes</code></li>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create RData file of variant protein coding sequences”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files</li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting files</li>
   </ol>
 </blockquote>
 
@@ -823,22 +821,22 @@ data manager to create these annotations to make them available for users.</p>
 <ul>
   <li>a variant FASTA file for short indels,</li>
   <li>a Single Amino acid Variant (SAV) FASTA file</li>
-  <li>an Sqlite file (genome mapping and variant mapping)</li>
+  <li>an Sqlite file (genome <span class="notranslate">mapping</span> and variant <span class="notranslate">mapping</span>)</li>
 </ul>
 
-<p>for mapping proteins to genome and an RData file for variant protein coding sequences.
-Similar to the genomic mapping, a variant mapping file is also generated from CustomProDB.
+<p>for <span class="notranslate">mapping</span> proteins to genome and an RData file for variant protein coding sequences.
+Similar to the genomic <span class="notranslate">mapping</span>, a variant <span class="notranslate">mapping</span> file is also generated from CustomProDB.
 This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
 variant annotation file will be used to visualize the variants in the Multi-omics Visualization
-Platform (in-house visualization platform developed by Galaxy-P senior developers).</p>
+Platform (in-house visualization platform developed by <span class="notranslate">Galaxy</span>-P senior developers).</p>
 
 <h1 id="transcript-assembly">Transcript Assembly</h1>
 
-<h2 id="rna-seq-to-transcripts">RNA-seq to transcripts</h2>
+<h2 id="rna-seq-to-transcripts"><span class="notranslate">RNA</span>-seq to transcripts</h2>
 
-<p><a href="http://ccb.jhu.edu/software/stringtie/">StringTie</a> is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a network flow algorithm as well as an optional <em>de novo</em> assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus.</p>
+<p><a href="http://ccb.jhu.edu/software/stringtie/">StringTie</a> is a fast and highly efficient assembler of <span class="notranslate">RNA</span>-Seq alignments into potential transcripts. It uses a network flow algorithm as well as an optional <em>de novo</em> assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus.</p>
 
-<p>Its input can include not only the alignments of raw reads used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads. To identify differentially expressed genes between experiments, StringTie’s output can be processed by specialized software like Ballgown, Cuffdiff or other programs (DESeq2, edgeR, etc.).</p>
+<p>Its input can include not only the alignments of raw <span class="notranslate">reads</span> used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those <span class="notranslate">reads</span>. To identify differentially expressed genes between experiments, StringTie’s output can be processed by specialized software like Ballgown, Cuffdiff or other programs (DESeq2, edgeR, etc.).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-transcript-assembly-with-stringtie"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Transcript assembly with StringTie</h3>
@@ -846,26 +844,26 @@ Platform (in-house visualization platform developed by Galaxy-P senior developer
   <ol>
     <li><strong>StringTie</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input mapped reads”</em>: <code class="highlighter-rouge">FASTQ_ProB_22LIST.BAM</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input mapped <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">FASTQ_ProB_22LIST.BAM</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify strand information”</em>: <code class="highlighter-rouge">Unstranded</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use a reference file to guide assembly?”</em>: <code class="highlighter-rouge">Use Reference GTF/GFF3</code>
           <ul>
             <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reference file”</em>: <code class="highlighter-rouge">Use file from History</code></li>
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
             <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Reference transcripts only?”</em>: <code class="highlighter-rouge">No</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output files for differential expression?”</em>: <code class="highlighter-rouge">No additional output</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output files for differential <span class="notranslate">expression</span>?”</em>: <code class="highlighter-rouge">No additional output</code></li>
             <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output coverage file?”</em>: <code class="highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting files.</li>
+    <li>Inspect <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting files.</li>
     <li>Rename the output to <code class="highlighter-rouge">Stringtie_outut.gtf</code>
       <blockquote class="tip">
 
         <h3 id="tip-tip-renaming-a-dataset-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field</li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -876,8 +874,8 @@ Platform (in-house visualization platform developed by Galaxy-P senior developer
 
         <h3 id="tip-tip-changing-the-datatype-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
           <li>Select ``</li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
@@ -887,12 +885,12 @@ Platform (in-house visualization platform developed by Galaxy-P senior developer
 
 </blockquote>
 
-<p>StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be
+<p>StringTie accepts a BAM (or SAM) file of paired-end <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span>, which must be
 sorted by genomic location (coordinate position). This file contains spliced read alignments
 and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a
 fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across
 at least one junction) in the input BAM file must contain the tag XS to indicate the genomic
-strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2
+strand that produced the <span class="notranslate">RNA</span> from which the read was sequenced. Alignments produced by HISAT2
 (when run with the <code class="highlighter-rouge">--dta</code> option) already include this tag, but if you use a different read mapper
 you should check that this XS tag is included for spliced alignments.</p>
 
@@ -901,21 +899,21 @@ you should check that this XS tag is included for spliced alignments.</p>
   <p>Be sure to run HISAT2 with the <code class="highlighter-rouge">--dta</code> option for alignment (under ‘Spliced alignment options’),
 for the best results.</p>
 
-  <p>Also note that if your reads are from a stranded library, you need to choose the appropriate
+  <p>Also note that if your <span class="notranslate">reads</span> are from a stranded library, you need to choose the appropriate
 setting for ‘Specify strand information’ above. As, if Forward (FR) is selected, StringTie will
-assume the reads are from a <code class="highlighter-rouge">--fr</code> library, while if Reverse (RF) is selected, StringTie will
-assume the reads are from a <code class="highlighter-rouge">--rf</code> library, otherwise it is assumed that the reads are from an
+assume the <span class="notranslate">reads</span> are from a <code class="highlighter-rouge">--fr</code> library, while if Reverse (RF) is selected, StringTie will
+assume the <span class="notranslate">reads</span> are from a <code class="highlighter-rouge">--rf</code> library, otherwise it is assumed that the <span class="notranslate">reads</span> are from an
 unstranded library (the widely-used, although now deprecated, TopHat had a similar <code class="highlighter-rouge">--library-type</code>
 option, where fr-firststrand corresponded to RF and fr-secondstrand corresponded to FR).
-If you don’t know whether your reads are from a stranded library or not, you could use the
+If you don’t know whether your <span class="notranslate">reads</span> are from a stranded library or not, you could use the
 tool ‘RSeQC Infer Experiment’ to try to determine.</p>
 
   <p>As an option, a reference annotation file in GTF/GFF3 format can be provided to StringTie. In
 this case, StringTie will prefer to use these “known” genes from the annotation file, and for
 the ones that are expressed it will compute coverage, TPM and FPKM values. It will also produce
-additional transcripts to account for RNA-seq data that aren’t covered by (or explained by) the
+additional transcripts to account for <span class="notranslate">RNA</span>-seq data that aren’t covered by (or explained by) the
 annotation. Note that if option <code class="highlighter-rouge">-e</code> is not used, the reference transcripts need to be fully covered
-by reads in order to be included in StringTie’s output. In that case, other transcripts assembled
+by <span class="notranslate">reads</span> in order to be included in StringTie’s output. In that case, other transcripts assembled
 from the data by StringTie and not present in the reference file will be printed as well.</p>
 
   <p>We highly recommend that you provide annotation if you are analyzing a genome that is well
@@ -924,7 +922,7 @@ annotated, such as human, mouse, or other model organisms.</p>
 
 <h2 id="evaluate-the-assembly-with-annotated-transcripts">Evaluate the assembly with annotated transcripts</h2>
 
-<p><a href="https://ccb.jhu.edu/software/stringtie/gffcompare.shtml">GffCompare</a> compares and evaluates the accuracy of RNA-Seq transcript assemblers (Cufflinks, Stringtie). * collapse (merge) duplicate transcripts from multiple GTF/GFF3 files (e.g. resulted from assembly of different samples) * classify transcripts from one or multiple GTF/GFF3 files as they relate to reference transcripts provided in a annotation file (also in GTF/GFF3 format)</p>
+<p><a href="https://ccb.jhu.edu/software/stringtie/gffcompare.shtml">GffCompare</a> compares and evaluates the accuracy of <span class="notranslate">RNA</span>-Seq transcript assemblers (Cufflinks, Stringtie). * collapse (merge) duplicate transcripts from multiple GTF/GFF3 files (e.g. resulted from assembly of different samples) * classify transcripts from one or multiple GTF/GFF3 files as they relate to reference transcripts provided in a annotation file (also in GTF/GFF3 format)</p>
 
 <p>The original form of this program is also distributed as part of the Cufflinks suite, under the name <a href="http://cole-trapnell-lab.github.io/cufflinks/cuffcompare/">CuffCompare</a>. Most of the options and parameters of CuffCompare are supported by GffCompare, while new features will likely be added to GffCompare in the future.</p>
 
@@ -976,36 +974,36 @@ no longer needed and is simply ignored when given).</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-translate-transcripts-to-protein-sequence"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Translate transcripts to protein sequence</h3>
 
-  <p>First, we must convert the GffCompare annotated GTF file to BED format.</p>
+  <p>First, we must convert the GffCompare annotated GTF file to <span class="notranslate">BED</span> format.</p>
 
   <ol>
-    <li><strong>Convert gffCompare annotated GTF to BED</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Convert gffCompare annotated GTF to <span class="notranslate">BED</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF annotated by gffCompare”</em>: <code class="highlighter-rouge">output from gff compare</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“filter GffCompare class_codes to convert”</em>:</li>
       </ul>
       <ul>
         <li><code class="highlighter-rouge">j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript</code></li>
-        <li><code class="highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.</code></li>
+        <li><code class="highlighter-rouge">e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-m<span class="notranslate">RNA</span> fragment.</code></li>
         <li><code class="highlighter-rouge">i : A transfrag falling entirely within a reference intron</code></li>
         <li><code class="highlighter-rouge">p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)</code></li>
         <li><code class="highlighter-rouge">u : Unknown, intergenic transcript</code></li>
       </ul>
 
-      <p>Next, we translate transcripts from the input BED file into protein sequences.</p>
+      <p>Next, we translate transcripts from the input <span class="notranslate">BED</span> file into protein sequences.</p>
     </li>
-    <li><strong>Translate BED transcripts cDNA in 3frames or CDS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Translate <span class="notranslate">BED</span> transcripts c<span class="notranslate">DNA</span> in 3frames or CDS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A BED file with 12 columns”</em>: <code class="highlighter-rouge">Convert GffCompare-annotated GTF to BED</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A <span class="notranslate">BED</span> file with 12 columns”</em>: <code class="highlighter-rouge">Convert GffCompare-annotated GTF to <span class="notranslate">BED</span></code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for Genomic Sequence Data”</em>: <code class="highlighter-rouge">Locally cached File</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select reference 2bit file”</em>: <code class="highlighter-rouge">mm10</code></li>
       </ul>
 
-      <p>Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).</p>
+      <p>Finally, we convert a <span class="notranslate">BED</span> format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).</p>
     </li>
-    <li><strong>bed to protein map</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong><span class="notranslate">bed</span> to protein map</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A BED file with 12 columns, thickStart and thickEnd define protein coding region”</em>: <code class="highlighter-rouge">Translate cDNA_minus_CDS</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A <span class="notranslate">BED</span> file with 12 columns, thickStart and thickEnd define protein coding region”</em>: <code class="highlighter-rouge">Translate c<span class="notranslate">DNA</span>_minus_CDS</code></li>
       </ul>
     </li>
   </ol>
@@ -1028,7 +1026,7 @@ no longer needed and is simply ignored when given).</p>
 <p>In this section we will perform the following tasks:</p>
 <ul>
   <li>The <strong>Protein Database Downloader</strong> tool is used to download the FASTA database from UniProt and cRAP (<strong>c</strong>ommon <strong>R</strong>epository of <strong>A</strong>dventitious <strong>P</strong>roteins) database containing known/reference mouse proteins. For the purpose of this tutorial, we will use the <code class="highlighter-rouge">Reference_5000_uniprot_cRAP.fasta</code> file as this database.</li>
-  <li>The <strong>FASTA Merge Files and Filter Unique Sequences</strong> tool is used to merge the databases obtained from CustomProDB and “Translate BED” tool
+  <li>The <strong>FASTA Merge Files and Filter Unique Sequences</strong> tool is used to merge the databases obtained from CustomProDB and “Translate <span class="notranslate">BED</span>” tool
 along with the UniProt and cRAP databases.</li>
   <li>The <strong>Regex Text Manipulation</strong> tool is used to manipulate the FASTA file to make it SearchGUI-compatible.</li>
 </ul>
@@ -1047,7 +1045,7 @@ along with the UniProt and cRAP databases.</li>
 </code></pre></div>          </div>
         </li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How are sequences judged to be unique?”</em>: <code class="highlighter-rouge">Accession and Sequence</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular Expression”</em>: <code class="highlighter-rouge">^&gt;([^ |]+).*$</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">^&gt;([^ |]+).*$</code></li>
       </ul>
     </li>
   </ol>
@@ -1066,34 +1064,34 @@ along with the UniProt and cRAP databases.</li>
 
 <p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence" /></p>
 
-<p>For visualization purposes we also use the concatenate tool to concatenate the genomic mapping with the protein mapping dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.</p>
+<p>For visualization purposes we also use the concatenate tool to concatenate the genomic <span class="notranslate">mapping</span> with the protein <span class="notranslate">mapping</span> dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.</p>
 
-<p>An SQLite database containing the genomic mapping SQLite, variant annotation and information from the protein mapping file is concatenated to form a single genomic mapping SQLite database later used as an input for the ‘Peptide Genomic Coordinate’ tool. For that we need to follow the steps below:</p>
+<p>An SQLite database containing the genomic <span class="notranslate">mapping</span> SQLite, variant annotation and information from the protein <span class="notranslate">mapping</span> file is concatenated to form a single genomic <span class="notranslate">mapping</span> SQLite database later used as an input for the ‘Peptide Genomic Coordinate’ tool. For that we need to follow the steps below:</p>
 
-<h2 id="genomic-mapping-database">Genomic mapping database</h2>
+<h2 id="genomic-mapping-database">Genomic <span class="notranslate">mapping</span> database</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-create-database-for-genomic-mapping"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create Database for genomic mapping</h3>
+  <h3 id="hands_on-hands-on-create-database-for-genomic-mapping"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create Database for genomic <span class="notranslate">mapping</span></h3>
 
   <ol>
     <li><strong>SQLite to tabular for SQL query</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SQLite Database”</em>: <code class="highlighter-rouge">genomic_mapping.sqlite</code> from CustomProDB</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SQLite Database”</em>: <code class="highlighter-rouge">genomic_<span class="notranslate">mapping</span>.sqlite</code> from CustomProDB</li>
         <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Query”</em>:
           <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  SELECT pro_name, chr_name, cds_chr_start - 1, cds_chr_end,strand,cds_start - 1, cds_end
-  FROM genomic_mapping
+  FROM genomic_<span class="notranslate">mapping</span>
   ORDER BY pro_name, cds_start, cds_end
 </code></pre></div>          </div>
         </li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Omit column headers from tabular output”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>Rename output to <code class="highlighter-rouge">genomic_mapping_sqlite</code>
+    <li>Rename output to <code class="highlighter-rouge">genomic_<span class="notranslate">mapping</span>_sqlite</code>
       <blockquote class="tip">
 
         <h3 id="tip-tip-renaming-a-dataset-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
         <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field</li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -1103,7 +1101,7 @@ along with the UniProt and cRAP databases.</li>
     </li>
     <li><strong>Column Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="highlighter-rouge">genomic_mapping_sqlite' (tabular)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="highlighter-rouge">genomic_<span class="notranslate">mapping</span>_sqlite' (tabular)</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Using”</em>: <code class="highlighter-rouge">column 1</code></li>
         <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
@@ -1128,13 +1126,13 @@ along with the UniProt and cRAP databases.</li>
     <li>
       <p>Rename the output to <code class="highlighter-rouge">SAV_INDEL</code></p>
 
-      <p>This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.</p>
+      <p>This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular <span class="notranslate">expression</span> pattern, it replaces the text with the specified replacement.</p>
 
-      <p>Next, we will concatenate the output from this tool with the “Bed to protein map” output.</p>
+      <p>Next, we will concatenate the output from this tool with the “<span class="notranslate">Bed</span> to protein map” output.</p>
     </li>
     <li><strong>Concatenate multiple datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous tool named as <code class="highlighter-rouge">SAV_INDEL</code> and the output from the “bed to protein map” tool and concatenate the tool.</li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Datasets”</em>: Select the output from the previous tool named as <code class="highlighter-rouge">SAV_INDEL</code> and the output from the “<span class="notranslate">bed</span> to protein map” tool and concatenate the tool.</li>
       </ul>
 
       <p>Output will be the “Genomic_Protein_map” rename it as that</p>
@@ -1165,7 +1163,7 @@ along with the UniProt and cRAP databases.</li>
       </ul>
     </li>
     <li>
-      <p>Rename the output as <strong>“genomic_mapping_sqlite”</strong></p>
+      <p>Rename the output as <strong>“genomic_<span class="notranslate">mapping</span>_sqlite”</strong></p>
 
       <p><img src="../../images/genomic_mapping_file.png" alt="genomic mapping" /></p>
     </li>
@@ -1247,8 +1245,8 @@ FROM variant_annotation
 
 </blockquote>
 
-<p>These SQLite databases, which contain the genomic mapping SQLite and variant
-annotation information from the protein mapping file, will be utilized
+<p>These SQLite databases, which contain the genomic <span class="notranslate">mapping</span> SQLite and variant
+annotation information from the protein <span class="notranslate">mapping</span> file, will be utilized
 by MVP to visualize the genomic loci of any variant peptides.</p>
 
 <p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant" /></p>
@@ -1265,10 +1263,10 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
       <ul>
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Run in batch mode?”</em>: <code class="highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Custom ProDB Merged Fasta File output</code></li>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Translate BED transcripts Fasta output</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Translate <span class="notranslate">BED</span> transcripts Fasta output</code></li>
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="highlighter-rouge">Input Reference_5000_uniprot_cRAP.fasta</code></li>
         <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How are sequences judged to be unique?”</em>: <code class="highlighter-rouge">Accession and Sequence</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular Expression”</em>: <code class="highlighter-rouge">^&gt;([^ |]+).*$</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Accession Parsing Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">^&gt;([^ |]+).*$</code></li>
       </ul>
     </li>
   </ol>

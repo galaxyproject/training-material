@@ -455,8 +455,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -723,7 +721,7 @@
 <h1 id="alignment">Alignment</h1>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-mapping-with-bwameth"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mapping with bwameth</h3>
+  <h3 id="hands_on-hands-on-mapping-with-bwameth"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <span class="notranslate">Mapping</span> with bwameth</h3>
 
   <p>We will map now the imported dataset against a reference genome.</p>
 
@@ -780,7 +778,7 @@ Compute now the alignment. Please notice that depending on your system this comp
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
             <li>The distribution of the methylation is more or less equal. Only at the start and the end we could trim a bit but a +- 5% variation is acceptable.</li>
-            <li>To trim the reads we would include for the first strand only the positions 0 to 145, for the second 6 to 149.</li>
+            <li>To trim the <span class="notranslate">reads</span> we would include for the first strand only the positions 0 to 145, for the second 6 to 149.</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -814,10 +812,10 @@ Compute now the alignment. Please notice that depending on your system this comp
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
 
-  <p>In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark.</p>
+  <p>In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, <span class="notranslate">DNA</span> methylation is usually a repressive mark.</p>
 
   <ol>
-    <li><strong>Wig/BedGraph-to-bigWig</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>
           <p>Use the result of MethylDackel to transform it to a bigWig file.</p>
@@ -837,7 +835,7 @@ Compute now the alignment. Please notice that depending on your system this comp
     </li>
     <li><strong>computeMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li>Use the file <code class="highlighter-rouge">CpGIslands.bed</code>as <code class="highlighter-rouge">Regions to plot</code> and the in the previous step created bigwig file as the <code class="highlighter-rouge">score file</code>.</li>
+        <li>Use the file <code class="highlighter-rouge">CpGIslands.<span class="notranslate">bed</span></code>as <code class="highlighter-rouge">Regions to plot</code> and the in the previous step created bigwig file as the <code class="highlighter-rouge">score file</code>.</li>
         <li>Use for the option <code class="highlighter-rouge">computeMatrix has two main output options</code> the value <code class="highlighter-rouge">reference-point</code>.</li>
       </ul>
     </li>
@@ -854,8 +852,8 @@ Compute now the alignment. Please notice that depending on your system this comp
 
   <p>Lets see how the methylation looks for a few provided files:</p>
   <ol>
-    <li><strong>Galaxy</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Import the files <code class="highlighter-rouge">NB1_CpG.meth.bedGraph</code> from the data library</li>
-    <li><strong>Wig/BedGraph-to-bigWig</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong><span class="notranslate">Galaxy</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Import the files <code class="highlighter-rouge">NB1_CpG.meth.<span class="notranslate">bed</span>Graph</code> from the data library</li>
+    <li><strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>Use the imported file to transform it to a bigWig file.</li>
       </ul>
@@ -875,16 +873,16 @@ Compute now the alignment. Please notice that depending on your system this comp
         <h3 id="comment-ucsc---ensembl-convert"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> UCSC - Ensembl convert</h3>
 
         <ul>
-          <li>Download the <code class="highlighter-rouge">Replace information file</code> for hg38 chromosome: <a href="https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt">Download</a> and import it to Galaxy.</li>
+          <li>Download the <code class="highlighter-rouge">Replace information file</code> for hg38 chromosome: <a href="https://raw.githubusercontent.com/dpryan79/ChromosomeMappings/master/GRCh38_ensembl2UCSC.txt">Download</a> and import it to <span class="notranslate">Galaxy</span>.</li>
           <li><strong>Replace column</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
             <ul>
-              <li>Choose for <code class="highlighter-rouge">File in which you want to replace some values</code> the previous used <code class="highlighter-rouge">NB1_CpG.meth.bedGraph</code> file and for <code class="highlighter-rouge">Replace information file</code>  conversion file. For <code class="highlighter-rouge">Which column should be replaced?</code> choose <code class="highlighter-rouge">Column: 1</code>, for <code class="highlighter-rouge">Skip this many starting lines</code> a <code class="highlighter-rouge">1</code> and for <code class="highlighter-rouge">Delimited by</code> <code class="highlighter-rouge">Tab</code>.</li>
+              <li>Choose for <code class="highlighter-rouge">File in which you want to replace some values</code> the previous used <code class="highlighter-rouge">NB1_CpG.meth.<span class="notranslate">bed</span>Graph</code> file and for <code class="highlighter-rouge">Replace information file</code>  conversion file. For <code class="highlighter-rouge">Which column should be replaced?</code> choose <code class="highlighter-rouge">Column: 1</code>, for <code class="highlighter-rouge">Skip this many starting lines</code> a <code class="highlighter-rouge">1</code> and for <code class="highlighter-rouge">Delimited by</code> <code class="highlighter-rouge">Tab</code>.</li>
             </ul>
           </li>
         </ul>
       </blockquote>
     </li>
-    <li>To save compute time we prepared the converted files for you. Import the files: <code class="highlighter-rouge">NB1_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">NB2_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT089_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT126_CpG.meth_ucsc.bedGraph</code>, <code class="highlighter-rouge">BT198_CpG.meth_ucsc.bedGraph</code> and <code class="highlighter-rouge">MCF7_CpG.meth_ucsc.bedgraph</code>.</li>
+    <li>To save compute time we prepared the converted files for you. Import the files: <code class="highlighter-rouge">NB1_CpG.meth_ucsc.<span class="notranslate">bed</span>Graph</code>, <code class="highlighter-rouge">NB2_CpG.meth_ucsc.<span class="notranslate">bed</span>Graph</code>, <code class="highlighter-rouge">BT089_CpG.meth_ucsc.<span class="notranslate">bed</span>Graph</code>, <code class="highlighter-rouge">BT126_CpG.meth_ucsc.<span class="notranslate">bed</span>Graph</code>, <code class="highlighter-rouge">BT198_CpG.meth_ucsc.<span class="notranslate">bed</span>Graph</code> and <code class="highlighter-rouge">MCF7_CpG.meth_ucsc.<span class="notranslate">bed</span>graph</code>.</li>
     <li>Compute the matrix and plot the profile as described above.</li>
   </ol>
 
@@ -902,11 +900,11 @@ Compute now the alignment. Please notice that depending on your system this comp
   <p>With metilene it is possible to detect differentially methylated regions (DMRs) which is a necessary prerequisite for characterizing different epigenetic states.</p>
 
   <ol>
-    <li><strong>Galaxy</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Import from the data library the files <code class="highlighter-rouge">NB1_CpG.meth.bedGraph</code>, <code class="highlighter-rouge">NB2_CpG.meth.bedGraph</code> and <code class="highlighter-rouge">BT198_CpG.meth.bedGraph</code>.</li>
+    <li><strong><span class="notranslate">Galaxy</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Import from the data library the files <code class="highlighter-rouge">NB1_CpG.meth.<span class="notranslate">bed</span>Graph</code>, <code class="highlighter-rouge">NB2_CpG.meth.<span class="notranslate">bed</span>Graph</code> and <code class="highlighter-rouge">BT198_CpG.meth.<span class="notranslate">bed</span>Graph</code>.</li>
     <li><strong>Metilene</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
       <ul>
-        <li>Choose for the first option <code class="highlighter-rouge">Input group 1</code> the imported files starting with <code class="highlighter-rouge">NB</code> and for <code class="highlighter-rouge">Input group 2</code> the imported files <code class="highlighter-rouge">BT198_CpG.meth.bedGraph</code>.</li>
-        <li>Select for the option <code class="highlighter-rouge">BED file containing regions of interest</code> the imported BED file CpGIslands.bed.</li>
+        <li>Choose for the first option <code class="highlighter-rouge">Input group 1</code> the imported files starting with <code class="highlighter-rouge">NB</code> and for <code class="highlighter-rouge">Input group 2</code> the imported files <code class="highlighter-rouge">BT198_CpG.meth.<span class="notranslate">bed</span>Graph</code>.</li>
+        <li>Select for the option <code class="highlighter-rouge"><span class="notranslate">BED</span> file containing regions of interest</code> the imported <span class="notranslate">BED</span> file CpGIslands.<span class="notranslate">bed</span>.</li>
       </ul>
     </li>
     <li>

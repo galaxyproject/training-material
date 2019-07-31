@@ -336,8 +336,6 @@
 
             
 
-
-
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -549,7 +547,7 @@
 <p>A plethora of software solutions exist for each step. In this tutorial, we will show how to
 use the <a href="http://proteowizard.sourceforge.net/">ProteoWizard</a> tool MSconvert and the <a href="https://openms.de">OpenMS</a> tool <a href="http://ftp.mi.fu-berlin.de/pub/OpenMS/release-documentation/html/TOPP_PeakPickerHiRes.html">PeakPickerHiRes</a> for step 1, and the <a href="https://compomics.com/">Compomics</a> tools <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> and <a href="https://compomics.github.io/projects/peptide-shaker.html">PeptideShaker</a>, for the steps 2-4.</p>
 
-<p>For an alternative identification pipeline using only tools provided by the <a href="https://openms.de">OpenMS software suite</a>, please consult <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">this tutorial</a>.</p>
+<p>For an alte<span class="notranslate">rna</span>tive identification pipeline using only tools provided by the <a href="https://openms.de">OpenMS software suite</a>, please consult <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">this tutorial</a>.</p>
 
 <h1 class="no_toc" id="input-data">Input data</h1>
 
@@ -575,7 +573,7 @@ If you already completed the tutorial on <a href="/training-material/topics/prot
 
 <h1 id="preparing-raw-data">Preparing Raw Data</h1>
 
-<p>Raw data conversion is the first step of any proteomic data analysis. The most common converter is msconvert from the <a href="http://proteowizard.sourceforge.net/">ProteoWizard software suite</a>, the format to convert to is mzML. SearchGUI needs <code class="highlighter-rouge">MGF</code> format as input, but as we need the <code class="highlighter-rouge">mzML</code> format for several other tasks, we will convert to <code class="highlighter-rouge">mzML</code> first. Due to licensing reasons, msconvert runs only on windows systems and will not work on most Galaxy servers.</p>
+<p>Raw data conversion is the first step of any proteomic data analysis. The most common converter is msconvert from the <a href="http://proteowizard.sourceforge.net/">ProteoWizard software suite</a>, the format to convert to is mzML. SearchGUI needs <code class="highlighter-rouge">MGF</code> format as input, but as we need the <code class="highlighter-rouge">mzML</code> format for several other tasks, we will convert to <code class="highlighter-rouge">mzML</code> first. Due to licensing reasons, msconvert runs only on windows systems and will not work on most <span class="notranslate">Galaxy</span> servers.</p>
 
 <p>Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the tandem mass spectrometry (MS2) data have to be converted to centroid mode, a process called “peak picking” or “centroiding”.
 Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and can be run in parallel to the mzML conversion. However, the OpenMS tool <strong><em>PeakPickerHiRes</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is reported to generate slightly better results (<a href="https://www.ncbi.nlm.nih.gov/pubmed/17094243">Lange et al., 2006, Pac Symp Biocomput</a>) and is therefore recommended for quantitative studies (<a href="https://www.ncbi.nlm.nih.gov/pubmed/19953549">Vaudel et al., 2010, Proteomics</a>).
@@ -584,7 +582,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong><
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-file-conversion-and-peak-picking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: File Conversion and Peak Picking</h3>
 
-  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">MGF</code> and <code class="highlighter-rouge">mzML</code> file formats. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your Galaxy instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input.</p>
+  <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="highlighter-rouge">raw</code> format and also already converted to <code class="highlighter-rouge">MGF</code> and <code class="highlighter-rouge">mzML</code> file formats. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your <span class="notranslate">Galaxy</span> instance, please download the preconverted <code class="highlighter-rouge">mzML</code> as an input.</p>
 
   <ol>
     <li>
@@ -598,7 +596,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong><
 
         <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
         <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
           <li>Select the option <strong>Create New</strong> from the menu</li>
         </ol>
       </blockquote>
@@ -612,7 +610,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong><
 
   <blockquote class="comment">
     <h3 id="comment-comment-local-use-of-msconvert"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Local Use of MSConvert</h3>
-    <p>The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
+    <p>The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in <span class="notranslate">Galaxy</span> instances. If <strong><em>msconvert</em></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your <span class="notranslate">Galaxy</span> instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your <span class="notranslate">Galaxy</span> history.</p>
   </blockquote>
 </blockquote>
 
@@ -645,7 +643,7 @@ In the <strong><code class="highlighter-rouge">Advanced Options</code></strong> 
     <p>Peptide Shaker offers a variety of outputs.
 The <code class="highlighter-rouge">Zip File for import to Desktop App</code> can be downloaded to view and evaluate the search results in the Peptide Shaker viewer (<a href="https://compomics.github.io/projects/peptide-shaker.html">Download</a>).
 The several <code class="highlighter-rouge">Reports</code> contain tabular, human-readable information.
-Also, an <code class="highlighter-rouge">mzidentML</code> (= <code class="highlighter-rouge">mzid</code>) file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software.
+Also, an <code class="highlighter-rouge">mzidentML</code> (= <code class="highlighter-rouge">mzid</code>) file can be created that contains all peptide sequence matching information and can be utilized by compatible <span class="notranslate">downstream</span> software.
 The <code class="highlighter-rouge">Certificate of Analysis</code> provides details on all parameters settings of both Search GUI and Peptide Shaker used for the analysis.</p>
   </blockquote>
 
@@ -732,15 +730,15 @@ False positives are expected to be randomly assigned to peptides in the FASTA da
   </blockquote>
 </blockquote>
 
-<h1 class="no_toc" id="premade-workflow">Premade Workflow</h1>
+<h1 class="no_toc" id="premade-workflow">Premade <span class="notranslate">Workflow</span></h1>
 
-<p>A premade workflow for this tutorial can be found <a href="workflows/wf_proteinID_SG_PS.ga">here</a></p>
+<p>A premade <span class="notranslate">workflow</span> for this tutorial can be found <a href="workflows/wf_proteinID_SG_PS.ga">here</a></p>
 
 <h1 class="no_toc" id="further-reading">Further Reading</h1>
 
 <ul>
   <li><a href="https://compomics.com/bioinformatics-for-proteomics/">Search GUI and Peptide Shaker tutorials at Compomics</a></li>
-  <li><a href="https://drive.google.com/file/d/0B6bIeOvjBkbWVnhMLWxXdGVUY3M/view">Using Search GUI and Peptide Shaker in Galaxy</a></li>
+  <li><a href="https://drive.google.com/file/d/0B6bIeOvjBkbWVnhMLWxXdGVUY3M/view">Using Search GUI and Peptide Shaker in <span class="notranslate">Galaxy</span></a></li>
 </ul>
 
 
