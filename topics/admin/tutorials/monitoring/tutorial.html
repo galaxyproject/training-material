@@ -215,9 +215,9 @@
     }
   },
   "url": "https://galaxyproject.github.io//training-material/topics/admin/tutorials/monitoring/tutorial.html",
-  "timeRequired": "PT30M",
+  "timeRequired": "PT2H",
   "keywords": "monitoring",
-  "description": "Galaxy Monitoring with Telegraf and Grafana\\nThe questions this  addresses are:\n - How to monitor Galaxy with Telegraf\n\n\\nThe objectives are:\n - Setup and start the Galaxy reports app.\n\n",
+  "description": "Galaxy Monitoring with Telegraf and Grafana\\nThe questions this  addresses are:\n - How to monitor Galaxy with Telegraf\n - How do I set up InfluxDB\n - How can I make graphs in Grafana?\n - How can I best alert on important metrics?\n\n\\nThe objectives are:\n - Setup InfluxDB\n - Setup Telegraf\n - Setup Grafana\n - Create several charts\n\n",
   "coursePrerequisites": [
     {
       "@type": "Course",
@@ -266,11 +266,7 @@
 
   ],
   "mentions": [
-    {
-      "@type": "Thing",
-      "url": "",
-      "name": "Training data for Galaxy Monitoring with Telegraf and Grafana tutorial"
-    }
+
   ],
   "author": [
     {
@@ -310,12 +306,30 @@
             <li><p>How to monitor Galaxy with Telegraf</p>
 </li>
             
+            <li><p>How do I set up InfluxDB</p>
+</li>
+            
+            <li><p>How can I make graphs in Grafana?</p>
+</li>
+            
+            <li><p>How can I best alert on important metrics?</p>
+</li>
+            
             </ul>
 
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li><p>Setup and start the Galaxy reports app.</p>
+            <li><p>Setup InfluxDB</p>
+</li>
+            
+            <li><p>Setup Telegraf</p>
+</li>
+            
+            <li><p>Setup Grafana</p>
+</li>
+            
+            <li><p>Create several charts</p>
 </li>
             
             </ul>
@@ -497,7 +511,7 @@
             
 
             
-            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
             
 
             
@@ -566,20 +580,291 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significan ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.</p>
+<p>Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
 
 <ol id="markdown-toc">
-  <li><a href="#telegraf" id="markdown-toc-telegraf">Telegraf</a></li>
+  <li><a href="#data-flow" id="markdown-toc-data-flow">Data Flow</a></li>
+  <li><a href="#infrastructure" id="markdown-toc-infrastructure">Infrastructure</a>    <ol>
+      <li><a href="#influxdb" id="markdown-toc-influxdb">InfluxDB</a></li>
+      <li><a href="#grafana" id="markdown-toc-grafana">Grafana</a></li>
+      <li><a href="#telegraf" id="markdown-toc-telegraf">Telegraf</a></li>
+    </ol>
+  </li>
+  <li><a href="#monitoring-with-grafana" id="markdown-toc-monitoring-with-grafana">Monitoring with Grafana</a>    <ol>
+      <li><a href="#importing-a-dashboard" id="markdown-toc-importing-a-dashboard">Importing a dashboard</a></li>
+      <li><a href="#setting-up-a-galaxy-dashboard" id="markdown-toc-setting-up-a-galaxy-dashboard">Setting up a Galaxy dashboard</a></li>
+      <li><a href="#styling" id="markdown-toc-styling">Styling</a></li>
+      <li><a href="#monitoring" id="markdown-toc-monitoring">Monitoring</a></li>
+    </ol>
+  </li>
+  <li><a href="#telegraf--gxadmin" id="markdown-toc-telegraf--gxadmin">Telegraf &amp; <code class="highlighter-rouge">gxadmin</code></a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="telegraf">Telegraf</h1>
+<p>This tutorial explicitly assumes you are starting with a setup like that created in the <em>Galaxy installation with Ansible</em> tutorial</p>
 
-<p>We use <a href="https://github.com/influxdata/telegraf">Telegraf</a> for monitoring as it is incredibly easy to get started with.</p>
+<h1 id="data-flow">Data Flow</h1>
+
+<p>The monitoring setup we (UseGalaxy.*) use involves compute nodes collecting metrics and forwarding the data to a central collector. On each node we have a data collector running (Telegraf) which collects data from numerous sources before aggregating it and forwarding it onwards. On another, sometimes public, node we accept and collect all of these metrics (InfluxDB) and provide an interface to visualise and query that data (Grafana).</p>
+
+<p>For UseGalaxy.eu, we pre-install Telegraf on our compute node images. Whenever we launch new compute nodes, they automatically start sending data to our central collection point. Telegraf additionally provides a nice feature of aggregating metrics it collects, batching them up before sending them off to InfluxDB. Telegraf has built in data collectors, or can run command line scripts and tools which output specifically formatted data.</p>
+
+<p>Telegraf communicates with InfluxDB using a JSON based HTTP API, making it easy to write custom tooling to send data there, if need be. Grafana provides the visualisation component, the most interesting component for most consumers of the metrics and monitoring.</p>
+
+<h1 id="infrastructure">Infrastructure</h1>
+
+<p>Setting up the infrastructure is quite simple thanks to the automation provided by Ansible. We will first setup a playbook for a “monitoring” machine, which will collect and visualize our data using InfluxDB and Grafana. We will then expand the Galaxy playbook to include Telegraf on the machine to monitor both it and Galaxy itself. In this tutorial we will do everything on the same machine. In practice you can separate these services to different machines, if you wish. The only requirement is that Telegraf run on the machine from which you wish to collect data.</p>
+
+<h2 id="influxdb">InfluxDB</h2>
+
+<p><a href="https://www.influxdata.com/">InfluxDB</a> provides the data storage for monitoring. It is a <abbr title="Time Series Database">TSDB</abbr>, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as “retention policies”. Outside of this feature, it is a <a href="https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/">relatively normal database</a>.</p>
+
+<p>The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains <a href="https://docs.ansible.com/ansible/latest/modules/list_of_database_modules.html#influxdb">several modules</a> you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml">their own role</a> for setting up their InfluxDB database, but it is not reusable enough for it to be used here yet. If you plan to automate your entire setup, this tutorial can perhaps provide inspiration for writing your own Ansible role. However, in this case it is sufficient to manually create your users and retention policies as a one-off task.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-influxdb"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up InfluxDB</h3>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">mtchavez.influxdb</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">v6.0.0</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
+    </li>
+    <li>
+      <p>Create a new playbook, <code class="highlighter-rouge">monitoring.yml</code> with the following:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">monitoring</span>
+  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">mtchavez.influxdb</span>
+</code></pre></div>      </div>
+
+      <p>During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB) on a separate host.</p>
+    </li>
+    <li>
+      <p>Edit the inventory file (<code class="highlighter-rouge">hosts</code>) an add a group for monitoring like:</p>
+
+      <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[monitoring]</span>
+<span class="err">training-0.example.org</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+</code></pre></div>      </div>
+
+      <p><strong>Ensure that the hostname is the full hostname of your machine.</strong></p>
+    </li>
+    <li>
+      <p>Run the playbook:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts monitoring.yml
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This will setup an InfluxDB server listening on port <code class="highlighter-rouge">:8086</code>. The service is currently unauthenticated but it is only listening on <code class="highlighter-rouge">localhost</code> so it is less of a concern. The service can be authenticated and SSL configured quite easily but that is outside the scope of this tutorial.</p>
+
+<p>You can access the InfluxDB service by running the command <code class="highlighter-rouge">influx</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ influx
+Connected to http://localhost:8086 version 1.7.7
+InfluxDB shell version: 1.7.7
+&gt; show databases
+name: databases
+name
+----
+_internal
+&gt; use _internal
+Using database _internal
+&gt; show measurements
+name: measurements
+name
+----
+cq
+database
+httpd
+queryExecutor
+runtime
+shard
+subscriber
+tsm1_cache
+tsm1_engine
+tsm1_filestore
+tsm1_wal
+write
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">influx</code> command provides command line access to InfluxDB in a similar fashion to <code class="highlighter-rouge">psql</code> for Postgresql. It provides commands like <code class="highlighter-rouge">show databases</code> and others, but we will not use this interface very often. Telegraf will automatically try to create any database needed, and no interaction is required to setup Grafana to talk to the database.</p>
+
+<h2 id="grafana">Grafana</h2>
+
+<p><a href="https://grafana.com/">Grafana</a> provides a visual interface to our metrics. It includes a nice query builder that provides a uniform experience across multiple backend databases, along with many attractive graphing and other visualization options. Each page in the Grafana webserver display is called a “dashboard.” Dashboards can each have multiple visualizations and graphs, all responding to the data collected by InfluxDB. Another benefit of using Grafana is that many of the UseGalaxy.* servers share their dashboards publicly, and you can easily copy these and use them on your own server.</p>
+
+<p>There are some nice examples of dashboards available from the public Galaxies, we recommend that you peruse them to get an idea of the possibilities:</p>
+
+<ul>
+  <li><a href="https://stats.galaxyproject.eu/">UseGalaxy.eu</a></li>
+  <li><a href="https://stats.genome.edu.au/">UseGalaxy.org.au</a></li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-grafana"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up Grafana</h3>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">cloudalchemy.grafana</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.14.2</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
+    </li>
+    <li>
+      <p>Add <code class="highlighter-rouge">cloudalchemy.grafana</code> to your <code class="highlighter-rouge">monitoring.yml</code> playbook</p>
+    </li>
+    <li>
+      <p>Edit the file <code class="highlighter-rouge">group_vars/galaxyservers.yml</code> and set the following variables:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">grafana_url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https:///grafana/"</span>
+
+<span class="na">grafana_security</span><span class="pi">:</span>
+    <span class="c1"># Please change at least the password to something more suitable</span>
+    <span class="na">admin_user</span><span class="pi">:</span> <span class="s">admin</span>
+    <span class="na">admin_password</span><span class="pi">:</span> <span class="s">password</span>
+
+<span class="c1"># These datasources will be automatically included into Grafana</span>
+<span class="na">grafana_datasources</span><span class="pi">:</span>
+ <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Galaxy</span>
+   <span class="na">type</span><span class="pi">:</span> <span class="s">influxdb</span>
+   <span class="na">access</span><span class="pi">:</span> <span class="s">proxy</span>
+   <span class="na">url</span><span class="pi">:</span> <span class="s">http://127.0.0.1:8086</span>
+   <span class="na">isDefault</span><span class="pi">:</span> <span class="no">true</span>
+   <span class="na">version</span><span class="pi">:</span> <span class="m">1</span>
+   <span class="na">editable</span><span class="pi">:</span> <span class="no">false</span>
+   <span class="na">database</span><span class="pi">:</span> <span class="s">telegraf</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts monitoring.yml
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Update the nginx configuration in <code class="highlighter-rouge">templates/nginx/galaxy.j2</code> to include the following at the end, before the last curly brace</p>
+
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">...</span>
+    <span class="s">location</span> <span class="n">/grafana/</span> <span class="p">{</span>
+        <span class="kn">proxy_pass</span> <span class="s">http://127.0.0.1:3000/</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>      </div>
+
+      <p>Since we will setup everything on the same host, we will re-use the Nginx server we setup for Galaxy. If you had planned to run the Grafana and InfluxDB servers on a separate host, you would need to setup Nginx for this host separately.</p>
+    </li>
+    <li>
+      <p>Run the Galaxy playbook which includes Nginx:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts galaxy.yml
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This has now deployed Grafana on your domain under <code class="highlighter-rouge">/grafana/</code>, with the username and password you set. The datasource, from which Grafana obtains data, is preconfigured. The Grafana web application will now be available, but currently there is no data available to it. We will return to Grafana shortly in the tutorial to configure dashboards once data is present.</p>
+
+<h2 id="telegraf">Telegraf</h2>
+
+<p>We use <a href="https://github.com/influxdata/telegraf">Telegraf</a> for monitoring as it is incredibly easy to get started with, and it natively integrates with InfluxDB.</p>
+
+<h3 id="data-input">Data Input</h3>
+
+<p>Telegraf has extensive documentation on how to configure different types of monitoring, and it supports <a href="https://github.com/influxdata/telegraf#input-plugins">a huge array of inputs</a>. If Telegraf doesn’t support a specific data source you wish to query, you can write a bash script to query this data, and have Telegraf <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec">execute it regularly</a>. Telegraf supports several text formats here but the easiest to manage is the InfluxDB line protocol format. The InfluxDB format looks like:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>weather,country=germany,city=freiburg temperature=25,wind=0 1453832006274169688
+weather,country=usa,city=state-college temperature=33,wind=10 1453832006274169688
+</code></pre></div></div>
+
+<p>The first portion is the metric name, in both of these cases <code class="highlighter-rouge">weather</code>. This is just a unique key for a metric which describes the data being collected. Telegraf commonly collects metrics like <code class="highlighter-rouge">cpu</code>, or <code class="highlighter-rouge">disk</code>, or <code class="highlighter-rouge">mem</code>. After the metric name, up to the first space are tags. Tags are used to store categorical data usually, something that is <a href="https://en.wikipedia.org/wiki/Continuous_or_discrete_variable">discrete</a> and <a href="https://en.wikipedia.org/wiki/Enumeration">enumerable</a>. If you’re interested in the weather you would collect some information from a particular city, and then <em>tag</em> these values with information about where they’re collected. After the space, are the various values or data points that are of interest. For weather this would be information like temperature, wind speed or direction, percentage cloud coverage, etc. After the final space is a timestamp, formatted as <a href="https://en.wikipedia.org/wiki/Unix_time">Unix epoch</a> with nanosecond precision.</p>
+
+<p>To apply this example to real world data, we’ll look at the some example output of the <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/disk"><code class="highlighter-rouge">disk</code> plugin</a>, which measures information about disks mounted to a server:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disk,device=devtmpfs,fstype=devtmpfs,host=stats.galaxyproject.eu,mode=rw,path=/dev free=952795136i,inodes_free=232283i,inodes_total=232616i,inodes_used=333i,total=952795136i,used=0i,used_percent=0 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/dev/shm free=963690496i,inodes_free=235275i,inodes_total=235276i,inodes_used=1i,total=963690496i,used=0i,used_percent=0 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/run free=862007296i,inodes_free=234817i,inodes_total=235276i,inodes_used=459i,total=963690496i,used=101683200i,used_percent=10.551437460684472 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=ro,path=/sys/fs/cgroup free=963690496i,inodes_free=235260i,inodes_total=235276i,inodes_used=16i,total=963690496i,used=0i,used_percent=0 1564485157000000000
+disk,device=vda2,fstype=xfs,host=stats.galaxyproject.eu,mode=rw,path=/ free=6652604416i,inodes_free=6134444i,inodes_total=6290368i,inodes_used=155924i,total=12872298496i,used=6219694080i,used_percent=48.31844197780791 1564485157000000000
+disk,device=vdb,fstype=xfs,host=stats.galaxyproject.eu,mode=rw,path=/vdb free=2013384704i,inodes_free=1044728i,inodes_total=1048576i,inodes_used=3848i,total=2136997888i,used=123613184i,used_percent=5.78443173454367 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/run/user/0 free=192741376i,inodes_free=235275i,inodes_total=235276i,inodes_used=1i,total=192741376i,used=0i,used_percent=0 1564485157000000000
+disk,device=tmpfs,fstype=tmpfs,host=stats.galaxyproject.eu,mode=rw,path=/run/user/1000 free=192741376i,inodes_free=235275i,inodes_total=235276i,inodes_used=1i,total=192741376i,used=0i,used_percent=0 1564485157000000000
+
+</code></pre></div></div>
+
+<p>Reformatting one of the lines to be a bit easier to read:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>disk,
+	device=vdb,
+	fstype=xfs,
+	host=stats.galaxyproject.eu,
+	mode=rw,
+	path=/vdb
+
+	free=2013384704i,
+	inodes_free=1044728i,
+	inodes_total=1048576i,
+	inodes_used=3848i,
+	total=2136997888i,
+	used=123613184i,
+	used_percent=5.78443173454367
+
+	1564485157000000000
+</code></pre></div></div>
+
+<p>The plugin generates a line of output per disk. It is tagged with the <code class="highlighter-rouge">fstype</code>, the type of the filesystem (e.g. <code class="highlighter-rouge">ext3</code>/<code class="highlighter-rouge">ext4</code>/<code class="highlighter-rouge">xfs</code>/<code class="highlighter-rouge">autofs</code>/etc.), the mode by which the filesystem was mounted (<code class="highlighter-rouge">rw</code> or <code class="highlighter-rouge">ro</code>), and the path to which the filesystem was mounted. Then various numbers are collected, the <code class="highlighter-rouge">i</code> suffix meaning an <a href="https://en.wikipedia.org/wiki/Integer">integer</a>. Those without a suffix are <a href="https://en.wikipedia.org/wiki/Floating-point_arithmetic">floats</a>. In this example, you can see that it is an <code class="highlighter-rouge">xfs</code> formatted device, available as vdb, mounted read-write on the path /vdb. Telegraf automatically tags values with the name of the host from which the data was collected.</p>
+
+<p>The values collected usually have quite self-explanatory names. Here there are <code class="highlighter-rouge">2013384704</code> bytes free on the disk, 1044728 <a href="https://en.wikipedia.org/wiki/Inode">inodes</a>, so many bytes total and used, and finally 5.784% disk usage.</p>
+
+<h3 id="gxadmin"><code class="highlighter-rouge">gxadmin</code></h3>
+
+<p>In the Galaxy world, the InfluxDB line protocol format and <a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/exec">exec</a> plugin are commonly seen together in conjunction with <a href="https://github.com/usegalaxy-eu/gxadmin">gxadmin</a> to run various database queries, and store the results into InfluxDB.</p>
+
+<p><code class="highlighter-rouge">gxadmin</code> provides various commands to inspect the database like <code class="highlighter-rouge">gxadmin query queue-detail</code>. It was written such that many of the queries can be automatically formatted for consumption by InfluxDB:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gxadmin iquery queue-overview --short-tool-id
+queue-overview,tool_id=__SET_METADATA__,tool_version=1.0.1,state=new,handler=handler_main_9,destination_id=unknown,job_runner_name=unknown count=3
+queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.39.5.0,state=new,handler=handler_main_2,destination_id=unknown,job_runner_name=unknown count=1
+</code></pre></div></div>
+
+<p>If Telegraf runs this command in an exec block, the data will then be available for graphing. Here the only numeric value we’re collecting is the <em>count</em> of how many jobs of that type are currently running.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>queue-overview,
+	tool_id=__SET_METADATA__,
+	tool_version=1.0.1,
+	state=new,
+	handler=handler_main_9,
+	destination_id=unknown,
+	job_runner_name=unknown
+
+	count=3
+</code></pre></div></div>
+
+<p>We capture information about what tool is running, the job state, and where it is running. This will allow us to produce nice graphs of the current queue status, how many jobs are new or queued or running.</p>
+
+<h3 id="configuring-telegraf">Configuring Telegraf</h3>
+
+<p>Setting up Telegraf is again very simple. We just add a single role to our playbook and set some variables.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-dependencies"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Dependencies</h3>
@@ -588,39 +873,38 @@
     <li>
       <p>Edit your <code class="highlighter-rouge">requirements.yml</code> and add the following:</p>
 
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">dj-wasabi.telegraf</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.12.0</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the requirements</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy install -p roles -r requirements.yml
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add an entry to the end of your <code class="highlighter-rouge">galaxy.yml</code> playbook under <code class="highlighter-rouge">roles:</code></p>
+
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">dj-wasabi.telegraf</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p><code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
-    </li>
-    <li>
-      <p>Add an entry to your playbook under <code class="highlighter-rouge">roles:</code></p>
+      <p>Create and edit <code class="highlighter-rouge">group_vars/all.yml</code> and add the following variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">dj-wasabi.telegraf</span>
-</code></pre></div>      </div>
-    </li>
-  </ol>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Install the latest version</span>
+<span class="na">telegraf_agent_package_state</span><span class="pi">:</span> <span class="s">latest</span>
 
-</blockquote>
-
-<p>This role has many convenient variables for us to set. We’ll do that now:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-telegraf-configuration"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Telegraf Configuration</h3>
-
-  <ol>
-    <li>
-      <p>Open your group variables file, and add the following variables:</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">telegraf_agent_version</span><span class="pi">:</span> <span class="s">1.9.3</span>
-
+<span class="c1"># Configure the output to point to an InfluxDB</span>
+<span class="c1"># running on localhost, and # place data in the</span>
+<span class="c1"># database "telegraf" which will be created if need be.</span>
 <span class="na">telegraf_agent_output</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">influxdb</span>
     <span class="na">config</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">urls = ["YOUR-INFLUX-URL"]</span>
+    <span class="pi">-</span> <span class="s">urls = ["http://127.0.0.1:8086"]</span>
     <span class="pi">-</span> <span class="s">database = "telegraf"</span>
 
+<span class="c1"># The default plugins, applied to any telegraf-configured host</span>
 <span class="na">telegraf_plugins_default</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">cpu</span>
   <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">disk</span>
@@ -632,8 +916,20 @@
   <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">swap</span>
   <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">net</span>
   <span class="pi">-</span> <span class="na">plugin</span><span class="pi">:</span> <span class="s">netstat</span>
+</code></pre></div>      </div>
 
-<span class="na">telegraf_plugins_extra</span><span class="pi">:</span>
+      <p>We have not previously used the <code class="highlighter-rouge">all</code> variables file. Any variables placed here apply to <em>all</em> groups known to Ansible, whenever you run a playbook, the variables from this file will be added to those of any more specific group. Variables specified in a named group (e.g. <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>) will take precedence over those in the <code class="highlighter-rouge">group_vars/all.yml</code> file.</p>
+
+      <p>This configures telegraf to output to the configured influxdb server in the <code class="highlighter-rouge">telegraf</code> database. A number of plugins are enabled as <code class="highlighter-rouge">defaults</code> like cpu or disk or memory, all of which is generically interesting to observe, across every host.</p>
+
+      <p>Any host that we setup Telegraf on, will have this base configuration. If you are setting up multiple hosts to be monitored, you will need to put the full hostname (or IP address) where InfluxDB will be available in the <code class="highlighter-rouge">telegraf_agent_output</code>, rather than <code class="highlighter-rouge">127.0.0.1</code>. That way every host with Telegraf will send data to the correct location.</p>
+    </li>
+    <li>
+      <p>Now with the generic configuration applied to all of our hosts, we will apply some specific configuration to the Galaxy server.</p>
+
+      <p>Open your <code class="highlighter-rouge">group_vars/galaxyservers.yml</code> file, and add the following variables:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">telegraf_plugins_extra</span><span class="pi">:</span>
   <span class="na">listen_galaxy_routes</span><span class="pi">:</span>
     <span class="na">plugin</span><span class="pi">:</span> <span class="s2">"</span><span class="s">statsd"</span>
     <span class="na">config</span><span class="pi">:</span>
@@ -641,33 +937,473 @@
       <span class="pi">-</span> <span class="s">metric_separator = "."</span>
       <span class="pi">-</span> <span class="s">allowed_pending_messages = </span><span class="m">10000</span>
 </code></pre></div>      </div>
+
+      <p>We have configured the <code class="highlighter-rouge">statsd</code> plugin for telegraf, as we will use it to receive Galaxy timing data. <a href="https://github.com/statsd/statsd">StatsD</a> was an earlier time series database and had an associated line protocol with a different format. Telegraf supports data sent in this format, allowing us to reuse the long-present Galaxy support for this with our newer Telegraf/InfluxDB setup. Telegraf parses the data and converts it into a format that InfluxDB can understand.</p>
     </li>
     <li>
-      <p>Replace the <code class="highlighter-rouge">YOUR-INFLUX-URL</code> placeholder with your influx service url.</p>
+      <p>Lastly, we need to enable Galaxy to send data to Telegraf:</p>
 
-      <p>This configures telegraf to output to the configured influxdb server in the <code class="highlighter-rouge">telegraf</code> database. A number of plugins are enabled as <code class="highlighter-rouge">defaults</code>, this is useful if you have telegraf configured for multiple machines; you can have a base configuration that applies to all machines (perhaps in <code class="highlighter-rouge">group_vars/all.yml</code>), and then <code class="highlighter-rouge">extra</code> configuration that is per-machine.</p>
-
-      <p>We have configured the <code class="highlighter-rouge">statsd</code> plugin for telegraf, as we will use it to receive Galaxy timing data.</p>
-    </li>
-    <li>
-      <p>We need to enable Galaxy to send data to Telegraf:</p>
-
-      <p>In your group variables file, edit the Galaxy configuration in<code class="highlighter-rouge"> galaxy_config &gt; galaxy</code> and add <code class="highlighter-rouge">statsd_host: localhost</code> and <code class="highlighter-rouge">statsd_influxdb: true</code>. It should look like:</p>
+      <p>In <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>, edit the <code class="highlighter-rouge">galaxy_config</code> block, and add <code class="highlighter-rouge">statsd_host: localhost</code> and <code class="highlighter-rouge">statsd_influxdb: true</code> under the <code class="highlighter-rouge">galaxy</code> subsection. It should look like:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
   <span class="na">galaxy</span><span class="pi">:</span>
-    <span class="na">statsd_host</span><span class="pi">:</span> <span class="s">localhost</span>
+    <span class="s">...</span>
+    <span class="s">statsd_host</span><span class="pi">:</span> <span class="s">localhost</span>
     <span class="na">statsd_influxdb</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="s">...</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook</p>
+      <p>Run the <code class="highlighter-rouge">galaxy.yml</code> playbook</p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>The stats should show up in Grafana now, allowing you to see node detail information and route timings. If you need dashboards, you can <a href="http://influx.training.galaxyproject.eu:8080/d/000000023/node-detail?orgId=1">copy the EU dashboards</a></p>
+<h1 id="monitoring-with-grafana">Monitoring with Grafana</h1>
+
+<p>The stats have been collecting in InfluxDB for a few minutes, so now we will now configure Grafana with dashboards and alerting rules.</p>
+
+<h2 id="importing-a-dashboard">Importing a dashboard</h2>
+
+<p>For any public Grafana dashboard, you can copy the dashboard for your own use. This is a nice feature of Grafana that has really helped it spread in the Galaxy community, any cool thing one of us builds, everyone else can copy and build upon.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-a-dashboard"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import a dashboard</h3>
+
+  <ol>
+    <li>
+      <p><a href="https://stats.galaxyproject.eu/d/000000023/node-detail-infrastructure?orgId=1">Visit UseGalaxy.eu’s Node Detail dashboard</a></p>
+    </li>
+    <li>
+      <p>Look for the sharing icon at the top and click it</p>
+    </li>
+    <li>
+      <p>Under the “Export” tab, click “Save to file”</p>
+    </li>
+    <li>
+      <p>On your own Grafana server, on the home page, hover over the <code class="highlighter-rouge">+</code> icon and use “Import” from the menu.</p>
+    </li>
+    <li>
+      <p>Click “Upload .json file” and select the json dashboard you downloaded</p>
+    </li>
+    <li>
+      <p>Click “Import”.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With this, your first dashboard should be live! You should see some data from your Galaxy instance, like CPU/load/memory/etc. This can give you a nice <code class="highlighter-rouge">htop</code> like view into your systems, all collected in one easy dashboard. At the top you will see a box labelled “Host” with a dropdown. If you have more systems, you can click here to select between different machines.</p>
+
+<h2 id="setting-up-a-galaxy-dashboard">Setting up a Galaxy dashboard</h2>
+
+<p>Importing dashboards is a good start, but it’s more interesting to create our own that’s personalise to our needs.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-dashboard"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a dashboard</h3>
+
+  <ol>
+    <li>
+      <p>Again find the <code class="highlighter-rouge">+</code> icon in Grafana and create a dashboard. This will bring you to a new screen</p>
+    </li>
+    <li>
+      <p>Click <em>Add Query</em>, and you will be dropped into the Grafana query builder</p>
+
+      <p><img src="../../images/grafana-query-builder.png" alt="Grafana query builder interface" /></p>
+
+      <p>This is the query builder interface. The interface somewhat resembles a SQL query, selecting data <em>from</em> a database, <em>where</em> it meets some condition, <em>select</em>ing some specific data, and <em>grouping by</em> time period. If this isn’t immediately clear how it behaves, hopefully it will become more clear once you have built some queries.</p>
+    </li>
+    <li>Let’s build a query:
+      <ul>
+        <li>From:
+          <ul>
+            <li><em>“select measurement”</em>: <code class="highlighter-rouge">galaxy.</code></li>
+          </ul>
+        </li>
+        <li>Select:
+          <ul>
+            <li><em>“field(value)”</em>: <code class="highlighter-rouge">field(mean)</code></li>
+          </ul>
+        </li>
+        <li>Group by:
+          <ul>
+            <li><em>“fill(null)”</em>: <code class="highlighter-rouge">fill(none)</code></li>
+            <li>add new (+): <code class="highlighter-rouge">tag(path)</code></li>
+          </ul>
+        </li>
+        <li>Alias by: <code class="highlighter-rouge">[[tag_path]]</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>At the top of the page it probably says “Last 6 hours”, click this to change to “Last 30 minutes”</p>
+    </li>
+    <li>
+      <p>Remember to save the dashboard (using the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> at the top), and give it a name like “Galaxy”</p>
+    </li>
+    <li>You can hit <kbd>Escape</kbd> to exit out of the graph editor, if need be.</li>
+  </ol>
+
+</blockquote>
+
+<p>This will track how long it takes the interface to respond on various web routes and API routes. The collection of individual points is a bit hard to interpret the “feeling” of, so it’s common to add a query like the <a href="https://en.wikipedia.org/wiki/Percentile">95th percentile</a> of requests. This is a value that is calculated from all of the data points collected. The 95th percentile means that 95% of requests are responded to more quickly than this value.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-a-second-query-to-an-existing-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add a second query to an existing graph</h3>
+
+  <ol>
+    <li>
+      <p>The top of the graph is probably labelled “Panel Title”, unless you changed it. Click this to access a dropdown and click “Edit”</p>
+    </li>
+    <li>
+      <p>On the right side you will find a button <strong>Add Query</strong>, click it.</p>
+    </li>
+    <li>Let’s build a query:
+      <ul>
+        <li>From:
+          <ul>
+            <li><em>“select measurement”</em>: <code class="highlighter-rouge">galaxy.</code></li>
+          </ul>
+        </li>
+        <li>Select:
+          <ul>
+            <li><em>“field(value)”</em>: <code class="highlighter-rouge">field(mean)</code></li>
+            <li>add new (+): Selectors → percentile</li>
+          </ul>
+        </li>
+        <li>Group by:
+          <ul>
+            <li><em>“fill(null)”</em>: <code class="highlighter-rouge">fill(none)</code></li>
+          </ul>
+        </li>
+        <li>Alias by: <code class="highlighter-rouge">percentile</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Remember to save the dashboard</p>
+    </li>
+    <li>
+      <p>You can hit <kbd>Escape</kbd> to exit out of the graph editor</p>
+    </li>
+    <li>At any time you can drag the bottom right corner of the graph to resize it as needed.</li>
+  </ol>
+
+</blockquote>
+
+<p>We should now have a graph that gives us not only individual data points, but also a more easily consumable overall representation. For many metrics there are so many data points individually collected that it can be overwhelming and so it is often useful to come up with an aggregate representation that summarises the points into a more easily consumed value. We will touch upon this again under the monitoring section.</p>
+
+<h2 id="styling">Styling</h2>
+
+<p>There is a significant amount of visual styling that one can do to the graphs to make data more or less prominent as you need.</p>
+
+<figure id="figure-1"><img src="../../images/grafana-graph-sections.png" alt="Grafana graph configuration sections" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Graph configuration sections, from top to bottom: data, visualisation, configuration, and alerting</figcaption></figure>
+
+<p>We will update the panel we’ve added to highlight the important information and downplay less important facets, as well as configuring it to have a nicer title than “Panel Title”</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-a-second-query-to-an-existing-graph-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add a second query to an existing graph</h3>
+
+  <ol>
+    <li>
+      <p>Again edit the one graph we’ve added in our dashboard</p>
+    </li>
+    <li>
+      <p>On the left side, select the second icon, Visualisation</p>
+    </li>
+    <li>
+      <p>In the first section, we can edit some display attributes.</p>
+
+      <p>We are primarily interested in the 95th percentile line. Here we can change the display from points to lines or bars, change the tooltip that displays when we hover over the graph, among other facets.</p>
+
+      <ul>
+        <li>Click <strong>Add series override</strong>, click in the box that appears and type “percentile”, to find the series we created early. Select it when it appears. We can now apply custom styling to this series.</li>
+        <li>Click the “+” after the series override, and find <strong>“Color → change”</strong>, and choose a colour that you like.</li>
+        <li>Click the “+” again, and find <strong>“Line width → 5”</strong> to make the line more visible. This is the most important facet of the graph for us, so we can emphasise it through colour and size.</li>
+      </ul>
+    </li>
+    <li>
+      <p>In the second section, we can edit information about the Axes:</p>
+
+      <ul>
+        <li>Left Y
+          <ul>
+            <li><em>“Unit”</em>: Time → millisecond (ms)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>This will cause the axis to display nicely at any scale. Before Grafana only knew it was a number, now it knows the type of number. If you have a request that takes 30 seconds, it will display as “30s” in Grafana, rather than “30000 ms”.</p>
+
+      <p>This section is also useful for setting the scale if your data is better viewed with a logarithmic scale, or forcing specific axis bounds. Commonly on graphs that show things like “disk usage percentage”, it can be useful to set the axis bounds to 0 and 100 to ensure that full context is available.</p>
+    </li>
+    <li>
+      <p>In the next section, “Legend” allows us to format the legend in more interesting ways.</p>
+
+      <ul>
+        <li>Options
+          <ul>
+            <li><em>“Show”</em>: yes</li>
+            <li><em>“As table”</em>: yes</li>
+            <li><em>“To right”</em>: yes</li>
+          </ul>
+        </li>
+        <li>Values
+          <ul>
+            <li><em>“Min”</em>: yes</li>
+            <li><em>“Max”</em>: yes</li>
+            <li><em>“Avg”</em>: yes</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Clicking on the headers of the table that has appeared, you can force it to be sorted by one column or another.</p>
+    </li>
+    <li>
+      <p>On the left side, select the third icon, “General”</p>
+
+      <ul>
+        <li><em>“Title”</em>: <code class="highlighter-rouge">Galaxy Request Times</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Save the dashboard</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Your graph should look something like the following:</p>
+
+<figure id="figure-2"><img src="../../images/grafana-graph-final.png" alt="Final graph" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The final graph should look something like this, but probably different based on the requests to your server. For this image the author made repeated, automated requests to Galaxy to produce more data points than might normally be present.</figcaption></figure>
+
+<h2 id="monitoring">Monitoring</h2>
+
+<p>Collecting all of this data is interesting to visualise but as an administrator you surely have more interesting things to do than to watch graphs all day. Many organisations like to display these dashboards on large monitors, but again this assumes someone is watching it. Everyone has better things to do with their time! So we will setup monitoring on the most important aspects of our system.</p>
+
+<p>Doing monitoring effectively, without causing undue burden to the administrators (extraneous alerts that are not actionable), or the users (unexpected/unnoticed downtime), is a very complex topic. Recommended reading here includes the <a href="https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/">monitoring chapter</a> of the Google SRE book <a class="citation" href="#Beyer:2016:SRE:3006357">Beyer <i>et al.</i> 2016</a> which can provide some general guidance on the topic and what metrics may be interesting or annoying to alert upon.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-no-generic-advice"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> No generic advice</h3>
+  <p>We cannot easily provide generic and applicable recommendations, that work across every system and every scale. Some of these performance bounds or features you will need to discover yourself, either adding new metrics in support of this, or changing monitoring thresholds to match the values you need.</p>
+</blockquote>
+
+<p>We will add an example alert, to make you familiar with the process. This is not an alert that will probably be useful in production.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-a-second-query-to-an-existing-graph-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add a second query to an existing graph</h3>
+
+  <ol>
+    <li>
+      <p>Again edit the <code class="highlighter-rouge">Galaxy Request Times</code> graph</p>
+    </li>
+    <li>
+      <p>On the left side, select the last icon, Alerting</p>
+    </li>
+    <li>
+      <p>Click <strong>Create Alert</strong></p>
+
+      <p>Alerts consist of a <em>Rule</em>, with some name, evaluated every N seconds, for a period of time. The <em>for</em> can be an important parameter, which you can read more about <a href="https://grafana.com/docs/alerting/rules/">in the Grafana documentation</a>.</p>
+
+      <p>Under some <em>conditions</em>, this alert will activate. We will change the conditions of the alert here:</p>
+
+      <ul>
+        <li><em>“When”</em>: <code class="highlighter-rouge">avg()</code></li>
+        <li><em>“OF”</em>: <code class="highlighter-rouge">query(B, 1m, now)</code>, here we select query B, the 95th percentile track, and the average over 1 minute</li>
+        <li><em>“IS ABOVE”</em>: <code class="highlighter-rouge">50</code></li>
+      </ul>
+
+      <p>We will not configure a notification channel in this tutorial. In practice, it is useful to do to ensure that the relevant people are notified automatically. If you and your team use <a href="https://grafana.com/docs/alerting/notifications/">one of the many services</a>, then you can configure this following their documentation.</p>
+    </li>
+    <li>
+      <p>Save the dashboard</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="telegraf--gxadmin">Telegraf &amp; <code class="highlighter-rouge">gxadmin</code></h1>
+
+<p>We need to setup gxadmin, and to configure Telegraf to have permissions to run it.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-gxadmin-and-configuring-telegraf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing gxadmin and configuring Telegraf</h3>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="highlighter-rouge">requirements.yml</code> and add the following:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/usegalaxy-eu/ansible-gxadmin</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">usegalaxy-eu.gxadmin</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the role with <code class="highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
+    </li>
+    <li>
+      <p>Add the role to your <code class="highlighter-rouge">galaxy.yml</code> playbook, it should run as root, and it should come before <code class="highlighter-rouge">dj-wasabi.telegraf</code> (as we will configure telegraf to call some gxadmin commands).</p>
+    </li>
+    <li>
+      <p>Edit the <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>, we need to add some additional permissions to permit Telegraf to run <code class="highlighter-rouge">gxadmin</code>:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This should already exist!</span>
+<span class="na">postgresql_objects_users</span><span class="pi">:</span>
+  <span class="s">...</span>
+  <span class="s"># Add this to create a telegraf user</span>
+  <span class="s">- name</span><span class="pi">:</span> <span class="s">telegraf</span>
+    <span class="s">password</span><span class="pi">:</span> <span class="no">null</span>
+
+<span class="c1"># And this to grant telegraf privileges to</span>
+<span class="c1"># SELECT values from the Galaxy database</span>
+<span class="na">postgresql_objects_privileges</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">database</span><span class="pi">:</span> <span class="s">galaxy</span>
+    <span class="na">roles</span><span class="pi">:</span> <span class="s">telegraf</span>
+    <span class="na">privs</span><span class="pi">:</span> <span class="s">SELECT</span>
+    <span class="na">objs</span><span class="pi">:</span> <span class="s">ALL_IN_SCHEMA</span>
+
+<span class="c1"># Configure locations for gxadmin that all</span>
+<span class="c1"># users can access</span>
+<span class="na">gxadmin_bin</span><span class="pi">:</span> <span class="s">/opt/gxadmin</span>
+<span class="na">gxadmin_bin_dir</span><span class="pi">:</span> <span class="s">/usr/bin</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Again edit the <code class="highlighter-rouge">group_vars/galaxyservers.yml</code>, we need to configure Telegraf to run <code class="highlighter-rouge">gxadmin</code></p>
+
+      <p>Under <code class="highlighter-rouge">telegraf_plugins_extra</code>, where we already have set a Galaxy StatsD listener, add a stanza to monitor the Galaxy queue</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">telegraf_plugins_extra</span><span class="pi">:</span>
+  <span class="s">...</span>
+  <span class="s">monitor_galaxy_queue</span><span class="pi">:</span>
+    <span class="na">plugin</span><span class="pi">:</span> <span class="s2">"</span><span class="s">exec"</span>
+    <span class="na">config</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">commands = ["/usr/bin/env PGDATABASE=galaxy /usr/bin/gxadmin iquery queue-overview --short-tool-id"]</span>
+      <span class="pi">-</span> <span class="s">timeout = "10s"</span>
+      <span class="pi">-</span> <span class="s">data_format = "influx"</span>
+      <span class="pi">-</span> <span class="s">interval = "15s"</span>
+</code></pre></div>      </div>
+
+      <p>This one is slightly more complex in the configuration. The command block does several things:</p>
+
+      <ul>
+        <li>it wraps the command with <code class="highlighter-rouge">env</code> which allows setting environment variables for a single command</li>
+        <li>It sets the <code class="highlighter-rouge">PGDATABASE</code> to the Galaxy database, by default the <code class="highlighter-rouge">psql</code> will try and connect to a database with the same name of the user. So the <code class="highlighter-rouge">telegraf</code> user will attempt to connect to a (non-existent) <code class="highlighter-rouge">telegraf</code> database.</li>
+        <li>Then it calls the gxadmin command <code class="highlighter-rouge">queue-overview</code>. By using <code class="highlighter-rouge">iquery</code> instead of <code class="highlighter-rouge">query</code>, the output is automatically converted to InfluxDB line protocol.</li>
+        <li>The command is run every 15 seconds, and has a timeout of 10 seconds. If the command fails to finish in 10 seconds, it will be killed.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Run the Galaxy playbook</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>With this, Telegraf will start monitoring the Galaxy queue by calling the query every few seconds to check the status every 15 seconds. This monitoring <em>will</em> miss jobs that complete within the 15 second interval, but for most servers this is not an issue. Most jobs are running for more than 15 seconds, and if not, it still gives an accurate point-in-time view.</p>
+
+<p>We’ll now create a graph for this, just like the one on <a href="https://stats.galaxyproject.eu">stats.galaxyproject.eu</a></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-building-the-queue-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Building the queue graph</h3>
+
+  <ol>
+    <li>
+      <p>Click the <strong>new graph</strong> button at the top of Grafana’s interface, and <em>Add a Query</em></p>
+    </li>
+    <li>Let’s build a query:
+      <ul>
+        <li>From:
+          <ul>
+            <li><em>“select measurement”</em>: <code class="highlighter-rouge">queue-overview</code></li>
+          </ul>
+        </li>
+        <li>Select:
+          <ul>
+            <li><em>“field(value)”</em>: <code class="highlighter-rouge">field(count)</code></li>
+            <li>add new (+): Aggregations → sum</li>
+          </ul>
+        </li>
+        <li>Group by:
+          <ul>
+            <li><em>“time(__interval)”</em>: <code class="highlighter-rouge">time(15s)</code>, because we set the interval to 15s</li>
+            <li>add new (+): <code class="highlighter-rouge">tag(tool_id)</code></li>
+            <li>add new (+): <code class="highlighter-rouge">tag(tool_version)</code></li>
+          </ul>
+        </li>
+        <li>Alias by: <code class="highlighter-rouge">[[tag_tool_id]]/[[tag_tool_version]]</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>In the second tab on the left, Visualisation:</p>
+
+      <p>Under the first section:</p>
+
+      <ul>
+        <li>Draw Modes:
+          <ul>
+            <li><em>“Bars”</em>: <code class="highlighter-rouge">no</code></li>
+            <li><em>“Lines”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“Points”</em>: <code class="highlighter-rouge">no</code></li>
+          </ul>
+        </li>
+        <li>Mode Options:
+          <ul>
+            <li><em>“Staircase”</em>: <code class="highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+        <li>Stacking &amp; Null Value
+          <ul>
+            <li><em>“Stack”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“Null Value”</em>: <code class="highlighter-rouge">null as zero</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Below, under the <em>Legend</em> section,</p>
+
+      <ul>
+        <li>Options:
+          <ul>
+            <li><em>“Show”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“As table”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“To Right”</em>: <code class="highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+        <li>Values:
+          <ul>
+            <li><em>“Max”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“Avg”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“Current”</em>: <code class="highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+        <li>Hide Series:
+          <ul>
+            <li><em>“With only nulls”</em>: <code class="highlighter-rouge">yes</code></li>
+            <li><em>“With only zeros”</em>: <code class="highlighter-rouge">yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>In the third tab, General settings:</p>
+
+      <ul>
+        <li><em>“Title”</em>: <code class="highlighter-rouge">Galaxy Queue Overview</code></li>
+      </ul>
+    </li>
+    <li>You can hit <kbd>Escape</kbd> to exit out of the graph editor, and remember to save your dashboard.</li>
+  </ol>
+
+</blockquote>
+
+<p>Run some tools in Galaxy, try to generate a large number of jobs. It is relatively easy to upload a dataset, and then run the “Secure Hash / Message Digest” or another tool repeatedly, running it over every dataset in your history, repeating until you’ve generated a few dozen datasets. If you have a slower tool like <code class="highlighter-rouge">bwa</code> installed, this can be an option too.</p>
+
+<figure id="figure-3"><img src="../../images/grafana-final-graph.png" alt="Final Graph" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Final graphs generated from this tutorial.</figcaption></figure>
+
+<p>You can also import a <a href="/training-material/topics/admin/tutorials/monitoring/dashboard.json">copy of the dashboard</a>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Monitoring with Telegraf, InfluxDB, and Grafana can provide an easy solution to monitor your infrastructure. The UseGalaxy.* servers use this stack and it has proven to be effective in production situations, with large Galaxy servers. The base monitoring done with Telegraf is easy to setup and extend on a per-site basis simply by adding scripts or commands to your servers which generate InfluxDB line protocol formatted output. Grafana provides an ideal visualisation solution as it encourages sharing, and allows you to import whatever dashboards have been developed by UseGalaxy.*, and then to extend them to your own needs.</p>
 
 
                     
@@ -675,10 +1411,19 @@
                         <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li><p>Galaxy supports pluggable monitoring extensions.</p>
+                            <li><p>Telegraf provides an easy solution to monitor servers</p>
 </li>
                             
-                            <li><p>Use grafana or the reports webapp to monitor your service.</p>
+                            <li><p>Galaxy can send metrics to Telegraf</p>
+</li>
+                            
+                            <li><p>Telegraf can run arbitrary commands like <code class="highlighter-rouge">gxadmin</code>, which provides influx formatted output</p>
+</li>
+                            
+                            <li><p>InfluxDB can collect metrics from Telegraf</p>
+</li>
+                            
+                            <li><p>Use Grafana to visualise these metrics, and monitor their values</p>
 </li>
                             
                         </ul>
@@ -687,6 +1432,19 @@
 
                     
 
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Beyer:2016:SRE:3006357">Beyer, B., C. Jones, J. Petoff, and N. R. Murphy, 2016 <b>Site Reliability Engineering: How Google Runs Production Systems</b>. <i>O’Reilly Media, Inc.</i></span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://landing.google.com/sre/sre-book/toc/index.html">https://landing.google.com/sre/sre-book/toc/index.html</a>
+      
+    
+
+</li></ol>
                     
 
                 </div>
