@@ -96,7 +96,6 @@ after_success:
       if [ "$TRAVIS_EVENT_TYPE" == "cron" ]
       then
         python bin/make_release.py
-        bin/publish-archive
       fi
     elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
     then
