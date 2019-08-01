@@ -15,13 +15,13 @@
             ga('send', 'pageview');
         </script>
         
-        <link rel="stylesheet" href="/archive//assets/css/bootstrap.min.css?v=3">
-        <link rel="stylesheet" href="/archive//assets/css/bootstrap-toc.min.css">
-        <link rel="stylesheet" href="/archive//assets/css/main.css?v=2">
-        <link rel="stylesheet" href="/archive//assets/css/font-awesome.css">
-        <link rel="stylesheet" href="/archive//assets/css/academicons.css">
-        <link rel="stylesheet" href="/archive//assets/css/syntax_highlighting.css">
-        <link rel="shortcut icon" href="/archive//favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
 
         
         
@@ -31,7 +31,7 @@
         <meta name="description" content="Training material for proteomics workflows in Galaxy" />
         <meta property="og:title" content="Galaxy Training: Mass spectrometry imaging: Loading and exploring MSI data" />
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
-        <meta property="og:image" content="/archive//assets/images/GTNLogo1000.png" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
     <body data-spy="scroll" data-target="#toc">
         
@@ -49,8 +49,8 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="/archive//">
-                <img src="/archive//assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
                 Galaxy Training!
             </a>
 
@@ -60,7 +60,7 @@
             <div class="collapse navbar-collapse" id="top-navbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/archive//topics/proteomics" title="Go back to list of tutorials">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
                             <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
                         </a>
                     </li>
@@ -106,7 +106,7 @@
         </form>
 
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/archive//faq" title="Check our FAQ">
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
             FAQ
         </a>
         <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
@@ -214,13 +214,13 @@
       "url": "https://galaxyproject.org/teach/gtn/"
     }
   },
-  "url": "https://galaxyproject.github.io//archive//topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html",
+  "url": "https://galaxyproject.github.io//training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html",
   "timeRequired": "PT45M",
   "description": "Mass spectrometry imaging: Loading and exploring MSI data\\nThe questions this  addresses are:\n - Did the tryptic digestions work?\n - Is there an intensity gradient in the data?\n - How good is the m/z accuracy?\n\n\\nThe objectives are:\n - How to upload an imzML file into Galaxy\n - Getting an overview of the MSI data with the MSI quality control tool\n - How to export MSI data as tabular files\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
-      "url": "https://galaxyproject.github.io//archive//topics/introduction/",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
       "name": "Introduction to Galaxy Analyses",
       "description": "Introduction to Galaxy Analyses",
       "provider": {
@@ -266,7 +266,7 @@
       "@type": "CreativeWork",
       "name": "Proteomics",
       "description": "Training material for proteomics workflows in Galaxy",
-      "url": "https://galaxyproject.github.io//archive//topics/proteomics/"
+      "url": "https://galaxyproject.github.io//training-material/topics/proteomics/"
     },
     {
       "@type": "DefinedTerm",
@@ -284,7 +284,7 @@
         <h1 data-toc-skip>Mass spectrometry imaging: Loading and exploring MSI data</h1>
         <div class="contributors-line">By: 
 
-<a href="/archive//hall-of-fame#foellmelanie" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Melanie Foell">Melanie Foell</a>, <a href="/archive//hall-of-fame#bgruening" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>
+<a href="/training-material/hall-of-fame#foellmelanie" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Melanie Foell">Melanie Foell</a>, <a href="/training-material/hall-of-fame#bgruening" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bgruening" alt="Björn Grüning">Björn Grüning</a>
 
 </div>
         <blockquote class="overview">
@@ -325,7 +325,7 @@
     
         
         
-        <a href="/archive//topics/introduction">Introduction to Galaxy Analyses</a>
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
         
     
     </li>
@@ -495,6 +495,8 @@
     
         
     
+        
+    
     </ul>
 
 
@@ -605,7 +607,7 @@ The imzML file consists of two files: The first file contains the metadata in an
         <h3 id="tip-tip-ftp-upload-for-large-files"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FTP upload for large files</h3>
         <ul>
           <li>In case one subfile is larger than 2 GB the uploading needs to be done via ftp.</li>
-          <li>The necessary steps are explained in this tutorial <a href="/archive//topics/galaxy-data-manipulation/tutorials/get-data/slides.html">Getting data into <span class="notranslate">Galaxy</span></a></li>
+          <li>The necessary steps are explained in this tutorial <a href="/training-material/topics/galaxy-data-manipulation/tutorials/get-data/slides.html">Getting data into <span class="notranslate">Galaxy</span></a></li>
         </ul>
       </blockquote>
 
@@ -716,7 +718,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
       <li>9013</li>
-      <li>Centroided = FALSE means that the data were read in profile mode. The user has to define in every tool if the input data is in profile or centroided mode. The Centroid value reported here corresponds to the choice the user has made in the tool and not by automatic recognition. To find out what the correct choice is visit <a href="/archive//topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html#quality-control-of-the-data">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
+      <li>Centroided = FALSE means that the data were read in profile mode. The user has to define in every tool if the input data is in profile or centroided mode. The Centroid value reported here corresponds to the choice the user has made in the tool and not by automatic recognition. To find out what the correct choice is visit <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html#quality-control-of-the-data">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
       <li>Median # peaks per spectrum: 4158. The <strong>MSI Qualitycontrol</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> consideres intensities &gt; 0 as peaks. Before peak picking this means that also noise with small intensities is counted as peak what explains why nearly every second m/z value has an intensity &gt; 0 (4158 peaks /9013 m/z values). After peak picking the number of peaks will decrease dramatically because only real peaks will be left.</li>
       <li>3 Calibrants out of the 4 Calibrants in the tabular files were valid, that means in the m/z range of the dataset. As we cut the m/z axis for this tutorial, <em>ACTH</em> is outside the m/z range that we kept (1220 - 1625).</li>
     </ol>
@@ -744,7 +746,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 <blockquote class="comment">
   <h3 id="comment-plotting-heatmaps"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting heatmaps</h3>
   <ul>
-    <li>The <strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate heatmaps with futher options such as contrast enhancement and smoothing functions. The usage of the tool is explained in more detail in the tutorial <a href="/archive//topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
+    <li>The <strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate heatmaps with futher options such as contrast enhancement and smoothing functions. The usage of the tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
 </blockquote>
 
@@ -780,7 +782,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 <blockquote class="comment">
   <h3 id="comment-plotting-mass-spectra"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting mass spectra</h3>
   <ul>
-    <li>The <strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to single, average or overlayed mass spectra plots and to zoom into m/z regions of interest. The tool is explained in more detail in the tutorial <a href="/archive//topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
+    <li>The <strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to single, average or overlayed mass spectra plots and to zoom into m/z regions of interest. The tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
 </blockquote>
 
@@ -864,7 +866,7 @@ Exporting and filtering the spectra information for three pixel that have differ
 
                     
                     <h1 data-toc-skip>Useful literature</h1>
-                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/archive//topics/proteomics#references">here</a>.</p>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
                     
 
                     
@@ -898,7 +900,7 @@ Exporting and filtering the spectra information for three pixel that have differ
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/archive//hall-of-fame">contributors</a> (Melanie Foell, Björn Grüning)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Melanie Foell, Björn Grüning)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
@@ -908,15 +910,15 @@ Exporting and filtering the spectra information for three pixel that have differ
 </footer>
 
     </body>
-    <script type="text/javascript" src="/archive//assets/js/jquery.slim.min.js"></script>
-    <script type="text/javascript" src="/archive//assets/js/popper.min.js"></script>
-    <script type="text/javascript" src="/archive//assets/js/bootstrap.min.js?v=3"></script>
-    <script type="text/javascript" src="/archive//assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="/archive//assets/js/bootstrap-toc.min.js"></script>
-    <script type="text/javascript" src="/archive//assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
 
-    <script type="text/javascript" src="/archive//assets/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
     <script type="text/javascript">
     var snippets=document.querySelectorAll('div.highlight');
     [].forEach.call(snippets,function(snippet){
@@ -928,7 +930,7 @@ Exporting and filtering the spectra information for three pixel that have differ
     }});
     </script>
     
-    <script type="text/javascript" src="/archive//assets/js/list.min.js"></script>
-    <script type="text/javascript" src="/archive//assets/js/topic.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/list.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/topic.js"></script>
     
 </html>
