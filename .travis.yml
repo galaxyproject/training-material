@@ -89,15 +89,15 @@ after_success:
       make annotate
       make build
 
+      # Publish to GH
+      bin/publish
+
       # monthly cron job to make release
       if [ "$TRAVIS_EVENT_TYPE" == "cron" ]
       then
         python bin/make_release.py
         bin/publish-archive
       fi
-
-      # Publish to GH
-      bin/publish
     elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
     then
       # Do not publish old versions live, and do not update badges since not pushing to gh-pages.
