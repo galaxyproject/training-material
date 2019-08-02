@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to image analysis using Galaxy"
-zenodo_link: https://zenodo.org/record/3358874#.XUQ9oi1XZUM
+zenodo_link: https://zenodo.org/record/3358912
 questions:
   - "How do I use Galaxy with imaging data?"
   - "How do I convert images using Galaxy?"
@@ -23,7 +23,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3358874#.XUQ9oi1XZUM).
+This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3358912).
 
 > ### Agenda
 >
@@ -36,7 +36,7 @@ This tutorial shows how to use Galaxy for image analysis. The data used in this 
 
 # Getting data
 
-The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3358874#.XUQ9oi1XZUM)). We will use a sample image from this dataset for training basic imaging skills in Galaxy.
+The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3358912)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -47,7 +47,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 2. Import the following dataset and choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/record/3358874/files/20190919_MIA_Image_Data_siRNA_Screen.zip
+>    https://zenodo.org/record/3358912/files/data.zip
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -60,7 +60,6 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 4. Rename dataset to `input.tif`
 >
 >    {% include snippets/rename_dataset.md %}
-
 {: .hands_on}
 
 
@@ -73,10 +72,22 @@ Now, we can extract metadata from an image.
 > 1. **Image Info** {% icon tool %} with the following parameters to extract metadata from the image:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file (output of the previous step)
 > 2. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and search for image acquisition information
->    ![eye](../../images/eye-icon.png){:width="320px"}
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What is the datatype?
+>    > 2. What are the pixel dimentions?
+>    > 3. How many bits per pixel are used?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. TIFF
+>    > > 2. 1344x1024
+>    > > 3. 16
+>    > {: .solution }
+>    {: .question}
 {: .hands_on}
 
-# Image Convertion
+# Image Conversion
 
 Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF can not be displayed in the browser. Therefore, we convert `input.tif` to a PNG for visualization.
 
@@ -87,10 +98,16 @@ Not all tools can handle all image formats. Especially proprietary microscope im
 >    - *"Output data type"*: `PNG`
 > 2. Rename the generated file to `viz_input`
 > 3. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content
->    ![eye](../../images/eye-icon.png){:width="320px"}
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. You can observe that the image content is barely visible. Why?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. The original image is 16-bit and the intensity values are spreaded over a larger range than the display can render. Therefore, for improved visibility the intensity histogram of the image can be normalized first.
+>    > {: .solution }
+>    {: .question}
 {: .hands_on}
-
-You can observe that the image content is barely visible, since the original image is 16-bit and the intensity values are spreaded over a larger range than the display can render. Therefore, for improved visibility the intensity histogram of the image can be normalized first.
 
 > ### {% icon hands_on %} Hands-on: Normalize Histogram and Convert Image
 >
@@ -103,7 +120,6 @@ You can observe that the image content is barely visible, since the original ima
 >    - *"Output data type"*: `PNG`
 > 4. Rename the generated file to `viz_normalized`
 > 5. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content
->    ![eye](../../images/eye-icon.png){:width="320px"}
 {: .hands_on}
 
 # Image Filtering
@@ -126,7 +142,6 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 >    - *"Output data type"*: `PNG`
 > 6. Rename the generated file to `viz_smoothed_normalized_normalized`
 > 7. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and compare the result with `viz_normalized`.
->    ![eye](../../images/eye-icon.png){:width="320px"}
 {: .hands_on}
 
 # Segmentation
@@ -153,7 +168,6 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    - *"Plot Labels"*: `yes`
 >    - *"Label Color"*: `yellow`
 > 6. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
->    ![eye](../../images/eye-icon.png){:width="320px"}
 {: .hands_on}
 
 
