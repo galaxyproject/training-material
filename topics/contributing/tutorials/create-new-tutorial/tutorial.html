@@ -227,12 +227,36 @@
     {
       "@type": "Person",
       "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Lucille Delisle"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Lucille Delisle"
     }
   ],
   "about": [
@@ -250,7 +274,7 @@
         <h1 data-toc-skip>Creating a new tutorial</h1>
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>
+<a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>, <a href="/training-material/hall-of-fame#erasche" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erasche" alt="Helena Rasche">Helena Rasche</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#lldelisle" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Lucille Delisle">Lucille Delisle</a>
 
 </div>
         <blockquote class="overview">
@@ -366,25 +390,7 @@
         
     
         
-        <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/galaxy/" title="Erasmus MC">
-            Erasmus MC
-        </a>
-        
     
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
-            Galaxy Test
-        </a>
-        
-    
-        
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
         
     
         
@@ -394,21 +400,7 @@
         
     
         
-        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
-            HiCExplorer
-        </a>
-        
     
-        
-        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
-            Human Cell Atlas
-        </a>
-        
-    
-        
-        <a class="dropdown-item" href="http://galaxy.hunter.cuny.edu:8080/" title="Hunter College Galaxy">
-            Hunter College Galaxy
-        </a>
         
     
         
@@ -422,9 +414,17 @@
         
     
         
-        <a class="dropdown-item" href="http://mississippi.fr/" title="MISSISSIPPI">
-            MISSISSIPPI
-        </a>
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
         
     
         
@@ -438,23 +438,11 @@
         
     
         
-        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
-            NanoGalaxy
-        </a>
-        
     
         
     
         
     
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
-            Single Cell Omics workbench
-        </a>
         
     
         
@@ -473,10 +461,6 @@
         </a>
         
     
-        
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
         
     
         
@@ -659,15 +643,37 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <p>The first task is to select some data to use for the Hands-on sections. The selected data must be informative enough to illustrate the meaning of using a tool or a given technique, but not too big to require long waiting times for processing during a workshop. Upload and download of files into and out of <span class="notranslate">Galaxy</span> is usually quick, but the time taken for a tool to run can be long. Tool run times of no more than 10-15 mins are recommended. Typically, the selected data should be the informative subset of a full real-life dataset.</p>
 
-<p>For example, we could generate a small dataset by</p>
+<p>Below we describe two examples of how toy datasets were generated for tutorials:</p>
 
 <ul>
-  <li>Taking one 16S sequences (used in the test case of a <span class="notranslate">Galaxy</span> tool)</li>
-  <li>Generating a reference database
+  <li><strong>Example 1</strong>: creating a toy dataset from scratch
     <ul>
-      <li>Blasting it on the NR database on <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">NCBI Blast</a></li>
-      <li>Extracting one similar sequence found with Blast</li>
-      <li>Searching and extracting 2 other sequences of the same species using the <a href="https://www.ncbi.nlm.nih.gov/nuccore">NCBI Nucleotide database</a></li>
+      <li>Take one 16S sequence (for example found in the test case of a <span class="notranslate">Galaxy</span> tool):</li>
+      <li>Generate a reference database
+        <ul>
+          <li>Blast it on the NR database on <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&amp;PAGE_TYPE=BlastSearch&amp;LINK_LOC=blasthome">NCBI Blast</a></li>
+          <li>Extracting one similar sequence found with Blast</li>
+          <li>Search and extract 2 other sequences of the same species using the <a href="https://www.ncbi.nlm.nih.gov/nuccore">NCBI Nucleotide database</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Example 2</strong>: creating a toy dataset from an existing larger one
+    <ul>
+      <li>When the experiment takes a FASTQ as input and a few <span class="notranslate">reads</span> are sufficient:
+        <ul>
+          <li>Use <strong>seqtk_sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract randomly <span class="notranslate">reads</span> from your input fastq.</li>
+        </ul>
+      </li>
+      <li>However, when it requires a lot of <span class="notranslate">reads</span> to be meaningful, you can use the following strategy (used for the ATAC-seq tutorial using <a href="./workflows/Galaxy-Workflow-MakeAFakeInput.ga">this <span class="notranslate">workflow</span></a>):
+        <ul>
+          <li>Run the <span class="notranslate">workflow</span> until the <span class="notranslate">mapping</span> step on the full dataset (or big enough to have good results).</li>
+          <li>Select IDs of <span class="notranslate">reads</span> which map on the smallest chromosome (for example chr22 for human data).</li>
+          <li>In order to keep in the toy dataset enough diversity, you can also take randomly 1% of the <span class="notranslate">reads</span> IDs.</li>
+          <li>Concatenate the two lists and remove the duplicated IDs.</li>
+          <li>Use <strong>seqtk_subseq</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to sample your original FASTQ with the list of IDs.</li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -965,7 +971,7 @@ you do not have a <span class="notranslate">workflow</span> of your own. This is
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Bérénice Batut, Helena Rasche, Saskia Hiltemann, Lucille Delisle)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on

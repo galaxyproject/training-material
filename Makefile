@@ -144,7 +144,12 @@ check-framework:
 check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
 
-lint: check-yaml check-frontmatter check-workflows check-references check-snippets ## run all linting checks
+lint: ## run all linting checks
+	$(MAKE) check-yaml
+	$(MAKE) check-frontmatter
+	$(MAKE) check-workflows
+	$(MAKE) check-references
+	$(MAKE) check-snippets
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
