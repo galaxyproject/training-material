@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to image analysis using Galaxy"
-zenodo_link: https://zenodo.org/record/3357662/
+zenodo_link: https://zenodo.org/record/3358874#.XUQ9oi1XZUM
 questions:
   - "How do I use Galaxy with imaging data?"
   - "How do I convert images using Galaxy?"
@@ -23,7 +23,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3357662/).
+This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3358874#.XUQ9oi1XZUM).
 
 > ### Agenda
 >
@@ -36,7 +36,7 @@ This tutorial shows how to use Galaxy for image analysis. The data used in this 
 
 # Getting data
 
-The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3357662/)). We will use a sample image from this dataset for training basic imaging skills in Galaxy.
+The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3358874#.XUQ9oi1XZUM)). We will use a sample image from this dataset for training basic imaging skills in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -47,7 +47,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 2. Import the following dataset and choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/record/3357662/files/20190919_MIA_Course_Data_siRNA_Screen.zip
+>    https://zenodo.org/record/3358874/files/20190919_MIA_Image_Data_siRNA_Screen.zip
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -55,7 +55,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 3. "Use the unzip tool to extract a single image from the zipped screen": `unzip`
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `Single file`
->    - *"Filepath"*: `data/B2--W00026--P00001--Z00000--T00000--dapi.tif`
+>    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
 >
 > 4. Rename dataset to `input.tif`
 >
