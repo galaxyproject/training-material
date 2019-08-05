@@ -177,6 +177,8 @@ On the x-axis are the base position in the read. In this example, the sample con
 > ### {% icon comment %} Non uniform X-axis
 >
 > The X-axis is not uniform. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows. 
+>
+> Binning can be removed when running FastQC
 {: .comment}
 
 For each position, a boxplot (BoxWhisker type ) is drawn with:
@@ -188,7 +190,7 @@ For each position, a boxplot (BoxWhisker type ) is drawn with:
 
 The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores, scores of reasonable quality (orange), and reads of poor quality (red).
 
-It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will after steadily drop over the length of the read. This is often due to signal decay or phasing during the sequencing run:
+It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will steadily drop over the length of the read. This is often due to signal decay or phasing during the sequencing run:
 
 - Signal decay
 
@@ -201,7 +203,7 @@ It is normal with all Illumina sequencers for the median quality score to start 
   - Incomplete removal of the 3' terminators and fluorophores
   - Incorporation of nucleotides without effective 3' terminators
 
-  It yields to a decrease in quality scores at the 3' end of the read. 
+  This leads to a decrease in quality scores at the 3' end of the read. 
 
 Newer chemistry has improved this somewhat, but reads are now longer than ever. 
 
@@ -243,7 +245,7 @@ Newer chemistry has improved this somewhat, but reads are now longer than ever.
 > {: .solution }
 {: .question}
 
-When the median quality is to a phred score of ~20, we should consider trimming the sequence at that point, since sequence with lower quality than that is likely to cause more problems than it fixes. We will explain that process in the next section
+When the median quality is below a phred score of ~20, we should consider trimming the sequence at that point, since sequence with lower quality than that is likely to cause more problems than it fixes. We will explain that process in the next section
 
 FastQC produces other diagnostic plots to assess sample quality.
 
@@ -265,7 +267,7 @@ In a random library we would expect that there would be little to no difference 
 
 > ### {% icon details %} Biases by library type
 > 
-> It's worth noting that some types of library will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries as in the previous plot), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
+> It's worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries as in the previous plot), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
 >
 > ![Per base sequence content for RNA-seq data](../../images/quality-control/per_base_sequence_content_rnaseq.png)
 > 
@@ -290,7 +292,7 @@ In a random library we would expect that there would be little to no difference 
 
 ![Per sequence GC content](../../images/quality-control/per_sequence_gc_content.png "Per sequence GC content")
 
-This plot displays the number of reads vs. GC% per read. It is compared it to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.
+This plot displays the number of reads vs. GC% per read. It is compared to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.
 
 An unusually-shaped distribution could indicate a contaminated library or some other kind of biased subset. A normal distribution which is shifted indicates some systematic bias, which is independent of base position. If there is a systematic bias which creates a shifted normal distribution then this won't be flagged as an error by the module since it doesn't know what your genome's GC content should be.
 
@@ -352,6 +354,10 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >   
 > The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at, or above, the average for that base in the run, and hotter colours indicate that a tile had worse qualities than other tiles for that base. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
 >
+> In some cases, the chemicals arrive last in some tiles making the chemistry is a bit worse there. The "Per tile sequence quality" graph will then have some horizontal lines like this:
+>
+> ![Per tile sequence quality with horizontal lines](../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png)
+>
 > #### Per base N content
 >
 > ![Per base N content](../../images/quality-control/per_base_n_content.png "Per base N content")
@@ -366,7 +372,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > ![Sequence length distribution](../../images/quality-control/sequence_length_distribution.png "Sequence length distribution")
 >
-> Some high throughput sequencers generate sequence fragments of uniform length, but others can contain reads of wildly varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end.
+> Some high throughput sequencers generate sequence fragments of uniform length, but others can contain reads of wildly varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$. 
 >
 > This graph shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
 >
@@ -384,7 +390,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > FastQC does a generic analysis of all of the short nucleotide of length k (kmer, with k = 7 by default) starting at each positon along the read in the library to find those which do not have even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read. 
 >
-> FastQC will report the list of kmers which appear at specific positions with greater than expected frequency are reported. This can find a number of different sources of bias in the library which can include the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer these sequences contain, and then it's not always easy to see if there are other interesintg biases are present.
+> FastQC will report the list of kmers which appear at specific positions with greater than expected frequency. This can find a number of different sources of bias in the library which can include the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer these sequences contain, and then it's not always easy to see if there are other interesintg biases are present.
 >
 > The following example is from a high quality DNA-Seq library. The biased Kmers near the start of the read likely are due to slight, sequence dependent efficiency of DNA shearing or a result of random priming:
 >
@@ -393,6 +399,8 @@ With DNA sequencing data no single sequence should be present at a high enough f
 > This module can be very difficult to interpret. RNA-seq libraries may have highly represented kmers that are derived from highly expressed sequences. To learn more about this plot, please check the [FastQC Kmer Content documentation](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/11%20Kmer%20Content.html).
 >
 {: .details}
+
+We tried here to explain here there different FastQC report and some use case. More can be find below but also  some common next-generation sequencing problems on [QCFAIL.com](https://sequencing.qcfail.com/)
 
 > ### {% icon details %} Specific problem for alternate library types
 >
@@ -447,7 +455,6 @@ The quality of the sequences drops at the end of the sequences. This could cause
     - with low mean quality score
     - too short
     - with too many ambiguous (N) bases
-    - based on their GC content
 
 To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html), a tool that enhances sequence quality by automating adapter trimming as well as quality control.
 
@@ -562,10 +569,10 @@ The quality of the previous dataset was pretty good from the beginning and we im
 >
 > Alternatives to this procedure would be:
 >
-> * Cut all positions with a quality smaller than the threshold
+> * Cut after the first position with a quality smaller than the threshold
 > * Sliding window approach
 >
->     The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the windows (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
+>     The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the window (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
 {: .details}
 
 # Process paired-end data
