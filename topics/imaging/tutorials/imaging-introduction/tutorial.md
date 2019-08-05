@@ -105,7 +105,7 @@ Not all tools can handle all image formats. Especially proprietary microscope im
 
 Your image should look something like this:
 
-![](../../images/imaging-introduction/viz_input.png){: width="75%"}
+![raw input image](../../images/imaging-introduction/viz_input.png){: width="75%"}
 
 > ### {% icon question %} Questions
 >
@@ -136,7 +136,7 @@ Next we will normalize the histogram.
 
 Your image should now look something like this:
 
-![](../../images/imaging-introduction/viz_normalized.png){: width="75%"}
+![viz_normalized output image](../../images/imaging-introduction/viz_normalized.png){: width="75%"}
 
 We can now clearly make out the presence of the stained nuclei. Next we will automatically detect these features and segment the image.
 
@@ -164,7 +164,7 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 
 Your image should now look something like this:
 
-![](../../images/imaging-introduction/viz_smoothed_normalized.png){: width="75%"}
+![viz_smoothed_normalized output image](../../images/imaging-introduction/viz_smoothed_normalized.png){: width="75%"}
 
 
 # Segmentation
@@ -195,8 +195,8 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 
 The resulting images should look something like this:
 
-![](../../images/imaging-introduction/viz_segmented.png){: width="40%"}
-![](../../images/imaging-introduction/viz_segmentation_mask.png){: width="40%"}
+![viz_segmented output image](../../images/imaging-introduction/viz_segmented.png){: width="40%"}
+![segmentation mask output image](../../images/imaging-introduction/viz_segmentation_mask.png){: width="40%"}
 
 We see that we were able to detect the locations of the nuclei and segment the cells in the image.
 
