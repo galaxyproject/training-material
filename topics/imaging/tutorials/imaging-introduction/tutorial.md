@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to image analysis using Galaxy"
-zenodo_link: https://zenodo.org/record/3358912
+zenodo_link: https://zenodo.org/record/3360236
 questions:
   - "How do I use Galaxy with imaging data?"
   - "How do I convert images using Galaxy?"
@@ -23,7 +23,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3358912).
+This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3360236).
 
 > ### Agenda
 >
@@ -36,7 +36,7 @@ This tutorial shows how to use Galaxy for image analysis. The data used in this 
 
 # Getting data
 
-The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3358912)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -47,7 +47,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 2. Import the following dataset and choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/record/3358912/files/data.zip
+>    https://zenodo.org/record/3360236/files/data.zip
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
