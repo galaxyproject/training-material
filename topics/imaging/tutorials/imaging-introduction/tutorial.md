@@ -159,7 +159,7 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 >    - {% icon param-file %} *"Input Image"*: `input_smoothed_normalized` file (output of **Histogram equalization** {% icon tool %})
 >    - *"Output data type"*: `PNG`
 > 6. Rename {% icon galaxy-pencil %} the generated file to `viz_smoothed_normalized`
-> 7. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and compare the result with `viz_normalized`.
+> 7. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and compare the result with `viz_normalized`. You can observe that `viz_smoothed_normalized` has significant reduced noise.
 {: .hands_on}
 
 Your image should now look something like this:
@@ -178,11 +178,14 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    - *"Threshold Algorithm"*: `Otsu`
 >    - *"Dark Background"*: `Yes`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `input_segmented`
-> 3. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_segmented` file (output of **Auto threshold** {% icon tool %})
+> 3. **Binary 2 Label** {% icon tool %} with the following parameters to segment the image:
+>    - {% icon param-file %} *"Binary Image File"*: `input_segmented` file (output of **Auto Threshold** {% icon tool %})
+> 4. Rename {% icon galaxy-pencil %} the generated file to `input_segmented_labeled`
+> 5. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
+>    - {% icon param-file %} *"Input Image"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
 >    - *"Output data type"*: `PNG`
-> 4. Rename {% icon galaxy-pencil %} the generated file to `viz_segmented`
-> 5. **Overlay Segmentation Mask** {% icon tool %} with the following parameters to convert the image to PNG:
+> 6. Rename {% icon galaxy-pencil %} the generated file to `viz_segmented`
+> 7. **Overlay Segmentation Mask** {% icon tool %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Image Source File"*: `viz_normalized` file
 >    - {% icon param-file %} *"Mask Source File"*: `viz_segmented` file
 >    - *"Image Is Greyscale"*: `Yes`
@@ -190,7 +193,7 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    - *"Stroke Color"*: `red`
 >    - *"Plot Labels"*: `yes`
 >    - *"Label Color"*: `yellow`
-> 6. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
+> 8. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
 {: .hands_on}
 
 The resulting images should look something like this:
