@@ -36,7 +36,8 @@ This tutorial shows how to use Galaxy for image analysis. The data used in this 
 
 # Getting data
 
-The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+The dataset required for this tutorial contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -44,7 +45,8 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following dataset and choose the type of data as `zip`.
+> 2. Import the following dataset
+>    - **Important:** Choose the type of data as `zip`.
 >
 >    ```
 >    https://zenodo.org/record/3360236/files/data.zip
@@ -52,12 +54,12 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. "Use the unzip tool to extract a single image from the zipped screen": `unzip`
+> 3. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
 >
-> 4. Rename dataset to `input.tif`
+> 4. Rename {% icon galaxy-pencil %} the dataset to `input.tif`
 >
 >    {% include snippets/rename_dataset.md %}
 {: .hands_on}
@@ -94,33 +96,49 @@ Not all tools can handle all image formats. Especially proprietary microscope im
 > ### {% icon hands_on %} Hands-on: Convert Image
 >
 > 1. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input.tif` file (output of the previous step)
+>    - {% icon param-file %} *"Input Image"*: `input.tif` file
 >    - *"Output data type"*: `PNG`
-> 2. Rename the generated file to `viz_input`
-> 3. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content
+> 2. Rename {% icon galaxy-pencil %} the generated file to `viz_input`
+> 3. Click on the {% icon galaxy-eye %} (eye) icon next to the file name to look at the file content
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. You can observe that the image content is barely visible. Why?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. The original image is 16-bit and the intensity values are spreaded over a larger range than the display can render. Therefore, for improved visibility the intensity histogram of the image can be normalized first.
->    > {: .solution }
->    {: .question}
 {: .hands_on}
+
+Your image should look something like this:
+
+![](../../images/imaging-introduction/viz_input.png){: width="75%"}
+
+> ### {% icon question %} Questions
+>
+> You can observe that the image content is barely visible. Why?
+>
+> > ### {% icon solution %} Solution
+> > The original image is 16-bit and the intensity values are spread over a larger range than the
+> > display can render. Therefore, for improved visibility the intensity histogram of the image can
+> > be normalized first.
+> {: .solution }
+{: .question}
+
+
+Next we will normalize the histogram.
 
 > ### {% icon hands_on %} Hands-on: Normalize Histogram and Convert Image
 >
 > 1. **Histogram equalization** {% icon tool %} with the following parameters to normalize the histogram of the image:
->    - {% icon param-file %} *"Source file"*: `input.tif` file (output of the previous step)
+>    - {% icon param-file %} *"Source file"*: `input.tif` file
 >    - *"Histogram Equalization Algorithm"*: `CLAHE`
-> 2. Rename the generated file to `input_normalized`
+> 2. Rename {% icon galaxy-pencil %} the generated file to `input_normalized`
 > 3. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_normalized` file (output of the histogram equalization)
+>    - {% icon param-file %} *"Input Image"*: `input_normalized` file (output of **Histogram equalization** {% icon tool %})
 >    - *"Output data type"*: `PNG`
-> 4. Rename the generated file to `viz_normalized`
+> 4. Rename {% icon galaxy-pencil %} the generated file to `viz_normalized`
 > 5. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content
 {: .hands_on}
+
+Your image should now look something like this:
+
+![](../../images/imaging-introduction/viz_normalized.png){: width="75%"}
+
+We can now clearly make out the presence of the stained nuclei. Next we will automatically detect these features and segment the image.
 
 # Image Filtering
 
@@ -131,18 +149,23 @@ Specific features of interest (e.g., edges, noise) can be enhanced or suppressed
 > 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
 >    - *"Image type"*: `Gaussian Blur`
 >    - *"Radius/Sigma"*: `3`
->    - {% icon param-file %} *"Source file"*: `input.tif` file (output of the previous step)
-> 2. Rename the generated file to `input_smoothed`
+>    - {% icon param-file %} *"Source file"*: `input.tif` file
+> 2. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed`
 > 3. **Histogram equalization** {% icon tool %} with the following parameters to normalize the histogram of the image:
->    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of filter image)
+>    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of **Filter image** {% icon tool %})
 >    - *"Histogram Equalization Algorithm"*: `CLAHE`
-> 4. Rename the generated file to `input_smoothed_normalized`
+> 4. Rename {% icon galaxy-pencil %} the generated file to `input_smoothed_normalized`
 > 5. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_smoothed_normalized` file (output of the histogram equalization)
+>    - {% icon param-file %} *"Input Image"*: `input_smoothed_normalized` file (output of **Histogram equalization** {% icon tool %})
 >    - *"Output data type"*: `PNG`
-> 6. Rename the generated file to `viz_smoothed_normalized_normalized`
+> 6. Rename {% icon galaxy-pencil %} the generated file to `viz_smoothed_normalized`
 > 7. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and compare the result with `viz_normalized`.
 {: .hands_on}
+
+Your image should now look something like this:
+
+![](../../images/imaging-introduction/viz_smoothed_normalized.png){: width="75%"}
+
 
 # Segmentation
 
@@ -151,17 +174,17 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 > ### {% icon hands_on %} Hands-on: Segment image
 >
 > 1. **Auto Threshold** {% icon tool %} with the following parameters to segment the image:
->    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of the previous step)
+>    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of **Filter image** {% icon tool %})
 >    - *"Threshold Algorithm"*: `Otsu`
 >    - *"Dark Background"*: `Yes`
-> 2. Rename the generated file to `input_segmented`
+> 2. Rename {% icon galaxy-pencil %} the generated file to `input_segmented`
 > 3. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Input Image"*: `input_segmented` file (output of auto threshold)
+>    - {% icon param-file %} *"Input Image"*: `input_segmented` file (output of **Auto threshold** {% icon tool %})
 >    - *"Output data type"*: `PNG`
-> 4. Rename the generated file to `viz_segmented`
+> 4. Rename {% icon galaxy-pencil %} the generated file to `viz_segmented`
 > 5. **Overlay Segmentation Mask** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Image Source File"*: `viz_normalized` file (output of previous step)
->    - {% icon param-file %} *"Mask Source File"*: `viz_segmented` file (output of convert image)
+>    - {% icon param-file %} *"Image Source File"*: `viz_normalized` file
+>    - {% icon param-file %} *"Mask Source File"*: `viz_segmented` file
 >    - *"Image Is Greyscale"*: `Yes`
 >    - *"Thickness"*: `3`
 >    - *"Stroke Color"*: `red`
@@ -170,6 +193,12 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 > 6. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
 {: .hands_on}
 
+The resulting images should look something like this:
+
+![](../../images/imaging-introduction/viz_segmented.png){: width="40%"}
+![](../../images/imaging-introduction/viz_segmentation_mask.png){: width="40%"}
+
+We see that we were able to detect the locations of the nuclei and segment the cells in the image.
 
 # Conclusion
 {:.no_toc}
