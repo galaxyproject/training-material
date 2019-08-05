@@ -35,11 +35,11 @@ contributors:
 
 Microbiomes play a critical role in host health, disease, and the environment. The study of microbiota and microbial communities has been facilitated by the evolution of technologies, specifically the sequencing techniques. We can now study the microbiome dynamics by investigating the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics):
 
-![Multiomics](../../images/Why_MT.png)
+![Multiomics](../../images/metatranscriptomics/Why_MT.png)
 
 New generations of sequencing platforms coupled to numerous bioinformatics tools have led to a spectacular technological progress in metagenomics and metatranscriptomics to investigate complex microorganism communities. These techniques are giving insight into taxonomic profiles and genomic components of microbial communities. Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.
 
-![meta-momics diagram](../../images/meta-omics.png)
+![meta-momics diagram](../../images/metatranscriptomics/meta-omics.png)
 
 In this tutorial, we will focus on **metatranscriptomics**. 
 
