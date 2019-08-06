@@ -53,13 +53,14 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following dataset and choose the type of data as `zip`.
->
+> 2. Import the following dataset from [Zenodo]( https://zenodo.org/record/3360236) or from the data library (ask your instructor).
+>    - **Important:** Choose the type of data as `zip`.
 >    ```
 >    https://zenodo.org/record/3360236/files/data.zip
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
 > 3. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
