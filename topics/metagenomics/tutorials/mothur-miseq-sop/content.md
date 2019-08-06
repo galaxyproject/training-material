@@ -177,6 +177,7 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    > https://zenodo.org/record/800651/files/silva.v4.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
+>    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
 >    > ```
 >    {: .solution }
 {: .hands_on}
@@ -1408,8 +1409,8 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 
 View the `summary` output from **Summary.single** {% icon tool %}. This shows several alpha diversity metrics:
 - [sobs](https://www.mothur.org/wiki/Sobs): observed richness (number of OTUs)
-- [coverage](https://mothur.org/wiki/Coverage): Good's coverage index
-- [invsimpson](https://en.wikipedia.org/wiki/Diversity_index#Simpson_index): Inverse Simpson Index
+- [coverage](https://mothur.org/wiki/Coverage): Good's coverage index (1 - (number of OTUs containing a single sequence / total number of sequences ))
+- [invsimpson](https://en.wikipedia.org/wiki/Diversity_index#Simpson_index): Inverse Simpson Index (1 / probability that two random individuals represent the OTU)
 - [nseqs](https://www.mothur.org/wiki/Nseqs): number of sequences
 
 
