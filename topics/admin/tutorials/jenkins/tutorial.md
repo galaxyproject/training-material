@@ -424,26 +424,57 @@ We also use a custom image that includes a lot of our requirements pre-installed
 This is a relatively straightforward job to build a WAR file and upload it to our depot server.
 
 ```console
-TODO
+# some env vars that are needed, it's kind of gross but it works :(
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/
+export PERL5LIB=/home/centos/workspace/usegalaxy-eu/apollo-builder/extlib/lib/perl5:$PERL5LIB
+# setting a variable from some build data
+APOLLO_VERSION=$(cat application.properties | grep app.version | sed 's/.*=//g')
+
+# Check if this version needs to be built
+curl --silent https://usegalaxy.eu/static/vgcn/ | \
+	grep -F "apollo-${APOLLO_VERSION}" && echo "Already built!" && exit 0;
+
+# Build the thing
+./apollo deploy
+
+# Deploy it to our server
+scp -i $PRIV_KEY \
+	target/*.war \
+    user@server:/static/apollo-${APOLLO_VERSION}.war
 ```
 
-We could also use the "Archive Artifacts" plugin to have Jenkins retain all of the artefacts (build outputs that you care about) but we wanted to have an Ansible role pull those files and it was simpler to have them accessible at predictable URLs.
+- We use the "Secret file" binding to inject a specific private key (available in the build as `$PRIV_KEY`) but the SSH agent plugin would work equally well.
+- We could also use the "Archive Artifacts" plugin to have Jenkins retain all of the artefacts (build outputs that you care about) but we wanted to have an Ansible role pull those files and it was simpler to have them accessible at predictable URLs.
 
 ### Job: Chado Schema Builder
 
 Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.
 
-```console
-TODO
-
-```
+Here we store both the [build](https://github.com/erasche/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/erasche/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
 
 ### Job: Website
-TODO
+
+We build our own Jekyll website because we have some plugins GitHub will not compile for us. The configuration here is more complex:
+
+- Throttle builds, since GitHub will only accept so many deploy requests in a time period
+- One SSH key used to clone the repository using the Git SCM, with "Wipe out repository & force clone" set.
+- Triggers on both:
+  - Cron, daily
+  - GitHub webhooks notifying us of pushes to master
+- SSH Agent is configured with a deploy SSH key (because git really prefers you provide keys in the SSH agent, I don't know if it is possible to pass a keyfile on the CLI)
+- The [.build.sh](https://github.com/usegalaxy-eu/website/blob/master/.build.sh) is run which activates the RVM pre-installed on the VMs
+- If the master branch is checked out, [`.publish.sh`](https://github.com/usegalaxy-eu/website/blob/master/.publish.sh) is run
+- Empty [`.nojekyll`](https://github.com/usegalaxy-eu/website/blob/master/.nojekyll) file to prevent GitHub from trying to build this.
 
 ### Job: Install Tools
 
-TODO
+For this job we use Jenkin's "Trigger other builds" feature:
+- We have one job that fetches all of the latest updates for IUC tools and writes those into yaml files. This job runs on cron every week.
+- This triggers a separate job to actually apply the changes to our server.
+
+By splitting these up, we can run the "actually apply" portion without having to fetch updates to the tools first. Additionally we can have the second portion run only if the first portion succeeds, so we have some check that everything looks OK before trying to apply it.
+
+We include a Galaxy API key as a credential and then use a `Makefile` contained in the project to do the steps. We don't automatically test PRs so we don't care if people change the Makefile because we visually validate it before merging their PR.
 
 ### Configuration: Themes
 
@@ -451,6 +482,9 @@ Many people find the "blue/red ball" icons a bit hard to understand. Using the "
 
 ### Configuration: Folder Permissions
 
-We have the aforementioned problem that our playbooks run with `--diff` and while we want to capture this output and be able to review it, it is not necessary that the public can see it. So permissions are configured not only on the global Jenkins level, but also within a single folder of jobs. The folder permissions look like:
+We have the aforementioned problem that our playbooks run with `--diff` and while we want to capture this output and be able to review it, it is not necessary that the public can see it. So permissions are configured not only on the global Jenkins level, but also within a single folder of jobs. The folder permissions involve setting:
 
-TODO
+- Properties
+  - *"Inheritance Strategy"*: `Do not inherit permission grants from other ACLs`
+  - Allowing `Discover` and nothing else for Anonymous + Authenticated
+  - Explicitly granting all permissions for the admins
