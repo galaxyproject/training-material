@@ -1,0 +1,198 @@
+---
+layout: tutorial_hands_on
+
+title: "Analyse HeLa fluorescence siRNA screen using Galaxy"
+zenodo_link: https://zenodo.org/record/3360236
+level: Intermediate
+questions:
+  - "How do I analyze a HeLa fluorescence siRNA screen?"
+  - "How do I segment cell nuclei?"
+  - "How do I extract features from segmentations?"
+  - "How do I filter segmentations by morphological features?"
+  - "How do I apply a feature extraction workflow to a screen?"
+  - "How do I visualize feature extraction results?"
+objectives:
+  - "How to segment cell nuclei in Galaxy."
+  - "How to extract features from segmentations in Galaxy."
+  - "How to filter segmentations by morphological features in Galaxy."
+  - "How to extract features from an imaging screen in Galaxy."
+  - "How to analyse extracted features from an imaging screen in Galaxy."
+requirements:
+  -
+    type: "internal"
+    topic_name: imaging
+    tutorials:
+      - imaging-introduction
+time_estimation: "1H"
+contributors:
+  - thomaswollmann
+  - shiltemann
+
+---
+
+# Introduction
+{:.no_toc}
+
+This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3360236).
+
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+# Getting data
+
+The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. If you are logged in, create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. Import the following dataset and choose the type of data as `zip`.
+>
+>    ```
+>    https://zenodo.org/record/3360236/files/data.zip
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>
+> 3. **Unzip file** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - *"Extract single file"*: `Single file`
+>    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
+>
+> 4. Rename {% icon galaxy-pencil %} the dataset to `testinput.tif`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 5. "Use the unzip tool to extract a the zipped screen": `unzip`
+>    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - *"Extract single file"*: `All files`
+>
+> 6. Rename dataset to `original data`
+> 7. Upload segmentation filter rules as tabular from the following raw data
+>    ~~~~
+	area	eccentricity
+min	500	0.
+max	100000	0.5
+~~~~
+>
+>    {% include snippets/create_new_file.md %}
+>
+> 8. Rename dataset to `rules`
+>
+>    {% include snippets/rename_dataset.md %}
+{: .hands_on}
+
+
+# Create feature extraction workflow
+First, we will create and test a workflow which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.
+
+> ### {% icon hands_on %} Hands-on: Create feature extraction workflow
+>
+> 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
+>    - *"Image type"*: `Gaussian Blur`
+>    - *"Radius/Sigma"*: `3`
+>    - {% icon param-file %} *"Source file"*: `testinput.tif` file
+> 2. **Auto Threshold** {% icon tool %} with the following parameters to segment the image:
+>    - {% icon param-file %} *"Source file"*: output of **Filter image** {% icon tool %}
+>    - *"Threshold Algorithm"*: `Otsu`
+>    - *"Dark Background"*: `Yes`
+> 3. **Split objects** {% icon tool %} with the following parameters to split touching objects:
+>    - {% icon param-file %} *"Source file"*: output of **Auto Threshold** {% icon tool %}
+>    - *"Minimum distance between two objects."*: `20`
+> 4. **2D Feature Extraction** {% icon tool %} with the following parameters to extract features from the segmented objects:
+>    - {% icon param-file %} *"Label file"*: output of **Split objects** {% icon tool %}
+>    - *"Use original image to compute additional features."*: `No original image`
+>    - *"Select features to compute"*: `Select features`
+>    - *"Available features"*: check `Add label id of label image`, `Area`, `Eccentricity`, `Major Axis Length`
+> 5. **Filter segmentation** {% icon tool %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
+>    - {% icon param-file %} *"Source file"*: output of **Split objects** {% icon tool %}
+>    - {% icon param-file %} *"Feature file"*: output of **2D Feature Extraction** {% icon tool %}
+>    - {% icon param-file %} *"Rules file"*: rules file
+> 6. **2D Feature Extraction** {% icon tool %} with the following parameters to extract features the final readout from the segmented objects:
+>    - {% icon param-file %} *"Label file"*: output of **Filter segmentation** {% icon tool %}
+>    - *"Use original image to compute additional features."*: `Use original image`
+>    - {% icon param-file %} *"Original image file"*: `testinput.tif` file
+>    - *"Select features to compute"*: `Select features`
+>    - *"Available features"*: check `Mean Intensity`, `Area`, `Major Axis Length`
+> 7. Now we can extract the workflow for batch processing and name it "feature_extraction". Name the inputs to `input image` and filter `rules`. Mark the results of step 5., 6. as outputs.
+>
+>    {% include snippets/extract_workflow.md %}
+{: .hands_on}
+
+The resulting workflow should look something like this:
+
+![feature extraction workflow](../../images/hela-screen-analysis/feature_extraction_workflow.png "Feature extraction subworkflow.")
+
+# Apply workflow to screen
+
+Now we want to apply our extracted workflow to `original data` and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.
+
+> ### {% icon hands_on %} Hands-on: Create screen analysis workflow
+>
+> 1. Create a new workflow in the workflow editor.
+> 
+>    {% include snippets/create_new_workflow.md %}
+> 2. Add a **Input dataset collection** node and name it `input images`
+> 3. Add a **Input dataset** node and name it `rules`
+> 4. Add the **feature_extraction** workflow as node.
+>    - {% icon param-file %} *"input image"*: `input images` output of **Input dataset collection** {% icon tool %}
+>    - {% icon param-file %} *"filter rules"*: `rules` output of **Input dataset** {% icon tool %}
+> 5. Add a **Collapse Collection** {% icon tool %} node.
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: output of **feature_extraction** workflow
+>    - *"Keep one header line"*: `Yes`
+>    - *"Append File name"*: `No`
+>    - Mark the tool output as workflow output
+> 6. Save your workflow and name it `analyze_screen`
+{: .hands_on}
+
+The resulting workflow should look something like this:
+
+![screen analysis workflow](../../images/hela-screen-analysis/analyze_screen_workflow.png "Full screen analysis workflow.")
+
+
+> ### {% icon hands_on %} Hands-on: Run screen analysis workflow
+>
+> 1. Run the screen analysis workflow on the `original data` screen and the `rules` file:
+> 
+>    {% include snippets/run_workflow.md %}
+{: .hands_on}
+
+# Plot feature extraction results
+
+Finally, we want to plot the results for better interpretation.
+
+> ### {% icon hands_on %} Hands-on: Plot feature extraction results
+>
+> 1. Click on the `Visualize this data` icon of the **Collapse Collection** {% icon tool %} result.
+> 2. Run `Box plot` with the following parameters:
+>    - *"Provide a title"*: `Screen features`
+>    - *"X-Axis label"*:
+>    - *"Y-Axis label"*:
+>    - *"1: Data series"*:
+>        - *"Provide a label"*: `Mean intensity`
+>        - *"Observations"*: `Column 1`
+>    - *"2: Data series"*:
+>        - *"Provide a label"*: `Area`
+>        - *"Observations"*: `Column 2`
+>    - *"3: Data series"*:
+>        - *"Provide a label"*: `Major axis length`
+>        - *"Observations"*: `Column 3`
+{: .hands_on}
+
+
+The resulting plot should look something like this:
+
+![feature extraction results box plot](../../images/hela-screen-analysis/result_boxplot.png){: width="100%"}
+
+# Conclusion
+{:.no_toc}
+
+In this exercise you imported images into Galaxy, segmented cell nuclei, filtered segmentations by morphological features, extracted features from segmentations, scaled your workflow to a whole screen, and plotted the feature extraction results using Galaxy.
