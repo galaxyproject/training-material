@@ -3,16 +3,22 @@ layout: tutorial_hands_on
 
 title: "Automation with Jenkins"
 questions:
+  - What sort of tasks should be automated?
+  - What are my options for automation?
   - How can I automate repetitive tasks?
 objectives:
   - Setup Jenkins
-  - Setup a job
-time_estimation: "2h"
+  - Setup a simple job
+  - Automate running of the Galaxy playbook
+  - Secure Jenkins
+time_estimation: "1h"
 tags:
   - automation
 #subtopic: features
 key_points:
-  - automate all the things
+  - Automate all the things!
+  - Especially regular tasks you might forget to do
+  - Automatically run Ansible to ensure machines are in compliance
 contributors:
   - erasche
 requirements:
@@ -33,7 +39,6 @@ Many of these systems focus on testing and deploying code, and provide some buil
 Testing and deploying code boils down to "please run this command, when X happens", and they tend to function as "commands as a service".
 You can often configure them to "test code when it is pushed to a branch on GitHub", or "test this code daily" or "deploy this code daily".
 If you need to automatically run a command whenever some event happens, and then to report this back in some standardised way (GitHub PR statuses, automatically deploying, notifications in chat), then a CI system can do this for you.
-
 
 There are many options for, some of these have different features which may be desirable in one or another scenario.
 This tutorial will specifically cover automation with Jenkins as that is one of the tools `usegalaxy.*` use for a subset of their automation.
@@ -157,7 +162,7 @@ With this, we're done, Jenkins is set up and ready to use!
 
 We will look at a couple basic cases of how to build things with Jenkins, and wrap up with some advanced usage documentation that is not so practical for a tutorial environment.
 
-Start by **visiting your Jenkins instance**, it will be running on port `8080` of your host, e.g. `http://example.org:8080`.
+Start by **visiting your Jenkins instance**, at `https://your-domain/jenkins`
 
 ![Welcome to Jenkins](../../images/jenkins-01-welcome.png "Welcome to Jenkins! This is how it looks once you've run the playbook and logged in. The menu on the left gives you some ability to configure Jenkins, below it is the job queue where running and queued jobs will appear. When you have configured some jobs, they will be visible in the central panel.")
 
@@ -165,9 +170,9 @@ Start by **visiting your Jenkins instance**, it will be running on port `8080` o
 
 > ### {% icon hands_on %} Hands-on: Create a simple job
 >
-> 1. Visit your Jenkins and login
+> 1. Visit your Jenkins and login with the credentials you set up in the group variables file
 >
-> 2. Click **New Item** in the left hand menu.
+> 2. Click **New Item** in the left hand menu
 >
 > 3. Give your job a name like `my-project`, and select that it is a `freestyle project`, and click "OK"
 >
@@ -211,13 +216,13 @@ Start by **visiting your Jenkins instance**, it will be running on port `8080` o
 >
 > 8. You will be brought back to the job information page. Click **Build Now**
 >
-> 9. Your job will appear in the *Build History* box at the left. Click the ball associated with your job, to see the console.
+> 9. Your job will appear in the *Build History* box at the left. **Click** the ball associated with your job, to see the console.
 >
->    ![Seeing a Jenkins job's console](../../images/jenkins-06-job1-run.png)
+>    ![Seeing a Jenkins job's console](../../images/jenkins-06-job1-run.png "The build history box lets you see the status of previous, running, and queued builds. The 'sun' icon indicates that all builds have been successful, it will become more cloudy/overcast if you experience failures. The 'trend' button allows you to visualise how quickly builds have run historically.")
 >
 >    Clicking the number will bring you to a job information page, where you can click "Console Output" to see the jobs output
 >
->    ![Jenkins job output](../../images/jenkins-07-job1-out.png "The output of your first Jenkins job. All jenkins jobs log the commands that were run and their outputs, to help you see which step potentially failed.")
+>    ![Jenkins job output](../../images/jenkins-07-job1-out.png "The output of your first Jenkins job. All jenkins jobs log both the commands that were run, and their outputs. Use this to see which step potentially failed.")
 {: .hands_on}
 
 Setting up Jenkins jobs is as simple as setting up a cron job, but the results are stored in a nice visual interface that may provide better visibility than a `cron` job.
@@ -280,15 +285,20 @@ We will now setup Jenkins to run Ansible on cron. In the "Galaxy Installation wi
 
 With this we have Jenkins running our playbook for us! You can imaging several steps you could take to follow up from this:
 
-1. Storing your playbooks in `git`, and having Jenkins clone that configuration and executing it
+1. Storing your playbooks in `git` like UseGalaxy.\*
+	- [UseGalaxy.eu's playbooks](https://github.com/usegalaxy-eu/infrastructure-playbook) are public, anyone can contribute and if the PR is merged, it is automatically applied to our infrastructure within the next day. We store our job configuration in here as well which specifies how much memory and how many CPUs tools receive. Our teammates often can contribute fixes themselves when they notice a tool needs more memory.
+	- [UseGalaxy.org's playbooks](https://github.com/galaxyproject/infrastructure-playbook) are also public, but run manually.
 2. Running this job regularly
+	- This can prevent mistakes, if a coworker edits some configuration on the server and forgets to commit it, this ensures everything is reverted back to the expected state.
+	- The amount of time the Galaxy playbook takes can be quite annoying when done manually but no one is upset if it takes 30 minutes when it is run on cron.
 3. Alerting you if something went wrong
+	- There are numerous plugins that can send notifications of build success/failure to various places like Slack, etc.
 
 These are all next steps that are great to look into, and will make your systems more reliable and trustworthy as you will know when things change, and you can be certain that the code is configured how you specified.
 
 # Securing Jenkins
 
-You have already secured Jenkins in that it is protected with a good password and HTTPS. This is one important thing. The other portion is the visibility of jobs and their outputs. In the above Ansible Galaxy deployment job we set the parameter `--diff`, so we could see what changed. This is an extremely helpful thing to do to be able to audit changes from a particular run. But! If you change the `id_secret` or other secret variables, then this diff will be visible in the job's console logs. This is useful for admins but needs to be restricted so that the whole world cannot see this.
+You have already secured Jenkins in that it is protected with a good password and HTTPS. This is one important thing. The other portion is the visibility of jobs and their outputs. In the above Ansible Galaxy deployment job we set the parameter `--diff`, so we could see what changed. This is an extremely helpful thing to do to be able to audit changes from a particular run. But! If you change the `id_secret` or other secret variables, then this diff will be visible in the job's console logs. This is useful to see for admins but needs to be restricted so that the whole world cannot see this.
 
 > ### {% icon hands_on %} Hands-on: Securing Jenkins
 >
@@ -300,14 +310,19 @@ You have already secured Jenkins in that it is protected with a good password an
 >
 >    1. In the first block *Access Control* Change the *Authorization* strategy from "Logged-in users can do anything" to "Matrix-based security"
 >
->    2. Click "Add user or group" and add the `admin` user, and then configure the permissions like below. Clicking on the checked checkbox icon at the right will allow you to enable/disable all of the checkboxes for that row.
+>    2. Click "Add user or group" and add the `admin` user
+>
+>    3. Configure the permissions like below. Clicking on the checked checkbox icon at the right will allow you to enable/disable all of the checkboxes for that row.
 >
 >       ![Configuring matrix based permissions](../../images/jenkins-09-permissions.png)
 >
 >       The matrix based security plugin is provided by a plugin, we installed this by setting the variable `jenkins_plugins: [matrix-auth]` in our group variables earlier.
 >       The checkboxes give you the ability to grant or deny permissions to certain classes of users. Each column is an individual permission, and you can hover over each column to get more information about what that permission allows.
 >
->       In the above example we have configured that Anonymous users (not logged in) may *Read*, so they can access the Jenkins page, but by default will not see any jobs. Once they login, they can see that jobs exist. The *Discover* permission is also granted so that if a user has bookmarked the ansible-galaxy job page, they will automatically be redirected through the login page, if they are not already logged in. We then let authenticated users do numerous tasks like creating and running jobs. Only administrative users, however, can configure Agents to run those jobs.
+>       In the above example we have configured that:
+>         - *Anonymous users* (not logged in) may `Read`, so they can access the Jenkins page, but by default will not see any jobs. The `Discover` permission is also granted so that if a user has bookmarked the ansible-galaxy job page, they will automatically be redirected through the login page, if they are not already logged in.
+>         - Once they login and are *Authenticated Users*, they can see that `Manage` and `Run` Jobs and Views
+>         - Only the *admin* user, however, can configure `Agents` to run those jobs.
 >
 >    3. Under **CSRF Protection**, check the box to prevent CSRF, and select the default crumb issuer, and then enable proxy compatibility.
 >
@@ -326,7 +341,7 @@ You have already secured Jenkins in that it is protected with a good password an
 
 # Advanced Topics
 
-Some of these topics are outside the scope of a training, but some discussion and configuration information will be provided below documenting common issues and questions.
+These topics are outside the scope of a training or do not lend themselves well to interesting exercises, but some discussion and configuration information will be provided below documenting common issues and questions that can be useful if you start using Jenkins "in anger".
 
 ## Updating Jenkins
 
@@ -335,7 +350,7 @@ Jenkins updates regularly due to security issues. We recommend that you either:
 1. Regularly check the [Jenkins Changelog](https://jenkins.io/changelog/), and update the server whenever there are important security fixes
 2. OR include some sort of yum or apt auto-updater on whichever system that Jenkins is running on
 
-The downside of automatic updating is that Jenkins will restart and kill any jobs that had been running. Choose which works best for your environment.
+The downside of automatic updating is that Jenkins will restart and kill any jobs that had been running. Choose which works best for your environment. UseGalaxy.eu chose a completely automated setup because their jobs can be killed and few things are affected. UseGalaxy.org chose a more manual setup because their jobs are more critical, there if jobs fail, Galaxy pull request tests will fail unexpectedly and unhelpfully.
 
 ## Updating Plugins
 
@@ -374,25 +389,68 @@ These plugins can be installed via the Ansible automation by expanding `jenkins_
 
 ### Source Code Management
 
-Jenkins supports most VCSs that are in use today. For the Git plugin, it allows you to clone a git repository into the job's directory, and then run scripts from there. It forms the foundation of most jobs, jobs without SCM setup are not common.
+Jenkins supports most VCSs that are in use today. For the Git plugin, it allows you to clone a git repository into the job's directory, and then run scripts from there. It forms the foundation of most jobs.
 
 You may need to specify credentials for cloning from private repositories, in this case you should beware that when you configure the SSH credentials you should specify the `user` as `git`. You will also need to ensure that the server's SSH public key is known to your Jenkins system which generally requires `su`ing as the Jenkins user and running `ssh git@...` once, and accepting the "Unknown host" key prompt. We recommend that you use repository URLs of the format `git@github.com:org/repo.git`, if you are using one of the GitHub PR builder plugins, then this URL has to match a value in the incoming webhook and it is not always obvious that this needs to be set like this.
 
-The "Branches to build" section allows you to specify which branches. Whenever you click "Build now", Jenkins usually just picks the master branch to build, and doesn't run a build job per-branch. If you know which branch, you can specify it there. If you are automatically triggering Jenkins builds based on GitHub (or other server) webhooks, then you can ensure that branches that should not be built are filtered out here. UseGalaxy.eu has one Jenkins job which should only build the master branch of a repository, and another job that only builds the PRs for that repository. We know the first job will never need to build another branch so we can hardcode that there.
-
-With the Git plugin, many "Additional Behaviours" are available. If you have submodules in your repository, you will need to enable one of these to ensure that the repository is cloned recursively. If you want to ensure a fresh start each time, there is a behaviour to wipe out the repository before each build.
+The "Branches to build" section allows you to specify which branches. Whenever you click "Build now", Jenkins usually just picks the master branch to build, and doesn't run a build job per-branch. If you are automatically triggering Jenkins builds based on GitHub (or other) webhooks, then you can ensure that branches that should not be built are filtered out here. Real life example: UseGalaxy.eu has one Jenkins job which should only build the master branch of a repository, and another job that only builds the PRs for that repository. We know the first job will only ever build the master branch so we can hardcode that there. With the Git plugin, many "Additional Behaviours" are available. If you have submodules in your repository, you will need to enable one of these to ensure that the repository is cloned recursively. If you want to ensure a fresh start each time because you write out temporary files to the current working directory, then there is a behaviour to wipe out the repository before each build.
 
 ### Build Triggers
 
-The GitHub Pull Request Builder plugin is not always easy to configure, here systems like Travis are generally significantly easier.
+The GitHub Pull Request Builder plugin is not always easy to configure, here systems like Travis are generally significantly easier. Consider if that is an option. It is not a bad thing to use multiple CI systems, it provides some degree of redundancy where if one system is experiencing an outage it may not affect all CI jobs.
 
 ### Credential Binding
 
-If you provide credentials to Jenkins builds, they will automatically be stripped from log outputs. So if your job will not "leak" any private information (e.g. in `--diff`) and you want to share the build logs with your users to prove that actions were taken or that things are working and automated, then the credential binding plugin ensures that any secrets will be stripped from output and replaced with `******`. They can be made available as environment variables, or in files that can be accessed. We often upload a configuration file with secrets (e.g. `.parsec.yml` ), and then can just call our software `parsec -c $PARSEC_CONFIG_FILE_LOCATION ...` passing in that file, wherever Jenkins has stored it securely.
+If you provide credentials to Jenkins builds, they will automatically be stripped from log outputs. So if your job will not "leak" any private information (e.g. in `--diff`) and you want to share the build logs with your users to prove that actions were taken or that things are working and automated, then the credential binding plugin ensures that any secrets will be stripped from output and replaced with `******`. They can be made available as environment variables, or in files that can be accessed.
+
+We often upload a configuration file with secrets (e.g. `.parsec.yml` ), and then can just call our software `parsec -c $PARSEC_CONFIG_FILE_LOCATION ...` passing in that file, wherever Jenkins has stored it securely.
 
 ### SSH Agent
 
+This allows you to automatically inject credentials into your build's SSH agent. If you want to `rsync` some build outputs to another server, or `ssh` to a server to run some one-off command, or to run `ansible`, then this is the feature you want. Beware that if you are pulling from and pushing to git repositories on GitHub with separate SSH credentials you may need to use a combination of the SSH Agent plugin, and injecting an SSH key through credential binding.
 
+## Real Life Examples
 
+Here are some examples of how Jenkins is used in the wild, maybe it can provide some reference for potential uses within your organisation or solutions to various problems. The examples are mostly pulled from UseGalaxy.eu's experiences, as the author is most familiar with those.
 
+### Compute Nodes
 
+We attach VMs as compute nodes for Jenkins to use as executors. We have an OpenStack cloud available so that is an easy option for us. We setup the VMs such that Jenkins just logs in as the default `centos` user and uses the home directory for building jobs. There is a Jenkins plugin to manage the VMs in the cloud automatically (scaling up/down as necessary, removing VMs with full disk) but our cloud was upgraded and we could not get this working. It is worth trying if that is an option! There are other cloud provider plugins available with similar features.
+
+We also use a custom image that includes a lot of our requirements pre-installed. We include e.g. LaTeX, Ruby/RVM, Java, Node, anything we think we might need for our jobs. This also lets us reduce the privileges of the jobs, nothing *needs* `root` access to install packages globally. Python, Ruby, and Node all have something similar to virtualenvs.
+
+### Job: Apollo Builder
+
+This is a relatively straightforward job to build a WAR file and upload it to our depot server.
+
+```console
+TODO
+```
+
+We could also use the "Archive Artifacts" plugin to have Jenkins retain all of the artefacts (build outputs that you care about) but we wanted to have an Ansible role pull those files and it was simpler to have them accessible at predictable URLs.
+
+### Job: Chado Schema Builder
+
+Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.
+
+```console
+TODO
+
+```
+
+### Job: Website
+TODO
+
+### Job: Install Tools
+
+TODO
+
+### Configuration: Themes
+
+Many people find the "blue/red ball" icons a bit hard to understand. Using the "Simple Theme Plugin" you can easily add custom CSS files or directly enter custom CSS. UseGalaxy.\* use the [jenkins-material-theme](http://afonsof.com/jenkins-material-theme/) as it provides a slightly cleaner view of Jenkins with better iconography.
+
+### Configuration: Folder Permissions
+
+We have the aforementioned problem that our playbooks run with `--diff` and while we want to capture this output and be able to review it, it is not necessary that the public can see it. So permissions are configured not only on the global Jenkins level, but also within a single folder of jobs. The folder permissions look like:
+
+TODO
