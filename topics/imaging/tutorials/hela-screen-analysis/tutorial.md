@@ -26,7 +26,6 @@ requirements:
 time_estimation: "1H"
 contributors:
   - thomaswollmann
-  - shiltemann
 
 ---
 

@@ -22,6 +22,7 @@ follow_up_training:
       - hela-screen-analysis
 contributors:
   - thomaswollmann
+  - shiltemann
 
 ---
 
