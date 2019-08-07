@@ -17,25 +17,23 @@ CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 # Any error messages
 errs = []
 
-def skip_disabled(data, fn)
-  # If there's an 'enable' key and it is one flavor of 'false', then, exit
-  # immediately without testing.
-  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
-    puts "#{fn} skipped (disabled)"
-    exit 0
-  end
+data = YAML.load_file(fn)
+
+if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
+  puts "#{fn} skipped (disabled)"
+  exit 0
 end
 
-def check_contributors(data)
+def check_contributors(input)
   errs = []
-  if data.key?('contributors') then
-    data['contributors'].each{ |x|
+  if input.key?('contributors') then
+    input['contributors'].each{ |x|
       if not CONTRIBUTORS.key?(x) then
         errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
       end
     }
-  elsif data.key?('maintainers') then
-    data['maintainers'].each{ |x|
+  elsif input.key?('maintainers') then
+    input['maintainers'].each{ |x|
       if not CONTRIBUTORS.key?(x) then
         errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
       end
@@ -120,9 +118,6 @@ end
 
 # Handle tutorials
 if fn.include?('tutorial.md') then
-  data = YAML.load_file(fn)
-  skip_disabled(data, fn)
-
   # Validate document
   errors = tutorial_validator.validate(data)
   if errors && !errors.empty?
@@ -163,8 +158,6 @@ if fn.include?('tutorial.md') then
 
 # Validate Metadata
 elsif fn.include?('metadata.yaml') then
-  data = YAML.load_file(fn)
-
   # Validate document
   errors = metadata_validator.validate(data)
   if errors && !errors.empty?
@@ -177,9 +170,6 @@ elsif fn.include?('metadata.yaml') then
   errs = errs.concat(check_contributors(data))
 
 elsif fn.include?('slides.html') then
-  data = YAML.load_file(fn)
-  skip_disabled(data, fn)
-
   # Validate document
   errors = slides_validator.validate(data)
   if errors && !errors.empty?
