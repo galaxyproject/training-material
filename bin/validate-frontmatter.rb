@@ -7,9 +7,8 @@ fn = ARGV[0]
 metadata_schema = YAML.load_file('bin/schema-topic.yaml')
 tutorial_schema = YAML.load_file('bin/schema-tutorial.yaml')
 slides_schema = YAML.load_file('bin/schema-slides.yaml')
-
-# Contributors
-CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
+requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
 # Any error messages
 errs = []
@@ -40,25 +39,19 @@ if not fn.include?('metadata.yaml') then
 end
 
 # Build validators now that we've filled out the subtopic enum
-metadata_validator = Kwalify::Validator.new(metadata_schema)
-tutorial_validator = Kwalify::Validator.new(tutorial_schema)
-slides_validator = Kwalify::Validator.new(slides_schema)
+$metadata_validator = Kwalify::Validator.new(metadata_schema)
+$tutorial_validator = Kwalify::Validator.new(tutorial_schema)
+$slides_validator = Kwalify::Validator.new(slides_schema)
+$requirement_external_validator = Kwalify::Validator.new(requirement_external_schema)
+$requirement_internal_validator = Kwalify::Validator.new(requirement_internal_schema)
 
-def check_contributors(input)
-  errs = []
-  if input.key?('contributors') then
-    key = 'contributors'
-  elsif input.key?('maintainers') then
-    key = 'maintainers'
+
+def validate_document(document, validator)
+  errors = validator.validate(document)
+  if errors && !errors.empty?
+    return errors
   end
-
-  input[key].each{ |x|
-    if not CONTRIBUTORS.key?(x) then
-      errs.push("Unknown #{key} #{x}, please add to CONTRIBUTORS.yaml")
-    end
-  }
-
-  return errs
+  return []
 end
 
 def validate_non_empty_key_value(map, key)
@@ -83,23 +76,10 @@ def validate_requirements(requirements)
   for requirement in requirements
     # For external links, they need a link that is non-empty
     if requirement['type'] == 'external'
-      errs.push(*validate_non_empty_key_value(requirement, 'title'))
-      errs.push(*validate_non_empty_key_value(requirement, 'link'))
-
-      requirement.keys.each{ |x|
-        if not ['title', 'link', 'type'].include?(x) then
-          errs.push("Unknown key #{x}")
-        end
-      }
+      errs.push(*validate_document(requirement, $requirement_external_validator))
     elsif requirement['type'] == 'internal'
-      errs.push(*validate_non_empty_key_value(requirement, 'topic_name'))
-      errs.push(*validate_non_empty_key_value(requirement, 'tutorials'))
+      errs.push(*validate_document(requirement, $requirement_internal_validator))
 
-      requirement.keys.each{ |x|
-        if not ['topic_name', 'tutorials', 'type'].include?(x) then
-          errs.push("Unknown key #{x}")
-        end
-      }
       # For the internal requirements, test that they point at something real.
       if requirement.key?('tutorials') then
         requirement['tutorials'].each{ |tutorial|
@@ -128,62 +108,26 @@ def validate_requirements(requirements)
   return errs
 end
 
-# Handle tutorials
+# Generic error handling:
+## Check requirements
+if data.key?('requirements') then
+  errs.push(*validate_requirements(data['requirements']))
+end
+
+## Check follow ups
+if data.key?('follow_up_training') then
+  errs.push(*validate_requirements(data['follow_up_training']))
+end
+
+# Custom error handling:
 if fn.include?('tutorial.md') then
-  # Validate document
-  errors = tutorial_validator.validate(data)
-  if errors && !errors.empty?
-    for e in errors
-      errs.push("[#{e.path}] #{e.message}")
-    end
-  end
-
-  # Check requirements
-  if data.key?('requirements') then
-    errs.push(*validate_requirements(data['requirements']))
-  end
-
-  # Check follow ups
-  if data.key?('follow_up_training') then
-    errs.push(*validate_requirements(data['follow_up_training']))
-  end
-
-  # Check contributors
-  errs = errs.concat(check_contributors(data))
-
-
-# Validate Metadata
+  errs.push(*validate_document(data, $tutorial_validator))
 elsif fn.include?('metadata.yaml') then
-  # Validate document
-  errors = metadata_validator.validate(data)
-  if errors && !errors.empty?
-    for e in errors
-      errs.push("[#{e.path}] #{e.message}")
-    end
-  end
-
-  # Check contributors
-  errs = errs.concat(check_contributors(data))
-
+  errs.push(*validate_document(data, $metadata_validator))
 elsif fn.include?('slides.html') then
-  # Validate document
-  errors = slides_validator.validate(data)
-  if errors && !errors.empty?
-    for e in errors
-      errs.push("[#{e.path}] #{e.message}")
-    end
-  end
-
-  # Check requirements
-  if data.key?('requirements') then
-    errs.push(*validate_requirements(data['requirements']))
-  end
-
-  # Check contributors
-  errs = errs.concat(check_contributors(data))
+  errs.push(*validate_document(data, $slides_validator))
 else
-  #puts "No validation available for filetype"
-  exit 0
+  errs.push("No validation available for this type of file")
 end
 
 
