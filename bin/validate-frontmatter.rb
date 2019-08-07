@@ -12,10 +12,6 @@ slides_required_keys = ['layout', 'logo', 'title', 'contributors']
 slides_optional_keys = ['level', 'time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
 slides_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'slides', 'workflows']
 
-metadata_required_keys = ['name', 'type', 'title', 'summary', 'maintainers']
-metadata_optional_keys = ['references', 'requirements', 'docker_image', 'edam_ontology', 'subtopics']
-metadata_deprecated_keys = ['material']
-
 # Contributors
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
 
@@ -35,6 +31,12 @@ def check_contributors(data)
   errs = []
   if data.key?('contributors') then
     data['contributors'].each{ |x|
+      if not CONTRIBUTORS.key?(x) then
+        errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
+      end
+    }
+  elsif data.key?('maintainers') then
+    data['maintainers'].each{ |x|
       if not CONTRIBUTORS.key?(x) then
         errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
       end
@@ -194,27 +196,7 @@ if fn.include?('tutorial.md') then
 # Validate Metadata
 elsif fn.include?('metadata.yaml') then
   data = YAML.load_file(fn)
-
-  # Check for required keys
-  metadata_required_keys.each{ |x|
-    if not data.key?(x) then
-      errs.push("Missing key: #{x}")
-    end
-  }
-
-  # Check deprecated keys
-  metadata_deprecated_keys.each{ |x|
-    if data.key?(x) then
-      errs.push("Deprecated key: #{x}")
-    end
-  }
-
-  # Check that all keys are valid
-  data.keys.each{ |x|
-    if not (metadata_required_keys.include?(x) or metadata_optional_keys.include?(x) or metadata_deprecated_keys.include?(x)) then
-      errs.push("Unknown key: #{x}")
-    end
-  }
+  errs = errs.concat(check_contributors(data))
 
 elsif fn.include?('slides.html') then
   data = YAML.load_file(fn)
