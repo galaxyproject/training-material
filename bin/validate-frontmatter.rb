@@ -15,6 +15,13 @@ errs = []
 
 data = YAML.load_file(fn)
 
+# Contributors
+CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+# Update the existing schemas to have enums with values. Then we get validation *for free*!
+tutorial_schema['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+slides_schema['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+metadata_schema['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+
 # If it's disabled, exit early
 if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
   puts "#{fn} skipped (disabled)"
