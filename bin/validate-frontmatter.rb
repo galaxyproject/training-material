@@ -1,16 +1,15 @@
 #!/usr/bin/env ruby
 require 'yaml'
 require 'pathname'
+require 'kwalify'
 fn = ARGV[0]
 
-# Required keys
-tutorial_required_keys = ['layout', 'title', 'time_estimation', 'contributors']
-tutorial_optional_keys = ['level', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'subtopic']
-tutorial_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'hands_on', 'slides', 'workflows']
-
-slides_required_keys = ['layout', 'logo', 'title', 'contributors']
-slides_optional_keys = ['level', 'time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
-slides_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'slides', 'workflows']
+metadata_schema = YAML.load_file('bin/schema-topic.yaml')
+metadata_validator = Kwalify::Validator.new(metadata_schema)
+tutorial_schema = YAML.load_file('bin/schema-tutorial.yaml')
+tutorial_validator = Kwalify::Validator.new(tutorial_schema)
+slides_schema = YAML.load_file('bin/schema-slides.yaml')
+slides_validator = Kwalify::Validator.new(slides_schema)
 
 # Contributors
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
@@ -124,42 +123,11 @@ if fn.include?('tutorial.md') then
   data = YAML.load_file(fn)
   skip_disabled(data, fn)
 
-  # Check for required keys
-  tutorial_required_keys.each{ |x|
-    if not data.key?(x) then
-      errs.push("Missing key: #{x}")
-    end
-  }
-
-  # Check deprecated keys
-  tutorial_deprecated_keys.each{ |x|
-    if data.key?(x) then
-      errs.push("Deprecated key: #{x}")
-    end
-  }
-
-  # Check that all keys are valid
-  data.keys.each{ |x|
-    if not (tutorial_required_keys.include?(x) or tutorial_optional_keys.include?(x) or tutorial_deprecated_keys.include?(x)) then
-      errs.push("Unknown key: #{x}")
-    end
-  }
-
-  # Check that the layout is correct
-  if data['layout'] != "tutorial_hands_on" then
-    errs.push("layout should be 'tutorial_hands_on', not '#{data['layout']}'")
-  end
-
-  # Check level
-  if data.key?('level') then
-    errs.push(*validate_level(data['level']))
-  end
-
-  # Check time formatting
-  if data.key?('time_estimation') then
-    match = /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/.match(data['time_estimation'])
-    if match.nil? then
-      errs.push("Time specification could not be parsed (Should be of form ##h##m##s, is '#{data['time_estimation']}')")
+  # Validate document
+  errors = tutorial_validator.validate(data)
+  if errors && !errors.empty?
+    for e in errors
+      errs.push("[#{e.path}] #{e.message}")
     end
   end
 
@@ -196,46 +164,33 @@ if fn.include?('tutorial.md') then
 # Validate Metadata
 elsif fn.include?('metadata.yaml') then
   data = YAML.load_file(fn)
+
+  # Validate document
+  errors = metadata_validator.validate(data)
+  if errors && !errors.empty?
+    for e in errors
+      errs.push("[#{e.path}] #{e.message}")
+    end
+  end
+
+  # Check contributors
   errs = errs.concat(check_contributors(data))
 
 elsif fn.include?('slides.html') then
   data = YAML.load_file(fn)
   skip_disabled(data, fn)
 
-  # Check for required keys
-  slides_required_keys.each{ |x|
-    if not data.key?(x) then
-      errs.push("Missing key: #{x}")
+  # Validate document
+  errors = slides_validator.validate(data)
+  if errors && !errors.empty?
+    for e in errors
+      errs.push("[#{e.path}] #{e.message}")
     end
-  }
-
-  # Check deprecated keys
-  slides_deprecated_keys.each{ |x|
-    if data.key?(x) then
-      errs.push("Deprecated key: #{x}")
-    end
-  }
-
-  # Check that all keys are valid
-  data.keys.each{ |x|
-    if not (slides_required_keys.include?(x) or slides_optional_keys.include?(x) or slides_deprecated_keys.include?(x)) then
-      errs.push("Unknown key: #{x}")
-    end
-  }
-
-  # Check level
-  if data.key?('level') then
-    errs.push(*validate_level(data['level']))
   end
 
   # Check requirements
   if data.key?('requirements') then
     errs.push(*validate_requirements(data['requirements']))
-  end
-
-  # Check that the layout is correct
-  if not ['base_slides', 'tutorial_slides'].include?(data['layout']) then
-    errs.push("layout should be 'base_slides', not '#{data['layout']}'")
   end
 
   # Check contributors
