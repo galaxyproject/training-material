@@ -54,12 +54,6 @@ def validate_non_empty_key_value(map, key)
     return []
 end
 
-def validate_level(level)
-  if level != "Introductory" && level != "Intermediate" && level != "Advanced" then
-    return "Wrong level value: only 'Introductory', 'Intermediate' or 'Advanced' are accepted"
-  end
-end
-
 def validate_requirements(requirements)
   errs = []
   # Exit early if no requirements
