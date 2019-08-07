@@ -6,7 +6,6 @@ questions:
 - What should we think about when we organize a workshop?
 - Have we done everything necessary for organising a great workshop?
 objectives:
--
 time_estimation: 3H
 key_points:
 - Running a workshop is not easy, there are many things to remember
