@@ -5,11 +5,8 @@ require 'kwalify'
 fn = ARGV[0]
 
 metadata_schema = YAML.load_file('bin/schema-topic.yaml')
-metadata_validator = Kwalify::Validator.new(metadata_schema)
 tutorial_schema = YAML.load_file('bin/schema-tutorial.yaml')
-tutorial_validator = Kwalify::Validator.new(tutorial_schema)
 slides_schema = YAML.load_file('bin/schema-slides.yaml')
-slides_validator = Kwalify::Validator.new(slides_schema)
 
 # Contributors
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
@@ -19,26 +16,47 @@ errs = []
 
 data = YAML.load_file(fn)
 
+# If it's disabled, exit early
 if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
   puts "#{fn} skipped (disabled)"
   exit 0
 end
 
+if not fn.include?('metadata.yaml') then
+  # Load topic metadata
+  topic = fn.split('/')[1]
+  topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+
+  # Load subtopic titles
+  if data.key?('subtopic') then
+    subtopic_ids = []
+    topic_metadata['subtopics'].each{ |x|
+      subtopic_ids.push(x['id'])
+    }
+
+    tutorial_schema['mapping']['subtopic']['enum'] = subtopic_ids
+    slides_schema['mapping']['subtopic']['enum'] = subtopic_ids
+  end
+end
+
+# Build validators now that we've filled out the subtopic enum
+metadata_validator = Kwalify::Validator.new(metadata_schema)
+tutorial_validator = Kwalify::Validator.new(tutorial_schema)
+slides_validator = Kwalify::Validator.new(slides_schema)
+
 def check_contributors(input)
   errs = []
   if input.key?('contributors') then
-    input['contributors'].each{ |x|
-      if not CONTRIBUTORS.key?(x) then
-        errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
-      end
-    }
+    key = 'contributors'
   elsif input.key?('maintainers') then
-    input['maintainers'].each{ |x|
-      if not CONTRIBUTORS.key?(x) then
-        errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
-      end
-    }
+    key = 'maintainers'
   end
+
+  input[key].each{ |x|
+    if not CONTRIBUTORS.key?(x) then
+      errs.push("Unknown #{key} #{x}, please add to CONTRIBUTORS.yaml")
+    end
+  }
 
   return errs
 end
@@ -132,22 +150,6 @@ if fn.include?('tutorial.md') then
 
   # Check contributors
   errs = errs.concat(check_contributors(data))
-
-  # Load topic metadata
-  topic = fn.split('/')[1]
-  topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
-
-  # Check subtopics
-  if data.key?('subtopic') then
-    subtopic_ids = []
-    topic_metadata['subtopics'].each{ |x|
-      subtopic_ids.push(x['id'])
-    }
-
-    if not subtopic_ids.include?(data['subtopic']) then
-      errs.push("Unknown subtopic: #{data['subtopic']} not in #{subtopic_ids}")
-    end
-  end
 
 
 # Validate Metadata
