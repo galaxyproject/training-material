@@ -1112,20 +1112,20 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <p>This is a relatively straightforward job to build a WAR file and upload it to our depot server.</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span> some <span class="nb">env </span>vars that are needed, it<span class="s1">'s kind of gross but it works :(
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>some <span class="nb">env </span>vars that are needed, it<span class="s1">'s kind of gross but it works :(
 </span><span class="go">export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/
 </span><span class="gp">export PERL5LIB=/home/centos/workspace/use<span class="notranslate">galaxy</span>-eu/apollo-builder/extlib/lib/perl5:$</span>PERL5LIB
-<span class="gp">#</span> setting a variable from some build data
+<span class="gp">#</span><span class="w"> </span>setting a variable from some build data
 <span class="gp">APOLLO_VERSION=$</span><span class="o">(</span><span class="nb">cat </span>application.properties | <span class="nb">grep </span>app.version | <span class="nb">sed</span> <span class="s1">'s/.*=//g'</span><span class="o">)</span>
 <span class="go">
-</span><span class="gp">#</span> Check <span class="k">if </span>this version needs to be built
+</span><span class="gp">#</span><span class="w"> </span>Check <span class="k">if </span>this version needs to be built
 <span class="gp">curl --silent https://use<span class="notranslate">galaxy</span>.eu/static/vgcn/ | \
 	grep -F "apollo-$</span><span class="o">{</span>APOLLO_VERSION<span class="o">}</span><span class="s2">" &amp;&amp; echo "</span>Already built!<span class="s2">" &amp;&amp; exit 0;
 </span><span class="go">
-</span><span class="gp">#</span> Build the thing
+</span><span class="gp">#</span><span class="w"> </span>Build the thing
 <span class="go">./apollo deploy
 
-</span><span class="gp">#</span> Deploy it to our server
+</span><span class="gp">#</span><span class="w"> </span>Deploy it to our server
 <span class="gp">scp -i $</span>PRIV_KEY <span class="se">\</span>
 	target/<span class="k">*</span>.war <span class="se">\</span>
     user@server:/static/apollo-<span class="k">${</span><span class="nv">APOLLO_VERSION</span><span class="k">}</span>.war

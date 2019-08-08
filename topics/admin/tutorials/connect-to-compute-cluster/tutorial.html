@@ -716,10 +716,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 <p>You can now check that all of the daemons are running with the command <code class="highlighter-rouge">systemctl status munge slurmd slurmctld</code></p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> <span class="nb">sudo </span>systemctl status munge slurmd slurmctld
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>systemctl status munge slurmd slurmctld
 <span class="go">● munge.service - MUNGE authentication service
-</span><span class="gp">   Loaded: loaded (/usr/lib/systemd/system/munge.service;</span> enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Sa 2019-01-26 22:38:13 CET;</span> 28min ago
+</span><span class="gp">   Loaded: loaded (/usr/lib/systemd/system/munge.service;</span><span class="w"> </span>enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+<span class="gp">   Active: active (running) since Sa 2019-01-26 22:38:13 CET;</span><span class="w"> </span>28min ago
 <span class="go">     Docs: man:munged(8)
  Main PID: 22930 (munged)
     Tasks: 4
@@ -731,8 +731,8 @@ Jan 26 22:38:13 helena-test.novalocal systemd[1]: Starting MUNGE authentication 
 Jan 26 22:38:13 helena-test.novalocal systemd[1]: Started MUNGE authentication service.
 
 ● slurmd.service - Slurm node daemon
-</span><span class="gp">   Loaded: loaded (/usr/lib/systemd/system/slurmd.service;</span> enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Sa 2019-01-26 23:04:21 CET;</span> 2min 25s ago
+</span><span class="gp">   Loaded: loaded (/usr/lib/systemd/system/slurmd.service;</span><span class="w"> </span>enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+<span class="gp">   Active: active (running) since Sa 2019-01-26 23:04:21 CET;</span><span class="w"> </span>2min 25s ago
 <span class="gp">  Process: 15051 ExecStart=/usr/sbin/slurmd $</span>SLURMD_OPTIONS <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
 <span class="go"> Main PID: 15054 (slurmd)
     Tasks: 1
@@ -745,8 +745,8 @@ Jan 26 23:04:21 helena-test.novalocal systemd[1]: PID file /var/run/slurmd.pid n
 Jan 26 23:04:21 helena-test.novalocal systemd[1]: Started Slurm node daemon.
 
 ● slurmctld.service - Slurm controller daemon
-</span><span class="gp">   Loaded: loaded (/usr/lib/systemd/system/slurmctld.service;</span> enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
-<span class="gp">   Active: active (running) since Sa 2019-01-26 23:04:20 CET;</span> 2min 26s ago
+</span><span class="gp">   Loaded: loaded (/usr/lib/systemd/system/slurmctld.service;</span><span class="w"> </span>enabled<span class="p">;</span> vendor preset: disabled<span class="o">)</span>
+<span class="gp">   Active: active (running) since Sa 2019-01-26 23:04:20 CET;</span><span class="w"> </span>2min 26s ago
 <span class="gp">  Process: 15040 ExecStart=/usr/sbin/slurmctld $</span>SLURMCTLD_OPTIONS <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
 <span class="go"> Main PID: 15042 (slurmctld)
     Tasks: 7
@@ -765,10 +765,10 @@ Jan 26 23:04:20 helena-test.novalocal systemd[1]: Started Slurm controller daemo
 
 <p>You should now be able to see that your Slurm cluster is operational with the <code class="highlighter-rouge">sinfo</code> command. This shows the state of nodes and partitions (synonymous with queues in other DRMs). The “node-oriented view” provided with the <code class="highlighter-rouge">-N</code> flag is particularly useful:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> sinfo
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sinfo
 <span class="go">PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 debug*       up   infinite      1   idle localhost
-</span><span class="gp">$</span> sinfo <span class="nt">-Nel</span>
+</span><span class="gp">$</span><span class="w"> </span>sinfo <span class="nt">-Nel</span>
 <span class="go">Fri Nov  4 16:51:24 2016
 NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT FEATURES REASON
 localhost      1    debug*        idle    1    2:1:1      1        0      1   (null) none
@@ -800,7 +800,7 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Your output may look slightly different:</p>
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> srun <span class="nb">uname</span> <span class="nt">-a</span>
+          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>srun <span class="nb">uname</span> <span class="nt">-a</span>
 <span class="gp">Linux helena-test.novalocal 3.10.0-862.14.4.el7.x86_64 #</span>1 SMP Wed Sep 26 15:12:11 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux
 </code></pre></div>          </div>
         </blockquote>
@@ -846,7 +846,7 @@ sleep </span>30
 
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> sbatch ~/sbatch-test.sh
+          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sbatch ~/sbatch-test.sh
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -1064,7 +1064,7 @@ pulsar.managers.util.drmaa DEBUG 2016-11-05 14:07:22,434 Initializing DRMAA sess
 
 <p>Slurm allows us to query the exit state of jobs for a time period of the value of Slurm’s <code class="highlighter-rouge">MinJobAge</code> option, which defaults to 300 (seconds, == 5 minutes):</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> scontrol show job 7
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>scontrol show job 7
 <span class="go">JobId=7 JobName=g2_upload1_anonymous_10_0_2_2
    UserId=<span class="notranslate">galaxy</span>(999) GroupId=<span class="notranslate">galaxy</span>(999)
    Priority=4294901754 Nice=0 Account=(null) QOS=(null)
@@ -1563,7 +1563,7 @@ pulsar.managers.util.drmaa DEBUG 2016-11-05 14:07:22,434 Initializing DRMAA sess
 
 <p>The cores parameter can be verified from the output of the tool. The walltime can be verified with <code class="highlighter-rouge">scontrol</code>:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span> scontrol show job 24
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>scontrol show job 24
 <span class="go">JobId=24 JobName=g24_multi_anonymous_10_0_2_2
    UserId=<span class="notranslate">galaxy</span>(999) GroupId=<span class="notranslate">galaxy</span>(999)
    Priority=4294901747 Nice=0 Account=(null) QOS=(null)
