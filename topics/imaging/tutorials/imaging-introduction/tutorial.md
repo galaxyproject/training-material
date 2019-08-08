@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Introduction to image analysis using Galaxy"
-zenodo_link: https://zenodo.org/record/3360236
+zenodo_link: https://zenodo.org/record/3362976
 level: Introductory
 questions:
   - "How do I use Galaxy with imaging data?"
@@ -29,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3360236).
+This tutorial shows how to use Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3362976).
 
 > ### Agenda
 >
@@ -42,7 +42,7 @@ This tutorial shows how to use Galaxy for image analysis. The data used in this 
 
 # Getting data
 
-The dataset required for this tutorial contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
+The dataset required for this tutorial contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information](https://zenodo.org/record/3362976)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -51,11 +51,11 @@ The dataset required for this tutorial contains a screen of [DAPI](https://en.wi
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following dataset from [Zenodo]( https://zenodo.org/record/3360236) or from the data library (ask your instructor).
+> 2. Import the following dataset from [Zenodo](https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >
 >    ```
->    https://zenodo.org/record/3360236/files/data.zip
+>    https://zenodo.org/record/3362976/files/B2.zip
 >    ```
 >
 >    {% include snippets/import_via_link.md %}

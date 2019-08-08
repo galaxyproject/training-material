@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Analyse HeLa fluorescence siRNA screen using Galaxy"
-zenodo_link: https://zenodo.org/record/3360236
+zenodo_link: https://zenodo.org/record/3362976
 level: Intermediate
 questions:
   - "How do I analyze a HeLa fluorescence siRNA screen?"
@@ -32,7 +32,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3360236).
+This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3362976).
 
 > ### Agenda
 >
@@ -53,10 +53,10 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following dataset from [Zenodo]( https://zenodo.org/record/3360236) or from the data library (ask your instructor).
+> 2. Import the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >    ```
->    https://zenodo.org/record/3360236/files/data.zip
+>    https://zenodo.org/record/3362976/files/B2.zip
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -75,8 +75,22 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
-> 6. Rename dataset to `original data`
-> 7. Upload segmentation filter rules as tabular from the following raw data
+> 6. Rename dataset to `control`
+> 7. Import the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
+>    - **Important:** Choose the type of data as `zip`.
+>    ```
+>    https://zenodo.org/record/3362976/files/B3.zip
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>
+> 8. "Use the unzip tool to extract a the zipped screen": `unzip`
+>    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - *"Extract single file"*: `All files`
+>
+> 9. Rename dataset to `PLK1`
+> 10. Upload segmentation filter rules as tabular from the following raw data
 >    ~~~~
 	area	eccentricity
 min	500	0.
@@ -85,7 +99,7 @@ max	100000	0.5
 >
 >    {% include snippets/create_new_file.md %}
 >
-> 8. Rename dataset to `rules`
+> 11. Rename dataset to `rules`
 >
 >    {% include snippets/rename_dataset.md %}
 {: .hands_on}
@@ -160,7 +174,10 @@ The resulting workflow should look something like this:
 
 > ### {% icon hands_on %} Hands-on: Run screen analysis workflow
 >
-> 1. Run the screen analysis workflow on the `original data` screen and the `rules` file:
+> 1. Run the screen analysis workflow on the `control` screen and the `rules` file:
+> 
+>    {% include snippets/run_workflow.md %}
+> 2. Run the screen analysis workflow on the `PLK1` screen and the `rules` file:
 > 
 >    {% include snippets/run_workflow.md %}
 {: .hands_on}
@@ -171,7 +188,7 @@ Finally, we want to plot the results for better interpretation.
 
 > ### {% icon hands_on %} Hands-on: Plot feature extraction results
 >
-> 1. Click on the `Visualize this data` icon of the **Collapse Collection** {% icon tool %} result.
+> 1. Click on the `Visualize this data` icon of the **Collapse Collection** {% icon tool %} results.
 > 2. Run `Box plot` with the following parameters:
 >    - *"Provide a title"*: `Screen features`
 >    - *"X-Axis label"*:
@@ -185,10 +202,19 @@ Finally, we want to plot the results for better interpretation.
 >    - *"3: Data series"*:
 >        - *"Provide a label"*: `Major axis length`
 >        - *"Observations"*: `Column 3`
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.
+>    > {: .solution }
+>    {: .question}
 {: .hands_on}
 
 
-The resulting plot should look something like this:
+One of the resulting plots should look something like this:
 
 ![feature extraction results box plot](../../images/hela-screen-analysis/result_boxplot.png){: width="100%"}
 
