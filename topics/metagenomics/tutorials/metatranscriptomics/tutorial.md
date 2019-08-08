@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Metatranscriptomics analysis using microbiome RNA-seq data
-zenodo_link: https://zenodo.org/record/3269404
+zenodo_link: https://zenodo.org/record/3362849
 questions:
 - "How to analyze metatranscriptomics data?"
 - "What information can be extracted of metatranscriptomics data?"
@@ -23,8 +23,10 @@ follow_up_training:
     tutorials:
       - comparative-metaomics-analysis
 key_points:
+- "Metatranscriptomics data have the same QC profile that RNA-seq data"
+- "A lot of metatranscriptomics sequences are identified as rRNA sequences"
 - "With shotgun data, we can extract information about the studied community structure and also the functions realised by the community"
-- "Metatranscriptomics data analyses are complex and time-consuming"
+- "Metatranscriptomics data analyses are complex and must be careful done, specially when they are done without combination to metagenomics data analyses"
 contributors:
 - pratikdjagtap
 - subinamehta
@@ -63,6 +65,10 @@ This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ fo
 2. extract and analyze the community functions (functional information)
 3. combine taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.
 
+> ### {% icon comment %} Workflow also applicable to metagenomics data
+> The approach with the tools described here can also apply to metagenomics data. What will change are the quality control profiles and proportion of rRNA sequences.
+{: .comment}
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -81,11 +87,11 @@ This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ fo
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `FORWARD_T4A_F` and `REVERSE_T4A_R` from [Zenodo](https://zenodo.org/record/3269404) or from the data library (ask your instructor)
+> 2. Import `T1A_forward` and `T1A_reverse` from [Zenodo](https://zenodo.org/record/3269404) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/FORWARD_T4A_F.fastqsanger
->    https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/REVERSE_T4A_R.fastqsanger
+>    {{ page.zenodo_link }}/files/T1A_forward.fastqsanger
+>    {{ page.zenodo_link }}/files/T1A_reverse.fastqsanger
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -93,7 +99,7 @@ This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ fo
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the file to `FORWARD_T4A_F` and `REVERSE_T4A_R`
+> 3. Rename the file to `T1A_forward` and `T1A_reverse`
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -114,11 +120,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: both `FORWARD_T4A_F` and `REVERSE_T4A_R` datasets selected with **Multiple datasets**
+>       - {% icon param-files %} *"Short read data from your current history"*: both `T1A_forward` and `T1A_reverse` datasets selected with **Multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
-> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `FORWARD_T4A_F` dataset
+> 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `T1A_forward` dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -157,26 +163,26 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Both files have 5,000 sequences
-> > 2. The "Per base sequence quality" is globally good for the forward reads: the quality stays around 40 over the reads, with just a slight decrease at the end (but still higher than 35)
+> > 1. Both files have 260,554 sequences
+> > 2. The "Per base sequence quality" is globally good: the quality stays around 40 over the reads, with just a slight decrease at the end (but still higher than 35)
 > >
 > >    ![Sequence Quality](../../images/metatranscriptomics/fastqc_per_base_sequence_quality_plot.png)
 > >
-> >    On the contrary, the reverse reads have a bad quality: the quality varies a lot with a value at the end around 20 and a high variability between the reads.
+> >    The reverse reads have a slight worst quality than the forward, a usual case in Illumina sequencing.
 > >
-> >    As a result, the distribution of the mean quality score is almost at the maximum for the forward. But for the reverse reads, we can see a wider distribution with a peak 38.
+> >    The distribution of the mean quality score is almost at the maximum for the forward and reverse reads:
 > >
 > >    ![Per Sequence Quality Scores](../../images/metatranscriptomics/fastqc_per_sequence_quality_scores_plot.png)
 > >
-> > 3. For both forward and reverse reads, the base content per base is biased. As for any RNA-seq data or more generally libraries produced by priming using random hexamers, the first 10-12 bases have an intrinsic bias.
+> > 3. For both forward and reverse reads, the percentage of A, T, C, G over sequence length is biased. As for any RNA-seq data or more generally libraries produced by priming using random hexamers, the first 10-12 bases have an intrinsic bias.
 > >
 > >    ![Per Base Sequence Content (forward)](../../images/metatranscriptomics/fastqc_per_base_sequence_content_forward.png)
 > >
 > >    ![Per Base Sequence Content (reverse)](../../images/metatranscriptomics/fastqc_per_base_sequence_content_reverse.png)
 > >
-> >    We could also see that after these first based the distinction between C-G and A-T groups is not clear. It explains the error raised by FastQC.
+> >    We could also see that after these first bases the distinction between C-G and A-T groups is not clear as expected. It explains the error raised by FastQC.
 > >
-> > 4. Forward reads are quite following a normal distribution of GC content. The distribution is on the other hand not so good for the reverse reads with several peaks, probably biaised by the bad quality reads.
+> > 4. With sequences from random position of a genome, we expect a normal distribution of the %GC of reads around the mean %GC of the genome. Here, we have RNA reads from various genomes. We do not expect a normal distribution of the %GC. Indeed, for the forward reads, the distribution shows with several peaks: maybe corresponding to mean %GC of different organisms.
 > >
 > >    ![Per Sequence GC Content](../../images/metatranscriptomics/fastqc_per_sequence_gc_content_plot.png)
 > >
@@ -184,7 +190,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > >
 > >    ![Per base N content](../../images/metatranscriptomics/fastqc_per_base_n_content_plot.png)
 > >
-> > 6. The forward reads seem to have more duplicated reads than the reverse reads with a rate up to 30%, with some reads found more the 10 times. 
+> > 6. The forward reads seem to have more duplicated reads than the reverse reads with a rate up to 60%, with some reads found more the 10 times. 
 > >
 > >    ![Sequence Counts](../../images/metatranscriptomics/fastqc_sequence_counts_plot.png)
 > >    ![Sequence Duplication Levels](../../images/metatranscriptomics/fastqc_sequence_duplication_levels_plot.png)
@@ -199,11 +205,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > >
 > >    ![ Adapter Content](../../images/metatranscriptomics/fastqc_adapter_content_plot.png)
 > >
-> > 10. After checking what is wrong, we should think about the errors reported by FastQC: they may come from the type of sequencing or what we sequenced (check the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for more details). Here, some like the duplication rate or the base content biais are due to the RNA sequencing. But the bad quality of the reverse reads or the left adapters could be improved to get better sequences for the downstream analyses.
+> > 10. After checking what is wrong, we should think about the errors reported by FastQC: they may come from the type of sequencing or what we sequenced (check the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) for more details): some like the duplication rate or the base content biais are due to the RNA sequencing. But we can still get slightly better sequences for the downstream analyses.
 > {: .solution} 
 {: .question}
 
-We should trim sequenced read to get rid of bases that were sequenced with high uncertainty (= low quality bases) at the read ends but also remove the reads of overall bad quality, using [**Cutadapt**](https://cutadapt.readthedocs.io/en/stable/) {% cite martin2011cutadapt %}
+We should trim sequenced read to get rid of bases that were sequenced with higher uncertainty (= low quality bases) at the read ends but also remove the reads of overall bad quality, using [**Cutadapt**](https://cutadapt.readthedocs.io/en/stable/) {% cite martin2011cutadapt %}
 
 **Cutadapt** helps also finding and removing adapter sequences, primers, poly-A tails or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. It also has additional features of modifying and filtering reads.
 
@@ -222,8 +228,8 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
->       - {% icon param-files %} *"FASTQ/A file #1"*: `FORWARD_T4A_F`
->       - {% icon param-files %} *"FASTQ/A file #2"*: `REVERSE_T4A_F`
+>       - {% icon param-files %} *"FASTQ/A file #1"*: `T1A_forward`
+>       - {% icon param-files %} *"FASTQ/A file #2"*: `T1A_reverse`
 >
 >      The order is important here!
 >
@@ -244,15 +250,15 @@ We should trim sequenced read to get rid of bases that were sequenced with high 
 >    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 3,480 bp has been trimmed for the forward read and 62,236 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.
->    > > 2. 195 (3.9%) reads were too short after trimming and then filtered.
+>    > > 1. 203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.
+>    > > 2. 1,500 (0.6%) reads were too short after trimming and then filtered.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
 
 ## Ribosomal RNA fragments filtering
 
-Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The vast majority of RNA will be ribosomal RNAs. These rRNAs are useful for the taxonomic assignation, i.e. which organisms are found, but they do not provide any functional informations, i.e. which genes are expressed. To make the downstream functional annotation faster, we will remove the rRNA sequences using **SortMeRNA** ({% cite kopylova2012sortmerna %}). It can handle large RNA databases and sort out all fragments matching to the database with high accuracy and specificity:
+Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The high proportion of the RNA sequences in any organisms will be ribosomal RNAs. These rRNAs are useful for the taxonomic assignation, i.e. which organisms are found, but they do not provide any functional informations, i.e. which genes are expressed. To make the downstream functional annotation faster, we will sort the rRNA sequences using **SortMeRNA** ({% cite kopylova2012sortmerna %}). It can handle large RNA databases and sort out all fragments matching to the database with high accuracy and specificity:
 
 ![SortMeRNA](../../images/metatranscriptomics/sortmerna.png)
 
@@ -286,7 +292,7 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 >    > > ### {% icon solution %} Solution
 >    > > 
 >    > > Aligned forward read file has 1,947 sequences and the unaligned 2,858 sequences. Then 1,947 reads have been identified as rRNA and 2,858 as non rRNA. The numbers are the same for the reverse reads. 
->    > > The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
+>    > > 
 >    > {: .solution }
 >    {: .question}
 >
@@ -296,12 +302,13 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 >    >
 >    > 1. How many reads have been processed?
 >    > 2. How many reads have been identified as rRNA given the log file? 
->    > 3. Which type of rRNA are identified?
+>    > 3. Which type of rRNA are identified? Which organisms are we then expected to identify?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 9,610 reads are processed: 4,805 for forward and 4,805 for reverse (given the **Cutadapt** report)
->    > > 2. 3,969 have passed the e-value threshold and are identified as rRNA. But we saw that 1,947 are in the aligned read files and 3,969 / 2 = 1984.5 > 1,947. Some of the aligned reads are  forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`, if one read in a pair does not align, both go to unaligned.
->    > > 3. The rRNA reads are mostly 23S and 16S bacterial rRNA (highest percentages per database)
+>    > > 1. 518,108 reads are processed: 259,054 for forward and 259,054 for reverse (given the **Cutadapt** report)
+>    > > 2. Out of the 518,108 reads, 136,622 (26%) have passed the e-value threshold and are identified as rRNA. The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
+>    > >    Some of the aligned reads are forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`, if one read in a pair does not align, both go to unaligned.
+>    > > 3. The 20.18% rRNA reads are 23S bacterial rRNA, 2.62% 16S bacterial rRNA and 2.22% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).
 >    > {: .solution }
 >    {: .question}
 >
@@ -309,9 +316,9 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 
 ## Interlace forward and reverse reads
 
-The tools for taxonomic and functional annotations need one file as input, even with paired-end data. We then need to join the two separate files (forward and reverse) to create a single interleace file, using **FASTQ interlacer**. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
+The tools for taxonomic and functional annotations need one file as input, even with paired-end data. We then need to join the two separate files (forward and reverse) to create a single interleaced file, using **FASTQ interlacer**, in which the forward reads have `/1` in their id and reverse reads `/2`. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
 
-We will run it on the outputs of **Cutadapt** but also on the unaligned reads from **SortMeRNA**.
+We will run **FASTQ interlacer** on the outputs of **Cutadapt** but also on the unaligned (non rRNA) reads from **SortMeRNA**.
 
 > ### {% icon hands_on %} Hands-on: 
 >
@@ -340,9 +347,9 @@ We will run it on the outputs of **Cutadapt** but also on the unaligned reads fr
 
 The first important information to get from microbiome data is the community structure: which organisms are present and in which abundance. It is called taxonomic profiling. Different approaches can be used:
 
-- Same approach as for amplicon data with identification and classification of OTUs
+- Identification and classification of OTUs, as used in amplicon data
 
-    Such an approach requires a first step of sequence sorting to extract only the 16S and 18S sequences, then using the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such an approach is not the most statistically supported
+    Such an approach requires a first step of sequence sorting to extract only the 16S and 18S sequences, then using the same tools as for amplicon data. However, rRNA sequences represent less than 50% of the sequences of the raw sequences so such an approach is not the most statistically supported
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
@@ -367,63 +374,78 @@ This step may take a couple of minutes as each sequence is compare to the full d
 
 3 files are generated:
 
-- A tabular file with the community structure
-
-    ```
-    #SampleID   Metaphlan2_Analysis
-    k__Bacteria 100.0
-    k__Bacteria|p__Proteobacteria   86.20712
-    k__Bacteria|p__Actinobacteria   13.79288
-    k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria    86.20712
-    k__Bacteria|p__Actinobacteria|c__Actinobacteria 13.79288
-    ```
-
-    Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: `k__`) and go to more precise taxa.
+- A SAM file with the results of the mapping of the sequences on the reference database
 
 - A BIOM file with the same information as the previous file but in BIOM format
 
     BIOM format is quite spread in microbiomics. This standard is for example the input for tools like mothur or QIIME.
 
-- A SAM file with the results of the mapping of the sequences on the reference database
+- A tabular file with the community structure
 
-> ### {% icon question %} Questions
+    ```
+    #SampleID	Metaphlan2_Analysis
+    k__Bacteria	99.73011
+    k__Archaea	0.26989
+    k__Bacteria|p__Firmicutes	99.68722
+    k__Archaea|p__Euryarchaeota	0.26989
+    k__Bacteria|p__Proteobacteria	0.04289
+    ```
+
+    Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: `k__`) and go to more precise taxa.
+
+    > ### {% icon question %} Questions
+    >
+    > 1. How many taxon have been identified?
+    > 2. What are the different taxonomic levels we have access to with MetaPhlAn2?
+    > 3. Which genus and species are found in our sample?
+    > 4. Do we have only bacteria identified in our sample?
+    >
+    > > ### {% icon solution %} Solution
+    > > 1. The file has 28 lines, including an header. So 27 taxons of different levels have been identified
+    > > 2. We have access: kingdom (`k__`), phylum (`p__`), class (`c__`), order (`o__`), family (`f__`), genus (`g__`), species (`s__`), strain (`t__`)
+    > > 3. In our sample, we identified:
+    > >     - 4 genus (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia) and 1 genus unclassified (Thermodesulfobiaceae unclassified)
+    > >     - 4 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) and 1 species unclassified (Escherichia unclassified)
+    > > 4. As expected from the rRNA sorting, we have some archaea, Methanobacteria, in our sample.
+    > {: .solution }
+    {: .question}
+
+> ### {% icon warning %} Analyzing an isolated metatranscriptome
+> 
+> We are analyzing our RNA reads as we would do for DNA reads. This approach has a main caveats. In **MetaPhlAn2**, the species are quantified based on recruitment of reads to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for RNA data: markers may be more or less transcribed within a species in this sample compared to the species average. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species' markers are expressed.
 >
-> 1. What is the most precise level we have access to with MetaPhlAn2?
-> 2. What is the order found in our sample?
->
-> > ### {% icon solution %} Solution
-> > 1. We have access to strain level
-> > 2. Clostridiales is found in our sample
-> {: .solution }
-{: .question}
+> We should then interpret carefully the species relative abundance estimates. These values reflect species' relative contributions to the pool of species-specific transcripts, and not the overall transcript pool. 
+{: .warning}
+
+## Extract abundance at the different taxonomic levels
 
 > ### {% icon hands_on %} Hands-on: Format MetaPhlAn2 output
 >
 > 1. **Format MetaPhlAn2 output** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file (MetaPhlAN2 output)"*: `Community profile` (output of **MetaPhlAn2**)
 >
+>     > ### {% icon question %} Questions
+>     > 
+>     > 1. What does **Format MetaPhlAn2 output** do?
+>     > 2. What is the need for formatting the data?
+>     >
+>     > > ### {% icon solution %} Solution
+>     > >
+>     > > 1. This tool format output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
+>     > >    9 files are generated: one file per taxonomic levels with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
+>     > >
+>     > > 2. This tool helps in simplifying the data for easy interpretation.
+>     > >
+>     > {: .solution}
+>     {: .question}
+>
 {: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. What does Format MetaPhlAn2 do?
-> 2. What is the need for formatting the data?
->
->    > ### {% icon solution %} Solution
->    >
->    > 1. This tool format output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
->    >    9 files are generated: one file per taxonomic levels with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
->    >
->    > 2. This tool helps in simplifying the data for easy interpretation.
->    >
->    {: .solution}
-{: .question}
 
 ## Community structure visualization
 
 Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and explore the community structure. 2 tools can be used there:
 
-- **KRONA** for an interactive HTML output
+- **Krona** for an interactive HTML output
 - **Graphlan** for a publication ready visualization
 
 > ### {% icon hands_on %} Hands-on: Interactive community structure visualization with KRONA
@@ -438,25 +460,34 @@ Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and 
 > 3. Inspect the Krona output
 {: .hands_on}
 
-**TODO: add output of KRONA**
+**Krona** {% cite ondov2011interactive %} renders results of a metagenomic profiling as a zoomable pie chart. It allows hierarchical data, here taxonomic levels, to be explored with zooming, multi-layered pie charts
 
 > ### {% icon question %} Questions
 >
-> 1. **TODO: add a question related to KRONA output**
+> 1. What are the abundances of 2 kingdoms identified here?
+>    
+>    ![Krona](../../images/metatranscriptomics/krona.png)
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. 
->    >
->    {: .solution}
+> 2. When zooming on bacteria, what are the 2 subclasses identified?
+>
+>    ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png)
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Archaea represents 0.3% so bacteria are 99.7% of the organisms identified in our sample
+> > 2. 0.02% of bacteria are Enterobacteriales and the rest Clostridia.
+> {: .solution}
 {: .question}
 
-**GraPhlAn** is a software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes the input a tree. We first need to convert the **MetaPhlAn2** output using **export2graphlan**. This conversion software tool produces both annotation and tree file for GraPhlAn. It can also convert LEfSe, and/or HUMAnN output to GraPhlAn input format. In particular, the annotation file tries to highlight specific sub-trees deriving automatically from input file what nodes are important.
+**GraPhlAn** is another software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes the input a tree. We first need to convert the **MetaPhlAn2** output using **export2graphlan**. This conversion software tool produces both annotation and tree file for GraPhlAn.
 
 > ### {% icon hands_on %} Hands-on: Publication-ready community structure visualization with KRONA
 >
 > 1. **Export to GraPhlAn** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `Community profile` (output of **MetaPhlAn2**)
+>    - *"List which levels should be annotated in the tree"*: `1,2``
+>    - *"List which levels should use the external legend for the annotation"*: `3,4,5`
+>    - *"List which levels should be highlight with a shaded background"*: `1`
 > 
 > 2. **Generation, personalization and annotation of tree** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tree"*: `Tree` (output of **Export to GraPhlAn**)
@@ -469,18 +500,8 @@ Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and 
 > 4. Inspect **GraPhlAn** output
 {: .hands_on}
 
-**TODO: add output of Graphlan**
+![GraPhlAn](../../images/metatranscriptomics/graphlan.png)
 
-> ### {% icon question %} Questions
->
-> 1. **TODO: add a question related to Graphlan output**
->
->    > ### {% icon solution %} Solution
->    >
->    > 1. 
->    >
->    {: .solution}
-{: .question}
 
 # Extract the functional information
 
@@ -505,12 +526,11 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 >    This step might take some time. Please have patience or we generated the output for you: so upload them
 >
-> 2. Import the 3 files whose the name is starting with "humann2"
+> 2. Import the 2 files:
 >
 >    ```
->    https://zenodo.org/record/815875/files/humann2_gene_families_abundance.tsv
->    https://zenodo.org/record/815875/files/humann2_pathways_abundance.tsv
->    https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
+>    {{ page.zenodo_link }}/files/T1A_humann2_gene_family_abundances.tsv
+>    {{ page.zenodo_link }}/files/T1A_humann2_pathway_abundances.tsv
 >    ```
 {: .hands_on}
 
@@ -518,28 +538,98 @@ HUMAnN2 generates 3 files
 
 - A file with the abundance of gene families
 
+    ```
+    # Gene Family	humann2_Abundance-RPKs
+    UNMAPPED	109359.0000000000
+    UniRef50_P62593: Beta-lactamase TEM	51842.4304363200
+    UniRef50_P62593: Beta-lactamase TEM|g__Clostridium.s__Clostridium_thermocellum	51842.4304363200
+    UniRef50_R5FV61	46966.2923149157
+    UniRef50_R5FV61|g__Clostridium.s__Clostridium_thermocellum	46966.2923149157
+    ```
+
+    This file details the abundance of each gene family in the community. Gene families are groups of evolutionarily-related protein-coding sequences that often perform similar functions. Here we used [UniRef50 gene families](https://www.uniprot.org/help/uniref): sequences in a gene families have at least 50% sequence identity.
+
+    Gene family abundance at the community level is stratified to show the contributions from known and unknown species. Individual species' abundance contributions sum to the community total abundance.
+
     Gene family abundance is reported in RPK (reads per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.
 
     The "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences.
+
+    > ### {% icon question %} Questions
+    >
+    > 1. What is the most abundant family? 
+    > 2. Which species is involved in production of this family?
+    > 3. How many gene families have been identified?
+    >
+    > > ### {% icon solution %} Solution
+    > > 1. The most abundant family is the first one in the family: UniRef50_P62593, involved in Beta-lactamase TEM, enzymes produced by bacteria that provide multi-resistance to β-lactam antibiotics.
+    > > 2. Beta-lactamase TEM seems mostly produced here by *Clostridium thermocellum*.
+    > > 3. There is 6,861 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.
+    > >
+    > >      To know the number of gene families, we need to remove all lines with the species information, i.e. lines with `|` in them using the tool **Select lines that match an expression** {% icon tool %} with:
+    > >      - *"Select lines from"*: `Gene families and their abundance` (output of **HUMAnN2**)
+    > >      - *"that"*: `NOT Matching`
+    > >      - *"the pattern"*: `\|`
+    > > 
+    > >      The output file has 3,418 lines, including the header and the UNMAPPED. So 3,416 UniRef50 gene families have been identified for our sample.
+    > {: .solution }
+    {: .question}
+
+- A file with the abundance of pathways
+
+    ```
+    # Pathway	humann2_Abundance
+    UNMAPPED	11417.7392070186
+    UNINTEGRATED	65807.9719501939
+    UNINTEGRATED|g__Clostridium.s__Clostridium_thermocellum	48238.6191078367
+    UNINTEGRATED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	6335.2676240042
+    UNINTEGRATED|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	80.7884346284
+    PWY-6305: putrescine biosynthesis IV	764.5363426532
+    PWY-6305: putrescine biosynthesis IV|g__Clostridium.s__Clostridium_thermocellum	751.0036125447
+    ```
+
+    This file shows each pathway and their abundance. We used here the [MetaCyc Metabolic Pathway Database](https://metacyc.org/), a curated database of experimentally elucidated metabolic pathways from all domains of life. 
+    
+    The abundance of a pathway in the sample is computed as a function of the abundances of the pathway's component reactions, with each reaction's abundance computed as the sum over abundances of genes catalyzing the reaction. The abundance is proportional to the number of complete "copies" of the pathway in the community. Indeed, for a simple linear pathway `RXN1 --> RXN2 --> RXN3 --> RXN4`, if RXN1 is 10 times as abundant as RXNs 2-4, the pathway abundance will be driven by the abundances of RXNs 2-4. 
+
+    The pathway abundance is computed once for all species (community level) and again for each species  using species gene abundances along the components of the pathway. Unlike gene abundance, a pathway's  abundance at community-level is not necessarily the sum of the abundance values of each species. For example, for the same pathway example as above, if the abundances of RXNs 1-4 are [5, 5, 10, 10] in Species A and [10, 10, 5, 5] in Species B, the pathway abundance would be 5 for Species A and Species B, but 15 at the community level as the reaction totals are [15, 15, 15, 15].
+
+    > ### {% icon question %} Questions
+    >
+    > 1. What is the most abundant pathway? 
+    > 2. Which species is involved in production of this pathway?
+    > 3. How many gene families have been identified?
+    > 4. What is the "UNINTEGRATED" abundance? 
+    >
+    > > ### {% icon solution %} Solution
+    > > 1. The most abundant pathway is PWY-6305. It produces the polyamine putrescine, a may be involved in interactions with proteins, DNA and RNA molecules.
+    > > 2. Like the gene family, this pathway is mostly achieved by *Clostridium thermocellum*.
+    > > 3. There is 146 lines in pathway file, including the ones with species information. To know the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with `|` in them using the tool **Select lines that match an expression** {% icon tool %}.
+    > >      The output file has 79 lines, including the header, UNMAPPED and UNINTEGRATED. So 76 UniRef50 pathways have been identified for our sample.
+    > >
+    > > 4. The "UNINTEGRATED" abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.
+    > {: .solution }
+    {: .question}
 
 - A file with the coverage of pathways
 
     Pathway coverage provides an alternative description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.
 
-- A file with the abundance of pathways
-
-> ### {% icon question %} Questions
+> ### {% icon warning %} Analyzing an isolated metatranscriptome
+> 
+> As we already mentioned above, we should be careful because we are analyzing our RNA reads as we would do for DNA reads. It means that we should be careful with the interpretation. We already mentioned the analysis of the species' relative abundance from **MetaPhlAn2**. But there is another aspect we should be careful about.
+> 
+> From a lone metatranscriptomic dataset, the transcript abundance can be confounded with underlying gene copy number. For example, transcript X may be more abundant in sample A relative to sample B because the the underlying X genes (same number in both samples) are more highly expressed in sample A relative to sample B or there are more copies of gene X in sample A relative to sample B (all of which are equally expressed). This is a general challenge in analyzing isolated metatranscriptomes.
 >
-> How many gene families and pathways have been identified?
+> The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running **MetaPhlAn2** on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to **HUMAnN2**. RNA reads are then mapped to any species' pangenomes detected in the metagenome. We run then **HUMAnN2** on both metagenomics and metatranscriptomic data. We could then use both outputs to normalize the RNA-level outputs (e.g. transcript family abundance) by corresponding DNA-level outputs to quantify microbial expression independent of gene copy number.
 >
-> > ### {% icon solution %} Solution
-> > **TODO** gene families but **TODO** pathways are identified
-> {: .solution }
-{: .question}
+> Here, we do not have a metagenomic dataset to combine with. We will be careful in our interpretation.
+>
+{: .warning}
 
 ## Normalize the abundances
 
-The RPK for the gene families are quite difficult to interpret in term of relative abundance. We decide then to normalize the values
+Gene family and pathway abundances are in RPKs (reads per kilobase), accounting for gene length but not sample sequencing depth. While there are some applications, e.g. strain profiling, where RPK units are superior to depth-normalized units, most of the time we need to renormalize our samples prior to downstream analysis.
 
 > ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
@@ -548,48 +638,85 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 >    - *"Normalization scheme"*: `Relative abundance`
 >    - *"Normalization level"*: `Normalization of all levels by community total`
 >
+> 3. Rename the generated file `Normalized gene families`
+> 4. Inspect the file
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What percentage of sequences has not be assigned to a gene family?
+>    > 2. What is the relative abundance of the most abundant gene family?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. 14% (`0.140345 x 100`) of the sequences have not be assigned to a gene family
+>    > > 2. The Beta-lactamase TEM gene family represents 6% of the reads.
+>    > {: .solution }
+>    {: .question}
+>
+> 5. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
+>    - *"Gene/pathway table"*: `Pathways and their abundance` (output of **HUMAnN2**)
+>    - *"Normalization scheme"*: `Relative abundance`
+>    - *"Normalization level"*: `Normalization of all levels by community total`
+>
+> 6. Rename the generated file `Normalized pathways`
+> 7. Inspect the file
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What is the UNMAPPED percentage?
+>    > 2. What percentage of reads assigned to a gene family has not be assigned to a pathway?
+>    > 3. What is the relative abundance of the most abundant gene family?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. UNMAPPED, here 14% of the reads, corresponds to the percentage of reads not assigned to gene families. It is the same value as in the normalized gene family file.
+>    > > 2. 81% (UNINTEGRATED) of reads assigned to a gene family have not be assigned to a pathway
+>    > > 3. The PWY-6305 pathway represents 0.9% of the reads.
+>    > {: .solution }
+>    {: .question}
+{: .hands_on}
+
+## Identify the gene families involved in the pathways
+
+We would like to know which gene families are involved in our most abundant pathways and which species.
+
+> ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
+>
+> 1. **Unpack pathway abundances to show genes included** {% icon tool %} with
+>    - *"Gene family or EC abundance file"*: `Normalized gene families`
+>    - *"Pathway abundance file"*: `Normalized pathways`
+>    - *"Remove the taxonomy from the output file?"*: `No`
+>
 > 2. Inspect the generated file
 {: .hands_on}
 
+This tool unpacks the pathways to show the genes for each. It adds another level of stratification to the pathway abundance table by including the gene family abundances:
+
+```
+# Pathway	humann2_Abundance
+ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	46.9853692906
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	23.6863932121	
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8V1: 6-phosphofructokinase 1 (Phosphofructokinase 1)(Phosphohexokinase 1) (ATP-PFK)	12.4204627049	
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8V2: 6-phosphofructokinase (Phosphofructokinase)(Phosphohexokinase)	24.9672323561	
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8I1: Triosephosphate isomerase
+```
+
 > ### {% icon question %} Questions
 >
-> 1. What percentage of sequences has not be assigned to a gene family?
-> 2. What is the most abundant gene family?
+> Which gene families are involved in the PWY-6305 pathway? And which species?
 >
 > > ### {% icon solution %} Solution
-> > 1. **TODO** of the sequences have not be assigned to a gene family
-> > 2. The most abundant gene family with **TODO** of sequences is a **TODO**
+> > If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd>):
+> >
+> > ````
+> > PWY-6305: putrescine biosynthesis IV	0.00939758	
+> > PWY-6305|g__Clostridium.s__Clostridium_thermocellum	0.00923124	
+> > PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_Q814Q2: Agmatinase	0.00189827	
+> > PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_D4KNP6: Arginine decarboxylase	8.60858e-05	
+> > PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_G8LSV4: Arginine/lysine/ornithine decarboxylase	0.000559771	
+> > ```
+> >
+> > The gene families UniRef50_Q814Q2, UniRef50_D4KNP6 and UniRef50_G8LSV4 are identified, for *Clostridium thermocellum*.
 > {: .solution }
 {: .question}
-
-It is possible to apply the same normalization to the pathways.
-
-## Create a genus level gene families file
-
-**TODO**
-
-The gene families and pathways output files from HUMAnN2 are species level by default.
-
-> ### {% icon hands_on %} Hands-on: 
->
-> 1. **Create a genus level gene families file** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Gene families input table"*: `Gene families and their abundance` (output of **HUMAnN2**)
->
-> 2. Inspect the generated file
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. **TODO: add a question related to Group abundances output**
->
->    > ### {% icon solution %} Solution
->    >
->    > 1. 
->    >
->    {: .solution}
-{: .question}
-
-It is possible to apply the same tool to the pathways.
 
 ## Group abundances into GO slim terms
 
@@ -607,276 +734,119 @@ The gene families can be a long list of ids and going through the gene families 
 
 > ### {% icon question %} Questions
 >
-> 1. **TODO: add a question related to Group abundances output**
+> What are the GO terms related to molecular functions that are the most abundant?
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. 
->    >
->    {: .solution}
+> > ### {% icon solution %} Solution
+> >
+> > The GO terms in the `Molecular function abundance` file are not sorted by abundance:
+> >
+> > ```
+> > GO id	GO name	Abundance
+> > GO:0000150	recombinase activity	123.345
+> > GO:0000150|g__Clostridium.s__Clostridium_thermocellum	recombinase activity|g__Clostridium.s__Clostridium_thermocellum	123.345
+> > GO:0000166	nucleotide binding	51078.796
+> > GO:0000166|g__Clostridium.s__Clostridium_thermocellum	nucleotide binding|g__Clostridium.s__Clostridium_thermocellum	43316.679
+> > GO:0000166|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	nucleotide binding|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	7609.601
+> > GO:0000166|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	nucleotide binding|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	152.517
+> > ```
+> >
+> > So to identify the most abundant GO terms, we first need to sort the file using the **Sort data in ascending or descending order** {% icon tool %} tool:
+> >
+> > ```
+> > GO:0016491	oxidoreductase activity	58558.589
+> > GO:0016787	hydrolase activity	58119.165
+> > GO:0016787|g__Clostridium.s__Clostridium_thermocellum	hydrolase activity|g__Clostridium.s__Clostridium_thermocellum	57390.482
+> > GO:0016491|g__Clostridium.s__Clostridium_thermocellum	oxidoreductase activity|g__Clostridium.s__Clostridium_thermocellum	54813.645
+> > GO:0000166	nucleotide binding	51078.796
+> > GO:0043167	ion binding	50385.168
+> > GO:0003735	structural constituent of ribosome	46442.807
+> > ```
+> >
+> > The most abundant GO terms related to molecular functions seem to be linked to oxidoreductase or hydrolase activity, but also to nucleotide, ion, nucleic acid, metal ion binding.
+> {: .solution}
 {: .question}
 
 # Combine taxonomic and functional information
 
-With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
+With **MetaPhlAn2** and **HUMAnN2**, we investigated "Which micro-organims are present in my sample?" and "What function are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
 
-In the HUMAnN2 output, gene families and pathways and their abundance may be related to a species. But the relative abundance of the species is not indicated. We would like now to extract for each gene families/pathways and the corresponding taxonomic stratification, the relative abundance of this gene family/pathway and the relative abundance of corresponding species and genus. 
+In the **HUMAnN2** output, gene families and pathways and their abundance may be related to a species. But the relative abundance of the species is not indicated. We would like now to extract for each gene families/pathways and the corresponding taxonomic stratification, the relative abundance of this gene family/pathway and the relative abundance of corresponding species and genus. 
 
 > ### {% icon hands_on %} Hands-on: Combine taxonomic and functional information
 >
 > 1. **Combine MetaPhlAn2 and HUMAnN2 outputs** {% icon tool %} with the following parameters:
 >   - {% icon param-file %} *"Input file corresponding to MetaPhlAN2 output"*: `Community profile` (output of **MetaPhlAn2**)
->   - {% icon param-file %} *"Input file corresponding HUMAnN2 output"*: `Gene families and their abundance` (output of **HUMAnN2**)
+>   - {% icon param-file %} *"Input file corresponding HUMAnN2 output"*: `Normalized gene families`
 >   - *"Type of characteristics in HUMAnN2 file"*: `Gene families`
 >
 > 2. Inspect the generated file
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. **TODO: add a question related to Combine MetaPhlAn2 and HUMAnN2 outputs**
->
->    > ### {% icon solution %} Solution
->    >
->    > 1. 
->    >
->    {: .solution}
-{: .question}
+The generated file is a table with 7 columns:
+- genus and its abundance
+- species and its abudance
+- gene family id, name and abundance
 
-It is possible to apply the same tool to the pathways.
-
-# Comparative analysis
-
-This dataset analyzed there were 1 time and 1 replicate from a time-serie analysis with 7 time points and 3 replicates of a microbial community inside a bioreactor ({% cite kunath2018proteins %}). We would like now to compare the community structure and functional information for the different time points.
-
-## Community structure
-
-To save us time, we already ran MetaPhlAn2. We will now import the outputs of MetaPhlAn2 inside a collection, using the rule based uploader ([advanced tutorial]({{ site.baseurl }}{ % link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})) 
-
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Create a new history for this tutorial and give it a proper name
->
-> 2. Click on the upload icon
-> 3. Click on `Rule-based` on the top
->    - *"Upload data as:"*: `Collection(s)`
-> 2. Paste the following tabular data right into the textbox
->
->    ```
->    dataset	sample	community_profile
->    SEM1b_T2A	SRX3777356	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T2A_community.tabular
->    SEM1b_T2B	SRX3777345	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T2B_community.tabular
->    SEM1b_T2C	SRX3777347	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T2C_community.tabular
->    SEM1b_T3A	SRX3777349	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T3A_community.tabular
->    SEM1b_T3B	SRX3777351	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T3B_community.tabular
->    SEM1b_T3C	SRX3777353	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T3C_community.tabular
->    SEM1b_T4A	SRX3777369	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T4A_community.tabular
->    SEM1b_T4B	SRX3777371	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T4B_community.tabular
->    SEM1b_T5A	SRX3777373	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5A_community.tabular
->    SEM1b_T5A	SRX3777375	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5A_community.tabular
->    SEM1b_T5B	SRX3777367	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5B_community.tabular
->    SEM1b_T5C	SRX3777343	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5C_community.tabular
->    SEM1b_T6A	SRX3777341	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T6A_community.tabular
->    SEM1b_T6B	SRX3777339	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T6B_community.tabular
->    SEM1b_T6C	SRX3777337	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T6C_community.tabular
->    SEM1b_T7A	SRX3777335	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T7A_community.tabular
->    SEM1b_T7B	SRX3777385	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T7B_community.tabular
->    SEM1b_T7C	SRX3777383	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T7C_community.tabular
->    SEM1b_T8A	SRX3777381	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T8A_community.tabular
->    SEM1b_T8B	SRX3777379	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T8B_community.tabular
->    SEM1b_T8C	SRX3777377	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T8C_community.tabular
->    ```
->
-> 5. Click on the `Build` button.
->
-> 6. Expand the **Filter** menu and select `First or Last N Rows`
->    - *"Filter which rows?"*: `first`
->    - *"Filter how many rows?"*: `1`
->    - Click `Apply`
->
-> 7. Expand the **Rules** menu and select `Add / Modify Column Definitions` 
->     - Expand `Add Definition` button and select `List Identifier(s)`
->       - *"List Identifier(s)"*: `A`
->     - Expand `Add Definition` button and select `URL`
->       - *"URL"*: `C`
->
-> 8. Enter a name for the collection, e.g. `Community profile`
-> 9. Click on `Upload`
->
-{: .hands_on}
-
-We have now a collection with 21 MetaPhlAn2 outputs: the 7 time points (T2 to T8) and the 3 replicates (A, B, and C).
-
-### Visualization with Krona
-
-As we did with one sample, we can visualize all community structures with KRONA.
-
-> ### {% icon hands_on %} Hands-on: Interactive community structure visualization with KRONA
->
-> 1. **Format MetaPhlAn2 output for Krona** {% icon tool %} with
->    - {% icon param-collection %} *"Input file (MetaPhlAN2 output)"*: `Community profile`
->
-> 2. **Krona pie chart** {% icon tool %} with
->    - *"What is the type of your input data"*: `Tabular`
->       - {% icon param-file %} *"Input file"*: output of **Format MetaPhlAn2 output for Krona**
->
-> 3. Inspect the Krona output
-{: .hands_on}
-
-One HTML file has been generated in which each sample can be interactively inspected.
+```
+genus	genus_abundance	species	species_abundance	gene_families_id	gene_families_name	gene_families_abundance
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_P62593	Beta lactamase TEM	6.65317186667
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_R5FV61		6.0274016911
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_P80579	Thioredoxin	5.34305149909
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.56309128026
+```
 
 > ### {% icon question %} Questions
 >
-> 1. Do we find always the same taxons in the different time points? And the replicates?
-> 2. What are the differences between the datasets
+> 1. Is there gene families associated to each genus identified with **MetaPhlAn2**?
+> 2. Is there gene families associated to each species identified with **MetaPhlAn2**?
+> 3. How many gene families are associated to each genus?
+> 4. How many gene families are associated to each species?
 >
->    > ### {% icon solution %} Solution
->    >
->    > 1. The same taxons are found the different time points and replicates:
->    >     - Bacteria (*kingdom*)
->    >       - Firmicutes (*phylum*)
->    >         - Clostridia (*class*)
->    >           - Clostridiales (*order*)
->    >             - Clostridiaceae (*family*)
->    >               - Clostridium (*genus*)
->    >                 - Clostridium thermocellum (*species*)
->    >           - Thermoanaerobacterales (*order*)
->    >               - Thermodesulfobiaceae (*family*)
->    >                 - Coprothermobacter (*genus*)
->    >       - Proteobacteria (*phylum*)
->    >         - Gammaproteobacteria (*class*)
->    >           - Enterobacteriales (*order*)
->    >             - Enterobacteriaceae (*family*)
->    >               - Escherichia (*genus*)
->    >     - Archaea (*kingdom*)
->    >       - Euryarchaeota (*phylum*)
->    >         - Methanobacteria (*class*)
->    >           - Methanobacteriales (*order*)
->    >             - Methanobacteriaceae (*family*)
->    >               - Methanothermobacter (*genus*)
->    >                 - Methanothermobacter thermautotrophicus (*species*)
->    >
->    > 2. The differences between the datasets are the abundance of the taxons.
->    {: .solution}
+> > ### {% icon solution %} Solution
+> > 
+> > To answer the different questions, we need to group output of **Combine MetaPhlAn2 and HUMAnN2 outputs** by either 1st or 3rd column and count the number of occurrences of gene families. We do that using **Group data by a column** {% icon tool %} with
+> >  - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
+> >  - *"Group by column"*: once with `Column:1` and once with `Column:3`
+> >  - *"Operation"*:
+> >    - Click on {% icon param-repeat %} *"Insert Operation"*
+> >      - *"Type"*: `Count`
+> >      - *"On column"*: `Column:5`
+> >
+> > Answers:
+> >
+> > 1. With **MetaPhlAn2**, we identified 4 genus (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia). But in the output of **Combine MetaPhlAn2 and HUMAnN2 outputs**, we have only gene families for Clostridium, Coprothermobacter and Methanothermobacter. The abundance of Escherichia is probably too low to identify correctly some gene families.
+> >
+> > 2. The 3 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) identified by **MetaPhlAn2** are associated to gene families.
+> >
+> > 3. 2323 gene families are associated to Clostridium, 918 to Coprothermobacter and 202 to Methanothermobacter. Given a genus abundance of 76.65512 for Clostridium, 20.75226 for Coprothermobacter and 0.26989 for Methanothermobacter, the ratio between number of gene families and genus abundance is really high for Methanothermobacter (748.45) compare to Methanothermobacter (44.26) and Coprothermobacter (30.30). 
+> >
+> > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 2323 for Clostridium thermocellum, 918 for Coprothermobacter proteolyticus	and 202 Methanothermobacter thermautotrophicus. The abundances are also the same.
+> >
+> {: .solution}
 {: .question}
 
-Differences of abundances between the different samples are difficult to compare using KRONA, specially the time points per replicates.
-
-### Comparison of the taxon abundances between samples
-
-We would like now to aggregate the abundances of taxon for each sample in one big table with all samples
-
-> ### {% icon hands_on %} Hands-on: Community structure aggregation
->
-> 1. **Merge MetaPhlAn2 files** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"MetaPhlAn2 output file to join"*: `Community profile`
->
->    In the generated file, the header of the column are dataset number and not the sample name. We will rename them by first removing the first 2 lines and adding one with sample names.
->
-> 2. **Select last lines** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Text file"*: `Merged MetaPhlAn2 files`
->    - *"Operation"*: `Keep everything from this line on`
->    - *"Number of lines"*: `3`
->
-> 3. Create a new file with headers:
->    1. Click on upload icon
->    2. Select `Paste/Fetch data`
->    3. Paste the following information
->
->      ```
->      ID	SEM1b_T2A	SEM1b_T2B	SEM1b_T2C	SEM1b_T3A	SEM1b_T3B	SEM1b_T3C	SEM1b_T4A	SEM1b_T4B	SEM1b_T4C	SEM1b_T5A	SEM1b_T5B	SEM1b_T5C	SEM1b_T6A	SEM1b_T6B	SEM1b_T6C	SEM1b_T7A	SEM1b_T7B	SEM1b_T7C	SEM1b_T8A	SEM1b_T8B	SEM1b_T8C
->      ```
-> 
->     4. Set *"Type"* to `tabular`
->     5. Click on `Start` to upload in the history
->
-> 4. **Concatenate datasets** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Datasets to concatenate"*: `Pasted entry`
->    - In *"Dataset"*
->      - Click on *"Insert Dataset"*
->        - {% icon param-file %} *"Select"*: output of **Select last lines**
->
-{: .hands_on}
-
-We now have a table with for each sample the abundances of the different identified taxons, making the comparison easier.
-
-> ### {% icon question %} Questions
->
-> Are all the Phyla present in all samples as suggested before?
->
->    > ### {% icon solution %} Solution
->    >
->    > Proteobacteria are in half of the samples, but we did not see that with KRONA plot
->    >
->    {: .solution}
-{: .question}
-
-
-### Visualization of the differences of the taxon abundances between samples
-
-We would like to visualize that distribution now
-
-> ### {% icon hands_on %} Hands-on: Community structure comparison
->
-> 3. **Generate heatmap with hierarchical clustering** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file of microbial relative abundances"*: `Concatenate datasets`
->    - *"Taxonomic level to display"*: `Genera only`
->    - *"Line width for the dendrograms"*: `0.5`
->
-> 3. Inspect the output
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> ![MetaPhlAn2 heatmap](../../images/metatranscriptomics/metaphlan2_heatmap.png)
->
-> **TODO: add a question related to the generated heatmap**
->
->    > ### {% icon solution %} Solution
->    >
->    > 1. 
->    >
->    {: .solution}
-{: .question}
-
-We can also visualize microbial abundances on a tree of life (also referred to as a phylogeny or cladogram) that captures their taxonomic (or phylogenetic) relatedness, using **GraPhlAn**.
-
-To make sense, we will:
-- select the top 100 most abundance clades to highlight
-- set a minimum abundance threshold for clades to be annotated
-- extract a minimum of 10 biomarkers
-- select taxonomic levels 5 and 6 to be annotated within the tree
-- select taxonomic level 7 to be used in the external legend
-- set the minimum size of clades annotated as biomarkers to 1
-
-> ### {% icon hands_on %} Hands-on: Cladogram
->
-> 1. **Export to GraPhlAn** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Concatenate datasets`
->    - *"List which levels should be annotated in the tree"*: `5,6``
->    - *"List which levels should use the external legend for the annotation"*: `7`
->    - *"Minimum value of clades that are biomarkers"*: `1`
->    - *"Minimun abundance value for a clade to be annotated"*: `1.0`
->    - *"Number of clades to highlight"*: `100`
->    - *"Minimum number of biomarkers to extract"*: `10`
->    - *"Row number to use as metadata"*: `1`
-> 
-> 2. **Generation, personalization and annotation of tree** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input tree"*: `Tree` (output of **Export to GraPhlAn**)
->    - {% icon param-file %} *"Annotation file"*: `Annotation` (output of **Export to GraPhlAn**)
->
-> 3. **GraPhlAn** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input tree"*: `Tree in PhyloXML`
->    - *"Output format"*: `PNG`
->
-> 4. Inspect **GraPhlAn** output
-{: .hands_on}
-
-## Functional information
+We could now apply the same tool to the pathways and run similar analysis.
 
 # Conclusion
 {:.no_toc}
 
+In this tutorial, we analyzed one metatranscriptomics sample from raw sequences to community structure, functional profiling. To do that, we:
+
+1. preprocessed the raw data: quality control, trimming and filtering, sequence sorting and formatting
+2. extracted and analyzed the community structure (taxonomic information)
+
+    We identified bacteria to the level of strains, but also some archaea.
+
+3. extracted and analyzed the community functions (functional information)
+
+    We extracted gene families, pathways, but also the gene families involved in pathways and aggregated the gene families into GO terms
+
+4. combined taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy
+
+The workflow can be represented this way:
+
+![ASaiM diagram](../../images/asaim-wf.png)
+
 The dataset used here was extracted from a time-serie analysis of a microbial community inside a bioreactor ({% cite kunath2018proteins %}) in which there are 3 replicates over 7 time points. We analyzed here only one time point for one replicate. 
 
-During the preparation of this tutorial, we analyzed the 21 datasets following the same workflow, making the samples comparable. We can now compare the different time points and replicates by following the [comparative analyis tutorial]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}).
+But during the preparation of this tutorial, we analyzed the remaining 20 datasets following the same workflow, making the samples comparable. You can now compare the different time points and replicates by following the [comparative analysis tutorial]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}).
