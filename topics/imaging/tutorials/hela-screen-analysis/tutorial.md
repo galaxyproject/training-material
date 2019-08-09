@@ -53,7 +53,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
+> 2. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >
 >    ```
@@ -72,12 +72,14 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 5. "Use the unzip tool to extract a the zipped screen": `unzip`
+> 5. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
-> 6. Rename dataset to `control`
-> 7. Import the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
+> 6. Rename {% icon galaxy-pencil %} the resulting collection to `control`
+>    {% include snippets/rename_collection.md %}
+>
+> 7. Import {% icon galaxy-upload %} the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
 >    ```
 >    https://zenodo.org/record/3362976/files/B3.zip
@@ -86,20 +88,20 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 8. "Use the unzip tool to extract a the zipped screen": `unzip`
+> 8. **Unzip** {% icon tool %} to extract the zipped screen:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
-> 9. Rename {% icon galaxy-pencil %} dataset to `PLK1`
-> 9. Upload segmentation filter rules as tabular from the following raw data
+> 9. Rename {% icon galaxy-pencil %} the collection to `PLK1`
+> 9. Upload {% icon galaxy-upload %} the following segmentation filter rules as a new pasted file (format: `tabular`):
 >    ```
 >    area	eccentricity
 >    min	500	0.
 >    max	100000	0.5
 >    ```
->    {% include snippets/create_new_file.md %}
+>    {% include snippets/create_new_file.md format="tabular" %}
 >
-> 9. Rename dataset to `rules`
+> 9. Rename {% icon galaxy-pencil %} dataset to `rules`
 >
 >    {% include snippets/rename_dataset.md %}
 {: .hands_on}
@@ -136,7 +138,10 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >    - {% icon param-file %} *"Original image file"*: `testinput.tif` file
 >    - *"Select features to compute"*: `Select features`
 >    - *"Available features"*: check `Mean Intensity`, `Area`, `Major Axis Length`
-> 7. Now we can extract the workflow for batch processing and name it "feature_extraction". Name the inputs to `input image` and filter `rules`. Mark the results of step 5., 6. as outputs.
+> 7. Now we can extract the workflow for batch processing
+>    - Name it "feature_extraction".
+>    - Name the inputs to `input image` and filter `rules`.
+>    - Mark the results of step 5., 6. as outputs.
 >
 >    {% include snippets/extract_workflow.md %}
 {: .hands_on}
@@ -188,7 +193,7 @@ Finally, we want to plot the results for better interpretation.
 
 > ### {% icon hands_on %} Hands-on: Plot feature extraction results
 >
-> 1. Click on the `Visualize this data` icon of the **Collapse Collection** {% icon tool %} results.
+> 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the **Collapse Collection** {% icon tool %} results.
 > 2. Run `Box plot` with the following parameters:
 >    - *"Provide a title"*: `Screen features`
 >    - *"X-Axis label"*:
