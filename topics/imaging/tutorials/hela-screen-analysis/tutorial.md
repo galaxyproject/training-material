@@ -55,6 +55,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >
 > 2. Import the following dataset from [Zenodo]( https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
+>
 >    ```
 >    https://zenodo.org/record/3362976/files/B2.zip
 >    ```
@@ -89,17 +90,16 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
 >    - *"Extract single file"*: `All files`
 >
-> 9. Rename dataset to `PLK1`
-> 10. Upload segmentation filter rules as tabular from the following raw data
->    ~~~~
-	area	eccentricity
-min	500	0.
-max	100000	0.5
-~~~~
->
+> 9. Rename {% icon galaxy-pencil %} dataset to `PLK1`
+> 9. Upload segmentation filter rules as tabular from the following raw data
+>    ```
+>    area	eccentricity
+>    min	500	0.
+>    max	100000	0.5
+>    ```
 >    {% include snippets/create_new_file.md %}
 >
-> 11. Rename dataset to `rules`
+> 9. Rename dataset to `rules`
 >
 >    {% include snippets/rename_dataset.md %}
 {: .hands_on}
@@ -152,7 +152,7 @@ Now we want to apply our extracted workflow to `original data` and merge the res
 > ### {% icon hands_on %} Hands-on: Create screen analysis workflow
 >
 > 1. Create a new workflow in the workflow editor.
-> 
+>
 >    {% include snippets/create_new_workflow.md %}
 > 2. Add a **Input dataset collection** node and name it `input images`
 > 3. Add a **Input dataset** node and name it `rules`
@@ -175,10 +175,10 @@ The resulting workflow should look something like this:
 > ### {% icon hands_on %} Hands-on: Run screen analysis workflow
 >
 > 1. Run the screen analysis workflow on the `control` screen and the `rules` file:
-> 
+>
 >    {% include snippets/run_workflow.md %}
 > 2. Run the screen analysis workflow on the `PLK1` screen and the `rules` file:
-> 
+>
 >    {% include snippets/run_workflow.md %}
 {: .hands_on}
 
