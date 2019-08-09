@@ -223,7 +223,7 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    > >      - *"Output data type"*: `PNG`
 >    > >
 >    > >     The information contained in the original image has now become visible to the human eye:
->    > >     ![](../../images/imaging-introduction/viz_segmented.png)
+>    > >     ![normalized viz_segmented file](../../images/imaging-introduction/viz_segmented.png)
 >    > >
 >    > {: .solution }
 >    {: .question}
