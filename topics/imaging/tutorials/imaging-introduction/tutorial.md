@@ -212,15 +212,19 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    > >    Since the IDs are stored as intensity values, these are too low to be visible in this case. Nevertheless, there is more
 >    > >    information in this image than meets the eye.
 >    > > 3. To make labeled objects visible, the values have to be stretched to a larger range of visible intensity values. We
->    > >    can do that by equalizing the histogram again.
+>    > >    can do that by equalizing the histogram again:
 >    > >
->    > >    **Histogram equalization** {% icon tool %} with the following parameters to normalize the intensity values:
+>    > >    - **Histogram equalization** {% icon tool %} with the following parameters to normalize the intensity values:
 >    > >      - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
->    > >      - *"Histogram Equalization Algorithm"*: `stretching`
+>    > >      - *"Histogram Equalization Algorithm"*: `CLAHE`
 >    > >
+>    > >    - **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
+>    > >      - {% icon param-file %} *"Input Image"*: output of **Histogram Equalization** {% icon tool %}
+>    > >      - *"Output data type"*: `PNG`
+>    > >
+>    > >     The information contained in the original image has now become visible to the human eye:
 >    > >     ![](../../images/imaging-introduction/viz_segmented.png)
 >    > >
->    > >    The information contained in the original image has now become visible to the human eye.
 >    > {: .solution }
 >    {: .question}
 >
