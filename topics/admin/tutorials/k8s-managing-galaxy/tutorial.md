@@ -53,7 +53,7 @@ moving those containers to a different node, allowing maintenance tasks to be
 performed on the underlying node without disruption of service.
 
 In this section, we will look at how to perform common management tasks on
-a Galaxy deployment on Kubernetes, including
+a Galaxy deployment on Kubernetes, including:
 - How to upgrade a deployment
 - Change the configuration of a running Galaxy instance
 - Map arbitrary files into Galaxy's config folder
@@ -84,17 +84,21 @@ startup, and then change some common settings in `galaxy.yml`.
 We will change the Galaxy configuration to limit the initial list of tools
 that Galaxy will use by pointing to our custom `tool_conf.xml`. This will make
 your chart start up much faster for the remainder of this tutorial, as the
-default configuration loads the full list of tools used by `usegalaxy.org`.
+default configuration loads the full list of tools used by
+[https://usegalaxy.org/](https://usegalaxy.org/).
 
 > ### {% icon hands_on %} Hands-on: Creating a custom tool set
 >
 > 1. First, let's create a simpler list of tools by saving the following tool
->    config as `my_tool_conf.xml` in a folder named `my_configs`.
+>    config as a file called `custom_tool_conf.xml`.
 >
 >    {% raw %}
 >    ```xml
 >    <?xml version="1.0" ?>
 >    <toolbox tool_path="/cvmfs/main.galaxyproject.org/shed_tools">
+>        <section id="get_data" name="Get Data">
+>            <tool file="data_source/upload.xml" />
+>        </section>
 >        <section id="chip_seq" name="ChIP-seq" version="">
 >            <tool file="toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/1b9a9409831d/chipseeker/chipseeker.xml" guid="toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/chipseeker/1.18.0+galaxy1">
 >                <tool_shed>toolshed.g2.bx.psu.edu</tool_shed>
@@ -125,37 +129,16 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >                <version>0.72+galaxy1</version>
 >            </tool>
 >        </section>
->        <section id="convert_formats" name="Convert Formats" version="">
->            <tool file="toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/c24014d80001/intermine_galaxy_exchange/intermine_galaxy_exchange.xml" guid="toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1">
->                <tool_shed>toolshed.g2.bx.psu.edu</tool_shed>
->                <repository_name>intermine_galaxy_exchange</repository_name>
->                <repository_owner>iuc</repository_owner>
->                <installed_changeset_revision>c24014d80001</installed_changeset_revision>
->                <id>toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1</id>
->                <version>0.0.1</version>
->            </tool>
->        </section>
->        <section id="fasta_fastq" name="FASTA/FASTQ" version="">
->            <tool file="toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/d882a0a75759/find_subsequences/find_subsequences.xml" guid="toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/bg_find_subsequences/0.2">
->                <tool_shed>toolshed.g2.bx.psu.edu</tool_shed>
->                <repository_name>find_subsequences</repository_name>
->                <repository_owner>bgruening</repository_owner>
->                <installed_changeset_revision>d882a0a75759</installed_changeset_revision>
->                <id>toolshed.g2.bx.psu.edu/repos/bgruening/find_subsequences/bg_find_subsequences/0.2</id>
->                <version>0.2</version>
->            </tool>
->        </section>
 >    </toolbox>
 >    ```
 >    {% endraw %}
 >
-> 2. Next, let's create a new `galaxy.yml` file that uses this `my_tool_conf.xml`.
->    To do so, create a new file named `galaxy.yml` and place that in your `my_configs`
->    folder.
+> 2. Next, let's create a new `galaxy.yml` file that uses this `custom_tool_conf.xml`.
 >
->    Note that the content below is the same as the `configs` section of `values-cvmfs.yaml`
->    in your helm chart, except that the `tool_config_file` entry is pointing to your custom
->    tool list instead of the full list from CVMFS.
+>    Note that the content below is the same as the `configs` section of
+>    `values-cvmfs.yaml` file from the Galaxy Helm chart with one exception:
+>    `tool_config_file` entry is pointing to our custom tool list instead of the
+>    full list from CVMFS.
 >
 >    {% raw %}
 >    ```yaml
@@ -182,7 +165,7 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >      database_connection: 'postgresql://{{.Values.postgresql.galaxyDatabaseUser}}:{{.Values.postgresql.galaxyDatabasePassword}}@{{ template "galaxy-postgresql.fullname" . }}/galaxy'
 >      integrated_tool_panel_config: "/galaxy/server/config/mutable/integrated_tool_panel.xml"
 >      sanitize_whitelist_file: "/galaxy/server/config/mutable/sanitize_whitelist.txt"
->      tool_config_file: "{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/galaxy/server/config/my_tool_conf.xml"
+>      tool_config_file: "{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/galaxy/server/config/custom_tool_conf.xml"
 >      tool_data_table_config_path: "{{ .Values.cvmfs.main.mountPath }}/config/shed_tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/managed/location/tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/byhand/location/tool_data_table_conf.xml"
 >      tool_dependency_dir: "{{.Values.persistence.mountPath}}/deps"
 >      builds_file_path: "{{.Values.cvmfs.data.mountPath}}/managed/location/builds.txt"
@@ -193,24 +176,24 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    ```
 >    {% endraw %}
 >
-> 3. Now, let's upgrade the chart to use your custom `my_tool_conf.xml` and
->    `galaxy.yml` by running the helm upgrade command.
+> 3. Now, let's upgrade the chart to use `custom_tool_conf.xml` and
+>    `galaxy.yml` by running the `helm upgrade` command.
 >
 >    {% raw %}
 >    ```bash
->    helm upgrade --reuse-values --set-file "configs.my_tool_conf\.xml"=my_configs/my_tool_conf.xml --set-file "configs.galaxy\.yml"=my_configs/galaxy.yml galaxy cloudve/galaxy
+>    helm upgrade --reuse-values --set-file "configs.custom_tool_conf\.xml"=custom_tool_conf.xml --set-file "configs.galaxy\.yml"=configs/galaxy.yml galaxy galaxy/galaxy
 >    ```
 >    {% endraw %}
 >
->    Note the `--reuse-values` flag, which instructs helm to reuse any
+>    Note the `--reuse-values` flag, which instructs Helm to reuse any
 >    previously set values, and apply the new ones on top.  The `--set-file`
->    option will set the value of the `configs.my_tool_conf.xml`
+>    option will set the value of the `configs.custom_tool_conf.xml`
 >    key in your values file to the contents of the specified file, as a text
->    string. Each file under `configs` is automatically mapped into galaxy's config
->    directory within the docker container.
+>    string. Each file under `configs` key in `values.yaml` is automatically
+>    mapped into Galaxy's `config` directory within the running container.
 >
 > 4. Notice that while the chart is upgrading, the existing version continues
->    to function. The change over will occur when the new container is online
+>    to function. The changeover will occur when the new container is online
 >    and signals readiness to Kubernetes by responding to web requests on
 >    the relevant port. Log into the Kubernetes dashboard and watch the logs
 >    as the new pods come online.
@@ -249,24 +232,24 @@ default configuration loads the full list of tools used by `usegalaxy.org`.
 >    {% endraw %}
 >
 >    Now run `ls /galaxy/server/config/` and note that the `galaxy.yml` contains
->    the content that you've provided and that `my_tool_conf.xml` has also been
+>    the content that you've provided and that `custom_tool_conf.xml` has also been
 >    mapped into the config folder. In this same way, any of Galaxy's config
 >    files can be overridden by simply mapping in the relevant file into the
 >    config folder.
 {: .hands_on}
 
 ## Setting the admin user and changing the brand
-
 Next, we will set the admin user and change the brand in `galaxy.yml`. We will
 rollback our change to understand how Helm manages configuration.
 
 > ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
 >
-> 1. Modify the following entries in your `galaxy.yml`.
+> 1. Modify the following entries in your `galaxy.yml`. Make sure to add these
+>    keys under the `galaxy:` section of the file.
 >
 >    {% raw %}
 >    ```
->    brand: "Hello GCC2019"
+>    brand: "Hello World"
 >    admin_users: "admin@mydomain.com"
 >    ```
 >    {% endraw %}
@@ -275,11 +258,11 @@ rollback our change to understand how Helm manages configuration.
 >
 >    {% raw %}
 >    ```bash
->    helm upgrade --reuse-values --set-file "configs.galaxy\.yml"=my_configs/galaxy.yml galaxy cloudve/galaxy
+>    helm upgrade --reuse-values --set-file "configs.galaxy\.yml"=galaxy.yml galaxy galaxy/galaxy
 >    ```
 >    {% endraw %}
 >
-> 3. Inspect the currently set helm values by:
+> 3. Inspect the currently set Helm values by:
 >
 >    {% raw %}
 >    ```bash
@@ -308,19 +291,18 @@ rollback our change to understand how Helm manages configuration.
 >
 >    Use `helm get values` again to observe that the values have reverted to
 >    the previous revision. After a short while, once the new container is up
->    and running, kubernetes will automatically switch over to it and you can
+>    and running, Kubernetes will automatically switch over to it and you can
 >    see that the previous configuration has been restored.
 >
 {: .hands_on}
 
 # Scaling Galaxy
-
 In Galaxy deployment on Kubernetes, there are two containers by default, one
 web handler and one job handler. We will now look at how these can be scaled.
 
 > ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
 >
-> 1. View the `values-cvmfs.yaml` file in your helm chart and note down the
+> 1. View the `values-cvmfs.yaml` file in the Galaxy Helm chart and note down the
 >    number of web and job handlers.
 >
 >    {% raw %}
@@ -336,7 +318,7 @@ web handler and one job handler. We will now look at how these can be scaled.
 >
 >    {% raw %}
 >    ```bash
->    helm upgrade --reuse-values --set webHandlers.replicaCount=2 galaxy cloudve/galaxy
+>    helm upgrade --reuse-values --set webHandlers.replicaCount=2 galaxy galaxy/galaxy
 >    ```
 >    {% endraw %}
 >
@@ -368,7 +350,6 @@ web handler and one job handler. We will now look at how these can be scaled.
 {: .hands_on}
 
 # Testing Kubernetes resilience
-
 To observe how Kubernetes handles failures, let’s exec into a running container and
 manually kill a process to simulate a possible process failure. Kubernetes
 continuously monitors running containers, and attempts to bring the environment
@@ -409,15 +390,15 @@ provision a new replacement.
 >    ```
 >    {% endraw %}
 >
-> 3. Notice how Kubernetes immediately starts a new pod to replace the failed one,
->    bringing the environment back to the desired state. Take a look at the
->    liveness probe defined for the galaxy web container in your helm chart
->    source code (`templates/deployment_web.yaml`).
+> 3. If we run `kubectl get pods`, we can notice how Kubernetes immediately
+>    starts a new pod to replace the failed one, bringing the environment back to
+>    the desired state. Take a look at the liveness probe defined for the galaxy
+>    web container in the helm chart source code
+>    (`templates/deployment-web.yaml`).
 >
 {: .hands_on}
 
 # Deleting Galaxy
-
 Finally, let’s take a look at how we can uninstall Galaxy and remove all
 related containers.
 
@@ -436,6 +417,7 @@ related containers.
 > 2. Use `kubectl get pods` to verify that the pods have been deleted.
 >
 {: .hands_on}
+
 # Next Steps
 This tutorial provided an overview of some common Galaxy administration tasks.
 Advanced customizations would include running custom shell scripts on Galaxy

@@ -14,8 +14,7 @@ key_points:
 contributors:
   - slugger70
   - erasche
-tags:
-  - ansible
+subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin

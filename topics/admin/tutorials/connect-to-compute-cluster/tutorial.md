@@ -27,7 +27,8 @@ contributors:
   - bgruening
   - erasche
 tags:
-  - ansible
+  - jobs
+subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin

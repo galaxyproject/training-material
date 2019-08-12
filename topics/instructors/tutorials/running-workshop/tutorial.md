@@ -3,9 +3,7 @@ layout: tutorial_hands_on
 
 title: Running a workshop as instructor
 questions:
--
 objectives:
--
 time_estimation: 3H
 key_points:
 - The take-home messages
