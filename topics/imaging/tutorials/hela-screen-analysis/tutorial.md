@@ -147,7 +147,10 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >    - *"Use original image to compute additional features."*: `Use original image`
 >    - {% icon param-file %} *"Original image file"*: `testinput.tif` file
 >    - *"Select features to compute"*: `Select features`
->    - *"Available features"*: check `Mean Intensity`, `Area`, `Major Axis Length`
+>    - *"Available features"*:
+>      - {% icon param-check %} `Mean Intensity`
+>      - {% icon param-check %} `Area`
+>      - {% icon param-check %} `Major Axis Length`
 > 7. Now we can extract the workflow for batch processing
 >    - Name it "feature_extraction".
 >    - Name the inputs to `input image` and filter `rules`.
