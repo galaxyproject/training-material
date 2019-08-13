@@ -18,9 +18,9 @@ objectives:
   - "How to extract features from an imaging screen in Galaxy."
   - "How to analyse extracted features from an imaging screen in Galaxy."
 key_points:
-- Galaxy workflows can be used to scale image analysis pipelines to a screen.
+- Galaxy workflows can be used to scale image analysis pipelines to whole screens.
 - Segmented objects can be filtered using the **Filter segmentation** tool.
-- Galaxy charts can be used to compare features extracted from screen showing cells with different treatment.
+- Galaxy charts can be used to compare features extracted from screens showing cells with different treatments.
 requirements:
   -
     type: "internal"
