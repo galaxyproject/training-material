@@ -133,7 +133,11 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >    - {% icon param-file %} *"Label file"*: output of **Split objects** {% icon tool %}
 >    - *"Use original image to compute additional features."*: `No original image`
 >    - *"Select features to compute"*: `Select features`
->    - *"Available features"*: check `Add label id of label image`, `Area`, `Eccentricity`, `Major Axis Length`
+>    - *"Available features"*:
+>        - {% icon param-check %} `Add label id of label image`
+>        - {% icon param-check %} `Area`
+>        - {% icon param-check %} `Eccentricity`
+>        - {% icon param-check %} `Major Axis Length`
 > 5. **Filter segmentation** {% icon tool %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
 >    - {% icon param-file %} *"Source file"*: output of **Split objects** {% icon tool %}
 >    - {% icon param-file %} *"Feature file"*: output of **2D Feature Extraction** {% icon tool %}
