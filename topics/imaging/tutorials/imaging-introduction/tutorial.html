@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to image analysis using Galaxy</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Image analysis using Galaxy tools" />
+        <meta property="og:title" content="Galaxy Training: Introduction to image analysis using Galaxy" />
+        <meta property="og:description" content="Image analysis using Galaxy tools" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Imaging
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fimaging%2Ftutorials%2Fimaging-introduction%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fimaging%2Ftutorials%2Fimaging-introduction%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fimaging%2Ftutorials%2Fimaging-introduction%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fimaging%2Ftutorials%2Fimaging-introduction%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fimaging%2Ftutorials%2Fimaging-introduction%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/imaging/tutorials/imaging-introduction/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to image analysis using Galaxy",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "imaging / imaging-introduction / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Introduction to image analysis using Galaxy' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Introduction to image analysis using Galaxy",
+    "description": "Introduction to image analysis using Galaxy",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "Introduction to image analysis using Galaxy\\nThe questions this  addresses are:\n - How do I use Galaxy with imaging data?\n - How do I convert images using Galaxy?\n - How do I display images in Galaxy?\n - How do I filter images in Galaxy?\n - How do I segment simple images in Galaxy?\n\n\\nThe objectives are:\n - How to handle images in Galaxy.\n - How to perform basic image processing in Galaxy.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/3362976",
+      "name": "Training data for Introduction to image analysis using Galaxy tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Thomas Wollmann"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Thomas Wollmann"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy tools",
+      "url": "https://galaxyproject.github.io//training-material/topics/imaging/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Introduction to image analysis using Galaxy</h1>
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#thomaswollmann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/thomaswollmann" alt="Thomas Wollmann">Thomas Wollmann</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+
+</div>
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How do I use Galaxy with imaging data?</p>
+</li>
+            
+            <li><p>How do I convert images using Galaxy?</p>
+</li>
+            
+            <li><p>How do I display images in Galaxy?</p>
+</li>
+            
+            <li><p>How do I filter images in Galaxy?</p>
+</li>
+            
+            <li><p>How do I segment simple images in Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>How to handle images in Galaxy.</p>
+</li>
+            
+            <li><p>How to perform basic image processing in Galaxy.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Introductory 
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul>
+                        <li>
+                            <div>
+                    
+
+                    
+                    <div>
+                        
+<a class="topic-icon" href="https://zenodo.org/record/3362976">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+
+                    </div>
+                    
+
+                    
+                    <div>
+                        
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/imaging/tutorials/imaging-introduction/workflows/" title="Workflows" alt="Introduction to image analysis using Galaxy workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                    </div>
+                    
+                    
+
+
+                    
+                    <div>
+                        
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden">instances</span> Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/imaging/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+
+                    </div>
+                    
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Image analysis is the extraction of meaningful information from images by means of digital image processing techniques. Imaging is an important component in a wide range of scientific fields of study, such as astronomy, medicine, physics, biology, geography, chemistry, robotics, and industrial manufacturing.</p>
+
+<p>This tutorial shows how to use <span class="notranslate">Galaxy</span> to perform basic image analysis tasks such as format conversion, image enhancement, segmentation, and feature extraction.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#getting-data" id="markdown-toc-getting-data">Getting data</a></li>
+  <li><a href="#image-metadata-extraction" id="markdown-toc-image-metadata-extraction">Image Metadata Extraction</a></li>
+  <li><a href="#image-conversion" id="markdown-toc-image-conversion">Image Conversion</a></li>
+  <li><a href="#image-filtering" id="markdown-toc-image-filtering">Image Filtering</a></li>
+  <li><a href="#segmentation" id="markdown-toc-segmentation">Segmentation</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="getting-data">Getting data</h1>
+
+<p>The dataset required for this tutorial is available from <a href="https://zenodo.org/record/3362976">Zenodo</a> and
+contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stained <a href="https://en.wikipedia.org/wiki/HeLa">HeLa</a> nuclei (<a href="https://zenodo.org/record/3362976">more information</a>). We will use a sample image from this dataset for training basic image processing skills in <span class="notranslate">Galaxy</span>.</p>
+
+<p>Our objective is to automatically count the number of cells contained in this image. In order to achieve this, we will enhance the quality of the image, automatically detect the nuclei and segment the nuclei and count them.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>If you are logged in, create a new history for this tutorial</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Import the following dataset from <a href="https://zenodo.org/record/3362976">Zenodo</a> or from the data library (ask your instructor).
+      <ul>
+        <li><strong>Important:</strong> Choose the type of data as <code class="highlighter-rouge">zip</code>.</li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3362976/files/B2.zip
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>Unzip file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input_file”</em>: <code class="highlighter-rouge">Zipped </code> input file</li>
+        <li><em>“Extract single file”</em>: <code class="highlighter-rouge">Single file</code></li>
+        <li><em>“Filepath”</em>: <code class="highlighter-rouge">B2--W00026--P00001--Z00000--T00000--dapi.tif</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">input.tif</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="image-metadata-extraction">Image Metadata Extraction</h1>
+
+<p>Now, we can extract metadata from an image.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-image-metadata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract Image Metadata</h3>
+
+  <ol>
+    <li><strong>Image Info</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract metadata from the image:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="highlighter-rouge">input.tif</code> file (output of the previous step)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the file name, to look at the file content and search for image acquisition information</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What is the datatype?</li>
+          <li>What are the pixel dimentions?</li>
+          <li>How many bits per pixel are used?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>TIFF</li>
+            <li>1344x1024</li>
+            <li>16</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="image-conversion">Image Conversion</h1>
+
+<p>Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF (<a href="https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html">supported formats</a>). However, TIFF can not be displayed in the browser. Therefore, we convert <code class="highlighter-rouge">input.tif</code> to a PNG for visualization.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-convert-image"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert Image</h3>
+
+  <ol>
+    <li><strong>Convert image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="highlighter-rouge">input.tif</code> file</li>
+        <li><em>“Output data type”</em>: <code class="highlighter-rouge">PNG</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">viz_input</code></li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the file name to look at the file content</li>
+  </ol>
+
+</blockquote>
+
+<p>Your image should look something like this:</p>
+
+<p><img src="../../images/imaging-introduction/viz_input.png" alt="raw input image" width="75%" /></p>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>You can observe that the image content is barely visible. Why?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The original image is 16-bit and the intensity values are spread over a larger range than the
+display can render. Therefore, for improved visibility the intensity histogram of the image can
+be normalized first.</p>
+  </blockquote>
+</blockquote>
+
+<p>Next we will normalize the histogram to improve the contrast. We do this using a <a href="https://en.wikipedia.org/wiki/Adaptive_histogram_equalization">Contrast Limited Adaptive Histogram Equalization (CLAHE)</a> approach.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-normalize-histogram-and-convert-image"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize Histogram and Convert Image</h3>
+
+  <ol>
+    <li><strong>Histogram equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to normalize the histogram of the image:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="highlighter-rouge">input.tif</code> file</li>
+        <li><em>“Histogram Equalization Algorithm”</em>: <code class="highlighter-rouge">CLAHE</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">input_normalized</code></li>
+    <li><strong>Convert image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="highlighter-rouge">input_normalized</code> file (output of <strong>Histogram equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output data type”</em>: <code class="highlighter-rouge">PNG</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">viz_normalized</code></li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the file name, to look at the file content</li>
+  </ol>
+</blockquote>
+
+<p>Your image should now look something like this:</p>
+
+<p><img src="../../images/imaging-introduction/viz_normalized.png" alt="viz_normalized output image" width="75%" /></p>
+
+<p>We can now clearly make out the presence of the stained nuclei. Next we will automatically detect these features and segment the image.</p>
+
+<h1 id="image-filtering">Image Filtering</h1>
+
+<p>Specific features of interest (e.g., edges, noise) can be enhanced or suppressed by using an image filter.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-image"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter image</h3>
+
+  <ol>
+    <li><strong>Filter Image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to smooth the image:
+      <ul>
+        <li><em>“Image type”</em>: <code class="highlighter-rouge">Gaussian Blur</code></li>
+        <li><em>“Radius/Sigma”</em>: <code class="highlighter-rouge">3</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="highlighter-rouge">input.tif</code> file</li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">input_smoothed</code></li>
+    <li><strong>Histogram equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to normalize the histogram of the image:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="highlighter-rouge">input_smoothed</code> file (output of <strong>Filter image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Histogram Equalization Algorithm”</em>: <code class="highlighter-rouge">CLAHE</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">input_smoothed_normalized</code></li>
+    <li><strong>Convert image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="highlighter-rouge">input_smoothed_normalized</code> file (output of <strong>Histogram equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output data type”</em>: <code class="highlighter-rouge">PNG</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">viz_smoothed_normalized</code></li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the file name, to look at the file content and compare the result with <code class="highlighter-rouge">viz_normalized</code>. You can observe that <code class="highlighter-rouge">viz_smoothed_normalized</code> has significant reduced noise.</li>
+  </ol>
+</blockquote>
+
+<p>Your image should now look something like this:</p>
+
+<p><img src="../../images/imaging-introduction/viz_smoothed_normalized.png" alt="viz_smoothed_normalized output image" width="75%" /></p>
+
+<h1 id="segmentation">Segmentation</h1>
+
+<p>Objects of interest like nuclei can be segmented by using a smoothed image and thresholding. Moreover, the results can be overlayed with the original image.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-segment-image"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Segment image</h3>
+
+  <ol>
+    <li><strong>Auto Threshold</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to segment the image:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="highlighter-rouge">input_smoothed</code> file (output of <strong>Filter image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Threshold Algorithm”</em>: <code class="highlighter-rouge">Otsu</code></li>
+        <li><em>“Dark Background”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">input_segmented</code></li>
+    <li><strong>Binary 2 Label</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to segment the image:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Binary Image File”</em>: <code class="highlighter-rouge">input_segmented</code> file (output of <strong>Auto Threshold</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the generated file to <code class="highlighter-rouge">input_segmented_labeled</code></li>
+    <li><strong>Convert image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: <code class="highlighter-rouge">input_segmented_labeled</code> file (output of <strong>Binary 2 Label</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output data type”</em>: <code class="highlighter-rouge">PNG</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the converted image to <code class="highlighter-rouge">viz segmented</code></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What does <strong>Binary 2 Label</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> do? (Hint: check the tool help section)</li>
+          <li>View the <code class="highlighter-rouge">viz_segmented</code> image from the last step, what do you see?
+            <ul>
+              <li>Can you explain this result?</li>
+            </ul>
+          </li>
+          <li>Exercise: Try to make the information in this image better visible (Hint: <strong>Histogram Equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>The tool assigns each connected component (e.g., segmented cell) in the image an object id and stores it as the intensity value.</li>
+            <li>The image looks completely black.
+The object IDs generated by <strong>Binary 2 Label</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> are relatively low.
+Since the IDs are stored as intensity values, these are too low to be visible in this case. Nevertheless, there is more
+information in this image than meets the eye.</li>
+            <li>
+              <p>To make labeled objects visible, the values have to be stretched to a larger range of visible intensity values. We
+can do that by equalizing the histogram again:</p>
+
+              <ul>
+                <li><strong>Histogram equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to normalize the intensity values:
+                  <ul>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="highlighter-rouge">input_segmented_labeled</code> file (output of <strong>Binary 2 Label</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><em>“Histogram Equalization Algorithm”</em>: <code class="highlighter-rouge">CLAHE</code></li>
+                  </ul>
+                </li>
+                <li><strong>Convert image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
+                  <ul>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Image”</em>: output of <strong>Histogram Equalization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                    <li><em>“Output data type”</em>: <code class="highlighter-rouge">PNG</code></li>
+                  </ul>
+                </li>
+              </ul>
+
+              <p>The information contained in the original image has now become visible to the human eye:
+ <img src="../../images/imaging-introduction/viz_segmented.png" alt="normalized viz_segmented file" /></p>
+            </li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>Overlay Segmentation Mask</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image Source File”</em>: <code class="highlighter-rouge">viz_normalized</code> file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mask Source File”</em>: <code class="highlighter-rouge">viz_segmented</code> file</li>
+        <li><em>“Image Is Greyscale”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Thickness”</em>: <code class="highlighter-rouge">3</code></li>
+        <li><em>“Stroke Color”</em>: <code class="highlighter-rouge">red</code></li>
+        <li><em>“Plot Labels”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><em>“Label Color”</em>: <code class="highlighter-rouge">yellow</code></li>
+      </ul>
+    </li>
+    <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the file name, to look at the file content and assess the segmentation performance</li>
+    <li><strong>Count Objects</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to count the segmented objects in the image:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file”</em>: <code class="highlighter-rouge">input_segmented_labeled</code> file (output of <strong>Binary 2 Label</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>How many objects were segmented?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>The <strong>Count Objects</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool counted 425 objects.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The resulting image should look something like this:</p>
+
+<p><img src="../../images/imaging-introduction/viz_segmentation_mask.png" alt="segmentation mask output image" width="75%" /></p>
+
+<p>We see the segmentation mask overlayed; each detected object (nucleus) is labeled with its ID value.</p>
+
+<p>We see that with the help of just a few simple steps, we were able to detect the locations of the stained nuclei, and count them.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this exercise you imported images into <span class="notranslate">Galaxy</span>, extracted meta information from an image, converted between file formats, learned how to visualize microscopy images, filtered the image, and segmented cells using <span class="notranslate">Galaxy</span>.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>The <strong>Image Info</strong> tool can provide valuable metadata information of an image.</p>
+</li>
+                            
+                            <li><p>TIFF files can not directly viewed in the browser, but have to be converted.</p>
+</li>
+                            
+                            <li><p>For visualization, images with a bit-depth more than 8-bit have to be histogram equalized.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                    
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/imaging">Imaging</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Analyse HeLa fluorescence siRNA screen:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+
+        <hr>
+        <br>
+
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to image analysis using Galaxy (Imaging)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Introduction to image analysis using Galaxy (Imaging)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Thomas Wollmann, Saskia Hiltemann)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/imaging/tutorials/imaging-introduction/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
