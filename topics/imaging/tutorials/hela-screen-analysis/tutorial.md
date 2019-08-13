@@ -23,6 +23,12 @@ requirements:
     topic_name: imaging
     tutorials:
       - imaging-introduction
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: statistics
+    tutorials:
+      - machinelearning
 time_estimation: "1H"
 contributors:
   - thomaswollmann
@@ -95,7 +101,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 > 9. Rename {% icon galaxy-pencil %} the collection to `PLK1`
 > 9. Upload {% icon galaxy-upload %} the following segmentation filter rules as a new pasted file (format: `tabular`):
 >    ```
->    area	eccentricity
+>    	area	eccentricity
 >    min	500	0.
 >    max	100000	0.5
 >    ```
