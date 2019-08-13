@@ -13,6 +13,10 @@ questions:
 objectives:
   - "How to handle images in Galaxy."
   - "How to perform basic image processing in Galaxy."
+key_points:
+- The **Image Info** tool can provide valuable metadata information of an image.
+- TIFF files can not directly viewed in the browser, but have to be converted.
+- For visualization, images with a bit-depth more than 8-bit have to be histogram equalized.
 time_estimation: "1H"
 follow_up_training:
   -
