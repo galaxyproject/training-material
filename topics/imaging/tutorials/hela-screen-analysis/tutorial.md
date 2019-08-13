@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Analyse HeLa fluorescence siRNA screen using Galaxy"
+title: "Analyse HeLa fluorescence siRNA screen"
 zenodo_link: https://zenodo.org/record/3362976
 level: Intermediate
 questions:
@@ -161,10 +161,13 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >      - {% icon param-check %} `Major Axis Length`
 > 7. Now we can extract the workflow for batch processing
 >    - Name it "feature_extraction".
->    - Name the inputs to `input image` and filter `rules`.
->    - Mark the results of step 5., 6. as outputs.
 >
 >    {% include snippets/extract_workflow.md %}
+>
+> 8. Edit the workflow you just created
+>    - Name the inputs `input image` and `filter rules`.
+>    - Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).
+>
 {: .hands_on}
 
 The resulting workflow should look something like this:
@@ -200,12 +203,11 @@ The resulting workflow should look something like this:
 
 > ### {% icon hands_on %} Hands-on: Run screen analysis workflow
 >
-> 1. Run the screen analysis workflow on the `control` screen and the `rules` file:
+> 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
 >
 >    {% include snippets/run_workflow.md %}
-> 2. Run the screen analysis workflow on the `PLK1` screen and the `rules` file:
+> 2. Run the screen analysis workflow {% icon workflow %} on the `PLK1` screen and the `rules` file
 >
->    {% include snippets/run_workflow.md %}
 {: .hands_on}
 
 # Plot feature extraction results
@@ -231,10 +233,10 @@ Finally, we want to plot the results for better interpretation.
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?
+>    > Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.
+>    > > The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
