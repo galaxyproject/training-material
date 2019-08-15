@@ -1,7 +1,7 @@
 # Settings
 JEKYLL=jekyll
 PORT?=4000
-HOST?=localhost
+HOST?=0.0.0.0
 FLAGS?=""
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
