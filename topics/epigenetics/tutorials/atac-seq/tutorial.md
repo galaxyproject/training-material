@@ -18,7 +18,6 @@ contributors:
 - lldelisle
 - mblue9
 - heylf
-- glorybsm
 
 ---
 
@@ -29,9 +28,7 @@ In many eukaryotic organisms, such as humans, the genome is tightly packed and o
 
 ![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
 
-In order to find chromatin accesible (open) region, the genome is treated with an enzmye called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is DNA sequence that can change its position within a genome. Read the two links to get a deeper insight. Intutively these are sequences that jump in t he genome. With the help of Tn5 we introduce adapters to genome. Concurrently, the DNA is sheared by the transposase activity. As a result, we obtain reads from an open chromatin regions. ATAC-Seq uses paired end reads. That means, two reads with two different adapters span a certain distance. However, we also have reads from closed chromatin regions, that is to say, read pairs that span at least one nucleosome or more. As you can imagine these read pairs span a bigger distance that the read pairs from open chromatin regions. Thus, we can filter based on this distance later on.
-
-After the Tn5 treatment, the read library is prepared for sequencing, including PCR amplification and purification steps.
+In order to find chromatin accesible (open) region, the genome is treated with an enzmye called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is DNA sequence that can change its position within a genome. Read the two links to get a deeper insight. Intutively these are sequences that jump in t he genome. With the help of Tn5 we introduce adapters to genome. Concurrently, the DNA is sheared by the transposase activity. As a result, we obtain reads from an open chromatin regions. ATAC-Seq uses paired end reads. That means, two reads with two different adapters span a certain distance. However, we also have reads from closed chromatin regions, that is to say, read pairs that span at least one nucleosome or more. As you can imagine these read pairs span a bigger distance that the read pairs from open chromatin regions. Thus, we can filter based on this distance later on. After the Tn5 treatment, the read library is prepared for sequencing, including PCR amplification and purification steps.
 
 ## Data
 In this training material we will use data from human. The original dataset had 2 x 200 million reads. This would be too long to be processed in a training session. So, we downsampled the original dataset to 200,000 reads but added about 200,000 reads pairs that will map to chr22 to have a good profile on this chromosome similar to a 2 x 20 million reads original fastq. Furthermore, we want to compare the predicted open chromatin regions to known binding sites of a transcriptional repressor called [CTCF](https://en.wikipedia.org/wiki/CTCF). This will help us to find potential sites that are in accordance to potential silencer regions. For that reason, we will download predicted sites of CTCF from ENCODE (ENCSR361KVZ, dataset ENCFF049IPS).
@@ -76,13 +73,15 @@ We first need to download the dataset that we downsampled as well as other annot
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> > ### {% icon details %} FASTQ format
-> > If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-{: .details}
-> > ### {% icon details %} BED format
-> > If you are not familiar with bed format, see the [BED Format](https://genome.ucsc.edu/FAQ/FAQformat.html)
-{: .details}
 {: .hands_on}
+
+> ### {% icon comment %} FASTQ format
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+{: .comment}
+>
+> ### {% icon comment %} BED format
+> If you are not familiar with bed format, see the [BED Format](https://genome.ucsc.edu/FAQ/FAQformat.html)
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Obtain Annotation of hg38 (bed file of genes)
 >
@@ -137,29 +136,31 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1) Per base sequence content
->    > > > ### {% icon details %} Tn5 sequence bias
->    > > > It is well known that the tn5 have a strong sequence bias at the insertion site. You can have more information about it reading [Green et al. 2012]({% link https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3 %})
-{: .details}
+>    > > > ### {% icon comment %} Tn5 sequence bias
+>    > > > It is well known that the tn5 have a strong sequence bias at the insertion site. You can have more information about it reading [Green et al. 2012](https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3)
+>    > > {: .comment}
 >    > >
 >    > > 2) Sequence Duplication Levels
->    > > > ### {% icon details %} PCR Duplicates
+>    > > > ### {% icon comment %} PCR Duplicates
 >    > > > The read library quite often has PCR duplicates that are introduced
 >    > > > simply by the PCR itself. We will remove these duplicates later on.
-{: .details}
+>    > > {: .comment}
 >    > >
 >    > > 3) Overrepresented sequences
->    > > > ### {% icon details %} Adapter Sequences
+>    > > > ### {% icon comment %} Adapter Sequences
 >    > > > Adapter sequences that are also observable in the **Adapter Content**
 >    > > > are registered by FastQC.
-{: .details}
+>    > > {: .comment}
 >    > >
 >    > {: .solution}
 >    >
 >    {: .question}
+{: .hands_on}
 
-This is what you should expect from the adapter section:
-
-![FastQC screenshot on the adapter content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the adapter content section")
+> ### {% icon comment %} FastQC Results
+> This is what you should expect from the adapter section:
+> ![FastQC screenshot on the adapter content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the adapter content section")
+{: .comment}
 
 ## Trimming Reads
 
@@ -198,9 +199,10 @@ the end.
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
 
-This is what you should see:
-
-![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
+> ### {% icon comment %} Cutadapt Results
+> This is what you should get from Cutadapt in the log:
+> ![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -216,10 +218,18 @@ This is what you should see:
 >
 {: .question}
 
- If we run `FastQC` again we should see under **Adapter Content** that the Nextera adapters are no longer present. Indeed this is what we have obtained when we ran it:
+> ### {% icon hands_on %} Hands-on: Check Adapter Removal with FastQC
+>
+> 1. **FastQC** {% icon tool %} with the default parameters:
+>       - *"Short read data from your current history"*: select the output of **Cutadapt** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
+>
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+{: .hands_on}
 
- ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
-
+> ### {% icon comment %} FastQC Results
+> If we run `FastQC` again we should see under **Adapter Content** that the Nextera adapters are no longer present. Indeed this is what we have obtained when we ran it:
+> ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
+{: .comment}
 
 # Mapping
 
@@ -247,9 +257,10 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats.
 {: .hands_on}
 
-This is what you should see:
-
-![Mapping statistics of bowtie2](../../images/atac-seq/Screenshot_bowtie2MappingStats.png "Mapping statistics of bowtie2")
+> ### {% icon comment %} Bowtie2 Results
+> This is what you should get from the Bowtie2 log:
+> ![Mapping statistics of bowtie2](../../images/atac-seq/Screenshot_bowtie2MappingStats.png "Mapping statistics of bowtie2")
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -319,8 +330,7 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 > > > There are 221 000 reads which map to chrM and 170 000 which map to chr22.
 > > {: .tip}
 > >
-> > Most of these removed alignments mapped to chrM.
-> >
+> > 1. Most of these removed alignments mapped to chrM.
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
 > {: .solution}
@@ -345,9 +355,10 @@ Because of the PCR amplification, there might be PCR duplicates which would over
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the MarkDuplicate metrics.
 {: .hands_on}
 
-This is what you should see:
-
-![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDup.png "Metrics of MarkDuplicates")
+> ### {% icon comment %} MarkDuplicates Results
+> This is what you should get from the MarkDuplicates log:
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDup.png "Metrics of MarkDuplicates")
+{: .comment}
 
 > ### {% icon tip %} Tip: Getting the header for the data of the MarkDuplicate metrics
 > You can copy/paste the 2 lines with header and data in an excel sheet.
@@ -387,9 +398,10 @@ We will check the insert sizes (the distance between the first and second read) 
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the upper one of the 2 outputs (the pdf file).
 {: .hands_on}
 
-This is what you should see:
-
-![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
+> ### {% icon comment %} CollectInsertSizeMetrics Results
+> This is what you get from CollectInsertSizeMetrics:
+> ![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -406,11 +418,15 @@ This is what you should see:
 This fragment size distribution is a good indication if your experiment worked or not.
 In absence of chromatin (without nucleosome), this is the profiles you would get:
 
-![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA") | ![Fragment size distribution of another purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked2.png "Fragment size distribution of another purified DNA")
+![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA")
+
+![Fragment size distribution of another purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked2.png "Fragment size distribution of another purified DNA")
 
 Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:
 
-![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq") | ![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another failed ATAC-Seq")
+![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq")
+
+![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another failed ATAC-Seq")
 
 A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome "peak".
 ![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
@@ -432,7 +448,7 @@ If we only make a coverage of 5' extremities, the data would be too parse and it
 
 > ### {% icon comment %} Comment on Tn5 insertion
 >
-> When Tn5 staggers to an accessible chromatin locus, it will join the Mosaic Ends (which will be used to make the library) to the top and bottom 3'OH extremity of a 9 bp DNA molecule  [Kia et al. 2017]({% link https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1 %}):
+> When Tn5 staggers to an accessible chromatin locus, it will join the Mosaic Ends (which will be used to make the library) to the top and bottom 3'OH extremity of a 9 bp DNA molecule  [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
 > This means that the 5' extremity of the read is not really the center of the staggered position but reads on the positive strand should be shifted 5 bp to the right and reads on the negative strands should be shifted 4 bp to the left. Here we are focusing on broad regions so we will not apply these shifts.
@@ -496,10 +512,10 @@ The tool **pyGenomeTracks** needs all bed files sorted, thus we sort the annotat
 > ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
 >
 > 1. **bedtools SortBED** order the intervals {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"hg38_Gencode_V28_chr22_geneName.bed"*.
+>    - {% icon param-file %} *"hg38.bed"*.
 >
 > 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"CTCF_peaks.bed.gz"*.
+>    - {% icon param-file %} *"CTCF.bed"*.
 >
 {: .hands_on}
 
@@ -528,14 +544,14 @@ The tool **pyGenomeTracks** needs all bed files sorted, thus we sort the annotat
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of hg38_Gencode_V28_chr22_geneName.bed`
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of hg38.bed`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"height"*: `5.0`
 >                - *"Type"*: `genes`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of CTCF_peaks.bed.gz`
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of CTCF.bed`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"Plot labels"*: `No`
 >    - *"Configure x-axis"*: `Yes`
@@ -545,9 +561,10 @@ The tool **pyGenomeTracks** needs all bed files sorted, thus we sort the annotat
 >
 {: .hands_on}
 
-This is what you could see:
-
-![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
+> ### {% icon comment %} pyGenomeTracks Results
+> This is what you get from pyGenomeTracks:
+> ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
+{: .comment}
 
 > ### {% icon question %} Questions
 > On this selected regions we see peaks on both TSS (middle track) and CTCF binding loci (bottom track).
@@ -602,9 +619,10 @@ We will now generate a heatmap. Each line will be a transcript. The coverage, wi
 >    - *"Show advanced options"*: `no`
 {: .hands_on}
 
-This is what you could see:
-
-![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
+> ### {% icon comment %} plotHeatmap Results
+> This is what you get from plotHeatmap:
+> ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -629,7 +647,8 @@ inserting adapters for sequencing. The training material gave you an insight int
 quality control of the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if `FastQC`, shows a warning in these areas. We mapped the reads
 with `Bowtie2`, filtered our reads for properly paired, good quality and reads that do not
 map to the mitochondrial genome. We found open chromatin regions with `Genrich`, which
-is a tool to find differential covered regions (peak calling).
+is a tool to find differential covered regions (peak calling). We visualized the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. Last but not least, we investigated the read coverage of our ATAC-Seq experiment around TSS with the help of `computeMatrix` and `plotHeatmap`. At the end, we found
+open chromatin regions that overlapped with CTCF sites, which pronounce potential silencer regions that we have covered with our ATAC-Seq experiment. These regions are located in genes, but could also be upstream or downstream for some other genes.
 
 
 
