@@ -814,7 +814,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >            # validate params
 >            cores = int(param_dict['__job_resource']['cores'])
 >            time = int(param_dict['__job_resource']['time'])
->            destination_id = DESTINATION_IDS[cores]
+>            destination_id = 'dynamic_cores_time' # DESTINATION_IDS[cores]
 >            destination = app.job_config.get_destination(destination_id)
 >            # set walltime
 >            if 'nativeSpecification' not in destination.params:
