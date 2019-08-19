@@ -7,7 +7,7 @@ questions:
 - 
 objectives:
 - 
-level: Introductory
+level: Intermediate
 tags:
 - metatranscriptomics
 time_estimation: 6H
@@ -68,7 +68,7 @@ We would like in this tutorial compare the results over the time serie and the r
 
 ## Data upload
 
-To save us time, we already ran MetaPhlAn2. We will now import the outputs of MetaPhlAn2 inside a collection, using the rule based uploader ([advanced tutorial]({{ site.baseurl }}{ % link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})) 
+To save us time, we already ran MetaPhlAn2. We will now import the outputs of MetaPhlAn2 inside a collection, using the rule based uploader ([advanced tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})) 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -81,27 +81,27 @@ To save us time, we already ran MetaPhlAn2. We will now import the outputs of Me
 >
 >    ```
 >    dataset	sample	community_profile
->    SEM1b_T2A	SRX3777356	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T2A_community.tabular
->    SEM1b_T2B	SRX3777345	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T2B_community.tabular
->    SEM1b_T2C	SRX3777347	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T2C_community.tabular
->    SEM1b_T3A	SRX3777349	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T3A_community.tabular
->    SEM1b_T3B	SRX3777351	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T3B_community.tabular
->    SEM1b_T3C	SRX3777353	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T3C_community.tabular
->    SEM1b_T4A	SRX3777369	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T4A_community.tabular
->    SEM1b_T4B	SRX3777371	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T4B_community.tabular
->    SEM1b_T5A	SRX3777373	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5A_community.tabular
->    SEM1b_T5A	SRX3777375	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5A_community.tabular
->    SEM1b_T5B	SRX3777367	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5B_community.tabular
->    SEM1b_T5C	SRX3777343	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T5C_community.tabular
->    SEM1b_T6A	SRX3777341	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T6A_community.tabular
->    SEM1b_T6B	SRX3777339	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T6B_community.tabular
->    SEM1b_T6C	SRX3777337	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T6C_community.tabular
->    SEM1b_T7A	SRX3777335	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T7A_community.tabular
->    SEM1b_T7B	SRX3777385	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T7B_community.tabular
->    SEM1b_T7C	SRX3777383	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T7C_community.tabular
->    SEM1b_T8A	SRX3777381	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T8A_community.tabular
->    SEM1b_T8B	SRX3777379	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T8B_community.tabular
->    SEM1b_T8C	SRX3777377	https://zenodo.org/api/files/84d7d6c9-2b7b-4569-87f6-dabc5ee42bc2/SEM1b_T8C_community.tabular
+>    SEM1b_T2A	SRX3777356	{{ page.zenodo_link }}/files/SEM1b_T2A_community.tabular
+>    SEM1b_T2B	SRX3777345	{{ page.zenodo_link }}/files/SEM1b_T2B_community.tabular
+>    SEM1b_T2C	SRX3777347	{{ page.zenodo_link }}/files/SEM1b_T2C_community.tabular
+>    SEM1b_T3A	SRX3777349	{{ page.zenodo_link }}/files/SEM1b_T3A_community.tabular
+>    SEM1b_T3B	SRX3777351	{{ page.zenodo_link }}/files/SEM1b_T3B_community.tabular
+>    SEM1b_T3C	SRX3777353	{{ page.zenodo_link }}/files/SEM1b_T3C_community.tabular
+>    SEM1b_T4A	SRX3777369	{{ page.zenodo_link }}/files/SEM1b_T4A_community.tabular
+>    SEM1b_T4B	SRX3777371	{{ page.zenodo_link }}/files/SEM1b_T4B_community.tabular
+>    SEM1b_T5A	SRX3777373	{{ page.zenodo_link }}/files/SEM1b_T5A_community.tabular
+>    SEM1b_T5A	SRX3777375	{{ page.zenodo_link }}/files/SEM1b_T5A_community.tabular
+>    SEM1b_T5B	SRX3777367	{{ page.zenodo_link }}/files/SEM1b_T5B_community.tabular
+>    SEM1b_T5C	SRX3777343	{{ page.zenodo_link }}/files/SEM1b_T5C_community.tabular
+>    SEM1b_T6A	SRX3777341	{{ page.zenodo_link }}/files/SEM1b_T6A_community.tabular
+>    SEM1b_T6B	SRX3777339	{{ page.zenodo_link }}/files/SEM1b_T6B_community.tabular
+>    SEM1b_T6C	SRX3777337	{{ page.zenodo_link }}/files/SEM1b_T6C_community.tabular
+>    SEM1b_T7A	SRX3777335	{{ page.zenodo_link }}/files/SEM1b_T7A_community.tabular
+>    SEM1b_T7B	SRX3777385	{{ page.zenodo_link }}/files/SEM1b_T7B_community.tabular
+>    SEM1b_T7C	SRX3777383	{{ page.zenodo_link }}/files/SEM1b_T7C_community.tabular
+>    SEM1b_T8A	SRX3777381	{{ page.zenodo_link }}/files/SEM1b_T8A_community.tabular
+>    SEM1b_T8B	SRX3777379	{{ page.zenodo_link }}/files/SEM1b_T8B_community.tabular
+>    SEM1b_T8C	SRX3777377	{{ page.zenodo_link }}/files/SEM1b_T8C_community.tabular
 >    ```
 >
 > 5. Click on the `Build` button.
