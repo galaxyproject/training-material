@@ -758,6 +758,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >                      - *"Specify a factor level"*: `SE`
 >                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
 >    - *"Files have header?"*: `No`
+>    - *"Visualising the analysis results"*: `Yes`
 >    - *"Output normalized counts table"*: `Yes`
 >
 >    {% include snippets/select_multiple_datasets.md %}
@@ -823,21 +824,37 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
     2.  Mean normalized counts, averaged over all samples from both conditions
     3.  Fold change in log2 (logarithm base 2)
 
-        The log2 fold changes are based on the primary factor level 1 vs. factor level 2, hence the input order of factor levels is important. For example, for the factor 'Treatment', DESeq2 computes fold changes of 'treated' samples against 'untreated', *i.e.* the values correspond to up- or downregulation of genes in treated samples.
+        The log2 fold changes are based on the primary factor level 1 vs. factor level 2, hence the input order of factor levels is important. Here, DESeq2 computes fold changes of 'treated' samples against 'untreated' from the first factor 'Treatment', *i.e.* the values correspond to up- or downregulation of genes in treated samples.
 
     4.  Standard error estimate for the log2 fold change estimate
     5.  [Wald](https://en.wikipedia.org/wiki/Wald_test) statistic
     6.  *p*-value for the statistical significance of this change
     7.  *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure, which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> ### {% icon comment %} Comment
->
-> For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
->
-> For more complex setup, e.g. with many samples, it is possible to use a collection with tags to specify the factors and levels. Check our ["Group tags for complex experimental designs" tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %}), explaining how to do that.
-{: .comment}
+For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 
-## Visualization of the differentially expressed genes
+> ### {% icon question %} Questions
+>
+> 1. Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?
+> 2. We could also hypothetically be interested in the effect of the sequencing (or other secondary factors in other cases). How would we know the differentially expressed genes because of sequencing type?
+> 3. We would like to analyze the interaction between the treatment and the sequencing. 
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
+> > 2. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after 
+correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
+both factors: factor 1 (treatment) become factor 2 and factor 2 (sequencing) become factor 1.
+> > 3. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should DESeq2 another time but with the only one factor with the following 4 levels:
+> >    - treated-PE
+> >    - untreated-PE
+> >    - treated-SE
+> >    - untreated-SE
+> >
+> >    By selection *"Output all levels vs all levels of primary factor (use when you have >2 levels for primary factor)"* to `Yes`, we can then compare treated-PE vs untreated-SE.
+> > 
+> {: .solution}
+{: .question}
 
 Now we would like to extract the most differentially expressed genes due to the treatment, and then visualize them using an heatmap of the normalized counts and also the z-score for each sample.
 
