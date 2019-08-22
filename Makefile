@@ -45,10 +45,8 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
 install: clean ## install dependencies
 	$(ACTIVATE_ENV) && \
-		npm install decktape && \
 		gem update --system && \
-		gem install nokogiri:'1.10.0' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem install addressable:'2.5.2' jekyll:'3.8.6' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
@@ -174,6 +172,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides
+	npm install decktape
 	mkdir -p _pdf
 	@for t in $(TUTORIALS); do \
 		name="$(PDF_DIR)/$$(echo $$t | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
