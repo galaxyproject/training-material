@@ -18,8 +18,9 @@ contributors:
   - slugger70
   - mvdbeek
   - erasche
+subtopic: features
 tags:
-  - ansible
+  - jobs
 requirements:
   - type: "internal"
     topic_name: admin
@@ -138,6 +139,7 @@ Some of the other options we will be using are:
 >    pulsar_config_dir: /mnt/pulsar/config
 >    pulsar_staging_dir: /mnt/pulsar/staging
 >    pulsar_pip_install: true
+>    pulsar_systemd: true
 >
 >    pulsar_host: 0.0.0.0
 >    pulsar_port: 8913
@@ -252,36 +254,11 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 >
 >    After the script has run, pulsar will be installed on the remote machines!
 >
-> 2. Log in to the machines and have a look in the `/mnt/pulsar` directory. You will see the venv and config directories. All the config files created can be perused.
+> 2. Log in to the machines and have a look in the `/mnt/pulsar` directory. You will see the venv and config directories. All the config files created by Ansible can be perused.
 >
-{: .hands_on}
-
-Pulsar can now be started. We do that by first activating the virtualenv, then running it and telling it which webserver to use (Paster) and where the config files are.
-
-> ### {% icon hands_on %} Hands-on: Starting Pulsar
+> 3. Run `journalctl -f -u pulsar`
 >
-> 1. Login to your Pulsar server
->
-> 2. Change directory into `/mnt/pulsar`
->
-> 3. Activate the virtualenv (`source venv/bin/activate`)
->
-> 4. Run pulsar (`pulsar -m paster -c config/`)
->
-{: .hands_on}
-
-
-A log will now start scrolling, showing the startup of pulsar. You'll notice that it will be initializing and installing conda. Once it is complete and listening on the assigned port, you can stop the server with Ctrl-C.
-
-
-> ### {% icon hands_on %} Hands-on: Daemonizing
->
-> 1. This is a pretty gross way of running Pulsar and it can run in daemon mode. To do that, add `--daemon` to the end of the above command line.
->
-> 2. Stopping the daemon is as simple as re-running the command with `--stop-daemon` instead.
->
-> 3. Before proceeding, make sure your Pulsar is running in `--daemon` mode.
->
+>    A log will now start scrolling, showing the startup of pulsar. You'll notice that it will be initializing and installing conda. Once this is completed, Pulsar will be listening on the assigned port.
 >
 {: .hands_on}
 
@@ -301,7 +278,7 @@ There are three things we need to do here:
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
-> 1. In your `job_conf.xml` file add the following job runner to the `<plugins>` section:
+> 1. In your `files/galaxy/config/job_conf.xml` file add the following job runner to the `<plugins>` section:
 >
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
@@ -329,7 +306,7 @@ There are three things we need to do here:
 >    </tools>
 >    ```
 >
-> 3. Restart Galaxy
+> 3. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
 {: .hands_on}
 

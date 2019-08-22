@@ -57,7 +57,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 > ### {% icon hands_on %} Hands-on: data upload and organization
 >
 > 1. Create a **new history** and name it something meaningful (e.g. *Proteogenomics DB search*)
-> 2. Import the four MGF MS/MS files and the FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
+> 2. Import the four MGF MS/MS files and the Trimmed_ref_5000_uniprot_cRAP.FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
@@ -68,7 +68,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename the datasets to something more recognizable (strip the URL prefix)
-> 4. Build a **Dataset list** for the three MGF files, name it something recognizable, for example *MGF files*
+> 4. Build a **Dataset list** for the three MGF files, name it as "**Mo_Tai_MGFs**"
 >
 >    {% include snippets/build_list_collection.md %}
 >
@@ -98,7 +98,7 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >      {: .tip}
 >
 >    - Section **Search Engine Options**:
->      - {% icon param-check %} *"B-Search Engines"*: `X!Tandem`
+>      - {% icon param-check %} *"DB-Search Engines"*: `X!Tandem`
 >
 >        > ### {% icon comment %} Comment:
 >        >    The section **Search Engine Options** contains a selection of sequence database searching
@@ -132,18 +132,16 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >        {: .tip}
 >
 >    - Section **Advanced Options**:
->      - {% icon param-select %} **"X!Tandem Options"*: `Advanced`
->        - {% icon param-check %} **"X!Tandem: Quick Acetyl"*: `No`
->        - {% icon param-check %} **"X!Tandem: Quick Pyrolidone"*: `No`
->        - {% icon param-check %} **"X!Tandem: Protein stP Bias"*: `No`
->        - {% icon param-text %} **"X!Tandem: Maximum Valid Expectation Value"*: `100`
->
->    - Leave everything else as default
->    - Click **Execute**
->
+>      - {% icon param-select %} *"X!Tandem Options"*: `Advanced`
+>        - {% icon param-check %} *"X!Tandem: Quick Acetyl"*: `No`
+>        - {% icon param-check %} *"X!Tandem: Quick Pyrolidone"*: `No`
+>        - {% icon param-check %} *"X!Tandem: Protein stP Bias"*: `No`
+>        - {% icon param-text %} *"X!Tandem: Maximum Valid Expectation Value"*: `100`
 >
 > Once the database search is completed, the SearchGUI tool will output a file (called a
 > SearchGUI archive file) that will serve as an input for the next section, PeptideShaker.
+> Rename the output as "**Compressed SearchGUI results**"
+>
 >
 > > ### {% icon comment %} Comment:
 > > Note that sequence databases used for proteogenomics are usually much larger than
@@ -194,7 +192,7 @@ outputs.
 >     >
 >     {: .comment}
 >
-> 2. Inspect the resulting files after they turned green with the **View data** icon
+> 2. Inspect {% icon galaxy-eye %} the resulting files
 >
 {: .hands_on}
 
@@ -234,7 +232,7 @@ The next step is to remove known peptides from the list of PSM's that we acquire
 
 The file named "Trimmed_ref_500_Uniprot_cRAP.fasta" is the trimmed version of Uniprot and cRAP database merged Fasta files.
 
-This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.
+This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The known peptides are those which are already annotated in the reference database, in this case the Uniprot database. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.
 
 > ### {% icon hands_on %}  Hands-on: FASTA to Tabular
 >
@@ -466,4 +464,10 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 
 Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “**Novel peptides**”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.
 
+> ### {% icon comment %} Comment: Tool Versions
+>
+> The tools are subjected to changes while being upgraded.
+> Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
+>
+{: .comment}
 
