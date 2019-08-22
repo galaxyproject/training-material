@@ -109,11 +109,11 @@ It means that the fragment named `SRR031716.1` corresponds to the DNA sequence `
 
 But what does this quality mean?
 
-The quality for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-indentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
+The quality score for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-identification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 
 ![Encoding of the quality score with ASCII characters for different Phred encoding](../../images/quality_score_encoding.png)
 
-So each nucleotide is assigned an ASCII character, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
+So each nucleotide is assigned to an ASCII character, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
 
 Phred Quality Score | Probability of incorrect base call | Base call accuracy
 --- | --- | ---
@@ -176,7 +176,7 @@ On the x-axis are the base position in the read. In this example, the sample con
 
 > ### {% icon comment %} Non uniform X-axis
 >
-> The X-axis is not uniform. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows. 
+> The X-axis is not uniform. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows. 
 >
 > Binning can be removed when running FastQC
 {: .comment}
@@ -185,20 +185,20 @@ For each position, a boxplot (BoxWhisker type ) is drawn with:
 
 - the median value, represented by the central red line
 - the inter-quartile range (25-75%), represented by the yellow box
-- the 10% and 90% points in the upper and lower whiskers
+- the 10% and 90% values in the upper and lower whiskers
 - the mean quality in the blue line
 
-The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores, scores of reasonable quality (orange), and reads of poor quality (red).
+The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red).
 
-It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will steadily drop over the length of the read. This is often due to signal decay or phasing during the sequencing run:
+It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will drop at the end of the read. This is often due to signal decay or phasing during the sequencing run:
 
 - Signal decay
 
-  The fluorescent signal intensity decays with each cycle of the sequencing process. Due to the degrading fluorophores, a proportion of the strands in the cluster are not being elongated. The proportion of signal being emitted continues to decrease with each cycle, yielding to a decrease of quality scores at the 3' end of the read. 
+  The fluorescent signal intensity decays with each cycle of the sequencing process. Due to the degrading fluorophores, a proportion of the strands in the cluster are not being elongated. The proportion of the signal being emitted continues to decrease with each cycle, yielding to a decrease of quality scores at the 3' end of the read. 
 
 - Phasing
 
-  The signal starts to blur as the number of cycles increases because the cluster loses synchronicity. As the cycles progress, some strands get random failure of nucleotides to incorporate due to:
+  The signal starts to blur with the increase of number of cycles because the cluster looses synchronicity. As the cycles progress, some strands get random failures of nucleotides to incorporate due to:
 
   - Incomplete removal of the 3' terminators and fluorophores
   - Incorporation of nucleotides without effective 3' terminators
@@ -229,7 +229,7 @@ Newer chemistry has improved this somewhat, but reads are now longer than ever.
 >
 >      ![Cycles loss](../../images/quality-control/per_base_sequence_quality_read2_failure.png)
 >
->    With such data, the sequencing facility should be contacted for resolution, if possible
+>    With such data, the sequencing facility should be contacted for discussion. Often, a resequencing then is needed (and from our experience also offered by the company).
 >
 {: .details}
 
@@ -239,19 +239,19 @@ Newer chemistry has improved this somewhat, but reads are now longer than ever.
 > 2. Is this tendency seen in all sequences?
 >
 > > ### {% icon solution %} Solution
-> > 1. The mean score over the sequence is dropping at the end of the sequences. It is usual: the sequencers are incorporating more errored nucleotides at the end. But the score stays good: over 28.
+> > 1. The mean score over the sequence is dropping at the end of the sequences. This is very common: the sequencers are incorporating more incorrect nucleotides at the end. But the overall score stays good: over 28.
 > > 2. The box plots are getting wider at the end of the sequences. It means a lot of sequences have their score dropping at the end of the sequence. At after 31 nucleotides, more than 10% of the sequences have scores below 20.
 > >
 > {: .solution }
 {: .question}
 
-When the median quality is below a phred score of ~20, we should consider trimming the sequence at that point, since sequence with lower quality than that is likely to cause more problems than it fixes. We will explain that process in the next section
+When the median quality is below a Phred score of ~20, we should consider trimming away bad quality bases from the sequence. We will explain that process in the next section.
 
 FastQC produces other diagnostic plots to assess sample quality.
 
 ## Per sequence quality scores
 
-It plots the average quality score over full length of reads on the x-axis and the total number of reads with this score on the y-axis:
+It plots the average quality score over the full length of all reads on the x-axis and gives the total number of reads with this score on the y-axis:
 
 ![Per sequence quality scores](../../images/quality-control/per_sequence_quality_scores.png "Per sequence quality scores")
 
@@ -261,7 +261,7 @@ The distribution of average read quality should be fairly tight in the upper ran
 
 ![Per base sequence content](../../images/quality-control/per_base_sequence_content.png "Per base sequence content for a DNA library")
 
-Per Base Sequence Content plots out the percentage of each of the four nucleotides (T, C, A, G) at each position across all reads in the input.  As for the per base sequence quality, the X-axis is non-uniform.
+Per Base Sequence Content plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all reads in the input sequence file.  As for the per base sequence quality, the x-axis is non-uniform.
 
 In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with `%A=%T` and `%G=%C`, and the lines in this plot should run parallel with each other. 
 
@@ -275,7 +275,7 @@ In a random library we would expect that there would be little to no difference 
 > 
 > ![Per base sequence content for Bisulphite data](../../images/quality-control/per_base_sequence_content_bisulphite.png)
 >
-> At the end, there is an overall shift in the sequence composition. This correlated with a loss of sequencing quality so the suspicion is that miscalls get made with a more even sequence bias than bisulphite converted libraries. Trimming the sequences fixed this problem, but if this hadn't been done it would have had a dramatic effect on the methylation calls which were made. 
+> At the end, there is an overall shift in the sequence composition. This correlates with a loss of sequencing quality so the suspicion is that miscalls get made with a more even sequence bias than bisulphite converted libraries. Trimming the sequences fixed this problem, but if this hadn't been done it would have had a dramatic effect on the methylation calls which were made. 
 {: .details}
 
 > ### {% icon question %} Questions
@@ -292,7 +292,7 @@ In a random library we would expect that there would be little to no difference 
 
 ![Per sequence GC content](../../images/quality-control/per_sequence_gc_content.png "Per sequence GC content")
 
-This plot displays the number of reads vs. GC% per read. It is compared to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.
+This plot displays the number of reads vs. [%] of the bases G and C per read. It is compared to a theoretical distribution assuming an uniform GC content for all reads, expected for whole genome shotgun sequencing, where the central peak corresponds to the overall GC content of the underlying genome. Since the GC content of the genome is not known, the modal GC content is calculated from the observed data and used to build a reference distribution.
 
 An unusually-shaped distribution could indicate a contaminated library or some other kind of biased subset. A normal distribution which is shifted indicates some systematic bias, which is independent of base position. If there is a systematic bias which creates a shifted normal distribution then this won't be flagged as an error by the module since it doesn't know what your genome's GC content should be.
 
@@ -320,7 +320,7 @@ Two sources of duplicate reads can be found:
 
   It is a concern because PCR duplicates misrepresent the true proportion of sequences in the input. 
 
-- Truly over represented sequences such as very abundant transcripts in an RNA-Seq library
+- Truly overrepresented sequences such as very abundant transcripts in an RNA-Seq library
 
   It is an expected case and not of concern because it does faithfully represent the input.
 
@@ -328,7 +328,7 @@ FastQC counts the degree of duplication for every sequence in a library and crea
 - Blue line: distribution of the duplication levels for the full sequence set
 - Red line: distribution for the de-duplicated sequences with the proportions of the deduplicated set which come from different duplication levels in the original data.
 
-For whole genome shotgun data it is expected that nearly 100% of your reads will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing is extremely deep (e.g. > 100X the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence reads which can be obtained from any given input DNA sample. 
+For whole genome shotgun data it is expected that nearly 100% of your reads will be unique (appearing only 1 time in the sequence data). Most sequences should fall into the far left of the plot in both the red and blue lines. This indicates a highly diverse library that was not over sequenced. If the sequencing depth is extremely high (e.g. > 100x the size of the genome) some inevitable sequence duplication can appear: there are in theory only a finite number of completely unique sequence reads which can be obtained from any given input DNA sample.
 
 More specific enrichments of subsets, or the presence of low complexity contaminants will tend to produce spikes towards the right of the plot. These high duplication peaks will most often appear in the blue trace as they make up a high proportion of the original library, but usually disappear in the red trace as they make up an insignificant proportion of the deduplicated set. If peaks persist in the red trace then this suggests that there are a large number of different highly duplicated sequences which might indicate either a contaminant set or a very severe technical duplication.
 
@@ -354,7 +354,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >   
 > The plot shows the deviation from the average quality for each tile. The colours are on a cold to hot scale, with cold colours being positions where the quality was at, or above, the average for that base in the run, and hotter colours indicate that a tile had worse qualities than other tiles for that base. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
 >
-> In some cases, the chemicals arrive last in some tiles making the chemistry is a bit worse there. The "Per tile sequence quality" graph will then have some horizontal lines like this:
+> In some cases, the chemicals used during sequencing becoming a bit exhausted over the time in some tiles which makes the sequencing reactions a bit error-prone. The "Per tile sequence quality" graph will then have some horizontal lines like this:
 >
 > ![Per tile sequence quality with horizontal lines](../../images/quality-control/per_tile_sequence_quality_horizontal_lines.png)
 >
@@ -362,7 +362,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > ![Per base N content](../../images/quality-control/per_base_n_content.png "Per base N content")
 >
-> If a sequencer is unable to make a base call with sufficient confidence then it will normally substitute an N rather than a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.
+> If a sequencer is unable to make a base call with sufficient confidence, it will write an "N" instead of a conventional base call. This plot displays the percentage of base calls at each position or bin for which an N was called.
 >
 > It's not unusual to see a very low proportion of Ns appearing in a sequence, especially near the end of a sequence. But this curve should never rises noticeably above zero. If it does this indicates a problem occurred during the sequencing run. In the example below, an error caused the instrument to be unable to call a base for approximately 20% of the reads at position 29:
 >
@@ -372,7 +372,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > ![Sequence length distribution](../../images/quality-control/sequence_length_distribution.png "Sequence length distribution")
 >
-> Some high throughput sequencers generate sequence fragments of uniform length, but others can contain reads of wildly varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$. 
+> Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$. 
 >
 > This graph shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple graph showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
 >
@@ -388,11 +388,11 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > #### Kmer Content
 >
-> FastQC does a generic analysis of all of the short nucleotide of length k (kmer, with k = 7 by default) starting at each positon along the read in the library to find those which do not have even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read. 
+> FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read. 
 >
-> FastQC will report the list of kmers which appear at specific positions with greater than expected frequency. This can find a number of different sources of bias in the library which can include the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer these sequences contain, and then it's not always easy to see if there are other interesintg biases are present.
+> FastQC will report the list of kmers which appear at specific positions with a greater than expected frequency. This can be due to different sources of bias in the library which can include the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer these sequences contain, and then it's not always easy to see if there are other interesting biases are present.
 >
-> The following example is from a high quality DNA-Seq library. The biased Kmers near the start of the read likely are due to slight, sequence dependent efficiency of DNA shearing or a result of random priming:
+> The following example is from a high-quality DNA-Seq library. The biased kmers nearby the start of the read likely are due to slight sequence dependent efficiency of DNA shearing or a result of random priming:
 >
 > ![Adapter Content](../../images/quality-control/kmer_content.png "Kmer content")
 >
@@ -400,19 +400,19 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 {: .details}
 
-We tried here to explain here there different FastQC report and some use case. More can be find below but also  some common next-generation sequencing problems on [QCFAIL.com](https://sequencing.qcfail.com/)
+We tried to explain here there different FastQC reports and some use cases. More about this and also some common next-generation sequencing problems can be found on [QCFAIL.com](https://sequencing.qcfail.com/)
 
 > ### {% icon details %} Specific problem for alternate library types
 >
 > #### Small/micro RNA
 > 
-> In small RNA libraries, we typically have a relatively small set of unique, short sequences. Small RNA libraries are not randomly sheared before adding sequencing adapters to their ends: all the reads for specific classes of micro RNA will be identical. It will result in:
+> In small RNA libraries, we typically have a relatively small set of unique, short sequences. Small RNA libraries are not randomly sheared before adding sequencing adapters to their ends: all the reads for specific classes of microRNAs will be identical. It will result in:
 > 
 > - Extremely biased per base sequence content
 > - Extremely narrow distribution of GC content
 > - Very high sequence duplication levels
 > - Abundance of overrepresented sequences
-> - Read through into adapters
+> - Read-through into adapters
 >
 > #### Amplicon
 > 
@@ -522,12 +522,12 @@ The quality of the previous dataset was pretty good from the beginning and we im
 > ### {% icon comment %} Bad quality sequences
 > If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data).
 >
-> You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything and you may lose too much information.
+> You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything and you may lose too much information if too many bad quality bases are cut away. These reads then will be filtered out and you loose them.
 {: .comment}
 
 > ### {% icon details %} Trimming with Cutadapt
 >
-> One of the biggest advantage of Cutadapt over other trimming tools is that it has nice [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
+> One of the biggest advantage of Cutadapt compared to other trimming tools (e.g. TrimGalore!) is that it has a good [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
 >
 > Cutadapt quality trimming algorithm consists of three simple steps:
 >
@@ -564,7 +564,7 @@ The quality of the previous dataset was pretty good from the beginning and we im
 > 42 40 26 27
 > ```
 >
-> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (note that the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
+> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
 >
 >
 > Alternatives to this procedure would be:
@@ -577,7 +577,7 @@ The quality of the previous dataset was pretty good from the beginning and we im
 
 # Process paired-end data
 
-With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. More of each DNA fragment is then sequenced than with single-end sequencing:
+With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. With this technique, we have the advantage to get more information about each DNA fragment compared to reads sequenced by only single-end sequencing:
 
 ```
     ------>                       [single-end]
@@ -619,7 +619,7 @@ The data we analyzed in the previous step was not single-end data but the forwar
 
 > ### {% icon question %} Questions
 >
-> 1. What do you think of the quality of the sequences?
+> 1. What do you think about the quality of the sequences?
 > 2. What should we do?
 >
 > > ### {% icon solution %} Solution
@@ -636,7 +636,7 @@ The data we analyzed in the previous step was not single-end data but the forwar
 > {: .solution}
 {: .question}
 
-With paired end reads the average quality scores for forward reads will almost always be higher than for reverse reads. 
+With paired-end reads the average quality scores for forward reads will almost always be higher than for reverse reads. 
 
 After trimming, reverse reads will be shorter because of their quality and then will be eliminated during the filtering step. If one of the reverse reads is removed, its corresponding forward read should be removed too. Otherwise we will get different number of reads in both files and in different order, and order is important for the next steps. Therefore **it is important to treat the forward and reverse reads together for trimming and filtering**.
 
@@ -650,7 +650,7 @@ After trimming, reverse reads will be shorter because of their quality and then 
 >
 >       - In *Read 1 Options* or *Read 2 Options*
 >
->         As before, no adapters were found in these datasets. When you process your own data, if you know which adapter sequences were used during library preparation, you should provide their sequences here.
+>         As before, no adapters were found in these datasets. When you process your own data and you know which adapter sequences were used during library preparation, you should provide their sequences here.
 >
 >    - In *"Filter Options"*
 >       - *"Minimum length"*: `20`
