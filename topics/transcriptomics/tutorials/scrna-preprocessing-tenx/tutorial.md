@@ -179,7 +179,23 @@ We inspect the lengths
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **RNA STARSolo** {% icon tool %} with the following parameters:
+> **RNA STARSolo** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `output` (Input dataset)
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `output` (Input dataset)
+>    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `output` (Input dataset)
+>    - *"Custom or built-in reference genome"*: `Use a built-in index`
+>        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
+>    - In *"Advanced Settings"*:
+>        - *"Configure Chemistry Options"*: `Cell Ranger v3`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -191,8 +207,53 @@ We inspect the lengths
 
 ## CellRanger Method
 
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> **DropletUtils** {% icon tool %} with the following parameters:
+>    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARSolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARSolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARSolo** {% icon tool %})
+>    - *"Operation"*: `Filter for Barcodes`
+>        - *"Method"*: `DefaultDrops`
+>        - *"Format for output matrices"*: `Tabular`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
 ## Flexible Method
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> **DropletUtils** {% icon tool %} with the following parameters:
+>    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARSolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARSolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARSolo** {% icon tool %})
+>    - *"Operation"*: `Filter for Barcodes`
+>        - *"Method"*: `EmptyDrops`
+>        - *"Format for output matrices"*: `Tabular`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
 
 # Conclusion
 {:.no_toc}
