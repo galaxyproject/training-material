@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 gem "nokogiri", ">= 1.10.4"
 gem 'addressable'
-gem 'jekyll', '3.8.6'
+gem 'jekyll', '< 4'
 gem 'jekyll-feed'
 gem 'jekyll-environment-variables'
 gem 'jekyll-github-metadata'

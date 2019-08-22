@@ -46,7 +46,7 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 install: clean ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --system && \
-		gem install addressable:'2.5.2' jekyll:'3.8.6' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem install addressable:'2.5.2' jekyll:'< 4' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
