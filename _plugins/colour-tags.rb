@@ -5,8 +5,7 @@ module Jekyll
 
       hue = ((d >> 4) % 360).abs
       saturation = 0.8
-      lightnessOffset = 85
-      lightness = lightnessOffset + (hash & 0xf)
+      lightness = 85
       bgColor = "hsl(#{hue}, #{saturation * 100}%, #{lightness}%)"
       brColor = "hsl(#{hue}, #{saturation * 100}%, #{lightness - 40}%)"
 

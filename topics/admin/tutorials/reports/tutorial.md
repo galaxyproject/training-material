@@ -16,8 +16,9 @@ contributors:
   - bgruening
   - slugger70
   - erasche
+subtopic: features
 tags:
-  - ansible
+  - monitoring
 requirements:
   - type: "internal"
     topic_name: admin

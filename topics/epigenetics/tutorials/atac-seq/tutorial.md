@@ -4,17 +4,16 @@ layout: tutorial_hands_on
 title: ATAC-Seq data analysis
 zenodo_link: "https://zenodo.org/record/3270536"
 questions:
-- Which DNA regions are accesible in the human lymphoblastoid cell line GM12878?
-- How to analyse and visualise ATAC-Seq data?
+- Which biological questions are addressed by the tutorial?
+- Which bioinformatics techniques are important to know for this type of data?
 objectives:
 - Apply appropriate analysis and quality control steps for ATAC-Seq
 - Visualise coverage and peaks of specific regions
 - Generate heatmaps
-time_estimation: 'No idea'
+time_estimation: 3H
 key_points:
-- ATAC-Seq can be used to identify accessible gene promoters and enhancers
-- ATAC-seq analysis uses similar to ChIP-Seq but different parameters
-contributors:
+- The take-home messages
+- They will appear at the end of the tutorial
 - lldelisle
 - mblue9
 - heylf
@@ -33,6 +32,7 @@ In order to find chromatin accesible (open) region, the genome is treated with a
 ## Data
 In this training material we will use data from human. The original dataset had 2 x 200 million reads. This would be too long to be processed in a training session. So, we downsampled the original dataset to 200,000 reads but added about 200,000 reads pairs that will map to chr22 to have a good profile on this chromosome similar to a 2 x 20 million reads original fastq. Furthermore, we want to compare the predicted open chromatin regions to known binding sites of a transcriptional repressor called [CTCF](https://en.wikipedia.org/wiki/CTCF). This will help us to find potential sites that are in accordance to potential silencer regions. For that reason, we will download predicted sites of CTCF from ENCODE (ENCSR361KVZ, dataset ENCFF049IPS).
 
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -42,11 +42,12 @@ In this training material we will use data from human. The original dataset had 
 >
 {: .agenda}
 
-# Preprocessing
+# Title for your first section
 
 ## Get Data
 
 We first need to download the dataset that we downsampled as well as other annotations files. Then, to increase the number of reads that will map to the assembly (here Human genome version 38), we need to preprocess the reads.
+
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -65,7 +66,8 @@ We first need to download the dataset that we downsampled as well as other annot
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. By default, galaxy will give as name the full path. Rename the datasets to keep only the file names.
+> 3. Rename the datasets
+> 4. Check that the datatype
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -106,21 +108,9 @@ The first step is to check the quality of the reads and the presence of the Next
 >
 > 1. **FastQC** {% icon tool %} with the default parameters:
 >       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1.fastq.gz` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1.fastq.gz` and `SRR891268_R2.fastq.gz`.
->
->    {% include snippets/select_multiple_datasets.md %}
->
 > 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check which are the adapters found at the end of the reads.
 >
->    > ### {% icon question %} Questions
->    >
->    > What is the read length?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > The read length is 50 bp.
->    > >
->    > {: .solution}
->    >
+>    > ### {% icon comment %} Comment
 >    >
 >    > How many reads are in the FASTQ?
 >    >
@@ -171,7 +161,8 @@ To trim the adapters we provide the Nextera adapter sequences to `Cutadapt`. The
 The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. Shorter reads will either be thrown out by the mapping or disturb our results at
 the end.
 
-> ### {% icon hands_on %} Hands-on: Trim reads
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
@@ -247,7 +238,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
->        - *"Select reference genome"*: `Human Dec. 2013 (GRCh38/hg38) (hg38)`
+>        - *"Select reference genome"*: ``
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1: Default setting only`
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
@@ -607,7 +598,7 @@ The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will
 {: .hands_on}
 
 
-### Run **plotHeatmap**
+## Sub-step with **plotHeatmap**
 
 We will now generate a heatmap. Each line will be a transcript. The coverage, will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top the of heatmap, will show the mean signal at the TSS.
 
@@ -637,6 +628,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage, wi
 > {: .solution}
 >
 {: .question}
+
 
 # Conclusion
 

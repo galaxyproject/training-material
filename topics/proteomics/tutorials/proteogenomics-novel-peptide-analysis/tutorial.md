@@ -56,7 +56,7 @@ All the files to run this workflow can be obtained from the [second tutorial]({{
 > ### {% icon hands_on %} Hands-on: data organization
 >
 > 1. The inputs for this workflow are:
->    - **Tabular file** – “**Peptides from BlastP analysis**”
+>    - **Tabular file** – “**Peptides for BlastP analysis**”
 >    - **Tabular file** – “**PeptideShaker_PSM**”
 >    - **Mz to sqlite**
 >    - **Genomic mapping sqlite**
@@ -158,11 +158,11 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 
 > ### {% icon hands_on %} Hands-on: Guide to MVP
 >
-> The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the mz to sqlite tool.
+> The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the `mz to sqlite tool` (Generated in the second workflow).
 > Here is a step by step guide to obtain the proteogenomic view of the "Novel peptides".
 >
 >
-> 1) Click on the **Visualize in MVP application**, it will open up a new window for MVP.
+> 1) Click on the **Visualize in MVP application**, it will open up options for visualization application in the center pane, Select **MVP Application** from the options (or Right click to open in a new window).
 >
 > ![mz to sqlite](../../images/mz2sqlite.png){:width="20%"}
 >
@@ -320,8 +320,8 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 >    ![Final Summary](../../images/final_summary.png){:width="100%"}
 >
-The Final summary displays a tabular output containing the list of novel peptides and its corresponding protein. It also provides the users with the chromosomal location of the novel proteoform along with the peptide's start and end position.	The output also features the strand information, gene	annotation and the genomic coordinates in a specific format that could be used on IGV or UCSC browser. It also provides the user with a	UCSC Genome Browser link, which the user can directly copy and paste it on a web browser to learn more about the novel proteoform. Here we are demonstrating the use of proteogenomics workflow on an example trimmed mouse dataset. This study explores the possibilities for downstream biological /functional analysis of peptides corresponding to novel proteoforms.
-
+> The Final summary displays a tabular output containing the list of novel peptides and its corresponding protein. It also provides the users with the chromosomal location of the novel proteoform along with the peptide's start and end position.	The output also features the strand information, gene	annotation and the genomic coordinates in a specific format that could be used on IGV or UCSC browser. It also provides the user with a	UCSC Genome Browser link, which the user can directly copy and paste it on a web browser to learn more about the novel proteoform. Here we are demonstrating the use of proteogenomics workflow on an example trimmed mouse dataset. This study explores the possibilities for downstream biological /functional analysis of peptides corresponding to novel proteoforms.
+>
 {: .hands_on}
 
 ### What's next?
@@ -336,4 +336,3 @@ This workflow is also available at [Proteogenomics gateway](http://galaxyp-prote
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](http://galaxyp.org)
-

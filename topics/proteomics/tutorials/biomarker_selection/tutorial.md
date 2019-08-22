@@ -283,6 +283,8 @@ candidates to their corresponding UniProt accession number. The tool **ID Conver
 >   > ### Output
 >   > **ID converter**: In this dataset, 2 columns (columns 6 and 7, at the end) which contain
 >   > UniProt accession number and ID are added.
+>   > Note: We used here the release "Homo sapiens 08/05/2019"; results can be slightly different 
+>   > according to the version number of Uniprot. 
 >   {: .comment}
 {: .hands_on}
 
@@ -304,7 +306,7 @@ For this purpose, we use the **Add protein features** {% icon tool %} ProteoRE t
 >        - *"Disease information"*: `Yes`
 >
 >   > ### Output
->   > **Add information from NextProt**: In this file (431 lines), 3 columns (columns 8, 9 and 10)
+>   > **Add information from NextProt**: In this file (115 lines), 3 columns (columns 8, 9 and 10)
 >   > were added (at the end). These columns present TMDomains, Subcell Location and Diseases info.
 >   {: .comment}
 {: .hands_on}

@@ -86,14 +86,14 @@ layout: base
             <strong>{% icon question %} Questions</strong>
             <ul>
             {% for question in page.questions %}
-            <li>{{ question }}</li>
+            <li>{{ question | markdownify }}</li>
             {% endfor %}
             </ul>
 
             <strong>{% icon objectives %} Objectives</strong>
             <ul>
             {% for objective in page.objectives %}
-            <li>{{ objective }}</li>
+            <li>{{ objective | markdownify }}</li>
             {% endfor %}
             </ul>
 
@@ -114,8 +114,16 @@ layout: base
             {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
             {% endif %}
 
+            {% if instances[topic.name].supported or topic.docker_image %}
+            {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
+                {% assign tuto_has_docker = true %}
+            {% endif %}
+            {% endif %}
+            {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
+                {% assign tuto_has_zenodo = true %}
+            {% endif %}
 
-
+            {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
             <div>
                 <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
                 <div id="supporting_materials">
@@ -136,7 +144,7 @@ layout: base
                     </div>
                     {% endif %}
 
-                    {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
+                    {% if tuto_has_zenodo %}
                     <div>
                         {% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}
                     </div>
@@ -154,19 +162,17 @@ layout: base
                     {% endif %}
 
 
-                    {% if instances[topic.name].supported or topic.docker_image %}
-                    {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
+                    {% if tuto_has_docker %}
                     <div>
                         {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}
                     </div>
-                    {% endif %}
                     {% endif %}
                             </div>
                         </li>
                     </ul>
                 </div>
-
             </div>
+            {% endif %}
 
         </blockquote>
 
@@ -178,16 +184,15 @@ layout: base
                 </div>
                 <div class="col-sm-10">
                     {{ content
-                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
-
+                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
+                        | no_translate:site.words_to_not_translate }}
 
                     {% if page.key_points %}
                     <blockquote class="key_points">
                         <h3>{% icon keypoints %} Key points</h3>
-
                         <ul>
                             {% for key_point in page.key_points %}
-                            <li>{{ key_point }}</li>
+                            <li>{{ key_point | markdownify }}</li>
                             {% endfor %}
                         </ul>
                     </blockquote>
