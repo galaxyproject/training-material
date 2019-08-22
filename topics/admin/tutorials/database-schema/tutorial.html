@@ -602,7 +602,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 </code></pre></div>  </div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
-          <span class="k">where</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
+          <span class="k">where</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="nb">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span><span class="p">;</span><span class="nv">`
 </span></code></pre></div>  </div>
 
@@ -611,13 +611,13 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n"><span class="notranslate">galaxy</span>_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
           <span class="k">and</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span> <span class="o">=</span> <span class="s1">'hansrudolf.hotz@fmi.ch'</span>
-          <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
+          <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="nb">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span><span class="p">;</span>
 </code></pre></div>  </div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span><span class="p">,</span> <span class="n"><span class="notranslate">galaxy</span>_user</span> <span class="n">u</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">id</span>
-          <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="k">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
+          <span class="k">and</span> <span class="k">EXTRACT</span><span class="p">(</span><span class="nb">year</span> <span class="k">FROM</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2016</span>
           <span class="k">and</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span><span class="o">=</span><span class="s1">'upload1'</span>
           <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">u</span><span class="p">.</span><span class="n">email</span><span class="p">;</span>
 </code></pre></div>  </div>
