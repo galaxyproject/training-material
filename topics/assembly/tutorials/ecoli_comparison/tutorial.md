@@ -198,12 +198,10 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >   > ### {% icon question %} Questions
 >   >
 >   > 1. What is the meaning of `^` character is SED expression?
->   > 2. Where do you go to learn more about regular expressions?
 >   >
 >   > > ### {% icon solution %} Solution
 >   > >
 >   > > 1. It tells SED to start matching from the beginning of the string.
->   > > 2. [Software Carpentry](https://software-carpentry.org)
 >   > >
 >   > {: .solution}
 >   {: .question}
