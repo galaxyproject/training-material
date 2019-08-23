@@ -21,7 +21,6 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        #- scrna-introduction
         - scrna-plates-batches-barcodes
 
 follow_up_training:
@@ -29,7 +28,7 @@ follow_up_training:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - scrna_preprocessing
+        - scrna-preprocessing
 
 
 contributors:
