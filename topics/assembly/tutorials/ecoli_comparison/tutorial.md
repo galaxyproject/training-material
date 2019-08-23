@@ -29,9 +29,9 @@ contributors:
   - delphine-l
 ---
 
-> ### Outline of this tutorial
->
-> In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.
+In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.
+
+> ### Agenda
 >
 > 1. TOC
 > {:toc}
@@ -40,33 +40,36 @@ contributors:
 
 # Finding closely related genomes
 
-*E. coli* is one of the most studied organisms. There are hundreds of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
+[*E. coli*](https://en.wikipedia.org/wiki/Escherichia_coli) is one of the most studied organisms. There are thousands of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
 ## Getting complete *E. coli* genomes into Galaxy
 
-
 Our initial objective is to compare our assembly against all complete *E. coli* genomes to identify the most related ones and to find any interesting genome alterations. In order to do this we need to align our assembly against all other genomes. And in order to do that we need to first obtain all these other genomes.
 
-[NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store all complete *E. coli* genomes. Specifically, they can be found [here](https://www.ncbi.nlm.nih.gov/genome/genomes/167). As we will see, this list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** sections show how they can be used to import all completed *E. coli* genomes into Galaxy.
+[NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store [all complete *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167). This list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** sections show how they can be used to import all completed *E. coli* genomes into Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
 >
->Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window and position two browser windows (one the tutorial and the one you just opened) side by side. Then follow the steps in the following video.
+> 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
 >
+> 2. Select only the "Complete" genomes with the filter at the top
 >
-><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271328293?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+>    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
+>
+> 3. At the top right, click "Download Table" as a `Tab-delimited (.txt)`
+>
+> 4. Upload this table to Galaxy
+>
+> 5. **Cut** {% icon tool %} columns from a table:
+>
+>    - *"Cut columns"*: `c8,c20`
+>    - *"From"*: the genome_proks.txt file you uploaded
 >
 {: .hands_on}
 
-Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:
+Now that the list is formatted as a table in a spreadsheet, it is time to upload it into Galaxy. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL: [GCA_000008865.1_ASM886v1](ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1) points to a directory (rather than a file) containing many files, most of which we do not need.
 
-```
-ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1
-```
-
-points to a directory (rather than a file) containing many files, most of which we do not need:
-
-![GenBank assembly files for an E. coli strain](../../images/genbank_dir.png "A list of files for an <i>E. coli</i> assembly. For further analyses we need datasets ending with <code>_genomic.fna.gz</code>.")
+![GenBank assembly files for an E. coli strain](../../images/genbank_dir.png "A list of files for an <i>E. coli</i> assembly. For further analyses we only need the dataset ending with <code>_genomic.fna.gz</code>.")
 
 So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add `/GCA_000008865.1_ASM886v1` and `_genomic.fna.gz` to the end to get this:
 
@@ -78,10 +81,54 @@ This can be done as a two step process where we first copy the end part of the e
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
->Here we copy data from the spreadsheet described in the previous section into Galaxy's rule-based uploader to download several hunder complete genomes into a Collection. Follow the steps in the video below.
+> 1. Again **Upload** {% icon tool %} data
+>
+> 2. Switch to the `Rule-based` tab on the right
+>
+>    > ### {% icon tip %} Tip: Using the Rule-based Uploader
+>    > There is a detailed tutorial on using the [Rule based Uploader](../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html) if you want to learn about the more advanced features available.
+>    {: .tip}
+>
+>    - *"Upload data as"*: `Collection(s)`
+>    - *"Load tabular data from"*: `History Dataset`
+>    - *"Select dataset to load"*: output of the cut tool
+>
+>    > ### {% icon tip %} Tip: dataset not there?
+>    > If the dataset doesn't appear in the select list, refresh your page.
+>    {: .tip}
+>
+> 3. From **Column**, select `Using a Regular Expression`
+>    - *"From Column"*: `B`
+>    - Select `Create columns matching expression groups`
+>    - *"Regular Expression"*: `.*(\/GCA.*$)`
+>    - *"Number of Groups"*: `1`
+>    - Click `Apply`
+> 4. From **Column**, select `Concatenate Columns`
+>    - *"From Column"*: `B`
+>    - *"From Column"*: `C`
+>    - Click `Apply`
+> 5. From **Rules**, select `Remove Columns(s)`
+>    - *"From Column"*: `B`, `C`
+>    - Click `Apply`
+> 6. From **Column**, select `Fixed Value`
+>    - *"Value"*: `_genomic.fna.gz`
+>    - Click `Apply`
+> 7. From **Column**, select `Concatenate Columns`
+>    - *"From Column"*: `B`
+>    - *"From Column"*: `C`
+>    - Click `Apply`
+> 8. From **Rules**, select `Remove Columns(s)`
+>    - *"From Column"*: `B`, `C`
+>    - Click `Apply`
+> 9. From **Rules** menu, select `Add / Modify Column Definitions`
+>    - `Add Definition`, `List Identifier(s)`, Select Column `A`
+>    - `Add Definition`, `URL`, Column `B`
+>    - Click `Apply`
+> 10. Set the **Type** in the bottom left to `fasta.gz`
+> 11. Give the upload a name like `Complete genomes`
+> 12. **Upload**
 >
 >
-><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/271336444?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 {: .hands_on}
 
 Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do a few things to our assembly.
@@ -125,44 +172,44 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >   - *"File to process"*: the output of the previous step
 >   - *"SED program"*: `s/^>1.*$/>Ecoli_C/`
 >
+>   > ### {% icon tip %} SED and Regular Expressions
+>   >
+>   > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
+>   >
+>   > The expression `s/^>1.*$/>Ecoli_C/` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
+>   >
+>   > - `s` - tells SED to *Substitute*
+>   > - `/` - opens a section of the commands telling SED *what* to substitute
+>   > - `^` - tell SED to start looking at *the beginning* of each line
+>   > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
+>   > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
+>   > - `.` - dot has a special meaning. It signifies *any* character
+>   > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
+>   > - `$` - signifies *the end* of a line
+>   > - `/` - is *the end* of the *what to substitute* section. It also serves as the beginning of *what to substitute WITH* section
+>   > - `>` - is the required element of the FASTA sequence name
+>   > - `Ecoli_C` is the *name* we want the sequence to have
+>   > - `/` - is the end of the SED command
+>   >
+>   >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>   >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
+>   {: .tip}
+>
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. What is the meaning of `^` character is SED expression?
+>   > 2. Where do you go to learn more about regular expressions?
+>   >
+>   > > ### {% icon solution %} Solution
+>   > >
+>   > > 1. It tells SED to start matching from the beginning of the string.
+>   > > 2. [Software Carpentry](https://software-carpentry.org)
+>   > >
+>   > {: .solution}
+>   {: .question}
+>
 {: .hands_on}
 
-
-> ### {% icon details %} Details: SED editor and Regular Expressions
->
-> The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
->
-> The expression `s/^>1.*$/>Ecoli_C/` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
->
-> - `s` - tells SED to *Substitute*
-> - `/` - opens a section of the commands telling SED *what* to substitute
-> - `^` - tell SED to start looking at *the beginning* of each line
-> - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
-> - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
-> - `.` - dot has a special meaning. It signifies *any* character
-> - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
-> - `$` - signifies *the end* of a line
-> - `/` - is *the end* of the *what to substitute* section. It also serves as the beginning of *what to substitute WITH* section
-> - `>` - is the required element of the FASTA sequence name
-> - `Ecoli_C` is the *name* we want the sequence to have
-> - `/` - is the end of the SED command
->
->So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
->Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
-{: .tip}
-
-> ### {% icon question %} Questions
->
-> 1. What is the meaning of `^` character is SED expression?
-> 2. Where do you go to learn more about regular expressions?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. It tells SED to start matching from the beginning of the string.
-> > 2. [Software Carpentry](https://software-carpentry.org)
-> >
-> {: .solution}
-{: .question}
 
 
 ## Generating alignments
