@@ -24,14 +24,14 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (heterochromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with DNA. If the DNA is transcribed into RNA, the DNA will be opened and loosened from the nucelosome complex (euchromatin). Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **Assay for Transposase-Accessible Chromatin with high-throughput sequencing (ATAC-Seq)** is a method to investigate the accessibility of the chromatin and thus a method to fathom regulatory mechanisms of the gene expression. The method can help to find potential promoter regions including enhancers and silences. A promoter is the potential starting and regulatory site of the gene. An enhancer, often located in the promoter or the downstream area of the gene, can increase the transcription of a gene. In contrast, a silencer decreases or inhibits the gene expression.
+In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (heterochromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with DNA. If the DNA is transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex (euchromatin). Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **Assay for Transposase-Accessible Chromatin with high-throughput sequencing ([ATAC-Seq](https://en.wikipedia.org/wiki/Transposable_element))** is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify potential promoter regions including enhancers and silencers. A promoter is the potential start and regulatory site of the gene. An enhancer, often located in the promoter or the downstream area of the gene, can increase the transcription of a gene. In contrast, a silencer decreases or inhibits the gene's expression.
 
 ![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
 
-In order to find chromatin accesible (open) region, the genome is treated with an enzmye called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is DNA sequence that can change its position within a genome. Read the two links to get a deeper insight. Intutively these are sequences that jump in t he genome. With the help of Tn5 we introduce adapters to genome. Concurrently, the DNA is sheared by the transposase activity. As a result, we obtain reads from an open chromatin regions. ATAC-Seq uses paired end reads. That means, two reads with two different adapters span a certain distance. However, we also have reads from closed chromatin regions, that is to say, read pairs that span at least one nucleosome or more. As you can imagine these read pairs span a bigger distance that the read pairs from open chromatin regions. Thus, we can filter based on this distance later on. After the Tn5 treatment, the read library is prepared for sequencing, including PCR amplification and purification steps.
+In order to find accessible (open) chromatin regions, the genome is treated with an enzyme called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome. Read the two links to get a deeper insight. With the help of Tn5 we introduce adapters into the genome and concurrently, the DNA is sheared by the transposase activity. As a result, we obtain reads from open chromatin regions. ATAC-Seq uses paired-end reads. That means, two reads with two different adapters span a certain distance. However, we also have reads from closed chromatin regions, that is to say, read pairs that span at least one nucleosome or more. As you can imagine these read pairs span a bigger distance than the read pairs from open chromatin regions. Thus, we can filter based on this distance in the analysis. After the Tn5 treatment, the read library is prepared for sequencing, including PCR amplification and purification steps.
 
 ## Data
-In this training material we will use data from human. The original dataset had 2 x 200 million reads. This would be too long to be processed in a training session. So, we downsampled the original dataset to 200,000 reads but added about 200,000 reads pairs that will map to chr22 to have a good profile on this chromosome similar to a 2 x 20 million reads original fastq. Furthermore, we want to compare the predicted open chromatin regions to known binding sites of a transcriptional repressor called [CTCF](https://en.wikipedia.org/wiki/CTCF). This will help us to find potential sites that are in accordance to potential silencer regions. For that reason, we will download predicted sites of CTCF from ENCODE (ENCSR361KVZ, dataset ENCFF049IPS).
+In this tutorial we will use data from the study of [Buenrostro et al., 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on ATAC-Seq. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and this would be too big to process in a training session. So, we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on a chromosome, similar to what you might get with a typical ATAC-seq sample (2 x 20 million reads in original fastq). Furthermore, we want to compare the predicted open chromatin regions to known binding sites of a transcriptional repressor called [CTCF](https://en.wikipedia.org/wiki/CTCF). This will help us to find sites that are potential silencer regions. For that reason, we will download predicted sites of CTCF from ENCODE (ENCSR361KVZ, dataset ENCFF049IPS).
 
 
 > ### Agenda
@@ -43,11 +43,11 @@ In this training material we will use data from human. The original dataset had 
 >
 {: .agenda}
 
-# Title for your first section
+# Preprocessing
 
 ## Get Data
 
-We first need to download the dataset that we downsampled as well as other annotations files. Then, to increase the number of reads that will map to the assembly (here Human genome version 38), we need to preprocess the reads.
+We first need to download the reads (fastqs) as well as other annotation files. Then, to increase the number of reads that will map to the reference genome (here Human genome version 38), we need to preprocess the reads.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -72,7 +72,7 @@ We first need to download the dataset that we downsampled as well as other annot
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype of the 2 fastq files is fasqsanger.gz
+> 4. Check that the datatype of the 2 fastq files is fastqsanger.gz
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -103,7 +103,7 @@ We first need to download the dataset that we downsampled as well as other annot
 
 ## Quality Control
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. When we do ATAC-Seq, two transposase could cut the DNA about 40 bp apart. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can do this with `FastQC`. The FastQC web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
+The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, two transposases could cut the DNA about 40 bp apart. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can do this with `FastQC`. The FastQC web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -128,7 +128,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > >
 >    > > 1) Per base sequence content
 >    > > > ### {% icon comment %} Tn5 sequence bias
->    > > > It is well known that the tn5 have a strong sequence bias at the insertion site. You can have more information about it reading [Green et al. 2012](https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3)
+>    > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can have more information about it reading [Green et al. 2012](https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3)
 >    > > {: .comment}
 >    > >
 >    > > 2) Sequence Duplication Levels
@@ -159,8 +159,7 @@ To trim the adapters we provide the Nextera adapter sequences to `Cutadapt`. The
 
 ![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera library with the sequence of adapters")
 
-The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. Shorter reads will either be thrown out by the mapping or disturb our results at
-the end.
+The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. We remove short reads (< 20bp) as they are not useful, they will either be thrown out by the mapping or may interfere with our results at the end.
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -199,7 +198,7 @@ the end.
 > ### {% icon question %} Questions
 >
 > 1. Which portion of reads contains adapters?
-> 2. How many reads were still longer than 20 after the trimming?
+> 2. How many reads are still longer than 20 after the trimming?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -227,7 +226,7 @@ the end.
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We use extended the maximum fragment length from 500 to 1000 because we know some valid pairs goes to this fragment length. We use the present **--very-sensitive** to have more chance to get the best match even if it is a bit longer. We run the **end-to-end** mode because we trimmed the adapters so we do not expect the read not to map fully.
+Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We will extend the maximum fragment length from 500 to 1000 because we know some valid pairs are from this fragment length. We will use the **--very-sensitive** parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed.
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
@@ -256,7 +255,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 
 > ### {% icon question %} Questions
 >
-> 1. What is the proportion of pairs which mapped concordantly?
+> 1. What proportion of read pairs mapped concordantly?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -268,9 +267,9 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 
 > ### {% icon comment %} Comment on the number of uniquely mapped.
 >
-> You could be surprised by the number of uniquely mapped compared to the number of multi-mapped reads.
+> You might be surprised by the number of uniquely mapped compared to the number of multi-mapped reads.
 > One of the reason is that we have used the parameter **--very-sensitive**. Bowtie2 considers a read as multi-mapped even if the second hit has a much lower quality than the first one.
-> Another reason is, that we have reads that map to the mitochondrial genome. The mitochondrial genome has a lot of other places where a read could map.
+> Another reason is, that we have reads that map to the mitochondrial genome. The mitochondrial genome has a lot of regions with similar sequence where a read could map.
 >
 {: .comment}
 
@@ -280,7 +279,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 
 We apply some filters to the reads after the mapping. ATAC-seq datasets can have a lot of reads that map to the mitchondrial genome. The mitchondrial genome is uninteresting for ATAC-Seq, thus we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filtering of uninformative reads
 >
 > 1. **Filter** BAM datasets on a variety of attributes {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
@@ -305,8 +304,8 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 
 > ### {% icon question %} Questions
 >
-> 1. Based on the files size, what proportion of alignment were removed?
-> 2. Which parameter should be modified if I am interested in repetitive regions?
+> 1. Based on the file size, what proportion of alignments was removed (approximately)?
+> 2. Which parameter should be modified if you are interested in repetitive regions?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -331,7 +330,7 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 
 ## Filter Duplicate Reads
 
-Because of the PCR amplification, there might be PCR duplicates which would over amplify some genomic regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider that such fragments to be PCR duplicates. We will remove them with `Picard`.
+Because of the PCR amplification, there might be duplicates (reads mapping to exactly the same genomic region) from overamplification of some regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider such fragments to be PCR duplicates. We will remove them with `Picard`.
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
@@ -341,7 +340,7 @@ Because of the PCR amplification, there might be PCR duplicates which would over
 >
 >    > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
 >    >
->    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to be able to filter them afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
+>    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
 >    {: .comment}
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the MarkDuplicate metrics.
@@ -352,8 +351,8 @@ Because of the PCR amplification, there might be PCR duplicates which would over
 > ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDup.png "Metrics of MarkDuplicates")
 {: .comment}
 
-> ### {% icon tip %} Tip: Getting the header for the data of the MarkDuplicate metrics
-> You can copy/paste the 2 lines with header and data in an excel sheet.
+> ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
+> You can copy/paste the 2 lines with header and data into an Excel sheet.
 > Replace `Unknown Library` by `Unknown_Library` in the second line.
 > Then do Text to Columns (it is space delimited data). You should check the box for Treat consecutive delimiters as one.
 > Now you should have:
@@ -378,7 +377,7 @@ Because of the PCR amplification, there might be PCR duplicates which would over
 
 ## Check Insert Sizes
 
-We will check the insert sizes (the distance between the first and second read) with `Picard CollectInsertSizeMetrics`. This is a very good indication of the quality of the ATAC-Seq.
+We will check the insert sizes (the distance between the first and second read) with `Picard CollectInsertSizeMetrics`. This gives a very good indication of the quality of the ATAC-Seq.
 
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
@@ -397,7 +396,7 @@ We will check the insert sizes (the distance between the first and second read) 
 
 > ### {% icon question %} Questions
 >
-> 1. Except the first peak, which peak corresponds to our insert size? Could you guess the size of the DNA protected by a nucleosome?
+> 1. Excluding the first peak, what is the predominant insert size? Could you guess the size of the DNA protected by a nucleosome?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -408,7 +407,7 @@ We will check the insert sizes (the distance between the first and second read) 
 {: .question}
 
 This fragment size distribution is a good indication if your experiment worked or not.
-In absence of chromatin (without nucleosome), this is the profiles you would get:
+In absence of chromatin (without nucleosome), this is the profile you would get:
 
 ![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA")
 
@@ -423,7 +422,7 @@ Here are examples of Fragment size distributions of ATAC-Seq which were very noi
 A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome "peak".
 ![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
 
-> ### {% icon comment %} Comment on fr and rf
+> ### {% icon comment %} Comment on FR and RF
 >
 > FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role.
 {: .comment}
@@ -432,11 +431,10 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 
 ## Call Peaks
 
-We are now finished with the data preprocessing. Now, in order to find regions corresponding to potential open chromatin regions, we need a tool that can identify differntial covered regions. That is to say, we have to estimate the background read coverage and compare it
-with each read stack to find out if some read stacks (peaks) are bigger than the background (enriched). We use `Genrich` for that reason. It is very important at this point that we center the reads on the 5' extermity (where the Tn5 cut). You want actually your peaks around the nucleosomes and not directly on the nucleosome:
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we need a tool that can identify differentially covered regions of the genome. That is to say, we want to identify regions where reads have piled up (peaks) greater than the background read coverage, to find out if some peaks are enriched. We use `Genrich` for that reason. It is very important at this point that we center the reads on the 5' extremity (where the Tn5 cut). You want your peaks around the nucleosomes and not directly on the nucleosome:
 ![Scheme of ATAC-seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-seq reads relative to nucleosomes")
 
-If we only make a coverage of 5' extremities, the data would be too parse and it would be impossible to call peaks. Thus, we will make a coverage of 5' extremities extended to 100 bp in each direction.
+If we only make a coverage of 5' extremities, the data would be too sparse and it would be impossible to call peaks. Thus, we will make a coverage of 5' extremities extended to 100 bp in each direction.
 
 > ### {% icon comment %} Comment on Tn5 insertion
 >
@@ -446,7 +444,7 @@ If we only make a coverage of 5' extremities, the data would be too parse and it
 > This means that the 5' extremity of the read is not really the center of the staggered position but reads on the positive strand should be shifted 5 bp to the right and reads on the negative strands should be shifted 4 bp to the left. Here we are focusing on broad regions so we will not apply these shifts.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Identifying enriched genomic regions
 >
 > 1. **Genrich** {% icon tool %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
@@ -458,20 +456,18 @@ If we only make a coverage of 5' extremities, the data would be too parse and it
 >        - *"Use ATAC-seq mode."*: `Yes`
 >        - *"Expand cut sites."*: `100`
 >
->
 {: .hands_on}
 
 # Visualisation of Coverage
 
 ## Prepare the Datasets
 
-Thanks to `Genrich` we now have a coverage which represent the coverage of the 5' extremities extended 100 bp to each side.
-The output of `Genrich` is in a bedgraph format. It is easily readable for human (4 columns text format) but it can be very large and the access to a specific region is quite slow.
-We will change it to bigwig format which is a binary format, where we can access very quickly any region of the genome.
+Thanks to `Genrich` we now have a coverage file which represents the coverage of the 5' extremities extended 100 bp to each side.
+The output of `Genrich` is in a bedgraph format. It is easily readable for human (4 columns text format) but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, where we can visualise any region of the genome very quickly.
 
 ### Convert BedGraph to bigWig
 
-> ### {% icon hands_on %} Hands-on: Convert the MACS2 coverage to bigWig.
+> ### {% icon hands_on %} Hands-on: Convert bedgraph to bigWig.
 >
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
@@ -484,7 +480,7 @@ We will change it to bigwig format which is a binary format, where we can access
 {: .hands_on}
 
 ### Convert NarrowPeak to BED3
-In order to visualize a specific region (e.g., the gene *YDJC*), we can either use a genome browser like `IGV` or `UCSC browser`, or use `pyGenomeTracks` to make publishable figures. For the moment, `pyGenomeTracks` require specific formats. To be able to display peaks, we will convert the narrowPeak file from **Genrich callpeak** {% icon tool %} into a BED3 format (only 3 columns).
+In order to visualize a specific region (e.g., the gene *YDJC*), we can either use a genome browser like `IGV` or `UCSC browser`, or use `pyGenomeTracks` to make publishable figures. We will use `pyGenomeTracks`. Currently `pyGenomeTracks` requires specific formats to be able to display peaks. We will convert the narrowPeak file from **Genrich callpeak** {% icon tool %} into a BED3 format (only 3 columns).
 
 > ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
 >
@@ -567,7 +563,7 @@ The tool **pyGenomeTracks** needs all bed files sorted, thus we sort the annotat
 > > ### {% icon solution %} Solution
 > >
 > > 1. We can see 7 TSS for 9 transcripts. 2 of them correspond to ATAC-Seq peaks and the TSS of YDJC has a high signal even though it is not significant.
-> > 2. We can see 8 CTCF peaks. Only 1 of them is also called significantly by MACS2 in the ATAC-Seq dataset. The TSS of YDJC has high signal and is also a CTCF bound locus but it is not called a peak by the MACS2 algorithm.
+> > 2. We can see 8 CTCF peaks. Only 1 of them is also called significantly by Genrich in the ATAC-Seq dataset. The TSS of YDJC has high signal and is also a CTCF bound locus but it is not called a peak by the Genrich algorithm.
 > >
 > {: .solution}
 >
@@ -599,9 +595,9 @@ The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will
 {: .hands_on}
 
 
-## Sub-step with **plotHeatmap**
+## Plot with **plotHeatmap**
 
-We will now generate a heatmap. Each line will be a transcript. The coverage, will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top the of heatmap, will show the mean signal at the TSS.
+We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
 
 > ### {% icon hands_on %} Hands-on: Generate the heatmap
 >
@@ -619,7 +615,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage, wi
 > ### {% icon question %} Questions
 >
 > 1. What is the mean value in genes?
-> 2. Is the coverage symetric?
+> 2. Is the coverage symmetric?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -642,7 +638,6 @@ with `Bowtie2`, filtered our reads for properly paired, good quality and reads t
 map to the mitochondrial genome. We found open chromatin regions with `Genrich`, which
 is a tool to find differential covered regions (peak calling). We visualized the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. Last but not least, we investigated the read coverage of our ATAC-Seq experiment around TSS with the help of `computeMatrix` and `plotHeatmap`. At the end, we found
 open chromatin regions that overlapped with CTCF sites, which pronounce potential silencer regions that we have covered with our ATAC-Seq experiment. These regions are located in genes, but could also be upstream or downstream for some other genes.
-
 
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
