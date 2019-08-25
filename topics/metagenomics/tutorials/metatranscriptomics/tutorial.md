@@ -55,9 +55,9 @@ Metatranscriptomics analysis enables understanding of how the microbiome respond
 
 To illustrate how to analyze metatranscriptomics data, we will use data from time-serie analysis of a microbial community inside a bioreactor ({% cite kunath2018proteins %}). They generated metatranscriptomics data for 3 replicates over 7 time points. RNAs were enriched by rRNA depletion and treated with DNAse and library was prepared with the TruSeq stranded RNA sample preparation, which included the production of a cDNA library. 
 
-In this tutorial, we focus on biological replicate A and the 1st time point, but [in a follow-up tutorial we illustrate how compare the results over the different time points and replicates]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}). The input files used here were trimmed out the original file for the purpose of saving time and resources. 
+In this tutorial, we focus on biological replicate A of the 1st time point, but [in a follow-up tutorial we illustrate how compare the results over the different time points and replicates]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}). The input files used here are trimmed version of the original file for the purpose of saving time and resources. 
 
-To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM ({% cite batut2018asaim %}) is an open-source Galaxy-based workflow that enables microbiome analyses. Its workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.
+To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM ({% cite batut2018asaim %}) is an open-source Galaxy-based workflow that enables microbiome analyses. It's workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.
 
 This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input and:
 1. preprocess
@@ -155,10 +155,10 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 2. How is the quality score over the reads? And the mean score?
 > 3. Is there any bias in base content?
 > 4. How is the GC content?
-> 5. Is there any unindentified bases?
-> 6. Is there duplicated sequences?
-> 7. Is there over-represented sequences?
-> 8. Is there still some adapters left?
+> 5. Are there any unindentified bases?
+> 6. Are there duplicated sequences?
+> 7. Are there over-represented sequences?
+> 8. Are there still some adapters left?
 > 9. What should we do?
 >
 > > ### {% icon solution %} Solution
@@ -316,7 +316,7 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 
 ## Interlace forward and reverse reads
 
-The tools for taxonomic and functional annotations need one file as input, even with paired-end data. We then need to join the two separate files (forward and reverse) to create a single interleaced file, using **FASTQ interlacer**, in which the forward reads have `/1` in their id and reverse reads `/2`. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
+The tools for taxonomic and functional annotations need single file as input, even with paired-end data. We need to join the two separate files (forward and reverse) to create a single interleaced file, using **FASTQ interlacer**, in which the forward reads have `/1` in their id and reverse reads `/2`. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
 
 We will run **FASTQ interlacer** on the outputs of **Cutadapt** but also on the unaligned (non rRNA) reads from **SortMeRNA**.
 
@@ -397,7 +397,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
     >
     > 1. How many taxon have been identified?
     > 2. What are the different taxonomic levels we have access to with MetaPhlAn2?
-    > 3. Which genus and species are found in our sample?
+    > 3. What genus and species are found in our sample?
     > 4. Do we have only bacteria identified in our sample?
     >
     > > ### {% icon solution %} Solution
@@ -485,7 +485,7 @@ Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and 
 >
 > 1. **Export to GraPhlAn** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `Community profile` (output of **MetaPhlAn2**)
->    - *"List which levels should be annotated in the tree"*: `1,2``
+>    - *"List which levels should be annotated in the tree"*: `1,2`
 >    - *"List which levels should use the external legend for the annotation"*: `3,4,5`
 >    - *"List which levels should be highlight with a shaded background"*: `1`
 > 
@@ -768,7 +768,7 @@ The gene families can be a long list of ids and going through the gene families 
 
 # Combine taxonomic and functional information
 
-With **MetaPhlAn2** and **HUMAnN2**, we investigated "Which micro-organims are present in my sample?" and "What function are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
+With **MetaPhlAn2** and **HUMAnN2**, we investigated "Which micro-organims are present in my sample?" and "What functions are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
 
 In the **HUMAnN2** output, gene families and pathways and their abundance may be related to a species. But the relative abundance of the species is not indicated. We would like now to extract for each gene families/pathways and the corresponding taxonomic stratification, the relative abundance of this gene family/pathway and the relative abundance of corresponding species and genus. 
 
