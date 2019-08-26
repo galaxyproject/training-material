@@ -24,14 +24,16 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (heterochromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with DNA. If the DNA is transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex (euchromatin). Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **Assay for Transposase-Accessible Chromatin with high-throughput sequencing ([ATAC-Seq](https://en.wikipedia.org/wiki/Transposable_element))** is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify potential promoter regions including enhancers and silencers. A promoter is the potential start and regulatory site of the gene. An enhancer, often located in the promoter or the downstream area of the gene, can increase the transcription of a gene. In contrast, a silencer decreases or inhibits the gene's expression.
+In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (heterochromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with DNA. If the DNA is transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex (euchromatin). Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **Assay for Transposase-Accessible Chromatin with high-throughput sequencing ([ATAC-Seq](https://en.wikipedia.org/wiki/ATAC-seq))** is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site. It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind it and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene's expression.
 
 ![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
 
-In order to find accessible (open) chromatin regions, the genome is treated with an enzyme called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome. Read the two links to get a deeper insight. With the help of Tn5 we introduce adapters into the genome and concurrently, the DNA is sheared by the transposase activity. As a result, we obtain reads from open chromatin regions. ATAC-Seq uses paired-end reads. That means, two reads with two different adapters span a certain distance. However, we also have reads from closed chromatin regions, that is to say, read pairs that span at least one nucleosome or more. As you can imagine these read pairs span a bigger distance than the read pairs from open chromatin regions. Thus, we can filter based on this distance in the analysis. After the Tn5 treatment, the read library is prepared for sequencing, including PCR amplification and purification steps.
+In order to find accessible (open) chromatin regions, the genome is treated with an enzyme called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). With the help of Tn5 we introduce adapters into the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification and purification steps. 
+
+As a result, we obtain reads from open chromatin regions. ATAC-Seq uses paired-end reads. That means, two reads with two different adapters sequencing the extremities of a fragment which spans a certain distance. However, we also have fragments that span one nucleosome or more. As you can imagine, these fragments span a bigger distance than most of the fragments from open chromatin regions (with no nucleosome). Thus, we can filter the reads based on this distance in the analysis.
 
 ## Data
-In this tutorial we will use data from the study of [Buenrostro et al., 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on ATAC-Seq. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and this would be too big to process in a training session. So, we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on a chromosome, similar to what you might get with a typical ATAC-seq sample (2 x 20 million reads in original fastq). Furthermore, we want to compare the predicted open chromatin regions to known binding sites of a transcriptional repressor called [CTCF](https://en.wikipedia.org/wiki/CTCF). This will help us to find sites that are potential silencer regions. For that reason, we will download predicted sites of CTCF from ENCODE (ENCSR361KVZ, dataset ENCFF049IPS).
+In this tutorial we will use data from the study of [Buenrostro et al., 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on ATAC-Seq. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and this would be too big to process in a training session. So, we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-seq sample (2 x 20 million reads in original fastq). Furthermore, we want to compare the predicted open chromatin regions to known binding sites of a well-known DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). This protein binds between 15 and 40 thousand sites genome-wide and thus generate a region of open chromatin around it. It can be used as a positive control for good quality of ATAC-Seq. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000DZN, dataset ENCFF117WKK).
 
 
 > ### Agenda
@@ -56,23 +58,22 @@ We first need to download the reads (fastqs) as well as other annotation files. 
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) and [ENCODE](https://www.encodeproject.org/experiments/ENCSR361KVZ/) or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) and [ENCODE](https://www.encodeproject.org/) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
 >    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
->    https://www.encodeproject.org/files/ENCFF049IPS/@@download/ENCFF049IPS.bed.gz
+>    https://www.encodeproject.org/files/ENCFF117WKK/@@download/ENCFF117WKK.bed.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype of the 2 fastq files is fastqsanger.gz
+> 4. Check that the datatype of the 2 fastq files is fastqsanger.gz and the bed file is bed.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -95,6 +96,7 @@ We first need to download the reads (fastqs) as well as other annotation files. 
 >    - *"group"*: `Genes and Gene Prediction`
 >    - *"track"*: `GENCODE v29`
 >    - *"table"*: `knownGene`
+>    - *"region"*: `position` `chr22`
 >    - *"output format"*: `BED - browser extensible data`
 >    - *"Send output to"*: `Galaxy`
 > 2. Click **get output**
@@ -157,7 +159,7 @@ The first step is to check the quality of the reads and the presence of the Next
 
 To trim the adapters we provide the Nextera adapter sequences to `Cutadapt`. These adapters are shown in the image below.
 
-![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg "Nextera library with the sequence of adapters")
+![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg.png "Nextera library with the sequence of adapters")
 
 The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. We remove short reads (< 20bp) as they are not useful, they will either be thrown out by the mapping or may interfere with our results at the end.
 
@@ -203,7 +205,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 > > ### {% icon solution %} Solution
 > >
 > > 1. 15%
-> > 2. 284,864 (99.9%)
+> > 2. 283,155 (99.3%)
 > >
 > {: .solution}
 >
@@ -238,7 +240,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
->        - *"Select reference genome"*: ``
+>        - *"Select reference genome"*: `Human Dec. 2013 (GRCh38/hg38 (hg38)`
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1: Default setting only`
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
@@ -259,7 +261,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 53.85+43.40=97.25%
+> > 1. 54.07+43.63=97.7%
 > >
 > {: .solution}
 >
@@ -284,9 +286,9 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 > 1. **Filter** BAM datasets on a variety of attributes {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
->        - {% icon param-repeat %} *"Insert Condition"*
+>        - *"1: Condition"*
 >            - In *"Filter"*:
->                - {% icon param-repeat %} *"Insert Filter"*
+>                - *"1: Filter"*
 >                    - *"Select BAM property to filter on"*: `mapQuality`
 >                        - *"Filter on read mapping quality (phred scale)"*: `>=30`
 >                - {% icon param-repeat %} *"Insert Filter"*
@@ -321,7 +323,6 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 > > > There are 221 000 reads which map to chrM and 170 000 which map to chr22.
 > > {: .tip}
 > >
-> > 1. Most of these removed alignments mapped to chrM.
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
 > {: .solution}
@@ -355,6 +356,7 @@ Because of the PCR amplification, there might be duplicates (reads mapping to ex
 > You can copy/paste the 2 lines with header and data into an Excel sheet.
 > Replace `Unknown Library` by `Unknown_Library` in the second line.
 > Then do Text to Columns (it is space delimited data). You should check the box for Treat consecutive delimiters as one.
+> Finally you copy and paste special your table to transpose it.
 > Now you should have:
 >
 > ![Metrics of MarkDuplicates in Excel](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates in Excel")
@@ -368,8 +370,8 @@ Because of the PCR amplification, there might be duplicates (reads mapping to ex
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 132911
-> > 2. 3515
+> > 1. 133284
+> > 2. 3549
 > >
 > {: .solution}
 >
@@ -396,11 +398,12 @@ We will check the insert sizes (the distance between the first and second read) 
 
 > ### {% icon question %} Questions
 >
-> 1. Excluding the first peak, what is the predominant insert size? Could you guess the size of the DNA protected by a nucleosome?
+> 1. Excluding the first peak around 50bp, what is the predominant insert size? Could you guess the size of the DNA protected by a nucleosome?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. A bit less than 200bp. This is exactly the distance where both Tn5 cuts were in the same accessible chromatin depleted region of the nucleosome. Other peaks correspond to events where at least one nucleosome was between the 2 cuts of Tn5.
+> > 1. A bit less than 200bp.
+> > The first peak (50bp) corresponds to the distance where both Tn5 cuts were in the same accessible chromatin region (depleted of nucleosome). The second peak (a bit less than 200bp) corresponds to events eactly around a single nucleosome. The third one (around 400bp) is for two adjacent nucleosomes etc...
 > >
 > {: .solution}
 >
@@ -434,11 +437,11 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we need a tool that can identify differentially covered regions of the genome. That is to say, we want to identify regions where reads have piled up (peaks) greater than the background read coverage, to find out if some peaks are enriched. We use `Genrich` for that reason. It is very important at this point that we center the reads on the 5' extremity (where the Tn5 cut). You want your peaks around the nucleosomes and not directly on the nucleosome:
 ![Scheme of ATAC-seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-seq reads relative to nucleosomes")
 
-If we only make a coverage of 5' extremities, the data would be too sparse and it would be impossible to call peaks. Thus, we will make a coverage of 5' extremities extended to 100 bp in each direction.
+If we only make a coverage of 5' extremities, the data would be too sparse and it would be impossible to call peaks. Thus, we will make a coverage of 5' extremities extended to 50 bp in each direction.
 
 > ### {% icon comment %} Comment on Tn5 insertion
 >
-> When Tn5 staggers to an accessible chromatin locus, it will join the Mosaic Ends (which will be used to make the library) to the top and bottom 3'OH extremity of a 9 bp DNA molecule  [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
+> When Tn5 staggers to an accessible chromatin locus, it will join the Mosaic Ends (single-strand DNA fragments which will be used to make the library) to the top and bottom 3'OH extremity of a 9 bp DNA molecule  [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
 > This means that the 5' extremity of the read is not really the center of the staggered position but reads on the positive strand should be shifted 5 bp to the right and reads on the negative strands should be shifted 4 bp to the left. Here we are focusing on broad regions so we will not apply these shifts.
@@ -455,6 +458,8 @@ If we only make a coverage of 5' extremities, the data would be too sparse and i
 >    - *"ATAC Options"*:
 >        - *"Use ATAC-seq mode."*: `Yes`
 >        - *"Expand cut sites."*: `100`
+>    - *"Output Options"*:
+>        - *"Bedgraph-ish Pileups"*: `Yes`
 >
 {: .hands_on}
 
@@ -462,16 +467,20 @@ If we only make a coverage of 5' extremities, the data would be too sparse and i
 
 ## Prepare the Datasets
 
-Thanks to `Genrich` we now have a coverage file which represents the coverage of the 5' extremities extended 100 bp to each side.
-The output of `Genrich` is in a bedgraph format. It is easily readable for human (4 columns text format) but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, where we can visualise any region of the genome very quickly.
+Thanks to `Genrich` we now have a coverage file which represents the coverage of the 5' extremities extended 50 bp to each side.
+The output of `Genrich` is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualize it. The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, where we can visualise any region of the genome very quickly.
 
-### Convert BedGraph to bigWig
+### Convert BedGraph-ish pileup to bigWig
 
-> ### {% icon hands_on %} Hands-on: Convert bedgraph to bigWig.
+> ### {% icon hands_on %} Hands-on: Convert bedgraph-ish pileup to bigWig.
 >
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
 >    - *"AWK Program"*: `NR>=3 {print $1,$2,$3,$4}`
+>    > ### {% icon comment %} Comment: From BedGraph-ish pileup to bedgraph
+>    >
+>    > The awk program will read each line of the output of **Genrich** {% icon tool %}, when the number of the line is greater or equal to 3 (NR>=3), it will write the first 4 columns (print $1,$2,$3,$4) into a new file.
+>    {: .comment}
 >
 > 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Convert"*: Select the output of **Text reformatting with awk** {% icon tool %} *"Bedgraph"*.
@@ -479,31 +488,13 @@ The output of `Genrich` is in a bedgraph format. It is easily readable for human
 >
 {: .hands_on}
 
-### Convert NarrowPeak to BED3
-In order to visualize a specific region (e.g., the gene *YDJC*), we can either use a genome browser like `IGV` or `UCSC browser`, or use `pyGenomeTracks` to make publishable figures. We will use `pyGenomeTracks`. Currently `pyGenomeTracks` requires specific formats to be able to display peaks. We will convert the narrowPeak file from **Genrich callpeak** {% icon tool %} into a BED3 format (only 3 columns).
+### Sort CTCF Peaks
+In order to visualize a specific region (e.g., the gene *YDJC*), we can either use a genome browser like `IGV` or `UCSC browser`, or use `pyGenomeTracks` to make publishable figures. We will use `pyGenomeTracks`. The tool **pyGenomeTracks** {% icon tool %} needs all bed files sorted, thus we sort the CTCF peaks.
 
-> ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
->
-> 1. **Cut** columns from a table {% icon tool %} with the following parameters:
->    - *"Cut columns"*: `c1,c2,c3`
->    - *"Delimited by"*: `Tab`
->    - {% icon param-file %} *"From"*: Select the output of **Genrich** {% icon tool %} *"Peaks (encodepeak)"*.
+> ### {% icon hands_on %} Hands-on: Sort the BED files
 >
 > 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: Select the output of **Cut** {% icon tool %} *"interval"*.
->
-{: .hands_on}
-
-### Sort Annotation and CTCF Regions
-The tool **pyGenomeTracks** needs all bed files sorted, thus we sort the annotation file and the CTCF regions.
-
-> ### {% icon hands_on %} Hands-on: Convert peaks to BED3 format
->
-> 1. **bedtools SortBED** order the intervals {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"hg38.bed"*.
->
-> 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"CTCF.bed"*.
+>    - {% icon param-file %} *"ENCFF117WKK.bed.gz"*.
 >
 {: .hands_on}
 
@@ -514,34 +505,35 @@ The tool **pyGenomeTracks** needs all bed files sorted, thus we sort the annotat
 > 1. **pyGenomeTracks** {% icon tool %} with the following parameters:
 >    - *"Region of the genome to limit the operation"*: `chr22:21,620,000-21,660,000`
 >    - In *"Include tracks in your plot"*:
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>        - *"1. Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Bigwig track `
->                - *"Plot title"*: `Coverage from macs2 (extended +/-100bp)`
+>                - *"Plot title"*: `Coverage from Genrich (extended +/-50bp)`
 >                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
 >                - *"Color of track"*: Select the color of your choice
->                - *"Minimum value"*: `0`
->                - *"Maximum value"*: `40.0`
 >                - *"height"*: `5.0`
 >                - *"data_range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
->                - *"Plot title"*: `Peaks from macs2 (extended +/-100bp)`
+>                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
 >                - {% icon param-file %} *"Track file bed format"*: Select the output of **bedtools SortBED** {% icon tool %}.
 >                - *"Color of track"*: Select the color of your choice
 >                - *"Plot labels"*: `No`
+>                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of hg38.bed`
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `UCSC Main on Human: knownGene (chr22:1-50,818,468)`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"height"*: `5.0`
->                - *"Type"*: `genes`
+>                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of CTCF.bed`
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of ENCFF117WKK.bed.gz`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"Plot labels"*: `No`
+>                - *"Include spacer at the end of the track"*: `0.5`
 >    - *"Configure x-axis"*: `Yes`
 >        - *"Where to place the x-axis"*: `Bottom`
 >
