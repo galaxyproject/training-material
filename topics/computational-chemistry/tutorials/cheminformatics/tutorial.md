@@ -1,16 +1,20 @@
 ---
 layout: tutorial_hands_on
 
-title: Protein docking
+title: Protein-ligand docking
 zenodo_link: ''
 questions:
-- What is docking?
+- What is cheminformatics?
+- What is protein-ligand docking?
 - How can I perform a simple docking workflow in Galaxy?
 objectives:
+- Create a miniature compound library using the ChEMBL database
 - Dock a variety of ligands to the active site of the Hsp90 protein
 time_estimation: 3H
 key_points:
 - Docking allows 'virtual screening' of drug candidates
+- Molecular fingerprints encode features into a bitstring
+- The ChemicalToolbox contains many tools for cheminformatics analysis
 contributors:
 - simonbray
 
@@ -158,27 +162,6 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 
 # Aside: other options for the compound library
 
-The ChemicalToolBox contains a large number of cheminformatics tools. This section will demonstrate some of the useful functionalities available. If you are just interested in docking, feel free to skip this section - or, just try out the tools which look particularly interesting.
-
-### Visualization
-
-It can be useful to visualize the compounds generated. There is a tool available for this in Galaxy based on OpenBabel, an open-source library for analyzing chemical data.
-
-> ### {% icon hands_on %} Hands-on: Visualization of chemical structures
->
-> 1. **Visualisation** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Molecular input file"*: Compound library
->    - {% icon param-file %} *"Embed molecule as CML"*: `No`
->    - {% icon param-file %} *"Draw all carbon atoms"*: `No`
->    - {% icon param-file %} *"Use thicker lines"*: `No`
->    - {% icon param-file %} *"Property to display under the molecule"*: `Molecule title`
->    - {% icon param-file %} *"Sort the displayed molecules by"*: `Molecular weight`
->    - {% icon param-file %} Format of the resultant picture"*: `SVG`
->
-{: .hands_on}
-
-This produces an SVG image of all the structures generated ordered by molecular weight.
-
 <!-- Add hydrogen atoms at a certain pH value
 Calculate molecular descriptors with Mordred
 Change title to metadata value.
@@ -205,6 +188,26 @@ Substructure Search of fingerprint data sets
 Taylor-Butina Clustering of molecular fingerprints
 Visualisation of compounds -->
 
+The ChemicalToolBox contains a large number of cheminformatics tools. This section will demonstrate some of the useful functionalities available. If you are just interested in docking, feel free to skip this section - or, just try out the tools which look particularly interesting.
+
+### Visualization
+
+It can be useful to visualize the compounds generated. There is a tool available for this in Galaxy based on OpenBabel, an open-source library for analyzing chemical data.
+
+> ### {% icon hands_on %} Hands-on: Visualization of chemical structures
+>
+> 1. **Visualisation** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Molecular input file"*: Compound library
+>    - {% icon param-file %} *"Embed molecule as CML"*: `No`
+>    - {% icon param-file %} *"Draw all carbon atoms"*: `No`
+>    - {% icon param-file %} *"Use thicker lines"*: `No`
+>    - {% icon param-file %} *"Property to display under the molecule"*: `Molecule title`
+>    - {% icon param-file %} *"Sort the displayed molecules by"*: `Molecular weight`
+>    - {% icon param-file %} Format of the resultant picture"*: `SVG`
+>
+{: .hands_on}
+
+This produces an SVG image of all the structures generated ordered by molecular weight.
 
 ![Hsp90 N-terminus structure]({{ site.baseurl }}{% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
 
@@ -242,6 +245,10 @@ Taylor-Butina clustering provides a classification of the compounds into differe
 
 ![Fingerprinting]({{ site.baseurl }}{% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case the presence of phenyl, amine and carboxylic acid groups are encoded.")
 
+The image produced by the NxN clustering shows the clustering in the form of a dendrogram.
+
+![NxN clustering]({{ site.baseurl }}{% link topics/computational-chemistry/images/nxn.png %} "Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 70, hence 51 search results are shown, plus the original ligands contained in the PDB file.")
+
 > ### {% icon details %} Further investigation (optional)
 >
 > * Try generating fingerprints using some of the other nine different protocols available and monitor how this affects the clustering.
@@ -264,15 +271,16 @@ In addition, docking requires the coordinates of a binding site to be defined. E
 
 > ### {% icon hands_on %} Hands-on: Generate PDBQT and config files for docking
 >
-> 1. **Prepare receptor** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select a PDB file"*: 'Protein' file.
+> 1. **Compound conversion** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Molecular input file"*: 'Protein' file.
+>    - {% icon param-file %} *"Output format"*: `PDBQT input format`.
+>    - Leave all other options unchanged.
 >    - Rename to 'Protein PDBQT'.
-> 2. **Prepare ligands for docking** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"The ligands which need to be prepared"*: 'Compound library' file.
->    - {% icon param-file %} *"Specify pH value"*: `7.4`
->    - {% icon param-file %} *"Generate 3D coordinates (--gen3d)"*: `Yes`
+> 2. **Compound conversion** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Molecular input file"*: 'Compound library' file.
 >    - {% icon param-file %} *"Output format"*: `PDBQT`
->    - A collection of 'Prepared ligands' will be created.
+>    - {% icon param-file %} *"Split multi-molecule files into a collection"*: `Yes`
+>    - Leave all other options unchanged.
 > 3. **Calculate the box parameters for an AutoDock Vina job** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input ligand"*: 'Ligand (MOL) file.
 >    - {% icon param-file %} *"x-axis buffer"*: `5`
@@ -297,4 +305,54 @@ Finally, the docking itself can be performed.
 >    - {% icon param-file %} *"Output format"*: `PDBQT (and separate file with binding scores)`
 {: .hands_on}
 
-The output consists of two collections, containing respectively structural files (PDBQT format) and scoring files for each of the ligands 
+The output consists of two collections, containing respectively structural files (PDBQT format) and scoring files for each of the ligands.
+
+View one of the scoring files (click on the eye icon in the history pane). You will see something that looks like this:
+
+```
+#################################################################
+# If you used AutoDock Vina in your work, please cite:          #
+#                                                               #
+# O. Trott, A. J. Olson,                                        #
+# AutoDock Vina: improving the speed and accuracy of docking    #
+# with a new scoring function, efficient optimization and       #
+# multithreading, Journal of Computational Chemistry 31 (2010)  #
+# 455-461                                                       #
+#                                                               #
+# DOI 10.1002/jcc.21334                                         #
+#                                                               #
+# Please see http://vina.scripps.edu for more information.      #
+#################################################################
+
+Reading input ... done.
+Setting up the scoring function ... done.
+Analyzing the binding site ... done.
+Using random seed: 1
+Performing search ... done.
+Refining results ... done.
+
+mode |   affinity | dist from best mode
+     | (kcal/mol) | rmsd l.b.| rmsd u.b.
+-----+------------+----------+----------
+   1         -9.2      0.000      0.000
+   2         -8.9      2.290      5.660
+   3         -7.9      2.782      5.767
+   4         -7.6      3.125      7.494
+   5         -7.5      2.628      7.444
+   6         -7.2      3.453      7.822
+   7         -6.9      2.625      7.542
+   8         -6.8      3.596      6.902
+   9         -6.7      3.293      8.765
+  10         -6.0      3.263      7.244
+  11         -5.4      3.513      7.115
+  12         -4.7      3.316      5.864
+  13         -4.7      3.125      6.982
+  14         -3.1      3.911      8.546
+  15         37.0      4.403      6.901
+Writing output ... done.
+
+```
+
+In the table, fifteen different binding modes are listed, from most to least energetically favorable. The second column shows the binding affinity in kcal/mol. The first row shows the most favorable binding mode. Thus we can see that the optimal binding energy of the ligand is -9.2 kcal/mol (or in SI units, -38.5 kJ/mol).
+
+Compare the optimal binding energies for several ligands, selecting examples from different NxN clusters.
