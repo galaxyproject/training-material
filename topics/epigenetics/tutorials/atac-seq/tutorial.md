@@ -116,7 +116,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1.fastq.gz` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1.fastq.gz` and `SRR891268_R2.fastq.gz`.
 > 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check which are the adapters found at the end of the reads.
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
 >    > How many reads are in the FASTQ?
 >    >
