@@ -62,7 +62,7 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >
 > 5. **Cut** {% icon tool %} columns from a table:
 >
->    - *"Cut columns"*: `c8,c20`
+>    - *"Cut columns"*: `c11,c20`
 >    - *"From"*: the genome_proks.txt file you uploaded
 >
 {: .hands_on}
@@ -218,7 +218,7 @@ Now everything is loaded and ready to go. We will now align our assembly against
 > ### {% icon hands_on %} Hands-on: Running LASTZ
 > 1. **LASTZ** {% icon tool %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
->   - {% icon param-files %} *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
+>   - {% icon param-collection %} *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
 >   - {% icon param-file %} *"Select QUERY sequence(s)"*: our assembly which was prepared in the previous step.
 >   - *"Perform chaining of HSPs with no penalties"*: `Yes` (in **Chaining** section)
 >   - *"Specify the output format"*: `blastn` (in **Output** section)
@@ -417,7 +417,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       > This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:
 >       >
 >       > ```json
->       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"collection_name","columns":[2]},{"type":"url","columns":[1]}]}
+>       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":0,"expression":"\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
 >       > ```
 >       >
 >       > You can click the {% icon tool %} next to the header **Rules** {% icon tool %}, and paste the contents there, before clicking **Apply**, and then **Upload**.
@@ -459,6 +459,19 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >    6. From **Column**, select `Fixed Value`
 >       - *"Value"*: `DNA`
 >       - Click `Apply`
+>    3. From **Column**, select `Using a Regular Expression`
+>       - *"From Column"*: `B`
+>       - Select `Create columns matching expression groups`
+>       - *"Regular Expression"*: `\/(.*)`
+>       - *"Number of Groups"*: `1`
+>       - Click `Apply`
+>    9. From **Rules** menu, select `Swap Column(s)`
+>       - *"Swap Column"*: `A`
+>       - *"With Column"*: `F`
+>       - Click `Apply`
+>    8. From **Rules**, select `Remove Columns(s)`
+>       - *"From Column"*: `F`
+>       - Click `Apply`
 >    9. From **Rules** menu, select `Split Column(s)`
 >       - *"Odd Row Column(s)"*: `B`, `D`
 >       - *"Even Row Column(s)"*: `C`, `E`
@@ -481,7 +494,7 @@ Now we will perform alignments between our assembly and the three most closely r
 >
 > 1. **LASTZ** {% icon tool %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
->   - {% icon param-files %} *"Select a reference dataset"*: the collection named `DNA` from our upload step
+>   - {% icon param-collection %} *"Select a reference dataset"*: the collection named `DNA` from our upload step
 >   - {% icon param-file %} *"Select QUERY sequence(s)"*: our assembly which was prepared in the beginning (`E. coli C`)
 >   - *"Perform chaining of HSPs with no penalties"*: `Yes` (section **Chaining**)
 >   - *"Specify the output format"*: to `Customized general` (section **Output**)
@@ -522,59 +535,34 @@ The first step will be collapsing the collection containing the three genomes in
 
 > ### {% icon hands_on %} Hands-on: Creating a single FASTA dataset with all genomes
 >
-> 1. **Collapse Collection** {% icon tool %} with the following parameters:
->   - *"Collection of files to collapse"* the three genomes (collection) (in the video above we called it `DNA`).
-{: .hands_on}
-
-This will produce a single FASTA dataset containing the three genomes. There is one problem though. If we look at the data in this file, we will see that FASTA headers look like this:
-```
->CP020543.1 Escherichia coli C, complete genome
-```
-This is a problem because a browser will "think" that this particular genome is called `CP020543.1 Escherichia coli C, complete genome` while in the alignment files produced by LASTZ the same genome will be listed as simply `CP020543.1`. Because these two seemingly identical things are technically different it will not be possible to render alignment results (or any other annotation) within a browser. To solve this issue we simply need to remove `Escherichia coli C, complete genome` from `>CP020543.1 Escherichia coli C, complete genome` and convert it into `>CP020543.1`. For this we will use **sed** tool we already used above to [prepare assembly files](#preparing-assembly):
-
-> ### {% icon hands_on %} Hands-on: Cleaning sequence names
-> 1. **Text transformation with sed** {% icon tool %} with the following parameters:
->   -  *"File to process"*: output of `collapse collection`
->   -  *"SED program"*: `s/\ Esc.*$//`
+> 1. **Collapse Collection** {% icon tool %}:
 >
->   Note: Here we are matching from space (`\ `) separating `CP020543.1` and `Escherichia coli C, complete genome` and substituting this with nothing.
-{: .hands_on}
-
-To make sure that everything completed correctly let's grab FASTA headers from all sequences in the dataset produced by the last tool:
-
-> ### {% icon hands_on %} Hands-on: "Grepping" FASTA headers
-> 1. **Search in textfiles (grep)** {% icon tool %} with the following parameters:
->   - *"Select lines from"*: output of the previous step (`Text transformation`)
->   - *"Regular Expression"*: `^>`
+>    - {% icon param-collection %} *"Collection of files to collapse"* the three genomes (collection) named `DNA`
 >
-> Note: This tells to return all line that begin with `>` (`^` signifies beginning of a line).
-{: .hands_on}
-
-If everything went well we will see something like this:
- ```
- >CP020543.1
- >CP024090.1
- >LT906474.1
- ```
-
-Finally, we need to add our own assembly to the FASTA dataset containing the three genomes. This can be done by a simple concatenation:
-
-> ### {% icon hands_on %} Hands-on: Concatenate FASTA files
-> 1. **Concatenate datasets tail-to-head (cat)** {% icon tool %} with the following parameters:
->   - *"Datasets to concatenate"*: output of **sed** tool we performed one step ago (*before* last step; it is called `Text transformation on...`)
->   - Click **Insert Dataset** button
->        - *"Select"*: our assembly (its name also begins with `Text transformation on...` but is located earlier in the history)
+> 2. Convert the datatype of this output to uncompress it
+>
+>    {% include snippets/convert_datatype.md conversion="Convert compressed to uncompressed" %}
+>
+> 3. **Concatenate datasets** {% icon tool %} tail-to-head (cat):
+>    - *"Datasets to concatenate"*: `Collapse collection ... uncompressed`, the output from the uncompression step.
+>    - Click **Insert Dataset** button
+>        - *"Select"*: the `E. coli C` file from the start of the history
+>
+> 4. Rename the output to `DNA (E. coli C + Relatives)`
+>
+>    {% include snippets/rename_dataset.md name="DNA (E. coli C + Relatives)" %}
 {: .hands_on}
 
 The resulting dataset contains four sequences: three genomes plus our assembly. Let's start a browser using these sequences:
 
-> ### {% icon hands_on %} Hands-on: Starting a custom IGV browser
-> 1. Go to [IGV web page](http://software.broadinstitute.org/software/igv/download) and launch a browser appropriate for your platform. Wait for it to start. It will display human genome, but we will change that.
-> 2. Go back to your Galaxy session and expand the dataset generated during the last step.
-> 3. Click on `local` link in **display with IGV local**
-> 4. Wait a bit and IGV will refresh displaying "chromosomes" of our *hybrid* genome:
+> ### {% icon hands_on %} Hands-on: Starting JBrowse
+> 1. **JBrowse** {% icon tool %} genome browser:
+>   - *"Reference genome to display"*: `Use a genome from history`
+>   - *"Select the reference genome"*: `DNA (E. coli C + Relatives)` from **Concatenate datasets** {% icon tool %}
 >
+> 2. View the output
 >
+> TODO: Fix image
 > ![Empty IGV](../../images/igv_empty.png "IGV instance displaying <i>Hybrid</i> genome without tracks")
 {: .hands_on}
 
@@ -752,134 +740,103 @@ Now it is time to think about the genes.
 
 ## Analyzing the deletion for gene content
 
-Earlier we [downloaded](#hands_on-hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `GENES` if you followed [the video](#hands_on-hands-on-uploading-sequences-and-annotations))):
+Earlier we [downloaded](#hands_on-hands-on-uploading-sequences-and-annotations) gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for `CP020543.1`, `CP024090.1`, and `LT906474.1`. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called `Genes`)):
 
-```
-Tab-delimited text file reporting locations and attributes for a subset of
-annotated features. Included feature types are: gene, CDS, RNA (all types),
-operon, C/V/N/S_region, and V/D/J_segment.
+> Tab-delimited text file reporting locations and attributes for a subset of
+> annotated features. Included feature types are: gene, CDS, RNA (all types),
+> operon, C/V/N/S_region, and V/D/J_segment.
+>
+> The file is tab delimited (including a #header) with the following columns:
+>
+> Column | Definition
+> ---    | ---
+> 1      | feature: INSDC feature type
+> 2      | class: Gene features are subdivided into classes according to the gene biotype computed based on the set of child features for that gene. See the description of the gene_biotype attribute in the GFF3 documentation for more details: ftp://ftp.ncbi.nlm.nih.gov/genomes/README_GFF3.txt ncRNA features are subdivided according to the ncRNA_class. CDS features are subdivided into with_protein and without_protein, depending on whether the CDS feature has a protein accession assigned or not. CDS features marked as without_protein include CDS features for C regions and V/D/J segments of immunoglobulin and similar genes that undergo genomic rearrangement, and pseudogenes.
+> 3      | assembly: assembly accession.version
+> 4      | assembly_unit: name of the assembly unit, such as "Primary Assembly", "ALT_REF_LOCI_1", or "non-nuclear"
+> 5      | seq_type: sequence type, computed from the "Sequence-Role" and "Assigned-Molecule-Location/Type" in the `*_assembly_report.txt` file. The value is computed as: if an assembled-molecule, then reports the location/type value. e.g. chromosome, mitochondrion, or plasmid if an unlocalized-scaffold, then report "unlocalized scaffold on <type>". e.g. unlocalized scaffold on chromosome else the role, e.g. alternate scaffold, fix patch, or novel patch
+> 6      | chromosome
+> 7      | genomic_accession
+> 8      | start: feature start coordinate (base-1). start is always less than end
+> 9      | end: feature end coordinate (base-1)
+> 10     | strand
+> 11     | product_accession: accession.version of the product referenced by this feature, if exists
+> 12     | non-redundant_refseq: for bacteria and archaea assemblies, the non-redundant `WP_` protein accession corresponding to the CDS feature. May be the same as column 11, for RefSeq genomes annotated directly with `WP_` RefSeq proteins, or may be different, for genomes annotated with genome-specific protein accessions (e.g. `NP_` or `YP_` RefSeq proteins) that reference a `WP_` RefSeq accession.
+> 13     | related_accession: for eukaryotic RefSeq annotations, the RefSeq protein accession corresponding to the transcript feature, or the RefSeq transcript accession corresponding to the protein feature.
+> 14     | name: For genes, this is the gene description or full name. For RNA, CDS, and some other features, this is the product name.
+> 15     | symbol: gene symbol
+> 16     | GeneID: NCBI GeneID, for those RefSeq genomes included in NCBI's Gene resource
+> 17     | locus_tag
+> 18     | feature_interval_length: sum of the lengths of all intervals for the feature (i.e. the length without introns for a joined feature)
+> 19     | product_length: length of the product corresponding to the accession.version in column 11. Protein product lengths are in amino acid units, and do not include the stop codon which is included in column 18. Additionally, product_length may differ from feature_interval_length if the product contains sequence differences vs. the genome, as found for some RefSeq transcript and protein products based on mRNA sequences and also for INSDC proteins that are submitted to correct genome discrepancies.
+> 20     | attributes: semi-colon delimited list of a controlled set of qualifiers. The list currently includes: partial, pseudo, pseudogene, ribosomal_slippage, trans_splicing, anticodon=NNN (for tRNAs), old_locus_tag=XXX
+>
+> *from [ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt](ftp://ftp.ncbi.nlm.nih.gov/genomes/genbank/README.txt)*
+{: .quote}
 
-The file is tab delimited (including a #header) with the following columns:
-col 1: feature: INSDC feature type
-col 2: class: Gene features are subdivided into classes according to the gene
-       biotype computed based on the set of child features for that gene. See
-       the description of the gene_biotype attribute in the GFF3 documentation
-       for more details: ftp://ftp.ncbi.nlm.nih.gov/genomes/README_GFF3.txt
-       ncRNA features are subdivided according to the ncRNA_class. CDS features
-       are subdivided into with_protein and without_protein, depending on
-       whether the CDS feature has a protein accession assigned or not. CDS
-       features marked as without_protein include CDS features for C regions and
-       V/D/J segments of immunoglobulin and similar genes that undergo genomic
-       rearrangement, and pseudogenes.
-col 3: assembly: assembly accession.version
-col 4: assembly_unit: name of the assembly unit, such as "Primary Assembly",
-       "ALT_REF_LOCI_1", or "non-nuclear"
-col 5: seq_type: sequence type, computed from the "Sequence-Role" and
-       "Assigned-Molecule-Location/Type" in the *_assembly_report.txt file. The
-       value is computed as:
-       if an assembled-molecule, then reports the location/type value. e.g.
-       chromosome, mitochondrion, or plasmid
-       if an unlocalized-scaffold, then report "unlocalized scaffold on <type>".
-       e.g. unlocalized scaffold on chromosome
-       else the role, e.g. alternate scaffold, fix patch, or novel patch
-col 6: chromosome
-col 7: genomic_accession
-col 8: start: feature start coordinate (base-1). start is always less than end
-col 9: end: feature end coordinate (base-1)
-col10: strand
-col11: product_accession: accession.version of the product referenced by this
-       feature, if exists
-col12: non-redundant_refseq: for bacteria and archaea assemblies, the
-       non-redundant WP_ protein accession corresponding to the CDS feature. May
-       be the same as column 11, for RefSeq genomes annotated directly with WP_
-       RefSeq proteins, or may be different, for genomes annotated with
-       genome-specific protein accessions (e.g. NP_ or YP_ RefSeq proteins) that
-       reference a WP_ RefSeq accession.
-col13: related_accession: for eukaryotic RefSeq annotations, the RefSeq protein
-       accession corresponding to the transcript feature, or the RefSeq
-       transcript accession corresponding to the protein feature.
-col14: name: For genes, this is the gene description or full name. For RNA, CDS,
-       and some other features, this is the product name.
-col15: symbol: gene symbol
-col16: GeneID: NCBI GeneID, for those RefSeq genomes included in NCBI's Gene
-       resource
-col17: locus_tag
-col18: feature_interval_length: sum of the lengths of all intervals for the
-       feature (i.e. the length without introns for a joined feature)
-col19: product_length: length of the product corresponding to the
-       accession.version in column 11. Protein product lengths are in amino acid
-       units, and do not include the stop codon which is included in column 18.
-       Additionally, product_length may differ from feature_interval_length if
-       the product contains sequence differences vs. the genome, as found for
-       some RefSeq transcript and protein products based on mRNA sequences and
-       also for INSDC proteins that are submitted to correct genome
-       discrepancies.
-col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
-       The list currently includes:
-       partial, pseudo, pseudogene, ribosomal_slippage, trans_splicing,
-       anticodon=NNN (for tRNAs), old_locus_tag=XXX
-```
 
-Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`:
+Our objective is to convert these data into BED. In this analysis we want to initially concentrate on protein coding regions. To do this let's select all lines from the annotation datasets that contain the term `CDS`, then
+we will produce a collection with three datasets just like the original `Genes` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`.
+Finally we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand), and then we can add the genome name.
 
 > ### {% icon hands_on %} Hands-on: Retain CDS rows in annotation datasets
 > 1. **Select lines that match an expression** {% icon tool %} with the following parameters:
->  - *"Select lines from"*: the collection containing annotations (called `GENES`)
->  - *"the pattern"*: `^CDS`
+>    - {% icon param-collection %} *"Select lines from"*: the collection containing annotations, `Genes`
+>    - *"the pattern"*: `^CDS`
 >
-> Note: This is because we want to retain all lines that begin (`^`) with `CDS`.
-{: .hands_on}
-
-This will produce a collection with three datasets just like the original `GENES` collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the BED format. There is one problem with this. We are trying to convert these data into [6 column BED](#comment-bed-format). In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of `0`:
-
-> ### {% icon hands_on %} Hands-on: Creating a dummy score column
+>    This is because we want to retain all lines that begin (`^`) with `CDS`.
 >
-> 1. **Add column to an existing dataset** {% icon tool %} with the following parameters:
->   - *"Add this value"*: `0`
->   - *"to Dataset"*: the collection produced by the previous step (`Select on collection...`)
-{: .hands_on}
-
-This will create a 21st column containing `0` for all rows. Now we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand). **Note** that we do not select a column corresponding to genome name. We will add this information on the next step.
-
-> ### {% icon hands_on %} Hands-on: Cutting columns form annotation data
+> 2. **Add column to an existing dataset** {% icon tool %} with the following parameters:
+>    - *"Add this value"*: `0`
+>    - {% icon param-collection %} *"to Dataset"*: the collection produced by the previous step (`Select on collection...`)
 >
-> 1. **Cut columns from a table** {% icon tool %} with the following parameters:
->   - *"Cut columns"*: `c8,c9,c15,c21,c10`
->   - *"From"* the collection produced at the previous step (`Select on collection...`)
-{: .hands_on}
-
-This will produce a collection with each element containing data like this:
-
-```
-   1    2                                              3 4 5
-------------------------------------------------------------
-  49 1452 chromosomal replication initiator protein DnaA 0 +
-1457 2557 DNA polymerase III subunit beta                0 +
-2557 3630 DNA replication and repair protein RecF        0 +
-```
-
-As we mentioned above these datasets lack genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genome IDs (if you are unsure make sure you followed the directions when [creating collection containing annotations](#hands_on-hands-on-uploading-sequences-and-annotations)). We will leverage this when collapsing this collection into a single dataset:
-
-> ### {% icon hands_on %} Hands-on: Collapsing annotations into a single BED dataset
-> 1. **Collapse Collection** {% icon tool %} with the following parameters:
+> 3. **Cut columns from a table** {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c8,c9,c14,c21,c10`
+>    - {% icon param-collection %} *"From"* the collection produced at the previous step (`Add column on collection...`)
+>
+>    This will produce a collection with each element containing data like this:
+>
+>    1    | 2    | 3                                              | 4 | 5
+>    ---- | ---- | ---------------------------------------------- | - | -
+>      49 | 1452 | chromosomal replication initiator protein DnaA | 0 | +
+>    1457 | 2557 | DNA polymerase III subunit beta                | 0 | +
+>    2557 | 3630 | DNA replication and repair protein RecF        | 0 | +
+>
+>    As we mentioned above these datasets lack genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genome IDs (if you are unsure make sure you followed the directions when [creating collection containing annotations](#hands_on-hands-on-uploading-sequences-and-annotations)). We will leverage this when collapsing this collection into a single dataset:
+>
+> 4. **Collapse Collection** {% icon tool %} with the following parameters:
 >   - *"Collection of files to collapse"*: the output of the previous step (`Cut on collection...`)
 >   - *"Append File name"*: `Yes`
 >   - *"Where to add dataset name"*: `Same line and each line in dataset`
+>
+> 5. Change the datatype of the collection to `bed` and rename it to `Genes (E. coli + Relatives)`
+>
+>   {% include snippets/change_datatype.md datatype="bed" %}
+>
+>   {% include snippets/rename_dataset.md name="Genes (E. coli + Relatives)" %}
+>
 {: .hands_on}
 
-Resulting data looks like this:
+The resulting collapsed dataset will look like this:
 
-```
-         1    2    3                                              4 5 6
------------------------------------------------------------------------
-CP020543.1   49 1452 chromosomal replication initiator protein DnaA 0 +
-CP020543.1 1457 2557 DNA polymerase III subunit beta                0 +
-CP020543.1 2557 3630 DNA replication and repair protein RecF        0 +
-```
+1          | 2    | 3    | 4                                              | 5 | 6
+---------- | ---- | ---- | ---------------------------------------------- | - | -
+CP020543.1 | 49   | 1452 | chromosomal replication initiator protein DnaA | 0 | +
+CP020543.1 | 1457 | 2557 | DNA polymerase III subunit beta                | 0 | +
+CP020543.1 | 2557 | 3630 | DNA replication and repair protein RecF        | 0 | +
 
-You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV. The one thing that remains is to tell Galaxy that it is BED as [we did before](#hands_on-hands-on-changing-dataset-type). After the format of the last dataset is set to BED it can be displayed in IGV by clicking the **display with IGV local** link (remember to give this new track a ["human" name](#comment-naming-igv-tracks)):
+You can see that the genome ID is now appended at the beginning and this dataset looks like a legitimate BED that can be displayed in IGV.
 
-![Displaying genes in IGV](../../images/igv_genes.png "Gene track is added to the browser. Here we are zoomed in at the gap region in LT906474.")
+> ### {% icon hands_on %} Hands-on: View genomes
+> 1. **JBrowse** {% icon tool %} genome browser:
+>   - *"Reference genome to display"*: `Use a genome from history`
+>   - *"Select the reference genome"*: `DNA (E. coli C + Relatives)` from **Concatenate datasets** {% icon tool %}
+>   - {% icon param-repeat %} Insert Track Group
+>       - {% icon param-repeat %} Insert Annotation Track
+>           - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>           - *"GFF/GFF3/BED/GBK Track Data"*: `Genes (E. coli + Relatives)` from **Collapse Collection** {% icon tool %}
+>
+{: .hands_on}
 
 ## Extracting genes programmatically
 
@@ -887,60 +844,38 @@ Above we've been able to look at genes that appear to be deleted in our assembly
 
 ![Complementing genomic ranges](../../images/complement.png "Any set of genomic intervals can <i>complemented</i> or converted into a set of intervals that do not overlap the original set (image from BEDTools documentation).")
 
-However, before we convert coordinates of alignments into their complements we need to prepare a so called *genome file*, which is a list of "chromosomes" and their lengths in our [hybrid genome](#hands_on-hands-on-concatenate-fasta-files):
+However, before we convert coordinates of alignments into their complements we need to prepare a so called *genome file*, which is a list of "chromosomes" and their lengths in our [hybrid genome](#hands_on-hands-on-concatenate-fasta-files). It needs to be sorted lexicograpically for later tools:
 
 > ### {% icon hands_on %} Hands-on: Creating a genome file
 >
 > 1. **Compute sequence length** {% icon tool %} with the following parameters:
->   - *"Compute length for these sequences"*: the FASTA dataset we generated [concatenated "hybrid" genome](#hands_on-hands-on-concatenate-fasta-files)
+>    - {% icon param-file %} *"Compute length for these sequences"*: `DNA (E. coli + Relatives)`, the FASTA dataset we generated from **Collapse Collection** {% icon tool %}
+>    - *"Strip fasta description from header"*: `Yes`
+>
+> 2. **Sort data in ascending or descending order** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Sort Dataset"*: the output of the previous step (`Compute sequence length on ...`)
+>    - *"on column"*: `Column: 1`
+>    - *"with flavor"*: `Alphabetical sort`
+>    - *"everything in"*: `Ascending order`
 {: .hands_on}
 
 This will generate a dataset that looks like this:
 
-```
-         1       2
-------------------
-CP020543.1 4617024
-CP024090.1 4592887
-LT906474.1 4625968
-Ecoli_C    4576293
-```
+1          | 2
+---------- | -------
+CP020543.1 | 4617024
+CP024090.1 | 4592887
+Ecoli_C    | 4576293
+LT906474.1 | 4625968
 
-Next, we need to sort this file lexicographically:
-
-> ### {% icon hands_on %} Hands-on: Sorting genome file
->
-> 1. **Sort data in ascending or descending order** {% icon tool %} with the following parameters:
->  - *"Sort Dataset"*: the output of the previous step (`Compute sequence length on ...`)
->  - *"on column"*: `Column: 1`
->  - *"with flavor"*: `Alphabetical sort`
->  - *"everything in"*: `Ascending order`
-{: .hands_on}
-
-You will get a sorted version of the above dataset:
-
-```
-         1       2
-------------------
-CP020543.1 4617024
-CP024090.1 4592887
-Ecoli_C    4576293
-LT906474.1 4625968
-```
-
-Next we need to go back to the BED file containing [alignment data](#hands_on-hands-on-changing-dataset-type) and sort it as well:
+Next we need to go back to the BED file containing alignment data and sort it as well:
 
 > ### {% icon hands_on %} Hands-on: Sorting BED file
 > 1. **SortBED order the intervals** {% icon tool %} with the following parameters
->   -  *"Sort the following BED file"*: our [alignment BED](#hands_on-hands-on-changing-dataset-type)
+>   -  {% icon param-file %} *"Sort the following BED file"*: our [alignment BED](#hands_on-hands-on-changing-dataset-type)
 >   -  *"Sort by"* on its default setting (`chromosome, then by start position (asc)`)
-{: .hands_on}
-
-Now we can finally compute the complement of the sorted BED dataset:
-
-> ### {% icon hands_on %} Hands-on: Sorting BED file
 >
-> 1. **ComplementBed Extract intervals not represented by an interval file** {% icon tool %} with the following parameters:
+> 2. **ComplementBed Extract intervals not represented by an interval file** {% icon tool %} with the following parameters:
 >  - *"BED/VCF/GFF file"*: output of the previous step
 >  - *"Genome file"*: `Genome file from your history`
 >  - *"Genome file"*: sorted genome file we've generated [two steps ago](#hands_on-hands-on-sorting-genome-file)
