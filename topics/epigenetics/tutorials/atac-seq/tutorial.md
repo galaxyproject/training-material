@@ -45,6 +45,9 @@ In this tutorial we will use data from the study of [Buenrostro et al., 2013](ht
 >
 {: .agenda}
 
+
+{% include snippets/warning_results_may_vary.md %}
+
 # Preprocessing
 
 ## Get Data
