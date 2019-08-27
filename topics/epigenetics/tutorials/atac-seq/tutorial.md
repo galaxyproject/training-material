@@ -72,9 +72,9 @@ We first need to download the reads (fastqs) as well as other annotation files. 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. Add a tag called `#SRR891268_R1` to the R1 file and a tag called `#SRR891268_R2` to the R2 file.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% include snippets/add_tag.md %}
 >
 > 4. Check that the datatype of the 2 fastq files is fastqsanger.gz and the bed file is bed.
 >
