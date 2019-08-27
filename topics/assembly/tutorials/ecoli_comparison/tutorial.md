@@ -168,9 +168,11 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >   - *"Minimal length"*: `10000`
 >
 >
-> 2. **Text transformation with sed** {% icon tool %} with the following parameters:
->   - *"File to process"*: the output of the previous step
+> 2. **Text transformation** {% icon tool %} with sed:
+>   - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
 >   - *"SED program"*: `s/^>1.*$/>Ecoli_C/`
+>
+>   {% include snippets/rename_dataset.md name="E. coli C" %}
 >
 >   > ### {% icon tip %} SED and Regular Expressions
 >   >
@@ -208,8 +210,6 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 >
 {: .hands_on}
 
-
-
 ## Generating alignments
 
 
@@ -218,8 +218,8 @@ Now everything is loaded and ready to go. We will now align our assembly against
 > ### {% icon hands_on %} Hands-on: Running LASTZ
 > 1. **LASTZ** {% icon tool %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
->   - *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
->   - *"Select QUERY sequence(s)"*: our assembly which was prepared in the previous step.
+>   - {% icon param-files %} *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
+>   - {% icon param-file %} *"Select QUERY sequence(s)"*: our assembly which was prepared in the previous step.
 >   - *"Perform chaining of HSPs with no penalties"*: `Yes` (in **Chaining** section)
 >   - *"Specify the output format"*: `blastn` (in **Output** section)
 {: .hands_on}
@@ -238,28 +238,28 @@ Note that because we started LASTZ on *a collection* of *E. coli* genomes, it wi
 LASTZ produced data in so-called `blastn` format (because we explicitly told LASTZ to output in this format, see previous step), which looks like this:
 
 ```
-         1       2     3   4  5 6       7       8    9   10      11    12
+      1          2     3   4  5 6       7       8    9   10      11    12
 -------------------------------------------------------------------------
-BA000007.2 Ecoli_C 66.81 232 51 6 3668174 3668397 5936 6149 3.2e-40 162.7
-BA000007.2 Ecoli_C 57.77 206 38 8  643802  643962 5945 6146 1.6e-18  90.6
-BA000007.2 Ecoli_C 67.03 185 32 6 4849373 4849528 5965 6149 2.9e-28 122.9
-BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
+Ecoli_C BA000007.2 66.81 232 51 6 3668174 3668397 5936 6149 3.2e-40 162.7
+Ecoli_C BA000007.2 57.77 206 38 8  643802  643962 5945 6146 1.6e-18  90.6
+Ecoli_C BA000007.2 67.03 185 32 6 4849373 4849528 5965 6149 2.9e-28 122.9
+Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 ```
 
 where columns are:
 
- 1. `qseqid` - query (e.g., gene) sequence id
- 2.	`sseqid` - subject (e.g., reference genome) sequence id
- 3.	`pident` - percentage of identical matches
- 4.	`length` - alignment length
- 5.	`mismatch` - number of mismatches
- 6.	`gapopen` - number of gap openings
- 7.	`qstart` - start of alignment in query
- 8.	`qend` - end of alignment in query
- 9.	`sstart` - start of alignment in subject
- 10. `send` - end of alignment in subject
- 11. `evalue` - [expect value](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=FAQ#expect)
- 12. `bitscore`	- [bit score](https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html)
+1. `qseqid` - query (e.g., gene) sequence id
+2. `sseqid` - subject (e.g., reference genome) sequence id
+3. `pident` - percentage of identical matches
+4. `length` - alignment length
+5. `mismatch` - number of mismatches
+6. `gapopen` - number of gap openings
+7. `qstart` - start of alignment in query
+8. `qend` - end of alignment in query
+9. `sstart` - start of alignment in subject
+10. `send` - end of alignment in subject
+11. `evalue` - [expect value](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=FAQ#expect)
+12. `bitscore` - [bit score](https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html)
 
  The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the *E. coli* genomes and our assembly:
 
@@ -290,12 +290,12 @@ Now we can visualize this dataset to discover generalities:
 
 > ### {% icon hands_on %} Hands-on: Graphing alignment data
 > 1. Expand random subset of alignment data generated on the previous step by clicking on it.
-> 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
+> 2. You will see "chart" button {% icon galaxy-barchart %}. Click on it.
 > 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
-> 4. Click **Select data** button (![Disks](../../images/disks.png))
+> 4. Click **Select data** {% icon galaxy-chart-select-data %}
 > 5. Set **Values for x-axis** to `Column: 3` (alignment identity)
 > 6. Set **Values for y-axis** to `Column: 4` (alignment length)
-> 7. You can also click on configuration button (![Cog](../../images/chart_cog.png)) and specify axis labels etc.
+> 7. You can also click on configuration button {% icon galaxy-gear %} and specify axis labels etc.
 {: .hands_on}
 
 The relationship between the alignment identity and alignment length looks like this (remember that this is only a subsample of the data):
@@ -305,8 +305,8 @@ The relationship between the alignment identity and alignment length looks like 
 You can see that most alignments are short and have relatively low identity. Thus we can filter the original dataset by identity and length. Judging from this graph we can select alignment longer than 10,000 bp with identity above 90%.
 
 > ### {% icon hands_on %} Hands-on: Filtering data
-> 1. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
->   - *"Filter"*: the full dataset.
+> 1. **Filter** {% icon tool %} data on any column using simple expressions:
+>   - *"Filter"*: the full dataset, from the output of the **Collapse Collection** {% icon tool %}.
 >   - *"With following condition"*: `c3 >= 90 and c4 >= 10000` (here `c` stands for *column*).
 >
 >  NOTE: You need to select the full dataset; not the down-sampled one, but [the one generated by the collection collapsing operation](#hands_on-hands-on-combining-collection-into-a-single-dataset).
@@ -317,25 +317,27 @@ You can see that most alignments are short and have relatively low identity. Thu
 
 Remember, our objective is to find the genomes that are most similar to ours. Given the alignment data in the table we just created we can define similarity as follows:
 
-*Genomes that have the smallest number of alignment blocks but the highest overall alignment length are most similar to our assembly. This essentially means that they have longest uninterrupted region of high similarity to our assembly.*
+> Genomes that have the smallest number of alignment blocks but the highest overall alignment length are most similar to our assembly. This essentially means that they have longest uninterrupted region of high similarity to our assembly.
+{: .quote}
 
 However, to extract this information from our data we need to aggregate it. In other words, for each *E. coli* genome we need to calculate the total number of alignment blocks, their combined length, and average identity. The following section explains how to do this:
 
 > ### {% icon hands_on %} Hands-on: Aggregating the data
 > 1. **Datamash (operations on tabular data)** {% icon tool %} with the following parameters:
 >     - *"Input tabular dataset"*: output of the previous `Filter` step.
->     - *"Group by fields"*: `1`. (column 1 contains name of the *E. coli* genome we mapped against)
+>     - *"Group by fields"*: `2`. (column 1 contains name of the *E. coli* genome we mapped against)
 >     - *"Sort input"*: `Yes`
 >     - *"Operation to perform on each group"*:
 >         - *"Type"*: `Count`
->         - *"On column"*: `Column: 1`
->     - Click **Insert operation to perform on each group** button twice to add two more input boxes.
->     - *"Operation to perform on each group"*:
->         - *"Type"*: `Mean`
->         - *"On column"*: `Column: 3`.
->     - *"Operation to perform on each group"*:
->         - *"Type"*: `Sum`
->         - *"On column"*: `Column: 4`
+>         - *"On column"*: `Column: 2`
+>     - {% icon param-repeat %} *"Insert operation to perform on each group"*
+>       - *"Operation to perform on each group"*:
+>           - *"Type"*: `Mean`
+>           - *"On column"*: `Column: 3`.
+>     - {% icon param-repeat %} *"Insert operation to perform on each group"*
+>       - *"Operation to perform on each group"*:
+>           - *"Type"*: `Sum`
+>           - *"On column"*: `Column: 4`
 {: .hands_on}
 
 ## Finding closest relatives
@@ -344,13 +346,13 @@ The dataset generated above lists each *E. coli* genome accession only once and 
 
 > ### {% icon hands_on %} Hands-on: Graphing aggregated data
 > 1. Expand the aggregated data generated on the previous step by clicking on it.
-> 2. You will see "chart" button (![Chart icon](../../images/bar-chart-o.png)). Click on it.
+> 2. You will see "chart" button {% icon galaxy-barchart %}. Click on it.
 > 3. In the central panel you will see a list of visualizations. Select **Scatter plot (NVD3)**
-> 4. Click **Select data** button (![Disks](../../images/disks.png))
+> 4. Click **Select data** {% icon galaxy-chart-select-data %}
 > 5. Set **Data point labels** to `Column: 1` (Accession number of each *E. coli* genome)
 > 5. Set **Values for x-axis** to `Column: 2` (# of alignment blocks)
 > 6. Set **Values for y-axis** to `Column: 4` (Total alignment length)
-> 7. You can also click on configuration button (![Cog](../../images/chart_cog.png)) and specify axis labels etc.
+> 7. You can also click on configuration button {% icon galaxy-gear %} and specify axis labels etc.
 {: .hands_on}
 
 The relationship between the number of alignment blocks and total alignment length looks like this:
@@ -388,11 +390,87 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 ## Getting sequences and annotations
 
 > ### {% icon hands_on %} Hands-on: Uploading sequences and annotations
-> Using the three accession listed above we will fetch necessary data from NCBI. Follow the steps in the video below:
+> Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.
 >
-><div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/272379016?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+> 1. **Select lines that match an expression** {% icon tool %} with the following parameters:
+>   - *"Select lines from"*: the `genome_proks.txt` you uploaded earlier
+>   - *"the pattern"*: `LT906474|CP024090|CP020543`
 >
->At the end of this you should have two collections: one containing genomic sequences and another containing annotations.
+> 2. **Cut** {% icon tool %} columns from a table:
+>
+>    - *"Cut columns"*: `c8,c20`
+>    - *"From"*: the output of the **select lines** {% icon tool %}
+>
+> 1. Again **Upload** {% icon tool %} data
+>
+>    2. Switch to the `Rule-based` tab on the right
+>
+>       - *"Upload data as"*: `Collection(s)`
+>       - *"Load tabular data from"*: `History Dataset`
+>       - *"Select dataset to load"*: output of the cut tool
+>
+>       > ### {% icon tip %} Tip: dataset not there?
+>       > If the dataset doesn't appear in the select list, refresh your page.
+>       {: .tip}
+>
+>       > ### {% icon tip %} Take a Shortcut
+>       > This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:
+>       >
+>       > ```json
+>       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"collection_name","columns":[2]},{"type":"url","columns":[1]}]}
+>       > ```
+>       >
+>       > You can click the {% icon tool %} next to the header **Rules** {% icon tool %}, and paste the contents there, before clicking **Apply**, and then **Upload**.
+>       {: .tip}
+>
+>    3. From **Column**, select `Using a Regular Expression`
+>       - *"From Column"*: `B`
+>       - Select `Create columns matching expression groups`
+>       - *"Regular Expression"*: `.*(\/GCA.*$)`
+>       - *"Number of Groups"*: `1`
+>       - Click `Apply`
+>    4. From **Column**, select `Concatenate Columns`
+>       - *"From Column"*: `B`
+>       - *"From Column"*: `C`
+>       - Click `Apply`
+>    5. From **Rules**, select `Remove Columns(s)`
+>       - *"From Column"*: `B`, `C`
+>       - Click `Apply`
+>    6. From **Column**, select `Fixed Value`
+>       - *"Value"*: `_feature_table.txt.gz`
+>       - Click `Apply`
+>    6. From **Column**, select `Fixed Value`
+>       - *"Value"*: `_genomic.fna.gz`
+>       - Click `Apply`
+>    7. From **Column**, select `Concatenate Columns`
+>       - *"From Column"*: `B`
+>       - *"From Column"*: `C`
+>       - Click `Apply`
+>    7. From **Column**, select `Concatenate Columns`
+>       - *"From Column"*: `B`
+>       - *"From Column"*: `D`
+>       - Click `Apply`
+>    8. From **Rules**, select `Remove Columns(s)`
+>       - *"From Column"*: `B`, `C`, `D`
+>       - Click `Apply`
+>    6. From **Column**, select `Fixed Value`
+>       - *"Value"*: `Genes`
+>       - Click `Apply`
+>    6. From **Column**, select `Fixed Value`
+>       - *"Value"*: `DNA`
+>       - Click `Apply`
+>    9. From **Rules** menu, select `Split Column(s)`
+>       - *"Odd Row Column(s)"*: `B`, `D`
+>       - *"Even Row Column(s)"*: `C`, `E`
+>       - Click `Apply`
+>    9. From **Rules** menu, select `Add / Modify Column Definitions`
+>       - `Add Definition`, `List Identifier(s)`, Select Column `A`
+>       - `Add Definition`, `URL`, Column `B`
+>       - `Add Definition`, `Collection Name`, Column `C`
+>       - Click `Apply`
+>    12. **Upload**
+>
+> At the end of this you should have two collections: one containing genomic sequences and another containing annotations.
 {: .hands_on}
 
 ## Visualizing rearrangements
@@ -403,8 +481,8 @@ Now we will perform alignments between our assembly and the three most closely r
 >
 > 1. **LASTZ** {% icon tool %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
->   - *"Select a reference dataset"*: dataset collection of the three genomes (in the video above we called it `DNA`)
->   - *"Select QUERY sequence(s)"*: our assembly which was prepared in the beginning (`Text transformation on data...`)
+>   - {% icon param-files %} *"Select a reference dataset"*: the collection named `DNA` from our upload step
+>   - {% icon param-file %} *"Select QUERY sequence(s)"*: our assembly which was prepared in the beginning (`E. coli C`)
 >   - *"Perform chaining of HSPs with no penalties"*: `Yes` (section **Chaining**)
 >   - *"Specify the output format"*: to `Customized general` (section **Output**)
 >   - *"Select which fields to include"*: select the following
