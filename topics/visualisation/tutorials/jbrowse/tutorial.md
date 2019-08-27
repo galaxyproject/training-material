@@ -1,7 +1,15 @@
 ---
 layout: tutorial_hands_on
-topic_name: visualisation
-tutorial_name: jbrowse
+
+title: JBrowse
+#zenodo_link:
+questions:
+objectives:
+time_estimation: "1h"
+key_points:
+contributors:
+  - erasche
+  - shiltemann
 ---
 
 # Introduction
@@ -58,17 +66,17 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 > 1.  Import all of the following files into a new history:
 >     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
 >     - [mutant_R2.fastq](https://zenodo.org/record/582600/files/mutant_R2.fastq)
->     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)  
+>     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)
 >     - [wildtype.gbk](https://zenodo.org/record/582600/files/wildtype.gbk)
 >     - [wildtype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
-> 
+>
 >     ```
 >     https://zenodo.org/record/582600/files/mutant_R1.fastq
 >     https://zenodo.org/record/582600/files/mutant_R2.fastq
 >     https://zenodo.org/record/582600/files/wildtype.fna
 >     https://zenodo.org/record/582600/files/wildtype.gbk
 >     https://zenodo.org/record/582600/files/wildtype.gff
->     ```  
+>     ```
 >
 >     > ### {% icon tip %} Tip: Importing data via links
 >     >
