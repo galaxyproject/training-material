@@ -45,6 +45,9 @@ In this tutorial we will use data from the study of [Buenrostro et al., 2013](ht
 >
 {: .agenda}
 
+
+{% include snippets/warning_results_may_vary.md %}
+
 # Preprocessing
 
 ## Get Data
@@ -69,9 +72,9 @@ We first need to download the reads (fastqs) as well as other annotation files. 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. Add a tag called `#SRR891268_R1` to the R1 file and a tag called `#SRR891268_R2` to the R2 file.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% include snippets/add_tag.md %}
 >
 > 4. Check that the datatype of the 2 fastq files is fastqsanger.gz and the bed file is bed.
 >
@@ -110,10 +113,10 @@ The first step is to check the quality of the reads and the presence of the Next
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **FastQC** {% icon tool %} with the default parameters:
->       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1.fastq.gz` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1.fastq.gz` and `SRR891268_R2.fastq.gz`.
-> 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check which are the adapters found at the end of the reads.
+>       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
+> 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon question %} Questions
 >    >
 >    > How many reads are in the FASTQ?
 >    >
@@ -130,7 +133,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > >
 >    > > 1) Per base sequence content
 >    > > > ### {% icon comment %} Tn5 sequence bias
->    > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can have more information about it reading [Green et al. 2012](https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3)
+>    > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in [Green et al. 2012](https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3)
 >    > > {: .comment}
 >    > >
 >    > > 2) Sequence Duplication Levels
@@ -141,8 +144,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > >
 >    > > 3) Overrepresented sequences
 >    > > > ### {% icon comment %} Adapter Sequences
->    > > > Adapter sequences that are also observable in the **Adapter Content**
->    > > > are registered by FastQC.
+>    > > > Nextera adapter sequences are observable in the **Adapter Content** section.
 >    > > {: .comment}
 >    > >
 >    > {: .solution}
@@ -151,8 +153,8 @@ The first step is to check the quality of the reads and the presence of the Next
 {: .hands_on}
 
 > ### {% icon comment %} FastQC Results
-> This is what you should expect from the adapter section:
-> ![FastQC screenshot on the adapter content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the adapter content section")
+> This is what you should expect from the Adapter Content section:
+> ![FastQC screenshot of the Adapter Content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the Adapter Content section")
 {: .comment}
 
 ## Trimming Reads
@@ -168,8 +170,8 @@ The forward and reverse adapters are slightly different. We will also trim low q
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
->        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1.fastq.gz`
->        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2.fastq.gz`
+>        - {% icon param-file %} *"FASTQ/A file #1"*: select `SRR891268_R1`
+>        - {% icon param-file %} *"FASTQ/A file #2"*: select `SRR891268_R2`
 >        - In *"Read 1 Options"*:
 >            - In *"3' (End) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 3' (End) Adapters"*
@@ -193,19 +195,19 @@ The forward and reverse adapters are slightly different. We will also trim low q
 {: .hands_on}
 
 > ### {% icon comment %} Cutadapt Results
-> This is what you should get from Cutadapt in the log:
+> You should get similar output to this from Cutadapt:
 > ![Summary of cutadapt](../../images/atac-seq/Screenshot_cutadaptSummary.png "Summary of cutadapt")
 {: .comment}
 
 > ### {% icon question %} Questions
 >
-> 1. Which portion of reads contains adapters?
-> 2. How many reads are still longer than 20 after the trimming?
+> 1. What percentage of reads contain adapters?
+> 2. What percentage of reads are still longer than 20bp after the trimming?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 15%
-> > 2. 283,155 (99.3%)
+> > 1. ~14%
+> > 2. ~99%
 > >
 > {: .solution}
 >
@@ -220,7 +222,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 {: .hands_on}
 
 > ### {% icon comment %} FastQC Results
-> If we run `FastQC` again we should see under **Adapter Content** that the Nextera adapters are no longer present. Indeed this is what we have obtained when we ran it:
+> If we run `FastQC` again we should see under **Adapter Content** that the Nextera adapters are no longer present.
 > ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
 {: .comment}
 
@@ -241,23 +243,21 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 >            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
 >        - *"Select reference genome"*: `Human Dec. 2013 (GRCh38/hg38 (hg38)`
->    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1: Default setting only`
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
->    - *"Do you want to tweak SAM/BAM Options?"*: `No`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats.
 {: .hands_on}
 
 > ### {% icon comment %} Bowtie2 Results
-> This is what you should get from the Bowtie2 log:
+> You should get similar results to this from Bowtie2:
 > ![Mapping statistics of bowtie2](../../images/atac-seq/Screenshot_bowtie2MappingStats.png "Mapping statistics of bowtie2")
 {: .comment}
 
 > ### {% icon question %} Questions
 >
-> 1. What proportion of read pairs mapped concordantly?
+> 1. What percentage of read pairs mapped concordantly?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -348,7 +348,7 @@ Because of the PCR amplification, there might be duplicates (reads mapping to ex
 {: .hands_on}
 
 > ### {% icon comment %} MarkDuplicates Results
-> This is what you should get from the MarkDuplicates log:
+> You should get similar output to this from MarkDuplicates:
 > ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDup.png "Metrics of MarkDuplicates")
 {: .comment}
 
