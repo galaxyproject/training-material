@@ -463,7 +463,7 @@ If we only assess the coverage of the start sites of the reads, the data would b
 > When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
-> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). Here we are focusing on calling peaks, which typically span many bases, so we will not apply these small shifts. If you wanted to use ATAC-seq data for transcription factor footprint analysis (see [Li et al. 2019](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6391789/)), where the exact site is more important for determining sequence motifs, then you would apply the shifts.
+> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). Here, `Genrich` is applying this shift.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Identifying enriched genomic regions
