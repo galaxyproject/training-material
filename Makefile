@@ -3,6 +3,7 @@ JEKYLL=jekyll
 PORT?=4000
 HOST?=localhost
 FLAGS?=""
+ENV?="development"
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
@@ -67,7 +68,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
+		JEKYLL_ENV=${ENV} ${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
 check-frontmatter:  ## Validate the frontmatter
