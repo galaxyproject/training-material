@@ -323,17 +323,6 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 > >
 > > 1. The original BAM file is 28 MB, the filtered one is 14.8 MB. Approximately half of the alignments were removed.
 > >
-> > > ### {% icon tip %} Tip: Getting the number of reads which mapped on chrM
-> > >
-> > > To get the number of reads per chromosome you can run **Samtools idxstats** {% icon tool %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
-> > > The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-> > > The first 2 lines of the result would be (after sorting):
-> > >
-> > > ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
-> > >
-> > > There are 221 000 reads which map to chrM and 170 000 which map to chr22.
-> > {: .tip}
-> >
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
 > {: .solution}
