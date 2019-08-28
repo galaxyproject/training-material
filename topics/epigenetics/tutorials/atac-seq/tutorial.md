@@ -30,7 +30,7 @@ In many eukaryotic organisms, such as humans, the genome is tightly packed and o
 
 With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with an enzyme called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). Tn5 inserts adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html). 
 
-In this tutorial we will use data from the study of [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on ATAC-Seq. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and this would be too big to process in a training session. So, we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-seq sample (2 x 20 million reads in original fastq). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000DZN, dataset ENCFF117WKK).
+In this tutorial we will use data from the study of [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on ATAC-Seq. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and this would be too big to process in a training session. So, we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-seq sample (2 x 20 million reads in original fastq). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).
 
 
 > ### Agenda
@@ -63,7 +63,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >    ```
 >    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
 >    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
->    https://www.encodeproject.org/files/ENCFF117WKK/@@download/ENCFF117WKK.bed.gz
+>    https://www.encodeproject.org/files/ENCFF933NTR/@@download/ENCFF933NTR.bed.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -94,13 +94,26 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >    - *"genome"*: `Human`
 >    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >    - *"group"*: `Genes and Gene Prediction`
->    - *"track"*: `GENCODE v29`
->    - *"table"*: `knownGene`
+>    - *"track"*: `All GENCODE V31`
+>    - *"table"*: `Basic`
 >    - *"region"*: `position` `chr22`
->    - *"output format"*: `BED - browser extensible data`
+>    - *"output format"*: `all fields from selected table`
 >    - *"Send output to"*: `Galaxy`
 > 2. Click **get output**
 > 3. Click **Send query to Galaxy**
+> This table contains all the information but is not in a BED format. To transform it into a bed format we will rearrange the columns:
+> 4. **Cut columns from a table** {% icon tool %} with the following parameters:
+>    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
+>    - {% icon param-text %} *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV31 (chr22:1-50,818,468)`
+> 5. Rename the dataset as genes.bed
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 6. Change its datatype to bed
+>
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
+>
 {: .hands_on}
 
 ## Quality Control
@@ -309,6 +322,7 @@ We apply some filters to the reads after the mapping. ATAC-seq datasets can have
 > > ### {% icon solution %} Solution
 > >
 > > 1. The original BAM file is 28 MB, the filtered one is 14.8 MB. Approximately half of the alignments were removed.
+> >
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
 > {: .solution}
@@ -438,7 +452,7 @@ If we only assess the coverage of the start sites of the reads, the data would b
 > When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
-> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). Here we are focusing on calling peaks, which typically span many bases, so we will not apply these small shifts. If you wanted to use ATAC-seq data for transcription factor footprint analysis (see [Li et al. 2019](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6391789/)), where the exact site is more important for determining sequence motifs, then you would apply the shifts.
+> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). Here, `Genrich` is applying this shift.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Identifying enriched genomic regions
@@ -489,9 +503,14 @@ In order to visualize a specific region (e.g., the gene *YDJC*), we can either u
 > ### {% icon hands_on %} Hands-on: Sort the BED files
 >
 > 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"ENCFF117WKK.bed.gz"*.
+>    - {% icon param-file %} *"ENCFF933NTR.bed.gz"*.
 >
 {: .hands_on}
+
+### Convert the Genrich peaks in bed
+For the moment, the wrapper of **pyGenomeTracks** {% icon tool %} does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** {% icon tool %} from encodepeak to bed.
+
+{% include snippets/change_datatype.md datatype="datatypes" %}
 
 ## Visualise Regions with **pyGenomeTracks**
 
@@ -505,27 +524,27 @@ In order to visualize a specific region (e.g., the gene *YDJC*), we can either u
 >                - *"Plot title"*: `Coverage from Genrich (extended +/-50bp)`
 >                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
 >                - *"Color of track"*: Select the color of your choice
->            - *"Choose style of the track"*: `Gene track / Bed track`
->                - *"height"*: `5.0`
->                - *"data_range"*: `Yes`
+>                - *"height"*: `5`
+>                - *"Show visualization of data range"*: `Yes`
 >                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
->                - {% icon param-file %} *"Track file bed format"*: Select the output of **bedtools SortBED** {% icon tool %}.
+>                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %} (the one you converted from encodepeak to bed).
 >                - *"Color of track"*: Select the color of your choice
+>                - *"height"*: `3`
 >                - *"Plot labels"*: `No`
 >                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `UCSC Main on Human: knownGene (chr22:1-50,818,468)`
+>                - {% icon param-file %} *"Track file bed format"*: Select the output of **Cut columns from a table** {% icon tool %}.
 >                - *"Color of track"*: Select the color of your choice
->                - *"height"*: `5.0`
+>                - *"height"*: `5`
 >                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `CTCF peaks`
->                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of ENCFF117WKK.bed.gz`
+>                - {% icon param-file %} *"Track file bed format"*: Select the dataset `bedtools SortBED of ENCFF933NTR.bed.gz`
 >                - *"Color of track"*: Select the color of your choice
 >                - *"Plot labels"*: `No`
 >                - *"Include spacer at the end of the track"*: `0.5`
@@ -536,10 +555,14 @@ In order to visualize a specific region (e.g., the gene *YDJC*), we can either u
 >
 {: .hands_on}
 
+
 > ### {% icon comment %} pyGenomeTracks Results
 > This is what you get from pyGenomeTracks:
 > ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
 {: .comment}
+
+TODO: See if we can get a better peak calling with the full dataset...
+
 
 > ### {% icon question %} Questions
 > On this selected regions we see peaks on both TSS (middle track) and CTCF binding loci (bottom track).
@@ -606,8 +629,8 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. A bit more than 5.
-> > 2. No it is higher on the left which is expected as usually the promoter is accessible.
+> > 1. Around 2.5.
+> > 2. No it is higher on the left which is expected as usually the promoter of active genes is accessible.
 > >
 > {: .solution}
 >
