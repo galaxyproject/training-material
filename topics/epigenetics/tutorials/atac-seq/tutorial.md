@@ -567,7 +567,7 @@ For the moment, the wrapper of **pyGenomeTracks** {% icon tool %} does not deal 
 > ![pyGenomeTracks output](../../images/atac-seq/pyGenomeTracksOutput.png "pyGenomeTracks output")
 {: .comment}
 
-Unfortunately, Genrich did not work with our training dataset as most of the data is on chr22 whereas the background model is built on the whole genome.
+Unfortunately, Genrich did not work with our training dataset (every covered region is called a peak). This is because most of the data is on chr22 whereas the background model was built on the whole genome.
 When, the pipeline was run on 20 million of pairs from the original dataset.
 This is the output of pyGenomeTracks:
 ![pyGenomeTracks output for 20 million of pairs on the whole genome](../../images/atac-seq/pyGenomeTracksOutput_20M.png "pyGenomeTracks output for 20 million of pairs on the whole genome")
@@ -660,7 +660,7 @@ quality control of the data. You should look for low quality bases, adapter cont
 with `Bowtie2`, filtered our reads for properly paired, good quality and reads that do not
 map to the mitochondrial genome. We found open chromatin regions with `Genrich`, which
 is a tool to find differential covered regions (peak calling). We visualized the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. Last but not least, we investigated the read coverage of our ATAC-Seq experiment around TSS with the help of `computeMatrix` and `plotHeatmap`. At the end, we found
-open chromatin regions that did not overlap with CTCF sites or TSS, which pronounce potential putative enhancer regions that we have covered with our ATAC-Seq experiment. These regions are located in genes (especially introns), but could also be upstream or downstream for some other genes.
+open chromatin regions that did not overlap with CTCF sites or TSS, which pronounce potential putative enhancer regions that we have covered with our ATAC-Seq experiment. One of these regions are located in the intron of a gene, the other one was in between genes. However, it is impossible to guess from the position which would be the gene controlled by this region.
 
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
