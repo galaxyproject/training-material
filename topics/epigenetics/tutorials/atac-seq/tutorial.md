@@ -410,8 +410,6 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 
 ![Fragment size distribution of a purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked.png "Fragment size distribution of a purified DNA")
 
-![Fragment size distribution of another purified DNA](../../images/atac-seq/Screenshot_sizeDistribution_Naked2.png "Fragment size distribution of another purified DNA")
-
 Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:
 
 ![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq")
