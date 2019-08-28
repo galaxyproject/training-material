@@ -51,7 +51,7 @@ The third and the last workflow in the proteogenomics tutorial is to identifying
 
 {: .no_toc}
 
-All the files to run this workflow can be obtained from the [second tutorial]({{ site.baseurl }}{% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %}) output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
+All the files to run this workflow can be obtained from the [second tutorial]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %}) output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
 
 > ### {% icon hands_on %} Hands-on: data organization
 >
@@ -329,8 +329,8 @@ The final tool for this workflow generates a tabular output that summarizes the 
 This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.
 
 Please look at the following tutorials in this proteogenomics series:
-1. [Proteogenomics database creation]({{ site.baseurl }}{% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
-2. [Proteogenomics database search]({{ site.baseurl }}{% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
+1. [Proteogenomics database creation]({% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
+2. [Proteogenomics database search]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
 
 This workflow is also available at [Proteogenomics gateway](http://galaxyp-proteogenomics.duckdns.org/).
 

@@ -195,8 +195,8 @@ a read provide evidence for is, of course, a prerequisite for variant calling.
 > ### {% icon comment %} More on quality control and mapping
 > If you would like to explore the topics of quality control and read mapping
 > in detail, you should take a look at the separate
-> [Quality Control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-> and [Mapping]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
+> [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+> and [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
 > tutorials.
 > Here, we will only illustrate the concrete steps necessary for quality
 > control and read mapping of our particular datasets.

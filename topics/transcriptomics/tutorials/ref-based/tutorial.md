@@ -767,7 +767,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    > If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
 >    > may be a lot of work. In these situations, **group tags** can make your life a lot easier.
 >    >
->    > For more information about setting and using group tags, please see [this tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %})
+>    > For more information about setting and using group tags, please see [this tutorial]({% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %})
 >    {: .comment}
 >
 {: .hands_on}
@@ -834,7 +834,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >
 > For more information about **DESeq2** and its outputs, you can have a look at [**DESeq2** documentation](https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf).
 >
-> For more complex setup, e.g. with many samples, it is possible to use a collection with tags to specify the factors and levels. Check our ["Group tags for complex experimental designs" tutorial]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %}), explaining how to do that.
+> For more complex setup, e.g. with many samples, it is possible to use a collection with tags to specify the factors and levels. Check our ["Group tags for complex experimental designs" tutorial]({% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %}), explaining how to do that.
 {: .comment}
 
 ## Visualization of the differentially expressed genes

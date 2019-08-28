@@ -338,7 +338,7 @@ This box at the top of each tutorial is automatically generated using the metada
 > - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements
-> - [Galaxy introduction]({{ site.baseurl }}{% link topics/introduction/index.md %})
+> - [Galaxy introduction]({% link topics/introduction/index.md %})
 >
 > {% icon time %} Time estimation: '1H'
 >

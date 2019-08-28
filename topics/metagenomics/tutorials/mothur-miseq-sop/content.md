@@ -21,11 +21,11 @@ In this tutorial we will perform an analysis based on the
 > {% if include.short %}
 > This is the **shortened version**. Instead of running each tool individually, we will employ
 > workflows to run groups of analysis steps (e.g. data cleaning) at once. If you would like
-> more in-depth discussion of each step, please see the [longer version of tutorial]({{ site.baseurl }}{% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %})
+> more in-depth discussion of each step, please see the [longer version of tutorial]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %})
 > {% else %}
 > This is the **extended version**. We will run every tool manually and discuss the results in detail.
 > If you would like to run through the tutorial a bit quicker and use workflows to run groups of
-> analysis steps (e.g. data cleaning) at once, please see the [shorter version of this tutorial]({{ site.baseurl }}{% link topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.md %})
+> analysis steps (e.g. data cleaning) at once, please see the [shorter version of this tutorial]({% link topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.md %})
 > {% endif %}
 > You can also **switch** between the long and short version at the start of any section.
 {: .comment}

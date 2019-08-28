@@ -66,7 +66,7 @@ Other than cell development, there are many more factors that can shape the leve
 ![Facets of Cellular Identity]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
 
 # Analysis Strategy
 {:.no_toc}
@@ -82,7 +82,7 @@ The tutorial is structured in two parts:
 1. **Single-Batch Processing**
 1. **Multi-Batch Processing**
 
-![Overview of workflow]({{ site.baseurl }}{% link topics/transcriptomics/images/scrna_workflow.svg %} "An overview of the entire workflow")
+![Overview of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "An overview of the entire workflow")
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#barcode-extraction) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.
 
@@ -138,7 +138,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 
 
 <!--
-For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
+For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
 -->
 
 ## Barcode Extraction
@@ -624,7 +624,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 In the new combined matrix we see that we have 1536 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the [*Barcode Extraction*](#barcode-extraction) stage previously.
 
-The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
+The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
 
 
 ## Guarding against Cross-Contamination
