@@ -243,7 +243,19 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the **--very-sensitive** parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed.
+Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
+
+> ### {% icon comment %} dovetailing
+> We will allow dovetailing. Indeed, due to the fact that the adapter removal is done only when at least 3 bases match the adapter sequence, it is possible that some reads goes over the beginning of the mate. For example: if the first mate is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`. They will not be trimmed by cutadapt and will map this way:
+> ```
+<--------------------Mate 1-----------------------
+AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
+  CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT
+  ----------------------Mate 2--------------------->
+```
+This is what we call dovetailing and we want to consider this pair as valid.
+{: .comment}
+
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
@@ -283,7 +295,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 > ### {% icon comment %} Comment on the number of uniquely mapped.
 >
 > You might be surprised by the number of uniquely mapped compared to the number of multi-mapped reads (reads mapping to more than one location in the genome).
-> One of the reasons is that we have used the parameter **--very-sensitive**. Bowtie2 considers a read as multi-mapped even if the second hit has a much lower quality than the first one.
+> One of the reasons is that we have used the parameter `--very-sensitive`. Bowtie2 considers a read as multi-mapped even if the second hit has a much lower quality than the first one.
 > Another reason is that we have reads that map to the mitochondrial genome. The mitochondrial genome has a lot of regions with similar sequence.
 >
 {: .comment}
