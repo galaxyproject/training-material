@@ -25,11 +25,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (heterochromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of DNA. When the DNA is being actively transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex (euchromatin). Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **A**ssay for **T**ransposase-**A**ccessible **C**hromatin using **seq**uencing ([ATAC-Seq](https://en.wikipedia.org/wiki/ATAC-seq)) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene's expression. ATAC-Seq has become popular for identifying accessible regions of the genome as it's easier, faster and requires less cells than alternative techniques, such as FAIRE-Seq and DNase-Seq.
+In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of DNA. When the DNA is being actively transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. **A**ssay for **T**ransposase-**A**ccessible **C**hromatin using **seq**uencing ([ATAC-Seq](https://en.wikipedia.org/wiki/ATAC-seq)) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene's expression. ATAC-Seq has become popular for identifying accessible regions of the genome as it's easier, faster and requires less cells than alternative techniques, such as FAIRE-Seq and DNase-Seq.
 
 ![ATAC-Seq](../../images/atac-seq/atac-seq.jpeg "Buenrostro et al. 2013 Nat Methods")
 
-With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with an enzyme called Tn5, which is a transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the Tn5 inserts DNA sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html). 
+With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts DNA sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html).
 
 In this tutorial we will use data from the study of [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million reads in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).
 
@@ -107,6 +107,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 >    - *"Send output to"*: `Galaxy`
 > 2. Click **get output**
 > 3. Click **Send query to Galaxy**
+>
 > This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
 > 4. **Cut columns from a table** {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
@@ -242,7 +243,19 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the **--very-sensitive** parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed.
+Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
+
+> ### {% icon comment %} dovetailing
+> We will allow dovetailing. Indeed, due to the fact that the adapter removal is done only when at least 3 bases match the adapter sequence, it is possible that some reads goes over the beginning of the mate. For example: if the first mate is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`. They will not be trimmed by cutadapt and will map this way:
+> ```
+<--------------------Mate 1-----------------------
+AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
+  CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT
+  ----------------------Mate 2--------------------->
+```
+This is what we call dovetailing and we want to consider this pair as valid.
+{: .comment}
+
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
@@ -282,7 +295,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use `B
 > ### {% icon comment %} Comment on the number of uniquely mapped.
 >
 > You might be surprised by the number of uniquely mapped compared to the number of multi-mapped reads (reads mapping to more than one location in the genome).
-> One of the reasons is that we have used the parameter **--very-sensitive**. Bowtie2 considers a read as multi-mapped even if the second hit has a much lower quality than the first one.
+> One of the reasons is that we have used the parameter `--very-sensitive`. Bowtie2 considers a read as multi-mapped even if the second hit has a much lower quality than the first one.
 > Another reason is that we have reads that map to the mitochondrial genome. The mitochondrial genome has a lot of regions with similar sequence.
 >
 {: .comment}
@@ -433,7 +446,7 @@ Here are examples of Fragment size distributions of ATAC-Seq which were very noi
 
 ![Fragment size distribution of a failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed.png "Fragment size distribution of a failed ATAC-Seq")
 
-![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another failed ATAC-Seq")
+![Fragment size distribution of another failed ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Failed2.png "Fragment size distribution of another very noisy ATAC-Seq")
 
 A final example of a Fragment size distribution of a very good ATAC-Seq, even if we cannot see the third nucleosome "peak".
 ![Fragment size distribution of a good ATAC-Seq](../../images/atac-seq/Screenshot_sizeDistribution_Good.png "Fragment size distribution of a good ATAC-Seq")
@@ -476,6 +489,8 @@ If we only assess the coverage of the start sites of the reads, the data would b
 >
 {: .hands_on}
 
+
+
 # Visualisation of Coverage
 
 ## Prepare the Datasets
@@ -516,6 +531,63 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 At the moment, the wrapper of **pyGenomeTracks** {% icon tool %} does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** {% icon tool %} from encodepeak to bed.
 
 {% include snippets/change_datatype.md datatype="datatypes" %}
+
+## Create heatmap of genes
+
+You might also be interested in specific regions. For this, you can compute a heatmap. We will use the `deepTools plotHeatmap`. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
+
+### Generate computeMatrix
+
+The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will use the tool `computeMatrix` that will evaluate the coverage at each locus you are interested in.
+
+> ### {% icon hands_on %} Hands-on: Generate the matrix
+>
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
+>    - In *"Select regions"*:
+>        - 1. *"Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
+>    - *"Sample order matters"*: `No`
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `yes`
+>        - *"Convert missing values to 0?"*: `yes`
+>        - *"Labels for the samples (each bigwig)"*: `ATAC-Seq`
+>
+{: .hands_on}
+
+
+### Plot with **plotHeatmap**
+
+We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
+
+> ### {% icon hands_on %} Hands-on: Generate the heatmap
+>
+> 1. **plotHeatmap** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `no`
+{: .hands_on}
+
+> ### {% icon comment %} plotHeatmap Results
+> This is what you get from plotHeatmap:
+> ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
+{: .comment}
+
+> ### {% icon question %} Questions
+>
+> 1. What is the mean value in genes?
+> 2. Is the coverage symmetric?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Around 2.5.
+> > 2. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Visualise Regions with **pyGenomeTracks**
 
@@ -589,63 +661,6 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 >
 {: .question}
 
-## Create heatmap of genes
-
-You might also be interested in specific regions. For this, you can compute a heatmap. We will use the `deepTools plotHeatmap`. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
-
-### Generate computeMatrix
-
-The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will use the tool `computeMatrix` that will evaluate the coverage at each locus you are interested in.
-
-> ### {% icon hands_on %} Hands-on: Generate the matrix
->
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
->    - In *"Select regions"*:
->        - 1. *"Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
->    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
->    - *"computeMatrix has two main output options"*: `reference-point`
->    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `yes`
->        - *"Labels for the samples (each bigwig)"*: `ATAC-Seq`
->
-{: .hands_on}
-
-
-### Plot with **plotHeatmap**
-
-We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
-
-> ### {% icon hands_on %} Hands-on: Generate the heatmap
->
-> 1. **plotHeatmap** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `no`
-{: .hands_on}
-
-> ### {% icon comment %} plotHeatmap Results
-> This is what you get from plotHeatmap:
-> ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
-{: .comment}
-
-> ### {% icon question %} Questions
->
-> 1. What is the mean value in genes?
-> 2. Is the coverage symmetric?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Around 2.5.
-> > 2. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
-> >
-> {: .solution}
->
-{: .question}
-
 
 # Conclusion
 
@@ -654,7 +669,7 @@ is a method to investigate the chromatin accessibility and the genome is treated
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
 inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if `FastQC`, shows a warning in these areas. We mapped the reads
 with `Bowtie2`, filtered our reads for properly paired, good quality and reads that do not
-map to the mitochondrial genome. We found open chromatin regions with `Genrich`, a tool to find regions of genomic enrichment (peaks). We visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. Last but not least, we investigated the read coverage around TSS with the help of `computeMatrix` and `plotHeatmap`. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
+map to the mitochondrial genome. We found open chromatin regions with `Genrich`, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of `computeMatrix` and `plotHeatmap`. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
 
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
