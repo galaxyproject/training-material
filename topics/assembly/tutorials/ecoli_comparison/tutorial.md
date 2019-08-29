@@ -501,8 +501,8 @@ Now we will perform alignments between our assembly and the three most closely r
 >   - *"Select which fields to include"*: select the following
 >        - `score` alignment score
 >        - `name1` name of the *target* sequence
->        - `strand` strand for the *target* sequence
->        - `zstart` 0-based start of alignment in *target*
+>        - `strand1` strand for the *target* sequence
+>        - `zstart1` 0-based start of alignment in *target*
 >        - `end1` end of alignment in *target*
 >        - `length1` length of alignment in *target*
 >        - `name2` name of *query* sequence
@@ -515,21 +515,31 @@ Now we will perform alignments between our assembly and the three most closely r
 >
 >   Note: for more information about chaining [look here](https://lastz.github.io/lastz/#ex_stages)
 >
+> 2. Rename the `LASTZ on collection... mapped reads` something more memorable like `LASTZ Alignments`
+>
+>    {% include snippets/rename_collection.md name="LASTZ Alignments" %}
+>
 {: .hands_on}
 
 Because we chose to produce Dot Plots as well, LASTZ will generate two collections: one containing alignment data and the other containing DotPlots in PNG format:
 
 ![Dot Plots](../../images/three_dot_plots.png "Dot Plot representations of alignments between three <i>E. coli</i> genomes and our assembly. Target (X-axis) is indicated above each dot plot. Query (Y-axis) is our assembly. Red circle indicates a region deleted in our assembly.")
 
-A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly. If you are not sure how to interpret Dot Plots here is a great explanation by [Michael Schatz](http://schatz-lab.org/):
+A quick conclusion that can be drawn here is that there is a large inversion in CP020543 and deletion in our assembly.
 
-![Interpreting Dot Plots](../../images/dotplot.png "A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.")
+> ### {% icon details %} Interpreting Dot Plots
+> If you are not sure how to interpret Dot Plots here is a great explanation by [Michael Schatz](http://schatz-lab.org/):
+>
+> ![Interpreting Dot Plots](../../images/dotplot.png "A quick reference to interpreting Dot Plots. Our case is identical to <i>Insertion into Reference</i> shown in the upper left.")
+{: .details}
 
 For a moment let's leave LASTZ result and create a browser that would allows us to display our results.
 
 ## Producing a Genome Browser for this experiment
 
 The dot plots we've produced above are great, but they are static. It would be wonderful to load these data into a genome browser where one can zoom in and out as well as add tracks such as those containing genes. To create a browser we need a genome and a set of tracks. Tracks are features such as genes or SNPs with start and end positions corresponding to a coordinate system provided by the genome. Thus the first thing to do is to create a *genome* that would represent our experiment. We can create such a genome by simply combining the three genomes of closely related strains with our assembly in a single dataset&mdash;a hybrid genome.
+
+### Collecting the genomes
 
 The first step will be collapsing the collection containing the three genomes into a single file:
 
@@ -553,22 +563,11 @@ The first step will be collapsing the collection containing the three genomes in
 >    {% include snippets/rename_dataset.md name="DNA (E. coli C + Relatives)" %}
 {: .hands_on}
 
-The resulting dataset contains four sequences: three genomes plus our assembly. Let's start a browser using these sequences:
+The resulting dataset contains four sequences: three genomes plus our assembly.
 
-> ### {% icon hands_on %} Hands-on: Starting JBrowse
-> 1. **JBrowse** {% icon tool %} genome browser:
->   - *"Reference genome to display"*: `Use a genome from history`
->   - *"Select the reference genome"*: `DNA (E. coli C + Relatives)` from **Concatenate datasets** {% icon tool %}
->
-> 2. View the output
->
-> TODO: Fix image
-> ![Empty IGV](../../images/igv_empty.png "IGV instance displaying <i>Hybrid</i> genome without tracks")
-{: .hands_on}
+### Preparing the alignments
 
-## Preparing and displaying alignments
-
-[Above](#hands_on-hands-on-aligning-again) we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one containing alignments an the other with dot plots). To display alignments in the browser we need to do several things:
+Above we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one containing alignments an the other with dot plots). To display alignments in the browser we need to do several things:
 
  1. Fix unwanted `%` signs in LASTZ output
  2. Create names for alignment blocks
@@ -577,66 +576,18 @@ The resulting dataset contains four sequences: three genomes plus our assembly. 
 
 To begin, let's look at the LASTZ output:
 
-```
-       1          2 3      4      5      6       7 8      9     10            11    12  13
-------------------------------------------------------------------------------------------
-10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0%  1
-    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0%   2
-    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6%   3
-```
+1        | 2            | 3 | 4      | 5      | 6      | 7         | 8 | 9      | 10     | 11     | 12
+-------- | ----------   | - | ------ | ------ | ------ | -------   | - | ------ | ------ | ------ | ---
+10141727 | `CP020543.1` | + | 48     | 106157 | 106109 | `Ecoli_C` | + | 0      | 106109 | 100.0  | 1
+    5465 | `CP020543.1` | + | 121267 | 121367 | 100    | `Ecoli_C` | + | 109317 | 109418 | 76.0%  | 2
+    4870 | `CP020543.1` | + | 159368 | 159512 | 144    | `Ecoli_C` | + | 128706 | 128828 | 82.6%  | 3
 
-One immediate problem is `%` character in column 12 (alignment identity). We need to remove it. For this we will use **SED** tool that should be familiar to us from [previous hands-on exercises](#hands_on-hands-on-cleaning-sequence-names):
+One immediate problem is `%` character in column 12 (alignment identity). We need to remove it as we will use this for the score column of the BED file, and that must be a normal number and not a percentage.
 
-> ### {% icon hands_on %} Hands-on: Removing `%` character from LASTZ output
->
-> 1. **Text transformation with sed** {% icon tool %} with the following parameters:
->   - *"File to process"*: output of LASTZ (`LASTZ on collection ...: mapped reads`)
->   - *"SED program"*: `s/\%//`
->
-> Note: Here we are matching percent character `%` (it is pre-pended with `\` because it is a special character, but we want `sed` to interpret it literally, as the percentage sign) and substituting this with nothing.
-{: .hands_on}
-
-As a result LASTZ output will look like this (no `%` signs):
-
-```
-      1          2 3      4      5      6       7 8      9     10            11    12  13
-------------------------------------------------------------------------------------------
-10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1
-    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2
-    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3
-```
-
-One of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with `1` each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 13) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on. Here is how we will do that:
-
-> ### {% icon hands_on %} Hands-on: Creating unique alignment identifiers
->
-> 1. **Merge Columns together** {% icon tool %} with the following parameters:
->   - *"Select data"*: the output of the previous step (`Text transformation of collection ...`)
->   - *"Merge column"*: `Column: 2` (this is the Target sequence name)
->   - *"with column"*: `Column: 13` (this is the alignment block created by LASTZ)
-{: .hands_on}
-
-The output will look like this:
-
-```
-     1          2 3      4      5      6       7 8      9     10            11    12  13           14
------------------------------------------------------------------------------------------------------
-10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1 CP020543.11
-    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2 CP020543.12
-    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
-```
-
-The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
-
-> ### {% icon hands_on %} Hands-on: Collapsing all alignment info into a single dataset
-> 1. **Collapse Collection** {% icon tool %} with the following parameters:
->   - *"Collection of files to collapse"*: the output of the previous step, `Merge Columns on collection...` (collection input)
-{: .hands_on}
-
-This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
+The 12th column of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning-again) is `number`. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with `1` each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 12) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier `1` will become `CP020543.11`, `2` will become `CP020543.12` and so on.
 
 > ### {% icon comment %} BED format
-> Our next goal is to convert this into a format that will be acceptable to the genome browser [created above](#producing-a-genome-browser-for-this-experiment). One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
+> Our goal is to convert this into a format that will be acceptable to the genome browser. One of such formats is [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1). In one of its simplest forms (there is one even simpler - 3 column BED) it has six columns:
 >
 > 1. Chromosome ID
 > 2. Start
@@ -646,78 +597,91 @@ This will produce a single dataset combining all alignment info. We can tell whi
 > 6. Strand (`+`, `-`, or `.` for no strand data).
 {: .comment}
 
-Let's look again at the data we generated in the last step:
-
-```
-     1          2 3      4      5      6       7 8      9     10            11    12  13           14
------------------------------------------------------------------------------------------------------
-10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1 CP020543.11
-    5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2 CP020543.12
-    4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
-```
-
-Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#hands_on-hands-on-fixing-assembly) `Ecoli_C`. In the first BED, column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`). In the second BED, column 1 will contain name of our assembly: `Ecoli_C`. To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns 7,9,10,14,12,8 will be cut.
-
-> ### {% icon warning %} There are multiple **CUT** tools!
-> The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but the tools are different.
-{: .warning}
-
-> ### {% icon hands_on %} Hands-on: Creating target BED
-> 1. **Cut columns from a table** {% icon tool %} with the following parameters:
->  - *"Cut columns"*: `c2,c4,c5,c14,c12,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
->  - *"From"*: the output of the previous step (`Collapse Collection on data ...`)
+> ### {% icon hands_on %} Hands-on: Convert LASTZ output to BED
+>
+> 1. **Replace Text** {% icon tool %} in a specific column:
+>    - {% icon param-collection %} *"Select lines from"*: output of LASTZ (`LASTZ Alignments`)
+>    - *"in column"*: `Column 11`
+>    - *"Find pattern"*: `%`
+>    - *"Replace with"*: leave empty
+>
+> 2. **Merge Columns together** {% icon tool %} with the following parameters:
+>    - {% icon param-collection %} *"Select data"*: the output of the previous step, `Replace Text on collection ...`
+>    - *"Merge column"*: `Column: 2` (this is the Target sequence name)
+>    - *"with column"*: `Column: 12` (this is the alignment block created by LASTZ)
+>
+>    > ### {% icon details %} Output information
+>    > The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, `CP020543.1` and `LT906474.1` because they will have accessions embedded within alignment block IDs. For example, the first alignment between `CP020543.1` and our assembly `Ecoli_C` will have alignment block id `CP020543.11`, while the 225th alignment between `LT906474.1` and `Ecoli_C` will have ID `LT906474.1225`. Because of this we can collapse the entire collection of alignments into a single dataset:
+>    {: .details}
+>
+> 3. **Collapse Collection** {% icon tool %} with the following parameters:
+>    - {% icon param-collection %} *"Collection of files to collapse"*: the output of the previous step, `Merge Columns on collection...`
+>
+>    This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
+>
+> 4. **Cut** {% icon tool %} columns from a table:
+>
+>    - *"Cut columns"*: `c2,c4,c5,c13,c11,c8`
+>    - *"From"*: the output of the previous step (`Collapse Collection on data ...`)
+>
+>    > ### {% icon details %} Converting to BED
+>    > Let's look again at the data we generated in the last step:
+>    >
+>    > 1        | 2          | 3 | 4      | 5      | 6      | 7       | 8 | 9      | 10     | 11    | 12 | 13
+>    > -------- | ---------- | - | ------ | ------ | ------ | ------- | - | ------ | ------ | ----- | -- | -----------
+>    > 10141727 | CP020543.1 | + | 48     | 106157 | 106109 | Ecoli_C | + | 0      | 106109 | 100.0 | 1  | CP020543.11
+>    >     5465 | CP020543.1 | + | 121267 | 121367 | 100    | Ecoli_C | + | 109317 | 109418 | 76.0  | 2  | CP020543.12
+>    >     4870 | CP020543.1 | + | 159368 | 159512 | 144    | Ecoli_C | + | 128706 | 128828 | 82.6  | 3  | CP020543.13
+>    >
+>    > Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But BED only has one set of coordinates. Thus we can create two BEDs: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences `CP020543.1`, `CP024090.1`, `LT906474.1` and the second from the standpoint of query - our own assembly [we called](#hands_on-hands-on-fixing-assembly) `Ecoli_C`.
+>    > In the first BED, column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`).
+>    > In the second BED, column 1 will contain name of our assembly: `Ecoli_C`.
+>    >
+>    > To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 13, 11, and 8. To produce the query BED columns 7, 9, 10, 13, 11, 8 will be cut.
+>    {: .details}
+>
+>    > ### {% icon warning %} There are multiple **CUT** tools!
+>    > The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but the tools are different.
+>    {: .warning}
+>
+>    This will produce a dataset looking like this:
+>
+>    1          | 2      | 3      | 4           | 5     | 6
+>    ---------- | ------ | ------ | ----------- | ----- | -
+>    CP020543.1 | 48     | 106157 | CP020543.11 | 100.0 | +
+>    CP020543.1 | 121267 | 121367 | CP020543.12 | 76.0  | +
+>    CP020543.1 | 159368 | 159512 | CP020543.13 | 82.6  | +
+>
+> 5. Change the datatype of the output to BED and rename it "Target Alignments"
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+>    {% include snippets/rename_dataset.md name="Target Alignments" %}
+>
+>    Now let's do a similar operation to create query BED:
+>
+> 6. **Cut columns from a table** {% icon tool %} with the following parameters
+>    - *"Cut columns"*: `c7,c9,c10,c13,c11,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
+>    - *"From"*: the output of **collection collapse** (a step before the last step!) (`Collapse Collection on data ...`)
+>
+> 5. Change the datatype of the output to BED and rename it "Query Alignments"
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+>    {% include snippets/rename_dataset.md name="Query Alignments" %}
+>
+>
 {: .hands_on}
 
 This will produce a dataset looking like this:
 
-```
-         1      2      3           4     5 6
---------------------------------------------
-CP020543.1     48 106157 CP020543.11 100.0 +
-CP020543.1 121267 121367 CP020543.12  76.0 +
-CP020543.1 159368 159512 CP020543.13  82.6 +
-```
+1       | 2      | 3      | 4           | 5     | 6
+------- | ------ | ------ | ----------- | ----- | -
+Ecoli_C | 0      | 106109 | CP020543.11 | 100.0 | +
+Ecoli_C | 109317 | 109418 | CP020543.12 | 76.0  | +
+Ecoli_C | 128706 | 128828 | CP020543.13 | 82.6  | +
 
-Now let's do a similar operation to create query BED:
-
-> ### {% icon hands_on %} Hands-on: Creating query BED
-> 1. **Cut columns from a table** {% icon tool %} with the following parameters
->  - *"Cut columns"*: `c7,c9,c10,c14,c12,c8` (look at the data shown above and the definition of BED to see why we make these choices.)
->  - *"From"*: the output of **collection collapse** (a step before the last step!) (`Collapse Collection on data ...`)
->
-> Note: In fact you can just click the rerun button (![Rerun](../../images/refresh.png)) at the previous step and change column names
-{: .hands_on}
-
-This will produce a dataset looking like this:
-
-```
-Ecoli_C      0 106109 CP020543.11 100.0 +
-Ecoli_C 109317 109418 CP020543.12  76.0 +
-Ecoli_C 128706 128828 CP020543.13  82.6 +
-```
-
-Now we can merge these two datasets into a single BED dataset that will be ready for display in the browser:
-
-> ### {% icon hands_on %} Hands-on: Merging Target and Query BEDs
->
-> 1. **Concatenate datasets tail-to-head** {% icon tool %} with the following parameters:
->   - *"Concatenate Dataset"*: the output of the step before last (`Cut on data...`)
->   - Click *"Insert Dataset"* button
->        - *"1: Dataset"*: the output of the previous step (also `Cut on data...`)
-{: .hands_on}
-
-Now we have a single BED that combines everything. Before displaying it in the browser we need to tell Galaxy that it is in fact a BED dataset:
-
-> ### {% icon hands_on %} Hands-on: Changing dataset type
->
-> 1. Click the pencil (![Pencil](../../images/pencil.png)) icon next to the last dataset in the history.
-> 2. Once we are at it let's also rename the dataset to `Alignments BED` by changing the content of the **Name** box.
-> 3. Click **Datatypes** (![Disks](../../images/disks.png)) tab
-> 4. In the dropdown **New Type** find `bed`
-> 5. Click **Change datatype** button.
-{: .hands_on}
-
-Now we are ready to display these data in the browser (make sure the browser we've created [above](#hands_on-hands-on-starting-a-custom-igv-browser) is open):
+Now we are ready to display these data in the browser
 
 > ### {% icon hands_on %} Hands-on: Display alignments in the browser
 >
@@ -727,13 +691,9 @@ Now we are ready to display these data in the browser (make sure the browser we'
 > 4. If you get `Could not locate genome:` error ignore it and click **OK**.
 {: .hands_on}
 
-> ### {% icon comment %} Naming IGV tracks
-> At the time of writing the datasets sent by Galaxy to IGV have uninformative names such as `galaxy_bbd44h445645h45454`. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the **Rename Track..** option.
->
-{: .comment}
-
 The result will look like this:
 
+TODO: image
 ![IGV Collage](../../images/igv_panels.png "A collage of IGV screen-shots showing alignment tracks for the four genomes. The deletion from our assembly is highlighted with the red circle. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion.")
 
 Now it is time to think about the genes.
