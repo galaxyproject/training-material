@@ -489,6 +489,8 @@ If we only assess the coverage of the start sites of the reads, the data would b
 >
 {: .hands_on}
 
+
+
 # Visualisation of Coverage
 
 ## Prepare the Datasets
@@ -529,6 +531,63 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 At the moment, the wrapper of **pyGenomeTracks** {% icon tool %} does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** {% icon tool %} from encodepeak to bed.
 
 {% include snippets/change_datatype.md datatype="datatypes" %}
+
+## Create heatmap of genes
+
+You might also be interested in specific regions. For this, you can compute a heatmap. We will use the `deepTools plotHeatmap`. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
+
+### Generate computeMatrix
+
+The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will use the tool `computeMatrix` that will evaluate the coverage at each locus you are interested in.
+
+> ### {% icon hands_on %} Hands-on: Generate the matrix
+>
+> 1. **computeMatrix** {% icon tool %} with the following parameters:
+>    - In *"Select regions"*:
+>        - 1. *"Select regions"*
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
+>    - *"Sample order matters"*: `No`
+>        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>    - *"computeMatrix has two main output options"*: `reference-point`
+>    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `yes`
+>        - *"Convert missing values to 0?"*: `yes`
+>        - *"Labels for the samples (each bigwig)"*: `ATAC-Seq`
+>
+{: .hands_on}
+
+
+### Plot with **plotHeatmap**
+
+We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
+
+> ### {% icon hands_on %} Hands-on: Generate the heatmap
+>
+> 1. **plotHeatmap** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
+>    - *"Show advanced output settings"*: `no`
+>    - *"Show advanced options"*: `no`
+{: .hands_on}
+
+> ### {% icon comment %} plotHeatmap Results
+> This is what you get from plotHeatmap:
+> ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
+{: .comment}
+
+> ### {% icon question %} Questions
+>
+> 1. What is the mean value in genes?
+> 2. Is the coverage symmetric?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Around 2.5.
+> > 2. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Visualise Regions with **pyGenomeTracks**
 
@@ -602,63 +661,6 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 >
 {: .question}
 
-## Create heatmap of genes
-
-You might also be interested in specific regions. For this, you can compute a heatmap. We will use the `deepTools plotHeatmap`. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
-
-### Generate computeMatrix
-
-The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will use the tool `computeMatrix` that will evaluate the coverage at each locus you are interested in.
-
-> ### {% icon hands_on %} Hands-on: Generate the matrix
->
-> 1. **computeMatrix** {% icon tool %} with the following parameters:
->    - In *"Select regions"*:
->        - 1. *"Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
->    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
->    - *"computeMatrix has two main output options"*: `reference-point`
->    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `yes`
->        - *"Convert missing values to 0?"*: `yes`
->        - *"Labels for the samples (each bigwig)"*: `ATAC-Seq`
->
-{: .hands_on}
-
-
-### Plot with **plotHeatmap**
-
-We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
-
-> ### {% icon hands_on %} Hands-on: Generate the heatmap
->
-> 1. **plotHeatmap** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: Select the output of **computeMatrix** {% icon tool %}.
->    - *"Show advanced output settings"*: `no`
->    - *"Show advanced options"*: `no`
-{: .hands_on}
-
-> ### {% icon comment %} plotHeatmap Results
-> This is what you get from plotHeatmap:
-> ![plotHeatmap output](../../images/atac-seq/plotHeatmapOutput.png "plotHeatmap output")
-{: .comment}
-
-> ### {% icon question %} Questions
->
-> 1. What is the mean value in genes?
-> 2. Is the coverage symmetric?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Around 2.5.
-> > 2. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
-> >
-> {: .solution}
->
-{: .question}
-
 
 # Conclusion
 
@@ -667,7 +669,7 @@ is a method to investigate the chromatin accessibility and the genome is treated
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
 inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if `FastQC`, shows a warning in these areas. We mapped the reads
 with `Bowtie2`, filtered our reads for properly paired, good quality and reads that do not
-map to the mitochondrial genome. We found open chromatin regions with `Genrich`, a tool to find regions of genomic enrichment (peaks). We visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. Last but not least, we investigated the read coverage around TSS with the help of `computeMatrix` and `plotHeatmap`. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
+map to the mitochondrial genome. We found open chromatin regions with `Genrich`, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of `computeMatrix` and `plotHeatmap`. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
 
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
