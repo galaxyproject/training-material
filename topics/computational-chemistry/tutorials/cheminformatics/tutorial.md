@@ -8,7 +8,7 @@ questions:
 - What is protein-ligand docking?
 - How can I perform a simple docking workflow in Galaxy?
 objectives:
-- Create a miniature compound library using the ChEMBL database
+- Create a small compound library using the ChEMBL database
 - Dock a variety of ligands to the active site of the Hsp90 protein
 time_estimation: 3H
 key_points:
@@ -24,11 +24,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The aim of protein-ligand docking is to find the optimal binding between a small molecule and a protein. Generally, the goal is to search for a potential drug candidate. Firstly, a target protein is identified which is involved in a disease. Secondly, a 'library' of ligands which may be able to bind to this protein and interfere with its function is assembled. Each of the compounds is then 'docked' into the protein to find the optimal binding position and energy.
+Cheminformatics is the use of computational techniques and information about molecules to solve problems in chemistry; while protein-ligand docking is used to find the optimal binding between a small molecule and a protein. These techniques are generally applied to the drug discovery and development process with the aim of finding a potential drug candidate. First, a target protein is identified. This protein is usually linked to a disease and is known to bind small molecules. Second, a 'library' of possible ligands is assembled. Ligands are small molecules that bind to a protein and may interfere with protein function. Each of the compounds in the library is then 'docked' into the protein to find the optimal binding position and energy.
 
-Docking is a form of molecular modelling, but several simplifications are made in comparison to methods such as molecular dynamics. Most significantly, the receptor is generally considered to be rigid, with covalent bond lengths and angles held constant. Charges and protonation states are also not permitted to change. While these approximations lower accuracy to some extent, they increase computational speed, which is necessary to screen a large compound library in a realistic amount of time.
+Docking is a form of molecular modelling, but several simplifications are made in comparison to methods such as molecular dynamics. Most significantly, the receptor is generally considered to be rigid, with covalent bond lengths and angles held constant. Charges and protonation states are also not permitted to change. While these approximations reduce accuracy to some extent, they increase computational speed, which is necessary to screen a large compound library in a realistic amount of time.
 
-In this tutorial, you will perform docking of ligands into the N-terminus of the Hsp90 protein. The tools used for docking are based on the open-source software [AutoDock Vina](http://vina.scripps.edu/).
+In this tutorial, you will perform docking of ligands into the N-terminus of Hsp90 (heat shock protein 90). The tools used for docking are based on the open-source software [AutoDock Vina](http://vina.scripps.edu/).
 
 > ### {% icon details %} Biological background
 >
@@ -37,6 +37,7 @@ In this tutorial, you will perform docking of ligands into the N-terminus of the
 >
 > Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to slow cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents. 
 >
+> Read more about this protein at [PDB-101](https://pdb101.rcsb.org/motm/108) and [Wikipedia](https://en.wikipedia.org/wiki/Hsp90).
 {: .details}
 
 
@@ -71,37 +72,46 @@ For this exercise, we need two datasets: a protein structure and a library of co
 
 # Separating protein and ligand structures
 
-You can view the contents of the downloaded PDB file by pressing the 'View data' icon in the history pane. After the header section (about 500 lines), tha atoms of the protein and their coordinates are listed. The lines begin with ```ATOM```. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled ```HETATM```. We can use the grep tool to separate these molecules into separate files.
+You can view the contents of the downloaded PDB file by pressing the 'View data' icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with ```ATOM```. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled ```HETATM```. We will use the grep tool to separate these molecules into separate files.
 
 > ### {% icon details %} What is grep?
 >
-> Grep is a command line tool for searching textfiles for lines which match a search query.
+> Grep is a command-line tool for searching text files for lines which match a search query.
 >
 > There is a Galaxy tool available based on grep, which we will apply to the downloaded PDB tool.
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Separate protein and ligand
 >
 > 1. **Search in textfiles (grep)** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: Downloaded PDB file
+>    - {% icon param-file %} *"Select lines from"*: Downloaded PDB file 'Hsp90 structure'
 >    - {% icon param-file %} *"that"*: `Don't match`
 >    - {% icon param-file %} *"Regular Expression"*: `HETATM`
->    - All other parameters can be left as their defaults. The result is a file with all non-protein (`HETATM`) atoms removed. Rename the dataset 'Protein (PDB)'.
+>    - All other parameters can be left as their defaults. 
+>    - Rename the dataset 'Protein (PDB)'.
+>
+>    The result is a file with all non-protein (`HETATM`) atoms removed.
 > 2. **Search in textfiles (grep)** {% icon tool %} with the following parameters. Here, we use grep again to produce a file with only non-protein atoms.
->    - {% icon param-file %} *"Select lines from"*: Downloaded PDB file
+>    - {% icon param-file %} *"Select lines from"*: Downloaded PDB file 'Hsp90 structure' 
 >    - {% icon param-file %} *"that"*: `Don't match`
 >    - {% icon param-file %} *"Regular Expression"*: `ATOM`
->    - All other parameters can be left as their defaults. This produces a file with only non-protein atoms. Rename the dataset 'Ligand (PDB)'. (Note: the file does also contain water molecules, but these will be removed in the next step).
+>    - All other parameters can be left as their defaults. 
+>    - Rename the dataset 'Ligand (PDB)'.
+>
+>    This produces a file with only non-protein atoms. Note: the file does also contain water molecules, but these will be removed in the next step.
 > 3. **Compound conversion** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Molecular input file"*: Ligand PDB file created in step 2.
 >    - {% icon param-file %} *"Output format"*: `MDL MOL format (sdf, mol)`
 >    - {% icon param-file %} *"Generate 3D coordinates"*: `Yes`
->    - All other parameters can be left as their defaults. Applying this tool will generate a representation of the structure of the ligand in MOL format. Rename the dataset 'Ligand (MOL)'.
+>    - All other parameters can be left as their defaults. 
+>    - Rename the dataset 'Ligand (MOL)'.
+>
+>    Applying this tool will generate a representation of the structure of the ligand in MOL format.
 >
 {: .hands_on}
 
-At this stage separate protein and ligand files have been created. Next, we want to generate a compound library we can use for docking.
+At this stage, separate protein and ligand files have been created. Next, we want to generate a compound library we can use for docking.
 
 
 # Creating and processing the compound library
@@ -116,7 +126,7 @@ In this step we will create a compound library, using data from the ChEMBL datab
 >
 {: .details}
 
-We will generate our compound library by searching ChEMBL for compounds which have a similar structure to the ligand in the PDB file we downloaded in the first step. There is a Galaxy tool for accessing ChEMBL which requires a data input in SMILES format; thus, the first step is to convert the 'Ligand' PDB file to a SMILES file. Then the search is performed, returning a SMILES file. For docking, we would like to convert to SDF format, which we can do once again using the 'Compound conversion' tool.
+We will generate our compound library by searching ChEMBL for compounds which have a similar structure to the ligand in the PDB file we downloaded in the first step. There is a Galaxy tool for accessing ChEMBL which requires data input in SMILES format; thus, the first step is to convert the 'Ligand' PDB file to a SMILES file. Then the search is performed, returning a SMILES file. For docking, we would like to convert to SDF format, which we can do once again using the 'Compound conversion' tool.
 
 > ### {% icon hands_on %} Hands-on: Generate compound library
 >
@@ -132,20 +142,21 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 >    - {% icon param-file %} *"Tanimoto cutoff score"*: `80`
 >    - {% icon param-file %} *"Filter for Lipinski's Rule of Five"*: `Yes`
 >    - All other parameters can be left as their defaults.
-> > ### {% icon question %} Question
-> >
-> > Why are compounds filtered for Lipinski's Rule of Five?
-> >
-> > > ### {% icon solution %} Solution
-> > > Lipinski's rule of five is an empirical rule which can be used to determine the 'druglikeness' of a molecule. The rule consists of four criteria which relate to the pharmokinetics of the molecule.
-> > {: .solution}
-> {: .question}
 >
-> 5. Optional: experiment with different combinations of options - adding different filters, adjusting the Tanimoto coefficient.
-> 6. Check that the datatype is correct (smi). This step is essential, as Galaxy does not automatically detect the datatype for SMILES files.
+>    > ### {% icon question %} Question
+>    >
+>    > Why are compounds filtered for Lipinski's Rule of Five?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > Lipinski's rule of five is an empirical rule which can be used to determine the 'druglikeness' of a molecule. The rule consists of four criteria which relate to the pharmacokinetics of the molecule. Read more on [Wikipedia](https://en.wikipedia.org/wiki/Lipinski%27s_rule_of_five).
+>    > {: .solution}
+>    {: .question}
+>
+>    Optional: experiment with different combinations of options - adding different filters, adjusting the Tanimoto coefficient.
+> 4. Check that the datatype is correct (smi). This step is essential, as Galaxy does not automatically detect the datatype for SMILES files.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
-> 7. Rename dataset 'Compound library'.
+> 5. Rename dataset 'Compound library'.
 >
 {: .hands_on}
 
@@ -153,14 +164,14 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 >
 > SMILES and SD-files both represent chemical structures. A SMILES file represents the 2D structure of a molecule as a chemical graph. In other words, it states only the atoms and the connectivity between them. An example of a SMILES string (taken from the ligand in the PDB file) is `c1c2OCCOc2ccc1c1c(C)[nH]nc1c1cc(CC)c(O)cc1O`. For more information on how the notation works, please consult the [OpenSMILES specification](http://opensmiles.org/opensmiles.html) or the description provided by [Wikipedia](https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system). A more comprehensive alternative to the SMILES system is the International Chemical Identifier (InChI).
 >
-> Neither SMILES nor InChIs display the three-dimensional structure of a molecule. By contrast, the SDF (structure data file) format encodes three-dimensional atomic coordinates of a structure, similarly to a PDB file.
+> Neither SMILES nor InChI format contain the three-dimensional structure of a molecule. By contrast, the SDF (structure data file) format encodes three-dimensional atomic coordinates of a structure, similar to a PDB file.
 >
 > In a previous step, we also generated a MOL file - this format is closely related to the SDF format. The difference is that MOL files can store only a single molecule, whereas SD-files can encode single or multiple molecules. Multiple molecules are separated by lines containing four dollar signs (`$$$$`).
 >
 > For docking, we need the three-dimensional coordinates of the ligand; thus, we want to convert from SMILES to SDF format.
 {: .details}
 
-# Aside: other options for the compound library
+# Optional: cheminformatics tools applied to the compound library
 
 <!-- Add hydrogen atoms at a certain pH value
 Calculate molecular descriptors with Mordred
@@ -213,9 +224,9 @@ This produces an SVG image of all the structures generated ordered by molecular 
 
 ### Calculation of fingerprints and clustering
 
-In this step we will assess the similarity of the compounds in our small library to each other and cluster them into groups accordingly. A key tool in cheminformatics for measuring molecular similarity is fingerprinting, which entails extracting chemical properties of molecules and storing them as a bitstring. These bitstrings can easily be compared computationally.
+In this step, we will group similar molecules together. A key tool in cheminformatics for measuring molecular similarity is fingerprinting, which entails extracting chemical properties of molecules and storing them as a bitstring. These bitstrings can be easily compared computationally, for example with a clustering method. 
 
-Initially, we will add an second column to the SMILES compound library containing a label for each molecule, and concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.
+Before clustering, let's label each compound. To do so add a second column to the SMILES compound library containing a label for each molecule, and concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.
 
 > ### {% icon hands_on %} Hands-on: Calculate molecular fingerprints
 > 1. **Add column** {% icon tool %} with the following parameters:
@@ -223,7 +234,7 @@ Initially, we will add an second column to the SMILES compound library containin
 >    - {% icon param-file %} *"to Dataset"*: 'Compound library' file.
 >    - {% icon param-file %} *"Iterate"*: `Yes`
 > 2. **Concatenate datasets** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Datasets to concatenate"*: Output of previous step, 'Ligand SMILES'.
+>    - {% icon param-file %} *"Datasets to concatenate"*: Output of the previous step, 'Ligand SMILES'.
 >    - {% icon param-file %} *"to Dataset"*: 'Compound library' file.
 >    - {% icon param-file %} *"Iterate"*: `Yes`
 >    - Rename dataset 'Labelled compound library'
@@ -231,21 +242,24 @@ Initially, we will add an second column to the SMILES compound library containin
 >    - {% icon param-file %} *"molecule file"*: 'Labelled compound library' file.
 >    - {% icon param-file %} *"Type of fingerprint"*: `Open Babel FP2 fingerprints`
 >    - Rename to 'Fingerprints'.
-> 2. **Taylor-Butina clustering** {% icon tool %} with the following parameters:
+{: .hands_on}
+
+Taylor-Butina clustering provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.
+
+![Fingerprinting]({{ site.baseurl }}{% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
+
+> ### {% icon hands_on %} Hands-on: Cluster molecules using molecular fingerprints
+> 1. **Taylor-Butina clustering** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Fingerprint dataset"*: 'Fingerprints' file.
 >    - {% icon param-file %} *"threshold"*: `0.8`
-> 3. **NxN Clustering** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fingerprint dataset"*: 'Ligand (MOL)' file.
+> 2. **NxN Clustering** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Fingerprint dataset"*: 'Fingerprints' file.
 >    - {% icon param-file %} *"threshold"*: `0.0`
 >    - {% icon param-file %} *"Format of the resulting picture"*: `SVG`
 >    - {% icon param-file %} *"Output options"*: `Image`
 {: .hands_on}
 
-Taylor-Butina clustering provides a classification of the compounds into different groups or clusters, based on their structural similarity. We can therefore see how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.
-
-![Fingerprinting]({{ site.baseurl }}{% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case the presence of phenyl, amine and carboxylic acid groups are encoded.")
-
-The image produced by the NxN clustering shows the clustering in the form of a dendrogram.
+The image produced by the NxN clustering shows the clustering in the form of a dendrogram. Clusters in the dendogram are coloured differently. For example all molecules connected in purple are similar enough to be grouped into the same cluster. 
 
 ![NxN clustering]({{ site.baseurl }}{% link topics/computational-chemistry/images/nxn.png %} "Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 70, hence 51 search results are shown, plus the original ligands contained in the PDB file.")
 
@@ -259,13 +273,13 @@ The image produced by the NxN clustering shows the clustering in the form of a d
 
 # Prepare files for docking
 
-A processing step now needs to be applied to the protein structure and the docking candidates - each of the structures needs to be converted to PDBQT format prior to application of the AutoDock Vina docking tool.
+A processing step now needs to be applied to the protein structure and the docking candidates - each of the structures needs to be converted to PDBQT format before using the AutoDock Vina docking tool.
 
-In addition, docking requires the coordinates of a binding site to be defined. Effectively, this defines a cuboidal volume in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in Galaxy which can be used to automatically create a configuration file for docking when ligand coordinates are already known.
+Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a cube-shaped volume in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in Galaxy which can be used to automatically create a configuration file for docking when ligand coordinates are already known.
 
 > ### {% icon details %} How to find the binding site of an apoprotein?
 >
-> If the structure contains no ligand in complex with the protein (i.e. apoprotein), identifying the binding site is not so trivial as in this example. Fortunately, software is available for automatic detection of pockets which may be promising candidates for ligand binding sites. If you want, check out the fpocket tool and try running it on the Hsp90 structure.
+> If the structure contains no ligand in complex with the protein (i.e. apoprotein), identifying the binding site is not trivial. There are software available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, try out the fpocket tool on the Hsp90 structure.
 >
 {: .details}
 
@@ -293,19 +307,19 @@ In addition, docking requires the coordinates of a binding site to be defined. E
 
 # Docking
 
-Finally, the docking itself can be performed.
+Now that the protein and the ligand library have been correctly prepared and formatted, docking can be performed.
 
 > ### {% icon hands_on %} Hands-on: Perform docking
 >
 > 1. **Docking** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Receptor"*: 'Protein PDBQT' file.
->    - {% icon param-file %} *"Ligand"*: 'Prepared ligands' collection.
+>    - {% icon param-file %} *"Ligand"*: 'Prepared ligands' collection. (Remember to click on the dataset collection icon)
 >    - {% icon param-file %} *"Specify parameters"*: 'Docking config file'
 >    - {% icon param-file %} *"Exhaustiveness"*: leave blank (it was specified in the previous step)
 >    - {% icon param-file %} *"Output format"*: `PDBQT (and separate file with binding scores)`
 {: .hands_on}
 
-The output consists of two collections, containing respectively structural files (PDBQT format) and scoring files for each of the ligands.
+The output consists of two collections, containing structural files (PDBQT format) and scoring files for each of the ligands.
 
 View one of the scoring files (click on the eye icon in the history pane). You will see something that looks like this:
 
@@ -353,6 +367,6 @@ Writing output ... done.
 
 ```
 
-In the table, fifteen different binding modes are listed, from most to least energetically favorable. The second column shows the binding affinity in kcal/mol. The first row shows the most favorable binding mode. Thus we can see that the optimal binding energy of the ligand is -9.2 kcal/mol (or in SI units, -38.5 kJ/mol).
+In the table, fifteen different binding modes are listed, from most to least energetically favorable. The second column shows the binding affinity in kcal/mol. The first row shows the most favorable binding mode. The optimal binding energy for this particular ligand is -9.2 kcal/mol (or in SI units, -38.5 kJ/mol).
 
 Compare the optimal binding energies for several ligands, selecting examples from different NxN clusters.
