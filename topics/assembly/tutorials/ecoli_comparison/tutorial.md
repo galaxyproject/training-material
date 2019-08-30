@@ -634,6 +634,10 @@ The 12th column of the fields chosen by us for [LASTZ run](#hands_on-hands-on-al
 >
 >    This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as `CP020543.13`.
 >
+> 4. We will reuse this file later so let's rename it `Unprocessed Alignments`
+>
+>    {% include snippets/rename_dataset.md name="Unprocessed Alignments" %}
+>
 > 4. **Cut** {% icon tool %} columns from a table:
 >
 >    - *"Cut columns"*: `c2,c4,c5,c14,c12,c8`
@@ -930,6 +934,10 @@ You will notice that all three genomes have a region starting past 3,200,000 and
 
 ## Visualising the Genome
 
+### JBrowse
+
+JBrowse is an interactive genome browser, which has been integrated into Galaxy as a workflow-compatible tool that you can use to summarise all of the datasets we've created thusfar:
+
 > ### {% icon hands_on %} Hands-on: View genomes
 > 1. **JBrowse** {% icon tool %} genome browser:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -966,6 +974,68 @@ Let's start by looking at the gaps in our alignments. The deletion from our asse
 </ul>
 
 Close ups of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.
+
+### Circos
+
+Alternatively to JBrowse, we can use Circos to create a nice image of the alignments:
+
+> ### {% icon hands_on %} Hands-on: Circos
+>
+> 1. **Cut** {% icon tool %} columns from a table:
+>
+>    - *"Cut columns"*: `c2,c4,c5,c7,c9,c10`
+>    - {% icon param-file %} *"From"*: `Unprocessed Alignments`
+>
+> 2. **Filter** {% icon tool %} data on any column using simple expressions:
+>    - *"Filter"*: the output of the previous **Cut** {% icon tool %} step
+>    - *"With following condition"*: `c3-c2 > 10000`
+>
+> 3. **Circos** {% icon tool %} genome browser:
+>
+>    - *"Reference genome"*: `From history`
+>    - *"Source FASTA sequence"*: `DNA (E. coli + Relatives)`
+>    - *"Limit/Filter Chromosomes"*: `Ecoli_C;LT906474.1;CP020543.1;CP024090.1`
+>    - *"Reverse these Chromosomes"*: `Ecoli_C`
+>    - In the section *"Ideogram Configuration (Genome/Chromosomes)"*
+>        - In the section *"Labels"*
+>            - *"Radius"*: `0.125`
+>            - *"Font size"*: `48`
+>    - In the section *"Ticks"*
+>        - *"Show Ticks"*: `Yes`
+>            - {% icon param-repeat %} Insert Tick Group
+>                - *"Tick Spacing"*: `50000`
+>                - *"Tick Size"*: `5.0`
+>                - *"Color"*: `grey` {% color_picker rgb(127,127,126) %}
+>            - {% icon param-repeat %} Insert Tick Group
+>                - *"Tick Spacing"*: `200000`
+>                - *"Tick Size"*: `10.0`
+>                - *"Color"*: `black` {% color_picker black %}
+>                - *"Show Tick Labels"*: `Yes`
+>                    - *"Label Format"*: `Float (one decmial)`
+>    - In the section *"2D Data"*
+>        - {% icon param-repeat %} Insert 2D Data Plot
+>            - *"Outside Radius"*: `0.99`
+>            - *"Inside Radius"*: `0.94`
+>            - *"Orient Inwards"*: `Yes`
+>            - *"Plot Format"*: `Tiles`
+>            - *"Tile Data Source"*: `Genes (Relatives)`
+>            - In the section *"Plot Format Specific Options"*
+>                - *"Fill Colour"*: select a nice colour like a middle blue {% color_picker rgb(84,141,212) %}
+>                - *"Stroke Thickness"*: `0`
+>    - In the section *"Ticks"*
+>        - {% icon param-repeat %} Insert Link Data
+>            - *"Inside Radius"*: `0.93`
+>            - *"Link Data Source"*: the output of the **Filter** {% icon tool %} above
+>            - *"Link Type"*: `Ribbon`
+>            - *"Link Colour"*: another nice colour, could be the same  blue {% color_picker rgb(84,141,212) %}
+>            - *"Transparency"*: `0.3`
+>
+{: .hands_on}
+
+This should produce a lovely Circos plot of your data:
+
+![Circos plot](../..//images/ecoli-comparison.png "Circos plot of the four genomes. The insertion in the related genomes is visible around the 3.2Mb region")
+
 
 ## Extracting genes programmatically
 
