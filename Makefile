@@ -1,13 +1,14 @@
 # Settings
 JEKYLL=jekyll
 PORT?=4000
-HOST?=localhost
+HOST?=0.0.0.0
 FLAGS?=""
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
-SITE_URL=http://${HOST}:${PORT}/training-material
+PDF_HOST?=127.0.0.1
+SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
