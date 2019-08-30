@@ -174,6 +174,7 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
   tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
 
 - `maintainers`: GitHub username of people maintaining the topic
+- `gitter`: The name of the chatroom on Gitter, if enabled, it will be embedded on the topic and tutorial pages. Should be formatted like `../..`, without the `https://gitter.im`, e.g. `galaxyproject/dev`
 
 > ### {% icon hands_on %} Hands-on: Update the new topic to the website
 >

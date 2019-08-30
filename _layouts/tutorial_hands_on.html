@@ -28,6 +28,15 @@ layout: base
     {% endif %}
 {% endfor %}
 
+{% if topic.gitter %}
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: '{{ topic.gitter }}'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+{% endif %}
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
