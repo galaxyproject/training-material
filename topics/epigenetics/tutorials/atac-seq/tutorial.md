@@ -8,8 +8,8 @@ questions:
 - How to analyse and visualise ATAC-Seq data?
 objectives:
 - Apply appropriate analysis and quality control steps for ATAC-Seq
-- Visualise coverage and peaks for specific regions
-- Generate a heatmap of transcription start sites
+- Generate a heatmap of transcription start site accessibility
+- Visualise peaks for specific regions
 time_estimation: 3h
 key_points:
 - ATAC-Seq can be used to identify accessible gene promoters and enhancers
@@ -131,7 +131,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 
 ## Quality Control
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get DNA fragments of about 40 bp if two adjacent Tn5 transposases cut the DNA [Adey et al. 2010](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-12-r119). This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can assess the reads with `FastQC`. The FastQC web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
+The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get DNA fragments of about 40 bp if two adjacent Tn5 transposases cut the DNA [Adey et al. 2010](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-12-r119). This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can assess the reads with **FastQC**.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -169,9 +169,11 @@ The first step is to check the quality of the reads and the presence of the Next
 > ![FastQC screenshot of the Adapter Content section](../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png "FastQC screenshot on the Adapter Content section")
 {: .comment}
 
+The FastQC web page **Adapter Content** section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.
+
 ## Trimming Reads
 
-To trim the adapters we provide the Nextera adapter sequences to `Cutadapt`. These adapters are shown in the image below.
+To trim the adapters we provide the Nextera adapter sequences to **Cutadapt**. These adapters are shown in the image below.
 
 ![Nextera library with the sequence of adapters](../../images/atac-seq/nexteraLibraryPicture.svg.png "Nextera library with the sequence of adapters")
 
@@ -235,7 +237,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 {: .hands_on}
 
 > ### {% icon comment %} FastQC Results
-> If we run `FastQC` again we should see under **Adapter Content** that the Nextera adapters are no longer present.
+> If we run FastQC again we should see under **Adapter Content** that the Nextera adapters are no longer present.
 > ![FastQC screenshot on the adapter content section after cutadapt](../../images/atac-seq/Screenshot_fastqcAftercutadapt.png "FastQC screenshot on the adapter content section after cutadapt")
 {: .comment}
 
@@ -243,17 +245,17 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use `Bowtie2`. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
+Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
 
-> ### {% icon comment %} dovetailing
-> We will allow dovetailing. Indeed, due to the fact that the adapter removal is done only when at least 3 bases match the adapter sequence, it is possible that some reads goes over the beginning of the mate. For example: if the first mate is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`. They will not be trimmed by cutadapt and will map this way:
+> ### {% icon comment %} Dovetailing
+> We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. For example, if the first mate in the read pair is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`, where both contain 2 bases of adapter sequence, they will not be trimmed by Cutadapt and will map this way:
 > ```
 <--------------------Mate 1-----------------------
 AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
   CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT
   ----------------------Mate 2--------------------->
 ```
-This is what we call dovetailing and we want to consider this pair as valid.
+This is what we call dovetailing and we want to consider this pair as a valid concordant alignment.
 {: .comment}
 
 
@@ -360,7 +362,7 @@ High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-seq 
 
 ## Filter Duplicate Reads
 
-Because of the PCR amplification, there might be duplicates (different reads mapping to exactly the same genomic region) from overamplification of some regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider such fragments to be PCR duplicates. We will remove them with `Picard`.
+Because of the PCR amplification, there might be read duplicates (different reads mapping to exactly the same genomic region) from overamplification of some regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider such fragments to be PCR duplicates. We will remove them with **Picard MarkDuplicates**.
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
@@ -408,7 +410,7 @@ Because of the PCR amplification, there might be duplicates (different reads map
 
 ## Check Insert Sizes
 
-We will check the insert sizes with `Picard CollectInsertSizeMetrics`. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
+We will check the insert sizes with **Picard CollectInsertSizeMetrics**. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.
 
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
@@ -468,7 +470,7 @@ We have now finished the data preprocessing. Next, in order to find regions corr
 > When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
-> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). `Genrich` can apply these shifts when ATAC-seq mode is selected.
+> This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected.
 {: .comment}
 
 If we only assess the coverage of the start sites of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 100bp (50 bp in each direction) to assess coverage.
@@ -495,8 +497,8 @@ If we only assess the coverage of the start sites of the reads, the data would b
 
 ## Prepare the Datasets
 
-Thanks to `Genrich` we now have a coverage file which represents the coverage of the read start sites extended 50 bp to each side.
-The output of `Genrich` is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it. The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
+Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 50 bp to each side.
+The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it. The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
 
 ### Convert BedGraph-ish pileup to bigWig
 
@@ -518,7 +520,7 @@ The output of `Genrich` is a BedGraph-ish pileup (6 columns text format with a c
 {: .hands_on}
 
 ### Sort CTCF Peaks
-In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like `IGV` or `UCSC browser`, or use `pyGenomeTracks` to make publishable figures. We will use `pyGenomeTracks`. The tool **pyGenomeTracks** {% icon tool %} needs all BED files sorted, thus we sort the CTCF peaks.
+In order to visualise a specific region (e.g. the gene *RAC2*), we can either use a genome browser like **IGV** or **UCSC browser**, or use **pyGenomeTracks** to make publishable figures. We will use **pyGenomeTracks**. The **pyGenomeTracks** tool needs all BED files sorted, thus we sort the CTCF peaks.
 
 > ### {% icon hands_on %} Hands-on: Sort the BED files
 >
@@ -528,17 +530,17 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 {: .hands_on}
 
 ### Convert the Genrich peaks to BED
-At the moment, the wrapper of **pyGenomeTracks** {% icon tool %} does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** {% icon tool %} from encodepeak to bed.
+At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** from encodepeak to bed.
 
 {% include snippets/change_datatype.md datatype="datatypes" %}
 
 ## Create heatmap of genes
 
-You might also be interested in specific regions. For this, you can compute a heatmap. We will use the `deepTools plotHeatmap`. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
+You might also be interested in specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
 
 ### Generate computeMatrix
 
-The input of `plotHeatmap` is a matrix in a hdf5 format. To generate it you will use the tool `computeMatrix` that will evaluate the coverage at each locus you are interested in.
+The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use the tool **computeMatrix** that will evaluate the coverage at each locus we are interested in.
 
 > ### {% icon hands_on %} Hands-on: Generate the matrix
 >
@@ -643,33 +645,35 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 
 
 > ### {% icon question %} Questions
-> On this selected region we see four peaks on TSS (middle track) or CTCF binding loci (bottom track).
+> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich. 
 >
-> 1. How many TSS are accessible in the displayed region?
-> 2. How many CTCF binding loci are accessible in the displayed region?
+> 1. How many TSS are accessible in the sample in the displayed region?
+> 2. How many CTCF binding loci are accessible?
 > 3. Can you spot peaks with no TSS and no CTCF peak?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. In total, we can see 3 TSS for 6 transcripts for 2 genes. The TSS of RAC2 corresponds to an ATAC-Seq peak whereas there is no significant coverage on both TSS of SSTR3.
 > >
-> > 2. Only the first peak overlaps with a CTCF binding site.
+> > 2. Only the first peak on the left overlaps with a CTCF binding site.
 > >
-> > 3. Amongst the 4 peaks in this region, the 2 in the middle do not correspond to CTCF peaks or TSS. As CTCF, by itself, can displace the nucleosome and create accessible regions it is more likely that a region with no CTCF peak and no TSS would be a putative enhancer. One of these regions are located in the intron of a gene, the other one was in between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. Of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc. 
+> > 3. Amongst the 4 peaks in this region, the 2 in the middle do not correspond to CTCF peaks or TSS.
 > >
 > {: .solution}
 >
 {: .question}
 
+As CTCF binds so ubiquitously and by itself can displace the nucleosome creating accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
+
 
 # Conclusion
 
-In this training you have learned about the general principles of ATAC-Seq data analysis. ATAC-Seq
+In this training you have learned the general principles of ATAC-Seq data analysis. ATAC-Seq
 is a method to investigate the chromatin accessibility and the genome is treated with
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
-inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if `FastQC`, shows a warning in these areas. We mapped the reads
-with `Bowtie2`, filtered our reads for properly paired, good quality and reads that do not
-map to the mitochondrial genome. We found open chromatin regions with `Genrich`, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of `computeMatrix` and `plotHeatmap`. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of `pyGenomeTracks`. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
+inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if **FastQC**, shows a warning in these areas. We mapped the reads
+with **Bowtie2**, filtered our reads for properly paired, good quality and reads that do not
+map to the mitochondrial genome. We found open chromatin regions with **Genrich**, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of **computeMatrix** and **plotHeatmap**. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of **pyGenomeTracks**. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.
 
 
 ![ATAC workflow](../../images/atac-seq/ATACWF.svg "ATAC workflow")
