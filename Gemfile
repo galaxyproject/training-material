@@ -1,0 +1,13 @@
+source "https://rubygems.org"
+gem 'nokogiri'
+gem 'addressable'
+gem 'jekyll'
+gem 'jekyll-feed'
+gem 'jekyll-environment-variables'
+gem 'jekyll-github-metadata'
+gem 'jekyll-scholar'
+gem 'csl-styles'
+gem 'awesome_bot'
+gem 'html-proofer'
+gem 'pkg-config'
+gem 'kwalify'
