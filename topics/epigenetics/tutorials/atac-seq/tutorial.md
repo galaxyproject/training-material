@@ -31,7 +31,7 @@ In many eukaryotic organisms, such as humans, the genome is tightly packed and o
 
 With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A [transposase](https://en.wikipedia.org/wiki/Transposase) can bind to a [transposable element](https://en.wikipedia.org/wiki/Transposable_element), which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts DNA sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described [here](https://informatics.fas.harvard.edu/atac-seq-guidelines.html).
 
-In this tutorial we will use data from the study of [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825), the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million reads in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).
+In this tutorial we will use data from the study of {% cite Buenrostro2013 %}, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million reads in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: [CTCF](https://en.wikipedia.org/wiki/CTCF). CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).
 
 ### When working with real data
 {:.no_toc}
@@ -131,7 +131,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 
 ## Quality Control
 
-The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get DNA fragments of about 40 bp if two adjacent Tn5 transposases cut the DNA [Adey et al. 2010](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-12-r119). This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can assess the reads with **FastQC**.
+The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get DNA fragments of about 40 bp if two adjacent Tn5 transposases cut the DNA {% cite Adey2010 %}. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can assess the reads with **FastQC**.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -150,7 +150,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > > 2. The 3 steps below have warnings:
 >    > >
 >    > > > 1) **Per base sequence content**
->    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in [Green et al. 2012](https://mobilednajournal.biomedcentral.com/articles/10.1186/1759-8753-3-3)
+>    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Geen2012 %}.
 >    > >
 >    > > > 2) **Sequence Duplication Levels**
 >    > > > > The read library quite often has PCR duplicates that are introduced
@@ -347,7 +347,7 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >
 {: .question}
 
-High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-seq samples have been reported to be 80% mitochondrial reads and so wet-lab methods have been developed to deal with this issue [Corces et al. 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5623106/) and [Litzenburger et al. 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/pmid/28118844/). It can be a useful QC to assess the number of mitochondrial reads.
+High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-seq samples have been reported to be 80% mitochondrial reads and so wet-lab methods have been developed to deal with this issue {% cite Corces2017 %} and {% cite Litzenburger2017 %}. It can be a useful QC to assess the number of mitochondrial reads.
 
 > ### {% icon tip %} Tip: Getting the number of mitochondrial reads
 >
@@ -467,7 +467,7 @@ We have now finished the data preprocessing. Next, in order to find regions corr
 
 > ### {% icon comment %} Comment on Tn5 insertion
 >
-> When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp [Kia et al. 2017](https://bmcbiotechnol.biomedcentral.com/track/pdf/10.1186/s12896-016-0326-1):
+> When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp {% cite Kia2017 %}:
 > ![Nextera Library Construction](../../images/atac-seq/NexteraLibraryConstruction.jpg "Nextera Library Construction")
 >
 > This means that to have the read start site reflect the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in [Buenrostro et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825). **Genrich** can apply these shifts when ATAC-seq mode is selected.
