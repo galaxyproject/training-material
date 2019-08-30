@@ -4,6 +4,7 @@ title: "Pre-processing of 10X Single-Cell RNA Datasets"
 zenodo_link: "https://zenodo.org/record/UPDATETHIS"
 tags:
   - single-cell
+  - 10x
 questions:
   - "What is 10X?"
   - "What is STARSolo and what is Cell Ranger?"
@@ -259,5 +260,7 @@ We inspect the lengths
 {:.no_toc}
 
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
+
+A full pipeline which produces both an hda5 and tabular file for inspection is provided [here](workflows/scrna_tenx.ga).
 
 <!-- ![Recap of workflow]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow") -->
