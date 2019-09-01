@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Pre-processing of 10X Single-Cell RNA Datasets"
-zenodo_link: "https://zenodo.org/record/UPDATETHIS"
+zenodo_link: "https://zenodo.org/record/3383115"
 tags:
   - single-cell
   - 10x
@@ -45,7 +45,7 @@ contributors:
 
 ## Era of 10x Genomics
 
-10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate. 
+10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate.
 
 ![clusters]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_clusters_intro.png %} "From less than 1K to over 10K with 10x genomics: Analyses of two separate scRNA datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.")
 
@@ -57,7 +57,7 @@ The gain in resolution reduces the granularity and noise issues that plagued the
 
 The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell's transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all reads in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the mRNA into a cDNA counterpart. The oil is then removed and all (now barcoded) cDNA reads are pooled together to be sequenced.
 
-Though there are ~750,000 10X gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (>90%) being empty in order to ensure that the remainder contains only one cell. 
+Though there are ~750,000 10X gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (>90%) being empty in order to ensure that the remainder contains only one cell.
 
 More information can be found in the [reagent kit documentation](https://support.10xgenomics.com/single-cell-gene-expression/library-prep/doc/user-guide-chromium-single-cell-3-reagent-kits-user-guide-v2-chemistry).
 
@@ -82,7 +82,7 @@ The tutorial is structured into two parts:
 
 ![Overview of workflow]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_workflow.png %} "An overview of the workflow")
 
-The first part of this tutorial is essentially a one-click "fire and forget" solution to demultiplexing and quantifying scRNA-seq data, where much of the intricacy and complexity required in this extremely crucial stage is obscured behind several layers of safety glass. 
+The first part of this tutorial is essentially a one-click "fire and forget" solution to demultiplexing and quantifying scRNA-seq data, where much of the intricacy and complexity required in this extremely crucial stage is obscured behind several layers of safety glass.
 
 However, Science favours the brave, and for those more interested in the gritty details of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
 
@@ -94,7 +94,16 @@ The second part of this tutorial also has a one-click solution if an identical C
 
 # Producing a Count Matrix from FASTQ
 
+Here we will use the [1k PBMCs from a Healthy Donor (v3 chemistry)](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.0/pbmc_1k_v3) from 10x genomics, consisting of 1000 Peripheral blood mononuclear cells (PBMCs) extracted from a healthy donor, where PBMCs are primary cells with relatively small amounts of RNA (~1pg RNA/cell).
+
+The source file consists of 6 FASTQ files split into two sequencing lanes of three reads: R1 (barcodes), R2 (cDNA sequence), I1 (illumina lane info).
+
+The CellRanger pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STAR Solo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3383115) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/api/files/858fcfb3-aca8-408d-afa2-eade47bd623a/subsetting_data.txt).
+
 ### Data upload and organization
+
+For the mapping, we require the sub-sampled source files, as well as a list of (737,000) known cell barcodes. The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
+
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
@@ -102,31 +111,26 @@ The second part of this tutorial also has a one-click solution if an identical C
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/UPDATETHIS) or from the data library (ask your instructor)
+> 1. Import the sub-sampled FASTQ data and the Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3383115) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/UPDATETHIS/files/
->    https://zenodo.org/record/UPDATETHIS/files/
+>    https://zenodo.org/record/3383115/737K-august-2016.txt
+>    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
+>    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
+>    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
+>    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/UPDATETHIS) or from the data library (ask your instructor)
+> 3. Import the Gene Annotations and Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3383115) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/UPDATETHIS/files/
->    https://zenodo.org/record/UPDATETHIS/files/
+>    https://zenodo.org/record/3383115/files/Homo_sapiens.GRCh37.75.gtf
+>    https://zenodo.org/record/3383115/files/737K-august-2016.txt
 >    ```
->
-> 4. Set the datatype of the `something` to `tabular`
 >
 {: .hands_on}
-
-
-> ### {% icon comment %} BCL files and Lane Information
-> STARSolo doesn't use this, link to the [original issue](https://github.com/alexdobin/STAR/issues/640)
-{: .comment}
-
 
 
 ## 10x Chemistries
@@ -135,7 +139,7 @@ There are two main reagent kits used during the library preparation, and the cho
 
 ![chem]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_primers.svg %} "10x Chromiumv2 and Chromiumv3 Chemistries")
 
-The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our reads. It is highly advised that the [Plates, Batches, and Barcodes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) slides are revisited to refresh your mind on these concepts. 
+The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our reads. It is highly advised that the [Plates, Batches, and Barcodes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) slides are revisited to refresh your mind on these concepts.
 
 
 | Chemistry | Read 2 | Read 1 (CB + UMI) | Insert (Read 2 + Read 1) |
@@ -147,35 +151,45 @@ The table above gives a summary of the primers used in the image and the number 
 
 > ### {% icon question %} Questions
 >
-> 1. What has stayed constant between the chemistries?
-> 1. What advantage does this have?
+> 1. What has stayed constant between the chemistry versions?
+> 1. What advantage does this constant factor give?
 > 1. What do UMIs do?
 > 1. What advantage does the 2 extra bp in the v3 UMIs have over v2 UMIs?
 >
 > > ### {% icon solution %} Solution
-> > 
-> > 1. The Cell Barcode (CB) has remained at 16bp for both chemistries. 
+> >
+> > 1. The Cell Barcode (CB) has remained at 16bp for both chemistries.
 > > 1. This has the advantage that the same set of barcodes can be used in both chemistries, which is important because barcodes are *very* hard to design.
-> >    * They need to be designed in such a way to minimise accidentally aligning to the reference they were prepared to be used for. 
+> >    * They need to be designed in such a way to minimise accidentally aligning to the reference they were prepared to be used for.
 > >    * Longer barcodes tend to be more unique, so this is a problem that is being solved as the barcodes increase in size, allowing for barcodes that can be used on more than one reference to be more common, as seen above.
 > > 1. UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random 'salt' that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two reads that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.
 > > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*](({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %})) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true
 > {: .solution}
 {: .question}
 
-The differences in the chemistries is slight, when the v2 aims to capture *on average* 50,000 reads per cell, whereas the v3 aims to capture *at minimum* 20,0000 reads per cell.
+The differences in the chemistries is a slight change in the library size, where the v2 aims to capture *on average* 50,000 reads per cell, whereas the v3 aims to capture *at minimum* 20,0000 reads per cell. This greatly reduces the lower-tail of the library size compared to the previous version.
 
 
 ### Determining what Chemistry our Data Contains
 
-We inspect the lengths
+To perform the demultiplexing, we need to tell **RNA STAR Solo** where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.
 
-> ### {% icon comment %} Note
-> 
-{: .comment}
+> ### {% icon question %} Question
+> Peek at one of the R1 FASTQ files using the {% icon galaxy-eye %} symbol below the dataset name.
+>
+> 1. How many basepairs are there in any given read?
+> 2. Which library preparation chemistry version was this read generated from?
+>
+> > ### {% icon solution %} Solution
+> > 1. There are 28 basepairs
+> > 2. The v2 has 26 basepairs, but the v3 has 28 basepairs. Therefore the reads we have here use the Chromium v3 chemistry.
+> {: .solution}
+{: .question}
 
 
 ## Performing the Demultiplexing and Quantification
+
+
 
 
 > ### {% icon hands_on %} Hands-on
