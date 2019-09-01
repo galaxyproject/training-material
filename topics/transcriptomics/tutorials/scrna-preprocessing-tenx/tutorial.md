@@ -189,36 +189,130 @@ To perform the demultiplexing, we need to tell **RNA STAR Solo** where to look i
 
 ## Performing the Demultiplexing and Quantification
 
-
+We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
 
 
 > ### {% icon hands_on %} Hands-on
 >
 > **RNA STARSolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `output` (Input dataset)
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `output` (Input dataset)
->    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `output` (Input dataset)
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
+>    - {% icon param-repeat %} *Insert Input Pairs*
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
+>      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `737K-august-2016.txt`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
->        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
+>        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
+>            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
 >    - In *"Advanced Settings"*:
 >        - *"Configure Chemistry Options"*: `Cell Ranger v3`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the CellRanger pipeline.
+>    >
 >    {: .comment}
 >
 {: .hands_on}
 
 
-## Inspecting the Unfiltered Output Matrix
+## Inspecting the Output Files
 
+At this stage **RNA STARSolo** has output 5 files, 2 mapping quality files and 3 matrix files:
+ 1. Log
+ 1. Feature Statistic Summaries
+ 1. Matrix Gene Counts
+ 1. Barcodes
+ 1. Genes
+
+
+### Mapping Quality
+
+Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.html}) tutorial.
+
+
+> ### {% icon hands_on %} Hands-on
+>
+> **MultiQC** {% icon tool %} with the following parameters:
+>    - In *"Results"*:
+>        - Under *"1:Results"*:
+>            - *"Which tool was used generate logs?"*: `STAR`
+>            - In *"STAR output"*:
+>                - Under *"1:STAR output"*:
+>                    - *"Type of STAR output?"*: `Log`
+>                    - {% icon param-file %} *"STAR log output"*: `log output of RNA STARSolo`
+
+
+> ### {% icon question %} Question
+> 
+> What percentage of reads are uniquely mapped?
+> 
+> > ### {% icon solution %} Solution
+> > 87.5%
+> > - This is good, and is expected of 10x datasets
+> >
+> {: .solution}
+{: .question}
+
+### Quantification Quality
+
+Let us investigate the STARSolo specific log. We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file. 
+
+```
+             Barcodes:
+           nNinBarcode            358
+       nUMIhomopolymer            707
+              nTooMany              0
+              nNoMatch        7491731
+                 Gene:
+             nUnmapped            196
+            nNoFeature          74087
+         nAmbigFeature           9537
+ nAmbigFeatureMultimap           7473
+              nTooMany            691
+         nNoExactMatch           1750
+           nExactMatch         106272
+                nMatch         106868
+         nCellBarcodes            272
+                 nUMIs          52748
+```
+
+The explanation of these parameters can be seen in the [RNA STAR Manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) under the *STARsolo* section, with most of the information given in the details box below.
+
+> ### {% icon details %} Details
+> 
+> * nNinBarcode: number of reads with more than 2 Ns in cell barcode (CB)
+> * nUMIhomopolymer: number of reads with homopolymer in CB
+> * nTooMany: not used at the moment
+> * nNoMatch: number of reads with CBs that do not match whitelist even with one mismatch
+> 
+> All of the above reads are discarded from Solo output.  Remaining reads are checked for overlap with features (e.g. genes):
+> 
+> * nUnmapped: number of reads unmapped to the genome
+> * nNoFeature: number of reads that map to the genome but do not belong to a feature
+> * nAmbigFeature: number of reads that belong to more than one feature
+> * nAmbigFeatureMultimap: number of reads that belong to more than one feature and are also multimapping to the genome (this is a subset of the `nAmbigFeature`)
+> * nTooMany: number of reads with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95)
+> * nNoExactMatch: number of reads with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other reads with exact matches of CB
+>
+> These metrics can be grouped into more broad categories:
+> * nNinBarcode+ nUMIhomopolymer + nNoMatch + nTooMany + nNoExactMatch = number of reads with CBs that do not match whitelist.
+> * nUnmapped + nAmbigFeature = number of reads without defined feature (gene)
+> * nMatch = number of reads that are output as solo counts
+>
+> The three categoties above summed together should be equal to the total number of reads.
+> 
+{: .details}
+
+The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large.
 
 # Producing a Quality Count Matrix
+
+The matrix files produced by **RNA STAR Solo** are in the *bundled* format, meaning that the information to create a tabular matrix of Genes vs Cells are separated into different files. These files are already 10x analysis datasets, compatible with any downstream single-cell RNA analysis pipeline, however the number of cells represented here are greatly over-represented, as the they have not yet been filtered for high quality cells, and therefore the matrix represents *any* cells that were unambiguously detected in the sample. 
+
+To get a high quality count matrix we must apply the **DropletUtils** tool, which will produce a filtered set which will produce a dataset more representative of the CellRanger pipeline. 
 
 ## CellRanger Method
 
