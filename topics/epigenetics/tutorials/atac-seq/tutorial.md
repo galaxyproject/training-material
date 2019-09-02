@@ -150,7 +150,7 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > > 2. The 3 steps below have warnings:
 >    > >
 >    > > > 1) **Per base sequence content**
->    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Geen2012 %}.
+>    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
 >    > >
 >    > > > 2) **Sequence Duplication Levels**
 >    > > > > The read library quite often has PCR duplicates that are introduced
