@@ -7,7 +7,7 @@ tags:
   - 10x
 questions:
   - "What is 10X?"
-  - "What is STARSolo and what is Cell Ranger?"
+  - "What is STARsolo and what is Cell Ranger?"
   - "What are BCL and MTX files?"
   - "What is an HDF5 file, and why is it important?"
 objectives:
@@ -40,10 +40,10 @@ contributors:
 # Introduction
 {:.no_toc}
 
-* Split-out single-cell into it's own intro section
-* (optional) Check out the original pre-processing tutorial.
+Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
+The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq. The analysis requires a great deal of knowledge about statistics, wet-lab protocols, and some machine learning due to variability and sparseness of the data. The uncertainty from the low coverage and low cell numbers per sample that once were common setbacks in the field are overcome by 10x Genomics which provides high-throughput solutions which are quickly championing the field.
 
-## Era of 10x Genomics
+### Era of 10x Genomics
 
 10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate.
 
@@ -51,7 +51,7 @@ contributors:
 
 The gain in resolution reduces the granularity and noise issues that plagued the field of scRNA-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.
 
-## Library Preparation
+### Library Preparation
 
 ![Library Preparation]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_libprep.png %} "An overview of the library preparation")
 
@@ -61,9 +61,9 @@ Though there are ~750,000 10X gel barcodes used, the amount actually qualitative
 
 More information can be found in the [reagent kit documentation](https://support.10xgenomics.com/single-cell-gene-expression/library-prep/doc/user-guide-chromium-single-cell-3-reagent-kits-user-guide-v2-chemistry).
 
-TODO:
+<!--TODO:
  * Discuss droplet-seq based workflows
- * What is Chromium, and do users need to know what it is?
+ * What is Chromium, and do users need to know what it is?-->
 
 
 # Analysis Strategy
@@ -87,7 +87,7 @@ The first part of this tutorial is essentially a one-click "fire and forget" sol
 However, Science favours the brave, and for those more interested in the gritty details of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
 
 
-Since STARSolo is a drop-in solution to the CellRanger pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARSolo** jobs and then spend the time deciding on what type of caffeine-inspired beverage they can make to maximise their time during the waiting period.
+Since STARsolo is a drop-in solution to the CellRanger pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARsolo** jobs and then spend the time deciding on what type of caffeine-inspired beverage they can make to maximise their time during the waiting period.
 
 The second part of this tutorial also has a one-click solution if an identical CellRanger matrix is the desired result, but the more interesting aspects of the pipeline are explored in the flexible method part of the tutorial.
 
@@ -98,7 +98,7 @@ Here we will use the [1k PBMCs from a Healthy Donor (v3 chemistry)](https://supp
 
 The source file consists of 6 FASTQ files split into two sequencing lanes of three reads: R1 (barcodes), R2 (cDNA sequence), I1 (illumina lane info).
 
-The CellRanger pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STAR Solo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3383115) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/api/files/858fcfb3-aca8-408d-afa2-eade47bd623a/subsetting_data.txt).
+The CellRanger pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STARsolo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3383115) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/api/files/858fcfb3-aca8-408d-afa2-eade47bd623a/subsetting_data.txt).
 
 ### Data upload and organization
 
@@ -114,11 +114,11 @@ For the mapping, we require the sub-sampled source files, as well as a list of (
 > 1. Import the sub-sampled FASTQ data and the Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3383115) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/3383115/737K-august-2016.txt
->    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
->    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
->    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
->    https://zenodo.org/record/3383115/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
+>    https://zenodo.org/record/3383115/files/737K-august-2016.txt
+>    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
+>    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
+>    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
+>    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -172,7 +172,7 @@ The differences in the chemistries is a slight change in the library size, where
 
 ### Determining what Chemistry our Data Contains
 
-To perform the demultiplexing, we need to tell **RNA STAR Solo** where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.
+To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.
 
 > ### {% icon question %} Question
 > Peek at one of the R1 FASTQ files using the {% icon galaxy-eye %} symbol below the dataset name.
@@ -194,7 +194,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > ### {% icon hands_on %} Hands-on
 >
-> **RNA STARSolo** {% icon tool %} with the following parameters:
+> **RNA STARsolo** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
 >    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
 >    - {% icon param-repeat %} *Insert Input Pairs*
@@ -220,7 +220,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 ## Inspecting the Output Files
 
-At this stage **RNA STARSolo** has output 5 files, 2 mapping quality files and 3 matrix files:
+At this stage **RNA STARsolo** has output 5 files, 2 mapping quality files and 3 matrix files:
  1. Log
  1. Feature Statistic Summaries
  1. Matrix Gene Counts
@@ -230,25 +230,25 @@ At this stage **RNA STARSolo** has output 5 files, 2 mapping quality files and 3
 
 ### Mapping Quality
 
-Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.html}) tutorial.
+Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control](({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})) tutorial.
 
 
 > ### {% icon hands_on %} Hands-on
 >
 > **MultiQC** {% icon tool %} with the following parameters:
 >    - In *"Results"*:
->        - Under *"1:Results"*:
->            - *"Which tool was used generate logs?"*: `STAR`
->            - In *"STAR output"*:
->                - Under *"1:STAR output"*:
->                    - *"Type of STAR output?"*: `Log`
->                    - {% icon param-file %} *"STAR log output"*: `log output of RNA STARSolo`
+>      - In *"1:Results"*:
+>        - *"Which tool was used generate logs?"*: `STAR`
+>        - In *"STAR output"*:
+>          - In *"1:STAR output"*:
+>            - *"Type of STAR output?"*: `Log`
+>            - {% icon param-file %} *"STAR log output"*: `log output of RNA STARsolo`
 
 
 > ### {% icon question %} Question
-> 
+>
 > What percentage of reads are uniquely mapped?
-> 
+>
 > > ### {% icon solution %} Solution
 > > 87.5%
 > > - This is good, and is expected of 10x datasets
@@ -258,116 +258,190 @@ Let us investigate the output log. This type of quality control is essential in 
 
 ### Quantification Quality
 
-Let us investigate the STARSolo specific log. We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file. 
+Let us investigate the STARsolo specific log. We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file.
 
-```
-             Barcodes:
-           nNinBarcode            358
-       nUMIhomopolymer            707
-              nTooMany              0
-              nNoMatch        7491731
-                 Gene:
-             nUnmapped            196
-            nNoFeature          74087
-         nAmbigFeature           9537
- nAmbigFeatureMultimap           7473
-              nTooMany            691
-         nNoExactMatch           1750
-           nExactMatch         106272
-                nMatch         106868
-         nCellBarcodes            272
-                 nUMIs          52748
-```
+
+> ### {% icon details %}: RNA STARsolo log output
+> ```
+>                             Barcodes:
+>                  nNinBarcode            358
+>              nUMIhomopolymer            707
+>                     nTooMany              0
+>                     nNoMatch        7491731
+>                             Gene:
+>                    nUnmapped            196
+>                   nNoFeature          74087
+>                nAmbigFeature           9537
+>        nAmbigFeatureMultimap           7473
+>                     nTooMany            691
+>                nNoExactMatch           1750
+>                  nExactMatch         106272
+>                       nMatch         106868
+>                nCellBarcodes            272
+>                        nUMIs          52748
+> ```
+{: .comment}
 
 The explanation of these parameters can be seen in the [RNA STAR Manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) under the *STARsolo* section, with most of the information given in the details box below.
 
-> ### {% icon details %} Details
-> 
-> * nNinBarcode: number of reads with more than 2 Ns in cell barcode (CB)
-> * nUMIhomopolymer: number of reads with homopolymer in CB
-> * nTooMany: not used at the moment
-> * nNoMatch: number of reads with CBs that do not match whitelist even with one mismatch
-> 
-> All of the above reads are discarded from Solo output.  Remaining reads are checked for overlap with features (e.g. genes):
-> 
-> * nUnmapped: number of reads unmapped to the genome
-> * nNoFeature: number of reads that map to the genome but do not belong to a feature
-> * nAmbigFeature: number of reads that belong to more than one feature
-> * nAmbigFeatureMultimap: number of reads that belong to more than one feature and are also multimapping to the genome (this is a subset of the `nAmbigFeature`)
-> * nTooMany: number of reads with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95)
-> * nNoExactMatch: number of reads with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other reads with exact matches of CB
+> ### {% icon details %} Explanation of parameters
+>
+>  | Parameter | Explanation |
+>  |-----------|-------------|
+>  | nNinBarcode | number of reads with more than 2 Ns in cell barcode (CB) |
+>  | nUMIhomopolymer | number of reads with homopolymer in CB |
+>  | nTooMany | not used at the moment |
+>  | nNoMatch | number of reads with CBs that do not match whitelist even with one mismatch |
+>
+> All of the above reads are discarded from Solo output.
+>
+> The remaining reads are checked for any overlap with the features/genes:
+>
+>
+>  | Parameter | Explanation |
+>  |-----------|-------------|
+>  | nUnmapped | number of reads unmapped to the genome |
+>  | nNoFeature | number of reads that map to the genome but do not belong to a feature |
+>  | nAmbigFeature | number of reads that belong to more than one feature |
+>  | nAmbigFeatureMultimap | number of reads that belong to more than one feature and are also multimapping to the genome (this is a subset of the `nAmbigFeature`) |
+>  | nTooMany | number of reads with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95) |
+>  | nNoExactMatch | number of reads with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other reads with exact matches of CB |
 >
 > These metrics can be grouped into more broad categories:
-> * nNinBarcode+ nUMIhomopolymer + nNoMatch + nTooMany + nNoExactMatch = number of reads with CBs that do not match whitelist.
-> * nUnmapped + nAmbigFeature = number of reads without defined feature (gene)
-> * nMatch = number of reads that are output as solo counts
+>
+> * `nNinBarcode` + `nUMIhomopolymer` + `nNoMatch` + `nTooMany` + `nNoExactMatch` = number of reads with CBs that do not match whitelist.
+> * `nUnmapped` + `nAmbigFeature` = number of reads without defined feature (gene)
+> * `nMatch` = number of reads that are output as solo counts
 >
 > The three categoties above summed together should be equal to the total number of reads.
-> 
+>
 {: .details}
 
-The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large.
+The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the source files, so this appears to be the default expected behaviour.
 
 # Producing a Quality Count Matrix
 
-The matrix files produced by **RNA STAR Solo** are in the *bundled* format, meaning that the information to create a tabular matrix of Genes vs Cells are separated into different files. These files are already 10x analysis datasets, compatible with any downstream single-cell RNA analysis pipeline, however the number of cells represented here are greatly over-represented, as the they have not yet been filtered for high quality cells, and therefore the matrix represents *any* cells that were unambiguously detected in the sample. 
+The matrix files produced by **RNA STARsolo** are in the *bundled* format, meaning that the information to create a tabular matrix of Genes vs Cells are separated into different files. These files are already 10x analysis datasets, compatible with any downstream single-cell RNA analysis pipeline, however the number of cells represented here are greatly over-represented, as they have not yet been filtered for high quality cells, and therefore the matrix represents *any* cells that were unambiguously detected in the sample.
 
-To get a high quality count matrix we must apply the **DropletUtils** tool, which will produce a filtered set which will produce a dataset more representative of the CellRanger pipeline. 
+If we were to construct a cell matrix using the data we have, we would have a large matrix of 60,000 Genes against 737,000 Cells, of which most values would be zero, i.e. an *extremely* sparse matrix.
+
+To get a high quality count matrix we must apply the **DropletUtils** tool, which will produce a filtered set which will produce a dataset more representative of the CellRanger pipeline.
 
 ## CellRanger Method
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Default Method
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARSolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARSolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARSolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
+>            - *"Expected Number of Cells"*: `3000`
+>            - *"Upper Quantile"*: `0.99`
+>            - *"Lower Proportion"*: `0.1`
 >        - *"Format for output matrices"*: `Tabular`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> > ### {% icon comment %} Comment
+> >
+> > The *"Expected Number of Cells"* parameter is the number of cells you expect to see in your sample, but does not correspond to how many cells you expect to see in a sub-sampled dataset like this one. The default is 3000 for CellRanger, which will yield ~300 cells here, but users are encouraged to experiment with this value when dealing with their own data, to recover the desired number of cells.
+> >
+> {: .comment}
 {: .hands_on}
 
-## Flexible Method
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### Question {% icon question %} Questions
+>
+> 1. How many cells were detected?
+> 1. Does this agree with the STARsolo Feature Statistics output?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that this is also `272` cells, as expected.
+> >
+> {: .solution}
+{: .question}
+
+This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the [*Downstream Single-cell RNA analysis with RaceID*](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-raceid/tutorial.html) tutorial.
+
+
+## Introspective Method
+
+The *DefaultDrops* method given in the previous sub-section is a good one-click solution to emulating the CellRanger process of producing a high quality count matrix.
+
+However, the **DropletUtils** tool does provide other options for determining which cells are of "good" quality and which are not.
+
+A useful diagnostic for droplet-based data is the barcode rank plot, which shows the (log-)total UMI count for each barcode on the x-axis and the (log-)rank on the y-axis. This is effectively a transposed empirical cumulative density plot with log-transformed axes. It is useful as it allows users to examine the distribution of total counts across barcodes, focusing on those with the largest counts.
+
+> ### {% icon hands_on %} Hands-on: Rank Barcodes
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARSolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARSolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARSolo** {% icon tool %})
->    - *"Operation"*: `Filter for Barcodes`
+>        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>    - *"Operation"*: `Rank Barcodes`
 >        - *"Method"*: `EmptyDrops`
->        - *"Format for output matrices"*: `Tabular`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>            - *"Lower Bound"*: `1`
 >
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Due to the sub-sampled dataset, we choose a very low lower bound.
 >    {: .comment}
 >
 {: .hands_on}
 
+![knee]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_knee.png %} "Barcode Ranks")
 
+The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between empty droplets with little RNA and cell-containing droplets with much more RNA, and gives us a rough idea of how many cells to expect in our sample.
+
+> ### Question {% icon question %} Questions
+>
+> 1. How many cells do we expect to see in our sample based on the above plot?
+> 1. What is the threshold of total UMIs to which a cell can be considered to be empty?>
+>
+> > ### {% icon solution %} Solution
+> > 1. We see the blue knee line cross the threshold of barcodes at just greater than the 100 Rank on the horizontal log scale, so we can assume that our assessment that there should be around 300 cells is correct.
+> > 1. The threshold is given by the inflection line which tells us that any cell with a total UMI count less than 3 should be considered empty.
+> >   **However**, this dataset has been greatly sub-sampled for training purposes (~1000 down to ~300 cells) so the sensitivity of this value should be taken into account. Due to the already low number of cells, we should realistically set this to 1.
+> {: .solution}
+{: .question}
+
+On large 10x datasets we can use these thresholds as metrics to utilise in our own custom filtering, which is once again provided by the **DropletUtils** tool.
+
+> ### {% icon hands_on %} Hands-on: Custom Filtering
+>
+> **DropletUtils** {% icon tool %} with the following parameters:
+>    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>    - *"Operation"*: `Filter for Barcodes`
+>        - *"Method"*: `EmptyDrops`
+>            - *"Lower-bound Threshold"*: `1`
+>            - *"FDR Threshold"*: `0`
+>        - *"Format for output matrices"*: `Tabular`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > We set the lower-bound to 1 instead of 3 due to the sparsity of the dataset. On a full dataset, you would insert the value you discovered using the Rank method.
+>    >
+>    > The False Discovery Rate (FDR) is set to zero because the ambient profile is too weak to measure against on this dataset.
+>    >
+>    {: .comment}
+>
+{: .hands_on}
+
+![cells]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_cells.png %} "Detected Cells (red)")
+
+
+Here we recover 137 high quality cells instead of the detected 272 given previously. On large datasets, this difference can help clean downstream clustering which may appear softer and less well-defined on a more inclusive dataset than that which has undergone tighter quality controls.
 
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
+In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a CellRanger workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
 
 A full pipeline which produces both an hda5 and tabular file for inspection is provided [here](workflows/scrna_tenx.ga).
 
