@@ -380,7 +380,7 @@ We now would like to create a file showing the abundance index per year of a cho
 
 > ### {% icon hands_on %} Hands-on: Generate an abundance index
 > 1. **Abundance index** {% icon tool %} with the following parameters:
->     -  *"Count file"*: output from **Tabular to CSV**, that should be named `Counting file` and/or tagged `Count`
+>     -  *"Count file"*: output from **Text reformatting with awk**, that should be named `Counting file` and/or tagged `Count`
 >     -  *"Flight curve output"*: output from **flight curve**
 {: .hands_on}
 
