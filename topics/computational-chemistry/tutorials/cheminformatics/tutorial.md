@@ -275,7 +275,7 @@ The image produced by the NxN clustering shows the clustering in the form of a d
 
 A processing step now needs to be applied to the protein structure and the docking candidates - each of the structures needs to be converted to PDBQT format before using the AutoDock Vina docking tool.
 
-Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a cube-shaped volume in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in Galaxy which can be used to automatically create a configuration file for docking when ligand coordinates are already known.
+Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a 'box' in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in Galaxy which can be used to automatically create a configuration file for docking when ligand coordinates are already known.
 
 > ### {% icon details %} How to find the binding site of an apoprotein?
 >
