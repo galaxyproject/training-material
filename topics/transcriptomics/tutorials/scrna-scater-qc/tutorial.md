@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Single-cell quality control with scater
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/3386291'
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
@@ -27,29 +27,20 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+scRNA-seq is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+A number of factors should be examined before downstream analyses, many of which we'll address here:
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+- **Low library size**: When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. It's important to remove these cells from downstream analyses.
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+- **Low number of expressed genes**: A low number of expressed genes may be a result of poor-quality cells (e.g. dying, degraded, damaged, etc), followed by high PCR amplification of the remaining RNA. Again, these cells should be removed from downstream analyses.
 
+- **High mitochondrial gene content**: High concentrations of mitochondrial genes is often a result of damaged cells where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+- **Batch effect**: Large scRNA-seq projects usually need to generate data across multiple batches due to logistical constraints. However, the processing of different batches is often subject to variation, e.g., changes in operator, differences in reagent quality and concentration, the sequencing machine used, etc. This results in systematic differences in the observed expression in cells from different batches, which we refer to as “batch effects”. Batch effects are problematic as they can be major drivers of variation in the data, masking the relevant biological differences and complicating interpretation of the results.
+
+We will use scater ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that your filtering has worked. You'll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.
+
 
 > ### Agenda
 >
@@ -60,148 +51,87 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+***TODO***: move the following to the header
+take scRNA-seq data, examine them for low quality cells and filter out these cells leaving you with the best quality data for reliable downstream analysis. You will visualise the data in order to look at library size, number of expressed genes, percentage of mitochondrial gene expression, etc., use different filtering approaches, and look for confounding factors that may affect the interpretation of downstream analyses.
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+# Overview
+You will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. You will visualise the data and carry out quality control filtering based on ***TODO***
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow")
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
 
-have fun!
-
-## Get data
+# Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3386291) or from the shared data library
 >
 >    ```
->    
+>    https://zenodo.org/record/3386291/files/annotation.txt
+>    https://zenodo.org/record/3386291/files/counts.txt
+>    https://zenodo.org/record/3386291/files/mt_controls.txt
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Visualize your data
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+Take a look at the data.
 
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+- The `counts.txt` file is a 40-sample expression matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of reads mapped to each gene/sample.
+- `annotation.txt` is a file listing experimentalinformation about each cell. Parmeters here include `Mutation_Status`, `Cell_Cycle`, and `Treatment`. These will be useful for looking at  batch effects later.
+- The `mt_controls.txt` file is a list of mitochondrial genes. This list will be used later to calculate the % of mitochondrial reads in each sequencing library.
 
 
-## Sub-step with **Scater: Calculate QC metrics**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Calculate QC metrics
 >
 > 1. **Scater: Calculate QC metrics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Expression matrix in tabular format"*: `output` (Input dataset)
->    - {% icon param-file %} *"Format dataset describing the features in tabular format"*: `output` (Input dataset)
->    - {% icon param-file %} *"Dataset containing the list of the mitochondrial control genes"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    - {% icon param-file %} *"Expression matrix in tabular format"*: `counts.txt` (Input dataset)
+>    - {% icon param-file %} *"Format dataset describing the features in tabular format"*: `annotation.txt` (Input dataset)
+>    - {% icon param-file %} *"Dataset containing the list of the mitochondrial control genes"*: `mt_controls.txt` (Input dataset)
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The output of this tool is a SingleCellExperiment object in [Loom](http://loompy.org/) format, which contains all the information from the input files, along with a host of other quality control metrics, calculated from the input data.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Next, lets take a look at the data by plotting various properties to see what our data looks like.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scater: plot library QC**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Plot library QC
 >
 > 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. When the tool has finished running, click on the 'eye' icon to view the plots. If it doesn't appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
+> ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > There are four plots, two distribution bar plots and two scatter plots. The first distribution plot is the number of reads in each library (from a single cell). The second plot is the distribution of 'feature counts' per cell. Feature counts in this case refers to the number of genes expressed in each cell. The third plot 'Scatterplot of reads vs genes' is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. The final scatterplot is the '% MT genes', which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
+>    > Let's look at each plot in turn and see what it tells us.
+>    > - 'Read counts'. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn't want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).
+>    > - 'Feature counts'. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (<600), then followed by a more even distribution.
+>    > - 'Scatterplot of reads vs genes'. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.
+>    > - '% MT genes'. You can see from the plot that there are a few cells outside the main 'cloud' of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Filtering
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Manual filtering
 
-## Sub-step with **Scater: filter SCE**
+In the **Scater: filter SCE** Galaxy tool there are two filtering methods available. First, there's an 'automatic' filtering method that uses PCA to identify outliers cells and remove them from the data. This is particularly useful for very large datasets (hundreds of samples). Second, there's a manual filtering method where users can put a range of filtering parameters, informed by the previous plotting tool.
+Here, we'll use the manual filtering method.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filtering with scater
 >
 > 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
@@ -211,71 +141,69 @@ A big step can have several subsections or sub steps:
 >        - *"Minimum number of expressed genes to filter cells on"*: `500`
 >        - *"Maximum % of mitochondrial genes expressed per cell"*: `35.0`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Let's have a look at the parameters and their value:
+>    > 1. 'Number of reads mapped to a gene for it to be counted as expressed': by default, only one read needs to be mapped to a gene for it to be counted as 'expressed'. We can be a little bit more stringent here and increase the number of reads that need to be mapped to a gene for it to be categorised as 'expressed'.
+>    > 2. 'Minimum library size (mapped reads) to filter cells on': This value asks how many mapped reads from each cell do you require to be mapped to your genome to be included in downstream analysis. We can see from our plots that we have a few cells that have less than 200,000 reads. 200,000 can still be quite a lot of reads (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.
+>    > 3. 'Minimum number of expressed genes': You can see that some cells only express a few hundred genes, so we'll remove these cells also.
+>    > 4. 'Maximum % of mitochondrial genes expressed per cell'. You can see that as well as having one obvious outlier (~37%).
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scater: plot library QC**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Plot library QC after filtering
 >
 > 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: filter SCE** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![QC plots after manual filtering](../../images/scrna-scater-qc/post_filter.png "QC plots after manual filtering")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How did the filtering go?
+> 2. Do you think it's done a good job?
+> 3. Have you removed too many cells? Too few cells? About right?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > Often, it's a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you're happy with the results. Using the initial Calculate QC metrics file, play around with the filtering paramters and visualise the output to see the effect different paramters have.
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Scater: PCA plot**
+## Automatic (PCA) filtering
+
+Another filtering approach is to identify outliers in the data and remove them. PCA can be run once a SingleCellExperiment object has been normalised, and outliers cells identified based on the pre-computed quality control metrics within the SingleCellExperiment object.
+
+As we are using a rather small, test dataset, it's unlikely that PCA filtering will make any difference, but if you have a larger, noisier dataset this is what you would do:
 
 > ### {% icon hands_on %} Hands-on: Task description
+> 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
+>    - *"Type of filter"*: `automatic`
 >
+>    > ### {% icon comment %} Comment
+>    >
+>    > Your data will be normalised and then PCA ran on it using the following information from your data:
+>    > * `pct_counts_top_100_features`
+>    > * `total_features_by_counts`
+>    > * `pct_counts_feature_control`
+>    > * `total_features_feature_control`
+>    > * `log10_total_counts_endogenous`
+>    > * `log10_total_counts_feature_control`
+>    >
+>    > When using these filtering approaches, it's probably best to use them the opposite way round - try PCA filtering first and then if that doesn't remove enough low-quality cells then use the manual filtering. You could actually pipeline them together - use PCA filtering first and then use the output of that to do further manual filtering.
+>    {: .comment}
+>
+{: .hands_on}
+
+As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong 'batch effects' can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.
+
+> ### {% icon hands_on %} Hands-on: PCA plot
 > 1. **Scater: PCA plot** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: filter SCE** {% icon tool %})
 >    - *"Feature (from annotation file) to colour PCA plot points by"*: `Mutation_Status`
@@ -285,39 +213,26 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![PCA plot](../../images/scrna-scater-qc/PCAplot.png "PCA plot")
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Do you see any obvious batch effect?
+> 2. Do any of the categories suggesting some sort of technical artefact?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. We can see that the 'S' and 'G2M' categories in Cell\_Cycle cluster away from the rest of the data. Spend some time thinking about whether this might be a batch effect or biologically significant.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+***TODO*** Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
