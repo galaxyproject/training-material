@@ -163,7 +163,7 @@ The table above gives a summary of the primers used in the image and the number 
 > >    * They need to be designed in such a way to minimise accidentally aligning to the reference they were prepared to be used for.
 > >    * Longer barcodes tend to be more unique, so this is a problem that is being solved as the barcodes increase in size, allowing for barcodes that can be used on more than one reference to be more common, as seen above.
 > > 1. UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random 'salt' that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two reads that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.
-> > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*](({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %})) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true
+> > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true
 > {: .solution}
 {: .question}
 
@@ -187,37 +187,6 @@ To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in
 {: .question}
 
 
-## Performing the Demultiplexing and Quantification
-
-We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
-
-
-> ### {% icon hands_on %} Hands-on
->
-> **RNA STARsolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->    - {% icon param-repeat %} *Insert Input Pairs*
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->      (*pay attention to the* **L001** *and* **L002** *names*)
->    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `737K-august-2016.txt`
->    - *"Custom or built-in reference genome"*: `Use a built-in index`
->        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
->            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
->    - In *"Advanced Settings"*:
->        - *"Configure Chemistry Options"*: `Cell Ranger v3`
->
->    > ### {% icon comment %} Comment
->    >
->    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the CellRanger pipeline.
->    >
->    {: .comment}
->
-{: .hands_on}
-
-
 ## Inspecting the Output Files
 
 At this stage **RNA STARsolo** has output 5 files, 2 mapping quality files and 3 matrix files:
@@ -230,7 +199,8 @@ At this stage **RNA STARsolo** has output 5 files, 2 mapping quality files and 3
 
 ### Mapping Quality
 
-Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control](({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})) tutorial.
+Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) tutorial.
+
 
 
 > ### {% icon hands_on %} Hands-on
@@ -318,6 +288,37 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 {: .details}
 
 The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the source files, so this appears to be the default expected behaviour.
+
+## Performing the Demultiplexing and Quantification
+
+We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
+
+
+> ### {% icon hands_on %} Hands-on
+>
+> **RNA STARsolo** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
+>    - {% icon param-repeat %} *Insert Input Pairs*
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
+>      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `737K-august-2016.txt`
+>    - *"Custom or built-in reference genome"*: `Use a built-in index`
+>        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
+>            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
+>    - In *"Advanced Settings"*:
+>        - *"Configure Chemistry Options"*: `Cell Ranger v3`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the CellRanger pipeline.
+>    >
+>    {: .comment}
+>
+{: .hands_on}
+
 
 # Producing a Quality Count Matrix
 
