@@ -198,7 +198,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                    - In *"Background"*:
 >                        - {% icon param-repeat %} *"Insert Background"*
 >                            - *"Radial-relative values"*: `Yes`
->                            - *"Color"*: {% color_picker #f2f2f2 %}
+>                            - *"Color"*: {% color_picker #f2f2f2 %} (light grey)
 >    - In *"Link Tracks"*:
 >        - In *"Link Data"*:
 >            - {% icon param-repeat %} *"Insert Link Data"*
