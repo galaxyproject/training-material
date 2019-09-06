@@ -135,7 +135,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                - *"Plot Format"*: `Scatter`
 >                    - In *"Plot Format Specific Options"*:
 >                        - *"Glyph Size"*: `4`
->                        - *"Color"*: `#7f7f7f`
+>                        - *"Color"*: {% color_picker #7f7f7f %}
 >                        - *"Stroke Thickness"*: `0`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:
@@ -147,7 +147,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                            - In *"Actions to Apply"*:
 >                                - {% icon param-repeat %} *"Insert Actions to Apply"*
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#00b050`
+>                                        - *"Fill Color"*: {% color_picker #00b050 %}
 >                        - {% icon param-repeat %} *"Insert Rule"*
 >                            - In *"Conditions to Apply"*:
 >                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
@@ -156,7 +156,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                            - In *"Actions to Apply"*:
 >                                - {% icon param-repeat %} *"Insert Actions to Apply"*
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#ff0000`
+>                                        - *"Fill Color"*: {% color_picker #ff0000 %}
 >                - In *"Axes"*:
 >                    - In *"Axis"*:
 >                        - {% icon param-repeat %} *"Insert Axis"*
@@ -173,7 +173,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                    - {% icon param-file %} *"Scatter Plot Data Source"*: `out_file1` (output of **Select random lines** {% icon tool %})
 >                    - In *"Plot Format Specific Options"*:
 >                        - *"Glyph Size"*: `4`
->                        - *"Color"*: `#7f7f7f`
+>                        - *"Color"*: {% color_picker #7f7f7f %}
 >                        - *"Stroke Thickness"*: `0`
 >                - In *"Axes"*:
 >                    - In *"Axis"*:
@@ -187,7 +187,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                - *"Plot Format"*: `Histogram`
 >                    - In *"Plot Format Specific Options"*:
 >                        - *"Transparency"*: `0.0`
->                        - *"Stroke Color"*: `#00b0f0`
+>                        - *"Stroke Color"*: {% color_picker #00b0f0 %}
 >                        - *"Fill underneath the histogram"*: `Yes`
 >                - In *"Axes"*:
 >                    - In *"Axis"*:
@@ -198,7 +198,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >                    - In *"Background"*:
 >                        - {% icon param-repeat %} *"Insert Background"*
 >                            - *"Radial-relative values"*: `Yes`
->                            - *"Color"*: `#f2f2f2`
+>                            - *"Color"*: {% color_picker #f2f2f2 %}
 >    - In *"Link Tracks"*:
 >        - In *"Link Data"*:
 >            - {% icon param-repeat %} *"Insert Link Data"*
@@ -222,7 +222,7 @@ And while the Circos tool covers a huge range of scenarios, it does not support 
 >            - {% icon param-repeat %} *"Insert Link Data"*
 >                - *"Inside Radius"*: `0.3`
 >                - *"Link Type"*: `basic`
->                - *"Link Color"*: `#ff0000`
+>                - *"Link Color"*: {% color_picker #ff0000 %}
 >                - *"Thickness"*: `2.0`
 >                - *"Bezier Radius"*: `0.0`
 >                - In *"Advanced Settings"*:
@@ -314,7 +314,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
 >    - In *"Plot Options"*:
 >        - *"Plot Format"*: `Color`
->            - *"Background Color"*: `#000000` <span style="background: #000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+>            - *"Background Color"*: {% color_picker #000000 %}
 >    - In *"Ideogram Configuration (Genome/Chromosomes)"*:
 >        - *"Thickness"*: `0.0`
 >        - In *"Labels"*:
@@ -344,7 +344,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#8064a2` <span style="background: #8064a2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+>                                        - *"Fill Color"*: {% color_picker #8064a2 %}
 >                            - *"Continue flow"*: `Yes`
 >                        - Click on *"Insert Rule"*:
 >                        - In *"2: Rule"*:
@@ -357,7 +357,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#ffff00` <span style="background: #ffff00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+>                                        - *"Fill Color"*: {% color_picker #ffff00 %}
 >                            - *"Continue flow"*: `Yes`
 >            - Click on *"Insert Highlight"*:
 >            - In *"3: Highlight"*:
@@ -377,7 +377,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#8064a2` <span style="background: #8064a2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+>                                        - *"Fill Color"*: {% color_picker #8064a2 %}
 >                            - *"Continue flow"*: `Yes`
 >                        - Click on *"Insert Rule"*:
 >                        - In *"2: Rule"*:
@@ -390,7 +390,7 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                - Click on *"Insert Actions to Apply"*:
 >                                - In *"1: Actions to Apply"*:
 >                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: `#ffff00` <span style="background: #ffff00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+>                                        - *"Fill Color"*: {% color_picker #ffff00 %}
 >
 >
 > 2. View the output PNG file
