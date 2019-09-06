@@ -37,9 +37,207 @@ In this tutorial we will show you how to reproduce these plots and hopefully you
 
 Publication quality circos plots are *rarely* produced on the first try. Developing a quality Circos plot involves a lot of trial and error to find the best way to convey specific pieces of your data to your audience.
 
-![Gif of a circos plots through the development process](../../images/circos.gif "Circos plots are an iterative process, requiring many iterative steps, each improving your plot and getting you closer to a final image.")
+![Gif of a circos plots through the development process](../../images/circos2.gif "Circos plots are an iterative process, requiring many iterative steps, each improving your plot and getting you closer to a final image.")
 
 And while the Circos tool covers a huge range of scenarios, it does not support every option. When you've created the best possible plot, you will likely be only 90% of the way to a true, production-quality plot. As a result, the Circos tool lets you download the configuration files it uses, and you can immediately continue from where you were in Galaxy.
+
+# Complete Genomics
+
+> ### {% icon hands_on %} Hands-on: Prepare the B-allele frequencey table
+>
+> 1. **Select** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `B-allele frequency.tsv`
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*: `^Chromosome`
+>
+> 1. **Select random lines** {% icon tool %} with the following parameters:
+>    - *"Randomly select"*: `25000`
+>    - {% icon param-file %} *"from"*: `out_file1` (output of **Select** {% icon tool %})
+>    - *"Set a random seed"*: `Don't set seed`
+>
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Create links from highConfidenceJunctions
+>
+>
+> 1. **Select** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `VCaP highConfidenceJunctions.tsv`
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*: `^[#><]`
+>
+> 1. **Cut** {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c2,c3,c3,c6,c7,c7`
+>    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Create copy number track
+> 1. **Select** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `VCaP copy number.tsv`
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*: `^Chromosome`
+>
+> 1. **Cut** {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c1,c2,c3,c4`
+>    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
+>
+> 1. **Select random lines** {% icon tool %} with the following parameters:
+>    - *"Randomly select"*: `25000`
+>    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
+>    - *"Set a random seed"*: `Don't set seed`
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Prepare VCF file
+> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `VCaP ListVariants.vcf`
+>    - *"Fields to extract"*: `CHROM POS POS CHROM POS POS`
+>
+> 1. **Paste** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Paste"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
+>    - {% icon param-file %} *"and"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
+>
+> 1. **Circos: Link Density Track** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Links file"*: `out_file1` (output of **Paste** {% icon tool %})
+>    - *"Normalize"*: `Yes`
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Plot the data!
+> 1. **Circos** {% icon tool %} with the following parameters:
+>    - In *"Reference Genome and Cytogenetic Bands"*:
+>        - *"Reference Genome"*: `Karyotype`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `output` (Input dataset)
+>    - In *"Plot Options"*:
+>        - *"Plot Format"*: `Color`
+>    - In *"Ideogram Configuration (Genome/Chromosomes)"*:
+>        - *"Radius"*: `0.85`
+>        - *"Thickness"*: `45.0`
+>        - In *"Labels"*:
+>            - *"Label Font Size"*: `64`
+>        - In *"Cytogenic Bands"*:
+>            - *"Fill Bands"*: `2`
+>            - *"Band Stroke Thickness"*: `1`
+>    - In *"Ticks"*:
+>        - *"Show Ticks"*: `Yes`
+>        - In *"Tick Group"*:
+>            - {% icon param-repeat %} *"Insert Tick Group"*
+>                - *"Tick Spacing"*: `10u`
+>                - *"Show Tick Labels"*: `Yes`
+>    - In *"2D Data"*:
+>        - In *"2D Data Plot"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>                - *"Outside Radius"*: `0.95`
+>                - *"Minimum / maximum options"*: `Supply min/max values`
+>                    - *"Minimum value"*: `-1.0`
+>                    - *"Maximum value"*: `1.0`
+>                - *"Plot Format"*: `Scatter`
+>                    - In *"Plot Format Specific Options"*:
+>                        - *"Glyph Size"*: `4`
+>                        - *"Color"*: `#7f7f7f`
+>                        - *"Stroke Thickness"*: `0`
+>                - In *"Rules"*:
+>                    - In *"Rule"*:
+>                        - {% icon param-repeat %} *"Insert Rule"*
+>                            - In *"Conditions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                                    - *"Condition"*: `Apply based on point value`
+>                                        - *"Points above this value"*: `0.15`
+>                            - In *"Actions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                                    - *"Action"*: `Change Fill Color for all points`
+>                                        - *"Fill Color"*: `#00b050`
+>                        - {% icon param-repeat %} *"Insert Rule"*
+>                            - In *"Conditions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                                    - *"Condition"*: `Apply based on point value`
+>                                        - *"Points below this value"*: `-0.15`
+>                            - In *"Actions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                                    - *"Action"*: `Change Fill Color for all points`
+>                                        - *"Fill Color"*: `#ff0000`
+>                - In *"Axes"*:
+>                    - In *"Axis"*:
+>                        - {% icon param-repeat %} *"Insert Axis"*
+>                            - *"Inside Radius (y0)"*: `-1.0`
+>                            - *"Radial-relative values"*: `Yes`
+>                            - *"Spacing"*: `0.5`
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>                - *"Outside Radius"*: `0.75`
+>                - *"Inside Radius"*: `0.6`
+>                - *"Minimum / maximum options"*: `Supply min/max values`
+>                    - *"Minimum value"*: `0.0`
+>                    - *"Maximum value"*: `1.0`
+>                - *"Plot Format"*: `Scatter`
+>                    - {% icon param-file %} *"Scatter Plot Data Source"*: `out_file1` (output of **Select random lines** {% icon tool %})
+>                    - In *"Plot Format Specific Options"*:
+>                        - *"Glyph Size"*: `4`
+>                        - *"Color"*: `#7f7f7f`
+>                        - *"Stroke Thickness"*: `0`
+>                - In *"Axes"*:
+>                    - In *"Axis"*:
+>                        - {% icon param-repeat %} *"Insert Axis"*
+>                            - *"Radial-relative values"*: `Yes`
+>                            - *"Spacing"*: `0.25`
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>                - *"Outside Radius"*: `0.55`
+>                - *"Inside Radius"*: `0.4`
+>                - *"Minimum / maximum options"*: `Plot all values`
+>                - *"Plot Format"*: `Histogram`
+>                    - In *"Plot Format Specific Options"*:
+>                        - *"Transparency"*: `0.0`
+>                        - *"Stroke Color"*: `#00b0f0`
+>                        - *"Fill underneath the histogram"*: `Yes`
+>                - In *"Axes"*:
+>                    - In *"Axis"*:
+>                        - {% icon param-repeat %} *"Insert Axis"*
+>                            - *"Radial-relative values"*: `Yes`
+>                            - *"Spacing"*: `0.25`
+>                - In *"Backgrounds"*:
+>                    - In *"Background"*:
+>                        - {% icon param-repeat %} *"Insert Background"*
+>                            - *"Radial-relative values"*: `Yes`
+>                            - *"Color"*: `#f2f2f2`
+>    - In *"Link Tracks"*:
+>        - In *"Link Data"*:
+>            - {% icon param-repeat %} *"Insert Link Data"*
+>                - *"Inside Radius"*: `0.38`
+>                - {% icon param-file %} *"Link Data Source"*: `out_file1` (output of **Cut** {% icon tool %})
+>                - *"Link Type"*: `basic`
+>                - *"Thickness"*: `1.0`
+>                - *"Bezier Radius"*: `0.25`
+>                - In *"Advanced Settings"*:
+>                    - *"Bezier Radius Purity"*: `1.0`
+>                    - *"Perturb links?"*: `no`
+>                - In *"Rules"*:
+>                    - In *"Rule"*:
+>                        - {% icon param-repeat %} *"Insert Rule"*
+>                            - In *"Conditions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                                    - *"Condition"*: `Interchromosomal`
+>                            - In *"Actions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                                    - *"Action"*: `Change Visibility`
+>            - {% icon param-repeat %} *"Insert Link Data"*
+>                - *"Inside Radius"*: `0.3`
+>                - *"Link Type"*: `basic`
+>                - *"Link Color"*: `#ff0000`
+>                - *"Thickness"*: `2.0`
+>                - *"Bezier Radius"*: `0.0`
+>                - In *"Advanced Settings"*:
+>                    - *"Perturb links?"*: `no`
+>                - In *"Rules"*:
+>                    - In *"Rule"*:
+>                        - {% icon param-repeat %} *"Insert Rule"*
+>                            - In *"Conditions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                                    - *"Condition"*: `Intrachromosomal`
+>                            - In *"Actions to Apply"*:
+>                                - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                                    - *"Action"*: `Change Visibility`
+>
+{: .hands_on}
 
 # Nature Cover ENCODE Diagram
 
