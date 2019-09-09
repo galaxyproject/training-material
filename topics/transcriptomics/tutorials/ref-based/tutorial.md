@@ -16,7 +16,7 @@ objectives:
 time_estimation: 8h
 key_points:
     - A spliced mapping tool should be used on eukaryotic RNA seq data
-    - Numerous factors should be taken into account when running a differential gene expression
+    - Numerous factors should be taken into account when running a differential gene expression analysis
 follow_up_training:
     -
         type: "internal"
@@ -41,7 +41,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-RNA-Seq is used to analyze the continuously changing cellular transcriptome, the set of all RNA molecules in one cell or a population of cells. Specifically, RNA-Seq facilitates the ability to look at alternative gene spliced transcripts, post-transcriptional modifications, gene fusion, mutations/SNPs and changes in gene expression over time, or differences in gene expression in different groups or treatments
+RNA-seq is used to analyze the continuously changing cellular transcriptome, the set of all RNA molecules in one cell or a population of cells. Specifically, RNA-seq facilitates the ability to look at alternative gene spliced transcripts, post-transcriptional modifications, gene fusion, mutations/SNPs and changes in gene expression over time, or differences in gene expression in different groups or treatments
 
 In the study of {% cite brooks2011conservation %}, the authors wanted to identify exons regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi).
 
@@ -246,7 +246,7 @@ This process is known as aligning or 'mapping' the reads to a reference. This is
 
 As a reference genome for *Drosophila melanogaster* is available, we can map the sequences to this genome in order to identify which genes are affected by the *Pasilla* gene depletion.
 
-{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the Release 6 of the *Drosophila melanogaster* reference genome assembly [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/)."%}
+{% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the release 6 of the *Drosophila melanogaster* reference genome assembly [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/)."%}
 
 With eukaryotic transcriptomes most reads originate from processed mRNAs lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Instead the reads must be separated into two categories:
 
@@ -271,7 +271,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 >    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al, Genome Biology, 2013)")
 >
-> To further optimize and speed up spliced read alignment ({% cite kim2015hisat %}) developed [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml). It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
+> To further optimize and speed up spliced read alignment [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2015hisat %}) was developed. It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
 >    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)")
 >
@@ -480,11 +480,11 @@ RNAs that are typically targeted in RNA-seq experiments are single stranded (*e.
 
 ![Relationship between DNA and RNA orientation](../../images/dna_rna.png "Relationship between DNA and RNA orientation")
 
-During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting.
+During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step.
 
 Some library preparation protocols create so called *stranded* RNA-seq libraries that preserve the strand information (an excellent overview in {% cite levin2010comprehensive %}). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:
 
-![Stranded RNAseq data look like this](../../images/stranded_result.png "Non-stranded vs. strand-specific RNA-seq read alignment (image from GATC Biotech)")
+![Stranded RNA-seq data look like this](../../images/stranded_result.png "Non-stranded vs. strand-specific RNA-seq read alignment (image from GATC Biotech)")
 
 Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:
 
@@ -619,7 +619,7 @@ The main output of **featureCounts** is a table.
 > > 1. The table has two columns: the gene id and the number of reads (or fragments in the case of paired-end reads) mapped to the gene
 > > 2. To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the **Sort** {% icon tool %} tool, by sorting the table on the second column in descending order. This reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177` and 127,416 in `GSM461180`).
 > > 
-> >    Comparing output is easier if we can view more than one dataset simultaneously. The Scratchbook allows us to build up a collection of datasets that will be shown on the screen together.
+> >    Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.
 > >    
 > >    > ### {% icon hands_on %} (Optional) View the sorted featureCounts using the Scratchbook
 > >    >
@@ -627,13 +627,13 @@ The main output of **featureCounts** is a table.
 > >    >
 > >    >    ![scratchbook icon](../../images/ref-based/menubarWithScratchbook.png "Menu bar with Scratchbook icon")
 > >    >
-> >    > 2. When the Scratchbook is **enabled** datasets being viewed are added to the Scratchbook:
+> >    > 2. When the Scratchbook is **enabled** datasets being viewed (by clicking the eye-icon) are added to the Scratchbook view:
 > >    >
-> >    >    ![scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png "Menu bar with Scratchbook icon enabled")
+> >    >    ![Scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png "Menu bar with Scratchbook icon enabled")
 > >    >
 > >    > 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts**. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
 > >    >
-> >    >    ![scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
+> >    >    ![Scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
 > >    >
 > >    > 4. When a dataset is shown **click in the main interface** to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:
 > >    >
@@ -641,11 +641,11 @@ The main output of **featureCounts** is a table.
 > >    >
 > >    > 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts**. The two datasets can now be seen side by side:
 > >    >
-> >    >    ![scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
+> >    >    ![Scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
 > >    >
 > >    > 6. To **leave** Scratchbook selection mode, click on the **Scratchbook icon** again. Your saved view will still remain for future viewing:
 > >    >
-> >    >    ![scratchbook disabled datasets saved](../../images/ref-based/scratchbookDisabledWithSavedDatasets.png "Scratchbook disabled with two datasets saved")
+> >    >    ![Scratchbook disabled datasets saved](../../images/ref-based/scratchbookDisabledWithSavedDatasets.png "Scratchbook disabled with two datasets saved")
 > >    >
 > >    {: .hands_on}
 > >
@@ -697,9 +697,9 @@ For both within or between-sample comparison, the gene counts need to be normali
 - Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
 
-This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates, that are absolutely essential for accurate results. For your own analysis, we advise you to use at least 3, but preferably 5 biological replicates per condition. It is possible to have different number of replicates per condition.
+This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates, that are absolutely essential for accurate results. For your own analysis, we advise you to use at least 3, but preferably 5 biological replicates per condition. It is possible to have different numbers of replicates per condition.
 
-[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for DGE analysis. It takes read counts and combines them into a big table (with genes in the rows and samples in the columns) and applies size factor normalization:
+[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for differential gene expression (DGE) analysis. It takes read counts and combines them into a big table (with genes in the rows and samples in the columns) and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
 - Division of every gene count by the geometric mean
@@ -853,8 +853,8 @@ For more information about **DESeq2** and its outputs, you can have a look at [*
 > > 1. FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value ($$4.0 \cdot 10^{-178} << 0.05$$). It is less expressed (`-` in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 ($$2^{log2FC} = 2^{2.99977727873544}$$).
 > > 2. DESeq2 in Galaxy returns the comparison between the different levels for the 1st factor, after 
 correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
-both factors: factor 1 (treatment) become factor 2 and factor 2 (sequencing) become factor 1.
-> > 3. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should DESeq2 another time but with the only one factor with the following 4 levels:
+both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.
+> > 3. To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
 > >    - treated-PE
 > >    - untreated-PE
 > >    - treated-SE
@@ -912,9 +912,9 @@ Now we would like to extract the most differentially expressed genes due to the 
 >
 {: .hands_on}
 
-We now have a table with 130 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its id, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
+We now have a table with 130 lines corresponding to the most differentially expressed genes. And for each of the gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its $$log_{2} FC$$ and other information.
 
-The id for each gene is something like FBgn0003360, i.e. an id in the corresponding database, here Flybase. These ids are unique but sometimes we prefer to have gene names, even if there may not reference an unique gene (e.g. duplicated after re-annotation). We would also like to have location of these genes. To do that, we need do add extra annotation from the annotation file we used for mapping and counting.
+The ID for each gene is something like FBgn0003360, i.e. an ID in the corresponding database, here Flybase. These IDs are unique but sometimes we prefer to have gene names, even if there may not reference an unique gene (e.g. duplicated after re-annotation). We would also like to have location of these genes. To do that, we need do add extra annotations from the annotation file we used for mapping and counting.
 
 > ### {% icon hands_on %} Hands-on: Annotation of the differentially expressed genes
 >
@@ -927,7 +927,7 @@ The id for each gene is something like FBgn0003360, i.e. an id in the correspond
 > 2. **Annotate DESeq2/DEXSeq output tables** {% icon tool %} with:
 >    - {% icon param-file %} *"Tabular output of DESeq2/edgeR/limma/DEXSeq"*: output of the last **Filter**
 >    - *"Input file type"*: `DESeq2/edgeR/limma`
->    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: impored GTF file
+>    - {% icon param-file %} *"Reference annotation in GFF/GTF format"*: imported GTF file
 >
 {: .hands_on}
 
@@ -935,17 +935,17 @@ The generated output is an extension of the previous file with some extra column
 
 > ### {% icon question %} Questions
 >
-> 1. Where is located the most over-expressed gene?
+> 1. Where is the most over-expressed gene located?
 > 2. What is the name of the gene?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. FBgn0025111 (the first gene with a positive log2FC) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
+> > 1. FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
 > > 2. Ant2, adenine nucleotide translocase 2
 > {: .solution}
 {: .question}
 
-The column names may not be obvious so we would like to add them before going further.
+The column names may not be precise so we would like to add them before going further.
 
 > ### {% icon hands_on %} Hands-on: Add column names
 >
@@ -972,19 +972,19 @@ The column names may not be obvious so we would like to add them before going fu
 We could plot the $$log_{2} FC$$ for the extracted genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
 
 We proceed in several steps:
-- Extract and plot the normalized counts for these genes for each sample, using the normalized count file generated by DESeq2, with an heatmap
-- Compute, extract and plot the Z score of the normalized counts
+- Extract and plot the normalized counts for these genes for each sample with a heatmap, using the normalized count file generated by DESeq2
+- Compute, extract and plot the Z-score of the normalized counts
 
 > ### {% icon comment %} Advanced tutorials on visualization
 >
-> In this tutorial, we will quickly explain some possible visualization. For more details, please have a look to the extra tutorials on visualization of RNA-seq results:
-> - [Visualization of RNA-Seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
-> - [Visualization of RNA-Seq results with Volcano Plot]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
+> In this tutorial, we will quickly explain some possible visualization. For more details, please have a look in the extra tutorials on visualization of RNA-seq results:
+> - [Visualization of RNA-seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
+> - [Visualization of RNA-seq results with Volcano Plot]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
 {: .comment}
 
 ### Visualization of the normalized counts
 
-To extract the normalized counts for the interesting genes, we join the normalized count table generated by DESeq with the table we just generated. We will then keep only the lines corresponding to the most differentially expressed genes.
+To extract the normalized counts for the interesting genes, we join the normalized count table generated by DESeq2 with the table we just generated. We will then keep only the lines corresponding to the most differentially expressed genes.
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
 > 3. **Join two Datasets** {% icon tool %} with the following parameters:
@@ -997,7 +997,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 >
 >    The generated file has more columns than we need for the heatmap: mean normalized counts, $$log_{2} FC$$ and other annotation information. We need to remove the extra columns.
 >
-> 4. **Cut** {% icon tool %} to extract the columns with the gene ids and normalized counts:
+> 4. **Cut** {% icon tool %} to extract the columns with the gene IDs and normalized counts:
 >    - *"Cut columns"*: `c1-c8`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
@@ -1005,7 +1005,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 > 5. Rename the output to `Normalized counts for the most differentially expressed genes`
 {: .hands_on}
 
-We now have a table with 130 lines (the most differentially expressed genes) and the normalized counts for these genes in the 7 samples.
+We now have a table with 130 lines (the most differentially expressed genes) and the normalized counts for these genes across the 7 samples.
 
 > ### {% icon hands_on %} Hands-on: Plot the heatmap of the normalized counts of these genes for the samples
 >
@@ -1073,7 +1073,7 @@ We now have a table with the Z-score for the most differentially expressed genes
 > > ### {% icon solution %} Solution
 > >
 > > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 thefar right of the normal distribution curve
-> > 2. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples one group and (mostly) negative for the samples in the other group.
+> > 2. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples in one group and (mostly) negative for the samples in the other group.
 > > 3. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
 > >    - with large noise: a very large effect
 > >    - with some noise: a rather large effect
@@ -1085,9 +1085,9 @@ We now have a table with the Z-score for the most differentially expressed genes
 > {: .solution}
 {: .question}
 
-We would like now to plot a heatmap for the Z-score:
+We would like now to plot a heatmap for the Z-scores:
 
-![Heatmap with the Z-scores counts for the most differentially expressed genes](../../images/ref-based/z-score-heatmap.png "Z-scores for the most differentially expressed genes")
+![Heatmap with the Z-score counts for the most differentially expressed genes](../../images/ref-based/z-score-heatmap.png "Z-scores for the most differentially expressed genes")
 
 > ### {% icon hands_on %} Hands-on: Plot the Z-score of the most differentially expressed genes
 > 1. **heatmap2** {% icon tool %} to plot the heatmap:
@@ -1100,7 +1100,7 @@ We would like now to plot a heatmap for the Z-score:
 
 ## Analysis of functional enrichment among the differentially expressed genes
 
-We have extracted genes that are differentially expressed in treated (PS gene-depleted) samples compared to untreated samples. We would like to know if there are categories of genes that are enriched among the differentially expressed genes.
+We have extracted genes that are differentially expressed in treated (PS gene-depleted) samples compared to untreated samples. Now, we would like to know if the differentially expressed genes are enriched transcripts of genes which belong to more common or specific categories to classify their potential function a bit better. These categories are called Gene Ontologies (GO).
 
 ### Gene Ontology analysis
 
@@ -1114,7 +1114,7 @@ The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/i
     - a boolean telling if the gene is differentially expressed or not: `True` if differentially expressed or `False` if not
 - A file with information about the length of a gene to correct for potential length bias in differentially expressed genes
 
-> ### {% icon hands_on %} Hands-on: Prepare the datasets for GOSeq
+> ### {% icon hands_on %} Hands-on: Prepare the datasets for goseq
 >
 > 1. **Compute** {% icon tool %} with
 >    - *"Add expression"*: `bool(c7<0.05)`
@@ -1131,7 +1131,7 @@ The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/i
 >    - *"Delimited by"*: `Tab`
 >    - *"To"*: `Upper case`
 >
->    We just generated the first input for goseq. We need as second input for goseq, the gene lengths. We can use there the gene length generated by **featureCounts** {% icon tool %} and format the gene ids.
+>    We just generated the first input for **goseq**. As second input for **goseq** we need the gene lengths. We can use here the gene lengths generated by **featureCounts** {% icon tool %} and format the gene IDs.
 >
 > 4. Drag and drop of the gene length file generated by **featureCounts** {% icon tool %} into this history using the {% icon galaxy-columns %} **View all histories**
 >
@@ -1163,21 +1163,21 @@ We have now the two required input files for goseq.
 
 1. A big table with the following columns for each GO term:
     1. `category`: GO category
-    2. `over_rep_pval`: *p*-value for over representation of the term in the differentially expressed genes
-    3. `under_rep_pval`: *p*-value for under representation of the term in the differentially expressed genes
+    2. `over_rep_pval`: *p*-value for over-representation of the term in the differentially expressed genes
+    3. `under_rep_pval`: *p*-value for under-representation of the term in the differentially expressed genes
     4. `numDEInCat`: number of differentially expressed genes in this category
     5. `numInCat`: number of genes in this category
     6. `term`: detail of the term
     7. `ontology`: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)
-    8. `p.adjust.over_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
-    9. `p.adjust.under_represented`: *p*-value for over representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+    8. `p.adjust.over_represented`: *p*-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
+    9. `p.adjust.under_represented`: *p*-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure
 
     To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted *p*-value.
 
     > ### {% icon question %} Questions
     >
     > 1. How many GO terms are over-represented at adjusted P value < 0.05? Under-represented?
-    > 2. How are the over-represented GO terms divided between MF, CC and BP? And for under-represented GO terms?
+    > 2. How are the over-represented GO terms divided into MF, CC and BP? And for under-represented GO terms?
     >
     > > ### {% icon solution %} Solution
     > >
@@ -1206,7 +1206,7 @@ We have now the two required input files for goseq.
 
 > ### {% icon comment %} Advanced tutorial on visualization
 >
-> In this tutorial, we covered GO enrichment analysis with **GOSeq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-seq genes to pathways"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
+> In this tutorial, we covered GO enrichment analysis with **goseq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-seq genes to pathways"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
 {: .comment}
 
 ### KEGG pathways
@@ -1254,16 +1254,16 @@ As for the GO terms, 2 files are generated:
 We could investigate which genes are involved in which pathways by looking at the second file generated by **goseq**. But it can be cumbersome and there is one tool, **pathview** {% cite luo2013pathview %} to help visualization of how genes involved in pathways may be affected.
 
 **pathview** needs 2 main information as inputs:
-- Pathway id(s) to plot, either as just one id or as a file with one column with the pathway ids
+- Pathway ID(s) to plot, either as just one id or as a file with one column with the pathway IDs
 - A tabular file with the genes in the RNA-seq experiment with 2 (or more) columns:
     - the gene IDs (unique within the file)
     - some information about the genes
 
-      It can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will plotted side by side on the gene node
+      It can be for example a p-value or a fold change. This information will be added to the pathway plot: the node of the corresponding gene will be colored given the value. If there are different columns, the different information will be plotted side by side on the gene node
 
 Here we would like to visualize the top 2 over-represented KEGG pathways (without `01100`, the one with all metabolic pathways) and we would like that the gene nodes are colored by Log2 Fold Change for the differentially expressed genes because of the treatment.
 
-> ### {% icon hands_on %} Hands-on: Perform GO analysis
+> ### {% icon hands_on %} Hands-on: Perform KEGG enrichment analysis
 >
 > 1. **Cut** {% icon tool %} with
 >    - *"Cut columns"*: `c1,c3`
@@ -1320,7 +1320,7 @@ Here we would like to visualize the top 2 over-represented KEGG pathways (withou
 > > ### {% icon solution %} Solution
 > >
 > > 1. The colored boxes are genes in the pathway that are differentially expressed
-> > 2. The color code is counterintuitive: green is for value below 0, it means for genes with a log2FC < 0 and red for genes with a log2FC > 0.
+> > 2. Pay attention that the color code is counterintuitive: green is for value below 0, it means for genes with a log2FC < 0 and red for genes with a log2FC > 0.
 > >
 > {: .solution}
 {: .question}
@@ -1469,6 +1469,6 @@ Similarly to DESeq2, DEXSeq generates a table with:
 # Conclusion
 {:.no_toc}
 
-In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up or downregulated by depletion of the *Pasilla* gene but also which GO terms or KEGG pathways they are involved in. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:
+In this tutorial, we have analyzed real RNA sequencing data to extract useful information, such as which genes are up or downregulated by depletion of the *Pasilla* gene, but also which GO terms or KEGG pathways they are involved in. To answer these questions, we analyzed RNA sequence datasets using a reference-based RNA-seq data analysis approach. This approach can be summarized with the following scheme:
 
 ![Summary of the analysis pipeline used](../../images/ref-based/tutorial-scheme.png "Summary of the analysis pipeline used")
