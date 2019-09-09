@@ -163,7 +163,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >    > ### {% icon comment %} Outputs
 >   > Two output files are created:
 >   > - **Filtered Add expression data on data 6 - Discarded lines** (12 proteins)
->   > - **FilteredAdd expression data on data 6** (151 proteins)
+>   > - **FilteredAdd expression data on data 6** (157 proteins)
 >{: .comment}
 >
 > > ### {% icon tip %} Tip: Using genes instead of keywords
@@ -175,7 +175,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 
 # Functional annotation of the EBC proteome (enrichment analysis)
 
-The resulting list of 151 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler). 
+The resulting list of 157 proteins identified in the two pooled EBC samples (excluding the 10 contaminants proteins) is now submitted to Gene Ontology (GO)-term enrichment analysis to determine functions that were significantly enriched in our EBC proteomic dataset compared to the lung proteome (corresponding to tissue-specific genes extracted from the Human Protein Atlas). To do so, we first build a lung reference proteome (that should be more representative of the studied sample rather than a full human proteome) that will be used for enrichment analysis performed with the ClusterProfiler tool (based on the R package clusterProfiler). 
 
 > ### {% icon hands_on %} Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis
 >
@@ -262,7 +262,7 @@ removal, which is the output of biological contaminants filter step.
 
 # Visualize EBC proteome on biological pathways (using Reactome)
 
-The 151 proteins identified in EBC samples are now mapped to biological pathways and visualized
+The 157 proteins identified in EBC samples are now mapped to biological pathways and visualized
 via the web service of Reactome, an open access, manually curated and peer-reviewed human pathway
 database that aims to provide intuitive bioinformatics tools for the visualization,
 interpretation and analysis of pathway knowledge.
