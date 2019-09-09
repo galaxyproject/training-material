@@ -3,20 +3,12 @@ layout: tutorial_hands_on
 
 title: Single-cell quality control with scater
 zenodo_link: 'https://zenodo.org/record/3386291'
-questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
-objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+
+In this tutorial we will take scRNA-seq data, examine them for low quality cells and filter out these cells leaving you with the best quality data for reliable downstream analysis. You will visualise the data in order to look at library size, number of expressed genes, percentage of mitochondrial genes expression, etc., use different filtering approaches, and look for confounding factors that may affect the interpretation of downstream analyses.
+Typically, reads generated from cells in scRNA-seq experiments are mapped to a reference genome and then an expression matrix is calculated from the number of reads that are allocated to each gene or transcript. It is this expression matrix that we will be using in the tutorial.
+
 time_estimation: 1H
-key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+
 contributors:
 - ethering
 - nsoranzo
@@ -51,12 +43,10 @@ We will use scater ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA
 >
 {: .agenda}
 
-***TODO***: move the following to the header
-take scRNA-seq data, examine them for low quality cells and filter out these cells leaving you with the best quality data for reliable downstream analysis. You will visualise the data in order to look at library size, number of expressed genes, percentage of mitochondrial gene expression, etc., use different filtering approaches, and look for confounding factors that may affect the interpretation of downstream analyses.
 
 
 # Overview
-You will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. You will visualise the data and carry out quality control filtering based on ***TODO***
+You will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. You will visualise the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).
 
 ![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow")
 
@@ -209,9 +199,6 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 >    - *"Feature (from annotation file) to colour PCA plot points by"*: `Mutation_Status`
 >    - *"Feature (from annotation file) to shape PCA plot points by"*: `Cell_Cycle`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 {: .hands_on}
 
@@ -233,6 +220,4 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 
 # Conclusion
 {:.no_toc}
-
-***TODO*** Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
