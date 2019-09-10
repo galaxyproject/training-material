@@ -52,22 +52,18 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 >   {% include snippets/create_new_history.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org) or from the shared data library (ask your instructors).
+>    The datasets are available on Zenodo under the references: [2650868](https://zenodo.org/record/2650868) for {% cite Lacombe2018 %},
+>    [2650874](https://zenodo.org/record/2650874) for {% cite Muccilli2015 %} and [2650872](https://zenodo.org/record/2650872) for
+>    {% cite Bredberg2011 %} with direct links provided below:
 >
->   The datasets are available on Zenodo under the references: [2650868](https://zenodo.org/record/2650868) for {% cite Lacombe2018 %},
->   [2650874](https://zenodo.org/record/2650874) for {% cite Muccilli2015 %} and [2650872](https://zenodo.org/record/2650872) for
->   {% cite Bredberg2011 %}.
->
-> You can import the 3 data files directly with these links in the galaxy upload menu :
->
-> https://zenodo.org/record/2650868/files/Lacombe_et_al_2017_OK.txt
->
-> https://zenodo.org/record/2650874/files/Mucilli.txt
->
-> https://zenodo.org/record/2650872/files/Bredberg.txt
+>    ```
+>    https://zenodo.org/record/2650868/files/Lacombe_et_al_2017_OK.txt
+>    https://zenodo.org/record/2650874/files/Mucilli.txt
+>    https://zenodo.org/record/2650872/files/Bredberg.txt
+>    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
->
 >
 {: .hands_on}
 
