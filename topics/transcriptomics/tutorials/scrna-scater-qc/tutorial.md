@@ -3,23 +3,33 @@ layout: tutorial_hands_on
 
 title: Single-cell quality control with scater
 zenodo_link: 'https://zenodo.org/record/3386291'
-
-In this tutorial we will take scRNA-seq data, examine them for low quality cells and filter out these cells leaving you with the best quality data for reliable downstream analysis. You will visualise the data in order to look at library size, number of expressed genes, percentage of mitochondrial genes expression, etc., use different filtering approaches, and look for confounding factors that may affect the interpretation of downstream analyses.
-Typically, reads generated from cells in scRNA-seq experiments are mapped to a reference genome and then an expression matrix is calculated from the number of reads that are allocated to each gene or transcript. It is this expression matrix that we will be using in the tutorial.
-
+questions:
+- How to ensure the quality of single-cell RNA-seq data?
+- What are the confounding factors that may affect the interpretation of downstream analyses?
+objectives:
+- Examine scRNA-seq data for low-quality cells
+- Visualise data with various types of plots
+- Filtering low-quality cells with the appropriate approach
+requirements:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-preprocessing
 time_estimation: 1H
-
+key_points:
+- Single-cell RNA-seq data is often noisy
+- scater can be used to apply the visualise-filter-visualise paradigm of quality control
 contributors:
 - ethering
 - nsoranzo
 
 ---
 
-
 # Introduction
 {:.no_toc}
 
-scRNA-seq is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
+Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
 
 A number of factors should be examined before downstream analyses, many of which we'll address here:
 
@@ -31,7 +41,7 @@ A number of factors should be examined before downstream analyses, many of which
 
 - **Batch effect**: Large scRNA-seq projects usually need to generate data across multiple batches due to logistical constraints. However, the processing of different batches is often subject to variation, e.g., changes in operator, differences in reagent quality and concentration, the sequencing machine used, etc. This results in systematic differences in the observed expression in cells from different batches, which we refer to as “batch effects”. Batch effects are problematic as they can be major drivers of variation in the data, masking the relevant biological differences and complicating interpretation of the results.
 
-We will use scater ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that your filtering has worked. You'll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.
+We will use *scater* ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that your filtering has worked. You'll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.
 
 
 > ### Agenda
@@ -46,7 +56,7 @@ We will use scater ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA
 
 
 # Overview
-You will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. You will visualise the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).
+You will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. You will plot the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).
 
 ![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow")
 
@@ -69,7 +79,7 @@ You will use a pre-calculated expression matrix, along with some additional meta
 >
 {: .hands_on}
 
-# Visualize your data
+# Visualise your data
 
 Take a look at the data.
 
@@ -160,7 +170,7 @@ Here, we'll use the manual filtering method.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Often, it's a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you're happy with the results. Using the initial Calculate QC metrics file, play around with the filtering paramters and visualise the output to see the effect different paramters have.
+> > Often, it's a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you're happy with the results. Using the initial Calculate QC metrics file, play around with the filtering parameters and visualise the output to see the effect different paramters have.
 > {: .solution}
 >
 {: .question}
