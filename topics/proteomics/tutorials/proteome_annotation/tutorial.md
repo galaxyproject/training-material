@@ -75,18 +75,17 @@ A group of 10 proteins were identified in both “technical” control samples w
 > ### {% icon hands_on %} Hands-on: Remove the contaminants
 >
 > 1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017.txt` (Input dataset)
->    - Keep default option `Yes` for *"Does file contain header?"*
->    - *"Operation"*: `Discard`. We want to remove technical contaminants.
->    - Keep the `OR` option (by default) for the **operator** parameter. We don't need that parameter for a single filter.
->    - First add a  {% icon param-repeat %} *"Insert Filter by keywords"* box with a list of keywords to be filtered out.   In this case, keywords are list of Uniprot accession numbers.
->    - The *"Column number on which to apply the filter"*, in this case is the column that contains Uniprot accession numbers (`c1` as by default).
->    - *"Search for exact match ?"* You can perform exact or partial match with the keywords entered. Partial match is set by default. We keep default option `No` in this tutorial.
->    - To *"Enter keywords"*, you can either copy and paste list of keywords to the text area or choose a file that contains keywords in text format, in which each lines contains a keyword. Here we choose to `copy/paste` the following list of Uniprot accession number `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
+>    - {% icon param-file %} *"Input file"*: `Lacombe_et_al_2017_OK.txt`
+>    - *"Operation"*: `Discard`
+>    - {% icon param-repeat %} *"Insert Filter by keywords"*
+>      - *"Column number on which to apply the filter"*: `c1`
+>      - *"Search for exact match ?"*: `No`
+>      - *"Enter keywords"*: `copy/paste`
+>      - *"Copy/paste keywords to find"*: `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
 >
 >    > ### {% icon comment %} Outputs
 >    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
->   > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
+>    > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
 >    >
 >    {: .comment}
 >
@@ -121,7 +120,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 > 1. **Add expression data** {% icon tool %} with the following parameters:
 >    - *"Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)"*: `Input file containing your IDs`
 >        - {% icon param-file %} *"Select your file"*: `output of ID Converter` (output of **ID Converter** {% icon tool %})
->        - *"Column IDs: `c4`
+>        - *"Column IDs"*: `c4`
 >        - *"Does file contain header"*: `Yes`
 >    - Numerous information can be extracted from the HPA source files, you can read user documentation at the end of the submission form of the tool for more detailed description. In this activity, in *"RNAseq/Ab-based expression data"*, we *"Select information to add to your list"*:
 >       - `Gene name`
