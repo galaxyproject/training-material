@@ -86,23 +86,40 @@ The first part of this tutorial is essentially a one-click "fire and forget" sol
 
 However, Science favours the brave, and for those more interested in the gritty details of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
 
+10x Genomics has its own processing pipeline, [Cell Ranger](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) to process the scRNA-seq outputs it produces, but this process requires much configuration to run and is significantly slower than other mappers.
 
-Since STARsolo is a drop-in solution to the CellRanger pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARsolo** jobs and then spend the time deciding on what type of caffeine-inspired beverage they can make to maximise their time during the waiting period.
+Since STARsolo is a drop-in solution to the *Cell Ranger* pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARsolo** jobs and then spend the time deciding on what type of caffeine-inspired beverage they can make to maximise their time during the waiting period.
 
-The second part of this tutorial also has a one-click solution if an identical CellRanger matrix is the desired result, but the more interesting aspects of the pipeline are explored in the flexible method part of the tutorial.
+
+> ### {% icon details %}: Benchmark of Cell Ranger to others
+>
+> ![tenx_runtimes]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_runtimes.jpg %} "Benchmark of different mapping software.")
+>
+> The image is from [*"Melsted et al (June, 2019)*](https://doi.org/10.1101/673285)
+{: .details}
+
+The second part of this tutorial also has a one-click solution to producing a matrix identical to that given by the *Cell Ranger* pipeline, but the more interesting aspects of the pipeline are explored in the *Introspective Method* part of the tutorial.
 
 
 # Producing a Count Matrix from FASTQ
 
 Here we will use the [1k PBMCs from a Healthy Donor (v3 chemistry)](https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.0/pbmc_1k_v3) from 10x genomics, consisting of 1000 Peripheral blood mononuclear cells (PBMCs) extracted from a healthy donor, where PBMCs are primary cells with relatively small amounts of RNA (~1pg RNA/cell).
 
-The source file consists of 6 FASTQ files split into two sequencing lanes of three reads: R1 (barcodes), R2 (cDNA sequence), I1 (illumina lane info).
+The source material consists of 6 FASTQ files split into two sequencing lanes *L001* and *L002*, each with three reads of **R1** (barcodes), **R2** (cDNA sequences), **I1** (illumina lane info):
+  * pbmc\_1k\_v3\_S1\_*L001*\_**R1**\_001.fastq.gz
+  * pbmc\_1k\_v3\_S1\_*L001*\_**R2**\_001.fastq.gz
+  * pbmc\_1k\_v3\_S1\_*L001*\_**I1**\_001.fastq.gz
+  * pbmc\_1k\_v3\_S1\_*L002*\_**R1**\_001.fastq.gz
+  * pbmc\_1k\_v3\_S1\_*L002*\_**R2**\_001.fastq.gz
+  * pbmc\_1k\_v3\_S1\_*L002*\_**I1**\_001.fastq.gz
 
-The CellRanger pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STARsolo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3383115) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/api/files/858fcfb3-aca8-408d-afa2-eade47bd623a/subsetting_data.txt).
+The *Cell Ranger* pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STARsolo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3383115) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/api/files/858fcfb3-aca8-408d-afa2-eade47bd623a/subsetting_data.txt).
 
 ### Data upload and organization
 
-For the mapping, we require the sub-sampled source files, as well as a list of (737,000) known cell barcodes. The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
+For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (737,000) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
+
+The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
@@ -163,11 +180,11 @@ The table above gives a summary of the primers used in the image and the number 
 > >    * They need to be designed in such a way to minimise accidentally aligning to the reference they were prepared to be used for.
 > >    * Longer barcodes tend to be more unique, so this is a problem that is being solved as the barcodes increase in size, allowing for barcodes that can be used on more than one reference to be more common, as seen above.
 > > 1. UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random 'salt' that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two reads that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.
-> > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true
+> > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true.
 > {: .solution}
 {: .question}
 
-The differences in the chemistries is a slight change in the library size, where the v2 aims to capture *on average* 50,000 reads per cell, whereas the v3 aims to capture *at minimum* 20,0000 reads per cell. This greatly reduces the lower-tail of the library size compared to the previous version.
+The differences in the chemistries is a slight change in the library size, where the v2 aims to capture *on average* 50,000 reads per cell, whereas the v3 aims to capture *at minimum* 20,000 reads per cell. This greatly reduces the lower-tail of the library size compared to the previous version.
 
 
 ### Determining what Chemistry our Data Contains
@@ -181,7 +198,7 @@ To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in
 > 2. Which library preparation chemistry version was this read generated from?
 >
 > > ### {% icon solution %} Solution
-> > 1. There are 28 basepairs
+> > 1. There are 28 basepairs.
 > > 2. The v2 has 26 basepairs, but the v3 has 28 basepairs. Therefore the reads we have here use the Chromium v3 chemistry.
 > {: .solution}
 {: .question}
@@ -221,7 +238,7 @@ Let us investigate the output log. This type of quality control is essential in 
 >
 > > ### {% icon solution %} Solution
 > > 87.5%
-> > - This is good, and is expected of 10x datasets
+> > - This is good, and is expected of 10x datasets.
 > >
 > {: .solution}
 {: .question}
@@ -280,14 +297,14 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 > These metrics can be grouped into more broad categories:
 >
 > * `nNinBarcode` + `nUMIhomopolymer` + `nNoMatch` + `nTooMany` + `nNoExactMatch` = number of reads with CBs that do not match whitelist.
-> * `nUnmapped` + `nAmbigFeature` = number of reads without defined feature (gene)
-> * `nMatch` = number of reads that are output as solo counts
+> * `nUnmapped` + `nAmbigFeature` = number of reads without defined feature (gene).
+> * `nMatch` = number of reads that are output as solo counts.
 >
 > The three categoties above summed together should be equal to the total number of reads.
 >
 {: .details}
 
-The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the source files, so this appears to be the default expected behaviour.
+The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.
 
 ## Performing the Demultiplexing and Quantification
 
@@ -313,7 +330,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the CellRanger pipeline.
+>    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the *Cell Ranger* pipeline.
 >    >
 >    {: .comment}
 >
@@ -326,9 +343,9 @@ The matrix files produced by **RNA STARsolo** are in the *bundled* format, meani
 
 If we were to construct a cell matrix using the data we have, we would have a large matrix of 60,000 Genes against 737,000 Cells, of which most values would be zero, i.e. an *extremely* sparse matrix.
 
-To get a high quality count matrix we must apply the **DropletUtils** tool, which will produce a filtered set which will produce a dataset more representative of the CellRanger pipeline.
+To get a high quality count matrix we must apply the **DropletUtils** tool, which will produce a filtered dataset that is more representative of the *Cell Ranger* pipeline.
 
-## CellRanger Method
+## Cell Ranger Method
 
 > ### {% icon hands_on %} Hands-on: Default Method
 >
@@ -344,15 +361,15 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >            - *"Lower Proportion"*: `0.1`
 >        - *"Format for output matrices"*: `Tabular`
 >
-> > ### {% icon comment %} Comment
+> > ### {% icon comment %} Default Parameter
 > >
-> > The *"Expected Number of Cells"* parameter is the number of cells you expect to see in your sample, but does not correspond to how many cells you expect to see in a sub-sampled dataset like this one. The default is 3000 for CellRanger, which will yield ~300 cells here, but users are encouraged to experiment with this value when dealing with their own data, to recover the desired number of cells.
+> > The *"Expected Number of Cells"* parameter is the number of cells you expect to see in your sample, but does not correspond to how many cells you expect to see in a sub-sampled dataset like this one. The default is 3000 for *Cell Ranger*, which will yield ~300 cells here, but users are encouraged to experiment with this value when dealing with their own data, to recover the desired number of cells.
 > >
 > {: .comment}
 {: .hands_on}
 
 
-> ### Question {% icon question %} Questions
+> ### {% icon question %} Questions
 >
 > 1. How many cells were detected?
 > 1. Does this agree with the STARsolo Feature Statistics output?
@@ -365,12 +382,26 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > {: .solution}
 {: .question}
 
-This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the [*Downstream Single-cell RNA analysis with RaceID*](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-raceid/tutorial.html) tutorial.
+This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the [*Downstream Single-cell RNA analysis with RaceID*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %}) tutorial.
+
+> ### {% icon details %} File Formats in scRNA-seq
+>
+> The tabular outputs here are selected mostly for transparency, since they are easy to inspect. However, the datasets produced with 10x data are very large and very sparse, meaning there is much data redundancy due to the repetition of zeroes everywhere in the data.
+>
+> [Many](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) analysis [packages](https://www.rdocumentation.org/packages/RaceID/versions/0.1.3/topics/SCseq) have [attempted](https://github.com/satijalab/seurat/wiki/Seurat) to [solve](https://www.rdocumentation.org/packages/scater/versions/1.0.4/topics/SCESet) this problem by inventing their own standard, which has led to the proliferation of many different "standards" in the scRNA-seq package ecosystem, most of which require an R programming environment to inspect.
+>
+> As expected, the format that usually wins is the one which is most common in the field. In this case, the format *also* happens to be a very good format that stores data in a concise, compressed, and extremely readable manner:
+>
+> ![anddata]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_anndata.svg %} "AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix." )
+>
+> The *AnnData* format (`hda5`) is an extension of the [HDF5 format](https://en.wikipedia.org/wiki/Hierarchical_Data_Format), which supports multidimensional datasets to be stored in a consistent and space-optimised way. This is the default output of *Cell Ranger* and so is also the default output of **RNA STARsolo**. The format is also now a widely accepted format in many downstream analysis suites.
+{: .details}
+
 
 
 ## Introspective Method
 
-The *DefaultDrops* method given in the previous sub-section is a good one-click solution to emulating the CellRanger process of producing a high quality count matrix.
+The *DefaultDrops* method given in the previous sub-section is a good one-click solution to emulating the *Cell Ranger* process of producing a high quality count matrix.
 
 However, the **DropletUtils** tool does provide other options for determining which cells are of "good" quality and which are not.
 
@@ -388,7 +419,7 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 >            - *"Lower Bound"*: `1`
 >
 >    > ### {% icon comment %} Comment
->    > Due to the sub-sampled dataset, we choose a very low lower bound.
+>    > Due to the sub-sampled dataset, we choose a very low lower bound of 1, compared to the more realistic lower bound of 3.
 >    {: .comment}
 >
 {: .hands_on}
@@ -437,13 +468,14 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 ![cells]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_cells.png %} "Detected Cells (red)")
 
 
-Here we recover 137 high quality cells instead of the detected 272 given previously. On large datasets, this difference can help clean downstream clustering which may appear softer and less well-defined on a more inclusive dataset than that which has undergone tighter quality controls.
+Here we recover 137 high quality cells instead of the detected 272 given previously. On large datasets, this difference can help clean downstream clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the downstream analysis training materials.
+
 
 # Conclusion
 {:.no_toc}
 
-In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a CellRanger workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
+In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a *Cell Ranger* workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
 
-A full pipeline which produces both an hda5 and tabular file for inspection is provided [here](workflows/scrna_tenx.ga).
+A full pipeline which produces both an AnnData and tabular file for inspection is provided [here](workflows/scrna_tenx.ga).
 
 <!-- ![Recap of workflow]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow") -->
