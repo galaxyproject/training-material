@@ -16,8 +16,8 @@ objectives:
   - "Understand the importance of high and low quality cells"
 time_estimation: "1h"
 key_points:
-  - "Filtering a raw matrix into a high quality one for downstream analysis"
-  - "Removing unwanted barcodes"
+  - "Barcode FASTQ Reads are used to parse cDNA sequencing Reads."
+  - "A raw matrix is too large to process alone, and need to be filtered into a high quality one for downstream analysis"
 requirements:
   -
     type: "internal"
@@ -82,20 +82,20 @@ The tutorial is structured into two parts:
 
 ![Overview of workflow]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_workflow.png %} "An overview of the workflow")
 
-The first part of this tutorial is essentially a one-click "fire and forget" solution to demultiplexing and quantifying scRNA-seq data, where much of the intricacy and complexity required in this extremely crucial stage is obscured behind several layers of safety glass.
+The first part of this tutorial is essentially a one-click "fire and forget" solution to demultiplexing and quantifying scRNA-seq data, where much of the complexity required in this extremely crucial stage is simplified into a single step.
 
-However, Science favours the brave, and for those more interested in the gritty details of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
+However, those who are more interested in learning the intricacies of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
 
 10x Genomics has its own processing pipeline, [Cell Ranger](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) to process the scRNA-seq outputs it produces, but this process requires much configuration to run and is significantly slower than other mappers.
 
-Since STARsolo is a drop-in solution to the *Cell Ranger* pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARsolo** jobs and then spend the time deciding on what type of caffeine-inspired beverage they can make to maximise their time during the waiting period.
+Since STARsolo is a drop-in solution to the *Cell Ranger* pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARsolo** jobs and spend the time familiarising themselves with the pre-processing training materials mentioned above.
 
 
 > ### {% icon details %}: Benchmark of Cell Ranger to others
 >
 > ![tenx_runtimes]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_runtimes.jpg %} "Benchmark of different mapping software.")
 >
-> The image is from [*"Melsted et al (June, 2019)*](https://doi.org/10.1101/673285)
+> The image is from [*"Melsted et al (June, 2019)*](https://doi.org/10.1101/673285). Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.
 {: .details}
 
 The second part of this tutorial also has a one-click solution to producing a matrix identical to that given by the *Cell Ranger* pipeline, but the more interesting aspects of the pipeline are explored in the *Introspective Method* part of the tutorial.
