@@ -35,7 +35,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the seqThe recent developments in chemistry applied to sequencing has improved this somewhat, but reads are now longer than ever.uencer. For each fragment in the library, a short sequence is generated, also called a **read**, which is simply a succession of nucleotides.
+During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a short sequence is generated, also called a **read**, which is simply a succession of nucleotides.
 
 Modern sequencing technologies can generate a massive number of sequence reads in a single experiment. However, no sequencing technology is perfect, and each instrument will generate different types and amount of errors, such as incorrect nucleotides being called. These wrongly called bases are due to the technical limitations of each sequencing platform.
 
