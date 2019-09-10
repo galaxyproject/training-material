@@ -699,6 +699,15 @@ For both within or between-sample comparison, the gene counts need to be normali
 
 This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates, that are absolutely essential for accurate results. For your own analysis, we advise you to use at least 3, but preferably 5 biological replicates per condition. It is possible to have different numbers of replicates per condition.
 
+> ### {% icon comment %} Technical vs biological replicates
+>
+> A technical replicate is an experiment which is performed once but measured several times (e.g. multiple sequencing of the same library). A biological replicate is an experiment performed (and also measured) several times.
+>
+> In our data, we have 4 biological replicates (here called samples) without treatment and 3 biological replicates with treatment (*Pasilla* gene depleted by RNAi).
+>
+> We recommend to combine the count tables for different technical replicates (but not for biological replicates) before a differential expression analysis.
+{: .comment}
+
 [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for differential gene expression (DGE) analysis. It takes read counts and combines them into a big table (with genes in the rows and samples in the columns) and applies size factor normalization:
 
 - Computation for each gene of the geometric mean of read counts across all samples
