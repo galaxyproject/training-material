@@ -253,7 +253,7 @@ With eukaryotic transcriptomes most reads originate from processed mRNAs lacking
 - Reads that can be mapped entirely within an exon
 - Reads spanning two or more exons
 
-![Five types of RNA-seq reads](../../images/five_type_rna_seq_reads.png "The five types of RNA-seq reads (Figure 1a from Kim et al, Nat Methods, 2015)")
+![Five types of RNA-seq reads](../../images/five_type_rna_seq_reads.png "The five types of RNA-seq reads (Figure 1a from {% cite kim2015hisat %})")
 
 Spliced mappers have been developed to efficiently map transcript-derived reads against genomes:
 
@@ -265,21 +265,21 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 > [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
->    ![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
+>    ![TopHat](../../images/tophat.png "TopHat (Figure 1 from {% cite trapnell2009tophat %})")
 >
-> TopHat has been subsequently improved with the development of TopHat2 {% cite kim2013tophat2 %}:
+> TopHat has been subsequently improved with the development of TopHat2 ({% cite kim2013tophat2 %}):
 >
->    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al., Genome Biology, 2013)")
+>    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
 >
 > To further optimize and speed up spliced read alignment [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2015hisat %}) was developed. It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
->    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Kim et al., Nat Methods, 2015)")
+>    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
 >
 > A part of the read (blue arrow) is first mapped to the genome using the global FM index. HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
 >
 > [STAR aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
 >
->    ![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al., Bioinformatics, 2013)")
+>    ![STAR's seed search](../../images/star.png "STAR's seed search (Figure 1 from {% cite dobin2013star %})")
 >
 > Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments</p>
 >
@@ -484,11 +484,11 @@ During a typical RNA-seq experiment the information about strandedness is lost a
 
 Some library preparation protocols create so called *stranded* RNA-seq libraries that preserve the strand information (an excellent overview in {% cite levin2010comprehensive %}). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:
 
-![Stranded RNA-seq data look like this](../../images/stranded_result.png "Non-stranded vs. strand-specific RNA-seq read alignment (image from GATC Biotech)")
+![Stranded RNA-seq data look like this](../../images/stranded_result.png "Non-stranded vs. strand-specific RNA-seq read alignment (Figure from GATC Biotech)")
 
 Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:
 
-![Effects of RNAseq library types](../../images/rnaseq_library_type.png "Effects of RNA-seq library types (adapted from Sailfish documentation)")
+![Effects of RNAseq library types](../../images/rnaseq_library_type.png "Effects of RNA-seq library types (Figure adapted from Sailfish documentation)")
 
 In practice, with Illumina paired-end RNA-seq protocols you are unlikely to encounter many of these possibilities. You will most likely deal with either:
 
@@ -1107,7 +1107,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. However, standard methods give biased results on RNA-seq data due to over-detection of differential expression for long and highly-expressed transcripts.
 
-The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) tool {% cite young2010gene %} provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
+The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) tool ({% cite young2010gene %}) provides methods for performing GO analysis of RNA-seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-seq data, such as KEGG pathway analysis.
 
 **goseq** needs 2 files as inputs:
 - A tabular file with the differentially expressed genes from all genes assayed in the RNA-seq experiment with 2 columns:
