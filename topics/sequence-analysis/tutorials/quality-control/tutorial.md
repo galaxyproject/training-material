@@ -113,7 +113,7 @@ The quality score for each sequence is a string of characters, one for each base
 
 ![Encoding of the quality score with ASCII characters for different Phred encoding](../../images/quality_score_encoding.png)
 
-So each nucleotide is assigned to an ASCII character, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
+So there is an ASCII character associated with each nucleotide, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
 
 Phred Quality Score | Probability of incorrect base call | Base call accuracy
 --- | --- | ---
@@ -390,7 +390,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read. 
 >
-> FastQC will report the list of kmers which appear at specific positions with a greater frequency than expected. This can be due to different sources of bias in the library, including the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer from these sequences. Any biased kmer due to other interesting biaises may be then diluted and not easy to see.
+> FastQC will report the list of kmers which appear at specific positions with a greater frequency than expected. This can be due to different sources of bias in the library, including the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer from these sequences. Any biased kmer due to other interesting biases may be then diluted and not easy to see.
 >
 > The following example is from a high-quality DNA-Seq library. The biased kmers nearby the start of the read likely are due to slight sequence dependent efficiency of DNA shearing or a result of random priming:
 >
@@ -445,7 +445,7 @@ We tried to explain here there different FastQC reports and some use cases. More
 
 # Filter and Trim
 
-The quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analyis. In general, quality treatments include:
+The quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. In general, quality treatments include:
 
 1. Cutting/Trimming/masking sequences
     - from low quality score regions
@@ -520,7 +520,7 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 The quality of the previous dataset was pretty good from the beginning and we improved it with with trimming and filtering step (in a reasonable way to not lose too much information)
 
 > ### {% icon comment %} Bad quality sequences
-> If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data).
+> If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).
 >
 > You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you loose them.
 {: .comment}
@@ -531,7 +531,7 @@ The quality of the previous dataset was pretty good from the beginning and we im
 >
 > Cutadapt quality trimming algorithm consists of three simple steps:
 >
-> 1. Substract the chosen threshold value from the quality value of each position
+> 1. Subtract the chosen threshold value from the quality value of each position
 > 2. Compute a partial sum of these differences from the end of the sequence to each position
 >    (as long as the partial sum is negative)
 > 3. Cut at the minimum value of the partial sum
