@@ -79,15 +79,15 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the FASTQ file pairs from [Zenodo](https://doi.org/10.5281/zenodo.1185122) or a data library:
+> 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >   - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
 >   - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
 >    ```
->    https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
->    https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+>    {{ page.zenodo_link }}/files/GSM461177_1.fastqsanger
+>    {{ page.zenodo_link }}/files/GSM461177_2.fastqsanger
+>    {{ page.zenodo_link }}/files/GSM461180_1.fastqsanger
+>    {{ page.zenodo_link }}/files/GSM461180_2.fastqsanger
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -96,7 +96,7 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >    > ### {% icon comment %} Comment
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
 >    >
->    >For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here https://zenodo.org/record/290221
+>    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }})
 >    {: .comment}
 >
 > 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
@@ -293,10 +293,10 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo](https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the Shared Data library if available or from [Zenodo]({{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf) into your current Galaxy history
 >
 >    ```
->    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+>    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
 >    ```
 >
 >    1. Rename the dataset if necessary
@@ -658,7 +658,7 @@ In the previous section, we counted reads mapped to genes for two samples. To be
 
 > ### {% icon hands_on %} (Optional) Hands-on: Re-run on the other datasets
 >
-> You can do the same process on the other sequence files available on [Zenodo](https://doi.org/10.5281/zenodo.1185122)
+> You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }})
 >
 > - Paired-end data
 >     - `GSM461178_1` and `GSM461178_2`
@@ -671,19 +671,19 @@ In the previous section, we counted reads mapped to genes for two samples. To be
 > The links to these files are below:
 >
 > ```
-> https://zenodo.org/record/1185122/files/GSM461178_1.fastqsanger
-> https://zenodo.org/record/1185122/files/GSM461178_2.fastqsanger
-> https://zenodo.org/record/1185122/files/GSM461181_1.fastqsanger
-> https://zenodo.org/record/1185122/files/GSM461181_2.fastqsanger
-> https://zenodo.org/record/1185122/files/GSM461176.fastqsanger
-> https://zenodo.org/record/1185122/files/GSM461179.fastqsanger
-> https://zenodo.org/record/1185122/files/GSM461182.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461178_1.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461178_2.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461181_1.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461181_2.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461176.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461179.fastqsanger
+> {{ page.zenodo_link }}/files/GSM461182.fastqsanger
 > ```
 >
 > This is really interesting to redo on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).
 {: .hands_on}
 
-To save time, we have run the necessary steps for you and generated 7 count files, available on [Zenodo](https://doi.org/10.5281/zenodo.1185122).
+To save time, we have run the necessary steps for you and generated 7 count files, available on [Zenodo]({{ page.zenodo_link }}).
 
 These files contain the counts for each gene of *Drosophila*. We could compare the files directly and calculate the extent of differential gene expression, but the number of sequenced reads mapped to a gene depends on:
 
@@ -722,7 +722,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
 > 1. Create a new history
-> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available):
+> 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >
 >    - `GSM461176_untreat_single.counts`
 >    - `GSM461177_untreat_paired.counts`
@@ -733,13 +733,13 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    - `GSM461182_untreat_single.counts`
 >
 >    ```
->    https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
->    https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
->    https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
->    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
+>    {{ page.zenodo_link }}/files/GSM461176_untreat_single.counts
+>    {{ page.zenodo_link }}/files/GSM461177_untreat_paired.counts
+>    {{ page.zenodo_link }}/files/GSM461178_untreat_paired.counts
+>    {{ page.zenodo_link }}/files/GSM461179_treat_single.counts
+>    {{ page.zenodo_link }}/files/GSM461180_treat_paired.counts
+>    {{ page.zenodo_link }}/files/GSM461181_treat_paired.counts
+>    {{ page.zenodo_link }}/files/GSM461182_untreat_single.counts
 >    ```
 >
 > 3. Rename the datasets (if needed)
@@ -921,7 +921,7 @@ The ID for each gene is something like FBgn0003360, i.e. an ID in the correspond
 > 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the previous, from the Data library or from Zenodo:
 >
 >    ```
->    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+>    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
 >    ```
 >
 > 2. **Annotate DESeq2/DEXSeq output tables** {% icon tool %} with:
@@ -1382,7 +1382,7 @@ DEXSeq generates a count table similar to the one generated by featureCounts, bu
 
 DEXSeq usage is similar to DESeq2. It uses similar statistics to find differentially used exons.
 
-As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we did that for you. The results are available on [Zenodo](https://doi.org/10.5281/zenodo.1185122):
+As for DESeq2, in the previous step, we counted only reads that mapped to exons on chromosome 4 and for only one sample. To be able to identify differential exon usage induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we did that for you. The results are available on [Zenodo]({{ page.zenodo_link }}):
 
 - The results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
@@ -1390,7 +1390,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 > ### {% icon hands_on %} Hands-on:
 >
 > 1. Create a new history
-> 2. Import the seven count files from [Zenodo](https://zenodo.org/record/1185122) or the Shared Data library (if available):
+> 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >
 >    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
 >    - `GSM461176_untreat_single.exon.counts`
@@ -1402,14 +1402,14 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 >    - `GSM461182_untreat_single.exon.counts`
 >
 >    ```
->    https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.dexseq.gtf
->    https://zenodo.org/record/1185122/files/GSM461176_untreat_single.exon.counts
->    https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.exon.counts
->    https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.exon.counts
->    https://zenodo.org/record/1185122/files/GSM461179_treat_single.exon.counts
->    https://zenodo.org/record/1185122/files/GSM461180_treat_paired.exon.counts
->    https://zenodo.org/record/1185122/files/GSM461181_treat_paired.exon.counts
->    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.exon.counts
+>    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.dexseq.gtf
+>    {{ page.zenodo_link }}/files/GSM461176_untreat_single.exon.counts
+>    {{ page.zenodo_link }}/files/GSM461177_untreat_paired.exon.counts
+>    {{ page.zenodo_link }}/files/GSM461178_untreat_paired.exon.counts
+>    {{ page.zenodo_link }}/files/GSM461179_treat_single.exon.counts
+>    {{ page.zenodo_link }}/files/GSM461180_treat_paired.exon.counts
+>    {{ page.zenodo_link }}/files/GSM461181_treat_paired.exon.counts
+>    {{ page.zenodo_link }}/files/GSM461182_untreat_single.exon.counts
 >    ```
 >
 > 3. **DEXSeq** {% icon tool %}: Run **DEXSeq** with
