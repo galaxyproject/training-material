@@ -45,7 +45,7 @@ RNA-seq is used to analyze the continuously changing cellular transcriptome, the
 
 In the study of {% cite brooks2011conservation %}, the authors wanted to identify exons regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi).
 
-Total RNA was then isolated and used to prepare both single-end and paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The RNA-seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on splicing events.
+Total RNA was then isolated and used to prepare both single-end and paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The RNA-seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on splicing events. In Galaxy it is possible to handle single-end data and paired-end data together. If you want to know more about splicing, read [here](https://en.wikipedia.org/wiki/RNA_splicing). 
 
 In this tutorial, we will reproduce the analysis of the RNA-Seq data step by step.
 
@@ -261,25 +261,25 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 > ### {% icon details %} More details on the different spliced mappers
 >
-> Several spliced mappers have been developed over the year with the explosion of RNA-seq data.
+> Several spliced mappers have been developed over the past years to process the explosion of RNA-seq data.
 >
-> [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
+> [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
 >    ![TopHat](../../images/tophat.png "TopHat (Trapnell et al, Bioinformatics, 2009)")
 >
 > TopHat has been subsequently improved with the development of TopHat2 {% cite kim2013tophat2 %}:
 >
->    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al, Genome Biology, 2013)")
+>    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Kim et al., Genome Biology, 2013)")
 >
 > To further optimize and speed up spliced read alignment [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2015hisat %}) was developed. It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
->    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HiSat/HiSat2 (Kim et al, Nat Methods, 2015)")
+>    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Kim et al., Nat Methods, 2015)")
 >
 > A part of the read (blue arrow) is first mapped to the genome using the global FM index. HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
 >
-> [STAR aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs seed search:
+> [STAR aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
 >
->    ![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al, Bioinformatics, 2013)")
+>    ![STAR's seed search](../../images/star.png "STAR's seed search (Dobin et al., Bioinformatics, 2013)")
 >
 > Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments</p>
 >
@@ -497,7 +497,7 @@ In practice, with Illumina paired-end RNA-seq protocols you are unlikely to enco
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the output of your mappings (BAM files), selects a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded.
+Another option is to estimate these parameters with a tool called **Infer Experiment** from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool takes the output of your mappings (BAM files), selects a subsample of your reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).
 
 > ### {% icon hands_on %} Hands-on: Determining the library strandness
 >
@@ -616,8 +616,8 @@ The main output of **featureCounts** is a table.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The table has two columns: the gene id and the number of reads (or fragments in the case of paired-end reads) mapped to the gene
-> > 2. To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the **Sort** {% icon tool %} tool, by sorting the table on the second column in descending order. This reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177` and 127,416 in `GSM461180`).
+> > 1. The table has two columns: the gene ID and the number of reads (or fragments in the case of paired-end reads) mapped to the gene
+> > 2. To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the **Sort** {% icon tool %} tool, by sorting the table on the second column (which contains the number of reads = counts) in descending order. The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in `GSM461177` and 127,416 in `GSM461180`).
 > > 
 > >    Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.
 > >    
@@ -631,7 +631,7 @@ The main output of **featureCounts** is a table.
 > >    >
 > >    >    ![Scratchbook icon enabled](../../images/ref-based/menubarWithScratchbookEnabled.png "Menu bar with Scratchbook icon enabled")
 > >    >
-> >    > 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts**. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
+> >    > 3. Click the {% icon galaxy-eye %} (eye) icon to view one of the **sorted featureCounts** files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:
 > >    >
 > >    >    ![Scratchbook one dataset shown](../../images/ref-based/scratchbookOneDataset.png "Scratchbook showing one dataset overlay")
 > >    >
@@ -639,7 +639,7 @@ The main output of **featureCounts** is a table.
 > >    >
 > >    >    ![scratchbook one saved view](../../images/ref-based/scratchbookOneSavedView.png "Menu bar with one saved dataset view in Scratchbook")
 > >    >
-> >    > 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts**. The two datasets can now be seen side by side:
+> >    > 5. Next click the {% icon galaxy-eye %} (eye) icon on the **second sorted featureCounts** file. The two datasets can now be seen side by side:
 > >    >
 > >    >    ![Scratchbook two datasets shown](../../images/ref-based/scratchbookTwoDatasetsShown.png "Scratchbook showing two side by side datasets")
 > >    >
