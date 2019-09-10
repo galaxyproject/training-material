@@ -21,7 +21,7 @@ follow_up_training:
     topic_name: sequence-analysis
     tutorials:
       - mapping
-time_estimation: "1H"
+time_estimation: "1H30M"
 level: Introductory
 key_points:
   - Run quality control on every dataset before running any other bioinformatics analysis
@@ -35,7 +35,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a short sequence is generated, also called a **read**, which is simply a succession of nucleotides.
+During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the seqThe recent developments in chemistry applied to sequencing has improved this somewhat, but reads are now longer than ever.uencer. For each fragment in the library, a short sequence is generated, also called a **read**, which is simply a succession of nucleotides.
 
 Modern sequencing technologies can generate a massive number of sequence reads in a single experiment. However, no sequencing technology is perfect, and each instrument will generate different types and amount of errors, such as incorrect nucleotides being called. These wrongly called bases are due to the technical limitations of each sequencing platform.
 
@@ -174,12 +174,16 @@ Rather than looking at quality scores for each individual read, FastQC looks at 
 
 On the x-axis are the base position in the read. In this example, the sample contains reads that are 37 bp long.
 
-> ### {% icon comment %} Non uniform x-axis
+> ### {% icon details %} Non uniform x-axis
 >
-> The x-axis is not uniform. It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows. 
+> The x-axis is not always uniform. When you have long reads, some binning is applied to keep things compact:
+>
+> ![Per base sequence quality](../../images/quality-control/per_base_sequence_quality_binned.png "Per base sequence quality with binned reads")
+>
+> It starts out with individual 1-10 bases. After that, bases are binned across a window a certain number of bases wide. Data binning means grouping and is a data pre-processing technique used to reduce the effects of minor observation errors. The number of base positions binned together depends on the length of the read. With 150 bp reads, the latter part of the plot will report aggregate statistics for 5bp windows. Shorter reads will have smaller windows and longer reads larger windows.
 >
 > Binning can be removed when running FastQC
-{: .comment}
+{: .details}
 
 For each position, a boxplot is drawn with:
 
@@ -190,25 +194,29 @@ For each position, a boxplot is drawn with:
 
 The y-axis shows the quality scores. The higher the score, the better the base call. The background of the  graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red).
 
-It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will drop at the end of the read. This is often due to signal decay or phasing during the sequencing run:
+It is normal with all Illumina sequencers for the median quality score to start out lower over the first 5-7 bases and to then rise. The quality of reads on most platforms will drop at the end of the read. This is often due to signal decay or phasing during the sequencing run. The recent developments in chemistry applied to sequencing has improved this somewhat, but reads are now longer than ever.
 
-- Signal decay
 
-  The fluorescent signal intensity decays with each cycle of the sequencing process. Due to the degrading fluorophores, a proportion of the strands in the cluster are not being elongated. The proportion of the signal being emitted continues to decrease with each cycle, yielding to a decrease of quality scores at the 3' end of the read. 
+> ### {% icon details %} Signal decay and phasing
+>
+> - Signal decay
+>
+>  The fluorescent signal intensity decays with each cycle of the sequencing process. Due to the degrading fluorophores, a proportion of the strands in the cluster are not being elongated. The proportion of the signal being emitted continues to decrease with each cycle, yielding to a decrease of quality scores at the 3' end of the read.
+>
+> - Phasing
+>
+>  The signal starts to blur with the increase of number of cycles because the cluster looses synchronicity. As the cycles progress, some strands get random failures of nucleotides to incorporate due to:
+>
+>  - Incomplete removal of the 3' terminators and fluorophores
+>  - Incorporation of nucleotides without effective 3' terminators
+>
+>  This leads to a decrease in quality scores at the 3' end of the read.
+{: .details}
 
-- Phasing
 
-  The signal starts to blur with the increase of number of cycles because the cluster looses synchronicity. As the cycles progress, some strands get random failures of nucleotides to incorporate due to:
-
-  - Incomplete removal of the 3' terminators and fluorophores
-  - Incorporation of nucleotides without effective 3' terminators
-
-  This leads to a decrease in quality scores at the 3' end of the read. 
-
-The recent developments in chemistry applied to sequencing has improved this somewhat, but reads are now longer than ever. 
 
 > ### {% icon details %} Some other sequencing error profiles that you could see
-> 
+>
 > - Overclustering
 >
 >   Sequencing facilities can overcluster the flow cells. It results in small distances between clusters and an overlap in the signals. Two clusters can be interpreted as a single cluster with mixed fluorescent signals being detected, decreasing signal purity. It generates lower quality scores across the entire read.
@@ -249,6 +257,14 @@ When the median quality is below a Phred score of ~20, we should consider trimmi
 
 FastQC produces other diagnostic plots to assess sample quality.
 
+> ### {% icon tip %} Take a shortcut
+>
+> The following sections go into detail about some of the other plots generated by FastQC.
+> These sections are **optional**, and if you would like to skip these you can:
+>   - Jump straight to the [next section](#filter-and-trim) to continue with filtering and trimming of your dataset
+{: .comment}
+
+
 ## Per sequence quality scores
 
 It plots the average quality score over the full length of all reads on the x-axis and gives the total number of reads with this score on the y-axis:
@@ -263,19 +279,19 @@ The distribution of average read quality should be tight peak in the upper range
 
 "Per Base Sequence Content" plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all reads in the input sequence file. As for the per base sequence quality, the x-axis is non-uniform.
 
-In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with `%A=%T` and `%G=%C`, and the lines in this plot should run parallel with each other. 
+In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with `%A=%T` and `%G=%C`, and the lines in this plot should run parallel with each other.
 
 > ### {% icon details %} Biases by library type
-> 
+>
 > It's worth noting that some library types will always produce biased sequence composition, normally at the start of the read. Libraries produced by priming using random hexamers (including nearly all RNA-Seq libraries as in the previous plot), and those which were fragmented using transposases, will contain an intrinsic bias in the positions at which reads start (the first 10-12 bases). This bias does not involve a specific sequence, but instead provides enrichment of a number of different K-mers at the 5' end of the reads. Whilst this is a true technical bias, it isn't something which can be corrected by trimming and in most cases doesn't seem to adversely affect the downstream analysis. It will, however, produce a warning or error in this module.
 >
 > ![Per base sequence content for RNA-seq data](../../images/quality-control/per_base_sequence_content_rnaseq.png)
-> 
+>
 > ChIP-seq data can also encounter read start sequence biases in this plot if fragmenting with transposases. With bisulphite converted data, e.g. HiC data, a separation of G from C and A from T is expected:
-> 
+>
 > ![Per base sequence content for Bisulphite data](../../images/quality-control/per_base_sequence_content_bisulphite.png)
 >
-> At the end, there is an overall shift in the sequence composition. If the shift correlates with a loss of sequencing quality, it can be suspected that miscalls are made with a more even sequence bias than bisulphite converted libraries.  Trimming the sequences fixed this problem, but if this hadn't been done it would have had a dramatic effect on the methylation calls which were made. 
+> At the end, there is an overall shift in the sequence composition. If the shift correlates with a loss of sequencing quality, it can be suspected that miscalls are made with a more even sequence bias than bisulphite converted libraries.  Trimming the sequences fixed this problem, but if this hadn't been done it would have had a dramatic effect on the methylation calls which were made.
 {: .details}
 
 > ### {% icon question %} Questions
@@ -318,7 +334,7 @@ In a diverse library most sequences will occur only once in the final set. A low
 Two sources of duplicate reads can be found:
 - PCR duplication in which library fragments have been over-represented due to biased PCR enrichment
 
-  It is a concern because PCR duplicates misrepresent the true proportion of sequences in the input. 
+  It is a concern because PCR duplicates misrepresent the true proportion of sequences in the input.
 
 - Truly over-represented sequences such as very abundant transcripts in an RNA-Seq library
 
@@ -347,11 +363,11 @@ With DNA sequencing data no single sequence should be present at a high enough f
 > ### {% icon details %} More details about other FastQC plots
 >
 > #### Per tile sequence quality
-> 
+>
 > ![Per tile sequence quality](../../images/quality-control/per_tile_sequence_quality.png "Per tile sequence quality")
-> 
+>
 > This plot will only appear for Illumina library which retains its original sequence identifiers. Encoded in these is the flowcell tile from which each read came. The plot enables you to look at the quality scores from each tile across all of your bases to see if there was a loss in quality associated with only one part of the flowcell.
->   
+>
 > The plot shows the deviation from the average quality for each tile. The hotter colours indicate that reads in the given tile have worse qualities for that position than reads in other tiles. In the example above you can see that certain tiles show consistently poor quality. A good plot should be blue all over.
 >
 > In some cases, the chemicals used during sequencing becoming a bit exhausted over the time and the last tiles got worst chemicals which makes the sequencing reactions a bit error-prone. The "Per tile sequence quality" graph will then have some horizontal lines like this:
@@ -367,12 +383,12 @@ With DNA sequencing data no single sequence should be present at a high enough f
 > It's not unusual to see a very high proportion of Ns appearing in a sequence, especially near the end of a sequence. But this curve should never rises noticeably above zero. If it does this indicates a problem occurred during the sequencing run. In the example below, an error caused the instrument to be unable to call a base for approximately 20% of the reads at position 29:
 >
 > ![Per base N content](../../images/quality-control/per_base_n_content_error.png)
-> 
+>
 > #### Sequence length distribution
 >
 > ![Sequence length distribution](../../images/quality-control/sequence_length_distribution.png "Sequence length distribution")
 >
-> Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$. 
+> Some high-throughput sequencers generate sequence fragments of uniform length, but others can contain reads of widely varying lengths. Even within uniform length libraries some pipelines will trim sequences to remove poor quality base calls from the end or the first $n$ bases if they match the first $n$ bases of the adapter up to 90% (by default), with sometimes $n = 1$.
 >
 > This plot shows the distribution of fragment sizes in the file which was analysed. In many cases this will produce a simple plot showing a peak only at one size, but for variable length FASTQ files this will show the relative amounts of each different size of sequence fragment.
 >
@@ -380,7 +396,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > ![Adapter Content](../../images/quality-control/adapter_content.png "Adapter Content")
 >
-> The plot shows the cumulative percentage of reads with the different adapter sequences at each position. Once an adapter sequence is seen in a read it is counted as being present right through to the end of the read so the percentages increases with the read length. Only adapters specific to the library type are searched. 
+> The plot shows the cumulative percentage of reads with the different adapter sequences at each position. Once an adapter sequence is seen in a read it is counted as being present right through to the end of the read so the percentages increases with the read length. Only adapters specific to the library type are searched.
 >
 > Ideally Illumina sequence data should not have any adapter sequence present. But with when using long read, some of the library inserts are shorter than the read length resulting in read-through to the adapter at the 3' end of the read. This is more likely to occur with RNA-Seq libraries where the distribution of library insert sizes is more varied and likely to include some short inserts. In the example below, a high quality RNA-Seq library have a small percentage of the library with inserts smaller than 150bp:
 >
@@ -388,7 +404,7 @@ With DNA sequencing data no single sequence should be present at a high enough f
 >
 > #### Kmer Content
 >
-> FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read. 
+> FastQC does a generic analysis of all of the short nucleotide sequences of length k (kmer, with k = 7 by default) starting at each position along the read in the library to find those which do not have an even coverage through the length of your reads. Any given kmer should be evenly represented across the length of the read.
 >
 > FastQC will report the list of kmers which appear at specific positions with a greater frequency than expected. This can be due to different sources of bias in the library, including the presence of read-through adapter sequences building up on the end of the sequences. The presence of any overrepresented sequences in the library (such as adapter dimers) causes the kmer plot to be dominated by the kmer from these sequences. Any biased kmer due to other interesting biases may be then diluted and not easy to see.
 >
@@ -405,9 +421,9 @@ We tried to explain here there different FastQC reports and some use cases. More
 > ### {% icon details %} Specific problem for alternate library types
 >
 > #### Small/micro RNA
-> 
+>
 > In small RNA libraries, we typically have a relatively small set of unique, short sequences. Small RNA libraries are not randomly sheared before adding sequencing adapters to their ends: all the reads for specific classes of microRNAs will be identical. It will result in:
-> 
+>
 > - Extremely biased per base sequence content
 > - Extremely narrow distribution of GC content
 > - Very high sequence duplication levels
@@ -415,7 +431,7 @@ We tried to explain here there different FastQC reports and some use cases. More
 > - Read-through into adapters
 >
 > #### Amplicon
-> 
+>
 > Amplicon libraries are prepared by PCR amplification of a specific target. For example, the V4 hypervariable region of the bacterial 16S rRNA gene. All reads from this type of library are expected to be nearly identical. It will result in:
 >
 > - Extremely biased per base sequence content
@@ -469,9 +485,9 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 >          {: .tip}
 >
 >       - In *Read 1 Options*
->          
+>
 >          > ### {% icon comment %} Know adapters
->          > In this dataset, no adapters were found as we saw in FastQC report. They were already removed. 
+>          > In this dataset, no adapters were found as we saw in FastQC report. They were already removed.
 >          > If you see or know which adapter sequences were used during library preparation, provide their sequences there.
 >          {: .comment}
 >
@@ -589,8 +605,8 @@ With paired-end sequencing, the fragments are sequenced from both sides. This ap
 The distance between both reads is known and therefore is additional information that can improve read mapping.
 
 Paired-end sequencing generates 2 FASTQ files:
-- One file with the sequences corresponding to foward orientation of all the fragments
-- One file with the sequences corresponding to reverse orientation of all the fragments
+- One file with the sequences corresponding to **forward** orientation of all the fragments
+- One file with the sequences corresponding to **reverse** orientation of all the fragments
 
 Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_r` or `_1` for the forward reads and `_f` or `_2` for the reverse reads.
 
@@ -626,7 +642,7 @@ The data we analyzed in the previous step was not single-end data but the forwar
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads: 
+> > 1. The quality of the sequences seems worse for the reverse reads than for the forward reads:
 > >     - Per Sequence Quality Scores: distribution more on the left, i.e. a lower mean quality of the sequences
 > >     - Per base sequence quality: less smooth curve and stronger decrease at the end with a mean value below 28
 > >     - Per Base Sequence Content: stronger bias at the beginning and no clear distinction between C-G and A-T groups
@@ -638,7 +654,7 @@ The data we analyzed in the previous step was not single-end data but the forwar
 > {: .solution}
 {: .question}
 
-With paired-end reads the average quality scores for forward reads will almost always be higher than for reverse reads. 
+With paired-end reads the average quality scores for forward reads will almost always be higher than for reverse reads.
 
 After trimming, reverse reads will be shorter because of their quality and then will be eliminated during the filtering step. If one of the reverse reads is removed, its corresponding forward read should be removed too. Otherwise we will get different number of reads in both files and in different order, and order is important for the next steps. Therefore **it is important to treat the forward and reverse reads together for trimming and filtering**.
 
