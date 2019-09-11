@@ -105,7 +105,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` (output of **Build tissue-specific expression dataset** {% icon tool %})
+>        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` (output of **Filter by keywords and/or numerical value** {% icon tool %})
 >    - *"Does file contain header"*: `Yes`
 >    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
