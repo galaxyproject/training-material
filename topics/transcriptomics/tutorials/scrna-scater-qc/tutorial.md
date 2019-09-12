@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: Single-cell quality control with scater
 zenodo_link: 'https://zenodo.org/record/3386291'
+tags:
+  - single-cell
 questions:
 - How to ensure the quality of single-cell RNA-seq data?
 - What are the confounding factors that may affect the interpretation of downstream analyses?
@@ -35,7 +37,7 @@ A number of factors should be examined before downstream analyses, many of which
 
 - **Low library size**: When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. It's important to remove these cells from downstream analyses.
 
-- **Low number of expressed genes**: A low number of expressed genes may be a result of poor-quality cells (e.g. dying, degraded, damaged, etc), followed by high PCR amplification of the remaining RNA. Again, these cells should be removed from downstream analyses.
+- **Low number of expressed genes**: A low number of expressed genes may be a result of poor-quality cells (e.g. dying, degraded, damaged, etc.), followed by high PCR amplification of the remaining RNA. Again, these cells should be removed from downstream analyses.
 
 - **High mitochondrial gene content**: High concentrations of mitochondrial genes is often a result of damaged cells where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.
 
@@ -56,7 +58,7 @@ We will use *scater* ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scR
 
 
 # Overview
-You will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. You will plot the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).
+We will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. We will plot the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).
 
 ![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow")
 
@@ -81,7 +83,7 @@ You will use a pre-calculated expression matrix, along with some additional meta
 
 # Visualise your data
 
-Take a look at the data.
+Take a look at the uploaded data by clicking on the {% icon galaxy-eye %} symbol for each dataset.
 
 - The `counts.txt` file is a 40-sample expression matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of reads mapped to each gene/sample.
 - `annotation.txt` is a file listing experimentalinformation about each cell. Parmeters here include `Mutation_Status`, `Cell_Cycle`, and `Treatment`. These will be useful for looking at  batch effects later.
@@ -109,7 +111,7 @@ Next, lets take a look at the data by plotting various properties to see what ou
 > 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
 >
-> 2. When the tool has finished running, click on the 'eye' icon to view the plots. If it doesn't appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
+> 2. When the tool has finished running, click on the {% icon galaxy-eye %} to view the plots. If it doesn't appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
 > ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
 >
 >    > ### {% icon comment %} Comment
