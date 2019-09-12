@@ -181,7 +181,7 @@ Here, we'll use the manual filtering method.
 
 Another filtering approach is to identify outliers in the data and remove them. PCA can be run once a SingleCellExperiment object has been normalised, and outliers cells identified based on the pre-computed quality control metrics within the SingleCellExperiment object.
 
-As we are using a rather small, test dataset, it's unlikely that PCA filtering will make any difference, but if you have a larger, noisier dataset this is what you would do:
+As we are using a rather small test dataset, it's unlikely that PCA filtering will make any difference; for a larger, noisier dataset this is what we would perform instead:
 
 > ### {% icon hands_on %} Hands-on: Task description
 > 1. **Scater: filter SCE** {% icon tool %} with the following parameters:
