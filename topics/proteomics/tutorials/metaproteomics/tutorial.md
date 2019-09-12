@@ -20,6 +20,7 @@ contributors:
   - pratikdjagtap
   - jj-umn
   - blankclemens
+  - subinamehta
 ---
 
 # Introduction
@@ -59,16 +60,13 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 > ### {% icon hands_on %} Hands-on: Data upload and organization
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field. You can add multiple links, each on a separate line.
->    > * Press **Start**
->    {: .tip}
+>    {% include snippets/import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -178,7 +176,7 @@ outputs.
 > results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
 > all peptide sequence matching information and can be utilized by compatible downstream
 > software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
-> as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken. 
+> as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
 > More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 {: .comment}
 
@@ -232,14 +230,14 @@ about structure and function of the protein. The UniPept web resource developed
 by Ghent University will be used to match the sample peptides to proteins. UniPept indexes all Uniprot
 proteins and provides a fast matching algorithm for peptides.
 
-> ### {% icon tip %} Tip: Unipept
+> ### {% icon comment %} Unipept
 >
 > Users can access UniPept via a [web page](https://unipept.ugent.be) and paste peptide
 > sequences into the search form to retrieve protein information. But we`ll use the Galaxy
 > *Unipept* tool to automate the process. The *Unipept* tool sends the peptide list to the
 > UniPept REST API service, then transforms the results into datasets that can be further analyzed
 > or operated on within Galaxy.
-{: .tip}
+{: .comment}
 
 #### Recieving the list of peptides: Query Tabular
 
@@ -279,12 +277,12 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **Save the sqlite database in your history**: `Yes`
 >
->        > ### {% icon tip %} Tip
+>        > ### {% icon comment %} Querying SQLite Databases
 >        >
 >        > * **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
 >        > will store the created database in the history, allowing to reuse it directly.
 >        >
->        {: .tip}
+>        {: .comment}
 >
 >    - **SQL Query to generate tabular output**:
 >
@@ -499,7 +497,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Creating your own Gene Ontology list
+> ### {% icon details %} Creating your own Gene Ontology list
 >
 > The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
 > `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
@@ -508,7 +506,7 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 > one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
 >
-{: .tip}
+{: .details}
 
 #### Retrieve GO IDs for peptides: Unipept
 
@@ -678,11 +676,11 @@ With this we have combined all the data into a single database which we can now 
 >    - **SQLite Database**: The created SQLite database from the former step
 >    - **SQL Query**:
 >
->          SELECT go.description, 
+>          SELECT go.description,
 >
->          count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms" 
+>          count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
 >
->          FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN 
+>          FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN
 >
 >          bering_psms ON bering_prot.peptide = bering_psms.sequence
 >
@@ -697,7 +695,7 @@ With this we have combined all the data into a single database which we can now 
 >
 {: .hands_on}
 
-With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides. 
+With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.
 
 > ### {% icon comment %} References
 >

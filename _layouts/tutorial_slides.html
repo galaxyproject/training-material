@@ -11,7 +11,6 @@ layout: base_slides
     {% endif %}
 {% endfor %}
 
-
 ### {% icon question %} Questions
 
 {% for question in page.questions %}
@@ -32,12 +31,24 @@ layout: base_slides
 
 {{ content }}
 
----
 
 {% if page.key_points %}
+---
 ### {% icon keypoints %} Key points
 
 {% for key_point in page.key_points %}
 - {{ key_point }}
 {% endfor %}
+{% endif %}
+
+
+{% if page.follow_up_training %}
+---
+### {% icon curriculum %} Do you want to extend your knowledge? 
+
+
+Follow one of our recommended follow-up trainings:
+
+{% include snippets/display_extra_training_slides.md extra_trainings=page.follow_up_training %}
+
 {% endif %}

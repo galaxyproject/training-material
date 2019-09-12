@@ -22,7 +22,7 @@ def discover_trainings(topics_dir):
             'trainings': {},
         }
 
-        for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')):
+        for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')) + glob.glob(os.path.join(training_dir, 'tutorials', '*', 'slides.html')):
             with open(material, 'r') as handle:
                 material_data = yaml.load_all(handle)
                 material_data = next(material_data)
@@ -48,7 +48,6 @@ def safe_name(server, dashes=True):
 
 def get_badge_path(label, value, color):
     """Return a string representing the expected badge filename. Returns something like 'Training Name|Supported' or 'Training Name|Unsupported'."""
-    print(label, value, color)
     safe_label = label.replace('@', '%40').replace(' ', '%20').replace('-', '--')
     safe_value = value.replace('@', '%40').replace(' ', '%20').replace('-', '--')
     return '%s-%s-%s.svg' % (safe_label, safe_value, color)

@@ -3,11 +3,14 @@ GalaxyP Training material
 
 topic | features
 :-- | :--:
-[Database Handling](tutorials/database-handling.md) | [:book:](tutorials/database-handling.md)
-[Peptide and Protein ID](tutorials/proteinID_SG_PS.md) | [:book:](tutorials/proteinID_SG_PS.md)
-[Protein Quantitation by Stable Isotope Labelling (SIL)](tutorials/proteinQuant_SIL.md) | [:book:](tutorials/proteinQuant_SIL.md)
-[Label-free versus Labelled - How to Choose Your Quantitation Method](tutorials/labelfree_vs_labelled.md)| [:book:](tutorials/labelfree_vs_labelled.md)
+[Database Handling](tutorials/database-handling/tutorial.md) | [:book:](tutorials/database-handling/tutorial.md)
+[Peptide and Protein ID](tutorials/protein-id-sg-ps/tutorial.md) | [:book:](tutorials/protein-id-sg-ps/tutorial.md)
+[Protein Quantitation by Stable Isotope Labelling (SIL)](tutorials/protein-quant-sil/tutorial.md) | [:book:](tutorials/protein-quant-sil/tutorial.md)
+[Label-free versus Labelled - How to Choose Your Quantitation Method](tutorials/labelfree-vs-labelled/tutorial.md)| [:book:](tutorials/labelfree-vs-labelled/tutorial.md)
 [Metaproteomics](tutorials/metaproteomics/tutorial.md)| [:book:](tutorials/metaproteomics/tutorial.md)
+[RNA-seq Database creation](tutorials/proteogenomics-dbcreation/tutorial.md)| [:book:](tutorials/proteogenomics-dbcreation/tutorial.md)
+[Proteogenomics Database searching](tutorials/proteogenomics-dbsearch/tutorial.md)| [:book:](tutorials/proteogenomics-dbsearch/tutorial.md)
+[Proteogenomics Novel Peptide Analysis](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)| [:book:](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
 

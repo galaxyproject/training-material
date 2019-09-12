@@ -28,12 +28,12 @@ contributors:
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
-- Amplicon sequencing, which sequence only the rRNA or ribosomal DNA of organisms
-- Shotgun sequencing, which sequence full genomes of the micro-organisms in the environment
+- Amplicon sequencing, which sequences only the rRNA or ribosomal DNA of organisms
+- Shotgun sequencing, which sequences full genomes of the micro-organisms in the environment
 
-In this tutorial, we will introduce the two types of analyses with the general principles behind and the differences. To go deeper in such analyses, we recommend to check our detailed tutorials on each analysis.
+In this tutorial, we will introduce the two mian types of analyses with their general principles and differences. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis.
 
-For that, we will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions, [see](https://doi.org/10.1186/2049-2618-1-21)).
+We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions, [see](https://doi.org/10.1186/2049-2618-1-21)).
 
 > ### Agenda
 >
@@ -50,10 +50,10 @@ Amplicon sequencing is a highly targeted approach for analyzing genetic variatio
 In the metagenomics fields, amplicon sequencing refers to capture and sequence of rRNA data in a sample.
 It can be 16S for bacteria or archea or 18S for eukaryotes.
 
-> ### {% icon tip %} Background: The 16S ribosomal RNA gene
+> ### {% icon comment %} Background: The 16S ribosomal RNA gene
 > ![The 16S ribosomal RNA gene](../../images/16S_gene.png "The 16S ribosomal RNA gene. Credit: https://www.slideshare.net/beiko/ccbc-tutorial-beiko")
 >
-> The 16S rRNA gene has several properties that make it ideally suited for our purposes
+> The 16S rRNA gene has several properties that make it ideally suited to our purposes
 >
 > 1. Present in all living organisms
 > 2. Highly conserved + highly variable regions
@@ -63,18 +63,18 @@ It can be 16S for bacteria or archea or 18S for eukaryotes.
 >
 > The highly conserved regions make it easy to target the gene across different organisms, while the highly variable regions allow us to distinguish between different species.
 >
-{: .tip}
+{: .comment}
 
-With amplicon data, we can extract from which micro-organisms the sequences in our sample are coming from. This is called taxonomic assignation.
+With amplicon data, we can determine the micro-organisms from which the sequences in our sample are coming from. This is called taxonomic assignation.
 We try to assign sequences to taxons and then classify or extract the taxonomy in our sample.
 
 In this analysis, we will use the [mothur tool suite](https://mothur.org), but only a small portion of its tools and possibilities.
-To learn more in detail how to use, check out the full [mothur tutorial](../mothur-miseq-sop/tutorial.html).
+To learn more in detail about how to use this tool, check out the full [mothur tutorial](../mothur-miseq-sop/tutorial.html).
 
 ## Importing the data
 
-Our datasets comes from a soil samples in two different Argentinian locations, for which the 16S rDNA V4 region
-has been sequenced using 454 GS FLX Titanium. For the tutorial the original fastq data has been down sampled and converted to fasta. The original data are available at EBI Metagenomics under the following run numbers:
+Our datasets come from a soil samples in two different Argentinian locations, for which the 16S rDNA V4 region
+has been sequenced using 454 GS FLX Titanium. For the tutorial, the original fastq data has been down sampled and converted to fasta. The original data are available at EBI Metagenomics under the following run numbers:
 
 - Pampa soil: [SRR531818](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS353016/runs/SRR531818/results/versions/2.0)
 - Anguil soil: [SRR651839](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS386929/runs/SRR651839/results/versions/2.0)
@@ -125,7 +125,7 @@ Project's QC results: https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samp
 
 ### Preparing datasets
 
-We will perform a multisample analysis with mothur, in order to do so, we will merge all reads into a single file,
+We will perform a multisample analysis with mothur. To do this, we will merge all reads into a single file,
 and create a *group file*, indicating which reads belong to which samples.
 
 > ### {% icon hands_on %} Hands-on: Prepare multisample analysis
@@ -137,7 +137,7 @@ and create a *group file*, indicating which reads belong to which samples.
 > 2. **Make.group** {% icon tool %} with the following parameters
 >   - "Method to create group file" to `Manually specify fasta files and group names`
 >   - "Additional": Add two elements to this repeat
->        - Fist element
+>        - First element
 >            - "fasta - Fasta to group" to `SRR531818_pampa` file
 >            - "group - Group name" to `pampa`
 >        - Second element (click on "Insert Additional")
@@ -146,12 +146,12 @@ and create a *group file*, indicating which reads belong to which samples.
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip
+> ### {% icon comment %} Note
 >
 > Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
-{: .tip}
+{: .comment}
 
-Have a look at the group file. It is a very simple file, it contains two columns, first contains the read names, second the group (sample) name, in our case `pampa` or `anguil`.
+Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case `pampa` or `anguil`.
 
 
 ### Optimization of files for computation
@@ -180,7 +180,7 @@ times, we'll unique our sequences using the `Unique.seqs` command:
 >
 {: .hands_on}
 
-This `Unique.seqs` tool outputs two files, one is a fasta file containing only the unique sequences, and a *names files*.
+This `Unique.seqs` tool outputs two files: a fasta file containing only the unique sequences, and a *names file*.
 The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative sequence in the first column.
 
 ```
@@ -208,11 +208,11 @@ The first step in any analysis should be to check and improve the quality of our
 
 > ### {% icon comment %} Comment
 >
-> For more information on the topic of quality control, please see our training materials [here]({{site.baseurl}}/topics/sequence-analysis/).
+> For more information on the topic of quality control, please see our training materials [here]({{site.baseurl}}{% link topics/sequence-analysis/index.md %}).
 {: .comment}
 
 
-First, let's get a feel of our data:
+First, let's get a feel for our data:
 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
@@ -243,7 +243,7 @@ total # of seqs:    20000
 This tells us that we have a total of 19,502 unique sequences, representing 20,000 total sequences that vary in length between 80 and 275 bases. Also, note that at least some of our sequences had some ambiguous base calls.
 Furthermore, at least one read had a homopolymer stretch of 31 bases, this is likely an error so we would like to filter such reads out as well.
 
-If you are thinking that 20,000 is an oddly round number, you are correct, we downsampled the original datasets to 10,000 reads per sample for this tutorial to reduce the amount of time the analysis steps will take.
+If you are thinking that 20,000 is an oddly round number, you are correct; we downsampled the original datasets to 10,000 reads per sample for this tutorial to reduce the amount of time the analysis steps will take.
 
 We can filter our dataset on length, base quality, and maximum homopolymer length using the `Screen.seqs` tool
 
@@ -344,7 +344,7 @@ To make sure that everything overlaps the same region we'll re-run `Screen.seqs`
 > {: .solution }
 {: .question}
 
-Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain external gap characters (*i.e.* "."), while columns containing only internal gap characters (i.e., "-") are not considered. These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
+Now we know our sequences overlap the same alignment coordinates, we want to make sure they *only* overlap that region. So we'll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain external gap characters (*i.e.* "."), while columns containing only internal gap characters (*i.e.*, "-") are not considered. These can be pulled out without losing any information. We'll do all this with `Filter.seqs`:
 
 > ### {% icon hands_on %} Hands-on: Filter sequences
 >
@@ -356,21 +356,21 @@ Now we know our sequences overlap the same alignment coordinates, we want to mak
 
 ## Extraction of taxonomic information
 
-The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in which proportion? What is the structure of the community of the micro-organisms?
+The main questions when analyzing amplicon data are: Which micro-organisms are present in an environmental samples? And in what proportion? What is the structure of the community of the micro-organisms?
 
-The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to define Operational Taxonomic Units (OTUs); groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
+The idea is to take the sequences and assign them to a taxon. To do that, we group (or cluster) sequences based on their similarity to defined Operational Taxonomic Units (OTUs): groups of similar sequences that can be treated as a single "genus" or "species" (depending on the clustering threshold)
 
-> ### {% icon tip %} Background: Operational Taxonomic Units (OTUs)
+> ### {% icon comment %} Background: Operational Taxonomic Units (OTUs)
 >
-> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
+> In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene sequence. Each of these clusters is intended to represent a taxonomic unit of a bacterial species or genus depending on the sequence similarity threshold. Typically, OTU clusters are defined by a 97% identity threshold of the 16S gene sequence variants at genus level. 98% or 99% identity is suggested for species separation.
 >
 > ![OTU and cluster with 97% identity threshold](../../images/otu.png "OTU and cluster with 97% identity threshold")
 >
 > ![OTU graph](../../images/OTU_graph.png "Cladogram of operational taxonomic units (OTUs). Credit: Danzeisen et al. 2013, 10.7717/peerj.237")
 >
-{: .tip}
+{: .comment}
 
-The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance and go from most abundant to least and identify sequences that differ no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
+The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the `Pre.cluster` command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance, then go from most abundant to least and identify sequences that differ by no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:
 
 > ### {% icon hands_on %} Hands-on: Perform preliminary clustering of sequences and remove undesired sequences
 >
@@ -433,8 +433,8 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 You will see that every read now has a classification.
 
-The next step is then to use this information to know the abundance of the different found taxons. This consists of three steps:
-1. first all individual sequences are classified, and get assigned a confidence score (0-100%)
+The next step is to use this information to determine the abundances of the different found taxa. This consists of three steps:
+1. first, all individual sequences are classified, and get assigned a confidence score (0-100%)
 2. next, sequences are grouped at 97% identity threshold (not using taxonomy info)
 3. finally, for each cluster, a consensus classification is determined based on the classification of the individual sequences and taking their confidence scores into account
 
@@ -557,13 +557,13 @@ To further explore the community structure, we can visualize it with dedicated t
 >
 {: .hands_on}
 
-Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison fo diversity between samples, analysis of populations, ... We will not go into detail of such analyses here but you follow our tutorials on amplicon data analyses to learn about them.
+Once we have information about the community structure (OTUs with taxonomic structure), we can do more analysis on it: estimation of the diversity of micro-organism, comparison of diversity between samples, analysis of populations, ... We will not go into detail of such analyses here but you can follow our tutorials on amplicon data analyses to learn more about them.
 
 # Shotgun metagenomics data
 
-In the previous section, we see how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
+In the previous section, we saw how to analyze amplicon data to extract the community structure. Such information can also be extracted from shotgun metagenomic data.
 
-In shotgun data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the genes of the micro-organisms. Using this information, we can try to answer to questions "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
+In shotgun data, full genomes of the micro-organisms in the environment are sequenced (not only the 16S or 18S). We can then have access to the rRNA (only a small part of the genomes), but also to the other genes of the micro-organisms. Using this information, we can try to answer questions such as "What are the micro-organisms doing?" in addition to the question "What micro-organisms are present?".
 
 In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR606451](https://www.ebi.ac.uk/metagenomics/projects/SRP016633/samples/SRS372043/runs/SRR606451/results/versions/2.0)).
 
@@ -584,9 +584,9 @@ In this second part, we will use a metagenomic sample of the Pampas Soil ([SRR60
 
 As for amplicon data, we can extract taxonomic and community structure information from shotgun data. Different approaches can be used:
 
-- Same approaches as for amplicon data with identification and classification of OTUs
+- Same approach as for amplicon data with identification and classification of OTUs
 
-    Such approaches imply a first step of sequence sorting to extract only the 16S and 18S sequences on which the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such an approach is not the most statistically supported
+    Such an approach requires a first step of sequence sorting to extract only the 16S and 18S sequences, then using the same tools as for amplicon data. However, rRNA sequences represent a low proportion (< 1%) of the shotgun sequences so such an approach is not the most statistically supported
 
 - Assignation of taxonomy on the whole sequences using databases with marker genes
 
@@ -652,9 +652,9 @@ Even if the output of MetaPhlAn2 is bit easier to parse than the BIOM file, we w
 
 ## Extraction of functional information
 
-We would like now to answer the question "What are the micro-organisms doing?" or "Which functions are done by the micro-organisms in the environment?".
+We would now like to answer the question "What are the micro-organisms doing?" or "Which functions are performed by the micro-organisms in the environment?".
 
-In the shotgun data, we have access to the gene sequences from the full genome. We use that to identify the genes, associate them to a function, build pathways, etc to investigate the functional part of the community.
+In the shotgun data, we have access to the gene sequences from the full genome. We use that to identify the genes, associate them with a function, build pathways, etc., to investigate the functional part of the community.
 
 > ### {% icon hands_on %} Hands-on: Metabolism function identification
 >
@@ -688,7 +688,7 @@ HUMAnN2 generates 3 files
 
     Gene family abundance is reported in RPK (reads per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.
 
-    "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences.
+    The "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences.
 
 - A file with the coverage of pathways
 
@@ -716,17 +716,17 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 >
 >  > ### {% icon question %} Questions
 >  >
->  > 1. Which percentage of sequences has not be assigned to a gene family?
+>  > 1. What percentage of sequences has not be assigned to a gene family?
 >  > 2. What is the most abundant gene family?
 >  >
 >  > > ### {% icon solution %} Solution
->  > > 1. 55% of the sequences has not be assigned to a gene family
+>  > > 1. 55% of the sequences have not be assigned to a gene family
 >  > > 2. The most abundant gene family with 25% of sequences is a putative secreted protein
 >  > {: .solution }
 >  {: .question}
 {: .hands_on}
 
-With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are done by the micro-organisms in my sample?". We can go further in these analyses (for example with combination of functional and taxonomic results). We did not detail that in this tutorial but you can found more analyses in our tutorials on shotgun metagenomic data analyses.
+With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
 
 # Conclusion
 {:.no_toc}
@@ -737,4 +737,4 @@ We can summarize the analyses with amplicon and shotgun metagenomic data:
 
 Both analyses are quite complex! However, in this tutorial, we only showed simple cases of metagenomics data analysis with subset of real data.
 
-Check our other tutorials to learn more in details how to analyze metagenomics data.
+Check our other tutorials to learn more in detail of how to analyze metagenomics data.

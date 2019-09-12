@@ -23,12 +23,30 @@ contributors:
   - bgruening
 ---
 
+### Preparing Admin Training VMs
+
+If you're falling along on Galaxy Admin Training VMs, you will need to setup Docker.
+
+You can modify your Ansible setup to configure this as described at [bit.ly/gxadmin-docker-playbook](http://bit.ly/gxadmin-docker-playbook).
+
+You will also need to stop Galaxy running on the VM so that you can run Galaxy in a container.
+
+```
+sudo supervisorctl stop galaxy
+```
+
+???
+
+TODO: Remove this slide after the training, it isn't general.
+
+---
+
+
 ### Preparation
 
 ```
-$ docker pull quay.io/bgruening/galaxy:gcc2016
-$ docker pull quay.io/bgruening/galaxy-docs-slurm:gcc2016
-$ git clone -b gcc2016 https://github.com/bgruening/docker-galaxy-stable.git
+$ docker pull bgruening/galaxy-stable:18.05
+$ git clone https://github.com/bgruening/docker-galaxy-stable.git
 ```
 
 ???
@@ -364,7 +382,7 @@ $ docker run -i -t
     -e "GALAXY_CONFIG_BRAND='My own Galaxy flavour'"
     -e "GALAXY_LOGGING=full"
 
-    quay.io/bgruening/galaxy
+    bgruening/galaxy-stable:18.05
 ```
 
 ???
@@ -610,7 +628,7 @@ Need a Dockerfile. I will describe it later. Here it is just to give you a broad
 
 ### {% icon hands_on %} Hands on! (1)
 
-Play with `quay.io/biocontainers/samtools:1.3--1`:
+Play with `quay.io/biocontainers/samtools:1.3--1`
 
 1. Get the image
 2. Launch `samtools` container interactively
@@ -624,10 +642,10 @@ Play with `quay.io/biocontainers/samtools:1.3--1`:
 
 ### {% icon hands_on %} Hands on! (2)
 
-Play with `quay.io/biocontainers/samtools:1.3--1`:
+Play with `quay.io/biocontainers/samtools:1.3--1`
 
-1. Create locally a `samtool_dir` directory
-2. Launch an interactive container with a volume pointing at `samtool_dir` directory
+1. Create a local `samtool_dir` directory
+2. Launch an interactive container with a volume pointing at the `samtool_dir` directory
   1. Add a [toy sam file](https://raw.githubusercontent.com/samtools/samtools/develop/examples/toy.sam) into the local `samtool_dir` directory
   2. Check if the existence of the file from inside the container
   3. Visualize the content of the toy file with `samtools view` commands
@@ -664,7 +682,7 @@ A text document that contains all the commands a user could call on the command 
 INSTRUCTION arguments
 ```
 
-.footnote[[Best practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)]
+.footnote[[Best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)]
 
 ???
 
@@ -677,6 +695,12 @@ Review of the commands
 ### Dockerfile & Layers
 
 ![](../../images/dockerfile_layers.svg)
+
+---
+
+### But Don't Do it Manually, Use Biocontainers
+
+[Tool Dependencies and Containers]({{ site.baseurl }}{% link topics/dev/tutorials/containers/slides.html %})
 
 ---
 
@@ -697,10 +721,12 @@ A Docker launching a Galaxy instance and
 
 
 ```
-docker run -i -t -p 8080:80 quay.io/bgruening
+docker run -i -t -p 8080:80 bgruening/galaxy-stable:18.05
 ```
 
-https://bgruening.github.io/docker-galaxy-stable/
+Visit your machine on port 8080 to see Galaxy running.
+
+https://github.com/bgruening/docker-galaxy-stable
 
 ---
 
@@ -714,7 +740,6 @@ Launch a Galaxy Docker Container and try to
 - Use export mounts (persistent data)
 - Trouble shooting (logging)
 - Install tools
-- Install visualizations (BioJS)
 - ...
 
 ---
@@ -755,14 +780,11 @@ https://github.com/bgruening/docker-galaxy-stable/tree/dev/docs/Running_jobs_out
 #
 # VERSION       0.1
 
-FROM quay.io/bgruening/galaxy:gcc2016
+FROM bgruening/galaxy-stable:18.05
 
 MAINTAINER Björn A. Grüning, bjoern.gruening@gmail.com
 
 ENV GALAXY_CONFIG_BRAND deepTools
-
-# Install Visualisation
-# RUN install-biojs msa
 
 # Adding the tool definitions to the container
 ADD my_tool_list.yml $GALAXY_ROOT/my_tool_list.yml

@@ -160,7 +160,7 @@ First, your history might contain several false starts or tool runs where the pa
 >    - This will remove them from the workflow.
 {: .hands_on}
 
-> ### {% icon tip %} Tip
+> ### {% icon tip %} Tip: Removing unnecessary steps before creating workflow
 > You can also delete these steps when you are first extracting the workflow from your history, by unchecking them.  However, it is often easier to identify the steps to drop in the workflow view, where connections and dead-ends are more obvious.
 {: .tip}
 

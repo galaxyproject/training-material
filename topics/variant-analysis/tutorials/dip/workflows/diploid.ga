@@ -1,0 +1,511 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "diploid",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "GIAB-Ashkenazim-Trio-hg19.bam"
+        }
+      ],
+      "label": "GIAB-Ashkenazim-Trio-hg19.bam",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 229,
+        "top": 204
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"GIAB-Ashkenazim-Trio-hg19.bam\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "5bbfca3e-68d7-4c87-8976-724ccaab2eb3",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "bc2eeefe-9c1e-4db8-bf4c-83ed024d67a0"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3r.1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "SnpEff Download",
+      "outputs": [
+        {
+          "name": "snpeff_db",
+          "type": "snpeffdb"
+        }
+      ],
+      "position": {
+        "left": 284,
+        "top": 441
+      },
+      "post_job_actions": {
+        "HideDatasetActionsnpeff_db": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "snpeff_db"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3r.1",
+      "tool_shed_repository": {
+        "changeset_revision": "68693743661e",
+        "name": "snpeff",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null, \"genome_version\": \"\\\"GRCh37.75\\\"\", \"__page__\": null}",
+      "tool_version": "4.3r.1",
+      "type": "tool",
+      "uuid": "93d7b415-6b8d-4f8c-a2fc-088d79978086",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "GIAB-Ashkenazim-Trio.tabular"
+        }
+      ],
+      "label": "GIAB-Ashkenazim-Trio.tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 289,
+        "top": 530
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"GIAB-Ashkenazim-Trio.tabular\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "4d40770f-b5f9-464b-b3e5-b99ae836fbf0",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "6f4a6fbd-e2a2-43dc-92ea-b99d4f32a20f"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "reference_source|batchmode|input_bams": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "FreeBayes",
+      "outputs": [
+        {
+          "name": "output_vcf",
+          "type": "vcf"
+        },
+        {
+          "name": "output_failed_alleles_bed",
+          "type": "bed"
+        },
+        {
+          "name": "output_trace",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 456,
+        "top": 194
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput_failed_alleles_bed": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_failed_alleles_bed"
+        },
+        "HideDatasetActionoutput_trace": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_trace"
+        },
+        "HideDatasetActionoutput_vcf": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_vcf"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
+      "tool_shed_repository": {
+        "changeset_revision": "156b60c1530f",
+        "name": "freebayes",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"e58c9a34b83f11e894ff984be1655608\\\"\", \"options_type\": \"{\\\"options_type_selector\\\": \\\"full\\\", \\\"allele_scope\\\": {\\\"__current_case__\\\": 1, \\\"allele_scope_selector\\\": \\\"do_not_set\\\"}, \\\"reporting\\\": {\\\"reporting_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 1}, \\\"genotype_likelihoods\\\": {\\\"__current_case__\\\": 1, \\\"genotype_likelihoods_selector\\\": \\\"do_not_set\\\"}, \\\"O\\\": \\\"false\\\", \\\"population_model\\\": {\\\"population_model_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 1}, \\\"reference_allele\\\": {\\\"reference_allele_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 1}, \\\"optional_inputs\\\": {\\\"optional_inputs_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 1}, \\\"__current_case__\\\": 0, \\\"population_mappability_priors\\\": {\\\"__current_case__\\\": 1, \\\"population_mappability_priors_selector\\\": \\\"do_not_set\\\"}, \\\"input_filters\\\": {\\\"input_filters_selector\\\": \\\"do_not_set\\\", \\\"__current_case__\\\": 1}, \\\"algorithmic_features\\\": {\\\"B\\\": \\\"1000\\\", \\\"report_genotype_likelihood_max\\\": \\\"false\\\", \\\"__current_case__\\\": 0, \\\"algorithmic_features_selector\\\": \\\"set\\\", \\\"H\\\": \\\"false\\\", \\\"j\\\": \\\"false\\\", \\\"D\\\": \\\"0.9\\\", \\\"N\\\": \\\"false\\\", \\\"genotype_qualities\\\": \\\"true\\\", \\\"W\\\": \\\"1,3\\\", \\\"genotyping_max_banddepth\\\": \\\"6\\\", \\\"genotype_variant_threshold\\\": \\\"\\\"}}\", \"reference_source\": \"{\\\"batchmode\\\": {\\\"input_bams\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"processmode\\\": \\\"individual\\\", \\\"__current_case__\\\": 0}, \\\"ref_file\\\": \\\"hg19\\\", \\\"reference_source_selector\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"target_limit_type\": \"{\\\"target_limit_type_selector\\\": \\\"do_not_limit\\\", \\\"__current_case__\\\": 0}\"}",
+      "tool_version": "1.1.0.46-0",
+      "type": "tool",
+      "uuid": "863768c2-7bf3-43a7-94bb-a99f2578b396",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcfallelicprimitives/vcfallelicprimitives/0.0.3",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "output_vcf"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool VcfAllelicPrimitives:",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "VcfAllelicPrimitives:",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "vcf"
+        }
+      ],
+      "position": {
+        "left": 753,
+        "top": 200
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_file1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/vcfallelicprimitives/vcfallelicprimitives/0.0.3",
+      "tool_shed_repository": {
+        "changeset_revision": "f49b23b41a12",
+        "name": "vcfallelicprimitives",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"max_length\": \"\\\"200\\\"\", \"__rerun_remap_job_id__\": null, \"keep_geno\": \"\\\"true\\\"\", \"keep_info\": \"\\\"true\\\"\", \"t_option\": \"\\\"Split primitives\\\"\", \"m_option\": \"\\\"false\\\"\", \"__workflow_invocation_uuid__\": \"\\\"e58c9a34b83f11e894ff984be1655608\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg19.len\\\"\"}",
+      "tool_version": "0.0.3",
+      "type": "tool",
+      "uuid": "c30a6247-3df3-4ea8-af1b-9d4aa007d7d3",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 4,
+          "output_name": "out_file1"
+        },
+        "snpDb|snpeff_db": {
+          "id": 1,
+          "output_name": "snpeff_db"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool SnpEff eff:",
+          "name": "input"
+        },
+        {
+          "description": "runtime parameter for tool SnpEff eff:",
+          "name": "intervals"
+        },
+        {
+          "description": "runtime parameter for tool SnpEff eff:",
+          "name": "snpDb"
+        },
+        {
+          "description": "runtime parameter for tool SnpEff eff:",
+          "name": "transcripts"
+        }
+      ],
+      "label": null,
+      "name": "SnpEff eff:",
+      "outputs": [
+        {
+          "name": "snpeff_output",
+          "type": "vcf"
+        },
+        {
+          "name": "statsFile",
+          "type": "html"
+        },
+        {
+          "name": "csvFile",
+          "type": "csv"
+        }
+      ],
+      "position": {
+        "left": 973,
+        "top": 200
+      },
+      "post_job_actions": {
+        "HideDatasetActioncsvFile": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "csvFile"
+        },
+        "HideDatasetActionsnpeff_output": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "snpeff_output"
+        },
+        "HideDatasetActionstatsFile": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "statsFile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "36dc3690a82c",
+        "name": "snpeff",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"spliceSiteSize\": \"\\\"2\\\"\", \"csvStats\": \"\\\"false\\\"\", \"udLength\": \"\\\"5000\\\"\", \"inputFormat\": \"\\\"vcf\\\"\", \"__page__\": null, \"outputConditional\": \"{\\\"outputFormat\\\": \\\"vcf\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"filterOut\": \"null\", \"noLog\": \"\\\"true\\\"\", \"generate_stats\": \"\\\"true\\\"\", \"spliceRegion\": \"{\\\"__current_case__\\\": 0, \\\"setSpliceRegions\\\": \\\"no\\\"}\", \"chr\": \"\\\"\\\"\", \"intervals\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"annotations\": \"null\", \"snpDb\": \"{\\\"snpeff_db\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"genomeSrc\\\": \\\"history\\\", \\\"reg_section\\\": {\\\"regulation\\\": null}}\", \"offset\": \"\\\"default\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"transcripts\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"filter\": \"{\\\"specificEffects\\\": \\\"no\\\", \\\"__current_case__\\\": 0}\"}",
+      "tool_version": "4.3+T.galaxy1",
+      "type": "tool",
+      "uuid": "9838e69a-7a27-4c06-b880-a42dd16c1ade",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.18.1.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "infile": {
+          "id": 5,
+          "output_name": "snpeff_output"
+        },
+        "ped": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GEMINI load",
+          "name": "ped"
+        },
+        {
+          "description": "runtime parameter for tool GEMINI load",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "GEMINI load",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "gemini.sqlite"
+        }
+      ],
+      "position": {
+        "left": 1193,
+        "top": 200
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutfile": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "outfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.18.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "cf61daf064fe",
+        "name": "gemini_load",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"no_load_genotypes\": \"\\\"false\\\"\", \"skip_cadd\": \"\\\"false\\\"\", \"__page__\": null, \"infostring\": \"\\\"false\\\"\", \"skip_gene_tables\": \"\\\"false\\\"\", \"no_genotypes\": \"\\\"false\\\"\", \"passonly\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"skip_gerp_bp\": \"\\\"false\\\"\", \"annotation_databases\": \"\\\"2018-07-08\\\"\", \"annotation_type\": \"\\\"snpEff\\\"\", \"ped\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/hg19.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.18.1.0",
+      "type": "tool",
+      "uuid": "129b444a-23df-4ee9-8387-02941d96f85b",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_db_info/gemini_db_info/0.18.1.0",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "infile": {
+          "id": 6,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GEMINI db_info",
+          "name": "infile"
+        }
+      ],
+      "label": "GEMINI_db_info",
+      "name": "GEMINI db_info",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1559,
+        "top": 197
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_db_info/gemini_db_info/0.18.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "4c5f4e9b1931",
+        "name": "gemini_db_info",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.18.1.0",
+      "type": "tool",
+      "uuid": "7f7f05f6-00b9-472b-8de9-044dc4feeb8c",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile",
+          "uuid": "7e61f96f-fc5a-436b-8433-dc78b10e5cea"
+        }
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.18.1.0",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "infile": {
+          "id": 6,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GEMINI query",
+          "name": "infile"
+        }
+      ],
+      "label": "GEMINI_query2",
+      "name": "GEMINI query",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1502,
+        "top": 478
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.18.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "5596c2dc4218",
+        "name": "gemini_query",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"show_families\": \"\\\"false\\\"\", \"min_kindreds\": \"\\\"1\\\"\", \"sample_filter\": \"\\\"\\\"\", \"show_samples\": \"\\\"false\\\"\", \"__page__\": null, \"region\": \"\\\"\\\"\", \"gt_filter\": \"\\\"\\\"\", \"family_wise\": \"\\\"false\\\"\", \"q\": \"\\\"SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'\\\"\", \"header\": \"\\\"false\\\"\", \"dgidb\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"in\": \"\\\"all\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.18.1.0",
+      "type": "tool",
+      "uuid": "7e13bb42-cf27-4251-85bb-9f695d711127",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile",
+          "uuid": "2ff2734e-c1c6-448b-95eb-e3f47329bc65"
+        }
+      ]
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.18.1.0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "infile": {
+          "id": 6,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool GEMINI query",
+          "name": "infile"
+        }
+      ],
+      "label": "GEMINI_query1",
+      "name": "GEMINI query",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1598,
+        "top": 334
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.18.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "5596c2dc4218",
+        "name": "gemini_query",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"show_families\": \"\\\"false\\\"\", \"min_kindreds\": \"\\\"1\\\"\", \"sample_filter\": \"\\\"\\\"\", \"show_samples\": \"\\\"false\\\"\", \"__page__\": null, \"region\": \"\\\"\\\"\", \"gt_filter\": \"\\\"\\\"\", \"family_wise\": \"\\\"false\\\"\", \"q\": \"\\\"SELECT count(*) FROM variants WHERE in_dbsnp == 0\\\"\", \"header\": \"\\\"false\\\"\", \"dgidb\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"in\": \"\\\"all\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.18.1.0",
+      "type": "tool",
+      "uuid": "00092a96-787b-444b-9b64-fe096588368b",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile",
+          "uuid": "2522c327-28ec-4e30-ac5f-cd751769e5ac"
+        }
+      ]
+    }
+  },
+  "tags": [],
+  "uuid": "896250a3-e3b6-4094-8430-53ea4ffe1d28"
+}

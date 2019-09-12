@@ -37,12 +37,11 @@ To generate the PDFs, a command `make pdf` is given. This command:
 
 > ### {% icon hands_on %} Hands-on: Checking the website generation locally
 >
-> 1. (If not done) Activate the conda environment: `source activate galaxy_training_material`
-> 2. Install Chrome
+> 1. Install Chrome
 >    - For OSX, install the [Chrome browser]()
->    - For Ubuntu, follow [these instructions]()
-> 1. Generate the PDFs: `make pdf`
-> 2. Check the generated PDFs in `_pdf` folder
+>    - For Ubuntu, follow [these instructions](https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186)
+> 2. Generate the PDFs: `make pdf`
+> 3. Check the generated PDFs in `_pdf` folder
 {: .hands_on}
 
 # Conclusion

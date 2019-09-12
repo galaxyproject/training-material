@@ -259,7 +259,7 @@ To make your webhook appealing you can also add custom CSS which you can use in 
 {: .hands_on}
 
 
-Please make sure you have activated webhooks in your `config/galaxy.ini` file by setting the `webhooks_dir` to the path in which your `phdcomics` folder is located.
+Please make sure you have activated webhooks in your `config/galaxy.yml` file by setting the `webhooks_dir` to the path in which your `phdcomics` folder is located.
 
 > ### {% icon hands_on %} Hands-on
 >
