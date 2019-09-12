@@ -160,7 +160,7 @@ First, your history might contain several false starts or tool runs where the pa
 >    - This will remove them from the workflow.
 {: .hands_on}
 
-> ### {% icon tip %} Tip
+> ### {% icon tip %} Tip: Removing unnecessary steps before creating workflow
 > You can also delete these steps when you are first extracting the workflow from your history, by unchecking them.  However, it is often easier to identify the steps to drop in the workflow view, where connections and dead-ends are more obvious.
 {: .tip}
 
@@ -182,7 +182,7 @@ Now that our edits are done, let's save our work and run the workflow.
 
 > ### {% icon hands_on %} Hands-on: Save the workflow edits
 >
->  1. *Click* on the **gear icon** at the top right of the center panel, *select* **Save** from the pull-down menu.
+>  1. *Click* on the **gear icon** at the top right of the central panel, *select* **Save** from the pull-down menu.
 {: .hands_on}
 
 

@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Reference-based RNAseq data analysis (long)"
 zenodo_link: ""
+enable: false
 questions:
   - "How to perform analysis of RNAseq data when reference genome is available?"
 objectives:

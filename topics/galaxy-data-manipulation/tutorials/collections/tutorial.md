@@ -3,11 +3,12 @@ layout: tutorial_hands_on
 
 title: "Collections: Using dataset collection"
 zenodo_link: ""
+level: Intermediate
 questions:
   - "How to manipulate large numbers of datasets at once?"
 objectives:
   - "Understand and master dataset collections"
-time_estimation: "30 min"
+time_estimation: "30m"
 key_points:
   - "Jobs running on data collections use the same settings for each dataset in the collection."
   - "For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset."
@@ -20,7 +21,7 @@ contributors:
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
 # Getting data
-[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a history containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
+[Here](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) is a library containing a few datasets we will be practicing with (as with any Galaxy tutorial, you can upload your own data and play with it instead of the provided datasets):
 
 - `M117-bl_1` - family 117, mother, 1-st (**F**) read from **blood**
 - `M117-bl_2` - family 117, mother, 2-nd (**R**) read from **blood**
@@ -98,7 +99,7 @@ By now we see that a collection can be used to bundle a large number of items in
 ![bwa_mem_collection_readGroups](../../images/bwa_mem_collection_readGroups.png)
 {: .img-responsive}
 
-In the middle pane, provide the following parameters for `Map with BWA-MEM`:
+In the central panel, provide the following parameters for `Map with BWA-MEM`:
 
 - set **Using reference genome** to `hg38` (red outline);
 - set **Single or Paired-end reads** to `Paired collection` (blue outline);
@@ -194,4 +195,4 @@ The history described in this page is accessible directly from here:
 From there you can import histories to make them your own.
 
 ## If things don't work...
-...you need to complain. Use [Galaxy's BioStar Channel](https://usegalaxy.org/biostar/biostar_redirect) to do this.
+...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.

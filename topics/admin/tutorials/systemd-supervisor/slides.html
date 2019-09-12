@@ -1,0 +1,142 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: "Controlling Galaxy with Supervisor"
+contributors:
+  - natefoo
+---
+
+class: special
+
+# Supervisor
+
+.footnote[\#usegalaxy / @galaxyproject]
+
+---
+# Supervisor
+
+A process manager written in Python
+
+- `supervisord` daemon
+  - Privileged or unprivileged
+- `supervisorctl` command line interface
+- INI config format
+- `[program:x]` defines a program to control
+
+---
+class: smaller
+# Supervisor - supervisorctl
+
+```console
+$ supervisorctl help
+
+default commands (type help <topic>):
+=====================================
+add    clear  fg        open  quit    remove  restart   start   stop  update
+avail  exit   maintail  pid   reload  reread  shutdown  status  tail  version
+
+$ supervisorctl status
+galaxy_main:handler0             RUNNING    pid 30554, uptime 7 days, 23:15:11
+galaxy_main:handler1             RUNNING    pid 30555, uptime 7 days, 23:15:11
+galaxy_main:handler2             RUNNING    pid 30556, uptime 7 days, 23:15:10
+galaxy_main:impersonate          RUNNING    pid 30567, uptime 7 days, 23:15:08
+galaxy_main:installer            RUNNING    pid 30574, uptime 7 days, 23:15:07
+galaxy_main:reports              RUNNING    pid 30563, uptime 7 days, 23:15:09
+galaxy_main_supervisord          RUNNING    pid 2108, uptime 8 days, 6:43:54
+galaxy_main_uwsgi                RUNNING    pid 3568, uptime 8 days, 6:39:07
+nginx                            RUNNING    pid 1917, uptime 8 days, 6:44:21
+proftpd                          RUNNING    pid 1916, uptime 8 days, 6:44:21
+```
+
+---
+# Supervisor - program
+
+A config for running a Galaxy server under uWSGI has been installed at `/etc/supervisor/conf.d/galaxy.conf`:
+
+```ini
+[program:galaxy]
+command         = uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.yml
+directory       = /srv/galaxy/server
+autostart       = true
+autorestart     = true
+startsecs       = 10
+user            = galaxy
+stopsignal      = INT
+```
+
+---
+class: special
+
+# Systemd
+
+The current Linux init system
+- Used to bootstrap the user space and to manage system processes after booting
+
+.footnote[\#usegalaxy / @galaxyproject]
+
+---
+# Systemd
+
+Replaces:
+- `/etc/init.d/*`, `/etc/rc?.d`
+- `service` command
+- Upstart
+- `update-rc.d`
+
+INI config format
+
+---
+# Systemd - Layout
+
+- `/lib/systemd/system` - System service definitions
+- `/etc/systemd/system` - User-defined service definitions
+
+---
+class: smaller
+# Systemd - Service file
+
+```ini
+[Unit]
+Description=Supervisor process control system for UNIX
+Documentation=http://supervisord.org
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
+ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
+KillMode=process
+Restart=on-failure
+RestartSec=50s
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+# Systemd - systemctl
+
+`systemctl` is the command line interface to systemd
+
+- `systemctl <start|stop|restart|...> <name>[.service]`
+- `systemctl <enable|disable> <name>[.service]`
+
+---
+# Systemd + supervisor
+
+Ensure that systemd is configured to start supervisor with:
+
+```console
+$ systemctl status supervisor
+● supervisor.service - Supervisor process control system for UNIX
+   Loaded: loaded (/lib/systemd/system/supervisor.service; enabled)
+   Active: active (running) since Mon 2016-10-10 14:19:34 EDT; 3 weeks 3 days ago
+ Main PID: 481 (supervisord)
+   CGroup: /system.slice/supervisor.service
+           ├─  481 /usr/bin/python /usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
+           ├─ 6264 /usr/bin/uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.yml
+           ├─ 6268 /usr/bin/uwsgi --plugin python --virtualenv /srv/galaxy/server/.venv --ini-paste /srv/galaxy/server/galaxy.yml
+           ├─10109 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.yml --server-name=handler0
+           └─10142 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.yml --server-name=handler1
+```

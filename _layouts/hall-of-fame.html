@@ -3,6 +3,7 @@ layout: base
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign stories = site.pages | where:"layout", "training_philosophy" %}
 
 
 {% include _includes/default-header.html %}
@@ -31,8 +32,23 @@ layout: base
                     {% endif %}
 
                     <div class="name">
-                        {{ contributors[username].name }}
+                        {{ contributors[username].name | default: username }}
                     </div>
+
+                    {% assign has_philosophy = false %}
+                    {% for story in stories %}
+                        {% if story.username == username %}
+                            {% assign has_philosophy = true %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if has_philosophy %}
+                    <div class="contact-items">
+                        <a href="{{ site.baseurl }}/topics/instructors/philosophies/#{{ username }}">
+                            Training Philosophy
+                        </a>
+                    </div>
+                    {% endif %}
 
                     <div class="contact-items">
                         {% if contributors[username].github != false %}

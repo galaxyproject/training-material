@@ -1,0 +1,357 @@
+{
+  "uuid": "aba1249f-5872-40a5-8da6-52e900eca3bb",
+  "tags": [],
+  "format-version": "0.1",
+  "name": "RNA-seq counts to genes",
+  "version": 5,
+  "steps": {
+    "0": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [],
+      "input_connections": {},
+      "tool_state": "{\"name\": \"seqdata\"}",
+      "id": 0,
+      "uuid": "8424dc54-041c-4fd4-880a-bc9d97fff0b0",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "seqdata",
+      "inputs": [
+        {
+          "name": "seqdata",
+          "description": ""
+        }
+      ],
+      "position": {
+        "top": 199.9921875,
+        "left": 199.9921875
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "1": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [],
+      "input_connections": {},
+      "tool_state": "{\"name\": \"sampleinfo\"}",
+      "id": 1,
+      "uuid": "7f07c2d1-5ae3-4992-85e4-040a96852d22",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "sampleinfo",
+      "inputs": [
+        {
+          "name": "sampleinfo",
+          "description": ""
+        }
+      ],
+      "position": {
+        "top": 290.015625,
+        "left": 199.9921875
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "2": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+      "tool_version": "1.1.0",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input": {
+          "output_name": "output",
+          "id": 0
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cut_type_options\": \"{\\\"__current_case__\\\": 0, \\\"cut_element\\\": \\\"-f\\\", \\\"list\\\": \\\"2\\\"}\", \"delimiter\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"complement\": \"\\\"--complement\\\"\"}",
+      "id": 2,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "74a8bef53a00",
+        "name": "text_processing",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "80063b4d-14eb-4236-aed1-ce047366ab1b",
+      "errors": null,
+      "name": "Cut",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input",
+          "description": "runtime parameter for tool Cut"
+        }
+      ],
+      "position": {
+        "top": 199.9921875,
+        "left": 458.015625
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+      "type": "tool"
+    },
+    "3": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1",
+      "tool_version": "1.0.1",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "out_file1"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input1": {
+          "output_name": "output",
+          "id": 1
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"col2\": \"\\\"4\\\"\", \"col1\": \"\\\"3\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"columns\": \"[]\"}",
+      "id": 3,
+      "tool_shed_repository": {
+        "owner": "devteam",
+        "changeset_revision": "f2aac0c5c60d",
+        "name": "merge_cols",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "1adf68f9-1698-42db-a5d2-6dc5895f462e",
+      "errors": null,
+      "name": "Merge Columns",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input1",
+          "description": "runtime parameter for tool Merge Columns"
+        }
+      ],
+      "position": {
+        "top": 320.015625,
+        "left": 458.015625
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1",
+      "type": "tool"
+    },
+    "4": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.1",
+      "tool_version": "1.1.1",
+      "outputs": [
+        {
+          "type": "input",
+          "name": "outfile"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "infile": {
+          "output_name": "output",
+          "id": 2
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"find_pattern\": \"\\\"_B[A-Z0-9_]+\\\"\", \"replace_pattern\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/mm10.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "id": 4,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "74a8bef53a00",
+        "name": "text_processing",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "a30e4b8e-e8f7-4a56-aa6b-d07a27eddaae",
+      "errors": null,
+      "name": "Replace Text",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "infile",
+          "description": "runtime parameter for tool Replace Text"
+        }
+      ],
+      "position": {
+        "top": 199.9921875,
+        "left": 716.0625
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.1",
+      "type": "tool"
+    },
+    "5": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+      "tool_version": "1.1.0",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "output"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input": {
+          "output_name": "out_file1",
+          "id": 3
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cut_type_options\": \"{\\\"__current_case__\\\": 0, \\\"cut_element\\\": \\\"-f\\\", \\\"list\\\": \\\"2,5\\\"}\", \"delimiter\": \"\\\"\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"complement\": \"\\\"\\\"\"}",
+      "id": 5,
+      "tool_shed_repository": {
+        "owner": "bgruening",
+        "changeset_revision": "74a8bef53a00",
+        "name": "text_processing",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "a3c14850-801a-43bf-85e6-83da17da18b6",
+      "errors": null,
+      "name": "Cut",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input",
+          "description": "runtime parameter for tool Cut"
+        }
+      ],
+      "position": {
+        "top": 320.015625,
+        "left": 716.0625
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+      "type": "tool"
+    },
+    "6": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.5.0.1",
+      "tool_version": "3.5.0.1",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "out_tab"
+        },
+        {
+          "type": "txt",
+          "name": "out_rscript"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "id_file": {
+          "output_name": "outfile",
+          "id": 4
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"rscriptOpt\": \"\\\"false\\\"\", \"id_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"organism\": \"\\\"Mm\\\"\", \"__rerun_remap_job_id__\": null, \"file_has_header\": \"\\\"true\\\"\", \"id_type\": \"\\\"ENTREZID\\\"\", \"output_cols\": \"[\\\"ENTREZID\\\", \\\"SYMBOL\\\", \\\"GENENAME\\\"]\", \"remove_dups\": \"\\\"false\\\"\"}",
+      "id": 6,
+      "tool_shed_repository": {
+        "owner": "iuc",
+        "changeset_revision": "9ab35a2245ce",
+        "name": "annotatemyids",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "7db95416-74db-4faf-b1dd-53463fa804d1",
+      "errors": null,
+      "name": "annotateMyIDs",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "id_file",
+          "description": "runtime parameter for tool annotateMyIDs"
+        }
+      ],
+      "position": {
+        "top": 199.9921875,
+        "left": 974.0859375
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.5.0.1",
+      "type": "tool"
+    },
+    "7": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/limma_voom/limma_voom/3.34.9.9",
+      "tool_version": "3.34.9.9",
+      "outputs": [
+        {
+          "type": "input",
+          "name": "outTables"
+        },
+        {
+          "type": "html",
+          "name": "outReport"
+        },
+        {
+          "type": "tabular",
+          "name": "outFilt"
+        },
+        {
+          "type": "tabular",
+          "name": "outNorm"
+        },
+        {
+          "type": "txt",
+          "name": "rscript"
+        },
+        {
+          "type": "tabular",
+          "name": "libinfo"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input|counts": {
+          "output_name": "outfile",
+          "id": 4
+        },
+        "anno|geneanno": {
+          "output_name": "out_tab",
+          "id": 6
+        },
+        "input|fact|finfo": {
+          "output_name": "output",
+          "id": 5
+        }
+      },
+      "tool_state": "{\"adv\": \"{\\\"lfc\\\": \\\"0.58\\\", \\\"normalisationOption\\\": \\\"TMM\\\", \\\"pAdjust\\\": \\\"BH\\\", \\\"pVal\\\": \\\"0.01\\\", \\\"robOption\\\": \\\"true\\\", \\\"topgenes\\\": \\\"10\\\", \\\"treat\\\": \\\"true\\\"}\", \"__page__\": null, \"deMethod\": \"{\\\"__current_case__\\\": 0, \\\"de_select\\\": \\\"voom\\\", \\\"weightOption\\\": \\\"false\\\"}\", \"f\": \"{\\\"filt\\\": {\\\"__current_case__\\\": 0, \\\"cformat\\\": {\\\"__current_case__\\\": 0, \\\"cpmReq\\\": \\\"0.5\\\", \\\"cpmSampleReq\\\": \\\"2\\\", \\\"format_select\\\": \\\"cpm\\\"}, \\\"filt_select\\\": \\\"yes\\\"}}\", \"__rerun_remap_job_id__\": null, \"anno\": \"{\\\"__current_case__\\\": 0, \\\"annoOpt\\\": \\\"yes\\\", \\\"geneanno\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"rep_contrast\": \"[{\\\"__index__\\\": 0, \\\"contrast\\\": \\\"basalpregnant-basallactate\\\"}, {\\\"__index__\\\": 1, \\\"contrast\\\": \\\"luminalpregnant-luminallactate\\\"}]\", \"input\": \"{\\\"__current_case__\\\": 1, \\\"counts\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"fact\\\": {\\\"__current_case__\\\": 0, \\\"ffile\\\": \\\"yes\\\", \\\"finfo\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, \\\"format\\\": \\\"matrix\\\"}\", \"out\": \"{\\\"filtCounts\\\": \\\"false\\\", \\\"libinfo\\\": \\\"true\\\", \\\"normCounts\\\": \\\"false\\\", \\\"plots\\\": [\\\"d\\\", \\\"c\\\", \\\"b\\\", \\\"x\\\", \\\"m\\\", \\\"h\\\", \\\"s\\\"], \\\"rdaOption\\\": \\\"false\\\", \\\"rscript\\\": \\\"false\\\"}\"}",
+      "id": 7,
+      "tool_shed_repository": {
+        "owner": "iuc",
+        "changeset_revision": "d5a940112511",
+        "name": "limma_voom",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "bc253fec-4869-467a-a324-96a825e229a0",
+      "errors": null,
+      "name": "limma",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "anno",
+          "description": "runtime parameter for tool limma"
+        },
+        {
+          "name": "input",
+          "description": "runtime parameter for tool limma"
+        }
+      ],
+      "position": {
+        "top": 199.9921875,
+        "left": 1231.125
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/limma_voom/limma_voom/3.34.9.9",
+      "type": "tool"
+    }
+  },
+  "annotation": "",
+  "a_galaxy_workflow": "true"
+}
