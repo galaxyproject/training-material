@@ -1,28 +1,20 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
-zenodo_link: ''
+title: "InterMine integration with Galaxy"
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+    - How to export your query results from your InterMine of choice to Galaxy?
+    - How to export your data sets from Galaxy to your InterMine of choice?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+    - Learn how to import/export data from/to InterMine instances
+    - Understand the InterMine Interchange Dataset
+time_estimation: 1h
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+    - TODO
 contributors:
-- contributor1
-- contributor2
-
+    - danielabutano
+    - yochannah
 ---
-
 
 # Introduction
 {:.no_toc}
@@ -60,17 +52,26 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Import data from InterMine
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+> ### {% icon hands_on %} Hands-on: Import
+> 1. Search Galaxy for “InterMine” (not case sensitive; “intermine” is fine too), and click on “InterMine Server” under “Get Data”.
+> 2. This will redirect you to the InterMine registry, which shows a full list of InterMines and the various organisms they support. Find an InterMine that has the organism type you’re working with, and > > click on it to redirect to that InterMine
+> 3. Once you arrive at your InterMine of choice, run a query as normal - this could be a search, a list results page, a template, or a query in the query builder. Eventually you’ll be presented with an > > InterMine results table.
+> 4. Click on Export (top right). This will bring up a modal window.
+> 5. Select “Send to Galaxy” and double-check the Galaxy Location is correct.
+> 6. Click on the “Send to Galaxy” button on the bottom right of the pop-up window.
+>
+>    > ### {% icon comment %} Allow popups
+>    >
+>    > If you get an error when you click on the “Send to Galaxy” button, please make sure to allow popups and try again.
+>    {: .comment}
+>
+{: .hands_on}
+You have now exported your query results from InterMine to Galaxy.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
 
-# Hands-on Sections
+# Export data into InterMine
 Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
 as breaking the tutorial into sections, we encourage you to make such changes as you
@@ -78,8 +79,6 @@ see fit, this is just a starting point :)
 
 Anywhere you find the word "***TODO***", there is something that needs to be changed
 depending on the specifics of your tutorial.
-
-have fun!
 
 ## Get data
 
@@ -109,27 +108,7 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Create InterMine Interchange**
+## Create InterMine Interchange
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -165,7 +144,7 @@ A big step can have several subsections or sub steps:
 {: .question}
 
 
-## Re-arrange
+## Send data to InterMine
 
 To create the template, each step of the workflow had its own subsection.
 
