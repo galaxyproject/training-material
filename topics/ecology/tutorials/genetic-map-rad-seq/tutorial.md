@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: "RAD-Seq to construct genetic maps"
 zenodo_link: "https://doi.org/10.5281/zenodo.1219888"
+tags:
+  - RAD-seq
 questions:
   - "How to analyze RAD sequencing data for a genetic map study?"
 objectives:
