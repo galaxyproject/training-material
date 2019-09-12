@@ -43,7 +43,7 @@ A number of factors should be examined before downstream analyses, many of which
 
 - **Batch effect**: Large scRNA-seq projects usually need to generate data across multiple batches due to logistical constraints. However, the processing of different batches is often subject to variation, e.g., changes in operator, differences in reagent quality and concentration, the sequencing machine used, etc. This results in systematic differences in the observed expression in cells from different batches, which we refer to as “batch effects”. Batch effects are problematic as they can be major drivers of variation in the data, masking the relevant biological differences and complicating interpretation of the results.
 
-We will use *scater* ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that your filtering has worked. You'll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.
+We will use *scater* ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scRNA-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that filtering has worked. We'll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.
 
 
 > ### Agenda
@@ -81,12 +81,12 @@ We will use a pre-calculated expression matrix, along with some additional metad
 >
 {: .hands_on}
 
-# Visualise your data
+# Visualise the data
 
 Take a look at the uploaded data by clicking on the {% icon galaxy-eye %} symbol for each dataset.
 
 - The `counts.txt` file is a 40-sample expression matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of reads mapped to each gene/sample.
-- `annotation.txt` is a file listing experimentalinformation about each cell. Parmeters here include `Mutation_Status`, `Cell_Cycle`, and `Treatment`. These will be useful for looking at  batch effects later.
+- `annotation.txt` is a file listing experimental information about each cell. Parameters here include `Mutation_Status`, `Cell_Cycle`, and `Treatment`. These will be useful for looking at  batch effects later.
 - The `mt_controls.txt` file is a list of mitochondrial genes. This list will be used later to calculate the % of mitochondrial reads in each sequencing library.
 
 
@@ -116,12 +116,12 @@ Next, lets take a look at the data by plotting various properties to see what ou
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > There are four plots, two distribution bar plots and two scatter plots. The first distribution plot is the number of reads in each library (from a single cell). The second plot is the distribution of 'feature counts' per cell. Feature counts in this case refers to the number of genes expressed in each cell. The third plot 'Scatterplot of reads vs genes' is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. The final scatterplot is the '% MT genes', which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
+>    > There are four plots, two distribution bar plots and two scatter plots. The first distribution plot is the number of reads in each library (from a single cell). The second plot is the distribution of *feature counts* per cell. Feature counts in this case refers to the number of genes expressed in each cell. The third plot **Scatterplot of reads vs genes** is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. The final scatterplot is the **% MT genes**, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
 >    > Let's look at each plot in turn and see what it tells us.
->    > - 'Read counts'. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn't want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).
->    > - 'Feature counts'. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (<600), then followed by a more even distribution.
->    > - 'Scatterplot of reads vs genes'. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.
->    > - '% MT genes'. You can see from the plot that there are a few cells outside the main 'cloud' of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%
+>    > - **Read counts**. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn't want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).
+>    > - **Feature counts**. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (<600), then followed by a more even distribution.
+>    > - **Scatterplot of reads vs genes**. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.
+>    > - **% MT genes**. You can see from the plot that there are a few cells outside the main "cloud" of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%
 >    {: .comment}
 >
 {: .hands_on}
@@ -130,7 +130,7 @@ Next, lets take a look at the data by plotting various properties to see what ou
 
 ## Manual filtering
 
-In the **Scater: filter SCE** Galaxy tool there are two filtering methods available. First, there's an 'automatic' filtering method that uses PCA to identify outliers cells and remove them from the data. This is particularly useful for very large datasets (hundreds of samples). Second, there's a manual filtering method where users can put a range of filtering parameters, informed by the previous plotting tool.
+In the **Scater: filter SCE** Galaxy tool there are two filtering methods available. First, there's an "automatic" filtering method that uses PCA to identify outliers cells and remove them from the data. This is particularly useful for very large datasets (hundreds of samples). Second, there's a manual filtering method where users can put a range of filtering parameters, informed by the previous plotting tool.
 Here, we'll use the manual filtering method.
 
 > ### {% icon hands_on %} Hands-on: Filtering with scater
@@ -146,10 +146,10 @@ Here, we'll use the manual filtering method.
 >    > ### {% icon comment %} Comment
 >    >
 >    > Let's have a look at the parameters and their value:
->    > 1. 'Number of reads mapped to a gene for it to be counted as expressed': by default, only one read needs to be mapped to a gene for it to be counted as 'expressed'. We can be a little bit more stringent here and increase the number of reads that need to be mapped to a gene for it to be categorised as 'expressed'.
->    > 2. 'Minimum library size (mapped reads) to filter cells on': This value asks how many mapped reads from each cell do you require to be mapped to your genome to be included in downstream analysis. We can see from our plots that we have a few cells that have less than 200,000 reads. 200,000 can still be quite a lot of reads (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.
->    > 3. 'Minimum number of expressed genes': You can see that some cells only express a few hundred genes, so we'll remove these cells also.
->    > 4. 'Maximum % of mitochondrial genes expressed per cell'. You can see that as well as having one obvious outlier (~37%).
+>    > 1. *"Number of reads mapped to a gene for it to be counted as expressed"*: by default, only one read needs to be mapped to a gene for it to be counted as "expressed". We can be a little bit more stringent here and increase the number of reads that need to be mapped to a gene for it to be categorised as "expressed".
+>    > 2. *"Minimum library size (mapped reads) to filter cells on"*: This value asks how many mapped reads from each cell do you require to be mapped to your genome to be included in downstream analysis. We can see from our plots that we have a few cells that have less than 200,000 reads. 200,000 can still be quite a lot of reads (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.
+>    > 3. *"Minimum number of expressed genes"*: You can see that some cells only express a few hundred genes, so we'll remove these cells also.
+>    > 4. *"Maximum % of mitochondrial genes expressed per cell"*. You can see that as well as having one obvious outlier (~37%).
 >    {: .comment}
 >
 {: .hands_on}
@@ -190,7 +190,7 @@ As we are using a rather small test dataset, it's unlikely that PCA filtering wi
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Your data will be normalised and then PCA ran on it using the following information from your data:
+>    > The data will be normalised and then PCA ran on it using the following information from the data:
 >    > * `pct_counts_top_100_features`
 >    > * `total_features_by_counts`
 >    > * `pct_counts_feature_control`
@@ -198,12 +198,12 @@ As we are using a rather small test dataset, it's unlikely that PCA filtering wi
 >    > * `log10_total_counts_endogenous`
 >    > * `log10_total_counts_feature_control`
 >    >
->    > When using these filtering approaches, it's probably best to use them the opposite way round - try PCA filtering first and then if that doesn't remove enough low-quality cells then use the manual filtering. You could actually pipeline them together - use PCA filtering first and then use the output of that to do further manual filtering.
+>    > When using these filtering approaches, it's probably best to use them the opposite way round - try PCA filtering first and then if that doesn't remove enough low-quality cells then use the manual filtering. We could actually pipeline them together - use PCA filtering first and then use the output of that to do further manual filtering.
 >    {: .comment}
 >
 {: .hands_on}
 
-As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong 'batch effects' can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.
+As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.
 
 > ### {% icon hands_on %} Hands-on: PCA plot
 > 1. **Scater: PCA plot** {% icon tool %} with the following parameters:
@@ -223,7 +223,7 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We can see that the 'S' and 'G2M' categories in Cell\_Cycle cluster away from the rest of the data. Spend some time thinking about whether this might be a batch effect or biologically significant.
+> > 1. We can see that the **S** and **G2M** categories in **Cell\_Cycle** cluster away from the rest of the data. Spend some time thinking about whether this might be a batch effect or biologically significant.
 > >
 > {: .solution}
 >
