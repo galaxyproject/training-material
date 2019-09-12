@@ -4,9 +4,7 @@ layout: tutorial_hands_on
 title: Annotating a protein list identified by LC-MS/MS experiments
 
 zenodo_link:
-- 'https://zenodo.org/record/2650868'
-- 'https://zenodo.org/record/2650874'
-- 'https://zenodo.org/record/2650872'
+- 'https://zenodo.org/record/3405119'
 
 questions:
 - How to filter out technical contaminants?
@@ -16,7 +14,9 @@ questions:
 - How to compare your proteome with other studies?
 objectives:
 - Execute a complete annotation pipeline of a protein list identified by LC-MS/MS experiments
+
 time_estimation: 1H
+
 key_points:
 
 contributors:
@@ -56,11 +56,17 @@ For this tutorial, we will use 3 datasets: the list of proteins identified by LC
 >    [2650874](https://zenodo.org/record/2650874) for {% cite Muccilli2015 %} and [2650872](https://zenodo.org/record/2650872) for
 >    {% cite Bredberg2011 %} with direct links provided below:
 >
->    ```
->    https://zenodo.org/record/2650868/files/Lacombe_et_al_2017_OK.txt
->    https://zenodo.org/record/2650874/files/Mucilli.txt
->    https://zenodo.org/record/2650872/files/Bredberg.txt
->    ```
+>   The datasets are available on Zenodo under the references:
+>   [3405119](https://zenodo.org/record/3405119) for the 3 datasets at once
+>   or one by one with the 3 following zenodo references:
+>   [2650868](https://zenodo.org/record/2650868) for {% cite Lacombe2018 %},
+>   [2650874](https://zenodo.org/record/2650874) for {% cite Muccilli2015 %},
+>   and [2650872](https://zenodo.org/record/2650872) for {% cite Bredberg2011 %}.
+>
+> You can import the 3 data files directly with these links in the galaxy upload menu :
+>
+> https://zenodo.org/record/3405119/files
+>
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -100,7 +106,7 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` (output of **Build tissue-specific expression dataset** {% icon tool %})
+>        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` (output of **Filter by keywords and/or numerical value** {% icon tool %})
 >    - *"Does file contain header"*: `Yes`
 >    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
