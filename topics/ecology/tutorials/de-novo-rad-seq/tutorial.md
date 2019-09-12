@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: "RAD-Seq de-novo data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
+tags:
+  - RAD-seq
 questions:
   - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
 objectives:
