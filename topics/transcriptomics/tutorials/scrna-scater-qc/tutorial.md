@@ -63,7 +63,7 @@ We will use a pre-calculated expression matrix, along with some additional metad
 ![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow")
 
 
-# Get data
+# Data upload
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
