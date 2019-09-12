@@ -28,18 +28,18 @@ An important goal of Galaxy is scalability. A major bottleneck when it comes to 
 
 
 Galaxy provides an interface such that it can communicate with other servers to get data directly into the Galaxy environment of a user without the need
-of "downloading" the data. In this hands on, we will use the resource from [DoRiNA Server](http://dorina.mdc-berlin.de/) [(Blin et al. 2014, Nucleic Acids Research.)](http://www.ncbi.nlm.nih.gov/pubmed/25416797),
+of "downloading" the data. In this hands on, we will use the resource from [DoRiNA Server](http://dorina.mdc-berlin.de/) ({% cite Blin2014 %}).
 but the main point about this short section is:
 if you have a data source which you think is very important for your research with Galaxy let us know!
 
-{% icon hands_on %} ***Hands on!***
+> ### {% icon hands_on %} Hands on!
+>
+> 1. Create a new history called "doRiNA"
+> 2. Go to Get Data::doRiNA search
+> 3. Choose hg19 from the drop-down list -> Search Database
+> 4. Leave everything as is and choose from the Regulators (set A) drop-down list "hsa-let-7astar-CLASH" -> Search doRiNA
+> 5. Use the "Send to Galaxy" button
+> 6. Notice the new History Item
+{: .hands_on}
 
-1. Create a new history called "doRiNA"
-2. Go to Get Data::doRiNA search
-3. Choose hg19 from the drop-down list -> Search Database
-4. Leave everything as is and choose from the Regulators (set A) drop-down list "hsa-let-7astar-CLASH" -> Search doRiNA
-5. Use the "Send to Galaxy" button
-6. Notice the new History Item
-
-You can see the [tutorial section ](http://dorina.mdc-berlin.de/tutorials) of the DoRiNA website for more detailed examples.
-That was very easy for all of you! If you want your database of choice to be accessible as easy as this **let us know**!
+You can see the [tutorial section ](http://dorina.mdc-berlin.de/tutorials) of the DoRiNA website for more detailed examples. That was very easy for all of you! If you want your database of choice to be accessible as easy as this **let us know**!
