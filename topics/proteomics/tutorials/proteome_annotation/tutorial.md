@@ -30,7 +30,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the following study: [Proteomic characterization of human exhaled breath condensate] {% cite Lacombe2018 %}.
+[ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled "Proteomic characterization of human exhaled breath condensate" {% cite Lacombe2018 %}.
 The goal of this study was to identify proteins secreted in the respiratory tract (lung, bronchi). Samples were obtained non-invasively by condensation of exhaled air that contains submicron droplets of airway lining fluid. Two pooled samples of EBC, each obtained from 10 healthy donors, were processed. Two 'technical' control samples were processed in parallel to the pooled samples to correct for exogenous protein contamination.
 A total of 229 unique proteins were identified in EBC among which 153 proteins were detected in both EBC pooled samples. A detailed bioinformatics analysis of these 153 proteins showed that most of the proteins identified corresponded to proteins secreted in the respiratory tract (lung, bronchi).
 
@@ -78,12 +78,11 @@ A group of 10 proteins were identified in both “technical” control samples w
 >      - *"Column number on which to apply the filter"*: `c1`
 >      - *"Search for exact match ?"*: `No`
 >      - *"Enter keywords"*: `copy/paste`
->      - *"Copy/paste keywords to find"*: `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
+>        - *"Copy/paste keywords to find"*: `P04264 P35908 P13645 Q5D862 Q5T749 Q8IW75 P81605 P22531 P59666 P78386`
 >
 >    > ### {% icon comment %} Outputs
 >    > - **Filtered_Lacombe_et_al_2017.txt - Discarded_lines**: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)
 >    > - **Filtered_Lacombe_et_al_2017.txt**: output contains the remaining proteins that will be considered for further analysis (151 proteins)
->    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -97,17 +96,16 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` (output of **Filter by keywords and/or numerical value** {% icon tool %})
->    - *"Does file contain header"*: `Yes`
+>        - {% icon param-file %} *"Select your file"*: `Filtered_Lacombe_et_al_2017.txt` output from **Filter by keywords** {% icon tool %}
 >    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
 >        - *"Type/source of IDs"*: `Uniprot accession number (e.g. P31946)`
->        - In *"Target type"*:
->            - *"Target type of IDs you would like to map to"*: `Ensembl gene ID (e.g. ENSG00000166913)`
+>        - *"Target type of IDs you would like to map to"*:
+>          - {% icon param-check %} `Ensembl gene ID (e.g. ENSG00000166913)`
 >
 >    > ### {% icon comment %} Output
 >    >
->    > - In the output file, a new column which contains Ensembl IDs was added (at the end)
+>    > In the output file, a new column which contains Ensembl IDs was added (at the end)
 >    {: .comment}
 {: .hands_on}
 
@@ -115,52 +113,57 @@ As EBC samples are obtained from air exhaled through the oral cavity, and even t
 > ### {% icon hands_on %} Hands-on: Check for proteins highly expressed in salivary glands
 >
 > 1. **Add expression data** {% icon tool %} with the following parameters:
->    - *"Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)"*: `Input file containing your IDs`
->        - {% icon param-file %} *"Select your file"*: `output of ID Converter` (output of **ID Converter** {% icon tool %})
->        - *"Column IDs"*: `c4`
->        - *"Does file contain header"*: `Yes`
->    - Numerous information can be extracted from the HPA source files, you can read user documentation at the end of the submission form of the tool for more detailed description. In this activity, in *"RNAseq/Ab-based expression data"*, we *"Select information to add to your list"*:
->       - `Gene name`
->       - `Gene description`
->       - `RNA tissue category (according to HPA)`
->       - `RNA tissue specificity abundance in "Transcript Per Million`
+>    - *"Enter your IDs"*: `Input file containing your IDs`
+>    - {% icon param-file %} *"Select your file"*: `ID Converter on data ..` from **ID Converter** {% icon tool %}
+>    - *"Column IDs"*: `c4` (column containing Ensembl IDs)
+>    - *"Does file contain header"*: `Yes`
+>    - *"Select informareactometion to add to your list"*:
+>       - {% icon param-check %} `Gene name`
+>       - {% icon param-check %} `Gene description`
+>       - {% icon param-check %} `RNA tissue category (according to HPA)`
+>       - {% icon param-check %} `RNA tissue specificity abundance in "Transcript Per Million`
 >
 >
 >    > ### {% icon comment %} Outputs
 >    >
->    > - In the output file, four columns were added (n°5, 6, 7 and 8) corresponding to the retrieved information from HPA.
+>    > In the output file, four columns were added (5, 6, 7 and 8) corresponding to the retrieved information from HPA.
 >    {: .comment}
->
->   > ### {% icon comment %} Comments
->   >
->   > Scroll down the table, note at the end of the list (column n°8), that **AMY1B**, **CALML5**, **PIP**, **ZG16B**, **CST4**, **MUC7**, **CST1** and **CST2** have been reported as highly enriched in salivary gland with elevated RNA transcript specific Transcript Per Million (TPM) value for each, suggesting that these proteins may come from the saliva and not from the exhaled breath condensate. We thus will remove these biological contaminants from our initial protein set.
->   {: .comment}
 >
 {: .hands_on}
 
+Examine the output table. Note that in the last column of the list (column 8), we see that *AMY1B*, *CALML5*, *PIP*, *ZG16B*, *CST4*, *MUC7*, *CST1* and *CST2* have been reported as highly enriched in salivary gland with elevated RNA transcript specific Transcript Per Million (TPM) value for each, suggesting that these proteins may come from the saliva and not from the exhaled breath condensate. We will remove these biological contaminants from our initial protein set.
 
-> ### {% icon hands_on %} Hands-on: Filter the data to remove the biological contaminants (i.e. proteins highly expressed in salivary glands)
+```
+[..]
+P04745  Alpha-amylase           1  23  ENSG00000174876  AMY1B  Amylase, alpha 1B (salivary) Tissue enriched   salivary gland: 1847.5
+[..]
+Q9NZT1  Calmodulin-like protein 5  8  ENSG00000178372   CALML5 Calmodulin-like 5            Group enriched    salivary gland: 262.7;skin: 651.2
+[..]
+```
+
+In the next step, we will filter the data to remove these biological contaminants (i.e. proteins highly expressed in salivary glands)
+by filtering out the lines that contain the word `salivary` in the column of RNA transcript specific TPM.
+
+> ### {% icon hands_on %} Hands-on: Filter the data to remove the biological contaminants
 >
->  **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `Add expression data on data 6` (output of **Add expression data** {% icon tool %})
->    - Keep default option `Yes` for *"Does file contain header?"*
->    - *"Operation"*: `Discard`. What we want is to remove biological contaminants.
->    - Keep the `OR` option (by default) for the **operator** parameter. We don't need that parameter for a single filter.
->    - First add a  {% icon param-repeat %} *"Insert Filter by keywords"* box with a list of keywords to be filtered out.
->   In this step, we will filter out the lines that contain "salivary" in the column of RNA transcript specific TPM.
->    - *"Column number on which to apply the filter"* : `c8`, the column of RNA transcript specific TPM
->    - *"Search for exact match ?" : `No`
->    - To *"Enter keywords"*, you can either copy and paste list of keywords to the text area or choose a file that contains keywords in text format, in which each lines contains a keyword. Here we choose to `copy/paste` the keyword to be filtered out :  `salivary`
+>  1. **Filter by keywords and/or numerical value** {% icon tool %} with the following parameters:
+>     - {% icon param-file %} *"Input file"*: `Add expression data on data ..` from **Add expression data** {% icon tool %}
+>     - *"Operation"*: `Discard`
+>     - {% icon param-repeat %} *"Insert Filter by keywords"*
+>       - *"Column number on which to apply the filter"* : `c8`  (column with RNA transcript specific TPM)
+>       - *"Search for exact match ?" : `No`
+>       - *"Enter keywords"*: `copy/paste`
+>          - *"Copy/paste keyword to fine"*: `salivary`
 >
->    > ### {% icon comment %} Outputs
->   > Two output files are created:
->   > - **Filtered Add expression data on data 6 - Discarded lines** (12 proteins)
->   > - **FilteredAdd expression data on data 6** (157 proteins)
->{: .comment}
+>     > ### {% icon comment %} Outputs
+>     > Two output files are created:
+>     > - **Filtered Add expression data on data .. - Discarded lines** (12 proteins)
+>     > - **FilteredAdd expression data on data ..** (157 proteins)
+>     {: .comment}
 >
-> > ### {% icon tip %} Tip: Using genes instead of keywords
-> > Note also that a list of “gene” may have been entered (selected on the basis of their TPM value) applied to column n°5 instead of the keywords "salivary" to column n°8, as it has been done in {% cite Lacombe2018 %}.
-> {: .tip}
+>  > ### {% icon tip %} Tip: Using genes instead of keywords
+>  > Note also that a list of “gene” may have been entered (selected on the basis of their TPM value) applied to column 5 instead of the keywords "salivary" to column 8, as it has been done in {% cite Lacombe2018 %}.
+>  {: .tip}
 >
 {: .hands_on}
 
@@ -172,10 +175,15 @@ The resulting list of 157 proteins identified in the two pooled EBC samples (exc
 > ### {% icon hands_on %} Hands-on: Build a lung reference proteome as a background for GO terms enrichment analysis
 >
 > 1. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
->    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
->    - *"Select tissue"*: `Lung` and `Bronchus`
->    - *"Expression level"*: `High`, `Medium` and `Low`
->    - *"Reliability score"*: `Enhanced` and `Supported`
+>    - {% icon param-select %} *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
+>    - {% icon param-select %} *"Select tissue"*: `Lung` and `Bronchus` (you can start typing to filter the list)
+>    - *"Expression level"*:
+>      - {% icon param-check %} `High`
+>      - {% icon param-check %} `Medium`
+>      - {% icon param-check %} `Low`
+>    - *"Reliability score"*:
+>      - {% icon param-check %} `Enhanced`
+>      - {% icon param-check %} `Supported`
 >
 >   > ### Output
 >   > - **Tissue-specific expression from IHC**: List of the selected proteins.
@@ -184,11 +192,8 @@ The resulting list of 157 proteins identified in the two pooled EBC samples (exc
 {: .hands_on}
 
 
-> ### {% icon tip %} Tip
-> Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells)
-> that could be used for further refinement of your reference background.
-{: .tip}
-
+Note that expression information about respiratory cell types is retrieved (column 4; e.g. macrophages, pneumocytes, respiratory epithelial cells)
+that could be used for further refinement of your reference background.
 
 As the ClusterProfiler tool (which we will use for the enrichment analysis) does not consider ENSG (Ensembl gene) identifiers as input, we need to convert IDs into either entrez Gene ID or Uniprot accession number.
 
@@ -196,17 +201,16 @@ As the ClusterProfiler tool (which we will use for the enrichment analysis) does
 >
 > 1. **ID Converter** {% icon tool %} with the following parameters:
 >    - *"Enter IDs"*: `Input file containing IDs`
->        - {% icon param-file %} *"Select your file"*: `Tissue-specific expression from IHC` (output of **Build tissue-specific expression dataset** {% icon tool %})
->    - *"Does file contain header"*: `Yes`
+>    - {% icon param-file %} *"Select your file"*: `Tissue-specific expression from IHC` from **Build tissue-specific expression dataset** {% icon tool %}
 >    - *"Column number of IDs to map"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
->        - *"Type/source of IDs"*: `Ensembl gene ID (e.g. ENSG00000166913)`
->        - In *"Target type"*:
->            - *"Target type of IDs you would like to map to"*: `UniProt accession number (e.g. P31946)` and `Entrez gene ID (e.g. 7529)`
+>      - *"Type/source of IDs"*: `Ensembl gene ID (e.g. ENSG00000166913)`
+       - *"Target type of IDs you would like to map to"*:
+>        - {% icon param-check %} `UniProt accession number (e.g. P31946)`
+>        - {% icon param-check %} `Entrez gene ID (e.g. 7529)`
 >
 >    > ### {% icon comment %} Output
->    >
->    > - In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion.
+>    > In the output file, 2 new columns have been added with the ID retrieved thanks to the conversion.
 >    {: .comment}
 {: .hands_on}
 
@@ -216,21 +220,25 @@ removal, which is the output of biological contaminants filter step.
 > ### {% icon hands_on %} Hands-on: GO terms analysis
 >
 > 1. **GO terms classification and enrichment analysis** {% icon tool %} with the following parameters:
->    - *"Enter your IDs (UniProt Accession numer or Gene ID)"*: `Input file containing your IDs`
->        - {% icon param-file %} *"Choose a file that contains your list of IDs"*: `FilteredAdd expression data on data 6` (output of **Filter by keywords and/or numerical value** {% icon tool %})
+>    - *"Enter your IDs"*: `Input file containing your IDs`
+>    - {% icon param-file %} *"Choose a file that contains your list of IDs"*: `Filtered_Add expression data on data ..`  from **Filter by keywords** {% icon tool %}
+>    - *"Column number of IDs"*: `c1`
 >    - *"Select type/source of IDs"*: `UniProt accession number (e.g.:P31946)`
->    - - *"Species"*: `Homo sapiens`
->    - *"Select GO terms category"*: select all three options `Cellular Component`, `Biological process`,
->    and `Molecular Function`
+>    - *"Species"*: `Homo sapiens`
+>    - *"Select GO terms category"*:
+>      - {% icon param-check %} `Cellular Component`
+>      - {% icon param-check %} `Biological process`
+>      - {% icon param-check %} `Molecular Function`
 >    - *"Perform GO categories representation analysis?"*: `Yes`
->        - *"Ontology level (the higher this number, the deeper the GO level)"*: `3`
+>    - *"Ontology level"*: `3`
 >    - *"Perform GO categories enrichment analysis?"*: `Yes`
->        - *"Define your own background IDs?"*: `Yes`
->            - *"Enter your background IDs (UniProt Accession number or Entrez Gene ID)"*: `Input file containing your background IDs`
->                - {% icon param-file %} *"Select file that contains your background IDs list"*: `ID converter on data 10` (output of **ID Converter** {% icon tool %})
->                - *"Column number of IDs"*: `c7`
->            - *"Select type of background IDs"*: `UniProt Accession number`
->        - *"Graphical display"*: `dotplot`
+>      - *"Define your own background IDs?"*: `Yes`
+>        - *"Enter your background IDs"*: `Input file containing your background IDs`
+>        - {% icon param-file %} *"Select file that contains your background IDs list"*: `ID converter on data ..` from lastest **ID Converter** {% icon tool %} run
+>        - *"Column number of IDs"*: `c7`
+>        - *"Select type of background IDs"*: `UniProt Accession number`
+>        - *"Graphical display"*:
+>          - {% icon param-check %} `dot-plot`
 >
 >   > ### {% icon comment %} Output
 >   >
@@ -238,17 +246,16 @@ removal, which is the output of biological contaminants filter step.
 >   >   - Cluster profiler
 >   >   - ClusterProfiler diagram outputs (collection dataset of all graphical outputs)
 >   >   - ClusterProfiler text files (collection dataset of all text files)
->
+>   >
 >   >   The suffix “GGO” (GroupGO) corresponds to the results “GO categories representation analysis” option
 >   >   (performs a gene/protein classification based on GO distribution at a specific level). The suffix
 >   >   “EGO” (EnrichGO) corresponds to the results from the enrichment analysis (based on an
->   >   over-representation
->   test of GO terms against the lung reference background). Two types of graphical output are provided either
+>   >   over-representation test of GO terms against the lung reference background). Two types of graphical output are provided either
 >   >   in the form of bar-plot or dot-plot.
 >   >   According to this analysis, the main biological processes over-represented in EBC compared to
 >   >   lung were some processes related to the immune system and exocytosis (see EGO.BP.dot.png, for Enriched
 >   >   Biological Process GO terms dot-plot representation in png format).
->    {: .comment}
+>   {: .comment}
 {: .hands_on}
 
 
@@ -261,21 +268,18 @@ interpretation and analysis of pathway knowledge.
 
 > ### {% icon hands_on %} Hands-on: Protein list mapping on Reactome database
 >
-> 1. **Query Reactome pathway database** {% icon tool %} with the following parameters:
->    - *"Input IDs (UniProt Accession number, Entrez Gene ID or Gene Name"*: `Input file containing your IDs`
->    - {% icon param-file %} *"Input file containing your IDs"*: `Filtered_Add expression data on data 6` (output of **Filter by keywords and/or numerical value** {% icon tool %})
+> 1. **Query pathway database [Reactome]** {% icon tool %} with the following parameters:
+>    - *"Input IDs"*: `Input file containing your IDs`
+>    - {% icon param-file %} *"Input file containing your IDs"*: `Filtered_Add expression data on data ..` from **Filter by keywords** {% icon tool %}
 >    - *"Column number of IDs"*: `c1`
 >    - *"Species"*: `Human (Homo sapiens)`
->   > ### {% icon comment %} Output
->   >
->   > You can click on a link that opens the connection on Reactome and shows the image below:
->   > ![the mapping of your IDs on the database](../../images/ProteoreAnnot-reactome.png).
->   >
->   {: .comment}
+>
 {: .hands_on}
 
+Within the `Query pathway database on data ..` output of the tool, you can click on a link that opens the connection on Reactome:
+![the mapping of your IDs on the database](../../images/ProteoreAnnot-reactome.png).
 
-Examine {% icon galaxy-eye %} the Reactome map of your IDs to see the context of your biological pathways.
+Here you can explore the Reactome map of your IDs to see the context of your biological pathways.
 
 
 # Comparison with other proteomic datasets from previous studies
@@ -283,19 +287,18 @@ Examine {% icon galaxy-eye %} the Reactome map of your IDs to see the context of
 > ### {% icon hands_on %} Hands-on: Lists comparison with Venn diagramm tool
 >
 > 1. **Venn diagram** {% icon tool %} with the following parameters:
->    - In *"List to compare"*:
->        - {% icon param-repeat %} *"Insert List to compare"*
->            - *"Enter your list"*: `Input file containing your list`
->                - {% icon param-file %} *"Select your file"*: `kept_lines` (output of **Filter by keywords and/or numerical value** {% icon tool %})
->            - *"Enter the name of this list"*: `Lacombe et al`
->        - {% icon param-repeat %} *"Insert List to compare"*
->            - *"Enter your list"*: `Input file containing your list`
->                - {% icon param-file %} *"Select your file"*: `output` (Input dataset)
->            - *"Enter the name of this list"*: `Bredberg et al`
->        - {% icon param-repeat %} *"Insert List to compare"*
->            - *"Enter your list"*: `Input file containing your list`
->                - {% icon param-file %} *"Select your file"*: `output` (Input dataset)
->            - *"Enter the name of this list"*: `Mucilli et al`
+>    - {% icon param-repeat %} *"Insert List to compare"*
+>      - *"Enter your list"*: `Input file containing your list`
+>      - {% icon param-file %} *"Select your file"*: `kept_lines` (output of **Filter by keywords and/or numerical value** {% icon tool %})
+>      - *"Enter the name of this list"*: `Lacombe et al`
+>    - {% icon param-repeat %} *"Insert List to compare"*
+>      - *"Enter your list"*: `Input file containing your list`
+>      - {% icon param-file %} *"Select your file"*: `output` (Input dataset)
+>      - *"Enter the name of this list"*: `Bredberg et al`
+>    - {% icon param-repeat %} *"Insert List to compare"*
+>      - *"Enter your list"*: `Input file containing your list`
+>      - {% icon param-file %} *"Select your file"*: `output` (Input dataset)
+>      - *"Enter the name of this list"*: `Mucilli et al`
 >
 >   > ### {% icon comment %} Output
 >   >
