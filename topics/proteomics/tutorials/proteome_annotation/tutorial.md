@@ -264,7 +264,7 @@ removal, which is the output of biological contaminants filter step.
 # Visualize EBC proteome on biological pathways (using Reactome)
 
 The 157 proteins identified in EBC samples are now mapped to biological pathways and visualized
-via the web service of Reactome {% cite croft2013reactome %}, an open access, manually curated and peer-reviewed human pathway
+via the web service of Reactome ({% cite croft2013reactome %}), an open access, manually curated and peer-reviewed human pathway
 database that aims to provide intuitive bioinformatics tools for the visualization,
 interpretation and analysis of pathway knowledge.
 
