@@ -3,8 +3,7 @@ layout: tutorial_hands_on
 
 title: Annotating a protein list identified by LC-MS/MS experiments
 
-zenodo_link:
-- 'https://zenodo.org/record/3405119'
+zenodo_link: "https://zenodo.org/record/3405119"
 
 questions:
 - How to filter out technical contaminants?
