@@ -44,29 +44,20 @@ A total of 229 unique proteins were identified in EBC among which 153 proteins w
 
 # Get Input Datasets
 
-For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published.
+For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from {% cite Lacombe2018 %} and two others EBC proteomes previously published ({% cite Muccilli2015 %}  and {% cite Bredberg2011 %}). These datasets are available from Zenodo [here](https://zenodo.org/record/3405119).
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial and give it a name
 >   {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org) or from the shared data library (ask your instructors).
->    The datasets are available on Zenodo under the references: [2650868](https://zenodo.org/record/2650868) for {% cite Lacombe2018 %},
->    [2650874](https://zenodo.org/record/2650874) for {% cite Muccilli2015 %} and [2650872](https://zenodo.org/record/2650872) for
->    {% cite Bredberg2011 %} with direct links provided below:
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3405119) or from the shared data library (ask your instructors).
 >
->   The datasets are available on Zenodo under the references:
->   [3405119](https://zenodo.org/record/3405119) for the 3 datasets at once
->   or one by one with the 3 following zenodo references:
->   [2650868](https://zenodo.org/record/2650868) for {% cite Lacombe2018 %},
->   [2650874](https://zenodo.org/record/2650874) for {% cite Muccilli2015 %},
->   and [2650872](https://zenodo.org/record/2650872) for {% cite Bredberg2011 %}.
->
-> You can import the 3 data files directly with these links in the galaxy upload menu :
->
-> https://zenodo.org/record/3405119/files
->
+>    ```
+>    https://zenodo.org/record/3405119/files/Lacombe_2018.txt
+>    https://zenodo.org/record/3405119/files/Bredberg.txt
+>    https://zenodo.org/record/3405119/files/Mucilli.txt
+>    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
