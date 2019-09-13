@@ -67,6 +67,9 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Import the [`CuffDiff SQLite`](https://zenodo.org/record/1001880/files/CuffDiff_SQLite_database.sqlite) dataset
 >
 >    {% include snippets/import_via_link.md %}

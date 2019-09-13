@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Protein FASTA Database Handling"
 edam_ontology: "topic_0121"
 zenodo_link: ""
+level: Introductory
 questions:
   - "How to download protein FASTA databases of a certain organism?"
   - "How to download a contaminant database?"
@@ -50,6 +51,9 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 > ### {% icon hands_on %} Hands-on: Uploading a protein search database
 >
 > 1. Create a new history for this Database Handling exercise.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Open **Protein Database Downloader** {% icon tool %}
 > 3. Select in the drop-down menues `Taxonomy`: "Homo sapiens (Human)" and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
 > 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.

@@ -45,6 +45,10 @@ We will use two files for this analysis:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq volcano plot`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the differentially results table.
 >
 >    To import the file, there are two options:

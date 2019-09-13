@@ -62,6 +62,9 @@ The second method works at any step during the analysis.
 > ### {% icon hands_on %} Hands-on: Set group tags during upload
 >
 > 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
 > 3. Click on **Rule-based** on the top
 >
@@ -182,20 +185,20 @@ The tool interface will prompt you with the group tags that are available for yo
 >              - In *"Factor level"*:
 >                  - In *"1: Factor level"*:
 >                      - *"Specify a factor level"*: `treat`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: treat`
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `untreat`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: untreat`
 >          - {% icon param-repeat %} Click on *"Insert Factor"* (not on "Insert Factor level")
 >          - In "2: Factor"
 >              - "Specify a factor name" to `Sequencing`
 >              - In *"Factor level"*:
 >                  - In *"1: Factor level"*:
 >                      - *"Specify a factor level"*: `paired`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: paired`
 >                  - In *"2: Factor level"*:
 >                      - *"Specify a factor level"*: `single`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>                      - *"Select groups that correspond to this factor level"*: `Tags: single`
 >    - *"Files have header?"*: `No`
 >    - *"Output normalized counts table"*: `Yes`
 {: .hands_on}

@@ -1,13 +1,14 @@
 # Settings
 JEKYLL=jekyll
 PORT?=4000
-HOST?=localhost
+HOST?=0.0.0.0
 FLAGS?=""
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
 SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
-SITE_URL=http://${HOST}:${PORT}/training-material
+PDF_HOST?=127.0.0.1
+SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
 REPO=$(shell echo "$${ORIGIN_REPO:-galaxyproject/training-material}")
 BRANCH=$(shell echo "$${ORIGIN_BRANCH:-master}")
@@ -43,30 +44,34 @@ create-env: ## create conda environment
 
 ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
-install: clean ## install dependencies
+install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
-		npm install decktape && \
 		gem update --system && \
-		gem install nokogiri:'1.10.0' -- --use-system-libraries --with-xml=$(CONDA_PREFIX)/lib && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar csl-styles awesome_bot html-proofer pkg-config
+		gem install addressable:'2.5.2' jekyll:'< 4' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar:'< 6' csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	$(ACTIVATE_ENV) && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
 detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: detached-serve
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
-check-frontmatter: build ## Validate the frontmatter
+check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
 	    xargs -n1 ruby bin/validate-frontmatter.rb
@@ -126,10 +131,24 @@ check-yaml: ## lint yaml files
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}"
 .PHONY: check-yaml
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references ## run all checks
+check-snippets: ## lint snippets
+	./bin/check-for-trailing-newline
+.PHONY: check-snippets
+
+check-framework:
+	$(ACTIVATE_ENV) && \
+		ruby _plugins/jekyll-notranslate.rb
+.PHONY: check-framework
+
+check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
 
-lint: check-yaml check-frontmatter check-workflows check-references ## run all linting checks
+lint: ## run all linting checks
+	$(MAKE) check-yaml
+	$(MAKE) check-frontmatter
+	$(MAKE) check-workflows
+	$(MAKE) check-references
+	$(MAKE) check-snippets
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -154,6 +173,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 
 
 pdf: detached-serve ## generate the PDF of the tutorials and slides
+	npm install decktape
 	mkdir -p _pdf
 	@for t in $(TUTORIALS); do \
 		name="$(PDF_DIR)/$$(echo $$t | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
@@ -179,7 +199,9 @@ pdf: detached-serve ## generate the PDF of the tutorials and slides
 .PHONY: pdf
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
-	python bin/add_galaxy_instance_annotations.py
+	${ACTIVATE_ENV} && \
+	bash bin/workflow_to_tool_yaml.sh && \
+	python bin/add_galaxy_instance_annotations.py && \
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
 

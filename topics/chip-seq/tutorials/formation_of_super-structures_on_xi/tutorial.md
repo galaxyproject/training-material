@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Formation of the Super-Structures on the Inactive X"
-zenodo_link: "https://doi.org/10.5281/zenodo.1321974"
+zenodo_link: "https://zenodo.org/record/1324070"
 questions:
     - Histone modification?
     - How is a raw set of ChIP-seq data processed and analyzed?

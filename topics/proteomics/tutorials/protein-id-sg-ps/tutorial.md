@@ -67,6 +67,9 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `MGF` and `mzML` file formats. If ***msconvert*** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
 > 3. Rename the dataset to something meaningful.
 > 4. (*optional*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.

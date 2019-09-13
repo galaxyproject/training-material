@@ -48,16 +48,30 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 
 # Pretreatments
 
-Suppose you get the following question:
+We start with the question: In human chromosome 22, which exon has the highest number of single nucleotide polymorphisms (SNPs)?
 
-> ### {% icon question %} Question
-> *Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?*
-{: .question}
+> ### {% icon comment %} Background
+> Not everyone has the same background and that's ok! You may have studied different organisms with different gene models, or you may not be familiar with the biological aspect at all. The biological background is not necessary for following this tutorial, we just like to provide research context for any tutorial. Here are brief explanations of some of the concepts mentioned in this tutorial:
+>
+> - **Nucleotides** are the A, C, T, and Gs that make up DNA.
+> - A **Chromosomes** can be thought of as a very long piece of DNA (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.
+> - **Features** are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.
+> - **Genes** are one kind of interesting feature, a region that will be [transcribed](https://en.wikipedia.org/wiki/Transcription_(biology)) into RNA before being [translated](https://en.wikipedia.org/wiki/Translation_(biology)) into proteins.
+> - **Exons** are part of the [eukaryotic](https://en.wikipedia.org/wiki/Eukaryote) gene [model](https://en.wikipedia.org/wiki/Gene#Structure_and_function). A gene is a complex structure with numerous segments that are removed before the the gene is transcribed into an RNA. The exons are the coding regions, the regions that will appear in the final protein product.
+>
+>   ![Eukaryotic gene model](../../images/DNA_exons_introns.png "An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)")
+>
+> - **SNP** stands for [single-nucleotide polymorphism](https://en.wikipedia.org/wiki/Single-nucleotide_polymorphism) and is pronounced like the English word "snip". SNPs are single nucleotide differences between a sequenced individual compared to some reference sequence; where one individual might have an A, another could have a C in that position. Databases of SNPs have been created for many organisms and they include any single nucleotide deviation from the reference sequence which appears in some percentage of the population (e.g. >1%). These are often especially interesting to geneticists as the causes of certain inheritable diseases.
+{: .comment}
 
 You may be familiar with the [UCSC Genome Browser](https://genome.ucsc.edu/) or another resource like it, and know that you can find the data there.
-With your data in hand, you are left with the question: "but how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
+But even with your data in hand, you stll have the question: "how do I actually compute this?" There is really a straightforward answer: **Galaxy**. So let's try it...
 
-Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts. The available tools are listed on the left, your analysis history is recorded on the right, and the central panel will show the home page, a tool form or some dataset content.
+Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and log in or register. The Galaxy interface consists of three main parts:
+
+1. The available tools are listed on the left
+2. Your analysis history is recorded on the right
+3. The central panel will let you run analyses and view outputs
 
 ![Galaxy interface](../../images/galaxy_interface.png)
 
@@ -65,11 +79,7 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 >
 > 1. Make sure you start from an empty analysis history.
 >
->    > ### {% icon tip %} Creating a new history
->    >
->    > * Click the **gear icon** at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
 >
@@ -77,13 +87,15 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 >
 {: .hands_on}
 
-## Upload exon locations
+## Locating Exons
 
-We are now ready to perform our analysis, but first we need to get some data into our history. You can upload files from your computer, but Galaxy can also fetch data directly from external sources. We will now import a list of all the exon locations on chromosome 22 directly from the UCSC table browser.
+First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
-> 1. **UCSC Main** {% icon tool %}: In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> 1. **UCSC Main** {% icon tool %} - table browser:
+>
+>     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
 >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
 >
@@ -131,12 +143,14 @@ We are now ready to perform our analysis, but first we need to get some data int
 >    ![Rename dataset to `Exons`](../../images/101_rename.png)
 {: .hands_on}
 
-## Upload SNP information
+## Obtaining SNP information
 
-Now we have information about the exon locations, but our question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
+We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 
 > ### {% icon hands_on %} Hands-on: SNP information
-> 1. **UCSC Main** {% icon tool %}: Open again the `UCSC Main - table browser` tool and set the following parameters:
+> Again open the `UCSC Main - table browser` tool and set the following parameters
+>
+> 1. **UCSC Main** {% icon tool %} table browser:
 >    - *"group"* should be changed to `Variation`
 >    - {% icon param-text %} *"region"* should be changed again to `position` with value `chr22`
 >    - *"output format"* should be changed again to `BED - browser extensible data`
@@ -149,20 +163,25 @@ Now we have information about the exon locations, but our question was which exo
 >
 >    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
 >
->    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. You will get your second item in your analysis history.
+>    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. A second item will appear in your analysis history.
 >
 > 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+>
+>    {% include snippets/rename_dataset.md name="SNPs" %}
 {: .hands_on}
 
 # Analysis
 
-## Find exons with the highest number of SNPs
+## Find exons with the most SNPs
 
-Let's remind ourselves that our objective is to find which exon contains the most SNPs. Therefore we have to join the file with the exon locations with the file containing the SNP locations (here "join" is just a fancy word for printing the SNPs and exons that overlap side-by-side).
+Our objective is to find which exon contains the most SNPs. Therefore we have to intersect the file with the exon locations with the file containing the SNP locations (here "intersect" is just a fancy word for printing SNPs and exons that overlap side-by-side).
 
 > ### {% icon comment %} Search bar
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
+>
+> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you'll need to search among the various options to find the one that works for you.
+>
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
@@ -175,10 +194,10 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >    - *"Join"*: Select `Exons`
 >    - *"With"*: Select `SNPs`
 >    - *"with min overlap"*: `1`
->    - *"Return"*: `Only records that are joined (INNER JOIN)`, so that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
+>    - *"Return"*: `Only records that are joined (INNER JOIN)`, which means that only matches are included in the output (i.e. only exons with SNPs in it and only SNPs that fall in exons)
 >
 >    > ### {% icon tip %} How do I use this tool?
->    > If you scroll down on this page, you will find the help of the tool.
+>    > All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.
 >    {: .tip}
 >
 >
@@ -188,9 +207,9 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >
 >    ![Contents of the `Join` output dataset](../../images/101_joined.png)
 >
->    Remember that variations are possible due to using different versions of UCSC databases, as long as you have similar looking columns you did everything right :)
+>    Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!
 >
-> > ### {% icon comment %} If things don't work...
+> > ### {% icon comment %} If things didn't work...
 > >
 > > Did the Join tool error with a memory failure? Or is this step executing for a long time? Most likely a setting was missed when extracting the data from the UCSC Table Browser. Try again, double checking that:
 > >
@@ -201,15 +220,26 @@ Let's remind ourselves that our objective is to find which exon contains the mos
 >
 {: .hands_on}
 
-Let's take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first lines in the file all have the same exon ID but different SNP IDs, meaning these lines represent different SNPs that all overlap the same exon. Therefore we can find the total number of SNPs in an exon simply by counting the number of lines that have the same exon ID in the fourth column.
+Let's take a look at this dataset. The first six columns correspond to the exons, and the last six columns correspond to the SNPs. Column 4 contains the exon IDs, and column 10 contains the SNP IDs. In our screenshot you see that the first lines in the file all have the same exon ID but different SNP IDs, meaning these lines represent different SNPs that all overlap the same exon.
 
 > ### {% icon question %} Question
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
+>
+> > ### {% icon solution %} Solution
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> to look for how many times each is used:
+> >
+> > Gene | Occurences
+> > ---- | ----------
+> > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 24
+> > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 24
+> > `ENST00000343518.10_cds_0_0_chr22_15690078_f` | 40
+> {: .solution}
 {: .question}
 
 
 ## Count the number of SNPs per exon
-We've just seen how to count the number of SNPs in each exon, so let's do this for all the exons in our file.
+
+Since each line in our file represents a single overlap between SNP and exon, we can find the total number of SNPs in an exon, simply by counting the number of lines that have the same exon ID. So let's do this for all the exons in our file:
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
@@ -236,14 +266,14 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 >    > > ### {% icon solution %} Solution
->    > > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image below. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information.
+>    > > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
 >    > >
 >    > {: .solution }
 {: .question}
 
 ## Sort the exons by SNPs count
 
-Now we have a list of all exons and the number of SNPs they contain, but we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
+Now that we have a list of all exons, and the number of SNPs they contain, we would like to know which exon has the *highest number* of SNPs. We can do this by sorting the file on the second column.
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
@@ -262,7 +292,7 @@ Now we have a list of all exons and the number of SNPs they contain, but we woul
 >
 >    ![Contents of the `Sort` output dataset](../../images/101_16.png)
 >
->    You should now see the same file as we had before, but the exons with the highest number of SNPs are now at the top.
+>    The file should look similar to before sorting, but now the exons with the highest number of SNPs are at the top.
 {: .hands_on}
 
 
@@ -285,7 +315,6 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
->
 >
 > 2. Click **Execute**
 >
@@ -337,33 +366,39 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the **Options** menu on the top of the history panel (gear symbol):
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the {% icon galaxy-gear %} **History Options** menu on the top of the history panel:
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just choose `Saved Histories` from the history menu and you will see a list of all your histories in the central panel:
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view, or choose `Saved Histories` from the history options menu and you will see a list of all your histories in the central panel:
 
 ![`Saved Histories` list](../../images/101_23.png)
 
-An alternative overview of your histories can be accessed by clicking on the **View all histories** button at top of your history panel (window icon).
+An alternative overview of your histories can be accessed by clicking on the {% icon galaxy-columns %} **View all histories** button at top of your history panel.
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
-Here you see a more detailed view of each history, and can perform the same operations, such as switching to a different history, deleting a history, purging it (permanently deleting it, this action cannot be reversed), or copying datasets and even entire histories.
+Here you see a more detailed view of each history, and can perform the same operations as the other view:
+- switching between different histories,
+- deleting a history,
+- purging it (permanently deleting it, this action cannot be reversed)
+- copying histories
+
+One difference is that this view lets you copy datasets between your histories by dragging and dropping them.
 
 You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
 
 ## Convert your analysis history into a workflow
 
-When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. Wouldn't it be nice to just convert this history into a workflow that we'll be able to execute again and again?
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
 
-Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform it manually once, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
 > 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
 >
-> 2. Go to the history **Options menu** (gear symbol) and select the `Extract Workflow` option.
+> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -371,7 +406,9 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of SNPs`.
+> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of interactions`.
+>
+>    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find those interactions as well.
 >
 >    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
@@ -398,7 +435,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    ![Workflow editor](../../images/101_28.png)
 >
->    When you click on a component, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
+>    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
 >    > ### {% icon tip %} Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
@@ -431,7 +468,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 > 7. **Repeat** this for the output of the `Compare two Datasets` tool, naming it `Top 5 exons`
 >
-> 8. **Save your workflow** (important!) by clicking on the gear icon at the top right of the screen, and selecting `Save`.
+> 8. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
 >    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
 >
@@ -440,7 +477,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 {: .hands_on}
 
 > ### {% icon comment %} Comments
-> We could **validate** our newly built workflow by running it on the same input datasets than the ones in the `Galaxy 101` history used to extract the workflow in order to make sure we do obtain the same results.
+> We could **validate** our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.
 {: .comment}
 
 ## Run workflow on different data
@@ -449,9 +486,11 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon hands_on %} Hands-on: Run workflow
 >
-> 1. Create a **new history** (gear icon) and give it a name.
+> 1. Create a **new history** and give it a name.
 >
-> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the history overview (window icon at top of history panel). Here you can just drag and drop datasets from one history to another.
+>    {% include snippets/create_new_history.md %}
+>
+> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
@@ -479,13 +518,13 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
 >    {: .comment}
 >
-> 6. Once the workflow has started, you will initially be able to see all its steps:
+> 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by selecting `Unhide Hidden Datasets` from the history options menu.
+> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on "hidden", just below the history name, or by selecting `Unhide Hidden Datasets` from the {% icon galaxy-gear %} history options menu.
 {: .comment}
 
 > ### {% icon question %} Questions
@@ -496,17 +535,23 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the gear symbol in the history panel and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
 
 1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
 3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
 
+> ### {% icon comment %} Permissions
+> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
+>
+> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Share history and workflow
 >
 > 1. Share one of your histories with your neighbour.
 > 2. See if you can do the same with your workflow!
-> 3. Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their history menu (gear icon) under `Histories shared with me`.
+> 3. Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
 {: .hands_on}
 
 # Conclusion

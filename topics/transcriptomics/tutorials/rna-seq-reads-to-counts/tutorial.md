@@ -101,6 +101,10 @@ In order to get these files into Galaxy, we will want to do a few things:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the files from Figshare using Galaxy's Rule-based Uploader.
 >    - Open the Galaxy Upload Manager
 >    - Click the tab **Rule-based**

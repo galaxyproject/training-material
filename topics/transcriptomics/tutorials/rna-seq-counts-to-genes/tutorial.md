@@ -77,6 +77,10 @@ We will use three files for this analysis:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this RNA-seq exercise e.g. `RNA-seq with limma-voom`
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >     To import the files, there are two options:

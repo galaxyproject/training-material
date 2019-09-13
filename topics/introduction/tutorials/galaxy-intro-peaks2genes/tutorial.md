@@ -79,11 +79,7 @@ Let's start with a fresh history.
 >
 > 1. Make sure you have an empty analysis history.
 >
->    > ### {% icon tip %} Starting a new history
->    >
->    > * Click the {% icon galaxy-gear %} (gear) icon (**History options**)  at the top of the history panel
->    > * Select the option **Create New** from the menu
->    {: .tip}
+>    {% include snippets/create_new_history.md %}
 >
 > 2. **Rename your history** to make it easy to recognize
 >
@@ -543,7 +539,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 > 1. Create a new history and give it a new name like `Galaxy Introduction Part 2`
 >
->    If you have forgotten how to do that, you can check the beginning of this tutorial.
+>    {% include snippets/create_new_history.md %}
 >
 > 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
 >
