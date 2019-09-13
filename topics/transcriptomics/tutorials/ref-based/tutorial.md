@@ -693,16 +693,239 @@ In the previous section, we counted reads mapped to genes for two samples. To be
 > This is really interesting to redo on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).
 {: .hands_on}
 
-To save time, we have run the necessary steps for you and generated 7 count files, available on [Zenodo]({{ page.zenodo_link }}).
+To save time, we have run the necessary steps for you. We then obtain 7 files with the counts for each gene of *Drosophila* for each sample. We could compare the files directly and calculate the extent of differential gene expression. But it is not so simple.
 
-These files contain the counts for each gene of *Drosophila*. We could compare the files directly and calculate the extent of differential gene expression, but the number of sequenced reads mapped to a gene depends on:
+Let's imagine we have RNA-seq counts from 3 samples for a genome with 4 genes:
 
-- The gene's expression level
-- The gene's length
-- The sequencing depth of the sample
-- The expression of all other genes within the sample
+Gene | Sample 1 Counts | Sample 2 Counts | Sample 3 Counts
+--- | --- | --- | ---
+A (2kb) | 10 | 12 | 30
+B (4kb) | 20 | 25 | 60
+C (1kb) | 5 | 8 | 15
+D (10kb) | 0 | 0 | 1
 
-For both within or between-sample comparison, the gene counts need to be normalized. We can then perform the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
+Sample 3 has more reads than the other replicates, regardless of the gene. It has a higher sequencing depth than the other replicates. Gene B is twice as long as gene A: it might explain why it has twice as many reads, regardless of replicates
+
+The number of sequenced reads mapped to a gene depends then on:
+
+- The **sequencing depth** of the samples
+
+    Samples sequenced with more depth will have more reads mapping to each genes
+
+- The **length of the gene**
+
+    Longer genes will have more reads mapping to them
+
+To make sample or gene comparison, the gene counts need to be normalized. We could use TPM (Transcripts Per Kilobase Million). 
+
+> ### {% icon details %} RPKM, FPKM and TPM?
+>
+> These three metrics are used to normalize count tables for:
+> - sequencing depth (the "Million" part)
+> - gene length (the "Kilobase" part)
+>
+> Let's use the previous example to explain RPK, FPKM and TPM.
+>
+> For **RPKM** (Reads Per Kilobase Million),
+> 1. Compute the the "per million" scaling factor: sum up the total reads in a sample and divide that number by 1,000,000
+>
+>    Gene | Sample 1 Counts | Sample 2 Counts | Sample 3 Counts
+>    --- | --- | --- | ---
+>    A (2kb) | 10 | 12 | 30
+>    B (4kb) | 20 | 25 | 60
+>    C (1kb) | 5 | 8 | 15
+>    D (10kb) | 0 | 0 | 1
+>    **Total reads** | 35 | 45 | 106
+>    **Scaling factor** | 3.5 | 4.5 | 10.6
+>
+>    *For the purpose of the example, we are score using a factor of 10.*
+>    
+> 2. Divide the read counts by the "per million" scaling factor
+>
+>    This normalizes for sequencing depth, giving reads per million (RPM)
+>
+>    Gene | Sample 1 RPM | Sample 2 RPM | Sample 3 RPM
+>    --- | --- | --- | ---
+>    A (2kb) | 2.86 | 2.67 | 2.83
+>    B (4kb) | 5.71 | 5.56 | 5.66
+>    C (1kb) | 1.43 | 1.78 | 1.432
+>    D (10kb) | 0 | 0 | 0.09  
+> 
+> 3. Divide the RPM values by the length of the gene, in kilobases
+>
+>    Gene | Sample 1 RPKM | Sample 2 RPKM | Sample 3 RPKM
+>    --- | --- | --- | ---
+>    A (2kb) | 1.43 | 1.33 | 1.42
+>    B (4kb) | 1.43 | 1.39 | 1.42
+>    C (1kb) | 1.43 | 1.78 | 1.42
+>    D (10kb) | 0 | 0 | 0.009  
+>
+> **FPKM** (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end RNA-seq and FPKM for paired-end RNA-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end RNA-seq, a single fragment can be the two reads of a pair, or, if one read in the pair did not map, one read can correspond to a single fragment. FPKM keeps tracks of fragments so that one fragment with 2 reads is counted only once.
+>
+>
+> **TPM** (Transcripts Per Kilobase Million) is very similar to RPKM and FPKM, except the order of the operation
+> 
+> 1. Divide the read counts by the length of each gene in kilobases
+> 
+>    This gives the reads per kilobase (RPK).
+>
+>    Gene | Sample 1 RPK | Sample 2 RPK | Sample 3 RPK
+>    --- | --- | --- | ---
+>    A (2kb) | 5 | 6 | 15
+>    B (4kb) | 20 | 6.25 | 15
+>    C (1kb) | 5 | 8 | 15
+>    D (10kb) | 0 | 0 | 0.1
+> 
+> 2. Compute the "per million" scaling factor by summing up all the RPK values in a sample and dividing this number by 1,000,000
+>
+>    Gene | Sample 1 RPK | Sample 2 RPK | Sample 3 RPK
+>    --- | --- | --- | ---
+>    A (2kb) | 5 | 6 | 15
+>    B (4kb) | 20 | 6.25 | 15
+>    C (1kb) | 5 | 8 | 15
+>    D (10kb) | 0 | 0 | 0.1
+>    **Total RPK** | 15 | 20.25 | 45.1
+>    **Scaling factor** | 1.5 | 2.025 | 4.51
+>
+>    *For the purpose of the example, we are score using a factor of 10.*
+>
+> 3. Divide the RPK values by the "per million" scaling factor
+>
+>    Gene | Sample 1 TPM | Sample 2 TPM | Sample 3 TPM
+>    --- | --- | --- | ---
+>    A (2kb) | 3.33 | 2.96 | 3.326
+>    B (4kb) | 3.33 | 3.09 | 3.326
+>    C (1kb) | 3.33 | 3.95 | 3.326
+>    D (10kb) | 0 | 0 | 0.1
+> 
+>
+> Contrary to RPKM and FPKM, when calculating TPM, we normalize for gene length first, and then normalize for sequencing depth second. However, the effects of this difference are quite profound, as we could already see with the example.
+> 
+> The sums of each colum are very different:
+>
+>    Gene | Sample 1 RPKM | Sample 2 RPKM | Sample 3 RPKM
+>    --- | --- | --- | ---
+>    A (2kb) | 1.43 | 1.33 | 1.42
+>    B (4kb) | 1.43 | 1.39 | 1.42
+>    C (1kb) | 1.43 | 1.78 | 1.42
+>    D (10kb) | 0 | 0 | 0.009
+>    **Total** | 4.29 | 4.5 | 4.25
+>
+>    Gene | Sample 1 TPM | Sample 2 TPM | Sample 3 TPM
+>    --- | --- | --- | ---
+>    A (2kb) | 3.33 | 2.96 | 3.326
+>    B (4kb) | 3.33 | 3.09 | 3.326
+>    C (1kb) | 3.33 | 3.95 | 3.326
+>    D (10kb) | 0 | 0 | 0.1
+>    **Total** | 10 | 10 | 10
+>
+> The sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.
+> 
+> In the example, TPM for gene A in Sample 1 is 3.33 and in sample B is ~3.33. Then the same proportion of total reads mapped to gene A in both samples, because the sum of the TPMs in both samples always add up to the same number (so the denominator required to calculate the proportions is the same, regardless of the sample)
+> 
+> With RPKM or FPKM, it is harder to compare the proportion of total reads because the sum of normalized reads in each sample can be different. Thus, if RPKM for gene A in Sample 1 is 1.43 and in Sample 2 is 1.43, we do not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2. 
+>
+> Since RNA-seq is all about comparing relative proportion of reads, TPM seems more appropriate than RPKM/FPKM.
+{: .details}
+
+But RNA-seq is often used to compare one tissue type to another. For example, muscle vs epithelial tissue. And it could be that there are a lot of muscle specific genes transcribed in muscle but not in the epithelial tissue. We call that a **difference in library composition**.
+
+It is also possible to see difference in library composition in the same tissue type after the knock out of a transcription factor.
+
+Let's imagine we have RNA-seq counts from 2 samples (same library size: 635 reads), for a genome with 6 genes. The genes have the same expression in both sample, except one: only Sample 1 transcribe genes D, at a high level (563 reads). This means that the 563 reads used by D in Sample 1 will be distributed to other genes in Sample 2.
+
+Gene | Sample 1 | Sample 2
+--- | --- | --- | ---
+A | 30 | 235
+B | 24 | 188
+C | 0 | 0
+D | 563 | 0
+E | 5 | 39
+F | 13 | 102
+**Total** | 635 | 635
+
+The read counts for all genes but D is really high in Sample 2. But the only differentially expressed genes is gene D.
+
+TPM, RPKM or FPKM do not deal with these differences in library composition in normalization. But tools like [**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}). 
+
+[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for dealing with RNA-seq data and running Differential Gene Expression (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for **sequencing depth** and **library composition**. 
+
+> ### {% icon details %} Normalization in DESeq2
+>
+> Let's take an example to illustrate how DESeq2 scales the different samples:
+>
+> Gene | Sample 1 | Sample 2 | Sample 3
+> A | 0 | 10 | 4
+> B | 2 | 6 | 12
+> C | 33 | 55 | 200
+>
+> The goal is to calculate a scaling factor for each sample, that takes read depth and library composition into account.
+>
+> 1. Take the log$$_e$$ of all the values
+> 
+>     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
+>     A | -Inf | 2.3 | 1.4
+>     B | 0.7 | 1.8 | 2.5
+>     C | 3.5 | 4.0 | 5.3
+>
+> 2. Average each row
+>
+>     Gene | Average of log values
+>     A | -Inf
+>     B | 1.7
+>     C | 4.3
+>
+>     Average of log values (also call geometric average) is used here because it is not easily impacted by outliers (e.g. gene 3 with its outlier for Sample 3)
+>
+> 3. Filter out genes with infinity
+>
+>     Gene | Average of log values
+>      | 
+>     B | 1.7
+>     C | 4.3
+>
+>     It filters out genes with 0 read counts in at least 1 sample, e.g. genes only transcribed in one tissue. 
+>
+>     It helps to focus the scaling factors on genes transcribed at similar levels regardless the condition.
+>
+> 4. Substract the average log value from the log counts
+>
+>     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
+>      |  |  | 
+>     B | -1.0 | 0.1 | 0.5
+>     C | -0.8 | -0.3 | 1.3
+>
+>     $$ log(reads for gene X) - average(log values for reads for gene X) = log(\frac{reads for gene X}{average for gene X})$$
+>
+>     This step is checking out the ratio of the reads in each sample to the average across all samples.
+>
+> 5. Calculate the median of the ratios for each sample
+>
+>     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
+>      |  |  | 
+>     B | -1.0 | 0.1 | 0.5
+>     C | -0.8 | -0.3 | 1.3
+>     **Median** | -0.9 | -0.1 | 0.9
+>
+>     The median is used here to avoid extreme genes (most likely rare ones) from swaying the value too much in one direction. It helps to put more emphasis on moderately expressed genes.
+>
+> 6. Take the exponential of the medians
+>
+>     Gene | Sample 1 | Sample 2 | Sample 3
+>     **Median** | -0.9 | -0.1 | 0.9
+>     **Scaling factors** | 0.4 | 0.7 | 2.5
+>
+> 7. Divide the original counts by the scaling factors
+>
+>     Gene | Sample 1 | Sample 2 | Sample 3
+>     A | 0 | 14 | 2
+>     B | 5 | 9 | 5
+>     C | 83 | 79 | 80
+>
+> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU)*
+{: .details}
+
+DESEq2 run also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
 
 - Estimate the biological variance using the replicates for each condition
 - Estimate the significance of expression differences between any two conditions
