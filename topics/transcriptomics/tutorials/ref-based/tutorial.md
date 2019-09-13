@@ -480,7 +480,7 @@ RNAs that are typically targeted in RNA-seq experiments are single stranded (*e.
 
 ![Relationship between DNA and RNA orientation](../../images/dna_rna.png "Relationship between DNA and RNA orientation")
 
-During a typical RNA-seq experiment the information about strandedness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step.
+During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step.
 
 Some library preparation protocols create so called *stranded* RNA-seq libraries that preserve the strand information (an excellent overview in {% cite levin2010comprehensive %}). The implication of stranded RNA-seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts:
 
@@ -927,7 +927,7 @@ The ID for each gene is something like FBgn0003360, i.e. an ID in the correspond
 
 > ### {% icon hands_on %} Hands-on: Annotation of the differentially expressed genes
 >
-> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the previous, from the Data library or from Zenodo:
+> 1. Import the Ensembl gene annotation for *Drosophila melanogaster* (`Drosophila_melanogaster.BDGP6.87.gtf`) from the previous history, or from the Shared Data library or from Zenodo:
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Drosophila_melanogaster.BDGP6.87.gtf
