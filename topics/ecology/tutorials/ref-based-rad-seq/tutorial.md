@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial
 
 title: "RAD-Seq Reference-based data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
