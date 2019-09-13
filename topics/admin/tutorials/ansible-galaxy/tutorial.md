@@ -25,9 +25,8 @@ requirements:
     topic_name: admin
     tutorials:
       - ansible
-  - type: "external"
+  - type: "none"
     title: "A VM with at least 2 vCPUs and 4 GB RAM"
-    link: "#"
 ---
 
 # Overview

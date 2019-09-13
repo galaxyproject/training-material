@@ -10,6 +10,15 @@ layout: base
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
 
+{% if topic.gitter %}
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: '{{ topic.gitter }}'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+{% endif %}
+
 <div class="container main-content">
     <section>
         <h1>{{ topic.title }}</h1>
