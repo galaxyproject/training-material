@@ -44,7 +44,7 @@ create-env: ## create conda environment
 
 ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
-install: clean ## install dependencies
+install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --system && \
 		gem install addressable:'2.5.2' jekyll:'< 4' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar:'< 6' jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify
