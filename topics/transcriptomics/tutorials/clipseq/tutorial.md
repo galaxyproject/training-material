@@ -21,7 +21,7 @@ key_points:
   - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
   - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
 contributors:
-  - Florian-H-Lab
+  - heylf
   - dmaticzka
   - bebatut
 ---
