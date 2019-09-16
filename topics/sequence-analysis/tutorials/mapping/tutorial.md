@@ -29,7 +29,7 @@ follow_up_training:
       - ref-based
   -
     type: "internal"
-    topic_name: chip-seq
+    topic_name: epigenetics
     tutorials:
       - formation_of_super-structures_on_xi
 contributors:
