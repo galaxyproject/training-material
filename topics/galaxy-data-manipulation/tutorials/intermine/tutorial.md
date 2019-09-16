@@ -25,7 +25,7 @@ InterMine ({% cite Smith2012 %}) is a well-establish platform to integrate and a
 It provides the integrated data via a web interface and RESTful web services.
 
 Other organizations download and deploy InterMine on their servers:
-there are more than 30 instances over the world (registered at registry.intermine.org), covering many organism,
+there are more than 30 instances over the world (registered at [registry.intermine.org](http://registry.intermine.org)), covering many organism,
 including human data, model animals, plant plants and research targets .
 
 InterMine has been integrated with the Galaxy suite ({% cite Blankenberg2011 %}): the InterMine tool server in Galaxy allows 
