@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/chip-seq/tutorials/formation_of_super-structures_on_xi/tutorial
 
 title: "Formation of the Super-Structures on the Inactive X"
 zenodo_link: "https://zenodo.org/record/1324070"
