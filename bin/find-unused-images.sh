@@ -63,9 +63,9 @@ sort -u $ALL.all > $ALL
 rm -f $USED.all $ALL.all
 
 echo "Missing images"
-diff $USED $ALL | grep '<'
+diff $USED $ALL | grep '<' | sed 's/> //g'
 
 echo "Unusued images"
-diff $USED $ALL | grep '>' | sed 's/> //g'| xargs -I{} rm '{}'
+diff $USED $ALL | grep '>' | sed 's/> //g'
 
 rm -f $USED $ALL
