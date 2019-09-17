@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'yaml'
-require 'pathname'
 
 fn = ARGV[0]
 
@@ -21,7 +20,7 @@ contributor_emails = CONTRIBUTORS.map{ |k, v|
 }.compact.to_h
 
 # Private map of emails to github usernames
-if Pathname.new('private-contrib-map.yaml').exist?
+if File.file?('private-contrib-map.yaml')
   private_contrib_map = YAML.load_file('private-contrib-map.yaml')
   contributor_emails.merge!(private_contrib_map)
 end
@@ -47,8 +46,13 @@ fixed_contribs = file_contributors.map{ |email|
 known = fixed_contribs.select{ |x| ! /@/.match(x) }
 unknown = fixed_contribs.select{ |x| /@/.match(x) }
 
+missing = (known - current_contributors).sort.uniq
 # These contributors not yet recognised
-puts "Missing contributors: #{(known - current_contributors).sort.uniq}"
+if missing.length > 0
+  puts "Missing contributors: #{missing}"
+end
+
+# These emails might map to known users, but we don't know yet.
 if unknown.length > 0
   puts "Unknown emails: #{unknown.sort.uniq}"
 end
