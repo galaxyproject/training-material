@@ -177,6 +177,7 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >    > https://zenodo.org/record/800651/files/silva.v4.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 >    > https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
+>    > https://zenodo.org/record/800651/files/mouse.dpw.metadata
 >    > ```
 >    {: .solution }
 {: .hands_on}
