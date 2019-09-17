@@ -229,7 +229,7 @@ The generated tutorial is structured with:
 {: .hands_on}
 
 ## Adding images with captions
-To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image.png)`.
+To add an image in Markdown file, we need to use the markdown syntax for this: `![](../../images/image_caption_screenshot.png)`.
 
 We have also added a small plugin to handle captions for each image:
 
@@ -238,7 +238,7 @@ We have also added a small plugin to handle captions for each image:
 The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 
 ```markdown
-![A textual description of the image](../images/image.png "Example of an image with a caption")
+![A textual description of the image](../images/image_caption_screenshot.png "Example of an image with a caption")
 ```
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
