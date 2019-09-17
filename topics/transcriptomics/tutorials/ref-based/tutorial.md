@@ -961,7 +961,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 > ### {% icon comment %} Comment
 >
-> We recommend that you add as many factors as you think which may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
+> We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
@@ -1470,7 +1470,7 @@ We have now the two required input files for goseq.
 
 ### KEGG pathways
 
-**goseq** can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing the current knowledge on the molecular interaction, reaction and relation networks. A map can integreate many entities including genes, proteins, RNAs, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets. 
+**goseq** can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing the current knowledge on the molecular interaction, reaction and relation networks. A map can integrate many entities including genes, proteins, RNAs, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets. 
 
 For example, the pathway `dme00010` represents the Glycolysis process (conversion of glucose into pyruvate with generation of small amounts of ATP and NADH) for Drosophila melanogaster:
 
