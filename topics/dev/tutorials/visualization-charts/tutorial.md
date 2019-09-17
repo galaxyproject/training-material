@@ -147,9 +147,9 @@ Each visualization is represented by a logo in the Galaxy interface. This makes
 it easier for users to find and configure their visualization. The logo should
 be in the `png`-file format. It will appear with a width of 120 pixels.
 
-Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
+Here's an example [logo](../../images/pdb-logo.png):
 
-![Logo](../../files/charts-plugins/pdb/logo.png)
+![Logo](../../images/pdb-logo.png)
 
 > ### {% icon hands_on %} Hands-on
 >
