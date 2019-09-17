@@ -5,13 +5,11 @@ title: "InterMine integration with Galaxy"
 zenodo_link: "https://zenodo.org/record/3407174"
 questions:
     - How to export your query results from your InterMine of choice to Galaxy?
-    - How to export your data sets from Galaxy to your InterMine of choice?
+    - How to export a list of identifiers from Galaxy to your InterMine of choice?
 objectives:
     - Learn how to import/export data from/to InterMine instances
     - Understand the InterMine Interchange Dataset
 time_estimation: 1h
-key_points:
-    - TODO
 contributors:
     - danielabutano
     - yochannah
@@ -26,11 +24,11 @@ It provides the integrated data via a web interface and RESTful web services.
 
 Other organizations download and deploy InterMine on their servers:
 there are more than 30 instances over the world (registered at [registry.intermine.org](http://registry.intermine.org)), covering many organism,
-including human data, model animals, plant plants and research targets .
+including human data, model animals, plants and drug targets.
 
 InterMine has been integrated with the Galaxy suite ({% cite Blankenberg2011 %}): the InterMine tool server in Galaxy allows 
 to import the data returned by any InterMine search and viceversa, using the InterMine Interchange format
-it's possible to export your Galaxy dataset into any InterMine instance of your choice.
+it's possible to export a list of identifiers from Galaxy into any InterMine instance of your choice.
 
 Learn more in this tutorial.
 
@@ -62,17 +60,13 @@ Learn more in this tutorial.
 You have now exported your query results from InterMine to Galaxy.
 
 
-# Export data into InterMine
+# Export identifiers into InterMine
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
->
->    {% include snippets/create_new_history.md %}
->
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3407174)
+> 1. Import some fly data from [Zenodo](https://zenodo.org/record/3407174)
 >
 >    ```
 >    https://zenodo.org/record/3407174/files/GenesLocatedOnChromosome4.tsv
@@ -80,18 +74,23 @@ You have now exported your query results from InterMine to Galaxy.
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename the dataset (e.g. `GenesLocatedOnChromosome4`)
+> 2. Rename the dataset (e.g. `GenesLocatedOnChromosome4`)
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Inspect the data 
+> 3. Inspect the data
+>
+>    Click on **View data** icon for the dataset to inspect it.
+>
+>    The dataset contains the secondary identifier and the symbol of the *Drosophila melanogaster* genes and their location on the chromosome 4
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. Do the data contain the type, e.g `Protein` or `Gene`?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. No, they don't
+>    > > 1. No, they don't. So we have to specify it, when we create the InterMine Interchange file 
 >    > >
 >    > {: .solution}
 >    >
@@ -99,20 +98,20 @@ You have now exported your query results from InterMine to Galaxy.
 >
 {: .hands_on}
 
-## Create InterMine Interchange
-Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **Create InterMine Interchange Dataset** under **Convert Formats** in order to generate an intermediate file which will be used to send the data to InterMine. This file requires the type (e.g. `Gene`), the identifier (e.g `WBGene00007063`) and, optionally, the organims's name.
+## Create InterMine Interchange dataset
+Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **Create InterMine Interchange Dataset** under **Convert Formats** in order to generate an intermediate file which will be used to send the identifiers (e.g. gene's identifiers) to InterMine. This file requires the identifier's type (e.g. `Gene`), the identifier (e.g `WBGene00007063`) and, optionally, the organims's name.
 
 > ### {% icon hands_on %} Hands-on: Generate InterMine file
 >
-> 1. **Create InterMine Interchange** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Tabular file"*: select the `GenesLocatedOnChromosome4` dataset
->    - *"Feature Type Column"*: select a column from the input file which contains the type of the dataset you are exporting to InterMine.
->    In this example, we have to edit the *"Feature Type"*
->    - *"Feature Type"*: edit the type of the dataset you are exporting to InterMine, in our example `Gene`
->    - *"Feature Identifier column"*: select a column from the input file which contains the identifier. In our example select the column *Column 2* 
->    - *"Feature Identifier"*: edit the identifier. This could be, as an example, a gene symbol like `GATA1` or another other identifier, e.g. `FBGN0000099` or perhaps a >      protein accession. In our example we do not have to edit anything.
->    - *"Organism Name column"*: select a column from the input file which contains the organism's name. In our example select column *Nothing selected*
->    - *"Organism Name"*: edit the organism's name, if you know it.
+> 1. **Create InterMine Interchange dateset** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Tabular file"*: select the `GenesLocatedOnChromosome4` dataset which contains some fly's genes
+>    - *"Feature Type Column"*: select a column from the input file which contains the identifer's type you are exporting to InterMine.
+>    In this example, because the `GenesLocatedOnChromosome4` dataset does not containt the type we have to edit it, in the *"Feature Type"*
+>    - *"Feature Type"*: edit the type of the identifiers you are exporting to InterMine, in this example `Gene`. It must be a class in the InterMine data model.
+>    - *"Feature Identifier column"*: select a column from the input file which contains the identifier. In our example select the column *Column 2* which contains the  gene symbol 
+>    - *"Feature Identifier"*: edit the identifier. This could be, as an example, a gene symbol like `GATA1` or another other identifier, e.g. `FBGN0000099` or perhaps a  protein accession. In our example we do not have to edit anything because it's retrieved from the `GenesLocatedOnChromosome4` dataset, under the *Column 2*
+>    - *"Organism Name column"*: select a column from the input file which contains the organism's name. In our example select the column *Nothing selected*
+>    - *"Organism Name"*: edit the organism's name, if you know it. In this example, no need to edit anything.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -121,21 +120,16 @@ Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and
 > 2. Click on **Execute**
 {: .hands_on}
 
-## Send data to InterMine
+## Send identifiers to InterMine
 
 Once the generation of the interchange dataset has been completed, open the green box related to **Create InterMine Interchange on data1**.
  
 > ### {% icon hands_on %} Hands-on: Send data
->   
+>
 >    1. Click on view intermine at **Registry** to be redirected to the InterMine registry, which shows a full list of InterMines and the various organisms they support.
->    2. Find an InterMine that has the organism type you’re working with, and click on **Send to** to export the data to.
+>    2. Find an InterMine that has the organism type you’re working with, in our case FlyMine, and click on the **Send to** green button to export the identifiers to.
+>    3. You are redirected to FlyMine, in the List Analysis page showing the identifiers you have just exported from Galaxy.
 >
 {: .hands_on}
-You are redirected to you InterMine of choice, in the List Analysis page which show the data you have just exported from Galaxy.
 
-You have now exported your data set from Galaxy to InterMine.
-
-# Conclusion
-{:.no_toc}
-
-TO COMPLETE
+You have now exported your identifiers from Galaxy to InterMine.
