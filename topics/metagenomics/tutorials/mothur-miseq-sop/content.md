@@ -1679,11 +1679,11 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 > > ### {% icon comment %} No link to Phinch on your dataset?
 > >
 > > If this visualisation link is not present on your Galaxy dataset, you can download the generated BIOM file from Galaxy,
-> > and upload it directly to the Phinch server at [https://usegalaxy.eu/phinch/](https://usegalaxy.eu/phinch/index.html).
+> > and upload it directly to the Phinch server at [https://usegalaxy.eu/phinch/](https://usegalaxy.eu/phinch/index.html). <br><br>
 > >
-> > **Important:** After downloading, please change the file extension from `.biom1` to `.biom` before uploading to Phinch.
+> > **Important:** After downloading, please change the file extension from `.biom1` to `.biom` before uploading to Phinch. <br><br>
 > >
-> > Note: This link will visualize your data in Phinch version 1. Recently, Phinch have released version 2 as a desktop application.
+> > **Note:** This link will visualize your data in Phinch version 1. Recently, Phinch have released version 2 as a desktop application.
 > > This file can also be visualized in Phinch2, but requires installation of Phinch to your local machine
 > {: .comment}
 {: .hands_on}
