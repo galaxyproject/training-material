@@ -128,10 +128,9 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 1. Import the sub-sampled FASTQ data and the Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3383115) or from the data library (ask your instructor)
+> 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3383115) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/3383115/files/737K-august-2016.txt
 >    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
 >    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
 >    https://zenodo.org/record/3383115/files/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
