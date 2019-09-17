@@ -1631,6 +1631,92 @@ innermost ring labeled "Bacteria"
 > {: .solution }
 {: .question}
 
+### Exercise: generating per-sample Krona plots (Optional)
+
+You may have noticed that this plot shows the results for all samples together.
+In order to save computation time, mothur pools all reads into a single file, and uses
+the `count table` file to keep track of which samples the reads came from.
+
+However, Krona does not understand the mothur count table format, but luckily we can get
+**Classify.otu** {% icon tool %} to output per-sample taxonomy files.
+
+
+> ### {% icon question %} Exercise: per-sample plots
+>
+> Try to create per-sample Krona plots. An few hints are given below, full answer
+> in the solution box. <br><br>
+>
+> 1. Re-run {% icon galaxy-refresh %} the **Classify.otu** {% icon tool %} tool we ran earlier
+>    - See if you can find a parameter to output a taxonomy file per sample (group)
+> 2. Run **Taxonomy-to-Krona** {% icon tool %} again on the per-sample taxonomy files (collection)
+> 3. Run **Krona** {% icon tool %}
+>
+> > ### {% icon solution %} Full Solution
+> >
+> > 1. Find the previous run of **Classify.otu** {% icon tool %} in your history
+> >   - Hit the **rerun** button {% icon galaxy-refresh %} to load the parameters you used before:
+> >      - {% icon param-file %} *"list"*: the `list` output from **Cluster.split** {% icon tool %}
+> >      - {% icon param-file %} *"count"*: the `count table` from **Remove.groups** {% icon tool %}
+> >      - {% icon param-file %} *"taxonomy"*: the `taxonomy` output from **Remove.groups** {% icon tool %}
+> >      - *"label"*: `0.03`
+> >   - Add new parameter setting:
+> >      - *"persample - allows you to find a consensus taxonomy for each group"*: `Yes`
+> >
+> >     <br> You should now have a collection with per-sample files <br><br>
+> >
+> > 2. **Taxonomy-to-Krona** {% icon tool %} with the following parameters
+> >     - {% icon param-collection %} *"Taxonomy file"*: the `taxonomy` collection from **Classify.otu** {% icon tool%}
+> >
+> > 3. **Krona pie chart** {% icon tool %} with the following parameters
+> >   - *"Type of input"*: `Tabular`
+> >   - {% icon param-collection %} *"Input file"*: the collection from **Taxonomy-to-Krona** {% icon tool %}
+> >
+> > <br> The final result should look something like this (switch between samples in list on left): <br><br>
+> >
+> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"> ![Krona](../../images/krona_multisample.png) </iframe>
+> >
+> {: .solution }
+{: .question}
+
+
+
+
+
+## Phinch
+
+We may now wish to further visualize our results. We can convert our *shared* file to the more widely used `biom` format and
+view it in a platform like [Phinch](http://www.phinch.org/).
+
+> ### {% icon hands_on %} Hands-on: Phinch
+>
+> 1. **Make.biom** {% icon tool %} with the following parameters
+>   - {% icon param-collection %} *"shared"*: the output from **Sub.sample** {% icon tool %}
+>   - {% icon param-collection %} *"constaxonomy"*: the `taxonomy` output from **Classify.otu** {% icon tool %}
+>   - {% icon param-file %} *"metadata"*: the `mouse.dpw.metadata` file you uploaded at the start of this tutorial
+>
+> 2. **View** the file in Phinch
+>   - If you expand the the output biom dataset, you will see a link to view the file at Phinch
+>
+>       ![Icon to view at Phinch](../../../../shared/images/viewatphinch.png)
+>
+>    - Click on this link ("view biom at Phinch")
+>
+>  This link will lead you to a Phinch server (hosted by Galaxy), which will automatically load your file, and
+>  where you can several interactive visualisations:
+>  ![Phinch overview](../../../../shared/images/phinch_overviewpage.png)
+>
+> > ### {% icon comment %} No link to Phinch on your dataset?
+> >
+> > If this visualisation link is not present on your Galaxy dataset, you can download the generated BIOM file from Galaxy,
+> > and upload it directly to the Phinch server at [https://usegalaxy.eu/phinch/](https://usegalaxy.eu/phinch/index.html).
+> >
+> > **Important:** After downloading, please change the file extension from `.biom1` to `.biom` before uploading to Phinch.
+> >
+> > Note: This link will visualize your data in Phinch version 1. Recently, Phinch have released version 2 as a desktop application.
+> > This file can also be visualized in Phinch2, but requires installation of Phinch to your local machine
+> {: .comment}
+{: .hands_on}
+
 
 # Conclusion
 {:.no_toc}
