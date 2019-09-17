@@ -18,7 +18,7 @@ If you want to build the website locally, please have a look at the [tutorial](h
 
 # License
 
-This content of this work is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0).
+The content of the tutorials and website are licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0).
 
 The code behind the infrastructure is licensed under the [MIT License](LICENSE.md)
 
