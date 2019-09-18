@@ -358,8 +358,8 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >
 >    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
 >
->       ![Visualize button](../../images/Visualize_output.png =100x20)
->![Viewer](../../images/Unipept_viewer.png)
+>       ![Visualize button](../../images/Visualize_output.png){:height="50%" width="50%"}
+>       ![Viewer](../../images/Unipept_viewer.png){:height="50%" width="50%"}
 
 >
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
@@ -369,7 +369,7 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viever plugin")
 
 > The user can perform the same functions for viewing the EC output.
-> ![Visualize button](../../images/EC-viewer.png)
+> ![Visualize button](../../images/EC-viewer.png){:height="50%" width="50%"}
 The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
 ![Unipept Tree viewer visual output](../../images/EC_treemap.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
 {: .hands_on}
