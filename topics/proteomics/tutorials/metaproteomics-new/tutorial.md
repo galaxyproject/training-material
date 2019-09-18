@@ -365,13 +365,13 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
 >
 >       ![Unipept Tree viewer visual output](../../images/Treeview_Unipet.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
->       ![Unipept Sunburst visual output](../../images/subburst_unipept.png "Interactive Sunburst visualization from the Unipept Tree viever plugin")
->       ![Unipept Tree map visual output](../../images/Treemap_Unipet.png "Interactive Tree map visualization from the Unipept Tree viever plugin")
+>       ![Unipept Sunburst visual output](../../images/sunburst_unipept.png "Interactive Sunburst visualization from the Unipept Tree viever plugin")
+>       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viever plugin")
 
 > The user can perform the same functions for viewing the EC output.
-> ![Visualize button](../../images/EC_viewer.png)
+> ![Visualize button](../../images/EC-viewer.png)
 The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
-![Unipept Tree viewer visual output](../../images/EC_treemapt.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
+![Unipept Tree viewer visual output](../../images/EC_treemap.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
 {: .hands_on}
 
 ## Genus taxonomy level summary
