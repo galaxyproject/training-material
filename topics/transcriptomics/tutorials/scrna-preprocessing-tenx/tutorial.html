@@ -757,8 +757,8 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <ol id="markdown-toc">
   <li><a href="#producing-a-count-matrix-from-fastq" id="markdown-toc-producing-a-count-matrix-from-fastq">Producing a Count Matrix from FASTQ</a>    <ol>
       <li><a href="#10x-chemistries" id="markdown-toc-10x-chemistries">10x Chemistries</a></li>
-      <li><a href="#inspecting-the-output-files" id="markdown-toc-inspecting-the-output-files">Inspecting the Output Files</a></li>
       <li><a href="#performing-the-demultiplexing-and-quantification" id="markdown-toc-performing-the-demultiplexing-and-quantification">Performing the Demultiplexing and Quantification</a></li>
+      <li><a href="#inspecting-the-output-files" id="markdown-toc-inspecting-the-output-files">Inspecting the Output Files</a></li>
     </ol>
   </li>
   <li><a href="#producing-a-quality-count-matrix" id="markdown-toc-producing-a-quality-count-matrix">Producing a Quality Count Matrix</a>    <ol>
@@ -961,6 +961,48 @@ https://zenodo.org/record/3383115/files/737K-august-2016.txt
   </blockquote>
 </blockquote>
 
+<h2 id="performing-the-demultiplexing-and-quantification">Performing the Demultiplexing and Quantification</h2>
+
+<p>We will now proceed to demultiplex, map, and quantify both sets of <span class="notranslate">reads</span> using the correct chemistry discovered in the previous sub-section.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <p><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L001_R1_001.fastq.gz</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, Barcode <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L001_R2_001.fastq.gz</code></li>
+    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Input Pairs</em></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L002_R1_001.fastq.gz</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, Barcode <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L002_R2_001.fastq.gz</code>
+(<em>pay attention to the</em> <strong>L001</strong> <em>and</em> <strong>L002</strong> <em>names</em>)</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq Cell Barcode Whitelist”</em>: <code class="highlighter-rouge">737K-august-2016.txt</code></li>
+    <li><em>“Custom or built-in reference genome”</em>: <code class="highlighter-rouge">Use a built-in index</code>
+      <ul>
+        <li><em>“Reference genome with or without an annotation”</em>: <code class="highlighter-rouge">use genome reference without builtin gene-model</code>
+          <ul>
+            <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Human (Homo Sapiens): hg19 Full</code></li>
+            <li><em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="highlighter-rouge">Homo_sapiens.GRCh37.75.gtf</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>In <em>“Advanced Settings”</em>:
+      <ul>
+        <li><em>“Configure Chemistry Options”</em>: <code class="highlighter-rouge">Cell Ranger v3</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <blockquote class="comment">
+    <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>We leave the <em>Genomic features to collect UMI counts upon</em> at <code class="highlighter-rouge">Gene</code> and <em>UMI deduplication (collapsing) algorithm</em> at <code class="highlighter-rouge">All</code>, as these are the options that emulate the <em>Cell Ranger</em> pipeline.</p>
+
+  </blockquote>
+
+</blockquote>
+
 <h2 id="inspecting-the-output-files">Inspecting the Output Files</h2>
 
 <p>At this stage <strong><span class="notranslate">RNA</span> STARsolo</strong> has output 5 files, 2 <span class="notranslate">mapping</span> quality files and 3 matrix files:</p>
@@ -977,7 +1019,7 @@ https://zenodo.org/record/3383115/files/737K-august-2016.txt
 <p>Let us investigate the output log. This type of quality control is essential in any <span class="notranslate">RNA</span>-based analysis and it is strongly recommended that you familiarise yourself with the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a> tutorial.</p>
 
 <blockquote>
-  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <p><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1127,48 +1169,6 @@ https://zenodo.org/record/3383115/files/737K-august-2016.txt
 </blockquote>
 
 <p>The main information to gather at this stage is that the <code class="highlighter-rouge">nCellBarcodes</code> tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (<code class="highlighter-rouge">nMatch</code>) has the largest value, and that the number of <span class="notranslate">reads</span> that map to the genome but not to a feature/gene given in the GTF (<code class="highlighter-rouge">nNoFeature</code>) is not too large. The number of no features is also quite high when <span class="notranslate">mapping</span> the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.</p>
-
-<h2 id="performing-the-demultiplexing-and-quantification">Performing the Demultiplexing and Quantification</h2>
-
-<p>We will now proceed to demultiplex, map, and quantify both sets of <span class="notranslate">reads</span> using the correct chemistry discovered in the previous sub-section.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
-
-  <p><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
-  <ul>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L001_R1_001.fastq.gz</code></li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, Barcode <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L001_R2_001.fastq.gz</code></li>
-    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Input Pairs</em></li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L002_R1_001.fastq.gz</code></li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, Barcode <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">pbmc_1k_v3_S1_L002_R2_001.fastq.gz</code>
-(<em>pay attention to the</em> <strong>L001</strong> <em>and</em> <strong>L002</strong> <em>names</em>)</li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq Cell Barcode Whitelist”</em>: <code class="highlighter-rouge">737K-august-2016.txt</code></li>
-    <li><em>“Custom or built-in reference genome”</em>: <code class="highlighter-rouge">Use a built-in index</code>
-      <ul>
-        <li><em>“Reference genome with or without an annotation”</em>: <code class="highlighter-rouge">use genome reference without builtin gene-model</code>
-          <ul>
-            <li><em>“Select reference genome”</em>: <code class="highlighter-rouge">Human (Homo Sapiens): hg19 Full</code></li>
-            <li><em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="highlighter-rouge">Homo_sapiens.GRCh37.75.gtf</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>In <em>“Advanced Settings”</em>:
-      <ul>
-        <li><em>“Configure Chemistry Options”</em>: <code class="highlighter-rouge">Cell Ranger v3</code></li>
-      </ul>
-    </li>
-  </ul>
-
-  <blockquote class="comment">
-    <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-
-    <p>We leave the <em>Genomic features to collect UMI counts upon</em> at <code class="highlighter-rouge">Gene</code> and <em>UMI deduplication (collapsing) algorithm</em> at <code class="highlighter-rouge">All</code>, as these are the options that emulate the <em>Cell Ranger</em> pipeline.</p>
-
-  </blockquote>
-
-</blockquote>
 
 <h1 id="producing-a-quality-count-matrix">Producing a Quality Count Matrix</h1>
 
