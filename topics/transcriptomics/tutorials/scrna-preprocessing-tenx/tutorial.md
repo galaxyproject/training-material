@@ -203,6 +203,39 @@ To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in
 {: .question}
 
 
+
+## Performing the Demultiplexing and Quantification
+
+We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
+
+
+> ### {% icon hands_on %} Hands-on
+>
+> **RNA STARsolo** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
+>    - {% icon param-repeat %} *Insert Input Pairs*
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
+>    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
+>      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `737K-august-2016.txt`
+>    - *"Custom or built-in reference genome"*: `Use a built-in index`
+>        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
+>            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
+>    - In *"Advanced Settings"*:
+>        - *"Configure Chemistry Options"*: `Cell Ranger v3`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the *Cell Ranger* pipeline.
+>    >
+>    {: .comment}
+>
+{: .hands_on}
+
+
+
 ## Inspecting the Output Files
 
 At this stage **RNA STARsolo** has output 5 files, 2 mapping quality files and 3 matrix files:
@@ -305,35 +338,6 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 
 The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.
 
-## Performing the Demultiplexing and Quantification
-
-We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
-
-
-> ### {% icon hands_on %} Hands-on
->
-> **RNA STARsolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->    - {% icon param-repeat %} *Insert Input Pairs*
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->      (*pay attention to the* **L001** *and* **L002** *names*)
->    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `737K-august-2016.txt`
->    - *"Custom or built-in reference genome"*: `Use a built-in index`
->        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
->            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
->    - In *"Advanced Settings"*:
->        - *"Configure Chemistry Options"*: `Cell Ranger v3`
->
->    > ### {% icon comment %} Comment
->    >
->    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the *Cell Ranger* pipeline.
->    >
->    {: .comment}
->
-{: .hands_on}
 
 
 # Producing a Quality Count Matrix
