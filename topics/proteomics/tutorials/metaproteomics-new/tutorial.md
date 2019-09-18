@@ -253,7 +253,7 @@ proteins and provides a fast matching algorithm for peptides.
 > ### {% icon comment %} Unipept
 >
 > Users can access UniPept via a [web page](https://unipept.ugent.be) and paste peptide
-> sequences into the search form to retrieve protein information. But we`ll use the Galaxy
+> sequences into the search form to retrieve protein information. But we'll use the Galaxy
 > *Unipept* tool to automate the process. The *Unipept* tool sends the peptide list to the
 > UniPept REST API service, then transforms the results into datasets that can be further analyzed
 > or operated on within Galaxy.
@@ -358,12 +358,20 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >
 >    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
 >
->       ![Visualize button](../../images/visualize_button.png)
+>       ![Visualize button](../../images/Visualize_output.png)
+>![Viewer](../../images/Unipept_viewer.png)
+
 >
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
 >
->       ![Unipept Tree viewer visual output](../../images/unipept_tree_viewer.png "Interactive visualization from the Unipept Tree viever plugin")
->
+>       ![Unipept Tree viewer visual output](../../images/Treeview_Unipet.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
+>       ![Unipept Sunburst visual output](../../images/subburst_unipept.png "Interactive Sunburst visualization from the Unipept Tree viever plugin")
+>       ![Unipept Tree map visual output](../../images/Treemap_Unipet.png "Interactive Tree map visualization from the Unipept Tree viever plugin")
+
+> The user can perform the same functions for viewing the EC output.
+> ![Visualize button](../../images/EC_viewer.png)
+The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
+![Unipept Tree viewer visual output](../../images/EC_treemapt.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
 {: .hands_on}
 
 ## Genus taxonomy level summary
@@ -406,15 +414,13 @@ ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc’
 >
 > 2. Click **Execute** and inspect the query results file after it turned green:
 >
->     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/metaproteomics_summary.png "Query Tabular output")
+>     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/Genera_PSM.png "Query Tabular output")
 >
 {: .hands_on}
 
 ## Functional Analysis
 
-Recent advances in microbiome research indicate that functional characterization via metaproteomics analysis has the potential to accurately
-measure the microbial response to perturbations. In particular, metaproteomics enables the estimation of the function of the microbial
-community based on expressed microbial proteome.
+Recent advances in microbiome research indicate that functional characterization via metaproteomics analysis has the potential to accurately measure the microbial response to perturbations. In particular, metaproteomics enables the estimation of the function of the microbial community based on expressed microbial proteome.
 
 In the following chapter, a functional analysis will be performed using the **UniPept** application `peptinfo` in order to match the list of peptides with the correlated Gene Ontology terms.
 This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data. We also performed EC number analysis on this dataset
@@ -469,7 +475,7 @@ The **UniPept** application `peptinfo` can be used to return the list of protein
 {: .hands_on}
 
 
-#### Combine all information to quantify the ECand GO results
+#### Combine all information to quantify the EC and GO results
 
 As a final step we will use **Query Tabular** in a more sophisticated way to combine all information to quantify the EC analysis. 
 > ### {% icon hands_on %} Hands-on: Query Tabular
@@ -559,6 +565,7 @@ The next three steps are to filter out the three different Go terms. For that we
 > 2. Click **Execute**.
 >
 {: .hands_on}
+> ![Filter output](../../images/Biological_process.png)
 
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
@@ -570,7 +577,7 @@ The next three steps are to filter out the three different Go terms. For that we
 > 2. Click **Execute**.
 >
 {: .hands_on}
-
+> ![Filter output](../../images/Cellular_component.png)
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
 > **Filter** {% icon tool %} with the following parameters: 
@@ -581,8 +588,11 @@ The next three steps are to filter out the three different Go terms. For that we
 > 2. Click **Execute**.
 >
 {: .hands_on}
+> ![Filter output](../../images/molecular_function.png)
 
 With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.
+
+This marks the end to the metaproteomics workflow! 
 
 > ### {% icon comment %} References
 >
