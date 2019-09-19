@@ -329,10 +329,10 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 > These metrics can be grouped into more broad categories:
 >
 > * `nNinBarcode` + `nUMIhomopolymer` + `nNoMatch` + `nTooMany` + `nNoExactMatch` = number of reads with CBs that do not match whitelist.
-> * `nUnmapped` + `nAmbigFeature` = number of reads without defined feature (gene).
+> * `nUnmapped` + `nAmbigFeature` + `nNoFeature` + `nTooMany` (from the `Gene` section) = number of reads without defined feature (gene).
 > * `nMatch` = number of reads that are output as solo counts.
 >
-> The three categoties above summed together should be equal to the total number of reads.
+> The three categories above summed together should be equal to the total number of reads (which is also given in the MultiQC output).
 >
 {: .details}
 
