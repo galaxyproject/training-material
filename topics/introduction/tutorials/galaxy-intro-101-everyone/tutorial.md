@@ -102,7 +102,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    {% include snippets/create_new_history.md %}
 >![Rename the history]({{ site.baseurl }}{% link shared/images/rename_history.png %})
 
-> **Rename your history** to be meaningful and easy to find. 
+> **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history. 
 >    {% include snippets/rename_history.md %}
 {: .hands_on}
 
@@ -125,7 +125,8 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Check the datatype 
+> 3. Check the datatype. The datatype of the iris dataset is `csv`. Change datatype
+> if it is different then `csv`.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -146,13 +147,13 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 >
 > 1. **csv_to_tabular** {% icon tool %} with the following parameters:
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    > * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
+>    > * Select `Convert CSV to tabular`
+>    > * Click the **Convert datatype** button
 >    {: .comment}
 >
 {: .hands_on}
