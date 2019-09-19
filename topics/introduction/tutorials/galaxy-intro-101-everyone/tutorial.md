@@ -84,8 +84,7 @@ The Galaxy interface consists of three main parts:
 
 # Create a history
 
-Galaxy allows you to create histories. They gather all the operations performed on certain datasets in order to achieve the desired results. 
-Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
+Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
@@ -192,13 +191,116 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 
 
-# What does the dataset contain?
+# Data Analysis: What does the dataset contain?
 
-Now we are going to inspect the dataset and count the number of different species and how many sample by species are present in the dataset.
+Now we are going to inspect the dataset using simple tools in order to get used to galaxy interface and answer basic questions.
 
 ## How many different species are in the dataset?
 
-## How many sample for each species?
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1.   **Cut** {% icon tool %} with the following parameters:
+>    - *"Cut columns"* should be changed to `c5`
+>    - *"Delimited by"* should be kept to `Tab`
+>    - *"From"* select your last output file
+>
+> 2.    Click **Execute**
+>
+> 3. Wait for the job to finish
+>
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
+>
+> 5.   **Unique** {% icon tool %} with the following parameters:
+>    - *"File to scan for unique values"* select your last output file
+>
+> 6. Click **Execute**
+>
+> 7. Wait for the job to finish
+>
+> 8. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+> 9. Examine the output file
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+> How many different species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1 
+> > ---- 
+> > setosa
+> >
+> > versicolor
+> >
+> > virginica
+> {: .solution}
+{: .question}
+
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+Another way round to answer this question with only one tool:
+>
+> 1.   **Group** {% icon tool %} with the following parameters:
+>    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Group by column"* should be changed to `Column: 5`
+>
+> 2. Click **Execute**
+>
+> 3. Wait for the job to finish
+>
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Question
+> How many different species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> > 
+> >
+> > 1 
+> > ---- 
+> > setosa
+> >
+> > versicolor
+> >
+> > virginica
+> {: .solution}
+{: .question}
+
+## How many samples by species?
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1.   **Group** {% icon tool %} with the following parameters:
+>    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Group by column"* should be changed to `Column: 5`
+>    - *"Insert operation"* click on the icon.
+>    - *"Type"* select `Count`
+>    - *"On column"* select `Column: 1`
+> 2. Click **Execute**
+> 3. Wait for the job to finish
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+> How many samples by species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> > 
+> >
+> > 1 | 2
+> > ---- | ----------
+> > setosa | 50
+> > versicolor | 50
+> > virginica | 50
+> {: .solution}
+{: .question}
 
 # Analysis: How to differentiate the different Iris species?
 
@@ -277,62 +379,11 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon question %} Questions
 >
-> 1. Does it help to highlight Iris flower charactertistics?
+> 1. Does it help to highlight Iris flower characteristics?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Datamash**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Datamash** {% icon tool %} with the following parameters:
->    - *"Group by fields"*: `5`
->    - *"Input file has a header line"*: `Yes`
->    - *"Print header line"*: `Yes`
->    - *"Sort input"*: `Yes`
->    - *"Ignore case when grouping"*: `Yes`
->    - In *"Operation to perform on each group"*:
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c1`
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c2`
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c3`
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c4`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
 > >
 > {: .solution}
 >
