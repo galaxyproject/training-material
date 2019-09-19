@@ -379,11 +379,14 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon question %} Questions
 >
-> 1. Does it help to highlight Iris flower characteristics?
+> 1. Can we differentiate the different Iris flower species?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
+> > 1. From the results, we can see that the average Setosa petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
+> > The same can be observed for Setosa petal widths. These numbers are much smaller (width and length) then versicolor and virginica petals.
+> > We can then use these characteristics to differentiate Iris Setosa from the two other species (versicolor and virginica). On the other hand,
+> > we cannot easily differentiate Iris Versicolor from Iris Virginica. Further analysis is necessary.
 > >
 > {: .solution}
 >
@@ -421,55 +424,41 @@ check whether we can spot any immediate patterns.
 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What does this scatter plot tell us about Iris species?
+> 2. Make a new scatter plot with Petal length versus Petal width. Can we differentiate the three Iris species?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. We get similar results than with Summary and statistics: Iris Setosa can clearly be distingished from Iris versicolor and
+> > iris virginica. We can also see that Sepal width and length are not sufficient features to differentiate Iris versicolor from Iris
+> > virginica.
+> > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+> >  - *"Column to plot on x-axis"*: `3`
+> >  - *"Column to plot on y-axis"*: `4`
+> >  - *"Plot title"*: `Petal length as a function of petal width`
+> >  - *"Label for x axis"*: `Petal length`
+> >  - *"Label for y axis"*: `Petal width`
+> >  - In *"Advanced Options"*:
+> >      - *"Data point options"*: `User defined point options`
+> >          - *"relative size of points"*: `2.0`
+> >      - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+> >          - *"column differentiating the different groups"*: `5`
+> >          - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete (discrete, max=8 colors)`
+> >      - *"Axis title options"*: `Default`
+> >      - *"Axis text options"*: `Default`
+> >      - *"Plot title options"*: `Default`
+> >      - *"Axis scaling"*: `Automatic axis scaling`
 > >
+> > Click **Execute** to perform the graph. Your new output dataset will look something like this:
+> >
+> >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
+> > We can better differentiate the 3 Iris species but for some samples the petal length versus width is still insufficient
+> > to differentiate Iris versicolor from Iris virginica. And as before, Iris setosa can easily distinguish from the two other species.
 > {: .solution}
 >
 {: .question}
-
-## Sub-step with **Transpose**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Transpose** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 # Share your work
 
