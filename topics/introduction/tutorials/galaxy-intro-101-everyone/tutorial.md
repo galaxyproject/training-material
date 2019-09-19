@@ -84,8 +84,7 @@ The Galaxy interface consists of three main parts:
 
 # Create a history
 
-Galaxy allows you to create histories. They gather all the operations performed on certain datasets in order to achieve the desired results. 
-Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
+Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
@@ -178,30 +177,116 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 
 
-# What does the dataset contain?
+# Data Analysis: What does the dataset contain?
 
-Now we are going to inspect the dataset and count the number of different species and how many sample by species are present in the dataset.
+Now we are going to inspect the dataset using simple tools in order to get used to galaxy interface and answer basic questions.
 
 ## How many different species are in the dataset?
 
-## How many sample for each species?
-
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1.   **Cut** {% icon tool %} with the following parameters:
+>    - *"Cut columns"* should be changed to `c5`
+>    - *"Delimited by"* should be kept to `Tab`
+>    - *"From"* select your last output file
 >
-{: .details}
+> 2.    Click **Execute**
+>
+> 3. Wait for the job to finish
+>
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
+>
+> 5.   **Unique** {% icon tool %} with the following parameters:
+>    - *"File to scan for unique values"* select your last output file
+>
+> 6. Click **Execute**
+>
+> 7. Wait for the job to finish
+>
+> 8. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+> 9. Examine the ouput file
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+> How many different species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1 
+> > ---- 
+> > setosa
+> >
+> > versicolor
+> >
+> > virginica
+> {: .solution}
+{: .question}
+
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+Another way round to answer this question with only one tool:
+>
+> 1.   **Group** {% icon tool %} with the following parameters:
+>    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Group by column"* should be changed to `Column: 5`
+>
+> 2. Click **Execute**
+>
+> 3. Wait for the job to finish
+>
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Question
+> How many different species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> > 
+> >
+> > 1 
+> > ---- 
+> > setosa
+> >
+> > versicolor
+> >
+> > virginica
+> {: .solution}
+{: .question}
+
+## How many samples by species?
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1.   **Group** {% icon tool %} with the following parameters:
+>    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Group by column"* should be changed to `Column: 5`
+>    - *"Insert operation"* click on the icon.
+>    - *"Type"* select `Count`
+>    - *"On column"* select `Column: 1`
+> 2. Click **Execute**
+> 3. Wait for the job to finish
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+> How many samples by species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> > 
+> >
+> > 1 | 2
+> > ---- | ----------
+> > setosa | 50
+> > versicolor | 50
+> > virginica | 50
+> {: .solution}
+{: .question}
 
 
 ## Sub-step with **Datamash**
