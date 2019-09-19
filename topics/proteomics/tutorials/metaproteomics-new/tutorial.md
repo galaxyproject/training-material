@@ -358,8 +358,8 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >
 >    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
 >
->       ![Visualize button](../../images/Visualize_output.png){:height="50%" width="50%"}
->       ![Viewer](../../images/Unipept_viewer.png){:height="50%" width="50%"}
+>       ![Visualize button](../../images/Visualize_output.png =100x)
+>       ![Viewer](../../images/Unipept_viewer.png =20x)
 
 >
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
