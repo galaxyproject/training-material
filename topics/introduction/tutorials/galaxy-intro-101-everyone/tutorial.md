@@ -84,8 +84,7 @@ The Galaxy interface consists of three main parts:
 
 # Create a history
 
-Galaxy allows you to create histories. They gather all the operations performed on certain datasets in order to achieve the desired results. 
-Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
+Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
@@ -145,7 +144,7 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **csv_to_tabular** {% icon tool %} with the following parameters:
+> 1. **csv_to_tabular** {% icon tool %}
 >
 >
 >    > ### {% icon comment %} Comment
@@ -156,6 +155,13 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 >    > * Click the **Convert datatype** button
 >    {: .comment}
 >
+> 2. Rename the dataset to `iris tabular`
+>
+>    {% include snippets/rename_dataset.md %}
+> 3. Add the tag `preprocessing` to the dataset
+>
+>    {% include snippets/add_tag.md %}
+> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 {: .hands_on}
 
 
@@ -163,162 +169,230 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Remove header** {% icon tool %} with the following parameters:
+> 1. **Remove beginning** {% icon tool %} with the following parameters:
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    - *Remove first*: `1` to remove the first line only.
+>    - *from*: {% icon param-file %}: select **iris tabular**
+>    - **Execute**
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Use the **tools search box** to find **Removing beginning** {% icon tool %}. 
 >    {: .comment}
 >
+> 2. Rename the dataset to `iris clean`
+>
+>    {% include snippets/rename_dataset.md %}
+> 3. Add the tag `clean` to the dataset
+>
+>    {% include snippets/add_tag.md %}
+> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 {: .hands_on}
 
 
 
-# What does the dataset contain?
+# Data Analysis: What does the dataset contain?
 
-Now we are going to inspect the dataset and count the number of different species and how many sample by species are present in the dataset.
+Now we are going to inspect the dataset using simple tools in order to get used to galaxy interface and answer basic questions.
 
 ## How many different species are in the dataset?
 
-## How many sample for each species?
-
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1.   **Cut** {% icon tool %} with the following parameters:
+>    - *"Cut columns"* should be changed to `c5`
+>    - *"Delimited by"* should be kept to `Tab`
+>    - *"From"* select your last output file
 >
-{: .details}
+> 2.    Click **Execute**
+>
+> 3. Wait for the job to finish
+>
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
+>
+> 5.   **Unique** {% icon tool %} with the following parameters:
+>    - *"File to scan for unique values"* select your last output file
+>
+> 6. Click **Execute**
+>
+> 7. Wait for the job to finish
+>
+> 8. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+> 9. Examine the output file
+>
+{: .hands_on}
 
+> ### {% icon question %} Question
+> How many different species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1 
+> > ---- 
+> > setosa
+> >
+> > versicolor
+> >
+> > virginica
+> {: .solution}
+{: .question}
 
-## Sub-step with **Datamash**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
+Another way round to answer this question with only one tool:
+>
+> 1.   **Group** {% icon tool %} with the following parameters:
+>    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Group by column"* should be changed to `Column: 5`
+>
+> 2. Click **Execute**
+>
+> 3. Wait for the job to finish
+>
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Question
+> How many different species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> > 
+> >
+> > 1 
+> > ---- 
+> > setosa
+> >
+> > versicolor
+> >
+> > virginica
+> {: .solution}
+{: .question}
+
+## How many samples by species?
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1.   **Group** {% icon tool %} with the following parameters:
+>    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Group by column"* should be changed to `Column: 5`
+>    - *"Insert operation"* click on the icon.
+>    - *"Type"* select `Count`
+>    - *"On column"* select `Column: 1`
+> 2. Click **Execute**
+> 3. Wait for the job to finish
+> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+> How many samples by species are in the dataset?
+>
+> > ### {% icon solution %} Solution
+> > 
+> >
+> > 1 | 2
+> > ---- | ----------
+> > setosa | 50
+> > versicolor | 50
+> > virginica | 50
+> {: .solution}
+{: .question}
+
+# Analysis: How to differentiate the different Iris species?
+
+Our objective is to find what differentiate the different Iris species. We know that we have **3** species of iris flowers, with
+**50** samples for each:
+- setosa,
+- versicolor,
+- virginica.
+
+These species look very much alike as shown on the figure below.
+
+![3 species of Iris flowers](../../images/iris_flowers.png "3 species of Iris flowers")
+
+And our objective is to find out whether the features we have been given for each species can help us to highlight the differences between the 3 species.
+
+In our dataset, we have the following features measured for each sample:
+- Petal length
+- Petal width
+- Sepal length
+- Sepal width
+
+> ### {% icon comment %} petal and sepal
+> The image below shows you what is a sepal and petal.
+> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal" of Iris flowers")
+{: .comment}
+
+## Summary and descriptive statistics with **Datamash**
+
+> ### {% icon hands_on %} Hands-on: Get the mean and sample standard deviation of Iris flower features
+>
 > 1. **Datamash** {% icon tool %} with the following parameters:
+>    - *Input tabular dataset*: {% icon param-file %}: select **iris tabular**
 >    - *"Group by fields"*: `5`
->    - *"Input file has a header line"*: `Yes`
->    - *"Print header line"*: `Yes`
+>    - *"Input file has a header line"*: `No`
+>    - *"Print header line"*: `No`
 >    - *"Sort input"*: `Yes`
+>    - "Print all fields from input file": `No`
 >    - *"Ignore case when grouping"*: `Yes`
 >    - In *"Operation to perform on each group"*:
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c1`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c1`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c2`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c2`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c3`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c3`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c4`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c4`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename the dataset to `iris summary and statistics`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+>    {% include snippets/rename_dataset.md %}
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. Add the tag `analysis` to the dataset
+>
+>    {% include snippets/add_tag.md %}
+> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+>
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Does it help to highlight Iris flower characteristics?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Datamash**
+## Visualize Iris dataset with **Scatterplot w ggplot2**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Datamash** {% icon tool %} with the following parameters:
->    - *"Group by fields"*: `5`
->    - *"Input file has a header line"*: `Yes`
->    - *"Print header line"*: `Yes`
->    - *"Sort input"*: `Yes`
->    - *"Ignore case when grouping"*: `Yes`
->    - In *"Operation to perform on each group"*:
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c1`
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c2`
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c3`
->        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Mean`
->            - *"On column"*: `c4`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scatterplot w ggplot2**
+Let's visualize the Iris dataset to see how the features depend on each other, and 
+check whether we can spot any immediate patterns.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -397,12 +471,28 @@ The idea is to keep the theory description before quite simple to focus more on 
 {: .question}
 
 
-## Re-arrange
+# Share your work
 
-To create the template, each step of the workflow had its own subsection.
+One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
+
+1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
+2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
+3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
+
+> ### {% icon comment %} Permissions
+> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
+>
+> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Share history and workflow
+>
+> 1. Share one of your histories with your neighbour.
+> 2. See if you can do the same with your workflow!
+> 3. Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
