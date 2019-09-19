@@ -318,93 +318,6 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Sub-step with **Grouping1**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Grouping1** {% icon tool %} with the following parameters:
->    - *"Group by column"*: `c5`
->    - *"Ignore case while grouping?"*: `Yes`
->    - *"Ignore lines beginning with these characters"*: ``
->    - In *"Operation"*:
->        - {% icon param-repeat %} *"Insert Operation"*
->            - *"Type"*: ``
->            - *"On column"*: `c[`
->            - *"Round result to nearest integer?"*: ``
->            - *"Replace non numeric data"*: `[`
->        - {% icon param-repeat %} *"Insert Operation"*
->            - *"Type"*: ``
->            - *"On column"*: `c]`
->            - *"Round result to nearest integer?"*: ``
->            - *"Replace non numeric data"*: `]`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Grouping1**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Grouping1** {% icon tool %} with the following parameters:
->    - *"Group by column"*: `c5`
->    - *"Ignore case while grouping?"*: `Yes`
->    - *"Ignore lines beginning with these characters"*: ``
->    - In *"Operation"*:
->        - {% icon param-repeat %} *"Insert Operation"*
->            - *"Type"*: `Count`
->            - *"On column"*: `c5`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **Scatterplot w ggplot2**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -426,15 +339,12 @@ The idea is to keep the theory description before quite simple to focus more on 
 >        - *"Plot title options"*: `Default`
 >        - *"Axis scaling"*: `Automatic axis scaling`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Click **Execute** to perform the graph. Your new output dataset will look something like this:
 >
->    ***TODO***: *Consider adding a comment or tip box*
+>    ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter.png)
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
+
 {: .hands_on}
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
