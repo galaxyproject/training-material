@@ -200,82 +200,88 @@ Now we are going to inspect the dataset and count the number of different specie
 
 ## How many sample for each species?
 
-# Title of the section usually corresponding to a big step in the analysis
+# Analysis: How to differentiate the different Iris species?
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+Our objective is to find what differentiate the different Iris species. We know that we have **3** species of iris flowers, with
+**50** samples for each:
+- setosa,
+- versicolor,
+- virginica.
 
-![Alternative text](../../images/image_name "Legend of the image")
+These species look very much alike as shown on the figure below.
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+![3 species of Iris flowers](../../images/iris_flowers.png "3 species of Iris flowers")
 
-***TODO***: *Consider adding a detail box to expand the theory*
+And our objective is to find out whether the features we have been given for each species can help us to highlight the differences between the 3 species.
 
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
+In our dataset, we have the following features measured for each sample:
+- Petal length
+- Petal width
+- Sepal length
+- Sepal width
 
+> ### {% icon comment %} petal and sepal
+> The image below shows you what is a sepal and petal.
+> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal" of Iris flowers")
+{: .comment}
 
-## Sub-step with **Datamash**
+## Summary and descriptive statistics with **Datamash**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get the mean and sample standard deviation of Iris flower features
 >
 > 1. **Datamash** {% icon tool %} with the following parameters:
+>    - *Input tabular dataset*: {% icon param-file %}: select **iris tabular**
 >    - *"Group by fields"*: `5`
->    - *"Input file has a header line"*: `Yes`
->    - *"Print header line"*: `Yes`
+>    - *"Input file has a header line"*: `No`
+>    - *"Print header line"*: `No`
 >    - *"Sort input"*: `Yes`
+>    - "Print all fields from input file": `No`
 >    - *"Ignore case when grouping"*: `Yes`
 >    - In *"Operation to perform on each group"*:
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c1`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c1`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c2`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c2`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c3`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c3`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >            - *"Type"*: `Mean`
 >            - *"On column"*: `c4`
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->            - *"Type"*: `Sample Standard deviantion`
+>            - *"Type"*: `Sample Standard deviation`
 >            - *"On column"*: `c4`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Rename the dataset to `iris summary and statistics`
 >
->    ***TODO***: *Consider adding a comment or tip box*
+>    {% include snippets/rename_dataset.md %}
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. Add the tag `analysis` to the dataset
+>
+>    {% include snippets/add_tag.md %}
+> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+>
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Does it help to highlight Iris flower charactertistics?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
 > >
 > {: .solution}
 >
@@ -419,7 +425,10 @@ The idea is to keep the theory description before quite simple to focus more on 
 >
 {: .question}
 
-## Sub-step with **Scatterplot w ggplot2**
+## Visualize Iris dataset with **Scatterplot w ggplot2**
+
+Let's visualize the Iris dataset to see how the features depend on each other, and 
+check whether we can spot any immediate patterns.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
