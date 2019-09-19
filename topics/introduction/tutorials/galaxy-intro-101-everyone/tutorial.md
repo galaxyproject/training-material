@@ -145,7 +145,7 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **csv_to_tabular** {% icon tool %} with the following parameters:
+> 1. **csv_to_tabular** {% icon tool %}
 >
 >
 >    > ### {% icon comment %} Comment
@@ -156,6 +156,13 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 >    > * Click the **Convert datatype** button
 >    {: .comment}
 >
+> 2. Rename the dataset to `iris tabular`
+>
+>    {% include snippets/rename_dataset.md %}
+> 3. Add the tag `preprocessing` to the dataset
+>
+>    {% include snippets/add_tag.md %}
+> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 {: .hands_on}
 
 
@@ -163,17 +170,24 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Remove header** {% icon tool %} with the following parameters:
+> 1. **Remove beginning** {% icon tool %} with the following parameters:
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    - *Remove first*: `1` to remove the first line only.
+>    - *from*: {% icon param-file %}: select **iris tabular**
+>    - **Execute**
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Use the **tools search box** to find **Removing beginning** {% icon tool %}. 
 >    {: .comment}
 >
+> 2. Rename the dataset to `iris clean`
+>
+>    {% include snippets/rename_dataset.md %}
+> 3. Add the tag `clean` to the dataset
+>
+>    {% include snippets/add_tag.md %}
+> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 {: .hands_on}
 
 
@@ -487,12 +501,28 @@ The idea is to keep the theory description before quite simple to focus more on 
 {: .question}
 
 
-## Re-arrange
+# Share your work
 
-To create the template, each step of the workflow had its own subsection.
+One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
+
+1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
+2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
+3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
+
+> ### {% icon comment %} Permissions
+> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
+>
+> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Share history and workflow
+>
+> 1. Share one of your histories with your neighbour.
+> 2. See if you can do the same with your workflow!
+> 3. Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
+{: .hands_on}
 
 # Conclusion
 {:.no_toc}
