@@ -371,7 +371,7 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viewer plugin")
 
 > The user can perform the same functions for viewing the EC output.
-> ![Visualize button](../../images/EC-viewer.png)
+>                       ![Visualize button](../../images/EC-viewer.png)
 >
 > The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
 >
@@ -570,7 +570,7 @@ The next three steps are to filter out the three different Go terms. For that we
 > 2. Click **Execute**.
 >
 {: .hands_on}
-> ![Filter output](../../images/Biological_process.png)
+>          ![Filter output](../../images/Biological_process.png)
 
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
@@ -582,7 +582,7 @@ The next three steps are to filter out the three different Go terms. For that we
 > 2. Click **Execute**.
 >
 {: .hands_on}
-> ![Filter output](../../images/Cellular_component.png)
+>          ![Filter output](../../images/Cellular_component.png)
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
 > **Filter** {% icon tool %} with the following parameters: 
@@ -593,7 +593,7 @@ The next three steps are to filter out the three different Go terms. For that we
 > 2. Click **Execute**.
 >
 {: .hands_on}
-> ![Filter output](../../images/molecular_function.png)
+>          ![Filter output](../../images/molecular_function.png)
 
 With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.
 
