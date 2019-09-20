@@ -72,6 +72,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 >    > ### {% icon comment %} Comments
 >    > - Rename the datasets to a more descriptive name
+>    > - There is a GO term file in the zenodo folder is for reference purposes, please do not load it on your account.
 >    {: .comment}
 >
 > 3. Build a **Dataset list** for the three MGF files
@@ -114,49 +115,49 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    - **Search Engines**: `X!Tandem`
 >
->   - {% icon param-file %} *”Protein database”*: ‘Output dataset ‘output’ from step 1‘
->   - {% icon param-check %} *”Create a concatenated target/decoy before running PeptideShaker”*: ‘Yes’
->   - {% icon param-check %} *”Gene mappings will be used and salves along with the project (UniProt databases only)”* ‘No’
->   - {% icon param-check %} *”Update gene mappings automatically from Esembl (UniProt databases only)”*: ‘No’
->   - {% icon param-file %} *”Input Peak Lists (mgf)”*: ‘Output dataset ‘output’ from step 2’
->   - {% icon param-check %} *”DB-Search engines”*: Select the ‘X!Tandem’
->   - {% icon param-select %} *”Digestion”*: ‘Select enzymes’
->   - {% icon param-select %} *”Enzyme”* ‘Trypsin’
->   - {% icon param-text %} *”Maximum Missed Cleavages”*: ‘2’
->   - {% icon param-select %} *”Precursor Ion Tolerance Units”*: ‘Parts per million (ppm)’
->   - {% icon param-text %} *”Precursor Ion Tolerance”*: ‘10.0’
->   - {% icon param-select %} *”Fragment Tolerance Units”*: ‘Daltons’
->   - {% icon param-text %} *” Fragment Tolerance”*: ‘0.02’
->   - {% icon param-text %} *”Minimum Charge”*: ‘2’
->   - {% icon param-text %} *”Maximum Charge”*: ‘6’
->   - {% icon param-select %} *”Forward Ion”*: ‘b’
->   - {% icon param-text %} *”Reverse Ion”*: ‘y’
->   - {% icon param-text %} *”Minimum precursor isotope”*: ‘0’
->   - {% icon param-text %} *”Maximum precursor isotope”*: ‘1’
->   - {% icon param-select %} *”Fixed Modifications”*: ‘Carbamidomethylation of C’
->   - {% icon param-select %} *”Variable Modifications”*: ‘Oxidation of M’
+>   - {% icon param-file %} *”Protein database”*: `Output dataset ‘output’ from step 1`
+>   - {% icon param-check %} *”Create a concatenated target/decoy before running PeptideShaker”*: `Yes`
+>   - {% icon param-check %} *”Gene mappings will be used and salves along with the project (UniProt databases only)”* `No`
+>   - {% icon param-check %} *”Update gene mappings automatically from Esembl (UniProt databases only)”*: `No`
+>   - {% icon param-file %} *”Input Peak Lists (mgf)”*: `Output dataset ‘output’ from step 2`
+>   - {% icon param-check %} *”DB-Search engines”*:`X!Tandem`
+>   - {% icon param-select %} *”Digestion”*: `Select enzymes`
+>   - {% icon param-select %} *”Enzyme”* `Trypsin`
+>   - {% icon param-text %} *”Maximum Missed Cleavages”*: `2`
+>   - {% icon param-select %} *”Precursor Ion Tolerance Units”*: `Parts per million (ppm)`
+>   - {% icon param-text %} *”Precursor Ion Tolerance”*: `10.0`
+>   - {% icon param-select %} *”Fragment Tolerance Units”*: `Daltons`
+>   - {% icon param-text %} *” Fragment Tolerance”*: `0.02`
+>   - {% icon param-text %} *”Minimum Charge”*: `2`
+>   - {% icon param-text %} *”Maximum Charge”*: `6`
+>   - {% icon param-select %} *”Forward Ion”*: `b`
+>   - {% icon param-text %} *”Reverse Ion”*: `y`
+>   - {% icon param-text %} *”Minimum precursor isotope”*: `0`
+>   - {% icon param-text %} *”Maximum precursor isotope”*: `1`
+>   - {% icon param-select %} *”Fixed Modifications”*: `Carbamidomethylation of C`
+>   - {% icon param-select %} *”Variable Modifications”*: `Oxidation of M`
 >
 >    > ### {% icon tip %} Tip: Search for options
 >    >
 >    > * For selection lists, typing the first few letters in the window will filter the available options.
 >    {: .tip}
 >
->   - {% icon param-select %} *”Search GUI Options”*: ‘Default’
->   - {% icon param-select %} *”X!Tandem Options”*: ‘Advanced’
->   - {% icon param-text %} *”X!Tandem: Total Peaks”*: ‘50’
->   - {% icon param-text %} *”X!Tandem: Min Peaks”*: ‘15’
->   - {% icon param-text %} *”X!Tandem: Min Frag m/z”*: ‘200’
->   - {% icon param-text %} *”X!Tandem: Min Precursor Mass”*: ‘200’
->   - {% icon param-check %} *”X!Tandem: Noise Suppression”*: ‘Yes’
->   - {% icon param-text %} *”X!Tandem: Dynamic Range”*: ‘100’
->   - {% icon param-check %} *”X!Tandem: Quick Acetyl”*: ‘No’
->   - {% icon param-check %} *”X!Tandem: Quick Pyrolidone”*: ‘No’
->   - {% icon param-check %} *”X!Tandem: Protein stP Bias”*: ‘No’
->   - {% icon param-text %} *”X!Tandem: Maximum Valid Expectation Value”*: ‘100.0’
->   - {% icon param-check %} *” X!Tandem: Output proteins”*: ‘No’
->   - {% icon param-check %} *”X!Tandem: Output sequences”*: ‘No’
->   - {% icon param-check %} *”X!Tandem: Output Spectra”*: ‘Yes’
->   - {% icon param-select %} *”X!Tandem peptide model refinement”*: ‘Don’t refine’
+>   - {% icon param-select %} *”Search GUI Options”*: `Default`
+>   - {% icon param-select %} *”X!Tandem Options”*: `Advanced`
+>   - {% icon param-text %} *”X!Tandem: Total Peaks”*: `50`
+>   - {% icon param-text %} *”X!Tandem: Min Peaks”*: `15`
+>   - {% icon param-text %} *”X!Tandem: Min Frag m/z”*: `200`
+>   - {% icon param-text %} *”X!Tandem: Min Precursor Mass”*: `200`
+>   - {% icon param-check %} *”X!Tandem: Noise Suppression”*: `Yes`
+>   - {% icon param-text %} *”X!Tandem: Dynamic Range”*: `100`
+>   - {% icon param-check %} *”X!Tandem: Quick Acetyl”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Quick Pyrolidone”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Protein stP Bias”*: `No`
+>   - {% icon param-text %} *”X!Tandem: Maximum Valid Expectation Value”*: `100.0`
+>   - {% icon param-check %} *” X!Tandem: Output proteins”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Output sequences”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Output Spectra”*: `Yes`
+>   - {% icon param-select %} *”X!Tandem peptide model refinement”*: `Don’t refine`
 >   - leave everything else as default
 >
 > 2. Click **Execute**.
@@ -196,26 +197,25 @@ outputs.
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
 > 1. **PeptideShaker** {% icon tool %}: Run **PeptideShaker** with:
->   - {% icon param-file %} *”Compressed SearchGUI results”*: ‘Output dataset ‘searchgui_results’ from step 3’’
->   - {% icon param-select %} *”Specify Advanced Peptide Shaker Processing Options”*: ‘Advanced Processing Options’
->   - {% icon param-text %} *”FDR at the protein level”*: ‘1.0’
->   - {% icon param-text %} *”FDR at the peptide level”*: ‘1.0’
->   - {% icon param-text %} *”FDR at the PSM level”*: ‘1.0’
->   - {% icon param-text %} *”Minimum confidence required for a protein in the fraction MW plot”*: ‘95.0’
->   - {% icon param-select %} *”The PRM probabilistic score to use for PTM localization”*: ‘A-score’
->   - {% icon param-select %} *”The PTM to peptide sequence matching type”*: ‘Amino Acids’
->   - {% icon param-check %} *”Align peptide ambiguously localizes PRMs on confident sites”*: ‘Yes’
->   - {% icon param-select %} *”Specify Advanced FIltering Options”*: ‘Advanced Filtering Options’
->   - {% icon param-text %} *”Minimum Peptide Length”*: ‘6’
->   - {% icon param-text %} *”Maximum Peptide Length”*: ‘65’
->   - {% icon param-text %} *”Maximum Precursor Error”*: ‘10.0’
->   - {% icon param-select %} *”Maximum Precursor Error Type”*: ‘ppm’
->   - {% icon param-check %} *”Exclude Unknown PTMs”: ‘Yes’
->   - {% icon param-select %} *”Specify Contact Information for mzldendML”*: ‘GalaxyP Project contact (Not suitable for PRIDE submission)’
->   - {% icon param-check %} *”Creates a mzldentML file*”: ‘No’
->   - {% icon param-check %} *”Compress results into single zip file”*: ‘No’
->   - {% icon param-check %} *”Exports the CPS file”*: ‘No’
->   - {% icon param-check %} *”Reports to be generated”*: Select the ‘PSM Report’
+>   - {% icon param-file %} *”Compressed SearchGUI results”*: `Output dataset ‘searchgui_results’ from step 3`
+>   - {% icon param-select %} *”Specify Advanced Peptide Shaker Processing Options”*: `Advanced Processing Options`
+>   - {% icon param-text %} *”FDR at the protein level”*: `1.0`
+>   - {% icon param-text %} *”FDR at the peptide level”*: `1.0`
+>   - {% icon param-text %} *”FDR at the PSM level”*: `1.0`
+>   - {% icon param-text %} *”Minimum confidence required for a protein in the fraction MW plot”*: `95.0`
+>   - {% icon param-select %} *”The PRM probabilistic score to use for PTM localization”*: `A-score`
+>   - {% icon param-select %} *”The PTM to peptide sequence matching type”*: `Amino Acids`
+>   - {% icon param-check %} *”Align peptide ambiguously localizes PRMs on confident sites”*: `Yes`
+>   - {% icon param-select %} *”Specify Advanced FIltering Options”*: `Advanced Filtering Options`
+>   - {% icon param-text %} *”Minimum Peptide Length”*: `6`
+>   - {% icon param-text %} *”Maximum Peptide Length”*: `65`
+>   - {% icon param-text %} *”Maximum Precursor Error”*: `10.0`
+>   - {% icon param-select %} *”Maximum Precursor Error Type”*: `ppm`
+>   - {% icon param-check %} *”Exclude Unknown PTMs”: `Yes`
+>   - {% icon param-check %} *”Creates a mzldentML file*”: `No`
+>   - {% icon param-check %} *”Compress results into single zip file”*: `No`
+>   - {% icon param-check %} *”Exports the CPS file”*: `No`
+>   - {% icon param-check %} *”Reports to be generated”*: `Select the ‘PSM Report’`
 >
 >
 > 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
@@ -269,14 +269,12 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 > 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
->   - {% icon param-file %} *”Add tables to this Database”*: ‘‘
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_psm’ from step 4’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘psm’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation’
->   - {% icon param-check %} *”Only load the columns you have named into database”*: ‘Yes’
->   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ‘’
->   - {% icon param-check %} *”Save the sqlite database in your history”*: ‘No’
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_psm’ from step 4`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `No`
 >
 >        > ### {% icon comment %} Comment
 >        >
@@ -296,13 +294,13 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **SQL Query to generate tabular output**:
 >
->          SELECT distinct sequence
+>          `SELECT distinct sequence
 >
 >          FROM psm
 >
 >          WHERE confidence >= 95
 >
->          ORDER BY sequence
+>          ORDER BY sequence`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -334,17 +332,17 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 > ### {% icon hands_on %} Hands-on: Unipept
 >
 > 1. **Unipept** {% icon tool %}: Run **Unipept** with:
->   - {% icon param-select %} *”Unipept application”*: ‘peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy’
->   - {% icon param-check %} *”Equate isoleucine and leucine”*: ‘No’
->   - {% icon param-check %} *”Retrieve extra information*”: ‘No’
->   - {% icon param-check %} *”Group responses by GO namespace (biological process, molecular function, cellular component)”*: ‘Yes’
->   - {% icon param-check %} *”Names”*: ‘No’
->   - {% icon param-check %} *”Allfields”*: ‘No’
->   - {% icon param-select %} *”Peptides input format”*: ‘Tabular’
->   - {% icon param-file %} *”Tabular Input Containing Peptide column”*: ‘Output dataset ‘output’ from step 5’
->   - {% icon param-text %} *”Select column with peptides”*: ‘1’
->   - {% icon param-check %} *”Choose outputs”*: Select the ‘JSON Taxonomy Tree (for pepet2lca, pe2taxa, and peptinfo),’ ‘Peptide GO terms in normalized tabular (for pept2go, pept2funct, and peptinfo),’ ‘Peptide EC terms in normalized tabular (for pept2ec, pept2funct, and peptinfo),’ ‘JSON EC Coverage Tree (for pept2ec, pep2funct, and peptinfo)’
->   - {% icon param-check %} *”Exit with error on invalid peptides, otherwise ignore them”*: ‘No’
+>   - {% icon param-select %} *”Unipept application”*: `peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy`
+>   - {% icon param-check %} *”Equate isoleucine and leucine”*: `No`
+>   - {% icon param-check %} *”Retrieve extra information*”: `No`
+>   - {% icon param-check %} *”Group responses by GO namespace (biological process, molecular function, cellular component)”*: `Yes`
+>   - {% icon param-check %} *”Names”*: `No`
+>   - {% icon param-check %} *”Allfields”*: `No`
+>   - {% icon param-select %} *”Peptides input format”*: `Tabular`
+>   - {% icon param-file %} *”Tabular Input Containing Peptide column”*: `Output dataset ‘output’ from step 5`
+>   - {% icon param-text %} *”Select column with peptides”*: `1`
+>   - {% icon param-check %} *”Choose outputs”*: `Select the ‘JSON Taxonomy Tree (for pepet2lca, pe2taxa, and peptinfo),’ ‘Peptide GO terms in normalized tabular (for pept2go, pept2funct, and peptinfo),’ ‘Peptide EC terms in normalized tabular (for pept2ec, pept2funct, and peptinfo),’ ‘JSON EC Coverage Tree (for pept2ec, pep2funct, and peptinfo)’`
+>   - {% icon param-check %} *”Exit with error on invalid peptides, otherwise ignore them”*: `No`
 >
 > 2. Click **Execute**. The history should grow by two files. View each to see the difference.
 >
@@ -359,19 +357,25 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
 >
 >       ![Visualize button](../../images/Visualize_output.png)
+>
+>
 >       ![Viewer](../../images/Unipept_viewer.png)
-
+>
 >
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
 >
->       ![Unipept Tree viewer visual output](../../images/Treeview_Unipet.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
->       ![Unipept Sunburst visual output](../../images/sunburst_unipept.png "Interactive Sunburst visualization from the Unipept Tree viever plugin")
->       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viever plugin")
+>       ![Unipept Tree viewer visual output](../../images/Treeview_Unipet.png "Interactive Tree viewer visualization from the Unipept Tree viewer plugin")
+>
+>       ![Unipept Sunburst visual output](../../images/sunburst_unipept.png "Interactive Sunburst visualization from the Unipept Tree viewer plugin")
+>
+>       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viewer plugin")
 
 > The user can perform the same functions for viewing the EC output.
-> ![Visualize button](../../images/EC-viewer.png){:height="50%" width="50%"}
-The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
-![Unipept Tree viewer visual output](../../images/EC_treemap.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
+> ![Visualize button](../../images/EC-viewer.png)
+>
+> The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
+>
+> ![Unipept Tree viewer visual output](../../images/EC_treemap.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
 {: .hands_on}
 
 ## Genus taxonomy level summary
@@ -383,32 +387,33 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >
 > 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >   - {% icon param-file %} *”Add tables to this Database”*: ‘‘
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_psm’ from step 4’
->   - {% icon param-select %} *”Filter By”*: ‘by regex expression matching’
->   - {% icon param-text %} *”Regex pattern”*: ‘^\d’
->   - {% icon param-select %} *”Action for regex match”*: ‘include line on pattern match’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘psm’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation’
->   - {% icon param-check %} *”Only load the columns you have named into database”*: ‘Yes’
->   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ‘’
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_tsv’ from step 7‘
->   - {% icon param-select %} *”Filter By”*: ‘by regex expression matching’
->   - {% icon param-text %} *”Regex pattern”*: ‘#peptide’
->   - {% icon param-select %} *”Action for regex match”*: ‘exclude line on pattern match’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘lca’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘peptide,,,,,,,,,,,,,,,,,,,,,genus’
->   - {% icon param-check %} *”Only load the columns you have named into database”*: ‘Yes’
->   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ‘’
->   - {% icon param-check %} *”Save the sqlite database in your history”*: ‘Yes’
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_psm’ from step 4`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `^\d`
+>   - {% icon param-select %} *”Action for regex match”*: `include line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_tsv’ from step 7`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `#peptide`
+>   - {% icon param-select %} *”Action for regex match”*: `exclude line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `lca`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `peptide,,,,,,,,,,,,,,,,,,,,,genus`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `Yes`
 >   - {% icon param-text %} *”SQL Query to generate tabular output”*:
- ‘SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+ `SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
 FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 WHERE confidence >= 95
 GROUP BY lca.genus
-ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc’
->   - {% icon param-check %} *”Include query result column headers”*: ‘Yes’
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+>
+>   - {% icon param-check %} *”Include query result column headers”*: `Yes`
 >   - {% icon param-select %} *”Prefix character for column_header line”*: ‘#’
 >
 >
@@ -448,7 +453,7 @@ This allows to get an insight of the **biological process**, the **molecular fun
 {: .comment}
 
 
-#### Retrieve GO IDs for peptides: Unipept
+#### Retrieve GO and EC IDs for peptides: Unipept
 
 The **UniPept** application `peptinfo` can be used to return the list of proteins containing each peptide.The option `retrieve extra information` option is set to `yes` so that we retrieve Gene Ontology assignments for each protein. Unipept 4.0 has inbuilt GO terms.
 
@@ -456,16 +461,16 @@ The **UniPept** application `peptinfo` can be used to return the list of protein
 >
 > 1. **Unipept** {% icon tool %}: Run **Unipept** with:
 >   - {% icon param-select %} *”Unipept application”*: ‘peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy’
->   - {% icon param-check %} *”Equate isoleucine and leucine”*: ‘No’
->   - {% icon param-check %} *”Retrieve extra information*”: ‘No’
->   - {% icon param-check %} *”Group responses by GO namespace (biological process, molecular function, cellular component)”*: ‘Yes’
->   - {% icon param-check %} *”Names”*: ‘No’
->   - {% icon param-check %} *”Allfields”*: ‘No’
->   - {% icon param-select %} *”Peptides input format”*: ‘Tabular’
->   - {% icon param-file %} *”Tabular Input Containing Peptide column”*: ‘Output dataset ‘output’ from step 5’
->   - {% icon param-text %} *”Select column with peptides”*: ‘1’
->   - {% icon param-check %} *”Choose outputs”*: Select the ‘Tabular with one line per peptide,’ ‘JSON Taxonomy Tree (for pepet2lca, pe2taxa, and peptinfo),’ ‘Peptide GO terms in normalized tabular (for pept2go, pept2funct, and peptinfo),’ ‘JSON EC Coverage Tree (for pept2ec, pep2funct, and peptinfo)’
->   - {% icon param-check %} *”Exit with error on invalid peptides, otherwise ignore them”*: ‘No’
+>   - {% icon param-check %} *”Equate isoleucine and leucine”*: `No`
+>   - {% icon param-check %} *”Retrieve extra information*”: `No`
+>   - {% icon param-check %} *”Group responses by GO namespace (biological process, molecular function, cellular component)”*: `Yes`
+>   - {% icon param-check %} *”Names”*: `No`
+>   - {% icon param-check %} *”Allfields”*: `No`
+>   - {% icon param-select %} *”Peptides input format”*: `Tabular`
+>   - {% icon param-file %} *”Tabular Input Containing Peptide column”*: `Output dataset ‘output’ from step 5`
+>   - {% icon param-text %} *”Select column with peptides”*: `1`
+>   - {% icon param-check %} *”Choose outputs”*: `Select the ‘Tabular with one line per peptide,’ ‘JSON Taxonomy Tree (for pepet2lca, pe2taxa, and peptinfo),’ ‘Peptide GO terms in normalized tabular (for pept2go, pept2funct, and peptinfo),’ ‘JSON EC Coverage Tree (for pept2ec, pep2funct, and peptinfo)`
+>   - {% icon param-check %} *”Exit with error on invalid peptides, otherwise ignore them”*: `No`
 > 2. Click **Execute**.
 >
 > 3. inspect the result:
@@ -481,32 +486,32 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
 >1.**Query Tabular** {% icon tool %} with the following parameters:
->   - {% icon param-file %} *”Add tables to this Database”*: ‘‘
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_psm’ from step 4‘
->   - {% icon param-select %} *”Filter By”*: ‘by regex expression matching’
->   - {% icon param-text %} *”Regex pattern”*: ‘^\d’
->   - {% icon param-select %} *”Action for regex match”*: ‘include line on pattern match’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘psm’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation’
->   - {% icon param-check %} *”Only load the columns you have named into database”*: ‘Yes’
->   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ‘’
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_ec_tsv’ from step 6‘
->   - {% icon param-select %} *”Filter By”*: ‘by regex expression matching’
->   - {% icon param-text %} *”Regex pattern”*: ‘#peptide’
->   - {% icon param-select %} *”Action for regex match”*: ‘exclude line on pattern match’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘goec’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘peptide,total_protein_count,ec_number,protein_count’
->   - {% icon param-check %} *”Save the sqlite database in your history”*: ‘No’
+>   - {% icon param-file %} *”Add tables to this Database”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_psm’ from step 4`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `^\d`
+>   - {% icon param-select %} *”Action for regex match”*: `include line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_ec_tsv’ from step 6`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `#peptide`
+>   - {% icon param-select %} *”Action for regex match”*: `exclude line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `goec`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `peptide,total_protein_count,ec_number,protein_count`
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `No`
 >   - {% icon param-text %} *”SQL Query to generate tabular output”*: 
-‘SELECT goec.ec_number,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES" 
+`SELECT goec.ec_number,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES" 
 FROM psm LEFT JOIN goec ON psm.sequence = goec.peptide 
 WHERE confidence >= 95 
 GROUP BY goec.ec_number 
-ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc’
->   - {% icon param-check %} *”Include query result column headers”*: ‘Yes’
->   - {% icon param-select %} *”Prefix character for column_header line”*: ‘#’
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+>   - {% icon param-check %} *”Include query result column headers”*: `Yes`
+>   - {% icon param-select %} *”Prefix character for column_header line”*: `#`
 >
 > 2. Click **Execute**.
 >
@@ -519,34 +524,34 @@ Here is another query tabular on extracting all the GO terms from the Unipept re
 >
 > 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
->   - {% icon param-file %} *”Add tables to this Database”*: ‘‘
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_psm’ from step 4’
->   - {% icon param-select %} *”Filter By”*: ‘by regex expression matching’
->   - {% icon param-text %} *”Regex pattern”*: ‘^\d’
->   - {% icon param-select %} *”Action for regex match”*: ‘include line on pattern match’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘psm’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation’
->   - {% icon param-check %} *”Only load the columns you have named into database”*: ‘Yes’
->   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ‘’
->   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset ‘output_go_tsv’ from step 6’
->   - {% icon param-select %} *”Filter By”*: ‘by regex expression matching’
->   - {% icon param-text %} *”Regex pattern”*: ‘#peptide’
->   - {% icon param-select %} *”Action for regex match”*: ‘exclude line on pattern match’
->   - {% icon param-text %} *”Specify Name for Table”*: ‘goterm’
->   - {% icon param-check %} *”Use first line as column names”*: ‘No’
->   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: ‘peptide,total_protein_count,go_term,protein_count,go_name’
->   - {% icon param-check %} *”Only load the columns you have named into database”*: ‘Yes’
->   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ‘’
->   - {% icon param-check %} *”Save the sqlite database in your history”*: ‘Yes’
+>   - {% icon param-file %} *”Add tables to this Database”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset `output_psm’ from step 4`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `^\d`
+>   - {% icon param-select %} *”Action for regex match”*: `include line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_go_tsv’ from step 6`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `#peptide`
+>   - {% icon param-select %} *”Action for regex match”*: `exclude line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `goterm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `peptide,total_protein_count,go_term,protein_count,go_name`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `Yes`
 >   - {% icon param-text %} *”SQL Query to generate tabular output”*: 
-'SELECT goterm.go_term,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES",goterm.go_name 
+`SELECT goterm.go_term,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES",goterm.go_name 
 FROM psm LEFT JOIN goterm ON psm.sequence = goterm.peptide 
 WHERE confidence >= 95 
 GROUP BY goterm.go_term 
-ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
->   - {% icon param-check %} *”Include query result column headers”*: ‘Yes’
->   - {% icon param-select %} *”Prefix character for column_header line”*: ‘#’
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+>   - {% icon param-check %} *”Include query result column headers”*: `Yes`
+>   - {% icon param-select %} *”Prefix character for column_header line”*: `#`
 >
 >
 > 2. Click **Execute**.
@@ -558,9 +563,9 @@ The next three steps are to filter out the three different Go terms. For that we
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
 > **Filter** {% icon tool %} with the following parameters: 
->   - {% icon param-file %} *”Filter”*: ‘Output dataset ‘output’ from step 9’
->   - {% icon param-text %} *”With following condition”*: ‘c4==’biological process’’
->   - {% icon param-text %} *”Number of header lines to skip”*: ‘1’
+>   - {% icon param-file %} *”Filter”*: `Output dataset ‘output’ from step 9`
+>   - {% icon param-text %} *”With following condition”*: `c4=='biological process'`
+>   - {% icon param-text %} *”Number of header lines to skip”*: `1`
 >
 > 2. Click **Execute**.
 >
@@ -570,9 +575,9 @@ The next three steps are to filter out the three different Go terms. For that we
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
 > **Filter** {% icon tool %} with the following parameters: 
->   - {% icon param-file %} *”Filter”*: ‘Output dataset ‘output’ from step 9’
->   - {% icon param-text %} *”With following condition”*: ‘c4==’cellular component’’
->   - {% icon param-text %} *”Number of header lines to skip”*: ‘1’
+>   - {% icon param-file %} *”Filter”*: `Output dataset ‘output’ from step 9`
+>   - {% icon param-text %} *”With following condition”*: `c4=='cellular component'`
+>   - {% icon param-text %} *”Number of header lines to skip”*: `1`
 >
 > 2. Click **Execute**.
 >
@@ -581,9 +586,9 @@ The next three steps are to filter out the three different Go terms. For that we
 > ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
 >
 > **Filter** {% icon tool %} with the following parameters: 
->   - {% icon param-file %} *”Filter”*: ‘Output dataset ‘output’ from step 9’
->   - {% icon param-text %} *”With following condition”*: ‘c4==’molecular function’’
->   - {% icon param-text %} *”Number of header lines to skip”*: ‘1’
+>   - {% icon param-file %} *”Filter”*: `Output dataset ‘output’ from step 9`
+>   - {% icon param-text %} *”With following condition”*: `c4==’molecular function’`
+>   - {% icon param-text %} *”Number of header lines to skip”*: `1`
 >
 > 2. Click **Execute**.
 >
