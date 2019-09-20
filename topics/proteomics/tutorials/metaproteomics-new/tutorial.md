@@ -371,6 +371,8 @@ We do a taxonomy analysis using the UniPept peptinfo function to return the taxo
 >       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viewer plugin")
 
 > The user can perform the same functions for viewing the EC output.
+>
+>
 >                       ![Visualize button](../../images/EC-viewer.png)
 >
 > The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
