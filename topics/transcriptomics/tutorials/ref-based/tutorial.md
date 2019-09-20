@@ -776,7 +776,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    C (1kb) | 1.43 | 1.78 | 1.42
 >    D (10kb) | 0 | 0 | 0.009  
 >
-> **FPKM** (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end RNA-seq and FPKM for paired-end RNA-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end RNA-seq, a single fragment are the two reads of a pair, or if one read in the pair did not map, one read can correspond to a single fragment (in case we decided to keep them). FPKM keeps tracks of fragments so that one fragment with 2 reads is counted only once.
+> **FPKM** (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end RNA-seq and FPKM for paired-end RNA-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end RNA-seq, two reads of a pair are mapped from a single fragment, or if one read in the pair did not map, one read can correspond to a single fragment (in case we decided to keep these). FPKM keeps tracks of fragments so that one fragment with 2 reads is counted only once.
 >
 >
 > **TPM** (Transcripts Per Kilobase Million) is very similar to RPKM and FPKM, except the order of the operation
@@ -792,7 +792,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    C (1kb) | 5 | 8 | 15
 >    D (10kb) | 0 | 0 | 0.1
 > 
-> 2. Compute the "per million" scaling factor: summ up all the RPK values in a sample and divide this number by 1,000,000
+> 2. Compute the "per million" scaling factor: sum up all the RPK values in a sample and divide this number by 1,000,000
 >
 >    Gene | Sample 1 RPK | Sample 2 RPK | Sample 3 RPK
 >    --- | --- | --- | ---
@@ -803,7 +803,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    **Total RPK** | 15 | 20.25 | 45.1
 >    **Scaling factor** | 1.5 | 2.03 | 4.51
 >
->    *Because of the small values in the example, we are scoring using a factor of 10.*
+>    *As above, because of the small values in the example, we are scoring using a factor of 10.*
 >
 > 3. Divide the RPK values by the "per million" scaling factor
 >
@@ -900,7 +900,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >     B | 1.7
 >     C | 4.3
 >
->     It filters out genes with no read counts in at least 1 sample, e.g. genes only transcribed in one tissue as the gene D in the previous example. It helps to focus the scaling factors on genes transcribed at similar levels regardless the condition.
+>     It filters out genes with no read counts in at least 1 sample, e.g. genes only transcribed in one tissue as gene D in the previous example. It helps to focus the scaling factors on genes transcribed at similar levels regardless of the condition.
 >
 > 4. Substract the average log value from the log counts
 >
@@ -911,7 +911,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 >     $$log(\textrm{counts for gene X}) - average(\textrm{log values for counts for gene X}) = log(\frac{\textrm{counts for gene X}}{\textrm{average for gene X}})$$
 >
->     This step is checking out the ratio of the counts in each sample compared to the average across all samples.
+>     This step compares the ratio of the counts in each sample to the average across all samples.
 >
 > 5. Calculate the median of the ratios for each sample
 >
@@ -1059,7 +1059,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
     2. Heatmap of the sample-to-sample distance matrix (with clustering)
     
-        The heatmap gives an overview of similarities and dissimilarities between samples: the colors represents the distance between the samples. Darker blue means shorter distance, i.e. closer samples given the normalized counts. 
+        The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts. 
 
         > ### {% icon question %} Questions
         >
@@ -1356,7 +1356,7 @@ We now have a table with the Z-score for the most differentially expressed genes
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 thefar right of the normal distribution curve
+> > 1. The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve
 > > 2. When a gene is differentially expressed between two groups (here treated and untreated), the Z-scores for this gene will be (mostly) positive for the samples in one group and (mostly) negative for the samples in the other group.
 > > 3. The Z-score is a signal-to-noise ratio. Large absolute Z-scores, i.e. large positive or negative values, is not a direct estimate of the effect, i.e. the strength of the differential expression. A same large Z-score can have different meanings, depending on the noise:
 > >    - with large noise: a very large effect
