@@ -311,6 +311,13 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 >    1. Rename the dataset if necessary
 >    2. Verify that the datatype is `gtf` and not `gff`, and that the database is `dm6`
 >
+>    > ### {% icon comment %} How to get annotation file?
+>    >
+>    > Annotation files from model organisms may be available on the Shared Data library (the path to them will change from one Galaxy server to the other). You could also retrieve the annotation file from UCSC (using **UCSC Main** tool).
+>    > 
+>    >
+>    {: .comment}
+>
 > 2. **RNA STAR** {% icon tool %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
 >       - {% icon param-files %} *"RNA-Seq FASTQ/FASTA file, forward reads"*: the `Read 1 Output` (outputs of **Cutadapt** {% icon tool %})
@@ -747,7 +754,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    **Total reads** | 35 | 45 | 106
 >    **Scaling factor** | 3.5 | 4.5 | 10.6
 >
->    *For the purpose of the example, we are score using a factor of 10.*
+>    *Because of the small values in the example, we are scoring using a factor of 10.*
 >    
 > 2. Divide the read counts by the "per million" scaling factor
 >
@@ -757,7 +764,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    --- | --- | --- | ---
 >    A (2kb) | 2.86 | 2.67 | 2.83
 >    B (4kb) | 5.71 | 5.56 | 5.66
->    C (1kb) | 1.43 | 1.78 | 1.432
+>    C (1kb) | 1.43 | 1.78 | 1.43
 >    D (10kb) | 0 | 0 | 0.09  
 > 
 > 3. Divide the RPM values by the length of the gene, in kilobases
@@ -769,7 +776,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    C (1kb) | 1.43 | 1.78 | 1.42
 >    D (10kb) | 0 | 0 | 0.009  
 >
-> **FPKM** (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end RNA-seq and FPKM for paired-end RNA-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end RNA-seq, a single fragment can be the two reads of a pair, or, if one read in the pair did not map, one read can correspond to a single fragment. FPKM keeps tracks of fragments so that one fragment with 2 reads is counted only once.
+> **FPKM** (Fragments Per Kilobase Million) is very similar to RPKM. RPKM is for single-end RNA-seq and FPKM for paired-end RNA-seq. With single-end, every read corresponds to a single fragment that was sequenced. With paired-end RNA-seq, a single fragment are the two reads of a pair, or if one read in the pair did not map, one read can correspond to a single fragment (in case we decided to keep them). FPKM keeps tracks of fragments so that one fragment with 2 reads is counted only once.
 >
 >
 > **TPM** (Transcripts Per Kilobase Million) is very similar to RPKM and FPKM, except the order of the operation
@@ -785,26 +792,26 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >    C (1kb) | 5 | 8 | 15
 >    D (10kb) | 0 | 0 | 0.1
 > 
-> 2. Compute the "per million" scaling factor by summing up all the RPK values in a sample and dividing this number by 1,000,000
+> 2. Compute the "per million" scaling factor: summ up all the RPK values in a sample and divide this number by 1,000,000
 >
 >    Gene | Sample 1 RPK | Sample 2 RPK | Sample 3 RPK
 >    --- | --- | --- | ---
 >    A (2kb) | 5 | 6 | 15
->    B (4kb) | 20 | 6.25 | 15
+>    B (4kb) | 5 | 6.25 | 15
 >    C (1kb) | 5 | 8 | 15
 >    D (10kb) | 0 | 0 | 0.1
 >    **Total RPK** | 15 | 20.25 | 45.1
->    **Scaling factor** | 1.5 | 2.025 | 4.51
+>    **Scaling factor** | 1.5 | 2.03 | 4.51
 >
->    *For the purpose of the example, we are scoring using a factor of 10.*
+>    *Because of the small values in the example, we are scoring using a factor of 10.*
 >
 > 3. Divide the RPK values by the "per million" scaling factor
 >
 >    Gene | Sample 1 TPM | Sample 2 TPM | Sample 3 TPM
 >    --- | --- | --- | ---
->    A (2kb) | 3.33 | 2.96 | 3.326
->    B (4kb) | 3.33 | 3.09 | 3.326
->    C (1kb) | 3.33 | 3.95 | 3.326
+>    A (2kb) | 3.33 | 2.96 | 3.33
+>    B (4kb) | 3.33 | 3.09 | 3.33
+>    C (1kb) | 3.33 | 3.95 | 3.33
 >    D (10kb) | 0 | 0 | 0.1
 > 
 >
@@ -822,17 +829,17 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 >
 >    Gene | Sample 1 TPM | Sample 2 TPM | Sample 3 TPM
 >    --- | --- | --- | ---
->    A (2kb) | 3.33 | 2.96 | 3.326
->    B (4kb) | 3.33 | 3.09 | 3.326
->    C (1kb) | 3.33 | 3.95 | 3.326
+>    A (2kb) | 3.33 | 2.96 | 3.33
+>    B (4kb) | 3.33 | 3.09 | 3.33
+>    C (1kb) | 3.33 | 3.95 | 3.33
 >    D (10kb) | 0 | 0 | 0.1
 >    **Total** | 10 | 10 | 10
 >
 > The sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.
 > 
-> In the example, TPM for gene A in Sample 1 is 3.33 and in sample B is ~3.33. Then the same proportion of total reads mapped to gene A in both samples, because the sum of the TPMs in both samples always add up to the same number (so the denominator required to calculate the proportions is the same, regardless of the sample)
+> In the example, TPM for gene A in Sample 1 is 3.33 and in sample 2 is 3.33. The same proportion of total reads maps then to gene A in both samples (0.33 here). Indeed, the sum of the TPMs in both samples adds up to the same number (10 here), the denominator required to calculate the proportions is then the same regardless of the sample, and so the proportion of reads for gene A (3.33/10 = 0.33) for both sample.
 > 
-> With RPKM or FPKM, it is harder to compare the proportion of total reads because the sum of normalized reads in each sample can be different. Thus, if RPKM for gene A in Sample 1 is 1.43 and in Sample 2 is 1.43, we do not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2. 
+> With RPKM or FPKM, it is harder to compare the proportion of total reads because the sum of normalized reads in each sample can be different (4.29 for Sample 1 and 4.25 for Sample 2). Thus, if RPKM for gene A in Sample 1 is 1.43 and in Sample B is 1.43, we do not know if the same proportion of reads in Sample 1 mapped to gene A as in Sample 2. 
 >
 > Since RNA-seq is all about comparing relative proportion of reads, TPM seems more appropriate than RPKM/FPKM.
 {: .details}
@@ -857,7 +864,7 @@ The read count for all genes except for gene C and D is really high in Sample 2.
 
 TPM, RPKM or FPKM do not deal with these differences in library composition in normalization, but more complex tools, like DESeq2, do. 
 
-[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for dealing with RNA-seq data and running Differential Gene Expression (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for **sequencing depth** and **library composition**. 
+[**DESeq2**](https://bioconductor.org/packages/release/bioc/html/DESeq2.html) ({% cite love2014moderated %}) is a great tool for dealing with RNA-seq data and running Differential Gene Expression (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for **sequencing depth** and **library composition**. Gene length normalization does not need to be accounted for because we are comparing the counts between sample groups for the same gene.
 
 > ### {% icon details %} Normalization in DESeq2
 >
@@ -884,7 +891,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >     B | 1.7
 >     C | 4.3
 >
->     Average of log values (also call geometric average) is used here because it is not easily impacted by outliers (e.g. gene 3 with its outlier for Sample 3)
+>     Average of log values (also call geometric average) is used here because it is not easily impacted by outliers (e.g. gene C with its outlier for Sample 3)
 >
 > 3. Filter out genes with infinity
 >
@@ -893,9 +900,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >     B | 1.7
 >     C | 4.3
 >
->     It filters out genes with 0 read counts in at least 1 sample, e.g. genes only transcribed in one tissue. 
->
->     It helps to focus the scaling factors on genes transcribed at similar levels regardless the condition.
+>     It filters out genes with no read counts in at least 1 sample, e.g. genes only transcribed in one tissue as the gene D in the previous example. It helps to focus the scaling factors on genes transcribed at similar levels regardless the condition.
 >
 > 4. Substract the average log value from the log counts
 >
@@ -904,9 +909,9 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >     B | -1.0 | 0.1 | 0.5
 >     C | -0.8 | -0.3 | 1.3
 >
->     $$ log(reads for gene X) - average(log values for reads for gene X) = log(\frac{reads for gene X}{average for gene X})$$
+>     $$log(\textrm{counts for gene X}) - average(\textrm{log values for counts for gene X}) = log(\frac{\textrm{counts for gene X}}{\textrm{average for gene X}})$$
 >
->     This step is checking out the ratio of the reads in each sample compared to the average across all samples.
+>     This step is checking out the ratio of the counts in each sample compared to the average across all samples.
 >
 > 5. Calculate the median of the ratios for each sample
 >
@@ -918,13 +923,13 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 >     The median is used here to avoid extreme genes (most likely rare ones) from swaying the value too much in one direction. It helps to put more emphasis on moderately expressed genes.
 >
-> 6. Take the exponential of the medians
+> 6. Compute the scaling factor by taking the exponential of the medians
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
 >     **Median** | -0.9 | -0.1 | 0.9
 >     **Scaling factors** | 0.4 | 0.7 | 2.5
 >
-> 7. Divide the original counts by the scaling factors
+> 7. Compute the normalized counts: divide the original counts by the scaling factors
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
 >     A | 0 | 14 | 2
@@ -966,7 +971,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 > ### {% icon hands_on %} Hands-on: Determine differentially expressed features
 >
-> 1. Create a new history
+> 1. Create a new empty history
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >
 >    - `GSM461176_untreat_single.counts`
@@ -1052,7 +1057,9 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
         > {: .solution}
         {: .question}
 
-    2. Heatmap of the sample-to-sample distance matrix (with clustering): overview over similarities and dissimilarities between samples
+    2. Heatmap of the sample-to-sample distance matrix (with clustering)
+    
+        The heatmap gives an overview of similarities and dissimilarities between samples: the colors represents the distance between the samples. Darker blue means shorter distance, i.e. closer samples given the normalized counts. 
 
         > ### {% icon question %} Questions
         >
@@ -1180,7 +1187,20 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 >
 {: .hands_on}
 
-The generated output is an extension of the previous file with some extra columns: chromosome, start, end, strand, feature and gene name
+The generated output is an extension of the previous file:
+1. Gene identifiers
+2. Mean normalized counts over all samples
+3. Log2 fold change
+4. Standard error estimate for the log2 fold change estimate
+5. Wald statistic
+6. *p*-value for the Wald statistic
+7. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure for the Wald statistic
+8. Chromosome
+9. Start
+10. End
+11. Strand
+12. Feature
+13. Gene name
 
 > ### {% icon question %} Questions
 >
@@ -1293,20 +1313,34 @@ The Z-score gives the number of standard-deviations that a value is away from th
 
 The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized count $$x_{i,j}$$ is computed as $$z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}$$ with $$\overline{x_i}$$ the mean and $$s_i$$ the standard deviation of the normalized counts for the gene $$i$$ over all samples.
 
+> ### {% icon comment %} Compute the Z-score for all genes
+> 
+> To save time in this tutorial, we will compute the Z-score directly on the normalized count of the most differentially expressed genes. In a standard analysis, we would compute the Z-score on all the genes (`Normalized count` file from **DESeq**) and then filter for the interesting genes as we did in the previous step.
+{: .comment}
+
+To compute the Z-score, we break the process into 2 steps:
+1. Substract each value by the mean of values in the row (i.e. x_{i,j}- \overline{x_i}) using the normalized count table
+2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)
+
 > ### {% icon hands_on %} Hands-on: Compute and extract the Z-score of the most differentially expressed genes
-> 1. **Table Compute** {% icon tool %} with the following parameters:
+> 1. **Table Compute** {% icon tool %} with the following parameters to first substract the mean values per row
 >    - *"Input Single or Multiple Tables"*: `Single Table`
 >      - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
 >      - *"Type of table operation"*: `Perform a full table operation`
 >        - *"Operation"*: `Custom`
->          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0).div(table.std(1),0)`
+>          - *"Custom expression on 'table', along 'axis' (0 or 1)"*: `table.sub(table.mean(1), 0)`
 >
->            `table.mean(1)` computes the mean for each row (here the genes), with `table.sub(table.mean(1), 0)` we substract each value by the row mean and then with `.div(table.std(1),0)` we divide the result by the standard deviation (`table.std(1)`) of the rows.
+>            The `table.mean(1)` expression computes the mean for each row (here the genes) and `table.sub(table.mean(1), 0)` substracts each value by the mean of the row (computed with `table.mean(1)`)
 >    
->    > ### {% icon comment %} Compute the Z-score for all genes
->    >
->    > To save time in this tutorial, we compute the Z-score directly on the normalized count of the most differentially expressed genes. In a standard analysis, we would compute the Z-score on all the genes (`Normalized count` file from **DESeq**) and then filter for the interesting genes as we did in the previous step.
->    {: .comment}
+> 1. **Table Compute** {% icon tool %} with the following parameters:
+>    - *"Input Single or Multiple Tables"*: `Multiple Table`
+>      - In *"1: Tables"
+>        - {% icon param-file %} *"Table"*: `Normalized counts for the most differentially expressed genes`
+>      - Click on on {% icon param-repeat %} *"Insert Tables"*
+>        - {% icon param-file %} *"Table"*: output of the first **Table Compute**
+>      - *"Custom expression on 'tableN'"*: `table2.div(table1.std(1),0)`
+>
+>        The `table1.std(1)` expression computes the standard deviations of each row on the 1st table (normalized counts) and `table2.div` divides the values of 2nd table (previously computed) by these standard deviations.
 >
 > 2. Rename the output to `Z-scores for the most differentially expressed genes`
 > 3. Inspect the output file
