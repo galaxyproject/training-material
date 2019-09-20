@@ -12,6 +12,7 @@ objectives:
   - "Learn how to tag datasets"
   - "Learn how to run tools"
   - "Learn how histories work"
+  - "Learn how to create a workflow"
   - "Learn how to share your work"
 time_estimation: "1H30M"
 key_points:
@@ -21,10 +22,10 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 contributors:
-  - annefou
-  - nagoue
   - chrisbarnettster
   - michelemaroni89
+  - annefou
+  - nagoue
   - olanag1
   - tnabtaf
 ---
@@ -145,18 +146,13 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 >
 > 1. **csv_to_tabular** {% icon tool %}
 >
-
-> ### {% icon hands_on %} Hands-on: Converting dataset format 
->    
->    * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
->    * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
->    * Select `Convert CSV to tabular`
->    * Click the **Convert datatype** button
-
-{: .hands_on}
-
+>
 >    > ### {% icon comment %} Comment
-> A New dataset is created in the history panel. You can click on the dataset name to get an overview
+>    >
+>    > * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+>    > * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
+>    > * Select `Convert CSV to tabular`
+>    > * Click the **Convert datatype** button
 >    {: .comment}
 >
 > 2. Rename the dataset to `iris tabular`
@@ -171,15 +167,7 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 ## Remove header
 
-> ### {% icon comment %} Search bar
->
-> Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
->
-> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you'll need to search among the various options to find the one that works for you.
->
-{: .comment}
-
-> ### {% icon hands_on %} Hands-on: Removing header
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
 >
@@ -192,8 +180,6 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 >    > Use the **tools search box** to find **Removing beginning** {% icon tool %}. 
 >    {: .comment}
 >
->    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
-
 > 2. Rename the dataset to `iris clean`
 >
 >    {% include snippets/rename_dataset.md %}
@@ -211,7 +197,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 
 ## How many different species are in the dataset?
 
-> ### {% icon hands_on %} Hands-on: Filtering dataset 
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1.   **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut columns"* should be changed to `c5`
@@ -253,7 +239,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: Grouping dataset
+> ### {% icon hands_on %} Hands-on: Task description
 >
 Another way round to answer this question with only one tool:
 >
@@ -288,7 +274,7 @@ Another way round to answer this question with only one tool:
 
 ## How many samples by species?
 
-> ### {% icon hands_on %} Hands-on: Grouping dataset and adding information
+> ### {% icon hands_on %} Hands-on: Task description
 >
 > 1.   **Group** {% icon tool %} with the following parameters:
 >    - *"Select data"* select your output file from `Remove beginning`
@@ -393,14 +379,101 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon question %} Questions
 >
-> 1. Can we differentiate the different Iris flower species?
+> 1. Does it help to highlight Iris flower characteristics?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. From the results, we can see that the average Setosa petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
-> > The same can be observed for Setosa petal widths. These numbers are much smaller (width and length) then versicolor and virginica petals.
-> > We can then use these characteristics to differentiate Iris Setosa from the two other species (versicolor and virginica). On the other hand,
-> > we cannot easily differentiate Iris Versicolor from Iris Virginica. Further analysis is necessary.
+> > 1. Answer for question1
+> >
+> {: .solution}
+>
+{: .question}
+
+<<<<<<< HEAD
+## Sub-step with **Scatterplot w ggplot2**
+=======
+## Sub-step with **Grouping1**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Grouping1** {% icon tool %} with the following parameters:
+>    - *"Group by column"*: `c5`
+>    - *"Ignore case while grouping?"*: `Yes`
+>    - *"Ignore lines beginning with these characters"*: ``
+>    - In *"Operation"*:
+>        - {% icon param-repeat %} *"Insert Operation"*
+>            - *"Type"*: ``
+>            - *"On column"*: `c[`
+>            - *"Round result to nearest integer?"*: ``
+>            - *"Replace non numeric data"*: `[`
+>        - {% icon param-repeat %} *"Insert Operation"*
+>            - *"Type"*: ``
+>            - *"On column"*: `c]`
+>            - *"Round result to nearest integer?"*: ``
+>            - *"Replace non numeric data"*: `]`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Grouping1**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Grouping1** {% icon tool %} with the following parameters:
+>    - *"Group by column"*: `c5`
+>    - *"Ignore case while grouping?"*: `Yes`
+>    - *"Ignore lines beginning with these characters"*: ``
+>    - In *"Operation"*:
+>        - {% icon param-repeat %} *"Insert Operation"*
+>            - *"Type"*: `Count`
+>            - *"On column"*: `c5`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
 > >
 > {: .solution}
 >
@@ -410,6 +483,7 @@ In our dataset, we have the following features measured for each sample:
 
 Let's visualize the Iris dataset to see how the features depend on each other, and 
 check whether we can spot any immediate patterns.
+>>>>>>> f334c5656c08a94b14913f51338927810835310a
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -438,41 +512,55 @@ check whether we can spot any immediate patterns.
 
 {: .hands_on}
 
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 > ### {% icon question %} Questions
 >
-> 1. What does this scatter plot tell us about Iris species?
-> 2. Make a new scatter plot with Petal length versus Petal width. Can we differentiate the three Iris species?
+> 1. Question1?
+> 2. Question2?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We get similar results than with Summary and statistics: Iris Setosa can clearly be distingished from Iris versicolor and
-> > iris virginica. We can also see that Sepal width and length are not sufficient features to differentiate Iris versicolor from Iris
-> > virginica.
-> > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
-> >  - *"Column to plot on x-axis"*: `3`
-> >  - *"Column to plot on y-axis"*: `4`
-> >  - *"Plot title"*: `Petal length as a function of petal width`
-> >  - *"Label for x axis"*: `Petal length`
-> >  - *"Label for y axis"*: `Petal width`
-> >  - In *"Advanced Options"*:
-> >      - *"Data point options"*: `User defined point options`
-> >          - *"relative size of points"*: `2.0`
-> >      - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
-> >          - *"column differentiating the different groups"*: `5`
-> >          - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete (discrete, max=8 colors)`
-> >      - *"Axis title options"*: `Default`
-> >      - *"Axis text options"*: `Default`
-> >      - *"Plot title options"*: `Default`
-> >      - *"Axis scaling"*: `Automatic axis scaling`
+> > 1. Answer for question1
+> > 2. Answer for question2
 > >
-> > Click **Execute** to perform the graph. Your new output dataset will look something like this:
-> >
-> >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
-> > We can better differentiate the 3 Iris species but for some samples the petal length versus width is still insufficient
-> > to differentiate Iris versicolor from Iris virginica. And as before, Iris setosa can easily distinguish from the two other species.
 > {: .solution}
 >
 {: .question}
+
+## Sub-step with **Transpose**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Transpose** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
 
 # Share your work
 
