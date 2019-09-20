@@ -141,22 +141,15 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 
 ## Convert dataset **csv_to_tabular**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **csv_to_tabular** {% icon tool %}
->
-
 > ### {% icon hands_on %} Hands-on: Converting dataset format 
 >    
 >    * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
 >    * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
 >    * Select `Convert CSV to tabular`
 >    * Click the **Convert datatype** button
-
-{: .hands_on}
-
+>
 >    > ### {% icon comment %} Comment
-> A New dataset is created in the history panel. You can click on the dataset name to get an overview
+>    > A New dataset is created in the history panel. You can click on the dataset name to get an overview
 >    {: .comment}
 >
 > 2. Rename the dataset to `iris tabular`
@@ -216,7 +209,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 > 1.   **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut columns"* should be changed to `c5`
 >    - *"Delimited by"* should be kept to `Tab`
->    - *"From"* select your last output file
+>    - *"From"* select `iris clean` dataset
 >
 > 2.    Click **Execute**
 >
@@ -224,65 +217,69 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 >
 > 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
 >
-> 5.   **Unique** {% icon tool %} with the following parameters:
+> 5. Add the tag `analysis` to the output dataset
+> 
+> 6.   **Unique** {% icon tool %} with the following parameters:
 >    - *"File to scan for unique values"* select your last output file
 >
-> 6. Click **Execute**
+> 7. Click **Execute**
 >
-> 7. Wait for the job to finish
+> 8. Wait for the job to finish
 >
-> 8. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 9. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
 >
-> 9. Examine the output file
+> 10. Add the tag `analysis` to the output dataset
+>
+> 11. Examine the output file
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
-> How many different species are in the dataset?
->
+> ### {% icon question %} Questions
+> 
+> 1. How many different species are in the dataset?
+> 2. What are the different Iris species?
+> 
 > > ### {% icon solution %} Solution
 > >
-> > 1 
-> > ---- 
-> > setosa
-> >
-> > versicolor
-> >
-> > virginica
+> > 1. There are 3 species.
+> > 2. The 3 different Iris species are:
+> > - setosa
+> > - versicolor
+> > - virginica
 > {: .solution}
 {: .question}
 
 
 > ### {% icon hands_on %} Hands-on: Grouping dataset
 >
-Another way round to answer this question with only one tool:
+> Another way round to answer this question with only one tool:
 >
 > 1.   **Group** {% icon tool %} with the following parameters:
->    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Select data"* select `iris clean` dataset
 >    - *"Group by column"* should be changed to `Column: 5`
 >
 > 2. Click **Execute**
 >
 > 3. Wait for the job to finish
 >
-> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 4. Add the tag `analysis` to the output dataset
+>
+> 5. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
 >
 {: .hands_on}
 
 
 > ### {% icon question %} Question
-> How many different species are in the dataset?
+> 1. How many different species are in the dataset?
+> 2. What are the different Iris species?
 >
 > > ### {% icon solution %} Solution
-> > 
 > >
-> > 1 
-> > ---- 
-> > setosa
-> >
-> > versicolor
-> >
-> > virginica
+> > 1. There are 3 species.
+> > 2. The 3 different Iris species are:
+> > - setosa
+> > - versicolor
+> > - virginica
 > {: .solution}
 {: .question}
 
@@ -291,7 +288,7 @@ Another way round to answer this question with only one tool:
 > ### {% icon hands_on %} Hands-on: Grouping dataset and adding information
 >
 > 1.   **Group** {% icon tool %} with the following parameters:
->    - *"Select data"* select your output file from `Remove beginning`
+>    - *"Select data"* select `iris clean` dataset
 >    - *"Group by column"* should be changed to `Column: 5`
 >    - *"Insert operation"* click on the icon.
 >    - *"Type"* select `Count`
@@ -299,20 +296,23 @@ Another way round to answer this question with only one tool:
 > 2. Click **Execute**
 > 3. Wait for the job to finish
 > 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 5. Add the tag `analysis` to the output dataset
 >
 {: .hands_on}
 
 > ### {% icon question %} Question
-> How many samples by species are in the dataset?
+> 1. How many samples by species are in the dataset?
 >
 > > ### {% icon solution %} Solution
 > > 
-> >
+> > 1. We have 50 samples per species:
+> > ```
 > > 1 | 2
 > > ---- | ----------
 > > setosa | 50
 > > versicolor | 50
 > > virginica | 50
+> > ```
 > {: .solution}
 {: .question}
 
@@ -338,7 +338,7 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon comment %} petal and sepal
 > The image below shows you what is a sepal and petal.
-> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal" of Iris flowers")
+> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
 ## Summary and descriptive statistics with **Datamash**
@@ -348,7 +348,7 @@ In our dataset, we have the following features measured for each sample:
 > 1. **Datamash** {% icon tool %} with the following parameters:
 >    - *Input tabular dataset*: {% icon param-file %}: select **iris tabular**
 >    - *"Group by fields"*: `5`
->    - *"Input file has a header line"*: `No`
+>    - *"Input file has a header line"*: `Yes`
 >    - *"Print header line"*: `No`
 >    - *"Sort input"*: `Yes`
 >    - "Print all fields from input file": `No`
@@ -414,11 +414,12 @@ check whether we can spot any immediate patterns.
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>    - *Input tabular dataset*: {% icon param-file %}: select **iris clean**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
 >    - *"Plot title"*: `Sepal length as a function of sepal width`
 >    - *"Label for x axis"*: `Sepal length`
->    - *"Label for y axis"*: `sepal width`
+>    - *"Label for y axis"*: `Sepal width`
 >    - In *"Advanced Options"*:
 >        - *"Data point options"*: `User defined point options`
 >            - *"relative size of points"*: `2.0`
@@ -434,8 +435,10 @@ check whether we can spot any immediate patterns.
 >
 >    ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter.png)
 >
+> 3. Add the tag `plot` to the dataset
 >
-
+>    {% include snippets/add_tag.md %}
+>
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -449,6 +452,7 @@ check whether we can spot any immediate patterns.
 > > iris virginica. We can also see that Sepal width and length are not sufficient features to differentiate Iris versicolor from Iris
 > > virginica.
 > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+> >  - *Input tabular dataset*: {% icon param-file %}: select **iris clean**
 > >  - *"Column to plot on x-axis"*: `3`
 > >  - *"Column to plot on y-axis"*: `4`
 > >  - *"Plot title"*: `Petal length as a function of petal width`
@@ -468,10 +472,11 @@ check whether we can spot any immediate patterns.
 > > Click **Execute** to perform the graph. Your new output dataset will look something like this:
 > >
 > >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
+> > 3. Add the tag `plot` to the dataset
+> >
 > > We can better differentiate the 3 Iris species but for some samples the petal length versus width is still insufficient
 > > to differentiate Iris versicolor from Iris virginica. And as before, Iris setosa can easily distinguish from the two other species.
 > {: .solution}
->
 {: .question}
 
 # Share your work
