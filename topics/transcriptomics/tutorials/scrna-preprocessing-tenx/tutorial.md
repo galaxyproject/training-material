@@ -171,7 +171,7 @@ The table above gives a summary of the primers used in the image and the number 
 >
 > Unstranded protocols do not distinguish between whether a fragments was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
 >
-> ![strandedness]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_standedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
+> ![strandedness]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_strandedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
 >
 > Stranded protocols overcome this by fitting different 5' and 3' primers and adaptors, meaning that the orientation of the fragment is fixed during sequencing. For the Chromium v2 and v3 chemistries, the barcode information is purely within the R1 forward strand.
 >
