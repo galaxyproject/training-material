@@ -1,6 +1,26 @@
 ---
 - doc: "Test sample data for Transcriptomics:Refence-based"
-  job: ref_based-job.yml
+  job:
+    GSM461177_1:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
+      filetype: fastqsanger
+    GSM461177_2:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
+      filetype: fastqsanger
+    GSM461180_1:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
+      filetype: fastqsanger
+    GSM461180_2:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+      filetype: fastqsanger
+    Drosophila_melanogaster.BDGP6.87.gtf:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+      filetype: gtf
   outputs:
     GSM461177_1_fastqc:
       asserts:
@@ -38,11 +58,3 @@
       asserts:
         has_text:
           text: '8412167'
-    deseq:
-      asserts:
-        has_text:
-          text: '1086.97429520489'
-    goseq:
-      asserts:
-        has_text:
-          text: 'GO:0005576'
