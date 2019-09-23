@@ -359,19 +359,6 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
 
 {% include topics/sequence-analysis/tutorials/mapping/bam_explanation.md mapper="RNA STAR" %}
 
-> ### {% icon question %} Question
->
-> 1. What is a BAM file?
-> 2. What does such a file contain?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. A Binary Alignment Map (BAM) file is the compressed version of a Sequence Alignment Map (SAM) file. A SAM file is a tab-delimited text file that contains sequence alignment data.
-> > 2. It contains information about the mapping: for each mapped read, the position on the reference genome, the mapping quality, ...
-> >
-> {: .solution}
-{: .question}
-
 ## Inspection of the mapping results
 
 The BAM file contains information about where the reads are mapped on the reference genome. But as it is a binary file containing information for many reads (several million for these samples), it is difficult to inspect and explore the file.
