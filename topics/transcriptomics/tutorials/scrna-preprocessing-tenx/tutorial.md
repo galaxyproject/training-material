@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Pre-processing of 10X Single-Cell RNA Datasets"
-zenodo_link: "https://zenodo.org/record/3453320"
+zenodo_link: "https://zenodo.org/record/3457880"
 tags:
   - single-cell
   - 10x
@@ -115,7 +115,7 @@ The source material consists of 6 FASTQ files split into two sequencing lanes *L
   * pbmc\_1k\_v3\_S1\_*L002*\_**R2**\_001.fastq.gz
   * pbmc\_1k\_v3\_S1\_*L002*\_**I1**\_001.fastq.gz
 
-The *Cell Ranger* pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STARsolo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3453320) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/record/3453320/files/subsetting_data.txt).
+The *Cell Ranger* pipeline requires all three files to perform the demultiplexing and quantification, but **RNA STARsolo** does [not require](https://github.com/alexdobin/STAR/issues/640) the I1 lane file to perform the analysis. These source files are provided in the [Zenodo](https://zenodo.org/record/3457880) data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the [Zenodo link](https://zenodo.org/record/3457880/files/subsetting_data.txt).
 
 ### Data upload and organization
 
@@ -130,22 +130,22 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3453320) or from the data library (ask your instructor)
+> 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/3453320/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
->    https://zenodo.org/record/3453320/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
->    https://zenodo.org/record/3453320/files/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
->    https://zenodo.org/record/3453320/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
+>    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
+>    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
+>    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
+>    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Import the Gene Annotations and Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3453320) or from the data library (ask your instructor)
+> 3. Import the Gene Annotations and Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/3453320/files/Homo_sapiens.GRCh37.75.gtf
->    https://zenodo.org/record/3453320/files/3M-february-2018.txt.gz
+>    https://zenodo.org/record/3457880/files/Homo_sapiens.GRCh37.75.gtf
+>    https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 >    ```
 >
 {: .hands_on}
