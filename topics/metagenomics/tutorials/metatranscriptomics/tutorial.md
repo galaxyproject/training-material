@@ -87,7 +87,7 @@ This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ fo
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `T4A_forward` and `T4A_reverse` from [Zenodo](https://zenodo.org/record/3269404) or from the data library (ask your instructor)
+> 2. Import `T1A_forward` and `T1A_reverse` from [Zenodo](https://zenodo.org/record/3362849) or from the data library (ask your instructor)
 >
 >    ```
 >    {{ page.zenodo_link }}/files/T1A_forward.fastqsanger
@@ -96,12 +96,12 @@ This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ fo
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
-> Or Copy These into your Get data
-> T4A_Forward: https://zenodo.org/record/3269404/files/FORWARD_T4A_F.fastqsanger?download=1
-> T4A_Reverse: https://zenodo.org/record/3269404/files/REVERSE_T4A_R.fastqsanger?download=1
+> Or Go to Upload file tool and copy These into your Paste/Fetch data 
+> T1A_Forward: https://zenodo.org/record/3362849/files/T1A_forward.fastqsanger?download=1
+> T1A_Reverse: https://zenodo.org/record/3362849/files/T1A_reverse.fastqsanger?download=1
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the file to `T4A_forward` and `T4A_reverse`
+> 3. Rename the file to `T1A_forward` and `T1A_reverse`
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -122,7 +122,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: both `T4A_forward` and `T4A_reverse` datasets selected with **Multiple datasets**
+>       - {% icon param-files %} *"Short read data from your current history"*: both `T1A_forward` and `T1A_reverse` datasets selected with **Multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
@@ -146,8 +146,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
->
-> 4. Inspect the webpage output from MultiQC for each FASTQ
+> 4. Select both the Raw files.
+> 5. Inspect the webpage output from MultiQC for each FASTQ
 >
 {: .hands_on}
 
@@ -273,7 +273,7 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 >       - *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`
 >    - *"Which strands to search"*: `Search both strands`
 >    - *"Databases to query"*: `Public pre-indexed ribosomal databases`
->       - *"rRNA databases"*: all (`rfam-5s-database-id98`, `silva-arc-23s-id98`, `silva-euk-28s-id98`, `silva-bac-23s-id98`, `silva-euk-18s-id95`, `silva-bac-16s-id90`, `rfam-5.8s-database-id98`, `silva-arc-16s-id95`)
+>       - *"rRNA databases"*: select all (`rfam-5s-database-id98`, `silva-arc-23s-id98`, `silva-euk-28s-id98`, `silva-bac-23s-id98`, `silva-euk-18s-id95`, `silva-bac-16s-id90`, `rfam-5.8s-database-id98`, `silva-arc-16s-id95`)
 >    - *"Include aligned reads in FASTA/FASTQ format?"*: `Yes (--fastx)`
 >       - *"Include rejected reads file?"*: `Yes`
 >    - *"Generate statistics file"*: `Yes`
