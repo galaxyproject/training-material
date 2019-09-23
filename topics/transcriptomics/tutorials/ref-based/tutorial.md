@@ -1034,7 +1034,21 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 - A table with the normalized counts for each gene (rows) in the samples (columns)
 - A graphical summary of the results, useful to evaluate the quality of the experiment:
 
-    1. Principal component plot of the samples ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) with the first two dimensions.
+    1. Plot with the first 2 dimensions from a principal component analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) run on the normalized counts of the samples
+
+        > ### {% icon details %} What is a PCA?
+        >
+        > Let's imagine we have some beer bottles standing here on the table. We can describe each beer by its colour,its foam, by how strong it is, and so on. We can compose a whole list of different characteristics of each beer in a beer shop. But many of them will measure related properties and so will be redundant. If so, we should be able to summarize each beer with fewer characteristics. This is what PCA or principal component analysis does.
+        >
+        > With PCA, we do not just select some interesting characteristics and discard the others. Instead, we construct some new characteristics that summarize our list of beers well. These new characteristics are constructed using the old ones. For example, a new characteristic might be computed as foam size age minus beer acidity level or some other combination like that. They are linear combinations.
+        >
+        > In fact, PCA finds the best possible characteristics, the ones that summarize the list of beers. These characteristics can be used to find similarities between beers and group them.
+        >
+        > Going back to read counts, the PCA is run on the normalized counts for all the samples. Here, we would like to describe the samples based on the expression of the genes. So the characteristics are the number of reads mapped on each genes. We use them and linear combinations of them to represent the samples and their similarities.
+        >
+        > *The beer analogy has been adapted from [an answer on StackExchange](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)*
+        >
+        {: .details}
 
         It shows the samples in the 2D plane spanned by their first two principal components. Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
@@ -1054,7 +1068,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
         > {: .solution}
         {: .question}
 
-    2. Heatmap of the sample-to-sample distance matrix (with clustering)
+    2. Heatmap of the sample-to-sample distance matrix (with clustering) based on the normalized counts
     
         The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts. 
 
