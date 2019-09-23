@@ -1210,7 +1210,7 @@ The generated output is an extension of the previous file:
 > > ### {% icon solution %} Solution
 > >
 > > 1. FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.
-> > 2. From the table, we got the short ucut of the gene name: Ant2. After some search on the Internet and biological databases, we can found that Ant2 corresponds to adenine nucleotide translocase 2.
+> > 2. From the table, we got the gene symbol: Ant2. After some search on the [online biological databases](https://www.ncbi.nlm.nih.gov/gene/32008), we can found that Ant2 corresponds to adenine nucleotide translocase 2.
 > {: .solution}
 {: .question}
 
@@ -1541,7 +1541,7 @@ As for the GO terms, 2 files are generated:
     > >
     > > 1. The file has 127 lines including an header, so 126 KEGG pathways have been identified.
     > > 2. 2 KEGG pathways (1.57%) are over-represented, using **Filter** {% icon tool %} on c6 (adjusted p-value for over-represented KEGG pathways)
-    > > 3. The first 2 KEGG pathways are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we found more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
+    > > 3. The first 2 KEGG pathways are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
     > > 4. 1 KEGG pathways (0.79%) is under-represented, using **Filter** {% icon tool %} on c7 (adjusted p-value for under-represented KEGG pathways): `03040`, Spliceosome
     > {: .solution}
     {: .question}
