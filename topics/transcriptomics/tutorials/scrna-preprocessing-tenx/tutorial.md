@@ -59,7 +59,19 @@ The gain in resolution reduces the granularity and noise issues that plagued the
 
 The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell's transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all reads in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the mRNA into a cDNA counterpart. The oil is then removed and all (now barcoded) cDNA reads are pooled together to be sequenced.
 
-Though there are ~750,000 10X gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (>90%) being empty in order to ensure that the remainder contains only one cell.
+Though there are approximately 3 million 10x gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (>90%) being empty in order to ensure that the remainder contains only one cell.
+
+> ### {% icon details %} Whitelist Barcodes
+>
+> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with 3,000,0000 barcodes.
+>
+> Both are provided in the Zenodo link, but we will only work with the 3 million barcodes because this is what is provided with the chemistry version.
+>
+> If you are getting a low number of cells detected for your reads later on, it could be because the barcodes provided are wrong.
+>
+{: .details}
+
+
 
 More information can be found in the [reagent kit documentation](https://support.10xgenomics.com/single-cell-gene-expression/library-prep/doc/user-guide-chromium-single-cell-3-reagent-kits-user-guide-v2-chemistry).
 
@@ -352,7 +364,7 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 {: .details}
 
 
-The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see 272 which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.
+The main information to gather at this stage is that the `nCellBarcodes` tell us how many cells were detected in our sample, where we see that there are 5200 cells, which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (`nMatch`) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (`nNoFeature`) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.
 
 
 
@@ -360,7 +372,7 @@ The main information to gather at this stage is that the `nCellBarcodes` tell us
 
 The matrix files produced by **RNA STARsolo** are in the *bundled* format, meaning that the information to create a tabular matrix of Genes vs Cells are separated into different files. These files are already 10x analysis datasets, compatible with any downstream single-cell RNA analysis pipeline, however the number of cells represented here are greatly over-represented, as they have not yet been filtered for high quality cells, and therefore the matrix represents *any* cells that were unambiguously detected in the sample.
 
-If we were to construct a cell matrix using the data we have, we would have a large matrix of 60,000 Genes against 737,000 Cells, of which most values would be zero, i.e. an *extremely* sparse matrix.
+If we were to construct a cell matrix using the data we have, we would have a large matrix of 60,000 Genes against 3 million Cells, of which most values would be zero, i.e. an *extremely* sparse matrix.
 
 To get a high quality count matrix we must apply the **DropletUtils** tool, which will produce a filtered dataset that is more representative of the *Cell Ranger* pipeline.
 
@@ -396,8 +408,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > > ### {% icon solution %} Solution
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
-> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that 5200 barcodes were detected in total, but only 272 of them were of good enough quality (using the default upper quantile and lower proportion parameters).
-> >    We will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that 5200 barcodes were detected in total, but only 272 of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
 > {: .solution}
 {: .question}
 
