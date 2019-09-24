@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Data source integration"
-enable: "false"
+enable: "true"
 questions:
  - How can I write a tool that can import data into Galaxy from an external database?
  - What are "data sources" and how do they function?
