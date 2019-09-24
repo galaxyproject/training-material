@@ -36,11 +36,10 @@ contributors:
 <!-- This is a comment. -->
 
 This practical aims to familiarize you with the Galaxy user interface. 
-It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
+It will teach you how to perform basic tasks such as importing data, running tools, working with histories, and sharing your work.
 Not everyone has the same background and that's ok! 
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+{% include snippets/warning_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -52,7 +51,7 @@ Not everyone has the same background and that's ok!
 {: .agenda}
 
 > ### {% icon comment %} Background
-> The Iris flower data set or Fisher’s Iris data set is a multivariate data set introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}). 
+> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}). 
 > Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
@@ -89,7 +88,7 @@ The order of operations is important as very often the next operation takes as i
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
 That is what we call a pipeline.
 
-Then the finalized pipeline can be serialized as a workflow.A workflow is the concatenation of one or multiple histories as a series of building blocks 
+Then the finalized pipeline can be serialized as a workflow. A workflow is the concatenation of one or multiple histories as a series of building blocks 
 for replicating an experimental result or a recipe. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
 In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input. 
 
@@ -272,18 +271,9 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 > ### {% icon question %} Question
 > 1. How many different species are in the dataset?
 > 2. What are the different Iris species?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. There are 3 species.
-> > 2. The 3 different Iris species are:
-> > - setosa
-> > - versicolor
-> > - virginica
-> {: .solution}
 {: .question}
 
-## How many samples by species?
+## How many samples by species are in the dataset?
 
 > ### {% icon hands_on %} Hands-on: Grouping dataset and adding information
 >
@@ -301,28 +291,27 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 {: .hands_on}
 
 > ### {% icon question %} Question
-> 1. How many samples by species are in the dataset?
+> How many samples by species are in the dataset?
 >
 > > ### {% icon solution %} Solution
 > > 
-> > 1. We have 50 samples per species:
-> > ```
-> > 1 | 2
-> > ---- | ----------
-> > setosa | 50
-> > versicolor | 50
-> > virginica | 50
-> > ```
+> > We have 50 samples per species:
+> >
+> > | 1         | 2   |
+> > |---------- | --- |
+> > |setosa     | 50  |
+> > |versicolor | 50  |
+> > |virginica  | 50  |
 > {: .solution}
 {: .question}
 
 # Analysis: How to differentiate the different Iris species?
 
-Our objective is to find what differentiate the different Iris species. We know that we have **3** species of iris flowers, with
+Our objective is to find what differentiate the different Iris species (Figure 1). We know that we have **3** species of iris flowers, with
 **50** samples for each:
-- setosa,
-- versicolor,
-- virginica.
+- setosa
+- versicolor
+- virginica
 
 These species look very much alike as shown on the figure below.
 
@@ -397,10 +386,10 @@ In our dataset, we have the following features measured for each sample:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. From the results, we can see that the average Setosa petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
-> > The same can be observed for Setosa petal widths. These numbers are much smaller (width and length) then versicolor and virginica petals.
-> > We can then use these characteristics to differentiate Iris Setosa from the two other species (versicolor and virginica). On the other hand,
-> > we cannot easily differentiate Iris Versicolor from Iris Virginica. Further analysis is necessary.
+> > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
+> > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) then *Iris versicolor* and *Iris virginica* petals.
+> > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I virginica*). On the other hand,
+> > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
 > >
 > {: .solution}
 >
@@ -448,9 +437,9 @@ check whether we can spot any immediate patterns.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. We get similar results than with Summary and statistics: Iris Setosa can clearly be distingished from Iris versicolor and
-> > iris virginica. We can also see that Sepal width and length are not sufficient features to differentiate Iris versicolor from Iris
-> > virginica.
+> > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distingished from *Iris versicolor* and
+> > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
+> > virginica*.
 > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
 > >  - *Input tabular dataset*: {% icon param-file %}: select **iris clean**
 > >  - *"Column to plot on x-axis"*: `3`
@@ -475,7 +464,7 @@ check whether we can spot any immediate patterns.
 > > 3. Add the tag `plot` to the dataset
 > >
 > > We can better differentiate the 3 Iris species but for some samples the petal length versus width is still insufficient
-> > to differentiate Iris versicolor from Iris virginica. And as before, Iris setosa can easily distinguish from the two other species.
+> > to differentiate *Iris versicolor* from *Iris virginica*. And as before, *Iris setosa* can easily distinguish from the two other species.
 > {: .solution}
 {: .question}
 
@@ -495,15 +484,14 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 > Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Share history and workflow
+> ### {% icon hands_on %} Hands-on: Share history
 >
-> 1. Share one of your histories with your neighbour.
-> 2. See if you can do the same with your workflow!
-> 3. Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
+> 1. Share your history with your neighbour.
+> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
 {: .hands_on}
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+{% icon trophy %} Well done! You have just performed your first analysis in Galaxy. Additionally you can share your results and methods with others.
+
