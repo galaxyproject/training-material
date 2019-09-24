@@ -57,7 +57,7 @@ To illustrate how to analyze metatranscriptomics data, we will use data from tim
 
 In this tutorial, we focus on biological replicate A of the 1st time point, but [in a follow-up tutorial we illustrate how compare the results over the different time points and replicates]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}). The input files used here are trimmed version of the original file for the purpose of saving time and resources. 
 
-To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM ({% cite batut2018asaim %}) is an open-source Galaxy-based workflow that enables microbiome analyses. It's workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.
+To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM ({% cite batut2018asaim %}) is an open-source Galaxy-based workflow that enables microbiome analyses. Its workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.
 
 This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input and:
 1. preprocess
@@ -96,9 +96,7 @@ This workflow takes in paired-end datasets of raw shotgun sequences (in FastQ fo
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
-> Or Go to Upload file tool and copy These into your Paste/Fetch data 
-> T1A_Forward: https://zenodo.org/record/3362849/files/T1A_forward.fastqsanger?download=1
-> T1A_Reverse: https://zenodo.org/record/3362849/files/T1A_reverse.fastqsanger?download=1
+>
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 3. Rename the file to `T1A_forward` and `T1A_reverse`
@@ -145,8 +143,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
 >           - *"Type of FastQC output?"*: `Raw data`
->           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
-> 4. Select both the Raw files.
+>           - {% icon param-files %} *"FastQC output"*: both `Raw data` files (outputs of **FastQC** {% icon tool %})
+>
 > 5. Inspect the webpage output from MultiQC for each FASTQ
 >
 {: .hands_on}
@@ -211,7 +209,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > {: .solution} 
 {: .question}
 
-Using Cutadapt, we can trim sequenced reads to remove bases that were sequenced with less certainty (= low-quality bases) at the read ends in addition to removing reads of overall bad quality {% cite martin2011cutadapt %}
+We should now trim reads to remove bases that were sequenced with less certainty (= low-quality bases) at the read ends in addition to removing reads of overall bad quality. Several tools can do that but here we will use **Cutadapt** ({% cite martin2011cutadapt %}).
 
 **Cutadapt** also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering reads.
 
@@ -351,7 +349,7 @@ The first important information to get from microbiome data is the community str
 
 - Identification and classification of OTUs, as used in amplicon data
 
-   Such an approach first requires sequence sorting to extract only the 16S and 18S sequences, then again using the same tools as for amplicon data. However, because rRNA sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported
+    Such an approach first requires sequence sorting to extract only the 16S and 18S sequences, then again using the same tools as for amplicon data. However, because rRNA sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported
 
 - Assignment of taxonomy on the whole sequences using databases with marker genes
 
@@ -606,7 +604,7 @@ HUMAnN2 generates 3 files
     > > ### {% icon solution %} Solution
     > > 1. The most abundant pathway is PWY-6305. It produces the polyamine putrescine that may be involved in interactions with proteins, DNA and RNA molecules.
     > > 2. Like the gene family, this pathway is mostly achieved by *Clostridium thermocellum*.
-    > > 3. There are 146 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with | in them using the tool Select lines that match an expression {% icon tool %}. 
+    > > 3. There are 146 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with `|` in them using the tool **Select lines that match an expression** {% icon tool %}. 
     > >      The output file has 79 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 76 UniRef50 pathways have been identified for our sample.”
     > >
     > > 4. The "UNINTEGRATED" abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.
@@ -785,9 +783,13 @@ Although gene families and pathways, and their abundance may be related to a spe
 {: .hands_on}
 
 The generated file is a table with 7 columns:
-- genus and its abundance
-- species and its abudance
-- gene family id, name and abundance
+1. genus
+2. abundance of the genus (percentage)
+3. species
+4. abundance of the species (percentage)
+5. gene family id
+6. gene family name
+7. gene family abundance (percentage)
 
 ```
 genus	genus_abundance	species	species_abundance	gene_families_id	gene_families_name	gene_families_abundance
@@ -800,27 +802,41 @@ Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.563091
 > ### {% icon question %} Questions
 >
 > 1. Are there gene families associated with each genus identified with **MetaPhlAn2**?
-> 2. Are there gene families associated to each species identified with **MetaPhlAn2**?
-> 3. How many gene families are associated to each genus?
+> 2. How many gene families are associated to each genus?
+> 3. Are there gene families associated to each species identified with **MetaPhlAn2**?
 > 4. How many gene families are associated to each species?
 >
 > > ### {% icon solution %} Solution
 > > 
-> > To answer the different questions, we need to first group the contents of the output of **Combine MetaPhlAn2 and HUMAnN2 outputs** by either 1st or 3rd column and count the number of occurrences of gene families. We do that using Group data by a column {% icon tool %} with
-> >  - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
-> >  - *"Group by column"*: once with `Column:1` and once with `Column:3`
-> >  - *"Operation"*:
-> >    - Click on {% icon param-repeat %} *"Insert Operation"*
-> >      - *"Type"*: `Count`
-> >      - *"On column"*: `Column:5`
+> > 1. To answer the questions, we need to group the contents of the output of **Combine MetaPhlAn2 and HUMAnN2 outputs** by 1st column and count the number of occurrences of gene families. We do that using **Group data by a column** {% icon tool %}:
 > >
-> > Answers:
+> >    > ### {% icon hands_on %} Hands-on: Group by genus and count gene families
+> >    > 1. **Group data by a column** {% icon tool %}
+> >    >    - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
+> >    >    - *"Group by column"*: `Column:1`
+> >    >    - *"Operation"*:
+> >    >      - Click on {% icon param-repeat %} *"Insert Operation"*
+> >    >        - *"Type"*: `Count`
+> >    >        - *"On column"*: `Column:5`
+> >    {: .hands_on}
 > >
-> > 1. With **MetaPhlAn2**, we identified 4 genus (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia). But in the output of **Combine MetaPhlAn2 and HUMAnN2 outputs**, we have only gene families for Clostridium, Coprothermobacter and Methanothermobacter. The abundance of Escherichia is probably too low to correctly identify correctly some gene families.
+> >    With **MetaPhlAn2**, we identified 4 genus (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia). But in the output of **Combine MetaPhlAn2 and HUMAnN2 outputs**, we have only gene families for Clostridium, Coprothermobacter and Methanothermobacter. The abundance of Escherichia is probably too low to correctly identify correctly some gene families.
+> > 
+> > 2. 2323 gene families are associated to Clostridium, 918 to Coprothermobacter and 202 to Methanothermobacter. Given a genus abundance of 76.65512 for Clostridium, 20.75226 for Coprothermobacter and 0.26989 for Methanothermobacter, the ratio between number of gene families and genus abundance is really high for Methanothermobacter (748.45) compare to Methanothermobacter (44.26) and Coprothermobacter (30.30). 
 > >
-> > 2. The 3 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) identified by **MetaPhlAn2** are associated to gene families.
+> > 3. For this question, we should group on the 3rd column:
 > >
-> > 3. 2323 gene families are associated to Clostridium, 918 to Coprothermobacter and 202 to Methanothermobacter. Given a genus abundance of 76.65512 for Clostridium, 20.75226 for Coprothermobacter and 0.26989 for Methanothermobacter, the ratio between number of gene families and genus abundance is really high for Methanothermobacter (748.45) compare to Methanothermobacter (44.26) and Coprothermobacter (30.30). 
+> >    > ### {% icon hands_on %} Hands-on: Group by species and count gene families
+> >    > 1. **Group data by a column** {% icon tool %}
+> >    >    - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
+> >    >    - *"Group by column"*: `Column:3`
+> >    >    - *"Operation"*:
+> >    >      - Click on {% icon param-repeat %} *"Insert Operation"*
+> >    >        - *"Type"*: `Count`
+> >    >        - *"On column"*: `Column:5`
+> >    {: .hands_on}
+> >
+> >    The 3 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) identified by **MetaPhlAn2** are associated to gene families.
 > >
 > > 4. As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 2323 for Clostridium thermocellum, 918 for Coprothermobacter proteolyticus	and 202 Methanothermobacter thermautotrophicus. The abundances are also the same.
 > >
