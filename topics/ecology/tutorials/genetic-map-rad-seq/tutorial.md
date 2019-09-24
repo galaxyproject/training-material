@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/sequence-analysis/tutorials/genetic-map-rad-seq/tutorial
 
 title: "RAD-Seq to construct genetic maps"
 zenodo_link: "https://doi.org/10.5281/zenodo.1219888"

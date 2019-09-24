@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
 
 title: "RAD-Seq de-novo data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
