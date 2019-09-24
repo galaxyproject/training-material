@@ -1584,7 +1584,7 @@ A tool we can use to visualize the composition of our community, is [Krona](http
 {: .hands_on}
 
 The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
-innermost ring labeled "Bacteria" below:
+innermost ring labeled "Bacteroidetes" below:
 
 <iframe id="krona" src="krona_all.html" frameBorder="0" width="100%" height="900px"> ![Krona](../../images/krona.png) </iframe>
 
