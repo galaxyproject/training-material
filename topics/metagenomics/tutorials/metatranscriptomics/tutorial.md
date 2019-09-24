@@ -16,12 +16,6 @@ level: Introductory
 tags:
 - metatranscriptomics
 time_estimation: 6H
-follow_up_training:
-  -
-    type: "internal"
-    topic_name: metagenomics
-    tutorials:
-      - comparative-metaomics-analysis
 key_points:
 - "Metatranscriptomics data have the same QC profile that RNA-seq data"
 - "A lot of metatranscriptomics sequences are identified as rRNA sequences"
@@ -55,7 +49,7 @@ Metatranscriptomics analysis enables understanding of how the microbiome respond
 
 To illustrate how to analyze metatranscriptomics data, we will use data from time-serie analysis of a microbial community inside a bioreactor ({% cite kunath2018proteins %}). They generated metatranscriptomics data for 3 replicates over 7 time points. RNAs were enriched by rRNA depletion and treated with DNAse and library was prepared with the TruSeq stranded RNA sample preparation, which included the production of a cDNA library. 
 
-In this tutorial, we focus on biological replicate A of the 1st time point, but [in a follow-up tutorial we illustrate how compare the results over the different time points and replicates]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}). The input files used here are trimmed version of the original file for the purpose of saving time and resources. 
+In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources. 
 
 To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM ({% cite batut2018asaim %}) is an open-source Galaxy-based workflow that enables microbiome analyses. Its workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.
 
@@ -866,5 +860,3 @@ The workflow can be represented this way:
 ![ASaiM diagram](../../images/asaim-wf.png)
 
 The dataset used here was extracted from a time-series analysis of a microbial community inside a bioreactor ({% cite kunath2018proteins %}) in which there are 3 replicates over 7 time points. We analyzed here only one single time point for one replicate.
-
-But during the preparation of this tutorial, we analyzed the remaining 20 datasets following the same workflow, making the samples comparable. You can now compare the different time points and replicates by following the [comparative analysis tutorial]({{ site.baseurl }}{% link topics/metagenomics/tutorials/comparative-metaomics-analysis/tutorial.md %}).
