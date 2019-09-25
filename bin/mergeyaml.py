@@ -32,12 +32,10 @@ def extend_list(merged, a):
     merged += missing
 
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Merge the data libraries in the tutorials into a single large one")
     parser.add_argument('--nondocker', action='store_true', help="For running outside of docker usecase")
     args = parser.parse_args()
-
     merged = {}
 
     if args.nondocker:
