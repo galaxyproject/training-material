@@ -435,7 +435,7 @@ The *DefaultDrops* method given in the previous sub-section is a good one-click 
 
 However, the **DropletUtils** tool does provide other options for determining which cells are of "good" quality and which are not.
 
-A useful diagnostic for droplet-based data is the barcode rank plot, which shows the (log-)total UMI count for each barcode on the x-axis and the (log-)rank on the y-axis. This is effectively a transposed empirical cumulative density plot with log-transformed axes. It is useful as it allows users to examine the distribution of total counts across barcodes, focusing on those with the largest counts.
+A useful diagnostic for droplet-based data is the barcode rank plot, which shows the (log-)total UMI count for each barcode on the y-axis and the (log-)rank on the x-axis. This is effectively a transposed empirical cumulative density plot with log-transformed axes. It is useful as it allows users to examine the distribution of total counts across barcodes, focusing on those with the largest counts.
 
 > ### {% icon hands_on %} Hands-on: Rank Barcodes
 >
@@ -445,8 +445,7 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 >        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Rank Barcodes`
->        - *"Method"*: `EmptyDrops`
->            - *"Lower Bound"*: `100`
+>        - *"Lower Bound"*: `100`
 >
 {: .hands_on}
 
