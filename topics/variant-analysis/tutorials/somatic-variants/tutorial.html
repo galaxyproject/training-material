@@ -546,6 +546,7 @@ resistance/sensitivity, tumor aggressiveness, <em>etc</em>.</p>
       <li><a href="#removing-duplicate-reads" id="markdown-toc-removing-duplicate-reads">Removing duplicate <span class="notranslate">reads</span></a></li>
       <li><a href="#left-align-reads-around-indels" id="markdown-toc-left-align-reads-around-indels">Left-align <span class="notranslate">reads</span> around indels</a></li>
       <li><a href="#recalibrate-read-mapping-qualities" id="markdown-toc-recalibrate-read-mapping-qualities">Recalibrate read <span class="notranslate">mapping</span> qualities</a></li>
+      <li><a href="#refilter-reads-based-on-mapping-quality" id="markdown-toc-refilter-reads-based-on-mapping-quality">Refilter <span class="notranslate">reads</span> based on <span class="notranslate">mapping</span> quality</a></li>
     </ol>
   </li>
   <li><a href="#variant-calling-and-classification" id="markdown-toc-variant-calling-and-classification">Variant calling and classification</a></li>
@@ -1127,34 +1128,97 @@ read <span class="notranslate">mapping</span>s we will do some postprocessing ne
 
 <h2 id="filtering-on-mapped-reads-properties">Filtering on mapped <span class="notranslate">reads</span> properties</h2>
 
-<p>To produce new filtered BAM datasets with only those <span class="notranslate">reads</span> retained that
-have a minimal <span class="notranslate">mapping</span> quality of 1 and are mapped in a proper pair:</p>
+<p>To produce new filtered BAM datasets with only those <span class="notranslate">reads</span> retained that have
+been mapped to the reference successfully, have a minimal <span class="notranslate">mapping</span> quality of 1,
+and for which the mate read has also been mapped:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filtering-for-mapping-status-and-quality"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering for <span class="notranslate">mapping</span> status and quality</h3>
 
   <ol>
-    <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following
-parameters (leaving non-mentioned ones at their defaults):
+    <li><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM or BAM file to filter”</em>: mapped <span class="notranslate">reads</span> datasets from
- the normal <em>and</em> the tumor tissue data, outputs of <strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Minimum MAPQ quality score”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Filter on bitwise flag”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM dataset(s) to filter”</em>: mapped <span class="notranslate">reads</span>
+ datasets from the normal <em>and</em> the tumor tissue data, outputs of
+ <strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Condition”</em>:</li>
       </ul>
       <ul>
-        <li><em>“Only output alignments with all of these flag bits set”</em>:
+        <li>In <em>“1: Condition”</em>:
           <ul>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Read is mapped in a proper pair”</em></li>
+            <li>In <em>“Filter”</em>:
+              <ul>
+                <li>In <em>“1: Filter”</em>:
+                  <ul>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">mapQuality</code>
+                      <ul>
+                        <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="highlighter-rouge">1</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>In <em>“2: Filter”</em>:
+                  <ul>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">isMapped</code>
+                      <ul>
+                        <li><em>“Selected mapped <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Yes</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>Click on <em>“Insert Filter”</em></li>
+                <li>In <em>“3: Filter”</em>:
+                  <ul>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">isMateMapped</code>
+                      <ul>
+                        <li><em>“Select <span class="notranslate">reads</span> with mapped mate”</em>: <code class="highlighter-rouge">Yes</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
           </ul>
+
+          <p>When you configure multiple filters within one condition, <span class="notranslate">reads</span> have
+to pass <em>all</em> the filters to be retained in the output. The above
+settings, thus, retain only read pairs, for which both mates are
+mapped.</p>
+
+          <p>Note that filtering for a minimal <span class="notranslate">mapping</span> quality is not strictly
+necessary. Most variant callers (including **VarScan somatic, which we
+will be using later) have an option for using only <span class="notranslate">reads</span> above a
+certain <span class="notranslate">mapping</span> quality. In this section, however, we are going to
+process the retained <span class="notranslate">reads</span> further rather extensively so it pays off
+in terms of performance to eliminate <span class="notranslate">reads</span> we do not plan to use at an
+early step.</p>
         </li>
       </ul>
     </li>
   </ol>
 
+  <ul>
+    <li><em>“Would you like to set rules?”</em>: <code class="highlighter-rouge">No</code></li>
+  </ul>
+
 </blockquote>
 
 <p>This will result in two new datasets, one for each of the normal and tumor data.</p>
+
+<blockquote class="details">
+  <h3 id="details-tools-for-filtering-bam-datasets"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Tools for filtering BAM datasets</h3>
+  <p>The related tutorial on variant detection from exome-seq data, demonstrates
+nearly identical filtering of BAM datasets using the tool <strong>Filter BAM
+datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+  <p>These two tools offer very similar functionality and can often be used
+interchangeably. Under the hood, <strong>Filter SAM or BAM, output SAM or BAM</strong>
+<i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> uses the <code class="highlighter-rouge">samtools view</code> command line tool, while <strong>Filter
+BAM datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> uses <code class="highlighter-rouge">bamtools
+filter</code>. Whatever the BAM filtering task, you should be able to perform it in
+<span class="notranslate">Galaxy</span> with one of these two tools.</p>
+
+</blockquote>
 
 <h2 id="removing-duplicate-reads">Removing duplicate <span class="notranslate">reads</span></h2>
 
@@ -1305,6 +1369,50 @@ variant calling.</p>
 <p>This will, once more, produce two new datasets, one for each of the normal
 and tumor data.</p>
 
+<h2 id="refilter-reads-based-on-mapping-quality">Refilter <span class="notranslate">reads</span> based on <span class="notranslate">mapping</span> quality</h2>
+
+<p>During recalibration of read <span class="notranslate">mapping</span> qualities <strong>CalMD</strong> may have set some
+<span class="notranslate">mapping</span> quality scores to 255. This special value is reserved for <em>undefined</em>
+<span class="notranslate">mapping</span> qualities and is used by the tool when a recalibrated <span class="notranslate">mapping</span> quality
+would drop below zero. In other words, a value of 255 does not indicate a
+particularly good <span class="notranslate">mapping</span> score, but a really poor one.
+To remove such <span class="notranslate">reads</span> from the data:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-eliminating-reads-with-undefined-mapping-quality"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Eliminating <span class="notranslate">reads</span> with undefined <span class="notranslate">mapping</span> quality</h3>
+
+  <ol>
+    <li><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM dataset(s) to filter”</em>: the recalibrated
+ datasets from the normal and the tumor tissue data; the outputs of
+ <strong>CalMD</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>In <em>“Condition”</em>:</li>
+      </ul>
+      <ul>
+        <li>In <em>“1: Condition”</em>:
+          <ul>
+            <li>In <em>“Filter”</em>:
+              <ul>
+                <li>In <em>“1: Filter”</em>:
+                  <ul>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">mapQuality</code>
+                      <ul>
+                        <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="highlighter-rouge">&lt;=254</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
 <h1 id="variant-calling-and-classification">Variant calling and classification</h1>
 
 <p>Having generated a high-quality set of mapped read pairs, we can proceed to
@@ -1336,8 +1444,8 @@ genome?”</em>: <code class="highlighter-rouge">Use a built-in genome</code>
             <p>If you have imported the <code class="highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
-              <li><em>“Will you select a reference genome from your history or use a built-in
-genome?”</em>: <code class="highlighter-rouge">Use a genome from the history</code>
+              <li><em>“Will you select a reference genome from your history or use a
+built-in genome?”</em>: <code class="highlighter-rouge">Use a genome from the history</code>
                 <ul>
                   <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference genome”</em>: your imported <code class="highlighter-rouge">hg19</code> fasta dataset.</li>
                 </ul>
@@ -1368,9 +1476,9 @@ our data.</p>
             <li>
               <p><em>“Minimum <span class="notranslate">mapping</span> quality”</em>: <code class="highlighter-rouge">1</code></p>
 
-              <p>During postprocessing, we have filtered our <span class="notranslate">reads</span> for ones with a <span class="notranslate">mapping</span>
-quality of at least one, so requiring this quality also here does not
-actually change the results, but it makes the requirement more explicit.</p>
+              <p>During postprocessing, we have filtered our <span class="notranslate">reads</span> for ones with a
+<span class="notranslate">mapping</span> quality of at least one, but <strong>CalMD</strong> may have lowered some
+<span class="notranslate">mapping</span> qualities to zero afterwards.</p>
             </li>
           </ul>
 
@@ -1446,7 +1554,7 @@ the shared data library.</p>
     <li>
       <p>Download <strong>SnpEff functional genomic annotations</strong></p>
 
-      <blockquote class="tip">
+      <blockquote class="comment">
         <h3 id="comment-shortcut-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Shortcut</h3>
         <p>You can skip this step if the <span class="notranslate">Galaxy</span> server you are working on offers
 <code class="highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
@@ -1757,35 +1865,6 @@ store …“</em>: <code class="highlighter-rouge">the first annotation found</c
               <p>This recipe extracts the dbSNP <em>SAO</em> field and adds it as <em>rs_ss</em> to
 the GEMINI database.</p>
             </li>
-            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation extraction recipe”</em></li>
-            <li>In <em>“2: Annotation extraction recipe”</em>:
-              <ul>
-                <li><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">CFL</code></li>
-                <li><em>“Database column name to use for recording annotations”</em>:
- <code class="highlighter-rouge">rs_cfl</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Numbers with
-decimal precision</code></li>
-                <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the first annotation found</code></li>
-              </ul>
-
-              <p>This recipe extracts the dbSNP <em>CFL</em> field and adds it as <em>rs_cfl</em> to
-the GEMINI database.</p>
-            </li>
-            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation extraction recipe”</em></li>
-            <li>In <em>“3: Annotation extraction recipe”</em>:
-              <ul>
-                <li><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">ASP</code></li>
-                <li><em>“Database column name to use for recording annotations”</em>:
- <code class="highlighter-rouge">rs_asp</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Integer numbers</code></li>
-                <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the first annotation found</code></li>
-              </ul>
-
-              <p>This recipe extracts the dbSNP <em>ASP</em> field and adds it as <em>rs_asp</em> to
-the GEMINI database.</p>
-            </li>
           </ul>
         </li>
       </ul>
@@ -2034,13 +2113,11 @@ and their columns</code></li>
   <ol>
     <li><strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the exact same settings as before, but:
       <ul>
-        <li><em>“Additional constraints expressed in SQL syntax”</em>: <code class="highlighter-rouge">somatic_status = 2 AND somatic_p &lt;= 0.05 AND (filter IS NULL OR rs_ids IS NOT NULL) AND rs_cfl != 1 AND rs_asp != 1</code></li>
+        <li><em>“Additional constraints expressed in SQL syntax”</em>: <code class="highlighter-rouge">somatic_status = 2 AND somatic_p &lt;= 0.05 AND filter IS NULL</code></li>
       </ul>
 
       <p>This translates into “variants classified as somatic with a p-value &lt;=
- 0.05, which haven’t been flagged as likely false-positives or, if so, are
- listed in dbSNP, but in there, are not flagged as being assembly-dependent
- or -specific”.</p>
+ 0.05, which haven’t been flagged as likely false-positives”.</p>
     </li>
   </ol>
 </blockquote>
@@ -2145,8 +2222,7 @@ advanced mode for composing the query.</p>
  g.synonym, g.hgnc_id, g.entrez_id, g.rvis_pct, v.clinvar_gene_phenotype
  FROM variants v, gene_detailed g WHERE v.chrom = g.chrom AND
  v.gene = g.gene AND v.somatic_status = 2 AND v.somatic_p &lt;= 0.05 AND
- (v.filter IS NULL OR v.rs_ids IS NOT NULL) AND v.rs_cfl != 1 and
- v.rs_asp != 1 GROUP BY g.gene</code></li>
+ v.filter IS NULL GROUP BY g.gene</code></li>
       </ul>
 
       <blockquote class="comment">

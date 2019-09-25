@@ -626,6 +626,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
             UseGalaxy.eu
         </a>
@@ -1410,7 +1412,8 @@ that may require high accuracy/sensitivity.</p>
 
 <p>The optimal set of postprocessing steps required depends on the variant calling
 software used at the next step. The <strong>FreeBayes</strong> variant caller that we are
-going to use in this tutorial is particularly well suited for use with minimal mapped <span class="notranslate">reads</span> postprocessing pipelines, so all we are going to do here is:</p>
+going to use in this tutorial is particularly well suited for use with minimal
+mapped <span class="notranslate">reads</span> postprocessing pipelines, so all we are going to do here is:</p>
 
 <ul>
   <li>
@@ -1418,7 +1421,7 @@ going to use in this tutorial is particularly well suited for use with minimal m
 for which both the forward and the reverse read have been mapped to the
 reference successfully</p>
 
-    <p>For such <em>proper pairs of <span class="notranslate">reads</span></em>, we can be extra confident that they don’t
+    <p>For such pairs of <span class="notranslate">reads</span>, we can be extra confident that they don’t
 come from some non-human contaminant <span class="notranslate">DNA</span> or represent a sequencing artefact
 of some sort.</p>
   </li>
@@ -1443,8 +1446,7 @@ callers.</p>
 
 <h2 id="filtering-on-mapped-reads-properties">Filtering on mapped <span class="notranslate">reads</span> properties</h2>
 
-<p>To produce new filtered BAM datasets with only those <span class="notranslate">reads</span> retained that are
-mapped in a proper pair:</p>
+<p>To produce new filtered BAM datasets with only mapped <span class="notranslate">reads</span> the mate of which is also mapped:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filtering-for-read-pair-mapping-status"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering for read pair <span class="notranslate">mapping</span> status</h3>
@@ -1460,8 +1462,11 @@ parameters (leaving non-mentioned ones at their defaults):
       </ul>
       <ul>
         <li><em>“Only output alignments with all of these flag bits set”</em>:
+Do not select anything here!</li>
+        <li><em>“Skip alignments with any of these flag bits set”</em>:
           <ul>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Read is mapped in a proper pair”</em></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“The read is unmapped”</em></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“The mate is unmapped”</em></li>
           </ul>
         </li>
       </ul>
@@ -1471,6 +1476,75 @@ parameters (leaving non-mentioned ones at their defaults):
 </blockquote>
 
 <p>This will result in three new datasets, one for each sample in the analysis.</p>
+
+<blockquote class="details">
+  <h3 id="details-more-than-one-way-to-filter"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More than one way to filter</h3>
+  <p>Instead of the above filter conditions we could also have exploited the
+<em>Read is mapped in a proper pair</em> flag bit.</p>
+
+  <p>For a read to be flagged as being mapped in a proper pair its mate needs to
+be mapped, but the mapped pair also needs to meet additional,
+aligner-specific criteria. These may include (and do so for <strong>BWA-MEM</strong>):</p>
+
+  <ul>
+    <li>both <span class="notranslate">reads</span> need to map to the same chomosome</li>
+    <li>the two <span class="notranslate">reads</span> need to map to the reference in the orientation expected by
+the aligner</li>
+    <li>the two read pairs need to map to the reference within an
+aligner-determined distance</li>
+  </ul>
+
+  <p>Thus, filtering based on the flag has two consequences:</p>
+
+  <ul>
+    <li>filtering will be stricter than with just the <em>Read is unmapped</em> and <em>Mate
+is unmapped</em> flags above</li>
+    <li>
+      <p>you will eliminate read pairs that could be informative with regard to
+chromosomal rearrangements and insertion/deletion events</p>
+
+      <p>=&gt; Do not filter for properly paired <span class="notranslate">reads</span> if you plan to detect such
+structural variants!</p>
+    </li>
+  </ul>
+
+  <p>In addition, the <em>proper pair</em> flag is considered undefined if the read
+itself is unmapped, so a <em>proper pair</em> filter should eliminate unmapped <span class="notranslate">reads</span>
+explicitly to be on the safe side.</p>
+
+  <p>Thus, if you would like to use proper pair filtering (we have no intention to
+detect structural variants in this tutorial) instead of just filtering for
+mapped <span class="notranslate">reads</span> with a mapped mate, you could run the alte<span class="notranslate">rna</span>tive:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+    <ol>
+      <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
+        <ul>
+          <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM or BAM file to filter”</em>: all 3 mapped
+ <span class="notranslate">reads</span> datasets of the family trio, outputs of <strong>Map with BWA-MEM</strong>
+ <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Filter on bitwise flag”</em>: <code class="highlighter-rouge">yes</code></li>
+        </ul>
+        <ul>
+          <li><em>“Only output alignments with all of these flag bits set”</em>:
+            <ul>
+              <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Read is mapped in a proper pair”</em></li>
+            </ul>
+          </li>
+          <li><em>“Skip alignments with any of these flag bits set”</em>:
+            <ul>
+              <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“The read is unmapped”</em></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
 
 <h2 id="removing-duplicate-reads">Removing duplicate <span class="notranslate">reads</span></h2>
 
