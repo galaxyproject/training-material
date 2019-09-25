@@ -388,7 +388,7 @@ In our dataset, we have the following features measured for each sample:
 > >
 > > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
 > > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) then *Iris versicolor* and *Iris virginica* petals.
-> > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I virginica*). On the other hand,
+> > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I. virginica*). On the other hand,
 > > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
 > >
 > {: .solution}
