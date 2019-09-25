@@ -1312,7 +1312,7 @@ You should obtain something similar to:
 > >
 > > 1. The samples are clustering by treatment.
 > > 2. The scale changes and the differences between the genes are not visible anymore.
-> > 3. Extract the genes with $$abs(log_{2} FC$$) > 1 (filter for genes with `abs(c3)>1` on the summary of the differentially expressed genes) and run **heatmap2** {% icon tool %} on the generated table.
+> > 3. Extract the genes with $$log_{2} FC$$ > 1 (filter for genes with `c3>1` on the summary of the differentially expressed genes) and run **heatmap2** {% icon tool %} on the generated table.
 > {: .solution}
 {: .question}
 
