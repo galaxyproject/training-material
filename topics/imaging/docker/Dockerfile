@@ -5,6 +5,7 @@
 #
 # to run image:
 #    docker run -p "8080:80" -t galaxy/imaging-training
+#    use -d to automatically dowload the datalibraries in the container
 
 FROM bgruening/galaxy-stable:latest
 
