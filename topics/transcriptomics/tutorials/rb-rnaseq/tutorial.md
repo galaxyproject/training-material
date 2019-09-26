@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: transcriptomics
-tutorial_name: rb-rnaseq
+
+title: "Reference-based RNAseq data analysis (long)"
+zenodo_link: ""
+enable: false
+questions:
+  - "How to perform analysis of RNAseq data when reference genome is available?"
+objectives:
+  - "Learns basic concepts of RNAseq analysis"
+time_estimation: "1h"
+key_points:
+contributors:
+  - nekrut
 ---
 
 # RNAseq: Reference-based
@@ -308,7 +318,7 @@ Here is what to do to load the data:
 
 #### Loading the data and create dataset collections
 
->Go to the [data library](https://usegalaxy.org/library/list#folders/Ff4ce53393dae30ee) and select all fastq files. Then Click `to History` button:
+> Go to the data library (ask your instructor) and select all fastq files. Then Click `to History` button:
 >
 >![Data libraries](../../images/rnaseq_library.png)
 >
@@ -316,7 +326,7 @@ Here is what to do to load the data:
 >
 >![RNASeq data in history](../../images/rnaseq_data_in_history.png)
 >
->Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial]({{site.baseurl}}/topics/introduction/tutorials/processing-many-samples-at-once/tutorial.html) for yet another explanation of dataset collections.
+>Twelve datasets make a lot of clicking necessary. To avoid this annoyance we will combine them into two collections - **c1** and **c2** as shown in the video below. Also, see this [tutorial]({{site.baseurl}}/topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial.html) for yet another explanation of dataset collections.
 > <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/163625221" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 >
 
@@ -387,10 +397,10 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 >
 >![Filter parameters](../../images/filter_gtf.png)
 >
->Select **htseq-count** from **NGS: RNA analysis** section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable `htseq-count` to see collections, you need to select the 'folder' button. In the case of this particular Galaxy [history](https://usegalaxy.org/u/aun1/h/rna-seq-tutorial) we will need to run `htseq-count` twice. Once on TopHat alignemnts for collection **c1** (dataset #37; shown below) and then on alignments for collection **c2** (dataset # 57).|
+>Select **htseq-count** from **NGS: RNA analysis** section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable `htseq-count` to see collections, you need to select the 'folder' button. In the case of this particular Galaxy history we will need to run `htseq-count` twice. Once on TopHat alignemnts for collection **c1** (dataset #37; shown below) and then on alignments for collection **c2** (dataset # 57).|
 |![htseq-count parameters](../../images/htseq_count_interface.png)
 >
->This will generate [read counts per gene](https://usegalaxy.org/datasets/bbd44e69cb8906b5d1e80eae6d363142/display/?preview=True).
+>This will generate read counts per gene.
 
 #### Normalizing read counts and computing differential expression with `DESeq2`
 
@@ -408,11 +418,11 @@ Before we can use `HTseq-count` we need to download gene annotations for version
 >
 >![DESeq2 parameters](../../images/deseq2_interface.png)
 >
->This will produce [output](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>
+>This will produce output as shown below. The columns are: (**1**) gene identifier, (**2**) mean normalised counts, averaged over all samples from both conditions, (**3**) logarithm (base 2) of the fold change, (**4**) the standard error estimate for the log2 fold change estimate, (**5**) [Wald test](https://en.wikipedia.org/wiki/Wald_test) statistic, (**6**) p value for the statistical significance of this change, and (**7**) *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate)). There is only one gene with significant change in gene expression between conditions: `CG1803-RC` with *p*-value = 1.6x10<sup>-05</sup>
 >
 >![DESeq2 output](../../images/deseq2_output.png)
 >
->In addition to the [list of genes](https://usegalaxy.org/datasets/bbd44e69cb8906b5d648fe21c36ac662/display/?preview=True) DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of *p*-values below shows that in our sample there is in fact just one instance of a significant *p*-value:
+>In addition to the list of genes DESeq2 outputs a graphical summary of the result. It includes a number of plots that should be used to evaluate the quality of the experiment. The histogram of *p*-values below shows that in our sample there is in fact just one instance of a significant *p*-value:
 >
 >![p values histogram](../../images/p_val_hist.png)
 >

@@ -2,7 +2,7 @@
 layout: base
 ---
 
-{% include default-header.html %}
+{% include _includes/default-header.html %}
 
 {% assign sorted_topics = "" | split: "," %}
 {% assign sorted_topics_pre = site.data | sort | order: "title" %}
@@ -45,7 +45,7 @@ layout: base
                     {% endfor %}
 
                     {% if has_badges %}
-                    <h2>{{ server }}</h2>
+                    <h2 id="{{ server | slugify }}">{{ server }}</h2>
 
                     <table class="table table-striped">
                         <thead>
@@ -97,4 +97,4 @@ layout: base
     </section>
 </div>
 
-{% include default-footer.html %}
+{% include _includes/default-footer.html %}

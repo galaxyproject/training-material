@@ -1,0 +1,680 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: "Galaxy Troubleshooting"
+contributors:
+  - martenson
+  - natefoo
+
+---
+class: special, middle
+In system administration...
+# Everything always goes wrong
+
+---
+# Database migration
+
+In case you see database migration errors during startup you can:
+
+* Check DB table `migrate_version` column `version`.
+* Check folder `lib/galaxy/model/migrate/versions/` - the latest migration should match the DB.
+* Clean the `*.pyc` files to make sure there is no remnant from other code revisions.
+  * See [makepyc.py in galaxyproject.galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/files/makepyc.py)
+
+---
+# Client build
+
+In case your javascript/css local changes are not visible.
+
+* JavaScript files are located in `client/galaxy/scripts`.
+* CSS files are in `client/galaxy/style/`.
+* Check `client/README.md` for details regarding client build.
+* Run `$ make client` from root folder.
+  * You can also check the `Makefile` in root for other useful targets.
+* The [galaxyproject.galaxy Ansible role](https://github.com/galaxyproject/ansible-galaxy/) builds the client for you
+
+???
+* This should only matter when you modify some of the Galaxy's static assets.
+* Does not affect javascript or style in mako templates.
+
+---
+class: normal
+# Missing tools
+
+* Restart Galaxy and watch the log for
+```console
+Loaded tool id: toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33, version: 1.33 into tool panel....
+```
+
+* Check `integrated_tool_panel.xml` for
+```xml
+<tool id="toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33" />
+```
+
+* If it is TS tool check `config/shed_tool_conf.xml` for
+```xml
+<tool file="toolshed.g2.bx.psu.edu/repos/iuc/sickle/43e081d32f90/sickle/sickle.xml" guid="toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33">
+...
+</tool>
+```
+
+---
+class: smaller
+# Jobs aren't running: always gray
+
+Corresponds to `job.state = 'new'` in database
+
+.left[Check the Galaxy server log for errors. Successful job lifecycle:]
+
+.reduce50[
+```console
+galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
+galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
+galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
+galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
+galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
+galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
+galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
+galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '${GALAXY_SLOTS:-1}' threads" > "/data/000/dataset_21.dat"]
+galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working; mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '/srv/galaxy/jobs/000/21';
+[ "$GALAXY_VIRTUAL_ENV" = "None" ] && GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
+python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880; sh -c "exit $return_code"
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
+galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
+galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
+```
+]
+
+---
+class: smaller, left
+# Successful job lifecycle
+
+Note `[p:PPPP,w:W,m:M]` in log messages:
+
+```console
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
+galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+```
+
+- `[p:6590,w:1,m:0]`: PID 6590, web worker, not a mule (0)
+- `[p:6593,w:0,m:1]`: PID 6593, not a web worker (0), mule 1
+
+---
+class: smaller
+# Successful job lifecycle
+
+Dissecting the lifecycle messages
+
+```console
+galaxy.tools DEBUG 2019-02-01 14:30:20,469 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Validated and populated state for tool request (11.587 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,500 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Handled output named output1 for tool testing (2.334 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,507 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Added output datasets to history (6.210 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,513 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Setup for job Job[unflushed,tool_id=testing] complete, ready to flush (5.408 ms)
+galaxy.tools.actions INFO 2019-02-01 14:30:20,558 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Flushed transaction for job Job[id=21,tool_id=testing] (44.550 ms)
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Sending message to farm job-handlers: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Tool [testing] created job [21] (73.833 ms)
+galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
+```
+
+- "Executed" is a bit misleading - the Job has been created in the "job" table of the database, but is not picked up by a job handler yet.
+- All of this has occurred in the web worker.
+- If not using mules and "Executed" is the last message you see, verify job assigned to a valid handler.
+
+---
+class: smaller
+# Successful job lifecycle
+
+```console
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,560 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Received message: {"__classname__": "JobHandlerMessage", "params": {"task": "setup", "job_id": 21}, "target": "job_handler"}
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6593,w:0,m:1] [UWSGIFarmMessageTransport.dispatcher_thread] Released lock
+galaxy.web.stack.transport DEBUG 2019-02-01 14:30:20,580 [p:6594,w:0,m:2] [UWSGIFarmMessageTransport.dispatcher_thread] Acquired message lock, waiting for new message
+```
+
+- Mule 1 took the job and released the message interface lock after setting `job.handler` to its own `server_name`
+- Mule 2 acquired the message interface lock and will take the next job.
+
+---
+class: smaller
+# Successful job lifecycle
+
+```console
+galaxy.jobs.rules.map_resources INFO 2019-02-01 14:30:21,526 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] returning destination: slurm
+galaxy.jobs.mapper DEBUG 2019-02-01 14:30:21,527 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Mapped job to destination id: slurm
+galaxy.jobs.handler DEBUG 2019-02-01 14:30:21,532 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Dispatching to slurm runner
+galaxy.jobs DEBUG 2019-02-01 14:30:21,539 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Persisting job destination (destination id: slurm)
+galaxy.jobs DEBUG 2019-02-01 14:30:21,565 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Working directory for job is: /srv/galaxy/jobs/000/21
+galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] Job [21] queued (44.601 ms)
+galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
+```
+
+- Job is mapped to destination: `<destination id="slurm"/>`
+- Job is dispatched to job runner plugin: `<plugin id="slurm"/>`
+
+---
+class: smaller
+# Successful job lifecycle
+
+```console
+galaxy.jobs.command_factory INFO 2019-02-01 14:30:21,714 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] Built script [/srv/galaxy/jobs/000/21/tool_script.sh] for tool command [echo "Running with '${GALAXY_SLOTS:-1}' threads" > "/data/000/dataset_21.dat"]
+galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,791 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) command is: rm -rf working; mkdir -p working; cd working; /srv/galaxy/jobs/000/21/tool_script.sh; return_code=$?; cd '/srv/galaxy/jobs/000/21';
+[ "$GALAXY_VIRTUAL_ENV" = "None" ] && GALAXY_VIRTUAL_ENV="$_GALAXY_VIRTUAL_ENV"; _galaxy_setup_environment True
+python "/srv/galaxy/jobs/000/21/set_metadata_FVs2H3.py" "/srv/galaxy/jobs/000/21/registry.xml" "/srv/galaxy/jobs/000/21/working/galaxy.json" "/srv/galaxy/jobs/000/21/metadata_in_HistoryDatasetAssociation_21_LeYyR2,/srv/galaxy/jobs/000/21/metadata_kwds_HistoryDatasetAssociation_21_2yXqbX,/srv/galaxy/jobs/000/21/metadata_out_HistoryDatasetAssociation_21_WwKZCq,/srv/galaxy/jobs/000/21/metadata_results_HistoryDatasetAssociation_21_nfKGx4,/data/000/dataset_21.dat,/srv/galaxy/jobs/000/21/metadata_override_HistoryDatasetAssociation_21_xsOoSa" 5242880; sh -c "exit $return_code"
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:21,821 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) submitting file /srv/galaxy/jobs/000/21/galaxy_21.sh
+galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) queued as 19
+galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
+```
+
+- The job has been dispatched and has been assigned Slurm job ID 19
+
+---
+class: smaller
+# Successful job lifecycle
+
+```console
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:22,158 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is queued and active
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:23,171 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job is running
+galaxy.jobs.runners.drmaa DEBUG 2019-02-01 14:30:51,666 [p:6593,w:0,m:1] [SlurmRunner.monitor_thread] (21/19) state change: job finished normally
+galaxy.model.metadata DEBUG 2019-02-01 14:30:51,778 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] loading metadata from file for: HistoryDatasetAssociation 21
+galaxy.jobs INFO 2019-02-01 14:30:51,836 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Collecting metrics for Job 21
+galaxy.jobs DEBUG 2019-02-01 14:30:51,847 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] job 21 ended (finish() executed in (130.848 ms))
+galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Cleaning up external metadata files
+```
+
+- The job is done
+- Its `state` column and its output datasets' `state` columns have been updated to `ok`
+
+---
+# Jobs aren't running - gray (!)
+
+Not yet picked up by the Galaxy job handler subsystem
+
+Solutions:
+- If mules
+  - Ensure no `<handlers>` in `job_conf.xml` or:
+- If single or multiprocess
+  - Ensure that handler ID(s) in `job_conf.xml` match `server_name`(s)
+- If multiprocess, check to ensure that your job handler(s) are running
+  - If yes, restart handler(s)
+
+---
+class: smaller
+# Handler ID to server_name match check
+
+.left[Job handler assignment check:]
+
+```gxadmin
+$ grep ' is running$' /path/to/galaxy*.log
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler0' is running
+galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler1' is running
+$ ./gxadmin query job-info 21
+```
+.reduce70[
+id  | tool_id | state |    handler    | username |        create_time         | job_runner_name | job_runner_external_id
+--- | ------- | ----- | ------------- | -------- | -------------------------- | --------------- | -----------------------
+21  | testing | new   | job_handler_0 | admin    | 2019-02-01 14:30:20.540327 |                 | 
+]
+
+The value of the `handler` column in the database **must**<sup>1</sup> match one of the handler `server_name`s the handlers have started as. In this case, `job_handler_0` is not `handler0` or `handler1`, so no handler will handle this job.
+
+.reduce70[.footnote[<sup>1</sup> Unless using one of the new job handler assignment methods in Galaxy 19.01]]
+
+---
+# An aside - unruly log files
+
+By default, Galaxy web workers and mules all log to a single file. Webless handlers can easily separate, for mules you need [advanced logging configuration](https://docs.galaxyproject.org/en/master/admin/config_logging.html)
+
+tl;dr: add [the second blob 'o YAML here](https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml)<sup>2,3</sup> to your `galaxy.yml`. Most importantly:
+
+```yaml
+filename_template: galaxy_{pool_name}_{server_id}.log
+```
+
+Galaxy subtitutes `{pool_name}` with e.g. `job-handlers` and `{server_id}` with e.g. `1`. Full list of facts in the docs.
+
+.reduce70[.foonote[<sup>2</sup> but wait until after [#7191](https://github.com/galaxyproject/galaxy/pull/7191/) is merged]]
+.reduce70[.foonote[<sup>3</sup> note to self, make a `split_logging` config var that enables this for you]]
+
+---
+# Jobs aren't running - gray clock
+
+Corresponds to `job.state = 'queued'` in database
+
+A handler has seen this job
+
+.left[Verify concurrency limits unmet in `job_conf.xml`:]
+- Local jobs: value of plugin `workers` attribute (default: 4)
+- All jobs: Entire `<limits>` section
+
+Users are *not* informed when they have reached the job limits. Exceeding disk quota also pauses jobs, but users are notified of this.
+
+---
+# Jobs aren't running - gray clock
+
+.left[Check database for:]
+- State (`gxadmin query job-info`)
+- Destination id assigned? (ditto)
+- Jobs owned by user in non-terminal state if limits in use (`gxadmin query jobs-nonterminal [user]`)
+
+---
+# Jobs aren't finishing - yellow
+
+Corresponds to `job.state = 'running'` in database
+
+The tool/dependency is no longer executing but the job is still "running"
+
+.left[Solutions:]
+- Check cluster for job
+- Check last job handler log message for job
+- Setting/collecting metadata can be slow: wait
+- Check handlers as with gray (!)
+
+---
+# Quota not being updated for a certain user
+
+In the Admin/Users menu you can run `Recalculate Disk Usage` on a certain user.
+
+There is also a command line version: `scripts/set_user_disk_usage.py`
+
+{% comment %}
+![Recalculate Disk Usage Option](images/admin_recalc_usage.png)
+{% endcomment %}
+
+---
+class: special
+# Tool errors
+
+Tools can fail for a variety of reasons, some valid, some invalid.
+
+Some made up examples follow.
+
+---
+# Tool errors - stderr
+
+**Galaxy considers *any* output to standard error (stderr) to be an error when no tool profile version is set by a tool.**
+
+Why would it do this????!?
+
+In the old days, tools were bad about setting the exit code on failure, so it could not be trusted. Galaxy had no functionality to inspect output to decide on failure.
+
+---
+class: left
+# Tool errors
+
+So what if tool stderr contains:
+```console
+Congratulations, running SuperAwesome tool was successful!
+```
+
+What happens: job fails (!!?!?)
+
+Solutions:
+- If the wrapped tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
+
+---
+class: left
+# Tool errors - stderr
+
+Tool stderr contains:
+```console
+Warning: File /galaxy/job/working/foo.tmp created in the future!
+```
+
+The system running the job has an incorrect clock, this most likely does not affect the correctness of results.
+
+Solutions:
+- Fix the problem (clock)
+- If the wrapped tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
+
+---
+class: left
+# Tool errors - stderr
+
+Tool stderr contains:
+```console
+Warning: Discarded 10000 lines of /path/to/input/dataset_1.dat because they looked funny
+```
+
+Maybe a problem, maybe not.
+
+Solutions:
+- Check tool input(s) and parameters
+- Verify input is not corrupt
+- If behavior is expected and the tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
+
+---
+class: left
+# Tool errors - memory errors
+
+Tool stderr contains one of:
+```
+MemoryError                 # Python
+what():  std::bad_alloc     # C++
+Segmentation Fault          # C - but could be other problems too
+Killed                      # Linux OOM Killer
+```
+
+Solutions:
+- Change input sizes or params
+  - Map/reduce?
+- Decrease the amount of memory the tool needs
+- Increase the amount of memory available to the job
+  - Stop other jobs
+  - Add memory
+  - Cluster (and reserve memory for jobs)
+  - Use job resubmission to automatically rerun with a larger memory allocation
+- Cross your fingers and rerun the job
+
+---
+class: left
+# Tool errors - system errors
+
+Tool stderr contains:
+```console
+open(): /path/to/input/dataset_1.dat: No such file or directory
+```
+
+Verify that `dataset_1.dat` exists.
+
+Solutions:
+- Fix the filesystem error (NFS?) and rerun the job
+- See NFS caching errors slide later
+
+---
+class: left
+# Tool errors - dependency problems
+
+Tool stderr contains:
+```console
+sh: command not found: samtools
+```
+
+Solutions:
+- Verify that `tool_dependency_dir` is accessible *on the cluster*
+- Verify that tool dependencies are properly installed: Galaxy UI "Admin > Manage dependencies"
+- Install dependencies from Conda/Bioconda or Docker/Singularity/BioContainers
+
+---
+# An aside - dependency problems on geriatric Galaxies
+
+Galaxy Tool Shed dependencies are dead.<sup>4</sup> If you don't know what Tool Shed dependencies are (lucky you) skip this slide.
+
+Don't attempt to fix Galaxy Tool Shed dependencies if at all possible, just move them out of the way and reinstall with Conda
+
+Put Conda first in [dependency_resolvers_conf.xml](https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample) if you still need to support both.
+
+.reduce70[.footnote[<sup>4</sup> The Tool Shed should only be used for Galaxy Tool configuration files and wrapper scripts]]
+
+---
+class: left
+# Tool errors - dependency problems
+
+Tool stderr contains:
+```console
+foo: /lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_2.23' not found (required by foo)
+```
+
+`foo` was compiled against Glibc 2.23 but Glibc < 2.23 is installed. Galaxy server OS is probably newer than cluster node OS.
+
+Solutions:
+- Reinstall dependencies from Conda/Bioconda or Docker/Singularity/BioContainers
+- For local tool dependencies:
+  - Verify that tool dependencies were properly installed
+  - Recompile `foo` on the "oldest" system on which it might run
+
+---
+class: left
+# Tool errors - dependency problems
+
+Tool stderr contains:
+```console
+deepthought: error while loading shared libraries: libdeepthought.so.42: cannot open shared object file: No such file or directory
+```
+
+`foo` was compiled against `libdeepthought.so.42` but it's not on the runtime linker path
+
+Solutions:
+- Reinstall dependencies from Conda/Bioconda or Docker/Singularity/BioContainers
+- Tool Shed Dependency or local dependencies:
+  - Modify dependency's `env.sh` to set `$LD_LIBRARY_PATH` as appropriate
+  - Install `libdeepthought` on target system
+  - Recompile `deepthought` with `-Wl,-rpath=/path/to/libdeepthought/dir`
+  - Recompile `deepthought` without `-ldeepthought` (if possible)
+
+---
+class: left
+# Tool errors - Empty green history item
+
+1. The tool is not correctly detecting error conditions: stderr, exit code?
+2. The tool correctly produced an empty dataset for the given params, inputs
+
+Solutions:
+- If the tool uses proper exit codes, use `<tool profile="16.04">` or later to recognize them
+- Fix the tool wrapper to detect errors
+- User education
+
+---
+class: left
+# One last word on tool errors
+
+All Devteam/IUC in the Tool Shed tools have tests
+
+Use these tests (now automateable with [Ephemeris](https://github.com/galaxyproject/ephemeris)!) to verify that the tool works in the basic case
+
+If yes:
+- Input/parameter problem (user or tool wrapper author problem)
+- Tool wrapper bug (tool wrapper author problem)
+- Tool bug (tool wrapper author or tool developer problem)
+- Resource problem (sysadmin problem)
+If no:
+- Sysadmin problem
+
+---
+# Galaxy UI is slow
+
+- Investigate load
+  - Web server(s)
+  - Database server
+- Investigate memory usage, swapping
+- Investigate iowait
+
+---
+# Galaxy UI is slow
+
+- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
+- Use `gdb` (demo in a bit!)
+
+---
+# Local or Network FS slow/down
+
+- Use `iostat` to see device performance (demo!)
+- Use `dstat` to see pretty device performance summary (demo!)
+- Use `time dd` (quick and dirty) or `fio` to test write performance (demo!)
+
+Solutions:
+- Don't put the Galaxy server in that FS. Local distribution, CVMFS, ??
+- Install Galaxy in two places and use [Pulsar Embedded Mode](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101) with [file actions](https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging) to rewrite paths<sup>5</sup>
+- Get a better network FS
+
+.reduce70[.footnote[<sup>5</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]
+
+---
+# NFS caching errors
+
+Galaxy gets "No such file or directory" for files that exist. NFS attribute caching is to blame. Set:
+
+```yaml
+galaxy:
+    retry_job_output_collection: 5
+```
+
+[retry_job_output_collection](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/__init__.py#L1229)
+
+---
+# Hung server processes
+
+Use `uwsgitop` (demo!)
+
+- `uwsgitop` state busy?
+
+```console
+uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
+node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
+ WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
+ 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
+```
+
+- Process state D?
+
+```console
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+g2main    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 /cvmfs/main.galaxyproject.org/venv/bin/uwsgi --yaml ...
+```
+
+Kernel uninterruptable sleep - normal unless stuck. Probably IO. Check filesystems, disks.
+
+---
+# Hung server processes
+
+- Investigate `/proc/pid` especially `fd`
+- Use `strace` (demo!)
+- Use `gdb` (demo!)
+
+---
+# Undead processes
+
+```
+bind(): Address already in use [core/socket.c line 769]
+```
+
+Use `lsof -i :<port>` (demo!)
+
+---
+class: left
+# pkill considered useful
+
+```console
+$ sudo pkill -INT -o -u galaxy uwsgi
+```
+
+Note if you're not using our default/suggested uWSGI config, `SIGINT` (`CTRL`+`c`) and `SIGTERM` (the `kill(1)` default) behave differently.
+
+- `SIGKILL`: Brutally reload the application
+- `SIGINT`: Brutally kill the application
+
+Our default/suggested uWSGI config includes:
+
+```yaml
+hook-master-start: unix_signal:2 gracefully_kill_them_all
+hook-master-start: unix_signal:15 gracefully_kill_them_all
+```
+
+This attempts to shut down gracefully, waiting for (by default) 60 seconds before killing.
+
+To alter the grace period, set the [*reload-mercy options](https://uwsgi-docs.readthedocs.io/en/latest/Options.html).
+
+---
+# 502 Bad Gateway
+
+Your reverse proxy has failed to connect to the Galaxy socket
+
+- Check that your proxy and Galaxy/uWSGI socket options match
+- Check proxy server logs (e.g. `/var/log/nginx`)
+- Check that something is listening on the correct port (`lsof -i host:port` or `lsof -i :port`)
+
+---
+# Remember ALL the log files
+
+All may be relevant:
+- uWSGI log
+- handler logs
+- Pulsar logs
+- nginx access, error logs
+- syslog/messages
+- authlog
+- browser console log
+
+---
+# Database problems
+
+Slow queries, high load, etc.
+
+- Use `EXPLAIN ANALYZE` (demo!)
+  - [Example of the "jobs ready to run" query](https://gist.github.com/natefoo/da46bea8136ba67d65f616c86a27c454)
+  - `database_engine_option_echo` (but warning, extremely verbose)
+  - `sentry_sloreq_threshold` if using Sentry
+- Use `VACUUM ANALYZE`
+
+Increase `shared_buffers`. 2GB on Main (16GB of memory on VM)
+
+---
+# error: [Errno 32] Broken pipe
+
+This error is not indicative of any kind of failure. It just means that the client closed a connection before the server finished sending a response.
+
+---
+# Installation failures - Python dependencies
+
+```
+psutil/_psutil_linux.c:12:20: fatal error: Python.h: No such file or directory
+compilation terminated.
+error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+```
+
+Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/)
+
+---
+# Other stuff
+
+- Galaxy server process (not jobs): Run Galaxy in a cgroup with a memory limit
+- You can add mules without a hard restart: add `mule:`, adjust `farm:`, run `pkill -HUP -o -u galaxy uwsgi`
+- `scripts/helper.py` and `scripts/secret_decoder_ring.py` can encode/decode IDs from UI
+- `scripts/helper.py` can also fail jobs with a notice to the user
+
+---
+# Job failures
+
+"Unable to run job due to a misconfiguration of the Galaxy job running system.  Please contact a site administrator."
+
+There is a traceback in the Galaxy log. Go find it.
+
+---
+# Node failures
+
+```console
+$ sinfo -Nel
+Fri Nov 11 09:50:01 2016
+NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT FEATURES REASON
+localhost      1    debug*        down    2    2:1:1      1        0      1   (null) Node unexpectedly rebooted
+```
+
+Figure out why it rebooted and:
+
+```console
+$ sudo scontrol update nodename=localhost state=resume
+```
+
+---
+class: special, middle
+# Any troubling Galaxy situations you have?
+
+---
+# Where to get help
+
+- [Galaxy Help](https://help.galaxyproject.org/)
+- [galaxy-dev Mailing list](http://dev.list.galaxyproject.org/)
+- [IRC](https://wiki.galaxyproject.org/Support/IRC): \#galaxyproject on Freenode
+- [Hub Support page](https://galaxyproject.org/support/)

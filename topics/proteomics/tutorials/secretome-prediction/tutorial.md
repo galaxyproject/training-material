@@ -1,7 +1,22 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: secretome-prediction
+
+title: "Secretome Prediction"
+zenodo_link: "https://zenodo.org/record/519260"
+questions:
+  - "How to predict cellular protein localization based upon GO-terms?"
+  - "How to combine multiple localization predictions?"
+objectives:
+  - "Predict proteins in the cellular secretome by using GO-terms."
+  - "Predict proteins in the cellular secretome by using WolfPSORT."
+  - "Combine the results of both predictions."
+time_estimation: "30m"
+key_points:
+  - "The cellular secretome contains more than the classically secreted proteins."
+  - "Localization predictions by multiple different algorithms can improve sensitivity and/or specificity."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Secretome Prediction using GO annotations and localization prediction

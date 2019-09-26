@@ -2,7 +2,7 @@
 layout: base
 ---
 
-{% include default-header.html %}
+{% include _includes/default-header.html %}
 {% assign contributors = site.data['contributors'] %}
 
 {% assign sorted_topics = "" | split: "," %}
@@ -37,18 +37,8 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "use" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
-                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
                         {% endif %}
@@ -57,6 +47,27 @@ layout: base
                 </table>
             </div>
             <div class="col">
+                <h3>Galaxy Tips & Tricks</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>Tutorials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for topic in sorted_topics %}
+                        {% if topic[1].type == "basics" %}
+                        <tr>
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
+                            <td>{{ tutorial_number }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+
                 <h3>Galaxy for Developers and Admins</h3>
                 <table class="table table-striped">
                     <thead>
@@ -69,18 +80,8 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "admin-dev" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
-                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
                         {% endif %}
@@ -94,7 +95,7 @@ layout: base
 
                 <p>You can report mistakes or errors, create more contents, etc. Whatever is your background, there is probably a way to do it: via the GitHub website, via command-line. If you feel it is too much, you can even write it with any text editor and contact us: we will work together to integrate it.</p>
 
-                <p>To get you started, check our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a></p>
+                <p>To get you started, check our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a></p>
 
                 <h3>Galaxy for Contributors and Instructors</h3>
                 <table class="table table-striped">
@@ -108,18 +109,8 @@ layout: base
                     {% for topic in sorted_topics %}
                         {% if topic[1].type == "instructors" %}
                         <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
-                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
+                            {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
+                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
                         {% endif %}
@@ -132,9 +123,9 @@ layout: base
 
         <h2>Acknowledgment and Funding</h2>
         <p>
-            We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a>
-            to our Galaxy courses, the Galaxy community for their constant
-            support, and our funding sources:
+            More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
+            We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> to our Galaxy
+            training materials, the Galaxy community for their constant support, and our funding sources:
         </p>
 
         <p>
@@ -191,7 +182,7 @@ layout: base
                     Check out the full <a href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
                 </p>
 
-                <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
+                <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
 
                 <h2>License</h2>
                 <p>This work is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
@@ -207,4 +198,4 @@ layout: base
     </section>
 </div>
 
-{% include default-footer.html %}
+{% include _includes/default-footer.html %}

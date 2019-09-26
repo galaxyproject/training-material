@@ -1,8 +1,24 @@
 ---
 layout: tutorial_slides
-topic_name: admin
-tutorial_name: upgrading
 logo: "GTN"
+
+title: "Upgrading Galaxy"
+zenodo_link: ""
+questions:
+  - What is the release cycle of Galaxy?
+  - What do I need to do before updating my Galaxy server?
+  - How to upgrade Galaxy to a new release?
+objectives:
+  - Identify the challenges involved in the Galaxy upgrade process.
+  - Complete the upgrade to a new release.
+time_estimation: "1h"
+key_points:
+  - Galaxy release notes contain important information about a new release.
+  - Backup of the database is essential when database migrations are necessary.
+contributors:
+  - martenson
+  - afgane
+  - nsoranzo
 ---
 
 # Release Cycle
@@ -22,6 +38,13 @@ logo: "GTN"
   * Kept up to date (especially for recent releases)
 
 ---
+# Ansible
+
+We recommend setting up, managing, and upgrading Galaxy using the Ansible software management tool. Please see the materials under 'Galaxy Installation with Ansible'.
+
+When you use Ansible the majority of this slide deck is not relevant anymore since everything mentioned becomes a trivial change in your playbook configuration. Use Ansible if you can.
+
+---
 class: left
 # Deal with local Galaxy modifications
 
@@ -29,12 +52,19 @@ Two scenarios:
 1. Uncommitted changes
 2. Changes committed to a local branch (or to a fork)
 
-The latter is probably better in case of large changes.
+Don't use a Galaxy with uncommitted changes. Make a branch (it's easy) and commit your changes.
 
 ---
-# Another possibility
+# Config Files
 
-If you want to keep your configurations and other local changes under version control, you can move these files/folders outside of Galaxy and into their own repository. You can then use symbolic links to place the files where Galaxy expects them. A good case for this could be dynamic runners, galaxy.yml files, job_conf.xml, etc.
+Configs you change (galaxy.yml, job_conf.xml, dynamic job rules, ...) should live in version control and be installed outside the Galaxy server directory.
+
+How to store outside Galaxy server dir?
+
+- galaxy.yml: Start Galaxy with `uwsgi --yaml /path/to/galaxy.yml`
+- all other configs: Set correct path in `galaxy.yml`
+
+The galaxyproject.galaxy Ansible role can maintain these paths for you.
 
 ---
 class: left
@@ -43,12 +73,12 @@ class: left
 If there are *no local commits*, you can update a `release_YY.MM` branch by running:
 
 ```console
-$ git stash  # optional, in case of uncommitted modifications
 $ git pull --ff-only
-$ git stash pop  # optional, as above
 ```
 
 and restarting Galaxy.
+
+The galaxyproject.galaxy Ansible role can perform this update for you.
 
 ---
 class: left
@@ -68,7 +98,7 @@ class: left
 
 When you upgrade to a new release:
 * Plan a service downtime for the upgrade and inform your users
-* Configure your reverse proxy to serve a custom error page, e.g. for nginx inside the `server` section add:
+* Configure your reverse proxy to serve a custom error page (the galaxyproject.galaxy Ansible role can do this for you), e.g. for nginx inside the `server` section add:
   ```ini
   error_page 502 /static/custom_502.html;
   ```
@@ -85,15 +115,15 @@ $ find . -name '*.pyc' -delete
 $ rm -rf database/compiled_templates/*
 ```
 
+The galaxyproject.galaxy Ansible role can do the first step for you.
+
 ---
 # Upgrading the galaxy repo
 
 ```console
 $ git fetch
-$ git stash  # optional
 $ git checkout release_YY.MM
 $ git pull --ff-only
-$ git stash pop  # optional
 ```
 
 ---
@@ -119,16 +149,14 @@ $ deactivate
 
 ---
 class: left
-# make client on `dev`
+# Client Artifacts
 
-Since January 2018, the `dev` and pre-release (frozen) Galaxy branches do not
-contain client build artifacts (e.g. JavaScript bundles in `static/`).  For
-`dev`, Galaxy will automatically build the client locally, as needed, though if
-you need to do so manually (e.g. to include local changes), the following steps
-should do it:
+* Since 18.01, the `dev` and pre-release (frozen) Galaxy branches do not
+contain client build artifacts (e.g. JavaScript bundles in `static/`).
 
-1. install `yarn`
-2. run `make client-production`
+* Since 18.09 not even the `release_*` branches include the client build. Instead Galaxy will check for local JavaScript changes and perform a build if neccessary (including the build dependency installation).
+
+* You can always run `make client-production` to force the client build (the galaxyproject.galaxy Ansible role can do this for you).
 
 [Documentation](https://github.com/galaxyproject/galaxy/blob/dev/client/README.md)
 ---
@@ -150,6 +178,8 @@ Galaxy will notify you on the first startup it the upgrade includes migrations.
    ```console
    $ sh manage_db.sh upgrade -c $GALAXY_CONFIG_FILE
    ```
+
+The galaxyproject.postgresql Ansible role can configure PostgreSQL PITR backups and the galaxyproject.galaxy role can perform the database upgrades for you.
 
 ---
 # Start Galaxy
@@ -175,12 +205,10 @@ to be done while being on the newer branch:
 $ export GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml
 $ export GALAXY_VIRTUAL_ENV=/srv/galaxy/venv
 $ sh manage_db.sh -c /srv/galaxy/config/galaxy.yml downgrade 140
-$ find . -name '*.pyc' -delete
+$ find /srv/galaxy/server/lib -name '*.pyc' -delete
 $ git fetch
-$ git stash  # optional
 $ git checkout release_18.01
 $ git pull --ff-only
-$ git stash pop  # optional
 $ ./scripts/common_startup.sh
 ```
 

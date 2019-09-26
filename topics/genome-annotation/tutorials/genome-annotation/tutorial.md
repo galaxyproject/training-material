@@ -1,7 +1,17 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
-tutorial_name: genome-annotation
+
+title: "Genome Annotation"
+zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
+tags:
+  - prokaryote
+questions:
+objectives:
+time_estimation: "2H"
+key_points:
+contributors:
+  - erxleben
+  - bgruening
 ---
 
 # Introduction
@@ -101,10 +111,10 @@ At first you need to identify those structures of the genome which code for prot
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} Aragorn in depth
 >
 > read more about **Aragorn** [here](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
-{: .tip}
+{: .details}
 
 # Functional Annotation
 
@@ -147,11 +157,15 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 >
-> <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
+>    <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
 >
->    > {% icon tip %} The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
->    >
->    > {% icon tip %} For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>    ### {% icon comment %} Results file
+>    > The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
+>    {: .comment}
+>
+>    ### {% icon comment %} Obtaining unannotated proteins for analysis
+>    > For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -169,37 +183,37 @@ This file will be the input for more detailed analysis:
 
 ![BLAST programs](../../images/blastprograms.png)
 
-![BLAST databases](../../images/blast%20database.png)
+![BLAST databases](../../images/blast_database.png)
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} Organism not available in a BLAST database
 >
 > If you have an organism which is not available in a BLAST database, you can use its genome sequence in FASTA file for BLAST searches "sequence file against sequence file". If you need to search in these sequences on a regularly basis, you can create a own BLAST database from the sequences of the organism. The advantage of having a own database for your organism is the duration of the BLAST search which speeds up a lot.
-{: .tip}
+{: .details}
 
 **NCBI BLAST+ makeblastdb** creates a BLAST database from your own FASTA sequence file. Molecule type of input is protein or nucleotide.
 
-> ### {% icon tip %} Tip: Further Reading about BLAST Tools in Galaxy
+> ### {% icon details %} Further Reading about BLAST Tools in Galaxy
 >
 > Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
-{: .tip}
+{: .details}
 
 ## More Similarity Search Tools in Galaxy
 
 * **VSEARCH**: For processing metagenomic sequences, including searching, clustering, chimera detection, dereplication, sorting, masking and shuffling. VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed. VSEARCH uses an optimal global aligner (full dynamic programming Needleman-Wunsch), in contrast to USEARCH which by default uses a heuristic seed and extend aligner. This results in more accurate alignments and overall improved sensitivity (recall) with VSEARCH, especially for alignments with gaps.
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} `vsearch` in depth
 >
 > Documentation for vsearch see [here](https://github.com/torognes/vsearch).
-{: .tip}
+{: .details}
 
 * **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
 
-> ### {% icon tip %} Tip:
+> ### {% icon details %} Diamond in depth
 >
 > [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
-{: .tip}
+{: .details}
 
 * **Kraken**: Kraken BLAST is a highly scalable, extremely fast, commercial, parallelized implementation of the NCBI BLAST application.
 
@@ -207,10 +221,11 @@ This file will be the input for more detailed analysis:
 
 For identification of gene clusters, **antiSMASH** is used. The tool uses genbank file as input files and predicts gene clusters. Output files are a html visualization and the gene cluster proteins.
 
-> ### antiSMASH analysis
+> ### {% icon hands_on %} Hands-on: antiSMASH analysis
 >
 > {% icon tool %} Import this [dataset](../../input_data/Streptomyces_coelicolor_part.genbank) into your Galaxy history and run **antiSMASH** to detect gene clusters. The genbank file contains a part of the *Streptomyces coelicolor* genome sequence.
 >
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
@@ -224,4 +239,4 @@ When you have a whole genome **antiSMASH** analysis, your result may look like t
 
 At the end, you can extract a reproducible workflow out of your history. The workflow should look like this:
 
-![GenomeAnnotation Workflow](../../images/work%20flow_Screenshot%20from%202015-06-23%2009-33-23.png)
+![GenomeAnnotation Workflow](../../images/work_flow_Screenshot_from_2015-06-23_09-33-23.png)

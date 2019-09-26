@@ -18,9 +18,9 @@ module Jekyll
       end
 
       if icon.start_with?("fa")
-          %Q(<i class="fa #{icon}" aria-hidden="true"></i>)
+          %Q(<i class="fa #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
       elsif icon.start_with?("ai")
-          %Q(<i class="ai #{icon}" aria-hidden="true"></i>)
+          %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
       end
     end
 

@@ -1,8 +1,42 @@
 ---
 layout: tutorial_slides
-topic_name: dev
-tutorial_name: tool-integration
 logo: "GTN"
+
+title: "Tool development and integration into Galaxy"
+hands_on: "external"
+hands_on_url: "http://planemo.readthedocs.io/en/latest/writing_standalone.html"
+questions:
+  - "What is a tool for Galaxy?"
+  - "How to build a tool/wrapper with the good practices?"
+  - "How to deal with the tool environment?"
+objectives:
+  - "Discover what is a wrapper and its structure"
+  - "Use the Planemo utilities to develop a good wrapper"
+  - "Deal with the dependencies"
+  - "Write functional tests"
+  - "Make a tool ready for publishing in a ToolShed"
+time_estimation: "6h"
+key_points:
+  - "Galaxy Tool Syntax"
+  - "Use Planemo"
+  - "Use Conda"
+  - "Use GitHub"
+  - "Use Travis"
+  - "No more excuse to develop crappy Galaxy tools"
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: dev
+    tutorials:
+      - conda
+contributors:
+  - shiltemann
+  - bebatut
+  - abretaud
+  - jmchilton
+  - nsoranzo
+  - bgruening
+  - lecorguille
 ---
 
 
@@ -44,7 +78,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 1. `<inputs>` (datasets and parameters) specified in the tool XML are exposed in the Galaxy tool UI
 2. When the user fills the form and click the `Execute` button, Galaxy fills the `<command>` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
-3. Galaxy creates a job for the generated script and executes it somewhere (bowtie is run in this case)
+3. Galaxy creates a job for the generated script and executes it somewhere (bowtie2 is run in this case)
 4. Some (not necessarily all) output files become new history datasets, as specified in the `<outputs>` XML tag set
 
 ---
@@ -85,7 +119,7 @@ Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), use
 <command><![CDATA[
 graphlan.py
 --format $format
-#if $dpi
+#if str($dpi):
     --dpi $dpi
 #end if
 --size $size
@@ -103,7 +137,7 @@ python '$__tool_directory__/graphlan.py'
 
 ???
 
-- In the first case, `graphlan.py` is expected to be on the PATH when the job executes
+- In the first case, `graphlan.py` is expected to be on the PATH when the job executes. This is usually accomplished by specifying some `<requirement/>` tags.
 - In the second case, `$__tool_directory__` is a special variable which is substituted by Galaxy with the directory where the tool XML is
 - The `#if ... #end if` syntax comes from the [Cheetah](https://cheetahtemplate.org/) template language, which has a Python-like syntax
 
@@ -144,7 +178,7 @@ python '$__tool_directory__/graphlan.py'
 <command><![CDATA[
 graphlan.py
 ...
-#if $dpi
+#if str($dpi):
     --dpi $dpi
 #end if
 '$input_tree'
@@ -193,7 +227,7 @@ graphlan.py
 ![](../../images/input_text.png)
 
 ```xml
-<param name="..." type="text" value="" label="..." help="..."/>
+<param name="..." type="text" value="..." label="..." help="..."/>
 ```
 
 ---
@@ -239,6 +273,7 @@ If no `option` has `selected="true"`, the first one is selected by default.
 <param name="..." type="select" multiple="true" label="..." help="...">
     <option value="ld" selected="true">Length distribution</option>
     <option value="gc" selected="true">GC content distribution</option>
+    ...
 </param>
 ```
 
@@ -366,16 +401,24 @@ N.B. If the filter expression raises an Exception, the dataset will NOT be filte
 
 ---
 
-### `stdio`
+### `detect_errors`
 
-Error if tool exit code is not 0 (default):
+Legacy wrappers (i.e. with `profile` unspecified or less than 16.04) by default fail only if the tool writes to stderr
+
+Non-legacy wrappers by default fail if the tool exit code is not 0, which is equivalent to specify:
 ```xml
 <command detect_errors="exit_code"> ... </command>
 ```
-Error if tool exit code is not 0 or either "Exception:" or "Error:" appears in standard error/output:
+
+To fail if either the tool exit code is not 0 or "Exception:"/"Error:" appears in standard error/output:
 ```xml
 <command detect_errors="aggressive"> ... </command>
 ```
+
+---
+
+### `stdio`
+
 If you need more precision:
 ```xml
 <stdio>
@@ -396,7 +439,6 @@ If you need more precision:
 
 ```xml
 <help><![CDATA[
-
 **What it does**
 GraPhlAn is a software tool for producing high-quality circular
 representations of taxonomic and phylogenetic trees. GraPhlAn focuses
@@ -406,7 +448,6 @@ investigation.
 
 For more information, check the `user manual
 < https://bitbucket.org/nsegata/graphlan/overview >`_.
-
 ]]></help>
 ```
 
@@ -861,13 +902,13 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 ![](../../images/exercise.png)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### The Goal
 
@@ -877,7 +918,7 @@ See [Tool Dependencies and Conda](../conda/slides.html)
 
 ---
 
-### <i class="fa fa-pencil" aria-hidden="true"></i> Hands-on
+### {% icon hands_on %} Hands-on
 
 #### Steps
 
@@ -914,7 +955,7 @@ class: packed
     <configfile name="script_nexus"><![CDATA[
 set autoclose = yes;
 execute $input_data;
-#if str( $data_type.type ) == "nuc“
+#if str($data_type.type) == "nuc“
     lset nst=$data_type.lset_params.lset_Nst;
 #end if
 mcmcp ngen=$mcmcp_ngen;
@@ -1022,6 +1063,27 @@ trinity.xml
 
 ---
 
+### Tips and best practices
+
+Use a `TOOL_VERSION` token
+
+```xml
+<macros>
+    <token name="@TOOL_VERSION@">1.2</token>
+</macros>
+```
+
+```xml
+<tool id="seqtk_seq" name="Convert to FASTA (seqtk)" version="@TOOL_VERSION@+galaxy3">
+    <requirements>
+        <requirement type="package" version="@TOOL_VERSION@">seqtk</requirement>
+    </requirements>
+```
+
+This means: the 3rd revision of the Galaxy tool wrapper for Seqtk 1.2 .
+
+---
+
 ### `command` > Reserved Variables
 
 ```xml
@@ -1116,7 +1178,7 @@ If the output file extension is not present/usable:
 
 ### Dataset collection
 
-To group related datasets, and treat them as a single entity
+A dataset collection combines numerous datasets in a single entity that can be manipulated together
 
 - `list`: a simple list of datasets
 - `paired`: a pair of datasets, `forward` and `reverse` for NGS
@@ -1146,19 +1208,23 @@ Usage
 
 ### Dataset collection
 
-Creation when uploading (>=17.05)
+Creation when uploading
 
-![](../../images/upload_collection.png)
+![collectionPrefiltered](../../../galaxy-data-manipulation/images/collectionPrefiltered.png)
+
+[Also possible with the rule-based uploader]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})
 
 ---
 
 ### Dataset collection > input
 
 ```xml
-<param name="inputs" type="data" format="bam" multiple="true" label="Input BAM(s)" />
+<param name="inputs" type="data" format="bam" label="Input BAM(s)" />
 ```
 
 ![](../../images/input_data_collection.png)
+
+<small>Also accepted with `multiple="true"`</small>
 
 Accept only collections:
 
@@ -1256,6 +1322,71 @@ blastn -query foo_bar -num_threads 4
 
 ---
 
+## Publishing tools
+
+---
+
+### Contributing to a community
+
+Many tools developed by the community on GitHub repositories
+- [Intergalactic Utilities Commission](https://github.com/galaxyproject/tools-iuc)
+- [GalaxyP](https://github.com/galaxyproteomics/tools-galaxyp)
+- ...
+
+Added value:
+- Easier development
+- Easier contribution for user
+- Avoid duplications of efforts
+- Automated tests on each contribution
+- Automated publishing to ToolShed
+- Principle of many eyes: if something is visible to many people then, collectively, they are more likely to find errors in it
+---
+
+### IUC: Intergalactic Utilities Commission
+
+.image-50[![IUC](../../images/iuc_logo.png)]
+
+- A team maintaining high quality tools
+- Establishing and following [best practices](https://galaxy-iuc-standards.readthedocs.io/) for tool development
+- Open to contributions: bug fixes, new tools, ...
+
+https://github.com/galaxyproject/tools-iuc
+
+---
+
+### How should I publish my tool?
+
+Adding to an existing GitHub repository (IUC, GalaxyP, ...)
+
+- Read the guidelines
+- Open a pull request
+- Respond to review comments
+
+---
+
+### How should I publish my tool?
+
+Using your own GitHub repository
+
+- Reasons: ownership, specific practices, exotic tools
+- Follow the same structure
+- Use `.travis.yml` to automate tests and publishing
+
+---
+
+### How should I publish my tool?
+
+Using planemo by hand
+
+- Ok for few tools
+- Makes contributing harder
+
+[Check out our tutorial to publish to the ToolShed using Planemo]({{ site.baseurl }}{% link topics/dev/tutorials/toolshed/slides.html %})
+
+---
+
+### Continuous Integration
+
 .image-50[![](../../images/github_logo.png)]
 
 .image-50[![](../../images/travis_ci_logo.png)]
@@ -1263,6 +1394,16 @@ blastn -query foo_bar -num_threads 4
 .image-50[![](../../images/planemo-logo.png)]
 
 .image-50[![](../../../../shared/images/conda_logo.png)]
+
+---
+
+### Continuous Integration
+
+- Create a Pull Request on a GitHub repository
+- Tests are automatically run on Travis
+- Other contributors review your tool
+- The Pull Request is accepted when all lights are green
+- The tool is automatically uploaded to the ToolShed
 
 ---
 
@@ -1275,6 +1416,75 @@ blastn -query foo_bar -num_threads 4
 ### Travis CI side
 
 ![](../../images/github_travis_travis.png)
+
+---
+
+### ToolShed
+
+- Need to create a `.shed.yml` file in the tool directory of the GitHub repository:
+
+```yml
+categories: [Sequence Analysis]
+description: Tandem Repeats Finder description
+long_description: A long long description.
+name: tandem_repeats_finder_2
+owner: gandres
+```
+
+```bash
+planemo shed_init --name="tandem_repeats_finder_2"
+                     --owner="gandres"
+                     --description="Tandem Repeats Finder description"
+                     --long_description="A long long description."
+                     --category="Sequence Analysis"
+                     [--remote_repository_url=<URL to .shed.yml on github>]
+                     [--homepage_url=<Homepage for tool.>]
+```
+
+---
+
+### Tool suites
+
+A tool suite is a group of related tools that can all be installed at once.
+
+Defined in `.shed.yml`: implicitly define repositories for each individual tool in the directory and build a suite for those tools.
+
+Example: `trinity/.shed.yml`
+
+```yml
+[...]
+auto_tool_repositories:
+    name_template: "{{ tool_id }}"
+    description_template: "{{ tool_name }} (from the Trinity tool suite)"
+suite:
+    name: "suite_trinity"
+    description: Trinity tools to assemble transcript sequences from Illumina RNA-Seq data.
+```
+
+---
+
+### Check
+
+```bash
+planemo shed_lint --tools
+```
+```bash
+Linting repository […]/tandem_repeats_finder
+Applying linter expansion... CHECK
+.. INFO: Included files all found.
+Applying linter tool_dependencies_xsd... CHECK
+.. INFO: tool_dependencies.xml found and appears to be valid XML
+Applying linter tool_dependencies_actions... CHECK
+.. INFO: Parsed tool dependencies.
+Applying linter repository_dependencies... CHECK
+.. INFO: No repository_dependencies.xml, skipping.
+Applying linter shed_yaml... CHECK
+.. INFO: .shed.yml found and appears to be valid YAML.
+Applying linter readme... CHECK
+.. INFO: No README found skipping.
++Linting tool […]/tandem_repeats_finder/tandem_repeats_finder_wrapper.xml
+[…]
+```
 
 ---
 
@@ -1346,15 +1556,3 @@ tools:
 ```bash
 docker run -d -p 8080:80 galaxy-deeptools
 ```
-
----
-
-## Conclusion
-
----
-
-### IUC: Intergalactic Utilities Commission
-
-- Lobbyist :)
-- Host orphan tools: [GitHub](https://github.com/galaxyproject/tools-iuc)
-- [IUC-standards](https://galaxy-iuc-standards.readthedocs.io/)

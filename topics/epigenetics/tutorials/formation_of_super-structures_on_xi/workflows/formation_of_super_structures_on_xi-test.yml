@@ -1,0 +1,44 @@
+---
+- doc: "Test sample data for ChIP-seq:formation_of_super_structures_on_xi"
+  job: formation_of_super_structures_on_xi-job.yml
+  outputs:
+    wt_H3K4me3_rep1_read1_fastqc:
+      asserts:
+        has_text:
+          text: 'https___zenodo_org_record_1324070_files_wt_H3K4me3_read1_fastq_gz'
+    wt_H3K4me3_rep1_read2_fastqc:
+      asserts:
+        has_text:
+          text: 'https___zenodo_org_record_1324070_files_wt_H3K4me3_read2_fastq_gz'
+    wt_H3K4me3_rep1_trim_galore:
+      asserts:
+        has_text:
+          text: '1569 (3.14%)'
+    wt_H3K4me3_rep1_bowtie2:
+      asserts:
+        has_text:
+          text: '98.64% overall alignment rate'
+    wt_H3K4me3_rep1_idxstats:
+      asserts:
+        has_text:
+          text: '1204821'
+    wt_H3K4me3_rep1_bamcoverage:
+      asserts:
+        has_text:
+          text: '75.1271'
+    wt_H3K4me3_input_rep1_bamcompare:
+      asserts:
+        has_text:
+          text: '-0.874559'
+    wt_H3K4me3_input_rep1_macs2:
+      asserts:
+        has_text:
+          text: '6047717'
+    wt_H3K4me3_CTCF_rep1_mergebed:
+      asserts:
+        has_text:
+          text: '3810380'
+    wt_all_mergebed:
+      asserts:
+        has_text:
+          text: '3402493'

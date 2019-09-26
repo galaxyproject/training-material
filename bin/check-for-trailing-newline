@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+ec=0
+
+for file in snippets/*; do
+	lastchar=$(tail -c 1 $file | od -An -v -tc);
+	if [[ "  \n" == "$lastchar" ]]; then
+		echo "$file has trailing newline."
+		ec=1
+	fi
+done;
+
+
+if (( ec > 0 )); then
+	echo "Remove with: perl -pi -e 'chomp if eof' snippets/*";
+	exit 1
+fi

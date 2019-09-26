@@ -1,7 +1,23 @@
 ---
 layout: tutorial_hands_on
-topic_name: proteomics
-tutorial_name: protein-id-sg-ps
+
+title: "Peptide and Protein ID using SearchGUI and PeptideShaker"
+zenodo_link: "https://zenodo.org/record/546301"
+questions:
+  - "How to convert LC-MS/MS raw files?"
+  - "How to identify peptides?"
+  - "How to identify proteins?"
+  - "How to evaluate the results?"
+objectives:
+  - "Protein identification from LC-MS/MS raw files."
+time_estimation: "45m"
+key_points:
+  - "LC-MS/MS raw files have to be locally converted to mgf/mzML prior to further analysis on most Galaxy servers."
+  - "SearchGUI can be used for running several peptide search engines at once."
+  - "PeptideShaker can be used to combine and evaluate the results, and to perform protein inference."
+contributors:
+  - stortebecker
+  - bgruening
 ---
 
 # Introduction
@@ -42,7 +58,7 @@ If you already completed the tutorial on [Database Handling]({{site.baseurl}}/to
 
 Raw data conversion is the first step of any proteomic data analysis. The most common converter is msconvert from the [ProteoWizard software suite](http://proteowizard.sourceforge.net/), the format to convert to is mzML. SearchGUI needs `MGF` format as input, but as we need the `mzML` format for several other tasks, we will convert to `mzML` first. Due to licensing reasons, msconvert runs only on windows systems and will not work on most Galaxy servers.
 
-Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the tandem mass spectrometry (MS2) data have to be converted to centroid mode, a process called "peak picking" or "centroiding". 
+Depending on your machine settings, raw data will be generated either in profile mode or centroid mode. For most peptide search engines, the tandem mass spectrometry (MS2) data have to be converted to centroid mode, a process called "peak picking" or "centroiding".
 Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate slightly better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
 
@@ -51,6 +67,9 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `MGF` and `mzML` file formats. If ***msconvert*** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
 >
 > 1. Create a new history for this Peptide and Protein ID exercise.
+>
+>    {% include snippets/create_new_history.md %}
+>
 > 2. Load the example dataset into your history from Zenodo: [raw](https://zenodo.org/record/892005/files/qExactive01819.raw) [mzML](https://zenodo.org/record/892005/files/qExactive01819_profile.mzml)
 > 3. Rename the dataset to something meaningful.
 > 4. (*optional*) Run ***msconvert*** {% icon tool %} on the test data to convert to the `mzML` format.
@@ -83,9 +102,9 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 >   {: .comment}
 >
 >   > ### {% icon comment %} Comment: PeptideShaker Outputs
->   > Peptide Shaker offers a variety of outputs. 
->   > The `Zip File for import to Desktop App` can be downloaded to view and evaluate the search results in the Peptide Shaker viewer ([Download](https://compomics.github.io/projects/peptide-shaker.html)). 
->   > The several `Reports` contain tabular, human-readable information. 
+>   > Peptide Shaker offers a variety of outputs.
+>   > The `Zip File for import to Desktop App` can be downloaded to view and evaluate the search results in the Peptide Shaker viewer ([Download](https://compomics.github.io/projects/peptide-shaker.html)).
+>   > The several `Reports` contain tabular, human-readable information.
 >   > Also, an `mzidentML` (= `mzid`) file can be created that contains all peptide sequence matching information and can be utilized by compatible downstream software.
 >   > The `Certificate of Analysis` provides details on all parameters settings of both Search GUI and Peptide Shaker used for the analysis.
 >   {: .comment}
@@ -116,11 +135,11 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 >   > 4. How many false positives do we expect in our list? How many of these are expected to match mycoplasma proteins?
 >   >
 >   >  > ### {% icon solution %} Solution
->   >  1. TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.
->   >  2. Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
->   >  3. There should be five _Mycoplasma_ proteins in your protein list. However, all of them stem from different _Mycoplasma_ species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it quite likely that we might have identified false positives here.
->   >  4. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
->   >     False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.
+>   >  > 1. TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.
+>   >  > 2. Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.
+>   >  > 3. There should be five _Mycoplasma_ proteins in your protein list. However, all of them stem from different _Mycoplasma_ species. Also, every protein was identified by one peptide only. You can see this in column 17-19 of your output. These observations make it quite likely that we might have identified false positives here.
+>   >  > 4. As we were allowing for a false discovery rate of 1 %, we would expect 12 false positive proteins in our list.
+>   >  >    False positives are expected to be randomly assigned to peptides in the FASTA database. Our database consists of about 20,000 human proteins and 4,000 mycoplasma proteins. Therefore, we would expect 17 % (= 2) of all false positives matching to mycoplasma proteins.
 >   >  {: .solution }
 >   {: .question}
 {: .hands_on}
