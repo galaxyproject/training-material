@@ -5,7 +5,7 @@ overallec=0
 
 while read -r img; do
 	image_name="$(basename "$img")"
-	grep -RI "$image_name" topics > /dev/null
+	grep -RI "$image_name" topics snippets shared _includes _layouts > /dev/null
 	ec=$?
 
 	if (( ec != 0 )); then
