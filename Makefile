@@ -94,6 +94,11 @@ check-workflows: build ## validate Workflows
 		bash bin/validate-json.sh
 .PHONY: check-workflows
 
+check-unused-images: ## Check that there are no unused images
+	$(ACTIVATE_ENV) && \
+		bash bin/find-unused-images.sh
+.PHONY: check-unused-images
+
 check-references: build ## validate no missing references
 	$(ACTIVATE_ENV) && \
 		bash bin/validate-references.sh
@@ -140,7 +145,7 @@ check-framework:
 		ruby _plugins/jekyll-notranslate.rb
 .PHONY: check-framework
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
+check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets check-unused-images ## run all checks
 .PHONY: check
 
 lint: ## run all linting checks

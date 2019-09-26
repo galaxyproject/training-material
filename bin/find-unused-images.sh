@@ -4,8 +4,6 @@ ALL=$(mktemp)
 
 
 for topic in $(find topics -maxdepth 1 -mindepth 1 -type d); do
-	echo $topic
-
 	# get directly referenced images
 	egrep '!\[[^[]*\]\([^)]*\)' $topic/tutorials/*/slides.html $topic/tutorials/*/tutorial.md -h 2>/dev/null| \
 		grep ']([^(]*)' -o | \
@@ -62,10 +60,9 @@ sort -u $USED.all > $USED
 sort -u $ALL.all > $ALL
 rm -f $USED.all $ALL.all
 
-echo "Missing images"
-diff $USED $ALL | grep '<' | sed 's/> //g'
+#echo "Missing images"
+#diff $USED $ALL | grep '<' | sed 's/> //g'
 
-echo "Unusued images"
 diff $USED $ALL | grep '>' | sed 's/> //g'
 
 rm -f $USED $ALL
