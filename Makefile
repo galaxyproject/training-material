@@ -154,6 +154,7 @@ lint: ## run all linting checks
 	$(MAKE) check-workflows
 	$(MAKE) check-references
 	$(MAKE) check-snippets
+	$(MAKE) check-unused-images
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
