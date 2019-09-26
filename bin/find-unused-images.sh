@@ -1,12 +1,10 @@
 #!/bin/bash
-ALL=$(mktemp)
-echo "Locating images ($ALL)"
-find topics/*/images/ -type f > $ALL
+echo "Locating images"
 
 overallec=0
 
-for img in $(cat "$ALL"); do
-	image_name=$(basename "$img")
+while read -r img; do
+	image_name="$(basename "$img")"
 	grep -RI "$image_name" topics > /dev/null
 	ec=$?
 
@@ -19,6 +17,6 @@ for img in $(cat "$ALL"); do
 			overallec=1
 		fi
 	fi
-done
+done < <( find topics/*/images/ -type f )
 
 exit $overallec
