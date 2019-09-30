@@ -428,6 +428,149 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 {: .hands_on}
 
+> ### {% icon details %} Further check for the quality of the data
+>
+> The quality of the data and mapping can be checked further by inspecting duplicate reads, number of reads mapped to each chromosome, gene body coverage, read distribution across features.
+>
+> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
+>
+> #### Duplicate reads
+>
+> In the FastQC report, we saw that some reads are duplicated:
+>
+> ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
+>
+> Duplicate reads are usually kept in RNA-Seq differential expression analysis: they can come from highly-expressed genes. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCA of low complexity library.
+>
+> **MarkDuplicates** from [Picard suite](http://broadinstitute.github.io/picard/) examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping at the same location (based on the start position of the mapping).
+>
+> > ### {% icon hands_on %} Hands-on: Check duplicate reads
+> >
+> > 1. **MarkDuplicates** {% icon tool %}:
+> >    - {% icon param-files %} *"Select SAM/BAM dataset or dataset collection"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+> >
+> > 2. **MultiQC** {% icon tool %} to aggregate the MarkDuplicates logs:
+> >    - In *"Results"*
+> >      - *"Which tool was used generate logs?"*: `Picard`
+> >      - In *"Picard output"*
+> >         - *"Type of Picard output?"*: `Markdups`
+> >         - {% icon param-files %} *"Picard output"*: `MarkDuplicate metrics` files (output of **MarkDuplicates** {% icon tool %})
+> >
+> >    > ### {% icon question %} Question
+> >    >
+> >    > What are the percentage of duplicate reads for both samples?
+> >    >
+> >    > > ### {% icon solution %} Solution
+> >    > > The sample `GSM461177` has 27.8% of duplicated reads and `GSM461180` 25.9%.
+> >    > {: .solution}
+> >    {: .question}
+> {: .hands_on}
+>
+> In general, we consider normal to obtain up to 50% of duplication. So both our samples are good.
+>
+> #### Number of reads mapped to each chromosome
+>
+> To assess the sample quality (e.g. excess of mitochondrial contamination), check the sex of samples or see if any chromosome have highly expressed genes, we can check the numbers of reads mapped to each chromosome using **IdxStats** from **Samtools** suite.
+>
+> > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
+> >
+> > 1. **Samtools idxstats** {% icon tool %}:
+> >    - {% icon param-files %} *"BAM file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+> >
+> > 2. **MultiQC** {% icon tool %} to aggregate the idxstats logs:
+> >    - In *"Results"*
+> >      - *"Which tool was used generate logs?"*: `idxstats`
+> >      - In *"Samtools output"*
+> >         - *"Type of Samtools output?"*: `Markdups`
+> >         - {% icon param-files %} *"Samtools output"*: `Samtools idxstats` files
+> >
+> >    > ### {% icon question %} Question
+> >    >
+> >    > ![Samtools idxstats](../../images/ref-based/samtools-idxstats-mapped-reads-plot.png)
+> >    >
+> >    > 1. How many chromosomes does the *Drosophila* genome have?
+> >    > 2. Where are mostly mapped the reads?
+> >    > 3. Can we determine the sex of the sample?
+> >    >
+> >    > > ### {% icon solution %} Solution
+> >    > > 1. The genome of *Drosophila* has 4 pairs of chromosomes: X/Y, 2, 3, and 4.
+> >    > > 2. The reads mapped mostly to chromosome 2 (chr2L and chr2R), 3 (chr3L and chr3R) and X. Some reads mapped on the chromosome 4 as expected as this chromosome is so small.
+> >    > > 3. From the percentage of X+Y reads, most of the reads map to X and only few to Y. So only few genes may be on Y. So the samples are probably both female.
+> >    > >
+> >    > >    ![Samtools idxstats](../../images/ref-based/samtools-idxstats-xy-plot.png)
+> >    > {: .solution}
+> >    {: .question}
+> {: .hands_on}
+>
+> #### Gene body coverage
+>
+> The gene body is the different regions of a gene. It is important to check if reads coverage is uniform over gene body or if there is any 5'/3' bias. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess the gene body coverage, we use **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nt (using a provided annotation file) and calculates the number of reads covering each nucleotide position.
+>
+> > ### {% icon hands_on %} Hands-on: Check gene body coverage
+> >
+> > 1. **Convert GTF to BED12** {% icon tool %} to convert the GTF file to BED:
+> >    - {% icon param-file %} *"GTF File to convert"*: `Drosophila_melanogaster.BDGP6.87.gtf`
+> >
+> > 2. **Gene Body Coverage (BAM)** {% icon tool %}:
+> >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
+> >      - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+> >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12** {% icon tool %})
+> >
+> > 3. **MultiQC** {% icon tool %} to aggregate the idxstats logs:
+> >    - In *"Results"*
+> >      - *"Which tool was used generate logs?"*: `RSeQC`
+> >      - In *"RSeQC output"*
+> >         - *"Type of RSeQC output?"*: `gene_body_coverage`
+> >         - {% icon param-files %} *"RSeQC gene_body_coverage output"*: `(text)` files (outputs of **Gene Body Coverage (BAM)** {% icon tool %})
+> >
+> >    > ### {% icon question %} Question
+> >    >
+> >    > ![Gene body coverage](../../images/ref-based/rseqc_gene_body_coverage_plot.png)
+> >    >
+> >    > How are the coverage across gene bodies? Are the samples biased in 3' or 5'?
+> >    >
+> >    > > ### {% icon solution %} Solution
+> >    > >
+> >    > > For both samples there is a pretty even coverage from 5' to 3' ends (despite some noise in the middle). So no obvious bias in both samples.
+> >    > {: .solution}
+> >    {: .question}
+> {: .hands_on}
+>
+> #### Read distribution across features
+>
+> With RNA-Seq data, we expect most reads to map to exons rather than introns or intergenic regions. Before going further in counting and differential expression analysis, it may be interesting to check the distribution of reads across known gene features (exons, CDS, 5'UTR, 3'UTR, introns, intergenic regions). For example, a high number of reads mapping to intergenic regions may indicate the presence of DNA contamination.
+>
+> We will here the **Read Distribution** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite, which uses the annotation file to identify the position of the different gene features.
+>
+> > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
+> >
+> > 1. **Read Distribution** {% icon tool %}:
+> >    - {% icon param-files %} *"Input .bam/.sam file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
+> >    - *"Reference gene model"*: BED12 file (output **Convert GTF to BED12** {% icon tool %})
+> >
+> > 2. **MultiQC** {% icon tool %} to aggregate the idxstats logs:
+> >    - In *"Results"*
+> >      - *"Which tool was used generate logs?"*: `RSeQC`
+> >      - In *"RSeQC output"*
+> >         - *"Type of RSeQC output?"*: `read_distribution`
+> >         - {% icon param-files %} *"RSeQC read_distribution output"*: outputs of **Read Distribution** {% icon tool %})
+> >
+> >    > ### {% icon question %} Question
+> >    >
+> >    > ![Samtools idxstats](../../images/ref-based/rseqc_read_distribution_plot.png)
+> >    >
+> >    > What do you think of the read distribution?
+> >    >
+> >    > > ### {% icon solution %} Solution
+> >    > >
+> >    > > Most of the reads are mapped to exons (>80%), only ~2% to introns and ~5% to intergenic regions. It confirms that our data are RNA-Seq data and that mapping worked.
+> >    > {: .solution}
+> >    {: .question}
+> {: .hands_on}
+>
+> Now that we have checked the data and are happy with how it looks, we can proceed to counting.
+{: .details}
+
 After the mapping, we have the information on where the reads are located on the reference genome. We also know how well they were mapped. The next step in RNA-Seq data analysis is quantification of the number of reads mapped to genomic features (genes, transcripts, exons, ...).
 
 > ### {% icon comment %} Comment
