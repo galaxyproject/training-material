@@ -296,7 +296,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 ## Mapping
 
-We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR** {% cite dobin2013star %}.
+We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR** ({% cite dobin2013star %}).
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
@@ -361,7 +361,7 @@ We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR**
 
 The BAM file contains information about where the reads are mapped on the reference genome. But as it is a binary file containing information for many reads (several million for these samples), it is difficult to inspect and explore the file.
 
-A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (IGV).
+A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (**IGV**, {% cite robinson2011integrative %}).
 
 > ### {% icon hands_on %} Hands-on: Inspection of mapping results
 >
@@ -466,9 +466,9 @@ To compare the expression of single genes between different conditions (*e.g.* w
 > {: .solution}
 {: .question}
 
-Two main tools could be used for that: [HTSeq-count](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or featureCounts ({% cite liao2013featurecounts %}). FeatureCounts is considerably faster and requires far less computational resources, so we will use it here.
+Two main tools could be used for that: [**HTSeq-count**](http://htseq.readthedocs.io/en/release_0.9.1/count.html) ({% cite anders2015htseq %}) or **featureCounts** ({% cite liao2013featurecounts %}). FeatureCounts is considerably faster and requires far less computational resources, so we will use it here.
 
-In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to featureCounts: for example the strandness.
+In principle, the counting of reads overlapping with genomic features is a fairly simple task. But there are some details that need to be given to **featureCounts**: for example the strandness.
 
 ## Estimation of the strandness
 
@@ -1326,7 +1326,7 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 {: .comment}
 
 To compute the Z-score, we break the process into 2 steps:
-1. Substract each value by the mean of values in the row (i.e. x_{i,j}- \overline{x_i}) using the normalized count table
+1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
 2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)
 
 > ### {% icon hands_on %} Hands-on: Compute and extract the Z-score of the most differentially expressed genes
