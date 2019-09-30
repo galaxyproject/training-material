@@ -50,24 +50,20 @@ contributors:
 # Introduction
 {:.no_toc}
 
-RNA-seq is used to analyze the continuously changing cellular transcriptome, the set of all RNA molecules in one cell or a population of cells. Specifically, RNA-seq facilitates the ability to look at alternative gene spliced transcripts, post-transcriptional modifications, gene fusion, mutations/SNPs and changes in gene expression over time, or differences in gene expression in different groups or treatments
+In recent years, RNA sequencing (also called RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-seq is profiling of gene expression by identification of genes or molecular pathways that are differentially expressed (DE) between two or more biological condition. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after depletion of a regulatory gene.
 
-In the study of {% cite brooks2011conservation %}, the authors wanted to identify exons regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi).
+In the study of {% cite brooks2011conservation %}, the authors identified genes and pathways regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi). Total RNA was then isolated and used to prepare both single-end and paired-end RNA-Seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-Seq reads for each sample. The RNA-Seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on gene expression.
 
-Total RNA was then isolated and used to prepare both single-end and paired-end RNA-seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-seq reads for each sample. The RNA-seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on splicing events. In Galaxy it is possible to handle single-end data and paired-end data together. If you want to know more about splicing, read [here](https://en.wikipedia.org/wiki/RNA_splicing). 
-
-In this tutorial, we will reproduce the analysis of the RNA-Seq data step by step.
-
-The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508).
-
-In this tutorial we will use the first 7 samples:
+In this tutorial, we illustrate the analysis of the gene expression data step by step using 7 of the original datasets:
 
 - 4 untreated samples: [GSM461176](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461176), [GSM461177](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461177), [GSM461178](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461178), [GSM461182](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461182)
 - 3 treated samples (*Pasilla* gene depleted by RNAi): [GSM461179](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461179), [GSM461180](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461180), [GSM461181](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM461181)
 
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
-The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files. In the first part of this tutorial we will use the files for 2 of the 7 samples, to demonstrate analysis of FASTQs. Optionally later you can import the FASTQs for the other 5 samples.
+> ### {% icon comment %} Full data
+> The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). The raw RNA-Seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files.
+{: .comment}
 
 > ### Agenda
 >
@@ -78,13 +74,15 @@ The raw RNA-seq reads have been extracted from the Sequence Read Archive (SRA) f
 >
 {: .agenda}
 
-# Pretreatments
+# Data upload
 
-## Data upload
+In the first part of this tutorial we will use the files for 2 of the 7 samples to demonstrate analysis how to extract read counts (~ gene expression) from FASTQ files (quality control, mapping, read counting). We provide the FASTQ files for the other 5 samples if you want to reproduce the analysis later.
+
+In the second part of the tutorial, read counts of all 7 samples are used to identify and visualize the DE genes, gene families and molecular pathways due to the depletion of the *PS* gene.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this RNA-seq exercise
+> 1. Create a new history for this RNA-Seq exercise
 >
 >    {% include snippets/create_new_history.md %}
 >
