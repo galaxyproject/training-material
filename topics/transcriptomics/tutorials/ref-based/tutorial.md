@@ -124,7 +124,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 
 The reads are raw data from the sequencing machine without any pretreatments. They need to be assessed for their quality.
 
-## Quality control
+# Quality control
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
@@ -435,14 +435,9 @@ After the mapping, we have the information on where the reads are located on the
 > The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
 {: .comment}
 
-In order to identify exons that are regulated by the *Pasilla* gene, we need to identify genes and exons which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.
-We will then analyze the differential gene expression and also the differential exon usage.
+In order to identify genes that are regulated by the *Pasilla* gene, we need to identify genes which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples. 
 
-# Analysis of the differential gene expression
-
-We will first investigate the differential gene expression to identify which genes are impacted by the *Pasilla* gene depletion.
-
-## Count the number of reads per annotated gene
+# Counting the number of reads per annotated gene
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene.
 
@@ -514,6 +509,7 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 >    - {% icon param-files %} *"Input .bam file"*: `mapped.bam` files (outputs of **RNA STAR** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output **Convert GTF to BED12** {% icon tool %})
 >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
+>
 {: .hands_on}
 
 **Infer Experiment** {% icon tool %} tool generates one file with information on:
@@ -564,7 +560,7 @@ If the two "Fraction of reads explained by" numbers are close to each other, we 
 >
 {: .details}
 
-### Counting
+## Counting reads per genes
 
 We now run **featureCounts** to count the number of reads per annotated gene.
 
@@ -695,6 +691,8 @@ Here we counted reads mapped to genes for two samples. It is really interesting 
 > ```
 >
 {: .hands_on}
+
+# Analysis of the differential gene expression
 
 ## Identification of the differentially expressed features
 
@@ -1512,7 +1510,7 @@ We have now the two required input files for goseq.
 > In this tutorial, we covered GO enrichment analysis with **goseq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-Seq genes to pathways"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
 {: .comment}
 
-### KEGG pathways
+## KEGG pathways analysis
 
 **goseq** can also be used to identify interesting KEGG pathways. The KEGG pathway database is a collection of pathway maps representing the current knowledge on the molecular interaction, reaction and relation networks. A map can integrate many entities including genes, proteins, RNAs, chemical compounds, glycans, and chemical reactions, as well as disease genes and drug targets. 
 
