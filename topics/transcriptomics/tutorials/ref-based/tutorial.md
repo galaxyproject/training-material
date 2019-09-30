@@ -260,7 +260,7 @@ With eukaryotic transcriptomes most reads originate from processed mRNAs lacking
 - Reads that can be mapped entirely within an exon
 - Reads spanning two or more exons
 
-![Five types of RNA-seq reads](../../images/five_type_rna_seq_reads.png "The five types of RNA-seq reads (Figure 1a from {% cite kim2015hisat %})")
+![Five types of RNA-Seq reads](../../images/five_type_rna_seq_reads.png "The five types of RNA-seq reads (Figure 1a from {% cite kim2015hisat %})")
 
 Spliced mappers have been developed to efficiently map transcript-derived reads against genomes:
 
@@ -268,35 +268,35 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 
 > ### {% icon details %} More details on the different spliced mappers
 >
-> Several spliced mappers have been developed over the past years to process the explosion of RNA-seq data.
+> Several spliced mappers have been developed over the past years to process the explosion of RNA-Seq data.
 >
-> [TopHat](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In TopHat reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
+> [**TopHat**](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In **TopHat** reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
 >    ![TopHat](../../images/tophat.png "TopHat (Figure 1 from {% cite trapnell2009tophat %})")
 >
-> TopHat has been subsequently improved with the development of TopHat2 ({% cite kim2013tophat2 %}):
+> **TopHat** has been subsequently improved with the development of **TopHat2** ({% cite kim2013tophat2 %}):
 >
 >    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
 >
-> To further optimize and speed up spliced read alignment [HISAT](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2015hisat %}) was developed. It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
+> To further optimize and speed up spliced read alignment [**HISAT**](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2015hisat %}) was developed. It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
 >    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
 >
-> A part of the read (blue arrow) is first mapped to the genome using the global FM index. HISAT then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now HISAT takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
+> A part of the read (blue arrow) is first mapped to the genome using the global FM index. **HISAT** then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now **HISAT** takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
 >
-> [STAR aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
+> [**STAR** aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-Seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
 >
 >    ![STAR's seed search](../../images/star.png "STAR's seed search (Figure 1 from {% cite dobin2013star %})")
 >
-> Here a read is split between two consecutive exons. STAR starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments</p>
+> Here a read is split between two consecutive exons. **STAR** starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it start to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments.
 >
-> At the second stage STAR stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. STAR is extremely fast but requires a substantial amount of RAM to run efficiently.
+> At the second stage **STAR** stitches MMPs to generate read-level alignments that (contrary to MMPs) can contain mismatches and indels. A scoring scheme is used to evaluate and prioritize stitching combinations and to evaluate reads that map to multiple locations. **STAR** is extremely fast but requires a substantial amount of RAM to run efficiently.
 >
 {: .details}
 
 ## Mapping
 
-We will map our RNA reads to the *Drosophila melanogaster* genome using STAR.
+We will map our RNA reads to the *Drosophila melanogaster* genome using **STAR** {% cite dobin2013star %}.
 
 > ### {% icon hands_on %} Hands-on: Spliced mapping
 >
