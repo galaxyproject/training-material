@@ -341,24 +341,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 
 **HISAT2** generates a BAM file with mapped reads.
 
-> ### {% icon hands_on %} Hands-on: Take a look at BAM format
->
-> 1. Click on the collection name (`HISAT2 on collection N: aligned reads (BAM)`)
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of one of the BAM files to have a look at what it contains.
->
->    > ### {% icon question %} Questions
->    >
->    > What is BAM format?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > See the answer in the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments)
->    > >
->    > {: .solution}
->    >
->    {: .question}
->
-{: .hands_on}
+{% include topics/sequence-analysis/tutorials/mapping/bam_explanation.md mapper="HISAT2" %}
 
 ## QC: mapped reads
 
