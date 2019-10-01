@@ -487,7 +487,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 > ### {% icon hands_on %} Hands-on: Share history
 >
 > 1. Share your history with your neighbour.
-> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
+> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
 {: .hands_on}
 
 # Conclusion
