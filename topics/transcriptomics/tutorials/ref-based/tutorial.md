@@ -432,7 +432,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > The quality of the data and mapping can be checked further by inspecting duplicate reads, number of reads mapped to each chromosome, gene body coverage, read distribution across features.
 >
-> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
+> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
 >
 > #### Duplicate reads
 >
