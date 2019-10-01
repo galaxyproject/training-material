@@ -123,9 +123,9 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    {% include snippets/rename_dataset.md %}
 >
 > 3. Check the datatype. The datatype of the iris dataset is `csv`. Change datatype
-> if it is different then `csv`.
+> if it is different than `csv`.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/detect_datatype.md datatype="datatypes" %}
 >
 > 4. Add the tag `iris` to the dataset
 >
