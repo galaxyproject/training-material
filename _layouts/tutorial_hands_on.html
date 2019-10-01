@@ -143,47 +143,33 @@ layout: base
 
             {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
             <div>
-                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-                <div id="supporting_materials">
-                    <ul><li><div>
-                        {% if associated_slides %}
-                        <div>
-                            <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                                {% icon slides %} Slides
-                            </a>
-                        </div>
-                        {% elsif intro_link %}
-                        <div>
-                            <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
-                                {% icon slides %} Introduction Slides
-                            </a>
-                        </div>
-                        {% endif %}
+                <p><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+                <div class="supporting_materials">
+                    {% if associated_slides %}
+                        <div><a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
+                            {% icon slides %} Slides
+                        </a></div>
+                    {% elsif intro_link %}
+                        <div><a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
+                            {% icon slides %} Introduction slides
+                        </a></div>
+                    {% endif %}
 
-                        {% if tuto_has_zenodo %}
-                        <div>
-                            {% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}
-                        </div>
-                        {% endif %}
+                    {% if tuto_has_zenodo %}
+                        <div>{% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}</div>
+                    {% endif %}
 
-                        {% if own_material.workflows %}
-                        <div>
-                            {% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}
-                        </div>
-                        {% endif %}
-                        {% if own_material.tours %}
-                        <div>
-                            {% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}
-                        </div>
-                        {% endif %}
+                    {% if own_material.workflows %}
+                        <div>{% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}</div>
+                    {% endif %}
 
+                    {% if own_material.tours %}
+                        <div>{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</div>
+                    {% endif %}
 
-                        {% if tuto_has_docker and topic.name != 'admin' %}
-                        <div>
-                            {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}
-                        </div>
-                        {% endif %}
-                    </div></li></ul>
+                    {% if tuto_has_docker and topic.name != 'admin' %}
+                        <div>{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</div>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
