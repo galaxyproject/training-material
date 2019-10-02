@@ -1,0 +1,60 @@
+---
+- doc: "Test sample data for Transcriptomics:Refence-based"
+  job:
+    GSM461177_1:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461177_1.fastqsanger
+      filetype: fastqsanger
+    GSM461177_2:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461177_2.fastqsanger
+      filetype: fastqsanger
+    GSM461180_1:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461180_1.fastqsanger
+      filetype: fastqsanger
+    GSM461180_2:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
+      filetype: fastqsanger
+    Drosophila_melanogaster.BDGP6.87.gtf:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+      filetype: gtf
+  outputs:
+    GSM461177_1_fastqc:
+      asserts:
+        has_text:
+          text: 'Sequence length	37'
+    GSM461177_cutadapt:
+      asserts:
+        has_text:
+          text: '147,810 (1.4%)'
+    GSM461180_cutadapt:
+      asserts:
+        has_text:
+          text: '1,101,875 (9.0%)'
+    GSM461177_star:
+      asserts:
+        has_text:
+          text: '79.00%'
+    GSM461180_star:
+      asserts:
+        has_text:
+          text: '8818168'
+    GSM461177_inferexperiment:
+      asserts:
+        has_text:
+          text: '0.4649'
+    GSM461180_inferexperiment:
+      asserts:
+        has_text:
+          text: '0.4524'
+    GSM461177_featurecounts:
+      asserts:
+        has_text:
+          text: '8234664'
+    GSM461180_featurecounts:
+      asserts:
+        has_text:
+          text: '8412167'

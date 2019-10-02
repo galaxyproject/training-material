@@ -135,7 +135,9 @@ module Jekyll
         # make it future proof.
         page_obj['type'] = 'tutorial'
 
-        resource_pages.push(page_obj)
+        if not page_obj.has_key?("enable") or page_obj['enable'] then
+          resource_pages.push(page_obj)
+        end
       end
 
       # The complete resources we'll return is the introduction slides first

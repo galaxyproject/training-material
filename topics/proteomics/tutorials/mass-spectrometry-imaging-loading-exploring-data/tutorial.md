@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Mass spectrometry imaging: Loading and exploring MSI data"
 edam_ontology: "topic_0121"
 zenodo_link: "https://doi.org/10.5281/zenodo.1560645"
+level: Introductory
 questions:
   - "Did the tryptic digestions work?"
   - "Is there an intensity gradient in the data?"

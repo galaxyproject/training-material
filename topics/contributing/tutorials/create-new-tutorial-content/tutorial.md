@@ -145,6 +145,7 @@ We also define metadata related to the pedagogical content of the tutorial, whic
     - `link`: URL to the external resource
 
     They will be displayed at the end of a tutorial.
+- `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
@@ -293,6 +294,7 @@ This does not appear to be visually appealing when representing matrices, which 
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
 ```
+{% endraw %}
 
 The rendered table is then given as a minimum-width and centred matrix:
 
