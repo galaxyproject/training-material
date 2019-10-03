@@ -119,7 +119,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .question}
 
-## Sub-step with **Filter**
+## Filtering data thanks to the data origin
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -128,10 +128,6 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    - *"With following condition"*: `c17=='HUMAN_OBSERVATION' or c17=='OBSERVATION' or c17=='PRESERVED_SPECIMEN'`
 >    - *"Number of header lines to skip"*: `1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
@@ -139,21 +135,27 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many records are kept and what is the percentage of filtered data?
+> 2. Why are we keeping only these 3 types of data collection origin?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 470 and 8.79% of records were drop out
+> > 2. These data collection methods are the most relevant
 > >
 > {: .solution}
 >
 {: .question}
+
+{: .hands_on}
+>
+> 1. Add to the outpu dataset a propagating tag corresponding to the filtering criteria adding `#basisOfRecord` string for example
+>
+>    {% include snippets/add_tag.md %}
+>
+{: .hands_on}
 
 ## Sub-step with **Summary Statistics**
 
