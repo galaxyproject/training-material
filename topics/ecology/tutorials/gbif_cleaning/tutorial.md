@@ -5,7 +5,11 @@ title: Cleaning GBIF data for the use in Ecology
 zenodo_link: ''
 questions:
 - Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+Cleaning GBIF dataset for further anlayzes
+- Which ecoinformatics techniques are important to know for this type of data?
+  - Data handling
+  - Data filtering
+  - Data visualization, notably delaing with GIS data
 objectives:
 - The learning objectives are the goals of the tutorial
 - They will be informed by your audience and will communicate to them and to yourself
@@ -13,13 +17,14 @@ objectives:
 - They are single sentences describing what a learner should be able to do once they
   have completed the tutorial
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+time_estimation: 0H30
 key_points:
 - The take-home messages
+Take the time to look at your data first, manipulate it before analyzing it
 - They will appear at the end of the tutorial
 contributors:
-- contributor1
-- contributor2
+- yvanlebras
+- sbenateau
 
 ---
 
@@ -29,24 +34,11 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion reords across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+In this tutorial we will propose a way to clean occurence records retrieved from GBIF.
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
+This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
@@ -55,55 +47,42 @@ tutorial.
 >
 > In this tutorial, we will cover:
 >
-> 1. TOC
+> 1. Download data from GBIF
+> 2. Clean data
+> 3. Convert text data into GIS format
+> 4. Visualize spatialized data
 > {:toc}
 >
 {: .agenda}
 
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+# Retrive data from GBIF
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from GBIF
+> ### {% icon hands_on %} Hands-on: Task description
 >
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+> 1. **Get species occurrences data** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
+>    - *"Data source to get data from"*: `Global Biodiversity Information Facility : GBIF`
+>    - *"Number of records to return"*: `999999` is a maimum value
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    > ### {% icon comment %} Comment
+>    >
+>    > ***TODO***: *Consider adding a comment regarding the maximum value, the R package spocc ...*
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {: .comment}
 >
-> 3. Rename the datasets
+{: .hands_on}
+>
 > 4. Check that the datatype
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 5. Add to each dataset a tag corresponding to the species and/or the data source for example
 >
 >    {% include snippets/add_tag.md %}
 >
