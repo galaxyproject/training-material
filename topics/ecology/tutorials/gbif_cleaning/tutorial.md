@@ -151,42 +151,33 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 {: .hands_on}
 >
-> 1. Add to the outpu dataset a propagating tag corresponding to the filtering criteria adding `#basisOfRecord` string for example
+> 1. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#basisOfRecord` string for example
 >
 >    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
-## Sub-step with **Summary Statistics**
+## Have a look at the age of records
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Here we propose to have a look at the age of records to know if there is some ancient data to maybe not consider.
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"Column or expression"*: `c57`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is the year of the oldier and younger records?
+> 2. Why do you think of interest to treat differently ancient and recent records?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. From 1903 to 2018
+> > 2. We can assume ancient records are not made in the same way than recent one so keeping ancient records can enhance heterogeneity of our dataset.
 > >
 > {: .solution}
 >
