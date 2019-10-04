@@ -56,7 +56,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from GBIF
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get data from GBIF
 >
 > 1. **Get species occurrences data** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
@@ -71,7 +71,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 >
-> 4. Check that the datatype
+> 4. Check the datatype
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -114,7 +114,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Filtering data thanks to the data origin
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter data on basisOfRecord GBIF attribute
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `output` (output of **Get species occurrences data** {% icon tool %})
@@ -177,7 +177,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## **Filtering** data on individual counts
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter data on individualCount GBIF attribute
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -227,7 +227,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Filtering data thanks to the age of records
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter data on ageOfRecord GBIF attribute
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Get species occurrences data** {% icon tool %})
@@ -281,7 +281,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Filtering 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter data on family attribute
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
