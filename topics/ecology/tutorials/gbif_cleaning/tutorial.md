@@ -150,13 +150,62 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
+
+## Have a look at the number of counts per record
+
+> ### {% icon hands_on %} Hands-on: Here we propose to have a look at the number of counts by record to know if there is some possible records with errors.
+>
+> 1. **Summary Statistics** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
+>    - *"Column or expression"*: `c57`
+>
+> 2. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#individualCount` string for example
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. What is the min and max of individual counts?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. From 1 to 99
+> >
+> {: .solution}
+>
+{: .question}
+
+## **Filtering** data on individual counts
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Filter** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
+>    - *"With following condition"*: `c57>0 and c57<99`
+>    - *"Number of header lines to skip"*: `1`
+>
+
+> ### {% icon question %} Questions
+>
+> 1. How many records are kept and what is the percentage of filtered data?
+> 2. How can you explain this result?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. 47 and 89.81% o records were drop out
+> > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
+> >
+> {: .solution}
+>
+{: .question}
+
 ## Have a look at the age of records
 
 > ### {% icon hands_on %} Hands-on: Here we propose to have a look at the age of records to know if there is some ancient data to maybe not consider.
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"Column or expression"*: `c57`
+>    - *"Column or expression"*: `c39`
 >
 > 2. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
 >
@@ -176,90 +225,15 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .question}
 
-## Sub-step with **Filter**
+## Filtering data thanks to the age of records
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"With following condition"*: `c57>0 and c57<99`
->    - *"Number of header lines to skip"*: `1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Summary Statistics**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Summary Statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"Column or expression"*: `c39`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Filter** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Get species occurrences data** {% icon tool %})
 >    - *"With following condition"*: `c39>1945`
 >    - *"Number of header lines to skip"*: `1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
@@ -267,87 +241,69 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many records are kept and what is the percentage of filtered data?
+> 2. Why are we keeping only data from 1945?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 44 and 6.25% of records were drop out
+> > 2. This arbitrary date allow to have only quite recent records, but you can specify another year.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Count**
+{: .hands_on}
+>
+> 1. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
+>
+>    {% include snippets/add_tag.md %}
+>
+{: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Taxonomic investigation
+
+> ### {% icon hands_on %} Hands-on: Investigate the taxonomic coverage, at the family level
 >
 > 1. **Count** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"Count occurrences of values in column(s)"*: `c[31]`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This column allows us to look at the different families associated to records. Normally, looking at a uniq species, we will obtain only one family
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter**
+## Filtering 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
+>    - *"With following condition"*: `c31=='Loliginidae'`
 >    - *"Number of header lines to skip"*: `1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > We here select only records with the family of interest, Loliginidae
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Is the firltering here of interest ? 
+> 2. Why keeping this step can be of interest?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. No, because 100% of records are kept
+> > 2. Because this is an important step we have to take into account in such a GBIF data treatment, and if your goal is to create your own workflow you plan to use on others species, this can be of interest to keep this step
 > >
 > {: .solution}
 >
@@ -355,7 +311,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Sub-step with **OGR2ogr**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Convert occurence dataset to GIS one for visualization
 >
 > 1. **OGR2ogr** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Gdal supported input file"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -367,43 +323,39 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >            - {% icon param-repeat %} *"Insert Add an input dataset open option"*
 >                - *"Input dataset open option"*: `Y_POSSIBLE_NAMES=latitude`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Did you have access to standard output and error of the original R script?
+> 2. What kind of information you can retrieve here in the standard output and/or error?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Yes, of course ;) A previsualizatoin of stdout is visible when clicking on the history output dataset and full report accessible through the information button, then stdout or stderr (here you can see warnings on the stderr)
+> > 2. The stderr is showing several warning related to automatic variable name mapping from GBIF to OGR plus information about application of a truncate process on a particularly long GeoJSON value
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Re-arrange
+## Visualize your data on a GIS oriented visualization
 
-To create the template, each step of the workflow had its own subsection.
+From your GeoJSON Galaxy history dataset, you can launch GIS visualization.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> ### {% icon hands_on %} Hands-on: Launch OpenLayers to visualize a map with your filtered records
+>
+> 1. Click on the *Visualize* tab on the upper menu and select `Create Visualization`
+> 2. Click on the OpenLayers icon
+> 3. Select the GeoJSON file from your history
+> 4. Click on `Create Visualization`
+>
+{: .hands_on}
+>
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial we learned how to get occurence records from GBIF and several steps to filter these data to be ready to analyze it! So now, let's go for the show! 
