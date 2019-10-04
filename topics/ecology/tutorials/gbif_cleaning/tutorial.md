@@ -4,24 +4,20 @@ layout: tutorial_hands_on
 title: Cleaning GBIF data for the use in Ecology
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-Cleaning GBIF dataset for further anlayzes
+- How can I get ecological data from GBIF?
+- How do I check and clean the data from GBIF?
+
 - Which ecoinformatics techniques are important to know for this type of data?
   - Data handling
   - Data filtering
-  - Data visualization, notably delaing with GIS data
+  - Data visualization, notably dealing with GIS data
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Get occurrence data on a species
+- Visualize the data to understand them
+- Clean GBIF dataset for further analyses
 time_estimation: 0H30
 key_points:
-- The take-home messages
-Take the time to look at your data first, manipulate it before analyzing it
-- They will appear at the end of the tutorial
+- Take the time to look at your data first, manipulate it before analyzing it
 contributors:
 - yvanlebras
 - sbenateau
@@ -39,9 +35,6 @@ GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE mo
 In this tutorial we will propose a way to clean occurence records retrieved from GBIF.
 
 This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -91,7 +84,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Where come from the records?
 
-> ### {% icon hands_on %} Hands-on: Here we propose to investigate the contaent of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin. 
+> ### {% icon hands_on %} Hands-on: Here we propose to investigate the contaent of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.
 >
 > 1. **Count** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: `output` (output of **Get species occurrences data** {% icon tool %})
