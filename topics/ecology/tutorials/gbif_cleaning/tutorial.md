@@ -353,6 +353,18 @@ From your GeoJSON Galaxy history dataset, you can launch GIS visualization.
 > 2. Click on the OpenLayers icon
 > 3. Select the GeoJSON file from your history
 > 4. Click on `Create Visualization`
+> 5. Select Openlayers
+> ### {% icon question %} Questions
+>
+> 1. You don't see Opebnlayers? Did you know why?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1.If you don't see Openlayers but others visualization types like Cytoscape, this means your datatype is JSON, not geojson. You have to change the datafile manually before visualizing it
+> >
+> {: .solution}
+>
+{: .question}
 >
 {: .hands_on}
 >
