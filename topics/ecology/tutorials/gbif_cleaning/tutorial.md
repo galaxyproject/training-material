@@ -157,7 +157,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"Column or expression"*: `c57`
+>    - *"Column or expression"*: `c72`
 >
 > 2. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#individualCount` string for example
 >
@@ -181,7 +181,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"With following condition"*: `c57>0 and c57<99`
+>    - *"With following condition"*: `c72>0 and c72<99`
 >    - *"Number of header lines to skip"*: `1`
 >
 
