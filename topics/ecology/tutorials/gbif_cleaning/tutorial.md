@@ -207,7 +207,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"Column or expression"*: `c39`
+>    - *"Column or expression"*: `c41`
 >
 > 2. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
 >
@@ -233,7 +233,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Get species occurrences data** {% icon tool %})
->    - *"With following condition"*: `c39>1945`
+>    - *"With following condition"*: `c41>1945`
 >    - *"Number of header lines to skip"*: `1`
 >
 >    > ### {% icon comment %} Comment
