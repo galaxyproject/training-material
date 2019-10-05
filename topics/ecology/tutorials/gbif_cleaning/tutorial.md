@@ -250,7 +250,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 44 and 6.25% of records were drop out
+> > 1. 44 and 11.76% of records were drop out
 > > 2. This arbitrary date allow to have only quite recent records, but you can specify another year.
 > >
 > {: .solution}
