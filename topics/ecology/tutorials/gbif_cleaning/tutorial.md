@@ -84,7 +84,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Where come from the records?
 
-> ### {% icon hands_on %} Hands-on: Here we propose to investigate the contaent of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.
+> ### {% icon hands_on %} Hands-on: Here we propose to investigate the content of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.
 >
 > 1. **Count** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: `output` (output of **Get species occurrences data** {% icon tool %})
