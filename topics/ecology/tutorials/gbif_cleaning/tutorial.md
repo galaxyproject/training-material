@@ -189,11 +189,13 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. How many records are kept and what is the percentage of filtered data?
 > 2. How can you explain this result?
+> 3. Which propagated tag you can propose to add here?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. 47 and 89.81% o records were drop out
 > > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
+> > 3. As for the previous "count" step you are dealing with the `individualCount` column, you can add a to the output dataset a  `#individualCount` tag for example
 > >
 > {: .solution}
 >
