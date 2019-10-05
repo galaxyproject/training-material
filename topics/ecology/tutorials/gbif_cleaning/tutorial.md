@@ -299,7 +299,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 > ### {% icon question %} Questions
 >
-> 1. Is the firltering here of interest ? 
+> 1. Is the filtering here of interest ? 
 > 2. Why keeping this step can be of interest?
 >
 > > ### {% icon solution %} Solution
