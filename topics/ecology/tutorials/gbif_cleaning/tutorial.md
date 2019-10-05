@@ -169,7 +169,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. From 1 to 99
+> > 1. From 1 to 100
 > >
 > {: .solution}
 >
