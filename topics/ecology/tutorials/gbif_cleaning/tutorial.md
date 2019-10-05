@@ -203,7 +203,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Have a look at the age of records
 
-> ### {% icon hands_on %} Hands-on: Here we propose to have a look at the age of records to know if there is some ancient data to maybe not consider.
+> ### {% icon hands_on %} Hands-on: Here we propose to have a look at the age of records, through the `year` GBIF attribute to know if there is some ancient data to maybe not consider.
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
