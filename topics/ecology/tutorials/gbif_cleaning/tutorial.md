@@ -193,7 +193,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 47 and 89.81% o records were drop out
+> > 1. 50 and 89.29% o records were drop out
 > > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
 > > 3. As for the previous "count" step you are dealing with the `individualCount` column, you can add a to the output dataset a  `#individualCount` tag for example
 > >
