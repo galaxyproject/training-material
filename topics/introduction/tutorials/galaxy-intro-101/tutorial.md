@@ -375,7 +375,7 @@ If you create a new history, your current history does not disappear. If you wou
 Here you can:
 - switch between different histories,
 - delete a history,
-- purge it (permanently deleting it, this action cannot be reversed)
+- purge it (i.e. permanently delete it, this action cannot be reversed)
 - copy histories
 - copy datasets between histories (by dragging and dropping)
 
@@ -437,16 +437,16 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
-> 3. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 4. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >
 >    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.
 >
-> 4. The box named `Exons` is named ok, but we want to change `SNPs` since this workflow is not specific to SNPs
+> 5. The box named `Exons` is named ok, but we want to change `SNPs` since this workflow is not specific to SNPs
 >
 >    - **Click** on the box corresponding to the `SNPs` input dataset
 >    - change the **Label** to `Features` on the right-hand side of your screen.
 >
-> 5. Let's also **rename the outputs**:
+> 6. Let's also **rename the outputs**:
 >
 >    - Click on the `Select first` tool in the workflow editor
 >    - In the menu on the right click on `Configure Output: 'out_file1'`
@@ -521,7 +521,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 {: .hands_on}
 
 > ### {% icon comment %} Unhiding hidden datasets
-> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the "## hidden" just below the history's name:
+> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the "## hidden" just below the history's name.
 {: .comment}
 
 > ### {% icon question %} Questions
