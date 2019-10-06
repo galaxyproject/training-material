@@ -444,14 +444,11 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
 >
+> 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
+>
 > 3. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >
->    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
->
->    ![Workflow minimap](../../images/101_31.png)
->
->
->    In the image above, you see that the top input dataset (with the blue border) connects to the first input of the `Join` tool, so this corresponds to the exon data.
+>    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.
 >
 > 4. The box named `Exons` is named ok, but we want to change `SNPs` since this workflow is not specific to SNPs
 >
@@ -497,10 +494,19 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 2. Click **Analyze Data** at the top to return to the main analysis window
 >
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
->    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
->    - *"group"* parameter should be changed to `Repeats`
->    - *"position"*: `chr22`
->    - leave the rest of the settings to the defaults
+>
+>    **UCSC Main** {% icon tool %} - table browser:
+>
+>     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+>
+>     Now set the following parameters:
+>     - *"clade"*: `Mammal`
+>     - *"genome"*: `Human`
+>     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>     - *"group"*: `Repeats`
+>     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
+>     - *"output format"* should be changed to `BED - browser extensible data`
+>     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
 >
