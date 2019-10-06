@@ -368,21 +368,16 @@ In Galaxy your analyses live in histories such as your current one. Histories ca
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view, or choose `Saved Histories` from the history options menu and you will see a list of all your histories in the central panel:
-
-![`Saved Histories` list](../../images/101_23.png)
-
-An alternative overview of your histories can be accessed by clicking on the {% icon galaxy-columns %} **View all histories** button at top of your history panel.
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view:
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
-Here you see a more detailed view of each history, and can perform the same operations as the other view:
-- switching between different histories,
-- deleting a history,
-- purging it (permanently deleting it, this action cannot be reversed)
-- copying histories
-
-One difference is that this view lets you copy datasets between your histories by dragging and dropping them.
+Here you can:
+- switch between different histories,
+- delete a history,
+- purge it (permanently deleting it, this action cannot be reversed)
+- copy histories
+- copy datasets between histories (by dragging and dropping)
 
 You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
 
