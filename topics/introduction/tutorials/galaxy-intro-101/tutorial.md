@@ -93,7 +93,7 @@ First we need to get some data into our history. You can upload files from your 
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
-> 1. **UCSC Main** {% icon tool %} - table browser:
+> 1. **UCSC Main** {% icon tool %} table browser:
 >
 >     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
@@ -251,8 +251,6 @@ Since each line in our file represents a single overlap between SNP and exon, we
 >      - 1: Operation
 >        - *"Type"*: `Count`
 >        - *"On column"*: `Column: 4`
->
->    ![Settings for the `Group` tool](../../images/101_13.png)
 >
 > 2. Click **Execute** to perform the grouping. Your new output dataset will look something like this:
 >
@@ -495,7 +493,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
 >
->    **UCSC Main** {% icon tool %} - table browser:
+>    **UCSC Main** {% icon tool %} table browser:
 >
 >     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
