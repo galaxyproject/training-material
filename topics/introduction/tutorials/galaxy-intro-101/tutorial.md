@@ -520,8 +520,8 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on "hidden", just below the history name, or by selecting `Unhide Hidden Datasets` from the {% icon galaxy-gear %} history options menu.
+> ### {% icon comment %} Unhiding hidden datasets
+> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the "## hidden" just below the history's name:
 {: .comment}
 
 > ### {% icon question %} Questions
