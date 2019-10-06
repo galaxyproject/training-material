@@ -717,7 +717,7 @@ But even with your data in hand, you stll have the question: “how do I actuall
 
   <ol>
     <li>
-      <p><strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> - table browser:</p>
+      <p><strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
 
       <p>In the tool menu, navigate to <code class="highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
 
@@ -943,8 +943,6 @@ tool named <code class="highlighter-rouge">Join - the intervals of two datasets 
           </ul>
         </li>
       </ul>
-
-      <p><img src="../../images/101_13.png" alt="Settings for the `Group` tool" /></p>
     </li>
     <li>
       <p>Click <strong>Execute</strong> to perform the grouping. Your new output dataset will look something like this:</p>
@@ -1117,23 +1115,18 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <p><img src="../../images/history_options_menu.png" alt="History options menu" /></p>
 
-<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> Multi-history view, or choose <code class="highlighter-rouge">Saved Histories</code> from the history options menu and you will see a list of all your histories in the central panel:</p>
-
-<p><img src="../../images/101_23.png" alt="`Saved Histories` list" /></p>
-
-<p>An alte<span class="notranslate">rna</span>tive overview of your histories can be accessed by clicking on the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> button at top of your history panel.</p>
+<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fa fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> Multi-history view:</p>
 
 <p><img src="../../images/101_history-overview.png" alt="Overview of histories with their datasets" /></p>
 
-<p>Here you see a more detailed view of each history, and can perform the same operations as the other view:</p>
+<p>Here you can:</p>
 <ul>
-  <li>switching between different histories,</li>
-  <li>deleting a history,</li>
-  <li>purging it (permanently deleting it, this action cannot be reversed)</li>
-  <li>copying histories</li>
+  <li>switch between different histories,</li>
+  <li>delete a history,</li>
+  <li>purge it (permanently deleting it, this action cannot be reversed)</li>
+  <li>copy histories</li>
+  <li>copy datasets between histories (by dragging and dropping)</li>
 </ul>
-
-<p>One difference is that this view lets you copy datasets between your histories by dragging and dropping them.</p>
 
 <p>You can always return to your analysis view by clicking on <strong>Analyze Data</strong> in the top menu bar.</p>
 
@@ -1152,8 +1145,6 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     </li>
     <li>
       <p>Go to the history <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> History Options menu and select the <code class="highlighter-rouge">Extract <span class="notranslate">Workflow</span></code> option.</p>
-
-      <p><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>
 
       <p>The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created <span class="notranslate">workflow</span>.</p>
 
@@ -1208,13 +1199,12 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       </blockquote>
     </li>
     <li>
+      <p>Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.</p>
+    </li>
+    <li>
       <p>Click the <strong>asterisk</strong> for <code class="highlighter-rouge">out_file1</code> in the <code class="highlighter-rouge">Select First</code> and <code class="highlighter-rouge">Compare two Datasets</code> tools.</p>
 
-      <p>Now, when we run the <span class="notranslate">workflow</span>, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the <strong>minimap</strong> at the bottom-right corner of your screen will have a colour-coded view of your <span class="notranslate">workflow</span>, with orange boxes representing a tool with an output that will be shown.</p>
-
-      <p><img src="../../images/101_31.png" alt="Workflow minimap" /></p>
-
-      <p>In the image above, you see that the top input dataset (with the blue border) connects to the first input of the <code class="highlighter-rouge">Join</code> tool, so this corresponds to the exon data.</p>
+      <p>Now, when we run the <span class="notranslate">workflow</span>, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.</p>
     </li>
     <li>
       <p>The box named <code class="highlighter-rouge">Exons</code> is named ok, but we want to change <code class="highlighter-rouge">SNPs</code> since this <span class="notranslate">workflow</span> is not specific to SNPs</p>
@@ -1290,12 +1280,22 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Click <strong>Analyze Data</strong> at the top to return to the main analysis window</p>
     </li>
-    <li>We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
+    <li>
+      <p>We wanted to know something about the repetitive elements per exon. We get this data from UCSC.</p>
+
+      <p><strong>UCSC Main</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
+
+      <p>In the tool menu, navigate to <code class="highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+
+      <p>Now set the following parameters:</p>
       <ul>
+        <li><em>“clade”</em>: <code class="highlighter-rouge">Mammal</code></li>
+        <li><em>“genome”</em>: <code class="highlighter-rouge">Human</code></li>
         <li><em>“assembly”</em>: <code class="highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
-        <li><em>“group”</em> parameter should be changed to <code class="highlighter-rouge">Repeats</code></li>
-        <li><em>“position”</em>: <code class="highlighter-rouge">chr22</code></li>
-        <li>leave the rest of the settings to the defaults</li>
+        <li><em>“group”</em>: <code class="highlighter-rouge">Repeats</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="highlighter-rouge">position</code> with value <code class="highlighter-rouge">chr22</code></li>
+        <li><em>“output format”</em> should be changed to <code class="highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
       </ul>
 
       <p>Click on <strong>get output</strong> and then <strong>Send query to <span class="notranslate">Galaxy</span></strong> on the next screen.</p>
@@ -1326,8 +1326,8 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 </blockquote>
 
 <blockquote class="comment">
-  <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-  <p>Because most intermediate steps of the <span class="notranslate">workflow</span> were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on “hidden”, just below the history name, or by selecting <code class="highlighter-rouge">Unhide Hidden Datasets</code> from the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> history options menu.</p>
+  <h3 id="comment-unhiding-hidden-datasets"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Unhiding hidden datasets</h3>
+  <p>Because most intermediate steps of the <span class="notranslate">workflow</span> were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the “## hidden” just below the history’s name:</p>
 </blockquote>
 
 <blockquote class="question">
