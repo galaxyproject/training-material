@@ -504,7 +504,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > #### Gene body coverage
 >
-> The gene body is the different regions of a gene. It is important to check if reads coverage is uniform over gene body or if there is any 5'/3' bias. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess the gene body coverage, we use **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nt (using a provided annotation file) and calculates the number of reads covering each nucleotide position.
+> The gene body is the different regions of a gene. It is important to check if reads coverage is uniform over gene body or if there is any 5'/3' bias. For example, a bias towards the 5' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay. To assess this, we can use the **Gene Body Coverage** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each nucleotide position.
 >
 > > ### {% icon hands_on %} Hands-on: Check gene body coverage
 > >
