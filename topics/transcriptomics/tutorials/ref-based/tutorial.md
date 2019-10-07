@@ -50,7 +50,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In recent years, RNA sequencing (also called RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-seq is profiling of gene expression by identification of genes or molecular pathways that are differentially expressed (DE) between two or more biological condition. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after depletion of a regulatory gene.
+In recent years, RNA sequencing (also called RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is profiling of gene expression by identification of genes or molecular pathways that are differentially expressed (DE) between two or more biological condition. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after depletion of a regulatory gene.
 
 In the study of {% cite brooks2011conservation %}, the authors identified genes and pathways regulated by the *Pasilla* gene (the *Drosophila* homologue of the mammalian splicing regulators Nova-1 and Nova-2 proteins) using RNA sequencing data. They depleted the *Pasilla* (*PS*) gene in *Drosophila melanogaster* by RNA interference (RNAi). Total RNA was then isolated and used to prepare both single-end and paired-end RNA-Seq libraries for treated (PS depleted) and untreated samples. These libraries were sequenced to obtain RNA-Seq reads for each sample. The RNA-Seq data for the treated and the untreated samples can be then compared to identify the effects of *Pasilla* gene depletion on gene expression.
 
@@ -76,7 +76,7 @@ Each sample constitutes a separate biological replicate of the corresponding con
 
 # Data upload
 
-In the first part of this tutorial we will use the files for 2 of the 7 samples to demonstrate analysis how to extract read counts (~ gene expression) from FASTQ files (quality control, mapping, read counting). We provide the FASTQ files for the other 5 samples if you want to reproduce the analysis later.
+In the first part of this tutorial we will use the files for 2 out of the 7 samples to demonstrate how to calculate read counts (a measure of the gene expression) from FASTQ files (quality control, mapping, read counting). We provide the FASTQ files for the other 5 samples if you want to reproduce the whole analysis later.
 
 In the second part of the tutorial, read counts of all 7 samples are used to identify and visualize the DE genes, gene families and molecular pathways due to the depletion of the *PS* gene.
 
@@ -430,7 +430,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 
 > ### {% icon details %} Further check for the quality of the data
 >
-> The quality of the data and mapping can be checked further by inspecting duplicate reads, number of reads mapped to each chromosome, gene body coverage, read distribution across features.
+> The quality of the data and mapping can be checked further, e.g. by inspecting read duplication level, number of reads mapped to each chromosome, gene body coverage, and read distribution across features.
 >
 > *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
 >
