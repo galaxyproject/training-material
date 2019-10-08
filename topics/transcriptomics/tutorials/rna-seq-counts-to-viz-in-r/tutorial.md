@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: RNA Seq Counts to Viz in R
 zenodo_link: ""
-enabled: false
+enable: false
 requirements:
   -
     type: "internal"

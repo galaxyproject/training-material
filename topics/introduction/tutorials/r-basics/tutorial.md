@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: R basics in Galaxy
 zenodo_link: ""
-enabled: false
+enable: false
 requirements:
   -
     type: "internal"
@@ -148,7 +148,7 @@ There are a few more suggestions about naming and style you may want to learn mo
 >
 > In the example below, the object name has a space, which is not allowed in R. The error message does not say this directly, but R is "not sure" about how to assign the name to `human_ chr_number` when the object name we want is `human_chr_number`.
 >
-> ![rstudio script warning](../../images/rna-seq-counts-to-viz-in-r/rstudio_script_warning.png)
+> ![rstudio script warning](../../images/r-basics/rstudio_script_warning.png)
 {: .comment}
 
 # Reassigning object names or deleting objects
