@@ -337,7 +337,7 @@
   "mentions": [
     {
       "@type": "Thing",
-      "url": "",
+      "url": "https://zenodo.org/record/3477564/",
       "name": "Training data for RNA Seq Counts to Viz in R tutorial"
     }
   ],
@@ -874,29 +874,41 @@ At more than 20 years old, R is fairly mature and <a href="https://www.tiobe.com
 
 <p>Now, let’s read the file with the annotated differentially expressed genes that was produced in the “<a href="https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based <span class="notranslate">RNA</span>-Seq data analysis</a>” tutorial.</p>
 
+<!--
+> ### <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import dataset into Galaxy
+> 1. In Galaxy, upload the following file from Zenodo:
+>    ```
+>    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
+>    ```
+> 2. Remember the dataset number (e.g. `2` in the example below)
+>    ![](../../images/rna-seq-counts-to-viz-in-r/dataset_number.png)
+>
+{: .hands_on}
+-->
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-read-the-annotated-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Read the annotated differentially expressed genes</h3>
   <ol>
-    <li>Create a new script</li>
+    <li>Create a new script (if needed)</li>
     <li>
-      <p>Upload the file to RStudio</p>
-
-      <blockquote class="tip">
-        <h3 id="tip-upload-file-from-a-galaxy-history-to-rstudio"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Upload file from a <span class="notranslate">Galaxy</span> history to RStudio</h3>
-
-      </blockquote>
-    </li>
-    <li>
-      <p>Read the tabular file in an object called <code class="highlighter-rouge">annotatedDEgenes</code></p>
+      <p>Read the tabular file in an object called <code class="highlighter-rouge">annotatedDEgenes</code>. We can import directly by URL:</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## read in a CSV file and save it as 'annotatedDEgenes'</span><span class="w">
-</span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"annotatedDEgenes.tabular"</span><span class="p">)</span><span class="w">
+</span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">)</span><span class="w">
 </span></code></pre></div>      </div>
 
       <p>The first argument to pass to our <code class="highlighter-rouge">read.csv()</code> function is the file path for our data. The file path must be in quotes and now is a good time to remember to use tab autocompletion. If you use tab autocompletion you avoid typos and errors in file paths. Use it!</p>
     </li>
     <li>Inspect the <strong>Environment</strong> panel</li>
   </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-upload-files-from-a-galaxy-history-to-rstudio"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Upload files from a <span class="notranslate">Galaxy</span> history to RStudio</h3>
+    <p>Rstudio in <span class="notranslate">Galaxy</span> provides some special functions to import and export from your history.</p>
+
+    <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gx_get</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="w"> </span><span class="c1"># will import dataset number 2 from your history</span><span class="w">
+</span></code></pre></div>    </div>
+  </blockquote>
 </blockquote>
 
 <p>In the <strong>Environment</strong> panel, you should have the <code class="highlighter-rouge">annotatedDEgenes</code> object, listed as 130 obs. (observations/rows) of 1 variable (column) - so the command worked (sort of)!</p>
@@ -938,7 +950,7 @@ At more than 20 years old, R is fairly mature and <a href="https://www.tiobe.com
     <li>
       <p>Read the file given it’s a tabular file</p>
 
-      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"annotatedDEgenes.tabular"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\t"</span><span class="p">)</span><span class="w">
+      <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"\t"</span><span class="p">)</span><span class="w">
 </span></code></pre></div>      </div>
     </li>
     <li>Inspect the object in the <strong>Environment</strong> panel</li>
