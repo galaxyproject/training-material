@@ -69,12 +69,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-Before diving into the tutorial, we need to open RStudio within Galaxy. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
-
-> ### {% icon hands_on %} Hands-on: Open RStudio in Galaxy
->
-> 
-{: .hands_on}
+{% include topics/introduction/tutorials/r-basics/start_rstudio.md %}
 
 # Get familiar with the annotated DE genes table in R
 
