@@ -1328,7 +1328,7 @@ The current version of the plot is not really informative, mostly due to the hig
 >
 >    ```R
 >    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value))) +
->         geom_point(
+>         geom_point()
 >    ```
 {: .hands_on}
 
