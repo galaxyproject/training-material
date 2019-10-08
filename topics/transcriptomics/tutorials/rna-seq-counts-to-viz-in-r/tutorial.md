@@ -1432,7 +1432,7 @@ We have now a nice Volcano plot:
 > > ### {% icon solution %} Solution
 > >
 > > ```
-> > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = chromosome)) +
+> > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
 > >   geom_point() +
 > >      labs(x = "-log10(P.adj)",
 > >           y = "StdErr")
@@ -1455,7 +1455,7 @@ We have now a nice Volcano plot:
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
->      facet_grid(. ~ chromosome)
+>      facet_grid(. ~ Chromosome)
 >    ```
 >
 >    ![Volcano Plot version 6](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v6.png)
@@ -1467,7 +1467,7 @@ We have now a nice Volcano plot:
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
->      facet_grid(chromosome ~ .)
+>      facet_grid(Chromosome ~ .)
 >    ```
 >
 >    ![Volcano Plot version 7](../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v7.png)
@@ -1481,7 +1481,7 @@ We have now a nice Volcano plot:
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
->      facet_grid(chromosome ~ .) +
+>      facet_grid(Chromosome ~ .) +
 >      theme_bw()
 >    ```
 >
@@ -1502,7 +1502,7 @@ We have now a nice Volcano plot:
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
->      facet_grid(chromosome ~ .) +
+>      facet_grid(Chromosome ~ .) +
 >      theme_bw() +
 >      theme(panel.grid = element_blank())
 >    ```
@@ -1518,7 +1518,7 @@ We have now a nice Volcano plot:
 > > ### {% icon solution %} Solution
 > >
 > > ```
-> > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = chromosome)) +
+> > ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
 > >  geom_point() +
 > >  labs(x = "-log10(P.adj)",
 > >       y = "StdErr") +
@@ -1539,9 +1539,9 @@ We would like now to make a barplot showing the number of differentially express
 > 1. Create a barplot with `geom_bar` function of the number of DE genes for each feature with one plot per chromosome
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = Feature, fill = chromosome)) +
+>    ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
 >    geom_bar() +
->    facet_grid(chromosome ~ .)
+>    facet_grid(Chromosome ~ .)
 >    ```
 {: .hands_on}
 
@@ -1554,9 +1554,9 @@ We would like now to make a barplot showing the number of differentially express
 > > ### {% icon solution %} Solution
 > >
 > > ```
-> > ggplot(data = annotatedDEgenes, aes(x = Feature, fill = chromosome)) +
+> > ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
 > >  geom_bar(show.legend = F) +
-> >  facet_grid(chromosome ~ .)
+> >  facet_grid(Chromosome ~ .)
 > > ```
 > > ![Bar plot 2](../../images/rna-seq-counts-to-viz-in-r/barPlot_v2.png)
 > >
