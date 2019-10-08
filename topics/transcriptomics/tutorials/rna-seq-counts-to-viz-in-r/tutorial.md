@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: RNA Seq Counts to Viz in R
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/record/3477564/"
 enable: false
 requirements:
   -
@@ -125,24 +125,38 @@ There are several ways to import data into R. For our purpose here, we will focu
 
 Now, let's read the file with the annotated differentially expressed genes that was produced in the "[Reference-based RNA-Seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html)" tutorial.
 
+<!--
+> ### {% icon hands_on %} Hands-on: Import dataset into Galaxy
+> 1. In Galaxy, upload the following file from Zenodo:
+>    ```
+>    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
+>    ```
+> 2. Remember the dataset number (e.g. `2` in the example below)
+>    ![](../../images/rna-seq-counts-to-viz-in-r/dataset_number.png)
+>
+{: .hands_on}
+-->
+
 > ### {% icon hands_on %} Hands-on: Read the annotated differentially expressed genes
-> 1. Create a new script
-> 2. Upload the file to RStudio
->
->    > ### {% icon tip %} Upload file from a Galaxy history to RStudio
->    >
->    {: .tip}
->
-> 3. Read the tabular file in an object called `annotatedDEgenes`
+> 1. Create a new script (if needed)
+> 2. Read the tabular file in an object called `annotatedDEgenes`. We can import directly by URL:
 >
 >    ```R
 >    ## read in a CSV file and save it as 'annotatedDEgenes'
->    annotatedDEgenes <- read.csv("annotatedDEgenes.tabular")
+>    annotatedDEgenes <- read.csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular")
 >    ```
 >
 >    The first argument to pass to our `read.csv()` function is the file path for our data. The file path must be in quotes and now is a good time to remember to use tab autocompletion. If you use tab autocompletion you avoid typos and errors in file paths. Use it!
 >
-> 4. Inspect the **Environment** panel
+> 3. Inspect the **Environment** panel
+>
+>  > ### {% icon tip %} Upload files from a Galaxy history to RStudio
+>  > Rstudio in Galaxy provides some special functions to import and export from your history.
+>  >
+>  > ```R
+>   > gx_get(2) # will import dataset number 2 from your history
+>  > ```
+>  {: .tip}
 {: .hands_on}
 
 In the **Environment** panel, you should have the `annotatedDEgenes` object, listed as 130 obs. (observations/rows) of 1 variable (column) - so the command worked (sort of)!
@@ -173,7 +187,7 @@ As you can see, there is a problem with how the data has been loaded. The table 
 > 1. Read the file given it's a tabular file
 >
 >    ```R
->    annotatedDEgenes <- read.csv("annotatedDEgenes.tabular", sep = "\t")
+>    annotatedDEgenes <- read.csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t")
 >    ```
 >
 > 2. Inspect the object in the **Environment** panel
