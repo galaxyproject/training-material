@@ -54,9 +54,9 @@ contributors:
 >
 {: .comment}
 
-With RNA-Seq data analyis, we generates tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
+With RNA-Seq data analyis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
-Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. We do not find a Galaxy tools for that or the correct parameters. We need then to use programming languages as R or Python.
+Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
 {% include topics/introduction/tutorials/r-basics/r_introduction.md %}
 {% include topics/introduction/tutorials/r-basics/r_advantages.md %}
@@ -73,7 +73,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-Before diving in the tutorial, we need to open RStudio within Galaxy. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
+Before diving into the tutorial, we need to open RStudio within Galaxy. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Open RStudio in Galaxy
 >
@@ -82,20 +82,20 @@ Before diving in the tutorial, we need to open RStudio within Galaxy. If you do 
 
 # Get familiar with the annotated DE genes table in R
 
-A substantial amount of the data we work with in science will be tabular data, i.e. data arranged in rows and columns - also known as spreadsheets. 
+A substantial amount of the data we work with in science is tabular data, i.e. data arranged in rows and columns - also known as spreadsheets. 
 
 > ### {% icon comment %} Few principles when working with data
 > We want to remind you of a few principles before we work with our first set of example data:
 >
 > 1. **Keep raw data separate from analyzed data**
 >
->    This is principle number one because if you can't tell which files are the original raw data, you risk making some serious mistakes (e.g. drawing conclusion from data which have been manipulated in some unknown way).
+>    This is principle number one, because if you can't tell which files are the original raw data, you risk making some serious mistakes (e.g. drawing conclusion from data which have been manipulated in some unknown way).
 >
->    When you work with data in R, you are not changing the original file you loaded that data from. This is different than (for example) working with a spreadsheet program where changing the value of the cell leaves you one "save"-click away from overwriting the original file. You have to purposely use a writing function (e.g. `write.csv()`) to save data loaded into R. In that case, be sure to save the manipulated data into a new file. More on this later in the lesson.
+>    When you work with data in R, you are not changing the original file which you loaded the data from. This is different than (for example) working with a spreadsheet program where changing the value of the cell leaves you one "save"-click away from overwriting the original file. You have to purposely use a writing function (e.g. `write.csv()`) to save data loaded into R. In that case, be sure to save the manipulated data into a new file. More on this later in the lesson.
 >
 > 2. **Keep spreadsheet data Tidy**
 >
->    The simplest principle of Tidy data is that we have one row in our spreadsheet for each observation or sample, and one column for every variable that we measure or report on. As simple as this sounds, it’s very easily violated. Most data scientists agree that significant amounts of their time is spent tidying data for analysis.
+>    The simplest principle of *Tidy* data is that we have one row in our spreadsheet for each observation or sample, and one column for every variable that we measure or report on. As simple as this sounds, it’s very easily violated. Most data scientists agree that significant amounts of their time is spent tidying data for analysis.
 >
 > 3. **Trust but verify**
 >
@@ -205,7 +205,7 @@ Congratulations! You've successfully loaded your data into RStudio!
 
 ## Summarize and determine the structure of a data frame
 
-Tabular data are stored in Rusing **data frame**. A data frame could also be thought of as a collection of vectors, all of which have the same length.
+Tabular data are stored in R using **data frame**. A data frame could also be thought of as a collection of vectors, all of which have the same length.
 
 > ### {% icon hands_on %} Hands-on: Learn more about our data frame
 > 1. Get summary statistics of `annotatedDEgenes` using `summary` function
@@ -266,7 +266,7 @@ Ok, thats a lot to unpack! Some things to notice:
 - the object type `data.frame` is displayed in the first row along with its dimensions, in this case 130 observations (rows) and 13 variables (columns)
 - Each variable (column) has a name (e.g. `GeneID`). This is followed by the object mode (e.g. `factor`, `int`, `num`, etc.). Notice that before each variable name there is a `$` - this will be important later.
 
-So from both `summary` and `str`, we know that pur data frame had 13 variables that summarize the data.
+So from both `summary` and `str`, we know that our data frame had 13 variables that summarize the data.
 
 - `Base.mean`, `log2.FC` and `P.value` variables (and several others) are numerical data
 
@@ -807,7 +807,7 @@ To select columns, instead with bracket, we could use the `select` function of `
 
 > ### {% icon question %} Selecting on multiple conditions
 >
-> Create a table that contains all the columns with the letter "s" in their name except for the column "Wald.Stats", and the column "End". 
+> Create a table that contains all the columns with the letter "s" in their name except for the column "Wald.Stats", and that contains the column "End". 
 > 
 > Hint: look at the help for the function `starts_with()` we've just covered.
 >
@@ -994,7 +994,7 @@ This new object includes all of the data from this sample.
 
 Frequently we want to create new columns based on the values in existing columns, e.g. to do unit conversions or find the ratio of values in two columns. For this we can use the `dplyr` function `mutate()`.
 
-In the data frame, there is a column titled `log2.FC`. This is the logarithmically-adjusted representation of the fold-change observed in expression of the genes in the transcriptomic experiment from which this data is derived. We can the observed expression level relative to the reference according to the formula: $$FC = 2^{log2.FC}$$
+In the data frame, there is a column titled `log2.FC`. This is the logarithmically-adjusted representation of the fold-change observed in expression of the genes in the transcriptomic experiment from which this data is derived. We can calculate the observed expression level relative to the reference according to the formula: $$FC = 2^{log2.FC}$$
 
 Let's create a column `ratio.FC` to our `annotatedDEgenes` data frame that show the observed expression as a multiple of the reference level.
 
@@ -1118,7 +1118,7 @@ We can also apply many other functions to individual columns to get other summar
 
 > ### {% icon question %} Counting
 >
-> How many genes are found in on each strand of each chromosome?
+> How many genes are found on each strand of each chromosome?
 >
 > > ### {% icon solution %} Solution
 > >

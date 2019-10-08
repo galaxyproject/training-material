@@ -99,7 +99,7 @@ Here are the major windows (or panels) of the RStudio environment:
 
 - **Environment/History**: RStudio will show here you what datasets and objects (variables) you have created and which are defined in memory.
 
-    You can also see some properties of objects/datasets such as their type and dimensions. The **History** tab contains a history of the R commands you've executed R.
+    You can also see some properties of objects/datasets such as their type and dimensions. The **History** tab contains a history of the R commands you've executed in R.
 
 - **Files/Plots/Packages/Help**: This multipurpose panel will show you the contents of directories on your computer
 
@@ -327,7 +327,7 @@ A list of potential interesting function related to "chi-Squared test" are liste
 > {: .solution}
 {: .question}
 
-We will not discuss now on where to look for the libraries and packages that contain functions you want to use. For now, be aware that two important ones are:
+We will not discuss now, where to look for the libraries and packages that contain functions you want to use. For now, be aware that two important ones are:
 1. [CRAN](https://cran.r-project.org/): the main repository for R
 2. [Bioconductor](http://bioconductor.org/): a popular repository for bioinformatics-related R packages
 
