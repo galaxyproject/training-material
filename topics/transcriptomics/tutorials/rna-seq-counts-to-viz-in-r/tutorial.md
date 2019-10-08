@@ -48,11 +48,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-> ### {% icon comment %} Comment
->
-> This tutorial is significantly based on [the Carpentries](https://carpentries.org) ["Intro to R and RStudio for Genomics"](https://carpentrieslab.github.io/genomics-r-intro/) lesson
->
-{: .comment}
+{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
 
 With RNA-Seq data analyis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
@@ -783,9 +779,9 @@ To select columns, instead with bracket, we could use the `select` function of `
 
 `dplyr` also provides useful functions to select columns based on their names. For instance, `starts_with()` allows you to select columns that starts with specific letters. 
 
-> ### {% icon hands_on %} Hands-on: Select columns that end with the letter "P"
+> ### {% icon hands_on %} Hands-on: Select columns that start with the letter "P"
 > 
-> 1. Select columns that end with the letter "P"
+> 1. Select columns that start with the letter "P"
 >
 >    ```R
 >    > select(annotatedDEgenes, starts_with("P."))
@@ -910,7 +906,7 @@ We can do this with **pipes**. Pipes, are a fairly recent addition to R. They le
 > - <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Select and filter in the same ti,e
+> ### {% icon hands_on %} Hands-on: Select and filter
 > 
 > 1. Filter for genes on forward strand, select `GeneID`, `Start`, `End`, `Chromosome` and display the first results using pipes
 >
@@ -996,7 +992,7 @@ Frequently we want to create new columns based on the values in existing columns
 
 In the data frame, there is a column titled `log2.FC`. This is the logarithmically-adjusted representation of the fold-change observed in expression of the genes in the transcriptomic experiment from which this data is derived. We can calculate the observed expression level relative to the reference according to the formula: $$FC = 2^{log2.FC}$$
 
-Let's create a column `ratio.FC` to our `annotatedDEgenes` data frame that show the observed expression as a multiple of the reference level.
+Let's create a column `FC` to our `annotatedDEgenes` data frame that show the observed expression as a multiple of the reference level.
 
 > ### {% icon hands_on %} Hands-on: Select and filter to create new object
 > 
@@ -1023,7 +1019,7 @@ Let's create a column `ratio.FC` to our `annotatedDEgenes` data frame that show 
 >
 >> ### {% icon solution %} Solution
 >> ```R
->> > annotatedDEgenes %>%
+>> annotatedDEgenes %>%
 >>    mutate(Length = End-Start) %>%
 >>    select(GeneID, Chromosome, Start, End, Length)
 >> ```
@@ -1106,10 +1102,9 @@ We can also apply many other functions to individual columns to get other summar
 > {: .solution}
 {: .question}
 
-> ### {% icon comment %} Missing data and built-in functions
+> ### {% icon comment %} Missing data and base functions
 >
-> R has many built-in functions like `mean()`, `median()`, `min()`, and `max()` that are useful to compute summary statistics. These are called "built-in
-> functions" because they come with R and don't require that you install any additional packages.
+> R has many base functions like `mean()`, `median()`, `min()`, and `max()` that are useful to compute summary statistics. These are also called "built-in functions" because they come with R and don't require that you install any additional packages.
 > 
 > By default, all **R functions operating on vectors that contains missing data will return NA**. It's a way to make sure that users know they have missing data, and make a conscious decision on how to deal with it. When dealing with simple statistics like the mean, the easiest way to ignore `NA` (the missing data) is to use `na.rm = TRUE` (`rm` stands for remove).
 {: .comment}

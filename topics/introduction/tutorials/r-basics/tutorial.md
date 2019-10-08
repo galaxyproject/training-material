@@ -34,12 +34,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-> ### {% icon comment %} Comment
->
-> This tutorial is significantly based on [the Carpentries](https://carpentries.org) ["Intro to R and RStudio for Genomics"](https://carpentrieslab.github.io/genomics-r-intro/) lesson
->
-{: .comment}
-
+{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
 {% include topics/introduction/tutorials/r-basics/r_introduction.md %}
 {% include topics/introduction/tutorials/r-basics/r_history.md %}
 {% include topics/introduction/tutorials/r-basics/r_advantages.md %}
