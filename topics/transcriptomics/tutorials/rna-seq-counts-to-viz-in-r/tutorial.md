@@ -204,7 +204,7 @@ Tabular data are stored in R using **data frame**. A data frame could also be th
 >    ```R
 >    ## get summary statistics on a data frame
 >    > summary(annotatedDEgenes)
->    GeneID            Base.mean          log2.FC           StdErr            Wald.Stats
+>    GeneID            Base.mean          log2.FC.          StdErr            Wald.Stats
 >    FBgn0000071:  1   Min.   :   19.15   Min.   :-4.1485   Min.   :0.08433   Min.   :-30.741
 >    FBgn0000079:  1   1st Qu.:  100.29   1st Qu.:-1.3363   1st Qu.:0.12849   1st Qu.:-10.005
 >    FBgn0000116:  1   Median :  237.99   Median :-1.0272   Median :0.16370   Median : -4.982
@@ -238,7 +238,7 @@ Tabular data are stored in R using **data frame**. A data frame could also be th
 >    'data.frame':	130 obs. of  13 variables:
 >     $ GeneID    : Factor w/ 130 levels "FBgn0000071",..: 87 12 28 26 31 96 65 62 125 1 ...
 >     $ Base.mean : num  1087 6410 65115 2192 5430 ...
->     $ log2.FC   : num  -4.15 -3 -2.38 2.7 -2.11 ...
+>     $ log2.FC.  : num  -4.15 -3 -2.38 2.7 -2.11 ...
 >     $ StdErr    : num  0.1349 0.1043 0.0843 0.0979 0.0925 ...
 >     $ Wald.Stats: num  -30.7 -28.7 -28.2 27.6 -22.7 ...
 >     $ P.value   : num  1.62e-207 9.42e-182 2.85e-175 2.85e-167 1.57e-114 ...
@@ -259,7 +259,7 @@ Ok, thats a lot to unpack! Some things to notice:
 
 So from both `summary` and `str`, we know that our data frame had 13 variables that summarize the data.
 
-- `Base.mean`, `log2.FC` and `P.value` variables (and several others) are numerical data
+- `Base.mean`, `log2.FC.` and `P.value` variables (and several others) are numerical data
 
     We get summary statistics on the min and max values for these columns, as well as mean, median, and interquartile ranges
 
@@ -370,7 +370,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > >     ```R
 > >     > annotatedDEgenes[2, ]
-> >            GeneID Base.mean   log2.FC    StdErr Wald.Stats       P.value         P.adj Seqname    Start
+> >            GeneID Base.mean   log2.FC.   StdErr Wald.Stats       P.value         P.adj Seqname    Start
 > >     2 FBgn0003360  6409.577 -2.999777 0.1043451  -28.74863 9.422382e-182 4.040788e-178    chrX 10780892
 > >            End Strand        Feature Gene.Name
 > >     2 10786958      - protein_coding      sesB
@@ -380,7 +380,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > >     ```R
 > >     > annotatedDEgenes[-1, ]
-> >             GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Seqname
+> >             GeneID   Base.mean  log2.FC.     StdErr Wald.Stats       P.value         P.adj Seqname
 > >     2  FBgn0003360  6409.57713 -2.999777 0.10434506 -28.748628 9.422382e-182 4.040788e-178    chrX
 > >     3  FBgn0026562 65114.84056 -2.380164 0.08432692 -28.225437 2.850473e-175 8.149503e-172   chr3R
 > >     4  FBgn0025111  2192.32237  2.699939 0.09794457  27.565988 2.846764e-167 6.104174e-164    chrX
@@ -460,7 +460,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > >     ```R
 > >     > head(annotatedDEgenes)
-> >            GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Seqname    Start
+> >            GeneID  Base.mean  log2.FC.      StdErr Wald.Stats       P.value         P.adj Seqname    Start
 > >     1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203   chr3R 24141394
 > >     2 FBgn0003360  6409.5771 -2.999777 0.10434506  -28.74863 9.422382e-182 4.040788e-178    chrX 10780892
 > >     3 FBgn0026562 65114.8406 -2.380164 0.08432692  -28.22544 2.850473e-175 8.149503e-172   chr3R 26869237
@@ -481,7 +481,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > >      ```R
 > >      > tail(annotatedDEgenes)
-> >               GeneID Base.mean   log2.FC    StdErr Wald.Stats      P.value        P.adj Seqname    Start
+> >               GeneID Base.mean  log2.FC.    StdErr Wald.Stats      P.value        P.adj Seqname    Start
 > >      125 FBgn0036560  27.71424  1.089000 0.2327527   4.678786 2.885785e-06 6.671531e-05   chr3L 16035484
 > >      126 FBgn0035710  26.16177  1.048979 0.2329221   4.503559 6.682472e-06 1.436480e-04   chr3L  6689326
 > >      127 FBgn0035523  70.99820  1.004819 0.2237625   4.490560 7.103600e-06 1.523189e-04   chr3L  4277961
@@ -526,7 +526,7 @@ The first thing to remember is that a data frame is two-dimensional (rows and co
 > >
 > >     ```R
 > >     > annotatedDEgenes[annotatedDEgenes$Feature == "pseudogene",]
-> >     GeneID Base.mean   log2.FC    StdErr Wald.Stats      P.value        P.adj Seqname   Start
+> >     GeneID Base.mean   log2.FC.    StdErr Wald.Stats      P.value        P.adj Seqname   Start
 > >     115 FBgn0037223  37.00783 -1.161706 0.2297393  -5.056627 4.267378e-07 1.192225e-05   chr3R 4243605
 > >     End Strand    Feature Gene.Name
 > >     115 4245511      + pseudogene     TwdlU
@@ -562,7 +562,7 @@ The subsetting notation is very similar to what we learned for vectors. The key 
 >    ```R
 >    # get a summary of the data frame
 >    > summary(annotatedDEgenes_plusStrand)
->    GeneID           Base.mean           log2.FC          StdErr            Wald.Stats
+>    GeneID           Base.mean           log2.FC.         StdErr            Wald.Stats
 >    FBgn0000071: 1   Min.   :   23.55   Min.   :-4.1485   Min.   :0.08603   Min.   :-30.741
 >    FBgn0001224: 1   1st Qu.:   96.04   1st Qu.:-1.3664   1st Qu.:0.12523   1st Qu.:-11.223
 >    FBgn0001226: 1   Median :  275.91   Median :-1.0739   Median :0.15648   Median : -5.290
@@ -759,7 +759,7 @@ To select columns, instead with bracket, we could use the `select` function of `
 >
 >    ```R
 >    > select(annotatedDEgenes, -Chromosome)
->             GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj    Start End Strand    Feature    Gene.Name
+>             GeneID   Base.mean  log2.FC.     StdErr Wald.Stats       P.value         P.adj    Start End Strand    Feature    Gene.Name
 >    1   FBgn0039155  1086.97430 -4.148450 0.13494887 -30.740902 1.617921e-207 1.387691e-203 24141394  24147490      +  protein_coding         Kal1
 >    2   FBgn0003360  6409.57713 -2.999777 0.10434506 -28.748628 9.422382e-182 4.040788e-178 10780892  10786958      -  protein_coding         sesB
 >    3   FBgn0026562 65114.84056 -2.380164 0.08432692 -28.225437 2.850473e-175 8.149503e-172 26869237  26871995      -  protein_coding  BM-40-SPARC
@@ -820,7 +820,7 @@ Similarly to choose rows, we can use the `filter()` function.
 >
 >    ```R
 >    > filter(annotatedDEgenes, Strand == "+")
->            GeneID   Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome Start      End Strand        Feature    Gene.Name
+>            GeneID   Base.mean  log2.FC.     StdErr Wald.Stats       P.value         P.adj Chromosome Start      End Strand        Feature    Gene.Name
 >    1  FBgn0039155  1086.97430 -4.148450 0.13494887 -30.740902 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding         Kal1
 >    2  FBgn0029167  5430.06728 -2.105062 0.09254660 -22.745964 1.573283e-114 2.698810e-111      chr3L 13846053 13860001      + protein_coding          Hml
 >    3  FBgn0039827   390.90178 -3.503014 0.16002962 -21.889786 3.250384e-106 4.646424e-103      chr3R 31196915 31203722      + protein_coding       CG1544
@@ -855,7 +855,7 @@ Similarly to choose rows, we can use the `filter()` function.
 >
 >    ```R
 >    ## rows where the log2 fold change is greater than 2
->    filter(annotatedDEgenes, log2.FC >= 2)
+>    filter(annotatedDEgenes, log2.FC. >= 2)
 >    ```
 {: .hands_on}
 
@@ -874,7 +874,7 @@ Similarly to choose rows, we can use the `filter()` function.
 > 2. Filter for genes on chrX and with log2 Fold Change smaller than -2 or larger than 2
 >
 >    ```R
->    filter(annotatedDEgenes, Chromosome == "chrX", (log2.FC <= -2 | log2.FC >= 2))
+>    filter(annotatedDEgenes, Chromosome == "chrX", (log2.FC. <= -2 | log2.FC. >= 2))
 >    ```
 {: .hands_on}
 
@@ -887,7 +887,7 @@ Similarly to choose rows, we can use the `filter()` function.
 > > ### {% icon solution %} Solution
 > >
 > > ```R
-> > filter(annotatedDEgenes, Start >= 1e6 & End <= 2e6, (log2.FC > 1 | P.adj < 1e-75)
+> > filter(annotatedDEgenes, Start >= 1e6 & End <= 2e6, (log2.FC. > 1 | P.adj < 1e-75)
 > > ```
 > {: .solution}
 {: .question}
@@ -972,13 +972,13 @@ This new object includes all of the data from this sample.
 >
 > Starting with the `annotatedDEgenes` data frame, use pipes to
 > - subset the data to include only observations from chromosome 3L,with the log2 fold change is at least 2
-> - retain only the columns `GeneID`, `P.adj`, and `log2.FC`.
+> - retain only the columns `GeneID`, `P.adj`, and `log2.FC.`.
 >
 > > ### {% icon solution %} Solution
 > > ```R
 > >  > annotatedDEgenes %>%
-> >     filter(Chromosome == "chr3L" & log2.FC >= 2) %>%
-> >     select(GeneID, P.adj, log2.FC)
+> >     filter(Chromosome == "chr3L" & log2.FC. >= 2) %>%
+> >     select(GeneID, P.adj, log2.FC.)
 > > ```
 > {: .solution}
 {: .question}
@@ -987,7 +987,7 @@ This new object includes all of the data from this sample.
 
 Frequently we want to create new columns based on the values in existing columns, e.g. to do unit conversions or find the ratio of values in two columns. For this we can use the `dplyr` function `mutate()`.
 
-In the data frame, there is a column titled `log2.FC`. This is the logarithmically-adjusted representation of the fold-change observed in expression of the genes in the transcriptomic experiment from which this data is derived. We can calculate the observed expression level relative to the reference according to the formula: $$FC = 2^{log2.FC}$$
+In the data frame, there is a column titled `log2.FC.`. This is the logarithmically-adjusted representation of the fold-change observed in expression of the genes in the transcriptomic experiment from which this data is derived. We can calculate the observed expression level relative to the reference according to the formula: $$FC = 2^{log2.FC.}$$
 
 Let's create a column `FC` to our `annotatedDEgenes` data frame that show the observed expression as a multiple of the reference level.
 
@@ -997,9 +997,9 @@ Let's create a column `FC` to our `annotatedDEgenes` data frame that show the ob
 >
 >     ```R
 >     > annotatedDEgenes %>%
->        mutate(FC = 2 ** log2.FC) %>%
+>        mutate(FC = 2 ** log2.FC.) %>%
 >        head()
->            GeneID  Base.mean   log2.FC     StdErr Wald.Stats       P.value         P.adj Chromosome  Start      End Strand        Feature   Gene.Name   FC
+>            GeneID  Base.mean  log2.FC.     StdErr Wald.Stats       P.value         P.adj Chromosome  Start      End Strand        Feature   Gene.Name   FC
 >     1 FBgn0039155  1086.9743 -4.148450 0.13494887  -30.74090 1.617921e-207 1.387691e-203      chr3R 24141394 24147490      + protein_coding        Kal1 0.05638871
 >     2 FBgn0003360  6409.5771 -2.999777 0.10434506  -28.74863 9.422382e-182 4.040788e-178       chrX 10780892 10786958      - protein_coding        sesB 0.12501930
 >     3 FBgn0026562 65114.8406 -2.380164 0.08432692  -28.22544 2.850473e-175 8.149503e-172      chr3R 26869237 26871995      - protein_coding BM-40-SPARC 0.19208755
@@ -1056,14 +1056,14 @@ We can also apply many other functions to individual columns to get other summar
 
 > ### {% icon hands_on %} Hands-on: Group and summarize data
 >
-> 1. View the highest fold change (`log2.FC`) for each chromsome
+> 1. View the highest fold change (`log2.FC.`) for each chromsome
 >
 >     ```R
 >     > annotatedDEgenes %>%
 >        group_by(Chromosome) %>%
->        summarize(max(log2.FC))
+>        summarize(max(log2.FC.))
 >     # A tibble: 5 x 2
->       Chromosome `max(log2.FC)`
+>       Chromosome `max(log2.FC.)`
 >       <fct>               <dbl>
 >     1 chr2L                2.15
 >     2 chr2R                2.41
@@ -1284,7 +1284,7 @@ Adding layers in this fashion allows for extensive flexibility and customization
 > 4. Define a mapping (using the `aes` aesthetic function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.
 >
 >     ```R
->     ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = P.value))
+>     ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = P.value))
 >     ```
 >
 >     X-axis is now the log2 FC and and Y-axis the p-value
@@ -1301,7 +1301,7 @@ Adding layers in this fashion allows for extensive flexibility and customization
 > 5. Add information about the graphical representations of the data in the plot (points, lines, bars) using `geoms` function added via the `+` operator
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = P.value)) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = P.value)) +
 >          geom_point()
 >    ```
 >
@@ -1327,7 +1327,7 @@ The current version of the plot is not really informative, mostly due to the hig
 > 1. Create volcano plot with log values on the y-axis
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value))) +
 >         geom_point(
 >    ```
 {: .hands_on}
@@ -1351,7 +1351,7 @@ The current version of the plot is not really informative, mostly due to the hig
 >
 > ```R
 > # Assign plot to a variable
-> de_genes_plot <- ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value)))
+> de_genes_plot <- ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value)))
 >
 > # Draw the plot
 > de_genes_plot +
@@ -1385,7 +1385,7 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 > 1. Add transparency (`alpha`) to avoid overplotting
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value))) +
 >         geom_point(alpha = 0.5)
 >    ```
 >
@@ -1394,7 +1394,7 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 > 2. Add colors for all the points
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value))) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value))) +
 >        geom_point(alpha = 0.5, color = "blue")
 >    ```
 >
@@ -1403,7 +1403,7 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 > 3. Color point based on their strand
 >
 >     ```R
->     ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+>     ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value), color = Strand)) +
 >         geom_point(alpha = 0.5)
 >     ```
 >
@@ -1414,7 +1414,7 @@ Building plots with `ggplot2` is typically an iterative process. We start by def
 > 4. Add axis labels
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value), color = Strand)) +
 >        geom_point(alpha = 0.5) +
 >          labs(x = "log2(Fold Change)",
 >               y = "-log10(P-Value)")
@@ -1451,7 +1451,7 @@ We have now a nice Volcano plot:
 > 1. Split volcano plot by chromosome using `facet_grid`
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value), color = Strand)) +
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
@@ -1463,7 +1463,7 @@ We have now a nice Volcano plot:
 > 2. Split volcano plot by chromosome using `facet_grid` with plots stacked vertically
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value), color = Strand)) +
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
@@ -1477,7 +1477,7 @@ We have now a nice Volcano plot:
 > 3. Add white background using `theme_bw()` to make the plot more readable when printed
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value), color = Strand)) +
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
@@ -1498,7 +1498,7 @@ We have now a nice Volcano plot:
 > 4. Remove the grid
 >
 >    ```R
->    ggplot(data = annotatedDEgenes, aes(x = log2.FC, y = -log10(P.value), color = Strand)) +
+>    ggplot(data = annotatedDEgenes, aes(x = log2.FC., y = -log10(P.value), color = Strand)) +
 >      geom_point() +
 >      labs(x = "log2(Fold Change)",
 >           y = "-log10(P-Value)") +
