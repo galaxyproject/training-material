@@ -48,9 +48,8 @@ def safe_name(server, dashes=True):
 
 def get_badge_path(label, value, color):
     """Return a string representing the expected badge filename. Returns something like 'Training Name|Supported' or 'Training Name|Unsupported'."""
-    print(label, value, color)
-    safe_label = label.replace('@', '%40').replace(' ', '%20').replace('-', '--')
-    safe_value = value.replace('@', '%40').replace(' ', '%20').replace('-', '--')
+    safe_label = label.replace('@', '%40').replace(' ', '%20').replace('-', '--').replace('/', '%2F')
+    safe_value = value.replace('@', '%40').replace(' ', '%20').replace('-', '--').replace('/', '%2F')
     return '%s-%s-%s.svg' % (safe_label, safe_value, color)
 
 

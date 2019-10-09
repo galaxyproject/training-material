@@ -21,7 +21,7 @@ key_points:
   - CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.
   - By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced.
 contributors:
-  - Florian-H-Lab
+  - heylf
   - dmaticzka
   - bebatut
 ---
@@ -59,15 +59,15 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following files from [Zenodo](https://zenodo.org/record/1327423).
+> 2. Import the following files from [Zenodo](https://zenodo.org/record/2579279).
 >
 >    ```
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/hg38_chr_sizes.txt
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/Homo_sapiens.GRCh38.87.gtf
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R1_RBFOX2.fastq
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-CLIP_S1_R2_RBFOX2.fastq
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R1.fastq
->    https://zenodo.org/api/files/102d29d5-2180-490b-be7c-bb0e4ca7b109/RBFOX2-204-INPUT_S2_R2.fastq
+>    https://zenodo.org/record/2579279/files/hg38_chr_sizes.txt
+>    https://zenodo.org/record/2579279/files/Homo_sapiens.GRCh38.87.gtf
+>    https://zenodo.org/record/2579279/files/RBFOX2-204-CLIP_S1_R1_RBFOX2.fastq
+>    https://zenodo.org/record/2579279/files/RBFOX2-204-CLIP_S1_R2_RBFOX2.fastq
+>    https://zenodo.org/record/2579279/files/RBFOX2-204-INPUT_S2_R1.fastq
+>    https://zenodo.org/record/2579279/files/RBFOX2-204-INPUT_S2_R2.fastq
 >    ```
 >
 >    {% include snippets/import_via_link.md %}

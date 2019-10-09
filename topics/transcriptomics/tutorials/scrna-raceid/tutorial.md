@@ -22,10 +22,9 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-##        - scrna-introduction
         - scrna-plates-batches-barcodes
         - scrna-umis
-        - scrna_preprocessing
+        - scrna-preprocessing
 
 time_estimation: 3H
 key_points:
@@ -47,7 +46,7 @@ contributors:
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by [Grün et.al](https://doi.org/10.1016/j.stem.2016.05.010) in 2016. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
-The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via [scRNA pre-processing methods]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
+The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via [scRNA pre-processing methods]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
 
 > ### {% icon comment %} Comment: Tidy Data
 > The [tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) convention prevalent amongst the R data analysis community assigns every value to a variable and an observation. The values are the number of reads which are assigned to a particular gene (a variable) that was measured within a specific cell (an observation).
@@ -267,7 +266,7 @@ Four histograms are generated with the top line giving the raw expression data f
 
 > ### {%icon comment %} Comment: Choosing Filtering Thresholds
 >
-> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna_preprocessing/tutorial.md %}).
+> The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}).
 >
 > This threshold is dependent primarily on the capture efficiency of the cells that were sequenced, with some cell types being easier to capture than others. For example, neuron cells would have a lower filtering threshold of ~1500 compared to the ~3000 used for hematopoietic cells.
 >
