@@ -33,18 +33,14 @@ by sharing a common sequence or structure. Since the biological function depends
 spatial structure of a molecule, it is often strongly conserved for ncRNAs.
 
 This workflow investigates a set of sequences for their sequence and structure conservation and for
-their alignability.
-
-***TODO***: *Add a general introduction to the topic*
-
-***TODO***: *Add a description of the dataset and what you want to do with it*
+their alignability. We will inspect a set of hammerhead RNAs and a set of epidermal growth factor sequences with the workflow and compare the different outcomes.
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 The first step in any analysis of unaligned ncRNAs is to run a multi alignment tool on the sequences of the ncRNAs. Using the multi alignment, we can extract some representative sequences, analyze them for protein coding potential, compute consensus structure and predict stable secondary structure. 
 
-For the multi-alignment, two types of tools are used: one generic multi-aligner and one RNA-aware. In this tutorial, we will see how to deal with both types of aligners to analyze unaligned ncRNAs.
+For the multi-alignment, two types of tools are used: one generic multi-aligner and one RNA-secondary structure aware.
 
 > ### Agenda
 >
