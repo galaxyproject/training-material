@@ -56,9 +56,13 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3482616) or from the shared data library
 >
->    ```
+>    We will retrieve two files one file containing homolog sequences from the
+>    SgrS family, which has been discovered to be a dual-function RNA.
+>    This allows us to show the ability of the workflow to test for protein
+>    coding potential, as well as for predicting functional non-coding RNA.
+>    
 >    
 >    ```
 >    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
@@ -66,7 +70,6 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 >    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype
