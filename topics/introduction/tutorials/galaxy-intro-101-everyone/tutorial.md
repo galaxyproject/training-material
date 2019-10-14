@@ -184,7 +184,7 @@ In the next steps we will perform two pre-processng steps:
 >    {: .comment}
 >
 >    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
-
+>
 > 2. Rename the dataset to `iris clean`
 >
 >    {% include snippets/rename_dataset.md %}
