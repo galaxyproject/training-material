@@ -1,9 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Refining Manual Genome Annotations with Apollo
+title: Apollo
 zenodo_link: https://zenodo.org/record/3270822
 tags:
+- intro
 - eukaryote
 questions:
 - How to visualize your genome after automated annotations have been performed?
@@ -22,28 +23,29 @@ key_points:
 - Export manual annotations as GFF3.
 contributors:
 - nathandunn
+- erasche
+
+requirements:
+- type: "internal"
+  topic_name: galaxy-data-manipulation
+  tutorials:
+    - upload-rules
+#- type: "internal"
+#  topic_name genome-annotation
+#  tutorials:
+#    -
 ---
 
 
 # Introduction
 {:.no_toc}
 
-After automatically editing annotations using 
-[Prokker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html) or 
-[Maker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html),
- its important to visualize and then manually refine any additional data. 
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), its important to visualize and then manually refine any additional data.
+This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
-This process is most often done as part of a group.  
+[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collabortive genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together to annotate a genome.
 
-This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. 
-
-***TODO***: *Add links to the Apollo User's Gropu and GGA*
-
-{% raw %} `{% cite Dunn2019 %}`{% endraw %}
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+This demo was inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. This tutorial was further developed by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group who developed the Galaxy-Apollo bridge.
 
 > ### Agenda
 >
@@ -54,81 +56,78 @@ This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github
 >
 {: .agenda}
 
+
+![Picture of A. mel](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bee_on_Lavender_Blossom_2.jpg/800px-Bee_on_Lavender_Blossom_2.jpg "<i>Apis mellifera</i> By Martin Falbisoner - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=41709017">Link</a>"){: style="float:right;max-width:25%"}
+
 # Data upload
 
-To annotate a genome using Apollo, you simply need the reference genome sequence in FASTA format.
+To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can refer to something like:
 
-We will also need to provide evidence for our refined annotations.  
+- A set of prior gene predictions or other genomic feature predictions
+- The output of a bioinformatic analysis like BLAST or InterProScan
+- Sequencing reads from RNA-Seq or another HTS analysis
+- If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
 
-This will result in several types of evidence:
-
-- If not *de novo*, then this could include a previous released official genome annotation.
-- A set of prior gene predictions or other genomic feature types if available (provided for this example) typically as GFF3.  
-- Individual read files in BAM format if available.
-- Additional visual data to help indicate things like read density such as BigWig files.
-
+In this tutorial we have obtained some data from [*Apis mellifera*](https://en.wikipedia.org/wiki/Apis_mellifera), this data comes from published scaffolds from the Apis mellifera assembly Amel_4.5 and Official Gene Set 3.2, available from [BeeBase](http://hymenopteragenome.org/beebase/?q=download_sequences).
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3270822) or from the shared data library
+> 1. Click the upload icon {% icon galaxy-upload %}
+>
+> 2. Switch to the "Rule-based" tab
+>
+> 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/Amel_4.5_scaffolds.fa.gz
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2.gff3.gz
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam.bai
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager.bw
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam.bai
->    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse.bw
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/Amel_4.5_scaffolds.fa.gz	Scaffolds	fasta.gz
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/amel_OGSv3.2.gff3.gz	OGS v3.2	gff3
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager_Amel4.5_accepted_hits.bam	forager_Amel4.5_accepted_hits	bam
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/forager.bw	forager coverage	bigwig
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse_Amel4.5_accepted_hits.bam	nurse_Amel4.5_accepted_hits	bam
+>    https://zenodo.org/api/files/55133323-b15b-45b4-98c9-dda00288b53f/nurse.bw	nurse coverage	bigwig
 >    ```
+> 4. Click **Build**
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+> 5. From **Rules** menu select `Add / Modify Column Definitions`
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>    - Click `Add Definition` button and select `Name`
+>      - *"Name"*: `B`
+>    - Repeat this again and select `URL` instead.
+>      - *"URL"*: `A`
+>    - Repeat this again and select `URL` instead.
+>      - *"Type"*: `C`
+>    - Click `Apply`
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+> 6. At the bottom of the dialog on the left, set your Genome to `A. mellifera 04 Nov 2010 (Amel_4.5/apiMel4)`
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
+> 7. Click **Upload**
 >
 {: .hands_on}
 
-# Setup Apollo for Annotation
+# Using Apollo for Annotation
 
 Refining genomes happens in multiple steps:
 
-- register a user, injecting the user from Galaxy into Apollo
-- create a viewable genome or organism from the reference genome FASTA file
-- add genomic evidence
-- refine the genome (more on that)
-- export the refined genome annotations
+- Create a JBrowse instance from the reference genome FASTA file and evidence tracks
+- Import this data into Apollo
+- Refine the annotations
+- Export the refined genome annotations
 
-
-(SCREEN SHOT TO ADD of imporection)
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that will be covered in other tutorials. When you've completed this tutorial you should be comfortable manipulating genomic data in Galaxy and Apollo.
 
 > ### {% icon details %} Why bother?
 >
-> Automated annotation programs continue to improve, however a simple score may not provide the visual evidence necessary to confirm an accurate prediction.
-> Therefore, it is necessary to both visually inspect as well as fix any issues with the predicted genomes.
-> 
+> Automated annotation programs continue to improve, however a simple score may not provide evidence necessary to confirm an accurate prediction.
+> Therefore, it is necessary to both visually inspect the results and manually fix any issues with the predictions.
+>
 > Additionally, many times assemblies are less than perfect or read depth and quality may be insufficient.
-> 
-
 {: .details}
 
+## Build the JBrowse Instance
 
 
-## Sub-step with **JBrowse**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -168,8 +167,8 @@ The idea is to keep the theory description before quite simple to focus more on 
 >    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} JBrowse is highly configurable
->    > 
->    > JBrowse is highly configurable and can be run standalone.   
+>    >
+>    > JBrowse is highly configurable and can be run standalone.
 >    > A refined genome can be published separate from Apollo or used as further evidence.
 >    {: .comment}
 
@@ -187,7 +186,7 @@ You will now see three new tracks displaying all the evidences used by Maker to 
 >    - *"Organism Common Name Source"*: `Direct Entry`
 >        - *"Organism Common Name"*: `Honeybee`
 >    - *"Genus"*: `Apis`
->    - *"Species"*: `Mellifera`
+>    - *"Species"*: `mellifera`
 >    - *"Is Organism Public"*: `Yes`
 >    - *"Grant access to a user group"*: ``
 >    - *"Remove old data directory"*: `Yes`
@@ -227,14 +226,14 @@ View data at a particular position
 
 ## Search for a gene
 
-Enter the gene XXX into the gene box.  
+Enter the gene XXX into the gene box.
 
 Zoom in to the proper region.
 
 ## Create structural edits
 
-Drag annotation from evidence to HTML region. 
- 
+Drag annotation from evidence to HTML region.
+
 Conversely, if you right-click you can any type of genome feature annotation.
 
 (SCREEN SHOT TO ADD of imperfection)
@@ -245,11 +244,11 @@ Additional isoforms may be dragged up from the evidence.
 ## Edit structure
 
 ### Update exon position
-Once isoforms have been created, the edges may be dragged to best match the biological evidence.   
+Once isoforms have been created, the edges may be dragged to best match the biological evidence.
 
-CDS's are automatically updated. 
+CDS's are automatically updated.
 
-Conversely by selecting "choose the annotation" the individual code view is selected. 
+Conversely by selecting "choose the annotation" the individual code view is selected.
 
 You will also notice that overlapping isoforms are highlighted.
 
@@ -258,7 +257,7 @@ You will also notice that overlapping isoforms are highlighted.
 
 Genes will automatically be predicted based on CDS overlap.  This can be unassigned by deselecting on the right-click menu.
 
-By right-clicking on the refined genome feature the details of the genome feature can be retrieved quite readily. 
+By right-clicking on the refined genome feature the details of the genome feature can be retrieved quite readily.
 
 (SCREEN SHOT of right-click menu)
 ![Alternative text](../../images/image_name "Legend of the image")
@@ -275,7 +274,7 @@ Selecting the features allows us to view the gene directly.
 
 There are various structured data options from the figure.
 
-All structured data 
+All structured data
 
 
 #### Editing and reverting history
@@ -291,7 +290,7 @@ All structured data
 There is various functional data.
 
 
-#### Edit names, etc. 
+#### Edit names, etc.
 
 
 #### Add comments, keys, and values
@@ -301,14 +300,14 @@ There is various functional data.
 #### Show GO Annotations
 
 
-## Executing the workflow 
+## Executing the workflow
 
 
 # Export refinements
 
 
 
-# Add users to help with the refinement 
+# Add users to help with the refinement
 
 
 
@@ -320,12 +319,12 @@ There is various functional data.
 
 Congratulations, you finished this tutorial! You learned how to manually refine predicted eukaryotic genomes using Apollo and export them to other forms.
 
-By using Apollo and JBrowse you can inspect and refine genome annotations with other researchers. 
+By using Apollo and JBrowse you can inspect and refine genome annotations with other researchers.
 When refinement is sufficient an updated or new version of the genome may be exported as GFF3 as well as published as a new JBrowse directory for inspection.
 
 # What's next?
 
-After generating your refined genome, you'll want to merge it back into the official gene sets.  
+After generating your refined genome, you'll want to merge it back into the official gene sets.
 
 If a de novo set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
 
