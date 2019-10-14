@@ -141,6 +141,8 @@ In the next steps we will perform two pre-processng steps:
 - Header removal
 
 
+### Convert format
+
 > ### {% icon hands_on %} Hands-on: Converting dataset format
 >
 > 1. Convert the CSV file (comma-separated) to tabular format (tab-separated)
@@ -160,7 +162,7 @@ In the next steps we will perform two pre-processng steps:
 {: .hands_on}
 
 
-## Remove header
+### Remove header
 
 > ### {% icon comment %} Search bar
 >
@@ -204,31 +206,21 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 
 > ### {% icon hands_on %} Hands-on: Filtering dataset
 >
-> 1.   **Cut** {% icon tool %} with the following parameters:
->    - *"Cut columns"* should be changed to `c5`
->    - *"Delimited by"* should be kept to `Tab`
->    - *"From"* select `iris clean` dataset
+> 1. **Cut** {% icon tool %} with the following parameters:
+>      - *"Cut columns"* should be changed to `c5`
+>      - *"Delimited by"* should be kept to `Tab`
+>      - *"From"* select `iris clean` dataset
 >
-> 2.    Click **Execute**
+> 2. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
 >
-> 3. Wait for the job to finish
+> 3. Add the tag `analysis` to the output dataset
 >
-> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
->
-> 5. Add the tag `analysis` to the output dataset
->
-> 6.   **Unique** {% icon tool %} with the following parameters:
+> 4.   **Unique** {% icon tool %} with the following parameters:
 >    - *"File to scan for unique values"* select your last output file
 >
-> 7. Click **Execute**
+> 5. View the resulting file {% icon galaxy-eye %}
 >
-> 8. Wait for the job to finish
->
-> 9. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
->
-> 10. Add the tag `analysis` to the output dataset
->
-> 11. Examine the output file
+> 6. Add the tag `analysis` to the output dataset
 >
 {: .hands_on}
 
@@ -252,17 +244,13 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 >
 > Another way round to answer this question with only one tool:
 >
-> 1.   **Group** {% icon tool %} with the following parameters:
+> 1. **Group** {% icon tool %} with the following parameters:
 >    - *"Select data"* select `iris clean` dataset
 >    - *"Group by column"* should be changed to `Column: 5`
 >
-> 2. Click **Execute**
+> 2. Add the tag `analysis` to the output dataset
 >
-> 3. Wait for the job to finish
->
-> 4. Add the tag `analysis` to the output dataset
->
-> 5. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 3. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
 >
 {: .hands_on}
 
@@ -282,10 +270,8 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 >    - *"Insert operation"* click on the icon.
 >    - *"Type"* select `Count`
 >    - *"On column"* select `Column: 1`
-> 2. Click **Execute**
-> 3. Wait for the job to finish
-> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
-> 5. Add the tag `analysis` to the output dataset
+> 2. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 3. Add the tag `analysis` to the output dataset
 >
 {: .hands_on}
 
