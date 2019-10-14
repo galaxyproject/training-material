@@ -164,7 +164,7 @@ In the next steps we will perform two pre-processng steps:
 
 ### Remove header
 
-> ### {% icon comment %} Search bar
+> ### {% icon comment %} Finding your tool: Search bar
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
 >
@@ -175,15 +175,13 @@ In the next steps we will perform two pre-processng steps:
 > ### {% icon hands_on %} Hands-on: Removing header
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
->
 >    - *Remove first*: `1` to remove the first line only.
 >    - *from*: {% icon param-file %}: select **iris tabular**
->    - **Execute**
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Tip: search for the tool
 >    >
->    > Use the **tools search box** to find **Removing beginning** {% icon tool %}.
->    {: .comment}
+>    > Use the **tools search box** at the top of the tool panel to find **Remove beginning** {% icon tool %}.
+>    {: .tip}
 >
 >    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
 >
