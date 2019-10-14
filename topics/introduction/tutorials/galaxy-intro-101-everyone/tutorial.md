@@ -135,29 +135,29 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 # Pre-processing
 
-A pre-processing step can be required to proceed analysis. In this case, format convertion and header removal have to be processed.
+One or more pre-processing step may be required to proceed with analysis. In our case, the tools we will use require tab-separated files, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to do some pre-processing of the files to make them ready for analysis.
+
+In the next steps we will perform two pre-processng steps:
+- Format conversion
+- Header removal
 
 
-## Convert dataset **csv_to_tabular**
-
-> ### {% icon hands_on %} Hands-on: Converting dataset format 
->    
->    * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
->    * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
->    * Select `Convert CSV to tabular`
->    * Click the **Convert datatype** button
+> ### {% icon hands_on %} Hands-on: Converting dataset format
 >
->    > ### {% icon comment %} Comment
->    > A New dataset is created in the history panel. You can click on the dataset name to get an overview
->    {: .comment}
+> 1. Convert the CSV file (comma-separated) to tabular format (tab-separated)
 >
-> 2. Rename the dataset to `iris tabular`
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 2. Rename the resulting dataset to `iris tabular`
 >
 >    {% include snippets/rename_dataset.md %}
+>
 > 3. Add the tag `preprocessing` to the dataset
 >
 >    {% include snippets/add_tag.md %}
+>
 > 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+>
 {: .hands_on}
 
 
