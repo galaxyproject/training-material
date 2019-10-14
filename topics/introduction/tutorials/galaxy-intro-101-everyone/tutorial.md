@@ -35,9 +35,9 @@ contributors:
 
 <!-- This is a comment. -->
 
-This practical aims to familiarize you with the Galaxy user interface. 
+This practical aims to familiarize you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, and sharing your work.
-Not everyone has the same background and that's ok! 
+Not everyone has the same background and that's ok!
 
 {% include snippets/warning_results_may_vary.md %}
 
@@ -51,7 +51,7 @@ Not everyone has the same background and that's ok!
 {: .agenda}
 
 > ### {% icon comment %} Background
-> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}). 
+> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
 > Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
@@ -82,24 +82,23 @@ The Galaxy interface consists of three main parts:
 
 # Create a history
 
-Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
+Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
 That is what we call a pipeline.
 
-Then the finalized pipeline can be serialized as a workflow. A workflow is the concatenation of one or multiple histories as a series of building blocks 
+Then the finalized pipeline can be serialized as a workflow. A workflow is the concatenation of one or multiple histories as a series of building blocks
 for replicating an experimental result or a recipe. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
-In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input. 
+In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input.
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
-> Make sure you start from an empty analysis history.
+> 1. Make sure you start from an empty analysis history.
 >
 >    {% include snippets/create_new_history.md %}
->![Rename the history]({{ site.baseurl }}{% link shared/images/rename_history.png %})
-
-> **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history. 
+>
+> 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
 >    {% include snippets/rename_history.md %}
 {: .hands_on}
 
@@ -181,7 +180,7 @@ In the next steps we will perform two pre-processng steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Use the **tools search box** to find **Removing beginning** {% icon tool %}. 
+>    > Use the **tools search box** to find **Removing beginning** {% icon tool %}.
 >    {: .comment}
 >
 >    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
@@ -203,7 +202,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 
 ## How many different species are in the dataset?
 
-> ### {% icon hands_on %} Hands-on: Filtering dataset 
+> ### {% icon hands_on %} Hands-on: Filtering dataset
 >
 > 1.   **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut columns"* should be changed to `c5`
@@ -217,7 +216,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 > 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
 >
 > 5. Add the tag `analysis` to the output dataset
-> 
+>
 > 6.   **Unique** {% icon tool %} with the following parameters:
 >    - *"File to scan for unique values"* select your last output file
 >
@@ -234,10 +233,10 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 {: .hands_on}
 
 > ### {% icon question %} Questions
-> 
+>
 > 1. How many different species are in the dataset?
 > 2. What are the different Iris species?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > 1. There are 3 species.
@@ -294,7 +293,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 > How many samples by species are in the dataset?
 >
 > > ### {% icon solution %} Solution
-> > 
+> >
 > > We have 50 samples per species:
 > >
 > > | 1         | 2   |
@@ -397,7 +396,7 @@ In our dataset, we have the following features measured for each sample:
 
 ## Visualize Iris dataset with **Scatterplot w ggplot2**
 
-Let's visualize the Iris dataset to see how the features depend on each other, and 
+Let's visualize the Iris dataset to see how the features depend on each other, and
 check whether we can spot any immediate patterns.
 
 > ### {% icon hands_on %} Hands-on: Task description
