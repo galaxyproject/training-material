@@ -43,7 +43,7 @@ requirements:
 After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), its important to visualize and then manually refine any additional data.
 This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
-[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collabortive genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together to annotate a genome.
+[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collabortive genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to annotate a genome.
 
 This demo was inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. This tutorial was further developed by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group who developed the Galaxy-Apollo bridge.
 
@@ -56,9 +56,6 @@ This demo was inspired by the [Apollo User's Guide](http://genomearchitect.githu
 >
 {: .agenda}
 
-
-![Picture of A. mel](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Bee_on_Lavender_Blossom_2.jpg/800px-Bee_on_Lavender_Blossom_2.jpg "<i>Apis mellifera</i> By Martin Falbisoner - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=41709017">Link</a>"){: style="float:right;max-width:25%"}
-
 # Data upload
 
 To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can refer to something like:
@@ -68,7 +65,7 @@ To annotate a genome using Apollo, we need the reference genome sequence in FAST
 - Sequencing reads from RNA-Seq or another HTS analysis
 - If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
 
-In this tutorial we have obtained some data from [*Apis mellifera*](https://en.wikipedia.org/wiki/Apis_mellifera), this data comes from published scaffolds from the Apis mellifera assembly Amel_4.5 and Official Gene Set 3.2, available from [BeeBase](http://hymenopteragenome.org/beebase/?q=download_sequences).
+In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655). All of the data is publicly accessible and the sources are noted in the Zenodo records.
 
 ## Get data
 
@@ -137,59 +134,66 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
->            - *"Track Category"*: `OGS 3.2`
+>            - *"Track Category"*: `Gene Calls`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `output` (Input dataset)
->                        - *"This is match/match_part data"*: `Yes`
->                        - *"JBrowse Track Type [Advanced]"*: `Neat HTML Features`
->                        - In *"JBrowse Feature Score Scaling & Coloring Options [Advanced]"*:
->                            - *"Color Score Algorithm"*: `Ignore score`
->                                - *"Color Selection"*: `Automatically selected`
->                        - *"Track Visibility"*: `On for new users`
+>                        - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: `Augustus` and `NCBI annotwriter Genes ASM584v2`
+>                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >        - {% icon param-repeat %} *"Insert Track Group"*
->            - *"Track Category"*: `Reads`
+>            - *"Track Category"*: `Sequencing`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BAM Pileups`
->                        - {% icon param-file %} *"BAM Track Data"*: `output` (Input dataset)
->                        - *"Autogenerate SNP Track"*: `Yes`
+>                        - {% icon param-files %} *"BAM Track Data"*: Both BWA-MEM Mappings
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BigWig XY`
+>                        - {% icon param-files %} *"BAM Track Data"*: Both the `K12 Coverage` and `O101:H4 Coverage` files
 >                        - *"Track Scaling"*: `Autoscale (local)`
->                        - In *"JBrowse Color Options [Advanced]"*:
->                            - *"Color Specification"*: `Automatically selected`
->                            - *"Bicolor Pivot"*: `Zero`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `RNA-Seq`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BAM Pileups`
+>                        - {% icon param-files %} *"BAM Track Data"*: Both TopHat Mappings
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BigWig XY`
+>                        - {% icon param-files %} *"BAM Track Data"*: Both the `Coverage .../rep1` and `Coverage .../rep2` files
+>                        - *"Track Scaling"*: `Autoscale (local)`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Variation`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `VCF SNPs`
+>                        - {% icon param-files %} *"SNP Track Data"*: Both FreeBayes files
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
+>                        - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: `O104:H4 LASTZ Alignments`
+>                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >
 >    > ### {% icon comment %} JBrowse is highly configurable
 >    >
->    > JBrowse is highly configurable and can be run standalone.
->    > A refined genome can be published separate from Apollo or used as further evidence.
+>    > JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifier like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.
+>    >
+>    > A static genome browser like this (just JBrowse, not in Apollo) is very useful for summarising results of a genomics workflow, where the next step is simply interpretation and not annotation.
+>    >
+>    > Currently we have built a standalone genome browser (data + the html page and user interface and javascript), but it's possible to just compile the data directory if you intend to send this data to Apollo, and don't need to view the static data in Galaxy.
 >    {: .comment}
 
 {: .hands_on}
 
-You will now see three new tracks displaying all the evidences used by Maker to generate consensus gene models.
+Next we will send this data through to Apollo, here we select the output of a JBrowse tool
 
-
-## Sub-step with **Create or Update Organism**
+##  **Create or Update Organism**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Create or Update Organism** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"JBrowse HTML Output"*: `output` (output of **JBrowse** {% icon tool %})
 >    - *"Organism Common Name Source"*: `Direct Entry`
->        - *"Organism Common Name"*: `Honeybee`
->    - *"Genus"*: `Apis`
->    - *"Species"*: `mellifera`
->    - *"Is Organism Public"*: `Yes`
->    - *"Grant access to a user group"*: ``
->    - *"Remove old data directory"*: `Yes`
+>        - *"Organism Common Name"*: `E. coli K12`
+>    - *"Genus"*: `Escherichia`
+>    - *"Species"*: `coli`
 >
 {: .hands_on}
 
