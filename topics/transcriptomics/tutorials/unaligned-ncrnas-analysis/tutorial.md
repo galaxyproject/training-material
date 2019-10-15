@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Analyse unaligned ncRNAs
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/3482616'
 questions:
 - Which biological questions are addressed by the tutorial?
   - Is my set of RNAs of interest homologous?
@@ -11,7 +11,7 @@ questions:
   - Alignment
   - RNA secondary structure folding
 objectives:
-- Knowing for which usecases the analyze non coding RNAs can be used
+- Knowing for which cases the "Analyze non coding RNAs" workflow can be used
 - Being able to apply the analyze non coding RNAs workflow
 - Learn about the tools used in the workflow
 time_estimation: 1H
@@ -60,20 +60,22 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 >    This allows us to show the ability of the workflow to test for protein
 >    coding potential, as well as for predicting functional non-coding RNA.
 >    
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>    * [genome](https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1)
+>    * [SgrS sequences](https://zenodo.org/record/3482616/files/RF00534.fasta?download=1)
 >
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename the datasets
+>
+>    Rename https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1 to ecoli.fa
+>    Rename https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1 to RF00534.fasta
+>    
+>
 > 4. Check that the datatype
 >
+>    Check that both uploads have fasta datatype.
+>
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
