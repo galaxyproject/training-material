@@ -192,7 +192,8 @@ To proceed from here it is expected that:
 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
-5. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
+5. Your VM has `python2.7` and `python-pip` installed.
+6. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
 
 
 ## Requirements
