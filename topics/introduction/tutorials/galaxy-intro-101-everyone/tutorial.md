@@ -123,9 +123,9 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    {% include snippets/rename_dataset.md %}
 >
 > 3. Check the datatype. The datatype of the iris dataset is `csv`. Change datatype
-> if it is different then `csv`.
+> if it is different than `csv`.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/detect_datatype.md datatype="datatypes" %}
 >
 > 4. Add the tag `iris` to the dataset
 >
@@ -388,7 +388,7 @@ In our dataset, we have the following features measured for each sample:
 > >
 > > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
 > > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) then *Iris versicolor* and *Iris virginica* petals.
-> > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I virginica*). On the other hand,
+> > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I. virginica*). On the other hand,
 > > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
 > >
 > {: .solution}
@@ -487,7 +487,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 > ### {% icon hands_on %} Hands-on: Share history
 >
 > 1. Share your history with your neighbour.
-> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users in their {% icon galaxy-gear %} history menu under `Histories shared with me`.
+> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
 {: .hands_on}
 
 # Conclusion
