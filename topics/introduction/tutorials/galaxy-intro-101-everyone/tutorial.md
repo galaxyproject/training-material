@@ -106,7 +106,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv
@@ -115,18 +115,20 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
->    As default, Galaxy takes the link as name, so rename them.
 >
-> 2. Rename the dataset to `iris`
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris`
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Check the datatype. The datatype of the iris dataset is `csv`. Change datatype
-> if it is different than `csv`.
+> 3. Check the datatype
+>    - Click on the history item to expand it to get more information.
+>    - The datatype of the iris dataset should be `csv`.
+>    - Change the datatype if it is different than `csv`.
 >
 >    {% include snippets/detect_datatype.md datatype="datatypes" %}
 >
-> 4. Add the tag `iris` to the dataset
+> 4. Add a tag {% icon galaxy-tags %} called `iris` to the dataset
+>    - Make sure the tag start with a hashtag symbol (`#iris`)
 >
 >    {% include snippets/add_tag.md %}
 >
@@ -141,7 +143,10 @@ In the next steps we will perform two pre-processng steps:
 - Header removal
 
 
-### Convert format
+## Convert format
+
+First, we will convert the file from comma-separated to tab-separated format. Galaxy has built-in format converters we can use for this.
+
 
 > ### {% icon hands_on %} Hands-on: Converting dataset format
 >
@@ -149,22 +154,30 @@ In the next steps we will perform two pre-processng steps:
 >
 >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
-> 2. Rename the resulting dataset to `iris tabular`
+> 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Add the tag `preprocessing` to the dataset
+> 3. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
->    {% include snippets/add_tag.md %}
->
-> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+>    > ### {% icon question %} Question
+>    >
+>    > How many header lines does our file have?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file has one header line, it contains the column names.
+>    > {: .solution}
+>    {: .question}
 >
 {: .hands_on}
 
 
-### Remove header
+## Remove header
 
-> ### {% icon comment %} Finding your tool: Search bar
+Now it is time to run your first tool! We saw in the previous step that our file has 1 header line. This line does not contain any data, but the names of each column. We will now remove that line from our file before moving on to our analysis.
+
+> ### {% icon comment %} Tip: Finding your tool
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
 >
@@ -175,8 +188,9 @@ In the next steps we will perform two pre-processng steps:
 > ### {% icon hands_on %} Hands-on: Removing header
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
->    - *Remove first*: `1` to remove the first line only.
->    - *from*: {% icon param-file %}: select **iris tabular**
+>    - *Remove first*: `1` (to remove the first line only)
+>    - {% icon param-file %} *"from"*: select **iris tabular**
+>    - Click **Execute**
 >
 >    > ### {% icon comment %} Tip: search for the tool
 >    >
@@ -188,105 +202,136 @@ In the next steps we will perform two pre-processng steps:
 > 2. Rename the dataset to `iris clean`
 >
 >    {% include snippets/rename_dataset.md %}
-> 3. Add the tag `clean` to the dataset
 >
->    {% include snippets/add_tag.md %}
-> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+> 3. Click on the new history item to expand it
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Which tags are present on this resulting dataset?
+>    > 2. How many samples (lines) does our dataset contain?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1.The output of **Remove beginning** {% icon tool %} is also tagged with the
+>    > > label `iris`. Tags beginning with a hashtag (`#`) will propagate; they will >    > > appear on any datasets derived from your original tagged file.
+>    > >
+>    > > 2. There are 150 lines in our file (we can see this under the file name when we have expanded the history item). This means we have 150 samples.
+>    > {: .solution}
+>    {: .question}
+>
+> 4. View {% icon galaxy-eye%} the contents of the resulting file.
+>    - You should see that the header line is now no longer present.
+>
 {: .hands_on}
 
 
 
 # Data Analysis: What does the dataset contain?
 
-Now we are going to inspect the dataset using simple tools in order to get used to galaxy interface and answer basic questions.
+Now we are going to inspect the dataset using simple tools in order to get used to Galaxy interface and answer basic questions.
 
 ## How many different species are in the dataset?
 
+In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in Galaxy. One approach might be to first extract this column from the file, and then count how many unique lines the file has. Let's do it!
+
 > ### {% icon hands_on %} Hands-on: Filtering dataset
 >
-> 1. **Cut** {% icon tool %} with the following parameters:
->      - *"Cut columns"* should be changed to `c5`
->      - *"Delimited by"* should be kept to `Tab`
->      - *"From"* select `iris clean` dataset
+> 1. **Cut** columns from a table {% icon tool %} with the following parameters:
+>      - *"Cut columns"*: `c5`
+>      - *"Delimited by"*: `Tab`
+>      - *"From"*: `iris clean` dataset
 >
-> 2. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 2. View the resulting file {% icon galaxy-eye %}
 >
-> 3. Add the tag `analysis` to the output dataset
+> 3. **Unique** occurrences of each record {% icon tool %} with the following parameters:
+>      - *"File to scan for unique values"*: the output from **Cut** {% icon tool %}
 >
-> 4.   **Unique** {% icon tool %} with the following parameters:
->    - *"File to scan for unique values"* select your last output file
+> 4. View the resulting file {% icon galaxy-eye %}
 >
-> 5. View the resulting file {% icon galaxy-eye %}
->
-> 6. Add the tag `analysis` to the output dataset
->
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many different species are in the dataset?
+>    > 2. What are the different Iris species?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. There are 3 species.
+>    > > 2. The 3 different Iris species are:
+>    > > - setosa
+>    > > - versicolor
+>    > > - virginica
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+Now we have our answer! There are 3 different Iris species in our file.
+
+Like we mentioned before, there are often multiple ways to reach your answer in Galaxy. For example, we could have done this with just a single tool, **Group** {% icon tool %} as well.
+
+
+> ### {% icon hands_on %} Exercise: Grouping dataset
 >
-> 1. How many different species are in the dataset?
-> 2. What are the different Iris species?
+> 1. Try answering this question (how many Iris species are in the file?) again, using a different approach:
+>    - Tool: **Group** data by a column and perform aggregate operation on other columns {% icon tool %}
+>    - Input dataset: `iris clean` dataset to answer the same question.
+> 2. Did you get the same answer as before?
 >
 > > ### {% icon solution %} Solution
+> > 1. **Group** {% icon tool %} with the following parameters:
+> >   - *"Select data"* select `iris clean` dataset
+> >   - *"Group by column"*: `Column: 5`
 > >
-> > 1. There are 3 species.
-> > 2. The 3 different Iris species are:
-> > - setosa
-> > - versicolor
-> > - virginica
+> > 2. This approach should give the same answer. There are often multiple ways to do a task in Galaxy, which way you choose is up to you!
 > {: .solution}
+>
 {: .question}
 
-
-> ### {% icon hands_on %} Hands-on: Grouping dataset
->
-> Another way round to answer this question with only one tool:
->
-> 1. **Group** {% icon tool %} with the following parameters:
->    - *"Select data"* select `iris clean` dataset
->    - *"Group by column"* should be changed to `Column: 5`
->
-> 2. Add the tag `analysis` to the output dataset
->
-> 3. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
->
-{: .hands_on}
-
-
-> ### {% icon question %} Question
-> 1. How many different species are in the dataset?
-> 2. What are the different Iris species?
-{: .question}
 
 ## How many samples by species are in the dataset?
 
+Now that we know that there are 3 different species in our dataset, our next objective is determining how many samples of each species we have. To answer this, we need to look at column 5 again, but instead of just determining how many unique values there are, we need to count how many times each of them occurs.
+
+You may have noticed there were some more parameters in the **Group** {% icon tool %} tool that we did not use. Let's have a closer look and see if any of them might help us answer this question.
+
+> ### {% icon comment %} Tool Help
+> To find out more about how a tool works, look at the help text (below the **Execute** button).
+>
+> Look at the tool help for the **Group** {% icon tool %}. Do you see any parameters that could help answer this question?
+{: .comment}
+
+Looking at the tool help for **Group** {% icon tool %}, we see that we can also perform aggregate operations such as mean, median, sum, max, min, count (and more). Counting sounds just like what we need, let's try it!
+
 > ### {% icon hands_on %} Hands-on: Grouping dataset and adding information
 >
-> 1.   **Group** {% icon tool %} with the following parameters:
->    - *"Select data"* select `iris clean` dataset
->    - *"Group by column"* should be changed to `Column: 5`
->    - *"Insert operation"* click on the icon.
->    - *"Type"* select `Count`
->    - *"On column"* select `Column: 1`
-> 2. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
-> 3. Add the tag `analysis` to the output dataset
+> 1. Re-run the **Group** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select data"*: `iris clean`
+>    - {% icon param-select %} *"Group by column"*: `Column: 5`
+>    - {% icon param-repeat %} *"Insert operation"*
+>      - *"Type"*: `Count`
+>      - *"On column"*: `Column: 1`
 >
+>    {% include snippets/rerun_tool.md %}
+>
+> 2. View {% icon galaxy-eye %} the resulting file.
+>
+>
+>
+>    > ### {% icon question %} Question
+>    > How many samples per species are in the dataset?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > We have 50 samples per species:
+>    > >
+>    > > | 1         | 2   |
+>    > > |---------- | --- |
+>    > > |setosa     | 50  |
+>    > > |versicolor | 50  |
+>    > > |virginica  | 50  |
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
-> ### {% icon question %} Question
-> How many samples by species are in the dataset?
->
-> > ### {% icon solution %} Solution
-> >
-> > We have 50 samples per species:
-> >
-> > | 1         | 2   |
-> > |---------- | --- |
-> > |setosa     | 50  |
-> > |versicolor | 50  |
-> > |virginica  | 50  |
-> {: .solution}
-{: .question}
 
 # Analysis: How to differentiate the different Iris species?
 
