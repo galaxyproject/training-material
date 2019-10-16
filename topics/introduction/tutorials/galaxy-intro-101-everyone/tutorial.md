@@ -35,9 +35,9 @@ contributors:
 
 <!-- This is a comment. -->
 
-This practical aims to familiarize you with the Galaxy user interface. 
+This practical aims to familiarize you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, and sharing your work.
-Not everyone has the same background and that's ok! 
+Not everyone has the same background and that's ok!
 
 {% include snippets/warning_results_may_vary.md %}
 
@@ -51,7 +51,7 @@ Not everyone has the same background and that's ok!
 {: .agenda}
 
 > ### {% icon comment %} Background
-> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}). 
+> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
 > Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
@@ -82,24 +82,23 @@ The Galaxy interface consists of three main parts:
 
 # Create a history
 
-Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions 
+Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
 That is what we call a pipeline.
 
-Then the finalized pipeline can be serialized as a workflow. A workflow is the concatenation of one or multiple histories as a series of building blocks 
+Then the finalized pipeline can be serialized as a workflow. A workflow is the concatenation of one or multiple histories as a series of building blocks
 for replicating an experimental result or a recipe. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
-In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input. 
+In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input.
 
 > ### {% icon hands_on %} Hands-on: Create history
 >
-> Make sure you start from an empty analysis history.
+> 1. Make sure you start from an empty analysis history.
 >
 >    {% include snippets/create_new_history.md %}
->![Rename the history]({{ site.baseurl }}{% link shared/images/rename_history.png %})
-
-> **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history. 
+>
+> 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
 >    {% include snippets/rename_history.md %}
 {: .hands_on}
 
@@ -135,35 +134,37 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 # Pre-processing
 
-A pre-processing step can be required to proceed analysis. In this case, format convertion and header removal have to be processed.
+One or more pre-processing step may be required to proceed with analysis. In our case, the tools we will use require tab-separated files, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to do some pre-processing of the files to make them ready for analysis.
+
+In the next steps we will perform two pre-processng steps:
+- Format conversion
+- Header removal
 
 
-## Convert dataset **csv_to_tabular**
+### Convert format
 
-> ### {% icon hands_on %} Hands-on: Converting dataset format 
->    
->    * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
->    * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
->    * Select `Convert CSV to tabular`
->    * Click the **Convert datatype** button
+> ### {% icon hands_on %} Hands-on: Converting dataset format
 >
->    > ### {% icon comment %} Comment
->    > A New dataset is created in the history panel. You can click on the dataset name to get an overview
->    {: .comment}
+> 1. Convert the CSV file (comma-separated) to tabular format (tab-separated)
 >
-> 2. Rename the dataset to `iris tabular`
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 2. Rename the resulting dataset to `iris tabular`
 >
 >    {% include snippets/rename_dataset.md %}
+>
 > 3. Add the tag `preprocessing` to the dataset
 >
 >    {% include snippets/add_tag.md %}
+>
 > 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+>
 {: .hands_on}
 
 
-## Remove header
+### Remove header
 
-> ### {% icon comment %} Search bar
+> ### {% icon comment %} Finding your tool: Search bar
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
 >
@@ -174,18 +175,16 @@ A pre-processing step can be required to proceed analysis. In this case, format 
 > ### {% icon hands_on %} Hands-on: Removing header
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
->
 >    - *Remove first*: `1` to remove the first line only.
 >    - *from*: {% icon param-file %}: select **iris tabular**
->    - **Execute**
 >
->    > ### {% icon comment %} Comment
+>    > ### {% icon comment %} Tip: search for the tool
 >    >
->    > Use the **tools search box** to find **Removing beginning** {% icon tool %}. 
->    {: .comment}
+>    > Use the **tools search box** at the top of the tool panel to find **Remove beginning** {% icon tool %}.
+>    {: .tip}
 >
 >    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
-
+>
 > 2. Rename the dataset to `iris clean`
 >
 >    {% include snippets/rename_dataset.md %}
@@ -203,41 +202,31 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 
 ## How many different species are in the dataset?
 
-> ### {% icon hands_on %} Hands-on: Filtering dataset 
+> ### {% icon hands_on %} Hands-on: Filtering dataset
 >
-> 1.   **Cut** {% icon tool %} with the following parameters:
->    - *"Cut columns"* should be changed to `c5`
->    - *"Delimited by"* should be kept to `Tab`
->    - *"From"* select `iris clean` dataset
+> 1. **Cut** {% icon tool %} with the following parameters:
+>      - *"Cut columns"* should be changed to `c5`
+>      - *"Delimited by"* should be kept to `Tab`
+>      - *"From"* select `iris clean` dataset
 >
-> 2.    Click **Execute**
+> 2. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
 >
-> 3. Wait for the job to finish
+> 3. Add the tag `analysis` to the output dataset
 >
-> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon). Use the output file as input of the second tool.
->
-> 5. Add the tag `analysis` to the output dataset
-> 
-> 6.   **Unique** {% icon tool %} with the following parameters:
+> 4.   **Unique** {% icon tool %} with the following parameters:
 >    - *"File to scan for unique values"* select your last output file
 >
-> 7. Click **Execute**
+> 5. View the resulting file {% icon galaxy-eye %}
 >
-> 8. Wait for the job to finish
->
-> 9. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
->
-> 10. Add the tag `analysis` to the output dataset
->
-> 11. Examine the output file
+> 6. Add the tag `analysis` to the output dataset
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
-> 
+>
 > 1. How many different species are in the dataset?
 > 2. What are the different Iris species?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > 1. There are 3 species.
@@ -253,17 +242,13 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 >
 > Another way round to answer this question with only one tool:
 >
-> 1.   **Group** {% icon tool %} with the following parameters:
+> 1. **Group** {% icon tool %} with the following parameters:
 >    - *"Select data"* select `iris clean` dataset
 >    - *"Group by column"* should be changed to `Column: 5`
 >
-> 2. Click **Execute**
+> 2. Add the tag `analysis` to the output dataset
 >
-> 3. Wait for the job to finish
->
-> 4. Add the tag `analysis` to the output dataset
->
-> 5. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 3. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
 >
 {: .hands_on}
 
@@ -283,10 +268,8 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 >    - *"Insert operation"* click on the icon.
 >    - *"Type"* select `Count`
 >    - *"On column"* select `Column: 1`
-> 2. Click **Execute**
-> 3. Wait for the job to finish
-> 4. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
-> 5. Add the tag `analysis` to the output dataset
+> 2. View the resulting file (with the {% icon galaxy-eye %} (eye) icon).
+> 3. Add the tag `analysis` to the output dataset
 >
 {: .hands_on}
 
@@ -294,7 +277,7 @@ Now we are going to inspect the dataset using simple tools in order to get used 
 > How many samples by species are in the dataset?
 >
 > > ### {% icon solution %} Solution
-> > 
+> >
 > > We have 50 samples per species:
 > >
 > > | 1         | 2   |
@@ -397,7 +380,7 @@ In our dataset, we have the following features measured for each sample:
 
 ## Visualize Iris dataset with **Scatterplot w ggplot2**
 
-Let's visualize the Iris dataset to see how the features depend on each other, and 
+Let's visualize the Iris dataset to see how the features depend on each other, and
 check whether we can spot any immediate patterns.
 
 > ### {% icon hands_on %} Hands-on: Task description
