@@ -16,7 +16,7 @@ key_points:
 - Data deletion in Galaxy is a two step process, deletion followed by purging from disk
 contributors:
 - slugger70
-
+- erasche
 ---
 
 
@@ -25,15 +25,15 @@ contributors:
 
 This tutorial outlines the process to get your data out of Galaxy and to delete it from Galaxy afterwards.
 
-After you have completed your analysis on a Galaxy server, you may need to download the results for use in reports, papers or other requirements. Galaxy has a myriad of methods for downloading data from individual datasets to a collection of data to an entire history along with all of its metadata. The first section of this tutorial will walk you through all of these methods.
+After you have completed your analysis on a Galaxy server, you may need to download the results for use in reports, papers, or other requirements. Galaxy has a myriad of methods for downloading data from individual datasets to a collection of data to an entire history along with all of its metadata. The first section of this tutorial will walk you through all of these methods.
 
-On some Galaxy servers, user disk quotas have been enabled meaning that users are only able to store a certain amount of data on that particular Galaxy server. Quotas can differ on different servers. User disk quotas for the **usegalaxy.*** servers are shown in the table below:
+On some Galaxy servers, user disk quotas have been enabled meaning that users are only able to store a certain amount of data on that particular Galaxy server. Quotas can differ on different servers. User disk quotas for the `usegalaxy.*` servers are shown in the table below:
 
-| Galaxy Server | Unregistered User | Registered User |
-|---------------|-------------------|-----------------|
-| usegalaxy.org | 5 GB | 250 GB |
-| usegalaxy.eu |   | 250 GB or 500 GB for Elixir Members |
-| usegalaxy.org.au | 5 GB | 100 GB or 600GB for Australian Users |
+| Galaxy Server    | Unregistered User   | Registered User                      |
+| ---------------  | ------------------- | -----------------                    |
+| usegalaxy.org    | 5 GB                | 250 GB                               |
+| usegalaxy.eu     | 5 GB                | 250 GB or 500 GB for Elixir Members  |
+| usegalaxy.org.au | 5 GB                | 100 GB or 600GB for Australian Users |
 
 Other Galaxy servers may have different quota systems.
 
@@ -59,17 +59,17 @@ There are multiple ways of downloading your data from Galaxy, the choice of whic
 
 The easiest way to get your data is to download a single dataset from a history.
 
-The following is an example and step through the process using a generic history. This history will most likely not appear in your Galaxy server but the process will be the same.
+The following example steps through the process using a generic history. The history pictured in the screenshots will most likely not appear in your Galaxy server but the process will be the same.
 
 > ### {% icon hands_on %} Hands-on: Download a single file
 >
-> * In the History pane, click on the name of the file you wish to download. This will expand the file in the History to show more details about it.
+> 1. In the History pane, click on the name of the file you wish to download. This will expand the file in the History to show more details about it.
 >
-> ![expanded file history](../../images/download-delete/expanded_file_history.png)
+>    ![expanded file history](../../images/download-delete/expanded_file_history.png)
 >
-> * Click the **Download** button. The dataset will now be downloaded to your computer.
+> 2. Click the {% icon galaxy-save %} **Download** button. The dataset will now be downloaded to your computer.
 >
-> ![download button](../../images/download-delete/file_download_button.png)
+>    ![download button](../../images/download-delete/file_download_button.png)
 >
 {: .hands_on}
 
@@ -83,33 +83,34 @@ The concept is very simple however, we are just going to lump together our files
 
 > ### {% icon hands_on %} Hands-on: Download multiple datasets
 >
->  **Create a collection of the files you want**
-> * Click on the **Collections** button at the top of the History pane (the little checkbox)
+> **Create a collection of the files you want**
 >
-> ![collections button](../../images/download-delete/collections_button.png)
+> 1. Click on the **Collections** button at the top of the History pane (the little checkbox)
 >
-> * This shows a different view of the History. Each file now has a checkbox next to it and there are some new buttons in the header section of the History.
+>    ![collections button](../../images/download-delete/collections_button.png)
 >
-> * Select the files you want by clicking on their checkboxes, you can also select all or none of them.
+>    This shows a different view of the History. Each file now has a checkbox next to it and there are some new buttons in the header section of the History.
 >
-> ![collection selection](../../images/download-delete/collection_selection.png)
+> 2. Select the files you want by clicking on their checkboxes, you can also select all or none of them.
 >
-> * Once you have selected everything you want, click the **for all selected** button and then **Build Dataset List**
+>    ![collection selection](../../images/download-delete/collection_selection.png)
 >
-> * A new interface opens, showing you the files you have selected. Give the list a name in the appropriate box and click **Create**
+> 3. Once you have selected everything you want, click the **for all selected** button and then **Build Dataset List**
 >
-> ![list interface](../../images/download-delete/list_interface.png)
+> 4. A new interface opens, showing you the files you have selected. Give the list a name in the appropriate box and click **Create**
 >
-> * A new collection item has now appeared in your History.
+>    ![list interface](../../images/download-delete/list_interface.png)
 >
-> ![collection in history](../../images/download-delete/collection_in_history.png)
+> 5. A new collection item has now appeared in your History.
+>
+>    ![collection in history](../../images/download-delete/collection_in_history.png)
 >
 > **Download the collection**
 >
-> * Click on the name of the collection to show its contents
-> * Click the **Download Collection** button to download the collection of files as a compressed archive to your computer.
+> 1. Click on the name of the collection to show its contents
+> 2. Click the {% icon galaxy-save %} **Download Collection** button to download the collection of files as a compressed archive to your computer.
 >
-> ![collection_download](../../images/download-delete/collection_download.png)
+>    ![collection_download](../../images/download-delete/collection_download.png)
 >
 {: .hands_on}
 
@@ -123,23 +124,23 @@ Depending on the size of the files and the complexity of the history, it can tak
 
 > ### {% icon hands_on %} Hands-on: Export an entire history
 >
-> * In the History pane, click on the history menu (the cog wheel), then select **Export History to File**
+> 1. In the History pane, click on the {% icon galaxy-gear %} history menu, then select **Export History to File**
 >
-> ![history export](../../images/download-delete/history_export.png)
+>    ![history export](../../images/download-delete/history_export.png)
 >
-> * Galaxy will now start archiving the history and making it available for download. In the main Galaxy pane, a message will appear with a download URL. Once the history has been completely archived, the URL can be used to download the history archive file.
+> 2. Galaxy will now start archiving the history and making it available for download. In the main Galaxy pane, a message will appear with a download URL. Once the history has been completely archived, the URL can be used to download the history archive file.
 >
-> ![history export link](../../images/download-delete/history_export_link.png)
+>    ![history export link](../../images/download-delete/history_export_link.png)
 >
-> * Click on the URL to start the download. If it isn’t ready yet, it will show you the following message. You will need to save the URL and try again later.
+> 3. Click on the URL to start the download. If it isn’t ready yet, it will show you the following message. You will need to save the URL and try again later.
 >
-> ![history export not ready](../../images/download-delete/history_export_not_ready.png)
+>    ![history export not ready](../../images/download-delete/history_export_not_ready.png)
 >
 {: .hands_on}
 
 # Deleting Data from Galaxy
 
-Once you have downloaded everything that you want to keep from your Galaxy account, you can delete your no longer required histories.
+Once you have downloaded everything that you want to keep from your Galaxy account, you can delete the data and histories your no longer require.
 
 Deletion in Galaxy is a two stage process. If you delete something, it actually only gets marked as deleted and then is hidden. To actually delete an object you must purge it from disk. The instructions for how to delete datasets and histories follow.
 
@@ -149,21 +150,21 @@ This section will show you how to delete and then purge a single dataset from a 
 
 > ### {% icon hands_on %} Hands-on: Delete a single dataset
 >
-> * Click on the **Delete** button of the dataset you wish to delete
+> 1. Click on the {% icon galaxy-cross %} **Delete** button of the dataset you wish to delete
 >
-> ![delete button](../../images/download-delete/delete_button.png)
+>    ![delete button](../../images/download-delete/delete_button.png)
 >
-> * The dataset has now disappeared from the history pane and there is a `1 deleted` link at the top.
+> 2. The dataset has now disappeared from the history pane and the text `1 deleted` appears below the history name.
 >
-> ![one deleted](../../images/download-delete/one_deleted.png)
+>    ![one deleted](../../images/download-delete/one_deleted.png)
 >
-> * You can see the dataset by clicking on the `1 deleted` link at the top of the history pane. This will allow you to either: `Undelete it` OR `Permanently remove it from disk` by clicking on the appropriate link. **Note: Once you click on the permanently remove it from disk link you CANNOT undo it.**
+> 3. You can see all of the deleted datasets by clicking on the `1 deleted` link at the top of the history pane. This will allow you to either: `Undelete it` OR `Permanently remove it from disk` by clicking on the appropriate link. **Note: Once you click on the permanently remove it from disk link you CANNOT undo it.**
 >
-> ![show deleted](../../images/download-delete/show_deleted.png)
+>    ![show deleted](../../images/download-delete/show_deleted.png)
 >
-> * You can also delete and purge multiple datasets at a time by clicking on the **delete** button on all the datasets you want to remove and then purge them all at once by going to the history menu (the little cog wheel) and selecting **Purge Deleted Datasets**
+> 4. You can also delete and purge multiple datasets at a time by clicking on the **delete** button on all the datasets you want to remove and then purge them all at once by going to the history menu (the little cog wheel) and selecting **Purge Deleted Datasets**
 >
-> ![purge deleted](../../images/download-delete/purge_deleted.png)
+>    ![purge deleted](../../images/download-delete/purge_deleted.png)
 >
 {: .hands_on}
 
@@ -173,18 +174,21 @@ You can delete an entire history and purge it from disk.
 
 > ### {% icon hands_on %} Hands-on: Delete an entire History
 >
-> * Open the **Saved Histories** display by clicking on the history menu (little cog wheel) and selecting **Saved Histories**
+> 1. Open the **History List** display by clicking on the {% icon galaxy-columns %} history list button
 >
-> ![saved histories](../../images/download-delete/saved_histories.png)
+>    ![saved histories](../../images/download-delete/saved_histories.png)
 >
-> * You will now see a list of all of your histories
+> 2. You will now see a list of all of your histories
 >
-> ![all_histories](../../images/download-delete/all_histories.png)
+>    ![all_histories](../../images/download-delete/all_histories.png)
 >
-> * You can now delete a history by clicking on the grey button with it’s name near or on the little down arrow, then selecting **Delete** OR **Delete Permanently**. **NOTE: Selecting Delete Permanently will remove the entire history and all of its non shared datasets from disk. It CANNOT be undone.**
-> * If you only selected **Delete**, the history will be available to un-delete for a certain time[^1]
+> 3. You can now delete a history by clicking on the {% icon galaxy-dropdown %} dropdown arrow at the top of the history, and then selecting **Delete** OR **Purge**.
 >
-> ![delete history](../../images/download-delete/delete_history.png)
+>    > ### {% icon warning %} You can lose data
+>    > **NOTE: Selecting Delete Permanently will remove the entire history and all of its non shared datasets from disk. It CANNOT be undone.**
+>    {: .warning}
+>
+> 4. If you only selected **Delete**, the history will be available to un-delete for a certain time[^1]
 >
 {: .hands_on}
 
@@ -195,4 +199,4 @@ This tutorial should have explained to you how to manage your data on Galaxy. Di
 
 ##### Footnotes:
 
-[^1]: On some Galaxy servers, data and histories marked for deletion are periodically purged by the administrators.
+[^1]: On some Galaxy servers, data and histories marked for deletion are periodically purged by the administrators. This period of time can vary between servers and you should check with the documentation or administrators of your server to know the exact amount of time.
