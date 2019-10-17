@@ -1077,6 +1077,34 @@ Then you can potentially use it to recover.
 {: .comment}
 
 
+## Upgrading Galaxy (Optional)
+
+With Ansible managing your Galaxy, upgrading is incredibly easy. Here is a commit from UseGalaxy.eu's upgrade:
+
+```diff
+diff --git a/group_vars/galaxy.yml b/group_vars/galaxy.yml
+index ce17525..54d0746 100644
+--- a/group_vars/galaxy.yml
++++ b/group_vars/galaxy.yml
+@@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
+ galaxy_config_style: ini
+
+ galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
+-galaxy_commit_id: 'release_19.05'
++galaxy_commit_id: 'release_19.09'
+ galaxy_force_checkout: true # discard any modified files
+```
+
+This is all that is required, changing the `galaxy_commit_id` and re-running the playbook. Everything else (building the client, database migrations, etc.) are taken care of for you.
+
+It is recommend that you also do the following during an upgrade:
+
+- [**Read the release notes**](https://docs.galaxyproject.org/en/latest/releases/index.html) for the new version of Galaxy
+- Check out the latest [`galaxy.yml.sample`](https://github.com/galaxyproject/galaxy/blob/master/config/galaxy.yml.sample) for the new release, and see if there are any variables you want to set for your server
+- Compare the [other configuration files](https://github.com/galaxyproject/galaxy/tree/master/config) to see if there are new features you want to take advantage of (e.g. new job runner options or metrics you wish to capture.)
+
+When you've read the documentation and checked out the new features, you can then run the playbook and you're done!
+
 # Final Notes
 
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
