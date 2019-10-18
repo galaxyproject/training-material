@@ -483,7 +483,7 @@
                     </div></li></ul>
                 </div>
 
-                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 16, 2019 </p>
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 18, 2019 </p>
             </div>
             
 
@@ -688,7 +688,7 @@ best practices and knowledge from previous admins codified for you.</p>
   <li>Your <code class="highlighter-rouge">ansible</code> version is <code class="highlighter-rouge">&gt;=2.7</code>, you can check this by running <code class="highlighter-rouge">ansible --version</code></li>
   <li>You have an <a href="../ansible/tutorial.html#inventory-file">inventory file</a> with the VM or host specified where you will deploy <span class="notranslate">Galaxy</span>. We will refer to this group of hosts as “<span class="notranslate">galaxy</span>servers.”</li>
   <li>Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.</li>
-  <li>Your VM has <code class="highlighter-rouge">python2.7</code> and <code class="highlighter-rouge">python-pip</code> installed.</li>
+  <li>Your VM has <code class="highlighter-rouge">python2.7</code> installed.</li>
   <li>In your inventory file, you have written the full DNS hostname that has been provided, and <strong>not</strong> <code class="highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
 </ol>
 
@@ -869,9 +869,8 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Open <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> with your text editor and set the following:</p>
 
       <ul>
-        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install additional necessary dependencies: <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">python-virtualenv</code>, <code class="highlighter-rouge">make</code></li>
-        <li>Add the role <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code>  to the roles</li>
-        <li>Add the role <code class="highlighter-rouge">uchida.miniconda</code> at the end</li>
+        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">make</code>, and <code class="highlighter-rouge">python-virtualenv</code></li>
+        <li>Add the roles <code class="highlighter-rouge">geerlingguy.pip</code>, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="highlighter-rouge">uchida.miniconda</code> (in this order) at the end</li>
       </ul>
 
       <blockquote class="question">
@@ -887,12 +886,13 @@ best practices and knowledge from previous admins codified for you.</p>
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
       <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">]</span>
   <span class="na">roles</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
       <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
       <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
+    <span class="pi">-</span> <span class="s">geerlingguy.pip</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
     <span class="pi">-</span> <span class="s">uchida.miniconda</span>
 </code></pre></div>          </div>
@@ -1222,7 +1222,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
   <ol>
     <li>
-      <p>Add the roles <code class="highlighter-rouge">geerlingguy.pip</code> and <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>-eu.supervisor</code> to your playbook, these need to install things and should run as the root user. Additionally, they should run <strong>after</strong> all of the roles we have already added so far.</p>
+      <p>Add the role <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>-eu.supervisor</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
     </li>
     <li>
       <p>Supervisor defines <code class="highlighter-rouge">programs</code> which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like SystemD or any other init system you may be familiar with. We will define a program for <span class="notranslate">Galaxy</span> which will directly invoke uWSGI, rather than <code class="highlighter-rouge">run.sh</code>, as <code class="highlighter-rouge">run.sh</code> does some extra tasks that are not needed in a true production environment. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our <span class="notranslate">Galaxy</span> user to access this. Lastly, since we now define how the <span class="notranslate">Galaxy</span> processes will be managed, we can inform <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> how to automatically restart the server whenever it is changed.</p>
@@ -1260,7 +1260,7 @@ So it is not always easy to tell what variables will be set, or what their final
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
       <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">]</span>
   <span class="na">handlers</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Restart <span class="notranslate">Galaxy</span></span>
       <span class="na">supervisorctl</span><span class="pi">:</span>
@@ -1637,16 +1637,16 @@ In a training setting there is no need to request certificates that will be trus
         <td>None</td>
       </tr>
       <tr>
+        <td><code class="highlighter-rouge">geerlingguy.pip</code></td>
+        <td>None</td>
+      </tr>
+      <tr>
         <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code></td>
         <td>None</td>
       </tr>
       <tr>
         <td><code class="highlighter-rouge">uchida.miniconda</code></td>
         <td>In our group variables, we define the path to <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code>, so <span class="notranslate">Galaxy</span> needs to have set those variables</td>
-      </tr>
-      <tr>
-        <td><code class="highlighter-rouge">geerlingguy.pip</code></td>
-        <td>None</td>
       </tr>
       <tr>
         <td><code class="highlighter-rouge">use<span class="notranslate">galaxy</span>-eu.supervisor</code></td>
