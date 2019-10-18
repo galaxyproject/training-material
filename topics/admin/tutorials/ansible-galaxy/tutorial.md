@@ -192,7 +192,8 @@ To proceed from here it is expected that:
 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
-5. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
+5. Your VM has `python2.7` installed.
+6. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
 
 
 ## Requirements
@@ -346,9 +347,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install additional necessary dependencies: `git`, `python-virtualenv`, `make`
->    - Add the role `galaxyproject.galaxy`  to the roles
->    - Add the role `uchida.miniconda` at the end
+>    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, and `python-virtualenv`
+>    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end
 >
 >    > ### {% icon question %} Question
 >    >
@@ -362,12 +362,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >   pre_tasks:
 >    > >     - name: Install Dependencies
 >    > >       package:
->    > >         name: ['python-psycopg2', 'git', 'python-virtualenv', 'make']
+>    > >         name: ['git', 'make', 'python-psycopg2', 'python-virtualenv']
 >    > >   roles:
 >    > >     - galaxyproject.postgresql
 >    > >     - role: natefoo.postgresql_objects
 >    > >       become: true
 >    > >       become_user: postgres
+>    > >     - geerlingguy.pip
 >    > >     - galaxyproject.galaxy
 >    > >     - uchida.miniconda
 >    > > ```
@@ -634,7 +635,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 
 > ### {% icon hands_on %} Hands-on: Supervisord
 >
-> 1. Add the roles `geerlingguy.pip` and `usegalaxy-eu.supervisor` to your playbook, these need to install things and should run as the root user. Additionally, they should run **after** all of the roles we have already added so far.
+> 1. Add the role `usegalaxy-eu.supervisor` to your playbook. This should run **after** all of the roles we have already added so far.
 >
 > 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like SystemD or any other init system you may be familiar with. We will define a program for Galaxy which will directly invoke uWSGI, rather than `run.sh`, as `run.sh` does some extra tasks that are not needed in a true production environment. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Lastly, since we now define how the Galaxy processes will be managed, we can inform `galaxyproject.galaxy` how to automatically restart the server whenever it is changed.
 >
@@ -674,7 +675,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >      pre_tasks:
 >        - name: Install Dependencies
 >          package:
->            name: ['python-psycopg2', 'git', 'python-virtualenv', 'make']
+>            name: ['git', 'make', 'python-psycopg2', 'python-virtualenv']
 >      handlers:
 >        - name: Restart Galaxy
 >          supervisorctl:
@@ -1022,9 +1023,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  ----                         | ------------
 >  `galaxyproject.postgresql`   | None
 >  `natefoo.postgresql_objects` | None
+>  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
 >  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
->  `geerlingguy.pip`            | None
 >  `usegalaxy-eu.supervisor`    | This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}

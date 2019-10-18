@@ -44,10 +44,10 @@ create-env: ## create conda environment
 
 ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
-install: clean ## install dependencies
+install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --system && \
-		gem install addressable:'2.5.2' jekyll:'< 4' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar:'< 6' csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem install addressable:'2.5.2' jekyll:'< 4' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar:'< 6' jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
@@ -71,7 +71,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
-check-frontmatter:  ## Validate the frontmatter
+check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
 	    xargs -n1 ruby bin/validate-frontmatter.rb
