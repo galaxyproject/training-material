@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Protein-ligand docking</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:title" content="Galaxy Training: Protein-ligand docking" />
+        <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/computational-chemistry" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Computational chemistry
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcheminformatics%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcheminformatics%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcheminformatics%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcheminformatics%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcheminformatics%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/computational-chemistry/tutorials/cheminformatics/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Protein-ligand docking",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "computational-chemistry / cheminformatics / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Protein-ligand docking' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Protein-ligand docking",
+    "description": "Protein-ligand docking",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "Protein-ligand docking\\nThe questions this  addresses are:\n - What is cheminformatics?\n - What is protein-ligand docking?\n - How can I perform a simple docking workflow in Galaxy?\n\n\\nThe objectives are:\n - Create a small compound library using the ChEMBL database\n - Dock a variety of ligands to the active site of the Hsp90 protein\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "",
+      "name": "Training data for Protein-ligand docking tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Computational chemistry",
+      "description": "Modelling, simulation and analysis of biomolecular systems",
+      "url": "https://galaxyproject.github.io//training-material/topics/computational-chemistry/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Protein-ligand docking</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#simonbray" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Simon Bray">Simon Bray</a>
+
+</div>
+        
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What is cheminformatics?</p>
+</li>
+            
+            <li><p>What is protein-ligand docking?</p>
+</li>
+            
+            <li><p>How can I perform a simple docking workflow in Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Create a small compound library using the ChEMBL database</p>
+</li>
+            
+            <li><p>Dock a variety of ligands to the active site of the Hsp90 protein</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul><li><div>
+                        
+
+                        
+
+                        
+                        <div>
+                            
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/cheminformatics/workflows/" title="Workflows" alt="Protein-ligand docking workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                        </div>
+                        
+                        
+
+
+                        
+                        <div>
+                            
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+        <a class="dropdown-item" href="http://aspendb.uga.edu:8085/" title="AGEseq @ AspenDB">
+            AGEseq @ AspenDB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://motherbox.chemeng.ntua.gr/anastasia_dev/" title="ANASTASIA">
+            ANASTASIA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://apostl.moffitt.org/" title="APOSTL">
+            APOSTL
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8083/" title="ARGA">
+            ARGA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://smile.hku.hk/SARGs" title="ARGs-OAP">
+            ARGs-OAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/argalaxy/" title="Antigen Receptor Galaxy (ARGalaxy)">
+            Antigen Receptor Galaxy (ARGalaxy)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://bf2i-galaxy.insa-lyon.fr:8080/" title="BF2I-MAP">
+            BF2I-MAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ugent.be/" title="BioBix">
+            BioBix
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.cloud.ba.infn.it:8080/" title="BioMaS">
+            BioMaS
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://pistacho.ac.uma.es/galaxy-bitlab" title="BitLAB">
+            BitLAB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://services.cbib.u-bordeaux2.fr/galaxy/" title="CBiB Galaxy">
+            CBiB Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cpt.tamu.edu/galaxy-public/" title="Center for Phage Technology (CPT)">
+            Center for Phage Technology (CPT)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://vm-chemflow-francegrille.eu/" title="ChemFlow">
+            ChemFlow
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.unmc.edu/" title="ChimeRScope">
+            ChimeRScope
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://codonharmonizer.systemsbiology.nl/" title="Codon Harmonizer">
+            Codon Harmonizer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://dintor.eurac.edu/" title="Dintor">
+            Dintor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/galaxy/" title="Erasmus MC">
+            Erasmus MC
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.freebioinfo.org/" title="FreeBioinfo">
+            FreeBioinfo
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gio.sbcs.qmul.ac.uk/" title="Galaxy Integrated Omics (GIO)">
+            Galaxy Integrated Omics (GIO)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.prabi.fr/" title="Galaxy@PRABI">
+            Galaxy@PRABI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="Galaxy@Pasteur">
+            Galaxy@Pasteur
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://hyperbrowser.uio.no/hb/" title="Genomic Hyperbrowser">
+            Genomic Hyperbrowser
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gigagalaxy.net/" title="GigaGalaxy">
+            GigaGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.hunter.cuny.edu:8080/" title="Hunter College Galaxy">
+            Hunter College Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://huttenhower.sph.harvard.edu/galaxy/" title="Huttenhower Lab">
+            Huttenhower Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8081/" title="IDENAP">
+            IDENAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://math-galaxy.cgrb.oregonstate.edu:8080/" title="Koslicki Lab">
+            Koslicki Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.lappsgrid.org/" title="LAPPS Grid">
+            LAPPS Grid
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.morganlangille.com/" title="Langille Lab">
+            Langille Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ul.edu.lb/" title="Lebanese University Galaxy">
+            Lebanese University Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mississippi.fr/" title="MISSISSIPPI">
+            MISSISSIPPI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://genomequebec.mcgill.ca/exomeai" title="Majewski Lab">
+            Majewski Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://neo.engr.uconn.edu/" title="Mandoiu Lab">
+            Mandoiu Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.informatik.uni-halle.de" title="Martin Luther U. Halle-Wittenberg">
+            Martin Luther U. Halle-Wittenberg
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/" title="MiModD NacreousMap">
+            MiModD NacreousMap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.mpds-diabetes.in/" title="Molecular Property Diagnostic Suite - Diabetes Mellitus Portal (MPDSDM)">
+            Molecular Property Diagnostic Suite - Diabetes Mellitus Portal (MPDSDM)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.inf.ethz.ch" title="Oqtans">
+            Oqtans
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://palfinder.ls.manchester.ac.uk/" title="Palfinder">
+            Palfinder
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://public.phenomenal-h2020.eu/" title="PhenoMeNal">
+            PhenoMeNal
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.proteore.org/" title="ProteoRE">
+            ProteoRE
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.southgreen.fr/galaxy/" title="South Green">
+            South Green
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://bioinformatics.hsanmartino.it:8080/" title="USMI Galaxy Demonstrator">
+            USMI Galaxy Demonstrator
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.csb.univie.ac.at:8080/" title="VarCap">
+            VarCap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.bio.ku.dk/" title="Vinther Lab">
+            Vinther Lab
+        </a>
+        
+    
+    </ul>
+
+
+
+                        </div>
+                        
+                    </div></li></ul>
+                </div>
+
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 18, 2019 </p>
+            </div>
+            
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Cheminformatics is the use of computational techniques and information about molecules to solve problems in chemistry. This involves a number of steps: retrieving data on chemical compounds, sorting data for properties which are of interest, and extracting new information. This tutorial will provide a brief overview of all of these, centered around protein-ligand docking, a molecular modelling technique. The purpose of protein-ligand docking is to find the optimal binding between a small molecule (ligand) and a protein. It is generally applied to the drug discovery and development process with the aim of finding a potential drug candidate. First, a target protein is identified. This protein is usually linked to a disease and is known to bind small molecules. Second, a ‘library’ of possible ligands is assembled. Ligands are small molecules that bind to a protein and may interfere with protein function. Each of the compounds in the library is then ‘docked’ into the protein to find the optimal binding position and energy.</p>
+
+<p>Docking is a form of molecular modelling, but several simplifications are made in comparison to methods such as molecular dynamics. Most significantly, the receptor is generally considered to be rigid, with covalent bond lengths and angles held constant. Charges and protonation states are also not permitted to change. While these approximations reduce accuracy to some extent, they increase computational speed, which is necessary to screen a large compound library in a realistic amount of time.</p>
+
+<p>In this tutorial, you will perform docking of ligands into the N-terminus of Hsp90 (heat shock protein 90). The tools used for docking are based on the open-source software <a href="http://vina.scripps.edu/">AutoDock Vina</a> (<a class="citation" href="#Trott2009">Trott and Olson 2009</a>).</p>
+
+<blockquote class="details">
+  <h3 id="details-biological-background"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Biological background</h3>
+
+  <p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases. The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle.</p>
+
+  <p>Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to slow cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents.</p>
+
+  <p>See <a class="citation" href="#Pearl2006">Pearl and Prodromou 2006</a> for a review on the structure and mechanism of the Hsp90 protein. Alte<span class="notranslate">rna</span>tively, read more at <a href="https://pdb101.rcsb.org/motm/108">PDB-101</a> and <a href="https://en.wikipedia.org/wiki/Hsp90">Wikipedia</a>.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#download-data" id="markdown-toc-download-data">Download data</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#separating-protein-and-ligand-structures" id="markdown-toc-separating-protein-and-ligand-structures">Separating protein and ligand structures</a>    <ol>
+      <li><a href="#creating-and-processing-the-compound-library" id="markdown-toc-creating-and-processing-the-compound-library">Creating and processing the compound library</a></li>
+    </ol>
+  </li>
+  <li><a href="#prepare-files-for-docking" id="markdown-toc-prepare-files-for-docking">Prepare files for docking</a></li>
+  <li><a href="#docking" id="markdown-toc-docking">Docking</a></li>
+  <li><a href="#optional-cheminformatics-tools-applied-to-the-compound-library" id="markdown-toc-optional-cheminformatics-tools-applied-to-the-compound-library">Optional: cheminformatics tools applied to the compound library</a></li>
+  <li><a href="#post-processing-and-plotting" id="markdown-toc-post-processing-and-plotting">Post-processing and plotting</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="download-data">Download data</h1>
+
+<p>For this exercise, we need two datasets: a protein structure and a library of compounds. We will download the former directly from the Protein Data Bank; the latter will be created by searching the ChEMBL database (<a class="citation" href="#Gaulton2016">Gaulton <i>et al.</i> 2016</a>).</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>Search <span class="notranslate">Galaxy</span> for the ‘Get PDB’ tool. Request the accession code <code class="highlighter-rouge">2brc</code>.</li>
+    <li>Rename the dataset to ‘Hsp90 structure’</li>
+    <li>
+      <p>Check that the datatype is correct (PDB file).</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<a class="citation" href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a>).</figcaption></figure>
+
+<h1 id="separating-protein-and-ligand-structures">Separating protein and ligand structures</h1>
+
+<p>You can view the contents of the downloaded PDB file by pressing the ‘View data’ icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with <code class="highlighter-rouge">ATOM</code>. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled <code class="highlighter-rouge">HETATM</code>. We will use the grep tool to separate these molecules into separate files, and then convert the ligand file into SDF/MOL format using the ‘Compound conversion’ tool, which is based on OpenBabel, an open-source library for analyzing chemical data (<a class="citation" href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a>).</p>
+
+<blockquote class="details">
+  <h3 id="details-what-is-grep"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What is grep?</h3>
+
+  <p>Grep is a command-line tool for searching text files for lines which match a search query.</p>
+
+  <p>There is a <span class="notranslate">Galaxy</span> tool available based on grep, which we will apply to the downloaded PDB tool.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-separate-protein-and-ligand"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Separate protein and ligand</h3>
+
+  <ol>
+    <li><strong>Search in textfiles (grep)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Downloaded PDB file ‘Hsp90 structure’</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="highlighter-rouge">Don't match</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">HETATM</code></li>
+        <li>All other parameters can be left as their defaults.</li>
+        <li>Rename the dataset <strong>‘Protein (PDB)’</strong>.</li>
+      </ul>
+
+      <p>The result is a file with all non-protein (<code class="highlighter-rouge">HETATM</code>) atoms removed.</p>
+    </li>
+    <li><strong>Search in textfiles (grep)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters. Here, we use grep again to produce a file with only non-protein atoms.
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Downloaded PDB file ‘Hsp90 structure’</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="highlighter-rouge">Match</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">CT5</code> (the name of the ligand in the PDB file)</li>
+        <li>All other parameters can be left as their defaults.</li>
+        <li>Rename the dataset <strong>‘Ligand (PDB)’</strong>.</li>
+      </ul>
+
+      <p>This produces a file which only contains ligand atoms.</p>
+    </li>
+    <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: Ligand PDB file created in step 2.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">MDL MOL format (sdf, mol)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Add hydrogens appropriate for pH”</em>: <code class="highlighter-rouge">7.4</code></li>
+        <li>All other parameters can be left as their defaults.</li>
+        <li>Change the datatype to ‘mol’ and rename the dataset <strong>‘Ligand (MOL)’</strong>.</li>
+      </ul>
+
+      <p>Applying this tool will generate a representation of the structure of the ligand in MOL format.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>At this stage, separate protein and ligand files have been created. Next, we want to generate a compound library we can use for docking.</p>
+
+<h2 id="creating-and-processing-the-compound-library">Creating and processing the compound library</h2>
+
+<p>In this step we will create a compound library, using data from the ChEMBL database.</p>
+
+<blockquote class="details">
+  <h3 id="details-what-chemical-databases-are-available"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What chemical databases are available?</h3>
+
+  <p>Multiple databases are available online which provide access to chemical information, e.g. chemical structures, reactions, or literature. In this tutorial, we use a tool which searches the <a href="https://www.ebi.ac.uk/chembl/">ChEMBL</a> database. There are also <span class="notranslate">Galaxy</span> tools available for downloading data from <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a>.</p>
+
+  <p>Other notable databases include <a href="https://www.drugbank.ca/">Drugbank</a> and <a href="http://www.chemspider.com/">ChemSpider</a>.</p>
+
+</blockquote>
+
+<p>We will generate our compound library by searching ChEMBL for compounds which have a similar structure to the ligand in the PDB file we downloaded in the first step. There is a <span class="notranslate">Galaxy</span> tool for accessing ChEMBL which requires data input in SMILES format; thus, the first step is to convert the ‘Ligand’ PDB file to a SMILES file. Then the search is performed, returning a SMILES file. For docking, we would like to convert to SDF format, which we can do once again using the ‘Compound conversion’ tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-compound-library"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate compound library</h3>
+
+  <ol>
+    <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: ‘Ligand’ PDB file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">SMILES format (SMI)</code></li>
+        <li>Leave all other options as default.</li>
+      </ul>
+    </li>
+    <li>Rename the output of the ‘compound conversion’ step to <strong>‘Ligand SMILES’</strong>.</li>
+    <li><strong>Search ChEMBL database</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SMILES input type”</em>: File</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: ‘Ligand SMILES’ file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Search type”</em>: <code class="highlighter-rouge">Similarity</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tanimoto cutoff score”</em>: <code class="highlighter-rouge">80</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter for Lipinski’s Rule of Five”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li>All other parameters can be left as their defaults.</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>Why are compounds filtered for Lipinski’s Rule of Five?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>Lipinski’s rule of five is an empirical rule which can be used to determine the ‘druglikeness’ of a molecule. The rule consists of four criteria which relate to the pharmacokinetics of the molecule. The rule is discussed in (<a class="citation" href="#Lipinski2004">Lipinski 2004</a>), or you can also read more on <a href="https://en.wikipedia.org/wiki/Lipinski%27s_rule_of_five">Wikipedia</a>.</p>
+        </blockquote>
+      </blockquote>
+
+      <p>Optional: experiment with different combinations of options - adding different filters, adjusting the Tanimoto coefficient.</p>
+    </li>
+    <li>
+      <p>Check that the datatype is correct (smi). This step is essential, as <span class="notranslate">Galaxy</span> does not automatically detect the datatype for SMILES files.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Rename dataset <strong>‘Compound library’</strong>.</li>
+  </ol>
+
+</blockquote>
+
+<p>There are some other tools available, which will not be used in this tutorial, which help to develop a more focused compound library. For example, the ‘Natural product likeness calculator’ and ‘Drug-likeness’ tools assign a score to compounds based on how similar they are to typical natural products and drugs respectively, which could then be used to filter the library. If you are interested, you can try testing them out on the library just generated.</p>
+
+<blockquote class="details">
+  <h3 id="details-what-are-smiles-and-sdf-formats"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What are SMILES and SDF formats?</h3>
+
+  <p>SMILES and SD-files both represent chemical structures. A SMILES file represents the 2D structure of a molecule as a chemical graph. In other words, it states only the atoms and the connectivity between them. An example of a SMILES string (taken from the ligand in the PDB file) is <code class="highlighter-rouge">c1c2OCCOc2ccc1c1c(C)[nH]nc1c1cc(CC)c(O)cc1O</code>. For more information on how the notation works, please consult the <a href="http://opensmiles.org/opensmiles.html">OpenSMILES specification</a> or the description provided by <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">Wikipedia</a>. A more comprehensive alte<span class="notranslate">rna</span>tive to the SMILES system is the Inte<span class="notranslate">rna</span>tional Chemical Identifier (InChI).</p>
+
+  <p>Neither SMILES nor InChI format contain the three-dimensional structure of a molecule. By contrast, the SDF (structure data file) format encodes three-dimensional atomic coordinates of a structure, similar to a PDB file.</p>
+
+  <p>In a previous step, we also generated a MOL file - this format is closely related to the SDF format. The difference is that MOL files can store only a single molecule, whereas SD-files can encode single or multiple molecules. Multiple molecules are separated by lines containing four dollar signs (<code class="highlighter-rouge">$$$$</code>).</p>
+
+  <p>For docking, we need the three-dimensional coordinates of the ligand; thus, we want to convert from SMILES to SDF format.</p>
+</blockquote>
+
+<h1 id="prepare-files-for-docking">Prepare files for docking</h1>
+
+<p>A processing step now needs to be applied to the protein structure and the docking candidates - each of the structures needs to be converted to PDBQT format before using the AutoDock Vina docking tool.</p>
+
+<p>Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a ‘box’ in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in <span class="notranslate">Galaxy</span> which can be used to automatically create a configuration file for docking when ligand coordinates are already known.</p>
+
+<blockquote class="details">
+  <h3 id="details-how-to-find-the-binding-site-of-an-apoprotein"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to find the binding site of an apoprotein?</h3>
+
+  <p>If the structure contains no ligand in complex with the protein (i.e. apoprotein), identifying the binding site is not trivial. There are software available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, try out the fpocket tool  (<a class="citation" href="#LeGuilloux2009">Le Guilloux <i>et al.</i> 2009</a>) on the Hsp90 structure.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-pdbqt-and-config-files-for-docking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate PDBQT and config files for docking</h3>
+
+  <ol>
+    <li><strong>Prepare receptor</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a PDB file”</em>: ‘Protein’ PDB file.</li>
+      </ul>
+    </li>
+    <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: ‘Compound library’ file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">SDF</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Generate 3D coordinates”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li>Leave all other options unchanged.</li>
+        <li>Rename to ‘Prepared ligands’</li>
+      </ul>
+    </li>
+    <li><strong>Calculate the box parameters for an AutoDock Vina job</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ligand”</em>: ‘Ligand (MOL) file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“x-axis buffer”</em>: <code class="highlighter-rouge">5</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“y-axis buffer”</em>: <code class="highlighter-rouge">5</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“z-axis buffer”</em>: <code class="highlighter-rouge">5</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: <code class="highlighter-rouge">1</code></li>
+        <li>The ‘Random seed’ parameter should be left empty.</li>
+        <li>Rename to ‘Docking config file’</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="docking">Docking</h1>
+
+<p>Now that the protein and the ligand library have been correctly prepared and formatted, docking can be performed.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-perform-docking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform docking</h3>
+
+  <ol>
+    <li><strong>Docking</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Receptor”</em>: ‘Protein PDBQT’ file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligands”</em>: ‘Prepared ligands’ file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="highlighter-rouge">7.4</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify parameters”</em>: ‘Upload a config file to specify parameters’</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Box configuration”</em>: ‘Docking config file’</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: leave blank (it was specified in the previous step)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The output consists of a collection, which contains an SDF output file for each ligand, containing multiple docking poses and scoring files for each of the ligands. We will now perform some processing on these files which extracts scores from the SD-files and selects the best score for each.</p>
+
+<h1 id="optional-cheminformatics-tools-applied-to-the-compound-library">Optional: cheminformatics tools applied to the compound library</h1>
+
+<p>The ChemicalToolBox contains a large number of cheminformatics tools. This section will demonstrate some of the useful functionalities available. If you are just interested in docking, feel free to skip this section - or, just try out the tools which look particularly interesting.</p>
+
+<p>(This section can also be completed while waiting for the docking, which can take some time to complete.)</p>
+
+<h3 id="visualization">Visualization</h3>
+
+<p>It can be useful to visualize the compounds generated. There is a tool available for this in <span class="notranslate">Galaxy</span> based on OpenBabel.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualization-of-chemical-structures"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualization of chemical structures</h3>
+
+  <ol>
+    <li><strong>Visualisation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: Compound library</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Embed molecule as CML”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Draw all carbon atoms”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use thicker lines”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Property to display under the molecule”</em>: <code class="highlighter-rouge">Molecule weight</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the displayed molecules by”</em>: <code class="highlighter-rouge">Molecular weight</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Format of the resultant picture”*: <code class="highlighter-rouge">SVG</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This produces an SVG image of all the structures generated ordered by molecular weight.</p>
+
+<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Hsp90 N-terminus structure" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structures of the compounds from ChEMBL.</figcaption></figure>
+
+<h3 id="calculation-of-fingerprints-and-clustering">Calculation of fingerprints and clustering</h3>
+
+<p>In this step, we will group similar molecules together. A key tool in cheminformatics for measuring molecular similarity is fingerprinting, which entails extracting chemical properties of molecules and storing them as a bitstring. These bitstrings can be easily compared computationally, for example with a clustering method. The fingerprinting tools in <span class="notranslate">Galaxy</span> are based on the Chemfp tools (<a class="citation" href="#Dalke2013">Dalke 2013</a>).</p>
+
+<p>Before clustering, let’s label each compound. To do so add a second column to the SMILES compound library containing a label for each molecule. The <code class="highlighter-rouge">Ligand SMILES</code> file is also labelled something like <code class="highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code> (the exact name will vary) and we would like to give it a more useful name. When labelling is complete, we can concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculate-molecular-fingerprints"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate molecular fingerprints</h3>
+  <ol>
+    <li><strong>Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="highlighter-rouge">Ligand SMILES</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Find pattern”</em>: add the current label of the SMILES here. You can find it by clicking the ‘view’ button next to the <code class="highlighter-rouge">Ligand SMILES</code> dataset - it will look something like <code class="highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Replace with”</em>: <code class="highlighter-rouge">ligand</code></li>
+      </ul>
+    </li>
+    <li><strong>Concatenate datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to concatenate”</em>: Output of the previous step.</li>
+        <li>Click on <strong>Insert Dataset</strong> and in the new selection box which appears, select ‘Compound library’.</li>
+        <li>Run the step and rename the output dataset ‘Labelled compound library’.</li>
+      </ul>
+    </li>
+    <li><strong>Molecules to Fingerprints</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“molecule file”</em>: ‘Labelled compound library’ file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Type of fingerprint”</em>: <code class="highlighter-rouge">Open Babel FP2 fingerprints</code></li>
+        <li>Rename to ‘Fingerprints’.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Taylor-Butina clustering  (<a class="citation" href="#Butina1999">Butina 1999</a>) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.</p>
+
+<figure id="figure-3"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Fingerprinting" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster molecules using molecular fingerprints</h3>
+  <ol>
+    <li><strong>Taylor-Butina clustering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fingerprint dataset”</em>: ‘Fingerprints’ file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="highlighter-rouge">0.8</code></li>
+      </ul>
+    </li>
+    <li><strong>NxN Clustering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fingerprint dataset”</em>: ‘Fingerprints’ file.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="highlighter-rouge">0.0</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format of the resulting picture”</em>: <code class="highlighter-rouge">SVG</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output options”</em>: <code class="highlighter-rouge">Image</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>The image produced by the NxN clustering shows the clustering in the form of a dendrogram, where individual molecules are represented as vertical lines and merged into clusters. Merges are represented by horizontal lines. The y-axis represents the similarity of data points to each other; thus, the lower a cluster is merged, the more similar the data points are which it contains. Clusters in the dendogram are colored differently. For example, all molecules connected in red are similar enough to be grouped into the same cluster.</p>
+
+<figure id="figure-4"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
+
+<blockquote class="details">
+  <h3 id="details-further-investigation-optional"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Further investigation (optional)</h3>
+
+  <ul>
+    <li>
+      <p>Try generating fingerprints using some of the other nine different protocols available and monitor how this affects the clustering.</p>
+    </li>
+    <li>
+      <p>For both the Taylor-Butina and NxN clustering, a threshold has to be set. Try varying this value and observe how the clustering results are affected.</p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h1 id="post-processing-and-plotting">Post-processing and plotting</h1>
+
+<p>From our collection of SD-files, we first extract all stored values into tabular format and then combine the files together to create a single tabular file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-process-sd-files"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Process SD-files</h3>
+
+  <ol>
+    <li><strong>Extract values from an SD-file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SD-file”</em>: Collection of SD-files generated by the docking step. (Remember to select the ‘collection’ icon!)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include the property name as header”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="highlighter-rouge">7.4</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include molecule name as column in output”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li>Leave all other paramters unchanged.</li>
+      </ul>
+    </li>
+    <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: Collection of tabular files generated by the previous step.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Keep one header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Append File name”</em>: <code class="highlighter-rouge">No</code></li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in
+front of the input parameter you want to supply the collection to.</li>
+          <li>Select the collection you want to use from the list</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: choose one of the SD-files from the collection generated by the docking step.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">Protein Data Bank format (pdb)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Split multi-molecule files into a collection”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li>Leave all other parameters unchanged.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We now have a tabular file available which contains all poses calculated for all ligands docked, together with scores and RMSD values for the deviation of each pose from the optimum. We also have PDB files for some of the docking poses which can be inspected using the NGLViewer visualization embedded in <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="details">
+  <h3 id="details-further-investigation-optional-1"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Further investigation (optional)</h3>
+
+  <p>There are visualizations available in <span class="notranslate">Galaxy</span> for producing various types of plots - for example, a scatter plot of RMSD (compared to optimal docking pose) against docking score can be calculated very easily:</p>
+
+  <figure id="figure-5"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Scatter plot of RMSD against docking score.</figcaption></figure>
+
+  <p>The plot shows a correlation between the two variables, as expected, though only a slight one, given the narrow range of docking scores in the dataset and the structural similarity of the ligands tested.</p>
+
+  <p>A more advanced exercise would be to generate molecular descriptors for the molecule (there are three tools available for this in <span class="notranslate">Galaxy</span>: RDKit, Mordred and PaDEL) and to identify those which are particularly predictive of docking score, either by inspecting plots or using the statistics tools built into <span class="notranslate">Galaxy</span>.</p>
+</blockquote>
+
+<p>Use the NGLviewer to inspect the protein and various ligand poses generated by docking. This can be done using either the visualization of NGLViewer in <span class="notranslate">Galaxy</span>, or via the <a href="http://nglviewer.org/ngl/">NGL website</a>.</p>
+
+<figure id="figure-6"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.</figcaption></figure>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Docking allows ‘virtual screening’ of drug candidates</p>
+</li>
+                            
+                            <li><p>Molecular fingerprints encode features into a bitstring</p>
+</li>
+                            
+                            <li><p>The ChemicalToolbox contains many tools for cheminformatics analysis</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Humphrey1996">Humphrey, W., A. Dalke, and K. Schulten, 1996 <b>VMD – Visual Molecular Dynamics</b>. Journal of Molecular Graphics 14: 33–38.</span>
+    
+    .
+    
+    
+    
+
+</li>
+<li><span id="Butina1999">Butina, D., 1999 <b>Unsupervised data base clustering based on daylight’s fingerprint and Tanimoto similarity: A fast and automated way to cluster small and large data sets</b>. Journal of Chemical Information and Computer Sciences 39: 747–750.</span>
+    
+    
+    
+
+</li>
+<li><span id="Lipinski2004">Lipinski, C. A., 2004 <b>Lead- and drug-like compounds: the rule-of-five revolution</b>. Drug Discovery Today: Technologies 1: 337–341.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.ddtec.2004.11.007">10.1016/j.ddtec.2004.11.007</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Pearl2006">Pearl, L. H., and C. Prodromou, 2006 <b>Structure and Mechanism of the Hsp90 Molecular Chaperone Machinery.</b> Annual Review of Biochemistry 75: 271–294.</span>
+    
+    
+    <a href="https://doi.org/10.1146/annurev.biochem.75.103004.142738">10.1146/annurev.biochem.75.103004.142738</a>
+    
+    
+
+</li>
+<li><span id="Trott2009">Trott, O., and A. J. Olson, 2009 <b>AutoDock Vina: Improving the speed and accuracy of docking with a new scoring function,  efficient optimization,  and multithreading</b>. Journal of Computational Chemistry NA–NA.</span>
+    
+    
+    <a href="https://doi.org/10.1002/jcc.21334">10.1002/jcc.21334</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="LeGuilloux2009">Le Guilloux, V., P. Schmidtke, and P. Tuffery, 2009 <b>Fpocket: an open source platform for ligand pocket detection</b>. BMC bioinformatics 10: 168.</span>
+    
+    
+    
+
+</li>
+<li><span id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3:</span>
+    
+    
+    <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Dalke2013">Dalke, A., 2013 <b>The FPS fingerprint format and chemfp toolkit</b>. Journal of cheminformatics 5: P36.</span>
+    
+    
+    
+
+</li>
+<li><span id="Gaulton2016">Gaulton, A., A. Hersey, M. Nowotka, Bento A Patrı́cia, J. Chambers <i>et al.</i>, 2016 <b>The ChEMBL database in 2017</b>. Nucleic acids research 45: D945–D954.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Protein-ligand docking (Computational chemistry)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Protein-ligand docking (Computational chemistry)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Bray)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/cheminformatics/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
