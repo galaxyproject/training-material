@@ -1077,6 +1077,10 @@ Then you can potentially use it to recover.
 {: .comment}
 
 
+## Keeping Galaxy Updated
+
+If you have set your `galaxy_commit_id` to a branch name like `release_19.09`, then all you need to do to keep Galaxy up to date (e.g. for security patches) is to run the playbook regularly, and to change that branch name whenever a new version of Galaxy is released. The `git` module in ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+
 ## Upgrading Galaxy (Optional)
 
 With Ansible managing your Galaxy, upgrading is incredibly easy. Here is a commit from UseGalaxy.eu's upgrade:
