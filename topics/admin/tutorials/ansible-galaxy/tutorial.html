@@ -483,7 +483,7 @@
                     </div></li></ul>
                 </div>
 
-                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 18, 2019 </p>
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 21, 2019 </p>
             </div>
             
 
@@ -525,6 +525,8 @@
       <li><a href="#supervisord" id="markdown-toc-supervisord">Supervisord</a></li>
       <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
       <li><a href="#disaster-strikes-optional" id="markdown-toc-disaster-strikes-optional">Disaster Strikes! (Optional)</a></li>
+      <li><a href="#keeping-galaxy-updated" id="markdown-toc-keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</a></li>
+      <li><a href="#upgrading-galaxy-optional" id="markdown-toc-upgrading-galaxy-optional">Upgrading <span class="notranslate">Galaxy</span> (Optional)</a></li>
     </ol>
   </li>
   <li><a href="#final-notes" id="markdown-toc-final-notes">Final Notes</a></li>
@@ -1715,6 +1717,39 @@ In a training setting there is no need to request certificates that will be trus
   <p>We’ve experienced these incidents and we know how horribly stressful it can be if an important service like <span class="notranslate">Galaxy</span> goes down and you cannot immediately replace it with another instance. We hope you will immediately apply the lessons from this training material, it can potentially save you a lot of stress and worry.</p>
 
 </blockquote>
+
+<h2 id="keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</h2>
+
+<p>If you have set your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> group variable to a branch name like <code class="highlighter-rouge">release_19.09</code>, then all you need to do to keep <span class="notranslate">Galaxy</span> up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
+
+<h2 id="upgrading-galaxy-optional">Upgrading <span class="notranslate">Galaxy</span> (Optional)</h2>
+
+<p>With Ansible, upgrading <span class="notranslate">Galaxy</span> to a new release is incredibly easy. Here is a commit from Use<span class="notranslate">Galaxy</span>.eu’s upgrade:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/group_vars/<span class="notranslate">galaxy</span>.yml b/group_vars/<span class="notranslate">galaxy</span>.yml
+index ce17525..54d0746 100644
+</span><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -345,7 +345,7 @@</span> <span class="notranslate">galaxy</span>_instance_hostname: use<span class="notranslate">galaxy</span>.eu
+ <span class="notranslate">galaxy</span>_config_style: ini
+
+ <span class="notranslate">galaxy</span>_repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/<span class="notranslate">galaxy</span>.git'
+<span class="gd">-<span class="notranslate">galaxy</span>_commit_id: 'release_19.05'
+</span><span class="gi">+<span class="notranslate">galaxy</span>_commit_id: 'release_19.09'
+</span> <span class="notranslate">galaxy</span>_force_checkout: true # discard any modified files
+</code></pre></div></div>
+
+<p>This is all that is required, changing the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> and re-running the playbook. Everything else (building the client, database migrations, etc.) are taken care of for you.</p>
+
+<p>It is recommend that you also do the following during an upgrade:</p>
+
+<ul>
+  <li><a href="https://docs.galaxyproject.org/en/latest/releases/index.html"><strong>Read the release notes</strong></a> for the new version of <span class="notranslate">Galaxy</span></li>
+  <li>Check out the latest <a href="https://github.com/galaxyproject/galaxy/blob/master/config/galaxy.yml.sample"><code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml.sample</code></a> for the new release, and see if there are any variables you want to set for your server</li>
+  <li>Compare the <a href="https://github.com/galaxyproject/galaxy/tree/master/config">other configuration files</a> to see if there are new features you want to take advantage of (e.g. new job runner options or metrics you wish to capture.)</li>
+</ul>
+
+<p>When you’ve read the documentation and checked out the new features, you can then run the playbook and you’re done!</p>
 
 <h1 id="final-notes">Final Notes</h1>
 
