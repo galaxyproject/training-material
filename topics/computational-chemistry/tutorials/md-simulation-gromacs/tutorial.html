@@ -510,7 +510,7 @@
                     </div></li></ul>
                 </div>
 
-                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 3, 2019 </p>
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 22, 2019 </p>
             </div>
             
 
@@ -529,7 +529,7 @@
 
 <p>Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in <span class="notranslate">Galaxy</span> are <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">NAMD</a> and CHARMM (available in the <a href="https://github.com/scientificomputing/BRIDGE">docker container</a>).</p>
 
-<p>This is a introductory guide to using GROMACS <a class="citation" href="#abraham15">Abraham <i>et al.</i> 2015</a> in <span class="notranslate">Galaxy</span> to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.</p>
+<p>This is a introductory guide to using GROMACS (<a class="citation" href="#abraham15">Abraham <i>et al.</i> 2015</a>) in <span class="notranslate">Galaxy</span> to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.</p>
 
 <blockquote class="comment">
   <h3 id="comment-more-information"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> More information</h3>
@@ -599,32 +599,10 @@
         </ol>
       </blockquote>
     </li>
-    <li>Upload the file in <span class="notranslate">Galaxy</span> from the PDB:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://files.rcsb.org/download/1AKI.pdb
-</code></pre></div>      </div>
-
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
-
-        <ul>
-          <li>Copy the link location</li>
-          <li>
-            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
-          </li>
-          <li>Select <strong>Paste/Fetch Data</strong></li>
-          <li>
-            <p>Paste the link into the text field</p>
-          </li>
-          <li>
-            <p>Press <strong>Start</strong></p>
-          </li>
-          <li><strong>Close</strong> the window</li>
-        </ul>
-
-        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
-
-      </blockquote>
+    <li>Use the <strong>Get PDB</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool to download a PDB file for simulation:
+      <ul>
+        <li><em>“PDB accession code”</em>: <code class="highlighter-rouge">1AKI</code></li>
+      </ul>
     </li>
     <li>Use the <strong>grep</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> text processing tool to remove all lines that refer to non-protein atoms.
       <ul>
@@ -642,12 +620,35 @@
   <p>As an alte<span class="notranslate">rna</span>tive option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:</p>
   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2598415
 </code></pre></div>  </div>
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+    <ul>
+      <li>Copy the link location</li>
+      <li>
+        <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+      </li>
+      <li>Select <strong>Paste/Fetch Data</strong></li>
+      <li>
+        <p>Paste the link into the text field</p>
+      </li>
+      <li>
+        <p>Press <strong>Start</strong></p>
+      </li>
+      <li><strong>Close</strong> the window</li>
+    </ul>
+
+    <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+  </blockquote>
+
 </blockquote>
 
 <blockquote class="details">
   <h3 id="details-background-what-is-the-pdb-protein-data-bank-and-format"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Background: What is the PDB (Protein Data Bank) and format?</h3>
 
-  <p>The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI">1AKI</a>).</p>
+  <p>The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI">1AKI</a>.</p>
 
   <p>More resources:</p>
 
@@ -687,9 +688,10 @@
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input file”</em>: <code class="highlighter-rouge">1AKI_clean.pdb</code> (Input dataset)</li>
     <li><em>“Water model”</em>: <code class="highlighter-rouge">SPC/E</code></li>
     <li><em>“Force field”</em>: <code class="highlighter-rouge">OPLS/AA</code></li>
-    <li><em>“Ignore hydrogens”</em>: <code class="highlighter-rouge">no</code></li>
+    <li><em>“Ignore hydrogens”</em>: <code class="highlighter-rouge">No</code></li>
+    <li><em>“Box dimensions in nanometers”</em>: <code class="highlighter-rouge">1.0</code></li>
     <li><em>“Box type”</em>: <code class="highlighter-rouge">Rectangular box with all sides equal</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
   </ul>
 
   <blockquote class="question">
@@ -719,7 +721,7 @@
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by setup</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology produced by setup</li>
     <li><em>“Water model for solvation”</em>: <code class="highlighter-rouge">SPC</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
   </ul>
 
 </blockquote>
@@ -735,9 +737,8 @@
 
   <p><strong>GROMACS energy minimization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by solvation tool</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
     <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
     <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">Steepest descent algorithm</code> (most common choice for EM)</li>
     <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
@@ -746,15 +747,16 @@
     <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
     <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
     <li><em>“Number of steps for the MD simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-    <li><em>“EM tolerance”</em>: <code class="highlighter-rouge">1000.0</code></li>
+    <li><em>“EM tolerance”</em>: <code class="highlighter-rouge">1000</code></li>
     <li><em>“Maximum step size”</em>: <code class="highlighter-rouge">0.01</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
   </ul>
 
 </blockquote>
 
 <h1 id="equilibration">Equilibration</h1>
 
-<p>At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant <strong>n</strong>umber of particles, <strong>v</strong>olume and <strong>t</strong>emperature, while the NPT ensemble maintains constant <strong>n</strong>umber of particles, <strong>p</strong>ressure and <strong>t</strong>emperature.</p>
+<p>At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant <strong>n</strong>umber of particles, <strong>v</strong>olume and <strong>t</strong>emperature, while the NPT ensemble maintains constant <strong>n</strong>umber of particles, <strong>p</strong>ressure and <strong>t</strong>emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).</p>
 
 <p>For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.</p>
 
@@ -764,11 +766,17 @@
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-nvt-dynamics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NVT dynamics</h3>
 
-  <p><strong>GROMACS NVT equilibration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><strong>GROMACS simulation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by setup</li>
+    <li><em>“Use a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">No CPT input</code></li>
+    <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
+    <li><em>“Apply position restraints”</em>: <code class="highlighter-rouge">Apply position restraints</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by ‘Setup’ tool.</li>
+    <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isochoric ensemble (NVT).</code></li>
+    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
+    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
     <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
     <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
     <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
@@ -781,24 +789,30 @@
     <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
     <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
     <li><em>“Number of steps for the NVT simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
-    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return the .gro structure</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
   </ul>
 </blockquote>
 
 <h2 id="npt-equilibration">NPT equilibration</h2>
 <p>Having stabilized the temperature of the system with NVT equilibration, we also need to stabilize the pressure of the system. We therefore equilibrate again using the NPT (constant number of particles, pressure, temperature) ensemble.</p>
 
+<p>Note that we can continue where the last simulation left off (with new parameters) by using the checkpoint (CPT) file saved at the end of the NVT simulation.</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-npt-dynamics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NPT dynamics</h3>
 
-  <p><strong>GROMACS NPT equilibration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><strong>GROMACS simulation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (TOP) file”</em>: Checkpoint file produced by NVT equilibration</li>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by setup</li>
+    <li><em>“Use a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Continue simulation from a CPT file.</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Checkpoint file produced by NVT equilibration</li>
+    <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
+    <li><em>“Apply position restraints”</em>: <code class="highlighter-rouge">Apply position restraints</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by ‘Setup’ tool.</li>
+    <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
+    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code></li>
+    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
     <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
     <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
     <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
@@ -811,9 +825,7 @@
     <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
     <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
     <li><em>“Number of steps for the NPT simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
-    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return the .gro structure</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
   </ul>
 </blockquote>
 
@@ -837,11 +849,17 @@
   <h3 id="hands_on-hands-on-production-simulation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Production simulation</h3>
 
   <ol>
-    <li><strong>GROMACS production simulation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>GROMACS simulation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (TOP) file”</em>: Checkpoint file produced by NPT equilibration</li>
+        <li><em>“Use a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Continue simulation from a CPT file.</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Checkpoint file produced by NPT equilibration</li>
+        <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">No CPT output</code></li>
+        <li><em>“Apply position restraints”</em>: <code class="highlighter-rouge">No position restraints</code></li>
+        <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
+        <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code> (this time, we save the trajectory)</li>
+        <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
         <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
         <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
         <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
@@ -854,9 +872,7 @@
         <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
         <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
         <li><em>“Number of steps for the simulation”</em>: <code class="highlighter-rouge">500000</code></li>
-        <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code> (this time, we save the trajectory)</li>
-        <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return the .gro structure</code></li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
