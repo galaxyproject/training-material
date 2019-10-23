@@ -107,13 +107,14 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     '''
     l_content = []
     do_not_add_next_lines = False
+    do_not_add_commented_part = False
     images = []
 
     for l in content:
         # remove lines with includes
         if '{% include' in l:
             continue
-        # remove questions, comments, details, tips, agenda boxes
+        # remove questions, comments, details, tips, agenda boxes and 
         elif re.search(r'{% icon (question|details|comment|tip|warning) %}', l):
             do_not_add_next_lines = True
             continue
@@ -123,6 +124,14 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
         elif do_not_add_next_lines:
             if re.search(r'{:[ ]?\.(question|details|comment|tip|warning|agenda)}', l):
                 do_not_add_next_lines = False
+            continue
+        # remove commented section
+        elif '{% comment %}' in l:
+            do_not_add_commented_part = True
+            continue
+        elif do_not_add_commented_part:
+            if '{% endcomment %}' in l:
+                do_not_add_commented_part = False
             continue
         # format hands-on boxes
         elif '{% icon hands_on %}' in l:
