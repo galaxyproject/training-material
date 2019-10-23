@@ -229,4 +229,4 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 
 # Conclusion
 {:.no_toc}
-We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
+We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix, using the visulise-filter-visulaise paradigm, which proves to be a very effective way of quality-controlling scRNA-seq data. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data. We also provide a workflow for users to utilise, either by using directly or to edit in order to fit their own ananyses: https://github.com/nsoranzo/training-material/edit/scater_tutorial/topics/transcriptomics/tutorials/scrna-scater-qc/workflows/main_workflow.ga
