@@ -84,7 +84,8 @@ def extract_metadata(yaml_metadata, contributor_fp):
     metadata = {
         'title': '',
         'author': [],
-        'abstract': ''
+        'abstract': '',
+        'bibliography': 'references.bib'
     }
     contributors = extract_contributors(contributor_fp)
     
@@ -142,7 +143,7 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     intro = "\n# Introduction\n\n" \
         "<why/aim (1st paragraph of the introduction)>.\n\n" \
         "This tutorial provides a detailed workflow for <outputs> from <inputs> using Galaxy." \
-        "Galaxy (Afgan et al. 2018) is a data analysis platform that provides access to hundreds" \
+        "Galaxy [@afgan2018galaxy] is a data analysis platform that provides access to hundreds" \
         " of tools used in a wide variety of analysis scenarios. os. It features a web-based user " \
         "interface while automatically and transparently managing underlying computation details. " \
         "The Galaxy's concept makes high-throughput sequencing data analysis a structured, "\
@@ -153,19 +154,12 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
         "which has the needed tools. However, to be sure, the authors recommend to use the Galaxy "\
         "Europe server (https://usegalaxy.eu/).\n\n" \
         "The tutorial presented in this article has been developed by the Galaxy Training Network "\
-        "(Batut et al. 2018) and is available online at https://training.galaxyproject.org/"
+        "[@batut2018community] and is available online at https://training.galaxyproject.org/"
     intro += tuto_fp.replace('md', 'html')
     intro += '.\n\n'
 
     # prepare references
-    ref = '\n# References\n\n' \
-        "Afgan, Enis, Dannon Baker, Bérénice Batut, Marius van den Beek, Dave Bouvier, " \
-        "Martin Cech, John Chilton, et al. 2018. \"The Galaxy Platform for Accessible, " \
-        "Reproducible and Collaborative Biomedical Analyses: 2018 Update.\" Nucleic Acids " \
-        "Research 46 (W1): W537–44.\n" \
-        "Batut, Bérénice, Saskia Hiltemann, Andrea Bagnacani, Dannon Baker, Vivek Bhardwaj, " \
-        "Clemens Blank, Anthony Bretaudeau, et al. 2018. \"Community-Driven Data Analysis Training " \
-        "for Biology.\" Cell Systems 6 (6): 752–58.e1.\n"
+    ref = "\n# References\n\n"
 
     # transform list of lines into string, add introduction, add references
     form_content = intro + ''.join(l_content) + ref
@@ -177,6 +171,9 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
 
     # replace icons
     form_content = re.sub(r'{% icon [a-z\-\_]+ %}[ ]?', '', form_content)
+
+    # replace {% cite ... %} by correct [@...]
+    form_content = re.sub(r'{% cite ([a-z0-9\-\_]+) %}', '[@\g<1>]', form_content)
 
     return form_content
 
@@ -214,6 +211,51 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
         tuto_f.write(formatted_tuto_content)
 
 
+def add_references(article_ref_fp, tuto_ref_fp):
+    '''
+    Add references
+
+    :param article_ref_fp: Path object to file with references for article
+    :param tuto_ref_fp: Path object to file with references for tutorial
+    '''
+    ref = ''
+
+    if tuto_ref_fp.exists():
+        with tuto_ref_fp.open("r") as ref_f:
+            ref = ref_f.read()
+    
+    ref += "@article{afgan2018galaxy,\n" \
+        "  title={The Galaxy platform for accessible, reproducible and " \
+        "collaborative biomedical analyses: 2018 update},\n" \
+        "  author={Afgan, Enis and Baker, Dannon and Batut, B{\'e}r{\'e}nice " \
+        "and Van Den Beek, Marius and Bouvier, Dave and {\v{C}}ech, Martin and " \
+        "Chilton, John and Clements, Dave and Coraor, Nate and Gr{\"u}ning, Bj{\"o}rn " \
+        "A and others},\n" \
+        "  journal={Nucleic acids research},\n" \
+        "  volume={46},\n" \
+        "  number={W1},\n" \
+        "  pages={W537--W544},\n" \
+        "  year={2018},\n" \
+        "  publisher={Oxford University Press}\n" \
+        "}\n\n" \
+        "@article{batut2018community,\n" \
+        "  title={Community-driven data analysis training for biology},\n" \
+        "  author={Batut, B{\'e}r{\'e}nice and Hiltemann, Saskia and Bagnacani, " \
+        "Andrea and Baker, Dannon and Bhardwaj, Vivek and Blank, Clemens and Bretaudeau," \
+        " Anthony and Brillet-Gu{\'e}guen, Loraine and {\v{C}}ech, Martin and Chilton, " \
+        "John and others},\n" \
+        "  journal={Cell systems},\n" \
+        "  volume={6},\n" \
+        "  number={6},\n" \
+        "  pages={752--758},\n" \
+        "  year={2018},\n" \
+        "  publisher={Elsevier}\n" \
+        "}\n"
+
+    with article_ref_fp.open("w") as ref_f:
+        ref_f.write(ref)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Format the tutorial file before pandoc')
     parser.add_argument('-t', '--tutorial', help="Path to tutorial directory")
@@ -224,11 +266,18 @@ if __name__ == '__main__':
     check_exists(tuto_dp)
     original_tuto_fp =  tuto_dp / "tutorial.md"
     check_exists(original_tuto_fp)
-    formatted_tuto_fp = tuto_dp / "formatted_tutorial.md"
+    article_dp = tuto_dp / "article"
+    article_dp.mkdir(parents=True, exist_ok=True)
+    formatted_tuto_fp = article_dp / "article.md"
     contributor_fp = Path("CONTRIBUTORS.yaml")
     check_exists(contributor_fp)
 
-    # 
+    # format tutorial
     format_tutorial(original_tuto_fp, formatted_tuto_fp, contributor_fp)
+
+    # add references
+    tuto_ref_fp = tuto_dp / "tutorial.bib"
+    article_ref_fp = article_dp / "references.bib"
+    add_references(article_ref_fp, tuto_ref_fp)
 
     
