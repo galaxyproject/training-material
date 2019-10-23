@@ -2,6 +2,7 @@
 
 import argparse
 import re
+import shutil
 import yaml
 from pathlib import Path
 
@@ -106,6 +107,7 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     '''
     l_content = []
     do_not_add_next_lines = False
+    images = []
 
     for l in content:
         # remove lines with includes
@@ -138,7 +140,8 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
         # rename 1st part
         elif '# Introduction' in l:
             l = '# Description of the data\n'
-
+        elif 'images/' in l:
+            images.append(l)
         l_content.append(l)
 
     # prepare introduction
@@ -177,7 +180,17 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     # replace {% cite ... %} by correct [@...]
     form_content = re.sub(r'{% cite ([a-z0-9\-\_]+) %}', '[@\g<1>]', form_content)
 
-    return form_content
+    # replace {{site.baseurl}}{% link ... %}
+    form_content = re.sub(
+        r'{{[ ]?site\.baseurl[ ]?}}{% link (topics\/[a-z0-9\-\_\/]+)\.md %}', 
+        'https://training.galaxyproject.org/\g<1>.html',
+        form_content)
+
+    # replace '../../images/folder/' and '../../images/'
+    form_content = re.sub(r'\.\.\/\.\.\/images[a-z0-9\-\_\/]+\/', 'images/', form_content)
+    form_content = re.sub(r'\.\.\/\.\.\/images\/', 'images/', form_content)
+
+    return (form_content, images)
 
 
 def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
@@ -201,7 +214,7 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
         yaml_metadata = yaml.load(''.join(full_content[1:i]))
 
         metadata = extract_metadata(yaml_metadata, contributor_fp)
-        formatted_tuto_content = format_tuto_content(
+        (formatted_tuto_content, img) = format_tuto_content(
             full_content[i+2:],
             yaml_metadata,
             str(tuto_fp))
@@ -211,6 +224,8 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
         tuto_f.write(yaml.dump(metadata))
         tuto_f.write('---\n')
         tuto_f.write(formatted_tuto_content)
+
+    return img
 
 
 def add_references(article_ref_fp, tuto_ref_fp):
@@ -258,6 +273,23 @@ def add_references(article_ref_fp, tuto_ref_fp):
         ref_f.write(ref)
 
 
+def copy_images(images, images_dp, tuto_dp):
+    '''Copy images
+
+    :param images:
+    :param images_dp:
+    '''
+    for img in images:
+        m = re.search(r'(?P<path>\.\.\/\.\.\/images[a-z0-9\-\_\/\.]+)', img)
+        if m is not None:
+            img_fp = tuto_dp / Path(m.group('path'))
+            check_exists(img_fp)
+            new_imgfp = images_dp / Path(img_fp.name)
+            shutil.copy(str(img_fp), str(new_imgfp))
+        else:
+            raise ValueError("Issue with path extraction from %s" % img)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Format the tutorial file before pandoc')
     parser._action_groups.pop()
@@ -272,16 +304,21 @@ if __name__ == '__main__':
     check_exists(original_tuto_fp)
     article_dp = tuto_dp / "article"
     article_dp.mkdir(parents=True, exist_ok=True)
+    images_dp = article_dp / "images"
+    images_dp.mkdir(parents=True, exist_ok=True)
     formatted_tuto_fp = article_dp / "article.md"
     contributor_fp = Path("CONTRIBUTORS.yaml")
     check_exists(contributor_fp)
 
     # format tutorial
-    format_tutorial(original_tuto_fp, formatted_tuto_fp, contributor_fp)
+    images = format_tutorial(original_tuto_fp, formatted_tuto_fp, contributor_fp)
 
     # add references
     tuto_ref_fp = tuto_dp / "tutorial.bib"
     article_ref_fp = article_dp / "references.bib"
     add_references(article_ref_fp, tuto_ref_fp)
+
+    # add images
+    copy_images(images, images_dp, tuto_dp)
 
     
