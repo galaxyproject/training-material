@@ -195,7 +195,7 @@ As we are using a rather small test dataset, it's unlikely that PCA filtering wi
 >    > * `log10_total_counts_endogenous`
 >    > * `log10_total_counts_feature_control`
 >    >
->    > When using these filtering approaches, it's probably best to use them the opposite way round - try PCA filtering first and then if that doesn't remove enough low-quality cells then use the manual filtering. We could actually pipeline them together - use PCA filtering first and then use the output of that to do further manual filtering.
+>    > When using these filtering approaches, it is sometimes good to try running them in reverse - try PCA filtering first and then if that doesn't remove enough low-quality cells then use the manual filtering. We could actually pipeline them together - use PCA filtering first and then use the output of that to do further manual filtering.
 >    {: .comment}
 >
 {: .hands_on}
