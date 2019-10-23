@@ -110,20 +110,25 @@ Next, lets take a look at the data by plotting various properties to see what ou
 >
 > 1. **Scater: plot library QC** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input SingleCellLoomExperiment dataset"*: `output_loom` (output of **Scater: Calculate QC metrics** {% icon tool %})
-- *"Plot on log scale"*: `No`
+>     - {% icon param-check %} *"Plot on log scale"*: `No`
 >
 > 2. If we have a large number of cells (500+), set the 'Plot on log scale' option to 'Yes'. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the {% icon galaxy-eye %} to view the plots. If it doesn't appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
 > ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > There are four plots, two distribution bar plots and two scatter plots. The first distribution plot is the number of reads in each library (from a single cell). The second plot is the distribution of *feature counts* per cell. Feature counts in this case refers to the number of genes expressed in each cell. The third plot **Scatterplot of reads vs genes** is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. The final scatterplot is the **% MT genes**, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
+>    > There are four plots, two distribution bar plots and two scatter plots. 
+> > The first distribution plot is the number of reads in each library (from a single cell). 
+> > The second plot is the distribution of *feature counts* per cell. Feature counts in this case refers to the number of genes expressed in each cell. 
+> > The third plot **Scatterplot of reads vs genes** is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. 
+> > The final scatterplot is the **% MT genes**, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.
+>    {: .comment}
 >    > Let's look at each plot in turn and see what it tells us.
 >    > - **Read counts**. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn't want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).
 >    > - **Feature counts**. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (<600), then followed by a more even distribution.
 >    > - **Scatterplot of reads vs genes**. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.
 >    > - **% MT genes**. You can see from the plot that there are a few cells outside the main "cloud" of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%
->    {: .comment}
+
 >
 {: .hands_on}
 
@@ -147,11 +152,12 @@ Here, we'll use the manual filtering method.
 >    > ### {% icon comment %} Comment
 >    >
 >    > Let's have a look at the parameters and their value:
+    {: .comment}
 >    > 1. *"Number of reads mapped to a gene for it to be counted as expressed"*: by default, only one read needs to be mapped to a gene for it to be counted as "expressed". We can be a little bit more stringent here and increase the number of reads that need to be mapped to a gene for it to be categorised as "expressed".
 >    > 2. *"Minimum library size (mapped reads) to filter cells on"*: This value asks how many mapped reads from each cell do you require to be mapped to your genome to be included in downstream analysis. We can see from our plots that we have a few cells that have less than 200,000 reads. 200,000 can still be quite a lot of reads (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.
 >    > 3. *"Minimum number of expressed genes"*: You can see that some cells only express a few hundred genes, so we'll remove these cells also.
 >    > 4. *"Maximum % of mitochondrial genes expressed per cell"*. You can see that as well as having one obvious outlier (~37%).
->    {: .comment}
+>
 >
 {: .hands_on}
 
