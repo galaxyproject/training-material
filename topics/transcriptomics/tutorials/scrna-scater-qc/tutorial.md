@@ -165,18 +165,14 @@ Here, we'll use the manual filtering method.
 
 ![QC plots after manual filtering](../../images/scrna-scater-qc/post_filter.png "QC plots after manual filtering")
 
-> ### {% icon question %} Questions
+> ### {% icon comment %} Comment
 >
-> 1. How did the filtering go?
-> 2. Do you think it's done a good job?
-> 3. Have you removed too many cells? Too few cells? About right?
->
-> > ### {% icon solution %} Solution
+> > How did the filtering go? Do you think it's done a good job? Have you removed too many cells? Too few cells? About right?
 > >
 > > Often, it's a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you're happy with the results. Using the initial Calculate QC metrics file, play around with the filtering parameters and visualise the output to see the effect different paramters have.
-> {: .solution}
+
 >
-{: .question}
+{: .comment}
 
 ## Automatic (PCA) filtering
 
