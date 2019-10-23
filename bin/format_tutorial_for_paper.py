@@ -260,7 +260,9 @@ def add_references(article_ref_fp, tuto_ref_fp):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Format the tutorial file before pandoc')
-    parser.add_argument('-t', '--tutorial', help="Path to tutorial directory")
+    parser._action_groups.pop()
+    required = parser.add_argument_group('required arguments')
+    required.add_argument('-t', '--tutorial', help="Path to tutorial directory", required=True)
     args = parser.parse_args()
 
     # get file paths
