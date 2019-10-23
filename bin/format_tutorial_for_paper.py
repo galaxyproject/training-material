@@ -128,8 +128,10 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
             l = l[:-1] +  '***\n'
         elif '{: .hands_on}' in l:
             continue
+        elif l.startswith('> '):
+            l = l[2:]
         elif l.startswith('>'):
-            l = l[1:]
+            continue
         # remove {:.no_toc}
         elif re.search(r'{:[ ]?\.no_toc}', l):
             continue
@@ -189,7 +191,7 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
     :param formatted_tuto_fp: Path object to file with formatted tutorial for pandoc
     :param contributor_fp: Path object to file with contributors
     '''    
-    with open(tuto_fp, "r") as tuto_f:
+    with tuto_fp.open("r") as tuto_f:
         full_content = tuto_f.readlines()#yaml.load(tuto_f)
 
         yaml_content = ''
@@ -204,7 +206,7 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
             yaml_metadata,
             str(tuto_fp))
         
-    with open(formatted_tuto_fp, "w") as tuto_f:
+    with formatted_tuto_fp.open("w") as tuto_f:
         tuto_f.write('---\n')
         tuto_f.write(yaml.dump(metadata))
         tuto_f.write('---\n')
