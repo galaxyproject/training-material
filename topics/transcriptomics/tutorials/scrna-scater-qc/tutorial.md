@@ -60,7 +60,7 @@ We will use *scater* ({% cite 10.1093/bioinformatics/btw777 %}) to visualise scR
 # Overview
 We will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. We will plot the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).
 
-![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow")
+![Workflow](../../images/scrna-scater-qc/Figure1.jpg "Workflow demonstrating the visualise-filter-visualise paradigm of the software")
 
 
 # Data upload
