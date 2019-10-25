@@ -458,19 +458,19 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 > >
 > >    > ### {% icon question %} Question
 > >    >
-> >    > What are the percentage of duplicate reads for both samples?
+> >    > What are the percentages of duplicate reads for each sample?
 > >    >
 > >    > > ### {% icon solution %} Solution
-> >    > > The sample `GSM461177` has 27.8% of duplicated reads and `GSM461180` 25.9%.
+> >    > > The sample `GSM461177` has 27.8% of duplicated reads while `GSM461180` has 25.9%.
 > >    > {: .solution}
 > >    {: .question}
 > {: .hands_on}
 >
-> In general, we consider normal to obtain up to 50% of duplication. So both our samples are good.
+> In general, up to 50% of duplication can be consider normal to obtain. So both our samples are good.
 >
 > #### Number of reads mapped to each chromosome
 >
-> To assess the sample quality (e.g. excess of mitochondrial contamination), check the sex of samples or see if any chromosome have highly expressed genes, we can check the numbers of reads mapped to each chromosome using **IdxStats** from **Samtools** suite.
+> To assess the sample quality (e.g. excess of mitochondrial contamination), check the sex of samples, or see if any chromosome have highly expressed genes, we can check the numbers of reads mapped to each chromosome using **IdxStats** from the **Samtools** suite.
 >
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
@@ -484,17 +484,17 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 > >         - *"Type of Samtools output?"*: `Markdups`
 > >         - {% icon param-files %} *"Samtools output"*: `Samtools idxstats` files
 > >
-> >    > ### {% icon question %} Question
+> >    > ### {% icon question %} Questions
 > >    >
 > >    > ![Samtools idxstats](../../images/ref-based/samtools-idxstats-mapped-reads-plot.png)
 > >    >
 > >    > 1. How many chromosomes does the *Drosophila* genome have?
-> >    > 2. Where are mostly mapped the reads?
+> >    > 2. Where did the reads mostly map?
 > >    > 3. Can we determine the sex of the sample?
 > >    >
 > >    > > ### {% icon solution %} Solution
 > >    > > 1. The genome of *Drosophila* has 4 pairs of chromosomes: X/Y, 2, 3, and 4.
-> >    > > 2. The reads mapped mostly to chromosome 2 (chr2L and chr2R), 3 (chr3L and chr3R) and X. Some reads mapped on the chromosome 4 as expected as this chromosome is so small.
+> >    > > 2. The reads mapped mostly to chromosome 2 (chr2L and chr2R), 3 (chr3L and chr3R) and X. Only some reads mapped to chromosome 4, which is expected given this chromosome is very small.
 > >    > > 3. From the percentage of X+Y reads, most of the reads map to X and only few to Y. So only few genes may be on Y. So the samples are probably both female.
 > >    > >
 > >    > >    ![Samtools idxstats](../../images/ref-based/samtools-idxstats-xy-plot.png)
@@ -540,7 +540,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > With RNA-Seq data, we expect most reads to map to exons rather than introns or intergenic regions. Before going further in counting and differential expression analysis, it may be interesting to check the distribution of reads across known gene features (exons, CDS, 5'UTR, 3'UTR, introns, intergenic regions). For example, a high number of reads mapping to intergenic regions may indicate the presence of DNA contamination.
 >
-> We will here the **Read Distribution** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite, which uses the annotation file to identify the position of the different gene features.
+> Here we will use the **Read Distribution** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite, which uses the annotation file to identify the position of the different gene features.
 >
 > > ### {% icon hands_on %} Hands-on: Check the number of reads mapped to each chromosome
 > >
