@@ -3,7 +3,7 @@
   pre_tasks:
     - name: Install Dependencies
       package:
-        name: ['python-psycopg2', 'git', 'python-virtualenv', 'make']
+        name: ['git', 'make', 'python-psycopg2', 'python-virtualenv']
   handlers:
     - name: Restart Galaxy
       supervisorctl:
@@ -14,8 +14,8 @@
     - role: natefoo.postgresql_objects
       become: true
       become_user: postgres
+    - geerlingguy.pip
     - galaxyproject.galaxy
     - uchida.miniconda
-    - geerlingguy.pip
     - usegalaxy-eu.supervisor
     - galaxyproject.nginx
