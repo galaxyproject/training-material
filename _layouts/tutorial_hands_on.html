@@ -142,36 +142,36 @@ layout: base
             {% endif %}
 
             {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
-            <div>
-                <p><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
-                <div class="supporting_materials">
-                    {% if associated_slides %}
-                        <div><a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                            {% icon slides %} Slides
-                        </a></div>
-                    {% elsif intro_link %}
-                        <div><a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
-                            {% icon slides %} Introduction slides
-                        </a></div>
-                    {% endif %}
+            <p><strong><i class="fa fa-external-link" aria-hidden="true" id="supporting-materials"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                {% if associated_slides %}
+                    <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
+                        {% icon slides %} Slides
+                    </a></li>
+                {% elsif intro_link %}
+                    <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
+                        {% icon slides %} Introduction slides
+                    </a></li>
+                {% endif %}
 
-                    {% if tuto_has_zenodo %}
-                        <div>{% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}</div>
-                    {% endif %}
+                {% if tuto_has_zenodo %}
+                    <li class="btn btn-default supporting_material">{% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
 
-                    {% if own_material.workflows %}
-                        <div>{% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}</div>
-                    {% endif %}
+                {% if own_material.workflows %}
+                    <li class="btn btn-default supporting_material">{% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
 
-                    {% if own_material.tours %}
-                        <div>{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</div>
-                    {% endif %}
+                {% if own_material.tours %}
+                    <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
 
-                    {% if tuto_has_docker and topic.name != 'admin' %}
-                        <div>{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</div>
-                    {% endif %}
+                {% if tuto_has_docker and topic.name != 'admin' %}
+                    <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
+                {% endif %}
                 </div>
-            </div>
+            </ul>
             {% endif %}
 
         </blockquote>
