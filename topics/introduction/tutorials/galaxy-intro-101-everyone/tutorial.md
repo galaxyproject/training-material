@@ -12,6 +12,7 @@ objectives:
   - "Learn how to tag datasets"
   - "Learn how to run tools"
   - "Learn how histories work"
+  - "Learn how to create a workflow"
   - "Learn how to share your work"
 time_estimation: "1H30M"
 key_points:
@@ -36,7 +37,7 @@ contributors:
 <!-- This is a comment. -->
 
 This practical aims to familiarize you with the Galaxy user interface.
-It will teach you how to perform basic tasks such as importing data, running tools, working with histories, and sharing your work.
+It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
 Not everyone has the same background and that's ok!
 
 {% include snippets/warning_results_may_vary.md %}
@@ -88,8 +89,7 @@ The order of operations is important as very often the next operation takes as i
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
 That is what we call a pipeline.
 
-Then the finalized pipeline can be serialized as a workflow. A workflow is the concatenation of one or multiple histories as a series of building blocks
-for replicating an experimental result or a recipe. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
+Then the finalized pipeline can be serialized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
 In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input.
 
 > ### {% icon hands_on %} Hands-on: Create history
@@ -241,12 +241,20 @@ In order to answer this question, we will have to look at column 5 of our file, 
 >      - *"Delimited by"*: `Tab`
 >      - *"From"*: `iris clean` dataset
 >
-> 2. View the resulting file {% icon galaxy-eye %}
+> 2. Rename the dataset to `iris species column`
 >
-> 3. **Unique** occurrences of each record {% icon tool %} with the following parameters:
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. View the resulting file {% icon galaxy-eye %}
+>
+> 4. **Unique** occurrences of each record {% icon tool %} with the following parameters:
 >      - *"File to scan for unique values"*: the output from **Cut** {% icon tool %}
 >
-> 4. View the resulting file {% icon galaxy-eye %}
+> 5. Rename the dataset to `iris species`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 6. View the resulting file {% icon galaxy-eye %}
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -274,7 +282,12 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 > 1. Try answering this question (how many Iris species are in the file?) again, using a different approach:
 >    - Tool: **Group** data by a column and perform aggregate operation on other columns {% icon tool %}
 >    - Input dataset: `iris clean` dataset to answer the same question.
-> 2. Did you get the same answer as before?
+>
+> 2. Rename the dataset to `iris species group`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. Did you get the same answer as before?
 >
 > > ### {% icon solution %} Solution
 > > 1. **Group** {% icon tool %} with the following parameters:
@@ -312,7 +325,11 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 >
 >    {% include snippets/rerun_tool.md %}
 >
-> 2. View {% icon galaxy-eye %} the resulting file.
+> 2. Rename the dataset to `iris samples per species group`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. View {% icon galaxy-eye %} the resulting file.
 >
 >
 >
@@ -452,7 +469,11 @@ check whether we can spot any immediate patterns.
 >
 >    ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter.png)
 >
-> 3. Add the tag `plot` to the dataset
+> 3. Rename the dataset to `iris sepal scatterplot w ggplot2`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Add the tag `plot` to the dataset
 >
 >    {% include snippets/add_tag.md %}
 >
@@ -463,6 +484,14 @@ check whether we can spot any immediate patterns.
 > 1. What does this scatter plot tell us about Iris species?
 > 2. Make a new scatter plot with Petal length versus Petal width. Can we differentiate the three Iris species?
 >
+>    > ### {% icon tip %} Hiding intermediate steps
+>    > Instead of clicking on **Scatterplot w ggplot2** {% icon tool %} again, it is possible to recall the previous scatterplot parameters by clicking on re-run button and updating the parameters we wish to modify.
+>    >    > ### {% icon hands_on %} Hands-on: Re-run the tool
+>    >    > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Scatterplot w ggplot2** {% icon tool %}
+>    >    > ![rerun](../../images/rerun_scatterplot.png)
+>    >    > This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
+>    {: .tip}
+
 > > ### {% icon solution %} Solution
 > >
 > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distingished from *Iris versicolor* and
@@ -496,7 +525,136 @@ check whether we can spot any immediate patterns.
 > {: .solution}
 {: .question}
 
-# Share your work
+
+# Galaxy management
+
+## Convert your analysis history into a workflow
+
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
+
+> ### {% icon hands_on %} Hands-on: Extract workflow
+>
+> 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
+>
+> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
+>
+>    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>
+>    ![Selection of steps for `Extract Workflow` from history](../../images/101_foreveryone_workflow_create.png)
+>
+> 3. **Rename** the workflow to something descriptive, for example `Exploring Iris dataset with statistics and scatterplots`.
+>
+>    While we created this workflow initially to analyse Iris dataset, if we had similarly formatted datasets we could use this workflow to describe them.
+>
+>    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+>
+> 4. Click on the **Create Workflow** button near the top.
+>
+>    You will get a message that the workflow was created. But where did it go?
+>
+> 5. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
+>
+>    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
+>    ![`Your workflows` list](../../images/101_foreveryone_workflow_list.png)
+{: .hands_on}
+
+## The workflow editor
+
+We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
+
+> ### {% icon hands_on %} Hands-on: Extract workflow
+>
+> 1. Click on the triangle to the right of your workflow name.
+>
+> 2. Select **Edit** to launch the workflow editor. You should see something like this:
+>
+>    ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
+>
+>    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
+>
+>    > ### {% icon tip %} Hiding intermediate steps
+>    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+>    > ![Asterisk for `out_file1` in the `Select First` tool](../../images/101_foreveryone_workflow_editor_mark_output.png)
+>    >
+>    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk (in green) will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
+>    {: .tip}
+>
+> 3. Click the **asterisk** for `out_file` in the `Unique` tool, for `out_file1` in `Group` tools and for `png` in the `Scatterplot w ggplot2` tools.
+>
+>    Now, when we run the workflow, we will only see the final five outputs, i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
+>
+> 4. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
+>
+>    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
+>
+> 5. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
+>
+{: .hands_on}
+
+> ### {% icon comment %} Comments
+> We could **validate** our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.
+{: .comment}
+
+
+## Run workflow on different data
+
+Now that we have built our workflow, let's use it on some different data. For example, let's describing `diamonds` R dataset.
+
+> ### {% icon hands_on %} Hands-on: Create a new history and upload a new data
+>
+> Create a **new history** and give it a name.
+>
+>    {% include snippets/create_new_history.md %}
+
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamond.csv) or from the data library (ask your instructor)
+>
+>    ```
+>    https://zenodo.org/record/3522106/files/diamond.csv
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>
+>
+
+The `diamonds` data set is coming from the well-known ggplot2 package developped by Hadley and initially collected from Diamond Search Engine in 2008.
+Dataset format is made of 53940 observations and 10 variables within the 4 Cs (carat, cut, color and clarity):
+  - carat, refers to the weight of the diamond when measured on a scale
+  - cut, applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+  - color, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow
+  - clarity, describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+
+![4 Cs](../../images/4cs-of-diamond-buying.jpg "4 Cs")
+
+> ### {% icon hands_on %} Hands-on: Run workflow
+>
+> 1. We wish to analyze diamonds by their 4 Cs by recycling our workflow.
+>
+> 2. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, `copy` it, `rename` it and select the option `Run`.
+>
+>    The central panel will change to allow you to configure and launch the workflow.
+>
+> 3. Select the appropriate dataset for the input, change column number to the different tools and create 2 scatterplots representing price according to carat with either color or clarity as factor
+>
+> 4. Click `Run workflow`.
+>
+> 5. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+{: .hands_on}
+
+> ### {% icon question %} Questions
+> How many cut category are there in the Diamond dataset ? How many samples are there in each cut category ? Which are the metrics for carat, depth, table, price, x, y and z ?
+
+{: .question}
+
+
+## Share your work
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
