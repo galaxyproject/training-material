@@ -62,7 +62,7 @@ In this tutorial, we illustrate the analysis of the gene expression data step by
 Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.
 
 > ### {% icon comment %} Full data
-> The original data is available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). The raw RNA-Seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files.
+> The original data are available at NCBI Gene Expression Omnibus (GEO) under accession number [GSE18508](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508). The raw RNA-Seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files.
 {: .comment}
 
 > ### Agenda
@@ -278,11 +278,11 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 >    ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
 >
-> To further optimize and speed up spliced read alignment [**HISAT**](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2015hisat %}) was developed. It uses a set of [FM-indices](https://en.wikipedia.org/wiki/FM-index) consisting one global genome-wide index and a collection of ~48,000 local overlapping 42 kb indices (~55,000 56 kb indices in HISAT2). This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
+> To further optimize and speed up spliced read alignment, [**HISAT2**](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2019graph %}) was developed. It uses a hierarchical graph [FM](https://en.wikipedia.org/wiki/FM-index) (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
 >    ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
 >
-> A part of the read (blue arrow) is first mapped to the genome using the global FM index. **HISAT** then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now **HISAT** takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
+> A part of the read (blue arrow) is first mapped to the genome using the global FM index. **HISAT2** then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now **HISAT2** takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
 >
 > [**STAR** aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-Seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
 >
@@ -440,9 +440,9 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
 >
-> Duplicate reads are usually kept in RNA-Seq differential expression analysis: they can come from highly-expressed genes. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCA of low complexity library.
+> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCA of low complexity library.
 >
-> **MarkDuplicates** from [Picard suite](http://broadinstitute.github.io/picard/) examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping at the same location (based on the start position of the mapping).
+> **MarkDuplicates** from [Picard suite](http://broadinstitute.github.io/picard/) examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping to the same location (based on the start position of the mapping).
 >
 > > ### {% icon hands_on %} Hands-on: Check duplicate reads
 > >
@@ -538,7 +538,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > #### Read distribution across features
 >
-> With RNA-Seq data, we expect most reads to map to exons rather than introns or intergenic regions. Before going further in counting and differential expression analysis, it may be interesting to check the distribution of reads across known gene features (exons, CDS, 5'UTR, 3'UTR, introns, intergenic regions). For example, a high number of reads mapping to intergenic regions may indicate the presence of DNA contamination.
+> With RNA-Seq data, we expect most reads to map to exons rather than introns or intergenic regions. Before going further in counting and differential expression analysis, it may be interesting to check the distribution of reads across known gene features (exons, CDS, 5' UTR, 3' UTR, introns, intergenic regions). For example, a high number of reads mapping to intergenic regions may indicate the presence of DNA contamination.
 >
 > Here we will use the **Read Distribution** tool from the RSeQC ({% cite wang2012rseqc %}) tool suite, which uses the annotation file to identify the position of the different gene features.
 >
@@ -568,7 +568,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 > >    {: .question}
 > {: .hands_on}
 >
-> Now that we have checked the data and are happy with how it looks, we can proceed to counting.
+> Now that we have checked the results of the read mapping, we can proceed to the next phase of the analysis.
 {: .details}
 
 After the mapping, we have the information on where the reads are located on the reference genome. We also know how well they were mapped. The next step in RNA-Seq data analysis is quantification of the number of reads mapped to genomic features (genes, transcripts, exons, ...).
