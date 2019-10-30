@@ -5,7 +5,6 @@ title: Apollo
 zenodo_link: https://zenodo.org/record/3270822
 tags:
 - intro
-- eukaryote
 questions:
 - How to visualize your genome after automated annotations have been performed?
 - How to manually annotate genome after automated annotations have been performed?
@@ -36,16 +35,18 @@ requirements:
 #    -
 ---
 
+> {% icon warning %} Only works on UseGalaxy.eu
+> Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
+{: .warning}
 
 # Introduction
 {:.no_toc}
 
-After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), its important to visualize and then manually refine any additional data.
-This process is most often done as part of a group, smaller organisms may be annotated individually though.
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
-[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collabortive genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to annotate a genome.
+[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collabortive genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidence and annotate a genome.
 
-This demo was inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. This tutorial was further developed by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group who developed the Galaxy-Apollo bridge.
+This demo was inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. This tutorial was further developed by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group who developed the Galaxy-Apollo bridge. It focuses on the mechanics of moving data into and out of Apollo, and not as much on how to use Apollo. The most up-to-date information on Apollo usage can be found in their [User Guide](http://genomearchitect.github.io/users-guide/).
 
 > ### Agenda
 >
@@ -58,18 +59,27 @@ This demo was inspired by the [Apollo User's Guide](http://genomearchitect.githu
 
 # Data upload
 
-To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can refer to something like:
+To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can be any data like:
 
 - A set of prior gene predictions or other genomic feature predictions
 - The output of a bioinformatic analysis like BLAST or InterProScan
 - Sequencing reads from RNA-Seq or another HTS analysis
 - If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
 
-In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655). All of the data is publicly accessible and the sources are noted in the Zenodo records.
+In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655), and we will visualise this data and use it to make some annotations in order to familiarise you with the process.
+
+> ### {% icon comment %} Real Data: Unreal Circumstances
+> While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on *E. coli K12*, this is not necessarily the data *you* might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.
+{: .comment}
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
+>
+> 0. Create a new history and give it a good name
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
 >
 > 1. Click the upload icon {% icon galaxy-upload %}
 >
@@ -124,21 +134,19 @@ In this tutorial we will focus more on the practical portions than the theoretic
 
 ## Build the JBrowse Instance
 
-
-
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
->    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
+>        - {% icon param-file %} *"Select the reference genome"*: Select the genome fasta file
+>    - *"Genetic Code"*: `11. The Bacterial, Archael`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Gene Calls`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                        - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: `Augustus` and `NCBI annotwriter Genes ASM584v2`
+>                        - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: `Augustus` and `NCBI AnnotWriter Genes`
 >                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Sequencing`
@@ -148,7 +156,9 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >                        - {% icon param-files %} *"BAM Track Data"*: Both BWA-MEM Mappings
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BigWig XY`
->                        - {% icon param-files %} *"BAM Track Data"*: Both the `K12 Coverage` and `O101:H4 Coverage` files
+>                        - {% icon param-files %} *"BAM Track Data"*: Both of the BWA-MEM Coverage files (**not** the `(as bigwig)` files)
+>                        - *"Use XYPlot"*: `Yes`
+>                        - *"Show Variance Band"*: `Yes`
 >                        - *"Track Scaling"*: `Autoscale (local)`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `RNA-Seq`
@@ -158,7 +168,9 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >                        - {% icon param-files %} *"BAM Track Data"*: Both TopHat Mappings
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `BigWig XY`
->                        - {% icon param-files %} *"BAM Track Data"*: Both the `Coverage .../rep1` and `Coverage .../rep2` files
+>                        - {% icon param-files %} *"BAM Track Data"*: Both of the `TopHat ... Coverage` files
+>                        - *"Use XYPlot"*: `Yes`
+>                        - *"Show Variance Band"*: `Yes`
 >                        - *"Track Scaling"*: `Autoscale (local)`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `Variation`
@@ -166,10 +178,19 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `VCF SNPs`
 >                        - {% icon param-files %} *"SNP Track Data"*: Both FreeBayes files
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Similarity`
+>            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
->                        - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: `O104:H4 LASTZ Alignments`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `O104:H4 LASTZ Alignments`
 >                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `Blast XML`
+>                        - {% icon param-file %} *"Blast XML Track Data"*: The `blastp` results from swissprot
+>                        - {% icon param-file %} *"Features used in Blast Search"*: The `NCBI AnnotWriter Genes` file
+>                        - *"Minimum Gap Size"*: `3`
+>                        - *"Is this a protein blast search?"*: `Yes`
 >
 >    > ### {% icon comment %} JBrowse is highly configurable
 >    >
@@ -179,52 +200,78 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >    >
 >    > Currently we have built a standalone genome browser (data + the html page and user interface and javascript), but it's possible to just compile the data directory if you intend to send this data to Apollo, and don't need to view the static data in Galaxy.
 >    {: .comment}
-
 {: .hands_on}
 
-Next we will send this data through to Apollo, here we select the output of a JBrowse tool
+This tool will take some time to run dependent on data size. All of the inputs need to be pre-processed by JBrowse into a form that it can render and visualise easily. Once this is complete, you can click on the {% icon galaxy-eye %} eyeball to view the JBrowse instance. This is a static view into the data, JBrowse does not let you make any annotations or save any changes. We will convert it into a dynamic view where we can make persistent annotations and share these with our colleagues.
 
-##  **Create or Update Organism**
+## Sending data to Apollo
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Import to Apollo
 >
 > 1. **Create or Update Organism** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"JBrowse HTML Output"*: `output` (output of **JBrowse** {% icon tool %})
+>    - {% icon param-file %} *"JBrowse HTML Output"*: output of **JBrowse** {% icon tool %}
 >    - *"Organism Common Name Source"*: `Direct Entry`
 >        - *"Organism Common Name"*: `E. coli K12`
 >    - *"Genus"*: `Escherichia`
 >    - *"Species"*: `coli`
 >
-{: .hands_on}
-
-## Sub-step with **Annotate**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> 2. **Annotate** {% icon tool %}:
+>    - {% icon param-file %} *"Apollo Organism Listing"*: output of **Create or Update Organism** {% icon tool %}
 >
-> 1. **Annotate** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Apollo Organism Listing"*: `output` (output of **Create or Update Organism** {% icon tool %})
->
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. View {% icon galaxy-eye %} the output of the Annotate tool, when it is ready.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. Why DO we bother?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Annotation depth may be insufficient and assemblies may be incorrect.
-> >
-> {: .solution}
->
-{: .question}
+Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This "Annotate" output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu's Apollo server it available at [https://usegalaxy.eu/apollo](https://usegalaxy.eu/apollo).
+{: .warnin}
 
-# Create refinements
+
+# Apollo
+
+
+![Apollo in Galaxy](../../images/apollo/ui.png "This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
+
+From the Apollo user manual:
+
+> The major steps of manual annotation using Apollo can be summarized as follows:
+>
+> 1. Locate a chromosomal region of interest.
+> 2. Determine whether a feature in an existing evidence track provides a reasonable gene model to start annotating.
+> 3. Drag the selected feature to the ‘User Annotation’ area, creating an initial gene model.
+> 4. Use editing functions to edit the gene model if necessary.
+> 5. Check your edited gene model for consistency with existing homologs by exporting the FASTA formatted sequence and searching a protein sequence database, such as UniProt or the NCBI Non Redundant (NR) database, and by conducting preliminary functional assignments using the Gene Ontology (GO) database.
+>
+{: .quote}
+
+The first four steps are generally the process of structural annotation (the process of identifying the correct gene model), and the last includes functional annotation (the process of assigning a putative function to a gene in your annotations).
+
+## Structural Annotation
+
+Let's start by looking at the tracks available to us, and then turning on the gene call tracks so we can start exploring our data.
+
+> ### {% icon hands_on %} Visualize the Gene Calls
+>
+> 1. In the right hand panel at the top click on **Tracks** to open the track listing
+>
+>    ![Track menu](../../images/apollo/tracks.png)
+>
+> 2. In the **Gene Calls** group, click the checkbox to the right.
+>
+>    You can either activate tracks in bulk, by clicking on the checkbox to the right of the group name ("Gene Calls"), or by clicking on the group name to expand the section, and then selecting individual tracks.
+>
+> 3. Zoom to the first 10kb of the genome.
+>
+>    1. In the left hand Annotation Window, at the top navigation bar you will find a textbox which shows the current location on the genome.
+>    2. Edit this and enter `1..10000`
+>    3. Press *Go* or use <kbd>Enter</kbd> on your keyboard.
+>
+>    ![JBrowse Location Bar](../../images/apollo/location.png)
+>
+{: .hands_on}
+
+We can now see two evidence tracks: one is the set of [genes from NCBI](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock), the other is the output of [AUGUSTUS](https://github.com/Gaius-Augustus/Augustus) {% cite Stanke_2008 %}. In a *de novo* annotation project, we probably will only have the outputs of various gene callers, and potentially some expression evidence like RNA-Seq.
+
+## Create refinements
 
 View data at a particular position
 
