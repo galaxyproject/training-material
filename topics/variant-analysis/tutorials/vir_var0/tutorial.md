@@ -516,6 +516,38 @@ Once the workflow is created we can run it on the collection that was produced b
 
 We are now ready to identify sequence variants in our data. For this purpose we will use **Freebayes** - a versatile variant calling suitable for mixed haploid samples. 
 
+> ### {% icon hands_on %} Calling variants with Freebayes
+> 1. *"Choose the source for the reference genome"* : `History` (red arrow in Fig. [16](#figure-16))
+> 2. *"BAM dataset"* : Set this to the collection produced by the downsampling workflow (blue arrow in Fig. [16](#figure-16))
+> 3. *"Use the following dataset as the reference sequence"* : Set this to HIV genome sequence [uploaded previously](#get-the-hiv-genome) (orange arrow in Fig. [16](#figure-16))
+> 4. *"Choose parameter selection level"* : `Full list of options`
+> 5. Locate *"Population model options"* dropdown and set it to `Set population model options`. Within this section set the following:
+>    - *"Set ploidy for the analysis"* : `1` (red arrow in Fig. [17](#figure-17))
+>    - *"Output all alleles which pass input filters, regardless of genotyping outcome or model"* : `Yes` (blue arrow in Fig. [17](#figure-17))
+> 6. Locate *"Input filters"* dropdown and set it to `Set input filters`. Within this section set the following:
+>    - *"Use stringent input base and mapping quality filters"* : `Yes` (red arrow in Fig. [18](#figure-18))
+>    - *"Require at least this fraction of observations supporting an alternate allele within a single individual in the in order to evaluate the position"* : `0.001` (blue arrow in Fig. [18](#figure-18))
+>    - *"Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position"* : `10` (orange arrow in Fig. [18](#figure-18))
+>  7. Click **Execute**
+{: .hands_on}
+
+![Freebayes datasets](../../images/hiv_freebayes1.png "Setting inputs for Freebayes")
+![Freebayes population settings](../../images/hiv_freebayes2.png "Setting population options")
+![Freebayes input filters](../../images/hiv_freebayes3.png "Setting input filters")
+
+
+
+
+> 2. Select the workflow you've just created (it is named `ds` in Fig. [14](#figure-14), but you could have named it any way you want). 
+> 3. Click on the down arrow ({% icon galaxy-dropdown %}) adjacent to the workflow name and select **Run**.
+> 4. In the interface that would appear you need to change three things:
+>    - *"BAMs"* : set to the output of **BWA-MEM** from the [mapping step](#map-against-hiv-genome-using-bwa-mem) (red arrow in Fig. [15](#figure-15))
+>    - *"Datamash"* : set to the [output of **Datamash**]](#hands_on-computing-mean-and-median-with-datamash) (blue arrow in Fig. [15](#figure-15))
+>    - *"Add expression"* : set to `min(1000/c1,1)`. This expression will output minimal of two values: `1000/c1` or `1` (orange arrow in Fig. [15](#figure-15))
+> 5. Click **Run workflow**
+>
+{: .hands_on}
+
 
 # Title of the section usually corresponding to a big step in the analysis
 
@@ -535,7 +567,6 @@ The idea is to keep the theory description before quite simple to focus more on 
 {: .details}
 
 A big step can have several subsections or sub steps:
-
 
 ## Sub-step with **My Tool**
 
