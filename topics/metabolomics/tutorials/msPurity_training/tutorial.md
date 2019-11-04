@@ -152,8 +152,35 @@ pa  <- purityA(mzMLpths)
 In Galaxy instance, you need to run the **msPurity.purityA** {% icon tool %} tool with the collection containing all your mzML files. It is the collection with which we started the peak picking processus at the beginning of this tutorial.
 
   - Input : your collection with all your files (`mzML`, `mzXML`,...)
-  - Output : one RData file containing all MS/MS datas from your files (`msPurity.purityA_on_yourdata.RData`)
+  - Output : one RData file containing **pa** object with all MS/MS datas from your files (`msPurity.purityA_on_yourdata.RData`)
 
+> ### {% icon solution %} Go further
+> 
+> - To verify your **pa** object and to learn what it contains, you can download your RData file from Galaxy (just clic on the *floppy disc* button) and open it in a R terminal or with RStudio application.
+> ```R
+> load("./Downloads/msPurity.purityA_on_yourdata.RData")
+> head(pa@puritydf)
+```
+> - During this first part of **msPurity** processing, only the *@puritydf* slot has been modified. It is now a table containing the following informations :
+>   - pid: unique id for MS/MS scan
+>   - fileid: unique id for mzML file
+>   - seqNum: scan number
+>   - precursorIntensity: precursor intensity value as defined in the mzML file
+>   - precursorMZ: precursor m/z value as defined in the mzML file
+>   - precursorRT: precursor RT value as defined in the mzML file
+>   - precursorScanNum: precursor scan number value as defined in mzML file
+>   - id: unique id (redundant)
+>   - filename: mzML filename
+>   - precursorNearest: MS1 scan nearest to the MS/MS scan purityA35
+>   - aMz:  The m/z value in the "precursorNearest" MS1 scan which most closely matches theprecursorMZ value provided from the mzML file
+>   - aPurity: The purity score for aMz
+>   - apkNm: The number of peaks in the isolation window for aMz
+>   - iMz:  The m/z value in the precursorNearest MS1 scan that is the most intense within theisolation window.
+>   - iPurity: The purity score for iMz
+>   - ipkNm: The number of peaks in the isolation window for iMz
+>   - inPurity:  The interpolated purity score (the purity score is calculated at neighbouring MS1scans and interpolated at the point of the MS/MS acquisition)
+>   - inpkNm: The interpolated number of peaks in the isolation window
+{: .solution}
 
 ## frag4feature function
 
@@ -206,15 +233,34 @@ q_dbPth <- createDatabase(pa, xset, outDir = td, dbName = 'lcmsms-processing.sql
 
 ## spectralMatching function
 
-blabla
+A query SQLite database can be matched against a library SQLite database with the spectralMatching function. The library spectral-database in most cases should contain the “known” spectra from either public or user generated resources. The library SQLite database by default contains data from MoNA including Massbank, HMDB, LipidBlast and GNPS. A larger database can be downloaded from here.
 
-## combineAnnotations function
+result <- spectralMatching(q_dbPth, q_xcmsGroups = c(12, 27), cores=1, l_accessions=c('CCMSLIB00000577898','CE000616'))
 
-blabla
+ Running msPurity spectral matching function for LC-MS(/MS) data
+
+ Filter query dataset
+
+ Filter library dataset
+
+ aligning and matching
+
+ Summarising LC feature annotations
+
+ combineAnnotations function
+
+
 
 ## createMSP function
 
-blabla
+Create an MSP file for all the fragmentation spectra that has been linked to an XCMS feature via frag4feature. Can export all the associated scans individually or the averaged fragmentation spectra can be exported.
+
+Additional metadata can be included in a dataframe (each column will be added to metadata of the MSP spectra). The dataframe must contain the column “grpid” corresponding to the XCMS grouped feature.
+
+```
+td <- tempdir()
+createMSP(pa, msp_file_pth = file.path(td, 'out.msp'))
+```
 
 ## flagRemove function
 
