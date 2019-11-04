@@ -179,9 +179,7 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 >
 >This will open a dropdown list. Select the novel peptides from there.
 >
->
 > ![dropdown](../../images/DropDown_novel.png){:width="50%"}
->
 >
 > 3) Select **Novel Peptides** from the right hand side.
 >
