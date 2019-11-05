@@ -632,6 +632,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
             UseGalaxy.eu
         </a>
@@ -662,7 +664,7 @@
                     </div></li></ul>
                 </div>
 
-                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 29, 2019 </p>
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 5, 2019 </p>
             </div>
             
 
@@ -1178,30 +1180,120 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p><strong>HISAT2</strong> generates a BAM file with mapped <span class="notranslate">reads</span>.</p>
 
+<p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed, binary file storing the sequences mapped to a reference sequence.</p>
+
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-take-a-look-at-bam-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Take a look at BAM format</h3>
+  <h3 id="hands_on-hands-on-inspect-a-bamsam-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect a BAM/SAM file</h3>
 
   <ol>
-    <li>Click on the collection name (<code class="highlighter-rouge">HISAT2 on collection N: aligned <span class="notranslate">reads</span> (BAM)</code>)</li>
-    <li>
-      <p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of one of the BAM files to have a look at what it contains.</p>
-
-      <blockquote class="question">
-        <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-        <p>What is BAM format?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <p>See the answer in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments"><span class="notranslate">RNA</span>-seq ref-based tutorial</a></p>
-
-        </blockquote>
-
-      </blockquote>
-    </li>
+    <li>Inspect the <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
   </ol>
 
+</blockquote>
+
+<p>A BAM file (or a SAM file, the non-compressed version) consists of:</p>
+
+<ul>
+  <li>A header section (the lines starting with <code class="highlighter-rouge">@</code>) containing metadata particularly the chromosome names and lengths (lines starting with the <code class="highlighter-rouge">@SQ</code> symbol)</li>
+  <li>
+    <p>An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Col</th>
+          <th>Field</th>
+          <th>Type</th>
+          <th>Brief Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>QNAME</td>
+          <td>String</td>
+          <td>Query template NAME</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>FLAG</td>
+          <td>Integer</td>
+          <td>Bitwise FLAG</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><span class="notranslate">RNA</span>ME</td>
+          <td>String</td>
+          <td>References sequence NAME</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>POS</td>
+          <td>Integer</td>
+          <td>1- based leftmost <span class="notranslate">mapping</span> POSition</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>MAPQ</td>
+          <td>Integer</td>
+          <td><span class="notranslate">MAPping</span> Quality</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>CIGAR</td>
+          <td>String</td>
+          <td>CIGAR String</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>RNEXT</td>
+          <td>String</td>
+          <td>Ref. name of the mate/next read</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>PNEXT</td>
+          <td>Integer</td>
+          <td>Position of the mate/next read</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>TLEN</td>
+          <td>Integer</td>
+          <td>Observed Template LENgth</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>SEQ</td>
+          <td>String</td>
+          <td>Segment SEQuence</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>QUAL</td>
+          <td>String</td>
+          <td>ASCII of Phred-scaled base QUALity+33</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Which information do you find in a SAM/BAM file?</li>
+    <li>What is the additional information compared to a FASTQ file?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>Sequences and quality information, like a FASTQ</li>
+      <li><span class="notranslate">Mapping</span> information, Location of the read on the chromosome, <span class="notranslate">Mapping</span> quality, etc</li>
+    </ol>
+  </blockquote>
 </blockquote>
 
 <h2 id="qc-mapped-reads">QC: mapped <span class="notranslate">reads</span></h2>
@@ -1232,7 +1324,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>Over 90% of <span class="notranslate">reads</span> have mapped in all samples, which is a good <span class="notranslate">mapping</span> rate, and the vast majority of <span class="notranslate">reads</span> have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
-<p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#pretreatments"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>.</p>
+<p>It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#inspection-of-the-mapping-results"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>.</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-downloading-a-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Downloading a collection</h3>
