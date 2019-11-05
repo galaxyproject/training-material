@@ -4,7 +4,7 @@ layout : tutorial_hands_on
 title : 'Mass spectrometry : MSMS analysis with msPurity package'
 level : Introductory
 enable : true
-zenodo_link : '' 
+zenodo_link : 'https://zenodo.org/record/3244991' 
 questions : 
     - Which biological questions are addressed by the tutorial? 
     - Which bioinformatics techniques are important to know for this type of data? 
