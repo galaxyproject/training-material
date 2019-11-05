@@ -3,7 +3,6 @@ layout : tutorial_hands_on
 
 title : 'Mass spectrometry : MSMS analysis with msPurity package'
 level : Introductory
-enable : true
 zenodo_link : 'https://zenodo.org/record/3244991' 
 questions : 
     - Which biological questions are addressed by the tutorial? 
@@ -17,7 +16,7 @@ time_estimation : 2H
 key_points : 
     - The take-home messages 
     - They will appear at the end of the tutorial 
-requirements:
+requirements :
   - type: "internal"
     topic_name: metabolomics
     tutorials: 
@@ -55,7 +54,7 @@ This software is based on different algorithms that have been published, and is 
 adducts and fragments using the R package CAMERA ({% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well
 adapted to define workflows, one of the key points of Galaxy.
 
-To be able to process your MS/MS datas, we need to start with the peakpicking of MS datas. One Galaxy Training already explains how to process with your MS datas. You should follow this link and complete this tutorial : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). 
+To be able to process your MS/MS datas, we need to start with the peakpicking of MS datas. One Galaxy Training already explains how to process with your MS datas. You should follow this link and complete this tutorial : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For MS/MS analysis you don't really need to finish this previous tutorial but for a better understanding of your datas, it is recommanded. In this tutorial, you just have to compute your datas with the following steps briefly describe in the *hands-on* part.
 
 > ### {% icon hands_on %} Hands-on: Resume of the XCMS preprocessing
 >
@@ -116,7 +115,7 @@ To be able to process your MS/MS datas, we need to start with the peakpicking of
 > {: .warning}
 {: .hands_on}
 
-
+When you have process **all or only needed** steps describe before, you can continue with the MS/MS processing part with **msPurity** package. Don't forget to always check your files format ! For the next step you need to have this file `xset.merged.groupChromPeaks.*.RData` where * is the name of optionnal steps you could do during the pre-processing.
 
 
 # msPurity package
