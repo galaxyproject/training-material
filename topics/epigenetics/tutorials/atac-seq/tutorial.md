@@ -384,6 +384,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 {: .comment}
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
+>
 > 1. **Select** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"that*: `matching`
@@ -392,7 +393,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 > 3. **Transpose** {% icon tool %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **Select** {% icon tool %}
 >
-> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191105.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
