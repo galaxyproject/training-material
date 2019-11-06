@@ -384,13 +384,15 @@ Because of the PCR amplification, there might be read duplicates (different read
 {: .comment}
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
-> You can copy/paste the 2 lines with header and data into an Excel sheet.
-> Replace `Unknown Library` by `Unknown_Library` in the second line.
-> Then do Text to Columns (it is space delimited data). You should check the box for Treat consecutive delimiters as one.
-> Finally you copy and paste special your table to transpose it.
-> Now you should have:
+> 1. **Select** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
+>    - *"that*: `matching`
+>    - *"the pattern*: `(Library|LIBRARY)`
+> 2. Check that the datatype is tabular. If they are not then change the datatype as described above.
+> 3. **Transpose** {% icon tool %}:
+>    - {% icon param-file %} *"Select lines from"*: Select the output of  **Select** {% icon tool %}
 >
-> ![Metrics of MarkDuplicates in Excel](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates in Excel")
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
