@@ -613,7 +613,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamond.csv) or from the data library (ask your instructor)
+> 1. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/3522106/files/diamond.csv
