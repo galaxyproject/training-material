@@ -614,22 +614,6 @@
     
         
     
-        
-    
-        
-        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
-            UseGalaxy.eu
-        </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
     </ul>
 
 
@@ -639,7 +623,7 @@
                     </div></li></ul>
                 </div>
 
-                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 2, 2019 </p>
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 6, 2019 </p>
             </div>
             
 
@@ -1307,13 +1291,24 @@ The first 2 lines of the result would be (after sorting):</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-formatting-the-markduplicate-metrics-for-readability"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Formatting the MarkDuplicate metrics for readability</h3>
-  <p>You can copy/paste the 2 lines with header and data into an Excel sheet.
-Replace <code class="highlighter-rouge">Unknown Library</code> by <code class="highlighter-rouge">Unknown_Library</code> in the second line.
-Then do Text to Columns (it is space delimited data). You should check the box for Treat consecutive delimiters as one.
-Finally you copy and paste special your table to transpose it.
-Now you should have:</p>
 
-  <figure id="figure-9"><img src="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png" alt="Metrics of MarkDuplicates in Excel" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Metrics of MarkDuplicates in Excel</figcaption></figure>
+  <ol>
+    <li><strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“that</em>: <code class="highlighter-rouge">matching</code></li>
+        <li><em>“the pattern</em>: <code class="highlighter-rouge">(Library|LIBRARY)</code></li>
+      </ul>
+    </li>
+    <li>Check that the datatype is tabular. If they are not then change the datatype as described above.</li>
+    <li><strong>Transpose</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of  <strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+  </ol>
+
+  <figure id="figure-9"><img src="../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191105.png" alt="Metrics of MarkDuplicates" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Metrics of MarkDuplicates</figcaption></figure>
 
 </blockquote>
 
