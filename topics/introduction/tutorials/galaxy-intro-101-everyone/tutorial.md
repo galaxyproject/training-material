@@ -605,6 +605,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
+> 3. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
+>
+>    {% include snippets/add_tag.md %}
 {: .hands_on}
 
 The `diamonds` data set is coming from the well-known ggplot2 package developped by Hadley and initially collected from Diamond Search Engine in 2008.
