@@ -205,6 +205,34 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 	python bin/add_galaxy_instance_badges.py
 .PHONY: annotate
 
+create-pandoc-env: ## create conda environment with pandoc
+	if ${CONDA} env list | grep '^gtn_paper'; then \
+	    ${CONDA} env update -n gtn_paper pandoc; \
+	else \
+	    ${CONDA} create -n gtn_paper pandoc -y; \
+	fi
+.PHONY: create-pandoc-env
+
+ROOT=../../../../../
+ARTICLE_TEMPLATE=shared/article-template/
+format-for-article: ## format a tutorial for article (specify TUTO with path to tutorial folder)
+	${ACTIVATE_ENV} && \
+	python bin/format_tutorial_for_article.py -t ${TUTO} && \
+	source $(shell dirname $(dir $(CONDA)))/bin/deactivate && \
+	source $(shell dirname $(dir $(CONDA)))/bin/activate gtn_paper && \
+	cd ${TUTO}/article && \
+	pandoc -f markdown -t latex --template ${ROOT}/${ARTICLE_TEMPLATE}/plos_latex_template.tex -o article_2.tex article_1.md && \
+	source $(shell dirname $(dir $(CONDA)))/bin/deactivate && \
+	cp ${ROOT}/${ARTICLE_TEMPLATE}/plos2015.bst . && \
+	pdflatex article_2.tex && \
+	bibtex article_2.aux && \
+	${ACTIVATE_ENV} && \
+	python ${ROOT}bin/format_article_latex.py -a . && \
+	pdflatex article_3.tex && \
+	pdflatex article_3.tex && \
+	cd ${ROOT}/
+.PHONY: format-for-article
+
 clean: ## clean up junk files
 	@rm -rf _site
 	@rm -rf .sass-cache
