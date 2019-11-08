@@ -231,11 +231,11 @@ Now it is time to run your first tool! We saw in the previous step that our file
 
 # Data Analysis: What does the dataset contain?
 
-Now we are going to inspect the dataset using simple tools in order to get used to Galaxy interface and answer basic questions.
+Now we are going to inspect the dataset using simple tools in order to get used to the Galaxy interface and answer basic questions.
 
 ## How many different species are in the dataset?
 
-In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in Galaxy. One approach might be to first extract this column from the file, and then count how many unique lines the file has. Let's do it!
+In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in Galaxy. One approach might be to first extract this column from the file, and then count how many unique lines the file contains. Let's do it!
 
 > ### {% icon hands_on %} Hands-on: Filtering dataset
 >
@@ -303,7 +303,7 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 
 Now that we know that there are 3 different species in our dataset, our next objective is determining how many samples of each species we have. To answer this, we need to look at column 5 again, but instead of just determining how many unique values there are, we need to count how many times each of them occurs.
 
-You may have noticed there were some more parameters in the **Group** {% icon tool %} tool that we did not use. Let's have a closer look and see if any of them might help us answer this question.
+You may have noticed there were more parameters in the **Group** {% icon tool %} tool that we did not use. Let's have a closer look and see if any of them might help us answer this question.
 
 > ### {% icon comment %} Tool Help
 > To find out more about how a tool works, look at the help text (below the **Execute** button).
@@ -366,7 +366,7 @@ In our dataset, we have the following features measured for each sample:
 - Sepal width
 
 > ### {% icon comment %} petal and sepal
-> The image below shows you wha the terms sepal and petal mean.
+> The image below shows you what the terms sepal and petal mean.
 > ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
@@ -477,7 +477,7 @@ check whether we can spot any immediate patterns.
 >  >
 >  > > ### {% icon solution %} Solution
 >  > >
->  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distingished from *Iris versicolor* and
+>  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distinguished from *Iris versicolor* and
 >  > > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
 >    > > virginica*.
 >  > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
@@ -499,7 +499,7 @@ check whether we can spot any immediate patterns.
 >  > >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
 >  > >
 >  > > We can better differentiate between the 3 Iris species but for some samples the petal length versus width is still insufficient
->  > > to differentiate *Iris versicolor* from *Iris virginica*. And as before, *Iris setosa* can easily distinguish from the two other species.
+>  > > to differentiate *Iris versicolor* from *Iris virginica*. And as before, *Iris setosa* can easily be distinguished from the two other species.
 >  > {: .solution}
 >  {: .question}
 {: .hands_on}
