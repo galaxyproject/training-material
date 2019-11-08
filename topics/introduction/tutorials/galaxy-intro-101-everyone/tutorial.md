@@ -610,14 +610,14 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    {% include snippets/add_tag.md %}
 {: .hands_on}
 
-The `diamonds` data set is coming from the well-known ggplot2 package developped by Hadley and initially collected from Diamond Search Engine in 2008.
-Dataset format is made of 53940 observations and 10 variables within the 4 Cs (carat, cut, color and clarity):
-  - carat, refers to the weight of the diamond when measured on a scale
-  - cut, applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
-  - color, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow
-  - clarity, describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
+The `diamonds` data set comes from the well-known ggplot2 package developed by Hadley and initially collected from Diamond Search Engine in 2008.
+The dataset contains 53940 observations and 10 variables within the 4 Cs (carat, cut, color and clarity):
+  - **Carat** refers to the weight of the diamond when measured on a scale
+  - **Cut** applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+  - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow
+  - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
 
-![4 Cs](../../images/4cs-of-diamond-buying.jpg "4 Cs")
+![4 Cs](../../images/4cs-of-diamond-buying.jpg "The 4 Cs of diamond of diamonds.")
 
 > ### {% icon hands_on %} Hands-on: Run workflow
 >
@@ -636,7 +636,9 @@ Dataset format is made of 53940 observations and 10 variables within the 4 Cs (c
 {: .hands_on}
 
 > ### {% icon question %} Questions
-> How many cut category are there in the Diamond dataset ? How many samples are there in each cut category ? Which are the metrics for carat, depth, table, price, x, y and z ?
+> 1. How many cut category are there in the Diamond dataset ?
+> 2. How many samples are there in each cut category ?
+> 3. Which are the metrics for carat, depth, table, price, x, y and z ?
 >
 {: .question}
 
