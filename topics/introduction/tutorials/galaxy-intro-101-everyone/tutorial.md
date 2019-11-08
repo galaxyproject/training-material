@@ -162,7 +162,7 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
+> 3. **View** the generated file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
 >    > ### {% icon question %} Question
 >    >
@@ -193,7 +193,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
->    - {% icon param-file %} *"from"*: select **iris tabular**
+>    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
 >    - Click **Execute**
 >
 >    > ### {% icon comment %} Tip: search for the tool
@@ -203,7 +203,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 >    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
 >
-> 2. Rename the dataset to `iris clean`
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris clean`
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -211,19 +211,18 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Which tags are present on this resulting dataset?
+>    > 1. Which tags are present on this resulting dataset? (You may have to refresh the history panel to see the tags)
 >    > 2. How many samples (lines) does our dataset contain?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1.The output of **Remove beginning** {% icon tool %} is also tagged with the
->    > > label `iris`. Tags beginning with a hashtag (`#`) will propagate; they will >    > > appear on any datasets derived from your original tagged file.
+>    > > 1. The output of **Remove beginning** {% icon tool %} is also tagged with the label `iris`. Tags beginning with a hashtag (`#`) will propagate; they will appear on any datasets derived from your original tagged file.
 >    > >
 >    > > 2. There are 150 lines in our file (we can see this under the file name when we have expanded the history item). This means we have 150 samples.
 >    > {: .solution}
 >    {: .question}
 >
-> 4. View {% icon galaxy-eye%} the contents of the resulting file.
+> 4. **View** {% icon galaxy-eye%} the contents of the resulting file.
 >    - You should see that the header line is now no longer present.
 >
 {: .hands_on}
@@ -240,25 +239,23 @@ In order to answer this question, we will have to look at column 5 of our file, 
 
 > ### {% icon hands_on %} Hands-on: Filtering dataset
 >
-> 1. **Cut** columns from a table {% icon tool %} with the following parameters:
+> 1. **Cut** - columns from a table {% icon tool %} with the following parameters:
 >      - *"Cut columns"*: `c5`
 >      - *"Delimited by"*: `Tab`
->      - *"From"*: `iris clean` dataset
+>      - {% icon param-file %} *"From"*: `iris clean` dataset
 >
-> 2. Rename the dataset to `iris species column`
->
->    {% include snippets/rename_dataset.md %}
->
-> 3. View the resulting file {% icon galaxy-eye %}
->
-> 4. **Unique** occurrences of each record {% icon tool %} with the following parameters:
->      - *"File to scan for unique values"*: the output from **Cut** {% icon tool %}
->
-> 5. Rename the dataset to `iris species`
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris species column`
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 6. View the resulting file {% icon galaxy-eye %}
+> 3. **View** {% icon galaxy-eye %} the resulting file
+>
+> 4. **Unique** - occurrences of each record {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File to scan for unique values"*: `iris species column` (the output from **Cut** {% icon tool %})
+>
+> 5. **Rename** {% icon galaxy-pencil %} the dataset to `iris species`
+>
+> 6. **View** {% icon galaxy-eye %} the resulting file
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -287,11 +284,9 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 >    - Tool: **Group** data by a column and perform aggregate operation on other columns {% icon tool %}
 >    - Input dataset: `iris clean` dataset to answer the same question.
 >
-> 2. Rename the dataset to `iris species group`
+> 2. Did you get the same answer as before?
 >
->    {% include snippets/rename_dataset.md %}
->
-> 3. Did you get the same answer as before?
+> 3. **Rename** {% icon galaxy-pencil %} the dataset to `iris species group`
 >
 > > ### {% icon solution %} Solution
 > > 1. **Group** {% icon tool %} with the following parameters:
@@ -320,7 +315,7 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 
 > ### {% icon hands_on %} Hands-on: Grouping dataset and adding information
 >
-> 1. Re-run the **Group** {% icon tool %} with the following parameters:
+> 1. **Re-run** {% icon galaxy-refresh %} the **Group** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select data"*: `iris clean`
 >    - {% icon param-select %} *"Group by column"*: `Column: 5`
 >    - {% icon param-repeat %} *"Insert operation"*
@@ -329,13 +324,9 @@ Looking at the tool help for **Group** {% icon tool %}, we see that we can also 
 >
 >    {% include snippets/rerun_tool.md %}
 >
-> 2. Rename the dataset to `iris samples per species group`
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris samples per species group`
 >
->    {% include snippets/rename_dataset.md %}
->
-> 3. View {% icon galaxy-eye %} the resulting file.
->
->
+> 3. **View** {% icon galaxy-eye %} the resulting file.
 >
 >    > ### {% icon question %} Question
 >    > How many samples per species are in the dataset?
@@ -375,7 +366,7 @@ In our dataset, we have the following features measured for each sample:
 - Sepal width
 
 > ### {% icon comment %} petal and sepal
-> The image below shows you what is a sepal and petal.
+> The image below shows you wha the terms sepal and petal mean.
 > ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
 {: .comment}
 
@@ -384,7 +375,7 @@ In our dataset, we have the following features measured for each sample:
 > ### {% icon hands_on %} Hands-on: Get the mean and sample standard deviation of Iris flower features
 >
 > 1. **Datamash** {% icon tool %} with the following parameters:
->    - *Input tabular dataset*: {% icon param-file %}: select **iris tabular**
+>    - {% icon param-file %} *"Input tabular dataset"*: `iris tabular`
 >    - *"Group by fields"*: `5`
 >    - *"Input file has a header line"*: `Yes`
 >    - *"Print header line"*: `No`
@@ -421,28 +412,25 @@ In our dataset, we have the following features measured for each sample:
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Add the tag `analysis` to the dataset
+> 3. **View** {% icon galaxy-eye %} the generated file
 >
->    {% include snippets/add_tag.md %}
-> 4. Inspect the generated file by clicking on the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. Can we differentiate the different Iris flower species?
+>   >
+>   > > ### {% icon solution %} Solution
+>   > >
+>   > > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
+>   > > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) then *Iris versicolor* and *Iris virginica* petals.
+>   > > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I. virginica*). On the other hand,
+>   > > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
+>   > >
+>   > {: .solution}
+>   >
+>   {: .question}
 >
 {: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. Can we differentiate the different Iris flower species?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
-> > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) then *Iris versicolor* and *Iris virginica* petals.
-> > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I. virginica*). On the other hand,
-> > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
-> >
-> {: .solution}
->
-{: .question}
 
 ## Visualize Iris dataset with **Scatterplot w ggplot2**
 
@@ -452,7 +440,7 @@ check whether we can spot any immediate patterns.
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
->    - *Input tabular dataset*: {% icon param-file %}: select **iris clean**
+>    - {% icon param-file %} *"Input tabular dataset"*: **iris clean**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
 >    - *"Plot title"*: `Sepal length as a function of sepal width`
@@ -463,73 +451,58 @@ check whether we can spot any immediate patterns.
 >            - *"relative size of points"*: `2.0`
 >        - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
 >            - *"column differentiating the different groups"*: `5`
->            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete (discrete, max=8 colors)`
->        - *"Axis title options"*: `Default`
->        - *"Axis text options"*: `Default`
->        - *"Plot title options"*: `Default`
->        - *"Axis scaling"*: `Automatic axis scaling`
+>            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
 >
-> 2. Click **Execute** to perform the graph. Your new output dataset will look something like this:
+> 2. **View** {% icon galaxy-eye%} the resulting plot:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter.png)
 >
-> 3. Rename the dataset to `iris sepal scatterplot w ggplot2`
+> 3. Rename the dataset to `iris sepal scatterplot`
 >
->    {% include snippets/rename_dataset.md %}
->
-> 4. Add the tag `plot` to the dataset
->
->    {% include snippets/add_tag.md %}
->
+> > ### {% icon question %} Questions
+>  >
+>  > 1. What does this scatter plot tell us about Iris species?
+>  > 2. Make a new scatter plot, this time with *Petal* length versus *Petal* width.
+>  > 3. Can we differentiate between the three Iris species?
+>  >
+>  >    > ### {% icon tip %} Tip: Re-running the ggplot tool
+>  >    > Instead of clicking on **Scatterplot w ggplot2** {% icon tool %} again, it is possible to recall the previous scatterplot parameters by clicking on re-run button and updating the parameters we wish to modify.
+>  >    >    > ### {% icon hands_on %} Hands-on: Re-run the tool
+>  >    >    > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Scatterplot w ggplot2** {% icon tool %}
+>  >    >    > ![rerun](../../images/rerun_scatterplot.png)
+>  >    >    >
+>  >    >    > This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
+>  >    >    {: .hands_on}
+>  >    {: .tip}
+>  >
+>  > > ### {% icon solution %} Solution
+>  > >
+>  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distingished from *Iris versicolor* and
+>  > > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
+>    > > virginica*.
+>  > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>  > >     - {% icon param-file %} *"Input tabular dataset"*: `iris clean`
+>  > >     - *"Column to plot on x-axis"*: `3`
+>  > >     - *"Column to plot on y-axis"*: `4`
+>  > >     - *"Plot title"*: `Petal length as a function of petal width`
+>  > >     - *"Label for x axis"*: `Petal length`
+>  > >     - *"Label for y axis"*: `Petal width`
+>  > >     - In *"Advanced Options"*:
+>  > >         - *"Data point options"*: `User defined point options`
+>  > >             - *"relative size of points"*: `2.0`
+>  > >         - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+>  > >             - *"column differentiating the different groups"*: `5`
+>  > >             - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
+>  > >
+>  > > 3. Your new output dataset will look something like this:
+>  > >
+>  > >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
+>  > >
+>  > > We can better differentiate between the 3 Iris species but for some samples the petal length versus width is still insufficient
+>  > > to differentiate *Iris versicolor* from *Iris virginica*. And as before, *Iris setosa* can easily distinguish from the two other species.
+>  > {: .solution}
+>  {: .question}
 {: .hands_on}
-
-> ### {% icon question %} Questions
->
-> 1. What does this scatter plot tell us about Iris species?
-> 2. Make a new scatter plot with Petal length versus Petal width. Can we differentiate the three Iris species?
->
->    > ### {% icon tip %} Hiding intermediate steps
->    > Instead of clicking on **Scatterplot w ggplot2** {% icon tool %} again, it is possible to recall the previous scatterplot parameters by clicking on re-run button and updating the parameters we wish to modify.
->    >    > ### {% icon hands_on %} Hands-on: Re-run the tool
->    >    > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Scatterplot w ggplot2** {% icon tool %}
->    >    > ![rerun](../../images/rerun_scatterplot.png)
->    >    > This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
->    {: .tip}
-{: .question}
-
-> > ### {% icon solution %} Solution
-> >
-> > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distingished from *Iris versicolor* and
-> > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
-> > virginica*.
-> > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
-> >  - *Input tabular dataset*: {% icon param-file %}: select **iris clean**
-> >  - *"Column to plot on x-axis"*: `3`
-> >  - *"Column to plot on y-axis"*: `4`
-> >  - *"Plot title"*: `Petal length as a function of petal width`
-> >  - *"Label for x axis"*: `Petal length`
-> >  - *"Label for y axis"*: `Petal width`
-> >  - In *"Advanced Options"*:
-> >      - *"Data point options"*: `User defined point options`
-> >          - *"relative size of points"*: `2.0`
-> >      - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
-> >          - *"column differentiating the different groups"*: `5`
-> >          - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete (discrete, max=8 colors)`
-> >      - *"Axis title options"*: `Default`
-> >      - *"Axis text options"*: `Default`
-> >      - *"Plot title options"*: `Default`
-> >      - *"Axis scaling"*: `Automatic axis scaling`
-> >
-> > Click **Execute** to perform the graph. Your new output dataset will look something like this:
-> >
-> >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
-> > 3. Add the tag `plot` to the dataset
-> >
-> > We can better differentiate the 3 Iris species but for some samples the petal length versus width is still insufficient
-> > to differentiate *Iris versicolor* from *Iris virginica*. And as before, *Iris setosa* can easily distinguish from the two other species.
-> {: .solution}
-{: .question}
-
 
 # Galaxy management
 
@@ -541,27 +514,29 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > ### {% icon hands_on %} Hands-on: Extract workflow
 >
-> 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
+> 1. **Clean up** your history.
+>    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button.
+>    - This will make the creation of a workflow easier.
 >
-> 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
+> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
+>    - Select the **Extract Workflow** option.
 >
->    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
->    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_foreveryone_workflow_create.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Exploring Iris dataset with statistics and scatterplots`.
->
->    While we created this workflow initially to analyse Iris dataset, if we had similarly formatted datasets we could use this workflow to describe them.
->
->    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+> 3. **Rename** the workflow to something descriptive
+>    - For example: `Exploring Iris dataset with statistics and scatterplots`.
+>    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
 > 4. Click on the **Create Workflow** button near the top.
+>    - You will get a message that the workflow was created. But where did it go?
 >
->    You will get a message that the workflow was created. But where did it go?
->
-> 5. Click on **Workflow** in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:
+> 5. Click on **Workflow** in the top menu of Galaxy.
+>    - Here you have a list of all your workflows.
+>    - Your newly created workflow should be listed at the top:
 >
 >    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
 >    ![`Your workflows` list](../../images/101_foreveryone_workflow_list.png)
@@ -571,15 +546,25 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> ### {% icon hands_on %} Hands-on: Editing our workflow
 >
-> 1. Click on the triangle to the right of your workflow name.
+> 1. Open the **workflow editor**
+>    - Click on the dropdown menu {% icon galaxy-dropdown %} (triangle icon) to the right of your workflow name.
 >
-> 2. Select **Edit** to launch the workflow editor. You should see something like this:
+> 2. Select **Edit** to launch the workflow editor.
+>    - You should see something like this:
 >
->    ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
+>      ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
 >
->    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
+>    - When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
+>
+> 3. **Hiding intermediate outputs**
+>     - We can tell Galaxy which outputs of a workflow should be shown in our history when we run it, and which can be hidden.
+>     - Click the **asterisk** for:
+>         - `out_file` in the `Unique` tool,
+>         - `out_file1` in `Group` tools and for
+>         - `png` in the `Scatterplot w ggplot2` tools.
+>     - Now, when we run the workflow, we will only see the final five outputs, i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
 >    > ### {% icon tip %} Hiding intermediate steps
 >    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
@@ -587,10 +572,6 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk (in green) will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
->
-> 3. Click the **asterisk** for `out_file` in the `Unique` tool, for `out_file1` in `Group` tools and for `png` in the `Scatterplot w ggplot2` tools.
->
->    Now, when we run the workflow, we will only see the final five outputs, i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
 > 4. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
@@ -639,9 +620,10 @@ Dataset format is made of 53940 observations and 10 variables within the 4 Cs (c
 >
 > 1. We wish to analyze diamonds by their 4 Cs by recycling our workflow.
 >
-> 2. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, `copy` it, `rename` it and select the option `Run`.
->
->    The central panel will change to allow you to configure and launch the workflow.
+> 2. Open the **workflow menu** (top menu bar).
+>    - Find the workflow you made in the previous section,
+>    - Select the option `Run`.
+>    - The central panel will change to allow you to configure and launch the workflow.
 >
 > 3. Select the appropriate dataset for the input, change column number to the different tools and create 2 scatterplots representing price according to carat with either color or clarity as factor
 >
