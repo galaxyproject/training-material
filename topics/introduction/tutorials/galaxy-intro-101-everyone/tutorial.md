@@ -491,6 +491,7 @@ check whether we can spot any immediate patterns.
 >    >    > ![rerun](../../images/rerun_scatterplot.png)
 >    >    > This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
 >    {: .tip}
+{: .question}
 
 > > ### {% icon solution %} Solution
 > >
@@ -606,14 +607,11 @@ Now that we have built our workflow, let's use it on some different data. For ex
 
 > ### {% icon hands_on %} Hands-on: Create a new history and upload a new data
 >
-> Create a **new history** and give it a name.
+> 1. Create a **new history** and give it a name.
 >
 >    {% include snippets/create_new_history.md %}
-
-
-> ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamonds.csv) or from the data library (ask your instructor)
+> 2. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/3522106/files/diamond.csv
@@ -622,7 +620,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
->
+{: .hands_on}
 
 The `diamonds` data set is coming from the well-known ggplot2 package developped by Hadley and initially collected from Diamond Search Engine in 2008.
 Dataset format is made of 53940 observations and 10 variables within the 4 Cs (carat, cut, color and clarity):
@@ -650,7 +648,7 @@ Dataset format is made of 53940 observations and 10 variables within the 4 Cs (c
 
 > ### {% icon question %} Questions
 > How many cut category are there in the Diamond dataset ? How many samples are there in each cut category ? Which are the metrics for carat, depth, table, price, x, y and z ?
-
+>
 {: .question}
 
 
