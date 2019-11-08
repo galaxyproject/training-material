@@ -23,7 +23,7 @@ def extract_contributors(contributor_fp):
     '''
     contributors = {}
     with open(contributor_fp, 'r') as contributor_f:
-        contributors = yaml.load(contributor_f)
+        contributors = yaml.load(contributor_f, Loader=yaml.FullLoader)
     return contributors
 
 
@@ -57,16 +57,16 @@ def get_time(time):
 def create_abstract(metadata):
     '''Create an abstract from the metadata of the tutorial
 
-    :param 
+    :param metadata:
     '''
-    a = "<why/aim (1st paragraph of the introduction)>. " \
-        "This tutorial is developed for the data analysis platform Galaxy. " \
+    a = "**TO ADD: why/aim (1st paragraph of the introduction)**. " \
+        "This paper is a tutorial developed for the data analysis platform Galaxy. " \
         "The Galaxy's concept makes high-throughput sequencing data analysis a " \
         "structured, reproducible and transparent process. "
     a += "In this tutorial we focus on %s questions: %s " % (
         len(metadata['questions']), 
         ' '.join(metadata['questions']))
-    a += "After finishing this tutorial you will be able to %s." % (
+    a += "After finishing you will be able to %s. " % (
         ', '.join([s[0].lower() + s[1:] for s in metadata['objectives']]))
     a += "Requirements for this tutorial is a minimal Galaxy experience and " \
         "a Galaxy account on the Galaxy Europe server. "
@@ -75,6 +75,19 @@ def create_abstract(metadata):
         
     return a
 
+
+def create_author_summary(metadata):
+    '''Create an author summary from the metadata of the tutorial
+
+    :param metadata:
+    '''
+    a = "In this tutorial we focus on %s questions: %s " % (
+        len(metadata['questions']), 
+        ' '.join(metadata['questions']))
+    a += "After finishing this tutorial you will be able to %s. " % (
+        ', '.join([s[0].lower() + s[1:] for s in metadata['objectives']]))
+        
+    return a
 
 def extract_metadata(yaml_metadata, contributor_fp):
     '''Extract metadata needed by pandoc from tutorial and contributors
@@ -86,6 +99,7 @@ def extract_metadata(yaml_metadata, contributor_fp):
         'title': '',
         'author': [],
         'abstract': '',
+        'author_summary': '',
         'bibliography': 'references.bib'
     }
     contributors = extract_contributors(contributor_fp)
@@ -94,6 +108,7 @@ def extract_metadata(yaml_metadata, contributor_fp):
     for c in yaml_metadata['contributors']:
         metadata['author'].append(get_author_name(c, contributors))
     metadata['abstract'] = create_abstract(yaml_metadata)
+    metadata['author_summary'] = create_author_summary(yaml_metadata)
 
     return metadata
 
@@ -106,24 +121,26 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     :param tuto_fp: string with path to file with original tutorial
     '''
     l_content = []
-    do_not_add_next_lines = False
+    do_not_add_next_lines = 0
     do_not_add_commented_part = False
+    code_section = False
     images = []
+    hands_on = []
 
     for l in content:
         # remove lines with includes
         if '{% include' in l:
             continue
-        # remove questions, comments, details, tips, agenda boxes and 
+        # remove questions, comments, details, tips, agenda boxes 
         elif re.search(r'{% icon (question|details|comment|tip|warning) %}', l):
-            do_not_add_next_lines = True
+            do_not_add_next_lines += 1
             continue
         elif '### Agenda' in l:
-            do_not_add_next_lines = True
+            do_not_add_next_lines += 1
             continue
-        elif do_not_add_next_lines:
+        elif do_not_add_next_lines > 0:
             if re.search(r'{:[ ]?\.(question|details|comment|tip|warning|agenda)}', l):
-                do_not_add_next_lines = False
+                do_not_add_next_lines -= 1
             continue
         # remove commented section
         elif '{% comment %}' in l:
@@ -133,14 +150,28 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
             if '{% endcomment %}' in l:
                 do_not_add_commented_part = False
             continue
+        # remove ``` with zenodo links
+        elif '```' in l:
+            if code_section:
+                code_section = False
+                continue
+            else:
+                code_section = True
+                continue
+        elif code_section:
+            if 'zenodo' in l:
+                continue
         # format hands-on boxes
         elif '{% icon hands_on %}' in l:
             l = l.replace('> ### {% icon hands_on %} ', '***')
-            l = l[:-1] +  '***\n'
+            l = l[:-1] +  '***\n\n'
+            l2 = l.replace('Hands-on: ', '')
+            hands_on.append(l2)
         elif '{: .hands_on}' in l:
             continue
         elif l.startswith('> '):
             l = l[2:]
+            hands_on.append(l)
         elif l.startswith('>'):
             continue
         # remove {:.no_toc}
@@ -155,28 +186,29 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
 
     # prepare introduction
     intro = "\n# Introduction\n\n" \
-        "<why/aim (1st paragraph of the introduction)>.\n\n" \
-        "This tutorial provides a detailed workflow for <outputs> from <inputs> using Galaxy." \
-        "Galaxy [@afgan2018galaxy] is a data analysis platform that provides access to hundreds" \
-        " of tools used in a wide variety of analysis scenarios. os. It features a web-based user " \
+        "***TO ADD: why/aim (1st paragraph of the introduction)***.\n\n" \
+        "This tutorial provides a detailed workflow for ***TO ADD: outputs*** from ***TO ADD: inputs*** using Galaxy. " \
+        "Galaxy \cite{afgan2018galaxy} is a data analysis platform that provides access to hundreds" \
+        " of tools used in a wide variety of analysis scenarios. It features a web-based user " \
         "interface while automatically and transparently managing underlying computation details. " \
         "The Galaxy's concept makes high-throughput sequencing data analysis a structured, "\
         "reproducible and transparent process.\n\n" \
-        "The tutorial starts from <inputs>. It runs first a <overview of each step (1 sentence) of the "\
-        "workflow with tool names in bold and citation.>\n\n" \
+        "The tutorial starts from ***TO ADD: inputs***. It runs first a ***TO ADD: overview of each step (1 sentence) of the "\
+        "workflow with tool names in bold and citation.***\n\n" \
         "The entire analysis described this article can be conducted efficiently on any Galaxy server "\
         "which has the needed tools. However, to be sure, the authors recommend to use the Galaxy "\
-        "Europe server (https://usegalaxy.eu/).\n\n" \
+        "Europe server ([https://usegalaxy.eu/](https://usegalaxy.eu/)).\n\n" \
         "The tutorial presented in this article has been developed by the Galaxy Training Network "\
-        "[@batut2018community] and is available online at https://training.galaxyproject.org/"
+        "\cite{batut2018community} and its most up-to-date version is available online on the "\
+        "[Galaxy Training Materials](https://training.galaxyproject.org/"
     intro += tuto_fp.replace('md', 'html')
-    intro += '.\n\n'
+    intro += ') website.\n\n'
 
     # prepare references
-    ref = "\n# References\n\n"
+    #ref = "\n# References\n\n"
 
     # transform list of lines into string, add introduction, add references
-    form_content = intro + ''.join(l_content) + ref
+    form_content = intro + ''.join(l_content)# + ref
 
     # replace {{ page.zenodo_link }} by correct link
     form_content = form_content.replace(
@@ -187,7 +219,11 @@ def format_tuto_content(content, yaml_metadata, tuto_fp):
     form_content = re.sub(r'{% icon [a-z\-\_]+ %}[ ]?', '', form_content)
 
     # replace {% cite ... %} by correct [@...]
-    form_content = re.sub(r'{% cite ([a-z0-9\-\_]+) %}', '[@\g<1>]', form_content)
+    form_content = re.sub(r'{% cite ([a-z0-9\-\_]+) %}', '\cite{\g<1>}', form_content)
+
+    # replace inline $$ for mathematical expression
+    form_content = form_content.replace(' $$', ' $')
+    form_content = form_content.replace('$$ ', '$ ')
 
     # replace {{site.baseurl}}{% link ... %}
     form_content = re.sub(
@@ -220,7 +256,7 @@ def format_tutorial(tuto_fp, formatted_tuto_fp, contributor_fp):
         for i, l in enumerate(full_content[1:]):
             if l.startswith("---"):
                 break
-        yaml_metadata = yaml.load(''.join(full_content[1:i]))
+        yaml_metadata = yaml.load(''.join(full_content[1:i]), Loader=yaml.FullLoader)
 
         metadata = extract_metadata(yaml_metadata, contributor_fp)
         (formatted_tuto_content, img) = format_tuto_content(
@@ -254,7 +290,7 @@ def add_references(article_ref_fp, tuto_ref_fp):
         "  title={The Galaxy platform for accessible, reproducible and " \
         "collaborative biomedical analyses: 2018 update},\n" \
         "  author={Afgan, Enis and Baker, Dannon and Batut, B{\'e}r{\'e}nice " \
-        "and Van Den Beek, Marius and Bouvier, Dave and {\v{C}}ech, Martin and " \
+        "and Van Den Beek, Marius and Bouvier, Dave and Cech, Martin and " \
         "Chilton, John and Clements, Dave and Coraor, Nate and Gr{\"u}ning, Bj{\"o}rn " \
         "A and others},\n" \
         "  journal={Nucleic acids research},\n" \
@@ -315,7 +351,7 @@ if __name__ == '__main__':
     article_dp.mkdir(parents=True, exist_ok=True)
     images_dp = article_dp / "images"
     images_dp.mkdir(parents=True, exist_ok=True)
-    formatted_tuto_fp = article_dp / "article.md"
+    formatted_tuto_fp = article_dp / "article_1.md"
     contributor_fp = Path("CONTRIBUTORS.yaml")
     check_exists(contributor_fp)
 
