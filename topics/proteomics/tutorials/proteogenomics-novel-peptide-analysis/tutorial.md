@@ -164,7 +164,7 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 >
 > 1) Click on the **Visualize in MVP application**, it will open up options for visualization application in the center pane, Select **MVP Application** from the options (or Right click to open in a new window).
 >
-> ![mz to sqlite](../../images/visualize.png){:width="20%"}
+> ![mz to sqlite](../../images/Visualize.png){:width="20%"}
 > 
 > This will open in the Center Pane. Select the MVP application.
 >
