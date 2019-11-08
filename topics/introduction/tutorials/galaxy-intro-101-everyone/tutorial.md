@@ -34,8 +34,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
 This practical aims to familiarize you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
 Not everyone has the same background and that's ok!
@@ -83,13 +81,15 @@ The Galaxy interface consists of three main parts:
 
 # Create a history
 
-Galaxy allows you to create histories. Overall a history represents an experimental lab book, or a recipe very much like a cooking recipe with a list of ingredients (datasets) and a set of instructions
-(pipeline of operations) that describes how to prepare or make something (such as a plot, or even a new dataset).
+Galaxy allows you to create analysis histories. A **history** can be thought of as an electronic experimental lab book; it keeps tracks of all the tools and parameters you used in your analysis. From such a history, a **workflow** can be extracted; this workflow can be used to easily repeat the analysis on different data.
+
+Think of a workflow as a cooking recipe with a list of ingredients (datasets) and a set of instructions
+(pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
 a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
-That is what we call a pipeline.
+That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.
 
-Then the finalized pipeline can be serialized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
+The finalized pipelines can be generalized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
 In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input.
 
 > ### {% icon hands_on %} Hands-on: Create history
@@ -120,15 +120,19 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Check the datatype
+> 3. Check the **datatype**
 >    - Click on the history item to expand it to get more information.
 >    - The datatype of the iris dataset should be `csv`.
->    - Change the datatype if it is different than `csv`.
+>    - **Change** {% icon galaxy-pencil %} the datatype *if* it is different than `csv`.
+>      - Option 1: Datatypes can be **autodetected**
+>      - Option 2: Datatypes can be **manually set**
 >
 >    {% include snippets/detect_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="csv" %}
 >
 > 4. Add a tag {% icon galaxy-tags %} called `iris` to the dataset
 >    - Make sure the tag start with a hashtag symbol (`#iris`)
+>    - This tag will stay with your dataset any any results derived from it, and will help you make sense of your history
 >
 >    {% include snippets/add_tag.md %}
 >
@@ -150,7 +154,7 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 
 > ### {% icon hands_on %} Hands-on: Converting dataset format
 >
-> 1. Convert the CSV file (comma-separated) to tabular format (tab-separated)
+> 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
 >
 >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
