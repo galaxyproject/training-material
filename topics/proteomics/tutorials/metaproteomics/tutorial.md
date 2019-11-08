@@ -16,11 +16,12 @@ key_points:
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
   - "Learning the basics of SQL queries can pay off"
 contributors:
-  - timothygriffin
-  - pratikdjagtap
-  - jj-umn
-  - blankclemens
   - subinamehta
+  - timothygriffin
+  - pratikdjagtap 
+  - emmaleith
+  
+  
 ---
 
 # Introduction
@@ -72,6 +73,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 >    > ### {% icon comment %} Comments
 >    > - Rename the datasets to a more descriptive name
+>    > - There is a GO term file in the zenodo folder is for reference purposes, please do not load it on your account.
 >    {: .comment}
 >
 > 3. Build a **Dataset list** for the three MGF files
@@ -114,37 +116,50 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    - **Search Engines**: `X!Tandem`
 >
->    > ### {% icon comment %} Comment
->    >
->    > The section **Search Engine Options** contains a selection of sequence database searching
->    > algorithms that are available in SearchGUI. Any combination of these programs can be used for
->    > generating PSMs from MS/MS data. For the purpose of this tutorial, **X!Tandem** we will be used.
->    {: .comment}
->
->    Section **Precursor Options**:
->
->    - **Fragment Tolerance Units**: `Daltons`
->    - **Fragment Tolerance**: `0.02`- this is high resolution MS/MS data
->    - **Maximum Charge**: `6`
->
->    Section **Protein Modification Options**:
->
->    - **Fixed Modifications**: `Carbamidomethylation of C`
->    - **Variable modifications**: `Oxidation of M`
+>   - {% icon param-file %} *”Protein database”*: `Output dataset ‘output’ from step 1`
+>   - {% icon param-check %} *”Create a concatenated target/decoy before running PeptideShaker”*: `Yes`
+>   - {% icon param-check %} *”Gene mappings will be used and salves along with the project (UniProt databases only)”* `No`
+>   - {% icon param-check %} *”Update gene mappings automatically from Esembl (UniProt databases only)”*: `No`
+>   - {% icon param-file %} *”Input Peak Lists (mgf)”*: `Output dataset ‘output’ from step 2`
+>   - {% icon param-check %} *”DB-Search engines”*:`X!Tandem`
+>   - {% icon param-select %} *”Digestion”*: `Select enzymes`
+>   - {% icon param-select %} *”Enzyme”* `Trypsin`
+>   - {% icon param-text %} *”Maximum Missed Cleavages”*: `2`
+>   - {% icon param-select %} *”Precursor Ion Tolerance Units”*: `Parts per million (ppm)`
+>   - {% icon param-text %} *”Precursor Ion Tolerance”*: `10.0`
+>   - {% icon param-select %} *”Fragment Tolerance Units”*: `Daltons`
+>   - {% icon param-text %} *” Fragment Tolerance”*: `0.02`
+>   - {% icon param-text %} *”Minimum Charge”*: `2`
+>   - {% icon param-text %} *”Maximum Charge”*: `6`
+>   - {% icon param-select %} *”Forward Ion”*: `b`
+>   - {% icon param-text %} *”Reverse Ion”*: `y`
+>   - {% icon param-text %} *”Minimum precursor isotope”*: `0`
+>   - {% icon param-text %} *”Maximum precursor isotope”*: `1`
+>   - {% icon param-select %} *”Fixed Modifications”*: `Carbamidomethylation of C`
+>   - {% icon param-select %} *”Variable Modifications”*: `Oxidation of M`
 >
 >    > ### {% icon tip %} Tip: Search for options
 >    >
 >    > * For selection lists, typing the first few letters in the window will filter the available options.
 >    {: .tip}
 >
->    Section **Advanced Options**:
->    - **X!Tandem Options**: `Advanced`
->    - **X!Tandem: Quick Acetyl**: `No`
->    - **X!Tandem: Quick Pyrolidone**: `No`
->    - **X!Tandem: Protein stP Bias**: `No`
->    - **X!Tandem: Maximum Valid Expectation Value**: `100`
->
->    - leave everything else as default
+>   - {% icon param-select %} *”Search GUI Options”*: `Default`
+>   - {% icon param-select %} *”X!Tandem Options”*: `Advanced`
+>   - {% icon param-text %} *”X!Tandem: Total Peaks”*: `50`
+>   - {% icon param-text %} *”X!Tandem: Min Peaks”*: `15`
+>   - {% icon param-text %} *”X!Tandem: Min Frag m/z”*: `200`
+>   - {% icon param-text %} *”X!Tandem: Min Precursor Mass”*: `200`
+>   - {% icon param-check %} *”X!Tandem: Noise Suppression”*: `Yes`
+>   - {% icon param-text %} *”X!Tandem: Dynamic Range”*: `100`
+>   - {% icon param-check %} *”X!Tandem: Quick Acetyl”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Quick Pyrolidone”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Protein stP Bias”*: `No`
+>   - {% icon param-text %} *”X!Tandem: Maximum Valid Expectation Value”*: `100.0`
+>   - {% icon param-check %} *” X!Tandem: Output proteins”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Output sequences”*: `No`
+>   - {% icon param-check %} *”X!Tandem: Output Spectra”*: `Yes`
+>   - {% icon param-select %} *”X!Tandem peptide model refinement”*: `Don’t refine`
+>   - leave everything else as default
 >
 > 2. Click **Execute**.
 >
@@ -183,20 +198,26 @@ outputs.
 > ### {% icon hands_on %} Hands-on: PeptideShaker
 >
 > 1. **PeptideShaker** {% icon tool %}: Run **PeptideShaker** with:
->   - **Compressed SearchGUI results**: The SearchGUI archive file
->   - **Specify Advanced PeptideShaker Processing Options**: `Default Processing Options`
->   - **Specify Advanced Filtering Options**: `Advanced Filtering Options`
->   - **Maximum Precursor Error Type**: `Daltons`
->   - **Specify Contact Information for mzIdendML**: You can leave the default dummy options for now, but feel free to enter custom contact information.
->   - **Include the protein sequences in mzIdentML**: `No`
->   - **Output options**: Select the `PSM Report` (Peptide-Spectral Match) and the `Certificate of Analysis`
+>   - {% icon param-file %} *”Compressed SearchGUI results”*: `Output dataset ‘searchgui_results’ from step 3`
+>   - {% icon param-select %} *”Specify Advanced Peptide Shaker Processing Options”*: `Advanced Processing Options`
+>   - {% icon param-text %} *”FDR at the protein level”*: `1.0`
+>   - {% icon param-text %} *”FDR at the peptide level”*: `1.0`
+>   - {% icon param-text %} *”FDR at the PSM level”*: `1.0`
+>   - {% icon param-text %} *”Minimum confidence required for a protein in the fraction MW plot”*: `95.0`
+>   - {% icon param-select %} *”The PRM probabilistic score to use for PTM localization”*: `A-score`
+>   - {% icon param-select %} *”The PTM to peptide sequence matching type”*: `Amino Acids`
+>   - {% icon param-check %} *”Align peptide ambiguously localizes PRMs on confident sites”*: `Yes`
+>   - {% icon param-select %} *”Specify Advanced FIltering Options”*: `Advanced Filtering Options`
+>   - {% icon param-text %} *”Minimum Peptide Length”*: `6`
+>   - {% icon param-text %} *”Maximum Peptide Length”*: `65`
+>   - {% icon param-text %} *”Maximum Precursor Error”*: `10.0`
+>   - {% icon param-select %} *”Maximum Precursor Error Type”*: `ppm`
+>   - {% icon param-check %} *”Exclude Unknown PTMs”: `Yes`
+>   - {% icon param-check %} *”Creates a mzldentML file*”: `No`
+>   - {% icon param-check %} *”Compress results into single zip file”*: `No`
+>   - {% icon param-check %} *”Exports the CPS file”*: `No`
+>   - {% icon param-check %} *”Reports to be generated”*: `Select the ‘PSM Report’`
 >
->       > ### {% icon comment %} Comment
->       >
->       > The **Certificate of Analysis** provides details on all the parameters
->       > used by both SearchGUI and PeptideShaker in the analysis. This can be downloaded from the
->       > Galaxy instance to your local computer in a text file if desired.
->       {: .comment}
 >
 > 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
 >     ![View data button](../../images/view_data_icon.png)
@@ -233,7 +254,7 @@ proteins and provides a fast matching algorithm for peptides.
 > ### {% icon comment %} Unipept
 >
 > Users can access UniPept via a [web page](https://unipept.ugent.be) and paste peptide
-> sequences into the search form to retrieve protein information. But we`ll use the Galaxy
+> sequences into the search form to retrieve protein information. But we'll use the Galaxy
 > *Unipept* tool to automate the process. The *Unipept* tool sends the peptide list to the
 > UniPept REST API service, then transforms the results into datasets that can be further analyzed
 > or operated on within Galaxy.
@@ -249,20 +270,12 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 > 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
->    - **Database Table**: Click on `+ Insert Database Table`:
->    - **Tabular Dataset for Table**: The PSM report
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `by regex expression matching`
->        - **regex pattern**: `^\d`
->        - **action for regex match**: `include line on pattern match`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `psm`
->    - **Specify Column Names (comma-separated list)**: `id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_psm’ from step 4`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `id,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `No`
 >
 >        > ### {% icon comment %} Comment
 >        >
@@ -273,10 +286,6 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >        > Check your input file to find the settings which best fits your needs.
 >        {: .comment}
 >
->    - **Only load the columns you have named into database**: `Yes`
->
->    - **Save the sqlite database in your history**: `Yes`
->
 >        > ### {% icon comment %} Querying SQLite Databases
 >        >
 >        > * **Query Tabular** can also use an existing SQLite database. Activating `Save the sqlite database in your history`
@@ -286,13 +295,13 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **SQL Query to generate tabular output**:
 >
->          SELECT distinct sequence
+>          `SELECT distinct sequence
 >
 >          FROM psm
 >
 >          WHERE confidence >= 95
 >
->          ORDER BY sequence
+>          ORDER BY sequence`
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -315,45 +324,26 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 {: .hands_on}
 
-While we can proceed with this list of peptides, let's practice using the created SQLite database for further queries.
-We might not only be interested in all the distinct peptides, but also on how many PSMs a single peptide had.
-Therefore we can search the database for the peptides and count the occurrence without configuring the tables and columns again:
-
-> ### {% icon hands_on %} Hands-on: SQLite to tabular
->
-> 1. **SQLite to tabular** {% icon tool %}: Run **SQLite to tabular** with:
->
->    - **SQL Query**:
->
->          SELECT sequence as "peptide", count(id) as "PSMs"
->
->          FROM psm
->
->          WHERE confidence >= 95
->
->          GROUP BY sequence
->
->          ORDER BY sequence
->
-> 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
->
-{: .hands_on}
-
 
 #### Retrieve taxonomy for peptides: Unipept
 
 The generated list of peptides can now be used to search via *Unipept*.
-We do a taxonomy analysis using the UniPept pept2lca function to return the taxonomic lowest common ancestor for each peptide:
+We do a taxonomy analysis using the UniPept peptinfo function to return the taxonomic lowest common ancestor for each peptide:
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
 > 1. **Unipept** {% icon tool %}: Run **Unipept** with:
->
->    - **Unipept application**: `pept2lca: lowest common ancestor`
->    - **Peptides input format**: `tabular`
->    - **Tabular Input Containing Peptide column**: The query results file.
->    - **Select column with peptides**: `Column 1`
->    - **Choose outputs**: Select `tabular` and `JSON taxonomy tree`
+>   - {% icon param-select %} *”Unipept application”*: `peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy`
+>   - {% icon param-check %} *”Equate isoleucine and leucine”*: `No`
+>   - {% icon param-check %} *”Retrieve extra information*”: `No`
+>   - {% icon param-check %} *”Group responses by GO namespace (biological process, molecular function, cellular component)”*: `Yes`
+>   - {% icon param-check %} *”Names”*: `No`
+>   - {% icon param-check %} *”Allfields”*: `No`
+>   - {% icon param-select %} *”Peptides input format”*: `Tabular`
+>   - {% icon param-file %} *”Tabular Input Containing Peptide column”*: `Output dataset ‘output’ from step 5`
+>   - {% icon param-text %} *”Select column with peptides”*: `1`
+>   - {% icon param-check %} *”Choose outputs”*: `Select the ‘JSON Taxonomy Tree (for pepet2lca, pe2taxa, and peptinfo),’ ‘Peptide GO terms in normalized tabular (for pept2go, pept2funct, and peptinfo),’ ‘Peptide EC terms in normalized tabular (for pept2ec, pept2funct, and peptinfo),’ ‘JSON EC Coverage Tree (for pept2ec, pep2funct, and peptinfo)’`
+>   - {% icon param-check %} *”Exit with error on invalid peptides, otherwise ignore them”*: `No`
 >
 > 2. Click **Execute**. The history should grow by two files. View each to see the difference.
 >
@@ -367,12 +357,28 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 >
 >    - Click on the JSON output file from the *Unipept* tool to expand it. Click on the **Visualize** button and select **Unipept Tree viewer**:
 >
->       ![Visualize button](../../images/visualize_button.png)
+>       ![Visualize button](../../images/Visualize_output.png)
+>
+>
+>       ![Viewer](../../images/Unipept_viewer.png)
+>
 >
 >    - A new window should appear with a visualization of the taxonomy tree of your data. Use the mouse wheel to scroll in and out and click on nodes to expand or collapse them:
 >
->       ![Unipept Tree viewer visual output](../../images/unipept_tree_viewer.png "Interactive visualization from the Unipept Tree viever plugin")
+>       ![Unipept Tree viewer visual output](../../images/Treeview_Unipet.png "Interactive Tree viewer visualization from the Unipept Tree viewer plugin")
 >
+>       ![Unipept Sunburst visual output](../../images/sunburst_unipept.png "Interactive Sunburst visualization from the Unipept Tree viewer plugin")
+>
+>       ![Unipept Tree map visual output](../../images/Treemap_unipept.png "Interactive Tree map visualization from the Unipept Tree viewer plugin")
+
+> The user can perform the same functions for viewing the EC output.
+>
+>
+>                       ![Visualize button](../../images/EC-viewer.png)
+>
+> The Unipept viewer also provides interactive viewer for EC number (Tree view, Sunburst and Treemap)
+>
+> ![Unipept Tree viewer visual output](../../images/EC_treemap.png "Interactive Tree viewer visualization from the Unipept Tree viever plugin")
 {: .hands_on}
 
 ## Genus taxonomy level summary
@@ -383,72 +389,49 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
 > 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
+>   - {% icon param-file %} *”Add tables to this Database”*: ‘‘
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_psm’ from step 4`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `^\d`
+>   - {% icon param-select %} *”Action for regex match”*: `include line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_tsv’ from step 7`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `#peptide`
+>   - {% icon param-select %} *”Action for regex match”*: `exclude line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `lca`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `peptide,,,,,,,,,,,,,,,,,,,,,genus`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `Yes`
+>   - {% icon param-text %} *”SQL Query to generate tabular output”*:
+ `SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
+WHERE confidence >= 95
+GROUP BY lca.genus
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
 >
->    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The PSM report
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `by regex expression matching`
->        - **regex pattern**: `^\d`
->        - **action for regex match**: `include line on pattern match`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `psm`
->    - **Specify Column Names (comma-separated list)**: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
->
->    - **Only load the columns you have named into database**: `Yes`
->
-> 2. Repeat this step to have a second **Database Table**:
->
->    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The **Unipept** `tabular`/`tsv` output
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `by regex expression matching`
->        - **regex pattern**: `#peptide`
->        - **action for regex match**: `exclude line on pattern match`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `lca`
->    - **Specify Column Names (comma-separated list)**: `peptide,,,,,,,,,,,,,,,,,,,,,genus`
->
->    - **Only load the columns you have named into database**: `Yes`
->
->    - **Save the sqlite database in your history**: `Yes`
->
->    - **SQL Query to generate tabular output**:
->
->          SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
->
->          FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
->
->          WHERE confidence >= 95
->
->          GROUP BY lca.genus
->
->          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
+>   - {% icon param-check %} *”Include query result column headers”*: `Yes`
+>   - {% icon param-select %} *”Prefix character for column_header line”*: ‘#’
 >
 >
 > 2. Click **Execute** and inspect the query results file after it turned green:
 >
->     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/metaproteomics_summary.png "Query Tabular output")
+>     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/Genera_PSM.png "Query Tabular output")
 >
 {: .hands_on}
 
 ## Functional Analysis
 
-Recent advances in microbiome research indicate that functional characterization via metaproteomics analysis has the potential to accurately
-measure the microbial response to perturbations. In particular, metaproteomics enables the estimation of the function of the microbial
-community based on expressed microbial proteome.
+Recent advances in microbiome research indicate that functional characterization via metaproteomics analysis has the potential to accurately measure the microbial response to perturbations. In particular, metaproteomics enables the estimation of the function of the microbial community based on expressed microbial proteome.
 
-In the following chapter, a functional analysis will be performed using the **UniPept** application `pept2prot` in order to match the list of peptides with the correlated Gene Ontology terms.
-This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data.
+In the following chapter, a functional analysis will be performed using the **UniPept** application `peptinfo` in order to match the list of peptides with the correlated Gene Ontology terms.
+This allows to get an insight of the **biological process**, the **molecular function** and the **cellular component** related to the sample data. We also performed EC number analysis on this dataset
 
 > ### {% icon comment %} Gene Ontology (GO) Consortium
 >
@@ -472,59 +455,25 @@ This allows to get an insight of the **biological process**, the **molecular fun
 >
 {: .comment}
 
-#### Data upload
 
-For this tutorial, a tabular file containing the relevant GO terms has been created. It contains the GO aspect, the ID and the name.
-It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.839701.svg)](https://doi.org/10.5281/zenodo.839701).
+#### Retrieve GO and EC IDs for peptides: Unipept
 
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Import the file `Gene_Ontology_Terms.tabular` from Zenodo.
->
->    > ### {% icon tip %} Tip: Setting file metadata on upload
->    >
->    > In the upload window of Galaxy you can set the filetype and related genome of the file you're uploading in the corresponding columns beforehand.
->    > This might be handy if the automatic detection of the filetype didn't work out perfectly or if you want to avoid setting the genome later on, especially for multiple files.
->    >
->    {: .tip}
->
->    As default, Galaxy takes the link as name.
->
->    > ### {% icon comment %} Comments
->    > - Rename the datasets to a more descriptive name, e.g. `Gene Ontology Terms`
->    {: .comment}
->
->
-{: .hands_on}
-
-> ### {% icon details %} Creating your own Gene Ontology list
->
-> The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
-> `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
->
-> In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
-> one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
-> An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
->
-{: .details}
-
-#### Retrieve GO IDs for peptides: Unipept
-
-The **UniPept** application `pept2prot` can be used to return the list of proteins containing each peptide.
-The option `retrieve extra information` option is set to `yes` so that we retrieve Gene Ontology assignments (`go_references`)
-for each protein.
+The **UniPept** application `peptinfo` can be used to return the list of proteins containing each peptide.The option `retrieve extra information` option is set to `yes` so that we retrieve Gene Ontology assignments for each protein. Unipept 4.0 has inbuilt GO terms.
 
 > ### {% icon hands_on %} Hands-on: Unipept
 >
 > 1. **Unipept** {% icon tool %}: Run **Unipept** with:
->
->    - **Unipept application**: `pept2prot: UniProt entries containing a given tryptic peptide`
->    - **retrieve extra information**: `Yes`
->    - **Peptides input format**: `tabular`
->    - **Tabular Input Containing Peptide column**: The first query results file.
->    - **Select column with peptides**: `Column 1`
->    - **Choose outputs**: Select `tabular`
->
+>   - {% icon param-select %} *”Unipept application”*: ‘peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy’
+>   - {% icon param-check %} *”Equate isoleucine and leucine”*: `No`
+>   - {% icon param-check %} *”Retrieve extra information*”: `No`
+>   - {% icon param-check %} *”Group responses by GO namespace (biological process, molecular function, cellular component)”*: `Yes`
+>   - {% icon param-check %} *”Names”*: `No`
+>   - {% icon param-check %} *”Allfields”*: `No`
+>   - {% icon param-select %} *”Peptides input format”*: `Tabular`
+>   - {% icon param-file %} *”Tabular Input Containing Peptide column”*: `Output dataset ‘output’ from step 5`
+>   - {% icon param-text %} *”Select column with peptides”*: `1`
+>   - {% icon param-check %} *”Choose outputs”*: `Select the ‘Tabular with one line per peptide,’ ‘JSON Taxonomy Tree (for pepet2lca, pe2taxa, and peptinfo),’ ‘Peptide GO terms in normalized tabular (for pept2go, pept2funct, and peptinfo),’ ‘JSON EC Coverage Tree (for pept2ec, pep2funct, and peptinfo)`
+>   - {% icon param-check %} *”Exit with error on invalid peptides, otherwise ignore them”*: `No`
 > 2. Click **Execute**.
 >
 > 3. inspect the result:
@@ -534,168 +483,124 @@ for each protein.
 {: .hands_on}
 
 
-#### Combine all information to quantify the GO results
+#### Combine all information to quantify the EC and GO results
 
-As a final step we will use **Query Tabular** in a more sophisticated way to combine all information to quantify the GO analysis. The three used file and the extracted information are:
+As a final step we will use **Query Tabular** in a more sophisticated way to combine all information to quantify the EC analysis. 
+> ### {% icon hands_on %} Hands-on: Query Tabular
+>
+>1.**Query Tabular** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *”Add tables to this Database”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_psm’ from step 4`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `^\d`
+>   - {% icon param-select %} *”Action for regex match”*: `include line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_ec_tsv’ from step 6`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `#peptide`
+>   - {% icon param-select %} *”Action for regex match”*: `exclude line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `goec`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `peptide,total_protein_count,ec_number,protein_count`
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `No`
+>   - {% icon param-text %} *”SQL Query to generate tabular output”*: 
+`SELECT goec.ec_number,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES" 
+FROM psm LEFT JOIN goec ON psm.sequence = goec.peptide 
+WHERE confidence >= 95 
+GROUP BY goec.ec_number 
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+>   - {% icon param-check %} *”Include query result column headers”*: `Yes`
+>   - {% icon param-select %} *”Prefix character for column_header line”*: `#`
+>
+> 2. Click **Execute**.
+>
+{: .hands_on}
 
-- **Gene Ontology Terms**:
-    - `go_id` to match with **Normalized UniPept output**
-    - The GO `aspect` to group the results in three separate files
-    - The GO `description` to annotate the results
-- **Normalized UniPept output**:
-    - `peptide` to match with **PSM Report** and to count distinct peptides per GO term
-    - `go_reference` to match with **Gene Ontology Terms**
-- **PSM Report**:
-    - `sequence` to match with **Normalized UniPept output**
-    - `id` to count distinct PSM's per GO term
+
+Here is another query tabular on extracting all the GO terms from the Unipept results
 
 > ### {% icon hands_on %} Hands-on: Query Tabular
 >
 > 1. **Query Tabular** {% icon tool %}: Run **Query Tabular** with:
 >
->    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The `Gene Ontology Terms` file
+>   - {% icon param-file %} *”Add tables to this Database”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: ‘Output dataset `output_psm’ from step 4`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `^\d`
+>   - {% icon param-select %} *”Action for regex match”*: `include line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `psm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `,,sequence,,,,,,,,,,,,,,,,,,,,confidence,validation`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-file %} *”Tabular Dataset for Table”*: `Output dataset ‘output_go_tsv’ from step 6`
+>   - {% icon param-select %} *”Filter By”*: `by regex expression matching`
+>   - {% icon param-text %} *”Regex pattern”*: `#peptide`
+>   - {% icon param-select %} *”Action for regex match”*: `exclude line on pattern match`
+>   - {% icon param-text %} *”Specify Name for Table”*: `goterm`
+>   - {% icon param-check %} *”Use first line as column names”*: `No`
+>   - {% icon param-text %} *”Specify Column Names (comma-separated list)”*: `peptide,total_protein_count,go_term,protein_count,go_name`
+>   - {% icon param-check %} *”Only load the columns you have named into database”*: `Yes`
+>   - {% icon param-text %} *”Add an auto increment primary key column with this name”*: ``
+>   - {% icon param-check %} *”Save the sqlite database in your history”*: `Yes`
+>   - {% icon param-text %} *”SQL Query to generate tabular output”*: 
+`SELECT goterm.go_term,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES",goterm.go_name 
+FROM psm LEFT JOIN goterm ON psm.sequence = goterm.peptide 
+WHERE confidence >= 95 
+GROUP BY goterm.go_term 
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+>   - {% icon param-check %} *”Include query result column headers”*: `Yes`
+>   - {% icon param-select %} *”Prefix character for column_header line”*: `#`
 >
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `skip leading lines`
->        - **Skip lines**: `1`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `go`
->    - **Specify Column Names (comma-separated list)**: `aspect,go_id,description`
->    - **Table Index**: Click on `+ Insert Table Index`:
->        - **This is a unique index**: `No`
->        - **Index on Columns**: `aspect,go_id`
->
->
-> 2. Repeat this step to have a second **Database Table**:
->
->    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The **Unipept** `tabluar`/`tsv` output
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `skip leading lines`
->        - **Skip lines**: `1`
->    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `prepend a line number column`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `bering_prot`
->    - **Specify Column Names (comma-separated list)**: `id,peptide,uniprot_id,taxon_id,taxon_name,ec_references,go_references,refseq_ids,refseq_protein_ids,insdc_ids,insdc_protein_ids`
->    - **Table Index**: Click on `+ Insert Table Index`:
->        - **This is a unique index**: `No`
->        - **Index on Columns**: `id,peptide`
->
-> 3. Repeat this step to have another **Database Table**:
->
->    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The same **Unipept** `tabluar`/`tsv` output
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `skip leading lines`
->        - **Skip lines**: leave blank
->    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `prepend a line number column`
->    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `select columns`
->        - **enter column numbers to keep**: `1,7`
->    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `normalize list columns, replicates row for each item in list`
->        - **enter column numbers to normalize**: `2`
->        - **List item delimiter in column**: ` ` (a single blank character)
->
->    > ### {% icon comment %} Comments
->    > - The UniPept result file can contain multiple GO IDs in a single row. In order to create a normalized table of this data, these rows will be split so each record contains only one GO ID.
->    {: .comment}
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `bering_prot_go`
->    - **Specify Column Names (comma-separated list)**: `id,go_reference`
->    - **Table Index**: Click on `+ Insert Table Index`:
->        - **This is a unique index**: `No`
->        - **Index on Columns**: `go_reference,id`
->
-> 4. Repeat this step to have another **Database Table**:
->
->    - **Database Table**: Click on `+ Insert Database Table`
->    - **Tabular Dataset for Table**: The `PSM Report`
->
->    Section **Filter Dataset Input**:
->
->    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `by regex expression matching`
->        - **regex pattern**: `^\d`
->        - **action for regex match**: `include line on pattern match`
->    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
->    - **Filter By**: Select `select columns`
->        - **enter column numbers to keep**: `1,3,23,24`
->
->    Section **Table Options**:
->
->    - **Specify Name for Table**: `bering_psms`
->    - **Specify Column Names (comma-separated list)**: `id,sequence,confidence,validation`
->    - **Only load the columns you have named into database**: `Yes`
->    - **Table Index**: Click on `+ Insert Table Index`:
->        - **This is a unique index**: `No`
->        - **Index on Columns**: `sequence,id`
->
->    - **Save the sqlite database in your history**: `Yes`
->
->    - **SQL Query to generate tabular output**:
->
->          SELECT sequence as "peptide", count(id) as "PSMs"
->
->          FROM bering_psms
->
->          WHERE confidence >= 95
->
->          GROUP BY sequence
->
->          ORDER BY sequence
->
->
-> 5. Click **Execute**.
->
-{: .hands_on}
-
-With this we have combined all the data into a single database which we can now query to extract the desired information with **SQLite to tabular**:
-
-> ### {% icon hands_on %} Hands-on: SQLite to tabular
->
-> 1. **SQLite to tabular** {% icon tool %}: Run **SQLite to tabular** with:
->
->    - **SQLite Database**: The created SQLite database from the former step
->    - **SQL Query**:
->
->          SELECT go.description,
->
->          count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
->
->          FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN
->
->          bering_psms ON bering_prot.peptide = bering_psms.sequence
->
->          WHERE go.aspect = 'molecular_function'
->
->          GROUP BY go.description
->
->          ORDER BY  bering_peptides desc,bering_psms desc
 >
 > 2. Click **Execute**.
-> 3. Repeat these steps two times by replacing `molecular_function` in the fifth row of the SQL query by `biological_process` and `cellular_component`.
 >
 {: .hands_on}
 
+The next three steps are to filter out the three different Go terms. For that we use the Filter data on any column using simple expressions tool and extract the GO terms and the corresponding number of peptides associated with these terms.
+
+> ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
+>
+> **Filter** {% icon tool %} with the following parameters: 
+>   - {% icon param-file %} *”Filter”*: `Output dataset ‘output’ from step 9`
+>   - {% icon param-text %} *”With following condition”*: `c4=='biological process'`
+>   - {% icon param-text %} *”Number of header lines to skip”*: `1`
+>
+> 2. Click **Execute**.
+>
+{: .hands_on}
+>![Filter output](../../images/Biological_process.png)
+
+> ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
+>
+> **Filter** {% icon tool %} with the following parameters: 
+>   - {% icon param-file %} *”Filter”*: `Output dataset ‘output’ from step 9`
+>   - {% icon param-text %} *”With following condition”*: `c4=='cellular component'`
+>   - {% icon param-text %} *”Number of header lines to skip”*: `1`
+>
+> 2. Click **Execute**.
+>
+{: .hands_on}
+>![Filter output](../../images/Cellular_component.png)
+> ### {% icon hands_on %} Hands-on: Filter data on any column using simple expressions
+>
+> **Filter** {% icon tool %} with the following parameters: 
+>   - {% icon param-file %} *”Filter”*: `Output dataset ‘output’ from step 9`
+>   - {% icon param-text %} *”With following condition”*: `c4==’molecular function’`
+>   - {% icon param-text %} *”Number of header lines to skip”*: `1`
+>
+> 2. Click **Execute**.
+>
+{: .hands_on}
+>![Filter output](../../images/molecular_function.png)
+
 With these three output files the functional analysis of this tutorial is finished. Each record contains the name of a GO term, the amount of peptides related to it and the amount of PSMs for these peptides.
+
+This marks the end to the metaproteomics workflow! 
 
 > ### {% icon comment %} References
 >
