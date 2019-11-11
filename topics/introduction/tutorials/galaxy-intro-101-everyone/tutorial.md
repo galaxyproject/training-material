@@ -660,14 +660,46 @@ The dataset contains 53940 observations and 10 variables within the 4 Cs (carat,
 > 4. Click `Run workflow`.
 >
 > 5. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+> 
+>    > ### {% icon question %} Questions
+>    > 1. How many cut category are there in the Diamond dataset ?
+>    > 2. How many samples are there in each cut category ?
+>    > 3. Which are the metrics for carat, depth, table, price, x, y and z ?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. There are 5 different cut categories:
+>    > > - Fair
+>    > > - Good
+>    > > - Ideal
+>    > > - Premium
+>    > > - Very Good
+>    > > 
+>    > > 2. We have the following number of samples in each cut category:
+>    > >
+>    > > | 1         | 2      |
+>    > > |---------- | ------ |
+>    > > | Fair      |	1610  |
+>    > > | Good	     |  4906  |
+>    > > | Ideal     |	21551 |
+>    > > | Premium   |	13791 |
+>    > > | Very Good |	12082 |
+>    > > 
+>    > > 3. The outputs of the `Datamash` tool return summary statistics:
+>    > > 
+>    > > |1	       |       2	        |          3	    |       4	       |       5	        |         6	        |      7	       |       8	    |         9	      |    10	        |  11	           |  12	        |     13	      |     14	        |      15         |
+>    > > |--------- | ------------------ | ----------------- | ---------------- | ------------------ | ----------------- | ---------------- | -------------- | --------------- | --------------- | ---------------- | -------------- | --------------- | --------------- | --------------- |
+>    > > |Fair	   |1.0461366459627	    |0.51640434069998	|64.041677018634   |3.6434275068327	    |59.053788819876	|3.9462612911303   |4358.7577639752	|3560.3866122646  |6.2468944099379	|0.96431708513188  |6.182652173913	|0.95638035216621 |3.9827701863354	|0.65163839263818 |
+>    > > |Good 	   |0.84918467183041	|0.45405441363088	|62.365878516103   |2.169373893882	    |58.694639217285	|2.85129972014	   |3928.8644516918	|3681.5895839156  |5.8387851610273	|1.0573012747742   |5.8507439869547	|1.0515352966067  |3.6395067264574	|0.65489254221648 |
+>    > > |Ideal	   |0.70283699132291	|0.43287625675123	|61.709400955872   |0.71853858408156	|55.951668136049	|1.2464233290118   |3457.5419702102	|3808.401172349	  |5.5074506983435	|1.0642102992756   |5.5200798106816	|1.0744952964633  |3.4014481926593	|0.65764806637504 |
+>    > > |Premium   |0.89195489812196	|0.5152616080441	|61.264672612573   |1.1588148936357	    |58.74609527953	    |1.4785732699089   |4584.2577042999	|4349.2049614968  |5.973887317816	|1.1882520694218   |5.944878543978	|1.2597510709697  |3.6471242114422	|0.73116101393451 |
+>    > > |Very Good |0.80638139380897	|0.4594353821123	|61.818275120013   |1.378630794221	    |57.956149644099	|2.1214480938391   |3981.7598907466	|3935.8621605664  |5.7406960768085	|1.1008389335347   |5.7700256580036	|1.1029235851753  |3.5598013573912	|0.73022810609745 |
+>    > >
+>    > >
+>    > > 
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
-
-> ### {% icon question %} Questions
-> 1. How many cut category are there in the Diamond dataset ?
-> 2. How many samples are there in each cut category ?
-> 3. Which are the metrics for carat, depth, table, price, x, y and z ?
->
-{: .question}
 
 
 ## Share your work
