@@ -592,7 +592,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > - To be able to reuse it with another dataset.
 > 
 > To make sure our workflow can be applied to any tabular dataset, we can generalize it by allowing to select columns at runtime.
-> For every tool parameter that needs to be customized at runtime, click on the icon ![icon_set_in_advance](../../images/icon_set_in_advance.png) to switch to **Set at Runtime** ![icon_at_runtime](../../images/icon_at_runtime.png).
+> For every tool parameter that needs to be customized at runtime, click on the icon ![icon_set_in_advance](../../images/icon_set_in_advance.png) to switch to **Set at Runtime** ![icon_at_runtime](../../images/icon_set_at_runtime.png).
 >
 >  ![Set runtime parameters](../../images/workflow_runtime_parameters.png)
 >
