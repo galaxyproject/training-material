@@ -34,7 +34,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This practical aims to familiarize you with the Galaxy user interface.
+This practical aims at familiarizing you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
 Not everyone has the same background and that's ok!
 
@@ -422,7 +422,7 @@ In our dataset, we have the following features measured for each sample:
 >   > > ### {% icon solution %} Solution
 >   > >
 >   > > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
->   > > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) then *Iris versicolor* and *Iris virginica* petals.
+>   > > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) than *Iris versicolor* and *Iris virginica* petals.
 >   > > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I. virginica*). On the other hand,
 >   > > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
 >   > >
@@ -562,7 +562,8 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >     - We can tell Galaxy which outputs of a workflow should be shown in our history when we run it, and which can be hidden.
 >     - Click the **asterisk** for:
 >         - `out_file` in the `Unique` tool,
->         - `out_file1` in `Group` tools and for
+>         - `out_file1` in `Group` tools,
+>         - `Datamash on input dataset(s)` in `Datamash` tool and for
 >         - `png` in the `Scatterplot w ggplot2` tools.
 >     - Now, when we run the workflow, we will only see the final five outputs, i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
@@ -572,6 +573,28 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    >
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk (in green) will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
+>
+> 4. **Rename output datasets**
+>
+> When extracting a workflow, the output dataset names are generic and correspond to the default dataset name of the corresponding tool. 
+> It is then difficult to differentiate the outputs in a workflow when the same tool is used several times: see for instance, `out_file1` for **Group** {% icon tool %}. 
+> Therefore we recommend to rename all the output datasets we do not hide (marked with an asterisk). For each tool where the output is not hidden:
+> - Click on the tool in the workflow to get the details of the tool (`Details` tab).
+> - Scroll down in the `Details` of the tool to select `Configure Output`.
+> - Give a meaningful label (see figure below).
+>
+>    ![Rename output datasets](../../images/workflow_rename_output.png)
+>
+> 5. **Generalize workflow**
+>
+> The idea of sharing our workflow is twofold:
+> - To be able to reproduce it with the very same dataset
+> - To be able to reuse it with another dataset.
+> 
+> To make sure our workflow can be applied to any tabular dataset, we can generalize it by allowing to select columns at runtime.
+> For every tool parameter that needs to be customized at runtime, click on the icon ![icon_set_in_advance](../../images/icon_set_in_advance.png) to switch to **Set at Runtime** ![icon_at_runtime](../../images/icon_at_runtime.png).
+>
+>  ![Set runtime parameters](../../images/workflow_runtime_parameters.png)
 >
 > 4. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
@@ -599,13 +622,17 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 2. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/3522106/files/diamond.csv
+>    https://zenodo.org/record/3522106/files/diamonds.csv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
+> 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
 >
 >    {% include snippets/add_tag.md %}
 {: .hands_on}
