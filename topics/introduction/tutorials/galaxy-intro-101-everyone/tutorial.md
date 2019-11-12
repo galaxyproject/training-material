@@ -28,6 +28,7 @@ contributors:
   - michelemaroni89
   - olanag1
   - tnabtaf
+  - shiltemann
 ---
 
 
@@ -554,47 +555,41 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 2. Select **Edit** to launch the workflow editor.
 >    - You should see something like this:
 >
->      ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
+>    ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
 >
 >    - When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
+>    - You can also change the parameter settings of your workflow here, and do more advanced configuration.
 >
 > 3. **Hiding intermediate outputs**
->     - We can tell Galaxy which outputs of a workflow should be shown in our history when we run it, and which can be hidden.
->     - Click the **asterisk** for:
->         - `out_file` in the `Unique` tool,
->         - `out_file1` in `Group` tools,
->         - `Datamash on input dataset(s)` in `Datamash` tool and for
->         - `png` in the `Scatterplot w ggplot2` tools.
->     - Now, when we run the workflow, we will only see the final five outputs, i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
+>    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
+>    - By default, all outputs will be shown
+>    - Click the **asterisk** for outputs to mark them as important:
+>        - `out_file` in  **Unique** {% icon tool %}
+>        - `out_file1` in both **Group** {% icon tool%} steps
+>        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
+>    - Now, when we run the workflow, we will only see these final outputs
+>        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
 >
->    > ### {% icon tip %} Hiding intermediate steps
->    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
->    > ![Asterisk for `out_file1` in the `Select First` tool](../../images/101_foreveryone_workflow_editor_mark_output.png)
->    >
->    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk (in green) will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
->    {: .tip}
+>    {% include snippets/workflow_hide_intermediate_steps.md %}
 >
-> 4. **Rename output datasets**
+> 4. **Renaming output datasets**
+>    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
+>    - We can do the same in a workflow
+>    - Let's rename all the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
+>        - `out_file` in the `Unique` tool
+>        - `out_file1` in `Group` tools,
+>        - `png` in the `Scatterplot w ggplot2` tools.
 >
-> When extracting a workflow, the output dataset names are generic and correspond to the default dataset name of the corresponding tool. 
-> It is then difficult to differentiate the outputs in a workflow when the same tool is used several times: see for instance, `out_file1` for **Group** {% icon tool %}. 
-> Therefore we recommend to rename all the output datasets we do not hide (marked with an asterisk). For each tool where the output is not hidden:
-> - Click on the tool in the workflow to get the details of the tool (`Details` tab).
-> - Scroll down in the `Details` of the tool to select `Configure Output`.
-> - Give a meaningful label (see figure below).
->
->    ![Rename output datasets](../../images/workflow_rename_output.png)
+>    {% include snippets/workflow_rename_output.md %}
 >
 > 5. **Generalize workflow**
+>    - When we run this workflow on a different dataset, we may want to use some different parameters
+>    - For example for the axis labels in our plots, or the column numbers in the file
+>    - To this end, we can tell Galaxy which parameters should be set by the user every time they run the workflow
+>    - Do this for the following parameters:
+>        - **Scatterplot** {% icon tool %}: `Plot title` parameter
 >
-> The idea of sharing our workflow is twofold:
-> - To be able to reproduce it with the very same dataset
-> - To be able to reuse it with another dataset.
-> 
-> To make sure our workflow can be applied to any tabular dataset, we can generalize it by allowing to select columns at runtime.
-> For every tool parameter that needs to be customized at runtime, click on the icon ![icon_set_in_advance](../../images/icon_set_in_advance.png) to switch to **Set at Runtime** ![icon_at_runtime](../../images/icon_set_at_runtime.png).
->
->  ![Set runtime parameters](../../images/workflow_runtime_parameters.png)
+>    {% include snippets/workflow_set_runtime.md %}
 >
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
@@ -660,7 +655,7 @@ The dataset contains 53940 observations and 10 variables within the 4 Cs (carat,
 > 4. Click `Run workflow`.
 >
 > 5. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
-> 
+>
 >    > ### {% icon question %} Questions
 >    > 1. How many cut category are there in the Diamond dataset ?
 >    > 2. How many samples are there in each cut category ?
@@ -675,7 +670,7 @@ The dataset contains 53940 observations and 10 variables within the 4 Cs (carat,
 >    > > - Ideal
 >    > > - Premium
 >    > > - Very Good
->    > > 
+>    > >
 >    > > 2. We have the following number of samples in each cut category:
 >    > >
 >    > > | 1         | 2      |
@@ -685,13 +680,13 @@ The dataset contains 53940 observations and 10 variables within the 4 Cs (carat,
 >    > > | Ideal     |	21551 |
 >    > > | Premium   |	13791 |
 >    > > | Very Good |	12082 |
->    > > 
->    > > 3. Using any of the scatter plots we made, we can see an obvious positive (non-linear) relationship between both variables: as carat size increases, price also increases. There is also very clear discrete values that carat size takes on, which are those vertical strips on the graph. 
->    > > 
+>    > >
+>    > > 3. Using any of the scatter plots we made, we can see an obvious positive (non-linear) relationship between both variables: as carat size increases, price also increases. There is also very clear discrete values that carat size takes on, which are those vertical strips on the graph.
+>    > >
 >    > > ![Price by Carat and Clarity](../../images/price_by_carat_and_clarity.png)
->    > > 
+>    > >
 >    > > 4. Holding carat weight constant, we see on the scatter plot shown above that diamonds with lower clarity are almost always cheaper than diamonds with better clarity: diamonds that are “IF” are the most expensive whereas “I1” are the least expensive clarity types. So clarity explains a lot of the variance found in price!
->    > > 
+>    > >
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
