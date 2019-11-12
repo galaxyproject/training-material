@@ -114,7 +114,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 >    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
-> 5. Add to each database a tag corresponding to the name of the sample (`#GSM461177` or `#GSM461180`)
+> 5. Add to each dataset a tag corresponding to the name of the sample (`#GSM461177` or `#GSM461180`)
 >
 >    {% include snippets/add_tag.md %}
 >
