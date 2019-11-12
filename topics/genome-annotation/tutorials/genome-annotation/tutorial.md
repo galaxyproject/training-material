@@ -37,19 +37,19 @@ It consists of three main steps:
 
 **FASTA**
 
-> DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
+DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
 
 ![FASTA file](../../images/fasta_format.png)
 
 **GFF3**
 
-> The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
+The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
 <img src="../../images/gff3_format.png" alt="GFF3 overview" width="70%">
 
 **GENBANK**
 
->The genbank sequence format is a rich format for storing sequences and associated annotations.
+The genbank sequence format is a rich format for storing sequences and associated annotations.
 
 ![genbank file](../../images/gb_full.png)
 
@@ -143,7 +143,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > What information do you see in the BLAST output?
 >    >
-> {: .question}
+>    {: .question}
 >
 >
 > From BLAST search results we want to get only the best hit for each protein.
@@ -153,7 +153,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > For how many proteins we do not get a BLAST hit?
 >    >
-> {: .question}
+>    {: .question}
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 >

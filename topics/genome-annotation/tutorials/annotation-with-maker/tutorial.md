@@ -156,7 +156,7 @@ BUSCO produces three output datasets
 - A full table: lists all the BUSCOs that were searched for, with the corresponding status (was it found in the genome? how many times? where?)
 - A table of missing BUSCOs: this is the list of all genes that were not found in the genome
 
->    ![BUSCO genome summary](../../images/busco_genome_summary.png "BUSCO short summary. Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all.")
+![BUSCO genome summary](../../images/busco_genome_summary.png "BUSCO short summary. Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all.")
 
 > ### {% icon question %} Questions
 >

@@ -149,16 +149,19 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > > 1. There are 285247 reads.
 >    > > 2. The 3 steps below have warnings:
 >    > >
->    > > > 1) **Per base sequence content**
->    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
+>    > >    1. **Per base sequence content**
 >    > >
->    > > > 2) **Sequence Duplication Levels**
->    > > > > The read library quite often has PCR duplicates that are introduced
->    > > > > simply by the PCR itself. We will remove these duplicates later on.
+>    > >       It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
 >    > >
->    > > > 3) **Overrepresented sequences**
->    > > > > Nextera adapter sequences are observable in the **Adapter Content** section.
->    > > 
+>    > >    2. **Sequence Duplication Levels**
+>    > >
+>    > >       The read library quite often has PCR duplicates that are introduced
+>    > >       simply by the PCR itself. We will remove these duplicates later on.
+>    > >
+>    > >    3. **Overrepresented sequences**
+>    > >
+>    > >       Nextera adapter sequences are observable in the **Adapter Content** section.
+>    > >
 >    > {: .solution}
 >    >
 >    {: .question}
@@ -245,7 +248,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
+Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed.
 
 > ### {% icon comment %} Dovetailing
 > We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. For example, if the first mate in the read pair is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`, where both contain 2 bases of adapter sequence, they will not be trimmed by Cutadapt and will map this way:
@@ -428,7 +431,7 @@ We will check the insert sizes with **Picard CollectInsertSizeMetrics**. The ins
 > ### {% icon comment %} CollectInsertSizeMetrics Results
 > This is what you get from CollectInsertSizeMetrics:
 > ![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
-{: .comment} 
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -533,9 +536,14 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 {: .hands_on}
 
 ### Convert the Genrich peaks to BED
-At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** from encodepeak to bed.
+At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak which is a special bed.
 
-{% include snippets/change_datatype.md datatype="datatypes" %}
+> ### {% icon hands_on %} Hands-on: Change the datatype
+> 1. Change the datatype of the output of **Genrich** from encodepeak to bed.
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+{: .hands_on }
 
 ## Create heatmap of genes
 
@@ -648,7 +656,7 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 
 
 > ### {% icon question %} Questions
-> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich. 
+> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich.
 >
 > 1. How many TSS are accessible in the sample in the displayed region?
 > 2. How many CTCF binding loci are accessible?

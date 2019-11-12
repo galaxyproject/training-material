@@ -192,21 +192,21 @@ Note that you can either:
 > ### {% icon tip %} Optional: Generate the right template with **xcms get a sampleMetadata file** {% icon tool %}
 >
 > In the case of this tutorial, we already prepared a *sampleMetadata* file with all the necessary information. Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:
->   1. You will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
->   2. You will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.
+>
+> 1. You will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
+> 2. You will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.
 >
 > > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
 > >
 > > 1. **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
 > >    - *"RData file"*: the `sacurine.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
-> >      {% include snippets/select_collection.md %}
 > >
 > {: .hands_on}
 >
 > An easy step for an easy sampleMetadata filling!
 >
 > From this tool, you will obtain a `tabular` file (meaning a tab-separated text file) with a first column of identifiers and a
-second column called *class* which is empty for the moment (only '.' for each sample). You can now download this file by clicking on the {% icon galaxy-save %} icon.
+> second column called *class* which is empty for the moment (only '.' for each sample). You can now download this file by clicking on the {% icon galaxy-save %} icon.
 >
 {: .tip}
 

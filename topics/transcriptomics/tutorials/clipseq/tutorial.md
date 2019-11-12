@@ -649,16 +649,16 @@ In this tutorial you imported raw eCLIP data, evaluated the quality of the read 
 
 In order to use the workflow linked to this tutorial, you have to create two lists of dataset pairs; one for you control and one for your CLIP experiment.
 
->    > ### {% icon tip %} Tip: Creating a list of dataset pairs.
->    >
->    > * Click on the check box icon in the history.
->    > ![builddatasetpairs1](../../images/clipseq_build_list_data_set_pairs_1.png "Select data sets for your list of data set pairs.")
->    > * Select the data files for your experiment (or control).
->    > * Select **For all selected...** below the check box icon.
->    > * Select **Build List of Dataset Paris**
->    > * In the new window, if you see no files and a warning, then select **Clear filters**. After that, organise the files into forward-reverse pairs.
->    > ![builddatasetpairs2](../../images/clipseq_build_list_data_set_pairs_2.png "Organise the data sets into pairs.")
->    >
->    >  ![builddatasetpairs3](../../images/clipseq_build_list_data_set_pairs_3.png "Result after organising the data sets into pairs.")
->    > * Give the list a name and click on the button **Create list**.
->    {: .tip}
+> ### {% icon tip %} Tip: Creating a list of dataset pairs.
+>
+> * Click on the check box icon in the history.
+> ![builddatasetpairs1](../../images/clipseq_build_list_data_set_pairs_1.png "Select data sets for your list of data set pairs.")
+> * Select the data files for your experiment (or control).
+> * Select **For all selected...** below the check box icon.
+> * Select **Build List of Dataset Paris**
+> * In the new window, if you see no files and a warning, then select **Clear filters**. After that, organise the files into forward-reverse pairs.
+> ![builddatasetpairs2](../../images/clipseq_build_list_data_set_pairs_2.png "Organise the data sets into pairs.")
+>
+>  ![builddatasetpairs3](../../images/clipseq_build_list_data_set_pairs_3.png "Result after organising the data sets into pairs.")
+> * Give the list a name and click on the button **Create list**.
+{: .tip}
