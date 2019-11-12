@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# First find the disabled tutorials, we don't care if boxes are broken there
+# Then find any 'raw' blockquote (missing any classes)
+# and diff those, removing everything from the disabled list.
+warning() {
+	(>&2 echo "$(tput setab 2)$*$(tput sgr0)")
+}
+
+BROKEN_BOXES="$(diff \
+	<(grep 'enable:.*false' -R topics/*/tutorials/*/tutorial.md -l | sed 's/md$/html/' ) \
+	<(grep '<blockquote>' `find _site -name 'tutorial.html' ` -l | sort -u | sed 's|_site/training-material/||' | sort -u) | \
+	grep '^>' | \
+	sed 's/^> //g;s/html$/md/')"
+
+BROKEN_TUTOS=$(echo "$BROKEN_BOXES" | wc -l)
+
+for box in ${BROKEN_BOXES}; do
+	warning "Broken boxes in $box"
+	html=$(echo "$box" | sed 's/md$/html/')
+	grep --color=always '<blockquote>' -A5 -B5 _site/training-material/$html
+done
+
+
+if (( BROKEN_TUTOS > 0 )); then
+	exit 1;
+fi
