@@ -194,9 +194,9 @@ We have an annotated reference and so will use it in this case.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1.
+>    > > 1. Substitution of a `C` to a `T`
 >    > >
->    > > 2.
+>    > > 2. According to SnpEff, it's a Synonymous change.
 >    > >
 >    > {: .solution}
 >    {: .question}
