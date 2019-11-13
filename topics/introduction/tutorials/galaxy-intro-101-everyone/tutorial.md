@@ -545,6 +545,16 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 ## The workflow editor
 
+
+> ### {% icon comment %} Tip: Problems creating your workflow?
+> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
+> which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
+>
+> {% include snippets/import_workflow.md %}
+>
+{: .comment}
+
+
 We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
 
 > ### {% icon hands_on %} Hands-on: Editing our workflow
@@ -557,15 +567,16 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
 >
->    - When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
->    - You can also change the parameter settings of your workflow here, and do more advanced configuration.
+>    - When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen (the **Details** section)
+>    - You can also change the parameter settings of your workflow here, and also do more advanced configuration.
 >
 > 3. **Hiding intermediate outputs**
 >    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
 >    - By default, all outputs will be shown
 >    - Click the **asterisk** for outputs to mark them as important:
 >        - `out_file` in  **Unique** {% icon tool %}
->        - `out_file1` in both **Group** {% icon tool%} steps
+>        - `out_file1` in **Group** {% icon tool%} step
+>            - This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the **Details** box on the right.
 >        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
 >    - Now, when we run the workflow, we will only see these final outputs
 >        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
@@ -574,22 +585,13 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 > 4. **Renaming output datasets**
 >    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
->    - We can do the same in a workflow
->    - Let's rename all the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
->        - `out_file` in the `Unique` tool
->        - `out_file1` in `Group` tools,
->        - `png` in the `Scatterplot w ggplot2` tools.
+>    - We can do the same in a workflow (see the tip box below)
+>    - Let's rename the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
+>        - **Unique** {% icon tool%}, output `out_file`: rename to `categories` tool
+>        - **Group** {% icon tool %}, output `out_file1`: rename to `samples per category`
+>        - Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.
 >
 >    {% include snippets/workflow_rename_output.md %}
->
-> 5. **Generalize workflow**
->    - When we run this workflow on a different dataset, we may want to use some different parameters
->    - For example for the axis labels in our plots, or the column numbers in the file
->    - To this end, we can tell Galaxy which parameters should be set by the user every time they run the workflow
->    - Do this for the following parameters:
->        - **Scatterplot** {% icon tool %}: `Plot title` parameter
->
->    {% include snippets/workflow_set_runtime.md %}
 >
 > 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
 >
@@ -607,6 +609,9 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 ## Run workflow on different data
 
 Now that we have built our workflow, let's use it on some different data. For example, let's describing `diamonds` R dataset.
+
+
+
 
 > ### {% icon hands_on %} Hands-on: Create a new history and upload a new data
 >
@@ -639,7 +644,7 @@ The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, 
   - **Cut** applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
   - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow. In our dataset, the color column is encoded as an integer with 1 for D and 23 for Z.
   - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is: 1 (Flawless), 2 (Internally Flawless), 3 (VVS1), 4 (VVS2), 5 (VS1), 6 (VS2), 7 (SI1), 8 (SI2), 9 (I1), 10 (I2) and 11 (I3). In term of quality, the "ideal" diamond would be Flawless (1) while the worst would be I3 (11).
-  
+
 ![4 Cs](../../images/4cs-of-diamond-buying.jpg "The 4 Cs of diamond of diamonds.")
 
 > ### {% icon hands_on %} Hands-on: Run workflow
@@ -654,14 +659,14 @@ The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, 
 > 3. Select the appropriate dataset for the input.
 >
 > 4. Customize the first scatter plot:
->    - Change `Plot title` to **Diamond price as a function of carat** 
+>    - Change `Plot title` to **Diamond price as a function of carat**
 >    - Change `Label for x axis` to **weight of the diamond (carat)**
 >    - Change `Label for y axis` to **Price (US dollars)**
 >
 >    > > ![Customize scatter plot](../../images/customize_diamond_plot.png)
 >
 > 5. Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
->    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor** 
+>    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor**
 >    - Change `Label for x axis` to **weight of the diamond (carat)**
 >    - Change `Label for y axis` to **Price (US dollars)**
 >    - And finally in `Advanced Options` change `column differentiating the different groups` to **4** (Clarity).
