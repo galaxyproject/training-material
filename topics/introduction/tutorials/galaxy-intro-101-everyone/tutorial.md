@@ -614,10 +614,10 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3522106/files/diamonds.csv) or from the data library (ask your instructor)
+> 2. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/3522106/files/diamonds.csv
+>    https://zenodo.org/record/3540705/files/diamonds.csv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -633,12 +633,13 @@ Now that we have built our workflow, let's use it on some different data. For ex
 {: .hands_on}
 
 The `diamonds` data set comes from the well-known ggplot2 package developed by Hadley and initially collected from Diamond Search Engine in 2008.
-The dataset contains 53940 observations and 10 variables within the 4 Cs (carat, cut, color and clarity):
+For this training, we have created a simpler dataset by selecting a subset of columns.
+The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, cut, color and clarity):
   - **Carat** refers to the weight of the diamond when measured on a scale
   - **Cut** applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
-  - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow
-  - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is (I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best))
-
+  - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow. In our dataset, the color column is encoded as an integer with 1 for D and 23 for Z.
+  - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is: 1 (Flawless), 2 (Internally Flawless), 3 (VVS1), 4 (VVS2), 5 (VS1), 6 (VS2), 7 (SI1), 8 (SI2), 9 (I1), 10 (I2) and 11 (I3). In term of quality, the "ideal" diamond would be Flawless (1) while the worst would be I3 (11).
+  
 ![4 Cs](../../images/4cs-of-diamond-buying.jpg "The 4 Cs of diamond of diamonds.")
 
 > ### {% icon hands_on %} Hands-on: Run workflow
@@ -650,11 +651,24 @@ The dataset contains 53940 observations and 10 variables within the 4 Cs (carat,
 >    - Select the option `Run`.
 >    - The central panel will change to allow you to configure and launch the workflow.
 >
-> 3. Select the appropriate dataset for the input, change column number to the different tools and create 2 scatterplots representing price according to carat with either color or clarity as factor
+> 3. Select the appropriate dataset for the input.
 >
-> 4. Click `Run workflow`.
+> 4. Customize the first scatter plot:
+>    - Change `Plot title` to **Diamond price as a function of carat** 
+>    - Change `Label for x axis` to **weight of the diamond (carat)**
+>    - Change `Label for y axis` to **Price (US dollars)**
 >
-> 5. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+>    > > ![Customize scatter plot](../../images/customize_diamond_plot.png)
+>
+> 5. Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
+>    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor** 
+>    - Change `Label for x axis` to **weight of the diamond (carat)**
+>    - Change `Label for y axis` to **Price (US dollars)**
+>    - And finally in `Advanced Options` change `column differentiating the different groups` to **4** (Clarity).
+>
+> 6. Click `Run workflow`.
+>
+> 7. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    > ### {% icon question %} Questions
 >    > 1. How many cut category are there in the Diamond dataset ?
@@ -685,7 +699,7 @@ The dataset contains 53940 observations and 10 variables within the 4 Cs (carat,
 >    > >
 >    > > ![Price by Carat and Clarity](../../images/price_by_carat_and_clarity.png)
 >    > >
->    > > 4. Holding carat weight constant, we see on the scatter plot shown above that diamonds with lower clarity are almost always cheaper than diamonds with better clarity: diamonds that are “IF” are the most expensive whereas “I1” are the least expensive clarity types. So clarity explains a lot of the variance found in price!
+>    > > 4. Holding carat weight constant, we see on the scatter plot shown above that diamonds with lower clarity are almost always cheaper than diamonds with better clarity: diamonds that are “Internally Flawless” are the most expensive whereas “I1” are the least expensive clarity types. So clarity explains a lot of the variance found in price!
 >    > >
 >    > {: .solution}
 >    {: .question}
