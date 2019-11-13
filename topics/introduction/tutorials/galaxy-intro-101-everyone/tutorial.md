@@ -692,17 +692,17 @@ The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, 
 >    > >
 >    > > 2. We have the following number of samples in each cut category:
 >    > >
->    > > | 1         | 2      |
->    > > |---------- | ------ |
->    > > | Fair      |	1610  |
->    > > | Good	     |  4906  |
->    > > | Ideal     |	21551 |
->    > > | Premium   |	13791 |
->    > > | Very Good |	12082 |
+>    > >    | 1         | 2      |
+>    > >    |---------- | ------ |
+>    > >    | Fair      |	1610  |
+>    > >    | Good	     |  4906  |
+>    > >    | Ideal     |	21551 |
+>    > >    | Premium   |	13791 |
+>    > >    | Very Good |	12082 |
 >    > >
 >    > > 3. Using any of the scatter plots we made, we can see an obvious positive (non-linear) relationship between both variables: as carat size increases, price also increases. There is also very clear discrete values that carat size takes on, which are those vertical strips on the graph.
 >    > >
->    > > ![Price by Carat and Clarity](../../images/price_by_carat_and_clarity.png)
+>    > >    ![Price by Carat and Clarity](../../images/price_by_carat_and_clarity.png)
 >    > >
 >    > > 4. Holding carat weight constant, we see on the scatter plot shown above that diamonds with lower clarity are almost always cheaper than diamonds with better clarity: diamonds that are “Internally Flawless” are the most expensive whereas “I1” are the least expensive clarity types. So clarity explains a lot of the variance found in price!
 >    > >
