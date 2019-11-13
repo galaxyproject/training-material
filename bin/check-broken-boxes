@@ -13,7 +13,7 @@ BROKEN_BOXES="$(diff \
 	grep '^>' | \
 	sed 's/^> //g;s/html$/md/')"
 
-BROKEN_TUTOS=$(echo "$BROKEN_BOXES" | wc -l)
+BROKEN_TUTOS=$(echo "$BROKEN_BOXES" | wc -c)
 
 for box in ${BROKEN_BOXES}; do
 	warning "Broken boxes in $box"
