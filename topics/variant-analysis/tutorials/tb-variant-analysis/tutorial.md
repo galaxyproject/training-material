@@ -17,6 +17,7 @@ key_points:
 contributors:
   - pvanheus
   - slugger70
+  - thobalose
 ---
 # Introduction
 {:.no_toc}
@@ -48,6 +49,8 @@ This data is available at Zenodo using the following [link](http://doi.org/10.52
 >   - [ERR550641_1.fastq.gz](https://zenodo.org/record/3531703/files/ERR550641_1.fastq.gz)
 >   - [ERR550641_2.fastq.gz](https://zenodo.org/record/3531703/files/ERR550641_2.fastq.gz)
 >   - [Mycobacterium_tuberculosis_ancestral_reference.gbk](https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_ancestral_reference.gbk)
+>   - [Mycobacterium_tuberculosis_ancestral_reference.gff3](https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3)
+>   - [MTB_Ancestor_reference.fasta](https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta)
 >
 >    {% include snippets/import_via_link.md %}
 >
@@ -167,7 +170,8 @@ Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Sni
 
 If we give Snippy an annotated reference, it will silently run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
-We have an annotated reference and so will use it in this case.
+We have an annotated reference built from the inferred *M. tuberculosis* [ancestral reference genome](https://zenodo.org/record/3497110) and the
+gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3) so will use it in this case.
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
@@ -202,8 +206,119 @@ We have an annotated reference and so will use it in this case.
 >    {: .question}
 {: .hands_on}
 
-RECAP: So far we have taken our sample reads, cleaned them up a bit, compared them with our reference sequence and then called variants (SNPs) between our sample and the reference genome.
+**RECAP**: So far we have taken our sample reads, cleaned them up a bit, checked for taxonomic assocation, compared the reads with our reference sequence and then called variants (SNPs and indels) between our sample and the reference genome. We have tried to mitigate a few errors along the way:
 
+1. Sequencing errors: these were addressed by the quality trimming step
+2. Sample contamination: we used `kraken2` to assess the extent of this problem in our sample
+3. Appropriate choice of a reference genome: we used a genome that is inferred to be ancestral to all *M. tuberculosis* for our analysis and the diversity within Mtb is limited enough for us to rely on a single reference genome for the entire species.
+4. Quality filtering in the mapping and variant calling stage: Tools like `bwa-mem` and `freebayes` judge the quality of their predictions, and `snippy` performs some filtering on variant calling predictions.
 
+# Further variant filtering and TB-profiling
 
-#
+We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
+
+> ### {% icon hands_on %} Hands-on: Run Snippy
+> 1. **TB Variant Filter**: {% icon tool %} with the following parameters
+>   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
+>   - *"Filters to apply"*: Select `Filter variants by region`, `Filter variants close to indels` and `Filter sites by read alignment depth`.
+>
+> 2. Open the new VCF file.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many of the original variants have now been filtered out?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. `197` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+Now that we have a collection of *high quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
+
+Finally, TB Variant Report use the COMBAT-TB [neodb](https://neodb.sanbi.ac.za/browser/) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
+
+> ### {% icon hands_on %} Hands-on: Run TB Profiler
+> 1. **TB-Profiler profile**: {% icon tool %} with the following parameters
+>   - *"Input File Type"*: `BAM`
+>       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
+>
+>
+>       **TB Profiler** produces 3 output files, it's own VCF file, a report about the sample including it's likely lineages and any AMR found. There is also a `.json` formatted results file.
+>
+>
+> 2. **TB Variant Report**: {% icon tool %} with the following parameters
+>   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `TB-Profiler Profile VCF on data XX`
+>   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
+>
+> 3. Open the drug resistance and variant report html files.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What was the final lineage of the sample we tested?
+>    >
+>    > 2. Were there any drug resistances found?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. `4`
+>    > >
+>    > > 2. No there were not.
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+# View a SNP with JBrowse
+
+# View Snippy output in JBrowse
+
+We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
+
+> ### {% icon hands_on %} Hands-on: Run JBrowse
+>
+> 1. **JBrowse** {% icon tool %} with the following parameters
+>    - *"Reference genome to display"*: `Use a genome from history`
+>       - *"Select the reference genome"*: `https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta`
+>
+>       This sequence will be the reference against which annotations are displayed
+>
+>    - *"Produce Standalone Instance"*: `Yes`
+>    - *"Genetic Code"*: `11: The Bacterial, Archaeal and Plant Plastid Code`
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
+>    - *"Track Group"*
+>
+>        We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)
+>
+>       - **Track 1 - sequence reads**: Click on `Insert Track Group` and fill it with
+>           - "Track Category" to `sequence reads`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `BAM Pileups`
+>               - "BAM Track Data" to `snippy on data XX, data XX, and data XX mapped reads (bam)`
+>               - "Autogenerate SNP Track" to `Yes`
+>               - "Track Visibility" to `On for new users`
+>       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
+>           - "Track Category" to `variants`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `VCF SNPs`
+>               - "SNP Track Data" to `TB Variant Filter on data XX`
+>               - "Track Visibility" to `On for new users`
+>       - **Track 3 - annotated reference**: Click on `Insert Track Group` and fill it with
+>           - "Track Category" to `annotated reference`
+>           - Click on `Insert Annotation Track` and fill it with
+>               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "GFF/GFF3/BED Track Data" to `https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3`
+>               - "JBrowse Track Type [Advanced]" to `Canvas Features`
+>               - Click on "JBrowse Styling Options [Advanced]"
+>               - "JBrowse style.label" to `product`
+>               - "JBrowse style.description" to `product`
+>               - "Track Visibility" to `On for new users`
+{: .hands_on}
+
+A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
+
+You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
+
+We hope you enjoyed this tutorial!
