@@ -216,6 +216,7 @@ Why do we need to correct those?
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
+>    - *"Transcripts"*: `transcriptome_raw.fasta`
 >    - *"Paired or Single-end data?"*: `Paired`
 >        - *"Left/Forward strand reads"* -> `Multiple datasets`
 >            - Click on the *Folder* button at the right
@@ -229,6 +230,9 @@ Why do we need to correct those?
 >    - *"Abundance estimation method"*: `Salmon`
 >    - In *"Additional Options"*:
 >        - *"Trinity assembly?"*: `Yes`
+> 2. **Rename** the 6 `* isoforms counts` :(
+>    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
+>    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -241,7 +245,7 @@ Why do we need to correct those?
 >    > ```
 >    {: .comment}
 >
-> ### {% icon comment %} Comment
+>    > ### {% icon comment %} Comment
 >    >
 >    > At this stage, you can now delete some useless datasets
 >    > - `Trimmomatic on collection XX: unpaired`
@@ -249,9 +253,6 @@ Why do we need to correct those?
 >    > Note that the dataset are just hidden. You can delete them permanently and make some room in the history options (the little wheel icon)
 >    {: .comment}
 >
-> 2. **Rename** the 6 `* isoforms counts` :(
->    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
->    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
 >
 {: .hands_on}
 
@@ -351,57 +352,72 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Checking of the assembly statistics after cleanin
+## Checking of the assembly statistics after cleaning
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinity Statistics** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
 >
->
 {: .hands_on}
 
+# Differential Expression (DE) Analysis
 
-
-# IN PROGRESS
-## Sub-step with **Align reads and estimate abundance**
+## Remapping on the filtered transcriptome using
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
+>    - *"Transcripts"*: `transcriptome_filtered.fasta`
 >    - *"Paired or Single-end data?"*: `Paired`
+>        - *"Left/Forward strand reads"* -> `Multiple datasets`
+>            - Click on the *Folder* button at the right
+>                - *Type to Search*: `left`
+>                - Select the 6 `Trimmomatic on ..._left.fq.gz`
+>        - *"Right/Reverse strand reads"* -> `Multiple datasets`
+>            - Click on the *Folder* button at the right
+>                - *Type to Search*: `right`
+>                - Select the 6 `Trimmomatic on ..._left.fq.gz`
 >        - *"Strand specific data"*: `Yes`
 >    - *"Abundance estimation method"*: `Salmon`
 >    - In *"Additional Options"*:
 >        - *"Trinity assembly?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. **Rename** the 6 `* isoforms counts` :(
+>    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
+>    - Rename the datasets: `A1_DE`, `A2_DE`, `A3_DE`, `B1_DE`, `B2_DE`, `B3_DE`.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you check at the Standard Error messages of your outputs. You can get the `Mapping rate`
+>    > 1. Click on one dataset
+>    > 2. Click on the little **i** icon
+>    > 3. Click on *Tool Standard Error:	stderr*
+>    > ```
+>    > [2019-11-14 15:44:21.500] [jointLog] [info] Mapping rate = 44.4358%
+>    > ```
+>    {: .comment}
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > At this stage, you can now delete some useless datasets
+>    > - `Align reads and estimate abundance on *: genes counts`
+>    > Note that the dataset are just hidden. You can delete them permanently and make some room in the history options (the little wheel icon)
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Merge the mapping tables and compute a TMM normalization
 
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. **Build expression matrix** {% icon tool %} with the following parameters:
+>    - *"Abundance estimates"*: `A1_DE`, `A2_DE`, `A3_DE`, `B1_DE`, `B2_DE`, `B3_DE`
+>    - *"Abundance estimation method"*: `Salmon`
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+{: .hands_on}
 
+
+# IN PROGRESS
 ## Sub-step with **TransDecoder**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -409,40 +425,6 @@ Why do we need to correct those?
 > 1. **TransDecoder** {% icon tool %} with the following parameters:
 >    - In *"Training Options"*:
 >        - *"Select the training method"*: `Train with the top longest ORFs`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Build expression matrix**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Build expression matrix** {% icon tool %} with the following parameters:
->    - *"Abundance estimation method"*: `Salmon`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
