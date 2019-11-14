@@ -179,6 +179,24 @@ Why do we need to correct those?
 >
 {: .question}
 
+# Assembly
+
+## Assembly with **Trinity**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Trinity** {% icon tool %} with the following parameters:
+>    - *"Are you pooling sequence datasets?"*: `Yes`
+>        - *"Paired or Single-end data?"*: `Paired-end collection`
+>            - *"Strand specific data"*: `No`
+>    - *"Run in silico normalization of reads"*: `No`
+>    - In *"Additional Options"*:
+>        - *"Use the genome guided mode?"*: `No`
+> 2. **Rename** the Trinity output
+>    - `Trinity on data 52, data 51, and others: Assembled Transcripts` -> `transcriptome_raw.fasta`
+>
+{: .hands_on}
+
 # Title of the section usually corresponding to a big step in the analysis
 
 
