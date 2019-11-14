@@ -45,7 +45,7 @@ This data is available at Zenodo using the following [link](http://doi.org/10.52
 
 > ### {% icon hands_on %} Hands-on: Get the data
 >
-> 1. Import the following three files into a new history
+> 1. Import the following five files into a new history
 >   - [ERR550641_1.fastq.gz](https://zenodo.org/record/3531703/files/ERR550641_1.fastq.gz)
 >   - [ERR550641_2.fastq.gz](https://zenodo.org/record/3531703/files/ERR550641_2.fastq.gz)
 >   - [Mycobacterium_tuberculosis_ancestral_reference.gbk](https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_ancestral_reference.gbk)
