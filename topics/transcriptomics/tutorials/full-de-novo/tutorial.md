@@ -19,8 +19,9 @@ key_points:
 - They will appear at the end of the tutorial
 contributors:
 - abretaud
-- r1corre
 - lecorguille
+- r1corre
+- xiliu
 
 ---
 
