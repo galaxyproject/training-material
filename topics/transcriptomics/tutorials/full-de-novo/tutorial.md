@@ -197,155 +197,89 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Assembly cleanning
 
-
-
-## Sub-step with **Trinity**
+## Checking of the assembly with **Trinity Statistics**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Trinity** {% icon tool %} with the following parameters:
->    - *"Are you pooling sequence datasets?"*: `Yes`
->        - *"Paired or Single-end data?"*: `Paired-end`
->            - *"Strand specific data"*: `Yes`
->    - In *"Additional Options"*:
->        - *"Use the genome guided mode?"*: `No`
+> 1. **Trinity Statistics** {% icon tool %} with the following parameters:
+>    - *"Trinity assembly"*: `transcriptome_raw.fasta`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MultiQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MultiQC** {% icon tool %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `FastQC`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Align reads and estimate abundance**
+## Remapping on the raw transcriptome using **Align reads and estimate abundance**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Align reads and estimate abundance** {% icon tool %} with the following parameters:
 >    - *"Paired or Single-end data?"*: `Paired`
+>        - *"Left/Forward strand reads"* -> `Multiple datasets`
+>            - Click on the *Folder* button at the right
+>                - *Type to Search*: `left`
+>                - Select the 6 `Trimmomatic on ..._left.fq.gz`
+>        - *"Right/Reverse strand reads"* -> `Multiple datasets`
+>            - Click on the *Folder* button at the right
+>                - *Type to Search*: `right`
+>                - Select the 6 `Trimmomatic on ..._left.fq.gz`
 >        - *"Strand specific data"*: `Yes`
 >    - *"Abundance estimation method"*: `Salmon`
 >    - In *"Additional Options"*:
 >        - *"Trinity assembly?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If you check at the Standard Error messages of your outputs. You can get the `Mapping rate`
+>    > 1. Click on one dataset
+>    > 2. Click on the little **i** icon
+>    > 3. Click on *Tool Standard Error:	stderr*
+>    > ```
+>    > [2019-11-14 15:44:21.500] [jointLog] [info] Mapping rate = 44.4358%
+>    > ```
 >    {: .comment}
+>
+> ### {% icon comment %} Comment
+>    >
+>    > At this stage, you can now delete some useless datasets
+>    > - `Trimmomatic on collection XX: unpaired`
+>    > - `Align reads and estimate abundance on *: genes counts`
+>    > Note that the dataset are just hidden. You can delete them permanently and make some room in the history options (the little wheel icon)
+>    {: .comment}
+>
+> 2. **Rename** the 6 `* isoforms counts` :(
+>    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
+>    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
+>
+>    {% include snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Build expression matrix**
+## Merge the mapping tables and compute a TMM normalization with **Build expression matrix**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
+>    - *"Abundance estimates"*: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`
 >    - *"Abundance estimation method"*: `Salmon`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> What are the three tables?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. `estimated RNA-Seq fragment isoform counts (raw counts)``
+> > 2. `matrix of isoform TPM expression values (not cross-sample normalized)`
+> > 3. `matrix of TMM-normalized expression values`
 > >
 > {: .solution}
 >
 {: .question}
+
+# IN PROGRESS
 
 ## Sub-step with **RNASeq samples quality check**
 
