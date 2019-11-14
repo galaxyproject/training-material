@@ -323,7 +323,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-![](../../images/full-de-novo/rnaseq_samples_quality_check.png)
+![RNASeq samples quality check Graphs](../../images/full-de-novo/rnaseq_samples_quality_check.png)
 
 ## Filter low expression transcripts
 
