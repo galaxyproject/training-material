@@ -99,7 +99,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Quality control with **FastQC**
+## Quality control
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -127,7 +127,7 @@ Why do we need to correct those?
 >
 {: .hands_on} -->
 
-## Clean with **Trimmomatic**
+## Read cleaning with **Trimmomatic**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -168,7 +168,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Quality control after cleaning with **FastQC**
+## Quality control after cleaning
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -199,7 +199,7 @@ Why do we need to correct those?
 
 # Assembly cleanning
 
-## Checking of the assembly with **Trinity Statistics**
+## Checking of the assembly statistics
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -209,7 +209,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Remapping on the raw transcriptome using **Align reads and estimate abundance**
+## Remapping on the raw transcriptome using
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -255,7 +255,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Merge the mapping tables and compute a TMM normalization with **Build expression matrix**
+## Merge the mapping tables and compute a TMM normalization
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -278,6 +278,30 @@ Why do we need to correct those?
 > {: .solution}
 >
 {: .question}
+
+## **Compute contig Ex90N50 statistic and Ex90 transcript count**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Compute contig Ex90N50 statistic and Ex90 transcript count** {% icon tool %} with the following parameters:
+>    - *"Expression matrix"*: `Build expression matrix: matrix of TMM-normalized expression values`
+>    - *"Transcripts"*: `Trinity: Assembled Transcripts`
+> 2. Click on the visulization icon on the dataset `Compute contig Ex90N50 statistic and Ex90 transcript count: ExN50 statistics`
+>    1. **Scatterplot - Creates a 2D-scatterplot from tabular datapoints**
+>    2. *"X Column"*: select the Columns `1`
+>    3. *"Y Column"*: select the Columns `2`
+>   
+>
+{: .hands_on}
+
+### What we get
+![ExN50_plot_toy_dataset](../../images/full-de-novo/ExN50_plot_toy_dataset.png)
+
+### What we should get with a real dataset
+![ExN50_plot](../../images/full-de-novo/ExN50_plot.png)
+[(source)](https://github.com/trinityrnaseq/trinityrnaseq/wiki/Transcriptome-Contig-Nx-and-ExN50-stats)
+
+
 
 # IN PROGRESS
 
@@ -324,39 +348,6 @@ Why do we need to correct those?
 >        - *"Minimum percent of dominant isoform expression"*: `1`
 >    - In *"Additional Options"*:
 >        - *"Trinity assembly?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Compute contig Ex90N50 statistic and Ex90 transcript count**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Compute contig Ex90N50 statistic and Ex90 transcript count** {% icon tool %} with the following parameters:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
