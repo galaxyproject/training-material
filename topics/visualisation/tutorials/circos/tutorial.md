@@ -10,7 +10,8 @@ objectives:
   - "Familiarise yourself with the various different track types"
 time_estimation: "2h"
 key_points:
-  - "Circos"
+  - "Circos is an effective tool to make circular visualisation of high-dimensional datasets"
+  - "Circos is often used for genomics, but can also be used for other types of data"
 contributors:
   - shiltemann
   - erasche
@@ -33,6 +34,11 @@ In this tutorial we will show you how to reproduce these plots and hopefully you
 {: .agenda}
 
 
+# Background
+
+examples of plots, track types
+
+
 # Circos is an Iterative Process
 
 Publication quality circos plots are *rarely* produced on the first try. Developing a quality Circos plot involves a lot of trial and error to find the best way to convey specific pieces of your data to your audience.
@@ -41,9 +47,31 @@ Publication quality circos plots are *rarely* produced on the first try. Develop
 
 And while the Circos tool covers a huge range of scenarios, it does not support every option. When you've created the best possible plot, you will likely be only 90% of the way to a true, production-quality plot. As a result, the Circos tool lets you download the configuration files it uses, and you can immediately continue from where you were in Galaxy.
 
-# Complete Genomics
+# Example 1: Integrative Cancer analysis plot
 
-> ### {% icon hands_on %} Hands-on: Prepare the B-allele frequencey table
+In this section, we will recreate a Circos plot of the V-CaP cancer cell line presented in {% cite vcap %}. In this study, data from various sources were combined into a single integrative Circos plot.
+
+This plot has 4 tracks
+ - B-allele Frequency (obtained from SNP-array data)
+ - Copy Number (obtained from SNP array data)
+ - Small variants (obtained from whole-genome NGS sequencing data)
+ - Structural variants (obtained from whole-genome NGS sequencing data)
+
+> ### {% icon hands_on %} Background: Understanding our data
+>
+> TODO: explain the 4 tracks
+>
+{: .comment}
+
+
+
+Each of these datasets comes in a different format, and some preprocessing of the input data is needed. Fortunately, Galaxy has tool that will help us do this.
+
+
+
+
+
+> ### {% icon hands_on %} Hands-on: Prepare the B-allele frequency table
 >
 > 1. **Select** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `B-allele frequency.tsv`
