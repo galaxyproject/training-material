@@ -195,6 +195,8 @@ Why do we need to correct those?
 > 2. **Rename** the Trinity output
 >    - `Trinity on data 52, data 51, and others: Assembled Transcripts` -> `transcriptome_raw.fasta`
 >
+>    {% include snippets/rename_dataset.md %}
+>
 {: .hands_on}
 
 # Assembly cleanning
@@ -250,8 +252,6 @@ Why do we need to correct those?
 > 2. **Rename** the 6 `* isoforms counts` :(
 >    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
 >    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
->
->    {% include snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
@@ -334,6 +334,30 @@ Why do we need to correct those?
 >    - *"Minimum expression level required across any sample"*: `1.0`
 >    - *"Isoform filtering method"*: `Keep all isoforms above a minimum percent of dominant expression`
 >        - *"Minimum percent of dominant isoform expression"*: `1`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > If you check at the Standard Error messages of your outputs. You can get the `Retained` rate
+>    > 1. Click on one dataset
+>    > 2. Click on the little **i** icon
+>    > 3. Click on *Tool Standard Error:	stderr*
+>    > ```
+>    > 	Retained 2096 / 2102 = 99.71% of total transcripts.
+>    > ```
+>    {: .comment}
+>
+> 2. **Rename** the Trinity output
+>    - `Filter low expression transcripts on data 42 and data 14: filtered low expression transcripts` -> `transcriptome_filtered.fasta`
+>
+{: .hands_on}
+
+## Checking of the assembly statistics after cleanin
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Trinity Statistics** {% icon tool %} with the following parameters:
+>    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
+>
 >
 {: .hands_on}
 
