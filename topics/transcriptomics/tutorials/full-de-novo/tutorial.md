@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: De novo transcriptome assembly, annotation, and differential expression analysis
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/3541678'
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
@@ -20,6 +20,7 @@ key_points:
 contributors:
 - abretaud
 - r1corre
+- lecorguille
 
 ---
 
@@ -29,14 +30,11 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+As a result of the development of novel sequencing technologies, the years between 2008 and 2012 saw a large drop in the cost of sequencing. Per megabase and genome, the cost dropped to 1/100,000th and 1/10,000th of the price, respectively. Prior to this, only transcriptomes of organisms that were of broad interest and utility to scientific research were sequenced; however, these developed in 2010s high-throughput sequencing (also called next-generation sequencing) technologies are both cost- and labor- effective, and the range of organisms studied via these methods is expanding.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+Examining non-model organisms can provide novel insights into the mechanisms underlying the "diversity of fascinating morphological innovations" that have enabled the abundance of life on planet Earth. In animals and plants, the "innovations" that cannot be examined in common model organisms include mimicry, mutualism, parasitism, and asexual reproduction. De novo transcriptome assembly is often the preferred method to studying non-model organisms, since it is cheaper and easier than building a genome, and reference-based methods are not possible without an existing genome. The transcriptomes of these organisms can thus reveal novel proteins and their isoforms that are implicated in such unique biological phenomena.
+
+[(source)](https://en.wikipedia.org/wiki/De_novo_transcriptome_assembly)
 
 > ### Agenda
 >
@@ -47,35 +45,47 @@ and technical) key concepts they will learn.
 >
 {: .agenda}
 
-# Title for your first section
+# Cleaning
 
-Give some background about what the trainees will be doing in the section.
+Known sequencing biases:
+- Unknown nucleotides (Ns)
+- Bad quality nucleotides
+- Hexamers biases (Illumina. Now corrected ?)
 
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+Why do we need to correct those?
+- To remove a lot of sequencing errors (detrimental to the vast majority of assemblers)
+- Because most de-bruijn graph based assemblers can’t handle unknown nucleotides
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. Import the 12 `fq.gz` into a `List of Pairs` collection named `raw`
+>    - Option 1: from a shared data library (ask your instructor)
+>    - Option 2: from Zenodo using the URLs given below
+>
+>      [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3541678.svg)](https://doi.org/10.5281/zenodo.3541678)
 >
 >    ```
->    
+>    https://zenodo.org/record/3541678/files/A1_left.fq.gz
+>    https://zenodo.org/record/3541678/files/A1_right.fq.gz
+>    https://zenodo.org/record/3541678/files/A2_left.fq.gz
+>    https://zenodo.org/record/3541678/files/A2_right.fq.gz
+>    https://zenodo.org/record/3541678/files/A3_left.fq.gz
+>    https://zenodo.org/record/3541678/files/A3_right.fq.gz
+>    https://zenodo.org/record/3541678/files/B1_left.fq.gz
+>    https://zenodo.org/record/3541678/files/B1_right.fq.gz
+>    https://zenodo.org/record/3541678/files/B2_left.fq.gz
+>    https://zenodo.org/record/3541678/files/B2_right.fq.gz
+>    https://zenodo.org/record/3541678/files/B3_left.fq.gz
+>    https://zenodo.org/record/3541678/files/B3_right.fq.gz
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_via_link.md collection=true collection_type="List of Pairs" collection_name="raw" %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
@@ -86,6 +96,30 @@ have fun!
 > 5. Add to each database a tag corresponding to ...
 >
 >    {% include snippets/add_tag.md %}
+>
+{: .hands_on}
+
+## Quality control with **FastQC** - step 1/2
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **FastQC** {% icon tool %} with the following parameters:
+>   - *"Short read data from your current history"*: `raw` (collection)
+>    ***TODO***: *Check parameter descriptions*
+>
+{: .hands_on}
+
+## Quality control with **MultiQC** - step 2/2
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **MultiQC** {% icon tool %} with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `FastQC`
+>                - In *"FastQC output"*:
+>                    - *"Type of FastQC output?"*: `Raw data`
+>                    - *"FastQC output"*: `FastQC on collection 13: RawData` (collection)
 >
 {: .hands_on}
 
@@ -109,38 +143,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **FastQC**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **FastQC**
 
@@ -188,42 +191,6 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
 >            - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
 >                - *"Minimum length of reads to be kept"*: `30`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MultiQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MultiQC** {% icon tool %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `FastQC`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
