@@ -279,7 +279,7 @@ Why do we need to correct those?
 >
 {: .question}
 
-## **Compute contig Ex90N50 statistic and Ex90 transcript count**
+## Compute contig Ex90N50 statistic and Ex90 transcript count
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -301,81 +301,45 @@ Why do we need to correct those?
 ![ExN50_plot](../../images/full-de-novo/ExN50_plot.png)
 [(source)](https://github.com/trinityrnaseq/trinityrnaseq/wiki/Transcriptome-Contig-Nx-and-ExN50-stats)
 
-
-
-# IN PROGRESS
-
-## Sub-step with **RNASeq samples quality check**
+## RNASeq samples quality check
 
 > ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **RNASeq samples quality check** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. **Describe samples and replicates**  {% icon tool %} with the following parameters:
+>    - *"Samples"*
+>        - *"1: Samples"*:
+>            - *"Full sample name"*: `A1`
+>            - *"Condition"*: `A`
+>        - *"2: Samples"*:
+>            - *"Full sample name"*: `A2`
+>            - *"Condition"*: `A`
+>        - ...:
+>        - *"6: Samples"*:
+>            - *"Full sample name"*: `B3`
+>            - *"Condition"*: `B`
+> 2. **RNASeq samples quality check** {% icon tool %} with the following parameters:
+>    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
+>    - *"Samples description"*: `Describe samples`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![](../../images/full-de-novo/rnaseq_samples_quality_check.png)
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter low expression transcripts**
+## Filter low expression transcripts
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter low expression transcripts** {% icon tool %} with the following parameters:
+>    - *"Trinity assembly"*: `Trinity: Assembled Transcripts`
+>    - *"Expression matrix"*: `Build expression matrix: matrix of isoform TPM expression values (not cross-sample normalized)`
 >    - *"Minimum expression level required across any sample"*: `1.0`
 >    - *"Isoform filtering method"*: `Keep all isoforms above a minimum percent of dominant expression`
 >        - *"Minimum percent of dominant isoform expression"*: `1`
->    - In *"Additional Options"*:
->        - *"Trinity assembly?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
+# IN PROGRESS
 ## Sub-step with **Align reads and estimate abundance**
 
 > ### {% icon hands_on %} Hands-on: Task description
