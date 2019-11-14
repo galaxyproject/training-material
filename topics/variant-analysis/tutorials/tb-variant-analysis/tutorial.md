@@ -31,12 +31,6 @@ Variation in the genome of *M. tuberculosis* (Mtb) is associated with changes in
 
 This tutorial will focus on identifying genomic variation in Mtb and using that do explore drug resistance and other aspects of the bacteria.
 
-TO DO:
-
-* TB variant filter
-* TB profiler
-* TB variant report
-
 # Get your data
 
 The data for today is a sample of *M. tuberculosis* [collected](https://www.ebi.ac.uk/ena/data/view/PRJEB6945) from a German [outbreak](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001387) of tuberculosis. In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the inferred most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
@@ -270,8 +264,6 @@ Finally, TB Variant Report use the COMBAT-TB [neodb](https://neodb.sanbi.ac.za/b
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
-
-# View a SNP with JBrowse
 
 # View Snippy output in JBrowse
 
