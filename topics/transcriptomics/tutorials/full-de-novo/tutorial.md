@@ -64,7 +64,7 @@ Why do we need to correct those?
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the 12 `fq.gz` into a `List of Pairs` collection named `raw`
+> 2. Import the 12 `fq.gz` into a `List of Pairs` collection named `fastq_raw`
 >    - Option 1: from a shared data library (ask your instructor)
 >    - Option 2: from Zenodo using the URLs given below
 >
@@ -85,7 +85,7 @@ Why do we need to correct those?
 >    https://zenodo.org/record/3541678/files/B3_right.fq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="List of Pairs" collection_name="raw" %}
+>    {% include snippets/import_via_link.md collection=true collection_type="List of Pairs" collection_name="fastq_raw" %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
@@ -99,17 +99,16 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Quality control with **FastQC** - step 1/2
+## Quality control with **FastQC**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->   - *"Short read data from your current history"*: `raw` (collection)
->    ***TODO***: *Check parameter descriptions*
+>   - *"Short read data from your current history"*: `fastq_raw` (collection)
 >
 {: .hands_on}
 
-## Quality control with **MultiQC** - step 2/2
+<!-- ## Quality control with **MultiQC** - step 2/2
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -119,171 +118,70 @@ Why do we need to correct those?
 >            - *"Which tool was used generate logs?"*: `FastQC`
 >                - In *"FastQC output"*:
 >                    - *"Type of FastQC output?"*: `Raw data`
->                    - *"FastQC output"*: `FastQC on collection 13: RawData` (collection)
->
-{: .hands_on}
-
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-
-
-## Sub-step with **FastQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>                    - *"FastQC output"*: `data XX, data XX, and others (flattened)`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > We agree that it's not comfortable. The wrapper of MultiQC must be improved
 >    {: .comment}
 >
-{: .hands_on}
+{: .hands_on} -->
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Trimmomatic**
+## Clean with **Trimmomatic**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trimmomatic** {% icon tool %} with the following parameters:
->    - *"Paired end data?"*: `Yes`
+>    - *"Single-end or paired-end reads?"*: `Paired-end (as collection)`
+>    - *"Select FASTQ dataset collection with R1/R2 pair"*: `fastq_raw`
 >    - *"Perform initial ILLUMINACLIP step?"*: `Yes`
+>    - *"Adapter sequences to use"*: `TruSeq3 (additional seqs) (paired-ended, for MiSeq and HiSeq)`
 >    - In *"Trimmomatic Operation"*:
+>        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
+>            - *"Select Trimmomatic operation to perform"*: `Cut bases off end of a read, if below a threshold quality (TRAILING)`
+>        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
+>            - *"Select Trimmomatic operation to perform"*: `Cut bases off start of a read, if below a threshold quality (LEADING)`
 >        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
 >            - *"Select Trimmomatic operation to perform"*: `Sliding window trimming (SLIDINGWINDOW)`
 >        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
+>            - *"Select Trimmomatic operation to perform"*: `Drop reads with average quality lower than a specific level (AVGQUAL)`
+>                - *"Minimum length of reads to be kept"*: `25`
+>        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
 >            - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
->                - *"Minimum length of reads to be kept"*: `30`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>                - *"Minimum length of reads to be kept"*: `50`
+>    - *"Output trimmomatic log messages?"*: `Yes`
+> 2. **Rename** the Dataset Collection
+>    - `Trimmomatic on collection XX: paired` -> `fastqc_cleaned`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > You can check the Trimmomatic log files to get the number of read before and after the cleaning
+>    > ```
+>    > Input Read Pairs: 10000
+>    > Both Surviving: 8804 (88.04%)
+>    > Forward Only Surviving: 491 (4.91%)
+>    > Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
+>    > ```
 >    {: .comment}
+>
+>    {% include snippets/rename_collection.md %}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **FastQC**
+## Quality control after cleaning with **FastQC**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>   - *"Short read data from your current history"*: `fastqc_cleaned` (collection)
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
 >
 {: .question}
 
-## Sub-step with **FastQC**
+# Title of the section usually corresponding to a big step in the analysis
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **FastQC** {% icon tool %} with the following parameters:
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Trinity**
 
