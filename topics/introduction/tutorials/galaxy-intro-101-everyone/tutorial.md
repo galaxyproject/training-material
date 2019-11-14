@@ -619,7 +619,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Import** {% icon galaxy-upload %} the file `diamond.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
+> 2. **Import** {% icon galaxy-upload %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/3540705/files/diamonds.csv
