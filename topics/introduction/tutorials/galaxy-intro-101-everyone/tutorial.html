@@ -1,0 +1,1950 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy 101 for everyone</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a scientific workflow, data integration, and da..." />
+        <meta property="og:title" content="Galaxy Training: Galaxy 101 for everyone" />
+        <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and da..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/introduction" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Introduction to Galaxy Analyses
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fintroduction%2Ftutorials%2Fgalaxy-intro-101-everyone%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fintroduction%2Ftutorials%2Fgalaxy-intro-101-everyone%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fintroduction%2Ftutorials%2Fgalaxy-intro-101-everyone%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fintroduction%2Ftutorials%2Fgalaxy-intro-101-everyone%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fintroduction%2Ftutorials%2Fgalaxy-intro-101-everyone%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Galaxy 101 for everyone",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "courseCode": "introduction / galaxy-intro-101-everyone / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Galaxy 101 for everyone' tutorial",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "Galaxy 101 for everyone",
+    "description": "Galaxy 101 for everyone",
+    "learningResourceType": "tutorial",
+    "interactivityType": "expositive",
+    "provider": {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+  },
+  "url": "https://galaxyproject.github.io//training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
+  "timeRequired": "PT1H30M",
+  "description": "Galaxy 101 for everyone\\nThe questions this  addresses are:\n - What are the differences between the Iris species?\n\n\\nThe objectives are:\n - Familiarize yourself with the basics of Galaxy\n - Learn how to obtain data from external sources\n - Learn how to tag datasets\n - Learn how to run tools\n - Learn how histories work\n - Learn how to create a workflow\n - Learn how to share your work\n\n",
+  "hasPart": [
+
+  ],
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/record/1319069/files/iris.csv",
+      "name": "Training data for Galaxy 101 for everyone tutorial"
+    }
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    },
+    {
+      "@type": "Person",
+      "name": "Nadia Goué"
+    },
+    {
+      "@type": "Person",
+      "name": "Christopher Barnettster"
+    },
+    {
+      "@type": "Person",
+      "name": "Michele Maroni"
+    },
+    {
+      "@type": "Person",
+      "name": "Olha Nahorna"
+    },
+    {
+      "@type": "Person",
+      "name": "Dave Clements"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    },
+    {
+      "@type": "Person",
+      "name": "Nadia Goué"
+    },
+    {
+      "@type": "Person",
+      "name": "Christopher Barnettster"
+    },
+    {
+      "@type": "Person",
+      "name": "Michele Maroni"
+    },
+    {
+      "@type": "Person",
+      "name": "Olha Nahorna"
+    },
+    {
+      "@type": "Person",
+      "name": "Dave Clements"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Galaxy is a scientific workflow, data integration, and data and analysis persistence and publishing platform that aims to make computational biology accessible to research scientists that do not have computer programming experience. ",
+      "url": "https://galaxyproject.github.io//training-material/topics/introduction/"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Galaxy 101 for everyone</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#annefou" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>, <a href="/training-material/hall-of-fame#nagoue" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nagoue" alt="Nadia Goué">Nadia Goué</a>, <a href="/training-material/hall-of-fame#chrisbarnettster" class="contributor-badge"><img src="https://avatars.githubusercontent.com/chrisbarnettster" alt="Christopher Barnettster">Christopher Barnettster</a>, <a href="/training-material/hall-of-fame#michelemaroni89" class="contributor-badge"><img src="https://avatars.githubusercontent.com/michelemaroni89" alt="Michele Maroni">Michele Maroni</a>, <a href="/training-material/hall-of-fame#olanag1" class="contributor-badge"><img src="https://avatars.githubusercontent.com/olanag1" alt="Olha Nahorna">Olha Nahorna</a>, <a href="/training-material/hall-of-fame#tnabtaf" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Dave Clements">Dave Clements</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+
+</div>
+        
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What are the differences between the Iris species?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Familiarize yourself with the basics of Galaxy</p>
+</li>
+            
+            <li><p>Learn how to obtain data from external sources</p>
+</li>
+            
+            <li><p>Learn how to tag datasets</p>
+</li>
+            
+            <li><p>Learn how to run tools</p>
+</li>
+            
+            <li><p>Learn how histories work</p>
+</li>
+            
+            <li><p>Learn how to create a workflow</p>
+</li>
+            
+            <li><p>Learn how to share your work</p>
+</li>
+            
+            </ul>
+
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour 30 minutes</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Introductory 
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <div>
+                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
+                <div id="supporting_materials">
+                    <ul><li><div>
+                        
+                        <div>
+                            <a class="topic-icon" href="/training-material/topics/introduction/slides/introduction.html" title="Introduction slides">
+                                <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction Slides
+                            </a>
+                        </div>
+                        
+
+                        
+                        <div>
+                            
+<a class="topic-icon" href="https://zenodo.org/record/1319069/files/iris.csv">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+
+                        </div>
+                        
+
+                        
+                        <div>
+                            
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/" title="Workflows" alt="Galaxy 101 for everyone workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+
+                        </div>
+                        
+                        
+
+
+                        
+                        <div>
+                            
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+
+                        </div>
+                        
+                    </div></li></ul>
+                </div>
+
+                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 14, 2019 </p>
+            </div>
+            
+
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This practical aims at familiarizing you with the <span class="notranslate">Galaxy</span> user interface.
+It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
+Not everyone has the same background and that’s ok!</p>
+
+<blockquote class="comment">
+  <h3 id="comment-note-results-may-vary"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: results may vary</h3>
+
+  <p>Your results may be slightly different from the ones presented in this tutorial
+due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or
+because of stochastic processes in the algorithms.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#what-does-galaxy-look-like" id="markdown-toc-what-does-galaxy-look-like">What does <span class="notranslate">Galaxy</span> look like?</a></li>
+  <li><a href="#create-a-history" id="markdown-toc-create-a-history">Create a history</a>    <ol>
+      <li><a href="#upload-iris-dataset" id="markdown-toc-upload-iris-dataset">Upload Iris dataset</a></li>
+    </ol>
+  </li>
+  <li><a href="#pre-processing" id="markdown-toc-pre-processing">Pre-processing</a>    <ol>
+      <li><a href="#convert-format" id="markdown-toc-convert-format">Convert format</a></li>
+      <li><a href="#remove-header" id="markdown-toc-remove-header">Remove header</a></li>
+    </ol>
+  </li>
+  <li><a href="#data-analysis-what-does-the-dataset-contain" id="markdown-toc-data-analysis-what-does-the-dataset-contain">Data Analysis: What does the dataset contain?</a>    <ol>
+      <li><a href="#how-many-different-species-are-in-the-dataset" id="markdown-toc-how-many-different-species-are-in-the-dataset">How many different species are in the dataset?</a></li>
+      <li><a href="#how-many-samples-by-species-are-in-the-dataset" id="markdown-toc-how-many-samples-by-species-are-in-the-dataset">How many samples by species are in the dataset?</a></li>
+    </ol>
+  </li>
+  <li><a href="#analysis-how-to-differentiate-the-different-iris-species" id="markdown-toc-analysis-how-to-differentiate-the-different-iris-species">Analysis: How to differentiate the different Iris species?</a>    <ol>
+      <li><a href="#summary-and-descriptive-statistics-with-datamash" id="markdown-toc-summary-and-descriptive-statistics-with-datamash">Summary and descriptive statistics with <strong>Datamash</strong></a></li>
+      <li><a href="#visualize-iris-dataset-with-scatterplot-w-ggplot2" id="markdown-toc-visualize-iris-dataset-with-scatterplot-w-ggplot2">Visualize Iris dataset with <strong>Scatterplot w ggplot2</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#galaxy-management" id="markdown-toc-galaxy-management"><span class="notranslate">Galaxy</span> management</a>    <ol>
+      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></a></li>
+      <li><a href="#the-workflow-editor" id="markdown-toc-the-workflow-editor">The <span class="notranslate">workflow</span> editor</a></li>
+      <li><a href="#run-workflow-on-different-data" id="markdown-toc-run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</a></li>
+      <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
+  <p>The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<a class="citation" href="#Fisher1936">Fisher 1936</a>).
+Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
+For more history of this dataset read here <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia</a>.</p>
+</blockquote>
+
+<h2 id="what-does-galaxy-look-like">What does <span class="notranslate">Galaxy</span> look like?</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-log-in-or-register"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Log in or register</h3>
+  <p>Browse to your <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> and log in or register.</p>
+  <ol>
+    <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+    <li>Browse to your <span class="notranslate">Galaxy</span> instance</li>
+    <li>Log in or register</li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="comment-different-galaxy-servers"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Different <span class="notranslate">Galaxy</span> servers</h3>
+    <p>The particular <span class="notranslate">Galaxy</span> server that you are using may look slightly different than the one shown in this training. Don’t worry!</p>
+  </blockquote>
+
+</blockquote>
+
+<p>The <span class="notranslate">Galaxy</span> interface consists of three main parts:</p>
+
+<ol>
+  <li>The available tools are listed on the left</li>
+  <li>Your analysis history is recorded on the right</li>
+  <li>The central panel will let you run analyses and view outputs</li>
+</ol>
+
+<p><img src="/training-material/shared/images/galaxy_interface.png" alt="Galaxy ecosystem" /></p>
+
+<h1 id="create-a-history">Create a history</h1>
+
+<p><span class="notranslate">Galaxy</span> allows you to create analysis histories. A <strong>history</strong> can be thought of as an electronic experimental lab book; it keeps tracks of all the tools and parameters you used in your analysis. From such a history, a <strong><span class="notranslate">workflow</span></strong> can be extracted; this <span class="notranslate">workflow</span> can be used to easily repeat the analysis on different data.</p>
+
+<p>Think of a <span class="notranslate">workflow</span> as a cooking recipe with a list of ingredients (datasets) and a set of instructions
+(pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
+The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
+a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
+That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.</p>
+
+<p>The finalized pipelines can be generalized as a <span class="notranslate">workflow</span>. If we use cooking as an analogy, a <span class="notranslate">workflow</span> could represent an entire menu with all the recipes for each meal.
+In other words, using a <span class="notranslate">workflow</span> makes it possible to apply the same procedure to a different dataset, just by changing the input.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-history"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create history</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you start from an empty analysis history.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. For instance, you can choose <strong><span class="notranslate">Galaxy</span> 101 for everyone</strong> as the name of your new history.</p>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="upload-iris-dataset">Upload Iris dataset</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p><strong>Import</strong> <i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> the file <code class="highlighter-rouge">iris.csv</code> from <a href="https://zenodo.org/record/1319069/files/iris.csv">Zenodo</a> or from the data library (ask your instructor)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1319069/files/iris.csv
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">iris</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Check the <strong>datatype</strong>
+      <ul>
+        <li>Click on the history item to expand it to get more information.</li>
+        <li>The datatype of the iris dataset should be <code class="highlighter-rouge">csv</code>.</li>
+        <li><strong>Change</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datatype <em>if</em> it is different than <code class="highlighter-rouge">csv</code>.
+          <ul>
+            <li>Option 1: Datatypes can be <strong>autodetected</strong></li>
+            <li>Option 2: Datatypes can be <strong>manually set</strong></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-detecting-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Detecting the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Detect datatype</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">csv</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Add a tag <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> called <code class="highlighter-rouge">iris</code> to the dataset
+      <ul>
+        <li>Make sure the tag start with a hashtag symbol (<code class="highlighter-rouge">#iris</code>)</li>
+        <li>This tag will stay with your dataset any any results derived from it, and will help you make sense of your history</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="pre-processing">Pre-processing</h1>
+
+<p>One or more pre-processing step may be required to proceed with analysis. In our case, the tools we will use require tab-separated files, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to do some pre-processing of the files to make them ready for analysis.</p>
+
+<p>In the next steps we will perform two pre-processng steps:</p>
+<ul>
+  <li>Format conversion</li>
+  <li>Header removal</li>
+</ul>
+
+<h2 id="convert-format">Convert format</h2>
+
+<p>First, we will convert the file from comma-separated to tab-separated format. <span class="notranslate">Galaxy</span> has built-in format converters we can use for this.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-converting-dataset-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting dataset format</h3>
+
+  <ol>
+    <li>
+      <p><strong>Convert</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-converting-the-file-format"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">Convert CSV to Tabular</code></li>
+          <li>Click the <strong>Convert datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the resulting dataset to <code class="highlighter-rouge">iris tabular</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>View</strong> the generated file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon</p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>How many header lines does our file have?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The file has one header line, it contains the column names.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="remove-header">Remove header</h2>
+
+<p>Now it is time to run your first tool! We saw in the previous step that our file has 1 header line. This line does not contain any data, but the names of each column. We will now remove that line from our file before moving on to our analysis.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-tip-finding-your-tool"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: Finding your tool</h3>
+
+  <p>Different <span class="notranslate">Galaxy</span> servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
+
+  <p>Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you’ll need to search among the various options to find the one that works for you.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-removing-header"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing header</h3>
+
+  <ol>
+    <li><strong>Remove beginning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>Remove first</em>: <code class="highlighter-rouge">1</code> (to remove the first line only)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: select the <strong>iris tabular</strong> file from your history</li>
+        <li>Click <strong>Execute</strong></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="comment-tip-search-for-the-tool"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: search for the tool</h3>
+
+        <p>Use the <strong>tools search box</strong> at the top of the tool panel to find <strong>Remove beginning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+      </blockquote>
+
+      <p><img src="../../images/101_foreveryone_remove_beginning.png" alt="Settings for the `Remove beginning` tool" /></p>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">iris clean</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Click on the new history item to expand it</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>Which tags are present on this resulting dataset? (You may have to refresh the history panel to see the tags)</li>
+          <li>How many samples (lines) does our dataset contain?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>
+              <p>The output of <strong>Remove beginning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is also tagged with the label <code class="highlighter-rouge">iris</code>. Tags beginning with a hashtag (<code class="highlighter-rouge">#</code>) will propagate; they will appear on any datasets derived from your original tagged file.</p>
+            </li>
+            <li>
+              <p>There are 150 lines in our file (we can see this under the file name when we have expanded the history item). This means we have 150 samples.</p>
+            </li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the contents of the resulting file.
+      <ul>
+        <li>You should see that the header line is now no longer present.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="data-analysis-what-does-the-dataset-contain">Data Analysis: What does the dataset contain?</h1>
+
+<p>Now we are going to inspect the dataset using simple tools in order to get used to the <span class="notranslate">Galaxy</span> interface and answer basic questions.</p>
+
+<h2 id="how-many-different-species-are-in-the-dataset">How many different species are in the dataset?</h2>
+
+<p>In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in <span class="notranslate">Galaxy</span>. One approach might be to first extract this column from the file, and then count how many unique lines the file contains. Let’s do it!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filtering-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering dataset</h3>
+
+  <ol>
+    <li><strong>Cut</strong> - columns from a table <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c5</code></li>
+        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="highlighter-rouge">iris clean</code> dataset</li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">iris species column</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-3"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting file</p>
+    </li>
+    <li><strong>Unique</strong> - occurrences of each record <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: <code class="highlighter-rouge">iris species column</code> (the output from <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">iris species</code></p>
+    </li>
+    <li>
+      <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How many different species are in the dataset?</li>
+          <li>What are the different Iris species?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>There are 3 species.</li>
+            <li>The 3 different Iris species are:
+              <ul>
+                <li>setosa</li>
+                <li>versicolor</li>
+                <li>virginica</li>
+              </ul>
+            </li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Now we have our answer! There are 3 different Iris species in our file.</p>
+
+<p>Like we mentioned before, there are often multiple ways to reach your answer in <span class="notranslate">Galaxy</span>. For example, we could have done this with just a single tool, <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> as well.</p>
+
+<blockquote class="question">
+  <h3 id="hands_on-exercise-grouping-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Exercise: Grouping dataset</h3>
+
+  <ol>
+    <li>Try answering this question (how many Iris species are in the file?) again, using a different approach:
+      <ul>
+        <li>Tool: <strong>Group</strong> data by a column and perform aggregate operation on other columns <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>Input dataset: <code class="highlighter-rouge">iris clean</code> dataset to answer the same question.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Did you get the same answer as before?</p>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">iris species group</code></li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+        <ul>
+          <li><em>“Select data”</em> select <code class="highlighter-rouge">iris clean</code> dataset</li>
+          <li><em>“Group by column”</em>: <code class="highlighter-rouge">Column: 5</code></li>
+        </ul>
+      </li>
+      <li>This approach should give the same answer. There are often multiple ways to do a task in <span class="notranslate">Galaxy</span>, which way you choose is up to you!</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="how-many-samples-by-species-are-in-the-dataset">How many samples by species are in the dataset?</h2>
+
+<p>Now that we know that there are 3 different species in our dataset, our next objective is determining how many samples of each species we have. To answer this, we need to look at column 5 again, but instead of just determining how many unique values there are, we need to count how many times each of them occurs.</p>
+
+<p>You may have noticed there were more parameters in the <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool that we did not use. Let’s have a closer look and see if any of them might help us answer this question.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-tool-help"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tool Help</h3>
+  <p>To find out more about how a tool works, look at the help text (below the <strong>Execute</strong> button).</p>
+
+  <p>Look at the tool help for the <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Do you see any parameters that could help answer this question?</p>
+</blockquote>
+
+<p>Looking at the tool help for <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, we see that we can also perform aggregate operations such as mean, median, sum, max, min, count (and more). Counting sounds just like what we need, let’s try it!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-grouping-dataset-and-adding-information"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Grouping dataset and adding information</h3>
+
+  <ol>
+    <li><strong>Re-run</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="highlighter-rouge">iris clean</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Group by column”</em>: <code class="highlighter-rouge">Column: 5</code></li>
+        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert operation”</em>
+          <ul>
+            <li><em>“Type”</em>: <code class="highlighter-rouge">Count</code></li>
+            <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-re-running-a-tool"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Re-running a tool</h3>
+
+        <ol>
+          <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>
+          <li><strong>Click</strong> re-run <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li>
+        </ol>
+
+        <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">iris samples per species group</code></p>
+    </li>
+    <li>
+      <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting file.</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <p>How many samples per species are in the dataset?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>We have 50 samples per species:</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>1</th>
+                <th>2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>setosa</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>versicolor</td>
+                <td>50</td>
+              </tr>
+              <tr>
+                <td>virginica</td>
+                <td>50</td>
+              </tr>
+            </tbody>
+          </table>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="analysis-how-to-differentiate-the-different-iris-species">Analysis: How to differentiate the different Iris species?</h1>
+
+<p>Our objective is to find what differentiate the different Iris species (Figure 1). We know that we have <strong>3</strong> species of iris flowers, with
+<strong>50</strong> samples for each:</p>
+<ul>
+  <li>setosa</li>
+  <li>versicolor</li>
+  <li>virginica</li>
+</ul>
+
+<p>These species look very much alike as shown on the figure below.</p>
+
+<figure id="figure-1"><img src="../../images/iris_flowers.png" alt="3 species of Iris flowers" /><figcaption><span class="figcaption-prefix">Figure 1:</span> 3 species of Iris flowers</figcaption></figure>
+
+<p>And our objective is to find out whether the features we have been given for each species can help us to highlight the differences between the 3 species.</p>
+
+<p>In our dataset, we have the following features measured for each sample:</p>
+<ul>
+  <li>Petal length</li>
+  <li>Petal width</li>
+  <li>Sepal length</li>
+  <li>Sepal width</li>
+</ul>
+
+<blockquote class="comment">
+  <h3 id="comment-petal-and-sepal"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> petal and sepal</h3>
+  <p>The image below shows you what the terms sepal and petal mean.</p>
+  <figure id="figure-2"><img src="../../images/iris_sepal_petal.png" alt="Sepal and petal" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sepal and petal of Iris flowers</figcaption></figure>
+</blockquote>
+
+<h2 id="summary-and-descriptive-statistics-with-datamash">Summary and descriptive statistics with <strong>Datamash</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-get-the-mean-and-sample-standard-deviation-of-iris-flower-features"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the mean and sample standard deviation of Iris flower features</h3>
+
+  <ol>
+    <li><strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">iris tabular</code></li>
+        <li><em>“Group by fields”</em>: <code class="highlighter-rouge">5</code></li>
+        <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Sort input”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li>“Print all fields from input file”: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Ignore case when grouping”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li>In <em>“Operation to perform on each group”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c1</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Sample Standard deviation</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c1</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Sample Standard deviation</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c3</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Sample Standard deviation</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c3</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c4</code></li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+              <ul>
+                <li><em>“Type”</em>: <code class="highlighter-rouge">Sample Standard deviation</code></li>
+                <li><em>“On column”</em>: <code class="highlighter-rouge">c4</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the dataset to <code class="highlighter-rouge">iris summary and statistics</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-4"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the generated file</li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>Can we differentiate the different Iris flower species?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <ol>
+        <li>From the results, we can see that the average <em>Iris setosa</em> petal length is lower than 1.5 with a relatively small standard deviation (&lt;0.2).
+The same can be observed for <em>Iris setosa</em> petal widths. These numbers are much smaller (width and length) than <em>Iris versicolor</em> and <em>Iris virginica</em> petals.
+We can then use these characteristics to differentiate <em>Iris setosa</em> from the two other species (<em>I. versicolor</em> and <em>I. virginica</em>). On the other hand,
+we cannot easily differentiate <em>Iris Versicolor</em> from <em>Iris Virginica</em>. Further analysis is necessary.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="visualize-iris-dataset-with-scatterplot-w-ggplot2">Visualize Iris dataset with <strong>Scatterplot w ggplot2</strong></h2>
+
+<p>Let’s visualize the Iris dataset to see how the features depend on each other, and
+check whether we can spot any immediate patterns.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <strong>iris clean</strong></li>
+        <li><em>“Column to plot on x-axis”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Column to plot on y-axis”</em>: <code class="highlighter-rouge">2</code></li>
+        <li><em>“Plot title”</em>: <code class="highlighter-rouge">Sepal length as a function of sepal width</code></li>
+        <li><em>“Label for x axis”</em>: <code class="highlighter-rouge">Sepal length</code></li>
+        <li><em>“Label for y axis”</em>: <code class="highlighter-rouge">Sepal width</code></li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Data point options”</em>: <code class="highlighter-rouge">User defined point options</code>
+              <ul>
+                <li><em>“relative size of points”</em>: <code class="highlighter-rouge">2.0</code></li>
+              </ul>
+            </li>
+            <li><em>“Plotting multiple groups”</em>: <code class="highlighter-rouge">Plot multiple groups of data on one plot</code>
+              <ul>
+                <li><em>“column differentiating the different groups”</em>: <code class="highlighter-rouge">5</code></li>
+                <li><em>“Color schemes to differentiate your groups”</em>: <code class="highlighter-rouge">Set 2 - predefined color pallete</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
+
+      <p><img src="../../images/101_foreveryone_scatter.png" alt="Contents of the `Group` output dataset" /></p>
+    </li>
+    <li>Rename the dataset to <code class="highlighter-rouge">iris sepal scatterplot</code></li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>What does this scatter plot tell us about Iris species?</li>
+      <li>Make a new scatter plot, this time with <em>Petal</em> length versus <em>Petal</em> width.</li>
+      <li>
+        <p>Can we differentiate between the three Iris species?</p>
+
+        <blockquote class="tip">
+          <h3 id="tip-tip-re-running-the-ggplot-tool"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Re-running the ggplot tool</h3>
+          <p>Instead of clicking on <strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> again, it is possible to recall the previous scatterplot parameters by clicking on re-run button and updating the parameters we wish to modify.</p>
+          <blockquote class="notranslate hands_on">
+            <h3 id="hands_on-hands-on-re-run-the-tool"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Re-run the tool</h3>
+            <ol>
+              <li>Click on the <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> icon (<strong>Run this job again</strong>) for the output dataset of <strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+<img src="../../images/rerun_scatterplot.png" alt="rerun" /></li>
+            </ol>
+
+            <p>This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.</p>
+          </blockquote>
+        </blockquote>
+      </li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <ol>
+        <li>We get similar results than with Summary and statistics: <em>Iris setosa</em> can clearly be distinguished from <em>Iris versicolor</em> and
+<em>Iris virginica</em>. We can also see that sepal width and length are not sufficient features to differentiate <em>Iris versicolor</em> from <em>Iris
+virginica</em>.</li>
+        <li><strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">iris clean</code></li>
+            <li><em>“Column to plot on x-axis”</em>: <code class="highlighter-rouge">3</code></li>
+            <li><em>“Column to plot on y-axis”</em>: <code class="highlighter-rouge">4</code></li>
+            <li><em>“Plot title”</em>: <code class="highlighter-rouge">Petal length as a function of petal width</code></li>
+            <li><em>“Label for x axis”</em>: <code class="highlighter-rouge">Petal length</code></li>
+            <li><em>“Label for y axis”</em>: <code class="highlighter-rouge">Petal width</code></li>
+            <li>In <em>“Advanced Options”</em>:
+              <ul>
+                <li><em>“Data point options”</em>: <code class="highlighter-rouge">User defined point options</code>
+                  <ul>
+                    <li><em>“relative size of points”</em>: <code class="highlighter-rouge">2.0</code></li>
+                  </ul>
+                </li>
+                <li><em>“Plotting multiple groups”</em>: <code class="highlighter-rouge">Plot multiple groups of data on one plot</code>
+                  <ul>
+                    <li><em>“column differentiating the different groups”</em>: <code class="highlighter-rouge">5</code></li>
+                    <li><em>“Color schemes to differentiate your groups”</em>: <code class="highlighter-rouge">Set 2 - predefined color pallete</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Your new output dataset will look something like this:</li>
+      </ol>
+
+      <p><img src="../../images/101_foreveryone_scatter_petal.png" alt="Contents of the `Group` output dataset" /></p>
+
+      <p>We can better differentiate between the 3 Iris species but for some samples the petal length versus width is still insufficient
+to differentiate <em>Iris versicolor</em> from <em>Iris virginica</em>. And as before, <em>Iris setosa</em> can easily be distinguished from the two other species.</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h1 id="galaxy-management"><span class="notranslate">Galaxy</span> management</h1>
+
+<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></h2>
+
+<p>When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with <span class="notranslate">Galaxy</span> preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn’t it be nice to just convert this history into a <span class="notranslate">workflow</span> that we will be able to execute again and again?</p>
+
+<p><span class="notranslate">Galaxy</span> makes this very easy with the <code class="highlighter-rouge">Extract <span class="notranslate">workflow</span></code> option. This means any time you want to build a <span class="notranslate">workflow</span>, you can just perform the steps once manually, and then convert it to a <span class="notranslate">workflow</span>, so that next time it will be a lot less work to do the same analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li><strong>Clean up</strong> your history.
+      <ul>
+        <li>If you had any failed jobs (red), please remove those datasets from your history by clicking on the <code class="highlighter-rouge">x</code> button.</li>
+        <li>This will make the creation of a <span class="notranslate">workflow</span> easier.</li>
+      </ul>
+    </li>
+    <li>Go to the <strong>History Options menu</strong>  <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> menu
+      <ul>
+        <li>
+          <p>Select the <strong>Extract <span class="notranslate">Workflow</span></strong> option.</p>
+
+          <p><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>
+        </li>
+        <li>
+          <p>The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created <span class="notranslate">workflow</span>.</p>
+        </li>
+      </ul>
+
+      <p><img src="../../images/101_foreveryone_workflow_create.png" alt="Selection of steps for `Extract Workflow` from history" /></p>
+    </li>
+    <li><strong>Rename</strong> the <span class="notranslate">workflow</span> to something descriptive
+      <ul>
+        <li>For example: <code class="highlighter-rouge">Exploring Iris dataset with statistics and scatterplots</code>.</li>
+        <li>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them.</li>
+      </ul>
+    </li>
+    <li>Click on the <strong>Create <span class="notranslate">Workflow</span></strong> button near the top.
+      <ul>
+        <li>You will get a message that the <span class="notranslate">workflow</span> was created. But where did it go?</li>
+      </ul>
+    </li>
+    <li>Click on <strong><span class="notranslate">Workflow</span></strong> in the top menu of <span class="notranslate">Galaxy</span>.
+      <ul>
+        <li>Here you have a list of all your workflows.</li>
+        <li>Your newly created <span class="notranslate">workflow</span> should be listed at the top:</li>
+      </ul>
+
+      <p><img src="../../images/101_foreveryone_workflow.png" alt="`Where workflows go` list" />
+<img src="../../images/101_foreveryone_workflow_list.png" alt="`Your workflows` list" /></p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="the-workflow-editor">The <span class="notranslate">workflow</span> editor</h2>
+
+<blockquote class="comment">
+  <h3 id="comment-tip-problems-creating-your-workflow"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: Problems creating your <span class="notranslate">workflow</span>?</h3>
+  <p>If you had problems extracting your <span class="notranslate">workflow</span> in the previous step, we provide a working copy for you <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga">here</a>,
+which you can import to <span class="notranslate">Galaxy</span> and use for the next sections (see below how to import a <span class="notranslate">workflow</span> to <span class="notranslate">Galaxy</span>).</p>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-a-workflow"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing a <span class="notranslate">workflow</span></h3>
+    <ul>
+      <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>
+      <li>Click on the upload icon <i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>
+      <li>Provide your <span class="notranslate">workflow</span>
+        <ul>
+          <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>
+          <li>Option 2: Upload the worflow file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>
+        </ul>
+      </li>
+      <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<p>We can examine the <span class="notranslate">workflow</span> in <span class="notranslate">Galaxy</span>’s <span class="notranslate">workflow</span> editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-editing-our-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Editing our <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Open the <strong><span class="notranslate">workflow</span> editor</strong>
+      <ul>
+        <li>Click on the dropdown menu <i class="fa fa-caret-down" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-dropdown</span> (triangle icon) to the right of your <span class="notranslate">workflow</span> name.</li>
+      </ul>
+    </li>
+    <li>Select <strong>Edit</strong> to launch the <span class="notranslate">workflow</span> editor.
+      <ul>
+        <li>You should see something like this:</li>
+      </ul>
+
+      <p><img src="../../images/101_foreveryone_workflow_editor.png" alt="Workflow editor" /></p>
+
+      <ul>
+        <li>When you click on a <span class="notranslate">workflow</span> step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen (the <strong>Details</strong> section)</li>
+        <li>You can also change the parameter settings of your <span class="notranslate">workflow</span> here, and also do more advanced configuration.</li>
+      </ul>
+    </li>
+    <li><strong>Hiding intermediate outputs</strong>
+      <ul>
+        <li>We can tell <span class="notranslate">Galaxy</span> which outputs of a <span class="notranslate">workflow</span> are important and should be shown in our history when we run it, and which can be hidden.</li>
+        <li>By default, all outputs will be shown</li>
+        <li>Click the <strong>asterisk</strong> for outputs to mark them as important:
+          <ul>
+            <li><code class="highlighter-rouge">out_file</code> in  <strong>Unique</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><code class="highlighter-rouge">out_file1</code> in <strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step
+              <ul>
+                <li>This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the <strong>Details</strong> box on the right.</li>
+              </ul>
+            </li>
+            <li><code class="highlighter-rouge">png</code> in both <strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> steps</li>
+          </ul>
+        </li>
+        <li>Now, when we run the <span class="notranslate">workflow</span>, we will only see these final outputs
+          <ul>
+            <li>i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-hiding-intermediate-steps"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hiding intermediate steps</h3>
+        <p>When a <span class="notranslate">workflow</span> is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a <span class="notranslate">workflow</span> will be shown, but we can explicitly tell <span class="notranslate">Galaxy</span> which outputs to show and which to hide for a given <span class="notranslate">workflow</span>. This behaviour is controlled by the little asterisk next to every output dataset:
+<img src="/training-material/topics/introduction/images/101_foreveryone_workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p>
+
+        <p>If you click on this asterisk for any of the output datasets, then <em>only</em> files with an asterisk (in green) will be shown, and all outputs without an asterisk will be hidden. (Note that clicking <em>all</em> outputs has the same effect as clicking <em>none</em> of the outputs, in both cases all the datasets will be shown.)</p>
+      </blockquote>
+    </li>
+    <li><strong>Renaming output datasets</strong>
+      <ul>
+        <li>When we performed the analysis manually, we often renamed output datasets to something more meaningful</li>
+        <li>We can do the same in a <span class="notranslate">workflow</span> (see the tip box below)</li>
+        <li>Let’s rename the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
+          <ul>
+            <li><strong>Unique</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, output <code class="highlighter-rouge">out_file</code>: rename to <code class="highlighter-rouge">categories</code> tool</li>
+            <li><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, output <code class="highlighter-rouge">out_file1</code>: rename to <code class="highlighter-rouge">samples per category</code></li>
+            <li>Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-workflow-outputs"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming <span class="notranslate">workflow</span> outputs</h3>
+        <ol>
+          <li>Open the <span class="notranslate">workflow</span> editor</li>
+          <li>Click on the tool in the <span class="notranslate">workflow</span> to get the details of the tool on the right-hand side of the screen.</li>
+          <li>Scroll down to the <strong>Configure Output</strong> section of your desired parameter, and click it to expand it.
+            <ul>
+              <li>
+                <p>Under <strong>Rename dataset</strong>, give it meaningful name</p>
+
+                <p><img src="/training-material/shared/images/workflow_rename_datasets.png" alt="Rename output datasets" /></p>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Save your <span class="notranslate">workflow</span></strong> (important!) by clicking on the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon at the top right of the screen.</p>
+
+      <p><img src="../../images/workflow_editor_save.png" alt="Save option in the workflow editor menu" /></p>
+    </li>
+    <li><strong>Return</strong> to the analysis view by clicking on <strong>Analyze Data</strong> at the top menu bar.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
+  <p>We could <strong>validate</strong> our newly built <span class="notranslate">workflow</span> by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.</p>
+</blockquote>
+
+<h2 id="run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</h2>
+
+<p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it on some different data. For example, let’s describing <code class="highlighter-rouge">diamonds</code> R dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-new-history-and-upload-a-new-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a new history and upload a new data</h3>
+
+  <ol>
+    <li>
+      <p>Create a <strong>new history</strong> and give it a name.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Import</strong> <i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> the file <code class="highlighter-rouge">diamonds.csv</code> from <a href="https://zenodo.org/record/3540705/files/diamonds.csv">Zenodo</a> or from the data library (ask your instructor)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3540705/files/diamonds.csv
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="highlighter-rouge">diamonds</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-5"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add a propagating tag <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> (e.g. <code class="highlighter-rouge">#diamonds</code>)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <code class="highlighter-rouge">diamonds</code> data set comes from the well-known ggplot2 package developed by Hadley and initially collected from Diamond Search Engine in 2008.
+For this training, we have created a simpler dataset by selecting a subset of columns.
+The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, cut, color and clarity):</p>
+<ul>
+  <li><strong>Carat</strong> refers to the weight of the diamond when measured on a scale</li>
+  <li><strong>Cut</strong> applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)</li>
+  <li><strong>Color</strong>, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow. In our dataset, the color column is encoded as an integer with 1 for D and 23 for Z.</li>
+  <li><strong>Clarity</strong> describes the amount and location of naturally occuring “inclusions” found in nearly all diamonds, a measurement of how clear the diamond is: 1 (Flawless), 2 (Inte<span class="notranslate">rna</span>lly Flawless), 3 (VVS1), 4 (VVS2), 5 (VS1), 6 (VS2), 7 (SI1), 8 (SI2), 9 (I1), 10 (I2) and 11 (I3). In term of quality, the “ideal” diamond would be Flawless (1) while the worst would be I3 (11).</li>
+</ul>
+
+<figure id="figure-3"><img src="../../images/4cs-of-diamond-buying.jpg" alt="4 Cs" /><figcaption><span class="figcaption-prefix">Figure 3:</span> The 4 Cs of diamond of diamonds.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>
+      <p>We wish to analyze diamonds by their 4 Cs by recycling our <span class="notranslate">workflow</span>.</p>
+    </li>
+    <li>Open the <strong><span class="notranslate">workflow</span> menu</strong> (top menu bar).
+      <ul>
+        <li>Find the <span class="notranslate">workflow</span> you made in the previous section,</li>
+        <li>Select the option <code class="highlighter-rouge">Run</code>.</li>
+        <li>The central panel will change to allow you to configure and launch the <span class="notranslate">workflow</span>.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Select the appropriate dataset for the input.</p>
+    </li>
+    <li>Customize the first scatter plot:
+      <ul>
+        <li>Change <code class="highlighter-rouge">Plot title</code> to <strong>Diamond price as a function of carat</strong></li>
+        <li>Change <code class="highlighter-rouge">Label for x axis</code> to <strong>weight of the diamond (carat)</strong></li>
+        <li>Change <code class="highlighter-rouge">Label for y axis</code> to <strong>Price (US dollars)</strong></li>
+      </ul>
+
+      <blockquote>
+        <blockquote>
+          <p><img src="../../images/customize_diamond_plot.png" alt="Customize scatter plot" /></p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
+      <ul>
+        <li>Change <code class="highlighter-rouge">Plot title</code> to <strong>Diamond price as a function of carat with clarity as a factor</strong></li>
+        <li>Change <code class="highlighter-rouge">Label for x axis</code> to <strong>weight of the diamond (carat)</strong></li>
+        <li>Change <code class="highlighter-rouge">Label for y axis</code> to <strong>Price (US dollars)</strong></li>
+        <li>And finally in <code class="highlighter-rouge">Advanced Options</code> change <code class="highlighter-rouge">column differentiating the different groups</code> to <strong>4</strong> (Clarity).</li>
+      </ul>
+    </li>
+    <li>
+      <p>Click <code class="highlighter-rouge">Run <span class="notranslate">workflow</span></code>.</p>
+    </li>
+    <li>
+      <p>Once the <span class="notranslate">workflow</span> has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <ol>
+          <li>How many cut category are there in the Diamond dataset ?</li>
+          <li>How many samples are there in each cut category ?</li>
+          <li>What do you notice about the relationship between price and carat ?</li>
+          <li>Based on the plot showing Price vs. Carat with Clarity as a factor, do you think clarity accounts for some of the variance in price? Why ?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>There are 5 different cut categories:
+              <ul>
+                <li>Fair</li>
+                <li>Good</li>
+                <li>Ideal</li>
+                <li>Premium</li>
+                <li>Very Good</li>
+              </ul>
+            </li>
+            <li>
+              <p>We have the following number of samples in each cut category:</p>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>1</th>
+                    <th>2</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Fair</td>
+                    <td>1610</td>
+                  </tr>
+                  <tr>
+                    <td>Good</td>
+                    <td>4906</td>
+                  </tr>
+                  <tr>
+                    <td>Ideal</td>
+                    <td>21551</td>
+                  </tr>
+                  <tr>
+                    <td>Premium</td>
+                    <td>13791</td>
+                  </tr>
+                  <tr>
+                    <td>Very Good</td>
+                    <td>12082</td>
+                  </tr>
+                </tbody>
+              </table>
+            </li>
+            <li>
+              <p>Using any of the scatter plots we made, we can see an obvious positive (non-linear) relationship between both variables: as carat size increases, price also increases. There is also very clear discrete values that carat size takes on, which are those vertical strips on the graph.</p>
+
+              <p><img src="../../images/price_by_carat_and_clarity.png" alt="Price by Carat and Clarity" /></p>
+            </li>
+            <li>Holding carat weight constant, we see on the scatter plot shown above that diamonds with lower clarity are almost always cheaper than diamonds with better clarity: diamonds that are “Inte<span class="notranslate">rna</span>lly Flawless” are the most expensive whereas “I1” are the least expensive clarity types. So clarity explains a lot of the variance found in price!</li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="share-your-work">Share your work</h2>
+
+<p>One of the most important features of <span class="notranslate">Galaxy</span> comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. <span class="notranslate">Galaxy</span> enables users to easily share their workflows and histories with others.</p>
+
+<p>To share a history, click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon in the history panel and select <code class="highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+
+<ol>
+  <li><strong>Make History Accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
+  <li><strong>Make History Accessible and Publish</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="highlighter-rouge">Shared Data → Histories</code> in the top menu.</li>
+  <li><strong>Share with a user</strong>. This will share the history only with specific users on the <span class="notranslate">Galaxy</span> instance.</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-permissions"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Permissions</h3>
+  <p>Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.</p>
+
+  <p>Be sure to select <strong>Also make all objects within the History accessible</strong> whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-share-history"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Share history</h3>
+
+  <ol>
+    <li>Share your history with your neighbour.</li>
+    <li>Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead “User” menu under <code class="highlighter-rouge">Histories shared with me</code>.</li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p><i class="fa fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in <span class="notranslate">Galaxy</span>. Additionally you can share your results and methods with others.</p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Galaxy provides an easy-to-use graphical user interface for often complex command-line tools</p>
+</li>
+                            
+                            <li><p>Galaxy keeps a full record of your analysis in a history</p>
+</li>
+                            
+                            <li><p>Workflows enable you to repeat your analysis on different data</p>
+</li>
+                            
+                            <li><p>Galaxy can connect to external sources for data import and visualization purposes</p>
+</li>
+                            
+                            <li><p>Galaxy provides ways to share your results and methods with others</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Fisher1936">Fisher, R. A., 1936 <b>The use of multiple measurements in taxonomic problems</b>. Annals of Eugenics 7: 179–188.</span>
+    
+    
+    <a href="https://doi.org/10.1111/j.1469-1809.1936.tb02137.x">10.1111/j.1469-1809.1936.tb02137.x</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-1809.1936.tb02137.x">https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-1809.1936.tb02137.x</a>
+      
+    
+
+</li></ol>
+                    
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Galaxy 101 for everyone (Introduction to Galaxy Analyses)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Galaxy 101 for everyone (Introduction to Galaxy Analyses)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux, Nadia Goué, Christopher Barnettster, Michele Maroni, Olha Nahorna, Dave Clements, Saskia Hiltemann)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
