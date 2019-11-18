@@ -44,7 +44,7 @@ requirements:
 
 After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
-[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collabortive genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidence and annotate a genome.
+[Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
 This demo was inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. This tutorial was further developed by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group who developed the Galaxy-Apollo bridge. It focuses on the mechanics of moving data into and out of Apollo, and not as much on how to use Apollo. The most up-to-date information on Apollo usage can be found in their [User Guide](http://genomearchitect.github.io/users-guide/).
 
@@ -62,7 +62,7 @@ This demo was inspired by the [Apollo User's Guide](http://genomearchitect.githu
 To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can be any data like:
 
 - A set of prior gene predictions or other genomic feature predictions
-- The output of a bioinformatic analysis like BLAST or InterProScan
+- The output of a bioinformatics analysis like BLAST or InterProScan
 - Sequencing reads from RNA-Seq or another HTS analysis
 - If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
 
@@ -115,7 +115,7 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 
 # Using Apollo for Annotation
 
-Refining genomes happens in multiple steps:
+Refining genome annotations happens in multiple steps:
 
 - Create a JBrowse instance from the reference genome FASTA file and evidence tracks
 - Import this data into Apollo
@@ -194,7 +194,7 @@ In this tutorial we will focus more on the practical portions than the theoretic
 >
 >    > ### {% icon comment %} JBrowse is highly configurable
 >    >
->    > JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifier like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.
+>    > JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifiers like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.
 >    >
 >    > A static genome browser like this (just JBrowse, not in Apollo) is very useful for summarising results of a genomics workflow, where the next step is simply interpretation and not annotation.
 >    >
@@ -378,4 +378,3 @@ When refinement is sufficient an updated or new version of the genome may be exp
 After generating your refined genome, you'll want to merge it back into the official gene sets.
 
 If a de novo set, you can export it as GFF3 and load it into a tool like [Tripal](http://tripal.info) to provide visualization.
-
