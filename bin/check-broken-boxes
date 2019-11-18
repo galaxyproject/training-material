@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # First find the disabled tutorials, we don't care if boxes are broken there
 # Then find any 'raw' blockquote (missing any classes)
 # and diff those, removing everything from the disabled list.
@@ -12,6 +11,7 @@ html2md() {
 }
 
 DISABLED_TUTOS="$(grep 'enable:.*false' -R topics/*/tutorials/*/tutorial.md -l)"
+
 
 BROKEN_BOXES="$(diff \
 	<(echo "$DISABLED_TUTOS" ) \
@@ -28,6 +28,8 @@ for box in ${BROKEN_BOXES}; do
 done
 
 WRONG_BOXES="$(grep '<blockquote[^>]*' $(find _site -name 'tutorial.html') | sed 's/notranslate//g;s/\s*<[^"]*"\s*//g;s/\s*".*//g' |grep -v 'agenda' | grep -v no_toc)"
+
+WRONG_TAG_EC=0
 
 for line in ${WRONG_BOXES}; do
 	file=$(echo "$line" | sed 's/:.*//g')
@@ -54,16 +56,23 @@ for line in ${WRONG_BOXES}; do
 		overview        ) ;;
 		warning         ) ;;
 		quote           ) ;;
-		#matrix          ) ;;
+		matrix          ) ;;
 		imgur-embed-pub ) ;;
 		*)
 			warning "Issue with $tags in $mdfile";
 			grep --color=always "{.*:.*$tags.*}" -A5 -B5 "$mdfile"
+			WRONG_TAG_EC=1
 			;;
 	esac
 done
 
 
-if (( BROKEN_TUTOS > 0 )); then
+if (( BROKEN_TUTOS > 1 )); then
 	exit 1;
 fi
+
+if (( WRONG_TAG_EC > 0 )); then
+	exit 2;
+fi
+
+exit 0
