@@ -100,17 +100,15 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 
 [Wallace](https://wallaceecomod.github.io/) is a R Shiny app integrated into Galaxy. It provides an interactive environment for the rapid and effective development and evaluation of SDM, including data download, cleaning, partitioning, modeling, visualisation and predictions.
 
-## Obtain occurrence data
+## Transmit occurrence data from Galaxy to Wallace
 
 With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Launch Wallace
-> 1. Click on **Visualization** (top panel) and then **Interactive Environments**
-> 2. Select
->    - *"GIE"*: `interactiveShiny`
->    - *"Image"*: `valentinchdock/wallace-galaxy-ie`
->    - *"Datasets"*: output of **Tabular to CSV**
-> 3. In Wallace
+> 1. Go to https://live.usegalaxy.eu/
+> 2. Verify your current history is the history containing previous filtered occurences data, then click on the Wallace Shiny app shortcut image
+> 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool name so here `Wallace visualisation`
+> 4. In Wallace
 >    1. Go to **1 Occ Data**
 >    2. In **Obtain Occurrence Data**
 >       - *"Modules Available"*: `Galaxy History User`
