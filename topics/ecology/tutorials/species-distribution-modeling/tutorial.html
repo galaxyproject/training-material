@@ -376,7 +376,7 @@
 <ol id="markdown-toc">
   <li><a href="#step-1-import-data-from-public-databank" id="markdown-toc-step-1-import-data-from-public-databank">Step 1: Import data from public databank</a></li>
   <li><a href="#step-2-development-and-evaluation-of-sdm-using-wallace" id="markdown-toc-step-2-development-and-evaluation-of-sdm-using-wallace">Step 2: Development and evaluation of SDM using Wallace</a>    <ol>
-      <li><a href="#obtain-occurrence-data" id="markdown-toc-obtain-occurrence-data">Obtain occurrence data</a></li>
+      <li><a href="#transmit-occurrence-data-from-galaxy-to-wallace" id="markdown-toc-transmit-occurrence-data-from-galaxy-to-wallace">Transmit occurrence data from <span class="notranslate">Galaxy</span> to Wallace</a></li>
       <li><a href="#process-occurrence-data" id="markdown-toc-process-occurrence-data">Process occurrence data</a></li>
       <li><a href="#obtain-environmental-data" id="markdown-toc-obtain-environmental-data">Obtain Environmental Data</a></li>
       <li><a href="#process-environmental-data" id="markdown-toc-process-environmental-data">Process environmental Data</a></li>
@@ -442,7 +442,7 @@
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
   <ol>
     <li>What do the lines in the files represent?</li>
-    <li>What are the columns 1, 2, 3 and 50 of the generated file?</li>
+    <li>What are the columns 1, 2, 3 and 52 of the generated file?</li>
   </ol>
 
   <blockquote class="solution">
@@ -461,7 +461,7 @@
   <ol>
     <li><strong>Cut columns</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2,c3,c50</code></li>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2,c3,c52</code></li>
         <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Get species occurrences data</strong></li>
       </ul>
@@ -484,7 +484,7 @@
 
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>71.18% of the occurrences (7,118) are conserved</p>
+          <p>64.55% of the occurrences (6,456) are conserved</p>
         </blockquote>
       </blockquote>
     </li>
@@ -502,21 +502,16 @@
 
 <p><a href="https://wallaceecomod.github.io/">Wallace</a> is a R Shiny app integrated into <span class="notranslate">Galaxy</span>. It provides an interactive environment for the rapid and effective development and evaluation of SDM, including data download, cleaning, partitioning, modeling, visualisation and predictions.</p>
 
-<h2 id="obtain-occurrence-data">Obtain occurrence data</h2>
+<h2 id="transmit-occurrence-data-from-galaxy-to-wallace">Transmit occurrence data from <span class="notranslate">Galaxy</span> to Wallace</h2>
 
 <p>With this you can either upload file you’ve loaded earlier from <span class="notranslate">Galaxy</span> data or you can download data directly from Wallace. Let’s use the data from your <span class="notranslate">Galaxy</span> history:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-launch-wallace"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch Wallace</h3>
   <ol>
-    <li>Click on <strong>Visualization</strong> (top panel) and then <strong>Interactive Environments</strong></li>
-    <li>Select
-      <ul>
-        <li><em>“GIE”</em>: <code class="highlighter-rouge">interactiveShiny</code></li>
-        <li><em>“Image”</em>: <code class="highlighter-rouge">valentinchdock/wallace-<span class="notranslate">galaxy</span>-ie</code></li>
-        <li><em>“Datasets”</em>: output of <strong>Tabular to CSV</strong></li>
-      </ul>
-    </li>
+    <li>Go to https://live.use<span class="notranslate">galaxy</span>.eu/</li>
+    <li>Verify your current history is the history containing previous filtered occurences data, then click on the Wallace Shiny app shortcut image</li>
+    <li>Go to User &gt; Active InteractiveTools, then click on the active InteractiveTool name so here <code class="highlighter-rouge">Wallace visualisation</code></li>
     <li>In Wallace
       <ol>
         <li>Go to <strong>1 Occ Data</strong></li>
