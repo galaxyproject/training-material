@@ -233,7 +233,7 @@ Why do we need to correct those?
 >        - *"Trinity assembly?"*: `Yes`
 > 2. **Rename** the 6 `* isoforms counts` :(
 >    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
->    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
+>    - Rename the datasets: `A1_raw`, `A2_raw`, `A3_raw`, `B1_raw`, `B2_raw`, `B3_raw`.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -257,13 +257,25 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Merge the mapping tables and compute a TMM normalization
+## Merge the mapping tables and compute normalizations
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
->    - *"Abundance estimates"*: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`
+>    - *"Abundance estimates"*: `A1_raw`, `A2_raw`, `A3_raw`, `B1_raw`, `B2_raw`, `B3_raw`
 >    - *"Abundance estimation method"*: `Salmon`
+> 2. **Describe samples and replicates**  {% icon tool %} with the following parameters:
+>    - *"Samples"*
+>        - *"1: Samples"*:
+>            - *"Full sample name"*: `A1_raw`
+>            - *"Condition"*: `A`
+>        - *"2: Samples"*:
+>            - *"Full sample name"*: `A2_raw`
+>            - *"Condition"*: `A`
+>        - ...:
+>        - *"6: Samples"*:
+>            - *"Full sample name"*: `B3_raw`
+>            - *"Condition"*: `B`
 >
 {: .hands_on}
 
@@ -306,19 +318,7 @@ Why do we need to correct those?
 ## RNASeq samples quality check
 
 > ### {% icon hands_on %} Hands-on: Task description
-> 1. **Describe samples and replicates**  {% icon tool %} with the following parameters:
->    - *"Samples"*
->        - *"1: Samples"*:
->            - *"Full sample name"*: `A1`
->            - *"Condition"*: `A`
->        - *"2: Samples"*:
->            - *"Full sample name"*: `A2`
->            - *"Condition"*: `A`
->        - ...:
->        - *"6: Samples"*:
->            - *"Full sample name"*: `B3`
->            - *"Condition"*: `B`
-> 2. **RNASeq samples quality check** {% icon tool %} with the following parameters:
+> 1. **RNASeq samples quality check** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
 >    - *"Samples description"*: `Describe samples`
 >
@@ -385,7 +385,7 @@ Why do we need to correct those?
 >        - *"Trinity assembly?"*: `Yes`
 > 2. **Rename** the 6 `* isoforms counts` :(
 >    - Check in the information panel (**i** icon) the lineage of your file (ex: `A1_left.fq.gz` ... )
->    - Rename the datasets: `A1_DE`, `A2_DE`, `A3_DE`, `B1_DE`, `B2_DE`, `B3_DE`.
+>    - Rename the datasets: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -412,8 +412,30 @@ Why do we need to correct those?
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
->    - *"Abundance estimates"*: `A1_DE`, `A2_DE`, `A3_DE`, `B1_DE`, `B2_DE`, `B3_DE`
+>    - *"Abundance estimates"*: `A1`, `A2`, `A3`, `B1`, `B2`, `B3`
 >    - *"Abundance estimation method"*: `Salmon`
+> 2. **Describe samples and replicates**  {% icon tool %} with the following parameters:
+>    - *"Samples"*
+>        - *"1: Samples"*:
+>            - *"Full sample name"*: `A1`
+>            - *"Condition"*: `A`
+>        - *"2: Samples"*:
+>            - *"Full sample name"*: `A2`
+>            - *"Condition"*: `A`
+>        - ...:
+>        - *"6: Samples"*:
+>            - *"Full sample name"*: `B3`
+>            - *"Condition"*: `B`
+>
+{: .hands_on}
+
+## Differential expression analysis
+
+> ### {% icon hands_on %} Hands-on: Task description
+> 1. **Differential expression analysis** {% icon tool %} with the following parameters:
+>    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
+>    - *"Sample description"*: `Describe samples` (the last one)
+>    - *"Differential analysis method"*: `DESeq2`
 >
 {: .hands_on}
 
@@ -460,40 +482,6 @@ Why do we need to correct those?
 >
 > 1. **Trinotate** {% icon tool %} with the following parameters:
 >    - *"Let Galaxy downloading the Trinotate Pre-generated Resource SQLite database"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Differential expression analysis**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Differential expression analysis** {% icon tool %} with the following parameters:
->    - *"Differential analysis method"*: `DESeq2`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
