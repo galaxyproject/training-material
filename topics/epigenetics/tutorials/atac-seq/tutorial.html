@@ -460,45 +460,37 @@
             
 
             
-            <div>
-                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-                <div id="supporting_materials">
-                    <ul><li><div>
-                        
-                        <div>
-                            <a class="topic-icon" href="/training-material/topics/epigenetics/slides/introduction-dna-methylation.html" title="Introduction slides">
-                                <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction Slides
-                            </a>
-                        </div>
-                        
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/epigenetics/slides/introduction-dna-methylation.html" title="Introduction slides">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
 
-                        
-                        <div>
-                            
+                
+                    <li class="btn btn-default supporting_material">
 <a class="topic-icon" href="https://zenodo.org/record/3270536">
     <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
 </a>
 
+</li>
+                
 
-                        </div>
-                        
-
-                        
-                        <div>
-                            
+                
+                    <li class="btn btn-default supporting_material">
     <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/epigenetics/tutorials/atac-seq/workflows/" title="Workflows" alt="ATAC-Seq data analysis workflows">
         <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
     </a>
 
+</li>
+                
 
-                        </div>
-                        
-                        
+                
 
-
-                        
-                        <div>
-                            
+                
+                    <li class="btn btn-default supporting_material">
 
     <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
@@ -511,8 +503,6 @@
             </a>
         </li>
     
-    
-        
     
         
     
@@ -635,16 +625,13 @@
     </ul>
 
 
-
-                        </div>
-                        
-                    </div></li></ul>
+</li>
+                
                 </div>
-
-                <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong>  </p>
-            </div>
+            </ul>
             
 
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong>  </p>
         </blockquote>
 
         <div class="container">
@@ -1270,7 +1257,7 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
 
   <p>To get the number of <span class="notranslate">reads</span> that mapped to the mitochondrial genome (chrM) you can run <strong>Samtools idxstats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output of  <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
 The columns of the output are: chromosome name, chromosome length, number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the chromosome, number of unaligned mate whose mate is <span class="notranslate">mapping</span> to the chromosome.
-The first 2 lines of the result would be (after sorting):</p>
+The first 2 lines of the result would be (after using <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>):</p>
 
   <figure id="figure-7"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Samtools idxstats result</figcaption></figure>
 
@@ -1318,7 +1305,7 @@ The first 2 lines of the result would be (after sorting):</p>
         <li><em>“the pattern</em>: <code class="highlighter-rouge">(Library|LIBRARY)</code></li>
       </ul>
     </li>
-    <li>Check that the datatype is tabular. If they are not then change the datatype as described above.</li>
+    <li>Check that the datatype is tabular. If not, change the datatype as described above.</li>
     <li><strong>Transpose</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of  <strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1506,6 +1493,7 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
     <li><strong><span class="notranslate">bed</span>tools SortBED</strong> order the intervals  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the following <span class="notranslate">BED</span>/<span class="notranslate">bed</span>Graph/GFF/VCF file”</em>: <code class="highlighter-rouge">ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort by”</em>: <code class="highlighter-rouge">chromosome, then by start position (asc)</code></li>
       </ul>
     </li>
   </ol>
@@ -1549,7 +1537,7 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
               <ol>
                 <li><em>“Select regions”</em>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: Select the dataset <code class="highlighter-rouge">hg38_Gencode_V28_chr22_geneName.<span class="notranslate">bed</span></code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regions to plot”</em>: Select the dataset <code class="highlighter-rouge">chr22 genes</code></li>
                   </ul>
                 </li>
               </ol>
@@ -1646,12 +1634,19 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
-      - <em>“Plot title”</em>: <code class="highlighter-rouge">Peaks from Genrich (extended +/-50bp)</code>
-      - <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the output of <strong>Genrich</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (the one you converted from encodepeak to <span class="notranslate">bed</span>).
-      - <em>“Color of track”</em>: Select the color of your choice
-      - <em>“height”</em>: <code class="highlighter-rouge">3</code>
-      - <em>“Plot labels”</em>: <code class="highlighter-rouge">No</code>
-      - <em>“Include spacer at the end of the track”</em>: <code class="highlighter-rouge">0.5</code></li>
+              <ul>
+                <li><em>“Choose style of the track”</em>: <code class="highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
+                  <ul>
+                    <li><em>“Plot title”</em>: <code class="highlighter-rouge">Peaks from Genrich (extended +/-50bp)</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the output of <strong>Genrich</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (the one you converted from encodepeak to <span class="notranslate">bed</span>).</li>
+                    <li><em>“Color of track”</em>: Select the color of your choice</li>
+                    <li><em>“height”</em>: <code class="highlighter-rouge">3</code></li>
+                    <li><em>“Plot labels”</em>: <code class="highlighter-rouge">No</code></li>
+                    <li><em>“Include spacer at the end of the track”</em>: <code class="highlighter-rouge">0.5</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
               <ul>
                 <li><em>“Choose style of the track”</em>: <code class="highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
