@@ -199,7 +199,7 @@ Note that you can either:
 > > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
 > >
 > > 1. **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
-> >    - *"RData file"*: the `sacurine.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
+> >    - {% icon param-collection %} *"RData file"*: the `sacurine.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >
 > {: .hands_on}
 >
