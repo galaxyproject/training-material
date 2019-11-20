@@ -439,6 +439,36 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
+## Extract and cluster differentially expressed transcripts
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Extract and cluster differentially expressed transcripts** {% icon tool %} with the following parameters:
+>    - In *"Additional Options"*:
+>        - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
+>        - *"Sample description"*: `Describe samples`
+>        - *"Differential expression results"*: `Differential expression results on data XXX and data XXX`
+>        - *"p-value cutoff for FDR"*: `1`
+>        - *"Run GO enrichment analysis"*: `No`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > *"p-value cutoff for FDR"*: `1`
+>    > Don't do this at home! It's because we have a Toy Dataset. The cutoff should be around `0.001`
+>    {: .comment}
+>
+{: .hands_on}
+
+## Partition genes into expression clusters
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Partition genes into expression clusters** {% icon tool %} with the following parameters:
+>    - *"RData file"*: `Extract and cluster differentially expressed transcripts: RData file`
+>    - *"Method for partitioning genes into clusters"*: `Cut tree based on x percent of max(height) of tree`
+>
+{: .hands_on}
+
 
 # IN PROGRESS
 ## Sub-step with **TransDecoder**
@@ -482,76 +512,6 @@ Why do we need to correct those?
 >
 > 1. **Trinotate** {% icon tool %} with the following parameters:
 >    - *"Let Galaxy downloading the Trinotate Pre-generated Resource SQLite database"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Extract and cluster differentially expressed transcripts**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Extract and cluster differentially expressed transcripts** {% icon tool %} with the following parameters:
->    - In *"Additional Options"*:
->        - *"Run GO enrichment analysis"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Partition genes into expression clusters**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Partition genes into expression clusters** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `rdata` (output of **Extract and cluster differentially expressed transcripts** {% icon tool %})
->    - *"Method for partitioning genes into clusters"*: `Cut tree based on x percent of max(height) of tree`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
