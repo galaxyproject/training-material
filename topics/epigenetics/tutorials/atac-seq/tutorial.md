@@ -353,7 +353,7 @@ High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-seq 
 >
 > To get the number of reads that mapped to the mitochondrial genome (chrM) you can run **Samtools idxstats** {% icon tool %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
 > The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-> The first 2 lines of the result would be (after sorting):
+> The first 2 lines of the result would be (after using **Sort** {% icon tool %}):
 >
 > ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
 >
@@ -389,7 +389,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"that*: `matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
-> 2. Check that the datatype is tabular. If they are not then change the datatype as described above.
+> 2. Check that the datatype is tabular. If not, change the datatype as described above.
 > 3. **Transpose** {% icon tool %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **Select** {% icon tool %}
 >
@@ -529,6 +529,7 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >
 > 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sort the following BED/bedGraph/GFF/VCF file"*: `ENCFF933NTR.bed.gz`
+>    - {% icon param-file %} *"Sort by"*: `chromosome, then by start position (asc)`
 >
 {: .hands_on}
 
@@ -550,7 +551,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 > 1. **computeMatrix** {% icon tool %} with the following parameters:
 >    - In *"Select regions"*:
 >        - 1. *"Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
 >    - *"Sample order matters"*: `No`
 >        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
 >    - *"computeMatrix has two main output options"*: `reference-point`
@@ -610,6 +611,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >                - *"Show visualization of data range"*: `Yes`
 >                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
 >                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %} (the one you converted from encodepeak to bed).
 >                - *"Color of track"*: Select the color of your choice
