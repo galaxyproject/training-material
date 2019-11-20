@@ -210,7 +210,7 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >    - src: galaxyproject.galaxy
 >      version: 0.9.1
 >    - src: galaxyproject.nginx
->      version: 0.6.0
+>      version: 0.6.3
 >    - src: galaxyproject.postgresql
 >      version: 1.0.1
 >    - src: natefoo.postgresql_objects
@@ -219,8 +219,9 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >      version: 1.0.0
 >    - src: uchida.miniconda
 >      version: 0.3.0
->    - src: https://github.com/usegalaxy-eu/ansible-role-supervisor
->      name: usegalaxy-eu.supervisor
+>    - src: https://github.com/usegalaxy-eu/ansible-galaxy-systemd
+>      name: usegalaxy-eu.galaxy-systemd
+>      version: py3
 >    - src: https://github.com/usegalaxy-eu/ansible-certbot
 >      name: usegalaxy-eu.certbot
 >    ```
@@ -645,48 +646,43 @@ However, the inventory file, `hosts`, never changes. The `-i` option can be elim
 >
 > Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >
+> ```ini
+> [galaxyservers]
+> your.host.name ansible_connection=local
+> ```
+{: .details}
+
+Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up SystemD which will manage the Galaxy processes!
+
+> ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
+>
+> 1. SSH into your server
+> 2. Switch user to Galaxy account (`sudo -iu galaxy`)
+> 3. Change directory into `/srv/galaxy/server`
+> 4. Activate virtualenv (`. ../venv/bin/activate`)
+> 5. `uwsgi --yaml ../config/galaxy.yml`
+> 6. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
-## Supervisord
+## SystemD
 
-Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [supervisord](http://supervisord.org/). If you're familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of Galaxy's use cases better and was fully featured long before SystemD became common.
+Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [SystemD](https://freedesktop.org/wiki/Software/systemd/).
 
-> ### {% icon hands_on %} Hands-on: Supervisord
+> ### {% icon hands_on %} Hands-on: SystemD
 >
-> 1. Add the role `usegalaxy-eu.supervisor` to your playbook. This should run **after** all of the roles we have already added so far.
->
-> 2. Supervisor defines `programs` which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like SystemD or any other init system you may be familiar with. We will define a program for Galaxy which will directly invoke uWSGI, rather than `run.sh`, as `run.sh` does some extra tasks that are not needed in a true production environment. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our Galaxy user to access this. Lastly, since we now define how the Galaxy processes will be managed, we can inform `galaxyproject.galaxy` how to automatically restart the server whenever it is changed.
+> 1. Add the role `usegalaxy-eu.galaxy-systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
 >    Add the following to the bottom of your `group_vars/galaxyservers.yml` file:
 >
 >    {% raw %}
 >    ```yaml
->    # Automatically restart Galaxy by calling a handler named 'Restart
->    # Galaxy', whenever the server changes.
->    galaxy_restart_handler_name: Restart Galaxy
->
->    # supervisord
->    supervisor_socket_user: galaxy
->    supervisor_socket_chown: galaxy
->    supervisor_programs:
->      - name: galaxy
->        state: present
->        command: "uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml"
->        configuration: |
->          autostart=true
->          autorestart=true
->          startretries=1
->          startsecs=10
->          user=galaxy
->          umask=022
->          directory={{ galaxy_server_dir }}
->          environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
+>    # SystemD
+>    galaxy_systemd_mode: mule
+>    galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    ```
 >    {% endraw %}
 >
->    Here we've defined a `galaxy` command that should be `present`. It will run the command `uwsgi ...` and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as `running`. It starts as the `galaxy` user with a umask of `022` (files created will be world readable by default). Its working directory on startup is the root of the Galaxy (cloned) code, and will run with the defined environment variables set.
->
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use Supervisor to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `galaxy.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [supervisorctl Ansible module](https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use SystemD to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `galaxy.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [SystemD Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
 >
 >    ```diff
 >    --- galaxy.yml
@@ -697,7 +693,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >             name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
 >    +  handlers:
 >    +    - name: Restart Galaxy
->    +      supervisorctl:
+>    +      systemctl:
 >    +        name: galaxy
 >    +        state: restarted
 >       roles:
@@ -707,7 +703,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 4. Run the playbook
 >
-> 5. Log in and check the status with `supervisorctl status` (remember to change to the Galaxy user)
+> 5. Log in and check the status with `systemctl status galaxy`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -717,21 +713,31 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    > >
 >    > > If everything went correctly you should see something like
 >    > >
->    > > ```yaml
->    > > galaxy                  RUNNING   pid 2246972, uptime 0:02:00
+>    > > ```
+>    > > $ systemctl status galaxy
+>    > > ● galaxy.service - Galaxy
+>    > >    Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
+>    > >    Active: active (running) since Wed 2019-11-20 17:11:11 UTC; 9s ago
+>    > >  Main PID: 20862 (uwsgi)
+>    > >     Tasks: 13 (limit: 4915)
+>    > >    Memory: 271.5M (limit: 32.0G)
+>    > >       CPU: 9.939s
+>    > >    CGroup: /system.slice/galaxy.service
+>    > >            ├─20862 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+>    > >            ├─20897 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+>    > >            ├─20903 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+>    > >            └─20907 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
 >    > > ```
 >    > >
 >    > {: .solution }
 >    >
 >    {: .question}
 >
->    Take a look at the supervisor configs that have been written in `/etc/supervisor` and `/etc/supervisor/conf.d`.
->
 > 6. Some things to note:
 >
 >    1. Refreshing the page before Galaxy has restarted will hang until the process is ready, a nice feature of uWSGI
->    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `supervisorctl restart galaxy`
->    3. You can use `supervisorctl tail -f galaxy` and `supervisorctl tail -f galaxy stderr` to see the logs of Galaxy
+>    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `systemctl restart galaxy`
+>    3. You can use `journalctl -f -u galaxy` to see the logs of Galaxy
 >
 {: .hands_on}
 
@@ -754,7 +760,7 @@ Galaxy should now be accessible over port :8080, again try connecting to your VM
 With this we have:
 
 - PostgreSQL running
-- Galaxy running (managed by supervisord)
+- Galaxy running (managed by SystemD)
 
 When we first configured Galaxy, we used the setting `http: 0.0.0.0:8080`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
 
@@ -1046,7 +1052,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
 >  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
->  `usegalaxy-eu.supervisor`    | This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
+>  `usegalaxy-eu.galaxy-systemd`| This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
@@ -1114,7 +1120,7 @@ index ce17525..54d0746 100644
  galaxy_config_style: ini
 
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
--galaxy_commit_id: 'release_19.09'
+-galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'
  galaxy_force_checkout: true # discard any modified files
 ```
