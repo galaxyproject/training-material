@@ -159,11 +159,11 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >
 >    <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
 >
->    ### {% icon comment %} Results file
+>    > ### {% icon comment %} Results file
 >    > The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
 >    {: .comment}
 >
->    ### {% icon comment %} Obtaining unannotated proteins for analysis
+>    > ### {% icon comment %} Obtaining unannotated proteins for analysis
 >    > For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
 >    {: .comment}
 >

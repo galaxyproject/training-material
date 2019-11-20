@@ -113,7 +113,7 @@ Next, lets take a look at the data by plotting various properties to see what ou
 >     - {% icon param-check %} *"Plot on log scale"*: `No`
 >
 > 2. If we have a large number of cells (500+), set the 'Plot on log scale' option to 'Yes'. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the {% icon galaxy-eye %} to view the plots. If it doesn't appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
-> ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
+>    ![Raw data QC plots](../../images/scrna-scater-qc/raw_data.png "Raw data QC plots")
 >
 >    > ### {% icon comment %} Comment
 >    >
