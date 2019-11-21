@@ -220,7 +220,7 @@ To learn the mapping between several features and the targets, we will apply a r
 >          - *"Select input type"*: `tabular data`
 >             - {% icon param-file %} *"Training samples dataset"*: `body_fat_train`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
->             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING somee by column header name(s)`
+>             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `target`
 >             - {% icon param-file %} *"Dataset containing class labels"*: `body_fat_train`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
