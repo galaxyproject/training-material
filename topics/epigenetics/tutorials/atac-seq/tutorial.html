@@ -923,30 +923,29 @@ To be able to have the exon information, you could use a GTF file which can be d
 
           <ol>
             <li>There are 285247 <span class="notranslate">reads</span>.</li>
-            <li>The 3 steps below have warnings:</li>
-          </ol>
+            <li>
+              <p>The 3 steps below have warnings:</p>
 
-          <blockquote>
-            <p>1) <strong>Per base sequence content</strong></p>
-            <blockquote>
-              <p>It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in <a class="citation" href="#Green2012">Green <i>et al.</i> 2012</a>.</p>
-            </blockquote>
-          </blockquote>
+              <ol>
+                <li>
+                  <p><strong>Per base sequence content</strong></p>
 
-          <blockquote>
-            <p>2) <strong>Sequence Duplication Levels</strong></p>
-            <blockquote>
-              <p>The read library quite often has PCR duplicates that are introduced
+                  <p>It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in <a class="citation" href="#Green2012">Green <i>et al.</i> 2012</a>.</p>
+                </li>
+                <li>
+                  <p><strong>Sequence Duplication Levels</strong></p>
+
+                  <p>The read library quite often has PCR duplicates that are introduced
 simply by the PCR itself. We will remove these duplicates later on.</p>
-            </blockquote>
-          </blockquote>
+                </li>
+                <li>
+                  <p><strong>Overrepresented sequences</strong></p>
 
-          <blockquote>
-            <p>3) <strong>Overrepresented sequences</strong></p>
-            <blockquote>
-              <p>Nextera adapter sequences are observable in the <strong>Adapter Content</strong> section.</p>
-            </blockquote>
-          </blockquote>
+                  <p>Nextera adapter sequences are observable in the <strong>Adapter Content</strong> section.</p>
+                </li>
+              </ol>
+            </li>
+          </ol>
 
         </blockquote>
 
@@ -1501,19 +1500,26 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
 </blockquote>
 
 <h3 id="convert-the-genrich-peaks-to-bed">Convert the Genrich peaks to <span class="notranslate">BED</span></h3>
-<p>At the moment, <strong>pyGenomeTracks</strong> does not deal with the datatype encodepeak which is a special <span class="notranslate">bed</span>. So we need to change the datatype of the output of <strong>Genrich</strong> from encodepeak to <span class="notranslate">bed</span>.</p>
+<p>At the moment, <strong>pyGenomeTracks</strong> does not deal with the datatype encodepeak which is a special <span class="notranslate">bed</span>.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-the-datatype"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change the datatype</h3>
+  <ol>
+    <li>
+      <p>Change the datatype of the output of <strong>Genrich</strong> from encodepeak to <span class="notranslate">bed</span>.</p>
 
-  <blockquote class="tip">
-    <h3 id="tip-tip-changing-the-datatype-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
-    <ul>
-      <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-      <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-      <li>Select <code class="highlighter-rouge">datatypes</code></li>
-      <li>Click the <strong>Change datatype</strong> button</li>
-    </ul>
-  </blockquote>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge"><span class="notranslate">bed</span></code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
 
 </blockquote>
 

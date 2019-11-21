@@ -535,25 +535,19 @@ It consists of three main steps:</p>
 
 <p><strong>FASTA</strong></p>
 
-<blockquote>
-  <p><span class="notranslate">DNA</span> and protein sequences are written in FASTA format where you have in the first line a “&gt;” followed by the description. In the second line the sequence starts.</p>
-</blockquote>
+<p><span class="notranslate">DNA</span> and protein sequences are written in FASTA format where you have in the first line a “&gt;” followed by the description. In the second line the sequence starts.</p>
 
 <p><img src="../../images/fasta_format.png" alt="FASTA file" /></p>
 
 <p><strong>GFF3</strong></p>
 
-<blockquote>
-  <p>The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of <span class="notranslate">DNA</span>, <span class="notranslate">RNA</span> and protein sequences.</p>
-</blockquote>
+<p>The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of <span class="notranslate">DNA</span>, <span class="notranslate">RNA</span> and protein sequences.</p>
 
 <p><img src="../../images/gff3_format.png" alt="GFF3 overview" width="70%" /></p>
 
 <p><strong>GENBANK</strong></p>
 
-<blockquote>
-  <p>The genbank sequence format is a rich format for storing sequences and associated annotations.</p>
-</blockquote>
+<p>The genbank sequence format is a rich format for storing sequences and associated annotations.</p>
 
 <p><img src="../../images/gb_full.png" alt="genbank file" /></p>
 
@@ -661,11 +655,11 @@ It consists of three main steps:</p>
 
   <p><img src="../../images/blastP.png" alt="blastp tool interface and parameters" width="70%" /></p>
 
-  <ol class="question">
+  <ol>
     <li>
       <p>Parsing the xml output (<strong>Parse blast XML output</strong>) results in changing the format style into tabular.</p>
 
-      <blockquote>
+      <blockquote class="question">
         <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
         <p>What information do you see in the BLAST output?</p>
@@ -675,32 +669,29 @@ It consists of three main steps:</p>
   </ol>
 
   <p>From BLAST search results we want to get only the best hit for each protein.</p>
-  <ol class="question">
+  <ol>
     <li>
       <p><i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Therefore apply the tool <strong>BLAST top hit descriptions</strong> with <em>number of descriptions =1</em> on the xml output file.</p>
 
-      <blockquote>
+      <blockquote class="question">
         <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>For how many proteins we do not get a BLAST hit?</p>
 
       </blockquote>
     </li>
-  </ol>
-
-  <ol>
     <li>
       <p><i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Choose the tool <strong>Select lines that match an <span class="notranslate">expression</span></strong> and enter the following information: <em>Select lines from</em> [select the BLAST top hit descriptions result file]; <em>that</em> [not matching]; <em>the pattern</em> [gi].</p>
 
       <p><img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%" /></p>
 
-      <h3 id="comment-results-file"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Results file</h3>
       <blockquote class="comment">
+        <h3 id="comment-results-file"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Results file</h3>
         <p>The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.</p>
       </blockquote>
 
-      <h3 id="comment-obtaining-unannotated-proteins-for-analysis"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Obtaining unannotated proteins for analysis</h3>
       <blockquote class="comment">
+        <h3 id="comment-obtaining-unannotated-proteins-for-analysis"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Obtaining unannotated proteins for analysis</h3>
         <p>For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool <strong>Filter sequences by ID from a tabular file</strong> and select for <em>Sequence file to filter on the identifiers</em> [Augustus protein sequences] and for <em>Tabular file containing sequence identifiers</em> the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.</p>
       </blockquote>
     </li>

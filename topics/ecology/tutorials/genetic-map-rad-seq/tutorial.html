@@ -764,24 +764,23 @@ https://zenodo.org/record/1219888/files/progeny_20
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-stacks-genotypes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Stacks: Genotypes</h3>
   <p><strong>Stacks: genotypes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-Run the last step of <code class="highlighter-rouge">Stacks: De novo map</code> pipeline specifying more options as:</p>
-  <blockquote>
-    <ol>
-      <li>
-        <p>The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))</p>
 
-        <p><img src="../../images/RAD2_Genetic_Map/Genetic_map_F2.png" alt="The genetic map type F2" />    <img src="../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png" alt="The genetic map CrossPollination" /></p>
-      </li>
-      <li>
-        <p>Genotyping options output file type for input in genetic mapper tools (ie JoinMap, R/qtl, …). Observe that the R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.</p>
-      </li>
-      <li>
-        <p>Thresholds concerning a minimal number of progeny and/or minimum stacks depth to consider a locus</p>
-      </li>
-      <li>
-        <p>Make Automated Corrections to the Data. This option allows the user to have the program automatically correct some types of errors. This setting can correct errors with the homozygous tags verification in the progeny by confirming the presence or absence of the SNP. If SNP detection model can’t identify a site as heterygous or homozygous, that site is temporarily tagged as homozygous to facilitate the search, by sstacks, in concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) and is found on a progeny with a weak frequency (&lt;10% of a stack <span class="notranslate">reads</span> number), the genotypes program can correct the genotype. Additionally, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 <span class="notranslate">reads</span>. Corrected genotypes are marked uppercase.</p>
-      </li>
-    </ol>
-  </blockquote>
+  <ol>
+    <li>
+      <p>The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))</p>
+
+      <p><img src="../../images/RAD2_Genetic_Map/Genetic_map_F2.png" alt="The genetic map type F2" />    <img src="../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png" alt="The genetic map CrossPollination" /></p>
+    </li>
+    <li>
+      <p>Genotyping options output file type for input in genetic mapper tools (ie JoinMap, R/qtl, …). Observe that the R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.</p>
+    </li>
+    <li>
+      <p>Thresholds concerning a minimal number of progeny and/or minimum stacks depth to consider a locus</p>
+    </li>
+    <li>
+      <p>Make Automated Corrections to the Data. This option allows the user to have the program automatically correct some types of errors. This setting can correct errors with the homozygous tags verification in the progeny by confirming the presence or absence of the SNP. If SNP detection model can’t identify a site as heterygous or homozygous, that site is temporarily tagged as homozygous to facilitate the search, by sstacks, in concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) and is found on a progeny with a weak frequency (&lt;10% of a stack <span class="notranslate">reads</span> number), the genotypes program can correct the genotype. Additionally, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 <span class="notranslate">reads</span>. Corrected genotypes are marked uppercase.</p>
+    </li>
+  </ol>
 
   <p>Here is an example of a locus originally marked as homozygous before automatic correction because an allele is supported by less than 5 <span class="notranslate">reads</span>. After correction, this locus is marked as heterozygous.</p>
 

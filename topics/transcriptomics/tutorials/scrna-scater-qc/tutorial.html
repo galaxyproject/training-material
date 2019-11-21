@@ -848,7 +848,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 
 <p>Next, lets take a look at the data by plotting various properties to see what our data looks like.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-library-qc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot library QC</h3>
 
   <ol>
@@ -858,31 +858,28 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
         <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Plot on log scale”</em>: <code class="highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>If we have a large number of cells (500+), set the ‘Plot on log scale’ option to ‘Yes’. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the plots. If it doesn’t appear in the browser, you may have to download it and view it exte<span class="notranslate">rna</span>lly. You should be presented with plots similar to those below.</li>
-  </ol>
-  <figure id="figure-2"><img src="../../images/scrna-scater-qc/raw_data.png" alt="Raw data QC plots" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Raw data QC plots</figcaption></figure>
+    <li>If we have a large number of cells (500+), set the ‘Plot on log scale’ option to ‘Yes’. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the plots. If it doesn’t appear in the browser, you may have to download it and view it exte<span class="notranslate">rna</span>lly. You should be presented with plots similar to those below.
+      <figure id="figure-2"><img src="../../images/scrna-scater-qc/raw_data.png" alt="Raw data QC plots" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Raw data QC plots</figcaption></figure>
 
-  <blockquote class="comment">
-    <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-    <p>There are four plots, two distribution bar plots and two scatter plots. 
-The first distribution plot is the number of <span class="notranslate">reads</span> in each library (from a <span class="notranslate">single cell</span>). 
-The second plot is the distribution of <em>feature counts</em> per cell. Feature counts in this case refers to the number of genes expressed in each cell. 
-The third plot <strong>Scatterplot of <span class="notranslate">reads</span> vs genes</strong> is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell. 
+        <p>There are four plots, two distribution bar plots and two scatter plots.
+The first distribution plot is the number of <span class="notranslate">reads</span> in each library (from a <span class="notranslate">single cell</span>).
+The second plot is the distribution of <em>feature counts</em> per cell. Feature counts in this case refers to the number of genes expressed in each cell.
+The third plot <strong>Scatterplot of <span class="notranslate">reads</span> vs genes</strong> is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell.
 The final scatterplot is the <strong>% MT genes</strong>, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.</p>
-  </blockquote>
-  <blockquote>
-    <p>Let’s look at each plot in turn and see what it tells us.</p>
-    <ul>
-      <li><strong>Read counts</strong>. You can see that there are a few cells that have less than ~200,000 <span class="notranslate">reads</span>, with other cells having up to one million <span class="notranslate">reads</span>. Although 200,000 <span class="notranslate">reads</span> is still quite a lot and we wouldn’t want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of <span class="notranslate">reads</span> (say, 100,000).</li>
-      <li><strong>Feature counts</strong>. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (&lt;600), then followed by a more even distribution.</li>
-      <li><strong>Scatterplot of <span class="notranslate">reads</span> vs genes</strong>. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.</li>
-      <li><strong>% MT genes</strong>. You can see from the plot that there are a few cells outside the main “cloud” of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%</li>
-    </ul>
-  </blockquote>
-</blockquote>
+      </blockquote>
 
-<blockquote class="notranslate hands_on">
+      <p>Let’s look at each plot in turn and see what it tells us.</p>
+      <ul>
+        <li><strong>Read counts</strong>. You can see that there are a few cells that have less than ~200,000 <span class="notranslate">reads</span>, with other cells having up to one million <span class="notranslate">reads</span>. Although 200,000 <span class="notranslate">reads</span> is still quite a lot and we wouldn’t want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of <span class="notranslate">reads</span> (say, 100,000).</li>
+        <li><strong>Feature counts</strong>. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (&lt;600), then followed by a more even distribution.</li>
+        <li><strong>Scatterplot of <span class="notranslate">reads</span> vs genes</strong>. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.</li>
+        <li><strong>% MT genes</strong>. You can see from the plot that there are a few cells outside the main “cloud” of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%</li>
+      </ul>
+    </li>
+  </ol>
 
 </blockquote>
 
@@ -913,9 +910,7 @@ Here, we’ll use the manual filtering method.</p>
       <blockquote class="comment">
         <h3 id="comment-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>Let’s have a look at the parameters and their value:</p>
-      </blockquote>
-      <blockquote>
+        <p>Let’s have a look at the parameters and their values:</p>
         <ol>
           <li><em>“Number of <span class="notranslate">reads</span> mapped to a gene for it to be counted as expressed”</em>: by default, only one read needs to be mapped to a gene for it to be counted as “expressed”. We can be a little bit more stringent here and increase the number of <span class="notranslate">reads</span> that need to be mapped to a gene for it to be categorised as “expressed”.</li>
           <li><em>“Minimum library size (mapped <span class="notranslate">reads</span>) to filter cells on”</em>: This value asks how many mapped <span class="notranslate">reads</span> from each cell do you require to be mapped to your genome to be included in <span class="notranslate">downstream</span> analysis. We can see from our plots that we have a few cells that have less than 200,000 <span class="notranslate">reads</span>. 200,000 can still be quite a lot of <span class="notranslate">reads</span> (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.</li>
@@ -943,17 +938,12 @@ Here, we’ll use the manual filtering method.</p>
 
 <figure id="figure-3"><img src="../../images/scrna-scater-qc/post_filter.png" alt="QC plots after manual filtering" /><figcaption><span class="figcaption-prefix">Figure 3:</span> QC plots after manual filtering</figcaption></figure>
 
-<blockquote>
+<blockquote class="comment">
   <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-  <blockquote>
-    <p>How did the filtering go? Do you think it’s done a good job? Have you removed too many cells? Too few cells? About right?</p>
+  <p>How did the filtering go? Do you think it’s done a good job? Have you removed too many cells? Too few cells? About right?</p>
 
-    <p>Often, it’s a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you’re happy with the results. Using the initial Calculate QC metrics file, play around with the filtering parameters and visualise the output to see the effect different paramters have.</p>
-  </blockquote>
-</blockquote>
-
-<blockquote class="comment">
+  <p>Often, it’s a matter of trial and error, where you would start off by being quite lenient (low parameters) and then increasing the stringency until you’re happy with the results. Using the initial Calculate QC metrics file, play around with the filtering parameters and visualise the output to see the effect different paramters have.</p>
 
 </blockquote>
 

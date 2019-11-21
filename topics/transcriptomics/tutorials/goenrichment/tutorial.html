@@ -638,11 +638,7 @@
 <p><strong>What is the Gene Ontology?</strong> <br />
 The <a href="http://www.geneontology.org/">Gene Ontology</a> (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.</p>
 
-<p><img src="../../images/goenrichment_GOexample.png" alt="GO Example" /></p>
-<blockquote>
-
-  <p><strong>Figure 1</strong> QuickGO - http://www.ebi.ac.uk/QuickGO</p>
-</blockquote>
+<figure id="figure-1"><img src="../../images/goenrichment_GOexample.png" alt="GO Example" /><figcaption><span class="figcaption-prefix">Figure 1:</span> QuickGO - http://www.ebi.ac.uk/QuickGO</figcaption></figure>
 
 <p>The GO Ontology, like other ontologies, are usually coded in the <a href="http://www.geneontology.org/faq/what-obo-file-format">OBO</a> or the <a href="http://www.geneontology.org/faq/what-owl-file">OWL</a> formats. It can be downloaded from the <a href="http://geneontology.org/page/download-ontology">Gene Ontology website</a> or from the <a href="http://www.obofoundry.org/">OBO foundry</a>. You can also find in <span class="notranslate">Galaxy</span> tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.</p>
 
@@ -683,10 +679,8 @@ Genes are associated to GO terms via GO annotations. Each gene can have multiple
 <p>For each GO term, we need to count the frequency (<strong>k</strong>) of genes in the study set (<strong>n</strong>) that are associated to the term, and the frequency (<strong>K</strong>) of genes in the population set (<strong>N</strong>) that are associated to the same term. Then we test how likely would it be to obtain at least <strong>k</strong> genes associated to the term if <strong>n</strong> genes would be randomly sampled from the population, given the frequency <strong>K</strong> and size <strong>N</strong> of the population.</p>
 
 <p>The appropriate statistical test is the one-tailed variant of Fisher’s exact test, also known as the hypergeometric test for over-representation. When the one-tailed version is applied, this test will compute the probability of observing at least the sample frequency, given the population frequency.  The <a href="https://en.wikipedia.org/wiki/Hypergeometric_distribution">hypergeometric distribution</a> measures precisely the probability of <strong>k</strong> successes in <strong>n</strong> draws, without replacement, from a finite population of size <strong>N</strong> that contains exactly <strong>K</strong> successful objects:</p>
-<blockquote>
 
-  <p><img src="../../images/goenrichment_formula.png" alt="Go Enrichment Formula" /></p>
-</blockquote>
+<p><img src="../../images/goenrichment_formula.png" alt="Go Enrichment Formula" /></p>
 
 <p>For this first exercise we will use data from <a href="https://www.ncbi.nlm.nih.gov/pubmed/22383036" title="Trapnell et al. data">Trapnell et al. 2014</a>. In this work, the authors created an artificial dataset of gene <span class="notranslate">expression</span> in <em>Drosophila melanogaster</em>, where 300 random genes were set (insilico) to be differentially expressed between two conditions.</p>
 
@@ -736,11 +730,8 @@ Genes are associated to GO terms via GO annotations. Each gene can have multiple
     <li>
       <p><strong>Rename</strong> the <em>go.obo</em> file to <code class="highlighter-rouge">GO</code> and <em>drosophila_gene_association.fb</em> file to <code class="highlighter-rouge">GO annotations Drosophila melanogaster</code>.</p>
 
-      <blockquote>
-        <p>After you upload the files, and if you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of <code class="highlighter-rouge">trapnellPopulation.tab</code> it should look something like this:
-<img src="../../images/goenrichment_trapnellFile.png" alt="Trapnell File" />
-<strong>Figure 2</strong> Trapnell file</p>
-      </blockquote>
+      <p>After you upload the files, and if you press the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of <code class="highlighter-rouge">trapnellPopulation.tab</code> it should look something like this:</p>
+      <figure id="figure-2"><img src="../../images/goenrichment_trapnellFile.png" alt="Trapnell File" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Trapnell file</figcaption></figure>
 
       <blockquote class="comment">
         <h3 id="comment-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comments</h3>
@@ -962,9 +953,6 @@ Let’s check the new graph <strong>goenrichment on trapnellStudy MF Graph Filte
   <p><img src="../../images/goenrichment_galaxySlimer.png" alt="Galaxy GO Slimmer" /></p>
 
   <p>This will generate one file called <code class="highlighter-rouge">Slim Annotations</code>.</p>
-</blockquote>
-<blockquote>
-
 </blockquote>
 
 <p>Now we will go use the GOEnrichment tool with the new Slim Annotations file and the same study set.</p>
