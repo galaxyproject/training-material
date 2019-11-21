@@ -1,0 +1,2009 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Metatranscriptomics analysis using microbiome RNA-seq data</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
+        <meta property="og:title" content="Galaxy Training: Metatranscriptomics analysis using microbiome RNA-seq data" />
+        <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/metagenomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Metagenomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmetatranscriptomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmetatranscriptomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmetatranscriptomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmetatranscriptomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetagenomics%2Ftutorials%2Fmetatranscriptomics%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/metagenomics/tutorials/metatranscriptomics/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Metatranscriptomics analysis using microbiome RNA-seq data",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metagenomics",
+    "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+    "url": "https://training.galaxyproject.org//training-material/topics/metagenomics/"
+  },
+  "courseCode": "metagenomics / metatranscriptomics / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Metatranscriptomics analysis using microbiome RNA-seq data' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html",
+  "timeRequired": "PT6H",
+  "keywords": "metatranscriptomics",
+  "description": "The questions this  addresses are:\n - How to analyze metatranscriptomics data?\n - What information can be extracted of metatranscriptomics data?\n - How to assign taxa and function to the identified sequences?\n\n\\nThe objectives are:\n - Choose the best approach to analyze metatranscriptomics data\n - Understand the functional microbiome characterization using metatranscriptomic results\n - Understand where metatranscriptomics fits in 'multi-omic' analysis of microbiomes\n - Visualise a community structure\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Pratik Jagtap"
+    },
+    {
+      "@type": "Person",
+      "name": "Subina Mehta"
+    },
+    {
+      "@type": "Person",
+      "name": "Ray Sajulga"
+    },
+    {
+      "@type": "Person",
+      "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Emma Leith"
+    },
+    {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Pratik Jagtap"
+    },
+    {
+      "@type": "Person",
+      "name": "Subina Mehta"
+    },
+    {
+      "@type": "Person",
+      "name": "Ray Sajulga"
+    },
+    {
+      "@type": "Person",
+      "name": "Bérénice Batut"
+    },
+    {
+      "@type": "Person",
+      "name": "Emma Leith"
+    },
+    {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metagenomics",
+      "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+      "url": "https://training.galaxyproject.org//training-material/topics/metagenomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    }
+  ],
+  "skillLevel": "Introductory"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Metatranscriptomics analysis using microbiome RNA-seq data</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#pratikdjagtap" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pratikdjagtap" alt="Pratik Jagtap">Pratik Jagtap</a>, <a href="/training-material/hall-of-fame#subinamehta" class="contributor-badge"><img src="https://avatars.githubusercontent.com/subinamehta" alt="Subina Mehta">Subina Mehta</a>, <a href="/training-material/hall-of-fame#jraysajulga" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jraysajulga" alt="Ray Sajulga">Ray Sajulga</a>, <a href="/training-material/hall-of-fame#bebatut" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bebatut" alt="Bérénice Batut">Bérénice Batut</a>, <a href="/training-material/hall-of-fame#emmaleith" class="contributor-badge"><img src="https://avatars.githubusercontent.com/emmaleith" alt="Emma Leith">Emma Leith</a>, <a href="/training-material/hall-of-fame#pravs3683" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pravs3683" alt="Praveen Kumar">Praveen Kumar</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to analyze metatranscriptomics data?</p>
+</li>
+            
+            <li><p>What information can be extracted of metatranscriptomics data?</p>
+</li>
+            
+            <li><p>How to assign taxa and function to the identified sequences?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Choose the best approach to analyze metatranscriptomics data</p>
+</li>
+            
+            <li><p>Understand the functional microbiome characterization using metatranscriptomic results</p>
+</li>
+            
+            <li><p>Understand where metatranscriptomics fits in ‘multi-omic’ analysis of microbiomes</p>
+</li>
+            
+            <li><p>Visualise a community structure</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6 hours</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Introductory 
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/metagenomics/slides/introduction.html" title="Introduction slides">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/3362849">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/metagenomics/tutorials/metatranscriptomics/workflows/" title="Workflows" alt="Metatranscriptomics analysis using microbiome RNA-seq data workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/metagenomics/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong>  </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Microbiomes play a critical role in host health, disease, and the environment. The study of microbiota and microbial communities has been facilitated by the evolution of technologies, specifically the sequencing techniques. We can now study the microbiome dynamics by investigating the <span class="notranslate">DNA</span> content (metagenomics), <span class="notranslate">RNA</span> <span class="notranslate">expression</span> (metatranscriptomics), protein <span class="notranslate">expression</span> (metaproteomics) or small molecules (metabolomics):</p>
+
+<p><img src="../../images/metatranscriptomics/Why_MT.png" alt="Multiomics" /></p>
+
+<p>New generations of sequencing platforms coupled to numerous bioinformatics tools have led to a spectacular technological progress in metagenomics and metatranscriptomics to investigate complex microorganism communities. These techniques are giving insight into taxonomic profiles and genomic components of microbial communities. Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.</p>
+
+<p><img src="../../images/metatranscriptomics/meta-omics.png" alt="meta-momics diagram" /></p>
+
+<p>In this tutorial, we will focus on <strong>metatranscriptomics</strong>.</p>
+
+<p>Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population. It provides scientists with the confirmation of predicted open‐reading frames (ORFs) and potential identification novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.</p>
+
+<p>To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor (<a class="citation" href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a>). They generated metatranscriptomics data for 3 replicates over 7 time points. <span class="notranslate">RNA</span>s were enriched by r<span class="notranslate">RNA</span> depletion and treated with <span class="notranslate">DNA</span>se and library was prepared with the TruSeq stranded <span class="notranslate">RNA</span> sample preparation, which included the production of a c<span class="notranslate">DNA</span> library.</p>
+
+<p>In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources.</p>
+
+<p>To analyze the data, we will follow the ASaiM <span class="notranslate">workflow</span> and explain it step by step. ASaiM (<a class="citation" href="#batut2018asaim">Batut <i>et al.</i> 2018</a>) is an open-source <span class="notranslate">Galaxy</span>-based <span class="notranslate">workflow</span> that enables microbiome analyses. Its <span class="notranslate">workflow</span> offers a streamlined <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM <span class="notranslate">workflow</span> has been updated by the <strong><span class="notranslate">Galaxy</span>P</strong> team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.</p>
+
+<p>This <span class="notranslate">workflow</span> takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input and:</p>
+<ol>
+  <li>Preprocess</li>
+  <li>Extract and analyze the community structure (taxonomic information)</li>
+  <li>Extract and analyze the community functions (functional information)</li>
+  <li>Combine taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-workflow-also-applicable-to-metagenomics-data"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> <span class="notranslate">Workflow</span> also applicable to metagenomics data</h3>
+  <p>The approach with the tools described here can also apply to metagenomics data. What will change are the quality control profiles and proportion of r<span class="notranslate">RNA</span> sequences.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+  <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
+      <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
+      <li><a href="#ribosomal-rna-fragments-filtering" id="markdown-toc-ribosomal-rna-fragments-filtering">Ribosomal <span class="notranslate">RNA</span> fragments filtering</a></li>
+      <li><a href="#interlace-forward-and-reverse-reads" id="markdown-toc-interlace-forward-and-reverse-reads">Interlace forward and reverse <span class="notranslate">reads</span></a></li>
+    </ol>
+  </li>
+  <li><a href="#extraction-of-the-community-profile" id="markdown-toc-extraction-of-the-community-profile">Extraction of the community profile</a>    <ol>
+      <li><a href="#extract-abundance-at-the-different-taxonomic-levels" id="markdown-toc-extract-abundance-at-the-different-taxonomic-levels">Extract abundance at the different taxonomic levels</a></li>
+      <li><a href="#community-structure-visualization" id="markdown-toc-community-structure-visualization">Community structure visualization</a></li>
+    </ol>
+  </li>
+  <li><a href="#extract-the-functional-information" id="markdown-toc-extract-the-functional-information">Extract the functional information</a>    <ol>
+      <li><a href="#normalize-the-abundances" id="markdown-toc-normalize-the-abundances">Normalize the abundances</a></li>
+      <li><a href="#identify-the-gene-families-involved-in-the-pathways" id="markdown-toc-identify-the-gene-families-involved-in-the-pathways">Identify the gene families involved in the pathways</a></li>
+      <li><a href="#group-abundances-into-go-slim-terms" id="markdown-toc-group-abundances-into-go-slim-terms">Group abundances into GO slim terms</a></li>
+    </ol>
+  </li>
+  <li><a href="#combine-taxonomic-and-functional-information" id="markdown-toc-combine-taxonomic-and-functional-information">Combine taxonomic and functional information</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-upload">Data upload</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import <code class="highlighter-rouge">T1A_forward</code> and <code class="highlighter-rouge">T1A_reverse</code> from <a href="https://zenodo.org/record/3362849">Zenodo</a> or from the data library (ask your instructor)</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3362849/files/T1A_forward.fastqsanger
+https://zenodo.org/record/3362849/files/T1A_reverse.fastqsanger
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+
+      <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
+    </li>
+    <li>
+      <p>Rename the file to <code class="highlighter-rouge">T1A_forward</code> and <code class="highlighter-rouge">T1A_reverse</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check that the datatype is <code class="highlighter-rouge">fastqsanger</code> (e.g. <strong>not</strong> <code class="highlighter-rouge">fastq</code>). If it is not, please change the datatype to <code class="highlighter-rouge">fastqsanger</code>.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">fastqsanger</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="pretreatments">Pretreatments</h1>
+
+<h2 id="quality-control">Quality control</h2>
+
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.</p>
+
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: both <code class="highlighter-rouge">T1A_forward</code> and <code class="highlighter-rouge">T1A_reverse</code> datasets selected with <strong>Multiple datasets</strong></li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-select-multiple-datasets"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the webpage output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">T1A_forward</code> dataset</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>What is the read length?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>The read length is 151 bp.</p>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports:
+      <ul>
+        <li>In <em>“Results”</em>
+          <ul>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li>In <em>“FastQC output”</em>
+              <ul>
+                <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: both <code class="highlighter-rouge">Raw data</code> files (outputs of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the webpage output from MultiQC for each FASTQ</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many sequences does each file have?</li>
+    <li>How is the quality score over the <span class="notranslate">reads</span>? And the mean score?</li>
+    <li>Is there any bias in base content?</li>
+    <li>How is the GC content?</li>
+    <li>Are there any unindentified bases?</li>
+    <li>Are there duplicated sequences?</li>
+    <li>Are there over-represented sequences?</li>
+    <li>Are there still some adapters left?</li>
+    <li>What should we do next?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Both files have 260,554 sequences</li>
+      <li>
+        <p>The “Per base sequence quality” is globally good: the quality stays around 40 over the <span class="notranslate">reads</span>, with just a slight decrease at the end (but still higher than 35)</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" /></p>
+
+        <p>The reverse <span class="notranslate">reads</span> have a slight worst quality than the forward, a usual case in Illumina sequencing.</p>
+
+        <p>The distribution of the mean quality score is almost at the maximum for the forward and reverse <span class="notranslate">reads</span>:</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" /></p>
+      </li>
+      <li>
+        <p>For both forward and reverse <span class="notranslate">reads</span>, the percentage of A, T, C, G over sequence length is biased. As for any <span class="notranslate">RNA</span>-seq data or more generally libraries produced by priming using random hexamers, the first 10-12 bases have an intrinsic bias.</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_per_base_sequence_content_forward.png" alt="Per Base Sequence Content (forward)" /></p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_per_base_sequence_content_reverse.png" alt="Per Base Sequence Content (reverse)" /></p>
+
+        <p>We could also see that after these first bases the distinction between C-G and A-T groups is not clear as expected. It explains the error raised by FastQC.</p>
+      </li>
+      <li>
+        <p>With sequences from random position of a genome, we expect a normal distribution of the %GC of <span class="notranslate">reads</span> around the mean %GC of the genome. Here, we have <span class="notranslate">RNA</span> <span class="notranslate">reads</span> from various genomes. We do not expect a normal distribution of the %GC. Indeed, for the forward <span class="notranslate">reads</span>, the distribution shows with several peaks: maybe corresponding to mean %GC of different organisms.</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" /></p>
+      </li>
+      <li>
+        <p>Almost no N were found in the <span class="notranslate">reads</span>: so almost no unindentified bases</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_per_base_n_content_plot.png" alt="Per base N content" /></p>
+      </li>
+      <li>
+        <p>The forward <span class="notranslate">reads</span> seem to have more duplicated <span class="notranslate">reads</span> than the reverse <span class="notranslate">reads</span> with a rate of duplication up to 60% and some <span class="notranslate">reads</span> identified over 10 times.</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_sequence_counts_plot.png" alt="Sequence Counts" />
+<img src="../../images/metatranscriptomics/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /></p>
+
+        <p>In data from <span class="notranslate">RNA</span> (metatranscriptomics data), duplicated <span class="notranslate">reads</span> are expected. The low rate of duplication in reverse <span class="notranslate">reads</span> could be due to bad quality: some nucleotides may have been wrongly identified, altering the <span class="notranslate">reads</span> and reducing the duplication.</p>
+      </li>
+      <li>
+        <p>The high rate of overrepresented sequences in the forward <span class="notranslate">reads</span> is linked to the high rate of duplication.</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_overrepresented_sequencesi_plot.png" alt=" Overrepresented sequences" /></p>
+      </li>
+      <li>
+        <p>Illumina universal adapters are still present in the <span class="notranslate">reads</span>, especially at the 3’ end.</p>
+
+        <p><img src="../../images/metatranscriptomics/fastqc_adapter_content_plot.png" alt=" Adapter Content" /></p>
+      </li>
+      <li>After checking what is wrong, we should think about the errors reported by FastQC: they may come from the type of sequencing or what we sequenced (check the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> for more details): some like the duplication rate or the base content biases are due to the <span class="notranslate">RNA</span> sequencing. However, despite these challenges, we can still get slightly better sequences for the <span class="notranslate">downstream</span> analyses.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p>We should now trim <span class="notranslate">reads</span> to remove bases that were sequenced with less certainty (= low-quality bases) at the read ends in addition to removing <span class="notranslate">reads</span> of overall bad quality. Several tools can do that but here we will use <strong>Cutadapt</strong> (<a class="citation" href="#martin2011cutadapt">Martin 2011</a>).</p>
+
+<p><strong>Cutadapt</strong> also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input <span class="notranslate">reads</span> by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering <span class="notranslate">reads</span>.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Are there any other tool which can perform similar functions?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Yes, there are many tools such as Trimmomatic, Trim Galore, Clip, trim putative adapter sequences. etc. We choose Cutadapt here because it is error tolerant, it is fast and the version is pretty stable.</p>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-control-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
+
+  <ol>
+    <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to trim low quality sequences:
+      <ul>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Paired-end</code>
+          <ul>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FASTQ/A file #1”</em>: <code class="highlighter-rouge">T1A_forward</code></li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FASTQ/A file #2”</em>: <code class="highlighter-rouge">T1A_reverse</code></li>
+          </ul>
+
+          <p>The order is important here!</p>
+        </li>
+        <li>In <em>“Filter Options”</em>
+          <ul>
+            <li><em>“Minimum length”</em>: <code class="highlighter-rouge">150</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Read Modification Options”</em>
+          <ul>
+            <li><em>“Quality cutoff”</em>: <code class="highlighter-rouge">20</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Output Options”</em>
+          <ul>
+            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+
+          <blockquote class="question">
+
+            <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+            <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
+
+            <blockquote class="solution">
+              <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+              <p>The tool can remove sequences if they become too short during the trimming process. For paired-end files it removes entire sequence pairs if one (or both) of the two <span class="notranslate">reads</span> became shorter than the set length cutoff. <span class="notranslate">Reads</span> of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
+
+            </blockquote>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the generated txt files (<code class="highlighter-rouge">Report</code>)</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How many basepairs has been removed from the forwards <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
+          <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>.</li>
+            <li>1,500 (0.6%) <span class="notranslate">reads</span> were too short after trimming and then filtered.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="ribosomal-rna-fragments-filtering">Ribosomal <span class="notranslate">RNA</span> fragments filtering</h2>
+
+<p>Metatranscriptomics sequencing targets any <span class="notranslate">RNA</span> in a pool of micro-organisms. The highest proportion of the <span class="notranslate">RNA</span> sequences in any organism will be ribosomal <span class="notranslate">RNA</span>s. These r<span class="notranslate">RNA</span>s are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed) To make the <span class="notranslate">downstream</span> functional annotation faster, we will sort the r<span class="notranslate">RNA</span> sequences using <strong>SortMe<span class="notranslate">RNA</span></strong> (<a class="citation" href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a>). It can handle large <span class="notranslate">RNA</span> databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
+
+<p><img src="../../images/metatranscriptomics/sortmerna.png" alt="SortMeRNA" /></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-ribosomal-rna-fragments-filtering"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Ribosomal <span class="notranslate">RNA</span> fragments filtering</h3>
+
+  <ol>
+    <li><strong>Filter with SortMe<span class="notranslate">RNA</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Sequencing type”</em>: <code class="highlighter-rouge"><span class="notranslate">Reads</span> are paired</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Forward <span class="notranslate">reads</span>”</em>: the <code class="highlighter-rouge">Read 1 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reverse <span class="notranslate">reads</span>”</em>: the <code class="highlighter-rouge">Read 2 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“If one of the paired-end <span class="notranslate">reads</span> aligns and the other one does not”</em>: <code class="highlighter-rouge">Output both <span class="notranslate">reads</span> to rejected file (--paired_out)</code></li>
+          </ul>
+        </li>
+        <li><em>“Databases to query”</em>: <code class="highlighter-rouge">Public pre-indexed ribosomal databases</code>
+          <ul>
+            <li><em>“r<span class="notranslate">RNA</span> databases”</em>: <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> Select all
+              <ul>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">rfam-5s-database-id98</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">silva-arc-23s-id98</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">silva-euk-28s-id98</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">silva-bac-23s-id98</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">silva-euk-18s-id95</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">silva-bac-16s-id90</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">rfam-5.8s-database-id98</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="highlighter-rouge">silva-arc-16s-id95</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Include aligned <span class="notranslate">reads</span> in FASTA/FASTQ format?”</em>: <code class="highlighter-rouge">Yes (--fastx)</code>
+          <ul>
+            <li><em>“Include rejected <span class="notranslate">reads</span> file?”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li><em>“Generate statistics file”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Expand the aligned and unaligned forward <span class="notranslate">reads</span></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <p>How many sequences have been identified as r<span class="notranslate">RNA</span> and non r<span class="notranslate">RNA</span>?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <p>Aligned forward read file has 1,947 sequences and the unaligned 2,858 sequences. Then 1,947 <span class="notranslate">reads</span> have been identified as r<span class="notranslate">RNA</span> and 2,858 as non r<span class="notranslate">RNA</span>. The numbers are the same for the reverse <span class="notranslate">reads</span>.</p>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Inspect the log file (<code class="highlighter-rouge">Log</code>)</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How many <span class="notranslate">reads</span> have been processed?</li>
+          <li>How many <span class="notranslate">reads</span> have been identified as r<span class="notranslate">RNA</span> given the log file?</li>
+          <li>Which type of r<span class="notranslate">RNA</span> are identified? Which organisms are we then expected to identify?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>518,108 <span class="notranslate">reads</span> are processed: 259,054 for forward and 259,054 for reverse (given the <strong>Cutadapt</strong> report)</li>
+            <li>Out of the 518,108 <span class="notranslate">reads</span>, 136,622 (26%) have passed the e-value threshold and are identified as r<span class="notranslate">RNA</span>. The proportion of r<span class="notranslate">RNA</span> sequences is then quite high (around 40%), compared to metagenomics data where usually they represent &lt; 1% of the sequences. Indeed there are only few copies of r<span class="notranslate">RNA</span> genes in genomes, but they are expressed a lot for the cells.
+Some of the aligned <span class="notranslate">reads</span> are forward (resp. reverse) <span class="notranslate">reads</span> but the corresponding reverse (resp. forward) <span class="notranslate">reads</span> are not aligned. As we choose <em>“If one of the paired-end <span class="notranslate">reads</span> aligns and the other one does not”</em>: <code class="highlighter-rouge">Output both <span class="notranslate">reads</span> to rejected file (--paired_out)</code>, if one read in a pair does not align, both go to unaligned.</li>
+            <li>The 20.18% r<span class="notranslate">RNA</span> <span class="notranslate">reads</span> are 23S bacterial r<span class="notranslate">RNA</span>, 2.62% 16S bacterial r<span class="notranslate">RNA</span> and 2.22% 18S eukaryotic r<span class="notranslate">RNA</span>. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic r<span class="notranslate">RNA</span>).</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="interlace-forward-and-reverse-reads">Interlace forward and reverse <span class="notranslate">reads</span></h2>
+
+<p>Tools for taxonomic and functional annotations need a single file as input, even with paired-end data. We need to join the two separate files (forward and reverse) to create a single interleaced file, using <strong>FASTQ interlacer</strong>, in which the forward <span class="notranslate">reads</span> have <code class="highlighter-rouge">/1</code> in their id and reverse <span class="notranslate">reads</span> <code class="highlighter-rouge">/2</code>. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.</p>
+
+<p>We will run <strong>FASTQ interlacer</strong> on the outputs of <strong>Cutadapt</strong> and on the unaligned (non r<span class="notranslate">RNA</span>) <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li><strong>FASTQ interlacer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Type of paired-end datasets”</em>: <code class="highlighter-rouge">2 separate datasets</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Left-hand mates”</em>: <code class="highlighter-rouge">Read 1 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Right-hand mates”</em>: <code class="highlighter-rouge">Read 2 Output</code> (outputs of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the pair output to <code class="highlighter-rouge">Interlaced QC controlled <span class="notranslate">reads</span></code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Change the datatype to <code class="highlighter-rouge">fastq</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">fastq</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>FASTQ interlacer</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Type of paired-end datasets”</em>: <code class="highlighter-rouge">2 separate datasets</code></li>
+      </ul>
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Left-hand mates”</em>: <code class="highlighter-rouge">Unaligned Forward <span class="notranslate">reads</span></code> (output of <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Right-hand mates”</em>: <code class="highlighter-rouge">Unaligned Reverse <span class="notranslate">reads</span></code> (output of <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>Rename the pair output to <code class="highlighter-rouge">Interlaced non r<span class="notranslate">RNA</span> <span class="notranslate">reads</span></code></li>
+  </ol>
+</blockquote>
+
+<h1 id="extraction-of-the-community-profile">Extraction of the community profile</h1>
+
+<p>The first important information to get from microbiome data is the community structure: which organisms are present and in which abundance. This is called taxonomic profiling. Different approaches can be used:</p>
+
+<ul>
+  <li>
+    <p>Identification and classification of OTUs, as used in amplicon data</p>
+
+    <p>Such an approach first requires sequence sorting to extract only the 16S and 18S sequences, then again using the same tools as for amplicon data. However, because r<span class="notranslate">RNA</span> sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported</p>
+  </li>
+  <li>
+    <p>Assignment of taxonomy on the whole sequences using databases with marker genes</p>
+  </li>
+</ul>
+
+<p>In this tutorial, we follow second approach using <strong>MetaPhlAn2</strong> (<a class="citation" href="#truong2015metaphlan2">Truong <i>et al.</i> 2015</a>). This tool uses a database of ~1M unique clade-specific marker genes (not only the r<span class="notranslate">RNA</span> genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes. We will use the <code class="highlighter-rouge">Interlaced QC controlled <span class="notranslate">reads</span></code> file with all <span class="notranslate">reads</span> (not only the non r<span class="notranslate">RNA</span>s) because the r<span class="notranslate">RNA</span>s <span class="notranslate">reads</span> are good marker genes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-the-community-structure"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the community structure</h3>
+
+  <ol>
+    <li><strong>MetaPhlAn2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="highlighter-rouge">Interlaced QC controled <span class="notranslate">reads</span></code></li>
+        <li><em>“Database with clade-specific marker genes”</em>: <code class="highlighter-rouge">Locally cached</code>
+          <ul>
+            <li><em>“Cached database with clade-specific marker genes”</em>: <code class="highlighter-rouge">MetaPhlAn2 clade-specific marker genes</code></li>
+          </ul>
+        </li>
+        <li><em>“Type of analysis to perform”</em>: <code class="highlighter-rouge">Profiling a metagenomes in terms of relative abundances</code>
+          <ul>
+            <li><em>“Taxonomic level for the relative abundance output”</em>: <code class="highlighter-rouge">All taxonomic levels</code></li>
+          </ul>
+        </li>
+        <li><em>“Profile viral organisms?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Profile eukaryotic organisms?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Profile bacteria organisms?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Profile archea organisms?”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This step may take a couple of minutes as each sequence is compare to the full database with ~1 million reference sequences.</p>
+
+<p>3 files are generated:</p>
+
+<ul>
+  <li>
+    <p>A SAM file with the results of the sequence <span class="notranslate">mapping</span> via the reference database.</p>
+  </li>
+  <li>
+    <p>A BIOM file with the same information as the previous file but in BIOM format</p>
+
+    <p>BIOM format is quite common in microbiomics. This is standard, for example, as the input for tools like mothur or QIIME.</p>
+  </li>
+  <li>
+    <p>A tabular file with the community structure</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  #SampleID	Metaphlan2_Analysis
+  k__Bacteria	99.73011
+  k__Archaea	0.26989
+  k__Bacteria|p__Firmicutes	99.68722
+  k__Archaea|p__Euryarchaeota	0.26989
+  k__Bacteria|p__Proteobacteria	0.04289
+</code></pre></div>    </div>
+
+    <p>Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: <code class="highlighter-rouge">k__</code>) and go to more precise taxa.</p>
+
+    <blockquote class="question">
+      <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+      <ol>
+        <li>How many taxon have been identified?</li>
+        <li>What are the different taxonomic levels we have access to with MetaPhlAn2?</li>
+        <li>What genus and species are found in our sample?</li>
+        <li>Has only bacteria been identified in our sample?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <ol>
+          <li>The file has 28 lines, including an header. Therefore, 27 taxons of different levels have been identified</li>
+          <li>We have access: kingdom (<code class="highlighter-rouge">k__</code>), phylum (<code class="highlighter-rouge">p__</code>), class (<code class="highlighter-rouge">c__</code>), order (<code class="highlighter-rouge">o__</code>), family (<code class="highlighter-rouge">f__</code>), genus (<code class="highlighter-rouge">g__</code>), species (<code class="highlighter-rouge">s__</code>), strain (<code class="highlighter-rouge">t__</code>)</li>
+          <li>In our sample, we identified:
+            <ul>
+              <li>4 genera (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia) and 1 genus unclassified (Thermodesulfobiaceae unclassified)</li>
+              <li>4 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) and 1 unclassified species  (Escherichia unclassified)</li>
+            </ul>
+          </li>
+          <li>As expected from the r<span class="notranslate">RNA</span> sorting, we have some archaea, Methanobacteria, in our sample.</li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote class="warning">
+  <h3 id="warning-analyzing-an-isolated-metatranscriptome"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Analyzing an isolated metatranscriptome</h3>
+
+  <p>We are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span>. This approach has one main caveat. In <strong>MetaPhlAn2</strong>, the species are quantified based on the recruitment of <span class="notranslate">reads</span> to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for <span class="notranslate">RNA</span> data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species’ markers is expressed.</p>
+
+  <p>We should then carefully interpret the species relative abundance. These values reflect species’ relative contributions to the pool of species-specific transcripts and not the overall transcript pool.</p>
+</blockquote>
+
+<h2 id="extract-abundance-at-the-different-taxonomic-levels">Extract abundance at the different taxonomic levels</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-format-metaphlan2-output"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format MetaPhlAn2 output</h3>
+
+  <ol>
+    <li><strong>Format MetaPhlAn2 output</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (MetaPhlAN2 output)”</em>: <code class="highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What does <strong>Format MetaPhlAn2 output</strong> do?</li>
+          <li>What is the need for formatting the data?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>
+              <p>This tool formats the output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
+9 files are generated: one file per taxonomic level with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.</p>
+            </li>
+            <li>
+              <p>This tool helps in simplifying the data for easy interpretation.</p>
+            </li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="community-structure-visualization">Community structure visualization</h2>
+
+<p>Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and explore the community structure. 2 tools can be used there:</p>
+
+<ul>
+  <li><strong>Krona</strong> for an interactive HTML output</li>
+  <li><strong>Graphlan</strong> for a publication ready visualization</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-interactive-community-structure-visualization-with-krona"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Interactive community structure visualization with KRONA</h3>
+
+  <ol>
+    <li><strong>Format MetaPhlAn2 output for Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (MetaPhlAN2 output)”</em>: <code class="highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+      </ul>
+    </li>
+    <li><strong>Krona pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“What is the type of your input data”</em>: <code class="highlighter-rouge">Tabular</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>Format MetaPhlAn2 output for Krona</strong></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the Krona output</li>
+  </ol>
+</blockquote>
+
+<p><strong>Krona</strong> <a class="citation" href="#ondov2011interactive">Ondov <i>et al.</i> 2011</a> renders results of a metagenomic profiling as a zoomable pie chart. It allows hierarchical data, here taxonomic levels, to be explored with zooming, multi-layered pie charts</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>
+      <p>What are the abundances of 2 kingdoms identified here?</p>
+    </li>
+    <li>
+      <p>When zooming on bacteria, what are the 2 subclasses identified?</p>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Archaea represents 0.3% so bacteria are 99.7% of the organisms identified in our sample
+<img src="../../images/metatranscriptomics/krona.png" alt="Krona" width="75%" /></li>
+      <li>0.02% of bacteria are Enterobacteriales and the rest Clostridia.
+<img src="../../images/metatranscriptomics/krona_bacteria.png" alt="Krona at bacteria level" width="75%" /></li>
+    </ol>
+  </blockquote>
+
+  <p><br /><br /></p>
+  <center><iframe id="krona" src="krona.html" frameborder="0" width="90%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe></center>
+
+</blockquote>
+
+<p><strong>GraPhlAn</strong> is another software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes a taxonomic tree file as the input. We first need to convert the <strong>MetaPhlAn2</strong> output using <strong>export2graphlan</strong>. This conversion software tool produces both annotation and tree file for GraPhlAn.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-publication-ready-community-structure-visualization-with-graphlan"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Publication-ready community structure visualization with GraPhlAn</h3>
+
+  <ol>
+    <li><strong>Export to GraPhlAn</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+        <li><em>“List which levels should be annotated in the tree”</em>: <code class="highlighter-rouge">1,2</code></li>
+        <li><em>“List which levels should use the exte<span class="notranslate">rna</span>l legend for the annotation”</em>: <code class="highlighter-rouge">3,4,5</code></li>
+        <li><em>“List which levels should be highlight with a shaded background”</em>: <code class="highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li><strong>Generation, personalization and annotation of tree</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tree”</em>: <code class="highlighter-rouge">Tree</code> (output of <strong>Export to GraPhlAn</strong>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation file”</em>: <code class="highlighter-rouge">Annotation</code> (output of <strong>Export to GraPhlAn</strong>)</li>
+      </ul>
+    </li>
+    <li><strong>GraPhlAn</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tree”</em>: <code class="highlighter-rouge">Tree in PhyloXML</code></li>
+        <li><em>“Output format”</em>: <code class="highlighter-rouge">PNG</code></li>
+      </ul>
+    </li>
+    <li>Inspect <strong>GraPhlAn</strong> output</li>
+  </ol>
+</blockquote>
+
+<p><img src="../../images/metatranscriptomics/graphlan.png" alt="GraPhlAn" /></p>
+
+<h1 id="extract-the-functional-information">Extract the functional information</h1>
+
+<p>We would now like to answer the question “What are the micro-organisms doing?” or “Which functions are performed by the micro-organisms in the environment?”.</p>
+
+<p>In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using <strong>HUMAnN2</strong> (<a class="citation" href="#franzosa2018species">Franzosa <i>et al.</i> 2018</a>). <strong>HUMAnN2</strong> is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.</p>
+
+<p>To identify the functions made by the community, we do not need the r<span class="notranslate">RNA</span> sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMe<span class="notranslate">RNA</span></strong>, but also the identified community profile from <strong>MetaPhlAn2</strong>. This will help <strong>HUMAnN2</strong> to focus on the know sequences for the identified organisms.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-the-functional-information"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the functional information</h3>
+  <ol>
+    <li><strong>HUMAnN2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequence file”</em>: <code class="highlighter-rouge">Interlaced non r<span class="notranslate">RNA</span> <span class="notranslate">reads</span></code></li>
+        <li><em>“Use of a custom taxonomic profile”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Taxonomic profile file”</em>: <code class="highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+          </ul>
+        </li>
+        <li><em>“Nucleotide database”</em>: <code class="highlighter-rouge">Locally cached</code>
+          <ul>
+            <li><em>“Nucleotide database”</em>: <code class="highlighter-rouge">Full</code></li>
+          </ul>
+        </li>
+        <li><em>“Software to use for translated alignment”</em>: <code class="highlighter-rouge">Diamond</code></li>
+        <li><em>“Protein database”</em>: <code class="highlighter-rouge">Locally cached</code>
+          <ul>
+            <li><em>“Protein database”</em>: <code class="highlighter-rouge">Full UniRef50</code></li>
+          </ul>
+        </li>
+        <li><em>“Search for uniref50 or uniref90 gene families?”</em>: <code class="highlighter-rouge">uniref50</code></li>
+        <li><em>“Database to use for pathway computations”</em>: <code class="highlighter-rouge">MetaCyc</code></li>
+      </ul>
+
+      <p>This is a large step and might take some time, so please be patient. Otherwise, we have pre-generated the outputs and you can upload them to inspect them without waiting.</p>
+    </li>
+    <li>
+      <p>Import the 2 files:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3362849/files/T1A_humann2_gene_family_abundances.tsv
+https://zenodo.org/record/3362849/files/T1A_humann2_pathway_abundances.tsv
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<p>HUMAnN2 generates 3 files</p>
+
+<ul>
+  <li>
+    <p>A file with the abundance of gene families</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Gene Family	humann2_Abundance-RPKs
+  UNMAPPED	109359.0000000000
+  UniRef50_P62593: Beta-lactamase TEM	51842.4304363200
+  UniRef50_P62593: Beta-lactamase TEM|g__Clostridium.s__Clostridium_thermocellum	51842.4304363200
+  UniRef50_R5FV61	46966.2923149157
+  UniRef50_R5FV61|g__Clostridium.s__Clostridium_thermocellum	46966.2923149157
+</code></pre></div>    </div>
+
+    <p>This file details the abundance of each gene family in the community. Gene families are groups of evolutionarily-related protein-coding sequences that often perform similar functions. Here we used <a href="https://www.uniprot.org/help/uniref">UniRef50 gene families</a>: sequences in a gene families have at least 50% sequence identity.</p>
+
+    <p>Gene family abundance at the community level is stratified to show the contributions from known and unknown species. Individual species’ abundance contributions sum to the community total abundance.</p>
+
+    <p>Gene family abundance is reported in RPK (<span class="notranslate">reads</span> per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.</p>
+
+    <p>The “UNMAPPED” value is the total number of <span class="notranslate">reads</span> which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, “UNMAPPED” can be interpreted as a single unknown gene of length 1 kilobase recruiting all <span class="notranslate">reads</span> that failed to map to known sequences.</p>
+
+    <blockquote class="question">
+      <h3 id="question-questions-10"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+      <ol>
+        <li>What is the most abundant family?</li>
+        <li>Which species is involved in production of this family?</li>
+        <li>How many gene families have been identified?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <ol>
+          <li>The most abundant family is the first one in the family: UniRef50_P62593, involved in Beta-lactamase TEM, enzymes produced by bacteria that provide multi-resistance to β-lactam antibiotics.</li>
+          <li>Beta-lactamase TEM seems mostly produced here by <em>Clostridium thermocellum</em>.</li>
+          <li>
+            <p>There is 6,861 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.</p>
+
+            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="highlighter-rouge">|</code> in them using the tool <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:</p>
+            <ul>
+              <li><em>“Select lines from”</em>: <code class="highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+              <li><em>“that”</em>: <code class="highlighter-rouge">NOT Matching</code></li>
+              <li><em>“the pattern”</em>: <code class="highlighter-rouge">\|</code></li>
+            </ul>
+
+            <p>The output file has 3,418 lines, including the header and the UNMAPPED. So 3,416 UniRef50 gene families have been identified for our sample.</p>
+          </li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p>A file with the abundance of pathways</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  # Pathway	humann2_Abundance
+  UNMAPPED	11417.7392070186
+  UNINTEGRATED	65807.9719501939
+  UNINTEGRATED|g__Clostridium.s__Clostridium_thermocellum	48238.6191078367
+  UNINTEGRATED|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	6335.2676240042
+  UNINTEGRATED|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	80.7884346284
+  PWY-6305: putrescine biosynthesis IV	764.5363426532
+  PWY-6305: putrescine biosynthesis IV|g__Clostridium.s__Clostridium_thermocellum	751.0036125447
+</code></pre></div>    </div>
+
+    <p>This file shows each pathway and their abundance. Here, we used  the <a href="https://metacyc.org/">MetaCyc Metabolic Pathway Database</a>, a curated database of experimentally elucidated metabolic pathways from all domains of life.</p>
+
+    <p>The abundance of a pathway in the sample is computed as a function of the abundances of the pathway’s component reactions, with each reaction’s abundance computed as the sum over abundances of genes catalyzing the reaction. The abundance is proportional to the number of complete “copies” of the pathway in the community. Indeed, for a simple linear pathway <code class="highlighter-rouge">RXN1 --&gt; RXN2 --&gt; RXN3 --&gt; RXN4</code>, if RXN1 is 10 times as abundant as RXNs 2-4, the pathway abundance will be driven by the abundances of RXNs 2-4.</p>
+
+    <p>The pathway abundance is computed once for all species (community level) and again for each species  using species gene abundances along the components of the pathway. Unlike gene abundance, a pathway’s  abundance at community-level is not necessarily the sum of the abundance values of each species. For example, for the same pathway example as above, if the abundances of RXNs 1-4 are [5, 5, 10, 10] in Species A and [10, 10, 5, 5] in Species B, the pathway abundance would be 5 for Species A and Species B, but 15 at the community level as the reaction totals are [15, 15, 15, 15].</p>
+
+    <blockquote class="question">
+      <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+      <ol>
+        <li>What is the most abundant pathway?</li>
+        <li>Which species is involved in production of this pathway?</li>
+        <li>How many gene families have been identified?</li>
+        <li>What is the “UNINTEGRATED” abundance?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-11"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <ol>
+          <li>The most abundant pathway is PWY-6305. It produces the polyamine putrescine that may be involved in interactions with proteins, <span class="notranslate">DNA</span> and <span class="notranslate">RNA</span> molecules.</li>
+          <li>Like the gene family, this pathway is mostly achieved by <em>Clostridium thermocellum</em>.</li>
+          <li>
+            <p>There are 146 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with <code class="highlighter-rouge">|</code> in them using the tool <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.
+  The output file has 79 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 76 UniRef50 pathways have been identified for our sample.”</p>
+          </li>
+          <li>The “UNINTEGRATED” abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.</li>
+        </ol>
+      </blockquote>
+    </blockquote>
+  </li>
+  <li>
+    <p>A file with the coverage of pathways</p>
+
+    <p>Pathway coverage provides an alte<span class="notranslate">rna</span>tive description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.</p>
+  </li>
+</ul>
+
+<blockquote class="warning">
+  <h3 id="warning-analyzing-an-isolated-metatranscriptome-1"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Analyzing an isolated metatranscriptome</h3>
+
+  <p>As we already mentioned above, we are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span> and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species’ relative abundance from <strong>MetaPhlAn2</strong>, but there is another aspect we should be careful about.</p>
+
+  <p>From a lone metatranscriptomic dataset, the transcript abundance can be confounded with the underlying gene copy number. For example, transcript X may be more abundant in sample A relative to sample B because the underlying X gene (same number in both samples) is more highly expressed in sample A relative to sample B; or there are more copies of gene X in sample A relative to sample B (all of which are equally expressed). This is a general challenge in analyzing isolated metatranscriptomes.</p>
+
+  <p>The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running <strong>MetaPhlAn2</strong> on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to <strong>HUMAnN2</strong>. <span class="notranslate">RNA</span> <span class="notranslate">reads</span> are then mapped to any species’ pangenomes detected in the metagenome. Then we run <strong>HUMAnN2</strong> on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the <span class="notranslate">RNA</span>-level outputs (e.g. transcript family abundance) by corresponding <span class="notranslate">DNA</span>-level outputs to the quantification of microbial <span class="notranslate">expression</span> independent of gene copy number.</p>
+
+  <p>Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation</p>
+
+</blockquote>
+
+<h2 id="normalize-the-abundances">Normalize the abundances</h2>
+
+<p>Gene family and pathway abundances are in RPKs (<span class="notranslate">reads</span> per kilobase), accounting for gene length but not sample sequencing depth. While there are some applications, e.g. strain profiling, where RPK units are superior to depth-normalized units, most of the time we need to renormalize our samples prior to <span class="notranslate">downstream</span> analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-normalize-the-gene-family-abundances"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize the gene family abundances</h3>
+
+  <ol>
+    <li><strong>Renormalize a HUMAnN2 generated table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Gene/pathway table”</em>: <code class="highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+        <li><em>“Normalization scheme”</em>: <code class="highlighter-rouge">Relative abundance</code></li>
+        <li><em>“Normalization level”</em>: <code class="highlighter-rouge">Normalization of all levels by community total</code></li>
+      </ul>
+    </li>
+    <li>Rename the generated file <code class="highlighter-rouge">Normalized gene families</code></li>
+    <li>
+      <p>Inspect the file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What percentage of sequences has not been assigned to a gene family?</li>
+          <li>What is the relative abundance of the most abundant gene family?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>14% (<code class="highlighter-rouge">0.140345 x 100</code>) of the sequences have not be assigned to a gene family</li>
+            <li>The Beta-lactamase TEM gene family represents 6% of the <span class="notranslate">reads</span>.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>Renormalize a HUMAnN2 generated table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Gene/pathway table”</em>: <code class="highlighter-rouge">Pathways and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+        <li><em>“Normalization scheme”</em>: <code class="highlighter-rouge">Relative abundance</code></li>
+        <li><em>“Normalization level”</em>: <code class="highlighter-rouge">Normalization of all levels by community total</code></li>
+      </ul>
+    </li>
+    <li>Rename the generated file <code class="highlighter-rouge">Normalized pathways</code></li>
+    <li>
+      <p>Inspect the file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-13"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What is the UNMAPPED percentage?</li>
+          <li>What percentage of <span class="notranslate">reads</span> assigned to a gene family has not be assigned to a pathway?</li>
+          <li>What is the relative abundance of the most abundant gene family?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-13"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>UNMAPPED, here 14% of the <span class="notranslate">reads</span>, corresponds to the percentage of <span class="notranslate">reads</span> not assigned to gene families. It is the same value as in the normalized gene family file.</li>
+            <li>81% (UNINTEGRATED) of <span class="notranslate">reads</span> assigned to a gene family have not be assigned to a pathway</li>
+            <li>The PWY-6305 pathway represents 0.9% of the <span class="notranslate">reads</span>.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="identify-the-gene-families-involved-in-the-pathways">Identify the gene families involved in the pathways</h2>
+
+<p>We would like to know which gene families are involved in our most abundant pathways and which species.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-normalize-the-gene-family-abundances-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize the gene family abundances</h3>
+
+  <ol>
+    <li><strong>Unpack pathway abundances to show genes included</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <ul>
+        <li><em>“Gene family or EC abundance file”</em>: <code class="highlighter-rouge">Normalized gene families</code></li>
+        <li><em>“Pathway abundance file”</em>: <code class="highlighter-rouge">Normalized pathways</code></li>
+        <li><em>“Remove the taxonomy from the output file?”</em>: <code class="highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<p>This tool unpacks the pathways to show the genes for each. It adds another level of stratification to the pathway abundance table by including the gene family abundances:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Pathway	humann2_Abundance
+ANAGLYCOLYSIS-PWY: glycolysis III (from glucose)	46.9853692906
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	23.6863932121
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8V1: 6-phosphofructokinase 1 (Phosphofructokinase 1)(Phosphohexokinase 1) (ATP-PFK)	12.4204627049
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8V2: 6-phosphofructokinase (Phosphofructokinase)(Phosphohexokinase)	24.9672323561
+ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef50_B5Y8I1: Triosephosphate isomerase
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Which gene families are involved in the PWY-6305 pathway? And which species?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-14"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd>):</p>
+
+    <pre><code class="language-`">PWY-6305: putrescine biosynthesis IV	0.00939758
+PWY-6305|g__Clostridium.s__Clostridium_thermocellum	0.00923124
+PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_Q814Q2: Agmatinase	0.00189827
+PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_D4KNP6: Arginine decarboxylase	8.60858e-05
+PWY-6305|g__Clostridium.s__Clostridium_thermocellum|UniRef50_G8LSV4: Arginine/lysine/ornithine decarboxylase	0.000559771
+</code></pre>
+
+    <p>The gene families UniRef50_Q814Q2, UniRef50_D4KNP6 and UniRef50_G8LSV4 are identified, for <em>Clostridium thermocellum</em>.</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="group-abundances-into-go-slim-terms">Group abundances into GO slim terms</h2>
+
+<p>The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help constuct a big picture, we could identify and use categories of genes using the gene families. <a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-group-abundances-into-go-slim-terms"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group abundances into GO slim terms</h3>
+
+  <ol>
+    <li><strong>Group abundances</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“HUMAnN2 output with UniRef 50 gene family abundance”</em>: <code class="highlighter-rouge">Gene families and their abundance</code> (output of <strong>HUMAnN2</strong>)</li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<p>3 outputs are generated from executing this tool: the abundances of GO slim terms grouped in 3 groups (molecular functions, biological processes and cellular components). Each file is a tabular file with 3 columns: GO slim term id, name and abundance.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-15"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Which of the GO terms related to molecular functions is the most abundant?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-15"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The GO terms in the <code class="highlighter-rouge">Molecular function abundance</code> file are not sorted by abundance:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO id	GO name	Abundance
+GO:0000150	recombinase activity	123.345
+GO:0000150|g__Clostridium.s__Clostridium_thermocellum	recombinase activity|g__Clostridium.s__Clostridium_thermocellum	123.345
+GO:0000166	nucleotide binding	51078.796
+GO:0000166|g__Clostridium.s__Clostridium_thermocellum	nucleotide binding|g__Clostridium.s__Clostridium_thermocellum	43316.679
+GO:0000166|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	nucleotide binding|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	7609.601
+GO:0000166|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	nucleotide binding|g__Methanothermobacter.s__Methanothermobacter_thermautotrophicus	152.517
+</code></pre></div>    </div>
+
+    <p>So to identify the most abundant GO terms, we first need to sort the file using the <strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO:0016491	oxidoreductase activity	58558.589
+GO:0016787	hydrolase activity	58119.165
+GO:0016787|g__Clostridium.s__Clostridium_thermocellum	hydrolase activity|g__Clostridium.s__Clostridium_thermocellum	57390.482
+GO:0016491|g__Clostridium.s__Clostridium_thermocellum	oxidoreductase activity|g__Clostridium.s__Clostridium_thermocellum	54813.645
+GO:0000166	nucleotide binding	51078.796
+GO:0043167	ion binding	50385.168
+GO:0003735	structural constituent of ribosome	46442.807
+</code></pre></div>    </div>
+
+    <p>The most abundant GO terms related to molecular functions seem to be linked to oxidoreductase or hydrolase activity, but also to nucleotide, ion, nucleic acid, metal ion binding.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="combine-taxonomic-and-functional-information">Combine taxonomic and functional information</h1>
+
+<p>With <strong>MetaPhlAn2</strong> and <strong>HUMAnN2</strong>, we investigated “Which micro-organims are present in my sample?” and “What functions are performed by the micro-organisms in my sample?”. We can go further in these analyses, for example using a combination of functional and taxonomic results. Although we did not detail that in this tutorial you can find more methods of analysis in our tutorials on shotgun metagenomic data analysis.</p>
+
+<p>Although gene families and pathways, and their abundance may be related to a species, in the <strong>HUMAnN2</strong> output, relative abundance of the species is not indicated. Therefore, for each gene family/pathway and the corresponding taxonomic stratification, we will now extract the relative abundance of this gene family/pathway and the relative abundance of the corresponding species and genus.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-combine-taxonomic-and-functional-information"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combine taxonomic and functional information</h3>
+
+  <ol>
+    <li><strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding to MetaPhlAN2 output”</em>: <code class="highlighter-rouge">Community profile</code> (output of <strong>MetaPhlAn2</strong>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding HUMAnN2 output”</em>: <code class="highlighter-rouge">Normalized gene families</code></li>
+        <li><em>“Type of characteristics in HUMAnN2 file”</em>: <code class="highlighter-rouge">Gene families</code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<p>The generated file is a table with 7 columns:</p>
+<ol>
+  <li>genus</li>
+  <li>abundance of the genus (percentage)</li>
+  <li>species</li>
+  <li>abundance of the species (percentage)</li>
+  <li>gene family id</li>
+  <li>gene family name</li>
+  <li>gene family abundance (percentage)</li>
+</ol>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>genus	genus_abundance	species	species_abundance	gene_families_id	gene_families_name	gene_families_abundance
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_P62593	Beta lactamase TEM	6.65317186667
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_R5FV61		6.0274016911
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_P80579	Thioredoxin	5.34305149909
+Clostridium	76.65512	Clostridium_thermocellum	76.65512	UniRef50_A3DC67		4.56309128026
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-questions-16"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Are there gene families associated with each genus identified with <strong>MetaPhlAn2</strong>?</li>
+    <li>How many gene families are associated to each genus?</li>
+    <li>Are there gene families associated to each species identified with <strong>MetaPhlAn2</strong>?</li>
+    <li>How many gene families are associated to each species?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-16"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>
+        <p>To answer the questions, we need to group the contents of the output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> by 1st column and count the number of occurrences of gene families. We do that using <strong>Group data by a column</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:</p>
+
+        <blockquote class="notranslate hands_on">
+          <h3 id="hands_on-hands-on-group-by-genus-and-count-gene-families"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group by genus and count gene families</h3>
+          <ol>
+            <li><strong>Group data by a column</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+              <ul>
+                <li><em>“Select data”</em>: output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong></li>
+                <li><em>“Group by column”</em>: <code class="highlighter-rouge">Column:1</code></li>
+                <li><em>“Operation”</em>:
+                  <ul>
+                    <li>Click on <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation”</em>
+                      <ul>
+                        <li><em>“Type”</em>: <code class="highlighter-rouge">Count</code></li>
+                        <li><em>“On column”</em>: <code class="highlighter-rouge">Column:5</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </blockquote>
+
+        <p>With <strong>MetaPhlAn2</strong>, we identified 4 genus (Clostridium, Coprothermobacter, Methanothermobacter, Escherichia). But in the output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong>, we have only gene families for Clostridium, Coprothermobacter and Methanothermobacter. The abundance of Escherichia is probably too low to correctly identify correctly some gene families.</p>
+      </li>
+      <li>
+        <p>2323 gene families are associated to Clostridium, 918 to Coprothermobacter and 202 to Methanothermobacter. Given a genus abundance of 76.65512 for Clostridium, 20.75226 for Coprothermobacter and 0.26989 for Methanothermobacter, the ratio between number of gene families and genus abundance is really high for Methanothermobacter (748.45) compare to Methanothermobacter (44.26) and Coprothermobacter (30.30).</p>
+      </li>
+      <li>
+        <p>For this question, we should group on the 3rd column:</p>
+
+        <blockquote class="notranslate hands_on">
+          <h3 id="hands_on-hands-on-group-by-species-and-count-gene-families"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Group by species and count gene families</h3>
+          <ol>
+            <li><strong>Group data by a column</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+              <ul>
+                <li><em>“Select data”</em>: output of <strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong></li>
+                <li><em>“Group by column”</em>: <code class="highlighter-rouge">Column:3</code></li>
+                <li><em>“Operation”</em>:
+                  <ul>
+                    <li>Click on <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation”</em>
+                      <ul>
+                        <li><em>“Type”</em>: <code class="highlighter-rouge">Count</code></li>
+                        <li><em>“On column”</em>: <code class="highlighter-rouge">Column:5</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ol>
+        </blockquote>
+
+        <p>The 3 species (Clostridium thermocellum, Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus) identified by <strong>MetaPhlAn2</strong> are associated to gene families.</p>
+      </li>
+      <li>
+        <p>As the species found derived directly from the genus (not 2 species for the same genus here), the number of gene families identified are the sames: 2323 for Clostridium thermocellum, 918 for Coprothermobacter proteolyticus	and 202 Methanothermobacter thermautotrophicus. The abundances are also the same.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>We could now apply the same tool to the pathways and run similar analysis.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we analyzed one metatranscriptomics sample from raw sequences to community structure, functional profiling. To do that, we:</p>
+
+<ol>
+  <li>preprocessed the raw data: quality control, trimming and filtering, sequence sorting and formatting</li>
+  <li>
+    <p>extracted and analyzed the community structure (taxonomic information)</p>
+
+    <p>We identified bacteria to the level of strains, but also some archaea.</p>
+  </li>
+  <li>
+    <p>extracted and analyzed the community functions (functional information)</p>
+
+    <p>We extracted gene families, pathways, but also the gene families involved in pathways and aggregated the gene families into GO terms</p>
+  </li>
+  <li>combined taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy</li>
+</ol>
+
+<p>The <span class="notranslate">workflow</span> can be represented this way:</p>
+
+<p><img src="../../images/asaim-wf.png" alt="ASaiM diagram" /></p>
+
+<p>The dataset used here was extracted from a time-series analysis of a microbial community inside a bioreactor (<a class="citation" href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a>) in which there are 3 replicates over 7 time points. We analyzed here only one single time point for one replicate.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Metatranscriptomics data have the same QC profile that RNA-seq data</p>
+</li>
+                            
+                            <li><p>A lot of metatranscriptomics sequences are identified as rRNA sequences</p>
+</li>
+                            
+                            <li><p>With shotgun data, we can extract information about the studied community structure and also the functions realised by the community</p>
+</li>
+                            
+                            <li><p>Metatranscriptomics data analyses are complex and must be careful done, specially when they are done without combination to metagenomics data analyses</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/metagenomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="martin2011cutadapt">Martin, M., 2011 <b>Cutadapt removes adapter sequences from high-throughput sequencing reads</b>. EMBnet. journal 17: 10–12.</span>
+    
+    
+    
+
+</li>
+<li><span id="ondov2011interactive">Ondov, B. D., N. H. Bergman, and A. M. Phillippy, 2011 <b>Interactive metagenomic visualization in a Web browser</b>. BMC bioinformatics 12: 385.</span>
+    
+    
+    
+
+</li>
+<li><span id="kopylova2012sortmerna">Kopylova, E., L. Noé, and H. Touzet, 2012 <b>SortMeRNA: fast and accurate filtering of ribosomal RNAs in metatranscriptomic data</b>. Bioinformatics 28: 3211–3217.</span>
+    
+    
+    
+
+</li>
+<li><span id="truong2015metaphlan2">Truong, D. T., E. A. Franzosa, T. L. Tickle, M. Scholz, G. Weingart <i>et al.</i>, 2015 <b>MetaPhlAn2 for enhanced metagenomic taxonomic profiling</b>. Nature methods 12: 902.</span>
+    
+    
+    
+
+</li>
+<li><span id="batut2018asaim">Batut, B., K. Gravouil, C. Defois, S. Hiltemann, J.-F. Brugère <i>et al.</i>, 2018 <b>ASaiM: a Galaxy-based framework to analyze microbiota data</b>. GigaScience 7: giy057.</span>
+    
+    
+    
+
+</li>
+<li><span id="franzosa2018species">Franzosa, E. A., L. J. McIver, G. Rahnavard, L. R. Thompson, M. Schirmer <i>et al.</i>, 2018 <b>Species-level functional profiling of metagenomes and metatranscriptomes</b>. Nature methods 15: 962.</span>
+    
+    
+    
+
+</li>
+<li><span id="kunath2018proteins">Kunath, B. J., F. Delogu, A. E. Naas, M. Ø. Arntzen, V. G. H. Eijsink <i>et al.</i>, 2018 <b>From proteins to polysaccharides: lifestyle and genetic evolution of Coprothermobacter proteolyticus</b>. The ISME journal 1.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Pratik Jagtap, Subina Mehta, Ray Sajulga, Bérénice Batut, Emma Leith, Praveen Kumar,  <b>Metatranscriptomics analysis using microbiome RNA-seq data (Galaxy Training Materials)</b>. <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html">/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{metagenomics-metatranscriptomics,
+    author = "Pratik Jagtap and Subina Mehta and Ray Sajulga and Bérénice Batut and Emma Leith and Praveen Kumar",
+    title = "Metatranscriptomics analysis using microbiome RNA-seq data (Galaxy Training Materials)",
+    year = "",
+    month = "",
+    day = ""
+    url = "\url{/training-material/topics/metagenomics/tutorials/metatranscriptomics/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Metatranscriptomics analysis using microbiome RNA-seq data (Metagenomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Metatranscriptomics analysis using microbiome RNA-seq data (Metagenomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Pratik Jagtap, Subina Mehta, Ray Sajulga, Bérénice Batut, Emma Leith, Praveen Kumar)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/metagenomics/tutorials/metatranscriptomics/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
