@@ -304,7 +304,7 @@ Wallace can use the trained model to predict possible species distributions in a
 > 1. Go to **8 Project**
 > 2. In **Project Model**
 >    - *"Modules Available"*: `Project to New Extent`
-> > 3. In the middle panel,
+> 3. In the middle panel,
 >    1. Click on the polygon icon on the map
 >    2. Draw a polygon around a part of Canada
 > 2. In **Project Model**

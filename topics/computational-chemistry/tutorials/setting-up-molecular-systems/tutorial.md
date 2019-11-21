@@ -100,9 +100,10 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >    {% include snippets/create_new_history.md %}
 >
 > 2. Import the files from the Zenodo link provided.
->    >    ```
->    > https://zenodo.org/record/2600690
->    >    ```
+>
+>    ```
+>    https://zenodo.org/record/2600690
+>    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -119,7 +120,7 @@ It is convenient to set up the molecular system outside Galaxy using a tool such
 
 > ### {% icon tip %} Tip: Viewing figures
 > * Some of the figures are screenshots and it may be difficult to make out details
-> * Right-click on the image and choose 'Open image in new tab' to view 
+> * Right-click on the image and choose 'Open image in new tab' to view
 > * Zoom in and out as needed to see the content
 {: .tip}
 
@@ -133,7 +134,7 @@ Go to the correct section depending on which MD engine you will be using.
 [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/pdbreader) and use the Input Generator, specifically the PDB Reader tool and upload the Cellulase PDB file. Press 'Next Step: Select Model/Chain' in the bottom right corner.
 
 > ### {% icon hands_on %} Hands-on: Upload the PDB to CHARMM-GUI
-> 
+>
 > 1. Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
 > 2. Upload the PDB and choose CHARMM format.
 > ![Snapshot of CHARMM-GUI PDB reader section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-reader.png %} "The CHARMM-GUI PDB Reader tool")
@@ -197,19 +198,17 @@ Go to the correct section depending on which MD engine you will be using.
 > ![Snapshot of CHARMM-GUI waterbox section]({{ site.baseurl }}{% link topics/computational-chemistry/images/charmmgui-waterbox.png %} "Setting up a waterbox in CHARMM-GUI")
 {: .hands_on}
 
-> > ### {% icon question %} Question
+> ### {% icon question %} Question
+>
+> Why is 10 angstrom a fair choice for the buffer?  Why choose 0.15M NaCl?
+>
+> > ### {% icon solution %} Solution
+> > Under periodic boundary conditions, we need to ensure the protein can never interact with its periodic image, otherwise artefacts are introduced. Allowing 10 angstroms between the protein and the box edge ensures the two images will always be at minimum 20 angstroms apart, which is sufficient.
 > >
-> > Why is 10 angstrom a fair choice for the buffer?  Why choose 0.15M NaCl?
-> >
-> > > ### {% icon solution %} Solution
-> > > Under periodic boundary conditions, we need to ensure the protein can never interact with its periodic image, otherwise artefacts are introduced. Allowing 10 angstroms between the protein and the box edge ensures the two images will always be at minimum 20 angstroms apart, which is sufficient.
-> > >
-> > > Some of the residues on the protein surface are charged and counter-ions need to be present nearby to neutralise them. Failure to explicitly model salt ions may destabilise the protein.
-> > {: .solution}
-> {: .question}
+> > Some of the residues on the protein surface are charged and counter-ions need to be present nearby to neutralise them. Failure to explicitly model salt ions may destabilise the protein.
+> {: .solution}
+{: .question}
 
-
-{: .details}
 
 ### Generate the FFT automatically
 
