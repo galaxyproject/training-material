@@ -105,7 +105,7 @@ The training dataset is used for learning the associations between features and 
 >          - *"Select input type"*: `tabular data`
 >             - {% icon param-file %} *"Training samples dataset"*: `breast-w_train`
 >             - *"Does the dataset contain header"*: `Yes`
->             - *"Choose how to select data by column"*: `All columns EXCLUDING somee by column header name(s)`
+>             - *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - *"Type header name(s)"*: `target`
 >             - {% icon param-file %} *"Dataset containing class labels"*: `breast-w_train`
 >             - *"Does the dataset contain header"*: `Yes`
