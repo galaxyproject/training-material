@@ -66,14 +66,14 @@ material. In this tutorial, we start with the interpreted data, which are KO
 ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are
 available from Zenodo.
 
-> ### {% icon tip %} Background: What is KO count?
+> ### {% icon details %} Background: What is KO count?
 >
 > KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 > It is a term specific to [KEGG](https://www.genome.jp/kegg/) database. It is a group concept, similar to the concept "pathway", which
 > includes a bunch of molecules and their interactions. Take a random line in our dataset, "K01369 7" as an example, the first column represents the KO ID,
 > and the second column --- the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO "K01369"; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.
 >
-{: .tip}
+{: .details}
 
 ## Understanding our input data
 
@@ -97,7 +97,8 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 > 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
->    {% include snippets/history_create_new.md %}
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
 >
 > 2. **Upload Disease Dataset**
 >    - Open the file upload menu
@@ -266,7 +267,7 @@ modeled by a uniform distribution. With this knowledge, we can fit these p-value
 
 ![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
 
-> ### {% icon tip %} Why do we need a mixture model?
+> ### {% icon comment %} Why do we need a mixture model?
 >
 > To avoid making this tutorial sound like a math class, let's focus on the philosophy of using a statistical model.
 > In the graph above, we have visualized the p-values; those bins have some shapes; by viewing the figure, it
@@ -275,7 +276,7 @@ modeled by a uniform distribution. With this knowledge, we can fit these p-value
 > mathematical formulas, that's why we need to fix the data into a statistical model (denoted by the red curve and blue line in the graph),
 > which computers can understand easily.
 >
-{: .tip}
+{: .comment}
 
 
 Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool
@@ -407,13 +408,13 @@ After getting Heinz scores, let's run Heinz program to find the optimal subnetwo
 
 It usually takes a few minutes to get the result, but mind you, for some tasks, it might take a few hours to get a result in practice.
 
-> ### {% icon tip %} Tip: the running time of the program
+> ### {% icon comment %} The running time of the program
 >
 > * Graph problem is way more complicated than we thought.
 > * It might take a much longer time for some complicated datasets.
 > * We can use multiple CPUs to accelerate the computation (for now, this function is not available in Galaxy yet),
 >   but, to use that, you can install Heinz directly via [Bioconda](https://anaconda.org/bioconda/heinz) in a Linux environment.
-{: .tip}
+{: .comment}
 
 ## Visualize the output: visualize the optimal subnetwork
 

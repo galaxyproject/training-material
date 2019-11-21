@@ -1,0 +1,23 @@
+{% if include.instances[include.topic].supported or include.docker %}
+{% if include.instances[include.topic]['tutorials'][include.tuto].supported or include.docker %}
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        {% icon instances %}{% if include.label %} Available on these Galaxies{% endif %}
+    </a>
+    <ul class="dropdown-menu">
+    {% if include.docker %}
+        <li>
+            <a class="dropdown-item" href="{{ site.github.repository_url }}/tree/{{ site.repository_branch }}/topics/{{ include.topic }}/docker" title="Docker image for this tutorial">
+                {% icon docker_image %} Docker image
+            </a>
+        </li>
+    {% endif %}
+    {% for inst in include.instances[include.topic]['tutorials'][include.tuto]['instances'] %}
+        {% if inst[1].supported %}
+        <a class="dropdown-item" href="{{ inst[1].url }}" title="{{ inst[0] }}">
+            {{ inst[0] }}
+        </a>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endif %}

@@ -3,6 +3,18 @@ layout: base_slides
 logo: "GTN"
 
 title: "Ansible"
+questions:
+  - Why Ansible?
+  - How and when to use Ansible?
+  - How to write a role?
+  - How to leverage community build roles?
+objectives:
+  - Learn Ansible basics
+  - Write a simple role
+  - Install a role from Ansible Galaxy
+key_points:
+  - Ansible lets you do system administration at scale
+  - Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles
 contributors:
   - erasche
 ---
@@ -57,7 +69,7 @@ What if:
 
 ---
 
-### Hosts File
+### Inventory File
 
 ```ini
 [webservers]
@@ -67,6 +79,14 @@ What if:
 [databases]
 db_1.example.org ansible_user=root
 ```
+
+???
+
+Defines the systems (called "hosts") against which Ansible will work.
+
+The headings in square brackets are group names, used to select a set of systems on which Ansible should operate.
+
+It is possible to assign variables to hosts and groups to be used later in playbooks.
 
 ---
 
@@ -90,7 +110,7 @@ db_1.example.org ansible_user=root
 
 Tasks are module invocations with their configuration.
 
-Here is an example of invoking the `copy` module and the package module. Copy copies a file from src on the local host to destination (the remote host) and sets some attributes about the file
+Here is an example of invoking the `copy` module and the package module. Copy copies a file from `src` on the local host to destination (the remote host) and sets some attributes about the file
 
 Next we see an example of the `package` module, a generic OS package manager. It ensures that for the package named `ntpdate`, its state is `present` (i.e. installed)
 
@@ -170,7 +190,7 @@ A collection of:
 
 ### Vault
 
-Allows encryption of files, can collaborate on ansible playbooks without worrying about accidentally sharing secrets like passwords.
+Allows encryption of files, can collaborate on Ansible playbooks without worrying about accidentally sharing secrets like passwords.
 
 ```
 $ANSIBLE_VAULT;1.1;AES256
@@ -198,4 +218,4 @@ $ANSIBLE_VAULT;1.1;AES256
 
 - Many for common software deployment (nginx, apache, postgresql)
 
-- Different "Galaxy" than the bioinformatics tool server (but ansible can be used to install that too!)
+- Different "Galaxy" than the bioinformatics tool server (but Ansible can be used to install that too!)

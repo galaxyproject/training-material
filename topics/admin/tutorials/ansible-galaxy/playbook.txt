@@ -1,0 +1,21 @@
+- hosts: galaxyservers
+  become: true
+  pre_tasks:
+    - name: Install Dependencies
+      package:
+        name: ['git', 'make', 'python-psycopg2', 'python-virtualenv']
+  handlers:
+    - name: Restart Galaxy
+      supervisorctl:
+        name: galaxy
+        state: restarted
+  roles:
+    - galaxyproject.postgresql
+    - role: natefoo.postgresql_objects
+      become: true
+      become_user: postgres
+    - geerlingguy.pip
+    - galaxyproject.galaxy
+    - uchida.miniconda
+    - usegalaxy-eu.supervisor
+    - galaxyproject.nginx

@@ -52,13 +52,13 @@ Processing the raw reads into consensus sequences consists of four main steps:
 
 Du Novo is a tool which can carry out these steps. Unlike most other such tools, it can do so without the use of a reference sequence, and it can correct for errors in the tags which can contribute to data loss.
 
-> ### {% icon tip %} Tip: Terminology
+> ### {% icon comment %} Terminology
 >
 > Du Novo processes the tags from each fragment by concatenating them into a single **barcode**.
 >
 > - For a standard protocol with two 12bp tags, this results in a 24bp barcode which identifies each family.
 >
-{: .tip}
+{: .comment}
 
 [Schmitt *et al.* 2012](http://www.pnas.org/content/109/36/14508.short) provides this overview of the whole method:
 ![duplex](../../images/ds.png)
@@ -79,12 +79,12 @@ In the image above there are two alleles: green (`A`) and red (`G`). After PCR a
 
 The entire analysis described here is accessible as a [Galaxy history](https://usegalaxy.org/u/nstoler/h/du-novo-gtn-tutorial) that you can copy and play with.
 
-> ### {% icon tip %} Tip: Running the tools
+> ### {% icon comment %} Running the tools
 > * Leave all parameters on their default settings, unless instructed otherwise.
 >   > ### {% icon comment %} Helping Du Novo
 >   > But if you'd like to help improve Du Novo, consider checking `Yes` under {% icon param-check %} *Send usage data*.
 >   {: .comment}
-{: .tip}
+{: .comment}
 
 This analysis can be divided into three parts:
  1. [Generating consensus sequences](#generating-consensus-sequences)
@@ -134,9 +134,9 @@ One can see that these data are of excellent quality and no additional processin
 
 Now we are ready to collapse the raw reads into duplex consensus sequences.
 
-> ### {% icon tip %} Tip: Finding Du Novo
+> ### {% icon comment %} Finding Du Novo
 > * The tools in this portion of the tutorial can all be found in the **NGS: Du Novo** section.
-{: .tip}
+{: .comment}
 
 ### Sorting reads into families
 
@@ -171,12 +171,12 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 
 After grouping reads that came from the same original fragment, we need to align them with each other. This next tool will perform a multiple sequence alignment on each family.
 
-> ### {% icon tip %} Tip: Analysis bottleneck
+> ### {% icon comment %} Analysis bottleneck
 > This is by far the most time-consuming step.
 >
 > On this dataset, it took 2 hours to complete when run on [Galaxy Main](https://usegalaxy.org/).
 > - At the time, Galaxy allocated 6 cores to the job.
-{: .tip}
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Aligning families
 >
@@ -209,7 +209,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 >  - `13: Du Novo: Make consensus reads on data 9 (SSCS mate 2)`
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Setting output formats
+> ### {% icon comment %} Setting output formats
 >
 > You may have to set the datatype of the outputs from {% icon tool %} **Du Novo: Make consensus reads** tool.
 >
@@ -219,7 +219,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 > 2. Click on the **Datatypes** tab.
 > 3. In the **Change datatype** pane, click on the dropdown where it says `fastq`.
 > 4. Enter `fastqsanger`, then click the **Change datatype** button in the upper right of the pane.
-{: .tip}
+{: .comment}
 
 > ### {% icon details %} Where do the FASTQ quality scores come from?
 >

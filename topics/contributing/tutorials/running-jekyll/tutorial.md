@@ -55,9 +55,9 @@ This step has to be done once.
 > 4. Install Jekyll and related modules into the conda environment: `make install`
 {: .hands_on}
 
-> ### {% icon tip %} Troubleshooting
+> ### {% icon details %} Troubleshooting `libxml2` errors
 > If you encounter an error about libxml2 on Linux, please try to install `libxml2-dev` (executing `sudo apt install libxml2-dev`) if on Debian/Ubuntu or `libxml2-devel` (executing `sudo yum install libxml2-devel`) if on Fedora/RedHat/CentOS, and re-run `make install` .
-{: .tip}
+{: .details}
 
 
 # Checking the website generation

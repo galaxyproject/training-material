@@ -1,0 +1,24 @@
+{% if include.material.hands_on == "external" %}
+<a class="topic-icon" href="{{ include.material.hands_on_url }}">
+    {% icon tutorial %}
+</a>
+{% elsif include.material.hands_on == "github" %}
+<a href="{{ site.github.repository_url }}/tree/master/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.md">
+    {% icon tutorial %}
+</a>
+{% elsif include.material.hands_on %}
+    <span class="btn-group">
+        <a href="{{ site.baseurl }}/topics/{{ include.topic }}/tutorials/{{ include.material.tutorial_name }}/tutorial.html" class="btn btn-default" title="Where to run the tutorial">
+            {% icon tutorial %}
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        {% for lang in language %}
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                {{ lang | upcase }}
+            </a>
+        {% endfor %}
+    </span>
+{% endif %}

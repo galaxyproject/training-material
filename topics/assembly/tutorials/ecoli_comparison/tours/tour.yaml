@@ -893,6 +893,32 @@ steps:
         <li>"From" to the collection produced at the previous step</li>
       </ul>
     position: left
+  - title: Cutting columns form annotation data
+    content: >-
+      This will create a 21st column containing `0` for all rows. Now we can cut
+      necessary columns from these datasets. These columns are 8 (start), 9
+      (end), 15 (gene symbol), 21 (dummy column we just created), and c10
+      (strand).
+    backdrop: true
+  - title: Cutting columns form annotation data
+    element: '#tool-search-query'
+    content: Search for "Cut columns from a table" tool
+    placement: right
+    textinsert: Cut columns
+  - title: Cutting columns form annotation data
+    element: '#tool-search'
+    content: Click on the "Cut columns from a table" tool to open it
+    placement: right
+    postclick:
+      - 'a[href$="/tool_runner?tool_id=Cut1"] .tool-old-link'
+  - title: Cutting columns form annotation data
+    element: '#tool-search'
+    content: |-
+      Execute the tool with the following parameters<ul>
+        <li>"Cut columns" to `c8,c9,c15,c21,c10`</li>
+        <li>"From" to the output of the previous step(collection)</li>
+      </ul>
+    position: left
   - title: Collapsing annotations into a single BED dataset
     element: '.history-right-panel .list-items > *:first'
     content: >-
