@@ -460,22 +460,25 @@ Even if the output of MetaPhlAn2 can be easy to parse, we want to visualize and 
 >
 > 1. What are the abundances of 2 kingdoms identified here?
 >
->    ![Krona](../../images/metatranscriptomics/krona.png)
->
 > 2. When zooming on bacteria, what are the 2 subclasses identified?
 >
->    ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png)
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Archaea represents 0.3% so bacteria are 99.7% of the organisms identified in our sample
+> >    ![Krona](../../images/metatranscriptomics/krona.png){: width="75%"}
 > > 2. 0.02% of bacteria are Enterobacteriales and the rest Clostridia.
+> >    ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png){: width="75%"}
 > {: .solution}
+>
+> <br/><br/>
+> <center><iframe id="krona" src="krona.html" frameBorder="0" width="90%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe></center>
+>
 {: .question}
 
 **GraPhlAn** is another software tool for producing high-quality circular representations of taxonomic and phylogenetic trees. It takes a taxonomic tree file as the input. We first need to convert the **MetaPhlAn2** output using **export2graphlan**. This conversion software tool produces both annotation and tree file for GraPhlAn.
 
-> ### {% icon hands_on %} Hands-on: Publication-ready community structure visualization with KRONA
+> ### {% icon hands_on %} Hands-on: Publication-ready community structure visualization with GraPhlAn
 >
 > 1. **Export to GraPhlAn** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `Community profile` (output of **MetaPhlAn2**)
