@@ -1,10 +1,24 @@
 #!/usr/bin/env ruby
-require 'yaml'
-
-
-# If there are unknown contributors, write a .mailmap file like:
+# Checks the header of a tutorial or slides file fo the current contributor list
+# Then compares against the people who have touched that file in git using the git log
+#
+# Each tutorial or slides file needs to be checked individually.
+#
+# If there are unknown contributors, create a .mailmap file like:
 # <gh-username> <user@earlham.ac.uk>
 # <gh-username> <user@gmail.com>
+#
+# This is the format of git's mail-map
+# https://www.git-scm.com/docs/git-check-mailmap
+# We probably should not commit this file, some people don't want their old emails
+# listed so publicly.
+
+require 'yaml'
+
+if ARGV.size != 1
+  puts "Please run with ./bin/check-contributors path/to/tutorial.md/or/slides.html"
+  exit
+end
 
 fn = ARGV[0]
 
