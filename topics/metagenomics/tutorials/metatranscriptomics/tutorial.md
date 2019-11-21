@@ -425,8 +425,8 @@ This step may take a couple of minutes as each sequence is compare to the full d
 >     >
 >     > > ### {% icon solution %} Solution
 >     > >
->     > > This tool formats the output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
->     > >  9 files are generated: one file per taxonomic level with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
+>     > > 1. This tool formats the output file of MetaPhlan2 containing community content (abundance) at all taxonomic levels (from kingdom to strains).
+>     > >    9 files are generated: one file per taxonomic level with abundance for corresponding clades and one file combining all taxonomic levels and corresponding abundances.
 >     > >
 >     > > 2. This tool helps in simplifying the data for easy interpretation.
 >     > >
