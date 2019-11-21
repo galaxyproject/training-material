@@ -87,8 +87,8 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    {% include snippets/create_new_history.md %}
 >
 > 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
->   - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
->   - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
+>    - `GSM461177` (untreated): `GSM461177_1` and `GSM461177_2`
+>    - `GSM461180` (treated): `GSM461180_1` and `GSM461180_2`
 >
 >    ```
 >    {{ page.zenodo_link }}/files/GSM461177_1.fastqsanger
@@ -133,7 +133,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
+>    - {% icon param-files %} *"Short read data from your current history"*: input datasets selected with **Multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
@@ -152,11 +152,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    {: .question}
 >
 > 3. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports:
->      - In *"Results"*
->        - *"Which tool was used generate logs?"*: `FastQC`
->        - In *"FastQC output"*
->           - *"Type of FastQC output?"*: `Raw data`
->           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
+>     - In *"Results"*
+>       - *"Which tool was used generate logs?"*: `FastQC`
+>       - In *"FastQC output"*
+>         - *"Type of FastQC output?"*: `Raw data`
+>         - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of **FastQC** {% icon tool %})
 >
 > 4. Inspect the webpage output from MultiQC for each FASTQ
 >
@@ -656,6 +656,7 @@ Another option is to estimate these parameters with a tool called **Infer Experi
 {: .hands_on}
 
 **Infer Experiment** {% icon tool %} tool generates one file with information on:
+
 - Paired-end or single-end library
 - Fraction of reads failed to determine
 - 2 lines
@@ -1131,27 +1132,23 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >
 > 1. **DESeq2** {% icon tool %} with the following parameters:
 >    - *"how"*: `Select datasets per level`
->       - In *"Factor"*:
->          - In "1: Factor"
->              - *"Specify a factor name"*: `Treatment`
->              - In *"Factor level"*:
->                  - In *"1: Factor level"*:
->                      - *"Specify a factor level"*: `treated`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
->                  - In *"2: Factor level"*:
->                      - *"Specify a factor level"*: `untreated`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
->
->          - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
->          - In "2: Factor"
->              - "Specify a factor name" to `Sequencing`
->              - In *"Factor level"*:
->                  - In *"1: Factor level"*:
->                      - *"Specify a factor level"*: `PE`
->                      - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
->                  - In *"2: Factor level"*:
->                      - *"Specify a factor level"*: `SE`
->                      - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
+>      - In "1: Factor"
+>        - *"Specify a factor name"*: `Treatment`
+>        - In *"1: Factor level"*:
+>          - *"Specify a factor level"*: `treated`
+>          - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `treat` in their name
+>        - In *"2: Factor level"*:
+>          - *"Specify a factor level"*: `untreated`
+>          - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `untreat` in their name
+>      - Click on {% icon param-repeat %} *"Insert Factor"* (not on "Insert Factor level")
+>      - In "2: Factor"
+>        - "Specify a factor name" to `Sequencing`
+>        - In *"1: Factor level"*:
+>          - *"Specify a factor level"*: `PE`
+>          - {% icon param-files %} *"Counts file(s)"*: the 4 gene count files with `paired` in their name
+>        - In *"2: Factor level"*:
+>          - *"Specify a factor level"*: `SE`
+>          - {% icon param-files %} *"Counts file(s)"*: the 3 gene count files with `single` in their name
 >    - *"Files have header?"*: `No`
 >    - *"Visualising the analysis results"*: `Yes`
 >    - *"Output normalized counts table"*: `Yes`
@@ -1338,6 +1335,7 @@ The ID for each gene is something like FBgn0003360, which is an ID from the corr
 {: .hands_on}
 
 The generated output is an extension of the previous file:
+
 1. Gene identifiers
 2. Mean normalized counts over all samples
 3. Log2 fold change
@@ -1391,6 +1389,7 @@ The column names may not be precise so we would like to add them before going fu
 We could plot the $$log_{2} FC$$ for the extracted genes, but here we would like to look at a heatmap of expression for these genes in the different samples. So we need to extract the normalized counts for these genes.
 
 We proceed in several steps:
+
 - Extract and plot the normalized counts for these genes for each sample with a heatmap, using the normalized count file generated by DESeq2
 - Compute, extract and plot the Z-score of the normalized counts
 
@@ -1406,7 +1405,7 @@ We proceed in several steps:
 To extract the normalized counts for the interesting genes, we join the normalized count table generated by DESeq2 with the table we just generated. We will then keep only the lines corresponding to the most differentially expressed genes.
 
 > ### {% icon hands_on %} Hands-on: Extract the normalized counts of the most differentially expressed genes
-> 3. **Join two Datasets** {% icon tool %} with the following parameters:
+> 1. **Join two Datasets** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: the `Normalized counts` file (output of **DESeq2** {% icon tool %})
 >    - *"using column"*: `Column: 1`
 >    - {% icon param-file %} *"with"*: `Genes with significant adj p-value & abs(FC) > 2`
@@ -1416,7 +1415,7 @@ To extract the normalized counts for the interesting genes, we join the normaliz
 >
 >    The generated file has more columns than we need for the heatmap: mean normalized counts, $$log_{2} FC$$ and other annotation information. We need to remove the extra columns.
 >
-> 4. **Cut** {% icon tool %} to extract the columns with the gene IDs and normalized counts:
+> 2. **Cut** {% icon tool %} to extract the columns with the gene IDs and normalized counts:
 >    - *"Cut columns"*: `c1-c8`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: the joined dataset (output of **Join two Datasets** {% icon tool %})
@@ -1469,6 +1468,7 @@ The Z-score $$z_{i,j}$$ for a gene $$i$$ in a sample $$j$$ given the normalized 
 {: .comment}
 
 To compute the Z-score, we break the process into 2 steps:
+
 1. Substract each value by the mean of values in the row (i.e. $$x_{i,j}- \overline{x_i}$$) using the normalized count table
 2. Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)
 
@@ -1544,6 +1544,7 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 The [**goseq**](https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf) tool ({% cite young2010gene %}) provides methods for performing GO analysis of RNA-Seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of RNA-Seq data, such as KEGG pathway analysis.
 
 **goseq** needs 2 files as inputs:
+
 - A tabular file with the differentially expressed genes from all genes assayed in the RNA-Seq experiment with 2 columns:
     - the Gene IDs (unique within the file), in uppercase letters
     - a boolean telling if the gene is differentially expressed or not: `True` if differentially expressed or `False` if not
@@ -1601,6 +1602,7 @@ We have now the two required input files for goseq.
 **goseq** generates with these parameters 3 outputs:
 
 1. A big table (`Ranked category list - Wallenius method`) with the following columns for each GO term:
+
     1. `category`: GO category
     2. `over_rep_pval`: *p*-value for over-representation of the term in the differentially expressed genes
     3. `under_rep_pval`: *p*-value for under-representation of the term in the differentially expressed genes
@@ -1701,6 +1703,7 @@ As for the GO terms, 2 files are generated:
 We could investigate which genes are involved in which pathways by looking at the second file generated by **goseq**. But it can be cumbersome and we would like to see the pathways as represented in the previous image. **Pathview** ({% cite luo2013pathview %}) can help to generate automatically similar images as the previous one but also add extra information about the genes (e.g. expression) in our study.
 
 This tool needs 2 main information as inputs:
+
 - Pathway ID(s) to plot, either as just one ID or as a file with one column with the pathway IDs
 - A tabular file with the genes in the RNA-Seq experiment with 2 (or more) columns:
     - the gene IDs (unique within the file)
