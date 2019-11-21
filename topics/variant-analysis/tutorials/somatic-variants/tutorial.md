@@ -434,7 +434,7 @@ and for which the mate read has also been mapped:
 >       - In *"Filter"*:
 >         - In *"1: Filter"*:
 >           - *"Select BAM property to filter on"*: `mapQuality`
->             - *"Filter on read mapping quality (phred scale)"*: `1`
+>             - *"Filter on read mapping quality (phred scale)"*: `>=1`
 >         - In *"2: Filter"*:
 >           - *"Select BAM property to filter on"*: `isMapped`
 >             - *"Selected mapped reads"*: `Yes`
