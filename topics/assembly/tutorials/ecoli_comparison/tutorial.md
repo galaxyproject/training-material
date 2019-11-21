@@ -982,14 +982,15 @@ Alternatively to JBrowse, we can use Circos to create a nice image of the alignm
 
 > ### {% icon hands_on %} Hands-on: Circos
 >
-> 1. **Cut** {% icon tool %} columns from a table:
+> 1. **LASTZ** {% icon tool %} with the following parameters:
+>   - *"Select TARGET sequence(s) to align against"*: `from your history`
+>   - {% icon param-collection %} *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
+>   - {% icon param-file %} *"Select QUERY sequence(s)"*: our assembly which was prepared in the previous step.
+>   - *"Perform chaining of HSPs with no penalties"*: `Yes` (in **Chaining** section)
+>   - *"Specify the output format"*: `MAF` (in **Output** section)
 >
->    - *"Cut columns"*: `c2,c4,c5,c7,c9,c10`
->    - {% icon param-file %} *"From"*: `Unprocessed Alignments`
->
-> 2. **Filter** {% icon tool %} data on any column using simple expressions:
->    - *"Filter"*: the output of the previous **Cut** {% icon tool %} step
->    - *"With following condition"*: `c3-c2 > 10000`
+> 2. **Circos: Alignemnts to Links** {% icon tool %} reformats alignment files to prepare for Circos:
+>    - *"Alignment file"*: the output of the previous **LASTZ** {% icon tool %} step
 >
 > 3. **Circos** {% icon tool %} genome browser:
 >
@@ -1026,7 +1027,7 @@ Alternatively to JBrowse, we can use Circos to create a nice image of the alignm
 >    - In the section *"Ticks"*
 >        - {% icon param-repeat %} Insert Link Data
 >            - *"Inside Radius"*: `0.93`
->            - *"Link Data Source"*: the output of the **Filter** {% icon tool %} above
+>            - *"Link Data Source"*: the output of the **Circos: Alignments to links** {% icon tool %} above
 >            - *"Link Type"*: `Ribbon`
 >            - *"Link Colour"*: another nice colour, could be the same  blue {% color_picker rgb(84,141,212) %}
 >            - *"Transparency"*: `0.3`
