@@ -1,7 +1,8 @@
 ---
 sudo: required
-language: python
-python: 3.6
+language: ruby
+rvm:
+  - 2.4.4
 branches:
   only:
     - gh-pages
@@ -72,6 +73,7 @@ script:
         make check-slides
       elif [ "$CHECK" == "site-build" ]
       then
+        make check-framework
         make build
       elif [ "$CHECK" == "pdf-generation" ]
       then
@@ -86,7 +88,15 @@ after_success:
       # update badges and instances and rebuild
       make annotate
       make build
+
+      # Publish to GH
       bin/publish
+
+      # monthly cron job to make release
+      if [ "$TRAVIS_EVENT_TYPE" == "cron" ]
+      then
+        python bin/make_release.py
+      fi
     elif [ "$TRAVIS_PULL_REQUEST" == "false" -a "$TRAVIS_TAG" != "" -a "$CHECK" == "site-build" ]
     then
       # Do not publish old versions live, and do not update badges since not pushing to gh-pages.

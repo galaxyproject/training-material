@@ -1,0 +1,137 @@
+---
+type: map
+mapping:
+    layout:
+        type: str
+        required: true
+        enum:
+            - base_slides
+            - tutorial_slides
+    title:
+        type: str
+        required: true
+    questions:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    objectives:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    key_points:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    edam_ontology:
+        type: str
+        required: false
+    contributors:
+        type: seq
+        required: true
+        sequence:
+            - type: str
+              required: true
+    hands_on:
+        type: str
+        required: false
+        enum:
+            - external
+    hands_on_url:
+        type: str
+        required: false
+    subtopic:
+        type: str
+        required: false
+    zenodo_link:
+        type: str
+        required: false
+    logo:
+        type: str
+        required: true
+    class:
+        type: str
+        required: false
+    tags:
+        type: seq
+        required: false
+        sequence:
+            - type: str
+              required: true
+    level:
+        type: str
+        required: false
+        enum:
+            - Introductory
+            - Intermediate
+            - Advanced
+    time_estimation:
+        type: str
+        required: false
+        pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        required: false
+    follow_up_training:
+        type: seq
+        required: false
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  type:
+                      type: str
+                      required: true
+                      enum:
+                          - internal
+                          - external
+                          - none
+                  topic_name:
+                      type: str
+                      required: false
+                  tutorials:
+                      type: seq
+                      required: false
+                      sequence:
+                          - type: str
+                  title:
+                      type: str
+                      required: false
+                  link:
+                      type: str
+                      required: false
+    requirements:
+        type: seq
+        required: false
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  type:
+                      type: str
+                      required: true
+                      enum:
+                          - internal
+                          - external
+                          - none
+                  topic_name:
+                      type: str
+                      required: false
+                  tutorials:
+                      type: seq
+                      required: false
+                      sequence:
+                          - type: str
+                  title:
+                      type: str
+                      required: false
+                  link:
+                      type: str
+                      required: false
