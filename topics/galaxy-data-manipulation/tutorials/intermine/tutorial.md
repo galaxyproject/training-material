@@ -45,16 +45,22 @@ Learn more in this tutorial.
 
 > ### {% icon hands_on %} Hands-on: Import
 > 1. Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **InterMine Server** under **Get Data**.
-> 2. This will redirect you to the InterMine registry, which shows a full list of InterMines and the various organisms they support. Find an InterMine that has the organism type you’re working with, and click on it to redirect to that InterMine
-> 3. Once you arrive at your InterMine of choice, run a query as normal - this could be a search, a list results page, a template, or a query in the query builder. Eventually you’ll be presented with an InterMine results table.
+{: .hands_on}
+
+
+This will redirect you to the InterMine registry, which shows a full list of InterMines and the various organisms they support. Find an InterMine that has the organism type you’re working with, and click on it to redirect to that InterMine.
+
+Once you arrive at your InterMine of choice, you can run a query as normal - this could be a search, a list results page, a template, or a query in the query builder. Eventually you’ll be presented with an InterMine results table.
+
+> ### {% icon hands_on %} Hands-on: Run a query on Intermine
 > 4. Click on **Export** (top right). This will bring up a modal window.
 > 5. Select **Send to Galaxy** and double-check the *"Galaxy Location"* is correct.
 > 6. Click on the **Send to Galaxy** button on the bottom right of the pop-up window.
 >
->    > ### {% icon comment %} Enable popups
+>    > ### {% icon tip %} Enable popups
 >    >
 >    > If you get an error when you click on the **Send to Galaxy** button, please make sure to allow popups and try again.
->    {: .comment}
+>    {: .tip}
 >
 {: .hands_on}
 You have now exported your query results from InterMine to Galaxy.
@@ -66,39 +72,39 @@ You have now exported your query results from InterMine to Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import some fly data from [Zenodo](https://zenodo.org/record/3407174)
+> 1. Import some fly data from [Zenodo](https://zenodo.org/record/3407174) or from the data librar<>
 >
 >    ```
 >    https://zenodo.org/record/3407174/files/GenesLocatedOnChromosome4.tsv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
-> 2. Rename the dataset (e.g. `GenesLocatedOnChromosome4`)
+> 2. Rename the dataset to `GenesLocatedOnChromosome4`
 >
 >    {% include snippets/rename_dataset.md %}
 >
 > 3. Inspect the data
 >
->    Click on **View data** icon for the dataset to inspect it.
->
->    The dataset contains the secondary identifier and the symbol of the *Drosophila melanogaster* genes and their location on the chromosome 4
->
->    > ### {% icon question %} Questions
->    >
->    > 1. Do the data contain the type, e.g `Protein` or `Gene`?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. No, they don't. So we have to specify it, when we create the InterMine Interchange file 
->    > >
->    > {: .solution}
->    >
->    {: .question}
->
 {: .hands_on}
 
+The dataset contains the secondary identifier and the symbol of the *Drosophila melanogaster* genes and their location on the chromosome 4
+
+> ### {% icon question %} Questions
+>
+> Do the data contain the type, e.g `Protein` or `Gene`?
+>
+> > ### {% icon solution %} Solution
+> >
+> > No, they don't. So we have to specify it, when we create the InterMine Interchange file 
+> >
+> {: .solution}
+>
+{: .question}
+
 ## Create InterMine Interchange dataset
+
 Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **Create InterMine Interchange Dataset** under **Convert Formats** in order to generate an intermediate file which will be used to send the identifiers (e.g. gene's identifiers) to InterMine. This file requires the identifier's type (e.g. `Gene`), the identifier (e.g `WBGene00007063`) and, optionally, the organims's name.
 
 > ### {% icon hands_on %} Hands-on: Generate InterMine file
@@ -126,10 +132,12 @@ Once the generation of the interchange dataset has been completed, open the gree
  
 > ### {% icon hands_on %} Hands-on: Send data
 >
->    1. Click on view intermine at **Registry** to be redirected to the InterMine registry, which shows a full list of InterMines and the various organisms they support.
->    2. Find an InterMine that has the organism type you’re working with, in our case FlyMine, and click on the **Send to** green button to export the identifiers to.
+> 1. Click on view intermine at **Registry** to be redirected to the InterMine registry, which shows a full list of InterMines and the various organisms they support.
+> 2. Find an InterMine that has the organism type you’re working with, in our case FlyMine, and click on the **Send to** green button to export the identifiers to.
 >    3. You are redirected to FlyMine, in the List Analysis page showing the identifiers you have just exported from Galaxy.
 >
 {: .hands_on}
 
 You have now exported your identifiers from Galaxy to InterMine.
+
+# Conclusion
