@@ -1,6 +1,11 @@
 #!/usr/bin/env ruby
 require 'yaml'
 
+
+# If there are unknown contributors, write a .mailmap file like:
+# <gh-username> <user@earlham.ac.uk>
+# <gh-username> <user@gmail.com>
+
 fn = ARGV[0]
 
 # Any error messages
@@ -19,13 +24,7 @@ contributor_emails = CONTRIBUTORS.map{ |k, v|
   end
 }.compact.to_h
 
-# Private map of emails to github usernames
-if File.file?('private-contrib-map.yaml')
-  private_contrib_map = YAML.load_file('private-contrib-map.yaml')
-  contributor_emails.merge!(private_contrib_map)
-end
-
-file_contributors = `git log --follow --pretty=%aE #{fn}`.lines.sort.uniq
+file_contributors = `git log --use-mailmap --follow --pretty=%aE #{fn}`.lines.sort.uniq
 
 fixed_contribs = file_contributors.map{ |email|
   email = email.strip
