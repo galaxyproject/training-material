@@ -372,6 +372,80 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
+
+# Annotation
+## Peptide prediction
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **TransDecoder** {% icon tool %} with the following parameters:
+>    - In *"Training Options"*:
+>        - *"Select the training method"*: `Train with the top longest ORFs`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+## Similarity search
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Diamond** {% icon tool %} with the following parameters:
+>    - *"What do you want to align?"*: `Align amino acid query sequences (blastp)`
+>    - *"Input query file in FASTA or FASTQ format"*: `@TODO result of transcoder`
+>    - *"Select a reference database"*: `Uniprot Swissprot`
+>    - *"Format of output file"*: `Tabular`
+>    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>    - *"The maximum number of target sequence per query to report alignments for"*: `1`
+> 2. **Diamond** {% icon tool %} with the following parameters:
+>    - *"What do you want to align?"*: `Align DNA query sequences (blastx)`
+>    - *"Input query file in FASTA or FASTQ format"*: `transcriptome_filtered.fasta`
+>    - *"Select a reference database"*: `Uniprot Swissprot`
+>    - *"Format of output file"*: `Tabular`
+>    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>    - *"The maximum number of target sequence per query to report alignments for"*: `1`
+>
+{: .hands_on}
+
+## Find signal peptides
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **SignalP** {% icon tool %} with the following parameters:
+>    - *"Fasta file of protein sequences"*: `@TODO result of transcoder`
+>
+{: .hands_on}
+
+## Find transmenbrane domains
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **TMHMM 2.0** {% icon tool %} with the following parameters:
+>    - *"FASTA file of protein sequences"*: `@TODO result of transcoder`
+>
+{: .hands_on}
+
+## Search again profile database
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **hmmscan** {% icon tool %} with the following parameters:
+>    - *"Sequence file"*: `@TODO result of transcoder`
+>
+{: .hands_on}
+
+## Transcriptome annotation using **Trinotate**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Trinotate** {% icon tool %} with the following parameters:
+>    - *"Let Galaxy downloading the Trinotate Pre-generated Resource SQLite database"*: `Yes`
+>
+{: .hands_on}
+
 # Differential Expression (DE) Analysis
 
 ## Remapping on the filtered transcriptome using
@@ -476,80 +550,6 @@ Why do we need to correct those?
 > 1. **Partition genes into expression clusters** {% icon tool %} with the following parameters:
 >    - *"RData file"*: `Extract and cluster differentially expressed transcripts: RData file`
 >    - *"Method for partitioning genes into clusters"*: `Cut tree based on x percent of max(height) of tree`
->
-{: .hands_on}
-
-
-# IN PROGRESS
-## Peptide prediction
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **TransDecoder** {% icon tool %} with the following parameters:
->    - In *"Training Options"*:
->        - *"Select the training method"*: `Train with the top longest ORFs`
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-## Similarity search
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Diamond** {% icon tool %} with the following parameters:
->    - *"What do you want to align?"*: `Align amino acid query sequences (blastp)`
->    - *"Input query file in FASTA or FASTQ format"*: `@TODO result of transcoder`
->    - *"Select a reference database"*: `Uniprot Swissprot`
->    - *"Format of output file"*: `Tabular`
->    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
->    - *"The maximum number of target sequence per query to report alignments for"*: `1`
-> 2. **Diamond** {% icon tool %} with the following parameters:
->    - *"What do you want to align?"*: `Align DNA query sequences (blastx)`
->    - *"Input query file in FASTA or FASTQ format"*: `transcriptome_filtered.fasta`
->    - *"Select a reference database"*: `Uniprot Swissprot`
->    - *"Format of output file"*: `Tabular`
->    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
->    - *"The maximum number of target sequence per query to report alignments for"*: `1`
->
-{: .hands_on}
-
-## Find signal peptides
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SignalP** {% icon tool %} with the following parameters:
->    - *"Fasta file of protein sequences"*: `@TODO result of transcoder`
->
-{: .hands_on}
-
-## Find transmenbrane domains
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **TMHMM 2.0** {% icon tool %} with the following parameters:
->    - *"FASTA file of protein sequences"*: `@TODO result of transcoder`
->
-{: .hands_on}
-
-## Search again profile database
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **hmmscan** {% icon tool %} with the following parameters:
->    - *"Sequence file"*: `@TODO result of transcoder`
->
-{: .hands_on}
-
-## Sub-step with **Trinotate**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Trinotate** {% icon tool %} with the following parameters:
->    - *"Let Galaxy downloading the Trinotate Pre-generated Resource SQLite database"*: `Yes`
 >
 {: .hands_on}
 
