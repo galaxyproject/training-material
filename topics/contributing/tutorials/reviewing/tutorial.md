@@ -25,7 +25,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-First of all, ***thank you!*** for contributing! Reviewing is a very important part of keeping the GTN training materials of high quality. We greatly appreciate any help with this! Whether you just report one typo, or test an enitire tutorial start to finish, any review -big or small- is extremely useful.
+First of all, ***thank you!*** for contributing! Reviewing is a very important part of keeping the GTN training materials of high quality. We greatly appreciate any help with this! Whether you just report one typo, or test an enitire tutorial start to finish, any review--big or small--is extremely useful.
 
 
 > ### Agenda
@@ -46,7 +46,7 @@ Reviewing is usually an iterative process, contributors suggest changes, reviewe
 
 Whenever somebody in the community wants to make a change to the training materials, they propose their changes by making a *pull request* (PR) to the [GTN GitHub repository](https://github.com/{{ site.repository }}).
 
-You can view the currently open PRs under the [*Pull requests* tab](https://githb.com/{{ site.repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc) of the GitHub repository:
+You can view the currently open PRs under the [*Pull requests* tab](https://github.com/{{ site.repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc) of the GitHub repository:
 
 ![The list of open PRs in GitHub](../../images/reviewing/open_pr_list.png){: .width="75%"}
 
