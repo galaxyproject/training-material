@@ -177,8 +177,6 @@ Why do we need to correct those?
 >   - *"Short read data from your current history"*: `fastqc_cleaned` (collection)
 >
 {: .hands_on}
->
-{: .question}
 
 # Assembly
 
