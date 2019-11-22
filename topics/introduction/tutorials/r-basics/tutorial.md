@@ -11,11 +11,12 @@ requirements:
     tutorials:
         - rstudio
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - rna-seq-counts-to-viz-in-r
+-
+  type: "internal"
+  topic_name: introduction
+  tutorials:
+      - r-advanced
+
 questions:
 - What are the basic features and objects of the R language?
 objectives:
@@ -804,7 +805,7 @@ Let's summarize this section on coercion with a few take home messages:
 
 # Lists
 
-Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode. 
+Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode.
 
 > ### {% icon comment %} Learning more about lists
 > Learn more about creating and using lists using this [nice tutorial](http://r4ds.had.co.nz/lists.html). In this one example, we will create a named list and show you how to retrieve items from the list.
@@ -856,4 +857,4 @@ Lists are quite useful in R. You may come across lists in the way that some bioi
 # Conclusion
 {:.no_toc}
 
-This tutorial 
+This tutorial
