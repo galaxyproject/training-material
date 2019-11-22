@@ -53,19 +53,25 @@ You can view the currently open PRs under the [*Pull requests* tab](https://gith
 Some of these will be small PRs, e.g. fixing a typo or link, while others might be more substantial, for example adding a completely new tutorial or topic.
 
 ## Viewing changes in GitHub
-To view the changes included in a PR, click on the pull request in the list, and go to the `files changed` tab near the top of the screen:
+
+More information about the pull request, and any discussion about it, can be found by clicking on the PR in the list:
 
 ![Main view of a PR](../../images/reviewing/pr_view.png){: width="75%"}
 
 
-Here you will find a list of all the files that were changed, and what those changes were, we call this a *diff*. The red lines show the old version of the file content, and the green lines show the proposed version:
+To view the changes included in a PR, click on the pull request in the list, and go to the `files changed` tab near the top of the screen
 
 ![The "files changed" view of a PR](../../images/reviewing/file_changes.png){: width="75%"}
 
 
+Here you will find a list of all the files that were changed, and what those changes were, we call this a *diff*. The red lines show the old version of the file content, and the green lines show the proposed version.
+
+You can now look through the changes to review them. For larger changes, looking at the diff may not be sufficient, and you may prefer to look at a preview of the website with the proposed changes in the PR. We will see how to do this in a later section.
+
+
 # Adding your Review
 
-You can add your review in the GitHub interface. You can either approve the changes, or add one or more comments requesting further changes, asking a question, or just giving a compliment to the PR creator(s).
+After looking at the changes, you can add your review in the GitHub interface. You can either approve the changes, add comments requesting further changes, asking a question or giving a compliment to the PR creator(s).
 
 ## Commenting on Changes
 If you have a question, suggestion, or compliment about a certain change, you can add a comment to a specific line of the diff, by moving your mouse over the line you want to comment on, and clicking on the plus icon that appears at the start of the line. A comment box will now open below this line, where you can type your message:
@@ -93,7 +99,7 @@ To add an in-line suggestion:
 ## Approving the PR
 When you think a PR is ready to merge, you can approve it via the GitHub interface. At the top of the *Files Changed* tab of the PR, you will find a green button labelled **Review changes**. If you click on this, you can write a message and choose to approve the changes (or not). Multiple different reviewers may add their review in this way.
 
-![Review changes dialog](../../images/reviewing/approve_pr.png)
+![Review changes dialog](../../images/reviewing/approving_pr.png)
 
 ## Merging a PR
 If you are a topic maintainer, checks have passed, and you are happy with the changes, you can merge the PR to update the tutorial on the live website using the **Merge Pull Request** button at the bottom of the PR page.
@@ -114,9 +120,11 @@ Below are a few tips and tricks for reviewing. Have a tip to add here? open a PR
 
 The previous section focused on how to add reviews using the GitHub interface. In this section, we will focus on how to evaluate the quality of the tutorial itself.
 
-A good way to review a tutorial, is to put yourself in the shoes of a learner, and test it out yourself. Upload the data to Galaxy, perform all the steps described in the tutorial. Did everything work? Could you answer all the questions? Do certain steps in the analysis require more explanation?
+The best way to review a tutorial, is to put yourself in the shoes of a learner, and test it out yourself. Upload the data to Galaxy, perform all the steps described in the tutorial. Did everything work? Could you answer all the questions? Do certain steps in the analysis require more explanation for beginners?
 
 This can be rather time consuming, but if you are able, this is a very good test of a tutorial's quality. Not an expert in the topic? Even better! Because neither are the learners this tutorial is intended for, and [experts often have a blind spot](TODO), and non-experts can identify more easily where more explanation is required for novices.
+
+If you have less time, just reading through the tutorial is also a good place to start an can reveal areas of improvement. If a workflow is included in the tutorial, this can be uploaded to a supported Galaxy instance and run to check if all the steps work as expected.
 
 
 ## Previewing the tutorial
@@ -133,7 +141,7 @@ hub pr checkout 1547
 
 Replace `1547` with the number of the PR (can be found after the title)
 
-Serve the jekyll website using `make serve`. Full instruction for preview the website locally can be found in [this tutorial](TODO)
+Serve the jekyll website using `make serve`. Full instruction for previewing the website locally can be found in [this tutorial](TODO)
 
 ### On Heroku
 
@@ -141,25 +149,29 @@ If you cannot run a local preview, you may be able to use the [Heroku](TODO) pre
 
 TODO: how to view via heroku
 
-# Checklist
+# Review Checklist
 
-Some things to look for when reviewing
+Below is a list of common things to look for when reviewing, this list is just a guide, and definitely incomplete, but it may help you during your review:
 
-- Do travis test pass? (see next section)
-- Is all the input data on Zenodo?
-  - Do the links match in the metadata, hands_on box, and data-library?
+
+**Content**
+- Are the tutorial Objectives, question and key messages present?
+  - Do they match the tutorial content?
+  - Is anything missing?
 - Is there a good introduction to the tutorial?
   - Description of what we will do in the tutorial and why.
   - Description the data that will be used.
   - Sufficient biological background
-- Is there a workflow for the tutorial?
-  - Does it work correctly? (test it on one of the supported Galaxy instances)
-- Do all question boxes have answers?
-  - Are the answers correct? (running the workflow can help you check answers more easily)
-- Can some things be replaced by snippets?
-  - Common instructions such as starting a new history should be included via snippets
-- Are there links to a specific Galaxy instance?
-  - This should not happen, find a way to make it more generic
+- Is there enough explanation throughout the tutorial
+  - Reason for each step should be explained
+  - Explanation of what happens in the steps
+  - Explanation of the outputs
+- Question boxes
+  - Are there enough question boxes in the tutorial?
+    - Questions help learners feel confident  of their understanding
+  - Do all question boxes have answers?
+    - All tutorials should be usable for self-study, so all questions should have answers.
+    - Are the answers correct? (tip: run the workflow to check)
 - Screenshot of tool forms are discouraged
   - They are hard to keep up-to-date (if the tool changes or Galaxy interface changes)
   - If screenshots are used, a textual version of it should always be included as well
@@ -169,6 +181,18 @@ Some things to look for when reviewing
   - Even harder to keep up to date
   - If videos are included, all information contained in them should also be available in written form
     - The tutorial should always be doable without watching the video.
+
+
+**Framework**
+- Do travis test pass? (see next section)
+- Is all the input data on Zenodo?
+  - Do the Zenodo links match in the metadata, hands_on boxes, and data-library yaml file?
+- Is there a workflow for the tutorial?
+  - Does it work correctly? (test it on one of the supported Galaxy instances)
+- Can some things be replaced by snippets?
+  - Common instructions such as starting a new history should be included via snippets
+- Are there links to a specific Galaxy instance?
+  - This should not happen, find a way to make it more generic
 
 
 
