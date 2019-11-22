@@ -14,7 +14,7 @@ time_estimation: "1H"
 key_points:
     - "Contributions come in many forms, reviewing is one of them, we appreciate your input!"
     - "Everybody is invited to help with reviewing tutorials"
-    - "Travis CI is used for some automated testing"
+    - "Travis CI is used for some automated testing, leaving you able to focus on the content of the tutorial"
     - "If you would like to review on a regular basis, consider volunteering to become a topic maintainer, we always need more help!"
 contributors:
   - shiltemann
@@ -122,6 +122,8 @@ The previous section focused on how to add reviews using the GitHub interface. I
 
 The best way to review a tutorial, is to put yourself in the shoes of a learner, and test it out yourself. Upload the data to Galaxy, perform all the steps described in the tutorial. Did everything work? Could you answer all the questions? Do certain steps in the analysis require more explanation for beginners?
 
+TODO: link to how to make good lessons?
+
 This can be rather time consuming, but if you are able, this is a very good test of a tutorial's quality. Not an expert in the topic? Even better! Because neither are the learners this tutorial is intended for, and [experts often have a blind spot](TODO), and non-experts can identify more easily where more explanation is required for novices.
 
 If you have less time, just reading through the tutorial is also a good place to start an can reveal areas of improvement. If a workflow is included in the tutorial, this can be uploaded to a supported Galaxy instance and run to check if all the steps work as expected.
@@ -166,6 +168,9 @@ Below is a list of common things to look for when reviewing, this list is just a
   - Reason for each step should be explained
   - Explanation of what happens in the steps
   - Explanation of the outputs
+- Hands-on boxes
+  - Are the instructions clear?
+  - Are they concise?
 - Question boxes
   - Are there enough question boxes in the tutorial?
     - Questions help learners feel confident  of their understanding
@@ -181,10 +186,13 @@ Below is a list of common things to look for when reviewing, this list is just a
   - Even harder to keep up to date
   - If videos are included, all information contained in them should also be available in written form
     - The tutorial should always be doable without watching the video.
+- Are the section names useful and well structured?
+  - Look at the agenda at the top, is this clear?
 
 
 **Framework**
 - Do travis test pass? (see next section)
+- Does the layout fit with the [best practices guidelines](TODO)?
 - Is all the input data on Zenodo?
   - Do the Zenodo links match in the metadata, hands_on boxes, and data-library yaml file?
 - Is there a workflow for the tutorial?
@@ -193,7 +201,7 @@ Below is a list of common things to look for when reviewing, this list is just a
   - Common instructions such as starting a new history should be included via snippets
 - Are there links to a specific Galaxy instance?
   - This should not happen, find a way to make it more generic
-
+- Are all the images in the PR actually used in the tutorial?
 
 
 # Automated Testing with Travis
@@ -214,13 +222,14 @@ Travis makes sure that:
 
 - The website builds successfully
 - All internal links (those referring to other pages within the GTN) are valid
-- External links are valid (Travis doesnt fail on this, but can check manually
+- External links are valid
+  - Travis doesnt fail on this, but you can check the job status in Travis
 - There are no broken boxes
-- All contributors listed on tutorial are in the CONTRIBUTING.yaml file
+- All contributors listed on tutorial are in the `CONTRIBUTING.yaml` file
 - All `yaml` files have a valid structure
 - Snippets are correctly formatted
 - Citations used in the tutorial are present in the bibliography (`.bib`) file
--
+
 
 
 
