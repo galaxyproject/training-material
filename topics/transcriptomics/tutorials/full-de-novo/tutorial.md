@@ -46,7 +46,7 @@ Examining non-model organisms can provide novel insights into the mechanisms und
 >
 {: .agenda}
 
-# Cleaning
+# Read cleaning
 
 Known sequencing biases:
 - Unknown nucleotides (Ns)
@@ -200,7 +200,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-# Assembly cleanning
+# Assembly assessment / cleaning
 
 ## Checking of the assembly statistics
 
@@ -212,7 +212,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## Remapping on the raw transcriptome using
+## Remapping on the raw transcriptome
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -314,6 +314,18 @@ Why do we need to correct those?
 ### What we should get with a real dataset
 ![ExN50_plot](../../images/full-de-novo/ExN50_plot.png)
 [(source)](https://github.com/trinityrnaseq/trinityrnaseq/wiki/Transcriptome-Contig-Nx-and-ExN50-stats)
+
+## Transcriptome annotation completeness
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Busco** {% icon tool %} with the following parameters:
+>    - *"Sequence to analyse"*: `transcriptome_raw.fasta`
+>    - *"Mode"*: `transcriptome`
+>    - *"Lineage"*: `eukaryota_odb9`
+>
+>
+{: .hands_on}
 
 ## RNASeq samples quality check
 
@@ -471,17 +483,13 @@ Why do we need to correct those?
 
 
 # IN PROGRESS
-## Sub-step with **TransDecoder**
+## Peptide prediction
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **TransDecoder** {% icon tool %} with the following parameters:
 >    - In *"Training Options"*:
 >        - *"Select the training method"*: `Train with the top longest ORFs`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -490,21 +498,53 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Similarity search
 
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. **Diamond** {% icon tool %} with the following parameters:
+>    - *"What do you want to align?"*: `Align amino acid query sequences (blastp)`
+>    - *"Input query file in FASTA or FASTQ format"*: `@TODO result of transcoder`
+>    - *"Select a reference database"*: `Uniprot Swissprot`
+>    - *"Format of output file"*: `Tabular`
+>    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>    - *"The maximum number of target sequence per query to report alignments for"*: `1`
+> 2. **Diamond** {% icon tool %} with the following parameters:
+>    - *"What do you want to align?"*: `Align DNA query sequences (blastx)`
+>    - *"Input query file in FASTA or FASTQ format"*: `transcriptome_filtered.fasta`
+>    - *"Select a reference database"*: `Uniprot Swissprot`
+>    - *"Format of output file"*: `Tabular`
+>    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>    - *"The maximum number of target sequence per query to report alignments for"*: `1`
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+{: .hands_on}
+
+## Find signal peptides
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
-{: .question}
+> 1. **SignalP** {% icon tool %} with the following parameters:
+>    - *"Fasta file of protein sequences"*: `@TODO result of transcoder`
+>
+{: .hands_on}
+
+## Find transmenbrane domains
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **TMHMM 2.0** {% icon tool %} with the following parameters:
+>    - *"FASTA file of protein sequences"*: `@TODO result of transcoder`
+>
+{: .hands_on}
+
+## Search again profile database
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **hmmscan** {% icon tool %} with the following parameters:
+>    - *"Sequence file"*: `@TODO result of transcoder`
+>
+{: .hands_on}
 
 ## Sub-step with **Trinotate**
 
@@ -513,32 +553,7 @@ Why do we need to correct those?
 > 1. **Trinotate** {% icon tool %} with the following parameters:
 >    - *"Let Galaxy downloading the Trinotate Pre-generated Resource SQLite database"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## Re-arrange
