@@ -302,7 +302,6 @@ Why do we need to correct those?
 >    1. **Scatterplot - Creates a 2D-scatterplot from tabular datapoints**
 >    2. *"X Column"*: select the Columns `1`
 >    3. *"Y Column"*: select the Columns `2`
->   
 >
 {: .hands_on}
 
@@ -321,7 +320,6 @@ Why do we need to correct those?
 >    - *"Sequence to analyse"*: `transcriptome_raw.fasta`
 >    - *"Mode"*: `transcriptome`
 >    - *"Lineage"*: `eukaryota_odb9`
->
 >
 {: .hands_on}
 
@@ -358,7 +356,7 @@ Why do we need to correct those?
 >    > ```
 >    {: .comment}
 >
-> 2. **Rename** the Trinity output
+> 2. **Rename** the output
 >    - `Filter low expression transcripts on data 42 and data 14: filtered low expression transcripts` -> `transcriptome_filtered.fasta`
 >
 {: .hands_on}
@@ -374,18 +372,23 @@ Why do we need to correct those?
 
 
 # Annotation
+## Generate gene to transcript map
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Generate gene to transcript map** {% icon tool %} with the following parameters:
+>    - *"Trinity assembly"*: `transcriptome_filtered.fasta`
+>
+{: .hands_on}
+
 ## Peptide prediction
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **TransDecoder** {% icon tool %} with the following parameters:
+>    - *"Transcripts"*: `transcriptome_filtered.fasta`
 >    - In *"Training Options"*:
 >        - *"Select the training method"*: `Train with the top longest ORFs`
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -395,18 +398,27 @@ Why do we need to correct those?
 >
 > 1. **Diamond** {% icon tool %} with the following parameters:
 >    - *"What do you want to align?"*: `Align amino acid query sequences (blastp)`
->    - *"Input query file in FASTA or FASTQ format"*: `@TODO result of transcoder`
+>    - *"Input query file in FASTA or FASTQ format"*: `TransDecoder on data XXX: pep`
 >    - *"Select a reference database"*: `Uniprot Swissprot`
->    - *"Format of output file"*: `Tabular`
->    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
->    - *"The maximum number of target sequence per query to report alignments for"*: `1`
+>    - *"Format of output file"*: `BLAST Tabular`
+>    - In *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>        - *"The maximum number of target sequence per query to report alignments for"*: `1`
+> 3. **Rename** the Diamond output
+>    - `Diamond on data XXX` -> `Diamond (blastp)`
 > 2. **Diamond** {% icon tool %} with the following parameters:
 >    - *"What do you want to align?"*: `Align DNA query sequences (blastx)`
 >    - *"Input query file in FASTA or FASTQ format"*: `transcriptome_filtered.fasta`
 >    - *"Select a reference database"*: `Uniprot Swissprot`
->    - *"Format of output file"*: `Tabular`
->    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
->    - *"The maximum number of target sequence per query to report alignments for"*: `1`
+>    - *"Format of output file"*: `BLAST Tabular`
+>    - In *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
+>        - *"The maximum number of target sequence per query to report alignments for"*: `1`
+> 4. **Rename** the Diamond output
+>    - `Diamond on data XXX` -> `Diamond (blastx)`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Note that you can both use **Diamond** {% icon tool %} or the **NCBI BLAST+ blastp** {% icon tool %} and **NCBI BLAST+ blast** {% icon tool %}
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -414,17 +426,17 @@ Why do we need to correct those?
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **SignalP** {% icon tool %} with the following parameters:
->    - *"Fasta file of protein sequences"*: `@TODO result of transcoder`
+> 1. **SignalP 3.0** {% icon tool %} with the following parameters:
+>    - *"Fasta file of protein sequences"*: `TransDecoder on data XXX: pep`
 >
 {: .hands_on}
 
-## Find transmenbrane domains
+## Find transmembrane domains
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **TMHMM 2.0** {% icon tool %} with the following parameters:
->    - *"FASTA file of protein sequences"*: `@TODO result of transcoder`
+>    - *"FASTA file of protein sequences"*: `TransDecoder on data XXX: pep`
 >
 {: .hands_on}
 
@@ -433,7 +445,7 @@ Why do we need to correct those?
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **hmmscan** {% icon tool %} with the following parameters:
->    - *"Sequence file"*: `@TODO result of transcoder`
+>    - *"Sequence file"*: `TransDecoder on data XXX: pep`
 >
 {: .hands_on}
 
@@ -442,6 +454,14 @@ Why do we need to correct those?
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinotate** {% icon tool %} with the following parameters:
+>    - *"Transcripts"*: `transcriptome_raw.fasta`
+>    - *"Peptides"*: `TransDecoder on data XXX: pep`
+>    - *"Genes to transcripts map"*: `Generate gene to transcript map on data XXX: Genes to transcripts map`
+>    - *"BLASTP: Peptides vs Uniprot.SwissProt"*: `Diamond (blastp)`
+>    - *"BLASTX: Transcripts vs Uniprot.SwissProt"*: `Diamond (blastx)`
+>    - *"HMMER hmmscan: Peptides vs PFAM"*: `Table of per-domain hits from HMM matches of TransDecoder on data XXX: pep against the profile database`
+>    - *"TMHMM on Peptides"*: `TMHMM results`
+>    - *"SignalP on Peptides"*: `SignalP euk results`
 >    - *"Let Galaxy downloading the Trinotate Pre-generated Resource SQLite database"*: `Yes`
 >
 {: .hands_on}
@@ -552,14 +572,6 @@ Why do we need to correct those?
 >    - *"Method for partitioning genes into clusters"*: `Cut tree based on x percent of max(height) of tree`
 >
 {: .hands_on}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
