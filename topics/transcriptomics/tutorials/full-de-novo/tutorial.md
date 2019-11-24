@@ -454,7 +454,7 @@ Why do we need to correct those?
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Trinotate** {% icon tool %} with the following parameters:
->    - *"Transcripts"*: `transcriptome_raw.fasta`
+>    - *"Transcripts"*: `transcriptome_filtered.fasta`
 >    - *"Peptides"*: `TransDecoder on data XXX: pep`
 >    - *"Genes to transcripts map"*: `Generate gene to transcript map on data XXX: Genes to transcripts map`
 >    - *"BLASTP: Peptides vs Uniprot.SwissProt"*: `Diamond (blastp)`
