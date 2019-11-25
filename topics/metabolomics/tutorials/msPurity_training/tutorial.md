@@ -91,7 +91,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
 ```
 This step is described as number 1 in details part below.
 
-Then, to be able to process your MS/MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to process with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For MS/MS analysis you **don't really need to finish** this previous tutorial but for a better understanding of your datas, it is recommanded. In this tutorial, you **just have to compute** your datas with the **following steps** briefly describe in the *details* part below.
+Then, to be able to process your MS/MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to process with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For MS/MS analysis you **don't really need to finish** this previous tutorial but for a better understanding of your datas, it is recommanded. In this tutorial, you **just have to compute** your datas with the **following steps** briefly describe in the *details* part below (please follow aprameters values to have the same results during the training).
 {: .text-justify}
 
 > ### {% icon details %} Some help : Resume of the XCMS preprocessing
@@ -185,16 +185,35 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 >
 > > ### {% icon solution %} 3 - First XCMS step : *peak picking* {% icon tool %}
 > >    
-> >    Open and run the **xcms findChromPeaks (xcmsSet)** {% icon tool %} tool and set your parameters.
+> > Open and run the **xcms findChromPeaks (xcmsSet)** {% icon tool %} tool and set your parameters. For our training please enter the following parameters : 
+> >   - **Extraction method for peaks detection** : there are 4 different possible options here. Please select `CentWave - chromatographic peak detection using the centWave method` for our training.
+> >   - **Max tolerated ppm m/z deviation in consecutive scans in ppm** : it corresponds to the maximum deviation in ppm. Please set it to `5` for our training.
+> >   - **Min, Max peak width in seconds** : it corresponds to the expected approximate peak width in chromatographic space. Please set it to `5,50` in our training to have a large example. 
+> > 
+> > Here, you have all the right parameters for our example. These are the two dataset collection you will have in your hsitory on the right of Galaxy instance : 
 > >    - **Input** : collection of Rdata object(s) obtained just before (format : `collection.raw.RData`)
 > >    - **Output** : a collection with informations about peak picking for each files. Format : `collection.raw.xset.RData`.
 > {: .solution}
 > 
 > > ### {% icon solution %} 4 - *Merge samples* {% icon tool %} in one dataset with a sampleMetadata file
 > >
-> >    To merge your datas, you need to **input a sampleMetadata file** containing namefiles and their metadata informations like their class for example. If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}.
-> >    - **Input** : collection of RData object(s) obtained during peak picking (format : `collection.raw.xset.RData`) and optionnaly a sampleMetadata file in `tabular` format.
-> >    - **Output** : one RData file named `xset.merged.RData` which contains a list of all your datas processed just before.
+> > To merge your datas, you need to **input a sampleMetadata file** containing namefiles and their metadata informations like their class for example. If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. Here is an example of the minimum expectations about a sampleMetadata file (important : don't write the format of the file, just their names) :
+> > {: .text-justify}
+> > 
+> > | sample_name |  class  | 
+> > |:-----------:|:-------:|
+> > |    file1    |  homme  |
+> > |-------------+---------|
+> > |    file2    |  femme  |
+> > |-------------+---------|
+> > |    file3    |  homme  |
+> > 
+> > You have just to enter the following files in the tool and process it. You should now have these files in your history :
+> >   - **Input** : 
+> >     - collection of RData object(s) obtained during peak picking (format : `collection.raw.xset.RData`) 
+> >     - optionnaly a sampleMetadata file in `tabular` format. For our example please start with `sampleMetadata_hommeVSfemme.csv` in tabular format.
+> >   - **Output** : 
+> >     - one RData file named `xset.merged.RData` which contains a list of all your datas processed just before.
 > {: .solution}
 >
 > > ### {% icon solution %} 5 - Second XCMS step : *determining shared ions across samples* {% icon tool %}
