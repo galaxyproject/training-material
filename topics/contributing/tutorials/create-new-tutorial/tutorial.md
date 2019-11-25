@@ -136,7 +136,9 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 > 2. Check that a new directory (with your tutorial name) has been generated in the topic folder
 > 3. Make sure that Jekyll is running
 >
+>    > ### {% icon comment %} Jekyll
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    {: .comment}
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 {: .hands_on}
@@ -270,7 +272,7 @@ For the next times, you can make it quicker.
 >             --workflow_id "ID of the workflow on the Galaxy instance" \
 >             --zenodo_link "URL to the Zenodo record"
 >      ```
->    - option 2: from a local workflow file (`.ga`)
+>    - option 2: from a local workflow file (`.ga`) (use only if your workflow is composed of tools from the main ToolShed)
 >
 >      ```
 >      $ planemo training_init \

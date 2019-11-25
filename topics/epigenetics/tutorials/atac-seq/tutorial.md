@@ -149,16 +149,19 @@ The first step is to check the quality of the reads and the presence of the Next
 >    > > 1. There are 285247 reads.
 >    > > 2. The 3 steps below have warnings:
 >    > >
->    > > > 1) **Per base sequence content**
->    > > > > It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
+>    > >    1. **Per base sequence content**
 >    > >
->    > > > 2) **Sequence Duplication Levels**
->    > > > > The read library quite often has PCR duplicates that are introduced
->    > > > > simply by the PCR itself. We will remove these duplicates later on.
+>    > >       It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
 >    > >
->    > > > 3) **Overrepresented sequences**
->    > > > > Nextera adapter sequences are observable in the **Adapter Content** section.
->    > > 
+>    > >    2. **Sequence Duplication Levels**
+>    > >
+>    > >       The read library quite often has PCR duplicates that are introduced
+>    > >       simply by the PCR itself. We will remove these duplicates later on.
+>    > >
+>    > >    3. **Overrepresented sequences**
+>    > >
+>    > >       Nextera adapter sequences are observable in the **Adapter Content** section.
+>    > >
 >    > {: .solution}
 >    >
 >    {: .question}
@@ -245,7 +248,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. 
+Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed.
 
 > ### {% icon comment %} Dovetailing
 > We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. For example, if the first mate in the read pair is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`, where both contain 2 bases of adapter sequence, they will not be trimmed by Cutadapt and will map this way:
@@ -353,7 +356,7 @@ High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-seq 
 >
 > To get the number of reads that mapped to the mitochondrial genome (chrM) you can run **Samtools idxstats** {% icon tool %} on the output of  **Bowtie2** {% icon tool %} *"alignments"*.
 > The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-> The first 2 lines of the result would be (after sorting):
+> The first 2 lines of the result would be (after using **Sort** {% icon tool %}):
 >
 > ![Samtools idxstats result](../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png "Samtools idxstats result")
 >
@@ -384,13 +387,16 @@ Because of the PCR amplification, there might be read duplicates (different read
 {: .comment}
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
-> You can copy/paste the 2 lines with header and data into an Excel sheet.
-> Replace `Unknown Library` by `Unknown_Library` in the second line.
-> Then do Text to Columns (it is space delimited data). You should check the box for Treat consecutive delimiters as one.
-> Finally you copy and paste special your table to transpose it.
-> Now you should have:
 >
-> ![Metrics of MarkDuplicates in Excel](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.png "Metrics of MarkDuplicates in Excel")
+> 1. **Select** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
+>    - *"that*: `matching`
+>    - *"the pattern*: `(Library|LIBRARY)`
+> 2. Check that the datatype is tabular. If not, change the datatype as described above.
+> 3. **Transpose** {% icon tool %}:
+>    - {% icon param-file %} *"Select lines from"*: Select the output of  **Select** {% icon tool %}
+>
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191105.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
@@ -425,7 +431,7 @@ We will check the insert sizes with **Picard CollectInsertSizeMetrics**. The ins
 > ### {% icon comment %} CollectInsertSizeMetrics Results
 > This is what you get from CollectInsertSizeMetrics:
 > ![Fragment size distribution](../../images/atac-seq/Screenshot_sizeDistribution.png "Fragment size distribution")
-{: .comment} 
+{: .comment}
 
 > ### {% icon question %} Questions
 >
@@ -526,13 +532,19 @@ In order to visualise a specific region (e.g. the gene *RAC2*), we can either us
 >
 > 2. **bedtools SortBED** order the intervals  {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sort the following BED/bedGraph/GFF/VCF file"*: `ENCFF933NTR.bed.gz`
+>    - {% icon param-file %} *"Sort by"*: `chromosome, then by start position (asc)`
 >
 {: .hands_on}
 
 ### Convert the Genrich peaks to BED
-At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak which is a special bed. So we need to change the datatype of the output of **Genrich** from encodepeak to bed.
+At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak which is a special bed.
 
-{% include snippets/change_datatype.md datatype="datatypes" %}
+> ### {% icon hands_on %} Hands-on: Change the datatype
+> 1. Change the datatype of the output of **Genrich** from encodepeak to bed.
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+{: .hands_on }
 
 ## Create heatmap of genes
 
@@ -547,7 +559,7 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 > 1. **computeMatrix** {% icon tool %} with the following parameters:
 >    - In *"Select regions"*:
 >        - 1. *"Select regions"*
->            - {% icon param-file %} *"Regions to plot"*: Select the dataset `hg38_Gencode_V28_chr22_geneName.bed`
+>            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
 >    - *"Sample order matters"*: `No`
 >        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
 >    - *"computeMatrix has two main output options"*: `reference-point`
@@ -607,6 +619,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >                - *"Show visualization of data range"*: `Yes`
 >                - *"Include spacer at the end of the track"*: `0.5`
 >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
 >                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %} (the one you converted from encodepeak to bed).
 >                - *"Color of track"*: Select the color of your choice
@@ -645,7 +658,7 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 
 
 > ### {% icon question %} Questions
-> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich. 
+> In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich.
 >
 > 1. How many TSS are accessible in the sample in the displayed region?
 > 2. How many CTCF binding loci are accessible?

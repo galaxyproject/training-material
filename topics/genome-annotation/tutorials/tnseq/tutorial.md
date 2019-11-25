@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Essential genes detection with Transposon insertion sequencing"
-zenodo_link: "https://doi.org/10.5281/zenodo.940733"
+zenodo_link: "https://doi.org/10.5281/zenodo.2579335"
 tags:
   - bacteria
   - tnseq
@@ -783,7 +783,7 @@ Once you get this list of gene, it is interesting to verify manually the genes c
 
 >    {% include snippets/view_mapping_in_IGV.md %}
 
-When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.  
+When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.
 
 ![Example of Essential gene with no reads mapped](../../images/tnseq/empty_gene.png "Example of Essential gene with no reads mapped")
 ![Example of Essential gene with depleted coverage](../../images/tnseq/low_coverage_gene.png "Example of Essential gene with depleted coverage")
