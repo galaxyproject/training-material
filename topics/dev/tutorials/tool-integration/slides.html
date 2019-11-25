@@ -78,7 +78,7 @@ graphlan.py --format "png" --size 7 input_tree.txt png_image.png
 
 1. `<inputs>` (datasets and parameters) specified in the tool XML are exposed in the Galaxy tool UI
 2. When the user fills the form and click the `Execute` button, Galaxy fills the `<command>` template in the XML with the inputs entered by the user and execute the Cheetah code, producing a script as output
-3. Galaxy creates a job for the generated script and executes it somewhere (bowtie is run in this case)
+3. Galaxy creates a job for the generated script and executes it somewhere (bowtie2 is run in this case)
 4. Some (not necessarily all) output files become new history datasets, as specified in the `<outputs>` XML tag set
 
 ---
@@ -119,7 +119,7 @@ Galaxy tool XML format is formally defined in a XML Schema Definition (XSD), use
 <command><![CDATA[
 graphlan.py
 --format $format
-#if $dpi
+#if str($dpi):
     --dpi $dpi
 #end if
 --size $size
@@ -137,7 +137,7 @@ python '$__tool_directory__/graphlan.py'
 
 ???
 
-- In the first case, `graphlan.py` is expected to be on the PATH when the job executes
+- In the first case, `graphlan.py` is expected to be on the PATH when the job executes. This is usually accomplished by specifying some `<requirement/>` tags.
 - In the second case, `$__tool_directory__` is a special variable which is substituted by Galaxy with the directory where the tool XML is
 - The `#if ... #end if` syntax comes from the [Cheetah](https://cheetahtemplate.org/) template language, which has a Python-like syntax
 
@@ -178,7 +178,7 @@ python '$__tool_directory__/graphlan.py'
 <command><![CDATA[
 graphlan.py
 ...
-#if $dpi
+#if str($dpi):
     --dpi $dpi
 #end if
 '$input_tree'
@@ -401,16 +401,24 @@ N.B. If the filter expression raises an Exception, the dataset will NOT be filte
 
 ---
 
-### `stdio`
+### `detect_errors`
 
-Error if tool exit code is not 0 (default):
+Legacy wrappers (i.e. with `profile` unspecified or less than 16.04) by default fail only if the tool writes to stderr
+
+Non-legacy wrappers by default fail if the tool exit code is not 0, which is equivalent to specify:
 ```xml
 <command detect_errors="exit_code"> ... </command>
 ```
-Error if tool exit code is not 0 or either "Exception:" or "Error:" appears in standard error/output:
+
+To fail if either the tool exit code is not 0 or "Exception:"/"Error:" appears in standard error/output:
 ```xml
 <command detect_errors="aggressive"> ... </command>
 ```
+
+---
+
+### `stdio`
+
 If you need more precision:
 ```xml
 <stdio>
@@ -947,7 +955,7 @@ class: packed
     <configfile name="script_nexus"><![CDATA[
 set autoclose = yes;
 execute $input_data;
-#if str( $data_type.type ) == "nuc“
+#if str($data_type.type) == "nuc“
     lset nst=$data_type.lset_params.lset_Nst;
 #end if
 mcmcp ngen=$mcmcp_ngen;

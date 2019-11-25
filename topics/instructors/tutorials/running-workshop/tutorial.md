@@ -3,9 +3,7 @@ layout: tutorial_hands_on
 
 title: Running a workshop as instructor
 questions:
--
 objectives:
--
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -139,13 +137,11 @@ Not everyone is always outwardly enthusiastic about the course for any number of
     Find someone you haven't talked to yet today, and talk to them. Make sure all the helpers have the same goal.
 
 6. Regularly ask questions of the trainees:
-
-  - What data formats work here?
-  - Where is the data coming from?
-  - What data transformation is being made?
-  - What were the data formats used today?
-  - What were the main steps of today's workflow?
-
+   - What data formats work here?
+   - Where is the data coming from?
+   - What data transformation is being made?
+   - What were the data formats used today?
+   - What were the main steps of today's workflow?
 7. Regularly remind trainees of things you've taught them
 
    Repeat again and again, in different ways, to reinforce concepts

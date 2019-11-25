@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)"
 zenodo_link: "https://zenodo.org/record/1051552"
+level: Intermediate
 questions:
   - "What are MS1 features?"
   - "How to quantify based on MS1 features?"
@@ -11,6 +12,13 @@ questions:
 objectives:
   - "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
 time_estimation: "1h"
+requirements:
+-
+  type: "internal"
+  topic_name: proteomics
+  tutorials:
+    - database-handling
+    - protein-id-oms
 key_points:
   - "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces."
   - "MS1 features can be used for relative protein quantitation."
@@ -150,7 +158,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 > ### {% icon comment %} Comment: Multiple labels per peptide
 > When using SILAC-KR or dimethyl-labelling and trypsin digestion, exactly one labelled amino acid per peptide is expected. The only labelled amino acids are lysine (K) and arginine (R) and trypsin cuts after each of them. However, a small percentage of missed cleavage normally occur also in those datasets. Setting *"Maximum number of missed cleavages due to incomplete digestion"* to `1` will be sufficient to deal with most missed cleavages.
 >
-> When using other enzymes (e.g. Lys-C) or other labels (e.g. $$^{18}O$$), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter **Maximum number of missed cleavages due to incomplete digestion**.
+> When using other enzymes (e.g. Lys-C) or other labels (e.g. $$^{18}O$$), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter *"Maximum number of missed cleavages due to incomplete digestion"*.
 {: .comment}
 
 # Mapping Identifications to Features
@@ -169,7 +177,7 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 >
 > 1. Run **IDMapper** {% icon tool %} with
 >   - {% icon param-file %} *"Protein/peptide identifications file"*: output of **IDFilter**
->   - {% icon param-file %} *Feature map/consensus map file"*: the `consensusXML` output of **FeatureFinderMultiplex**
+>   - {% icon param-file %} *"Feature map/consensus map file"*: the `consensusXML` output of **FeatureFinderMultiplex**
 >   - *"RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features"*: `20`
 >   - *"m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features"*: `10`
 >   - *"Match using RT and m/z of sub-features instead of consensus RT and m/z"*: `Yes`
@@ -185,8 +193,8 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 >
 > 4. Run **MultiplexResolver** {% icon tool %} with
 >    - {% icon param-file %} *"Peptide multiplets with assigned sequence information"*: output of **IDConflictResolver**
->   - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
->   - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
+>    - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
+>    - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
 >
 > 5. Run **ProteinQuantifier** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: first output of **MultiplexResolver**
@@ -209,15 +217,15 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 For proteins, we added a log-transformed ratio to the output, which is saved in column 8 of the protein table. The ratio is calculated as **log2 (abundance2/abundance1)**, which is sometimes called the *fold change (FC)* ratio.
 
 To get a quick overview of the results, you can calculate basic descriptive statistics and plot the data as a histogram.
-Comment lines in the beginning of a `tabular` file may sometimes cause errors, therefore we will remove them with the tool **Select last (tail)**.
+Comment lines in the beginning of a `tabular` file may sometimes cause errors, therefore we will remove them with the tool **Select last lines from a dataset (tail)**.
 
 > ### {% icon hands_on %} Hands-on: Descriptive Statistics
 > 1. Run **Summary Statistics** {% icon tool %} with
->   - {% icon param-file %} *"Summary statistics on"*: protein table output of **ProteinQuantifier**
+>   - {% icon param-file %} *"Summary statistics on"*: protein table output (first file) of **ProteinQuantifier**
 >   - *"Column or expression"*: `c8`
 >
-> 2. Run **Select last** {% icon tool %} with
->   - {% icon param-file %} *"Text file"*: protein table output of **ProteinQuantifier**
+> 2. Run **Select last (tail)** {% icon tool %} with
+>   - {% icon param-file %} *"Text file"*: protein table output (first file) of **ProteinQuantifier**
 >   - *"Operation"*: `Keep everything from this line on`
 >   - *"Number of lines"*: `4`
 >
