@@ -103,23 +103,30 @@ The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wi
 
 ## Getting data in and assessing quality
 
-We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220).
+You can conveniently obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) via a public [history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015) that accompanies this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Importing the raw data
+> ### {% icon hands_on %} Hands-on: Importing the input data
 >
-> You can obtain the reads from this dataset by copying [this history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
+> Import the FASTQ files into [usegalaxy.org](https://usegalaxy.org):
 > 1. Make sure you're logged into [Galaxy](https://usegalaxy.org).
 > 2. Go to [the history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
-> 3. Click on **Import history** in the upper right.
->
-> Or, if you'd like to use a different Galaxy instance, you can import it:
-> 1. Click on the gear icon at the top of the **History** pane.
-> 2. Click on "Import from File" at the bottom of the menu.
-> 3. Enter this link in the box under **Archived History URL**:
-> `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
+> 3. Click on the plus button in the upper right (next to **About this History**).
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
+This creates two datasets in our galaxy history: one for forward reads and one for reverse.
+
+We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse):
+
+> ### {% icon hands_on %} Hands-on: Evaluating input read quality
+>
+> Run {% icon tool %} **FastQC** with the following parameters:
+>  - {% icon param-file %} *Short read data from your current history*: One of the raw FASTQ datasets (`SRR1799908_forward`)
+>  - Leave the rest of the options as their defaults.
+>
+> Then repeat with the other FASTQ file (`SRR1799908_reverse`).
+{: .hands_on}
+
+You can read more about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
 
 This gave us the following plots:
 
@@ -139,16 +146,14 @@ Now we are ready to collapse the raw reads into duplex consensus sequences.
 
 ### Sorting reads into families
 
-The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then it will use the barcodes to sort the reads into families that all descend from the same original fragment.
+The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then, it will use the barcodes to sort the reads into families that all descend from the same original fragment.
 
 > ### {% icon hands_on %} Hands-on: Sorting reads into families
 >
 > Run {% icon tool %} **Du Novo: Make families** with the following parameters:
->  - {% icon param-file %} *Sequencing reads, mate 1*: `1: SRR1799908_forward`
->  - {% icon param-file %} *Sequencing reads, mate 2*: `2: SRR1799908_reverse`
+>  - {% icon param-file %} *Sequencing reads, mate 1*: The forward raw reads (`SRR1799908_forward`)
+>  - {% icon param-file %} *Sequencing reads, mate 2*: The reverse raw reads (`SRR1799908_reverse`)
 >  - {% icon param-text %} *Tag length*: `12`
->
-> Output: `7: Du Novo: Make families on data 2 and data 1`
 {: .hands_on}
 
 ### Correcting barcodes
@@ -160,10 +165,8 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 > ### {% icon hands_on %} Hands-on: Correcting barcodes
 >
 > Run {% icon tool %} **Du Novo: Correct barcodes** with the following parameters:
->  - {% icon param-file %} *Input reads*: `7: Du Novo: Make families on data 2 and data 1`
+>  - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Make families**
 >  - {% icon param-text %} *Maximum differences*: `3`
->
-> Output: `8: Du Novo: Correct barcodes on data 7`
 {: .hands_on}
 
 ### Aligning families
@@ -180,10 +183,8 @@ After grouping reads that came from the same original fragment, we need to align
 > ### {% icon hands_on %} Hands-on: Aligning families
 >
 > Run {% icon tool %} **Du Novo: Align families** with the following parameters:
->  - {% icon param-file %} *Input reads*: `8: Du Novo: Correct barcodes on data 7`
+>  - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Correct barcodes**
 >  - {% icon param-select %} *Multiple sequence aligner*: `Kalign2`
->
-> Output: `9: Du Novo: Align families on data 8`
 {: .hands_on}
 
 ### Making consensus sequences
@@ -195,17 +196,15 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 > ### {% icon hands_on %} Hands-on: Making consensus sequences
 >
 > Run {% icon tool %} **Du Novo: Make consensus reads** with the following parameters:
->  - {% icon param-file %} *Aligned input reads*: `9: Du Novo: Align families on data 8`
+>  - {% icon param-file %} *Aligned input reads*: The output of {% icon tool %} **Align families**
 >  - {% icon param-text %} *Minimum reads for a consensus sequence*: `3`
 >  - {% icon param-text %} *Consensus % threshold*: `0.7`
 >  - {% icon param-select %} *Output format*: `FASTQ`
 >  - {% icon param-check %} *Output single-strand consensus sequences as well*: `Yes`
 >
-> Outputs:
->  - `10: Du Novo: Make consensus reads on data 9 (mate 1)`
->  - `11: Du Novo: Make consensus reads on data 9 (mate 2)`
->  - `12: Du Novo: Make consensus reads on data 9 (SSCS mate 1)`
->  - `13: Du Novo: Make consensus reads on data 9 (SSCS mate 2)`
+> This tool will produce 4 output files, in two sets of paired-end FASTQ files:
+>  - one pair for the single-stranded consensus sequences (called `SSCS mate 1` and `2`)
+>  - one pair for the double-stranded consensus sequences (called `mate 1` and `2`).
 {: .hands_on}
 
 > ### {% icon comment %} Setting output formats
@@ -242,18 +241,14 @@ This information could be useful for some analyses, but not for our variant call
 >
 > Run {% icon tool %} **Sequence Content Trimmer** with the following parameters:
 >  - {% icon param-select %} *Paired reads?*: `Paired`
->  - {% icon param-file %} *Input reads (mate 1)*: `10: Du Novo: Make consensus reads on data 9 (mate 1)`
->  - {% icon param-file %} *Input reads (mate 2)*: `11: Du Novo: Make consensus reads on data 9 (mate 2)`
+>  - {% icon param-file %} *Input reads (mate 1)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 1)
+>  - {% icon param-file %} *Input reads (mate 2)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 2)
 >  - {% icon param-text %} *Bases to filter on*: `ACGT`
 >  - {% icon param-text %} *Frequency threshold*: `0.2`
 >  - {% icon param-text %} *Size of the window*: `10`
 >  - {% icon param-check %} *Invert filter bases*: `Yes`
 >  - {% icon param-check %} *Set a minimum read length*: `Yes`
 >  - {% icon param-text %} *Minimum read length*: `50`
->
-> Outputs:
->  - `14: Sequence Content Trimmer on data 10 and data 11`
->  - `15: Sequence Content Trimmer on data 10 and data 11`
 {: .hands_on}
 
 # Calling variants with duplex consensus sequences
@@ -272,10 +267,8 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 >
 > Run {% icon tool %} **Map with BWA-MEM** with the following parameters:
 >  - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
->  - {% icon param-file %} *Select first set of reads*: `14: Sequence Content Trimmer on data 10 and data 11`
->  - {% icon param-file %} *Select second set of reads*: `15: Sequence Content Trimmer on data 10 and data 11`
->
-> Output: `16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)`
+>  - {% icon param-file %} *Select first set of reads*: The first output from the {% icon tool %} **Sequence Content Trimmer**
+>  - {% icon param-file %} *Select second set of reads*: The second output from the {% icon tool %} **Sequence Content Trimmer**
 {: .hands_on}
 
 ### Left Aligning indels
@@ -285,11 +278,9 @@ To normalize the positional distribution of indels we use the {% icon tool %} **
 > ### {% icon hands_on %} Hands-on: Left-align indels
 >
 > Run {% icon tool %} **BamLeftAlign** with the following parameters:
->  - {% icon param-file %} *Select alignment file in BAM format*: `16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)`
+>  - {% icon param-file %} *Select alignment file in BAM format*: The output of {% icon tool %} **Map with BWA-MEM**
 >  - {% icon param-select %} *Using reference genome*: `Human (Homo sapiens): hg38`
 >    - The same genome we aligned to.
->
-> Output: `17: BamLeftAlign on data 16 (alignments)`
 {: .hands_on}
 
 ## Calling the variants
@@ -307,7 +298,7 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 > ### {% icon hands_on %} Hands-on: Count the variants
 >
 > Run {% icon tool %} **Naive Variant Caller (NVC)** with the following parameters:
->  - {% icon param-file %} *BAM file*: `17: BamLeftAlign on data 16 (alignments)`
+>  - {% icon param-file %} *BAM file*: The output of {% icon tool %} **BamLeftAlign**
 >  - {% icon param-select %} *Using reference genome*: `hg38`
 >    - The same genome we aligned to.
 >  - {% icon param-check %} *Insert Restrict to regions*: Click to add a region.
@@ -318,8 +309,6 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 >  - {% icon param-text %} *Minimum mapping quality*: `20`
 >  - {% icon param-text %} *Ploidy*: `1`
 >    - Ploidy is irrelevant here as it is a mixture of multiple genomes.
->
-> Output: `18: Naive Variant Caller (NVC) on data 17`
 {: .hands_on}
 
 The {% icon tool %} **Naive Variant Caller (NVC)** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file that can be viewed at genome browsers such as [IGV](https://www.broadinstitute.org/igv/). Yet one rarely finds variants by looking at genome browsers. We'll want to use tools to search for variants that fit our criteria.
@@ -331,13 +320,11 @@ Now we'll want to parse the VCF produced by the NVC, determine what the major an
 > ### {% icon hands_on %} Hands-on: Read the variants file
 >
 > Run {% icon tool %} **Variant Annotator** with the following parameters:
->  - {% icon param-file %} *Input variants from Naive Variants Detector*: `18: Naive Variant Caller (NVC) on data 17`
+>  - {% icon param-file %} *Input variants from Naive Variants Detector*: The output of {% icon tool %} **Naive Variant Caller (NVC)**
 >  - {% icon param-text %} *Minor allele frequency threshold*: `0`
 >  - {% icon param-text %} *Coverage threshold*: `10`
 >  - {% icon param-check %} *Output stranded base counts*: `Yes`
 >    - To be able to filter for strand bias.
->
-> Output: `19: Variant Annotator on data 18`
 {: .hands_on}
 
 ### Filtering out the noise
@@ -349,11 +336,9 @@ The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, 
 > ### {% icon hands_on %} Hands-on: Filter the raw variants list
 >
 > Run {% icon tool %} **Filter** with the following parameters:
->  - {% icon param-file %} *Filter*: `19: Variant Annotator on data 18`
+>  - {% icon param-file %} *Filter*: The output of {% icon tool %} **Variant Annotator**
 >  - {% icon param-text %} *With following condition*: `c16 >= 0.01`
 >  - {% icon param-check %} *Number of header lines to skip*: `1`
->
-> Output: `20: Filter on data 19`
 {: .hands_on}
 
 ## Results
@@ -370,13 +355,9 @@ The polymorphism we are interested in (and the one reported by [Schmitt *et al.*
 
 # Calling variants with single strand consensus sequences
 
-Analysis of SSCS data follows the exact same trajectory:
+To analyze the SSCS data, go back to the [Filtering consensuses](#filtering-consensuses) step, and replace the input to the {% icon tool %} **Sequence Content Trimmer** with the single-stranded output of {% icon tool %} **Make consensus reads** instead of the double-stranded output. Then continue through the same steps as before, with the same parameters, to the end.
 
-* [Filtering consensuses](#filtering-consensuses)
-* [Mapping the reads](#mapping-the-reads)
- 	- [Aligning against genome](#align-against-the-genome-with-bwa-mem)
- 	- [Left aligning indels](#left-aligning-indels)
-* [Calling the variants](#calling-the-variants)
+Then you will have a new set of variants, but produced with the SSCS reads, giving you a higher sensitivity (fewer false negatives), but lower specificity (more false positives).
 
 > ### {% icon tip %} Tip: Re-running with the same settings
 >
