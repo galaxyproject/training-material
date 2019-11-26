@@ -46,7 +46,7 @@ Examining non-model organisms can provide novel insights into the mechanisms und
 >
 {: .agenda}
 
-# Read cleaning
+# Read cleaning (20 minutes)
 
 Known sequencing biases:
 - Unknown nucleotides (Ns)
@@ -178,7 +178,7 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-# Assembly
+# Assembly (120 minutes - computing)
 
 ## Assembly with **Trinity**
 
@@ -207,6 +207,9 @@ Why do we need to correct those?
 > 1. **Trinity Statistics** {% icon tool %} with the following parameters:
 >    - *"Trinity assembly"*: `transcriptome_raw.fasta`
 >
+>    > ### {% icon comment %} Comment
+>    > This step, even with this toy dataset, will take around 2 hours
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -262,18 +265,6 @@ Why do we need to correct those?
 > 1. **Build expression matrix** {% icon tool %} with the following parameters:
 >    - *"Abundance estimates"*: `A1_raw`, `A2_raw`, `A3_raw`, `B1_raw`, `B2_raw`, `B3_raw`
 >    - *"Abundance estimation method"*: `Salmon`
-> 2. **Describe samples and replicates**  {% icon tool %} with the following parameters:
->    - *"Samples"*
->        - *"1: Samples"*:
->            - *"Full sample name"*: `A1_raw`
->            - *"Condition"*: `A`
->        - *"2: Samples"*:
->            - *"Full sample name"*: `A2_raw`
->            - *"Condition"*: `A`
->        - ...:
->        - *"6: Samples"*:
->            - *"Full sample name"*: `B3_raw`
->            - *"Condition"*: `B`
 >
 {: .hands_on}
 
@@ -297,7 +288,7 @@ Why do we need to correct those?
 >
 > 1. **Compute contig Ex90N50 statistic and Ex90 transcript count** {% icon tool %} with the following parameters:
 >    - *"Expression matrix"*: `Build expression matrix: matrix of TMM-normalized expression values`
->    - *"Transcripts"*: `Trinity: Assembled Transcripts`
+>    - *"Transcripts"*: `transcriptome_raw.fasta`
 > 2. Click on the visulization icon on the dataset `Compute contig Ex90N50 statistic and Ex90 transcript count: ExN50 statistics`
 >    1. **Scatterplot - Creates a 2D-scatterplot from tabular datapoints**
 >    2. *"X Column"*: select the Columns `1`
@@ -323,15 +314,6 @@ Why do we need to correct those?
 >
 {: .hands_on}
 
-## RNASeq samples quality check
-
-> ### {% icon hands_on %} Hands-on: Task description
-> 1. **RNASeq samples quality check** {% icon tool %} with the following parameters:
->    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
->    - *"Samples description"*: `Describe samples`
->
-{: .hands_on}
-
 ![RNASeq samples quality check Graphs](../../images/full-de-novo/rnaseq_samples_quality_check.png)
 
 ## Filter low expression transcripts
@@ -339,7 +321,7 @@ Why do we need to correct those?
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Filter low expression transcripts** {% icon tool %} with the following parameters:
->    - *"Trinity assembly"*: `Trinity: Assembled Transcripts`
+>    - *"Trinity assembly"*: `transcriptome_raw.fasta`
 >    - *"Expression matrix"*: `Build expression matrix: matrix of isoform TPM expression values (not cross-sample normalized)`
 >    - *"Minimum expression level required across any sample"*: `1.0`
 >    - *"Isoform filtering method"*: `Keep all isoforms above a minimum percent of dominant expression`
@@ -530,6 +512,15 @@ Why do we need to correct those?
 >        - *"6: Samples"*:
 >            - *"Full sample name"*: `B3`
 >            - *"Condition"*: `B`
+>
+{: .hands_on}
+
+## RNASeq samples quality check
+
+> ### {% icon hands_on %} Hands-on: Task description
+> 1. **RNASeq samples quality check** {% icon tool %} with the following parameters:
+>    - *"Expression matrix"*: `Build expression matrix: estimated RNA-Seq fragment isoform counts (raw counts)`
+>    - *"Samples description"*: `Describe samples`
 >
 {: .hands_on}
 
