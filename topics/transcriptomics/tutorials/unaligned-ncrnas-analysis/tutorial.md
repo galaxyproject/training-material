@@ -103,20 +103,19 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 >
 {: .hands_on}
 
-***TODO***: *Comment quickly the generated outputs*
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+MAFFT is a general purpose alignment tool that outputs a multiple seqence alignment. We will use this
+alignment to test the sequences for coding potential and to test if there is a conserved secondary
+structure, without using secondary structure information to guide the alignment.
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What additional characters can you observe in the multiple sequence alignment constrast to the individual sequences?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
+> > 1. Answer for question
+> >    We can observe gap characters that are representing insertions and deletions
+> >    in case the individual sequences are of different length.
 > {: .solution}
 >
 {: .question}
@@ -125,7 +124,7 @@ We can now analyze more in depth the representative sequences of the alignment: 
 
 ## Analysis for potential protein coding regions
 
-We would like first to know if there is any potential protein coding regions left in the alignment. We use **RNAcode** {% icon tool %} which predicts protein coding regions in an alignment of homologous nucleotide sequences. The prediction is based on evolutionary signatures typical for protein genese, i.e. the presence of synonyomous/conservative nucleotide mutations, conservation of the reading frame and absence of stop codons.
+We would like first to know if there is any potential protein coding regions left in the alignment. We use **RNAcode** {% icon tool %} which predicts protein coding regions in an alignment of homologous nucleotide sequences. The prediction is based on evolutionary signatures typical for protein genes, i.e. the presence of synonyomous/conservative nucleotide mutations, conservation of the reading frame and absence of stop codons.
 
 **RNAcode** {% icon tool %} does not rely on any species specific sequence characteristics whatsoever and does not use any machine learning techniques. 
 
@@ -140,17 +139,16 @@ We would like first to know if there is any potential protein coding regions lef
 
 **RNAcode** {% icon tool %} reports local regions of unusual high coding potential together with an associated p-value.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What are features that RNAcode uses to detect reagions with coding potential?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    RNAcode uses the conservation of a reading frame, synonymous mutations and the absence of stop codons
+> >    in the individual sequences of the different species to detect coding potential.
 > >
 > {: .solution}
 >
@@ -181,17 +179,18 @@ We now calculate secondary structures for a set of aligned RNAs using **RNAalifo
 
 **RNAalifold** returns the mfe structure in bracket notation, its energy, the free energy of the thermodynamic ensemble and the frequency of the mfe structure in the ensemble to stdout. It also produces Postscript files with plots of the resulting secondary structure graph and a "dot plot" of the base pairing matrix.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is covariation of structure in terms of homologous RNA sequences?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    Covariation is the conservation of functionally important base-pairs after mutation events.
+> >    If a base-pair is disrupted by a mutation that relevant for obtaining the correct spatial structure
+> >    a second mutation of the pairing nucleotide can restore the base-pair. The more of these mutations
+> >    that can be observed over multiple specices the higher the likelyhood that this base-pair is of
+> >    biological relevance.
 > >
 > {: .solution}
 >
@@ -208,19 +207,21 @@ To predict structurally conserved and thermodynamically stable RNA secondary str
 >    - *"Use mononucleotide shuffled z-scores"*: `Yes`
 {: .hands_on}
 
-***TODO***: *Comment quickly the generated outputs*
+RNAz screens the input alignment for conserved secondary structures which are classified by a Support Vector Machine
+to be structured RNA.
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is a conserved secondary structure an indicator that the region detected by RNAz possessed a biologial function?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    Biologically functional RNA molecules need to fold into the necessary spatial structure to perform their function.
+> >    If the secondary structure is conserved over larger phylogenetic distances this is a strong indicator that
+> >    the function is preserved in multiple species and therefore has been maintained despite mutation events.
 > >
 > {: .solution}
 >
@@ -254,19 +255,24 @@ We will now run a similar analysis using a RNA-aware multi alignment tool and wi
 >
 {: .hands_on}
 
-***TODO***: *Comment quickly the generated outputs*
+In contrast to the alignment with MAFFT we now aligned the individual sequences considering the secondary
+structure. This will make it easier to test for a conserved structure with RNAz, but it will
+make it more difficult to detect common open reading frames and coding potential.
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is the difference of aliging the individual sequnces with MAFFT or with LocaRNA?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    MAFFT is a general purpose alignment tool based on sequence information only, while LocaRNA uses
+> >    secondary structure information. In the MAFFT alignment we expect to see nucleotides to be in the
+> >    same column based on reading frame information. In LocaRNA output there is a preference to align
+> >    nucleotides in the same column if they are part of the same base-pair, even when the sequence is
+> >    not similar.
 > >
 > {: .solution}
 >
@@ -287,17 +293,16 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 >    - *"Create colored plots in EPS format"*: `Create Plots`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding and compare with results from MAFFT*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Is it easier to detect coding potential with the alignment output of MAFFT or of LocaRNA?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    It is easier to detect with the MAFFT output, since LocaRNA gives preference to maintain base-pairs over
+> >    the reading frames.
 > >
 > {: .solution}
 >
