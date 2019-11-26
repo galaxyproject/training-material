@@ -56,29 +56,34 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
+>    
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3482616) or from the shared data library
 >
 >    We will retrieve two files one file containing homolog sequences from the
 >    SgrS family, which has been discovered to be a dual-function RNA.
 >    This allows us to show the ability of the workflow to test for protein
->    coding potential, as well as for predicting functional non-coding RNA.
+>    coding potential, as well as for predicting functional non-coding RNAs.
 >    
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% include snippets/import_via_link.md %}
+>    Search for Upload File in the Tool search field and select it from the search results.
+>    The popup for file upload that opens offers the Paste/Fetch data option.
+>    Select it and paste following URLs into the URL field and press Start:
+>    https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1
+>    https://zenodo.org/record/3482616/files/RF00534.fasta?download=1
 >
 > 3. Rename the datasets
+>
+>    The two datasets uploaded from Zenodo will now be renamed with less verbose names.
+>    The history on the left shows two items which symbolize the uploaded datasets.
+>    We rename the first from
+>    https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1
+>    to  genome.fa
+>    and we also rename
+>    https://zenodo.org/record/3482616/files/RF00534.fasta?download=1
+>    to sgrs.fa
+>
 > 4. Check that the datatype
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
+>    Both uploaded and renamed files should automatically be detected as fasta format files.
 >
 {: .hands_on}
 
