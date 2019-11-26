@@ -329,17 +329,15 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 >        - *"Use ribosum scoring matrix"*: `Yes`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding and compare with results from MAFFT*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Compare the predicted secondary structure with the one predicted with the MAFFT alignment?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> > TODO add answer
 > >
 > {: .solution}
 >
@@ -355,17 +353,16 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 >    - *"Use decision model for structural alignments"*: `Yes`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding and compare with results from MAFFT*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
+> 1. Compare the result of the prediction vs the one performed with the MAFFT alignment?
 > 2. Question2?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> > 2. TODO add answer
 > >
 > {: .solution}
 >
@@ -405,18 +402,18 @@ In addition to writing CM(s) to the output file, **cmbuild** also outputs a sing
 - `rel entropy`: HMM: the total relative entropy of the model ignoring secondary structure divided by the number of consensus columns 
 - `description`: description of the model/alignment.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What does a RNA family model represent?
+> 2. What is the practical application of a RNA family model?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
+> >    RNA family model capture the sequence and structure information of the aligned individual sequences of a RNA family with a probabilistic model, also called covariance model.
 > > 2. Answer for question2
-> >
+> >    RNA family models can be used for homology search that considers the secondary structure of the RNA family and enables to identify novel members of the RNA family.
 > {: .solution}
 >
 {: .question}
@@ -433,19 +430,21 @@ To get a better idea about the RNA family, we can extract summary statistics for
 >
 {: .hands_on}
 
-***TODO***: *Comment quickly the generated outputs*
+CMstat outputs different statistics about the generated RNA family model. Most useful is the information content of the HMM and the CM part of the model.
+Since the HMM part models the sequence information and the CM part models also the structure information we expect a rather low information content
+for protein coding sequences. However for functional ncRNAs we expect that there is a relevant secondary structure encoded by the model and therefore
+a higher CM information content.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How is the information content for HMM and CM components of the RNA family model different for ncRNA and protein coding genes?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    Protein coding genes often posses no or only limited conserved secondary structure, we therefore expect that the CM information content that models the secondary structure will be low.
+> >    For non-coding RNAs a higher CM information content is expected.
 > >
 > {: .solution}
 >
@@ -461,19 +460,19 @@ We can also visualize the RNA family model by showing nodes and probabilites of 
 >        - {% icon param-file %} *"Input stockholm alignment"*: `stockholm` (output of **LocARNA Multiple Aligner** {% icon tool %})
 {: .hands_on}
 
-***TODO***: *Comment quickly the generated outputs*
+The text output of RNA family models is very verbose and therefor clunky to inspect in detail. If you are interested how the probabilies and
+state contained in the model the visualization simplyfies to investigate the model by displaying the different nodes of the model
+with additional information.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many nodes does the newly constructed model posses?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    TODO answer question
 > >
 > {: .solution}
 >
@@ -493,19 +492,18 @@ Infernal is used to search sequence databases for homologs of structural RNA seq
 >        - {% icon param-file %} *"Covariance models file from the history."*: `cmfile_outfile` (output of **Build covariance models** {% icon tool %})
 {: .hands_on}
 
-***TODO***: *Comment quickly the generated outputs*
+Finally we want to search other genomes with the RNA family model constructed for our input alignment. 
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many potentially homolog sequences were detected by searching with the model?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. Answer for question1
-> > 2. Answer for question2
+> >    TODO answer question
 > >
 > {: .solution}
 >
@@ -514,5 +512,7 @@ Infernal is used to search sequence databases for homologs of structural RNA seq
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In summary we applied to different alignment strategies to test if the input alignment is encoding a protein and if there is a conserved RNA secondary structure indicating
+a biological function as non-coding RNA. We learned that using RNA secondary structure information during alignment can be beneficial to detect conserved RNA secondary
+structures and disrupt open-reading frame information. Therefore to test for RNA-secondary structure it is useful to apply a structure aware alignment tool, while
+testing for proteins coding potential should be done with a generic alignment tool. We used a dual-function RNA for the examples to simplify the examples
