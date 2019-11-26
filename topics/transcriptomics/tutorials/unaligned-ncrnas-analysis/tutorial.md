@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Analyse unaligned ncRNAs
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/3482616'
 questions:
 - Which biological questions are addressed by the tutorial?
   - Is my set of RNAs of interest homologous?
@@ -11,7 +11,7 @@ questions:
   - Alignment
   - RNA secondary structure folding
 objectives:
-- Knowing for which usecases the analyze non coding RNAs can be used
+- Knowing for which cases the "Analyze non coding RNAs" workflow can be used
 - Being able to apply the analyze non coding RNAs workflow
 - Learn about the tools used in the workflow
 time_estimation: 1H
@@ -33,10 +33,7 @@ by sharing a common sequence or structure. Since the biological function depends
 spatial structure of a molecule, it is often strongly conserved for ncRNAs.
 
 This workflow investigates a set of sequences for their sequence and structure conservation and for
-their alignability. We will inspect a set of hammerhead RNAs and a set of epidermal growth factor sequences with the workflow and compare the different outcomes.
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+their alignability. We will inspect a set of dual function RNAs and a set of epidermal growth factor sequences with the workflow and compare the different outcomes.
 
 The first step in any analysis of unaligned ncRNAs is to run a multi alignment tool on the sequences of the ncRNAs. Using the multi alignment, we can extract some representative sequences, analyze them for protein coding potential, compute consensus structure and predict stable secondary structure. 
 
