@@ -113,7 +113,7 @@ You can obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.go
 > 2. In the window that pops up, click the button on the bottom labeled *Paste/Fetch data*.
 > 3. Then paste this link into the text box that appears:  
 >    `https://zenodo.org/record/3554549/files/SRR1799908_forward.fastq?download=1`
-> 4. Name the dataset `SRR1799908_forward`, and set its type to `fastqsanger`.
+> 4. Name the dataset `SRR1799908_forward`.
 > 5. Repeat steps 2-4 but with the following link, and the name `SRR1799908_reverse`:  
 >    `https://zenodo.org/record/3554549/files/SRR1799908_reverse.fastq?download=1`
 > 6. Then click the *Start* button, then *Close*.
