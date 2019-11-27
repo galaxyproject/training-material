@@ -103,11 +103,22 @@ The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wi
 
 ## Getting data in and assessing quality
 
-You can conveniently obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) via a public [history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015) that accompanies this tutorial.
+You can obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) from Zenodo, or just import the [Galaxy history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015) that accompanies this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Importing the input data
+> ### {% icon hands_on %} Hands-on: Importing the input FASTQ files
 >
-> Import the FASTQ files into [usegalaxy.org](https://usegalaxy.org):
+> Option 1: Import the files from Zenodo (this will work with any Galaxy instance):
+> 1. In the Galaxy interface, click on the upload icon.  
+>    \- The one with an up arrow, at the top of the **Tools** panel on the left.
+> 2. In the window that pops up, click the button on the bottom labeled *Paste/Fetch data*.
+> 3. Then paste this link into the text box that appears:  
+>    `https://zenodo.org/record/3554549/files/SRR1799908_forward.fastq?download=1`
+> 4. Name the dataset `SRR1799908_forward`, and set its type to `fastqsanger`.
+> 5. Repeat steps 2-4 but with the following link, and the name `SRR1799908_reverse`:  
+>    `https://zenodo.org/record/3554549/files/SRR1799908_reverse.fastq?download=1`
+> 6. Then click the *Start* button, then *Close*.
+>
+> Option 2: Obtain the files by importing [this Galaxy history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015) (this only works on [usegalaxy.org](https://usegalaxy.org)):
 > 1. Make sure you're logged into [Galaxy](https://usegalaxy.org).
 > 2. Go to [the history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
 > 3. Click on the plus button in the upper right (next to **About this History**).
