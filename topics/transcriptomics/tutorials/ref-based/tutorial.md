@@ -128,7 +128,7 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Adapters may also be present if the reads are longer than the fragments sequenced and trimming these may improve the number of reads mapped.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to create a report of sequence quality, [MultiQC](https://multiqc.info/) ({% cite ewels2016multiqc %}) to aggregate generated reports and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) to improve the quality of sequences via trimming and filtering.
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) to create a report of sequence quality, [MultiQC](https://multiqc.info/) ({% cite ewels2016multiqc %}) to aggregate generated reports and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}) to improve the quality of sequences via trimming and filtering.
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -235,7 +235,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 >    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, specially for GSM461180.
+>    > > 1. For `GSM461177`, 5,072,810 bp has been trimmed for the forward reads (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For `GSM461180`, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the reads the quality was dropping more for the reverse reads than for the forward reads, especially for `GSM461180`.
 >    > > 2. 147,810 (1.4%) reads were too short for `GSM461177` and 1,101,875 (9%) for `GSM461180`.
 >    > {: .solution }
 >    {: .question}
@@ -250,7 +250,7 @@ To make sense of the reads, we need to first figure out where the sequences orig
 > Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 {: .comment}
 
-In this study, the authors used *Drosophila melanogaster* organisms. We should then map the quality-controlled sequences to the reference genome of *Drosophila melanogaster*.
+In this study, the authors used *Drosophila melanogaster* cells. We should then map the quality-controlled sequences to the reference genome of *Drosophila melanogaster*.
 
 {% include topics/sequence-analysis/tutorials/mapping/ref_genome_explanation.md answer_3="The genome of *Drosophila melanogaster* is known and assembled and it can be used as the reference genome in this analysis. Note that new versions of reference genomes may be released if the assembly improves, for this tutorial we are going to use the release 6 of the *Drosophila melanogaster* reference genome assembly [(dm6)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383921/)."%}
 
@@ -349,7 +349,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    {: .question}
 {: .hands_on}
 
-Given the **MultiQC** report, more than 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference sequence.
+According to the **MultiQC** report, more than 80% of reads for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of reads that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.
 
 The main output of **STAR** is a BAM file.
 
@@ -574,7 +574,7 @@ After the mapping, we have now the information on where the reads are located on
 > The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. `dm6` here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.
 {: .comment}
 
-Here we will focus on the genes as we would like to identify the onesgenes that are differentially expressed because of the Pasilla gene knockdown.
+Here we will focus on the genes as we would like to identify the ones that are differentially expressed because of the Pasilla gene knockdown.
 
 # Counting the number of reads per annotated gene
 
@@ -611,7 +611,7 @@ In principle, the counting of reads overlapping with genomic features is a fairl
 
 ## Estimation of the strandness
 
-RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for reads located on the overlap of 2 genes that are on different strands
+RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for reads located on the overlap of 2 genes that are on different strands.
 
 ![Why strandness?](../../images/ref-based/strandness_why.png "Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.")
 
@@ -1106,7 +1106,7 @@ This expression analysis is estimated from read counts and attempts are made to 
 > We recommend to combine the count tables for different technical replicates (but not for biological replicates) before a differential expression analysis (see [DESeq2 documentation](http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#collapsing-technical-replicates))
 {: .details}
 
-Multiple factors with several levels can then be incorporated in the analysis representing known sources of variation (e.g. treatment, tissue type, gender, batches), with several levels, representing the conditions for one factor. After normalization we can compare the response of the expression of any gene to the presence of different levels of a factor in a statistically reliable way.
+Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with several levels representing the conditions for one factor. After normalization we can compare the response of the expression of any gene to the presence of different levels of a factor in a statistically reliable way.
 
 In our example, we have samples with two varying factors that can contribute to differences in gene expression:
 
