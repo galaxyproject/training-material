@@ -235,7 +235,7 @@ For both of these techniques the number of occurrences into each bin may vary.
 > ### {% icon hands_on %} Hands-on: Partition Occurrence Data
 > 1. Go to **5 Partition Occs**
 > 2. In **Partition Occurrence Data**
->    - *"Modules Available"*: `Non-spatial Partition`
+>    - *"Modules Available"*: `Spatial Partition`
 >    - *"Options Available:"*: `Checkerboard 2 (k=4)`
 >    - *"Aggregation Factor"*: `6`
 > 4. Click on **Partition**
