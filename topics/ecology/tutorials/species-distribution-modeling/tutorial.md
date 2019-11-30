@@ -35,6 +35,7 @@ The goal of this tutorial is to model a theoretical ecological niche and predict
 >
 {: .agenda}
 
+
 # Step 1: Import data from public databank
 
 In this study the datasets are all imported from the [GBIF](https://www.gbif.org/) databanks. It is also possible to import from [bison](https://www.gbif.org/), [iNaturalist](https://www.inaturalist.org/) and others.
@@ -105,10 +106,10 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
 
 > ### {% icon hands_on %} Hands-on: Launch Wallace
-> 1. Go to https://live.usegalaxy.eu/
-> 2. Verify your current history is the history containing previous filtered occurences data, then click on the Wallace Shiny app shortcut image
-> 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool name so here `Wallace visualisation`
+> 1. Verify your current history is the history containing previous filtered occurences data, then go to https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace and click on execute
+> 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool named `Wallace visualisation`
 > 4. In Wallace
+>    0. Due to an issue related to last wallace Docker update, a manual fix is proposed waiting for a better solution. You first have to go to the **5 Partition Occs**, selecting *"Spatial Partition"* then for *"Options available"* selecting `Checkerboard 2 (k=4)` then click on the **Partition** button. This will fix the issue so now you have the *"Aggregation Factor"* displayed. Sorry for the inconvenience.
 >    1. Go to **1 Occ Data**
 >    2. In **Obtain Occurrence Data**
 >       - *"Modules Available"*: `Galaxy History User`
