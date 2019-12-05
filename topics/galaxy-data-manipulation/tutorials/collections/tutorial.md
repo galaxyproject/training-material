@@ -15,7 +15,7 @@ key_points:
   - "In this tutorial, several tools were run on the list of dataset pairs, such as `bwa-mem`, `cleanSam`, `Filter SAM or BAM`, etc."
   - "When using collections, you have to click on the `batch input mode` button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list."
 contributors:
-  - nekrut
+  - nekrut,moheydarian, pdeford
 ---
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
@@ -142,12 +142,7 @@ Click **Execute**. As an output this tool will produce a collection contained cl
 
 ### Retaining 'proper pairs'
 
-Now let's clean the dataset further by only preserving truly paired reads (reads satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use `Filter SAM or BAM` tools from **SAMTools** collection:
-
-![filter](../../images/filter.png)
-{: .img-responsive}
-
-parameters should be set as shown below. By setting mapping quality to `20` we avoid reads mapping to multiple locations and by using **Filter on bitwise flag** option we ensure that the resulting dataset will contain only properly paired reads. This operation will produce yet another collection containing now filtered datasets.
+Now let's clean the dataset further by only preserving truly paired reads (reads satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use `Filter SAM or BAM` tools from **SAMTools** collection. By setting mapping quality to `20` we avoid reads mapping to multiple locations and by using **Filter on bitwise flag** option we ensure that the resulting dataset will contain only properly paired reads. This operation will produce yet another collection containing now filtered datasets.
 
 ![filter_closeup](../../images/filter_closeup.png)
 {: .img-responsive}
@@ -168,7 +163,7 @@ This operation will **not** generate a collection. Instead, it will generate a s
 
 ## Let's look at what we've got!
 
-So we have one BAM dataset combining everything we've done so far. Let's look at the contents of this dataset using a genome browser. First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use `Downsample SAM/BAM` tool:
+So we have one BAM dataset combining everything we've done so far. Let's look at the contents of this dataset using a genome browser **to get an idea of what the read distribution is on the mitochondrial chromosome (chrM).** First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use `Downsample SAM/BAM` tool:
 
 ![downsample](../../images/downsample.png)
 {: .img-responsive}
@@ -182,17 +177,24 @@ This will generate another BAM dataset containing only 5% of the original reads 
 ![browserLinks](../../images/browserLinks.png)
 {: .img-responsive}
 
-Click the **Human hg38** link in the **display with IGV** line as highlighted above (learn more about displaying Galaxy data in IGV with this [movie](https://vimeo.com/123442619#t=4m16s)). Below is an example generated with IGV on these data. In this screenshot, reads are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group `M117-bl`.
+Click your downsampled dataset to expand the dataset in the history. Click the visualization button (in blue below).
 
-![igv](../../images/igv.png)
+![vizbutton](../../images/vizbuttonondataset.png)
 {: .img-responsive}
 
-## We did not fake this:
-The history described in this page is accessible directly from here:
+Select **Trackster** from the options in the following page. Choose a name for your Trackster session and click the "View in new Visualization" button to start your session. 
 
-* History [**Collections (full analysis)**](https://usegalaxy.org/u/aun1/h/collections-full-analysis)
+When your session finishes loading, you will see a blank genome browser since the defualt view if of chromosome 1, where no reads were mapped. Click the chromosomal coordinates at the center panel at the top of you Trackster session and **enter the coordinates: `chrM:0-16568`** to view the mitochondrial chromosome (chrM).
 
-From there you can import histories to make them your own.
+
+## What do you see on the genome browser? 
+
+![trackster](../../images/trackster.png)
+{: .img-responsive}
+
+This data set was originally generated to analyze regions of the mitochondrial genome. Can you guess how this sequencing library was created??? 
+
+
 
 ## If things don't work...
 ...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.
