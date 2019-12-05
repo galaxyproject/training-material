@@ -173,12 +173,12 @@ Set **Probability (between 0 and 1) that any given read will be kept** to roughl
 This will generate another BAM dataset containing only 5% of the original reads and much smaller as a result. Click on this dataset and you will see links to various genome browsers:
 
 ![browserLinks](../../images/browserLinks.png)
-{: .img-responsive}
+
 
 Click your downsampled dataset to expand the dataset in the history. Click the visualization button (in blue below).
 
 ![vizbutton](../../images/vizbuttonondataset.png)
-{: .img-responsive}
+
 
 Select **Trackster** from the options in the following page. Choose a name for your Trackster session and click the "View in new Visualization" button to start your session. 
 
@@ -188,7 +188,6 @@ When your session finishes loading, you will see a blank genome browser since th
 ## What do you see on the genome browser? 
 
 ![trackster](../../images/trackster.png)
-{: .img-responsive}
 
 This data set was originally generated to analyze regions of the mitochondrial genome. Can you guess how this sequencing library was created??? 
 
