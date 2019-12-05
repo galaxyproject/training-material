@@ -12,7 +12,8 @@ objectives:
 requirements:
 time_estimation: "1h"
 key_points:
-    - ""
+    - "Use 'classical' Galaxy tools in combination with Interactive tools"
+    - "Identify general steps of a species distribution modeling aproach"
 contributors:
     - emichn
     - yvanlebras
@@ -48,7 +49,7 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 >    {% include snippets/rename_history.md %}
 >
 > 2. **Get species occurrences data** {% icon tool %} with the following parameters
->    - *"Scientific name"*: `Chrysemys picta`
+>    - *"Scientific name"*: `chrysemys picta`
 >    - *"Data source"*: `gbif`
 >    - *"Number of records to return"*: `10000`
 >
@@ -59,7 +60,7 @@ We have now a tabular file with about 10,001 lines and many columns.
 
 > ### {% icon question %} Questions
 > 1. What do the lines in the files represent?
-> 2. What are the columns 1, 2, 3 and 52 of the generated file?
+> 2. What are the columns 1, 2, 3 and 51 of the generated file?
 >
 > > ### {% icon solution %} Solution
 > > 1. Each line represent an observation of Chrysemys picta, with its location, and some other metadata
@@ -71,7 +72,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. **Cut columns** {% icon tool %} with the following parameters
->    - *"Cut columns"*: `c1,c2,c3,c52`
+>    - *"Cut columns"*: `c1,c2,c3,c51`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Get species occurrences data**
 >
@@ -95,6 +96,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    - {% icon param-file %} *"tabular file"*: output of **Filter**
 >    - *"output csv Separator"*: `,`
 >    - *"Header in file"*: `Yes`
+> 5. Due to an issue related to the actual tabular to csv converter application to GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` by `"` using for example the **Replace** {% icon tool %} parts of text tool.
 {: .hands_on}
 
 # Step 2: Development and evaluation of SDM using Wallace
