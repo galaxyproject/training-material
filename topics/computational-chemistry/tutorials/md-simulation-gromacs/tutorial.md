@@ -34,10 +34,10 @@ Molecular dynamics (MD) is a method to simulate molecular motion by iterative ap
 
 Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
-This is a introductory guide to using GROMACS {% cite abraham15 %} in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme. 
+This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
 > ### {% icon comment %} More information
-> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. 
+> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS.
 {: .comment}
 
 > ### Agenda
@@ -75,12 +75,8 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Upload the file in Galaxy from the PDB:
->    ```
->    https://files.rcsb.org/download/1AKI.pdb
->    ```
->
->    {% include snippets/import_via_link.md %}
+> 2. Use the **Get PDB** {% icon tool %} tool to download a PDB file for simulation:
+>    - *"PDB accession code"*: `1AKI`
 >
 > 3. Use the **grep** {% icon tool %} text processing tool to remove all lines that refer to non-protein atoms.
 >    - *"Select lines from"*: uploaded PDB file
@@ -94,11 +90,12 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 >    ```
 >    https://zenodo.org/record/2598415
 >    ```
+>    {% include snippets/import_via_link.md %}
 {: .comment}
 
 > ### {% icon details %} Background: What is the PDB (Protein Data Bank) and format?
 >
-> The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code [1AKI](https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI)).
+> The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code [1AKI](https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI).
 >
 > More resources:
 >
@@ -132,9 +129,10 @@ In summary, this tool will:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
 >    - *"Water model"*: `SPC/E`
 >    - *"Force field"*: `OPLS/AA`
->    - *"Ignore hydrogens"*: `no`
+>    - *"Ignore hydrogens"*: `No`
+>    - *"Box dimensions in nanometers"*: `1.0`
 >    - *"Box type"*: `Rectangular box with all sides equal`
->    - *"Generate detailed log"*: `yes`
+>    - *"Generate detailed log"*: `Yes`
 >
 > > ### {% icon question %} Question
 > >
@@ -160,7 +158,7 @@ The next stage is protein solvation, performed using **GROMACS solvation and add
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by setup
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology produced by setup
 >    - *"Water model for solvation"*: `SPC`
->    - *"Generate detailed log"*: `yes`
+>    - *"Generate detailed log"*: `Yes`
 >
 {: .hands_on}
 
@@ -173,9 +171,8 @@ Here, and in the later steps, two options are presented under 'Parameter input'.
 > ### {% icon hands_on %} Hands-on: energy minimization
 >
 > **GROMACS energy minimization** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GRO structure file"*: GRO structure file
+>    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by solvation tool
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - *"Generate detailed log"*: `yes`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `Steepest descent algorithm` (most common choice for EM)
 >    - *"Neighbor searching"*: `Generate a pair list with buffering` (the '[Verlet scheme](https://en.wikipedia.org/wiki/Verlet_list)')
@@ -184,14 +181,15 @@ Here, and in the later steps, two options are presented under 'Parameter input'.
 >    - *"Cut-off distance for the short-range neighbor list"*: `1.0` (but irrelevant as we are using the Verlet scheme)
 >    - *"Short range van der Waals cutoff"*: `1.0`
 >    - *"Number of steps for the MD simulation"*: `50000`
->    - *"EM tolerance"*: `1000.0`
+>    - *"EM tolerance"*: `1000`
 >    - *"Maximum step size"*: `0.01`
+>    - *"Generate detailed log"*: `Yes`
 >
 {: .hands_on}
 
 # Equilibration
 
-At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant **n**umber of particles, **v**olume and **t**emperature, while the NPT ensemble maintains constant **n**umber of particles, **p**ressure and **t**emperature.
+At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant **n**umber of particles, **v**olume and **t**emperature, while the NPT ensemble maintains constant **n**umber of particles, **p**ressure and **t**emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).
 
 For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.
 
@@ -200,10 +198,16 @@ Firstly, we perform equilibration using classical NVT dynamics.
 
 > ### {% icon hands_on %} Hands-on: NVT dynamics
 >
-> **GROMACS NVT equilibration** {% icon tool %} with the following parameters:
+> **GROMACS simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by setup
+>    - *"Use a checkpoint (CPT) file"*: `No CPT input`
+>    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
+>    - *"Apply position restraints"*: `Apply position restraints`
+>    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
+>    - *"Ensemble"*: `Isothermal-isochoric ensemble (NVT).`
+>    - *"Trajectory output"*: `Return no trajectory output` (we are not interested in how the system evolves to the equilibrated state, merely the final structure)
+>    - *"Structure output"*: `Return .gro file`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
@@ -216,21 +220,27 @@ Firstly, we perform equilibration using classical NVT dynamics.
 >    - *"Cut-off distance for the short-range neighbor list"*: `1.0` (but irrelevant as we are using the Verlet scheme)
 >    - *"Short range van der Waals cutoff"*: `1.0`
 >    - *"Number of steps for the NVT simulation"*: `50000`
->    - *"Trajectory output"*: `Return no trajectory output` (we are not interested in how the system evolves to the equilibrated state, merely the final structure)
->    - *"Structure output"*: `Return the .gro structure`
->    - *"Generate detailed log"*: `yes`
+>    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
 ## NPT equilibration
 Having stabilized the temperature of the system with NVT equilibration, we also need to stabilize the pressure of the system. We therefore equilibrate again using the NPT (constant number of particles, pressure, temperature) ensemble.
 
+Note that we can continue where the last simulation left off (with new parameters) by using the checkpoint (CPT) file saved at the end of the NVT simulation.
+
 > ### {% icon hands_on %} Hands-on: NPT dynamics
 >
-> **GROMACS NPT equilibration** {% icon tool %} with the following parameters:
+> **GROMACS simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - {% icon param-file %} *"Checkpoint (TOP) file"*: Checkpoint file produced by NVT equilibration
->    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by setup
+>    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
+>    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NVT equilibration
+>    - *"Produce a checkpoint (CPT) file"*: `Produce CPT output`
+>    - *"Apply position restraints"*: `Apply position restraints`
+>    - {% icon param-file %} *"Position restraint file"*: Position restraint file produced by 'Setup' tool.
+>    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
+>    - *"Trajectory output"*: `Return no trajectory output`
+>    - *"Structure output"*: `Return .gro file`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
@@ -243,19 +253,17 @@ Having stabilized the temperature of the system with NVT equilibration, we also 
 >    - *"Cut-off distance for the short-range neighbor list"*: `1.0` (but irrelevant as we are using the Verlet scheme)
 >    - *"Short range van der Waals cutoff"*: `1.0`
 >    - *"Number of steps for the NPT simulation"*: `50000`
->    - *"Trajectory output"*: `Return no trajectory output` (we are not interested in how the system evolves to the equilibrated state, merely the final structure)
->    - *"Structure output"*: `Return the .gro structure`
->    - *"Generate detailed log"*: `yes`
+>    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
-> > ### {% icon question %} Question
-> >
-> > Why is the position of the protein restrained during equilibration?
-> >
-> > > ### {% icon solution %} Solution
-> > > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
-> > {: .solution}
-> {: .question}
+> ### {% icon question %} Question
+>
+> Why is the position of the protein restrained during equilibration?
+>
+> > ### {% icon solution %} Solution
+> > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
+> {: .solution}
+{: .question}
 
 
 # Production simulation
@@ -263,10 +271,16 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 > ### {% icon hands_on %} Hands-on: Production simulation
 >
-> 1. **GROMACS production simulation** {% icon tool %} with the following parameters:
+> 1. **GROMACS simulation** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GRO structure file"*: GRO structure file
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology
->    - {% icon param-file %} *"Checkpoint (TOP) file"*: Checkpoint file produced by NPT equilibration
+>    - *"Use a checkpoint (CPT) file"*: `Continue simulation from a CPT file.`
+>    - {% icon param-file %} *"Checkpoint (CPT) file"*: Checkpoint file produced by NPT equilibration
+>    - *"Produce a checkpoint (CPT) file"*: `No CPT output`
+>    - *"Apply position restraints"*: `No position restraints`
+>    - *"Ensemble"*: `Isothermal-isobaric ensemble (NPT).`
+>    - *"Trajectory output"*: `Return .xtc file (reduced precision)` (this time, we save the trajectory)
+>    - *"Structure output"*: `Return .gro file`
 >    - *"Parameter input"*: `Use default (partially customisable) setting`
 >    - *"Choice of integrator"*: `A leap-frog algorithm for integrating Newton’s equations of motion` (A basic leap-frog integrator)
 >    - *"Bond constraints"*: `Bonds with H-atoms` (bonds involving H are constrained)
@@ -279,9 +293,7 @@ Now that equilibration is complete, we can release the position restraints. We a
 >    - *"Cut-off distance for the short-range neighbor list"*: `1.0` (but irrelevant as we are using the Verlet scheme)
 >    - *"Short range van der Waals cutoff"*: `1.0`
 >    - *"Number of steps for the simulation"*: `500000`
->    - *"Trajectory output"*: `Return .xtc file (reduced precision)` (this time, we save the trajectory)
->    - *"Structure output"*: `Return the .gro structure`
->    - *"Generate detailed log"*: `yes`
+>    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
 # Workflow

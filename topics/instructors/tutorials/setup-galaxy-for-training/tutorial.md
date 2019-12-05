@@ -31,7 +31,9 @@ Tutorials in this repository are all supplemented with files describing the tech
   - `workflows` folder: contains one or more workflows with all steps in the tutorial
   - `tours` folder: contains one or more yaml files describing interactive tours
 
+> ### {% icon comment %} Requirements
 > For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md %}).
+{: .comment}
 
 For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#quickstart) at the end of this tutorial.
 

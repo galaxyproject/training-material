@@ -79,7 +79,13 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
+>    {% include snippets/rename_dataset.md %}
 >
+> 4. Make sure that the file `FASTQ_ProB_22List.fastqsanger`
+>    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>
+> 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
+>    {% include snippets/change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
 >
 {: .hands_on}
 
@@ -96,6 +102,8 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 >    - {% icon param-select %} *"Single-end or paired-end reads"*: `Single end`
 >    - {% icon param-file %} *"Input FASTQ files"*: `FASTQ_ProB_22LIST.fastqsanger`
 >    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
+> 2. Inspect {% icon galaxy-eye %} the resulting files
+> 3. Rename the output to `HISAT_Output.BAM`
 >
 > > ### {% icon comment %} Note on strandedness
 > > Note that if your reads are from a stranded library, you need to choose the appropriate
@@ -152,8 +160,9 @@ and RO fields in the VCF output.
 >    - {% icon param-select %} *"Limit variant calling to a set of regions?"*: `Do not Limit`
 >    - {% icon param-select %} *"Choose parameter selection level"*: `Simple diploid calling`
 >
-> 2. Click **Execute** and inspect the resulting files
+> 2. Inspect {% icon galaxy-eye %} the resulting files.
 >
+> Note: FreeBayes may take some time...be patient!!!!
 {: .hands_on}
 
 > ### {% icon comment %} FreeBayes options
@@ -204,6 +213,7 @@ data manager to create these annotations to make them available for users.
 >    - {% icon param-check %} *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
 >    - {% icon param-check %} *"Create RData file of variant protein coding sequences"*: `Yes`
 >
+> 2. Inspect {% icon galaxy-eye %} the resulting files
 {: .hands_on}
 
 Three FASTA files are generated through the CustomProDB tool:
@@ -236,7 +246,12 @@ Its input can include not only the alignments of raw reads used by other transcr
 >      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
 >      - {% icon param-select %} *"Use Reference transcripts only?"*: `No`
 >      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
->
+>      - {% icon param-select %} *"Output coverage file?"*: `No`
+> 2. Inspect {% icon galaxy-eye %} the resulting files.
+> 3. Rename the output to `Stringtie_outut.gtf`
+>    {% include snippets/rename_dataset.md %}
+> 4. Make sure the datatype is `gtf`
+>    {% include snippets/change_datatype.md %}
 {: .hands_on}
 
 StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be
@@ -319,25 +334,25 @@ The original form of this program is also distributed as part of the Cufflinks s
 > First, we must convert the GffCompare annotated GTF file to BED format.
 >
 > 1. **Convert gffCompare annotated GTF to BED** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GTF annotated by gffCompare"*: `output from gff compare`
->    - {% icon param-select %} *"filter GffCompare class_codes to convert"*:
->      - `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`
->      - `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.`
->      - `i : A transfrag falling entirely within a reference intron`
->      - `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
->      - `u : Unknown, intergenic transcript`
+>  - {% icon param-file %} *"GTF annotated by gffCompare"*: `output from gff compare`
+>  - {% icon param-select %} *"filter GffCompare class_codes to convert"*:
+>    - `j : Potentially novel isoform (fragment): at least one splice junction is shared with a reference transcript`
+>    - `e : Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible   pre-mRNA fragment.`
+>    - `i : A transfrag falling entirely within a reference intron`
+>    - `p : Possible polymerase run-on fragment (within 2Kbases of a reference transcript)`
+>    - `u : Unknown, intergenic transcript`
 >
->     Next, we translate transcripts from the input BED file into protein sequences.
+>    Next, we translate transcripts from the input BED file into protein sequences.
 >
-> 1. **Translate BED transcripts cDNA in 3frames or CDS** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
->    - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
->    - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
+> 2. **Translate BED transcripts cDNA in 3frames or CDS** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
+>   - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
+>   - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
 >
->     Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
+>    Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
 >
-> 1. **bed to protein map** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `Translate cDNA_minus_CDS`
+> 3. **bed to protein map** {% icon tool %} with the following parameters:
+>   - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `Translate cDNA_minus_CDS`
 >
 {: .hands_on}
 
@@ -352,10 +367,10 @@ The original form of this program is also distributed as part of the Cufflinks s
 # Creating FASTA Databases
 
 In this section we will perform the following tasks:
-- The **Protein Database Downloader** tool is used to download the FASTA database from UniProt and cRAP (**c**ommon **R**epository of **A**dventitious **P**roteins) database containing known/reference mouse proteins.
-- The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
+- The **Protein Database Downloader** tool is used to download the FASTA database from UniProt and cRAP (**c**ommon **R**epository of **A**dventitious **P**roteins) database containing known/reference mouse proteins. For the purpose of this tutorial, we will use the `Reference_5000_uniprot_cRAP.fasta` file as this database.
 - The **FASTA Merge Files and Filter Unique Sequences** tool is used to merge the databases obtained from CustomProDB and "Translate BED" tool
 along with the UniProt and cRAP databases.
+- The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
 
 > ### {% icon hands_on %} Hands-on
 >
@@ -376,6 +391,7 @@ along with the UniProt and cRAP databases.
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
+> - Rename it as **CustomProDB Merged Fasta**
 {: .comment}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)
@@ -397,10 +413,14 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      FROM genomic_mapping
 >      ORDER BY pro_name, cds_start, cds_end
 >      ```
+>   - {% icon param-file %} *"Omit column headers from tabular output"*: `No`
 >
->     The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
+> 2. Rename output to `genomic_mapping_sqlite`
+>    {% include snippets/rename_dataset.md %}
 >
-> 1. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+>    The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
+>
+> 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
 >    - {% icon param-select %} *"Using"*: `column 1`
 >    - {% icon param-repeat %} **Insert Check**
@@ -413,18 +433,20 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1`
 >
+> 4. Rename the output to `SAV_INDEL`
+>
 >     This tool goes line by line through the specified input file and if the text in the selected column matches a specified regular expression pattern, it replaces the text with the specified replacement.
 >
 >     Next, we will concatenate the output from this tool with the "Bed to protein map" output.
 >
-> 1. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
->   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous tool and the `Bed2protein_SJ_SAV_INDEL` output.
+> 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
+>   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous tool named as `SAV_INDEL` and the output from the "bed to protein map" tool and concatenate the tool.
 >
->     Output will be the "Genomic_Protein_map"
+>     Output will be the "Genomic_Protein_map" rename it as that
 >
 >     Now, we load this tabular datasets into an SQLite database.
 >
-> 1. **Query Tabular using SQLite** {% icon tool %} with the following parameters:
+> 6. **Query Tabular using SQLite** {% icon tool %} with the following parameters:
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - {% icon param-file%} *"Tabular Dataset for Table"*: `Genomic_Protein_map`
 >      - Section **Table Options**:
@@ -434,8 +456,9 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >        - {% icon param-repeat %} **Insert Table Index**:
 >          - {% icon param-check %} *"This is a unique index"*: `No`
 >          - {% icon param-text %} *"Index on columns"*: `name,cds_start,cds_end`
+>        - {% icon param-select %} *"Save the sqlite database in your history"*:`Yes`
 >
-> 1. Rename the output as **"genomic_mapping_sqlite"**
+> 7. Rename the output as **"genomic_mapping_sqlite"**
 >
 >    ![genomic mapping](../../images/genomic_mapping_file.png)
 >
@@ -483,7 +506,7 @@ We will repeat the process for the variant annotations
 >      - {% icon param-repeat %} **Insert Table Index**
 >        - {% icon param-check %} *"This is a unique index"*: `No`
 >        - {% icon param-text %} *"Index on columns"*: `name,cigar`
->
+>      - {% icon param-select %} *"Save the sqlite database in your history"*:`Yes`
 > 1. Rename the output as **"Variant_annotation_sqlitedb"**
 >
 {: .hands_on}
@@ -494,4 +517,27 @@ by MVP to visualize the genomic loci of any variant peptides.
 
 
 ![SNP variant](../../images/viewing_SNP_Variant_IGV.png)
+
+Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.
+
+To do so:
+
+> ### {% icon hands_on %} Hands-on
+>
+> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
+>   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Merged Fasta File output`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Translate BED transcripts Fasta output`
+>   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Reference_5000_uniprot_cRAP.fasta`
+>   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+>
+{: .hands_on}
+
+> ### {% icon comment %} Tool parameters explained
+> This tool concatenates FASTA database files together.
+> - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
+> - The default accession parser will treat everything in the header before the first space as the accession.
+> - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
+{: .comment}
 

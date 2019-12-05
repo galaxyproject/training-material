@@ -21,12 +21,12 @@ The reads have a direction: they are mapped to the forward or reverse strand, re
 >
 > > ### {% icon solution %} Solution
 > > 1. If a nucleotide differs from the reference sequence in more than 20% of quality weighted reads, IGV colors the bar in proportion to the read count of each base.
-> > 2. They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.
+> > 2. They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible that the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.
 > {: .solution }
 {: .question}
 
 > ### {% icon comment %} Tips for IGV
-> 1. Because the number of reads over a region can be quite large, the IGV browser by default only allows to see the reads that fall into a small window. This behaviour can be changed in the IGV from `view > Preferences > Alignments`.
+> 1. Because the number of reads over a region can be quite large, the IGV browser by default only displays the reads that fall into a small window. This behaviour can be changed in the IGV from `view > Preferences > Alignments`.
 > 2. If the genome of your interest is not there check if it is available via **More...**. If this is not the case, you can add it manually via the menu **Genomes** -> **Load Genome from...**
 >
 >    ![Select genome in IGV](../../images/igv_select_genome.png "Select genome in IGV")

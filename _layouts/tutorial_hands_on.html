@@ -28,6 +28,15 @@ layout: base
     {% endif %}
 {% endfor %}
 
+{% if topic.gitter %}
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: '{{ topic.gitter }}'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+{% endif %}
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -80,20 +89,29 @@ layout: base
 
     <section class="tutorial">
         <h1 data-toc-skip>{{ page.title }}</h1>
+        {% if page.enable == false or page.enable == "false" %}
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Under Development!</h4>
+            <p>This tutorial is not in its final state. The content may change a lot in the next months.
+            Because of this status, it is also not listed in the topic pages.</p>
+        </div>
+        {% endif %}
+
         <div class="contributors-line">By: {% include _includes/contributor-badge-list.html contributors=page.contributors %}</div>
+
         <blockquote class="overview">
             <h3>Overview</h3>
             <strong>{% icon question %} Questions</strong>
             <ul>
             {% for question in page.questions %}
-            <li>{{ question }}</li>
+            <li>{{ question | markdownify }}</li>
             {% endfor %}
             </ul>
 
             <strong>{% icon objectives %} Objectives</strong>
             <ul>
             {% for objective in page.objectives %}
-            <li>{{ objective }}</li>
+            <li>{{ objective | markdownify }}</li>
             {% endfor %}
             </ul>
 
@@ -114,60 +132,49 @@ layout: base
             {% include _includes/difficulty-indicator.html level=page.level textlabel=true %}</p>
             {% endif %}
 
+            {% if instances[topic.name].supported or topic.docker_image %}
+                {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
+                    {% assign tuto_has_docker = true %}
+                {% endif %}
+            {% endif %}
+            {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
+                {% assign tuto_has_zenodo = true %}
+            {% endif %}
 
+            {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker %}
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                {% if associated_slides %}
+                    <li class="btn btn-default"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
+                        {% icon slides %} Slides
+                    </a></li>
+                {% elsif intro_link %}
+                    <li class="btn btn-default supporting_material"><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
+                        {% icon slides %} Introduction slides
+                    </a></li>
+                {% endif %}
 
-            <div>
-                <div><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></div>
-                <div id="supporting_materials">
-                    <ul>
-                        <li>
-                            <div>
-                    {% if associated_slides %}
-                    <div>
-                        <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html" title="Slides for this tutorial">
-                            {% icon slides %} Slides
-                        </a>
-                    </div>
-                    {% elsif intro_link %}
-                    <div>
-                        <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ intro_target }}" title="Introduction slides">
-                            {% icon slides %} Introduction Slides
-                        </a>
-                    </div>
-                    {% endif %}
+                {% if tuto_has_zenodo %}
+                    <li class="btn btn-default supporting_material">{% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
 
-                    {% if own_material.zenodo_link and own_material.zenodo_link != "" %}
-                    <div>
-                        {% include _includes/resource-zenodo.html material=own_material topic=topic.name label=true %}
-                    </div>
-                    {% endif %}
+                {% if own_material.workflows %}
+                    <li class="btn btn-default supporting_material">{% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
 
-                    {% if own_material.workflows %}
-                    <div>
-                        {% include _includes/resource-workflows.html material=own_material topic=topic.name label=true %}
-                    </div>
-                    {% endif %}
-                    {% if own_material.tours %}
-                    <div>
-                        {% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}
-                    </div>
-                    {% endif %}
+                {% if own_material.tours %}
+                    <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
+                {% endif %}
 
-
-                    {% if instances[topic.name].supported or topic.docker_image %}
-                    {% if instances[topic.name]['tutorials'][own_material.tutorial_name].supported or topic.docker_image %}
-                    <div>
-                        {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}
-                    </div>
-                    {% endif %}
-                    {% endif %}
-                            </div>
-                        </li>
-                    </ul>
+                {% if tuto_has_docker and topic.name != 'admin' %}
+                    <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
+                {% endif %}
                 </div>
+            </ul>
+            {% endif %}
 
-            </div>
-
+            <p><strong> {% icon last_modification %} Last modification:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </p>
         </blockquote>
 
         <div class="container">
@@ -178,16 +185,15 @@ layout: base
                 </div>
                 <div class="col-sm-10">
                     {{ content
-                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">' }}
-
+                        | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
+                        | no_translate:site.words_to_not_translate }}
 
                     {% if page.key_points %}
                     <blockquote class="key_points">
                         <h3>{% icon keypoints %} Key points</h3>
-
                         <ul>
                             {% for key_point in page.key_points %}
-                            <li>{{ key_point }}</li>
+                            <li>{{ key_point | markdownify }}</li>
                             {% endfor %}
                         </ul>
                     </blockquote>
@@ -202,6 +208,58 @@ layout: base
                     <h1 id="bibliography">References</h1>
                     {% bibliography --cited %}
                     {% endif %}
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">
+                            {%- include _includes/contributor-author-list-comma.html contributors=page.contributors -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.baseurl }}{{page.url}}">{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
+    author = "{%- include _includes/contributor-author-list.html contributors=page.contributors -%}",
+    title = "{{ page.title }} (Galaxy Training Materials)",
+    year = "{{ page.last_modified_at | date: "%Y"}}",
+    month = "{{ page.last_modified_at | date: "%m"}}",
+    day = "{{ page.last_modified_at | date: "%d" }}"
+    url = "{% raw %}\url{{% endraw %}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
 
                 </div>
             </div>
@@ -244,6 +302,7 @@ layout: base
         <hr>
         <br>
 
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
         <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ page.title }} ({{ topic.title }})">Loading...
         </iframe>
 

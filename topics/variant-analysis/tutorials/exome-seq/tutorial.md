@@ -457,7 +457,7 @@ the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analy
 >        - *"Read group identifier (ID)"*: `001`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `mother`
-> 
+>
 > 3. **Map with BWA-MEM** {% icon tool %} to map the reads from the **child** sample to the reference genome **using the same parameters as before** except
 >
 >    - *"Single or Paired-end reads"*: `Paired`
@@ -498,13 +498,14 @@ reads before passing them to a variant caller.
 
 The optimal set of postprocessing steps required depends on the variant calling
 software used at the next step. The **FreeBayes** variant caller that we are
-going to use in this tutorial is particularly well suited for use with minimal mapped reads postprocessing pipelines, so all we are going to do here is:
+going to use in this tutorial is particularly well suited for use with minimal
+mapped reads postprocessing pipelines, so all we are going to do here is:
 
 - filter the paired-end reads of all samples to retain only those read pairs,
   for which both the forward and the reverse read have been mapped to the
   reference successfully
 
-  For such *proper pairs of reads*, we can be extra confident that they don't
+  For such pairs of reads, we can be extra confident that they don't
   come from some non-human contaminant DNA or represent a sequencing artefact
   of some sort.
 
@@ -525,8 +526,7 @@ going to use in this tutorial is particularly well suited for use with minimal m
 
 ## Filtering on mapped reads properties
 
-To produce new filtered BAM datasets with only those reads retained that are
-mapped in a proper pair:
+To produce new filtered BAM datasets with only mapped reads the mate of which is also mapped:
 
 > ### {% icon hands_on %} Hands-on: Filtering for read pair mapping status
 >
@@ -537,11 +537,62 @@ mapped in a proper pair:
 >     {% icon tool %}
 >   - *"Filter on bitwise flag"*: `yes`
 >     - *"Only output alignments with all of these flag bits set"*:
->        - {% icon param-check %} *"Read is mapped in a proper pair"*
+>       Do not select anything here!
+>     - *"Skip alignments with any of these flag bits set"*:
+>        - {% icon param-check %} *"The read is unmapped"*
+>        - {% icon param-check %} *"The mate is unmapped"*
 >
 {: .hands_on}
 
 This will result in three new datasets, one for each sample in the analysis.
+
+> ### {% icon details %} More than one way to filter
+> Instead of the above filter conditions we could also have exploited the
+> *Read is mapped in a proper pair* flag bit.
+>
+> For a read to be flagged as being mapped in a proper pair its mate needs to
+> be mapped, but the mapped pair also needs to meet additional,
+> aligner-specific criteria. These may include (and do so for **BWA-MEM**):
+>
+> - both reads need to map to the same chomosome
+> - the two reads need to map to the reference in the orientation expected by
+>   the aligner
+> - the two read pairs need to map to the reference within an
+>   aligner-determined distance
+>
+> Thus, filtering based on the flag has two consequences:
+>
+> - filtering will be stricter than with just the *Read is unmapped* and *Mate
+>   is unmapped* flags above
+> - you will eliminate read pairs that could be informative with regard to
+>   chromosomal rearrangements and insertion/deletion events
+>
+>   => Do not filter for properly paired reads if you plan to detect such
+>   structural variants!
+>
+> In addition, the *proper pair* flag is considered undefined if the read
+> itself is unmapped, so a *proper pair* filter should eliminate unmapped reads
+> explicitly to be on the safe side.
+>
+> Thus, if you would like to use proper pair filtering (we have no intention to
+> detect structural variants in this tutorial) instead of just filtering for
+> mapped reads with a mapped mate, you could run the alternative:
+>
+> > ### {% icon hands_on %} Hands-on:
+> >
+> > 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %}:
+> >   - {% icon param-files %} *"SAM or BAM file to filter"*: all 3 mapped
+> >     reads datasets of the family trio, outputs of **Map with BWA-MEM**
+> >     {% icon tool %}
+> >   - *"Filter on bitwise flag"*: `yes`
+> >     - *"Only output alignments with all of these flag bits set"*:
+> >       - {% icon param-check %} *"Read is mapped in a proper pair"*
+> >     - *"Skip alignments with any of these flag bits set"*:
+> >       - {% icon param-check %} *"The read is unmapped"*
+> >
+> {: .hands_on}
+>
+{: .details}
 
 ## Removing duplicate reads
 
@@ -1123,22 +1174,22 @@ you think could plausibly be causative for the child's disease.
 >
 {: .hands_on}
 
-> > ### {% icon question %} Question
-> >
-> > From the GEMINI reports you generated, can you identify the most likely
-> > candidate variant responsible for the child's disease?
-> {: .question}
+> ### {% icon question %} Question
+>
+> From the GEMINI reports you generated, can you identify the most likely
+> candidate variant responsible for the child's disease?
+{: .question}
 
-> > ### {% icon details %} More GEMINI usage examples
-> >
-> > While only demonstrating command line use of GEMINI, the following tutorial
-> > slides may give you additional ideas for variant queries and filters:
-> >
-> > - [Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
-> > - [Identifying *de novo* mutations with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
-> > - [Identifying recessive gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
-> > - [Identifying dominant gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
-> {: .details}
+> ### {% icon details %} More GEMINI usage examples
+>
+> While only demonstrating command line use of GEMINI, the following tutorial
+> slides may give you additional ideas for variant queries and filters:
+>
+> - [Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
+> - [Identifying *de novo* mutations with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
+> - [Identifying recessive gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
+> - [Identifying dominant gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
+{: .details}
 
 # Conclusion
 {:.no_toc}

@@ -63,7 +63,9 @@ The templates for the tutorials are different from the other pages to help users
 
 The content of each tutorial is generated with [Jekyll](https://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
+> ### {% icon comment %} Contributing
 > Want to contribute to a tutorial? Check out [our training materials about that]({{ site.baseurl }}{% link topics/contributing/index.md %}).
+{: .comment}
 
 Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
 
@@ -133,7 +135,9 @@ Once the topic name has been chosen, we can create it.
 > 4. Check that a YAML file with your topic name has been generated in `metadata` folder
 > 5. Make sure that Jekyll is running
 >
+>    > ### {% icon comment %} Jekyll
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    {: .comment}
 >
 > 6. Check if the topic has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)
 >
@@ -159,10 +163,22 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
     - `link`: URL to the external resource
 
 - `docker_image`: name of the Docker image for the topic
-
     If no Docker image exists for this topic, let this information empty
 
+- `subtopics`: for large topics, we can define subtopics and create multiple tutorial lists:
+  ```
+  subtopics:
+    singlecell:
+      title: "Single Cell Analysis"
+      description: "These tutorials cover single cell analysis"
+    small:
+      title: "Small RNA"
+      description: "These Tutorial"
+  ```
+  tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
+
 - `maintainers`: GitHub username of people maintaining the topic
+- `gitter`: The name of the chatroom on Gitter, if enabled, it will be embedded on the topic and tutorial pages. Should be formatted like `../..`, without the `https://gitter.im`, e.g. `galaxyproject/dev`
 
 > ### {% icon hands_on %} Hands-on: Update the new topic to the website
 >
@@ -170,7 +186,9 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 > 2. Fill the correct metadata of the topic
 > 3. Make sure that Jekyll is running
 >
+>    > ### {% icon comment %} Jekyll
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    {: .comment}
 >
 > 4. Check how it changes the local website
 >

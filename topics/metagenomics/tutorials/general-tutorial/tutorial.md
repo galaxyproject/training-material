@@ -507,7 +507,7 @@ Let's visualize our data using Krona:
 The result is an HTML file with an interactive visualization, for instance try clicking
 on one of the rings in the image or playing around with some of the settings.
 
-![Krona output](../../images/krona.png)
+<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona](../../images/krona.png) </iframe>
 
 This produced a single plot for both your samples, but what if you want to compare
 the two samples?
