@@ -48,7 +48,7 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 >    {% include snippets/rename_history.md %}
 >
 > 2. **Get species occurrences data** {% icon tool %} with the following parameters
->    - *"Scientific name"*: `Chrysemys picta`
+>    - *"Scientific name"*: `chrysemys picta`
 >    - *"Data source"*: `gbif`
 >    - *"Number of records to return"*: `10000`
 >
