@@ -37,7 +37,7 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 
 ## Load data from Galaxy library
 
-Right click (or Ctrl-click) on [this link](https://usegalaxy.org/library/list#folders/Fab5f788f07073c11) to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:
+Right click (or Ctrl-click) on [this link](http://ecg2019.bioch.virginia.edu/galaxy/library/list#folders/F33b43b4e7093c91f) to open a new browser window and position this window side-by-side with the window displaying this tutorial. You will see this:
 
 ![Data in Galaxy library](../../images/grab_data.png)
 
