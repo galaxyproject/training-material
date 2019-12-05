@@ -1,5 +1,5 @@
 # Using collections to organize complex datasets 
-### Adapted from:https://training.galaxyproject.org/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html
+##### Adapted from:https://training.galaxyproject.org/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html
 ---
 
 Questions:
