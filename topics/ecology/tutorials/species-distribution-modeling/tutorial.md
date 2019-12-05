@@ -95,6 +95,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    - {% icon param-file %} *"tabular file"*: output of **Filter**
 >    - *"output csv Separator"*: `,`
 >    - *"Header in file"*: `Yes`
+> 5. Due to an issue related to the actual tabular to csv converter related to GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` by `"` using for example the **Replace** parts of texte  {% icon tool %} tool.
 {: .hands_on}
 
 # Step 2: Development and evaluation of SDM using Wallace
