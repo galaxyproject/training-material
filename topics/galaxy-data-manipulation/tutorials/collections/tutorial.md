@@ -170,10 +170,7 @@ Set **Probability (between 0 and 1) that any given read will be kept** to roughl
 
 ![downsample_closeup](../../images/downsample_closeup.png)
 
-This will generate another BAM dataset containing only 5% of the original reads and much smaller as a result. Click on this dataset and you will see links to various genome browsers:
-
-![browserLinks](../../images/browserLinks.png)
-
+This will generate another BAM dataset containing only 5% of the original reads and much smaller as a result. Click on this dataset and you will see links to various genome browsers, we will use Galaxy's own Genome Browser to visualize our data below. 
 
 Click your downsampled dataset to expand the dataset in the history. Click the visualization button (in blue below).
 
