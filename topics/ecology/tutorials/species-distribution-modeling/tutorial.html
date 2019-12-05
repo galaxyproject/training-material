@@ -342,8 +342,185 @@
             
 
             
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 30, 2019 </p>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/ecology/tutorials/species-distribution-modeling/workflows/" title="Workflows" alt="Species distribution modeling workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 5, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -418,7 +595,7 @@
     </li>
     <li><strong>Get species occurrences data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Scientific name”</em>: <code class="highlighter-rouge">Chrysemys picta</code></li>
+        <li><em>“Scientific name”</em>: <code class="highlighter-rouge">chrysemys picta</code></li>
         <li><em>“Data source”</em>: <code class="highlighter-rouge">gbif</code></li>
         <li><em>“Number of records to return”</em>: <code class="highlighter-rouge">10000</code></li>
       </ul>
@@ -433,7 +610,7 @@
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
   <ol>
     <li>What do the lines in the files represent?</li>
-    <li>What are the columns 1, 2, 3 and 52 of the generated file?</li>
+    <li>What are the columns 1, 2, 3 and 51 of the generated file?</li>
   </ol>
 
   <blockquote class="solution">
@@ -452,7 +629,7 @@
   <ol>
     <li><strong>Cut columns</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2,c3,c52</code></li>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2,c3,c51</code></li>
         <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Get species occurrences data</strong></li>
       </ul>
@@ -486,6 +663,7 @@
         <li><em>“Header in file”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
+    <li>Due to an issue related to the actual tabular to csv converter application to GBIF format, each <code class="highlighter-rouge">"</code> sign is triplicated on the resulting file. You need to replace <code class="highlighter-rouge">"""</code> by <code class="highlighter-rouge">"</code> using for example the <strong>Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> parts of text tool.</li>
   </ol>
 </blockquote>
 
@@ -879,7 +1057,10 @@
                         <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li>
+                            <li><p>Use ‘classical’ Galaxy tools in combination with Interactive tools</p>
+</li>
+                            
+                            <li><p>Identify general steps of a species distribution modeling aproach</p>
 </li>
                             
                         </ul>
@@ -934,8 +1115,8 @@
     author = "Elisa Michon and Yvan Le Bras and Bérénice Batut",
     title = "Species distribution modeling (Galaxy Training Materials)",
     year = "2019",
-    month = "11",
-    day = "30"
+    month = "12",
+    day = "05"
     url = "\url{/training-material/topics/ecology/tutorials/species-distribution-modeling/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
