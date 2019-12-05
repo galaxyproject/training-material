@@ -12,7 +12,8 @@ objectives:
 requirements:
 time_estimation: "1h"
 key_points:
-    - ""
+    - "Use "classical" Galaxy tools in combination with Interactive ones"
+    - "Identify ge,eral steps of a species distribution modeling aproach"
 contributors:
     - emichn
     - yvanlebras
@@ -95,7 +96,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    - {% icon param-file %} *"tabular file"*: output of **Filter**
 >    - *"output csv Separator"*: `,`
 >    - *"Header in file"*: `Yes`
-> 5. Due to an issue related to the actual tabular to csv converter related to GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` by `"` using for example the **Replace** parts of texte  {% icon tool %} tool.
+> 5. Due to an issue related to the actual tabular to csv converter application to GBIF format, each `"` sign is triplicated on the resulting file. You need to replace `"""` by `"` using for example the **Replace** {% icon tool %} parts of text tool.
 {: .hands_on}
 
 # Step 2: Development and evaluation of SDM using Wallace
