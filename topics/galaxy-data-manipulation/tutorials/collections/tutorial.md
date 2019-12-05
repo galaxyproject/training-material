@@ -1,23 +1,20 @@
-#Using collections to organize complex datasets 
+# Using collections to organize complex datasets 
+### Adapted from:https://training.galaxyproject.org/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html
 ---
-layout: tutorial_hands_on
 
-title: "Collections: Using dataset collection"
-zenodo_link: ""
-level: Intermediate
-questions:
+Questions:
   - "How to manipulate large numbers of datasets at once?"
-objectives:
+Objectives:
   - "Understand and master dataset collections"
-time_estimation: "30m"
-key_points:
+Time_estimation: "30m"
+Key_points:
   - "Jobs running on data collections use the same settings for each dataset in the collection."
   - "For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset."
   - "In this tutorial, several tools were run on the list of dataset pairs, such as `bwa-mem`, `cleanSam`, `Filter SAM or BAM`, etc."
   - "When using collections, you have to click on the `batch input mode` button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list."
 contributors:
-  - nekrut,moheydarian, pdeford
 ---
+
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
