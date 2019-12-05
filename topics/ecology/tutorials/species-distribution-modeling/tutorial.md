@@ -12,8 +12,8 @@ objectives:
 requirements:
 time_estimation: "1h"
 key_points:
-    - "Use "classical" Galaxy tools in combination with Interactive ones"
-    - "Identify ge,eral steps of a species distribution modeling aproach"
+    - "Use 'classical' Galaxy tools in combination with Interactive tools"
+    - "Identify general steps of a species distribution modeling aproach"
 contributors:
     - emichn
     - yvanlebras
