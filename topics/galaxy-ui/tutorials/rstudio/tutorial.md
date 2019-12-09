@@ -44,12 +44,7 @@ contributors:
 
 ## Opening up RStudio
 
-> ### {% icon hands_on %} Hands-on: Open RStudio
->
-> 1. Start RStudio in Galaxy
-> 
->    {% include snippets/launch_rstudio_cloud.md %}
-{: .hands_on}
+{% include snippets/launch_rstudio.md %}
 
 You should now be looking at a page with the RStudio interface:
 
