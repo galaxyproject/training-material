@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: RStudio in Galaxy
 zenodo_link: ""
-enable: false
 questions:
 - How can I manipulate data using R in Galaxy?
 objectives:

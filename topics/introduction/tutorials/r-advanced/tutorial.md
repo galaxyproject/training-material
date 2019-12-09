@@ -1,17 +1,16 @@
 ---
 layout: tutorial_hands_on
 
-title: R advanced in Galaxy
+title: Advanced R in Galaxy
+level: Intermediate
 zenodo_link: ""
-enable: false
 requirements:
   -
     type: "internal"
     topic_name: galaxy-ui
     tutorials:
         - rstudio
-
- -
+  -
     type: "internal"
     topic_name: introduction
     tutorials:
@@ -37,6 +36,7 @@ key_points:
 - Just like Galaxy, base R's capabilities can be further enhanced by software packages developed by the user community.
 - Use the `dplyr` package to manipulate data frames.
 - Pipes can be used to combine simple operations into complex procedures.
+subtopic: r
 contributors:
   - bebatut
   - fpsom
