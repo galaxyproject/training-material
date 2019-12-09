@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: RNA Seq Counts to Viz in R
 zenodo_link: "https://zenodo.org/record/3477564/"
-enable: false
 requirements:
   -
     type: "internal"
@@ -45,9 +44,9 @@ With RNA-Seq data analysis, we generated tables containing list of DE genes, the
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
-{% include topics/introduction/tutorials/r-basics/r_introduction.md %}
-{% include topics/introduction/tutorials/r-basics/r_advantages.md %}
-{% include topics/introduction/tutorials/r-basics/disclaimer.md %}
+> ### {% icon tip %} Prerequisites
+> It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.
+{: .tip}
 
 In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
@@ -60,7 +59,7 @@ In this tutorial, we will take the list of DE genes extracted from DESEq2's outp
 >
 {: .agenda}
 
-{% include topics/introduction/tutorials/r-basics/start_rstudio.md %}
+{% include snippets/launch_rstudio.md %}
 
 # Visualization
 
