@@ -46,6 +46,37 @@ Sometimes we want to have some customizations on visualization, some complex tab
 
 > ### {% icon tip %} Prerequisites
 > It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.
+>
+> If you are starting with this tutorial, you will need to import a dataset:
+>
+> > ### {% icon hands_on %} Hands-on: Using datasets from Galaxy
+> >
+> > 1. Upload the following URL to Galaxy:
+> >    ```
+> >    https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
+> >    ```
+> >
+> > 2. Note the history ID of the dataset in your Galaxy history
+> >
+> > 3. Rstudio in Galaxy provides some special functions to import and export from your history:
+> >
+> >    ```R
+> >    annotatedDEgenes <- read.csv(gx_get(2), sep="\t") # will import dataset number 2 from your history, use the correct ID for your dataset.
+> >    ```
+> >
+> >
+> {: .hands_on}
+>
+> > ### {% icon hands_on %} Hands-on: Using datasets without Galaxy
+> > 1. Read the tabular file into an object called `annotatedDEgenes`:
+> >
+> >    ```R
+> >    ## read in a CSV file and save it as 'annotatedDEgenes'
+> >    annotatedDEgenes <- read.csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep="\t")
+> >    ```
+> >
+> >  {: .tip}
+> {: .hands_on}
 {: .tip}
 
 In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
@@ -71,6 +102,8 @@ In RNA-seq data analysis and other omics experiments, visualization are an impor
 
 ```R
 ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>() +
+  <GEOM_FUNCTION>() +
   <GEOM_FUNCTION>()
 ```
 
