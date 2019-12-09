@@ -1,17 +1,16 @@
 ---
 layout: tutorial_hands_on
 
-title: R advanced in Galaxy
+title: Advanced R in Galaxy
+level: Intermediate
 zenodo_link: ""
-enable: false
 requirements:
   -
     type: "internal"
     topic_name: galaxy-ui
     tutorials:
         - rstudio
-
- -
+  -
     type: "internal"
     topic_name: introduction
     tutorials:
@@ -37,6 +36,7 @@ key_points:
 - Just like Galaxy, base R's capabilities can be further enhanced by software packages developed by the user community.
 - Use the `dplyr` package to manipulate data frames.
 - Pipes can be used to combine simple operations into complex procedures.
+subtopic: r
 contributors:
   - bebatut
   - fpsom
@@ -50,8 +50,9 @@ With HTS-Seq data analysis, we generated tables containing list of DE genes, the
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
+<!-- Keeping this here because people may be familiar enough with R, that they go directly to this tutorial, and it is still useful information. -->
+
 {% include topics/introduction/tutorials/r-basics/r_introduction.md %}
-{% include topics/introduction/tutorials/r-basics/r_advantages.md %}
 {% include topics/introduction/tutorials/r-basics/disclaimer.md %}
 
 In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.

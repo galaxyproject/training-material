@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: R basics in Galaxy
+level: Introductory
 zenodo_link: ""
-enable: false
 requirements:
   -
     type: "internal"
@@ -26,6 +26,7 @@ objectives:
 time_estimation: 3H
 key_points:
 - It is important to understand how data are organised by R in a given object type (e.g. numeric, character, logical, etc.) and how the mode of that type determines how R will operate on that data.
+subtopic: r
 contributors:
   - bebatut
   - fpsom
@@ -50,7 +51,9 @@ contributors:
 >
 {: .agenda}
 
-{% include topics/introduction/tutorials/r-basics/start_rstudio.md %}
+Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
+
+{% include snippets/launch_rstudio.md %}
 
 # Creating objects in R
 
