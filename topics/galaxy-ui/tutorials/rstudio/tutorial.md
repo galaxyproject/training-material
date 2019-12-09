@@ -204,7 +204,7 @@ You have hopefully noticed a pattern - an R function has three key properties:
 
 What if you wanted to round to one significant digit, `round()` can do this, but you may first need to read the help to find out how.
 
-To see the help you need enter a `?` in front of the function name. The **Help** tab (in the bottom-right panel) will show you information. 
+To see the help you need enter a `?` in front of the function name. The **Help** tab (in the bottom-right panel) will show you information.
 
 > ### {% icon hands_on %} Hands-on: Get help
 >
@@ -214,7 +214,7 @@ To see the help you need enter a `?` in front of the function name. The **Help**
 >    > ?round()
 >    ```
 >
-> 2. Check the **Help** tab 
+> 2. Check the **Help** tab
 >
 {: .hands_on}
 
