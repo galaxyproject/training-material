@@ -732,6 +732,43 @@
 <blockquote class="tip">
   <h3 id="tip-prerequisites"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Prerequisites</h3>
   <p>It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.</p>
+
+  <p>If you are starting with this tutorial, you will need to import a dataset:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-using-datasets-from-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using datasets from <span class="notranslate">Galaxy</span></h3>
+
+    <ol>
+      <li>Upload the following URL to <span class="notranslate">Galaxy</span>:
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Note the history ID of the dataset in your <span class="notranslate">Galaxy</span> history</p>
+      </li>
+      <li>
+        <p>Rstudio in <span class="notranslate">Galaxy</span> provides some special functions to import and export from your history:</p>
+
+        <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">gx_get</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">)</span><span class="w"> </span><span class="c1"># will import dataset number 2 from your history, use the correct ID for your dataset.</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-using-datasets-without-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using datasets without <span class="notranslate">Galaxy</span></h3>
+    <ol>
+      <li>
+        <p>Read the tabular file into an object called <code class="highlighter-rouge">annotatedDEgenes</code>:</p>
+
+        <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## read in a CSV file and save it as 'annotatedDEgenes'</span><span class="w">
+</span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">)</span><span class="w">
+</span></code></pre></div>        </div>
+      </li>
+    </ol>
+
+  </blockquote>
 </blockquote>
 
 <p>In this tutorial, we will take the list of DE genes extracted from DESEq2’s output that we generated in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based <span class="notranslate">RNA</span>-Seq data analysis” tutorial</a>, manipulate it and create some visualizations.</p>
@@ -790,6 +827,8 @@
 <p><code class="highlighter-rouge">ggplot2</code> graphics are built step by step by adding new elements, i.e. layers:</p>
 
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">DATA</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n"><span class="notranslate">mapping</span></span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="o">&lt;</span><span class="n"><span class="notranslate">MAPPING</span>S</span><span class="o">&gt;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
+  </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w">
 </span></code></pre></div></div>
 
