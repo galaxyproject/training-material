@@ -150,7 +150,7 @@ Now, let's read the file with the annotated differentially expressed genes that 
 >  > Rstudio in Galaxy provides some special functions to import and export from your history.
 >  >
 >  > ```R
->   > gx_get(2) # will import dataset number 2 from your history
+>  > gx_get(2) # will import dataset number 2 from your history
 >  > ```
 >  {: .tip}
 {: .hands_on}
