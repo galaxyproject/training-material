@@ -346,6 +346,10 @@ Here is one last bonus we will mention about RStudio. It's difficult to remember
 >
 {: .hands_on}
 
+## Stopping RStudio
+
+If you want to stop your RStudio interactive tool, once you finish your R treatment and if relevant, saving your RStudio environment in your Galay history, you just have to delete the corresponding history dataset named `RStudio` and showing a in progress state, so yellow.
+
 # Interaction between RStudio and Galaxy
 
 Getting data in and out from Galaxy
