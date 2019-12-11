@@ -1497,47 +1497,47 @@ So it is not always easy to tell what variables will be set, or what their final
       <p>Create <code class="highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> with the following contents:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
-    <span class="c1"># Listen on port 443
-</span>    <span class="kn">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
-    <span class="c1"># The virtualhost is our domain name
-</span>    <span class="kn">server_name</span>   <span class="s">"</span><span class="p">{</span><span class="err">{</span> <span class="kn">inventory_hostname</span> <span class="err">}}</span><span class="s">"</span><span class="p">;</span>
+    <span class="c1"># Listen on port 443</span>
+    <span class="kn">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
+    <span class="c1"># The virtualhost is our domain name</span>
+    <span class="kn">server_name</span>   <span class="s">"</span><span class="p">{</span><span class="err">{</span> <span class="kn">inventory_hostname</span> <span class="err">}}</span><span class="s">"</span><span class="p">;</span>
 
-    <span class="c1"># Our log files will go here.
-</span>    <span class="kn">access_log</span>  <span class="n">/var/log/nginx/access.log</span><span class="p">;</span>
+    <span class="c1"># Our log files will go here.</span>
+    <span class="kn">access_log</span>  <span class="n">/var/log/nginx/access.log</span><span class="p">;</span>
     <span class="kn">error_log</span>   <span class="n">/var/log/nginx/error.log</span><span class="p">;</span>
 
-    <span class="c1"># The most important location block, by default all requests are sent to uWSGI
-</span>    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
-        <span class="c1"># This is the backend to send the requests to.
-</span>        <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
+    <span class="c1"># The most important location block, by default all requests are sent to uWSGI</span>
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="c1"># This is the backend to send the requests to.</span>
+        <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
         <span class="kn">uwsgi_param</span> <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
         <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1"># Static files can be more efficiently served by Nginx. Why send the
-</span>    <span class="c1"># request to uWSGI which should be spending its time doing more useful
-</span>    <span class="c1"># things like serving <span class="notranslate">Galaxy</span>!
-</span>    <span class="kn">location</span> <span class="n">/static</span> <span class="p">{</span>
+    <span class="c1"># Static files can be more efficiently served by Nginx. Why send the</span>
+    <span class="c1"># request to uWSGI which should be spending its time doing more useful</span>
+    <span class="c1"># things like serving <span class="notranslate">Galaxy</span>!</span>
+    <span class="kn">location</span> <span class="n">/static</span> <span class="p">{</span>
         <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn"><span class="notranslate">galaxy</span>_server_dir</span> <span class="err">}}</span><span class="n">/static</span><span class="p">;</span>
         <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1"># The style directory is in a slightly different location
-</span>    <span class="kn">location</span> <span class="n">/static/style</span> <span class="p">{</span>
+    <span class="c1"># The style directory is in a slightly different location</span>
+    <span class="kn">location</span> <span class="n">/static/style</span> <span class="p">{</span>
         <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn"><span class="notranslate">galaxy</span>_server_dir</span> <span class="err">}}</span><span class="n">/static/style/blue</span><span class="p">;</span>
         <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1"># In <span class="notranslate">Galaxy</span> instances started with run.sh, many config files are
-</span>    <span class="c1"># automatically copied around. The welcome page is one of them. In
-</span>    <span class="c1"># production, this step is skipped, so we will manually alias that.
-</span>    <span class="kn">location</span> <span class="n">/static/welcome.html</span> <span class="p">{</span>
+    <span class="c1"># In <span class="notranslate">Galaxy</span> instances started with run.sh, many config files are</span>
+    <span class="c1"># automatically copied around. The welcome page is one of them. In</span>
+    <span class="c1"># production, this step is skipped, so we will manually alias that.</span>
+    <span class="kn">location</span> <span class="n">/static/welcome.html</span> <span class="p">{</span>
         <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn"><span class="notranslate">galaxy</span>_server_dir</span> <span class="err">}}</span><span class="n">/static/welcome.html.sample</span><span class="p">;</span>
         <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1"># serve visualization and interactive environment plugin static content
-</span>    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/plugins/(?&lt;plug_type&gt;[^/]+?)/((?&lt;vis_d&gt;[^/_]*)_?)?(?&lt;vis_name&gt;[^/]*?)/static/(?&lt;static_file&gt;.*?)$</span> <span class="p">{</span>
+    <span class="c1"># serve visualization and interactive environment plugin static content</span>
+    <span class="kn">location</span> <span class="p">~</span> <span class="sr">^/plugins/(?&lt;plug_type&gt;[^/]+?)/((?&lt;vis_d&gt;[^/_]*)_?)?(?&lt;vis_name&gt;[^/]*?)/static/(?&lt;static_file&gt;.*?)$</span> <span class="p">{</span>
         <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn"><span class="notranslate">galaxy</span>_server_dir</span> <span class="err">}}</span><span class="n">/config/plugins/</span><span class="nv">$plug_type</span><span class="n">/</span><span class="p">;</span>
         <span class="kn">try_files</span> <span class="nv">$vis_d</span><span class="n">/</span>$<span class="p">{</span><span class="kn">vis_d</span><span class="err">}</span><span class="s">_</span>$<span class="p">{</span><span class="kn">vis_name</span><span class="err">}</span><span class="n">/static/</span><span class="nv">$static_file</span>
                   <span class="nv">$vis_d</span><span class="n">/static/</span><span class="nv">$static_file</span> <span class="p">=</span><span class="mi">404</span><span class="p">;</span>
@@ -1558,10 +1558,10 @@ So it is not always easy to tell what variables will be set, or what their final
 
         <p>In your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.j2</code> in the above step, you should change the <code class="highlighter-rouge">listen</code> parameter:</p>
 
-        <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Change this
-</span><span class="k">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
-<span class="c1"># to this
-</span><span class="k">listen</span>        <span class="s">*:80</span> <span class="s">default_server</span><span class="p">;</span>
+        <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Change this</span>
+<span class="k">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
+<span class="c1"># to this</span>
+<span class="k">listen</span>        <span class="s">*:80</span> <span class="s">default_server</span><span class="p">;</span>
 </code></pre></div>        </div>
 
       </blockquote>
