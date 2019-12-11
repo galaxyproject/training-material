@@ -8,7 +8,7 @@
 > > 1. Open the Rstudio tool {% icon tool %} by clicking [here](https://usegalaxy.eu/?tool_id=interactive_tool_rstudio)
 > > 2. Click Execute
 > > 3. The tool will start running and will stay running permanently
-> > 4. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the RStudio instance you started.
+> > 4. Click on the "User" menu at the top and go to "Active InteractiveTools" and locate the RStudio instance you started.
 > {: .tip}
 >
 > > ### {% icon tip %} Tip: Launch RStudio Cloud if not available on Galaxy
