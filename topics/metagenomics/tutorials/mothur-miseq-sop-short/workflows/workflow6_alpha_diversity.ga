@@ -1,1 +1,197 @@
-{"uuid": "da118ea7-31a1-4e32-aa7b-a6027f997390", "tags": [], "format-version": "0.1", "name": "Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis with mothur]", "version": 2, "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "574e4fbd-b67d-464b-8688-d3821fc9bd1a", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 0, "uuid": "e3dff405-13b8-4a8f-98a7-ff10c7a2bd8a", "errors": null, "name": "Input dataset", "label": "Shared file", "inputs": [], "position": {"top": 379.5, "left": 207}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "input", "name": "rarefactioncurves"}], "workflow_outputs": [], "input_connections": {"otu": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"abund\": \"\\\"10\\\"\", \"iters\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"label\": \"null\", \"savelog\": \"\\\"false\\\"\", \"freq\": \"\\\"100.0\\\"\", \"calc\": \"[\\\"sobs\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"null\"}", "id": 1, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "5c2157147393", "name": "mothur_rarefaction_single", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "77c12a31-e26c-4d4c-8ccc-67a3a6c90d0b", "errors": null, "name": "Rarefaction.single", "post_job_actions": {"HideDatasetActionrarefactioncurves": {"output_name": "rarefactioncurves", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [], "position": {"top": 309, "left": 521}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0", "type": "tool"}, "2": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "input", "name": "summaryfiles"}, {"type": "tabular", "name": "subsample_summary"}, {"type": "tabular", "name": "summary"}], "workflow_outputs": [{"output_name": "summary", "uuid": "492468c7-2737-4dc5-b265-8c39b268afd7", "label": null}], "input_connections": {"otu": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"abund\": \"\\\"10\\\"\", \"__rerun_remap_job_id__\": null, \"groupmode\": \"\\\"true\\\"\", \"label\": \"null\", \"subsample\": \"{\\\"__current_case__\\\": 1, \\\"use\\\": \\\"no\\\"}\", \"savelog\": \"\\\"false\\\"\", \"calc\": \"[\\\"sobs\\\", \\\"coverage\\\", \\\"invsimpson\\\", \\\"nseqs\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"null\", \"size\": \"\\\"2389\\\"\"}", "id": 2, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "de4801f05e5e", "name": "mothur_summary_single", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "a40cb819-b7a4-41fa-97b5-c4515bf6a809", "errors": null, "name": "Summary.single", "post_job_actions": {"HideDatasetActionsubsample_summary": {"output_name": "subsample_summary", "action_type": "HideDatasetAction", "action_arguments": {}}, "HideDatasetActionsummaryfiles": {"output_name": "summaryfiles", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [], "position": {"top": 495, "left": 535}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.0", "type": "tool"}, "3": {"tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2", "tool_version": "1.0.2", "outputs": [{"type": "png", "name": "out_file_png"}], "workflow_outputs": [{"output_name": "out_file_png", "uuid": "e55c7e0c-2101-4217-8e19-75b724e16fe4", "label": null}], "input_connections": {"series_0|input": {"output_name": "rarefactioncurves", "id": 1}}, "tool_state": "{\"__page__\": null, \"xlab\": \"\\\"Number of Sequences\\\"\", \"series\": \"[{\\\"__index__\\\": 0, \\\"header\\\": \\\"true\\\", \\\"input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"series_type\\\": {\\\"__current_case__\\\": 0, \\\"col\\\": \\\"1\\\", \\\"lty\\\": \\\"1\\\", \\\"lwd\\\": \\\"1.0\\\", \\\"type\\\": \\\"line\\\"}, \\\"xcol\\\": \\\"1\\\", \\\"ycol\\\": \\\"2\\\\n5\\\\n8\\\\n11\\\\n14\\\\n17\\\\n20\\\\n23\\\\n26\\\\n29\\\\n32\\\\n35\\\\n38\\\\n41\\\\n44\\\\n47\\\\n50\\\\n53\\\\n56\\\\n\\\"}]\", \"outftype\": \"\\\"png\\\"\", \"ylab\": \"\\\"Number of OTUs\\\"\", \"main\": \"\\\"Rarefaction\\\"\", \"__rerun_remap_job_id__\": null}", "id": 3, "tool_shed_repository": {"owner": "devteam", "changeset_revision": "ecb437f1d298", "name": "xy_plot", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "db15a205-0faf-4e34-9a4f-59ff649b5241", "errors": null, "name": "Plotting tool", "post_job_actions": {"RenameDatasetActionout_file_png": {"output_name": "out_file_png", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Rarefaction plot"}}}, "label": null, "inputs": [], "position": {"top": 301, "left": 900}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2", "type": "tool"}}, "annotation": "", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "Workflow 6: Alpha Diversity [Galaxy Training: 16S Microbial Analysis with mothur]",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Shared file",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 207,
+        "top": 379.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "e3dff405-13b8-4a8f-98a7-ff10c7a2bd8a",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "574e4fbd-b67d-464b-8688-d3821fc9bd1a"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "otu": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Rarefaction.single",
+      "outputs": [
+        {
+          "name": "rarefactioncurves",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 521,
+        "top": 309
+      },
+      "post_job_actions": {
+        "HideDatasetActionrarefactioncurves": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "rarefactioncurves"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "5c2157147393",
+        "name": "mothur_rarefaction_single",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"abund\": \"\\\"10\\\"\", \"iters\": \"\\\"1000\\\"\", \"__rerun_remap_job_id__\": null, \"label\": \"null\", \"savelog\": \"\\\"false\\\"\", \"freq\": \"\\\"100.0\\\"\", \"calc\": \"[\\\"sobs\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"null\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "77c12a31-e26c-4d4c-8ccc-67a3a6c90d0b",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "otu": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Summary.single",
+      "outputs": [
+        {
+          "name": "summaryfiles",
+          "type": "input"
+        },
+        {
+          "name": "subsample_summary",
+          "type": "tabular"
+        },
+        {
+          "name": "summary",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 535,
+        "top": 495
+      },
+      "post_job_actions": {
+        "HideDatasetActionsubsample_summary": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "subsample_summary"
+        },
+        "HideDatasetActionsummaryfiles": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "summaryfiles"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "de4801f05e5e",
+        "name": "mothur_summary_single",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"abund\": \"\\\"10\\\"\", \"__rerun_remap_job_id__\": null, \"groupmode\": \"\\\"true\\\"\", \"label\": \"null\", \"subsample\": \"{\\\"__current_case__\\\": 1, \\\"use\\\": \\\"no\\\"}\", \"savelog\": \"\\\"false\\\"\", \"calc\": \"[\\\"sobs\\\", \\\"coverage\\\", \\\"invsimpson\\\", \\\"nseqs\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"null\", \"size\": \"\\\"2389\\\"\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "a40cb819-b7a4-41fa-97b5-c4515bf6a809",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "summary",
+          "uuid": "492468c7-2737-4dc5-b265-8c39b268afd7"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "series_0|input": {
+          "id": 1,
+          "output_name": "rarefactioncurves"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Plotting tool",
+      "outputs": [
+        {
+          "name": "out_file_png",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 900,
+        "top": 301
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file_png": {
+          "action_arguments": {
+            "newname": "Rarefaction plot"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file_png"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2",
+      "tool_shed_repository": {
+        "changeset_revision": "ecb437f1d298",
+        "name": "xy_plot",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"xlab\": \"\\\"Number of Sequences\\\"\", \"series\": \"[{\\\"__index__\\\": 0, \\\"header\\\": \\\"true\\\", \\\"input\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"series_type\\\": {\\\"__current_case__\\\": 0, \\\"col\\\": \\\"1\\\", \\\"lty\\\": \\\"1\\\", \\\"lwd\\\": \\\"1.0\\\", \\\"type\\\": \\\"line\\\"}, \\\"xcol\\\": \\\"1\\\", \\\"ycol\\\": \\\"2\\\\n5\\\\n8\\\\n11\\\\n14\\\\n17\\\\n20\\\\n23\\\\n26\\\\n29\\\\n32\\\\n35\\\\n38\\\\n41\\\\n44\\\\n47\\\\n50\\\\n53\\\\n56\\\\n\\\"}]\", \"outftype\": \"\\\"png\\\"\", \"ylab\": \"\\\"Number of OTUs\\\"\", \"main\": \"\\\"Rarefaction\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "db15a205-0faf-4e34-9a4f-59ff649b5241",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_file_png",
+          "uuid": "e55c7e0c-2101-4217-8e19-75b724e16fe4"
+        }
+      ]
+    }
+  },
+  "tags": [],
+  "uuid": "da118ea7-31a1-4e32-aa7b-a6027f997390",
+  "version": 2
+}

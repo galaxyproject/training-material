@@ -1,1 +1,87 @@
-{"a_galaxy_workflow": "true", "format-version": "0.1", "name": "Select first n lines", "annotation": "", "tags": [], "uuid": "6e198cca-4228-45f0-91c9-8111cb59af3f", "steps": {"0": {"id": 0, "type": "data_input", "content_id": null, "tool_id": null, "tool_version": null, "name": "Input dataset", "tool_state": "{}", "errors": null, "uuid": "ac600c9c-04f0-4e2d-9bd7-636de8a7ae56", "label": null, "annotation": "", "inputs": [], "workflow_outputs": [{"output_name": "output", "label": null, "uuid": "3e5ff777-86d7-4510-8f63-d0c6379656fe"}], "outputs": [], "input_connections": {}, "position": {"left": 162.9609375, "top": 199.9921875}}, "1": {"id": 1, "type": "tool", "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0", "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0", "tool_version": "1.1.0", "name": "Select first", "tool_state": "{\"complement\": \"\\\"\\\"\", \"count\": \"\\\"10\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "errors": null, "uuid": "6ef9506c-cf7b-48c9-889f-db7dfb97389a", "label": null, "annotation": "", "tool_shed_repository": {"name": "text_processing", "owner": "bgruening", "changeset_revision": "0a8c6b61f0f4", "tool_shed": "toolshed.g2.bx.psu.edu"}, "post_job_actions": {}, "inputs": [{"name": "infile", "description": "runtime parameter for tool Select first"}], "workflow_outputs": [{"output_name": "outfile", "label": null, "uuid": "6f9509ee-42cd-4c3d-81fc-22c3a95de600"}], "outputs": [{"name": "outfile", "type": "input"}], "input_connections": {"infile": {"id": 0, "output_name": "output"}}, "position": {"left": 463.9453125, "top": 197.9765625}}}, "version": 1}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "Select first n lines",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 162.9609375,
+        "top": 199.9921875
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ac600c9c-04f0-4e2d-9bd7-636de8a7ae56",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "3e5ff777-86d7-4510-8f63-d0c6379656fe"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "infile": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Select first",
+          "name": "infile"
+        }
+      ],
+      "label": null,
+      "name": "Select first",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 463.9453125,
+        "top": 197.9765625
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "0a8c6b61f0f4",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"complement\": \"\\\"\\\"\", \"count\": \"\\\"10\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "6ef9506c-cf7b-48c9-889f-db7dfb97389a",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "outfile",
+          "uuid": "6f9509ee-42cd-4c3d-81fc-22c3a95de600"
+        }
+      ]
+    }
+  },
+  "tags": [],
+  "uuid": "6e198cca-4228-45f0-91c9-8111cb59af3f",
+  "version": 1
+}
