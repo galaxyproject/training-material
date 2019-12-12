@@ -328,7 +328,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 23, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 10, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -1133,7 +1133,23 @@ $ANSIBLE_VAULT;1.1;AES256
       </blockquote>
     </li>
     <li>
-      <p>Use the new variable in our <code class="highlighter-rouge">.ini</code> file from earlier. Edit <code class="highlighter-rouge">roles/my-role/templates/test.ini.j2</code> and add the line <code class="highlighter-rouge">apikey = </code></p>
+      <p>Use the new variable in our <code class="highlighter-rouge">.ini</code> file from earlier. Edit <code class="highlighter-rouge">roles/my-role/templates/test.ini.j2</code> and add the line <code class="highlighter-rouge">apikey = {{ apikey }}</code></p>
+    </li>
+    <li>
+      <p>Add encrypted variable file to <code class="highlighter-rouge">playbook.yml</code></p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
+   <span class="s">...</span>
+   <span class="na">vars_files</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">secret_group_vars/all.yml</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Tell ansible where to find the decryption file. Create file <code class="highlighter-rouge">ansible.cfg</code> with content</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">[</span><span class="nv">default</span><span class="pi">]</span>
+ <span class="s">vault_password_file=vault-password.txt</span>
+</code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook</p>
@@ -1282,8 +1298,8 @@ $ANSIBLE_VAULT;1.1;AES256
     author = "Helena Rasche and Saskia Hiltemann",
     title = "Ansible (Galaxy Training Materials)",
     year = "2019",
-    month = "07",
-    day = "23"
+    month = "12",
+    day = "10"
     url = "\url{/training-material/topics/admin/tutorials/ansible/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
