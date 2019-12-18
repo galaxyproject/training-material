@@ -109,7 +109,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 > 3. Click **Send query to Galaxy**
 >
 > This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
-> 4. **Cut columns from a table** {% icon tool %} with the following parameters:
+> 4. **Cut** columns from a table {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
 >    - {% icon param-text %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV31 (chr22:1-50,818,468)`
@@ -139,31 +139,31 @@ The first step is to check the quality of the reads and the presence of the Next
 >       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
 > 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. How many reads are in the FASTQ?
->    > 2. Which sections have a warning?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > 1. There are 285247 reads.
->    > > 2. The 3 steps below have warnings:
->    > >
->    > >    1. **Per base sequence content**
->    > >
->    > >       It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
->    > >
->    > >    2. **Sequence Duplication Levels**
->    > >
->    > >       The read library quite often has PCR duplicates that are introduced
->    > >       simply by the PCR itself. We will remove these duplicates later on.
->    > >
->    > >    3. **Overrepresented sequences**
->    > >
->    > >       Nextera adapter sequences are observable in the **Adapter Content** section.
->    > >
->    > {: .solution}
->    >
+> > ### {% icon question %} Questions
+> >
+> > 1. How many reads are in the FASTQ?
+> > 2. Which sections have a warning?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. There are 285247 reads.
+> > > 2. The 3 steps below have warnings:
+> > >
+> > >    1. **Per base sequence content**
+> > >
+> > >       It is well known that the Tn5 has a strong sequence bias at the insertion site. You can read more about it in {% cite Green2012 %}.
+> > >
+> > >    2. **Sequence Duplication Levels**
+> > >
+> > >       The read library quite often has PCR duplicates that are introduced
+> > >       simply by the PCR itself. We will remove these duplicates later on.
+> > >
+> > >    3. **Overrepresented sequences**
+> > >
+> > >       Nextera adapter sequences are observable in the **Adapter Content** section.
+> > >
+> > {: .solution}
+> >
 >    {: .question}
 {: .hands_on}
 
@@ -373,9 +373,9 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
->    > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
->    >
->    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
+> > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
+> >
+> > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
 >    {: .comment}
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the MarkDuplicate metrics.
@@ -388,13 +388,13 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
 >
-> 1. **Select** {% icon tool %} with the following parameters:
+> 1. **Select** lines that match an expression {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
->    - *"that*: `matching`
+>    - *"that*: `Matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
 > 2. Check that the datatype is tabular. If not, change the datatype as described above.
 > 3. **Transpose** {% icon tool %}:
->    - {% icon param-file %} *"Select lines from"*: Select the output of  **Select** {% icon tool %}
+>    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
 > ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191105.png "Metrics of MarkDuplicates")
 >
@@ -487,8 +487,6 @@ If we only assess the coverage of the start sites of the reads, the data would b
 >    - *"Are you pooling Treatment Files?"*: `No`
 >    - {% icon param-file %} *"Treatment File(s)"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"Do you have a Control File?"*: `No`
->    - *"Filter Options"*:
->        - *"Remove PCR duplicates"*: `Yes`
 >    - *"ATAC Options"*:
 >        - *"Use ATAC-seq mode."*: `Yes`
 >        - *"Expand cut sites."*: `100`
