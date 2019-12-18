@@ -4,12 +4,23 @@ layout: tutorial_hands_on
 title: Clustering 3K PBMCs with Scanpy
 zenodo_link: 'https://zenodo.org/record/3581213'
 questions:
-- How cells are clustered in single-cell data?
+- What are the steps to prepare single-cell RNA-Seq data for clustering?
+- How to cluster cells in single-cell RNA-Seq data?
+- How cell type annotation can be assigned to cell clusters?
 objectives:
-- Need to add
+- Describe an AnnData object to store single-cell data
+- Explain the preprocessing steps for single-cell data
+- Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC
+- Execute data normalization and scaling
+- Identify highly variable genes
+- Construct and run a dimensionality reduction using Principal Component Analysis
+- Perform a graph-based clustering for cells
+- Identify marker genes for the clusters
+- Construct and run a cell type annotation for the clusters
 time_estimation: 5H
 key_points:
-- scRNA-seq data analysis is exploratory. Different tools and parameters should be tested.
+- scRNA-seq data analysis is complex and exploratory process, still in development
+- Different tools and parameters should be tested for each step of the process
 requirements:
 -
     type: "internal"
@@ -317,7 +328,7 @@ To mitigate these problems, we need to remove these low-quality cells at the sta
 
 - **Proportion of reads mapped to geens in the mitochondrial genome**
 
-    High concentrations of mitochondrial genes is often a result of damaged cells ({% cite islam2014quantitative, ilicic2016classification %}) where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.
+    High concentrations of mitochondrial genes is often a result of damaged cells ({% cite islam2014quantitative %}, {% cite ilicic2016classification %}) where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.
 
 We will make the key assumption that these metrics are independent of biological state of each cell. Technical factors rather than biological processes are presumed to drive poor values (e.g., low cell sizes, high mitochondrial proportions). The subsequent removal of impacted cells do not misrepresent the biology in downstream analyses. 
 
