@@ -461,14 +461,14 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 
 > ### {% icon comment %} Comment on FR and RF
 >
-> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role.
+> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role. Here 
 {: .comment}
 
 # Peak calling
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. We will use [Genrich](https://github.com/jsh58/Genrich). It is very important at this point that we center the reads on the 5' extremity (read start site) as this is where Tn5 cut. You want your peaks around the nucleosomes and not directly on the nucleosome:
+We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are [Genrich](https://github.com/jsh58/Genrich) and [MACS2](https://github.com/taoliu/MACS). Genrich has a mode dedicated to ATAC-seq but is still not published, so both are presented here. It is very important at this point that we center the reads on the 5' extremity (read start site) as this is where Tn5 cut. You want your peaks around the nucleosomes and not directly on the nucleosome:
 ![Scheme of ATAC-Seq reads relative to nucleosomes](../../images/atac-seq/schemeWithLegend.jpg "Scheme of ATAC-Seq reads relative to nucleosomes")
 
 > ### {% icon comment %} Comment on Tn5 insertion
@@ -480,6 +480,24 @@ We have now finished the data preprocessing. Next, in order to find regions corr
 {: .comment}
 
 If we only assess the coverage of the start sites of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 100bp (50 bp in each direction) to assess coverage.
+
+### Using Genrich
+
+> ### {% icon comment %} Comment on Genrich filters
+>
+> Using **Genrich**, you can do most of the filtering we did previously:
+>
+> Remove PCR duplicates: Yes
+>
+> Comma-separated list of chromosomes to exclude:
+> chrM
+>
+> Minimum MAPQ to keep an alignment.
+> 30
+>
+> However, you cannot filter the unconcordant pairs, and you cannot get the fragment size histogram on filtered reads, that's why in this training we performed all filtering step prior to the use of Genrich.
+{: .comment}
+
 
 > ### {% icon hands_on %} Hands-on: Identifying enriched genomic regions
 >
@@ -495,18 +513,59 @@ If we only assess the coverage of the start sites of the reads, the data would b
 >
 {: .hands_on}
 
+### Using MACS2
 
+We convert the BAM file to BED format because when we shift the reads with MACS2, it will only consider one of the read pairs.
+
+> ### {% icon hands_on %} Hands-on: Convert the BAM to BED
+>
+> 1. **bedtools BAM to BED** converter {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
+>
+{: .hands_on}
+
+We call peaks with MACS2. Usually people expand 200bp around cut sites (+/-100bp). Here, to be able to compare with **Genrich**, we will use 100bp.
+
+> ### {% icon hands_on %} Hands-on: Call peaks with MACS2
+>
+> 1. **MACS2 callpeak** {% icon tool %} with the following parameters:
+>    - *"Are you pooling Treatment Files?"*: `No`
+>    - *"Do you have a Control File?"*: `No`
+>    - *"Format of Input Files"*: `Single-end BED`
+>    - *"Effective genome size"*: `H. sapiens (2.7e9)`
+>    - *"Build Model"*: `Do not build the shifting model (--nomodel)`
+>        - *"Set extension size"*: `100`, people usually put `200`
+>        - *"Set shift size"*: `-50`, people usually put `-100`. It needs to be - half the extension size to be centered on the 5'.
+>    - *"Additional Outputs"*:
+>        - Check `Peaks as tabular file`
+>        - Check `Peak summits`
+>        - Check `Scores in bedGraph files`
+>    - In *"Advanced Options"*:
+>        - *"Composite broad regions"*: `No broad regions`
+>            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
+>        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
+>
+> > ### {% icon comment %} Why keeping all duplicates is important
+> >
+> > We previously removed duplicates using **MarkDuplicates** {% icon tool %} using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.
+>    {: .comment}
+>
+> 2. Add a tag called `#MACS2_cov` to the output called MACS2 callpeak ...(Bedgraph Treatment).
+>
+{: .hands_on}
 
 # Visualisation of Coverage
 
 ## Prepare the Datasets
 
 Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 50 bp to each side.
-The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it. The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
+The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it. 
 
-### Convert BedGraph-ish pileup to bigWig
+### Convert BedGraph-ish pileup of **Genrich** to bedgraph
 
-> ### {% icon hands_on %} Hands-on: Convert bedgraph-ish pileup to bigWig.
+First, we need to remove the 2 header lines. Then, we select the first 4 columns.
+
+> ### {% icon hands_on %} Hands-on: Convert bedgraph-ish pileup to bedgraph.
 >
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
@@ -517,10 +576,19 @@ The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a
 >    > The awk program will read each line of the output of **Genrich** {% icon tool %}, when the number of the line is greater or equal to 3 (NR>=3), it will write the first 4 columns (print $1,$2,$3,$4) into a new file.
 >    {: .comment}
 >
-> 2. **Wig/BedGraph-to-bigWig** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Convert"*: Select the output of **Text reformatting with awk** {% icon tool %} *"Bedgraph"*.
+> 2. Add a tag called `#Genrich_cov` to the output of **Cut**.
+{: .hands_on}
+
+### Convert bedgraph from **Genrich** and **MACS2** to bigwig
+The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.
+
+> ### {% icon hands_on %} Hands-on: Convert bedgraphs to bigWig.
+>
+> 1. **Wig/BedGraph-to-bigWig** converter {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"Convert"*: Select both the output of **Cut** {% icon tool %} and the output of **MACS2** {% icon tool %} (Bedgraph Treatment).
 >    - *"Converter settings to use"*: `Default`
 >
+> 2. Rename the datasets `MACS2 bigwig` and `Genrich bigwig` (you can use the tags to know which one is which one).
 {: .hands_on}
 
 ### Sort CTCF Peaks
@@ -559,20 +627,19 @@ The input of **plotHeatmap** is a matrix in a hdf5 format. To generate it we use
 >        - 1. *"Select regions"*
 >            - {% icon param-file %} *"Regions to plot"*: Select the dataset `chr22 genes`
 >    - *"Sample order matters"*: `No`
->        - {% icon param-file %} *"Score file"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>        - {% icon param-file %} *"Score file"*: Select the both outputs of **Wig/BedGraph-to-bigWig** {% icon tool %} that should be named `MACS2 bigwig` and `Genrich bigwig`.
 >    - *"computeMatrix has two main output options"*: `reference-point`
 >    - *"The reference point for the plotting"*: `beginning of region (e.g. TSS)`
 >    - *"Show advanced output settings"*: `no`
 >    - *"Show advanced options"*: `yes`
 >        - *"Convert missing values to 0?"*: `yes`
->        - *"Labels for the samples (each bigwig)"*: `ATAC-Seq`
 >
 {: .hands_on}
 
 
 ### Plot with **plotHeatmap**
 
-We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS.
+We will now generate a heatmap. Each line will be a transcript. The coverage will be summarized with a color code from red (no coverage) to blue (maximum coverage). All TSS will be aligned in the middle of the figure and only the 2 kb around the TSS will be displayed. Another plot, on top of the heatmap, will show the mean signal at the TSS. There will be one heatmap per bigwig.
 
 > ### {% icon hands_on %} Hands-on: Generate the heatmap
 >
@@ -589,14 +656,22 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 
 > ### {% icon question %} Questions
 >
-> 1. What is the mean value in genes?
-> 2. Is the coverage symmetric?
+> 1. Is the coverage symmetric?
+> 2. What is the mean value in genes?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Around 2.5.
-> > 2. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
+> > 1. No, it is higher on the left which is expected as usually the promoter of active genes is accessible.
+> > 2. Around 2.5 for Genrich and 3 for MACS2.
 > >
+> > > ### {% icon tip %} Tip: Why the height is different
+> > >
+> > > MACS2 coverage is very simple, each 5' is extended 100bp (+/-50bp).
+> > > Genrich coverage is evaluated in a more subtle way: if the fragment length is above 100 (the expension size), the coverage will be each 5' extended 100bp (+/-50bp), but if it is less, the coverage will be between each 5' extended 50bp (-50bp - fragment size - + 50bp):
+> > > ![macs2 vs genrich](../../images/atac-seq/Screenshot_macs2vsGenrich.png "macs2 vs genrich coverage")
+> > > In this example, we see on the left a pair with a long fragment size: both algorithm behave the same.
+> > > On the left a pair with a short fragment size: Genrich reports only one interval joining both extremities wheareas macs2 will still report 2 intervals even if they overlap.
+> > {: .tip}
 > {: .solution}
 >
 {: .question}
@@ -611,7 +686,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >        - *"1. Include tracks in your plot"*
 >            - *"Choose style of the track"*: `Bigwig track `
 >                - *"Plot title"*: `Coverage from Genrich (extended +/-50bp)`
->                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %}.
+>                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `Genrich bigwig`.
 >                - *"Color of track"*: Select the color of your choice
 >                - *"height"*: `5`
 >                - *"Show visualization of data range"*: `Yes`
@@ -620,6 +695,22 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >            - *"Choose style of the track"*: `Gene track / Bed track`
 >                - *"Plot title"*: `Peaks from Genrich (extended +/-50bp)`
 >                - {% icon param-file %} *"Track file bed format"*: Select the output of **Genrich** {% icon tool %} (the one you converted from encodepeak to bed).
+>                - *"Color of track"*: Select the color of your choice
+>                - *"height"*: `3`
+>                - *"Plot labels"*: `No`
+>                - *"Include spacer at the end of the track"*: `0.5`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bigwig track `
+>                - *"Plot title"*: `Coverage from macs2 (extended +/-50bp)`
+>                - {% icon param-file %} *"Track file bigwig format"*: Select the output of **Wig/BedGraph-to-bigWig** {% icon tool %} called `MACS2 bigwig`.
+>                - *"Color of track"*: Select the color of your choice
+>                - *"height"*: `5`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `0.5`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Peaks from macs2 (extended +/-50bp)`
+>                - {% icon param-file %} *"Track file bed format"*: Select the output of **MACS2** {% icon tool %} (narrow Peaks).
 >                - *"Color of track"*: Select the color of your choice
 >                - *"height"*: `3`
 >                - *"Plot labels"*: `No`
