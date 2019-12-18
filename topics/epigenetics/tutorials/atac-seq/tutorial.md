@@ -461,7 +461,14 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 
 > ### {% icon comment %} Comment on FR and RF
 >
-> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role. Here 
+> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role. 
+
+> Here, we expected FR and we got RF for small reads. This is because when reads fully overlap:
+> ```
+>    ------>
+>    <------
+> ```
+> Bowtie2 gives a negative fragment size (8th field of SAM files) thus the Picard tool **CollectInsertSizeMetrics** {% icon tool %} attribute them to FR if the first read in the pair is forward and RF if the first read in the pair is reverse.
 {: .comment}
 
 # Peak calling
