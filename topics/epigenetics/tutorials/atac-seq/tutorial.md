@@ -248,7 +248,7 @@ The forward and reverse adapters are slightly different. We will also trim low q
 
 ## Mapping Reads to Reference Genome
 
-Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed.
+Next we map the trimmed reads to the human reference genome. Here we will use **Bowtie2**. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the `--very-sensitive` parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the **end-to-end** mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains [alternate loci](https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE). This means that some region of the genome are prensent both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg39 (only the chromosome with numbers, chrX, chrY, and chrM).
 
 > ### {% icon comment %} Dovetailing
 > We will allow dovetailing of read pairs with Bowtie2. This is because adapters are removed by Cutadapt only when at least 3 bases match the adapter sequence, so it is possible that after trimming a read can contain 1-2 bases of adapter and go beyond it's mate start site. For example, if the first mate in the read pair is: `GCTATGAAGAATAGGGCGAAGGGGCCTGCGGCGTATTCGATGTTGAAGCT` and the second mate is `CTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGCCT`, where both contain 2 bases of adapter sequence, they will not be trimmed by Cutadapt and will map this way:
@@ -272,7 +272,7 @@ This is what we call dovetailing and we want to consider this pair as a valid co
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a built-in genome index`
->        - *"Select reference genome"*: `Human Dec. 2013 (GRCh38/hg38 (hg38)`
+>        - *"Select reference genome"*: `Human (Homo sapiens): hg38 Canonical`
 >    - *"Select analysis mode"*: `1: Default setting only`
 >        - *"Do you want to use presets?"*: `Very sensitive end-to-end (--very-sensitive)`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
@@ -291,7 +291,7 @@ This is what we call dovetailing and we want to consider this pair as a valid co
 >
 > > ### {% icon solution %} Solution
 > >
-> > 54.07+43.63=97.7%
+> > 54.8+42.87=97.67%
 > >
 > {: .solution}
 >
@@ -342,7 +342,7 @@ We apply some filters to the reads after the mapping. ATAC-Seq datasets can have
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The original BAM file is 28 MB, the filtered one is 14.8 MB. Approximately half of the alignments were removed.
+> > 1. The original BAM file is 28 MB, the filtered one is 15.1 MB. Approximately half of the alignments were removed.
 > >
 > > 2. You should modify the mapQuality criteria and decrease the threshold.
 > >
@@ -396,7 +396,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 > 3. **Transpose** {% icon tool %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
-> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191105.png "Metrics of MarkDuplicates")
+> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDupAfterTranspose.20191218.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
@@ -407,8 +407,8 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 133284
-> > 2. 3549
+> > 1. 135813
+> > 2. 3584
 > >
 > {: .solution}
 >
