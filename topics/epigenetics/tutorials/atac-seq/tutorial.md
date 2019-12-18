@@ -567,16 +567,18 @@ First, we need to remove the 2 header lines. Then, we select the first 4 columns
 
 > ### {% icon hands_on %} Hands-on: Convert bedgraph-ish pileup to bedgraph.
 >
-> 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
->    - *"AWK Program"*: `NR>=3 {print $1,$2,$3,$4}`
+> 1. **Remove beginning** of a file {% icon tool %} with the following parameters:
+>    - *"Remove first"*: `2`
+>    - {% icon param-file %} *"from"*: Select the output of **Genrich** {% icon tool %} *"Bedgraph Pileups"*.
 >
->    > ### {% icon comment %} Comment: From BedGraph-ish pileup to bedgraph
->    >
->    > The awk program will read each line of the output of **Genrich** {% icon tool %}, when the number of the line is greater or equal to 3 (NR>=3), it will write the first 4 columns (print $1,$2,$3,$4) into a new file.
->    {: .comment}
+> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
+>    - {% icon param-text %} *"Cut columns"*: `c1,c2,c3,c4`
+>    - {% icon param-text %} *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: Select the output of **Remove beginning** {% icon tool %}
 >
-> 2. Add a tag called `#Genrich_cov` to the output of **Cut**.
+> 3. Chage the datatype from interval to bedgraph.
+>
+> 4. Add a tag called `#Genrich_cov` to the output of **Cut**.
 {: .hands_on}
 
 ### Convert bedgraph from **Genrich** and **MACS2** to bigwig
