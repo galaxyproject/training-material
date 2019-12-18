@@ -108,7 +108,7 @@ We will visualise regions later in the analysis and obtain the gene information 
 > 2. Click **get output**
 > 3. Click **Send query to Galaxy**
 >
-> This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
+>    This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
 > 4. **Cut** columns from a table {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
 >    - {% icon param-text %} *"Delimited by"*: `Tab`
@@ -373,9 +373,9 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
-> > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
-> >
-> > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
+>    > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
+>    >
+>    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
 >    {: .comment}
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the MarkDuplicate metrics.
@@ -461,9 +461,8 @@ A final example of a Fragment size distribution of a very good ATAC-Seq, even if
 
 > ### {% icon comment %} Comment on FR and RF
 >
-> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role. 
-
-> Here, we expected FR and we got RF for small reads. This is because when reads fully overlap:
+> FR stands for forward reverse orientation of the read pairs, meaning, your reads are oriented as -> <- so the first read is on the forward and the second on the reverse strand. RF stands for reverse forward oriented, i.e., <- ->. It really depends on your experiment, how your reads are oriented and if the orientation plays a role.
+> Here, we expected FR and we got some RF for small reads. This is because when reads fully overlap:
 > ```
 >    ------>
 >    <------
@@ -552,12 +551,13 @@ We call peaks with MACS2. Usually people expand 200bp around cut sites (+/-100bp
 >            - *"Use a more sophisticated signal processing approach to find subpeak summits in each enriched peak region"*: `Yes`
 >        - *"How many duplicate tags at the exact same location are allowed?"*: `all`
 >
-> > ### {% icon comment %} Why keeping all duplicates is important
-> >
-> > We previously removed duplicates using **MarkDuplicates** {% icon tool %} using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.
+>    > ### {% icon comment %} Why keeping all duplicates is important
+>    >
+>    > We previously removed duplicates using **MarkDuplicates** {% icon tool %} using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.
 >    {: .comment}
 >
 > 2. Add a tag called `#MACS2_cov` to the output called MACS2 callpeak ...(Bedgraph Treatment).
+>
 >
 {: .hands_on}
 
@@ -621,7 +621,7 @@ At the moment, **pyGenomeTracks** does not deal with the datatype encodepeak whi
 >
 {: .hands_on }
 
-## Create heatmap of genes
+## Create heatmap of coverage at TSS with deepTools
 
 You might also be interested in specific regions. For this, you can compute a heatmap. We will use the **deepTools plotHeatmap**. As an example, we will here make a heatmap centered on the transcription start sites (TSS).
 
@@ -685,7 +685,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 >
 {: .question}
 
-## Visualise Regions with **pyGenomeTracks**
+## Visualise Regions with pyGenomeTracks
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
