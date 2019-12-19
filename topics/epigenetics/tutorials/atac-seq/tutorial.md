@@ -752,7 +752,7 @@ We will now generate a heatmap. Each line will be a transcript. The coverage wil
 {: .comment}
 
 Unfortunately, Genrich does not work very well with our small training dataset (every covered region is called a peak). This is because most of the data is on chr22 whereas the background model was built on the whole genome. When the pipeline described here was run on 20 million of pairs from the original dataset, this is the output of pyGenomeTracks:
-![pyGenomeTracks output for 20 million of pairs on the whole genome](../../images/atac-seq/pyGenomeTracksOutput_20M.png "pyGenomeTracks output for 20 million of pairs on the whole genome")
+![pyGenomeTracks output for 20 million of pairs on the whole genome](../../images/atac-seq/pyGenomeTracksOutput_20M.png "pyGenomeTracks output for 20 million of pairs on the whole genome").
 
 
 > ### {% icon question %} Questions
@@ -773,6 +773,9 @@ Unfortunately, Genrich does not work very well with our small training dataset (
 > {: .solution}
 >
 {: .question}
+
+We can see that in this region both peak calling perform the same. However, when zooming out, we see that macs2 is more sensitive:
+![pyGenomeTracks output for 20 million of pairs on the whole genome zoom out](../../images/atac-seq/pyGenomeTracksOutput_20M_zo.png "pyGenomeTracks output for 20 million of pairs on the whole genome zoom out").
 
 As CTCF binds so ubiquitously and by itself can displace the nucleosome creating accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.
 
