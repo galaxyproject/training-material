@@ -60,15 +60,15 @@ In this tutorial, we will investigate clustering of single-cell data from 10x Ge
 
 # Data
 
-For this tutorial, we analyze a dataset of Peripheral Blood Mononuclear Cells (PBMC) extracted from a heal, freely available from 10X Genomics. The dataset contains 2,700 single cells sequencd using Illumina NextSeq 500. The raw sequences have been processed by [**cellranger**](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) pipeline from 10X to extract an unique molecular identified (UMI) count matrix, in a similar way as explained in ["Pre-processing of 10X Single-Cell RNA Datasets" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}).
+For this tutorial, we analyze a dataset of Peripheral Blood Mononuclear Cells (PBMC) extracted from a healthy donor, freely available from 10X Genomics. The dataset contains 2,700 single cells sequenced using Illumina NextSeq 500. The raw sequences have been processed by the [**cellranger**](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) pipeline from 10X to extract a unique molecular identifier (UMI) count matrix, in a similar way to that as explained in ["Pre-processing of 10X Single-Cell RNA Datasets" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}).
 
-In this matrix, the values represent the number for each feature (i.e. gene; row) that are detected in each cell (column). Such matrix can be quite large, here 2,700 columns with 32,738 lines, with mostly zero values, i.e. extremely sparse matrix. To optimize the storage of such table and the information about the genes and cells, **cellranger** created 3 files:
+In this matrix, the values represent the number for each feature (i.e. gene; row) that are detected in each cell (column). Such matrices can be quite large, where here there are 2,700 columns with 32,738 lines, with mostly zero values, i.e. an extremely sparse matrix. To optimize the storage of such a table and the information about the genes and cells, **cellranger** creates 3 files:
 
 - `genes.tsv`: a tabular file with information about the 32,738 genes in 2 columns (Ensembl gene id and the gene symbol)
 - `barcodes.tsv`: a tabular file with the barcode for each of the 2,700 cells
 - `matrix.mtx`: a condensed version of the count matrix
 
-    The count matrix is there represented by its non-zero values. Each non-zero value is indicated by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives indication about the number of lines, column and non-zero values.
+    The count matrix is therefore represented by its non-zero values. Each non-zero value is indicated by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives indication about the number of lines, column and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [here](https://math.nist.gov/MatrixMarket/formats.html)
 
 ## Data upload
 
@@ -101,7 +101,7 @@ In this matrix, the values represent the number for each feature (i.e. gene; row
 > ```
 >
 > 1. How many non-zero values are in the matrix?
-> 2. How many counts are found for the 32,706th genes and the 1st cell?
+> 2. How many counts are found for the 32,706th gene in the 1st cell?
 > 
 > > ### {% icon solution %} Solution
 > >
@@ -120,7 +120,7 @@ The most common format, called [`AnnData`](https://anndata.readthedocs.io/en/sta
 
 ![Anndata format](../../images/tenx_anndata.svg "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 
-This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}), the tool suie for analyzing single-cell gene expression data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an `AnnData` object.
+This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}), the tool suite for analyzing single-cell gene expression data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an `AnnData` object.
 
 > ### {% icon hands_on %} Hands-on: Transform matrix and all into AnnData object
 >
@@ -137,7 +137,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 > 3. Check that the format is `h5ad`
 {: .hands_on}
 
-Because `AnnData` format is an extension of the HDF5 format, i.e. a binary format, an `AnnData` object can not be inspected directly in Galaxy by clicking on the {% icon galaxy-eye %} (**View data**) icon. Instead we need to use a dedicated tool from the **AnnData** suite.
+Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary format, an `AnnData` object can not be inspected directly in Galaxy by clicking on the {% icon galaxy-eye %} (**View data**) icon. Instead we need to use a dedicated tool from the **AnnData** suite.
 
 > ### {% icon hands_on %} Hands-on: Inspect an AnnData object
 >
@@ -250,7 +250,7 @@ Because `AnnData` format is an extension of the HDF5 format, i.e. a binary forma
 
 # Preprocessing
 
-The first step when we get count is to prepare them before clustering. It includes ({% cite amezquita2019orchestrating %}):
+The first step when we get our counts is to prepare them before we perform the clustering. This includes ({% cite amezquita2019orchestrating %}):
 
 1. **Selection and filtration of cells and genes based on quality metrics**
 
@@ -258,15 +258,15 @@ The first step when we get count is to prepare them before clustering. It includ
 
 2. **Data normalization and scaling**
 
-    It will eliminate cell-specific biases (e.g., in capture efficiency), allowing to perform explicit comparisons across cells afterwards. Some transformations, typically log, are also applied to adjust for the mean-variance relationship.
+    It will eliminate cell-specific biases (e.g., in capture efficiency), allowing us to perform explicit comparisons across cells afterwards. Some transformations, typically log, are also applied to adjust for the mean-variance relationship.
 
 3. **Selection of features**
 
-    This selection picks a subset of interesting features for downstream analysis,by modelling the variance across cells for each gene and retaining genes that are highly variable. The step is done to reduce computational overhead and noise from uninteresting genes.
+    This selection picks a subset of interesting features for downstream analysis, by modelling the variance across cells for each gene and retaining genes that are highly variable. This step is done to reduce computational overhead and noise from uninteresting genes.
 
 ## Quality control
 
-Genes that appear in less that few cells can be considered noise and thus removed.
+Genes that appear in less than a few cells can be considered noise and thus removed.
 
 > ### {% icon hands_on %} Hands-on: Remove genes found in less than 3 cells
 >
@@ -302,15 +302,15 @@ Low-quality cells may be due to a variety of sources such as cell damage during 
 
 > ### {% icon details %} Impact of low-quality cells on the downstream analyses
 >
-> #### Formation of their own distrinct cluster(s)
+> #### Formation of their own distinct cluster(s)
 >
-> Increased mitochondrial proportions or enrichment for nuclear RNAs after cell damage are the most obvious causes for this phenomenon. Low-quality cells different cell types can, in the worst case, cluster together (because of similarities in the damage-induced expression profiles) leading to artificial intermediate states or trajectories between subpopulations that should be otherwise distinct. This phenomenon makes the results difficult to interprete.
+> Increased mitochondrial proportions or enrichment for nuclear RNAs after cell damage are the most obvious causes for this phenomenon. Low-quality cells in different cell types can, in the worst case, cluster together (because of similarities in the damage-induced expression profiles) leading to artificial intermediate states or trajectories between subpopulations that should be otherwise distinct. This phenomenon makes the results difficult to interpret.
 > 
 > #### Distortion of population heterogeneity during variance estimation or principal components analysis
 >
 > With low-quality cells, the main differences captured by the first few principal components will be based on quality rather than biology, reducing then the effectiveness of dimensionality reduction. Similarly, differences between low- and high-quality cells will create genes with the largest variances. For example, in low-quality cells with very low counts, the scaling normalization increases the variance of genes that happen to have a non-zero count in those cells.
 > 
-> #### Misindentification of upregulated genes
+> #### Misidentification of upregulated genes
 >
 > Due to aggressive scaling to normalize for small cell sizes, low-quality cells shows genes that appear to be strongly "upregulated". For example, contaminating transcripts may be present in all cells with a low but constant levels. With the increased scaling normalization in low-quality cells, the small counts for these transcripts may become large normalized expression values, i.e. an apparent upregulation compared to other cells.
 >
@@ -320,25 +320,25 @@ To mitigate these problems, we need to remove these low-quality cells at the sta
 
 - **Cell size**, i.e. the total sum of counts accross all genes for each cells
 
-    When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. Cells with small size are then considered of low quality: the RNA has been lost during the library preparation (cell lysis, inefficient cDNA capture and amplification, etc)
+    When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. Cells with small sizes are then considered to be of low quality: the RNA has been lost during the library preparation (cell lysis, inefficient cDNA capture and amplification, etc.)
 
 - **Number of expressed genes**, i.e. the number of genes with non-zero counts for each cells
 
     A low number of expressed genes may be a result of poor-quality cells (e.g. dying, degraded, damaged, etc.), followed by high PCR amplification of the remaining RNA. The diverse transcript population has not been successfully captured so the cell is considered of low quality. Cell doublets or multiplets may also exhibit an aberrantly high gene count.
 
-- **Proportion of reads mapped to geens in the mitochondrial genome**
+- **Proportion of reads mapped to genes in the mitochondrial genome**
 
     High concentrations of mitochondrial genes is often a result of damaged cells ({% cite islam2014quantitative %}, {% cite ilicic2016classification %}) where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.
 
-We will make the key assumption that these metrics are independent of biological state of each cell. Technical factors rather than biological processes are presumed to drive poor values (e.g., low cell sizes, high mitochondrial proportions). The subsequent removal of impacted cells do not misrepresent the biology in downstream analyses. 
+We will make the key assumption that these metrics are independent of the biological state of each cell. Technical factors rather than biological processes are presumed to drive poor values (e.g., low cell sizes, high mitochondrial proportions). The subsequent removal of impacted cells do not misrepresent the biology in downstream analyses. 
 
-To identify low-quality cells, the simplest approach is to apply thresholds on the QC metrics. This strategy while simple required to determine appropriate thresholds, that will change given the experimental protocol and biological system.
+To identify low-quality cells, the simplest approach is to apply thresholds on the QC metrics. This strategy, while simple, is required to determine appropriate thresholds that will change given the experimental protocol and the biological system.
 
 ### Computation of QC metrics
 
 To estimate the thresholds, we first need to look at the distribution of QC metrics for our dataset.
 
-The first 2 QC metrics (cell size and number of expressed genes) can be easily estimated from the count table. For the third metric (proportion of reads mapped to geens in the mitochondrial genome), we need the information about which genes are mitochondrial or not.
+The first 2 QC metrics (cell size and number of expressed genes) can be easily estimated from the count table. For the third metric (proportion of reads mapped to genes in the mitochondrial genome), we need the information about which genes are mitochondrial or not.
 
 > ### {% icon hands_on %} Hands-on: Extract gene annotation
 >
@@ -349,7 +349,7 @@ The first 2 QC metrics (cell size and number of expressed genes) can be easily e
 > 2. Rename the generated file `Gene annotation`
 {: .hands_on}
 
-In the gene annotation, we currently have the gene symbol the Ensembl gene ids and the number of cells in which the genes are expressed, but no information if a gene is mitochondrial. This can be extracted from the gene symbol as all mitochondrial genes have a name starting with `MT-` and added to the `var` of the `AnnData` object using **Manipulate AnnData** tool.
+In the gene annotation, we currently have the gene symbol the Ensembl gene ids and the number of cells in which the genes are expressed, but have no information on whether a gene is mitochondrial. This can be extracted from the gene symbol as all mitochondrial genes have a name starting with `MT-` and added to the `var` of the `AnnData` object using **Manipulate AnnData** tool.
 
 A new annotation for `var` should be a table with the same number of lines as `var` (i.e. one line per genes) and as many columns as new annotations, with their names on the 1st line. In our case, we would need to create a 1 column table with `mito` on the 1st line and then `True` for mitochondrial gene or `False` for non mitochondrial genes.
 
@@ -366,7 +366,7 @@ To create this table, we need to:
     3. Keep only the 2nd column
     4. Add `mito` on the 1st line
 
-> ### {% icon hands_on %} Hands-on: Add mitrochondrial gene annotation
+> ### {% icon hands_on %} Hands-on: Add mitochondrial gene annotation
 >
 > 1. **Text reformatting** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Gene annotation`
@@ -496,7 +496,7 @@ We can now compute QC metrics on the `AnnData` object.
 >    {: .question}
 {: .hands_on}
 
-We would like to visualize the 3 interesting QC metrics:
+We would like to visualize 3 of the more informative QC metrics:
 
 - the cell size, i.e. `total_counts`
 - the number of expressed genes, i.e. `n_genes_by_counts`
@@ -520,9 +520,9 @@ We would like to visualize the 3 interesting QC metrics:
 >    > ### {% icon question %} Questions
 >    >
 >    > ![QC violin plot](../../images/scrna-scanpy-pbmc3k/qc_violin_plot.png)
->    > To update...
+>    > <!-- To update... -->
 >    >
->    > How are distributed the 3 QC metrics
+>    > How do the distributions of the 3 QC metrics look?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -530,7 +530,7 @@ We would like to visualize the 3 interesting QC metrics:
 >    > >
 >    > > The numbers of expressed genes, i.e. `n_genes_by_counts`, are mostly between 500 genes and 1,200 genes, with also some extremely high values skewing the distribution.
 >    > >
->    > > The distribution of the proportions of reads mapped to mitochondrial genes, i.e. `pct_counts_mito`, is even more narrow with some cells with no counts from mitochondrial genes but also some really extreme values (above 5%).
+>    > > The distribution of the proportions of reads mapped to mitochondrial genes, i.e. `pct_counts_mito`, is even more narrow with some cells having no counts from mitochondrial genes but also having some really extreme values (above 5%).
 >    > >
 >    > {: .solution}
 >    >
@@ -580,9 +580,9 @@ We would like to visualize the 3 interesting QC metrics:
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Cells with high proportion of mitochondrial genes are not cells with the ones with many expressed genes. There is not visible correlation.
->    > > 2. The cells with percentage of mitochondrial counts above 5% have also few genes. So 5% may be a good threshold.
->    > > 3. As discussed before, a low number of expressed genes may a sign of poor-quality cells. Any cells with less than 200 genes is definitely out of the main distribution so it could be a good threshold. High gene count may also be a sign for cell multiplets. We will choose here a threshold of 2,500 genes.
+>    > > 1. Cells with a high proportion of mitochondrial genes are not also cells that have many expressed genes. There is no visible correlation.
+>    > > 2. The cells with a percentage of mitochondrial counts above 5% have also few genes. So 5% may be a good threshold.
+>    > > 3. As discussed before, a low number of expressed genes may be a sign of poor-quality cells. Any cells with less than 200 genes is definitely out of the main distribution so this could be a good threshold to use. High gene count may also be a sign for cell multiplets. We will choose here a threshold of 2,500 genes.
 >    > >
 >    > {: .solution}
 >    >
@@ -591,7 +591,7 @@ We would like to visualize the 3 interesting QC metrics:
 
 ### Filtering of low-quality cells
 
-As explained before, we would like now to filter for low-quality cells based on the 3 previous metrics (cell size, number of expressed genes, and proportion of reads mapped to mitochondrial genes). As the cell size is highly correlated with the number expressed genes, we can focus only on the number expressed genes and the proportion of reads mapped to mitochondrial genes
+As explained before, we would like now to filter for low-quality cells based on the 3 previous metrics (cell size, number of expressed genes, and proportion of reads mapped to mitochondrial genes). As the cell size is highly correlated with the number expressed genes, we can focus only on the number expressed genes and the proportion of reads mapped to mitochondrial genes.
 
 Based on the previous plot, we would like to remove cells that have:
 
@@ -689,7 +689,7 @@ Based on the previous plot, we would like to remove cells that have:
 
 In scRNA-seq, we can observe systematic differences in sequencing coverage between cells ({% cite stegle2015computational %}), because of technical differences in cDNA capture or PCR amplification efficiency across cells, attributable to the difficulty of achieving consistent library preparation with minimal starting material. After removing low-quality cells, normalization of the counts removes these differences to avoid that they interfere with comparisons of the expression profiles between cells. Any observed heterogeneity or differential expression within the cell population after normalization are then driven by biology and not technical biases.
 
-Scaling normalization is the simplest and most commonly used class of normalization strategies. All counts for each cell are divided by a cell-specific scaling factor, often called a "size factor". The assumption behind this process is that any technical biases tend to affect genes in a similar manner. The relative bias for each cell is represented by the size factor for that cell. Dividing the cell counts by its size factor should then remove the bias.
+Scaling normalization is the simplest and most commonly-used class of normalization strategies. All counts for each cell are divided by a cell-specific scaling factor, often called a "size factor". The assumption behind this process is that any technical biases tend to affect genes in a similar manner. The relative bias for each cell is represented by the size factor for that cell. Dividing the cell counts by its size factor should then remove the bias.
 
 The simplest strategy for scaling normalization is the cell size normalization, i.e. similar total sum of counts across all genes for each cell. The "cell size factor" for each cell is computed directly for its cell size and transformed such that the mean size factor across all cells is equal to 1. The normalized expression values are then kept on the same scale as the original counts.
 
@@ -708,7 +708,7 @@ Here we would to normalize our count table such that each cell have 10,000 reads
 >
 {: .hands_on}
 
-The normalized counts should be log-transformed afterward to adjust for the mean-variance relationship.
+The normalized counts should be log-transformed afterwards to adjust for the mean-variance relationship.
 
 With log-transformation, the differences in the log-values represent log-fold changes in expression. Log-transformation focuses on promoting contributions from genes with strong relative differences (e.g. a gene that is expressed at an average count of 50 in cell type A and 10 in cell type B rather than a gene that is expressed at an average count of 1100 in A and 1000 in B).
 
@@ -719,7 +719,7 @@ With log-transformation, the differences in the log-values represent log-fold ch
 >    - *"Method used for inspecting"*: `Logarithmize the data matrix, using 'pp.log1p'`
 {: .hands_on}
 
-We will freeze the current state of the AnnData object, i.e. the logarithmized raw gene expression, in the a `raw` attribute. This information will be useed later in differential testing and visualizations of gene expression. 
+We will freeze the current state of the AnnData object, i.e. the logarithmized raw gene expression, in the a `raw` attribute. This information will be used later in differential testing and visualizations of gene expression.
 
 > ### {% icon hands_on %} Hands-on: Freeze the state of the AnnData object
 >
@@ -732,15 +732,15 @@ We will freeze the current state of the AnnData object, i.e. the logarithmized r
 
 ## Selection of features
 
-scRNA-Seq date are often used in exploratory analyses to characterize heterogeneity across cells. With clustering and dimensionality reduction, cells are compared based on their gene expression profiles. The choice of genes to use may have a major impact on the behavior of the clustering and the dimensionality reduction. We need then to remove genes with random noise while keeping genes containing useful information about the biology of the system. This reduce the data size but still highlight any interesting biological signal without the noise that obscures that structure.
+Data from scRNA-Seq is often used in exploratory analyses to characterize heterogeneity across cells. With clustering and dimensionality reduction, cells are compared based on their gene expression profiles. The choice of genes to use may have a major impact on the behaviour of the clustering and the dimensionality reduction. We need then to remove genes with random noise while keeping genes containing useful information about the biology of the system. This reduces the data size but still highlights any interesting biological signal without the noise that obscures that structure.
 
 Selecting the most variable genes based on their expression across the cells (i.e. genes highly expressed in some cells, and lowly expressed in others) is the simplest approach for feature selection. With this approach, we assume that increased variation in some genes compared to other genes are genuine biological differences and not technical noise or a baseline level of "uninteresting" biological variation. 
 
-To quantify the per-gene variation, the simplest approach consist in computing the variance of the log-normalized expression values for each gene across all cells in the population. With this approach, the feature selection is based on the same log-values as the ones used in clustering, ensuring then that the quantitative definition of heterogeneity is consistent throughout the entire analysis.
+To quantify the per-gene variation, the simplest approach consists of computing the variance of the log-normalized expression values for each gene across all cells in the population. With this approach, the feature selection is based on the same log-values as the ones used in clustering, ensuring then that the quantitative definition of heterogeneity is consistent throughout the entire analysis.
 
 Calculation of the per-gene variance is simple but feature selection requires modelling of the mean-variance relationship, as done in the Seurat procedure ({% cite stuart2019comprehensive %}) we will use.
 
-Once the per-gene variation has been quantified, we need to select the subset of highly variable genes that we will use in dowstream analyses. A large subset reduces the risk of discarding any interesting biological signal, but increases the noise from irrelevant genes on the signal. The optimal trade-off is difficult to determine but there are several common strategies routinely used. You can read the [Chapter 8 from "Orchestrating Single-Cell Analysis with Bioconductor"](https://osca.bioconductor.org/feature-selection.html#hvg-selection) for a nice presentation of the different strategies. Here, we will keep as highly variables the genes with normalized dispersion higher after normalization than 0.5.
+Once the per-gene variation has been quantified, we need to select the subset of highly variable genes that we will use in downstream analyses. A large subset reduces the risk of discarding any interesting biological signal, but increases the noise from irrelevant genes on the signal. The optimal trade-off is difficult to determine but there are several common strategies routinely used. You can read the [Chapter 8 from "Orchestrating Single-Cell Analysis with Bioconductor"](https://osca.bioconductor.org/feature-selection.html#hvg-selection) for a nice presentation of the different strategies. Here, we will define the set of highly variable genes as those which, after normalization, have a normalized dispersion amount higher than 0.5.
 
 > ### {% icon hands_on %} Hands-on: Identify the highly variable genes
 >
@@ -766,7 +766,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 > ### {% icon hands_on %} Hands-on: Keep the highly variable genes
 >
 > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: utput of the last **Filter** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: Output of the last **Filter** {% icon tool %}
 >    - *"What to inspect?"*: `General information about the object`
 >
 >    > ### {% icon question %} Questions
@@ -825,8 +825,8 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 Prior to any downstream analysis like dimensional reduction, we need to apply a linear transformation or scaling to
 
-1. Regress out unwanted sources of variation in the total counts per cell and the percentage of mitochondrial genes expressed
-2. Scale data to unit variance and zero mean, i.e. the variance across cells is 1 and the mean expression is 0, to give equal weight in downstream analyses and ensure that highly-expressed genes do not dominate
+1. Regress out unwanted sources of variation in the total counts per cell and the percentage of mitochondrial genes expressed.
+2. Scale data to unit variance and zero mean, i.e. the variance across cells is 1 and the mean expression is 0, in order to give equal weight in downstream analyses and ensure that highly-expressed genes do not dominate.
 
 > ### {% icon hands_on %} Hands-on: Scale the data
 >
@@ -850,7 +850,7 @@ Prior to any downstream analysis like dimensional reduction, we need to apply a 
 
 We aim in scRNA-seq to compare cells based on their expressions across genes, e.g. to identify similar transcriptomic profiles. Each gene represents then a dimension of the data. 
 
-With a dataset with 2 genes, we could make a 2-dimensional plot with each point being a cell and each axis the expression of one gene. With datasets with thousands of genes, the concept is the same: each cell's expression profile defines its location in the high-dimensional expression space.
+With a dataset of 2 genes, we could make a 2-dimensional plot where each point is a cell and each axis is the expression of one gene. For datasets with thousands of genes, the concept is the same: each cell's expression profile defines its location in the high-dimensional expression space.
 
 Expressions of different genes are correlated if they are affected by the same biological process. The separate information for these individual genes do not need to be stored, but can instead be compressed into a single dimension, e.g. an "eigengene". Dimensionality reduction aims then to reduce the number of separate dimensions in the data and then:
 
@@ -864,7 +864,7 @@ Principal Component Analysis (PCA) is a dimensionality reduction technique consi
 
 In PCA, the first axis (or Principal Component (PC)) is chosen such that it captures the greatest variance across cells. The next PC should be orthogonal to the first and capture the greatest remaining amount of variation, and so on.
 
-By applying PCA to scRNA-Seq, we assume that multiple genes are affected by the biological processes in a coordinated way and random technical or biological noise affect each gene independently. As more variation can be captured by considering the correlated behaviour of many genes, the top PCs are likely to represent the biological signal and the noise are concentrated in the later PCs. The dominant factors of heterogeneity are then captured by the top PCs. Restricting downstream analyses to the top PCs will then reduce the dimensionality of the data while focusing on the biological signal and removing the noise.
+By applying PCA to scRNA-Seq, we assume that multiple genes are affected by the same biological processes in a coordinated way and random technical or biological noise affects each gene independently. As more variation can be captured by considering the correlated behaviour of many genes, the top PCs are likely to represent the biological signal and the noise are concentrated into the later PCs. The dominant factors of heterogeneity are then captured by the top PCs. Restricting downstream analyses to the top PCs will then reduce the dimensionality of the data whilst focusing on the biological signal and removing the noise.
 
 Here we perform the PCA on the log-normalized expression values and compute the first 50 PCs.
 
@@ -956,7 +956,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >
 > >    > ### {% icon question %} Questions
 > >    >
-> >    > What are the information stored in `varm` regarding the PCA?
+> >    > What information is stored in `varm` regarding the PCA?
 > >    > 
 > >    > > ### {% icon solution %} Solution
 > >    > >
@@ -993,7 +993,7 @@ Scanpy provides several useful ways of visualizing both cells and genes that def
 
 ![PCA overview](../../images/scrna-scanpy-pbmc3k/pca_overview.png)
 
-On these plot,s we see the different cells projected on the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and these plot like this are not so informative. It may be more interesting to project also the values for the genes, maybe the genes most involved in the 3 PCs.
+On these plots we see the different cells projected onto the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and plot like these are not so informative. It may be more interesting to project also the values for the genes, since perhaps these are the genes most involved in the 3 PCs.
 
 > ### {% icon hands_on %} Hands-on: Visualize the top genes associated with PCs
 >
@@ -1006,7 +1006,7 @@ On these plot,s we see the different cells projected on the first 3 PCs. We can 
 >    >
 >    > ![PCA loadings](../../images/scrna-scanpy-pbmc3k/pca_loadings.png)
 >    >
->    > What are the top gene for each of the 3 first PCs? What do they represent?
+>    > What are the top genes for each of the 3 first PCs? What do they represent?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -1036,7 +1036,7 @@ On these plot,s we see the different cells projected on the first 3 PCs. We can 
 
 > ### {% icon question %} Questions
 >
-> Where are the differences of expression for CST3, NKG7, and PPBP?
+> Where are the differences in expression for CST3, NKG7, and PPBP?
 > 
 > > ### {% icon solution %} Solution
 > >
@@ -1047,7 +1047,7 @@ On these plot,s we see the different cells projected on the first 3 PCs. We can 
 
 ## Determination of the number of PCs to keep
 
-We performed the PCA analyses using 50 PCS. They represent a robust compression of the dataset, but we may not need to keep all of them. How many component should we choose to include?
+We performed the PCA analyses using 50 PCS. They represent a robust compression of the dataset, but we may not need to keep all of them. How many components should we choose to include?
 
 The choice of the number of PCs is a similar question to the choice of the number of highly variable genes to keep. More PCs means more noise but also more biological signal.
 
@@ -1085,15 +1085,15 @@ In the PC projection, we saw some subpopulations of cells emerging. We would lik
 
 Clustering summarizes the data and allows us to describe the population heterogeneity in terms of discrete and easily understandable labels. The subpopulations can be afterwards treated as proxies for biological objects like cell types or states.
 
-Graph-based clustering has been popularized for clustering large scRNA-Seq datasets by its use in Seurat ({% cite butler2018integrating %}, {% cite stuart2019comprehensive %}). Such approach like the K-nearest neighbor (KNN) graph works in 2 steps:
+Graph-based clustering has been popularized for clustering large scRNA-Seq datasets by its use in Seurat ({% cite butler2018integrating %}, {% cite stuart2019comprehensive %}). Such approaches like the K-nearest neighbor (KNN) graph works in 2 steps:
 
 1. **Computation of a neighborhood graph**
 
-    A graph is first built with each node being a cell connected to its nearest neighbours having smiliar expression patterns. Edges are weighted based on the similarity between the cells: higher weight given to cells that are more closely related, i.e. have similar expression profiles.
+    A graph is first built with each node being a cell connected to its nearest neighbours having similar expression patterns. Edges are weighted based on the similarity between the cells: higher weight is given to cells that are more closely related, i.e. have similar expression profiles.
 
 2. **Clustering of the neighborhood graph**
 
-    The graph is then partition into highly interconnected "quasi-cliques" or "communities", i.e. cells that are more connected to cells in the same community than they are to cells of different communities. Each community represents a cluster that we can use for downstream interpretation.
+    The graph is then partitioned into highly interconnected "quasi-cliques" or "communities", i.e. cells that are more connected to cells in the same community than they are to cells of different communities. Each community represents a cluster that we can use for downstream interpretation.
 
 ## Computation of a neighborhood graph
 
@@ -1123,7 +1123,7 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 > 
 >    > ### {% icon question %} Questions
 >    >
->    > How is the neighborhood graph is stored in the `AnnData` object?
+>    > How is the neighborhood graph stored in the `AnnData` object?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -1145,9 +1145,9 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 
 To visualize and explore the neighborhood graph, we can apply an extra step of non-linear dimensional reduction techniques to learn the underlying manifold of the data in order to place similar cells together in low-dimensional space. Cells that will be in the same clusters, i.e. cells with similar local neighborhoods in high-dimensional space, should co-localize on these low-dimensional plots.
 
-2 techniques are mainly used for the non-linear dimensional reduction: *t*-SNE (t-distributed stochastic neighbor embedding) and UMAP. Scanpy authors recommend to use here UMAP as it better preservers trajectories (check {% cite becht2019dimensionality %} for a review).
+Two techniques are commonly used for the non-linear dimensional reduction: *t*-SNE (t-distributed stochastic neighbor embedding) and UMAP. Scanpy authors recommend to use here UMAP as it better preserves trajectories (check {% cite becht2019dimensionality %} for a review) and easily accommodates new data.
 
-Here, we will reduce the neighborhood to 2 UMAP components and check how the cells are projected on them given the top genes
+Here, we will reduce the neighborhood to 2 UMAP components and then we will check to see how the cells are projected on them given the top genes
 
 > ### {% icon hands_on %} Hands-on: Embed and plot the neighborhood graph
 >
@@ -1159,7 +1159,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and check how the cel
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How is the UMAP reduction is stored in the `AnnData` object?
+>    > How is the UMAP reduction stored in the `AnnData` object?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -1188,7 +1188,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and check how the cel
 
 > ### {% icon question %} Questions
 >
-> Are clusters identifiable on these graphs? May they be linked to PCs?
+> Are clusters identifiable on these graphs? Might they be linked to PCs?
 > 
 > > ### {% icon solution %} Solution
 > >
@@ -1201,7 +1201,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and check how the cel
 
 ## Clustering of the neighborhood graph
 
-Given the first visualization, we can now cluster the cells on neighborhood graph. 
+Given the first visualization, we can now cluster the cells within a neighborhood graph.
 
 Which community detection algorithm should we use to define the clusters? Several modularity optimization techniques such as the SLM ({% cite blondel2008fast %}), Louvain algorithm ({% cite levine2015data %}) or the Leiden algorithm ({% cite traag2019louvain %}) are available to iteratively group cells together while optimizing the standard modularity function.
 
@@ -1219,7 +1219,7 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How is the UMAP reduction is stored in the `AnnData` object?
+>    > How is the UMAP reduction stored in the `AnnData` object?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -1266,9 +1266,9 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 
 # Finding marker genes
 
-To give sense to the clusters, we need to identify the genes that drive separation between clusters. These marker genes can ben then used to assign biological sense (e.g. cell type) to each cluster based on their functional annotation, but also to identify subtle differences between clusters (e.g., changes in activation or differentiation state) based on the behavior of genes in the affected pathways.
+To give sense to the clusters, we need to identify the genes that drive separation between clusters. These marker genes can then be used to assign biological sense (e.g. cell type) to each cluster based on their functional annotation, but also to identify subtle differences between clusters (e.g., changes in activation or differentiation state) based on the behaviour of genes in the affected pathways.
 
-Marker genes are usually by detected by their differential expression between clusters, as the more strongly DE genes are more likely to have caused separate clustering of cells. To quantify the differences in expression profiles, several different statistical tests can be used.
+Marker genes are usually detected by their differential expression between clusters, as the more strongly DE genes are more likely to have caused separate clustering of cells. To quantify the differences in expression profiles, several different statistical tests can be used.
 
 The identification of the marker genes for each cluster is made not only on the highly variable genes, but on the whole set (currently stored in the `raw` attribute).
 
@@ -1292,7 +1292,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How is the marker gene information is stored in the `AnnData` object?
+>    > How is the marker gene information stored in the `AnnData` object?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -1346,7 +1346,7 @@ RPS25 | S100A9 | HLA-DRB1 | CST7 | FTH1 | GNLY | HLA-DRB1 | NRGN
 
 > ### {% icon question %} Questions
 >
-> Are CST3, NKG7 and PPBP in the marker genes? If yes, are they assigned to the clusters we guessed before?
+> Are CST3, NKG7 and PPBP in the set of marker genes? If yes, are they assigned to the clusters we guessed before?
 > 
 > > ### {% icon solution %} Solution
 > >
@@ -1410,7 +1410,7 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > 
 > > ### {% icon solution %} Solution
 > >
-> > 1. The 5 top ranked genes are slighthly different, at least in their order.
+> > 1. The 5 top ranked genes are slightly different, at least in their order.
 > > 2. CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed); NKG7 for clusters 3 and 5 (not 0 as guessed) and PPBP for cluster 7, as we guessed before.
 > > 
 > {: .solution}
@@ -1434,9 +1434,9 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > 
 > > ### {% icon solution %} Solution
 > >
-> > - NKG7 is more expressed in clusters 3 and 5, the ones for which it is found as  a marker gene.
-> > - PPBP for cluster 7, its cluster
-> > - CST3 is more expressed in clusters 1, 4, 6, the ones for which it is found as  a marker gene, but also in cluster 7, which is unexpected.
+> > - NKG7 is more expressed in clusters 3 and 5, the ones for which it was previously found as a marker gene.
+> > - PPBP is very pronounced in cluster 7, for which it was previously found as a marker gene.
+> > - CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.
 > > 
 > {: .solution}
 {: .question}
@@ -1481,7 +1481,7 @@ The assumption should be even more true for the top marker genes. The first way 
 > {: .solution}
 {: .question}
 
-Another approach consist in displaying the mean expression of the marker genes for the cells on the neighborhood graph.
+Another approach consists of displaying the mean expression of the marker genes for the cells on the neighborhood graph.
 
 > ### {% icon hands_on %} Hands-on: Plot top marker gene expression on an UMAP plot
 >
@@ -1495,7 +1495,7 @@ Another approach consist in displaying the mean expression of the marker genes f
 >
 {: .hands_on}
 
-![Top marker gene expression on an UMAP plot](../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png)
+![Top marker gene expression on a UMAP plot](../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png)
 
 > ### {% icon question %} Questions
 > Are the top marker genes clearly associated to their clusters?
@@ -1527,13 +1527,13 @@ We would like now to have a look at the expression of the top 20 marker genes in
 Each cells is shown in a row and in columns are the marker genes for each cluster.
 
 > ### {% icon question %} Questions
-> How are clusters close to each other in term of expression of the top 20 marker genes? 
+> How are clusters close to each other in terms of expression of the top 20 marker genes? 
 > 
 > > ### {% icon solution %} Solution
 > >
-> > Clusters 0, 3, and 5 are similar in term of expression. It was expected as they are physically close on the neighborhood graph.
+> > Clusters 0, 3, and 5 are similar in term of expression. This was expected as they are physically close on the neighborhood graph.
 > >
-> > Clusters 1 and 4 are together and then 2 and 6 together with then after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.
+> > Clusters 1 and 4 are together and then 2 and 6 are together after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.
 > > 
 > {: .solution}
 {: .question}
@@ -1576,12 +1576,12 @@ In some cases, it may also be interesting to find marker genes distinguishing on
 >
 > > ### {% icon solution %} Solution
 > >
-> > In this graph are the marker genes distinguishing cluster 0 from cluster 1, ranked based on their difference of expression of the genes between cells in both clusters. So MALAT1 is the most differentially expressed genes between cells in cluster 0 and cells in cluster 1, even it was not in the top marker genes for cluster 0.
+> > In this graph are the marker genes distinguishing cluster 0 from cluster 1, ranked based on their difference of expression of the genes between cells in both clusters. So MALAT1 is the most differentially expressed gene between cells in cluster 0 and cells in cluster 1, even though it was not in the set of  top marker genes for cluster 0.
 > >
 > {: .solution}
 {: .question}
 
-The marker genes distinguishing cluster 0 from cluster 1 are extracted based on the expression difference, that can be easily visualized.
+The marker genes distinguishing cluster 0 from cluster 1 are extracted based on their differences in expression, which can be easily visualized.
 
 > ### {% icon hands_on %} Hands-on: Plot expression difference for the marker genes distinguishing cluster 0 from cluster 1
 > 1. **Plot** {% icon tool %} with the following parameters:
@@ -1592,17 +1592,17 @@ The marker genes distinguishing cluster 0 from cluster 1 are extracted based on 
 >      - *"Use 'raw' attribute of input if present"*: `No`
 {: .hands_on}
 
-![Violot plot for marker genes for clusters 0 vs 1 with Wilcoxon](../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png)
+![Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon](../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png)
 
 Previous visualizations like the heatmap can also be used to represent the differential expression of the marker genes between both clusters.
 
-In the next steps, we are mostly interested in the marker genes for each cluster individually by comparison to the rest, not 1-to-1 comparison. So we will use again the AnnData object called `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`.
+In the next steps, we are mostly interested in the marker genes for each cluster individually by comparison one cluster to the rest, instead of a 1-to-1 comparison. So we will use again the AnnData object called `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`.
 
 # Cell type annotation
 
-Obtaining clusters of cells was quite straightfoward. Determine what biological state is represented by each of those clusters is likely the most challenging task in scRNA-Seq data analysis. To do so, we need to bridge the gap between our current dataset and prior biological knowledge. 
+Obtaining clusters of cells is quite straightforward. Determining what biological state is represented by each of those clusters is likely the most challenging task in scRNA-Seq data analysis. To do so, we need to bridge the gap between our current dataset and prior biological knowledge.
 
-But the biological knowledge is not always avaialable in a consistent and quantitative manner. For example, the concept of "cell type" is not clearly defined. Intepretation of scRNA-seq data is then often manual.
+This biological knowledge is not always available in a consistent and quantitative manner. For example, the concept of "cell type" is not clearly defined. The interpretation of scRNA-seq data is often then quite manual.
 
 Fortunately in the case of our dataset, we can use canonical markers to known cell types:
 
@@ -1690,7 +1690,7 @@ Cluster | Cell type
 >
 >    > ### {% icon question %} Questions
 >    > 
->    > How can we check that the cell type has been correctly added?I
+>    > How can we check that the cell type has been correctly added?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -1716,11 +1716,11 @@ Cluster | Cell type
 
 > ### {% icon question %} Questions
 >  
-> How are clustered the cell types given the neighborhood graph?
+> How well are the cell types clustered in the neighborhood graph?
 >
 > > ### {% icon solution %} Solution
 > >
-> > T cells (CD4+ and CD8+) are clustered together with NK cells. Monocytes cells (CD14+ and FCGR3A+) are close to each others, with Dendritic and Megakaryocytes. B cells are physically independant.
+> > T cells (CD4+ and CD8+) are clustered together with NK cells. Monocytes cells (CD14+ and FCGR3A+) are close to each others, with Dendritic and Megakaryocytes. B cells are physically independent.
 > >
 > {: .solution}
 {: .question}
@@ -1792,7 +1792,7 @@ With the annotated cell types, we can also visualize the expression of their can
 > > ### {% icon solution %} Solution
 > >
 > > 1. Some canonical marker genes like LYZ or CST3 are not only highly expressed in their cell type but also on closely related other cell types.  
-> > 1. As seen on the UMAP graph, T cells (CD4+ and CD8+) are clustered together with NK cells, but NK cells and CD8+ closer to each other. Monocytes cells (CD14+ and FCGR3A+) are close to each others, but B cells are close to Dendritic and then Megakaryocytes despite B cells being physically independant on the neighborhood graph.
+> > 1. As seen on the UMAP graph, T cells (CD4+ and CD8+) are clustered together with NK cells, but NK cells and CD8+ closer to each other. Monocytes cells (CD14+ and FCGR3A+) are close to each others, but B cells are close to Dendritic and then Megakaryocytes despite B cells being physically independent on the neighborhood graph.
 > >
 > {: .solution}
 {: .question}
