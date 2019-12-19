@@ -1,0 +1,741 @@
+---
+layout: tutorial_hands_on
+
+title: "Galaxy 101 for everyone"
+zenodo_link: https://zenodo.org/record/1319069/files/iris.csv
+level: Introductory
+questions:
+  - "What are the differences between the Iris species?"
+objectives:
+  - "Familiarize yourself with the basics of Galaxy"
+  - "Learn how to obtain data from external sources"
+  - "Learn how to tag datasets"
+  - "Learn how to run tools"
+  - "Learn how histories work"
+  - "Learn how to create a workflow"
+  - "Learn how to share your work"
+time_estimation: "1H30M"
+key_points:
+  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
+  - "Galaxy keeps a full record of your analysis in a history"
+  - "Workflows enable you to repeat your analysis on different data"
+  - "Galaxy can connect to external sources for data import and visualization purposes"
+  - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
+contributors:
+  - annefou
+  - nagoue
+  - chrisbarnettster
+  - michelemaroni89
+  - olanag1
+  - tnabtaf
+  - shiltemann
+---
+
+
+# Introduction
+{:.no_toc}
+
+This practical aims at familiarizing you with the Galaxy user interface.
+It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
+Not everyone has the same background and that's ok!
+
+{% include snippets/warning_results_may_vary.md %}
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+> ### {% icon comment %} Background
+> The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
+> Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
+> For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
+{: .comment}
+
+## What does Galaxy look like?
+
+> ### {% icon hands_on %} Hands-on: Log in or register
+> Browse to your [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
+> 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
+> 2. Browse to your Galaxy instance
+> 3. Log in or register
+>
+>   > ### {% icon comment %} Different Galaxy servers
+>   > The particular Galaxy server that you are using may look slightly different than the one shown in this training. Don't worry!
+>   {: .comment}
+>
+{: .hands_on}
+
+
+The Galaxy interface consists of three main parts:
+
+1. The available tools are listed on the left
+2. Your analysis history is recorded on the right
+3. The central panel will let you run analyses and view outputs
+
+![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+
+
+# Create a history
+
+Galaxy allows you to create analysis histories. A **history** can be thought of as an electronic experimental lab book; it keeps tracks of all the tools and parameters you used in your analysis. From such a history, a **workflow** can be extracted; this workflow can be used to easily repeat the analysis on different data.
+
+Think of a workflow as a cooking recipe with a list of ingredients (datasets) and a set of instructions
+(pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
+The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
+a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
+That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.
+
+The finalized pipelines can be generalized as a workflow. If we use cooking as an analogy, a workflow could represent an entire menu with all the recipes for each meal.
+In other words, using a workflow makes it possible to apply the same procedure to a different dataset, just by changing the input.
+
+> ### {% icon hands_on %} Hands-on: Create history
+>
+> 1. Make sure you start from an empty analysis history.
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Rename your history** to be meaningful and easy to find. For instance, you can choose **Galaxy 101 for everyone** as the name of your new history.
+>    {% include snippets/rename_history.md %}
+{: .hands_on}
+
+## Upload Iris dataset
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+>
+>    ```
+>    https://zenodo.org/record/1319069/files/iris.csv
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>
+>
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. Check the **datatype**
+>    - Click on the history item to expand it to get more information.
+>    - The datatype of the iris dataset should be `csv`.
+>    - **Change** {% icon galaxy-pencil %} the datatype *if* it is different than `csv`.
+>      - Option 1: Datatypes can be **autodetected**
+>      - Option 2: Datatypes can be **manually set**
+>
+>    {% include snippets/detect_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="csv" %}
+>
+> 4. Add a tag {% icon galaxy-tags %} called `iris` to the dataset
+>    - Make sure the tag start with a hashtag symbol (`#iris`)
+>    - This tag will stay with your dataset any any results derived from it, and will help you make sense of your history
+>
+>    {% include snippets/add_tag.md %}
+>
+{: .hands_on}
+
+# Pre-processing
+
+One or more pre-processing step may be required to proceed with analysis. In our case, the tools we will use require tab-separated files, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to do some pre-processing of the files to make them ready for analysis.
+
+In the next steps we will perform two pre-processng steps:
+- Format conversion
+- Header removal
+
+
+## Convert format
+
+First, we will convert the file from comma-separated to tab-separated format. Galaxy has built-in format converters we can use for this.
+
+
+> ### {% icon hands_on %} Hands-on: Converting dataset format
+>
+> 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. **View** the generated file by clicking on the {% icon galaxy-eye %} (eye) icon
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How many header lines does our file have?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > The file has one header line, it contains the column names.
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+## Remove header
+
+Now it is time to run your first tool! We saw in the previous step that our file has 1 header line. This line does not contain any data, but the names of each column. We will now remove that line from our file before moving on to our analysis.
+
+> ### {% icon comment %} Tip: Finding your tool
+>
+> Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
+>
+> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you'll need to search among the various options to find the one that works for you.
+>
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Removing header
+>
+> 1. **Remove beginning** {% icon tool %} with the following parameters:
+>    - *Remove first*: `1` (to remove the first line only)
+>    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
+>    - Click **Execute**
+>
+>    > ### {% icon comment %} Tip: search for the tool
+>    >
+>    > Use the **tools search box** at the top of the tool panel to find **Remove beginning** {% icon tool %}.
+>    {: .tip}
+>
+>    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
+>
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris clean`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. Click on the new history item to expand it
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Which tags are present on this resulting dataset? (You may have to refresh the history panel to see the tags)
+>    > 2. How many samples (lines) does our dataset contain?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. The output of **Remove beginning** {% icon tool %} is also tagged with the label `iris`. Tags beginning with a hashtag (`#`) will propagate; they will appear on any datasets derived from your original tagged file.
+>    > >
+>    > > 2. There are 150 lines in our file (we can see this under the file name when we have expanded the history item). This means we have 150 samples.
+>    > {: .solution}
+>    {: .question}
+>
+> 4. **View** {% icon galaxy-eye%} the contents of the resulting file.
+>    - You should see that the header line is now no longer present.
+>
+{: .hands_on}
+
+
+
+# Data Analysis: What does the dataset contain?
+
+Now we are going to inspect the dataset using simple tools in order to get used to the Galaxy interface and answer basic questions.
+
+## How many different species are in the dataset?
+
+In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in Galaxy. One approach might be to first extract this column from the file, and then count how many unique lines the file contains. Let's do it!
+
+> ### {% icon hands_on %} Hands-on: Filtering dataset
+>
+> 1. **Cut** - columns from a table {% icon tool %} with the following parameters:
+>      - *"Cut columns"*: `c5`
+>      - *"Delimited by"*: `Tab`
+>      - {% icon param-file %} *"From"*: `iris clean` dataset
+>
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris species column`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. **View** {% icon galaxy-eye %} the resulting file
+>
+> 4. **Unique** - occurrences of each record {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"File to scan for unique values"*: `iris species column` (the output from **Cut** {% icon tool %})
+>
+> 5. **Rename** {% icon galaxy-pencil %} the dataset to `iris species`
+>
+> 6. **View** {% icon galaxy-eye %} the resulting file
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many different species are in the dataset?
+>    > 2. What are the different Iris species?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. There are 3 species.
+>    > > 2. The 3 different Iris species are:
+>    > > - setosa
+>    > > - versicolor
+>    > > - virginica
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+Now we have our answer! There are 3 different Iris species in our file.
+
+Like we mentioned before, there are often multiple ways to reach your answer in Galaxy. For example, we could have done this with just a single tool, **Group** {% icon tool %} as well.
+
+
+> ### {% icon hands_on %} Exercise: Grouping dataset
+>
+> 1. Try answering this question (how many Iris species are in the file?) again, using a different approach:
+>    - Tool: **Group** data by a column and perform aggregate operation on other columns {% icon tool %}
+>    - Input dataset: `iris clean` dataset to answer the same question.
+>
+> 2. Did you get the same answer as before?
+>
+> 3. **Rename** {% icon galaxy-pencil %} the dataset to `iris species group`
+>
+> > ### {% icon solution %} Solution
+> > 1. **Group** {% icon tool %} with the following parameters:
+> >   - *"Select data"* select `iris clean` dataset
+> >   - *"Group by column"*: `Column: 5`
+> >
+> > 2. This approach should give the same answer. There are often multiple ways to do a task in Galaxy, which way you choose is up to you!
+> {: .solution}
+>
+{: .question}
+
+
+## How many samples by species are in the dataset?
+
+Now that we know that there are 3 different species in our dataset, our next objective is determining how many samples of each species we have. To answer this, we need to look at column 5 again, but instead of just determining how many unique values there are, we need to count how many times each of them occurs.
+
+You may have noticed there were more parameters in the **Group** {% icon tool %} tool that we did not use. Let's have a closer look and see if any of them might help us answer this question.
+
+> ### {% icon comment %} Tool Help
+> To find out more about how a tool works, look at the help text (below the **Execute** button).
+>
+> Look at the tool help for the **Group** {% icon tool %}. Do you see any parameters that could help answer this question?
+{: .comment}
+
+Looking at the tool help for **Group** {% icon tool %}, we see that we can also perform aggregate operations such as mean, median, sum, max, min, count (and more). Counting sounds just like what we need, let's try it!
+
+> ### {% icon hands_on %} Hands-on: Grouping dataset and adding information
+>
+> 1. **Re-run** {% icon galaxy-refresh %} the **Group** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select data"*: `iris clean`
+>    - {% icon param-select %} *"Group by column"*: `Column: 5`
+>    - {% icon param-repeat %} *"Insert operation"*
+>      - *"Type"*: `Count`
+>      - *"On column"*: `Column: 1`
+>
+>    {% include snippets/rerun_tool.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris samples per species group`
+>
+> 3. **View** {% icon galaxy-eye %} the resulting file.
+>
+>    > ### {% icon question %} Question
+>    > How many samples per species are in the dataset?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > We have 50 samples per species:
+>    > >
+>    > > | 1         | 2   |
+>    > > |---------- | --- |
+>    > > |setosa     | 50  |
+>    > > |versicolor | 50  |
+>    > > |virginica  | 50  |
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+
+# Analysis: How to differentiate the different Iris species?
+
+Our objective is to find what differentiate the different Iris species (Figure 1). We know that we have **3** species of iris flowers, with
+**50** samples for each:
+- setosa
+- versicolor
+- virginica
+
+These species look very much alike as shown on the figure below.
+
+![3 species of Iris flowers](../../images/iris_flowers.png "3 species of Iris flowers")
+
+And our objective is to find out whether the features we have been given for each species can help us to highlight the differences between the 3 species.
+
+In our dataset, we have the following features measured for each sample:
+- Petal length
+- Petal width
+- Sepal length
+- Sepal width
+
+> ### {% icon comment %} petal and sepal
+> The image below shows you what the terms sepal and petal mean.
+> ![Sepal and petal](../../images/iris_sepal_petal.png "Sepal and petal of Iris flowers")
+{: .comment}
+
+## Summary and descriptive statistics with **Datamash**
+
+> ### {% icon hands_on %} Hands-on: Get the mean and sample standard deviation of Iris flower features
+>
+> 1. **Datamash** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: `iris tabular`
+>    - *"Group by fields"*: `5`
+>    - *"Input file has a header line"*: `Yes`
+>    - *"Print header line"*: `No`
+>    - *"Sort input"*: `Yes`
+>    - "Print all fields from input file": `No`
+>    - *"Ignore case when grouping"*: `Yes`
+>    - In *"Operation to perform on each group"*:
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c1`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviation`
+>            - *"On column"*: `c1`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c2`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviation`
+>            - *"On column"*: `c2`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c3`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviation`
+>            - *"On column"*: `c3`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Mean`
+>            - *"On column"*: `c4`
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>            - *"Type"*: `Sample Standard deviation`
+>            - *"On column"*: `c4`
+>
+> 2. Rename the dataset to `iris summary and statistics`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. **View** {% icon galaxy-eye %} the generated file
+>
+>
+>   > ### {% icon question %} Questions
+>   >
+>   > 1. Can we differentiate the different Iris flower species?
+>   >
+>   > > ### {% icon solution %} Solution
+>   > >
+>   > > 1. From the results, we can see that the average *Iris setosa* petal length is lower than 1.5 with a relatively small standard deviation (<0.2).
+>   > > The same can be observed for *Iris setosa* petal widths. These numbers are much smaller (width and length) than *Iris versicolor* and *Iris virginica* petals.
+>   > > We can then use these characteristics to differentiate *Iris setosa* from the two other species (*I. versicolor* and *I. virginica*). On the other hand,
+>   > > we cannot easily differentiate *Iris Versicolor* from *Iris Virginica*. Further analysis is necessary.
+>   > >
+>   > {: .solution}
+>   >
+>   {: .question}
+>
+{: .hands_on}
+
+## Visualize Iris dataset with **Scatterplot w ggplot2**
+
+Let's visualize the Iris dataset to see how the features depend on each other, and
+check whether we can spot any immediate patterns.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: **iris clean**
+>    - *"Column to plot on x-axis"*: `1`
+>    - *"Column to plot on y-axis"*: `2`
+>    - *"Plot title"*: `Sepal length as a function of sepal width`
+>    - *"Label for x axis"*: `Sepal length`
+>    - *"Label for y axis"*: `Sepal width`
+>    - In *"Advanced Options"*:
+>        - *"Data point options"*: `User defined point options`
+>            - *"relative size of points"*: `2.0`
+>        - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+>            - *"column differentiating the different groups"*: `5`
+>            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
+>
+> 2. **View** {% icon galaxy-eye%} the resulting plot:
+>
+>    ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter.png)
+>
+> 3. Rename the dataset to `iris sepal scatterplot`
+>
+> > ### {% icon question %} Questions
+>  >
+>  > 1. What does this scatter plot tell us about Iris species?
+>  > 2. Make a new scatter plot, this time with *Petal* length versus *Petal* width.
+>  > 3. Can we differentiate between the three Iris species?
+>  >
+>  >    > ### {% icon tip %} Tip: Re-running the ggplot tool
+>  >    > Instead of clicking on **Scatterplot w ggplot2** {% icon tool %} again, it is possible to recall the previous scatterplot parameters by clicking on re-run button and updating the parameters we wish to modify.
+>  >    >    > ### {% icon hands_on %} Hands-on: Re-run the tool
+>  >    >    > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Scatterplot w ggplot2** {% icon tool %}
+>  >    >    > ![rerun](../../images/rerun_scatterplot.png)
+>  >    >    >
+>  >    >    > This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.
+>  >    >    {: .hands_on}
+>  >    {: .tip}
+>  >
+>  > > ### {% icon solution %} Solution
+>  > >
+>  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distinguished from *Iris versicolor* and
+>  > > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
+>    > > virginica*.
+>  > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>  > >     - {% icon param-file %} *"Input tabular dataset"*: `iris clean`
+>  > >     - *"Column to plot on x-axis"*: `3`
+>  > >     - *"Column to plot on y-axis"*: `4`
+>  > >     - *"Plot title"*: `Petal length as a function of petal width`
+>  > >     - *"Label for x axis"*: `Petal length`
+>  > >     - *"Label for y axis"*: `Petal width`
+>  > >     - In *"Advanced Options"*:
+>  > >         - *"Data point options"*: `User defined point options`
+>  > >             - *"relative size of points"*: `2.0`
+>  > >         - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+>  > >             - *"column differentiating the different groups"*: `5`
+>  > >             - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
+>  > >
+>  > > 3. Your new output dataset will look something like this:
+>  > >
+>  > >   ![Contents of the `Group` output dataset](../../images/101_foreveryone_scatter_petal.png)
+>  > >
+>  > > We can better differentiate between the 3 Iris species but for some samples the petal length versus width is still insufficient
+>  > > to differentiate *Iris versicolor* from *Iris virginica*. And as before, *Iris setosa* can easily be distinguished from the two other species.
+>  > {: .solution}
+>  {: .question}
+{: .hands_on}
+
+# Galaxy management
+
+## Convert your analysis history into a workflow
+
+When you look carefully at your history, you can see that it contains all steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn't it be nice to just convert this history into a workflow that we will be able to execute again and again?
+
+Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
+
+> ### {% icon hands_on %} Hands-on: Extract workflow
+>
+> 1. **Clean up** your history.
+>    - If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button.
+>    - This will make the creation of a workflow easier.
+>
+> 2. Go to the **History Options menu**  {% icon galaxy-gear %} menu
+>    - Select the **Extract Workflow** option.
+>
+>      ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
+>
+>    - The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
+>
+>    ![Selection of steps for `Extract Workflow` from history](../../images/101_foreveryone_workflow_create.png)
+>
+> 3. **Rename** the workflow to something descriptive
+>    - For example: `Exploring Iris dataset with statistics and scatterplots`.
+>    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+>
+> 4. Click on the **Create Workflow** button near the top.
+>    - You will get a message that the workflow was created. But where did it go?
+>
+> 5. Click on **Workflow** in the top menu of Galaxy.
+>    - Here you have a list of all your workflows.
+>    - Your newly created workflow should be listed at the top:
+>
+>    ![`Where workflows go` list](../../images/101_foreveryone_workflow.png)
+>    ![`Your workflows` list](../../images/101_foreveryone_workflow_list.png)
+{: .hands_on}
+
+## The workflow editor
+
+
+> ### {% icon comment %} Tip: Problems creating your workflow?
+> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
+> which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
+>
+> {% include snippets/import_workflow.md %}
+>
+{: .comment}
+
+
+We can examine the workflow in Galaxy's workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.
+
+> ### {% icon hands_on %} Hands-on: Editing our workflow
+>
+> 1. Open the **workflow editor**
+>    - Click on the dropdown menu {% icon galaxy-dropdown %} (triangle icon) to the right of your workflow name.
+>
+> 2. Select **Edit** to launch the workflow editor.
+>    - You should see something like this:
+>
+>    ![Workflow editor](../../images/101_foreveryone_workflow_editor.png)
+>
+>    - When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen (the **Details** section)
+>    - You can also change the parameter settings of your workflow here, and also do more advanced configuration.
+>
+> 3. **Hiding intermediate outputs**
+>    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
+>    - By default, all outputs will be shown
+>    - Click the **asterisk** for outputs to mark them as important:
+>        - `out_file` in  **Unique** {% icon tool %}
+>        - `out_file1` in **Group** {% icon tool%} step
+>            - This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the **Details** box on the right.
+>        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
+>    - Now, when we run the workflow, we will only see these final outputs
+>        - i.e. the two dataset with species, the dataset with number of samples by species and the two scatterplots.
+>
+>    {% include snippets/workflow_hide_intermediate_steps.md %}
+>
+> 4. **Renaming output datasets**
+>    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
+>    - We can do the same in a workflow (see the tip box below)
+>    - Let's rename the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
+>        - **Unique** {% icon tool%}, output `out_file`: rename to `categories` tool
+>        - **Group** {% icon tool %}, output `out_file1`: rename to `samples per category`
+>        - Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.
+>
+>    {% include snippets/workflow_rename_output.md %}
+>
+> 5. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
+>
+>    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
+>
+> 6. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
+>
+{: .hands_on}
+
+> ### {% icon comment %} Comments
+> We could **validate** our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.
+{: .comment}
+
+
+## Run workflow on different data
+
+Now that we have built our workflow, let's use it on some different data. For example, let's describing `diamonds` R dataset.
+
+
+
+
+> ### {% icon hands_on %} Hands-on: Create a new history and upload a new data
+>
+> 1. Create a **new history** and give it a name.
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Import** {% icon galaxy-upload %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
+>
+>    ```
+>    https://zenodo.org/record/3540705/files/diamonds.csv
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
+>
+> 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Add a propagating tag {% icon galaxy-tags %} (e.g. `#diamonds`)
+>
+>    {% include snippets/add_tag.md %}
+{: .hands_on}
+
+The `diamonds` data set comes from the well-known ggplot2 package developed by Hadley and initially collected from Diamond Search Engine in 2008.
+For this training, we have created a simpler dataset by selecting a subset of columns.
+The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, cut, color and clarity):
+  - **Carat** refers to the weight of the diamond when measured on a scale
+  - **Cut** applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
+  - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow. In our dataset, the color column is encoded as an integer with 1 for D and 23 for Z.
+  - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is: 1 (Flawless), 2 (Internally Flawless), 3 (VVS1), 4 (VVS2), 5 (VS1), 6 (VS2), 7 (SI1), 8 (SI2), 9 (I1), 10 (I2) and 11 (I3). In term of quality, the "ideal" diamond would be Flawless (1) while the worst would be I3 (11).
+
+![4 Cs](../../images/4cs-of-diamond-buying.jpg "The 4 Cs of diamond of diamonds.")
+
+> ### {% icon hands_on %} Hands-on: Run workflow
+>
+> 1. We wish to analyze diamonds by their 4 Cs by recycling our workflow.
+>
+> 2. Open the **workflow menu** (top menu bar).
+>    - Find the workflow you made in the previous section,
+>    - Select the option `Run`.
+>    - The central panel will change to allow you to configure and launch the workflow.
+>
+> 3. Select the appropriate dataset for the input.
+>
+> 4. Customize the first scatter plot:
+>    - Change `Plot title` to **Diamond price as a function of carat**
+>    - Change `Label for x axis` to **weight of the diamond (carat)**
+>    - Change `Label for y axis` to **Price (US dollars)**
+>
+>    > > ![Customize scatter plot](../../images/customize_diamond_plot.png)
+>
+> 5. Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
+>    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor**
+>    - Change `Label for x axis` to **weight of the diamond (carat)**
+>    - Change `Label for y axis` to **Price (US dollars)**
+>    - And finally in `Advanced Options` change `column differentiating the different groups` to **4** (Clarity).
+>
+> 6. Click `Run workflow`.
+>
+> 7. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+>
+>    > ### {% icon question %} Questions
+>    > 1. How many cut category are there in the Diamond dataset ?
+>    > 2. How many samples are there in each cut category ?
+>    > 3. What do you notice about the relationship between price and carat ?
+>    > 4. Based on the plot showing Price vs. Carat with Clarity as a factor, do you think clarity accounts for some of the variance in price? Why ?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. There are 5 different cut categories:
+>    > > - Fair
+>    > > - Good
+>    > > - Ideal
+>    > > - Premium
+>    > > - Very Good
+>    > >
+>    > > 2. We have the following number of samples in each cut category:
+>    > >
+>    > >    | 1         | 2      |
+>    > >    |---------- | ------ |
+>    > >    | Fair      |	1610  |
+>    > >    | Good	     |  4906  |
+>    > >    | Ideal     |	21551 |
+>    > >    | Premium   |	13791 |
+>    > >    | Very Good |	12082 |
+>    > >
+>    > > 3. Using any of the scatter plots we made, we can see an obvious positive (non-linear) relationship between both variables: as carat size increases, price also increases. There is also very clear discrete values that carat size takes on, which are those vertical strips on the graph.
+>    > >
+>    > >    ![Price by Carat and Clarity](../../images/price_by_carat_and_clarity.png)
+>    > >
+>    > > 4. Holding carat weight constant, we see on the scatter plot shown above that diamonds with lower clarity are almost always cheaper than diamonds with better clarity: diamonds that are “Internally Flawless” are the most expensive whereas “I1” are the least expensive clarity types. So clarity explains a lot of the variance found in price!
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+
+## Share your work
+
+One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
+
+To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
+
+1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
+2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
+3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
+
+> ### {% icon comment %} Permissions
+> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
+>
+> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Share history
+>
+> 1. Share your history with your neighbour.
+> 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
+{: .hands_on}
+
+# Conclusion
+{:.no_toc}
+
+{% icon trophy %} Well done! You have just performed your first analysis in Galaxy. Additionally you can share your results and methods with others.
+

@@ -20,6 +20,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
 contributors:
   - shiltemann
   - nsoranzo
@@ -93,7 +94,7 @@ First we need to get some data into our history. You can upload files from your 
 
 > ### {% icon hands_on %} Hands-on: Data upload from UCSC
 >
-> 1. **UCSC Main** {% icon tool %} - table browser:
+> 1. **UCSC Main** {% icon tool %} table browser:
 >
 >     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
 >
@@ -252,8 +253,6 @@ Since each line in our file represents a single overlap between SNP and exon, we
 >        - *"Type"*: `Count`
 >        - *"On column"*: `Column: 4`
 >
->    ![Settings for the `Group` tool](../../images/101_13.png)
->
 > 2. Click **Execute** to perform the grouping. Your new output dataset will look something like this:
 >
 >    ![Contents of the `Group` output dataset](../../images/101_14.png)
@@ -265,10 +264,10 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > ### {% icon question %} Question
 > How many exons are there in total in your file?
 >
->    > > ### {% icon solution %} Solution
->    > > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
->    > >
->    > {: .solution }
+> > ### {% icon solution %} Solution
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
+> >
+> {: .solution }
 {: .question}
 
 ## Sort the exons by SNPs count
@@ -370,21 +369,16 @@ In Galaxy your analyses live in histories such as your current one. Histories ca
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view, or choose `Saved Histories` from the history options menu and you will see a list of all your histories in the central panel:
-
-![`Saved Histories` list](../../images/101_23.png)
-
-An alternative overview of your histories can be accessed by clicking on the {% icon galaxy-columns %} **View all histories** button at top of your history panel.
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view:
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
-Here you see a more detailed view of each history, and can perform the same operations as the other view:
-- switching between different histories,
-- deleting a history,
-- purging it (permanently deleting it, this action cannot be reversed)
-- copying histories
-
-One difference is that this view lets you copy datasets between your histories by dragging and dropping them.
+Here you can:
+- switch between different histories,
+- delete a history,
+- purge it (i.e. permanently delete it, this action cannot be reversed)
+- copy histories
+- copy datasets between histories (by dragging and dropping)
 
 You can always return to your analysis view by clicking on **Analyze Data** in the top menu bar.
 
@@ -399,8 +393,6 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 > 1. **Clean up** your history. If you had any failed jobs (red), please remove those datasets from your history by clicking on the `x` button. This will make the creation of a workflow easier.
 >
 > 2. Go to the history {% icon galaxy-gear %} History Options menu and select the `Extract Workflow` option.
->
->    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
 >    The central panel will change as shown below and you will be able to choose which steps to include/exclude and how to name the newly created workflow.
 >
@@ -444,21 +436,18 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
 >
-> 3. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
->    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser. Once you have done this, you will notice that the **minimap** at the bottom-right corner of your screen will have a colour-coded view of your workflow, with orange boxes representing a tool with an output that will be shown.
+> 4. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
 >
->    ![Workflow minimap](../../images/101_31.png)
+>    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.
 >
->
->    In the image above, you see that the top input dataset (with the blue border) connects to the first input of the `Join` tool, so this corresponds to the exon data.
->
-> 4. The box named `Exons` is named ok, but we want to change `SNPs` since this workflow is not specific to SNPs
+> 5. The box named `Exons` is named ok, but we want to change `SNPs` since this workflow is not specific to SNPs
 >
 >    - **Click** on the box corresponding to the `SNPs` input dataset
 >    - change the **Label** to `Features` on the right-hand side of your screen.
 >
-> 5. Let's also **rename the outputs**:
+> 6. Let's also **rename the outputs**:
 >
 >    - Click on the `Select first` tool in the workflow editor
 >    - In the menu on the right click on `Configure Output: 'out_file1'`
@@ -497,10 +486,19 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 2. Click **Analyze Data** at the top to return to the main analysis window
 >
 > 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
->    - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
->    - *"group"* parameter should be changed to `Repeats`
->    - *"position"*: `chr22`
->    - leave the rest of the settings to the defaults
+>
+>    **UCSC Main** {% icon tool %} table browser:
+>
+>     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+>
+>     Now set the following parameters:
+>     - *"clade"*: `Mammal`
+>     - *"genome"*: `Human`
+>     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>     - *"group"*: `Repeats`
+>     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
+>     - *"output format"* should be changed to `BED - browser extensible data`
+>     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
 >
@@ -523,8 +521,8 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, we can unhide all hidden datasets by clicking on "hidden", just below the history name, or by selecting `Unhide Hidden Datasets` from the {% icon galaxy-gear %} history options menu.
+> ### {% icon comment %} Unhiding hidden datasets
+> Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the "## hidden" just below the history's name.
 {: .comment}
 
 > ### {% icon question %} Questions
