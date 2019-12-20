@@ -22,10 +22,11 @@ module Jekyll
 
     def figurify(page)
       num = 0
-      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")?\)/) {
+      page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")?\)({:(.*)})?/) {
         alt = $1
         url = $2
         title = $3
+        style = $5
 
         if skip_titles?(title) or (title.to_s.empty? and skip_empty?)
           Regexp.last_match
@@ -33,7 +34,7 @@ module Jekyll
           num += 1
 
           "<figure id=\"figure-#{num}\">" +
-            "<img src=\"#{url}\" alt=\"#{alt}\">" +
+            "<img src=\"#{url}\" alt=\"#{alt}\" #{style}>" +
             "<figcaption><span class=\"figcaption-prefix\">#{figcaption_prefix}#{num}:</span> #{title}</figcaption>" +
           "</figure>"
         end

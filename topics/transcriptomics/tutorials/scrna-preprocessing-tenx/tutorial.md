@@ -24,11 +24,12 @@ requirements:
     topic_name: transcriptomics
     tutorials:
       - scrna-preprocessing
-#
-# follow_up_training:
-#   -
-#     type: "internal"
-#     topic_name: transcriptomics
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-scanpy-pbmc3k
 
 contributors:
   - mtekman
