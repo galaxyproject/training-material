@@ -3,7 +3,7 @@
     "tags": [],
     "format-version": "0.1",
     "name": "exome_seq_training_short_w_cached_ref",
-    "version": 3,
+    "version": 4,
     "steps": {
         "0": {
             "tool_id": null,
@@ -114,207 +114,186 @@
             "type": "data_input"
         },
         "4": {
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
-            "tool_version": "2.4.1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
+            "tool_version": "1.8+galaxy1",
             "outputs": [
                 {
-                    "type": "txt",
-                    "name": "out_file2"
-                },
-                {
-                    "type": "bam",
-                    "name": "out_file1"
+                    "type": "sam",
+                    "name": "output1"
                 }
             ],
-            "workflow_outputs": [
-                {
-                    "output_name": "out_file2",
-                    "uuid": "f18826ff-d5d7-4bd2-b3ba-f1457b745fc8",
-                    "label": null
-                },
-                {
-                    "output_name": "out_file1",
-                    "uuid": "c6653b3c-b9ce-4eea-b493-3048631734c0",
-                    "label": null
-                }
-            ],
+            "workflow_outputs": [],
             "input_connections": {
-                "input_bam": {
+                "input1": {
                     "output_name": "output",
                     "id": 0
                 }
             },
-            "tool_state": "{\"input_bam\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"rule_configuration\": \"{\\\"__current_case__\\\": 0, \\\"rules_selector\\\": \\\"false\\\"}\", \"conditions\": \"[{\\\"__index__\\\": 0, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"__current_case__\\\": 11, \\\"bam_property_selector\\\": \\\"isProperPair\\\", \\\"bam_property_value\\\": \\\"true\\\"}}]}]\", \"__page__\": null}",
+            "tool_state": "{\"__page__\": null, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"__current_case__\\\": 1, \\\"filter\\\": \\\"yes\\\", \\\"reqBits\\\": null, \\\"skipBits\\\": [\\\"0x0004\\\", \\\"0x0008\\\"]}\", \"mapq\": \"\\\"0\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
             "id": 4,
             "tool_shed_repository": {
                 "owner": "devteam",
-                "changeset_revision": "bd735cae4ce6",
-                "name": "bamtools_filter",
+                "changeset_revision": "a7add3e93cc5",
+                "name": "samtool_filter2",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "uuid": "c2bf2c6f-f243-4766-89d3-8f9ec8f07faa",
+            "uuid": "3479ed8e-baf1-425f-9082-a5dd365b86a0",
             "errors": null,
-            "name": "Filter",
+            "name": "Filter SAM or BAM, output SAM or BAM",
             "post_job_actions": {
-                "TagDatasetActionout_file1": {
-                    "output_name": "out_file1",
-                    "action_type": "TagDatasetAction",
-                    "action_arguments": {
-                        "tags": "#father"
-                    }
-                },
-                "TagDatasetActionout_file2": {
-                    "output_name": "out_file2",
-                    "action_type": "TagDatasetAction",
-                    "action_arguments": {
-                        "tags": "#father"
-                    }
+                "HideDatasetActionoutput1": {
+                    "output_name": "output1",
+                    "action_type": "HideDatasetAction",
+                    "action_arguments": {}
                 }
             },
             "label": null,
-            "inputs": [],
+            "inputs": [
+                {
+                    "name": "bed_file",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                },
+                {
+                    "name": "input1",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                },
+                {
+                    "name": "flag",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                }
+            ],
             "position": {
-                "top": 201,
-                "left": 386.796875
+                "top": 289,
+                "left": 373.33331298828125
             },
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
             "type": "tool"
         },
         "5": {
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
-            "tool_version": "2.4.1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
+            "tool_version": "1.8+galaxy1",
             "outputs": [
                 {
-                    "type": "txt",
-                    "name": "out_file2"
-                },
-                {
-                    "type": "bam",
-                    "name": "out_file1"
+                    "type": "sam",
+                    "name": "output1"
                 }
             ],
             "workflow_outputs": [
                 {
-                    "output_name": "out_file2",
-                    "uuid": "9d80d7df-be29-4f97-a25e-899ad6ad7ac7",
-                    "label": null
-                },
-                {
-                    "output_name": "out_file1",
-                    "uuid": "5ae44b36-5567-496e-b59e-26ea46f25db8",
+                    "output_name": "output1",
+                    "uuid": "3fbd0ea8-4682-4e90-a5fc-50ffb395fa5b",
                     "label": null
                 }
             ],
             "input_connections": {
-                "input_bam": {
+                "input1": {
                     "output_name": "output",
                     "id": 1
                 }
             },
-            "tool_state": "{\"input_bam\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"rule_configuration\": \"{\\\"__current_case__\\\": 0, \\\"rules_selector\\\": \\\"false\\\"}\", \"conditions\": \"[{\\\"__index__\\\": 0, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"__current_case__\\\": 11, \\\"bam_property_selector\\\": \\\"isProperPair\\\", \\\"bam_property_value\\\": \\\"true\\\"}}]}]\", \"__page__\": null}",
+            "tool_state": "{\"__page__\": null, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"__current_case__\\\": 1, \\\"filter\\\": \\\"yes\\\", \\\"reqBits\\\": null, \\\"skipBits\\\": [\\\"0x0004\\\", \\\"0x0008\\\"]}\", \"mapq\": \"\\\"0\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
             "id": 5,
             "tool_shed_repository": {
                 "owner": "devteam",
-                "changeset_revision": "bd735cae4ce6",
-                "name": "bamtools_filter",
+                "changeset_revision": "a7add3e93cc5",
+                "name": "samtool_filter2",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "uuid": "d51e28bf-561a-448c-839b-dcfb7725fe3d",
+            "uuid": "887c2e21-95ad-481b-bed8-6400741a70c4",
             "errors": null,
-            "name": "Filter",
+            "name": "Filter SAM or BAM, output SAM or BAM",
             "post_job_actions": {
-                "TagDatasetActionout_file1": {
-                    "output_name": "out_file1",
-                    "action_type": "TagDatasetAction",
-                    "action_arguments": {
-                        "tags": "#mother"
-                    }
-                },
-                "TagDatasetActionout_file2": {
-                    "output_name": "out_file2",
-                    "action_type": "TagDatasetAction",
-                    "action_arguments": {
-                        "tags": "#mother"
-                    }
+                "HideDatasetActionoutput1": {
+                    "output_name": "output1",
+                    "action_type": "HideDatasetAction",
+                    "action_arguments": {}
                 }
             },
             "label": null,
-            "inputs": [],
+            "inputs": [
+                {
+                    "name": "bed_file",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                },
+                {
+                    "name": "input1",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                },
+                {
+                    "name": "flag",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                }
+            ],
             "position": {
-                "top": 402.796875,
-                "left": 393.1875
+                "top": 519.9999847412109,
+                "left": 381.33331298828125
             },
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
             "type": "tool"
         },
         "6": {
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
-            "tool_version": "2.4.1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
+            "tool_version": "1.8+galaxy1",
             "outputs": [
                 {
-                    "type": "txt",
-                    "name": "out_file2"
-                },
-                {
-                    "type": "bam",
-                    "name": "out_file1"
+                    "type": "sam",
+                    "name": "output1"
                 }
             ],
             "workflow_outputs": [
                 {
-                    "output_name": "out_file2",
-                    "uuid": "46a89aeb-b33f-4378-b0dd-3f197579497a",
-                    "label": null
-                },
-                {
-                    "output_name": "out_file1",
-                    "uuid": "001628ec-b058-40af-8bef-38be7103623b",
+                    "output_name": "output1",
+                    "uuid": "7241442e-9274-4c77-bfe6-8d9cdfd953e2",
                     "label": null
                 }
             ],
             "input_connections": {
-                "input_bam": {
+                "input1": {
                     "output_name": "output",
                     "id": 2
                 }
             },
-            "tool_state": "{\"input_bam\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"rule_configuration\": \"{\\\"__current_case__\\\": 0, \\\"rules_selector\\\": \\\"false\\\"}\", \"conditions\": \"[{\\\"__index__\\\": 0, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"__current_case__\\\": 11, \\\"bam_property_selector\\\": \\\"isProperPair\\\", \\\"bam_property_value\\\": \\\"true\\\"}}]}]\", \"__page__\": null}",
+            "tool_state": "{\"__page__\": null, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"__current_case__\\\": 1, \\\"filter\\\": \\\"yes\\\", \\\"reqBits\\\": null, \\\"skipBits\\\": [\\\"0x0004\\\", \\\"0x0008\\\"]}\", \"mapq\": \"\\\"0\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
             "id": 6,
             "tool_shed_repository": {
                 "owner": "devteam",
-                "changeset_revision": "bd735cae4ce6",
-                "name": "bamtools_filter",
+                "changeset_revision": "a7add3e93cc5",
+                "name": "samtool_filter2",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "uuid": "ffdd103f-4b08-49c7-a212-e8659a1196ad",
+            "uuid": "8af8801a-a1de-4a59-b0e7-b8b162754b65",
             "errors": null,
-            "name": "Filter",
+            "name": "Filter SAM or BAM, output SAM or BAM",
             "post_job_actions": {
-                "TagDatasetActionout_file1": {
-                    "output_name": "out_file1",
-                    "action_type": "TagDatasetAction",
-                    "action_arguments": {
-                        "tags": "#child"
-                    }
-                },
-                "TagDatasetActionout_file2": {
-                    "output_name": "out_file2",
-                    "action_type": "TagDatasetAction",
-                    "action_arguments": {
-                        "tags": "#child"
-                    }
+                "HideDatasetActionoutput1": {
+                    "output_name": "output1",
+                    "action_type": "HideDatasetAction",
+                    "action_arguments": {}
                 }
             },
             "label": null,
-            "inputs": [],
+            "inputs": [
+                {
+                    "name": "bed_file",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                },
+                {
+                    "name": "input1",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                },
+                {
+                    "name": "flag",
+                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM"
+                }
+            ],
             "position": {
-                "top": 657.203125,
-                "left": 469
+                "top": 789.3333129882812,
+                "left": 445.33331298828125
             },
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
             "type": "tool"
         },
         "7": {
@@ -335,7 +314,7 @@
             ],
             "input_connections": {
                 "input1": {
-                    "output_name": "out_file1",
+                    "output_name": "output1",
                     "id": 4
                 }
             },
@@ -379,7 +358,7 @@
             ],
             "input_connections": {
                 "input1": {
-                    "output_name": "out_file1",
+                    "output_name": "output1",
                     "id": 5
                 }
             },
@@ -423,7 +402,7 @@
             ],
             "input_connections": {
                 "input1": {
-                    "output_name": "out_file1",
+                    "output_name": "output1",
                     "id": 6
                 }
             },
@@ -481,7 +460,7 @@
                     }
                 ]
             },
-            "tool_state": "{\"__page__\": null, \"reference_source\": \"{\\\"__current_case__\\\": 0, \\\"batchmode\\\": {\\\"__current_case__\\\": 0, \\\"input_bams\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"processmode\\\": \\\"individual\\\"}, \\\"ref_file\\\": \\\"hg19\\\", \\\"reference_source_selector\\\": \\\"cached\\\"}\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"__current_case__\\\": 1, \\\"options_type_selector\\\": \\\"simple\\\"}\", \"target_limit_type\": \"{\\\"__current_case__\\\": 0, \\\"target_limit_type_selector\\\": \\\"do_not_limit\\\"}\"}",
+            "tool_state": "{\"__page__\": null, \"reference_source\": \"{\\\"__current_case__\\\": 0, \\\"batchmode\\\": {\\\"__current_case__\\\": 0, \\\"input_bams\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"processmode\\\": \\\"merge\\\"}, \\\"ref_file\\\": \\\"hg19\\\", \\\"reference_source_selector\\\": \\\"cached\\\"}\", \"__rerun_remap_job_id__\": null, \"options_type\": \"{\\\"__current_case__\\\": 1, \\\"options_type_selector\\\": \\\"simple\\\"}\", \"target_limit_type\": \"{\\\"__current_case__\\\": 0, \\\"target_limit_type_selector\\\": \\\"do_not_limit\\\"}\"}",
             "id": 10,
             "tool_shed_repository": {
                 "owner": "devteam",

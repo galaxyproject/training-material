@@ -671,11 +671,26 @@ Now that you have a small role built up, you might start thinking about deployin
 >    > {: .solution}
 >    {: .question}
 >
-> 4. Use the new variable in our `.ini` file from earlier. Edit `roles/my-role/templates/test.ini.j2` and add the line `apikey = {{ apikey }}`
+> 4. Use the new variable in our `.ini` file from earlier. Edit `roles/my-role/templates/test.ini.j2` and add the line `{% raw %}apikey = {{ apikey }}{% endraw %}`
 >
-> 5. Run the playbook
+> 5. Add encrypted variable file to `playbook.yml`
 >
-> 6. Check the contents of `/tmp/test.ini`
+>    ```yaml
+>     - hosts: my_hosts
+>       ...
+>       vars_files:
+>        - secret_group_vars/all.yml
+>     ```
+>
+> 6. Tell ansible where to find the decryption file. Create file `ansible.cfg` with content
+>
+>     ```yaml
+>     [default]
+>     vault_password_file=vault-password.txt
+>     ```
+> 7. Run the playbook
+>
+> 8. Check the contents of `/tmp/test.ini`
 >
 >    > ### {% icon question %} Question
 >    >

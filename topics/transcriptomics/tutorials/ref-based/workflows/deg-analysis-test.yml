@@ -1,0 +1,56 @@
+---
+- doc: "Test sample data for Transcriptomics:Refence-based"
+  job:
+    Drosophila_melanogaster.BDGP6.87.gtf:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+      filetype: gtf
+    GSM461176_untreat_single.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+      filetype: tabular
+    GSM461177_untreat_paired.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
+      filetype: tabular
+    GSM461178_untreat_paired.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
+      filetype: tabular
+    GSM461179_treat_single.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
+      filetype: tabular
+    GSM461180_treat_paired.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
+      filetype: tabular
+    GSM461181_treat_paired.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
+      filetype: tabular
+    GSM461182_untreat_single.counts:
+      class: File
+      location: https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
+      filetype: tabular
+    Drosophila_melanogaster.BDGP6.87.gene_lengths:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gene_lengths
+      filetype: tabular
+  outputs:
+    deseq_out:
+      asserts:
+        has_text:
+          text: '1086.97429520489'
+    z_score:
+      asserts:
+        has_text:
+          text: '1.222027'
+    go_terms:
+      asserts:
+        has_text:
+          text: 'GO:0005576'
+    kegg_pathways:
+      asserts:
+        has_text:
+          text: '01100'

@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "EWAS data analysis of 450k data"
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
-enable: "false"
 questions:
   - "What is a epigenome-wide association studies?"
   - "Why is a EWAS analysis useful?"
