@@ -227,6 +227,42 @@ Your output should look something like this:
 > {: .solution}
 {: .question}
 
+We see from this image that chromosome 5 has an unusually large number of SVs, let's look at that chromosome more closely:
+
+
+> ### {% icon hands_on %} Hands-on: Plot only Chromosome 5
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
+>
+> 2. **Change** the following tool parameters:
+>    - In *"Ideogram"*:
+>       - *"Limit/Filter Chromosomes"*: `chr5`
+>
+{: .hands_on}
+
+You should see a plot like:
+
+![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png){: width="50%"}
+
+
+> ### {% icon question %} Questions
+>
+> 1. Are there indeed significantly more SVs on chromosome 5 than on the other chromosomes? (hint: plot some of the other chromosomes as well)
+> 2. Are the SVs equally distributed over chromosome 5? Can you think of an explanation for this?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Yes, plotting for example only chromosome 1 and comparing this with the chromosome 5 plot, reveals that chr5 has abnormally high number of SVs
+> >
+> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png){: width="30%"}
+> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr1.png){: width="30%"}
+> >
+> > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
+> >    This could be caused by a phenomenon known as *chromothripsis*
+> >
+> {: .solution}
+{: .question}
+
 
 
 ## Copy Number Variation
