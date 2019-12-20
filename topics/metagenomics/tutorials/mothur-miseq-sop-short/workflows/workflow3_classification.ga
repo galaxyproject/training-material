@@ -1,1 +1,334 @@
-{"uuid": "a5a47d31-c4ac-4295-b46b-173454838b2b", "tags": [], "format-version": "0.1", "name": "Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis with mothur]", "version": 10, "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "517ac991-d3d4-4a74-94e8-c7a1d6f40112", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 0, "uuid": "ba9fcf07-e3cc-4ab5-bf92-71314aac1fe7", "errors": null, "name": "Input dataset", "label": "Cleaned Sequences", "inputs": [], "position": {"top": 237.5, "left": 222}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "6d6b2af1-0459-401f-bfc2-017eae577421", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 1, "uuid": "0f9b6041-d152-4092-960a-69b45ccc6e34", "errors": null, "name": "Input dataset", "label": "Count Table", "inputs": [], "position": {"top": 350.5, "left": 207}, "annotation": "", "content_id": null, "type": "data_input"}, "2": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "bc4798cf-9f53-4219-9ccb-2e587f1cc200", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 2, "uuid": "6619b0a9-e092-4264-a66a-46ac8e386d80", "errors": null, "name": "Input dataset", "label": "Training set Taxonomy", "inputs": [], "position": {"top": 446, "left": 213}, "annotation": "", "content_id": null, "type": "data_input"}, "3": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "49e7a3ed-a8be-428c-9002-7d613ea63d84", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 3, "uuid": "6ff6f5e0-bd98-4cfb-88a2-fc53da30dd4f", "errors": null, "name": "Input dataset", "label": "Training set FASTA", "inputs": [], "position": {"top": 567, "left": 222}, "annotation": "", "content_id": null, "type": "data_input"}, "4": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "mothur.seq.taxonomy", "name": "taxonomy_out"}, {"type": "mothur.tax.summary", "name": "tax_summary"}, {"type": "tabular", "name": "tree_sum"}], "workflow_outputs": [{"output_name": "taxonomy_out", "uuid": "1527932b-9aae-4f29-bcdd-385829d34576", "label": null}, {"output_name": "tax_summary", "uuid": "be0fc29e-c74f-48b5-83de-17a31c456486", "label": null}], "input_connections": {"count": {"output_name": "output", "id": 1}, "alignment|template": {"output_name": "output", "id": 3}, "fasta": {"output_name": "output", "id": 0}, "tax|taxonomy": {"output_name": "output", "id": 2}}, "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"name\": \"null\", \"relabund\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"tax\": \"{\\\"__current_case__\\\": 1, \\\"source2\\\": \\\"hist\\\", \\\"taxonomy\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}}\", \"savelog\": \"\\\"false\\\"\", \"classify\": \"{\\\"__current_case__\\\": 0, \\\"cutoff\\\": \\\"80\\\", \\\"iters\\\": \\\"100\\\", \\\"ksize\\\": \\\"8\\\", \\\"method\\\": \\\"wang\\\", \\\"probs\\\": \\\"true\\\"}\", \"printlevel\": \"\\\"-1\\\"\", \"output\": \"\\\"simple\\\"\", \"fasta\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"alignment\": \"{\\\"__current_case__\\\": 1, \\\"source\\\": \\\"hist\\\", \\\"template\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}}\"}", "id": 4, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "5da484e2c7a4", "name": "mothur_classify_seqs", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "dc910dfc-7a0d-455b-8e7f-2f595c9ed206", "errors": null, "name": "Classify.seqs", "post_job_actions": {"HideDatasetActiontree_sum": {"output_name": "tree_sum", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [], "position": {"top": 412, "left": 634}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0", "type": "tool"}, "5": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "mothur.seq.taxonomy", "name": "taxonomy_out"}, {"type": "input", "name": "fasta_out"}, {"type": "mothur.count_table", "name": "count_out"}], "workflow_outputs": [{"output_name": "taxonomy_out", "uuid": "4dc8694f-3817-419a-a771-de54f6874ced", "label": null}, {"output_name": "count_out", "uuid": "28182a05-017e-4249-8b7f-3de7093c3306", "label": null}, {"output_name": "fasta_out", "uuid": "beb50177-4f34-4a27-9b72-53d27121dace", "label": null}], "input_connections": {"count": {"output_name": "output", "id": 1}, "file|taxonomy": {"output_name": "taxonomy_out", "id": 4}, "fasta_in": {"output_name": "output", "id": 0}}, "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"dups\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"fasta_in\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"taxon\": \"\\\"Chloroplast-Mitochondria-unknown-Archaea-Eukaryota\\\"\", \"group_in\": \"null\", \"savelog\": \"\\\"false\\\"\", \"file\": \"{\\\"__current_case__\\\": 0, \\\"filetype\\\": \\\"usetaxonomy\\\", \\\"taxonomy\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"taxons\\\": null}\", \"alignreport_in\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"list_in\": \"null\", \"name_in\": \"null\"}", "id": 5, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "380e75c0ae8e", "name": "mothur_remove_lineage", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "9cf932f6-e04d-40ab-ba61-4aa92dd5cbae", "errors": null, "name": "Remove.lineage", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 391, "left": 982}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0", "type": "tool"}, "6": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "txt", "name": "logfile"}, {"type": "mothur.summary", "name": "out_summary"}], "workflow_outputs": [{"output_name": "logfile", "uuid": "8e339cd6-b61a-4882-a458-0597cfa7fbd1", "label": null}], "input_connections": {"count": {"output_name": "count_out", "id": 5}, "fasta": {"output_name": "fasta_out", "id": 5}}, "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"name\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"savelog\": \"\\\"true\\\"\", \"fasta\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}", "id": 6, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "d7ea2d0b4917", "name": "mothur_summary_seqs", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "6aba2a6b-2501-442a-b30c-0ffbf4009ce1", "errors": null, "name": "Summary.seqs", "post_job_actions": {"HideDatasetActionout_summary": {"output_name": "out_summary", "action_type": "HideDatasetAction", "action_arguments": {}}, "RenameDatasetActionlogfile": {"output_name": "logfile", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Summary.seqs [After non-bacterial sequence removal]"}}}, "label": null, "inputs": [{"name": "name", "description": "runtime parameter for tool Summary.seqs"}], "position": {"top": 382, "left": 1319}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0", "type": "tool"}}, "annotation": "", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "Workflow 3: Classification [Galaxy Training: 16S Microbial Analysis with mothur]",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Cleaned Sequences",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 222,
+        "top": 237.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "ba9fcf07-e3cc-4ab5-bf92-71314aac1fe7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "517ac991-d3d4-4a74-94e8-c7a1d6f40112"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Count Table",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 207,
+        "top": 350.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "0f9b6041-d152-4092-960a-69b45ccc6e34",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "6d6b2af1-0459-401f-bfc2-017eae577421"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Training set Taxonomy",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 213,
+        "top": 446
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "6619b0a9-e092-4264-a66a-46ac8e386d80",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "bc4798cf-9f53-4219-9ccb-2e587f1cc200"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Training set FASTA",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 222,
+        "top": 567
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "6ff6f5e0-bd98-4cfb-88a2-fc53da30dd4f",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "49e7a3ed-a8be-428c-9002-7d613ea63d84"
+        }
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "alignment|template": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "count": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "fasta": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "tax|taxonomy": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Classify.seqs",
+      "outputs": [
+        {
+          "name": "taxonomy_out",
+          "type": "mothur.seq.taxonomy"
+        },
+        {
+          "name": "tax_summary",
+          "type": "mothur.tax.summary"
+        },
+        {
+          "name": "tree_sum",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 634,
+        "top": 412
+      },
+      "post_job_actions": {
+        "HideDatasetActiontree_sum": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "tree_sum"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "5da484e2c7a4",
+        "name": "mothur_classify_seqs",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"name\": \"null\", \"relabund\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"tax\": \"{\\\"__current_case__\\\": 1, \\\"source2\\\": \\\"hist\\\", \\\"taxonomy\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}}\", \"savelog\": \"\\\"false\\\"\", \"classify\": \"{\\\"__current_case__\\\": 0, \\\"cutoff\\\": \\\"80\\\", \\\"iters\\\": \\\"100\\\", \\\"ksize\\\": \\\"8\\\", \\\"method\\\": \\\"wang\\\", \\\"probs\\\": \\\"true\\\"}\", \"printlevel\": \"\\\"-1\\\"\", \"output\": \"\\\"simple\\\"\", \"fasta\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"alignment\": \"{\\\"__current_case__\\\": 1, \\\"source\\\": \\\"hist\\\", \\\"template\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}}\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "dc910dfc-7a0d-455b-8e7f-2f595c9ed206",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "taxonomy_out",
+          "uuid": "1527932b-9aae-4f29-bcdd-385829d34576"
+        },
+        {
+          "label": null,
+          "output_name": "tax_summary",
+          "uuid": "be0fc29e-c74f-48b5-83de-17a31c456486"
+        }
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "count": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "fasta_in": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "file|taxonomy": {
+          "id": 4,
+          "output_name": "taxonomy_out"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Remove.lineage",
+      "outputs": [
+        {
+          "name": "taxonomy_out",
+          "type": "mothur.seq.taxonomy"
+        },
+        {
+          "name": "fasta_out",
+          "type": "input"
+        },
+        {
+          "name": "count_out",
+          "type": "mothur.count_table"
+        }
+      ],
+      "position": {
+        "left": 982,
+        "top": 391
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "380e75c0ae8e",
+        "name": "mothur_remove_lineage",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"dups\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"fasta_in\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"taxon\": \"\\\"Chloroplast-Mitochondria-unknown-Archaea-Eukaryota\\\"\", \"group_in\": \"null\", \"savelog\": \"\\\"false\\\"\", \"file\": \"{\\\"__current_case__\\\": 0, \\\"filetype\\\": \\\"usetaxonomy\\\", \\\"taxonomy\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"taxons\\\": null}\", \"alignreport_in\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"list_in\": \"null\", \"name_in\": \"null\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "9cf932f6-e04d-40ab-ba61-4aa92dd5cbae",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "taxonomy_out",
+          "uuid": "4dc8694f-3817-419a-a771-de54f6874ced"
+        },
+        {
+          "label": null,
+          "output_name": "count_out",
+          "uuid": "28182a05-017e-4249-8b7f-3de7093c3306"
+        },
+        {
+          "label": null,
+          "output_name": "fasta_out",
+          "uuid": "beb50177-4f34-4a27-9b72-53d27121dace"
+        }
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "count": {
+          "id": 5,
+          "output_name": "count_out"
+        },
+        "fasta": {
+          "id": 5,
+          "output_name": "fasta_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Summary.seqs",
+          "name": "name"
+        }
+      ],
+      "label": null,
+      "name": "Summary.seqs",
+      "outputs": [
+        {
+          "name": "logfile",
+          "type": "txt"
+        },
+        {
+          "name": "out_summary",
+          "type": "mothur.summary"
+        }
+      ],
+      "position": {
+        "left": 1319,
+        "top": 382
+      },
+      "post_job_actions": {
+        "HideDatasetActionout_summary": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "out_summary"
+        },
+        "RenameDatasetActionlogfile": {
+          "action_arguments": {
+            "newname": "Summary.seqs [After non-bacterial sequence removal]"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "logfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "d7ea2d0b4917",
+        "name": "mothur_summary_seqs",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"count\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"name\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"savelog\": \"\\\"true\\\"\", \"fasta\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "6aba2a6b-2501-442a-b30c-0ffbf4009ce1",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "logfile",
+          "uuid": "8e339cd6-b61a-4882-a458-0597cfa7fbd1"
+        }
+      ]
+    }
+  },
+  "tags": [],
+  "uuid": "a5a47d31-c4ac-4295-b46b-173454838b2b",
+  "version": 10
+}
