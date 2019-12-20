@@ -78,7 +78,7 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 In this section, we will recreate a Circos plot of the VCaP cancer cell line presented in {% cite alves2013gene %}. In this study, data from various sources were combined into a single integrative Circos plot.
 
-![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="60%"}
+![VCaP cancer Circos plot](../../images/circos/vcap.png "Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants"){: width="60%"}
 
 
 This plot has 4 tracks
@@ -109,6 +109,11 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >            - *"Convert bands from BED format to circos karyotype band format"*: `No`
 >            - *"Fill Bands"*: `2`
 >            - *"Band Stroke Thickness"*: `1`
+>
+> 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
+>
+>    {% include snippets/rename_dataset.md %}
+>
 {: .hands_on}
 
 You should now have a plot that looks like this:
@@ -123,12 +128,11 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 >
 > Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (>50 bp) that are deleted, duplicated, translocated or inverted.
 >
-> ![Overview of types of SVs](../../images/circos/sv-types.jpg){: width="50%"}
->
+> ![Overview of types of SVs](../../images/circos/sv-types.jpg "Different types of SVs"){: width="50%"}
 >
 > One of the first observations of SVs in the human genome is known as the [Philadelphia Chromosome](https://en.wikipedia.org/wiki/Philadelphia_chromosome), a SV observed in leukemia. In this mutation, a translocation of genetic material  occurs between chromosomes 9 and 22, resulting in a fusion between genes *BCR* and *ABL1*, causing the production of a hybrid protein, impairing various signalling pathways and causing the cell to divide uncontrollably.
 >
-> ![the Philedelphia chromosome](../../images/circos/sv.jpg){: width="50%"}
+> ![the Philedelphia chromosome](../../images/circos/sv.jpg "The Philadelphia chromosome"){: width="70%"}
 >
 > In cancer analyses it is therefore often useful to examine SVs and look for potential fusion genes that may affect cell function.
 >
@@ -138,7 +142,8 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 
 We will now plot structural variants using the *link* track type, and colouring the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).
 
-Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Our first step will be to transform our input dataset to the Circos format for link tracks.
+SVs are usually described in terms of the SV **breakpoints** (or **junctions**); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Our first step will be to transform our input dataset to the Circos format for link tracks.
+
 
 **SV File Format:**
 
@@ -182,11 +187,11 @@ So in order to convert this to Circos format, we need to
 >    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
 {: .hands_on}
 
-Now that we have the correct format, we can
+Now that we have the correct format, we can plot our data in Circos. We will plot the SVs as links; showing which parts of genome have been fused together in our sample.
 
-> ### {% icon hands_on %} Hands-on: Add Circos link track
+> ### {% icon hands_on %} Hands-on: Add Circos link track for SVs
 >
-> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (where we set up the ideogram)
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot ideogram`)
 >
 > 2. Add a new Link Track for the SV data, colouring by SV type:
 >    - In *"Link Tracks"*:
@@ -206,14 +211,16 @@ Now that we have the correct format, we can
 >                           - In *"Actions to Apply"*:
 >                               - {% icon param-repeat %} *"Insert Actions to Apply"*
 >                                   - *"Action"*: `Change Link Colour`
->                                   - *"Link Color"*: `red` (Select from the colour wheel)
+>                                   - *"Link Color"*: {% color_picker #ff0000 %} (red)
+>
+> 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot SVs`
 >
 {: .hands_on}
 
 
 Your output should look something like this:
 
-![The plot with an SV track](../../images/circos/cancer_svs1.png){: width="60%"}
+![The plot with an SV track](../../images/circos/cancer_svs1.png "SVs on the VCaP cell line. Red line indicate *interchromosomal* SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome."){: width="60%"}
 
 > ### {% icon question %} Questions
 >
@@ -247,6 +254,7 @@ You should see a plot like:
 ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png "Chromosome 5 of the VCaP cancer cell line. The q arm of this chromosome appears to be affected by an unusually large number of SVs"){: width="50%"}
 
 
+
 > ### {% icon question %} Questions
 >
 > 1. Are there indeed significantly more SVs on chromosome 5 than on the other chromosomes? (hint: plot some of the other chromosomes as well)
@@ -254,20 +262,211 @@ You should see a plot like:
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Yes, plotting for example only chromosome 1 and comparing this with the chromosome 5 plot, reveals that chr5 has abnormally high number of SVs
+> > 1. Yes, plotting for example only chromosome 1 (left) and comparing this with the chromosome 5 plot (right), reveals that chr5 has abnormally high number of SVs compared to the other chromosomes
 > >
-> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png "Chromosome 1"){: width="30%"}
-> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png "Chromosome 5"){: width="30%"}
+> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png ){: width="40%"}
+> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png ){: width="40%"}
+> >
 > >
 > > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
 > >    This could be caused by a phenomenon known as *chromothripsis*
+> >
+> >    ![](../../images/circos/chromosome-arms.jpg "The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis"){: width="50%"}
 > >
 > {: .solution}
 {: .question}
 
 
 
+> ### {% icon comment %} Background: Chromothripsis
+>
+> **Chromothripsis** is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
+together by the cell's repair mechanisms. This leads to a huge number of SV junctions.
+>
+> ![](../../images/circos/chromothripsis.png "Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements."){: width="60%"}
+>
+> **Characteristics of chromothripsis:**
+>
+> 1. **Large numbers of complex rearrangements** in localised regions of single chromosomes or chromosome arms (showed by high density and clustered breakpoints) which suggests that chromosomes need to be condensed e.g. in mitosis for chromothripsis to occur.
+> 2. Low **copy number states- alternation between 2 states** (sometimes 3) suggesting that rearrangements occurred in a short period of time.
+> 3. In chromothriptic areas you get **alternation of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy** (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.
+>
+{: .comment}
+
+By visualizing the SVs, we have observed large number of complex rearrangements in a localised regon of a single chromosome arm, one of the main features of chromothripsis. In order to confirm we are indeed dealing with chromothripsis, we will next look plot copy number data and B-allele frequencey data (both obtained from microarrays) to ascertain whether we observe the expected patterns in copy number states and heterozygosity.
+
+
 ## Copy Number Variation
+
+
+> ### {% icon comment %} Background: Copy Number Variation (CNV)
+>
+>
+>
+{: .comment}
+
+
+
+Let's look at our file format (VCaP-copynumber.txt`):
+
+```
+Chromosome	Start	End	Value	Array
+chr1	10004	10004	0.07110633	0
+chr1	28663	28663	0.2057637	0
+chr1	46844	46844	0.2016204	0
+chr1	59415	59415	0.1775235	0
+chr1	72017	72017	-0.1353417	0
+```
+
+The `Value` column indicates the copy number state, and is always between -1 and 1. the position has expected copy-number (`0`), indicating 2 copies in the case of diploid genomes, or whether it has a copy number loss (negative values) or a gain in copy number (positive values).
+
+This is pretty close to the format expected by Circos for 2D data tracks (`chr - start - end - value`), all we need to do to prepare this file is remove the first header line, and remove column 5. Furthermore, because this file is quite large, we do a subsampling down to 25000 lines; this is enough to get a genome-level overview of the data, but small enough that Circos will complete plotting quickly.
+
+
+
+> ### {% icon hands_on %} Hands-on: Prepare CNV input file
+>
+> 1. **Remove beginning** of a file {% icon tool %} with the following parameters:
+>    - *"Remove first"*: `1`
+>    - {% icon param-file %} *"from"*: `VCaP copy number.tsv`
+>
+> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c1,c2,c3,c4`
+>    - {% icon param-file %} *"From"*: `out_file1` (output of **Remove beginning** {% icon tool %})
+>
+> 3. **Select random lines** {% icon tool %} with the following parameters:
+>    - *"Randomly select"*: `25000`
+>    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
+>    - *"Set a random seed"*: `Don't set seed`
+>
+> 4. **Rename** {% icon galaxy-pencil %} the output file `cnv-circos.txt`
+>
+{: .hands_on}
+
+
+Now that our file is prepared, we can add a track to our Circos image. We will create a scatterplot, and colour each data point depending on copy number state (green=gain, red=loss)
+
+
+> ### {% icon hands_on %} Hands-on: Add Copy Number track to Circos
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the Circos plot containing the SV track {% icon tool %} run (`Circos Plot SVs`)
+>
+> 2. Add a new scatterplot track to the image
+>    - In *"2D Data Tracks"*:
+>        - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - *"Outside Radius"*: `0.95`
+>            - *"Inside Radius"*: `0.8`
+>            - *"Plot Type"*: `Scatter`
+>                - *"Scatter Plot Data Source"*: `cnv-circos.txt`
+>                - In *"Plot Format Specific Options"*:
+>                    - *"Glyph Size"*: `4`
+>                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                    - *"Stroke Thickness"*: `0`
+>            - *"Minimum / maximum options"*: `Supply min/max values`
+>                - *"Minimum value"*: `-1.0`
+>                - *"Maximum value"*: `1.0`
+>
+> 3. Examine the resulting plot
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. Examine the resulting plot, what do you see?
+>    > 2. How could we solve this?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. We see the new track, but it overlaps with the SV track. This is because we used the same `radius` parameter.
+>    > >    This parameter determines the position of the track within the plot.
+>    > >
+>    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png ){: width="80%"
+>    > >
+>    > >
+>    > > 2. Rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (<`0.8`).
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 4. **Rerun** {% icon galaxy-refresh %} the tool, changing the following parameters.
+>    - In *"Link Tracks"*:
+>        - In *"Link Data"*:
+>            - *"Inside Radius"*: `0.75`
+>
+>
+{: .hands_on}
+
+You should see a plot that looks like:
+
+![](../../images/circos/cancer-cnv.png)
+
+
+Now that we are happy with the placement of our track, let's tweak it a bit more. Let's colour positions showing a significant copy number loss (< `-0.15`) red, and positions with a copy number gain (> `0.15`) green:
+
+
+> ### {% icon hands_on %} Hands-on: Colour data points by copy number state
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
+>
+> 2. In the **2D data track** of the CNV track we just created, add the following rules:
+>    - In *"Rules"*:
+>        - {% icon param-repeat %} *"Insert Rule"*
+>            - In *"Conditions to Apply"*:
+>                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                    - *"Condition"*: `Apply based on point value`
+>                        - *"Points above this value"*: `0.15`
+>            - In *"Actions to Apply"*:
+>                - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                    - *"Action"*: `Change Fill Color for all points`
+>                        - *"Fill Color"*: {% color_picker #00b050 %} (green)
+>        - {% icon param-repeat %} *"Insert Rule"*
+>            - In *"Conditions to Apply"*:
+>                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                    - *"Condition"*: `Apply based on point value`
+>                       - *"Points below this value"*: `-0.15`
+>            - In *"Actions to Apply"*:
+>                - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                    - *"Action"*: `Change Fill Color for all points`
+>                        - *"Fill Color"*: {% color_picker #ff0000 %} (red)
+>
+{: .hands_on}
+
+Sometimes it can also be nice to see the plot axes to more accurately judge the values of the different data points:
+
+> ### {% icon hands_on %} Hands-on: Add plot axes
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
+>
+> 2. In the **2D data track** of the CNV track we just created, add plot axes as follows:
+>    - In *"Axes"*:
+>        - In *"Axis"*:
+>            - {% icon param-repeat %} *"Insert Axis"*
+>                - *"Inside Radius"*: `-1`
+>                - *"Outside Radius"*: `1`
+>                - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                - *"Spacing"*: `0.25`
+>
+> 3. **Rename** {% icon galaxy-pencil%} the output `Circos Plot CopyNumber`
+>
+{: .hands_on}
+
+
+TODO: add image
+
+
+
+
+## B-allele Frequency
+
+Next, we will visualize the B-allele frequency (also known as minor allele frequency)
+
+> ### {% icon comment %} Background: Copy Number Variation (CNV)
+>
+>
+>
+{: .comment}
+
+
+TODO: look at file format, explain its always between 0 and 1
+
 
 > ### {% icon hands_on %} Hands-on: Prepare the B-allele frequency table
 >
@@ -285,38 +484,58 @@ You should see a plot like:
 
 
 
-
-
-> ### {% icon hands_on %} Hands-on: Create copy number track
-> 1. **Select** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `VCaP copy number.tsv`
->    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `^Chromosome`
+> ### {% icon hands_on %} Hands-on: Add B-allele Frequency track to Circos
 >
-> 1. **Cut** {% icon tool %} with the following parameters:
->    - *"Cut columns"*: `c1,c2,c3,c4`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (where we set up the ideogram)
 >
-> 1. **Select random lines** {% icon tool %} with the following parameters:
->    - *"Randomly select"*: `25000`
->    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
->    - *"Set a random seed"*: `Don't set seed`
+> 2. Add a new scatterplot track to the image
+>    - In *"2D Data Tracks"*:
+>        - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - *"Outside Radius"*: `0.95`
+>            - *"Inside Radius"*: `0.8`
+>            - *"Plot Type"*: `Scatter`
+>                - *"Scatter Plot Data Source"*: `cnv-circos.txt`
+>                - In *"Plot Format Specific Options"*:
+>                    - *"Glyph Size"*: `4`
+>                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                    - *"Stroke Thickness"*: `0`
+>            - *"Minimum / maximum options"*: `Supply min/max values`
+>                - *"Minimum value"*: `-1.0`
+>                - *"Maximum value"*: `1.0`
+>            >            - In *"Rules"*:
+>                - In *"Rule"*:
+>                    - {% icon param-repeat %} *"Insert Rule"*
+>                        - In *"Conditions to Apply"*:
+>                            - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                                - *"Condition"*: `Apply based on point value`
+>                                    - *"Points above this value"*: `0.15`
+>                        - In *"Actions to Apply"*:
+>                            - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                                - *"Action"*: `Change Fill Color for all points`
+>                                   - *"Fill Color"*: {% color_picker #00b050 %} (green)
+>                    - {% icon param-repeat %} *"Insert Rule"*
+>                        - In *"Conditions to Apply"*:
+>                            - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                                - *"Condition"*: `Apply based on point value`
+>                                   - *"Points below this value"*: `-0.15`
+>                        - In *"Actions to Apply"*:
+>                            - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                                - *"Action"*: `Change Fill Color for all points`
+>                                    - *"Fill Color"*: {% color_picker #ff0000 %} (red)
+>            - In *"Axes"*:
+>                 - In *"Axis"*:
+>                    - {% icon param-repeat %} *"Insert Axis"*
+>                        - *"Inside Radius (y0)"*: `-1.0`
+>                        - *"Radial-relative values"*: `Yes`
+>                        - *"Spacing"*: `0.5`
+>
+>
+>
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Prepare VCF file
-> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `VCaP ListVariants.vcf`
->    - *"Fields to extract"*: `CHROM POS POS CHROM POS POS`
->
-> 1. **Paste** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Paste"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
->    - {% icon param-file %} *"and"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
->
-> 1. **Circos: Link Density Track** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Links file"*: `out_file1` (output of **Paste** {% icon tool %})
->    - *"Normalize"*: `Yes`
-{: .hands_on}
+
+
 
 
 > ### {% icon hands_on %} Hands-on: Plot the data!
@@ -452,6 +671,24 @@ You should see a plot like:
 >                                - {% icon param-repeat %} *"Insert Actions to Apply"*
 >                                    - *"Action"*: `Change Visibility`
 >
+{: .hands_on}
+
+
+## Optional: Plot individual chromsomes
+
+
+> ### {% icon hands_on %} Hands-on: Prepare VCF file
+> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `VCaP ListVariants.vcf`
+>    - *"Fields to extract"*: `CHROM POS POS CHROM POS POS`
+>
+> 1. **Paste** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Paste"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
+>    - {% icon param-file %} *"and"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
+>
+> 1. **Circos: Link Density Track** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Links file"*: `out_file1` (output of **Paste** {% icon tool %})
+>    - *"Normalize"*: `Yes`
 {: .hands_on}
 
 # Nature Cover ENCODE Diagram
