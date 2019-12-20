@@ -119,22 +119,24 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 
 ## Structural Variations
 
-### Background
+> ### {% icon comment %} Background: Structural Variants
+>
+> Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (>50 bp) that are deleted, duplicated, translocated or inverted.
+>
+> ![Overview of types of SVs](../../images/circos/sv-types.jpg){: width="50%"}
+>
+>
+> One of the first observations of SVs in the human genome is known as the [Philadelphia Chromosome](https://en.wikipedia.org/wiki/Philadelphia_chromosome), a SV observed in leukemia. In this mutation, a translocation of genetic material  occurs between chromosomes 9 and 22, resulting in a fusion between genes *BCR* and *ABL1*, causing the production of a hybrid protein, impairing various signalling pathways and causing the cell to divide uncontrollably.
+>
+> ![the Philedelphia chromosome](../../images/circos/sv.jpg){: width="50%"}
+>
+> In cancer analyses it is therefore often useful to examine SVs and look for potential fusion genes that may affect cell function.
+>
+{: .comment}
 
-Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (>50 bp) that are deleted, duplicated, translocated or inverted.
-
-![Overview of types of SVs](../../images/circos/sv-types.jpg){: width="50%"}
 
 
-One of the first observations of SVs in the human genome is known as the [Philadelphia Chromosome](https://en.wikipedia.org/wiki/Philadelphia_chromosome), a SV observed in leukemia. In this mutation, a translocation of genetic material  occurs between chromosomes 9 and 22, resulting in a fusion between genes *BCR* and *ABL1*, causing the production of a hybrid protein, impairing various signalling pathways and causing the cell to divide uncontrollably.
-
-![the Philedelphia chromosome](../../images/circos/sv.jpg){: width="50%"}
-
-In cancer analyses it is therefore often useful to examine SVs and look for potential fusion genes that may affect cell function.
-
-### Plotting SVs
-
-We will now plot these SVs using a link track type, and colouring the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).
+We will now plot structural variants using the *link* track type, and colouring the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).
 
 Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Our first step will be to transform our input dataset to the Circos format for link tracks.
 
@@ -242,7 +244,7 @@ We see from this image that chromosome 5 has an unusually large number of SVs, l
 
 You should see a plot like:
 
-![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png){: width="50%"}
+![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png "Chromosome 5 of the VCaP cancer cell line. The q arm of this chromosome appears to be affected by an unusually large number of SVs"){: width="50%"}
 
 
 > ### {% icon question %} Questions
@@ -254,8 +256,8 @@ You should see a plot like:
 > >
 > > 1. Yes, plotting for example only chromosome 1 and comparing this with the chromosome 5 plot, reveals that chr5 has abnormally high number of SVs
 > >
-> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png){: width="30%"}
-> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr1.png){: width="30%"}
+> >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr1.png "Chromosome 1"){: width="30%"}
+> >    ![Circos plot of chromosome 1 SVs](../../images/circos/cancer_svs_chr5.png "Chromosome 5"){: width="30%"}
 > >
 > > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
 > >    This could be caused by a phenomenon known as *chromothripsis*
