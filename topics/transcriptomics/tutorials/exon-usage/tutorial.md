@@ -5,7 +5,7 @@ title: "Differential exon usage analysis"
 tags:
     - bulk
     - rna-seq
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/record/3588250"
 questions:
     - What are the steps to identify differentially expressed exons?
     - How to count exon usage?
