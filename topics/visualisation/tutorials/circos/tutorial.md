@@ -188,11 +188,16 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 
 ## Structural Variations
 
+The first data track we will configure, will be the structural variants (SVs) using the *link* track type in Circos. We will colour the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).
+
+
 > ### {% icon comment %} Background: Structural Variants
 >
 > Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (>50 bp) that are deleted, duplicated, translocated or inverted.
 >
 > ![Overview of types of SVs](../../images/circos/sv-types.jpg "Different types of SVs"){: width="50%"}
+>
+> Image Credit: {% cite alkan2011genome%}
 >
 > One of the first observations of SVs in the human genome is known as the [Philadelphia Chromosome](https://en.wikipedia.org/wiki/Philadelphia_chromosome), a SV observed in leukemia. In this mutation, a translocation of genetic material  occurs between chromosomes 9 and 22, resulting in a fusion between genes *BCR* and *ABL1*, causing the production of a hybrid protein, impairing various signalling pathways and causing the cell to divide uncontrollably.
 >
@@ -203,10 +208,7 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 {: .comment}
 
 
-
-We will now plot structural variants using the *link* track type, and colouring the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).
-
-SVs are usually described in terms of the SV **breakpoints** (or **junctions**); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Our first step will be to transform our input dataset to the Circos format for link tracks.
+SVs are usually described in terms of the SV **breakpoints** (or **junctions**); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent in the sample through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Therefore, our first step will be to transform our input dataset to the Circos format for link tracks.
 
 
 **SV File Format:**
@@ -284,7 +286,7 @@ Now that we have the correct format, we can plot our data in Circos. We will plo
 
 Your output should look something like this:
 
-![The plot with an SV track](../../images/circos/cancer_svs1.png "SVs on the VCaP cell line. Red line indicate *interchromosomal* SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome."){: width="60%"}
+![The plot with an SV track](../../images/circos/cancer_svs1.png "SVs on the VCaP cell line. Red line indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome."){: width="60%"}
 
 > ### {% icon question %} Questions
 >
@@ -294,13 +296,14 @@ Your output should look something like this:
 > > ### {% icon solution %} Solution
 > >
 > > 1. Interchromosomal SVs (between different chromosomes) are coloured red in this
-> >    plot, while SVs within a single chromosome are coloured black. You can now easily see that there are more intrachromosomal SVs than interchromosomal.
+> >    plot, while SVs within a single chromosome are coloured black. By plotting the data with Circos, you can now easily see
+> >    at a glance that there are more intrachromosomal SVs (black) than interchromosomal SVs (red).
 > > 2. Chromosome 5 appears to have a lot more SVs than the other chromosomes (it looks almost completely black!)
 > >
 > {: .solution}
 {: .question}
 
-We see from this image that chromosome 5 has an unusually large number of SVs, let's look at that chromosome more closely:
+We see from this image that chromosome 5 has an unusually large number of SVs, let's look at that chromosome more closely, by limiting the chromosomes Circos should draw:
 
 
 > ### {% icon hands_on %} Hands-on: Plot only Chromosome 5
@@ -333,7 +336,7 @@ You should see a plot like:
 > >
 > >
 > > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
-> >    This could be caused by a phenomenon known as *chromothripsis*
+> >    This could be caused by a phenomenon known as *chromothripsis* (see next box).
 > >
 > >    ![](../../images/circos/chromosome-arms.jpg "The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis"){: width="50%"}
 > >
@@ -357,18 +360,45 @@ together by the cell's repair mechanisms. This leads to a huge number of SV junc
 >
 {: .comment}
 
-By visualizing the SVs, we have observed large number of complex rearrangements in a localised regon of a single chromosome arm, one of the main features of chromothripsis. In order to confirm we are indeed dealing with chromothripsis, we will next look plot copy number data and B-allele frequencey data (both obtained from microarrays) to ascertain whether we observe the expected patterns in copy number states and heterozygosity.
+By visualizing the SVs, we have observed characteristic 1 of the list above; large number of complex rearrangements in a localised regon of a single chromosome arm, one of the main features of chromothripsis. In order to confirm we are indeed dealing with chromothripsis, we will next look plot copy number data and B-allele frequency data (both obtained from microarrays) to ascertain whether we observe the expected patterns in copy number states and heterozygosity.
 
 
 ## Copy Number Variation
 
+Next, we will create a track displaying copy number. This data comes from Affymetrix SNP arrays.
+
 
 > ### {% icon comment %} Background: Copy Number Variation (CNV)
 >
+> The human genome is a *diploid* genome, meaning there are 2 copies of each chromosome, one paternal, and one maternal. This means that for any given gene, humans have two different copies of it in our genome.
 >
+> <br>
+>
+> Some structural variants will lead to a change in this copy number, for example duplications and deletions. Other SVs (such as inversions and translocations) do not result in a change in copy number, since the piece of DNA is just moved, but the number of copies of it remains the same.
+>
+> ![SVs lead to CNVs](../../images/circos/cancer-cnv-intro.png "Duplications and deletions lead to a change in copy number, measurable by a change in read depth. Other SVs such as inversions are copy-number neutral.")
+>
+> In a healthy diploid genome, we expect the copy number to be around 2 in most places, with occasional duplications and deletions which are part of
+> the normal variation within the human population. In highly rearranged genomes such as cancer we expect to see a lot more copynumber variation.
 >
 {: .comment}
 
+
+> ### {% icon comment %} Background: DNA Microarrays
+>
+> **Microarrays** are used to measure the expression levels of large number of genes simultaneously, or to genotype multiple regions of a genome. In this example in our tutorial, we have data from a **SNP array**. This type of microarray detects the presence and proportion (homozyogous/heterozygous) of a
+> wide range of SNPS (Single Nucleotide Polymorphisms) known to exist within the population. A set of **probes** targeting positions of a large number of known SNPs
+> are used to detect the presence or absence of the SNPs in the sample.
+>
+> <br>
+> Each SNP location is covered by 2 probes (one for the reference allele, and one for the variant allele). By comparing their combined intensity to the expected intensity (e.g. the sample average), a measure known as the **Log R ratio**, we can learn something about copy number. The resulting plots often look something like this:
+>
+>   ![](../../images/circos/cnv-plot.png){: width="50%"}
+>
+> With a value of 0 indicating the normalized copy number (2 in the case of a diploid genome), and significant diversions from this expected value
+> point to copy number gains or losses (the figure above shows 1 region with a copy number loss).
+>
+{: .comment}
 
 
 Let's look at our file format (VCaP-copynumber.txt`):
@@ -430,7 +460,7 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 >                - *"Minimum value"*: `-1.0`
 >                - *"Maximum value"*: `1.0`
 >
-> 3. Examine the resulting plot
+> 3. **Examine** {% icon galaxy-eye %} the resulting plot
 >
 >    > ### {% icon question %} Question
 >    >
@@ -442,17 +472,19 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 >    > > 1. We see the new track, but it overlaps with the SV track. This is because we used the same `radius` parameter.
 >    > >    This parameter determines the position of the track within the plot.
 >    > >
->    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png ){: width="80%"
+>    > >    ![Circos plot of chromosome 5 SVs](../../images/circos/cancer-overlap.png ){: width="80%"}
 >    > >
 >    > >
->    > > 2. Rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (<`0.8`).
+>    > > 2. To fix this, we can rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (<`0.8`).
+>    > >    We will do this in the next step. This is what we mean by Circos being an iterative process; the tool is too complex to define a multitrack plot
+>    > >    all at once, rather, you build it up step by step and frequently check the output.
 >    > >
 >    > {: .solution}
 >    {: .question}
 >
 > 4. **Rerun** {% icon galaxy-refresh %} the tool, changing the following parameters.
 >    - In *"Link Tracks"*:
->        - In *"Link Data"*:
+>        - In *"1: Link Data"*:
 >            - *"Inside Radius"*: `0.75`
 >
 >
@@ -460,10 +492,10 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 
 You should see a plot that looks like:
 
-![](../../images/circos/cancer-cnv.png)
+![Circos plot with CNV track](../../images/circos/cancer-cnv.png){: width="75%"}
 
 
-Now that we are happy with the placement of our track, let's tweak it a bit more. Let's colour positions showing a significant copy number loss (< `-0.15`) red, and positions with a copy number gain (> `0.15`) green:
+Now that we are happy with the placement of our track, let's tweak it a bit more. Let's colour positions showing a significant copy number loss (< `-0.15`) red, and positions with a copy number gain (> `0.15`) green, leaving everything inbetween gray (expected copy number):
 
 
 > ### {% icon hands_on %} Hands-on: Colour data points by copy number state
@@ -493,7 +525,8 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >
 {: .hands_on}
 
-Sometimes it can also be nice to see the plot axes to more accurately judge the values of the different data points:
+Sometimes it can also be nice to see the axes of the plot, to more accurately judge the values of the different data points.
+We can do this as follows:
 
 > ### {% icon hands_on %} Hands-on: Add plot axes
 >
@@ -513,7 +546,11 @@ Sometimes it can also be nice to see the plot axes to more accurately judge the 
 {: .hands_on}
 
 
-TODO: add image
+You should now see a plot like this:
+
+![Circos plot with SNV track with rules and axes defined](../../images/circos/cancer-cnv-full.png){: width="75%"}
+
+<!-- TODO: update image when axes are fixed (should be able to go to -1) -->
 
 
 
@@ -522,83 +559,127 @@ TODO: add image
 
 Next, we will visualize the B-allele frequency (also known as minor allele frequency)
 
-> ### {% icon comment %} Background: Copy Number Variation (CNV)
+> ### {% icon comment %} Background: B-allele Frequency (BAF)
 >
+> The B-allele frequency is closely related to copy number. There are many nuances to the measurement of B-allele frequency,
+> but roughly speaking it indicates the frequency (ratio) of the non-reference allele of the SNP within the sample
 >
+> This can be used to estimate copy number changes; in a diploid genome we expect to observe 3 states:
+>  1. SNP is present in 100% of the probes (**homozygous variant**)
+>  2. SNP is present in 0% of the probes (**homozygous reference**)
+>  3. SNP is present in 50% of the probes (**heterozygous**)
+>
+> <br>
+>
+> By plotting this percentage, we get our B-allele frequency plot:;
+>
+> ![Example CNV and BAF plots for different copy number states](../../images/circos/cnv-baf-intro.png "expected B-allele frequency plot (top) and Log R ratio plot (bottom) for different copy number states")
+>
+> When these SNPs are detected at different ratios, it may indicate copy number variation. For example, a region displaying SNP ratios of 33% and 66% may indicate a copy number of 3 for that region (see image above).
 >
 {: .comment}
 
 
-TODO: look at file format, explain its always between 0 and 1
+Now we will add such a B-allele frequency plot as track in our Circos visualization.
+The data we will use for this is also obtained from SNP array data, and looks like this:
+
+```
+Chromosome	Start	End	Value
+chr1	10004	10004	0.9956236
+chr1	28663	28663	0.005509489
+chr1	46844	46844	0.488594
+chr1	59415	59415	0.570193
+chr1	72017	72017	0.006410222
+chr1	97215	97215	0.0
+chr1	110905	110905	0.9918569
+[..]
+```
+
+Note that the B-allele frequency value is always between 0 and 1.
+
+We will make another scatterplot, so our data should be in the same format as the copynumber track: `chr - start - end - value`. Luckily, this data is already in the correct format, all we have to do is remove the header line! We will also subset the data again by selecting lines randomly from the file.
 
 
 > ### {% icon hands_on %} Hands-on: Prepare the B-allele frequency table
 >
-> 1. **Select** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `B-allele frequency.tsv`
->    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `^Chromosome`
+> 1. **Remove beginning** of a file {% icon tool %} with the following parameters:
+>    - *"Remove first"*: `1`
+>    - {% icon param-file %} *"from"*: `B-allele frequence.tsv`
 >
-> 1. **Select random lines** {% icon tool %} with the following parameters:
+> 2. **Select random lines** {% icon tool %} with the following parameters:
 >    - *"Randomly select"*: `25000`
 >    - {% icon param-file %} *"from"*: `out_file1` (output of **Select** {% icon tool %})
 >    - *"Set a random seed"*: `Don't set seed`
 >
+> 3. **Rename** {% icon galaxy-pencil %} this file to `baf-circos.tsv`
+>
 {: .hands_on}
 
-
+Now are data is ready to be plotted in Circos. We will plot this track directly inside the CNV track, which means we will have to change the radius of the SV link track again as well.
 
 > ### {% icon hands_on %} Hands-on: Add B-allele Frequency track to Circos
 >
-> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (where we set up the ideogram)
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot CopyNumber`)
 >
 > 2. Add a new scatterplot track to the image
 >    - In *"2D Data Tracks"*:
 >        - {% icon param-repeat %} *"Insert 2D Data Plot"*
->            - *"Outside Radius"*: `0.95`
->            - *"Inside Radius"*: `0.8`
->            - *"Plot Type"*: `Scatter`
->                - *"Scatter Plot Data Source"*: `cnv-circos.txt`
+>            - *"Outside Radius"*: `0.75`
+>            - *"Inside Radius"*: `0.6`
+>            - *"Plot Format"*: `Scatter`
+>                - {% icon param-file %} *"Scatter Plot Data Source"*: `baf-circos.tsv` (output of **Select random lines** {% icon tool %})
 >                - In *"Plot Format Specific Options"*:
 >                    - *"Glyph Size"*: `4`
 >                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
 >                    - *"Stroke Thickness"*: `0`
 >            - *"Minimum / maximum options"*: `Supply min/max values`
->                - *"Minimum value"*: `-1.0`
+>                - *"Minimum value"*: `0.0`
 >                - *"Maximum value"*: `1.0`
->            >            - In *"Rules"*:
->                - In *"Rule"*:
->                    - {% icon param-repeat %} *"Insert Rule"*
->                        - In *"Conditions to Apply"*:
->                            - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                                - *"Condition"*: `Apply based on point value`
->                                    - *"Points above this value"*: `0.15`
->                        - In *"Actions to Apply"*:
->                            - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                - *"Action"*: `Change Fill Color for all points`
->                                   - *"Fill Color"*: {% color_picker #00b050 %} (green)
->                    - {% icon param-repeat %} *"Insert Rule"*
->                        - In *"Conditions to Apply"*:
->                            - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                                - *"Condition"*: `Apply based on point value`
->                                   - *"Points below this value"*: `-0.15`
->                        - In *"Actions to Apply"*:
->                            - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                - *"Action"*: `Change Fill Color for all points`
->                                    - *"Fill Color"*: {% color_picker #ff0000 %} (red)
 >            - In *"Axes"*:
->                 - In *"Axis"*:
+>                - In *"Axis"*:
 >                    - {% icon param-repeat %} *"Insert Axis"*
->                        - *"Inside Radius (y0)"*: `-1.0`
->                        - *"Radial-relative values"*: `Yes`
->                        - *"Spacing"*: `0.5`
->
->
+>                        - *"Spacing"*: `0.25`
+>    - In *"Link Tracks"*:
+>        - In *"1: Link Data"*:
+>            - *"Inside Radius"*: `0.55`
 >
 {: .hands_on}
 
+You should see a plot that looks like this:
+
+![](../../images/circos/cancer-baf.png){: width="60%"}
 
 
+Great! we can see our B-allele frequency plot track added.
+
+
+> ### {% icon question %} Questions
+>
+> 1. Look at the B-allele frequency track, try to identify chromosome(s) having a copy number of:
+>    1. `CN=2` (diploid)
+>    2. `CN=1` (haploid)
+>    3. `CN=3` (triploid)
+>
+>    Hint: ![Example CNV and BAF plots for different copy number states](../../images/circos/cnv-baf-intro.png)
+>
+> 2. Do you see anything other than these states?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Compare the B-allele frequency plot to the expected plot shown above for the different copynumber states.
+> >    1. Chromosome 12 appears completely diploid
+> >    2. Chromosomes 16 and X appear to have only 1 copy (no heterozygosity and a loss in copynumber as shown by the CNV track)
+> >    3. Chromosomes 1,2, and 3 show a pattern consistent with `CN=3`
+> >
+> > 2. Chromosome 5 shows a lot of changes in B-allele frequency. Chromosome 19 displays a pattern that could potentially indicate 4 copies (B-allele frequencies of 0, 0.25, 0.5, 0.75 and 1)
+> {: .solution}
+{: .question}
+
+
+### Optional: Final Tweaking of Circos plot
+
+You may have noticed, that by moving the link track closer to the center repeatedly, the track of intrachromosomal links has become rather narrow.
+There is a parameter of the link track type called *Bezier*, which controls how tightly the links arc (i.e. how close to the center they reach. By playing around with this parameter, we can fine a more pleasing
 
 
 
