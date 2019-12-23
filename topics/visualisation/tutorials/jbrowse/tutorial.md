@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: JBrowse
-#zenodo_link:
+title: Genomic Data Visualisation with JBrowse
+zenodo_link: https://doi.org/10.5281/zenodo.3591856
 questions:
 objectives:
 time_estimation: "1h"
@@ -26,7 +26,9 @@ The Galaxy tool accepts data in many formats:
 - Wig/BigWig
 - VCF files
 
-and executes the "run-once data formatting tools" mentioned in its description. The JBrowse tool has an incredibly extensive number of options, more than anyone needs most of the time. We'll go through them in detail but feel free to skip the sections that don't apply to the data types you use. Not everyone has Blast XML results to visualise.
+and executes the "run-once data formatting tools" mentioned in its description. The JBrowse tool has an incredibly extensive number of options, more than anyone needs most of the time. We'll go through them in detail but feel free to skip the sections that don't apply to the data types you use. Not everyone has Blast results to visualise.
+
+This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will have different behaviour and tool layout.
 
 > ### Agenda
 >
@@ -37,58 +39,34 @@ and executes the "run-once data formatting tools" mentioned in its description. 
 >
 {: .agenda}
 
-# Preparation
+# Data Upload
 
-## Tool Installation
-
-This tutorial covers versions 0.7.0.3 or greater of the JBrowse tool.
-
-## Data Upload
-
-The data for today is a subset of a real dataset from a Staphylococcus aureus bacteria.
-We have a closed genome sequence and an annotation for our "wildtype" strain.
-We have used a whole genome shotgun approach to produce a set of short sequence reads on an Illumina DNA sequencing instrument for our mutant strain.
-
-- The reads are paired-end
-- Each read is on average 150 bases
-- The reads would cover the original wildtype genome to a depth of 19x
-
-The files we will be using are:
-
-- `mutant_R1.fastq` & `mutant_R2.fastq` - the read files in fastq format.
-- `wildtype.fna` - The sequence of the reference strain in fasta format.
-- `wildtype.gbk` - The reference strain with gene and other annotations in genbank format.
-- `wildtype.gff` - The reference strain with gene and other annotations in gff3 format.
-
-This data is available at Zenodo using the following [link](https://doi.org/10.5281/zenodo.582600).
-> ### {% icon hands_on %} Hands-on: Get the data
+> ### {% icon hands_on %} Hands-on: Getting the data
 >
-> 1.  Import all of the following files into a new history:
->     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
->     - [mutant_R2.fastq](https://zenodo.org/record/582600/files/mutant_R2.fastq)
->     - [wildtype.fna](https://zenodo.org/record/582600/files/wildtype.fna)
->     - [wildtype.gbk](https://zenodo.org/record/582600/files/wildtype.gbk)
->     - [wildtype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
+> 1. Create and name a new history for this tutorial.
 >
->     ```
->     https://zenodo.org/record/582600/files/mutant_R1.fastq
->     https://zenodo.org/record/582600/files/mutant_R2.fastq
->     https://zenodo.org/record/582600/files/wildtype.fna
->     https://zenodo.org/record/582600/files/wildtype.gbk
->     https://zenodo.org/record/582600/files/wildtype.gff
->     ```
+>    {% include snippets/create_new_history.md %}
 >
->     > ### {% icon tip %} Tip: Importing data via links
->     >
->     > * Copy the link location
->     > * Open the Galaxy Upload Manager
->     > * Select **Paste/Fetch Data**
->     > * Paste the link into the text field
->     > * Press **Start**
->     {: .tip}
+> 2. Import the datasets we will visualize:
+>
+>    ```
+>    https://zenodo.org/record/3591856/files/blastp%20genes.gff3
+>    https://zenodo.org/record/3591856/files/blastp%20vs%20swissprot.xml
+>    https://zenodo.org/record/3591856/files/dna%20sequencing.bam
+>    https://zenodo.org/record/3591856/files/dna%20sequencing%20coverage.bw
+>    https://zenodo.org/record/3591856/files/genes%20(de%20novo).gff3
+>    https://zenodo.org/record/3591856/files/genes%20(NCBI).gff3
+>    https://zenodo.org/record/3591856/files/genome.fa
+>    https://zenodo.org/record/3591856/files/RNA-Seq%20coverage%201.bw
+>    https://zenodo.org/record/3591856/files/RNA-Seq%20coverage%202.bw
+>    https://zenodo.org/record/3591856/files/variants.vcf
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
 >
 {: .hands_on}
 
+The data for today is a subset of real datasets from *E. coli MG1655 strain K-12*
 
 # Simple Gene Tracks
 
@@ -96,16 +74,23 @@ We will start by adding a couple of gene call tracks. In our case these are gene
 
 > ### {% icon hands_on %} Hands-on: Build the JBrowse
 >
-> 1. *Reference Genome to display*: `Use a genome from History`
-> 2. *Select the reference genome*: `wildtype.fna`
-> 3. *Insert Track Group*
->    1. *Insert Annotation Track*
->         1. *Track Type*: `GFF/GFF3/BED/GBK Features`
->         2. *GFF/GFF3/BED/GBK Data*: `wildtype.gff`
+> 1. **JBrowse** {% icon tool %} with the following parameters:
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - In *"Track Group"*:
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Genes`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `genes (de novo).gff3`
 > 4. Execute
+>
 > 5. View the contents of the file
 >
-> > ![Screenshot of JBrowse](../../images/jbrowse-gff-track.png "Screenshot of JBrowse")
+>    ![Screenshot of JBrowse](../../images/jbrowse-gff-track.png "Screenshot of JBrowse")
+>
 {: .hands_on}
 
 If you are not familiar with the operation of JBrowse there are some important points:
@@ -125,27 +110,35 @@ If you are not familiar with the operation of JBrowse there are some important p
 
 All of the track types in the JBrowse tool support a wide array of features. We've only looked at a simple track with default options, however there are more tools available to us to help create user-friendly JBrowse instances that can embed rich data.
 
-> ### {% icon hands_on %} Hands-on: Build the JBrowse
+> ### {% icon hands_on %} Hands-on: Build a JBrowse for viewing Genes
 >
-> 1. *Reference Genome to display*: `Use a genome from History`
-> 2. *Select the reference genome*: `wildtype.fna`
-> 3. *Insert Track Group*
->    1. *Insert Annotation Track*
->         1. *Track Type*: `GFF/GFF3/BED/GBK Features`
->         2. *GFF/GFF3/BED/GBK Data*: `wildtype.gff`
->         3. *Index this Track*: `Yes`
->         4. *JBrowse Styling Options*
->             1. *JBrowse style.label*: `name`
->             2. *JBrowse style.description*: `product`
->         5. *JBrowse Contextual Menu Options*
->             1. *Menu Action*: `iframeDialog`
->             2. *Menu Label*: `{Locus_tag} on NCBI`
->             3. *Menu title*: `NCBI Protein {id}`
->             4. *Menu url*: `https://www.ncbi.nlm.nih.gov/protein/{Locus_tag}`
->             5. *Menu Icon*: `Search`
->         6. *Track Visibility*: `On for new users`
-> 4. Execute
-> 5. View the contents of the file
+> 1. **JBrowse** {% icon tool %} with the following parameters:
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - In *"Track Group"*:
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Genes`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `genes (de novo).gff3`
+>                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
+>                        - In *"JBrowse Feature Score Scaling & Coloring Options [Advanced]"*:
+>                            - *"Color Score Algorithm"*: `Based on score`
+>                                - *"How should minimum and maximum values be determined for the scores of the features"*: `Manually specify minimum and maximum expected scores for the feature track`
+>                                    - *"Minimum expected score"*: `0`
+>                                    - *"Maximum expected score"*: `1`
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `genes (NCBI).gff3`
+>                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
+>                        - In *"JBrowse Contextual Menu options [Advanced]"*:
+>                            - In *"Track Menu"*:
+>                                - {% icon param-repeat %} *"Insert Track Menu"*
+>                                    - *"Menu label"*: `See protein at NCBI`
+>                                    - *"Menu url"*: `https://www.ncbi.nlm.nih.gov/gene?term={locus_tag}%5BGene%20Name%5D`
+>                                    - *"Menu icon"*: `Database`
 >
 > > ### {% icon tip %} Tip: Templating in Contextual Menu Options
 > >
@@ -154,6 +147,16 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 > > properties of the feature. Any of the top level properties can be used
 > > directly in your templating
 > {: .tip}
+>
+> 2. View the output
+>
+> 3. Turn on both tracks of data.
+>
+> 4. Navigate to `21,200`, either manually, or by copying and pasting the location block: `NC_000913.3:18351..24780`
+>
+> 5. Right click on the `yaaY` gene, and click the "See protein at NCBI" menu option.
+>
+>    This menu option is dynamic, try it with a few other features from the `genes (NCBI).gff3` track. These features have a `locus_tag` and the menu button we added will open a URL to an NCBI search page for the value of this `locus_tag` attribute.
 {: .hands_on}
 
 Contextual menus can be used to link to more than just NCBI.
@@ -161,9 +164,70 @@ Contextual menus can be used to link to more than just NCBI.
 - The links can go anywhere such as web search services (e.g. Google) or genomics web services (e.g. EBI)
 - Some sites use the IFrame action to link genes to local services where users are expected to submit annotation notes or data.
 
-Unfortunately this object does not have access to the sequence, so this makes
-building a link which could initiate a BLAST (or other) sequence search not
-possible.
+# Sequencing, Coverage, and Variation
+
+This is the next major category of data that people wish to visualize, sequencing, coverage, and variation. The sequencing data can be of any type, as long as the results are formatted as BAM files.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **JBrowse** {% icon tool %} with the following parameters:
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - In *"Track Group"*:
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Coverage`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BigWig XY`
+>                        - {% icon param-file %} *"BigWig Track Data"*: `dna sequencing coverage.bw`
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BigWig XY`
+>                        - {% icon param-file %} *"BigWig Track Data"*: `rna-seq coverage/1.bw`
+>                        - *"Use XYPlot"*: `Yes`
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BigWig XY`
+>                        - {% icon param-file %} *"BigWig Track Data"*: `rna-seq coverage/2.bw`
+>                        - *"Use XYPlot"*: `Yes`
+>                        - *"Show variance band"*: `Yes`
+>                        - *"Track Scaling"*: `Autoscale (global)`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Sequencing & Variation`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BAM Pileups`
+>                        - {% icon param-file %} *"BAM Track Data"*: `sequencing.bam`
+>                        - *"Autogenerate SNP Track"*: `Yes`
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `VCF SNPs`
+>                        - {% icon param-file %} *"SNP Track Data"*: `variants.vcf`
+>
+> 2. Execute and then explore the resulting data.
+>
+{: .hands_on}
 
 
 # Blast Results
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **JBrowse** {% icon tool %} with the following parameters:
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - In *"Track Group"*:
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `Blast XML`
+>                        - {% icon param-file %} *"BlastXML Track Data"*: `blastp vs swissprot.xml`
+>                        - {% icon param-file %} *"Features used in Blast Search"*: `blastp genes.gff3`
+>                        - *"Minimum Gap Size"*: `5`
+>                        - *"Is this a protein blast search?"*: `Yes`
+>                        - In *"JBrowse Feature Score Scaling & Coloring Options [Advanced]"*:
+>                            - *"Color Score Algorithm"*: `Based on score`
+>                                - *"JBrowse style.color function's score scaling"*: `Blast scaling`
+>
+> 2. Execute and then explore the resulting data.
+>
+{: .hands_on}
