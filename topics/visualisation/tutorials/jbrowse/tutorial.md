@@ -92,7 +92,7 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 
 # Simple Gene Tracks
 
-We will start by adding a single track containing the genes from the wildtype.gff file.
+We will start by adding a couple of gene call tracks. In our case these are genes and gene predictions, but they don't have to be. In the general case this can be any interesting region from an analysis, where a tool has pointed out some region for further inspection for some reason, then this data can be visualised with the "gene" track type.
 
 > ### {% icon hands_on %} Hands-on: Build the JBrowse
 >
