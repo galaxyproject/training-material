@@ -81,7 +81,7 @@ In this section, we will recreate a Circos plot of the VCaP cancer cell line pre
 ![VCaP cancer Circos plot](../../images/circos/vcap.png "Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants"){: width="60%"}
 
 
-This plot has 4 tracks
+This plot has 4 tracks:
  - Structural variants (2 tracks, data obtained from whole-genome NGS sequencing data)
  - B-allele Frequency (obtained from SNP-array data)
  - Copy Number (obtained from SNP array data)
@@ -91,7 +91,11 @@ In this section we will reproduce this Circos plot step by step.
 
 ## Ideogram
 
-As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw).
+As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
+
+
+
+
 
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
@@ -121,6 +125,66 @@ You should now have a plot that looks like this:
 ![](../../images/circos/cancer_ideogram.png){: width="50%"}
 
 We will use this as the basis for our plot, and add data tracks one at a time.
+
+
+> ### {% icon comment %} Advanced info: defining your karyotype file
+>
+> Since our data uses `hg18` reference genome, we supply a corresponding karyotype file:
+>
+> ```
+> chr - chr1 1 0 247249719 chr1
+> chr - chr2 2 0 242951149 chr2
+> chr - chr3 3 0 199501827 chr3
+> chr - chr4 4 0 191273063 chr4
+> chr - chr5 5 0 180857866 chr5
+> chr - chr6 6 0 170899992 chr6
+> chr - chr7 7 0 158821424 chr7
+> chr - chr8 8 0 146274826 chr8
+> chr - chr9 9 0 140273252 chr9
+> chr - chr10 10 0 135374737 chr10
+> chr - chr11 11 0 134452384 chr11
+> chr - chr12 12 0 132349534 chr12
+> chr - chr13 13 0 114142980 chr13
+> chr - chr14 14 0 106368585 chr14
+> chr - chr15 15 0 100338915 chr15
+> chr - chr16 16 0 88827254 chr16
+> chr - chr17 17 0 78774742 chr17
+> chr - chr18 18 0 76117153 chr18
+> chr - chr19 19 0 63811651 chr19
+> chr - chr20 20 0 62435964 chr20
+> chr - chr21 21 0 46944323 chr21
+> chr - chr22 22 0 49691432 chr22
+> chr - chrX x 0 154913754 chrx
+> chr - chrY y 0 57772954 chry
+> ```
+>
+> Chromosome definitions are formatted as follows: `chr - ID LABEL START END COLOR`
+>
+> - The first two fields are always `chr`, indicating that the line defines a chromosome, and `-`. The second field defines the parent structure and is used only for band definitions.
+> - The `ID` is the identifier used in data files whereas the `LABEL` is the text that will appear next to the ideogram on the image.
+> - The `start` and `end` values define the size of the chromosome. The karyotype file should store the entire chromsome size, not just the region you wish to draw.
+> There are other parameters we can use to draw only a subset of the data (e.g. just one chromosome).
+> - The `color` parameter is optional, to use built-in color scheme, use `chr1, chr2. etc` again in this column
+>
+> More information about this format (including karyotype definitions for several species) can be found on the [Circos website](http://circos.ca/documentation/tutorials/ideograms/karyotypes/)
+>
+> > ### {% icon question %} Question
+> >
+> > 1. Why didn't we use the `hg18` built-in genome (using the `Locally Cached` option)?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > 1. These built-in definitions often include more than the canonical chromosomes (chr1-chr22, chrX, chrY), which we might not want to plot. For example, using
+> > >    The full definition of `hg18` built-in to Galaxy, we get the following ideogram:
+> > >
+> > >    ![](../../images/circos/cancer_ideogram_cached.png){: width="85%"}
+> > >
+> > >    We could still use this karyotype, but we would have to limit the chromosomes to be drawn in the Circos settings (we will cover this later). In this example however, we supply our own karyotype file defining only the canonical chromosomes.
+> > {: .solution}
+> {: .question}
+>
+{: .tip}
+
 
 ## Structural Variations
 
