@@ -4,9 +4,16 @@ layout: tutorial_hands_on
 title: Genomic Data Visualisation with JBrowse
 zenodo_link: https://doi.org/10.5281/zenodo.3591856
 questions:
+- How can I visualise features or blast data?
+- How can I visualise sequencing data in a workflow
 objectives:
+- Build several visualisations in JBrowse
+- Have basic familiarity with moving around JBrowse, and loading several data tracks
 time_estimation: "1h"
 key_points:
+- This tutorial can not exhaustively cover every data type, but maybe it provides inspiration for your own analyses
+- JBrowse is a great, workflow-compatible alternative to other genome browsers
+- You can build visualisations that summarise dozens of analyses in one visualisation
 contributors:
   - erasche
   - shiltemann
@@ -151,6 +158,8 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 >
 > 2. View the output
 >
+>    ![genes in JBrowse](../../images/jbrowse/genes.png "Genes visualised in JBrowse. The lighter coloured genes on the denovo track are coloured based on the confidence score given to the prediction by AUGUSTUS. NCBI genes do not have scores, these are more like an official gene set.")
+>
 > 3. Turn on both tracks of data.
 >
 > 4. Navigate to `21,200`, either manually, or by copying and pasting the location block: `NC_000913.3:18351..24780`
@@ -158,6 +167,8 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 > 5. Right click on the `yaaY` gene, and click the "See protein at NCBI" menu option.
 >
 >    This menu option is dynamic, try it with a few other features from the `genes (NCBI).gff3` track. These features have a `locus_tag` and the menu button we added will open a URL to an NCBI search page for the value of this `locus_tag` attribute.
+>
+>    ![ncbi view](../../images/jbrowse/ncbi.png "The NCBI iframe within JBrowse, you can see how to link to external databases from JBrowse and help the viewer obtain as much information or context as they might need... but you have to build it yourself.")
 {: .hands_on}
 
 Contextual menus can be used to link to more than just NCBI.
@@ -207,6 +218,7 @@ Next we will add a sequencing dataset, a BAM file which maps some sequencing rea
 >
 > 2. Execute and then explore the resulting data.
 >
+>    ![sequencing tracks in JBrowse](../../images/jbrowse/sequencing.png "All of the sequencing tracks in JBrowse. Try exploring! There are many menu and configuration options which can help you filter and sort your data.")
 {: .hands_on}
 
 Try:
@@ -242,4 +254,10 @@ The best way to accomplish this is through the `gffread` tool which can cleanup 
 >                                - *"JBrowse style.color function's score scaling"*: `Blast scaling`
 >
 > 2. Execute and then explore the resulting data.
+>
+>    ![blast results in JBrowse](../../images/jbrowse/blast.png "Blast results, coloured according to their e-value. This sort of track is commonly used to help genome annotators have additional genomic context when they are annotating.")
 {: .hands_on}
+
+# Conclusion
+
+This does not exhaustively cover JBrowse, and the tool is more extensible than can be easily documented, but hopefully these examples are illustrative and can give you some ideas about your next steps.
