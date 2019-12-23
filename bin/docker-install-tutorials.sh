@@ -28,7 +28,7 @@ do
         do
             workflow-to-tools -w $w -o $dir/workflows/wftools.yaml -l $(basename $dir)
             echo " - Installing tools from workflow $(basename $w)" 
-            shed-tools install -t $dir/workflows/wftools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD
+            shed-tools install -t $dir/workflows/wftools.yaml -g $galaxy_instance -u $GALAXY_DEFAULT_ADMIN_USER -p $GALAXY_DEFAULT_ADMIN_PASSWORD -v
             rm $dir/workflows/wftools.yaml
         done
         echo " - Installing workflows"
