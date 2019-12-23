@@ -65,6 +65,14 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 ## Ideogram
 
+The ideogram depicts your objects (chromosomes in the case of genomic data) of which you want to plot data.
+
+![](../../images/circos/ideograms_examples.png){: width="50%"}
+
+And there are a lot of configuration options available to custumize your ideogram
+
+![](../../images/circos/ideograms_options.png){: width="50%"}
+
 ## Data Tracks
 
 [track types, radius to choose position of track within plot, input format]
