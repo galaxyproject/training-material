@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualisation with Circos"
+zenodo_link: "https://zenodo.org/record/3591846"
 questions:
   - "What can the Circos Galaxy tool be used for?"
   - "How can I visualise common genomic datasets using Circos?"
@@ -74,9 +75,23 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 ### Text Labels
 
-# Example 1: Cancer Genomics
+# Overview
+
+We will now illustrate Circos further with a number of example plots. Each of these can be run independently of each other, so feel free to pick an example that suits your interest
+
+| Example             | Preview       | Note                                  |
+| ------------------- |:-------------:| -------------------------------------:|
+| [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="25%"} | Will cover some cancer basics as well |
+| [ENCODE cover](#example-encode-cover) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="20%"} | Recreate a nature Cover|
+
+<!-- | Presidential Debate | centered | Plots non-genomics data |-->
+
+
+
+# Example: Cancer Genomics
 
 In this section, we will recreate a Circos plot of the VCaP cancer cell line presented in {% cite alves2013gene %}. In this study, data from various sources were combined into a single integrative Circos plot.
+
 
 ![VCaP cancer Circos plot](../../images/circos/vcap.png "Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants"){: width="60%"}
 
@@ -88,6 +103,33 @@ This plot has 4 tracks:
 
 
 In this section we will reproduce this Circos plot step by step.
+
+## Data upload
+
+
+> ### {% icon hands_on %} Hands-on: Obtaining our data
+>
+> 1. Make sure you have an empty analysis history. Give it a name.
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Import Data.**
+>    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
+>
+>    ```
+>    https://zenodo.org/record/3591846/files/VCaP_Copy-Number.tsv
+>    https://zenodo.org/record/3591846/files/VCaP_B-allele-Frequency.tsv
+>    https://zenodo.org/record/3591846/files/VCaP-highConfidenceJunctions.tsv
+>    https://zenodo.org/record/3591846/files/hg18_karyotype_bands.tsv
+>    https://zenodo.org/record/3591846/files/hg18_karyotype.txt
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>
+>    {% include snippets/import_from_data_library.md %}
+>
+{: .hands_on}
+
 
 ## Ideogram
 
@@ -102,14 +144,14 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 > 1. **Circos** {% icon tool %} with the following parameters:
 >    - In *"Reference Genome and Cytogenetic Bands"*:
 >        - *"Reference Genome"*: `Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `karyotype_human_hg18.txt`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.tsv`
 >    - In *"Ideogram"*:
 >        - *"Radius"*: `0.85`
 >        - *"Thickness"*: `45`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `64`
 >        - In *"Cytogenic Bands"*:
->            - {% icon param-file %} *"Cytogenic Bands"*: `karyotype-bands.txt`
+>            - {% icon param-file %} *"Cytogenic Bands"*: `hg18_karyotype_bands.tsv`
 >            - *"Convert bands from BED format to circos karyotype band format"*: `No`
 >            - *"Fill Bands"*: `2`
 >            - *"Band Stroke Thickness"*: `1`
@@ -251,6 +293,9 @@ So in order to convert this to Circos format, we need to
 > 2. **Cut** {% icon tool %} with the following parameters:
 >    - *"Cut columns"*: `c2,c3,c3,c6,c7,c7`
 >    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
+>
+> 3. **Rename** {% icon galaxy-pencil %} this output to `SVs Circos.tsv`
+>
 {: .hands_on}
 
 Now that we have the correct format, we can plot our data in Circos. We will plot the SVs as links; showing which parts of genome have been fused together in our sample.
@@ -264,7 +309,7 @@ Now that we have the correct format, we can plot our data in Circos. We will plo
 >       - In *"Link Data"*:
 >           - {% icon param-repeat %} *"Insert Link Data"*
 >               - *"Inside Radius"*: `0.95`
->               - {% icon param-file %} *"Link Data Source"*: `out_file1` (output of **Cut** {% icon tool %})
+>               - {% icon param-file %} *"Link Data Source"*: `SVs Circos.tsv`
 >               - *"Link Type"*: `basic`
 >               - *"Thickness"*: `3.0`
 >               - *"Bezier Radius"*: `0.5`
@@ -643,6 +688,8 @@ Now are data is ready to be plotted in Circos. We will plot this track directly 
 >        - In *"1: Link Data"*:
 >            - *"Inside Radius"*: `0.55`
 >
+> 3. **Rename** {% icon galaxy-pencil %} this plot to `Circos Plot BAF`
+>
 {: .hands_on}
 
 You should see a plot that looks like this:
@@ -676,165 +723,92 @@ Great! we can see our B-allele frequency plot track added.
 {: .question}
 
 
-### Optional: Final Tweaking of Circos plot
+## Optional: Final Tweaking of Circos plot
 
 You may have noticed, that by moving the link track closer to the center repeatedly, the track of intrachromosomal links has become rather narrow.
 There is a parameter of the link track type called *Bezier*, which controls how tightly the links arc (i.e. how close to the center they reach. By playing around with this parameter, we can fine a more pleasing
 
-
-
-> ### {% icon hands_on %} Hands-on: Plot the data!
-> 1. **Circos** {% icon tool %} with the following parameters:
->    - In *"Reference Genome and Cytogenetic Bands"*:
->        - *"Reference Genome"*: `Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `output` (Input dataset)
->    - In *"Plot Options"*:
->        - *"Plot Format"*: `Color`
->    - In *"Ideogram Configuration (Genome/Chromosomes)"*:
->        - *"Radius"*: `0.85`
->        - *"Thickness"*: `45.0`
->        - In *"Labels"*:
->            - *"Label Font Size"*: `64`
->        - In *"Cytogenic Bands"*:
->            - *"Fill Bands"*: `2`
->            - *"Band Stroke Thickness"*: `1`
->    - In *"Ticks"*:
->        - *"Show Ticks"*: `Yes`
->        - In *"Tick Group"*:
->            - {% icon param-repeat %} *"Insert Tick Group"*
->                - *"Tick Spacing"*: `10u`
->                - *"Show Tick Labels"*: `Yes`
->    - In *"2D Data"*:
->        - In *"2D Data Plot"*:
->            - {% icon param-repeat %} *"Insert 2D Data Plot"*
->                - *"Outside Radius"*: `0.95`
->                - *"Minimum / maximum options"*: `Supply min/max values`
->                    - *"Minimum value"*: `-1.0`
->                    - *"Maximum value"*: `1.0`
->                - *"Plot Format"*: `Scatter`
->                    - In *"Plot Format Specific Options"*:
->                        - *"Glyph Size"*: `4`
->                        - *"Color"*: {% color_picker #7f7f7f %} (gray)
->                        - *"Stroke Thickness"*: `0`
->                - In *"Rules"*:
->                    - In *"Rule"*:
->                        - {% icon param-repeat %} *"Insert Rule"*
->                            - In *"Conditions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                                    - *"Condition"*: `Apply based on point value`
->                                        - *"Points above this value"*: `0.15`
->                            - In *"Actions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: {% color_picker #00b050 %} (green)
->                        - {% icon param-repeat %} *"Insert Rule"*
->                            - In *"Conditions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                                    - *"Condition"*: `Apply based on point value`
->                                        - *"Points below this value"*: `-0.15`
->                            - In *"Actions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                    - *"Action"*: `Change Fill Color for all points`
->                                        - *"Fill Color"*: {% color_picker #ff0000 %} (red)
->                - In *"Axes"*:
->                    - In *"Axis"*:
->                        - {% icon param-repeat %} *"Insert Axis"*
->                            - *"Inside Radius (y0)"*: `-1.0`
->                            - *"Radial-relative values"*: `Yes`
->                            - *"Spacing"*: `0.5`
->            - {% icon param-repeat %} *"Insert 2D Data Plot"*
->                - *"Outside Radius"*: `0.75`
->                - *"Inside Radius"*: `0.6`
->                - *"Minimum / maximum options"*: `Supply min/max values`
->                    - *"Minimum value"*: `0.0`
->                    - *"Maximum value"*: `1.0`
->                - *"Plot Format"*: `Scatter`
->                    - {% icon param-file %} *"Scatter Plot Data Source"*: `out_file1` (output of **Select random lines** {% icon tool %})
->                    - In *"Plot Format Specific Options"*:
->                        - *"Glyph Size"*: `4`
->                        - *"Color"*: {% color_picker #7f7f7f %} (gray)
->                        - *"Stroke Thickness"*: `0`
->                - In *"Axes"*:
->                    - In *"Axis"*:
->                        - {% icon param-repeat %} *"Insert Axis"*
->                            - *"Radial-relative values"*: `Yes`
->                            - *"Spacing"*: `0.25`
->            - {% icon param-repeat %} *"Insert 2D Data Plot"*
->                - *"Outside Radius"*: `0.55`
->                - *"Inside Radius"*: `0.4`
->                - *"Minimum / maximum options"*: `Plot all values`
->                - *"Plot Format"*: `Histogram`
->                    - In *"Plot Format Specific Options"*:
->                        - *"Transparency"*: `0.0`
->                        - *"Stroke Color"*: {% color_picker #00b0f0 %} (sky blue)
->                        - *"Fill underneath the histogram"*: `Yes`
->                - In *"Axes"*:
->                    - In *"Axis"*:
->                        - {% icon param-repeat %} *"Insert Axis"*
->                            - *"Radial-relative values"*: `Yes`
->                            - *"Spacing"*: `0.25`
->                - In *"Backgrounds"*:
->                    - In *"Background"*:
->                        - {% icon param-repeat %} *"Insert Background"*
->                            - *"Radial-relative values"*: `Yes`
->                            - *"Color"*: {% color_picker #f2f2f2 %} (light grey)
+> ### {% icon hands_on %} Hands-on: Change Bezier radius
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot CopyNumber`)
+>
+> 2. Change the Bezier parameter of the SV track:
 >    - In *"Link Tracks"*:
->        - In *"Link Data"*:
->            - {% icon param-repeat %} *"Insert Link Data"*
->                - *"Inside Radius"*: `0.38`
->                - {% icon param-file %} *"Link Data Source"*: `out_file1` (output of **Cut** {% icon tool %})
->                - *"Link Type"*: `basic`
->                - *"Thickness"*: `1.0`
->                - *"Bezier Radius"*: `0.25`
->                - In *"Advanced Settings"*:
->                    - *"Bezier Radius Purity"*: `1.0`
->                    - *"Perturb links?"*: `no`
->                - In *"Rules"*:
->                    - In *"Rule"*:
->                        - {% icon param-repeat %} *"Insert Rule"*
->                            - In *"Conditions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                                    - *"Condition"*: `Interchromosomal`
->                            - In *"Actions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                    - *"Action"*: `Change Visibility`
->            - {% icon param-repeat %} *"Insert Link Data"*
->                - *"Inside Radius"*: `0.3`
->                - *"Link Type"*: `basic`
->                - *"Link Color"*: {% color_picker #ff0000 %} (red)
->                - *"Thickness"*: `2.0`
->                - *"Bezier Radius"*: `0.0`
->                - In *"Advanced Settings"*:
->                    - *"Perturb links?"*: `no`
->                - In *"Rules"*:
->                    - In *"Rule"*:
->                        - {% icon param-repeat %} *"Insert Rule"*
->                            - In *"Conditions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                                    - *"Condition"*: `Intrachromosomal`
->                            - In *"Actions to Apply"*:
->                                - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                    - *"Action"*: `Change Visibility`
+>        - In *"1: Link Data"*:
+>            - *"Bezier Radius"*: `0.25`
 >
 {: .hands_on}
 
+![](../../images/circos/cancer-all.png){: width="60%"}
 
-## Optional: Plot individual chromsomes
 
+Another thing you may have noticed, is that in the original image we showed at the start of this section, the red links (interchromosomal SVs) were displayed as a completely different track. To do this, instead of creating a single track with a rule to change the colour of a subset of the data, we can make 2 separate tracks, with rules to only plot a subset of the data.
 
-> ### {% icon hands_on %} Hands-on: Prepare VCF file
-> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `VCaP ListVariants.vcf`
->    - *"Fields to extract"*: `CHROM POS POS CHROM POS POS`
+> ### {% icon question %} Exercise: Split SV track into two
 >
-> 1. **Paste** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Paste"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
->    - {% icon param-file %} *"and"*: `output` (output of **SnpSift Extract Fields** {% icon tool %})
+> 1. Try to split the link track in two so that it matches the original image. This may take some trial and error. The full configuration is shown in the answer box below, but we provede some hints if you want to try it yourself first:
+>    1. **Change the existing link track:**
+>       1. instead of a rule to change the colour of *interchromosomal* SVs, change their visibility (hide them)
+>    2. **Add a new link track**
+>       1. Choose an appropriate radius
+>       2. Set the link colour to red
+>       3. Add a rule to hide the *intrachromosomal* SVs
 >
-> 1. **Circos: Link Density Track** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Links file"*: `out_file1` (output of **Paste** {% icon tool %})
->    - *"Normalize"*: `Yes`
-{: .hands_on}
+>   ![VCaP cancer Circos plot](../../images/circos/vcap.png "The original image from the paper. Try to make the two link tracks look like this"){: width="40%"}
+>
+> > ### {% icon solution %} Solution
+> >
+> > The full configuration  of the two link tracks is:
+> >
+> > > ### {% icon hands_on %} Hands on: Two link tracks
+> > >
+> > > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
+> > >
+> > > 2. Configure two separate link tracks:
+> > >    - In *"Link Tracks"*:
+> > >        - In *"Link Data"*:
+> > >            - {% icon param-repeat %} *"Insert Link Data"*
+> > >                - *"Inside Radius"*: `0.55`
+> > >                - {% icon param-file %} *"Link Data Source"*: `SVs Circos.tsv`
+> > >                - *"Link Type"*: `basic`
+> > >                - *"Thickness"*: `1.0`
+> > >                - *"Bezier Radius"*: `0.25`
+> > >                - In *"Advanced Settings"*:
+> > >                    - *"Bezier Radius Purity"*: `1.0`
+> > >                    - *"Perturb links?"*: `no`
+> > >                - In *"Rules"*:
+> > >                    - In *"Rule"*:
+> > >                        - {% icon param-repeat %} *"Insert Rule"*
+> > >                            - In *"Conditions to Apply"*:
+> > >                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+> > >                                    - *"Condition"*: `Interchromosomal`
+> > >                            - In *"Actions to Apply"*:
+> > >                                - {% icon param-repeat %} *"Insert Actions to Apply"*
+> > >                                    - *"Action"*: `Change Visibility`
+> > >                                    - *"Show"*: `No`
+> > >            - {% icon param-repeat %} *"Insert Link Data"*
+> > >                - *"Inside Radius"*: `0.3`
+> > >                - {% icon param-file %} *"Link Data Source"*: `SVs Circos.tsv`
+> > >                - *"Link Type"*: `basic`
+> > >                - *"Link Color"*: {% color_picker #ff0000 %} (red)
+> > >                - *"Thickness"*: `2.0`
+> > >                - *"Bezier Radius"*: `0.0`
+> > >                - In *"Rules"*:
+> > >                    - In *"Rule"*:
+> > >                        - {% icon param-repeat %} *"Insert Rule"*
+> > >                            - In *"Conditions to Apply"*:
+> > >                                - {% icon param-repeat %} *"Insert Conditions to Apply"*
+> > >                                    - *"Condition"*: `Intrachromosomal`
+> > >                            - In *"Actions to Apply"*:
+> > >                                - {% icon param-repeat %} *"Insert Actions to Apply"*
+> > >                                    - *"Action"*: `Change Visibility`
+> > >                                    - *"Show"*: `No`
+> > >
+> > {: .hands_on}
+> >
+> {: .solution}
+{: .question}
+
 
 # Nature Cover ENCODE Diagram
 
