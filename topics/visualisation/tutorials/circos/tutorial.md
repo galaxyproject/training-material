@@ -816,6 +816,7 @@ Here we will reproduce the output of the [Circos tutorial](http://circos.ca/docu
 
 ![Nature Cover ENCODE](../../images/nature_cover_encode.png "Nature Cover")
 
+<!--
 The official Circos tutorial goes into detail on how to use rules and variables and automagic counting to help automate the production of such an image.
 
 ```
@@ -830,7 +831,7 @@ post_increment_counter = plot:1
 </plot>
 ```
 
-Due to the Circos Galaxy tool being a simplified interface and more user-friendly interface, we cannot make use of these advanced features like using Perl's math or `eval`uating code snippets to generate our image. <!-- TODO(hxr): fix the wording, this is gross -->
+Due to the Circos Galaxy tool being a simplified interface and more user-friendly interface, we cannot make use of these advanced features like using Perl's math or `eval`uating code snippets to generate our image.  TODO(hxr): fix the wording, this is gross -->
 
 ## Data Formats
 
