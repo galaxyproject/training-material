@@ -82,7 +82,7 @@ We will now illustrate Circos further with a number of example plots. Each of th
 | Example             | Preview       | Note                                  |
 | ------------------- |:-------------:| -------------------------------------:|
 | [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="25%"} | Will cover some cancer basics as well |
-| [ENCODE cover](#example-encode-cover) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="20%"} | Recreate a nature Cover|
+| [ENCODE cover](#example-nature-cover-encode) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="20%"} | Recreate a nature Cover|
 
 <!-- | Presidential Debate | centered | Plots non-genomics data |-->
 
@@ -810,7 +810,7 @@ Another thing you may have noticed, is that in the original image we showed at t
 {: .question}
 
 
-# Nature Cover ENCODE Diagram
+# Example: Nature Cover ENCODE
 
 Here we will reproduce the output of the [Circos tutorial](http://circos.ca/documentation/tutorials/recipes/nature_cover_encode/lesson) for producing an image like that which was used on Nature's Cover:
 
