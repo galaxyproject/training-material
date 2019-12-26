@@ -105,6 +105,7 @@ We can see that this RNA-seq dataset is high-dimensional. There are over `27,000
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.linear_model`
 >            - *"Choose estimator class"*: `ElasticNet`
+>            - *"Type in parameter settings if different from default"*: `random_state=42`
 >    - In *"Output parameters for searchCV?"*: `Yes`
 >
 {: .hands_on}
@@ -297,6 +298,7 @@ We will create a pipeline with **Pipeline builder** tool but this time, we just 
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
+>            - *"Type in parameter settings if different from default"*: `random_state=42`
 >    - In *"Output parameters for searchCV?"*: `Yes`
 > 
 >
