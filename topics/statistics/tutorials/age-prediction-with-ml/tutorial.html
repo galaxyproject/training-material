@@ -503,7 +503,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 26, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -664,7 +664,7 @@
 
 <h2 id="create-data-processing-pipeline">Create data processing pipeline</h2>
 
-<p>We can see that this <span class="notranslate">RNA</span>-seq dataset is high-dimensional. There are over <code class="highlighter-rouge">27,000</code> columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest">SelectKBest</a> module. This approach involves extracting those features which are most correlated to the target (<code class="highlighter-rouge">age</code> in our dataset). <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression">F-regression</a> is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (finds the best combination of values of different parameters). It works by setting a different number of features and find out the number for which the accuracy is the best among all the numbers. To wrap this feature selector with a regressor, we will use the <strong>Pipeline builder</strong> tool. This tool creates a sequential flow of algorithms to execute on datasets. It does not take any dataset as input. Rather, it is used as an input to the <strong>Hyperparameter search</strong> tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with <code class="highlighter-rouge">l1</code> (also called lasso) and <code class="highlighter-rouge">l2</code> (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising dataset it is trained upon instead of learning general features. The consequence of overfitting is that the accuracy on the training set is good but on the unseen set (test set) is not good which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like <code class="highlighter-rouge">l1</code> and <code class="highlighter-rouge">l2</code> are used. <code class="highlighter-rouge">L1</code> is a linear term added to the error function of a machine learning algorithm and <code class="highlighter-rouge">l2</code> adds a squared term to the error function. More details about <code class="highlighter-rouge">l1</code> and <code class="highlighter-rouge">l2</code> can found <a href="https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms">here</a>.</p>
+<p>We can see that this <span class="notranslate">RNA</span>-seq dataset is high-dimensional. There are over <code class="highlighter-rouge">27,000</code> columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest">SelectKBest</a> module. This approach involves extracting those features which are most correlated to the target (<code class="highlighter-rouge">age</code> in our dataset). <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression">F-regression</a> is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (finds the best combination of values of different parameters). It works by setting a different number of features and find out the number for which the accuracy is the best among all the numbers. To wrap this feature selector with a regressor, we will use the <strong>Pipeline builder</strong> tool. This tool creates a sequential flow of algorithms to execute on datasets. Since the hyperparameters will be tuned, we choose to ouput the parameters for searchCV. The tool does not take any dataset as input. Rather, the outputs will be used as inputs to the <strong>Hyperparameter search</strong> tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with <code class="highlighter-rouge">l1</code> (also called lasso) and <code class="highlighter-rouge">l2</code> (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising dataset it is trained upon instead of learning general features. The consequence of overfitting is that the accuracy on the training set is good but on the unseen set (test set) is not good which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like <code class="highlighter-rouge">l1</code> and <code class="highlighter-rouge">l2</code> are used. <code class="highlighter-rouge">L1</code> is a linear term added to the error function of a machine learning algorithm and <code class="highlighter-rouge">l2</code> adds a squared term to the error function. More details about <code class="highlighter-rouge">l1</code> and <code class="highlighter-rouge">l2</code> can found <a href="https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-pipeline"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create pipeline</h3>
@@ -690,11 +690,12 @@
             <li><em>“Choose the module that contains target estimator”</em>: <code class="highlighter-rouge">sklearn.linear_model</code>
               <ul>
                 <li><em>“Choose estimator class”</em>: <code class="highlighter-rouge">ElasticNet</code></li>
+                <li><em>“Type in parameter settings if different from default”</em>: <code class="highlighter-rouge">random_state=42</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>In <em>“Output the final estimator instead?”</em>: <code class="highlighter-rouge">Pipeline</code></li>
+        <li>In <em>“Output parameters for searchCV?”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -743,27 +744,9 @@
   <p>These parameters have the same description and values in the second part of the tutorial where we will again use the <strong>Hyperparameter search</strong> tool.</p>
 </blockquote>
 
-<h3 id="extract-hyperparameters">Extract hyperparameters</h3>
-
-<p>Before searching for the best values of hyperparameters, we require a tool to extract the list of hyperparameters of data preprocessors and estimators. To achieve it, we will use the <strong>Estimator attributes</strong> tool. This tool creates a tabular file with a list of all the different hyperparameters of preprocessors and estimators. This tabular file will be used in the <strong>Hyperparameter search</strong> tool to populate the list of hyperparameters with their respective values.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-estimator-attributes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimator attributes</h3>
-
-  <ol>
-    <li><strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing estimator/pipeline object”</em>:  <code class="highlighter-rouge">pipeline builder</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select an attribute retrieval type”</em>: <code class="highlighter-rouge">Estimator - get_params()</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
 <h3 id="search-for-the-best-values-of-hyperparameters">Search for the best values of hyperparameters</h3>
 
-<p>After extracting the parameter names from the <strong>Pipeline builder</strong> file using <strong>Estimator attributes</strong> tool, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
+<p>We will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-hyperparameter-search"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Hyperparameter search</h3>
@@ -773,10 +756,10 @@
       <ul>
         <li><em>“Select a model selection search scheme”</em>: <code class="highlighter-rouge">GridSearchCV - Exhaustive search over specified parameter values for an estimator </code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">zipped</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">zipped</code> file (one of the outputs of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li>In <em>“Search parameters Builder”</em>:
               <ul>
-                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="highlighter-rouge">tabular</code> file (output of <strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="highlighter-rouge">tabular</code> file (the other output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 <li>In <em>“Parameter settings for search”</em>:
                   <ul>
                     <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Parameter settings for search”</em>
@@ -850,6 +833,7 @@
             </li>
           </ul>
         </li>
+        <li><em>“Whether to hold a portion of samples for test exclusively?”</em>: <code class="highlighter-rouge">Nope</code></li>
       </ul>
     </li>
   </ol>
@@ -1010,7 +994,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 
 <h2 id="create-data-processing-pipeline-1">Create data processing pipeline</h2>
 
-<p>We will create a pipeline with <strong>Pipeline builder</strong> tool but this time, we just specify the regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> has used <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor">Random Forest</a> as the regressor and we can conclude from this study that the ensemble-based regressor works well on this <span class="notranslate">DNA</span> methylation dataset. Therefore, we will use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor">Gradient boosting</a> which is an ensemble-based regressor because it uses multiple decision tree regressors inte<span class="notranslate">rna</span>lly and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The <strong>Pipeline builder</strong> tool will wrap this regressor and return a zipped file. We will use this zipped file with <strong>Estimator attributes</strong> tool set the search space of hyperparameters.</p>
+<p>We will create a pipeline with <strong>Pipeline builder</strong> tool but this time, we just specify the regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> has used <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor">Random Forest</a> as the regressor and we can conclude from this study that the ensemble-based regressor works well on this <span class="notranslate">DNA</span> methylation dataset. Therefore, we will use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor">Gradient boosting</a> which is an ensemble-based regressor because it uses multiple decision tree regressors inte<span class="notranslate">rna</span>lly and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The <strong>Pipeline builder</strong> tool will wrap this regressor and return a zipped file and a tabular file containing all tunable hyperparameters.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-pipeline-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create pipeline</h3>
@@ -1023,15 +1007,12 @@ https://zenodo.org/record/2545213/files/test_rows.csv
             <li><em>“Choose the module that contains target estimator”</em>: <code class="highlighter-rouge">sklearn.ensemble</code>
               <ul>
                 <li><em>“Choose estimator class”</em>: <code class="highlighter-rouge">GradientBoostingRegressor</code></li>
+                <li><em>“Type in parameter settings if different from default”</em>: <code class="highlighter-rouge">random_state=42</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>
-          <p>In <em>“Output the final estimator instead?”</em>: <code class="highlighter-rouge">Final Estimator</code></p>
-
-          <p>We choose <code class="highlighter-rouge">Final Estimator</code> as we have only the estimator and no preprocessor and need the parameters of only the estimator.</p>
-        </li>
+        <li>In <em>“Output parameters for searchCV?”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1048,27 +1029,9 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 <p>For this analysis as well, we will use the <strong>Hyperparameter search</strong> tool to estimate the best values of parameters for the given dataset.
 We use only one parameter <code class="highlighter-rouge">n_estimators</code> of <code class="highlighter-rouge">Gradient boosting</code> regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of <code class="highlighter-rouge">n_estimators</code> for this regressor is <code class="highlighter-rouge">100</code>. But, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than <code class="highlighter-rouge">100</code> and a few more than <code class="highlighter-rouge">100</code>. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.</p>
 
-<h3 id="extract-hyperparameters-1">Extract hyperparameters</h3>
-
-<p>We will use the <strong>Estimator attributes</strong> tool to get a list of different hyperparameters of the estimator (including <code class="highlighter-rouge">n_estimators</code>). This tool creates a tabular file with a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the <strong>Hyperparameter search</strong> tool to populate the list of hyperparameters with their respective (default) values.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-estimator-attributes-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimator attributes</h3>
-
-  <ol>
-    <li><strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing estimator/pipeline object”</em>:  <code class="highlighter-rouge">final estimator builder</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select an attribute retrieval type”</em>: <code class="highlighter-rouge">Estimator - get_params()</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
 <h3 id="search-for-the-best-values-of-hyperparameters-1">Search for the best values of hyperparameters</h3>
 
-<p>After extracting the parameter names from the <strong>Pipeline builder</strong> file, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
+<p>We will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-hyperparameter-search-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Hyperparameter search</h3>
@@ -1078,10 +1041,10 @@ We use only one parameter <code class="highlighter-rouge">n_estimators</code> of
       <ul>
         <li><em>“Select a model selection search scheme”</em>: <code class="highlighter-rouge">GridSearchCV - Exhaustive search over specified parameter values for an estimator </code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">zipped</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">zipped</code> file (one of the outputs of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li>In <em>“Search parameters Builder”</em>:
               <ul>
-                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="highlighter-rouge">tabular</code> file (output of <strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="highlighter-rouge">tabular</code> file (the other output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 <li>In <em>“Parameter settings for search”</em>:
                   <ul>
                     <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Parameter settings for search”</em>
@@ -1143,6 +1106,7 @@ We use only one parameter <code class="highlighter-rouge">n_estimators</code> of
             </li>
           </ul>
         </li>
+        <li><em>“Whether to hold a portion of samples for test exclusively?”</em>: <code class="highlighter-rouge">Nope</code></li>
       </ul>
     </li>
   </ol>
@@ -1287,8 +1251,8 @@ We use only one parameter <code class="highlighter-rouge">n_estimators</code> of
     author = "Ekaterina Polkh and Anup Kumar",
     title = "Age prediction using machine learning (Galaxy Training Materials)",
     year = "2019",
-    month = "07",
-    day = "17"
+    month = "12",
+    day = "26"
     url = "\url{/training-material/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
