@@ -93,7 +93,7 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 
 ## Create data processing pipeline
 
-We can see that this RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use [SelectKBest](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest) module. This approach involves extracting those features which are most correlated to the target (`age` in our dataset). [F-regression](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression) is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (finds the best combination of values of different parameters). It works by setting a different number of features and find out the number for which the accuracy is the best among all the numbers. To wrap this feature selector with a regressor, we will use the **Pipeline builder** tool. This tool creates a sequential flow of algorithms to execute on datasets. It does not take any dataset as input. Rather, it is used as an input to the **Hyperparameter search** tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with `l1` (also called lasso) and `l2` (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising dataset it is trained upon instead of learning general features. The consequence of overfitting is that the accuracy on the training set is good but on the unseen set (test set) is not good which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like `l1` and `l2` are used. `L1` is a linear term added to the error function of a machine learning algorithm and `l2` adds a squared term to the error function. More details about `l1` and `l2` can found [here](https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms).
+We can see that this RNA-seq dataset is high-dimensional. There are over `27,000` columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use [SelectKBest](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest) module. This approach involves extracting those features which are most correlated to the target (`age` in our dataset). [F-regression](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression) is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (finds the best combination of values of different parameters). It works by setting a different number of features and find out the number for which the accuracy is the best among all the numbers. To wrap this feature selector with a regressor, we will use the **Pipeline builder** tool. This tool creates a sequential flow of algorithms to execute on datasets. Since the hyperparameters will be tuned, we choose to ouput the parameters for searchCV. The tool does not take any dataset as input. Rather, the outputs will be used as inputs to the **Hyperparameter search** tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with `l1` (also called lasso) and `l2` (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising dataset it is trained upon instead of learning general features. The consequence of overfitting is that the accuracy on the training set is good but on the unseen set (test set) is not good which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like `l1` and `l2` are used. `L1` is a linear term added to the error function of a machine learning algorithm and `l2` adds a squared term to the error function. More details about `l1` and `l2` can found [here](https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms).
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -105,7 +105,8 @@ We can see that this RNA-seq dataset is high-dimensional. There are over `27,000
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.linear_model`
 >            - *"Choose estimator class"*: `ElasticNet`
->    - In *"Output the final estimator instead?"*: `Pipeline`
+>            - *"Type in parameter settings if different from default"*: `random_state=42`
+>    - In *"Output parameters for searchCV?"*: `Yes`
 >
 {: .hands_on}
 
@@ -141,29 +142,17 @@ For these three parameters, we have 24 different combinations (4 x 2 x 3) of val
 > These parameters have the same description and values in the second part of the tutorial where we will again use the **Hyperparameter search** tool.
 {: .comment}
 
-### Extract hyperparameters
-
-Before searching for the best values of hyperparameters, we require a tool to extract the list of hyperparameters of data preprocessors and estimators. To achieve it, we will use the **Estimator attributes** tool. This tool creates a tabular file with a list of all the different hyperparameters of preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective values.
-
-> ### {% icon hands_on %} Hands-on: Estimator attributes
->
-> 1. **Estimator attributes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `pipeline builder` file (output of **Pipeline builder** {% icon tool %})
->    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
->
-{: .hands_on}
-
 ### Search for the best values of hyperparameters
 
-After extracting the parameter names from the **Pipeline builder** file using **Estimator attributes** tool, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
+We will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
 > 1. **Hyperparameter search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
->        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
+>        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (one of the outputs of **Pipeline builder** {% icon tool %})
 >        - In *"Search parameters Builder"*:
->             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (output of **Estimator attributes** {% icon tool %})
+>             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (the other output of **Pipeline builder** {% icon tool %})
 >             - In *"Parameter settings for search"*:
 >                 - {% icon param-repeat %} *"1: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `selectkbest__k: 10`
@@ -202,6 +191,7 @@ After extracting the parameter names from the **Pipeline builder** file using **
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >            - *"Type header name(s)"*: `age`
+>    - *"Whether to hold a portion of samples for test exclusively?"*: `Nope`
 >
 {: .hands_on}
 
@@ -300,7 +290,7 @@ The `train_rows` contains a column `Age` which is the label or target. We will e
 
 ## Create data processing pipeline
 
-We will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor) which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file. We will use this zipped file with **Estimator attributes** tool set the search space of hyperparameters.
+We will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) has used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) as the regressor and we can conclude from this study that the ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use [Gradient boosting](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor) which is an ensemble-based regressor because it uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage which comes from its basic principle of boosting is that it cannot be parallelised. The **Pipeline builder** tool will wrap this regressor and return a zipped file and a tabular file containing all tunable hyperparameters.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -308,9 +298,9 @@ We will create a pipeline with **Pipeline builder** tool but this time, we just 
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
->    - In *"Output the final estimator instead?"*: `Final Estimator`
+>            - *"Type in parameter settings if different from default"*: `random_state=42`
+>    - In *"Output parameters for searchCV?"*: `Yes`
 > 
->      We choose `Final Estimator` as we have only the estimator and no preprocessor and need the parameters of only the estimator.
 >
 {: .hands_on}
 
@@ -323,29 +313,17 @@ We will create a pipeline with **Pipeline builder** tool but this time, we just 
 For this analysis as well, we will use the **Hyperparameter search** tool to estimate the best values of parameters for the given dataset.
 We use only one parameter `n_estimators` of `Gradient boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. But, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `100` and a few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
 
-### Extract hyperparameters
-
-We will use the **Estimator attributes** tool to get a list of different hyperparameters of the estimator (including `n_estimators`). This tool creates a tabular file with a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
-
-> ### {% icon hands_on %} Hands-on: Estimator attributes
->
-> 1. **Estimator attributes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `final estimator builder` file (output of **Pipeline builder** {% icon tool %})
->    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
->
-{: .hands_on}
-
 ### Search for the best values of hyperparameters
 
-After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
+We will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
 > 1. **Hyperparameter search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
->        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
+>        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (one of the outputs of **Pipeline builder** {% icon tool %})
 >        - In *"Search parameters Builder"*:
->             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (output of **Estimator attributes** {% icon tool %})
+>             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (the other output of **Pipeline builder** {% icon tool %})
 >             - In *"Parameter settings for search"*:
 >                 - {% icon param-repeat %} *"1: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `n_estimators: 100`
@@ -378,6 +356,7 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >            - *"Type header name(s)"*: `Age`
+>    - *"Whether to hold a portion of samples for test exclusively?"*: `Nope`
 >
 {: .hands_on}
 
