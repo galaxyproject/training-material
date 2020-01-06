@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualisation with Circos"
-zenodo_link: "https://zenodo.org/record/3591846"
+zenodo_link: "https://zenodo.org/record/3598502"
 questions:
   - "What can the Circos Galaxy tool be used for?"
   - "How can I visualise common genomic datasets using Circos?"
