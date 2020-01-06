@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: RStudio in Galaxy
 zenodo_link: ""
-enable: false
 questions:
 - How can I manipulate data using R in Galaxy?
 objectives:
@@ -44,12 +43,7 @@ contributors:
 
 ## Opening up RStudio
 
-> ### {% icon hands_on %} Hands-on: Open RStudio
->
-> 1. Start RStudio in Galaxy
-> 
->    {% include snippets/launch_rstudio_cloud.md %}
-{: .hands_on}
+{% include snippets/launch_rstudio.md %}
 
 You should now be looking at a page with the RStudio interface:
 
@@ -210,7 +204,7 @@ You have hopefully noticed a pattern - an R function has three key properties:
 
 What if you wanted to round to one significant digit, `round()` can do this, but you may first need to read the help to find out how.
 
-To see the help you need enter a `?` in front of the function name. The **Help** tab (in the bottom-right panel) will show you information. 
+To see the help you need enter a `?` in front of the function name. The **Help** tab (in the bottom-right panel) will show you information.
 
 > ### {% icon hands_on %} Hands-on: Get help
 >
@@ -220,7 +214,7 @@ To see the help you need enter a `?` in front of the function name. The **Help**
 >    > ?round()
 >    ```
 >
-> 2. Check the **Help** tab 
+> 2. Check the **Help** tab
 >
 {: .hands_on}
 

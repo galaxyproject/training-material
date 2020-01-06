@@ -16,6 +16,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
 contributors:
   - tnabtaf
 ---
@@ -60,17 +61,21 @@ To explore this question we need a basic understanding of *genomes, chromosomes,
 
 > ### {% icon comment %} Definitions 1
 >
-> * **Genome**
->> The genome is the collection of all DNA native to an organism. For humans, the genome is all of a person's chromosomes.
+> - **Genome**
 >
-> * **Chromosome**
->> The largest unit of DNA organization in an organism.  Humans have two copies of 23 chromosomes.  Chromosomes are *linear* in humans, and all animals and plants.  (Bacteria have *circular* chromosomes.)
+>   The genome is the collection of all DNA native to an organism. For humans, the genome is all of a person's chromosomes.
 >
-> * **Strand**
->> Chromosomes are *double-stranded*.  One is the forward strand, is typically drawn on top, and moves from left to right. The other, reverse strand, is typically drawn on the bottom and moves from right to left.  Genes can occur on either strand.  A single gene will have parts on only one stand.
+> - **Chromosome**
 >
-> * **Gene**
->> "What is a gene?" is actually a hotly debated question.  For our purposes, a gene is a section of DNA on chromosome strand that creates a molecule used by an organism.
+>   The largest unit of DNA organization in an organism.  Humans have two copies of 23 chromosomes.  Chromosomes are *linear* in humans, and all animals and plants.  (Bacteria have *circular* chromosomes.)
+>
+> - **Strand**
+>
+>   Chromosomes are *double-stranded*.  One is the forward strand, is typically drawn on top, and moves from left to right. The other, reverse strand, is typically drawn on the bottom and moves from right to left.  Genes can occur on either strand.  A single gene will have parts on only one stand.
+>
+> - **Gene**
+>
+>   "What is a gene?" is actually a hotly debated question.  For our purposes, a gene is a section of DNA on chromosome strand that creates a molecule used by an organism.
 >
 > Graphically, the human genome can be shown as the chromosomes that are in it:
 >
@@ -118,7 +123,8 @@ There are [many ways to get data into a Galaxy instance]({{ site.baseurl }}{% li
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
 > 1. *Click* on the **Get Data** toolbox to expand it.
->  > ![The Get Data toolbox](../../images/101_01.png)
+>
+>    ![The Get Data toolbox](../../images/101_01.png)
 >
 {: .hands_on}
 
@@ -129,7 +135,9 @@ The **Get Data** toolbox contains a list of data sources that this Galaxy instan
 > ### {% icon hands_on %} Hands-on: Go to UCSC
 >
 > 1. *Click* on the tool **UCSC Main table browser** to go to UCSC.
->  > ![Click on UCSC Main table browser](../../images/101_01.png)
+>
+>    ![Click on UCSC Main table browser](../../images/101_01.png)
+>
 {: .hands_on}
 
 This will take you to the UCSC Table Browser:
@@ -150,20 +158,23 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 
 **track** has a bewildering list of options. UCSC suggests `GENCODE v24`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
 
-> The GENCODE project produces high quality reference gene annotation and ...
+The GENCODE project produces high quality reference gene annotation and ...
 
 Time for a few more definitions.
 
 > ### {% icon comment %} Definitions 2
 >
-> * **Reference genome**
->> A reference genome is the *genome of a single individual* that has been thoroughly studied, to the point that we know exactly what most of that individual's DNA is.  In practice a reference genome is used as shared map by researchers working on that organism. Reference genomes are updated periodically as techniques improve.
+> - **Reference genome**
 >
-> * **Sequence**
->> A genome's sequence describes the DNA in that genome, down to the A, C, T, and G (single nucleotide) level including the exact location where each is.  Given a reference genome, you can ask questions like, "What's the DNA on chromosome 2 between positions 1,678,901 and 1.688,322?"
+>    A reference genome is the *genome of a single individual* that has been thoroughly studied, to the point that we know exactly what most of that individual's DNA is.  In practice a reference genome is used as shared map by researchers working on that organism. Reference genomes are updated periodically as techniques improve.
 >
-> * **Genome/Gene annotation**
->> The sequence tells us what DNA is where, but it doesn't tell us anything about the function of that DNA.  *Annotation* is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is.
+> - **Sequence**
+>
+>   A genome's sequence describes the DNA in that genome, down to the A, C, T, and G (single nucleotide) level including the exact location where each is.  Given a reference genome, you can ask questions like, "What's the DNA on chromosome 2 between positions 1,678,901 and 1.688,322?"
+>
+> - **Genome/Gene annotation**
+>
+>   The sequence tells us what DNA is where, but it doesn't tell us anything about the function of that DNA.  *Annotation* is additional information about particular regions of the genome like where genes, repeats, promotors, and centromeres are, or how active a particular gene is.
 {: .comment}
 
 The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.)
@@ -175,14 +186,16 @@ So far we haven't changed *anything* from the defaults.  Lets change something. 
 > ### {% icon hands_on %} Hands-on: Limit the region and get the data.
 >
 > 1. Say that we just want chromosome 22
->   * For **region** select `position`.
->   * In the text box next to `position` enter `chr22` (case matters).
->     > ![Change the region](../../images/ucsc_tb_set_region_chr22.png)
+>    - For **region** select `position`.
+>    - In the text box next to `position` enter `chr22` (case matters).
+>
+>    ![Change the region](../../images/ucsc_tb_set_region_chr22.png)
 >
 > 2. *Click* the **get output** button.
->   * And, that doesn't actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want.
-> &nbsp;
->     > ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
+>
+>    And, that doesn't actually get us the output.  It sends us to a second UCSC page that asks us exactly what we want.
+>
+>    ![UCSC Table Browser 2nd page](../../images/ucsc_tb_2nd_page_whole_gene.png)
 >
 > 3. Under **Create one BED record per** make sure that **Whole Gene** is selected.
 >
@@ -228,9 +241,9 @@ The dataset preview is informative, but you can't see much of the actual dataset
 
 > ### {% icon hands_on %} Hands-on: Look at all the data.
 > 1. Click on the {% icon galaxy-eye %} (eye) icon to view the contents of the dataset.
->    > This displays all of the data
->      &nbsp;
->    > ![Full dataset in central panel](../../images/genes_human_chr22_dataset_view.png)
+>    This displays all of the data
+>
+>    ![Full dataset in central panel](../../images/genes_human_chr22_dataset_view.png)
 {: .hands_on}
 
 ### BED Format
@@ -310,11 +323,14 @@ It doesn't say anything about Filter being able to split a file into multiple fi
 > * The filter tool has 3 fields:
 >
 >   1. **Dataset**: This pulldown will list any dataset from your history that this tool can work on.  In your case that's probably only one dataset.  Make sure this is set to your `Genes` dataset.
->   1. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
->   * This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
->   1. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
+>   2. **Condition**: this free text field is where we specify which records we want in the output dataset.  *Enter* `c6 == "+"` in the text box.
+>      This specifies that column 6 (the strand) must be equal to (`==` is Python for *is equal to*) a plus sign.
+>   3. **Header lines to skip**: Leave this as `0`. Our dataset does not have any header lines.
+>
 > * Finally, *click* the **Execute** button.
->   > ![Run the Filter tool to get only the forward strand genes](../../images/filter_tool_forward_strand_genes_only.png)
+>
+>   ![Run the Filter tool to get only the forward strand genes](../../images/filter_tool_forward_strand_genes_only.png)
+>
 {: .hands_on}
 
 This adds another dataset to your history. This one should contain only genes on the forward strand.  Once the dataset is green, click the {% icon galaxy-eye %} (eye) icon to confirm this. We also recommend that you rename this dataset to something like `Genes, forward strand` (remember how?).
@@ -365,8 +381,8 @@ Genes are an example of a *genomic interval*.
 
 > ### {% icon comment %} Definitions 3
 >
-> * **Genomic interval**
->> In Galaxy, a *genomic interval* is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.
+> - **Genomic interval**
+>   In Galaxy, a *genomic interval* is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.
 {: .comment}
 
 Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.
@@ -390,7 +406,8 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 >     - **for at least** to `1`
 >       - This will return genes with even just one position overlapping.
 >     - *Click* **Execute**.
->     > ![Run Intersect](../../images/genes_human_intersect_strands.png)
+>
+>     ![Run Intersect](../../images/genes_human_intersect_strands.png)
 >
 > 3. Now repeat the intersect, but make the first dataset be the reverse genes, and the second be the forward genes.
 >
@@ -457,12 +474,12 @@ Now, take a look at one of our results.  (Any pair of overlapping genes will do.
 > To zoom in,
 > * *Click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
 > * Now *drag* the mouse across the Scale track to just to the right of the  black boxes and let go.
->    > ![Zoom by clicking and dragging on the Scale track](../../images/ucsc_gb_zoom_by_drag.png)
+>   ![Zoom by clicking and dragging on the Scale track](../../images/ucsc_gb_zoom_by_drag.png)
 > * A window pops up describing several ways to interact with the browser.  Just *click* the **Zoom In** button at the bottom.
 > * This redraws the window, this time zoomed in to what you highlighted.
 > * Continue to zoom in until you have the set of linked black boxes you picked centered on the screen.
 > * Once you are as zoomed as you want to be, click on one of the linked boxes.  This will expand the track:
->    > ![One gene, fully zoomed and expanded](../../images/ucsc_gb_zoom_to_1_gene.png)
+>   ![One gene, fully zoomed and expanded](../../images/ucsc_gb_zoom_to_1_gene.png)
 {: .hands_on}
 
 The black boxes connected by lines represent genes, and each set of connected boxes is a single gene (actually, a single transcript of a gene).  Take a close look at the top several tracks.
@@ -474,8 +491,8 @@ Um, *what's up with the boxes and the lines connecting them?*
 
 > ### {% icon comment %} Definitions 4
 >
-> * **Exon**
->> In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
+> - **Exon**
+>   In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
 {: .comment}
 
 As you may have guessed (or already knew): The black boxes are exons.  *Genes* are defined as *covering the entire area from the first black box to the last connected black box.*
@@ -515,10 +532,10 @@ We want to run the same analysis, but this time only look for overlaps that happ
 >    - In our case, we only want the `Genes` dataset.
 > 4. Under **Destination History** enter an informative history name in the **New history named:** box.
 >    - For example, `Exon overlaps on opposite strands`
->    > ![Copy only the Genes dataset to the new history](../../images/copy_datasets_to_new_history.png)
+>      ![Copy only the Genes dataset to the new history](../../images/copy_datasets_to_new_history.png)
 > 5. *Click* the **Copy History Items** button to create your new history.
 >    - This creates a new history (with the copied dataset) and throws up a green box saying:
->    >  1 dataset copied to 1 history: `name you gave your new history`.
+>      "1 dataset copied to 1 history: `name you gave your new history`."
 > 6. The history name is a link.  *Click* on it.
 {: .hands_on}
 
@@ -561,6 +578,7 @@ When you did the *History to Workflow* tutorial you created a new workflow that 
 And Galaxy launches the workflow and says (in a nice big green box) something like:
 
 > You can check the status of queued jobs and view the resulting data by refreshing the History pane.
+{: .quote}
 
 Which in this case *is the truth*.  You can refresh the history panel by either reloading the whole page, of by clicking the looping arrow icon at the top of the history panel.  What you'll see is a stack of history steps that will go from queued to running to done as you watch them.
 

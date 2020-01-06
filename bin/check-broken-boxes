@@ -1,0 +1,78 @@
+#!/bin/bash
+# First find the disabled tutorials, we don't care if boxes are broken there
+# Then find any 'raw' blockquote (missing any classes)
+# and diff those, removing everything from the disabled list.
+warning() {
+	(>&2 echo "$(tput setab 2)$*$(tput sgr0)")
+}
+
+html2md() {
+	cat | sed 's|_site/training-material/||;s|html$|md|'
+}
+
+DISABLED_TUTOS="$(grep 'enable:.*false' -R topics/*/tutorials/*/tutorial.md -l)"
+
+
+BROKEN_BOXES="$(diff \
+	<(echo "$DISABLED_TUTOS" ) \
+	<(grep '<blockquote>' $(find _site -name 'tutorial.html') -l | sort -u | html2md | sort -u) | \
+	grep '^>' | \
+	sed 's/^> //g;s/html$/md/')"
+
+BROKEN_TUTOS=$(echo "$BROKEN_BOXES" | wc -c)
+
+for box in ${BROKEN_BOXES}; do
+	warning "Broken boxes in $box"
+	html=$(echo "$box" | sed 's/md$/html/')
+	grep --color=always '<blockquote>' -A5 -B5 _site/training-material/$html
+done
+
+WRONG_BOXES="$(grep '<blockquote[^>]*' $(find _site -name 'tutorial.html') | sed 's/notranslate//g;s/\s*<[^"]*"\s*//g;s/\s*".*//g' |grep -v 'agenda' | grep -v no_toc)"
+
+WRONG_TAG_EC=0
+
+for line in ${WRONG_BOXES}; do
+	file=$(echo "$line" | sed 's/:.*//g')
+	mdfile=$(echo "$file" | html2md)
+
+	# Check if tuto is disabled
+	echo "$DISABLED_TUTOS" | grep --quiet "$mdfile"
+	ec=$?
+	if (( ec == 0 )); then
+		continue
+	fi
+
+	# Otherwise compare tags to our list of expected values
+	tags=$(echo "$line" | sed 's/.*://g' | sed 's/\s*//g')
+	case $tags in
+		details         ) ;;
+		comment         ) ;;
+		hands_on        ) ;;
+		tip             ) ;;
+		question        ) ;;
+		solution        ) ;;
+		key_points      ) ;;
+		feedback        ) ;;
+		overview        ) ;;
+		warning         ) ;;
+		quote           ) ;;
+		matrix          ) ;;
+		imgur-embed-pub ) ;;
+		*)
+			warning "Issue with $tags in $mdfile";
+			grep --color=always "{.*:.*$tags.*}" -A5 -B5 "$mdfile"
+			WRONG_TAG_EC=1
+			;;
+	esac
+done
+
+
+if (( BROKEN_TUTOS > 1 )); then
+	exit 1;
+fi
+
+if (( WRONG_TAG_EC > 0 )); then
+	exit 2;
+fi
+
+exit 0

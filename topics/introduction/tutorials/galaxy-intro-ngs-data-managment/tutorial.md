@@ -15,6 +15,7 @@ key_points:
   - "FastqQC is a tool allowing to check the quality of FASTQ datasets."
   - "The most common tools for mapping are Bowtie, BWA, BWA-MEM. You can use in-built genome to map against or upload one if it is missing."
   - "The standard format for storing aligned reads is SAM/BAM. The major toolsets to process these datasets are DeepTools, SAMtools, BAMtools and Picard."
+subtopic: core
 contributors:
   - nekrut
 ---
@@ -184,7 +185,7 @@ The base qualities allow us to judge how trustworthy each base in a sequencing r
 > Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called [Phred score](http://www.phrap.com/phred/), $$Q$$, which is proportional to the probability $$p$$ that a base call is incorrect, where $$Q = −10lg(p)$$. For example, a Phred score of 10 corresponds to one error in every ten base calls ($$Q = −10lg(0.1)$$), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base.
 >
 > To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At http://ascii-code.com/ you can see which characters are assigned to what number.
-> 
+>
 > For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.
 {: .comment}
 
@@ -205,7 +206,7 @@ One of the first steps in the analysis of NGS data is seeing how good the data a
 
 |                                        |                                    |
 |:---------------------------------------|:-----------------------------------|
-| ![Good quality in FastQC](../../images/good_fq.png)    | ![Bad quality in FastQC](../../images/bad_fq.png) |    
+| ![Good quality in FastQC](../../images/good_fq.png)    | ![Bad quality in FastQC](../../images/bad_fq.png) |
 |<small>**A.** Excellent quality</small> | <small>**B.** Hmmm...OK</small>    |
 
 Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: **A** and **B**. The **A** dataset has long reads (250 bp) and very good quality profile with no qualities dropping below [phred score](http://www.phrap.com/phred/) of 30. The **B** dataset is significantly worse with ends of the reads dipping below phred score of 20. The **B** reads may need to be trimmed for further processing.

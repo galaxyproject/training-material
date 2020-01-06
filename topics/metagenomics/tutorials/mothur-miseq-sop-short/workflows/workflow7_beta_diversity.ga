@@ -1,1 +1,357 @@
-{"uuid": "bcf25a08-5f12-4d26-81d3-5f8a6185a67c", "tags": [], "format-version": "0.1", "name": "Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis with mothur]", "version": 7, "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "85d58475-fdf4-4d0f-a826-4fc256a7178a", "label": null}], "input_connections": {}, "tool_state": "{}", "id": 0, "uuid": "26b2e723-eda6-4281-b16a-e6ce26b87fe7", "errors": null, "name": "Input dataset", "label": "Shared file from Make.shared", "inputs": [], "position": {"top": 339.5, "left": 225}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [{"output_name": "output", "uuid": "bae473d8-11e6-45f0-a189-d327f016af75", "label": null}], "input_connections": {}, "tool_state": "{\"collection_type\": \"list\"}", "id": 1, "uuid": "99a100b5-a928-4747-81a0-8f4ffccc8368", "errors": null, "name": "Input dataset collection", "label": "Sub.sample shared", "inputs": [], "position": {"top": 569.5, "left": 225}, "annotation": "", "content_id": null, "type": "data_collection_input"}, "2": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "input", "name": "distfiles"}], "workflow_outputs": [], "input_connections": {"otu": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"label\": \"null\", \"savelog\": \"\\\"false\\\"\", \"groups\": \"null\", \"output\": \"\\\"lt\\\"\", \"subsampling\": \"{\\\"__current_case__\\\": 0, \\\"iters\\\": \\\"1000\\\", \\\"subsample\\\": \\\"2389\\\", \\\"use\\\": \\\"yes\\\"}\", \"calc\": \"[\\\"jclass\\\", \\\"thetayc\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}", "id": 2, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "3e2ca0c67e9d", "name": "mothur_dist_shared", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "b7920a3b-f441-453d-8481-30fe81099628", "errors": null, "name": "Dist.shared", "post_job_actions": {"HideDatasetActiondistfiles": {"output_name": "distfiles", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [], "position": {"top": 375, "left": 568}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0", "type": "tool"}, "3": {"tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0", "tool_version": "4.0", "outputs": [{"type": "input", "name": "output"}], "workflow_outputs": [{"output_name": "output", "uuid": "054b6d66-6ada-4d5f-9c0a-8ad5ab7e8cf6", "label": null}], "input_connections": {"input_list": {"output_name": "output", "id": 1}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input_list\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"one_header\": \"\\\"false\\\"\", \"filename\": \"{\\\"__current_case__\\\": 1, \\\"add_name\\\": \\\"false\\\"}\"}", "id": 3, "tool_shed_repository": {"owner": "nml", "changeset_revision": "25136a2b0cfe", "name": "collapse_collections", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "01e62e61-a507-4342-9ddb-6a37a7e825f5", "errors": null, "name": "Collapse Collection", "post_job_actions": {}, "label": null, "inputs": [{"name": "input_list", "description": "runtime parameter for tool Collapse Collection"}], "position": {"top": 775.5, "left": 174}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0", "type": "tool"}, "4": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "svg", "name": "heatmap"}], "workflow_outputs": [{"output_name": "heatmap", "uuid": "1749f435-3802-42f5-b674-191945753353", "label": null}], "input_connections": {"input|dist": {"output_name": "distfiles", "id": 2}}, "tool_state": "{\"count\": \"null\", \"__page__\": null, \"savelog\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"fontsize\": \"\\\"24\\\"\", \"input\": \"{\\\"__current_case__\\\": 2, \\\"dist\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"source\\\": \\\"phylip\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dist|__identifier__\": \"\\\"thetayc.0.03.lt.std\\\"\"}", "id": 4, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "2f93c7bba6f8", "name": "mothur_heatmap_sim", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "df423450-bc03-4839-98ba-5cba5a4d5ea2", "errors": null, "name": "Heatmap.sim", "post_job_actions": {}, "label": null, "inputs": [], "position": {"top": 183, "left": 866}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0", "type": "tool"}, "5": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "mothur.tre", "name": "tre"}], "workflow_outputs": [], "input_connections": {"input|dist": {"output_name": "distfiles", "id": 2}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"savelog\": \"\\\"false\\\"\", \"input\": \"{\\\"__current_case__\\\": 1, \\\"dist\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"name\\\": null, \\\"source\\\": \\\"phylip\\\"}\", \"calc\": \"[\\\"jclass\\\", \\\"thetayc\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dist|__identifier__\": \"\\\"thetayc.0.03.lt.std\\\"\"}", "id": 5, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "73dd30cbca20", "name": "mothur_tree_shared", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "43f5bfd6-2f82-4f4f-9631-faa3b89c4100", "errors": null, "name": "Tree.shared", "post_job_actions": {"HideDatasetActiontre": {"output_name": "tre", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [], "position": {"top": 543, "left": 852}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0", "type": "tool"}, "6": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0", "tool_version": "1.39.5.0", "outputs": [{"type": "input", "name": "sharedotus_out"}, {"type": "input", "name": "svgs_out"}], "workflow_outputs": [{"output_name": "svgs_out", "uuid": "612d2fa3-eced-4708-9157-ceab57789b85", "label": null}], "input_connections": {"input|otu": {"output_name": "output", "id": 3}}, "tool_state": "{\"sharedotus\": \"\\\"true\\\"\", \"__page__\": null, \"nseqs\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"fontsize\": \"\\\"24\\\"\", \"input\": \"{\\\"__current_case__\\\": 0, \\\"calc\\\": null, \\\"groups\\\": [\\\"F3D0\\\",\\\"F3D1\\\",\\\"F3D2\\\",\\\"F3D3\\\"], \\\"label\\\": \\\"\\\", \\\"otu\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"source\\\": \\\"shared\\\"}\", \"savelog\": \"\\\"false\\\"\", \"permute\": \"\\\"4\\\"\"}", "id": 6, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "8df8d8b67b13", "name": "mothur_venn", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "56b67018-f343-4ae9-a58f-3b000c0433e5", "errors": null, "name": "Venn", "post_job_actions": {"HideDatasetActionsharedotus_out": {"output_name": "sharedotus_out", "action_type": "HideDatasetAction", "action_arguments": {}}}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Venn"}], "position": {"top": 598.5, "left": 528}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0", "type": "tool"}, "7": {"tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6", "tool_version": "1.6", "outputs": [{"type": "svg", "name": "output"}], "workflow_outputs": [{"output_name": "output", "uuid": "a0dcca1f-e46c-42af-9c0b-3d367727c72e", "label": null}], "input_connections": {"fileNewick": {"output_name": "tre", "id": 5}}, "tool_state": "{\"__page__\": null, \"outformat\": \"\\\"svg\\\"\", \"scalebar\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"leafFont\": \"\\\"sans-serif\\\"\", \"width\": \"\\\"800\\\"\", \"leafSize\": \"\\\"10px\\\"\", \"fileNewick\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"radial\": \"\\\"false\\\"\", \"condbranchlength\": \"{\\\"__current_case__\\\": 1, \\\"branchlength\\\": \\\"false\\\"}\", \"condbranchsupport\": \"{\\\"__current_case__\\\": 1, \\\"branchsupport\\\": \\\"false\\\"}\", \"legend\": \"\\\"\\\"\"}", "id": 7, "tool_shed_repository": {"owner": "iuc", "changeset_revision": "fe4235285ee8", "name": "newick_utils", "tool_shed": "toolshed.g2.bx.psu.edu"}, "uuid": "2a9f7adc-1ba1-4be6-bdc1-6e98ff85632a", "errors": null, "name": "Newick Display", "post_job_actions": {"RenameDatasetActionoutput": {"output_name": "output", "action_type": "RenameDatasetAction", "action_arguments": {"newname": "Phylogenitic Trees"}}}, "label": null, "inputs": [], "position": {"top": 373, "left": 1119}, "annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6", "type": "tool"}}, "annotation": "", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "Workflow7: Beta Diversity [Galaxy Training: 16S Microbial Analysis with mothur]",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Shared file from Make.shared",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 225,
+        "top": 339.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "26b2e723-eda6-4281-b16a-e6ce26b87fe7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "85d58475-fdf4-4d0f-a826-4fc256a7178a"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Sub.sample shared",
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 225,
+        "top": 569.5
+      },
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "99a100b5-a928-4747-81a0-8f4ffccc8368",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "bae473d8-11e6-45f0-a189-d327f016af75"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "otu": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Dist.shared",
+      "outputs": [
+        {
+          "name": "distfiles",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 568,
+        "top": 375
+      },
+      "post_job_actions": {
+        "HideDatasetActiondistfiles": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "distfiles"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "3e2ca0c67e9d",
+        "name": "mothur_dist_shared",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"label\": \"null\", \"savelog\": \"\\\"false\\\"\", \"groups\": \"null\", \"output\": \"\\\"lt\\\"\", \"subsampling\": \"{\\\"__current_case__\\\": 0, \\\"iters\\\": \\\"1000\\\", \\\"subsample\\\": \\\"2389\\\", \\\"use\\\": \\\"yes\\\"}\", \"calc\": \"[\\\"jclass\\\", \\\"thetayc\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"otu\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "b7920a3b-f441-453d-8481-30fe81099628",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input_list": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Collapse Collection",
+          "name": "input_list"
+        }
+      ],
+      "label": null,
+      "name": "Collapse Collection",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 174,
+        "top": 775.5
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+      "tool_shed_repository": {
+        "changeset_revision": "25136a2b0cfe",
+        "name": "collapse_collections",
+        "owner": "nml",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input_list\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"one_header\": \"\\\"false\\\"\", \"filename\": \"{\\\"__current_case__\\\": 1, \\\"add_name\\\": \\\"false\\\"}\"}",
+      "tool_version": "4.0",
+      "type": "tool",
+      "uuid": "01e62e61-a507-4342-9ddb-6a37a7e825f5",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "054b6d66-6ada-4d5f-9c0a-8ad5ab7e8cf6"
+        }
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input|dist": {
+          "id": 2,
+          "output_name": "distfiles"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Heatmap.sim",
+      "outputs": [
+        {
+          "name": "heatmap",
+          "type": "svg"
+        }
+      ],
+      "position": {
+        "left": 866,
+        "top": 183
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "2f93c7bba6f8",
+        "name": "mothur_heatmap_sim",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"count\": \"null\", \"__page__\": null, \"savelog\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"fontsize\": \"\\\"24\\\"\", \"input\": \"{\\\"__current_case__\\\": 2, \\\"dist\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"source\\\": \\\"phylip\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dist|__identifier__\": \"\\\"thetayc.0.03.lt.std\\\"\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "df423450-bc03-4839-98ba-5cba5a4d5ea2",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "heatmap",
+          "uuid": "1749f435-3802-42f5-b674-191945753353"
+        }
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input|dist": {
+          "id": 2,
+          "output_name": "distfiles"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Tree.shared",
+      "outputs": [
+        {
+          "name": "tre",
+          "type": "mothur.tre"
+        }
+      ],
+      "position": {
+        "left": 852,
+        "top": 543
+      },
+      "post_job_actions": {
+        "HideDatasetActiontre": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "tre"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "73dd30cbca20",
+        "name": "mothur_tree_shared",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"savelog\": \"\\\"false\\\"\", \"input\": \"{\\\"__current_case__\\\": 1, \\\"dist\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"name\\\": null, \\\"source\\\": \\\"phylip\\\"}\", \"calc\": \"[\\\"jclass\\\", \\\"thetayc\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dist|__identifier__\": \"\\\"thetayc.0.03.lt.std\\\"\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "43f5bfd6-2f82-4f4f-9631-faa3b89c4100",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input|otu": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Venn",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Venn",
+      "outputs": [
+        {
+          "name": "sharedotus_out",
+          "type": "input"
+        },
+        {
+          "name": "svgs_out",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 528,
+        "top": 598.5
+      },
+      "post_job_actions": {
+        "HideDatasetActionsharedotus_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "sharedotus_out"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0",
+      "tool_shed_repository": {
+        "changeset_revision": "8df8d8b67b13",
+        "name": "mothur_venn",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"sharedotus\": \"\\\"true\\\"\", \"__page__\": null, \"nseqs\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"fontsize\": \"\\\"24\\\"\", \"input\": \"{\\\"__current_case__\\\": 0, \\\"calc\\\": null, \\\"groups\\\": [\\\"F3D0\\\",\\\"F3D1\\\",\\\"F3D2\\\",\\\"F3D3\\\"], \\\"label\\\": \\\"\\\", \\\"otu\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"source\\\": \\\"shared\\\"}\", \"savelog\": \"\\\"false\\\"\", \"permute\": \"\\\"4\\\"\"}",
+      "tool_version": "1.39.5.0",
+      "type": "tool",
+      "uuid": "56b67018-f343-4ae9-a58f-3b000c0433e5",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "svgs_out",
+          "uuid": "612d2fa3-eced-4708-9157-ceab57789b85"
+        }
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "fileNewick": {
+          "id": 5,
+          "output_name": "tre"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Newick Display",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "svg"
+        }
+      ],
+      "position": {
+        "left": 1119,
+        "top": 373
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Phylogenitic Trees"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6",
+      "tool_shed_repository": {
+        "changeset_revision": "fe4235285ee8",
+        "name": "newick_utils",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"outformat\": \"\\\"svg\\\"\", \"scalebar\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"leafFont\": \"\\\"sans-serif\\\"\", \"width\": \"\\\"800\\\"\", \"leafSize\": \"\\\"10px\\\"\", \"fileNewick\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"radial\": \"\\\"false\\\"\", \"condbranchlength\": \"{\\\"__current_case__\\\": 1, \\\"branchlength\\\": \\\"false\\\"}\", \"condbranchsupport\": \"{\\\"__current_case__\\\": 1, \\\"branchsupport\\\": \\\"false\\\"}\", \"legend\": \"\\\"\\\"\"}",
+      "tool_version": "1.6",
+      "type": "tool",
+      "uuid": "2a9f7adc-1ba1-4be6-bdc1-6e98ff85632a",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "a0dcca1f-e46c-42af-9c0b-3d367727c72e"
+        }
+      ]
+    }
+  },
+  "tags": [],
+  "uuid": "bcf25a08-5f12-4d26-81d3-5f8a6185a67c",
+  "version": 7
+}

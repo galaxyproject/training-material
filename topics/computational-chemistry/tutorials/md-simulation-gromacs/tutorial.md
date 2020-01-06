@@ -34,10 +34,10 @@ Molecular dynamics (MD) is a method to simulate molecular motion by iterative ap
 
 Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
-This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme. 
+This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
 > ### {% icon comment %} More information
-> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. 
+> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS.
 {: .comment}
 
 > ### Agenda
@@ -256,14 +256,14 @@ Note that we can continue where the last simulation left off (with new parameter
 >    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
-> > ### {% icon question %} Question
-> >
-> > Why is the position of the protein restrained during equilibration?
-> >
-> > > ### {% icon solution %} Solution
-> > > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
-> > {: .solution}
-> {: .question}
+> ### {% icon question %} Question
+>
+> Why is the position of the protein restrained during equilibration?
+>
+> > ### {% icon solution %} Solution
+> > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
+> {: .solution}
+{: .question}
 
 
 # Production simulation

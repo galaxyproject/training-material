@@ -20,6 +20,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
 contributors:
   - shiltemann
   - nsoranzo
@@ -263,10 +264,10 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > ### {% icon question %} Question
 > How many exons are there in total in your file?
 >
->    > > ### {% icon solution %} Solution
->    > > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
->    > >
->    > {: .solution }
+> > ### {% icon solution %} Solution
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
+> >
+> {: .solution }
 {: .question}
 
 ## Sort the exons by SNPs count
