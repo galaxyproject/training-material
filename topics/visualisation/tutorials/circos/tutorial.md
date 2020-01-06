@@ -67,30 +67,40 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 The ideogram depicts your objects (chromosomes in the case of genomic data) of which you want to plot data.
 
-![](../../images/circos/ideograms_examples.png){: width="50%"}
+![](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown."){: width="50%"}
 
-And there are a lot of configuration options available to custumize your ideogram
-
-![](../../images/circos/ideograms_options.png){: width="50%"}
 
 ## Data Tracks
 
-[track types, radius to choose position of track within plot, input format]
+Within this ideogram, we can plot *data tracks*. There are different plot types available, such as scatterplots, histograms, heatmaps, and link tracks. Below is a list of the main track types with example images:
 
-### 2D data track
+| Example | Description |
+| ---- | ----- |
+| ![](../../images/circos/data_tracks_scatter.png){: width="60%"} | **Scatter plot** track type. All data points are indicated by a glyph (shape). |
+| ![](../../images/circos/data_tracks_line.png){: width="60%"} | **Line plot** track type. Data points are connected by a line. |
+| ![](../../images/circos/data_tracks_histogram.png){: width="60%"} | **Histogram** track type. Data points are connected to form a step-like trace. |
+| ![](../../images/circos/data_tracks_heatmap.png){: width="60%"} | **Heatmap** track type |
+| ![](../../images/circos/data_tracks_tiles.png){: width="60%"} | **Tile** track type. This is useful to indicate a range of the chromosome, for example to show genes, reads, repeat regions, etc. |
+| ![](../../images/circos/data_tracks_text.png){: width="60%"} | **Text** track type. Text may also be added to a plot, for instance to indicate names of impacted genes. |
+| ![](../../images/circos/data_tracks_links.png){: width="60%"} | **Link** track type. Relationship between objects can be indicated by a line between them. |
+| ![](../../images/circos/data_tracks_ribbons.png){: width="60%"} | **Ribbons** are a type of link track. These can be coloured and twisted as desired.|
 
-### Link Track
+Tracks can be customized a lot, some relevant concepts are:
+  - **Radius** of the track determines it location between the center (0) and the ideogram (1).
+  - **Rules** can be defined to change for example the color of data points depending on the value of the data points.
+  - **Axes and backgrounds** can be drawn on a data track
 
-### Text Labels
 
-# Overview
+There are a *lot* of further customizations available within Circos, but in this tutorial, we will start with the basics.
 
-We will now illustrate Circos further with a number of example plots. Each of these can be run independently of each other, so feel free to pick an example that suits your interest
+# Tutorial Overview
 
-| Example             | Preview       | Note                                  |
+We will now illustrate Circos further with a number of example plots. Each of these can be run independently of each other, so feel free to pick an example that suits your interest. If this is your first time using Circos, we suggest doing the examples in order.
+
+| Link to Section     | Preview       | Note                                  |
 | ------------------- |:-------------:| -------------------------------------:|
-| [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="25%"} | Will cover some cancer basics as well |
-| [ENCODE cover](#example-nature-cover-encode) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="20%"} | Recreate a nature Cover|
+| [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="45%"} | Create a plot using data from a cancer cell line. This tutorial covers some cancer basics as well |
+| [ENCODE cover](#example-nature-cover-encode) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="30%"} | Recreate a nature Cover! |
 
 <!-- | Presidential Debate | centered | Plots non-genomics data |-->
 
@@ -125,11 +135,11 @@ In this section we will reproduce this Circos plot step by step.
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3591846/files/VCaP_Copy-Number.tsv
->    https://zenodo.org/record/3591846/files/VCaP_B-allele-Frequency.tsv
->    https://zenodo.org/record/3591846/files/VCaP-highConfidenceJunctions.tsv
->    https://zenodo.org/record/3591846/files/hg18_karyotype_bands.tsv
->    https://zenodo.org/record/3591846/files/hg18_karyotype.txt
+>    https://zenodo.org/record/3598502/files/VCaP_Copy-Number.tsv
+>    https://zenodo.org/record/3598502/files/VCaP_B-allele-Frequency.tsv
+>    https://zenodo.org/record/3598502/files/VCaP-highConfidenceJunctions.tsv
+>    https://zenodo.org/record/3598502/files/hg18_karyotype_bands.tsv
+>    https://zenodo.org/record/3598502/files/hg18_karyotype.txt
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
