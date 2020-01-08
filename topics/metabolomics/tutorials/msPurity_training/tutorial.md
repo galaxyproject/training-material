@@ -5,7 +5,7 @@ title : 'Mass spectrometry : MSMS analysis with msPurity package'
 level : Introductory
 zenodo_link : 'https://zenodo.org/record/3244991' 
 questions : 
-    - What are the main steps of MS/MS data processing for metabolomic analysis ? 
+    - What are the main steps of MS/MS datas processing for metabolomic analysis ? 
     - How te be able to annotate the maximum of spectra using Galaxy ? 
 objectives : 
     - To be sure you have already comprehend the diversity of LC-MS analysis. 
@@ -34,10 +34,10 @@ As wrote in the msPurity paper, “mass spectrometry (MS) is routinely used to q
 A metabolomics analytical and data analysis workflow that directly takes into consideration the purity of an isolation window has been developed through the msPurity package, enabling deconvolution of MS2 spectra. “The approach, demonstrated using an Agilent6520 Q-TOF instrument, requires sliding isolation windows to be acquired surrounding the precursor of interest.[...] In these cases, simply assessing the targeted precursor purity can be useful in interpreting the MS2 spectra and aid in assessing the reliability of any subsequent annotation. [...] What we call here “precursor purity” is calculated with a revised Michalski approach”. Advances include that the metric is interpolated at the recorded time of the MS2 acquisition using bordering full scan spectra, the isolation efficiency of the mass spectrometer can be included within the calculation, and as per the PCI (Percent Chimera Intensity) approach, isotopic peaks of the targeted precursor can be removed and peaks with intensities below a minimum percentage of the precursor peak intensity are removed from the calculation. The software has been applied to investigate DDA or DIA metabolomics data sets for different biological samples retrieved from the data repositories MetaboLights, Metabolomics Workbench, and PRIMeData Resource of Plant Metabolomics (DROP Met). We also detail how theoretical isolation windows can be assessed using MS1 data sets collected independent of MS2 acquisitions. The computational methods detailed in the msPurity paper (Lawson et al. 2017) are available in the R package msPurity. The package has been developed to work as a standalone or to be used in conjunction with the metabolomics peak detection and processing R package XCMS 2.0.
 {: .text-justify}
 
-To illustrate this approach, we will use data from [*Metabolights n°307*](https://www.ebi.ac.uk/metabolights/MTBLS307), extracted from {% cite VanDerHooft2016%}. The objective of this paper is “to detect and visualize antihypertensive drug metabolites in untargeted metabolomics experiments based on the spectral similarity of their fragmentation spectra”. To do so, the authors collected urines from a cohort of 26 patients and performed a Thermo Q-Exactive coupled to pHILIC chromatography using data dependent analysis (DDA) MS/MS gas-phase experiments. They found 165 separate drugs metabolites and during this tutorial we will try to find the best result out of these 165. For time reasons, we will just used a subset of the samples and should not find all these waiting metabolites.
+To illustrate this approach, we will use datas from [*Metabolights n°307*](https://www.ebi.ac.uk/metabolights/MTBLS307), extracted from {% cite VanDerHooft2016%}. The objective of this paper is “to detect and visualize antihypertensive drug metabolites in untargeted metabolomics experiments based on the spectral similarity of their fragmentation spectra”. To do so, the authors collected urines from a cohort of 26 patients and performed a Thermo Q-Exactive coupled to pHILIC chromatography using data dependent analysis (DDA) MS/MS gas-phase experiments. They found 165 separate drugs metabolites and during this tutorial we will try to find the best result out of these 165. For time reasons, we will just used a subset of the samples and should not find all these waiting metabolites.
 {: .text-justify}
 
-To analyze these data, we will start to follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}), then we can complet the MS/MS workflow developped by **msPurity** authors ({% cite Lawson2017%}). 
+To analyze these datas, we will start to follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}), then we can complet the MS/MS workflow developped by **msPurity** authors ({% cite Lawson2017%}). 
 {: .text-justify}
 
 > ### Agenda
@@ -425,7 +425,7 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 {: .question}
 
 The output is a RData file with the purityA S4 class object (referred to as *pa* for convenience throughout the manual). The object contains a slot (pa@puritydf) where we can find the details of the purity assessments for each MS/MS scan. The purityA object can then be used for further processing including linking the fragmentation spectra to XCMS features, averaging fragmentation, database creation and spectral matching (from the created database).
-There is also the additional output which is a tsv file of the purity assessment data frame.
+There is also the additional output which is a tsv file of the purity assessment dataframe.
 {: .text-justify}
 
 > ### {% icon details %} Advanced parameters
@@ -692,7 +692,34 @@ blabla
 
 You have now finish the msPurity package part. Like in the previous stopover, we will verify your files to know if you have done msPurity steps correctly. This package has a function named "createMSP" which is installed as tool in Galaxy. With this, you can obtain a MSP format file which contains each saved MS/MS fragmentation spectra and its peaks. For the annotation step, we will need this MSP file as input for each tool we will want to use. 
 
-The MSP file should contains lines like these : 
+The MSP file should contains lines like these repeated for each spectra and its precursor : 
+
+```
+RECORD_TITLE: MZ:71.0605 | RT:848.8 | grpid:3 | file:NA | adduct:NA
+MS$FOCUSED_ION: PRECURSOR_M/Z 71.0605060747176
+AC$CHROMATOGRAPHY: RETENTION_TIME 848.84928
+XCMS groupid (grpid): 3
+COMMENT: Exported from msPurity purityA object using function createMSP, using method 'av_inter' msPurity version:1.12.0 
+PK$NUM_PEAK: 8
+PK$PEAK: m/z int. rel.int.
+50.0516510009766    407.938293457031    6.76
+61.6874847412109    416.434692382812    6.9
+65.3922653198242    408.490203857422    6.77
+68.5475082397461    443.723205566406    7.36
+71.0605697631836    6032.71630859375    100
+71.0685195922852    759.818908691406    12.59
+73.6430206298828    366.938262939453    6.08
+74.0707550048828    408.659912109375    6.77
+```
+
+Line 1 : this is the title line and it contains informations about the spectra and its precursor.  
+Line 2 : it informs the exact precursor mass  
+Line 3 : it is the exact retention time  
+Line 4 : it is the group id  
+Line 5 : it is a comment about the source and how we obtain this  
+Line 6 : it is the number of peaks in the spectra  
+Line 7 : it is the title line for peaks  
+After : it is all peaks with their mass and their intensity or/and relatve intensity.
 
 
 # Annotation
@@ -783,16 +810,8 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 
 ## With Sirius CSI-FingerID
 
-## With .??
-
 
 # Conclusion 
 {:.no_toc} 
 
-blabla 
-
->    > ### {% icon comment %} Comment
->    >
->    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
->    > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem right away if you appear to get one of these obvious issues.
->    {: .comment}
+During this tutorial, the user learnt how to process with MS/MS datas. The peakpicking part is very very important for the rest of the annotation of MS/MS datas. 
