@@ -65,25 +65,143 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 ## Ideogram
 
-The ideogram depicts your objects (chromosomes in the case of genomic data) of which you want to plot data.
+The ideogram depicts your major data classes. For genomics data this is usually chromosomes, but could also be species, or genes, or another resolution level depending on what relationships you want to show. For non-genomic data this could be individuals in a population, countries, or any other major facet of your data that you want to use for grouping.
 
-![](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown."){: width="50%"}
+![](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as neeeded and when available."){: width="70%"}
 
 
 ## Data Tracks
 
 Within this ideogram, we can plot *data tracks*. There are different plot types available, such as scatterplots, histograms, heatmaps, and link tracks. Below is a list of the main track types with example images:
 
-| Example | Description |
-| ---- | ----- |
-| ![](../../images/circos/data_tracks_scatter.png){: width="60%"} | **Scatter plot** track type. All data points are indicated by a glyph (shape). |
-| ![](../../images/circos/data_tracks_line.png){: width="60%"} | **Line plot** track type. Data points are connected by a line. |
-| ![](../../images/circos/data_tracks_histogram.png){: width="60%"} | **Histogram** track type. Data points are connected to form a step-like trace. |
-| ![](../../images/circos/data_tracks_heatmap.png){: width="60%"} | **Heatmap** track type |
-| ![](../../images/circos/data_tracks_tiles.png){: width="60%"} | **Tile** track type. This is useful to indicate a range of the chromosome, for example to show genes, reads, repeat regions, etc. |
-| ![](../../images/circos/data_tracks_text.png){: width="60%"} | **Text** track type. Text may also be added to a plot, for instance to indicate names of impacted genes. |
-| ![](../../images/circos/data_tracks_links.png){: width="60%"} | **Link** track type. Relationship between objects can be indicated by a line between them. |
-| ![](../../images/circos/data_tracks_ribbons.png){: width="60%"} | **Ribbons** are a type of link track. These can be coloured and twisted as desired.|
+<table style="table-layout: fixed">
+	<thead>
+		<tr>
+			<th width="300">Example</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_scatter.png" /></td>
+			<td>
+				<b>Scatter plot</b> track type. All data points are indicated by a glyph (shape).
+				<br /><br />
+
+				<u>Data format</u>: four or five columns, tab separated. While Circos accepts space or tab separated, to use Galaxy's data manipulation tools you will need tab separated data. The attributes colum is completely optional but can be used to override colours, or provide extra context like "strand" or something else on which it might be diserable to filter. The format is <code>key=value,key2=value2,...</code>
+				<table>
+					<thead><tr><th>Chromosome</th><th>Start</th><th>End</th><th>Value</th><th>Attributes (optional)</th></tr></thead>
+						<tbody>
+						<tr>
+							<td>chrX</td><td>0</td><td>7499999</td><td>50</td><td></td>
+						</tr>
+						<tr>
+							<td>chrX</td><td>7500000</td><td>14999999</td><td>100</td><td>fill_color=red</td>
+						</tr>
+						<tr>
+							<td>chrX</td><td>15000000</td><td>22499999</td><td>-25</td><td>fill_color=(140,104,137)</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_line.png" alt="" /></td>
+			<td><strong>Line plot</strong> track type. Data points are connected by a line. <br/><br/><u>Data format</u>: identical to scatter plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_histogram.png" alt="" /></td>
+			<td><strong>Histogram</strong> track type. Data points are connected to form a step-like trace. <br/><br/><u>Data format</u>: identical to scatter plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_heatmap.png" alt="" /></td>
+			<td><strong>Heatmap</strong> track type. <br/><br/><u>Data format</u>: identical to scatter plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_tiles.png" alt="" /></td>
+			<td>
+				<strong>Tile</strong> track type. This is useful to indicate a range of the chromosome, for example to show genes, <span class="notranslate">reads</span>, repeat regions, etc.
+				<br /><br />
+
+				<u>Data format</u>: four or five columns, similar to scatter plot but instead of a value or a score, we have a text label that can be displayed.
+				<table>
+					<thead><tr><th>Chromosome</th><th>Start</th><th>End</th><th>Label</th><th>Attributes (optional)</th></tr></thead>
+						<tbody>
+						<tr>
+							<td>hs1</td><td>10119128</td><td>10345073</td><td>C_994</td><td>id=Conrad_994</td>
+						</tr>
+						<tr>
+							<td>hs1</td><td>10171406</td><td>10415218</td><td>M_1535</td><td>id=McCarroll_1535</td>
+						</tr>
+						<tr>
+							<td>hs1</td><td>103351772</td><td>103448763</td><td>M_5507</td><td>id=Mills_5507</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_text.png" alt="" /></td>
+			<td><strong>Text</strong> track type. Text may also be added to a plot, for instance to indicate names of impacted genes. <br/><br/><u>Data format</u>: identical to tiles plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_links.png" alt="" /></td>
+			<td>
+				<strong>Link</strong> track type. Relationship between objects can be indicated by a line between them.
+				<br /><br />
+
+				<u>Data format 1</u>: six or seven columns, including the optional attribute column.
+				<table>
+					<thead>
+						<tr>
+							<th>Chromosome 1</th><th>Start 1</th><th>End 1</th>
+							<th>Chromosome 2</th><th>Start 2</th><th>End 2</th>
+							<th>Attributes (optional)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>chrX</td><td>87655109</td><td>107655109</td><td>hs12</td><td>109275831</td><td>129275831</td><td>color=blue,value=0</td>
+						</tr>
+						<tr>
+							<td>chrX</td><td>73701156</td><td>93701156</td><td>hs22</td><td>26513447</td><td>46513447</td><td>color=green,value=1</td>
+						</tr>
+						<tr>
+							<td>chr12</td><td>121879007</td><td>132349534</td><td>hs7</td><td>43840633</td><td>63840633</td><td>color=red,value=2</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<u>Data format 2</u>: four or five columns, including the optional attribute column.
+				<table>
+					<thead>
+						<tr>
+							<th>Link ID</th><th>Chromosome</th><th>Start</th><th>End</th><th>Attributes (optional)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>link_0</td><td>chrX</td><td>87655109</td><td>107655109</td><td>color=red</td>
+						</tr>
+						<tr>
+							<td>link_0</td><td>chr12</td><td>109275831</td><td>129275831</td><td>color=blue</td>
+						</tr>
+						<tr>
+							<td>link_1</td><td>chrX</td><td>73701156</td><td>93701156</td><td>color=green</td>
+						</tr>
+						<tr>
+							<td>link_1</td><td>chr22</td><td>26513447</td><td>46513447</td><td>color=black</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_ribbons.png" alt="" /></td>
+			<td><strong>Ribbons</strong> are a type of link track. These can be coloured and twisted as desired. <br/><br/><u>Data format</u>: identical to links.</td>
+		</tr>
+	</tbody>
+</table>
 
 Tracks can be customized a lot, some relevant concepts are:
   - **Radius** of the track determines it location between the center (0) and the ideogram (1).
@@ -879,15 +997,6 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
-
-- what is required for a plot (karyotype)
-- outputs
-- plot options
-- ideogram
-- ticks
-- highlights
-- 2d
-- links
 
 
 > ### {% icon hands_on %} Hands-on: Circos
