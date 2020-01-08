@@ -28,27 +28,16 @@ contributors :
 # Introduction
 {:.no_toc}
 
-**Mass spectrometry** (MS) is routinely used to *quantify*, *annotate*, and *identify* small molecules in complex biological matrices. An MS experimental workflow can consist of infusing a sample directly into a mass spectrometer without any prior chromatographic separation (direct infusion mass spectrometry; DIMS). But more often, the sample components are **spatially separated** via either gas (GC) or liquid chromatography (LC). 
-?? A METTRE ?? The predictable mass fragmentation patterns observed from the electron ionization (EI) technique commonly used with gas chromatography allows for reliable **matching to mass spectral libraries** such as *NIST3* and the *Golm Metabolome Database*. ?? A METTRE ??
+As wrote in the msPurity paper, “mass spectrometry (MS) is routinely used to quantify, annotate, and identify small molecules in complex biological matrices.[..] Tandem mass spectrometry (MS/MS or MS2) is a widely used approach for structural annotation and identification of metabolites in complex biological samples”. The first method allows to find the general formula of the desired metabolite while the second can give in detail the structure of the molecule and its components. They also demonstrate the key point of MS/MS : “the term “tandem mass spectrometry” is used when a single collision step is used, but product ions can be isolated for further collision to provide MSn spectra where n ≥ 3. A key component of any MS2 (or higher) technology is the isolation of selected m/z windows for gas-phase fragmentation and the mapping back of the fragmentation (product) spectrum to the selected m/z window”.
 {: .text-justify}
 
-#### Tandem Mass Spectrometry
-{: .no_toc}
-
-**Tandem mass spectrometry** (MS/MS or MS2) is a widely used approach for *structural annotation* and *identification of metabolites* in complex biological samples. The term *“tandem mass spectrometry”* is used when a single collision step is used, but product ions can be isolated for further collision to provide MSn spectra where n ≥ 3. A key component of any MS2 (or higher) technology is **the isolation of selected m/z windows** for gas-phase fragmentation and the **mapping back** of the fragmentation (product) spectrum to the selected m/z window.
+A metabolomics analytical and data analysis workflow that directly takes into consideration the purity of an isolation window has been developed through the msPurity package, enabling deconvolution of MS2 spectra. “The approach, demonstrated using an Agilent6520 Q-TOF instrument, requires sliding isolation windows to be acquired surrounding the precursor of interest.[...] In these cases, simply assessing the targeted precursor purity can be useful in interpreting the MS2 spectra and aid in assessing the reliability of any subsequent annotation. [...] What we call here “precursor purity” is calculated with a revised Michalski approach”. Advances include that the metric is interpolated at the recorded time of the MS2 acquisition using bordering full scan spectra, the isolation efficiency of the mass spectrometer can be included within the calculation, and as per the PCI (Percent Chimera Intensity) approach, isotopic peaks of the targeted precursor can be removed and peaks with intensities below a minimum percentage of the precursor peak intensity are removed from the calculation. The software has been applied to investigate DDA or DIA metabolomics data sets for different biological samples retrieved from the data repositories MetaboLights, Metabolomics Workbench, and PRIMeData Resource of Plant Metabolomics (DROP Met). We also detail how theoretical isolation windows can be assessed using MS1 data sets collected independent of MS2 acquisitions. The computational methods detailed in the msPurity paper (Lawson et al. 2017) are available in the R package msPurity. The package has been developed to work as a standalone or to be used in conjunction with the metabolomics peak detection and processing R package XCMS 2.0.
 {: .text-justify}
 
-A metabolomics analytical and data analysis **workflow** that directly takes into consideration the purity of an isolation window has been developed, enabling deconvolution of MS2 spectra. The approach, demonstrated using an Agilent6520 Q-TOF instrument, requires sliding isolation windows to be acquired surrounding the precursor of interest. In these cases, simply **assessing the targeted precursor purity** can be useful in interpreting the MS2 spectra and aid in assessing the reliability of any subsequent annotation. What we call here *“precursor purity”* is calculated with a revised Michalski approach. Advances include that the metric is interpolated at the recorded time of the MS2 acquisition using bordering full scan spectra, the isolation efficiency of the mass spectrometer can be included within the calculation, and as per the PCI (Percent Chimera Intensity) approach, isotopic peaks of the targeted precursor can be removed and peaks with intensities **below a minimum percentage of the precursor peak intensity** are removed from the calculation. The software has been applied to investigate 12 DDA and one DIA metabolomics data sets for different biological samples retrieved from the data repositories [MetaboLights](https://www.ebi.ac.uk/metabolights/), [Metabolomics Workbench](https://www.metabolomicsworkbench.org/), and PRIMeData Resource of Plant Metabolomics ([DROP Met](http://prime.psc.riken.jp/)). We also detail how theoretical isolation windows can be assessed using MS1 data sets collected independent of MS2 acquisitions. The computational methods detailed in the msPurity paper ({% cite Lawson2017 %}) are available in the **R package *msPurity***. The package has been developed to **work as a standalone** or to be used **in conjunction with the metabolomics peak detection and processing R package *XCMS* 2.0**.
+To illustrate this approach, we will use data from [*Metabolights n°307*](https://www.ebi.ac.uk/metabolights/MTBLS307), extracted from {% cite VanDerHooft2016%}. The objective of this paper is “to detect and visualize antihypertensive drug metabolites in untargeted metabolomics experiments based on the spectral similarity of their fragmentation spectra”. To do so, the authors collected urines from a cohort of 26 patients and performed a Thermo Q-Exactive coupled to pHILIC chromatography using data dependent analysis (DDA) MS/MS gas-phase experiments. They found 165 separate drugs metabolites and during this tutorial we will try to find the best result out of these 165. For time reasons, we will just used a subset of the samples and should not find all these waiting metabolites.
 {: .text-justify}
 
-#### What will we do ?
-{: .no_toc}
-
-To illustrate this approach, we will use data from [*Metabolights n°307*](https://www.ebi.ac.uk/metabolights/MTBLS307), extracted from {% cite VanDerHooft2016%}. The objective of this paper is to detect and visualize antihypertensive drug metabolites in untargeted metabolomics experiments based on the spectral similarity of their fragmentation spectra. To do so, the authors collected urines from a cohort of 26 patients and performed a Thermo Q-Exactive coupled to pHILIC chromatography using data dependent analysis (DDA) MS/MS gas-phase experiments. They found 165 separate drugs metabolites and during this tutorial we will try to find the best result out of these 165. For time reasons, we will just used a subset of the samples and should not find all these waiting metabolites.
-{: .text-justify}
-
-To analyze these data, we will start to follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
-developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}), then we can complet the MS/MS workflow developped by **msPurity** authors ({% cite Lawson2017%}). 
+To analyze these data, we will start to follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow), developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}), then we can complet the MS/MS workflow developped by **msPurity** authors ({% cite Lawson2017%}). 
 {: .text-justify}
 
 > ### Agenda
@@ -91,12 +80,13 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
 ```
 This step is described as number 1 in details part below.
 
-Then, to be able to process your MS/MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to process with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For MS/MS analysis you **don't really need to finish** this previous tutorial but for a better understanding of your datas, it is recommanded. In this tutorial, you **just have to compute** your datas with the **following steps** briefly describe in the *details* part below (please follow aprameters values to have the same results during the training).
+Then, to be able to process your MS/MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to process with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For MS/MS analysis you **don't really need to finish** this previous tutorial but for a better understanding of your datas, it is recommanded. In this tutorial, you **just have to compute** your datas with the **following steps** briefly describe in the *details* part below (please follow parameters values to have the same results during the training).
 {: .text-justify}
 
 > ### {% icon details %} Some help : Resume of the XCMS preprocessing
 >
-> Here is a resume of the **XCMS** {% icon tool %} preprocessing. It has few steps that are an obligation to be able to obtain the final file. With this file, we can continue the workflow to process our MS/MS datas with **msPurity** {% icon tool %} package.
+> Here is a resume of the **XCMS** {% icon tool %} preprocessing. Please follow instructions for this training tutorial. It has few steps that are an obligation to be able to obtain the final file. With this file, we can continue the workflow to process our MS/MS datas with **msPurity** {% icon tool %} package.
+> {: .text-justify}
 >
 > > ### {% icon solution %} 1 - Import your datas into a Galaxy collection
 > > 
@@ -183,21 +173,21 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > >   - **Output** : a new collection with your files and their information after `readMSData` function. Format : `collection.raw.RData`.
 > {: .solution}
 >
-> > ### {% icon solution %} 3 - First XCMS step : *peak picking* {% icon tool %}
+> > ### {% icon solution %} 3 - First XCMS step : *peak picking*
 > >    
 > > Open and run the **xcms findChromPeaks (xcmsSet)** {% icon tool %} tool and set your parameters. For our training please enter the following parameters : 
 > >   - **Extraction method for peaks detection** : there are 4 different possible options here. Please select `CentWave - chromatographic peak detection using the centWave method` for our training.
 > >   - **Max tolerated ppm m/z deviation in consecutive scans in ppm** : it corresponds to the maximum deviation in ppm. Please set it to `5` for our training.
-> >   - **Min, Max peak width in seconds** : it corresponds to the expected approximate peak width in chromatographic space. Please set it to `5,50` in our training to have a large example. 
+> >   - **Min, Max peak width in seconds** : it corresponds to the expected approximate peak width in chromatographic space. Please set it to `5,20` in our training to have a large example. 
 > > 
 > > Here, you have all the right parameters for our example. These are the two dataset collection you will have in your hsitory on the right of Galaxy instance : 
 > >    - **Input** : collection of Rdata object(s) obtained just before (format : `collection.raw.RData`)
 > >    - **Output** : a collection with informations about peak picking for each files. Format : `collection.raw.xset.RData`.
 > {: .solution}
 > 
-> > ### {% icon solution %} 4 - *Merge samples* {% icon tool %} in one dataset with a sampleMetadata file
+> > ### {% icon solution %} 4 - *Merge samples* in one dataset with a sampleMetadata file
 > >
-> > To merge your datas, you need to **input a sampleMetadata file** containing namefiles and their metadata informations like their class for example. If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. Here is an example of the minimum expectations about a sampleMetadata file (important : don't write the format of the file, just their names) :
+> > To merge your datas, you need to **input a sampleMetadata file** containing namefiles and their metadata informations like their class for example. If you don't add a sampleMetadata file, the **xcms findChromPeaks Merger** {% icon tool %} tool will **group all your files together**. You can also **create your sampleMetadata file** with W4M Galaxy tool **xcms get a sampleMetadata file** {% icon tool %} with the following parameters: *"RData file"* outputed from **MSnbase readMSData** {% icon tool %}. Here is an example of the minimum expectations about a sampleMetadata file (**important** : don't write the format of the file, just their names) :
 > > {: .text-justify}
 > > 
 > > | sample_name |  class  | 
@@ -216,18 +206,32 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > >     - one RData file named `xset.merged.RData` which contains a list of all your datas processed just before.
 > {: .solution}
 >
-> > ### {% icon solution %} 5 - Second XCMS step : *determining shared ions across samples* {% icon tool %}
+> > ### {% icon solution %} 5 - Second XCMS step : *determining shared ions across samples*
 > >
-> >    Open **xcms groupChromPeaks (group)** {% icon tool %} tool and run it with your parameters.
-> >    - **Input** : the RData file obtained just before with all datas and peaks informations for each files (format : `xset.merged.RData`).
-> >    - **Output** : one Rdata file named `xset.merged.groupChromPeaks.RData` containing all peaks grouped according to their mz and retention time.
+> > Open **xcms groupChromPeaks (group)** {% icon tool %} tool and run it with your parameters. This tool will group all your peaks found before together when they represent the same analyte across samples. It uses overlapping m/z bins and calculations of smoothed peak distributions in chromatographic time. In Galaxy instance please set the parameters as below : 
+> >  - **Method to use for grouping** : please `keep the PeakDensity method` which will groups peak based on time dimension peak densities.
+> >  - **Bandwidth** : it correspond to the standard deviation of the smoothing kernel to be used. Set it to `10` for our example.
+> >  - **Minimum fraction of samples** : minimum fraction of samples in at least one sample group in which the peaks have to be present to be considered as a peak group. This value is the threshold and `don't change` it for our example.
+> >  - **Minimum number of samples** : minimum number of sample(s) in which the peak have to be detected to be considered as a group. Please `don't change` it for our example.
+> >  - **Width of overlapping m/z slices** : the m/z difference between two peaks to be able to be grouped. For our example please set it to `0.05`.
+> > 
+> > You don't need to change the other parameters, except if you want the peaklist as output. You should now have these files in your history : 
+> >  - **Input** : 
+> >    - the RData file obtained just before with all datas and peaks informations for each files (format : `xset.merged.RData`).
+> >  - **Output** : 
+> >    - one Rdata file named `xset.merged.groupChromPeaks.RData` containing all peaks grouped according to their mz and retention time.
+> >    - one `pdf` file named `xset.merged.groupChromPeaks.plotChromPeakDensity.pdf`. It contains chromatographic density plots.
+> >    - 2 `tsv` files. The first one named `xset.merged.group.dataMatrix.tsv` contains informations about ions intensities. The second one named `xset.merged.group.variableMetadata.tsv` contains an other table with informations about ions. These files are generated only if you set the parameter **Get peaklist** to `yes`. It is just more informations after the grouping step. 
 > {: .solution}
 >
-> > ### {% icon solution %} 6 - Optional XCMS step : *retention time correction* {% icon tool %}
+> > ### {% icon solution %} 6 - Optional XCMS step : *retention time correction*
 > >
-> >    This step is optionnal, it aims to correct retention time drift for each peak among samples. You have to use the **xcms adjustRtime (retcor)** {% icon tool%} tool to correct this retention time.
-> >    - **Input** : the Rdata file named `xset.merged.groupChromPeaks.RData`
-> >    - **Output** : new RData file named `xset.merged.groupChromPeaks.adjustRtime.RData`
+> > This step is optionnal, it aims to correct retention time drift for each peak among samples. You have to use the **xcms adjustRtime (retcor)** {% icon tool%} tool to correct this retention time. We `don't use it in our example`. But if you will use it during an other processing, you should have these files in your history : 
+> >  - **Input** : 
+> >    - the Rdata file already with peaks grouped and named `xset.merged.groupChromPeaks.RData`
+> >  - **Output** : 
+> >    - new RData file named `xset.merged.groupChromPeaks.adjustRtime.RData` with correction of retention time
+> >    - one `pdf` file named `xset.merged.groupChromPeaks_rawVSadjusted.adjustRtime.Rplots.pdf`  and containing a plot to show the difference between rt and adjusted rt for each file.
 > >    
 > > > ### {% icon comment %} Important : Have to group again !
 > > >
@@ -235,11 +239,13 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > >    {: .warning}
 > {: .solution}
 >
-> > ### {% icon solution %} 7 - Final XCMS step *integrating areas of missing peaks* {% icon tool %}
+> > ### {% icon solution %} 7 - Final XCMS step *integrating areas of missing peaks*
 > >
-> >    This last step can be run after grouping your peaks and don't need the retention time correction. Run **xcms fillChromPeaks (fillPeaks)** {% icon tool%} with the following things.
-> >    - **Input** : you Rdata file `xset.merged.groupChromPeaks.*.RData`
-> >    - **Output** : a new RData file named `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
+> > This last step can be run after grouping your peaks and don't need the retention time correction. Run **xcms fillChromPeaks (fillPeaks)** {% icon tool%} to identify, for each sample, peak groups where that sample is not represented. 
+> >  - **Input** : 
+> >    - your Rdata file `xset.merged.groupChromPeaks.*.RData`
+> >  - **Output** : 
+> >    - a new RData file named `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
 > {: .solution}
 > > ### {% icon comment %} Important : Be careful of the file format
 > >
@@ -248,22 +254,85 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > {: .warning} 
 {: .details}
 
-When you have process **all or only needed** steps described before, you can continue with the MS/MS processing part with **msPurity** package. Don't forget to always check your files format ! For the next step you need to have this file `xset.merged.groupChromPeaks.*.RData` where * is the name of **optionnal** steps you could do during the pre-processing.
+
+# Stopover : Verify your datas after the XCMS preprocessing
+
+When you have process **all or only needed** steps described before, you can continue with the MS/MS processing part with **msPurity** package. Don't forget to always check your files format ! For the next step you need to have this file `xset.merged.groupChromPeaks.*.RData` where * is the name of **optionnal** steps you could do during the pre-processing. For our example, your file should be named `xset.merged.groupchromPeaks.RData`. 
 {: .text-justify}
+
+> ### {% icon comment %} Comment
+> 
+> The preprocessing part of this analysis can be **quite time-consuming**, and already corresponds to quite a few number of steps, depending of your analysis. We highly recommend, at this step of the MS/MS workflow, to split your analysis by beginning a new Galaxy history with **only the files you need** (final xset Rdata file and your data collection of mzML). This will help you in limiting selecting the wrong dataset in further analysis, and bring a little **tidiness** for future review of your MS/MS analysis process. You should also be able to make a better peakpicking in the future in the same history and it will not be polluated by MS/MS part of your process.
+> {: .text-justify}
+> 
+> > ### {% icon tip %} Tip: Copy dataset to a new history
+> >
+> > 1. Click on the {% icon galaxy-gear %} icon (**History options**) on the top of the history panel
+> > 2. Click on **Copy Dataset**
+> > 3. Select the desired files
+> > 4. Give a relevant name to the "New history"
+> > 5. Click on the new history name in the green box that have just appear to switch to this history
+> {: .tip}
+> 
+> To begin a new history with the files from your current history, you can **use the functionality ‘copy dataset’** and copy it into a new history (the option is hidden behind the notched wheel at the top right of the history).
+> {: .text-justify}
+> 
+> You may have notice that the XCMS tools generate **output names that contain the different XCMS steps you used**, allowing easy traceability while browsing your history. Hence, we highly recommend you to rename it **with something short**, e.g. "xset", "XCMSSetObject", or anything not too long that you may find convenient.
+> {: .text-justify}
+> {% include snippets/rename_dataset.md %}
+>
+{: .comment}
+
+Before the next step with msPurity package on MS/MS datas, here are some questions to be able to verify if your file is ready and if you have the same results as us. Please check these questions : 
+{: .text-justify}
+
+> ### {% icon question %} Question before MS/MS steps
+> 
+>  **1** - What are the steps of XCMS you made before your final file ?
+> > ### {% icon solution %} Solution
+> > 
+> > Here are the different steps made for our example : 
+> >  - **(Not with XCMS)** import your datas into Galaxy instance
+> >  - **MSNbase readMSData** {% icon tool %} to read our MS datas
+> >  - XCMS peakpicking with **xcms findChromPeaks (xcmsSet)** {% icon tool %} tool
+> >  - (Not with XCMS but necessary) merge my datas into one file with **xcms findChromPeaks Merger** {% icon tool %} tool
+> >  - XCMS grouping with **xcms groupChromPeaks (group)** {% icon tool %} tool
+> >  - **(Not done)** XCMS retention time correction, then grouping again with xcms adjustRtime (retcor) {% icon tool %} tool
+> >  - XCMS integration of missing peaks with **xcms fillChromPeaks (fillPeaks)** {% icon tool %} tool
+> > 
+> {: .solution}
+> <br>
+>  **2** - Concerning what we said before and the previous answer, what is the complete name of your final RData file ?
+> > ### {% icon solution %} Solution
+> > 
+> > During each step of XCMS preprocessing, the name of the file which is processing is completed by the name of the step you were doing. So, finally your file should be name `xset.merged.groupChromPeaks.fillChromPeaks.RData`. That because (as seen in previous answer) you ran a grouping and the integration after merged datas.
+> > {: .text-justify}
+> > 
+> {: .solution}
+> <br>
+> **3** - What is the size (in MB) of your final RData file ?
+> > ### {% icon solution %} Solution
+> > 
+> > To be able to see the size of a file in your history, you just have to select it. It will deployed informations about it and you can see the size of yours. For our example, the size of the final file is **1.4 MB**.
+> > {: .text-justify}
+> > 
+> {: .solution}
+{: .question}
+
 
 # Processing with msPurity package
 
-**msPurity** is a R package developped by Birmingham University team and published in 2017 ({% cite Lawson2017 %}). It is also available via Galaxy instance through some [wrappers](https://github.com/computational-metabolomics/mspurity-galaxy/tree/master) that were developped by the same people. 
+**msPurity** is a R package developed by Birmingham University team and published in 2017 ({% cite Lawson2017 %}). It is also available via Galaxy instance through some [wrappers](https://github.com/computational-metabolomics/mspurity-galaxy/tree/master) that were developped by the same people. 
 {: .text-justify}
 
-This R package was developped to :
+This R package was developed to :
 1. Assess the spectral quality of fragmentation spectra by evaluating the "precursor ion purity". 
 2. Process fragmentation spectra. 
 3. Perform spectral matching. 
 
 **What is *precursor ion purity*?** 
 
-What we call **"precursor ion purity"** is a measure of the contribution of a selected precursor peak in an isolation window used for fragmentation. The simple calculation involves dividing the intensity of the selected precursor peak by the total intensity of the isolation window. When assessing MS/MS spectra this calculation is done before and after the MS/MS scan of interest and the **purity is interpolated at the recorded time of the MS/MS acquisition**. Additionally, isotopic peaks can be removed, low abundance peaks are removed that are thought to have limited contribution to the resulting MS/MS spectra and the isolation efficiency of the mass spectrometer can be used to normalise the intensities used for the calculation.
+They call "**precursor ion purity** the measure of the contribution of a selected precursor peak in an isolation window used for fragmentation. The simple calculation involves dividing the intensity of the selected precursor peak by the total intensity of the isolation window. When assessing MS/MS spectra this calculation is done before and after the MS/MS scan of interest and the **purity is interpolated at the recorded time of the MS/MS acquisition**.[...] Additionally, isotopic peaks can be removed, low abundance peaks are removed that are thought to have limited contribution to the resulting MS/MS spectra and the isolation efficiency of the mass spectrometer can be used to normalise the intensities used for the calculation."
 {: .text-justify}
 
 ## 1 - Assessing the purity (*purityA function*)
@@ -271,12 +340,12 @@ What we call **"precursor ion purity"** is a measure of the contribution of a se
 The importance of **assessing the contribution of the precursor ion** within an isolation window for MS2 experiments has been previously detailed in proteomics, where precursor ion purity influences the quality and accuracy of matching to mass spectral libraries. But to date, there has been little attention to this data-processing technique in metabolomics. In **targeted and data-dependent acquisition** (DDA)-based experiments, where MS2 is performed on a dynamic list of precursor ions (as often determined by a preceding MS full scan), an isolation window is centered on the targeted precursor peak (m/z value). However, the **isolation window** can often contain **more than one distinct peak**. Fragmentation spectra resulting from these situations being termed *“chimeric”* and can be problematic for interpretation of the spectra and mass spectral library searching.
 {: .text-justify}
 
-The precursor purity metric is calculated as *“intensity of a selected precursor divided by the summed intensity of the isolation window”*. The impact of chimeric spectra on spectral matching and annotation depends on the purity of the isolation window fragmented (i.e., the ratio between the relative intensity of the precursor divided by the summed intensity of all ions within the isolation window). If the purity of the precursor ion is sufficiently low, it can often be difficult to determine the origin of the resulting product ion(s). This in turn can lead to erroneous spectral matching results or no spectral matches. Deconvolution of chimeric spectra however is possible and forms the basis of the data-analysis procedures applied to data independent acquisition (DIA) experiments.
+The precursor purity metric is calculated as *“intensity of a selected precursor divided by the summed intensity of the isolation window”*. The impact of chimeric spectra on spectral matching and annotation depends on **the purity of the isolation window fragmented** (i.e., the ratio between the relative intensity of the precursor divided by the summed intensity of all ions within the isolation window). If the purity of the precursor ion is sufficiently low, it can often **be difficult to determine the origin of the resulting product ion(s)**. This in turn can lead to erroneous spectral matching results or no spectral matches. Deconvolution of chimeric spectra however is possible and forms the basis of the data-analysis procedures applied to data independent acquisition (DIA) experiments.
 {: .text-justify}
 
 > ### {% icon comment %} How the purityA algorithm works ?
 > 
-> Given a vector of LC-MS/MS file paths the **precursor ion purity** of each MS/MS scan from each file can be calculated. It then stores in the purityA S4 class object where **a dataframe of the purity results** can be accessed using the appropriate slot (*pa@puritydf*). The **calculation** involves dividing the intensity of the selected precursor peak by the total intensity of the isolation window. It is performed before and after the MS/MS scan of interest and interpolated at the recorded time of the MS/MS acquisition. 
+> Just given a vector of LC-MS/MS file paths and the **precursor ion purity** of each MS/MS scan from each file can be calculated. It then stores in the purityA S4 class object where **a dataframe of the purity results** can be accessed using the appropriate slot (*pa@puritydf*). The **calculation** involves dividing the intensity of the selected precursor peak by the total intensity of the isolation window. It is performed before and after the MS/MS scan of interest and interpolated at the recorded time of the MS/MS acquisition. 
 > {: .text-justify}
 > 
 > 
@@ -294,10 +363,15 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 > ### {% icon hands_on %} Hands-on : msPurity.purityA {% icon tool %}
 > 
 > In Galaxy instance, you just need to run the **msPurity.purityA** {% icon tool %} tool with the collection containing all your files. It is the collection with which we started the peak picking processus at the beginning of this tutorial. 
->  - **\*.mzML file** : Please select the directory icon and then `select your dataset collection` you used at the begining of your XCMS preprocessing
->  - **Use most intense peak within isolation window for precursor?** : you can set it to "No" value if you want the process to keep the registered precursor from the file. If you set it to "Yes", it will selected the most intense peak within its isolation window. Please `set it to True`.
->  - **Use nearest full scan to determine precursor?** : you can set it to "No" value to keep the precursor scan already registered within the file. If you set it to "True", it will use the nearest full scan to determine what the m/z value is of the precursor. Please `set it to True`.
+> {: .text-justify}
+>  - **\*.mzML file** : Please select the directory icon and then `select your dataset collection` you used at the begining of your XCMS preprocessing 
+> {: .text-justify}
+>  - **Use most intense peak within isolation window for precursor?** : you can set it to "No" value if you want the process to keep the registered precursor from the file. If you set it to "Yes", it will selected the most intense peak within its isolation window. Please `set it to Yes`.
+> {: .text-justify}
+>  - **Use nearest full scan to determine precursor?** : you can set it to "No" value to keep the precursor scan already registered within the file. If you set it to "True", it will use the nearest full scan to determine what the m/z value is of the precursor. Please `set it to Yes`. 
+> {: .text-justify}
 >  - **Interpolation PPM** : Enter the value you want as the ppm tolerance for the precursor ion purity interpolation (the closest match within the window will be used for the interpolation). Please `set it to 5`.
+> {: .text-justify}
 >
 > You just have to adjust these 4 parameters and don't touch the others.
 > 
@@ -308,24 +382,71 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 > >  - **Output** : 
 > >    - one RData file containing **pa** object with all MS/MS datas from your files (`msPurity.purityA_on_yourdata.RData`)
 > >    - one `tsv` file with all results from the assess of purity in the files you gave (*slot puritydf of pa object*). Each line correspond to one MS/MS scan (`msPurity.purityA_on_yourdata.tsv`). 
+> > {: .text-justify}
 > {: .comment}
 {: .hands_on}
 
-> ### {% icon solution %} Advanced parameters
+> ### {% icon question %} Question
+> 
+> **1** - How many lines do you have in your `msPurity.purityA_on_yourdata.tsv` file ?
+> <br>
+> **2** - Can you explain briefly what each column corresponds to ?
+> 
+> > ### {% icon solution %} Solution
+> > 
+> > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **31 897** lines. Each line corresponds to a MS/MS spectra and its informations. 
+> > {: .text-justify}
+> > <br>
+> > **2** - During this first part of **msPurity** processing, only the *@puritydf* slot has been modified. It is now a table containing the following informations : 
+> > {: .text-justify}
+> >  - **pid** : unique id for MS/MS scan
+> >  - **fileid** : unique id for file
+> >  - **seqNum** : scan number
+> >  - **acquisitionNum** : acquisition number
+> >  - **precursorIntensity** : precursor intensity value as defined in the file
+> >  - **precursorMZ** : precursor m/z value as defined in the file
+> >  - **precursorRT** : precursor RT value as defined in the file
+> >  - **precursorScanNum** : precursor scan number value as defined in file
+> >  - **id** : unique id (redundant)
+> >  - **filename** : filename
+> >  - **retentionTime** : retention time 
+> >  - **precursorNearest** : MS1 scan nearest to the MS/MS scan purityA35
+> >  - **aMz** :  The m/z value in the "precursorNearest" MS1 scan which most closely matches the precursorMZ value provided from the file
+> >  - **aPurity** : The purity score for aMz
+> >  - **apkNm** : The number of peaks in the isolation window for aMz
+> >  - **iMz** :  The m/z value in the precursorNearest MS1 scan that is the most intense within the isolation window.
+> >  - **iPurity** : The purity score for iMz
+> >  - **ipkNm** : The number of peaks in the isolation window for iMz
+> >  - **inPkNm** : The interpolated number of peaks in the isolation window
+> >  - **inPurity** :  The interpolated purity score (the purity score is calculated at neighbouring MS1 scans and interpolated at the point of the MS/MS acquisition)
+> > 
+> {: .solution}
+> 
+{: .question}
+
+The output is a RData file with the purityA S4 class object (referred to as *pa* for convenience throughout the manual). The object contains a slot (pa@puritydf) where we can find the details of the purity assessments for each MS/MS scan. The purityA object can then be used for further processing including linking the fragmentation spectra to XCMS features, averaging fragmentation, database creation and spectral matching (from the created database).
+There is also the additional output which is a tsv file of the purity assessment data frame.
+{: .text-justify}
+
+> ### {% icon details %} Advanced parameters
 >
 > Here, we list all parameters available on Galaxy tool, depending of the need of the user and not cited just before : 
+>{: .text-justify}
 >
 > - **offsets** : two options are available here :
 >   - **uses offsets determined in the file** : it will use the retention time offsets determined in the file directly for the precursor values
 >   - **user supplied offset values** : with this option you have to enter 2 values. One corresponding to the left offsets (the *minoffset*) and the other one corresponding to the right offset (the *maxoffset*).
+> {: .text-justify}
 > - **Threshold to remove peaks below x % of the relative intensity of precursor of interest** : you have to enter a numeric value between 0 and 1. All peaks less than this percentage of the precursor ion of interest will be removed from the purity calculation. It is essentially a noise filter to remove peaks that are thought to have either none or very limited impact on the resulting fragmentation spectra (*--ilim* parameter)
+> {: .text-justify}
 > - **Normalisation for isolation efficiency** : you can choose 4 values for this parameter. If you set it to "none", the intensity of the isolation window stay like this. If you choose one of the following functions (*Gaussian*, *Raised Cosine* or *Calculated from Q-Exactive for +/-0.5 Da windows*), the intensity will be normalised by this function (*--iwNorm* parameter and *--iwNormFun* parameter).
+> {: .text-justify}
 > - **Handling of isotopic peaks** : you can choose 3 propositions (*--isotopes* parameter and *--im* parameter) :
 >   - **Keep isotopes in precursor ion purity calculation** : with this option, nothing is done on isotopes in precursor ion purity calculation.
 >   - **Exclude C12/C13 isotopes in precursor ion purity calculation** : with this option, you will exclude C13 isotopes (single, double and triple bonds). It is the default parameter.
+> {: .text-justify}
 >   - **Exclude a user supplied list of isotopes in purity calculation** : with this option, you can add a table as input. This table contains all your isotopes you want to excludes. Tabular files should be has the following : 
 >
-> *Add table*
 > 
 > | isotope_id | mass diff | abundance of isotope  | ppm tol for mz  | abundance buffer | charge | relative atomic mass (int) | xflag |
 > |:----------:|:---------:|:---------------------:|:---------------:|:----------------:|:------:|:--------------------------:|:-----:|
@@ -335,67 +456,42 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 > |------------+-----------+-----------------------+-----------------+------------------+--------+----------------------------+-------|
 > |     3      | 0.916291  |        0.4931         |        4        |       0.1        |    1   |             80             |   1   |
 > {: .custom-class #table_isotopes}
-{: .solution}
-
-
-> ### {% icon solution %} Go further
 > 
-> - To verify your **pa** object and to learn what it contains, you can download your RData file from Galaxy (just clic on the *floppy disc* button) and open it in a R terminal or with RStudio application.
-> ```R
-> library(msPurity)
-> load("./Downloads/msPurity.purityA_on_yourdata.RData")
-> head(pa@puritydf)
-```
-> - During this first part of **msPurity** processing, only the *@puritydf* slot has been modified. It is now a table containing the following informations :
->   - pid: unique id for MS/MS scan
->   - fileid: unique id for file
->   - seqNum: scan number
->   - precursorIntensity: precursor intensity value as defined in the file
->   - precursorMZ: precursor m/z value as defined in the file
->   - precursorRT: precursor RT value as defined in the file
->   - precursorScanNum: precursor scan number value as defined in file
->   - id: unique id (redundant)
->   - filename: filename
->   - precursorNearest: MS1 scan nearest to the MS/MS scan purityA35
->   - aMz:  The m/z value in the "precursorNearest" MS1 scan which most closely matches theprecursorMZ value provided from the file
->   - aPurity: The purity score for aMz
->   - apkNm: The number of peaks in the isolation window for aMz
->   - iMz:  The m/z value in the precursorNearest MS1 scan that is the most intense within theisolation window.
->   - iPurity: The purity score for iMz
->   - ipkNm: The number of peaks in the isolation window for iMz
->   - inPurity:  The interpolated purity score (the purity score is calculated at neighbouring MS1scans and interpolated at the point of the MS/MS acquisition)
->   - inpkNm: The interpolated number of peaks in the isolation window
-> - The remaining slots for purityA class include :
->   - cores: The number of CPUs to be used for any further processing with this purityA object
->   - fileList: list of the files that have been processed
->   - mzRback: The backend library used by mzR to extract information from the file (e.g. pwiz)
->   - grped_df: If frag4feature has been performed, a dataframe of the grouped XCMS features linked to the associated fragmentation spectra precursor * details is recorded here
->   - grped_MS/MS: If frag4feature has been performed, a list of fragmentation spectra assoicated with each grouped XCMS feature is recorded here
->   - f4f_link_type: If frag4feature has been performed, the linking method is recorded here
->   - av_spectra: if averageIntraFragSpectra, averageInterFragSpectra, or averageAllFragSpectra have been performed, the average spectra is recorded here
->   - av_intra_params: If averageIntraFragSpectra has been performed, the parameters are recorded here
->   - av_inter_params: if averageInterFragSpectra has been performed, the parameters are recorded here
->   - av_all_params: If averageAllFragSpectra has been performed, the parameters are recorded here
->   - db_path: If create_database has been performed, the resulting database path is recorded here
-{: .solution}
-
-The output is an RData file with the purityA S4 class object (referred to as pa for convenience throughout the manual). The object contains a slot (pa@puritydf) where the details of the purity assessments for each MS/MS scan. The purityA object can then be used for further processing including linking the fragmentation spectra to XCMS features, averaging fragmentation, database creation and spectral matching (from the created database).
-There is also the additional output of the a tsv file of the pa@puritydf data frame.
+> The remaining slots for purityA class include :
+>  - cores: The number of CPUs to be used for any further processing with this purityA object
+>  - fileList: list of the files that have been processed
+>  - mzRback: The backend library used by mzR to extract information from the file (e.g. pwiz)
+>  - grped_df: If frag4feature has been performed, a dataframe of the grouped XCMS features linked to the associated fragmentation spectra precursor * details is recorded here
+>  - grped_MS/MS: If frag4feature has been performed, a list of fragmentation spectra assoicated with each grouped XCMS feature is recorded here
+>  - f4f_link_type: If frag4feature has been performed, the linking method is recorded here
+>  - av_spectra: if averageIntraFragSpectra, averageInterFragSpectra, or averageAllFragSpectra have been performed, the average spectra is recorded here
+>  - av_intra_params: If averageIntraFragSpectra has been performed, the parameters are recorded here
+>  - av_inter_params: if averageInterFragSpectra has been performed, the parameters are recorded here
+>  - av_all_params: If averageAllFragSpectra has been performed, the parameters are recorded here
+>  - db_path: If create_database has been performed, the resulting database path is recorded here
+{: .details}
 
 ## 2 - Match features with fragmentation spectra (*frag4feature function*)
 
-The `frag4feature` function will link the fragmentation spectra (MS/MS) back to the XCMS features. This function matches precursor ions of MS/MS datas with features and store them into a new table. To be able to be matched, the associated acquisition time of the MS/MS event has to be **within the retention time window** defined for the individual peaks associated and the precursor m/z value also has to be **within the user ppm tolerance** to XCMS feature. 
+The `frag4feature` function from msPurity package will link the fragmentation spectra (MS/MS) back to the XCMS features. This function matches precursor ions of MS/MS datas with features and stores them into a new table. To be able to be matched, the associated acquisition time of the MS/MS event has to be **within the retention time window** defined for the individual peaks associated and the precursor m/z value also has to be **within the user ppm tolerance** to XCMS feature. 
+{: .text-justify}
 
 > ### {% icon hands_on %} Hands-on : msPurity.frag4feature {% icon tool %}
 >
 > Just find the **msPurity.frag4feature** {% icon tool %} tool in the Galaxy instance to be able to run this function. As result, it will give you all your MS/MS datas which have a good precursor found during the XCMS processus. But before, you have to enter the right parameters : 
 > {: .text-justify}
->  - **xcmsSet object** : the Rdata file you made during the XCMS preprocessing. Its name should be `xset.merged.groupChromPeaks.*.RData` (where \* is the name of optionnal tools you ran).
+>  - **xcmsSet object** : the Rdata file you made during the XCMS preprocessing. Its name should be `xset.merged.groupChromPeaks.fillChromPeaks.RData` (or your new name if your rename it).
+> {: .text-justify}
 >  - **purityA object** : the RData file ouputed the step before containing all your MS/MS spectra. Should be named `msPurity.purityA_on_yourdata.RData`.
+> {: .text-justify}
 >  - **ppm error tolerance between precursor mz and XCMS feature mz** : fragmentation will be ignored if the precursor m/z value is not within the ppm tolerance to the XCMS feature m/z. Please **set it to 10** (default).
+> {: .text-justify}
 >  - **Should the most intense precursor be used within the isolation window?** : if you set it to "yes", the most intense precursor will be used. If it is on "no" the precursor closest the center of the isolation window will be used. Please **set it to "yes"**.
+> {: .text-justify}
 >  - **Was retention time correction used?** : just **precise if you used retention time correction** when you made the XCMS preprocessing. It is an optionnal step so maybe you have not made it.
+> {: .text-justify}
 >  - **For matching fragmentation to a feature, use the grouped feature range** : XCMS has already calculated individual peaks for each file, then it has grouped them together. If your MS/MS files have also MS datas, you can link MS2 spectra directly to a peak for each file. In this case, you can turn this parameter to "no". If you don't have any MS datas in each file, you can turn it to "yes". In this case, the full width of the grouped peaks will be used to link MS2 spectra with it. In our case, please **set it to "no"**, we have enough MS datas in our files.
+> {: .text-justify}
 > 
 > You have an other parameter that is a threshold for the precursor ion purity. It is here to filter precursor with a high purity, but we will see the filter tool just after to be able to order our datas. 
 > {: .text-justify}
@@ -408,8 +504,52 @@ The `frag4feature` function will link the fragmentation spectra (MS/MS) back to 
 > >  - Output : 
 > >    - one updated RData file named `msPurity.frag4feature_on_yourdata.RData`.
 > >    - one `tsv` file containg all MS/MS spectra that matched with a XCMS feature (*slot grped_df of pa object*). Each line has informations about  the grouped XCMS features linked to the associated fragmentation spectra precursor details (`msPurity.frag4feature_on_yourdata.tsv`).
+> > {: .text-justify}
 > {: .comment}
 {: .hands_on}
+
+> ### {% icon question %} Question
+> 
+> **1** - How many lines do you have in your `msPurity.frag4feature_on_yourdata.tsv` file ?
+> <br>
+> **2** - Can you explain briefly what each column corresponds to ?
+> 
+> > ### {% icon solution %} Solution
+> > 
+> > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **7 528** lines. Each line corresponds to a MS/MS spectra which matched with a precursor ion. 
+> > {: .text-justify}
+> > <br>
+> > **2** - During this first part of **msPurity** processing, only the *@puritydf* slot has been modified. It is now a table containing the following informations : 
+> > {: .text-justify}
+> >  - **grpid** : group id from XCMS feature
+> >  - **mz** : mass derived from XCMS peaklist
+> >  - **mzmin** : minimum mass derived from XCMS peaklist
+> >  - **mzmax** : maximum mass derived from XCMS peaklist
+> >  - **rt** : retention time of 
+> >  - **rtmin** : minimum retention time
+> >  - **rtmax** : maximum retention time
+> >  - **into** : 
+> >  - **intb** : 
+> >  - **maxo** : 
+> >  - **sn** : 
+> >  - **sample** : 
+> >  - **is_filled** :  
+> >  - **cid** : 
+> >  - **filename** : 
+> >  - **inPurity** : interpolated purity score
+> >  - **pid** : 
+> >  - **precurMtchID** : associated nearest precursor scan id (file specific)
+> >  - **precurMtchScan** : associated 
+> >  - **precurMtchRT** : associated precursor scan retention time
+> >  - **precurMtchMZ** : associated precursor scan mass
+> >  - **precurMtchPPM** : associated precursor scan mz tolerance in parts per million
+> >  - **retentionTime** : 
+> >  - **fileid** : 
+> >  - **seqNum** : 
+> > 
+> {: .solution}
+> 
+{: .question}
 
 > ### {% icon solution %} Go further
 > The slot grped_df is a dataframe of the grouped XCMS features linked to a reference to any associated MS/MS scans in the region of the full width of the XCMS feature in each file. The dataframe contains the following columns.
@@ -427,12 +567,19 @@ The `frag4feature` function will link the fragmentation spectra (MS/MS) back to 
 >   - maxo: derived from XCMS peaklist
 >   - sn: derived from XCMS peaklist
 >   - sample: derived from XCMS peaklist
->   - id: unique id of MS/MS scan
+>   - is_filled : 
+>   - cid: unique id of MS/MS scan
+>   - filename : 
+>   - inPurity: The interpolated purity score
+>   - pid : 
 >   - precurMtchID: Associated nearest precursor scan id (file specific)
+>   - precurMtchScan : 
 >   - precurMtchRT: Associated precursor scan RT
 >   - precurMtchMZ: Associated precursor m/z
 >   - precurMtchPPM: Associated precursor m/z parts per million (ppm) tolerance to XCMS feature m/z
->   - inPurity: The interpolated purity score
+>   - retentionTime : 
+>   - fileid : 
+>   - seqNum : 
 >
 > The slot grped_MS2 is a list of the associated fragmentation spectra for the grouped features.
 > {: .text-justify}
@@ -441,16 +588,23 @@ The `frag4feature` function will link the fragmentation spectra (MS/MS) back to 
 ## 3 - (Optionnal) Filter your results (*filterFragSpectra function*)
 
 The fragmentation result can be filtered prior to averaging using the `filterFragSpectra` function. You can filter your features according to different parameters : 
+{: .text-justify}
  - **precursor ion purity** : you can filter by enter the value that will be the threshold for the precursor ion purity value. Each MS/MS spectra with a precursor ion purity under this threshold will be tagged as *false* or will be removed.
+ {: .text-justify}
  - **peak intensity** : you can fix a minimum for the peak intensity. All peaks under this value will be tagged or removed.
+ {: .text-justify}
  - **relative abundance** : the relative abundance is calculated for each peak in the window. You can select a value that will be the minimum requiered as relative abundance. Every peak under this value will be removed or flagged. 
+ {: .text-justify}
  - **signal-to-noise** : the ratio of a peak signal to the noise is calculated for each peak of a file. You can enter the minimum signa-to-noise ratio that will removed (or flagged) all peaks under this value. 
+ {: .text-justify}
 
 > ### {% icon hands_on %} Hands-on : msPurity.filterFragSpectra {% icon tool %}
 >
 > This function is used in **msPurity.filterFragSpectra {% icon tool %}** from Galaxy instance. It is an optionnal step of the process but we can make some tries to refine our MS/MS spectra and have a little bit less than thousands we had. Here is an example with the different parameters you have to complete to make a selection of your matched MS/MS spectra : 
+> {: .text-justify}
 > 
 >  - **Miniumum precursor ion purity of the associated precursor for fragmentation spectra scan** : minimum precursor ion purity of the associated precursor for fragmentation spectra scan. For example, you can **set it to 0.9** to obtain MS/MS spectra with a good porecursor ion purity only.
+>  {: .text-justify}
 >  - **Peak instensity threshold** : minimum intensity of a peak. 
 >  - **Relative abundance threshold** : minimum relative abundance of a peak.
 >  - **snr** : minimum signal-to-noise of a peak within each file. 
@@ -463,20 +617,32 @@ The fragmentation result can be filtered prior to averaging using the `filterFra
 
 ## 4 - (Optionnal) Average your results (*averageFragSpectra function*)
 
-Averaging of the fragmentation spectra can be done with either `averageAllFragSpectra` or with `averageIntraFragSpectra` and `averageInterFragSpectra`. This will depend if the user wishes to treat the fragmentation spectra from within a file and between files. Another alternative is to ignore the averaging completely and just use the non-averaged fragmentation spectra for the spectral matching.
+The fragmentation spectra can be averaged in multiple ways : 
+  - `averageIntraFragSpectra` will average fragmentation spectra **within a file**.
+  - `averageInterFragSpectra` will average fragmentation spectra **across files** (but *intra need to be done first*).
+  - `averageAllFragSpectra` will average **all** spectra **ignoring the intra and inter relationships**.
 
-If the inter and intra fragmentation scans are to be treated differently the following should be followed:
+The way you make the average will depend of the user wishes to treat its fragmentation spectra. Another alternative is to ignore the averaging completely and just use the non-averaged fragmentation spectra for the spectral matching.
+{: .text-justify}
 
-```R
-pa <- averageIntraFragSpectra(pa) # use parameters specific to intra spectra 
-pa <- averageInterFragSpectra(pa) # use parameters specific to inter spectra
-```
-
-If the inter and intra fragmentation scans are to be treated the same the following workflow should be used.
-
-```R
-pa <- averageAllFragSpectra(pa) 
-```
+> ### {% icon details %} How to process the averaging ?
+> If the inter and intra fragmentation scans are to be treated differently the following should be followed :
+> {: .text-justify}
+>  - Start by running the **msPurity.averageFragSpectra** {% icon tool %} tool with the following parameters : 
+>    - **purityA object** : your RData file outputed from **msPurity.filterFragSpectra** {% icon tool %} tool or from **msPurity.frag4feature** {% icon tool %} if you didn't use the filter tool on your datas.
+>    {: .text-justify}
+>    - **Average and filter fragmentation spectra for each XCMS feature** : start by choosing the *within a MS data file* option to be bale to run the **intra averaging**.
+>    {: .text-justify}
+>  - When it is finish, run again **msPurity.averageFragSpectra** {% icon tool %} tool but change the following parameter :
+>  {: .text-justify}
+>    - **purityA object** : choose the RData file created with the previous tool.
+>    {: .text-justify}
+>    - **Average and filter fragmentation spectra for each XCMS feature** : this time choose the *across MS data files* option to be able to make **the averaging between your files**.
+>    {: .text-justify}
+>    
+> If the inter and intra fragmentation scans are to be treated the same the following workflow should be used.
+> 
+{: .details}
 
 ## 5 - (Optionnal) Create a database (*creataDatabase function*)
 
@@ -522,10 +688,98 @@ createMSP(pa, msp_file_pth = file.path(td, 'out.msp'))
 
 blabla
 
+# Stopover : Verify your datas after the msPurity processing
+
+You have now finish the msPurity package part. Like in the previous stopover, we will verify your files to know if you have done msPurity steps correctly. This package has a function named "createMSP" which is installed as tool in Galaxy. With this, you can obtain a MSP format file which contains each saved MS/MS fragmentation spectra and its peaks. For the annotation step, we will need this MSP file as input for each tool we will want to use. 
+
+The MSP file should contains lines like these : 
+
 
 # Annotation
 
 ## With MetFrag
+
+MetFrag is a software developped by PheNoMeNal team and which is freely available. It is used for the annotation of high precision tandem mass spectra of metabolites which is a first and critical step for the identification of a molecule's structure. Candidate molecules of different databases are fragmented in silico and matched against mass to charge values. A score calculated using the fragment peak matches gives hints to the quality of the candidate spectrum assignment. MetFrag can be easily used via the web tool but it can also be processed by the commandline version or the R package for the R programming language. 
+A tool has been developped on Galaxy instance and is available on W4M Galaxy. With this tool, you can continue the previous steps we have done during this tutorial. 
+{: .text-justify}
+
+> ### {% icon hands_on %} Hands-on : MetFrag {% icon tool %}
+> This tool is named **MetFrag** {% icon tool %} in Galaxy instance. It is the principal step of annotation after the msPurity part. To link these two parts, we already saw the **msPurity.createMSP** {% icon tool %} tool which able us to obtain a MSP file where we have all our interesting masses link to their spectrum and informations. So to run the metfrag tool, we need to set up these parameters for the tutorial : 
+>  - **MSP file (Output from Create MSP tool)** : it is the file outputed from createMSP tool and containing all your spectra and their informations. For the tutorial you should have the **msPurity.createMSP_on_data_x:msp** file.
+>  - **Choose Compound Database** : with this parameter you can choose the database you want to compare to. There are multiple databases you can choose : *KEGG, PubChem, MetChem* or your own database if you want. For the tutorial, please **set it to KEGG** to have less possibility compare to *PubChem*. For more informations about these databases, please look at "go further" part just after.
+>  - **Polarity** : just be sure the polarity parameter match with your datas. **Keep it at positive** for the tutorial because our datas are in positive mode.
+>  - **MetFrag Score Types** : here you choose the differents scores you want to apply during the processing. To see what score you can obtain, just clic on *Select/Unselect all*. And to choose the score, just delete with the cross the score you don't want. For the tutorial, **just keep the FragmenterScore**
+>  - **MetFrag Score Weights** : it is the weight for each score you choose in the parameter just before. For each one you add before, you need to precise the value max for this one, separate by a coma. For the tutorial, **you just need to set it to 1** because you just selected *FragmenterScore*.
+>  - **Minimum number of MS/MS peaks** : you can set a threshold to the spectra on the minimum number of peaks. It can be a good process to reduce the time of the processing avoiding useless spectra. For our tutorial, **please set it to 5**.
+>  - **In post-processing section** :
+>    - **Threshold for score after MetFrag search** : this parameter filter results which have a better score than the threshold we fix here. It can be good to set it to have less results which will probably be some bad matches between database and spectra. For the tutorial **set it to 0.7**.
+>    - **Minimum percentage of explain peaks** : during the matching part of MetFrag between database and spectra, it compare spectra peaks and database peaks. When it finds that peaks are quite the same, it adds them into explain peaks. They can probably explain something similar between database and spectra. So for the tutorial, **we would like 50% of explain peaks** in our results to have only good matches.
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+> 
+> **1** - How many results do you have after the MetFrag processing ?
+> <br>
+> **2** - Can you explain each column of the result file ?
+> <br>
+> **3** - Can you find the following drugs that should be present in our datas according to the publication : *clodipogrel, irbesartan, verapamil, atenolol, ranitidine, metformin, paracetamol* ?
+> 
+> > ### {% icon solution %} Solution
+> > 
+> > **1** - To see the number of results, you just have to look at the number of line of the `tsv` file. For our example, we can see that we have **560** lines. Each line corresponds to one result from MetFrag. 
+> > {: .text-justify}
+> > <br>
+> > **2** - There are multiple informations about results from MetFrag : 
+> >  - **adduct** : the adduct used to obtain these results
+> >  - **name** : name of the spectra
+> >  - **sample_name** : ??
+> >  - **CompoundName** : name of the compound which matched
+> >  - **ExplPeaks** : value of all explain peaks
+> >  - **FormulasOfExplPeaks** : formula of explain peaks and their value
+> >  - **FragmenterScore** : result for fragmenter score
+> >  - **FragmenterScore_Values** : values used for fragmenter score calculation
+> >  - **Identifier** : identifier of the compound for the database choose
+> >  - **InChI** : inchi of the compound
+> >  - **InChIKey** : inchi key of the compound
+> >  - **InChIKey1** : inchi key 1 of the compound
+> >  - **InChIKey2** : inchi key 2 of the compound
+> >  - **InChIKey3** : inchi key 3 of the compound
+> >  - **MaximumTreeDepth** : depth of the reconstruction tree to obtain the final compound
+> >  - **MolecularFormula** : formula of the compound
+> >  - **MonoisotopicMass** : monoisotopic mass
+> >  - **NoExplPeaks** : number of explain peaks
+> >  - **NumberPeaksUsed** : number of peaks used for matching (= total number of peaks in spectra)
+> >  - **SMILES** : SMILES code of the compound
+> >  - **Score** : final score
+> > 
+> > <br>
+> > **3** - After searching each compound in our database (here it is KEGG) we want to find, we have the following informations : 
+> > 
+> > ![compound table](../../images/tutorial_msms_compound_table.png)
+> > 
+> > Firstable, we can see that the *clodipogrel* compound has **no reference in KEGG database**. This is due to the poor referencing of MSMS data. But it exists bigger databases that can contain this compound. Whereas the process is very longer with this king of database contrary to KEGG database where we have the principal compounds and which is **not too big to have a process running in a few time**.
+> > {: .text-justify}
+> > Masses in the table are **monoisotopic masses** and we have to add the mass of the adduct to be able to find the good precursor mass in our results. For example here, we just have to **add 1.0072 to the monoisotopic mass because of the adduct [M+H]+**. When we have these values for each compound we are searching for these values in our results. One value can have multiple lines because the retention time can be different (mass has been found during different retention time). After that, you just have to look at the corresponding compound that matched and **verify if it corresponds to the one you are searching for**. You can also do it other way around : **searching for the compound names you want and verify if the mass correspond**. If you find something that match between mass and compound name, you have also to verify their score and their number of explain peaks. With the parameters that we completed for the processing, you should not have some bad results... 
+> > {: .text-justify}
+> > In our example, we can find *irbesartan* with a MZ = 429.2406 and *metformin* with MZ = 130.1089. But we only have these two compounds where we can find the name and the mass matched correctly... But if you search a little bit more, you can find that we also have some compounds with MZ = 267.1693 which is *practolol* and with mz = 152.0706 which is *acetaminophen*. The first one corresponds to the *atenolol* and the second *paracetamol*. So it is **important to know that we can have differents names for the same compound !!** 
+> > {: .text-justify}
+> > To resume, we have found 4 compounds : *irbesartan, metformin, practolol(atenolol), acetaminophen(paracetamol)*. 3 haven't been found : one is **not in KEGG database**, so it is normal, the 2 others are not in MetFrag result but it could be interesting to **investigate earlier in the workflow** to know if we found something about these compounds. Please open the "go further" section just after to know more about it.
+> > 
+> {: .solution}
+> 
+{: .question}
+
+> ### {% icon solution %} Go further
+> 
+> We will try to find all our compounds. We **already have 4 of them** found during the MetFrag annotation we performed just after the msPurity part. But it misses 3 of them... The first one (*clodipogrel*) **may be find in PubChem database or some other**. The two others we can try to find if we have them in our previous files of the workflow : 
+>  - in the `msp` file : try to find the associated MZ for each of these not found compounds. Here we should find something around MZ = 455 and MZ = 315... Whereas we don't have anything between MZ = 446 and MZ = 464 or MZ = 314 and MZ = 316. So with the adduct [M+H]+, we don't have these 2 compounds. But maybe we can find them with a better investigation on the adduct type of these compounds.
+>  - in the tabular file of assessing MS/MS : it is exactly the same problem as previous. We don't have any mass which correspond to the one we are searching.
+>
+> ![mass_diff](../../images/tutorial_msms_mass_diff.png)
+> 
+{: .solution}
+
 
 ## With Sirius CSI-FingerID
 
