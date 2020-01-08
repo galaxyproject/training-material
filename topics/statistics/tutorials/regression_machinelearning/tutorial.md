@@ -13,7 +13,7 @@ objectives:
 key_points:
 - Using regression, real-valued targets are learned using the training set and predicted
   using the test set.
-- For each regression algorithm, it parameters should be optimized based on the dataset
+- For each regression algorithm, its parameters should be optimized based on the dataset
 time_estimation: 2H
 contributors:
 - khanteymoori
@@ -306,7 +306,7 @@ R2 score is 0.93, the same as the linear model, but the RMSE is smaller (3.85), 
 
 ## Create data processing pipeline
 
-At the final step, we will create a pipeline learner with **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a zip file. By choosing `Yes` from the boolean option, tunable hyperparameters will be output in a seperate file.
+In the final step, we will create a pipeline learner with the **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a zip file. By choosing `Yes` from the boolean option, tunable hyperparameters will be output in a separate file.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -317,7 +317,7 @@ At the final step, we will create a pipeline learner with **Pipeline builder** t
 >            - *"Type in parameter settings if different from default"*: `random_state=42`
 >        - In *"Output parameters for searchCV?"*: `Yes`
 > 
->      The `Ranomd_state` could be set to any arbitrary integer number. The purpose is to make determistic and therefore reproducible result.
+>      `random_state` could be set to any arbitrary integer number; its purpose is to ensure a determistic and therefore reproducible result.
 >
 {: .hands_on}
 
