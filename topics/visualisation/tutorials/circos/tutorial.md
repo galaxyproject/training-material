@@ -1148,7 +1148,7 @@ Let's add it to our plot:
 > > >                    - {% icon param-repeat %} *"Insert Conditions to Apply"*
 > > >                        - *"Condition"*: `Chromosome`
 > > >                            - *"Comparison"*: `from chromosome`
-> > >                            - *"Chromosome"*: `Obama`
+> > >                            - *"Chromosome"*: `obama`
 > > >                    - In *"Actions to Apply"*:
 > > >                        - {% icon param-repeat %} *"Insert Actions to Apply"*
 > > >                             - *"Action"*: `Change Link Color`
