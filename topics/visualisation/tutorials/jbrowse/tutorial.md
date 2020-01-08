@@ -34,7 +34,7 @@ The Galaxy tool accepts data in many formats:
 - Wig/BigWig
 - VCF files
 
-and executes the "run-once data formatting tools" mentioned in its description. The JBrowse tool has an incredibly extensive number of options, more than anyone needs most of the time. We'll go through them in detail but feel free to skip the sections that don't apply to the data types you use. Not everyone has Blast results to visualise. This tutorial also is very hands off, we will give some guidance but it is up to you to explore JBrowse and consider ways in which it can apply to your own data.
+and executes the "run-once data formatting tools" mentioned in its description. The JBrowse tool has an incredibly extensive number of options, more than anyone needs most of the time. We'll go through them in detail but feel free to skip the sections that don't apply to the data types you use. Not everyone has Blast results to visualise. This tutorial also is very hands off, we will give some guidance but it is up to you to explore JBrowse and consider ways in which it can apply to your own data. Unlike other tutorials there is no biological story here, just some ways you can visualise common datatypes.
 
 This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will have different behaviour and tool layout.
 
@@ -148,13 +148,13 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 >                                    - *"Menu url"*: `https://www.ncbi.nlm.nih.gov/gene?term={locus_tag}%5BGene%20Name%5D`
 >                                    - *"Menu icon"*: `Database`
 >
-> > ### {% icon tip %} Tip: Templating in Contextual Menu Options
-> >
-> > There are more valid values for templating than mentioned in the help. When
-> > you click on a feature in the JBrowse instance, it will present all of the
-> > properties of the feature. Any of the top level properties can be used
-> > directly in your templating
-> {: .tip}
+>    > ### {% icon tip %} Tip: Templating in Contextual Menu Options
+>    >
+>    > There are more valid values for templating than mentioned in the help. When
+>    > you click on a feature in the JBrowse instance, it will present all of the
+>    > properties of the feature. Any of the top level properties can be used
+>    > directly in your templating
+>    {: .tip}
 >
 > 2. View the output
 >
