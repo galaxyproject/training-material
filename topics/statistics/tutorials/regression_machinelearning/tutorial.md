@@ -306,7 +306,7 @@ R2 score is 0.93, the same as the linear model, but the RMSE is smaller (3.85), 
 
 ## Create data processing pipeline
 
-At the final step, we will create a pipeline with **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a zip file. We will use this zip file with **Estimator attributes** tool to set the search space of hyperparameters.
+At the final step, we will create a pipeline learner with **Pipeline builder** tool but this time, we just specify the regressor. The **Pipeline builder** tool will wrap this regressor and return a zip file. By choosing `Yes` from the boolean option, tunable hyperparameters will be output in a seperate file.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -314,33 +314,22 @@ At the final step, we will create a pipeline with **Pipeline builder** tool but 
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
->    - In *"Output the final estimator instead?"*: `Final Estimator`
+>            - *"Type in parameter settings if different from default"*: `random_state=42`
+>        - In *"Output parameters for searchCV?"*: `Yes`
 > 
->      We choose `Final Estimator` as we have only the estimator and no preprocessor and need only the parameters of the estimator.
+>      The `Ranomd_state` could be set to any arbitrary integer number. The purpose is to make determistic and therefore reproducible result.
 >
 {: .hands_on}
 
-
-### Extract hyperparameters
-
-We use the **Estimator attributes** tool to get a list of different hyperparameters of the estimator. This tool creates a tabular file with a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
-
-> ### {% icon hands_on %} Hands-on: Estimator attributes
->
-> 1. **Estimator attributes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `final estimator builder` file (output of **Pipeline builder** {% icon tool %})
->    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
->
-{: .hands_on}
 
 ### Search for the best values of hyperparameters
 
-After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `Gradient boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. However, we are not sure if this gives the best accuracy. Therefore, it is important to try setting this parameter to different values to find the optimal one. We choose some values which are less than `100` and a few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
+After the **New Pipeline/Estimator** and its tunable hyperparameters are produced, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `Gradient boosting` regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of `n_estimators` for this regressor is `100`. However, we are not sure if this gives the best accuracy. Therefore, it is important to try setting this parameter to different values to find the optimal one. We choose some values which are less than `100` and a few more than `100`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.
 
 
 > ### {% icon details %} 5-fold cross-validation
 >
-> This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
+> This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
 >
 > ![5fold_cv](../../images/age-prediction-with-ml/5fold_cv.png "5-fold cross validation. ")
 >The image demonstrates how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.
@@ -352,8 +341,9 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 > 1. **Hyperparameter search** {% icon tool %} with the following parameters:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
 >        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
+>        - *"Is the estimator a deep learning model?"*: `No`
 >        - In *"Search parameters Builder"*:
->             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (output of **Estimator attributes** {% icon tool %})
+>             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (the other output of **Pipeline builder** {% icon tool %})
 >             - In *"Parameter settings for search"*:
 >                 - {% icon param-repeat %} *"1: Parameter settings for search"*
 >                    - *"Choose a parameter name (with current value)"*: `gradientboostingregressor_n_estimators: 100`
@@ -386,7 +376,8 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >            - *"Type header name(s)"*: `Age`
->    - *"Save best estimator?"*: `Fitted estimator (excluding deep learning)`
+>    - *"Whether to hold a portion of samples for test exclusively?"*: `Nope`
+>    - *"Save best estimator?"*: `Fitted best estimator or Detailed cv_results_ from nested CV`
 >
 {: .hands_on}
 
