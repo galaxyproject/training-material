@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualisation with Circos"
-zenodo_link: "https://zenodo.org/record/3598502"
+zenodo_link: "https://zenodo.org/record/3601438"
 questions:
   - "What can the Circos Galaxy tool be used for?"
   - "How can I visualise common genomic datasets using Circos?"
@@ -211,16 +211,17 @@ Tracks can be customized a lot, some relevant concepts are:
 
 There are a *lot* of further customizations available within Circos, but in this tutorial, we will start with the basics.
 
+
 # Tutorial Overview
 
 We will now illustrate Circos further with a number of example plots. Each of these can be run independently of each other, so feel free to pick an example that suits your interest. If this is your first time using Circos, we suggest doing the examples in order.
 
 | Link to Section     | Preview       | Note                                  |
-| ------------------- |:-------------:| -------------------------------------:|
-| [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="45%"} | Create a plot using data from a cancer cell line. This tutorial covers some cancer basics as well |
-| [ENCODE cover](#example-nature-cover-encode) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="30%"} | Recreate a nature Cover! |
+| ------------------- |:-------------:| :------------------------------------ |
+| [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="45%"} | Create a plot using data from a cancer cell line. This tutorial will guide you through the iterative process of building your first Circos image, and covers some cancer background as well. |
+| [Presidential Debate](#example-presidential-debate) | ![](../../images/circos/candidatenetworkdiagram.png){: width="45%"} | To show that Circos can be used for non-genomics data as well, this example recreates a plot that appeared in the New York times, visualizing data of the presidential debates. |
+| [ENCODE cover](#example-nature-cover-encode) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="30%"} | Recreate a Nature Cover! |
 
-<!-- | Presidential Debate | centered | Plots non-genomics data |-->
 
 
 
@@ -253,11 +254,11 @@ In this section we will reproduce this Circos plot step by step.
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3598502/files/VCaP_Copy-Number.tsv
->    https://zenodo.org/record/3598502/files/VCaP_B-allele-Frequency.tsv
->    https://zenodo.org/record/3598502/files/VCaP-highConfidenceJunctions.tsv
->    https://zenodo.org/record/3598502/files/hg18_karyotype_bands.tsv
->    https://zenodo.org/record/3598502/files/hg18_karyotype.txt
+>    https://zenodo.org/record/3601438/files/VCaP_Copy-Number.tsv
+>    https://zenodo.org/record/3601438/files/VCaP_B-allele-Frequency.tsv
+>    https://zenodo.org/record/3601438/files/VCaP-highConfidenceJunctions.tsv
+>    https://zenodo.org/record/3601438/files/hg18_karyotype_bands.tsv
+>    https://zenodo.org/record/3601438/files/hg18_karyotype.txt
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -278,7 +279,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
 > 1. **Circos** {% icon tool %} with the following parameters:
->    - In *"Reference Genome and Cytogenetic Bands"*:
+>    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.tsv`
 >    - In *"Ideogram"*:
@@ -946,38 +947,232 @@ Another thing you may have noticed, is that in the original image we showed at t
 {: .question}
 
 
+Awesome! You have now created a publication-quality Circos plot within Galaxy! There are more example plots in the sections below if you would like to get some more practice with the tool.
+
+
+# Example: Presidential Debate
+
+Circos was originally developed for genomics data, and a lot of the terminology in the tool is reminiscent of genomics (karyotype, ideogram, chromosome), but Circos can be used to plot any type of data. To illustrate this, the next example involves recreating a plot that appeared in [an article in the New York Times](http://www.nytimes.com/interactive/2007/12/15/us/politics/DEBATE.html), visualizing the 2008 presidential debates.
+
+![Original plot from the NYT article](../../images/circos/presidential_debate_nyt.png "Plot showing how many times each presidential candidate mentioned each other candidate in the debates leading up to the 2008 US presidential election."){: width="80%"}
+
+
+> ### {% icon comment %} Note
+>
+> This tutorial is based on one of the [tutorials on the Circos website](http://circos.ca/documentation/tutorials/recipes/naming_names/).
+>
+{: .comment}
+
+
+Since we could not obtain the original datasets used to generate this image, we will re-create a similar plot using an artificial dataset:
+
+![Presidential plot we will create this tutorial](../../images/circos/presidential_debate_plot.png){: width="60%"}
+
+
+## Get Data
+
+First, let's get the data we need for this plot:
+
+> ### {% icon hands_on %} Hands-on: Obtaining our data
+>
+> 1. Make sure you have an empty analysis history. Give it a name.
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. **Import Data.**
+>    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
+>
+>    ```
+>    https://zenodo.org/record/3601438/files/debate_karyotype.txt
+>    https://zenodo.org/record/3601438/files/debate_links.tab
+>    https://zenodo.org/record/3601438/files/debate_slices.tab
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>
+>    {% include snippets/import_from_data_library.md %}
+>
+{: .hands_on}
+
+
+## Ideogram
+
+Ideograms can be used to depict any axes, not just a stretch of genomics sequence like a chromosome. In this example, each segment corresponds to a candidate's total word count during all the debates.
+
+The karyotype file (`debate_karyotype.tab`) defines these segments:
+
+```
+chr - obama OBAMA 0 2000 dem
+chr - richardson RICHARDSON 0 1000 dem
+chr - clinton CLINTON 0 1500 dem
+chr - mccain MCCAIN 0 1000 rep
+chr - romney ROMNEY 0 1750 rep
+chr - huckabee HUCKABEE 0 1250 rep
+```
+
+In this example, Obama spoke 2000 workds, Richardson spoke a total of 1000 words, etc. These are not the real values, but we are using them as an example.
+The last column indicates the party of each candidate (democratic or republican), and will be used for the color of the segments.
+
+Let's start by creating the ideogram for our plot:
+
+
+> ### {% icon hands_on %} Hands-on: Set ideogram configuration
+>
+> 1. **Circos** {% icon tool %} with the following parameters:
+>    - In *"Karyotype"*:
+>        - *"Reference Genome"*: `Karyotype`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
+>    - In *"Ideogram"*:
+>        - In *"Labels"*:
+>            - *"Label Font Size"*: `40`
+>        - In *"Cytogenic Bands"*:
+>
+> 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot karyotype`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+{: .hands_on}
+
+The resulting file should look something like this:
+
+![first step of the debate circos plot](../../images/circos/debate_karyotype.png){: width="50%"}
+
+That looks right, but we want to colour each candidate's segment according to their party. We will do this using a *highlights* track.
+
+## Highlights track
+
+This highlights track shows a highlight for each debate, in the color of their party (blue for democrat, red for republican). The size of each highlight indicates the number of words spoken by the candidate in each debate. The file `debate_slices.tab` contains this information and looks like this:
+
+```
+obama       0    300    stroke_thickness=5,stroke_color=white
+obama       301  750    stroke_thickness=5,stroke_color=white
+obama       751  950    stroke_thickness=5,stroke_color=white
+obama       951  1250   stroke_thickness=5,stroke_color=white
+obama       1251 1500   stroke_thickness=5,stroke_color=white
+obama       1501 2000   stroke_thickness=5,stroke_color=white
+richardson  0    250    stroke_thickness=5,stroke_color=white
+richardson  251  750    stroke_thickness=5,stroke_color=white
+[..]
+```
+
+It is of format `segment - start - end`, with an optional 4th column, which can contain some additional Circos parameter settings.
+
+Now, let's use this file to create our highlights track
+
+> ### {% icon hands_on %} Hands-on: Add Highlights track to Circos Plot
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot karyotype`)
+>
+> 2. Add highlights to the ideogram:
+>    - In "Highlights":
+>        - {% icon param-repeat %} Insert Highlight:
+>            - *"Outside Radius"*: `1`
+>            - *"Inside Radius"*: `0.9`
+>            - {% icon param-file %} *"Highlight Data Source"*: `debate_slices.tab`
+>            - *"Fill Color"*: {% color_picker #d99696 %} (light red)
+>            - In "Rules":
+>                - {% icon param-repeat %} Insert Rule
+>                    - In *"Conditions to Apply"*:
+>                        - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                            - *"Condition"*: `Check for presence/absence per chromosome`
+>                            - *"Contig IDs"*: `obama|richardson|clinton`
+>                    - In *"Actions to Apply"*:
+>                        - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                            - *"Action"*: `Change Fill Color for all points`
+>                            - *"Fill Color"*: {% color_picker #548dd4 %} (light blue)
+>
+> 3. **Rename** {% icon galaxy-pencil%} the output `Circos Plot highlights`
+>
+{: .hands_on}
+
+
+![The debate plot with highlights track](../../images/circos/debate_highlights.png){: width="50%"}
+
+Great! All that is left to do now is add a link track. One line will be drawn for each time a candidate mentioned another candidate's name.
+
+## Link Track
+
+The data is stored in the file named `debate_links.tab`:
+
+```
+obama	150	150	clinton	750	750
+mccain	875	875	clinton	750	750
+huckabee	525	525	clinton	750	750
+```
+
+The format is `segment start end segment start end`. The first line indicates that Obama mentioned Clinton in a debate.
+
+Let's add it to our plot:
+
+> ### {% icon hands_on %} Hands-on: Add Highlights track to Circos Plot
+>
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot highlights`)
+>
+> 2. Add a link track:
+>    - In *"Link Tracks"*:
+>       - In *"Link Data"*:
+>           - {% icon param-repeat %} *"Insert Link Data"*
+>               - *"Inside Radius"*: `0.89`
+>               - {% icon param-file %} *"Link Data Source"*: `debate_links.tab`
+>               - *"Link Type"*: `basic`
+>               - *"Thickness"*: `5.0`
+>
+{: .hands_on}
+
+![Debate plot with link track](../../images/circos/debate_links.png){: width="50%"}
+
+
+> ### {% icon question %} Exercise: Color links by party of candidate
+>
+> 1. As an exercise, try to add rules to the link track to colour the links red or blue depending on party of the person who spoke (`from_chromosom`)
+>    - The link should be blue for Obama, and red for McCain and Huckabee
+>    - Hint 1: since two of the links should be red, and one blue, it is easiest to make red the default colour, and use a rule to change the colour for Obama
+>    - Hint 2: use `Chromosome` as the condition for the rule
+>
+>   ![Debate plot with coloured links](../../images/circos/presidential_debate_plot.png "Try to make the link track look like this"){: width="40%"}
+>
+> > ### {% icon solution %} Solution
+> >
+> > The full configuration  of the rules for the link tracks is:
+> >
+> > > ### {% icon hands_on %} Hands on: Two link tracks
+> > >
+> > > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run
+> > >
+> > > 2. Add rules to the link track:
+> > >    - In *"Link Tracks"*:
+> > >        - *"Link Color"*: {% color_picker #d99696 %} (light red)
+> > >        - In *"Rules"*:
+> > >            - {% icon param-repeat %} *"Insert Rule"*
+> > >                - In *"Conditions to Apply"*:
+> > >                    - {% icon param-repeat %} *"Insert Conditions to Apply"*
+> > >                        - *"Condition"*: `Chromosome`
+> > >                            - *"Comparison"*: `from chromosome`
+> > >                            - *"Chromosome"*: `Obama`
+> > >                    - In *"Actions to Apply"*:
+> > >                        - {% icon param-repeat %} *"Insert Actions to Apply"*
+> > >                             - *"Action"*: `Change Link Color`
+> > >                             - *"Link Color"*: {% color_picker #548dd4 %} (light blue)
+> > {: .hands_on}
+> >
+> {: .solution}
+{: .question}
+
+Great work! You have now created a Circos plot with non-genomics data!
+
+The next example will show you how to recreate a Nature cover, if you would like to keep going.
+
 # Example: Nature Cover ENCODE
 
 Here we will reproduce the output of the [Circos tutorial](http://circos.ca/documentation/tutorials/recipes/nature_cover_encode/lesson) for producing an image like that which was used on Nature's Cover:
 
 ![Nature Cover ENCODE](../../images/nature_cover_encode.png "Nature Cover")
 
-<!--
-The official Circos tutorial goes into detail on how to use rules and variables and automagic counting to help automate the production of such an image.
-
-```
-<plot>
-r1   = dims(ideogram,radius_inner)
-         - conf(plot_padding)*eval(remap(counter(plot),0,conf(num_plots),1,0.9))
-         - eval((conf(plot_width)+conf(plot_padding))*counter(plot)*eval(remap(counter(plot),0,conf(num_plots),1,0.9)))
-r0   = conf(.,r1)
-         - conf(plot_width)*eval(remap(counter(plot),0,conf(num_plots),1,0.9))
-post_increment_counter = plot:1
-<<include rules.conf>>
-</plot>
-```
-
-Due to the Circos Galaxy tool being a simplified interface and more user-friendly interface, we cannot make use of these advanced features like using Perl's math or `eval`uating code snippets to generate our image.  TODO(hxr): fix the wording, this is gross -->
-
 ## Data Formats
 
 <!-- TODO(hxr): document it all -->
 
-The Circos Galaxy tool mostly accepts `tabular` files. These always have at least three columns:
-
-1. Chromosome
-2. Start
-3. End
+The Circos Galaxy tool mostly accepts `tabular` files. These always have at least three columns `chromosome start end`.
 
 ## Get data
 
@@ -986,29 +1181,32 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]() or from the shared data library
 >
->    - [Chromosome File](../../files/chrom.tab)
->    - [Highlights](../../files/highlights.tab)
->
+>    ```
+>    https://zenodo.org/record/3601438/files/chrom.tab
+>    https://zenodo.org/record/3601438/files/highlights.tab
+>    ```
 >    {% include snippets/import_via_link.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
+> 4. Check that the datatype is `tabular` for both files
 >
 >    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
 
+## Create Plot
+
+We will now create the plot all at once. Normally, this would be a more iterative step-by-step process. The previous examples show how this stepwise approach is normally used, here we just give you all the configuration to create this plot all at once.
+
 > ### {% icon hands_on %} Hands-on: Circos
->
-> We will now run the Circos tool. In terms of tool interface, it is one of the most complex extant Galaxy tools.
 >
 > > ### {% icon tip %} Tip: Interface Complexity
 > > The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.
 > {: .tip}
 >
 > 1. **Circos** {% icon tool %} with the following parameters:
->    - In *"Reference Genome and Cytogenetic Bands"*:
+>    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
 >    - In *"Plot Options"*:
@@ -1092,35 +1290,13 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 >                                        - *"Fill Color"*: {% color_picker #ffff00 %} (yellow)
 >
 >
-> 2. View the output PNG file
+> 2. View {% icon galaxy-eye%} the output PNG file
 >
 {: .hands_on}
 
 When this has complete, your output should look similar to the following;
 
 ![Circos simplified Nature ENCODE Cover](../../images/circos-encode.png "Simplified Nature Cover")
-
-<!--
-
-What question could we ask about this plot?
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
--->
 
 # Conclusion
 {:.no_toc}
