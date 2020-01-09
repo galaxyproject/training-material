@@ -1381,4 +1381,4 @@ Hopefully this helps you take your Circos plots from 90% to 100% publication rea
 # Conclusion
 {:.no_toc}
 
-Congratulations on finishing this tutorial! You have now seen how you can create Circos plots within Galaxy. Circos is a very flexible tool, but this flexibility also comes with a certain degreen of complexity and a steep learning curve. When you are making your own plots, remember that Circos is an iterative process, don't try to do too much at once, but build your plot up step by step, and check the output often.
+Congratulations on finishing this tutorial! You have now seen how you can create Circos plots within Galaxy. Circos is a very flexible tool, but this flexibility also comes with a certain degree of complexity and a steep learning curve. When you are making your own plots, remember that Circos is an iterative process, don't try to do too much at once, but build your plot up step by step, and check the output often.
