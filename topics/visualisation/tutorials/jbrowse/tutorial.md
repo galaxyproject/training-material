@@ -99,6 +99,12 @@ We will start by adding a couple of gene call tracks. In our case these are gene
 >
 >    ![Screenshot of JBrowse](../../images/jbrowse-gff-track.png "Screenshot of JBrowse")
 >
+>    > ### {% icon tip %} Error reading from name store
+>    > If you see this error message:
+>    > ![error message](../../images/jbrowse/error.png)
+>    > Just click OK, this is a known bug.
+>    {: .tip}
+>
 {: .hands_on}
 
 If you are not familiar with the operation of JBrowse there are some important points:
