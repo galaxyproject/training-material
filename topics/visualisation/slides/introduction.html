@@ -3,14 +3,61 @@ layout: introduction_slides
 topic_name: introduction
 tutorial_name: introduction
 logo: "GTN"
+
+title: Visualisations in Galaxy
+key_points:
+  - "Visualizations are vital for the interpretation of large datasets"
+  - "Galaxy has numerous visualization options available"
+contributors:
+  - erasche
+  - shiltemann
+
 ---
 
 # What is Data Visualisation
 
+- Making graphics to clearly convey data
+- Many different options
+
+![](../images/chart_types.png)
+
 ---
 
-- Making graphics to clearly convey data
-- Many different options: more than just scatter plots and bar charts
+# What is Data Visualisation
+
+- More than just scatter plots and bar charts
+- Many domain-specific
+  - Protein folding, network graphs, trees, genome browsers
+
+![](../../dev/images/charts_examples2.png)
+
+---
+
+## Why visualizations?
+
+.pull-left[
+- *"A picture is worth 1000 words"*
+
+- Anscombe's Quartet
+
+- All these datasets share the same basic statistics:
+
+  ```python
+  X mean: 54.26, X SD: 16.76
+  Y mean: 47.83, Y SD: 26.93
+  Correlation: -0.06
+  ```
+
+- But visualisation reveals vastly different underlying structures!
+]
+.pull-right[
+.image-90[![](../../dev/images/anscombe-quartet-animated.gif)]
+]
+
+
+???
+Anscombes quartet, all these datasets have same mean, standard deviation and correlation,
+yet when visualizing them it is revealed they have vastly different structures.
 
 ---
 
@@ -18,18 +65,73 @@ logo: "GTN"
 
 ---
 
-## Genomic Data Visualisation in Galaxy
+## Genome Browsers
 
+- Visualize the genome
+  - mapped sequence reads, variants, genes, ..
 
-Tool      | Use Case
---------- | ---------
-UCSC      | Visualising interval data on the main UCSC site
-IGB / IGV | Locally visualising interval and pileup data, analysing variants
-JBrowse   | Web genome browser similar to IGB/IGV (workflow compatible)
-Circos    | Circular plots (nearly) ready for publication (workflow compatible)
+![JBrowse screenshot](../images/jbrowse/sequencing.png)
+
+---
+
+## Genome Browsers in Galaxy
+
+- As display applications
+  - e.g. UCSC browser, IBV, IGB, ..
+  - accessed via links on dataset
+
+    ![screenshot of display options](../images/display_options_bam.png)
+
+---
+
+## JBrowse
+
+- Genome browser as a regular tool
+- Configure your settings
+
+.image-75[ ![](../images/jbrowse_tool.png) ]
+
 
 ???
-[something about ucsc / igb / igv.]
-[as far as I care trackster/circster don't exist since they aren't WF compatible / there are many pros to the tools.]
 
-The JBrowse and Circos tools can provide workflow compatible tools to help summarize tens to hundreds of datasets within a single graphic that researchers can interpret. This can provide much need visual context that separate files or large textual reports cannot.
+- JBrowse is not a display application like the previous examples
+- Regular Galaxy tool
+
+---
+
+## JBrowse
+
+- Then interactively explore your genome
+
+.image-75[![JBrowse screenshot](../images/jbrowse/sequencing.png)]
+
+
+---
+
+## Galaxy Charts
+
+- Accessed through Charts icon {% icon galaxy-barchart %} on dataset
+- Different options depending on datatype
+
+![Example of list of Galaxy charts](../images/charts_list.png)
+
+---
+
+## Galaxy Charts
+
+- After selecting chart type, can customize settings
+- Example: Protein Viewer
+
+  ![](../../dev/images/charts_pdbviewer.png)
+
+---
+
+## Visualisation Tools
+
+- Many tools for visualisation
+- Example: Circos for circular data plots
+
+
+![Sample Circos images](../images/circos-sample-panel.png)
+
+
