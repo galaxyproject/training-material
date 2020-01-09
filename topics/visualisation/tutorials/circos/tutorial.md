@@ -83,7 +83,7 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 	</thead>
 	<tbody>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_scatter.png" /></td>
+			<td><img src="../../images/circos/data_tracks_scatter.png" alt="Example of a Circos scatter track"/></td>
 			<td>
 				<b>Scatter plot</b> track type. All data points are indicated by a glyph (shape).
 				<br /><br />
@@ -106,19 +106,19 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 			</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_line.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_line.png" alt="Example of a Circos line track" /></td>
 			<td><strong>Line plot</strong> track type. Data points are connected by a line. <br/><br/><u>Data format</u>: identical to scatter plot.</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_histogram.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_histogram.png" alt="Example of a Circos Histogram track" /></td>
 			<td><strong>Histogram</strong> track type. Data points are connected to form a step-like trace. <br/><br/><u>Data format</u>: identical to scatter plot.</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_heatmap.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_heatmap.png" alt="Example of a Circos Heatmap track" /></td>
 			<td><strong>Heatmap</strong> track type. <br/><br/><u>Data format</u>: identical to scatter plot.</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_tiles.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_tiles.png" alt="Example of a Circos tile track" /></td>
 			<td>
 				<strong>Tile</strong> track type. This is useful to indicate a range of the chromosome, for example to show genes, <span class="notranslate">reads</span>, repeat regions, etc.
 				<br /><br />
@@ -141,11 +141,11 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 			</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_text.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_text.png" alt="Example of a Circos text track" /></td>
 			<td><strong>Text</strong> track type. Text may also be added to a plot, for instance to indicate names of impacted genes. <br/><br/><u>Data format</u>: identical to tiles plot.</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_links.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_links.png" alt="Example of a Circos link track" /></td>
 			<td>
 				<strong>Link</strong> track type. Relationship between objects can be indicated by a line between them.
 				<br /><br />
@@ -197,7 +197,7 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 			</td>
 		</tr>
 		<tr>
-			<td><img src="../../images/circos/data_tracks_ribbons.png" alt="" /></td>
+			<td><img src="../../images/circos/data_tracks_ribbons.png" alt="Example of a Circos link track with ribbons" /></td>
 			<td><strong>Ribbons</strong> are a type of link track. These can be coloured and twisted as desired. <br/><br/><u>Data format</u>: identical to links.</td>
 		</tr>
 	</tbody>
