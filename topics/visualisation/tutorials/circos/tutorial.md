@@ -67,7 +67,7 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 The ideogram depicts your major data classes. For genomics data this is usually chromosomes, but could also be species, or genes, or another resolution level depending on what relationships you want to show. For non-genomic data this could be individuals in a population, countries, or any other major facet of your data that you want to use for grouping.
 
-![](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as neeeded and when available."){: width="70%"}
+![Examples of ideograms in Circos](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as neeeded and when available."){: width="70%"}
 
 
 ## Data Tracks
@@ -219,7 +219,7 @@ We will now illustrate Circos further with a number of example plots. Each of th
 | Link to Section     | Preview       | Note                                  |
 | ------------------- |:-------------:| :------------------------------------ |
 | [Cancer Genomics](#example-cancer-genomics) | ![VCaP cancer Circos plot](../../images/circos/vcap.png){: width="45%"} | Create a plot using data from a cancer cell line. This tutorial will guide you through the iterative process of building your first Circos image, and covers some cancer background as well. |
-| [Presidential Debate](#example-presidential-debate) | ![](../../images/circos/candidatenetworkdiagram.png){: width="45%"} | To show that Circos can be used for non-genomics data as well, this example recreates a plot that appeared in the New York times, visualizing data of the presidential debates. |
+| [Presidential Debate](#example-presidential-debate) | ![Presidential Debate NYT Circos plot](../../images/circos/candidatenetworkdiagram.png){: width="45%"} | To show that Circos can be used for non-genomics data as well, this example recreates a plot that appeared in the New York times, visualizing data of the presidential debates. |
 | [ENCODE cover](#example-nature-cover-encode) | ![Nature Cover ENCODE](../../images/nature_cover_encode.png){: width="30%"} | Recreate a Nature Cover! |
 
 
@@ -301,7 +301,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 
 You should now have a plot that looks like this:
 
-![](../../images/circos/cancer_ideogram.png){: width="50%"}
+![Circos output with only the ideogram](../../images/circos/cancer_ideogram.png){: width="50%"}
 
 We will use this as the basis for our plot, and add data tracks one at a time.
 
@@ -356,7 +356,7 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 > > > 1. These built-in definitions often include more than the canonical chromosomes (chr1-chr22, chrX, chrY), which we might not want to plot. For example, using
 > > >    The full definition of `hg18` built-in to Galaxy, we get the following ideogram:
 > > >
-> > >    ![](../../images/circos/cancer_ideogram_cached.png){: width="85%"}
+> > >    ![Example of ideogram generated using built-in genome definition](../../images/circos/cancer_ideogram_cached.png){: width="85%"}
 > > >
 > > >    We could still use this karyotype, but we would have to limit the chromosomes to be drawn in the Circos settings (we will cover this later). In this example however, we supply our own karyotype file defining only the canonical chromosomes.
 > > {: .solution}
@@ -522,7 +522,7 @@ You should see a plot like:
 > > 2. No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
 > >    This could be caused by a phenomenon known as *chromothripsis* (see next box).
 > >
-> >    ![](../../images/circos/chromosome-arms.jpg "The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis"){: width="50%"}
+> >    ![Chromosome arms](../../images/circos/chromosome-arms.jpg "The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis"){: width="50%"}
 > >
 > {: .solution}
 {: .question}
@@ -534,7 +534,7 @@ You should see a plot like:
 > **Chromothripsis** is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
 together by the cell's repair mechanisms. This leads to a huge number of SV junctions.
 >
-> ![](../../images/circos/chromothripsis.png "Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements."){: width="60%"}
+> ![Chromothripsis](../../images/circos/chromothripsis.png "Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements."){: width="60%"}
 >
 > > **Characteristics of chromothripsis:**
 > >
@@ -580,7 +580,7 @@ Next, we will create a track displaying copy number. This data comes from Affyme
 > <br>
 > Each SNP location is covered by 2 probes (one for the reference allele, and one for the variant allele). By comparing their combined intensity to the expected intensity (e.g. the sample average), a measure known as the **Log R ratio**, we can learn something about copy number. The resulting plots often look something like this:
 >
->   ![](../../images/circos/cnv-plot.png){: width="50%"}
+>   ![Example of a Log R ration plot](../../images/circos/cnv-plot.png){: width="50%"}
 >
 > With a value of 0 indicating the normalized copy number (2 in the case of a diploid genome), and significant diversions from this expected value
 > point to copy number gains or losses (the figure above shows 1 region with a copy number loss).
@@ -835,7 +835,7 @@ Now are data is ready to be plotted in Circos. We will plot this track directly 
 
 You should see a plot that looks like this:
 
-![](../../images/circos/cancer-baf.png){: width="60%"}
+![Circos output with BAF track](../../images/circos/cancer-baf.png){: width="60%"}
 
 
 Great! we can see our B-allele frequency plot track added.
@@ -880,7 +880,7 @@ There is a parameter of the link track type called *Bezier*, which controls how 
 >
 {: .hands_on}
 
-![](../../images/circos/cancer-all.png){: width="60%"}
+![Final Circos image](../../images/circos/cancer-all.png){: width="60%"}
 
 
 Another thing you may have noticed, is that in the original image we showed at the start of this section, the red links (interchromosomal SVs) were displayed as a completely different track. To do this, instead of creating a single track with a rule to change the colour of a subset of the data, we can make 2 separate tracks, with rules to only plot a subset of the data.
