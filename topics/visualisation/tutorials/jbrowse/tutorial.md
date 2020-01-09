@@ -24,11 +24,13 @@ contributors:
 
 > JBrowse ({% cite Buels_2016 %}) is a fast, embeddable genome browser built completely with JavaScript
 > and HTML5, with optional run-once data formatting tools written in Perl.
+>
+> *from [http://jbrowse.org/](http://jbrowse.org/)*
 {: .quote}
 
 The Galaxy tool accepts data in many formats:
 
-- Intervals/Feature Tracks (GFF/GFF3, BED, GenBank)
+- Intervals/Annotation/Feature Tracks (GFF/GFF3, BED, GenBank)
 - BAM Pileups
 - Blast XML results
 - Wig/BigWig
@@ -100,9 +102,9 @@ We will start by adding a couple of gene call tracks. In our case these are gene
 >    ![Screenshot of JBrowse](../../images/jbrowse-gff-track.png "Screenshot of JBrowse")
 >
 >    > ### {% icon tip %} Error reading from name store
->    > If you see this error message:
 >    > ![error message](../../images/jbrowse/error.png)
->    > Just click OK, this is a known bug.
+>    >
+>    > If you see this error message, click OK, this is a known bug.
 >    {: .tip}
 >
 {: .hands_on}
@@ -148,19 +150,25 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `genes (NCBI).gff3`
 >                        - *"JBrowse Track Type [Advanced]"*: `Canvas Features`
 >                        - In *"JBrowse Contextual Menu options [Advanced]"*:
+>
+>                          > ### {% icon tip %} Tip: Contextual Menus
+>                          >
+>                          > We're going to add a "Contextual Menu" which deserves a little explanation first. In JBrowse
+>                          > terminology the right click menu of some features is called the contextual menus. You can customize
+>                          > this menu to add new links and options that will be useful to the user. These links can be
+>                          > templated with variables based on metadata of the feature that the user clicked upon.
+>                          >
+>                          > There are more valid values for templating than mentioned in the help. When
+>                          > you click on a feature in the JBrowse instance, it will present all of the
+>                          > properties of the feature. Any of the top level properties can be used
+>                          > directly in your templating
+>                          {: .tip}
+>
 >                            - In *"Track Menu"*:
 >                                - {% icon param-repeat %} *"Insert Track Menu"*
 >                                    - *"Menu label"*: `See protein at NCBI`
 >                                    - *"Menu url"*: `https://www.ncbi.nlm.nih.gov/gene?term={locus_tag}%5BGene%20Name%5D`
 >                                    - *"Menu icon"*: `Database`
->
->    > ### {% icon tip %} Tip: Templating in Contextual Menu Options
->    >
->    > There are more valid values for templating than mentioned in the help. When
->    > you click on a feature in the JBrowse instance, it will present all of the
->    > properties of the feature. Any of the top level properties can be used
->    > directly in your templating
->    {: .tip}
 >
 > 2. View the output
 >
@@ -184,9 +192,9 @@ Contextual menus can be used to link to more than just NCBI.
 
 # Sequencing, Coverage, and Variation
 
-This is the next major category of data that people wish to visualize, sequencing, coverage, and variation. The sequencing data can be of any type, and does not necessarily need to be sequencing data, as long as the results are formatted as BAM files. Here we will add several coverage tracks (essentially a line plot along the genome, associating a position with a value) with various visualisation options like scaling and display type. Each of these visualisation options can be useful in different situations, but it largely is a matter of preference or what you are used to seeing.
+This is the next major category of data that people wish to visualize: sequencing, coverage, and variation. The sequencing data can be of any type, and does not necessarily need to be sequencing data, as long as the results are formatted as BAM files. Here we will add several coverage tracks (essentially a line plot along the genome, associating a position with a value) with various visualisation options like scaling and display type. Each of these visualisation options can be useful in different situations, but it largely is a matter of preference or what you are used to seeing.
 
-Next we will add a sequencing dataset, a BAM file which maps some sequencing reads against various locations along the genome. JBrowse helpfully highlights which reads have mapping issues, and any changes in bases between the reads and the genome. We "Autogenerate a SNP track", which produces an extra track we can enable in JBrowse. This track reads the same BAM file used for visualising reads, and then produces a SNP and coverage visualisation. **NB**: This only works for small BAM files, if your files are large (>200 Mb), then you should consider generating these coverage and SNP tracks by other means (e.g. `bamCoverage` and `FreeBayes` or similar tools) as it will be significantly faster.
+Next we will add a sequencing dataset, a BAM file which maps some sequencing reads against various locations along the genome. JBrowse helpfully highlights which reads have mapping issues, and any changes in bases between the reads and the genome. We "Autogenerate a SNP track", which produces an extra track we can enable in JBrowse. This track reads the same BAM file used for visualising reads, and then produces a SNP and coverage visualisation. **NB**: This only works for small BAM files, if your files are large (>200 Mb), then you should consider generating these coverage and SNP tracks by other means (e.g. `bamCoverage` and `FreeBayes` or similar tools) as it will be significantly faster. You can learn more about generating these files in [the Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
