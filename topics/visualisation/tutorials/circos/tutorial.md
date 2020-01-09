@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualisation with Circos"
-zenodo_link: "https://zenodo.org/record/3601438"
+zenodo_link: "https://zenodo.org/record/3603221"
 questions:
   - "What can the Circos Galaxy tool be used for?"
   - "How can I visualise common genomic datasets using Circos?"
@@ -254,11 +254,11 @@ In this section we will reproduce this Circos plot step by step.
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3601438/files/VCaP_Copy-Number.tsv
->    https://zenodo.org/record/3601438/files/VCaP_B-allele-Frequency.tsv
->    https://zenodo.org/record/3601438/files/VCaP-highConfidenceJunctions.tsv
->    https://zenodo.org/record/3601438/files/hg18_karyotype_bands.tsv
->    https://zenodo.org/record/3601438/files/hg18_karyotype.txt
+>    https://zenodo.org/record/3603221/files/VCaP_Copy-Number.tsv
+>    https://zenodo.org/record/3603221/files/VCaP_B-allele-Frequency.tsv
+>    https://zenodo.org/record/3603221/files/VCaP-highConfidenceJunctions.tsv
+>    https://zenodo.org/record/3603221/files/hg18_karyotype_bands.tsv
+>    https://zenodo.org/record/3603221/files/hg18_karyotype.txt
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -987,9 +987,9 @@ First, let's get the data we need for this plot:
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3601438/files/debate_karyotype.txt
->    https://zenodo.org/record/3601438/files/debate_links.tab
->    https://zenodo.org/record/3601438/files/debate_slices.tab
+>    https://zenodo.org/record/3603221/files/debate_karyotype.txt
+>    https://zenodo.org/record/3603221/files/debate_links.tab
+>    https://zenodo.org/record/3603221/files/debate_slices.tab
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -1185,8 +1185,8 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 > 2. Import the files from [Zenodo]() or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/3601438/files/chrom.tab
->    https://zenodo.org/record/3601438/files/highlights.tab
+>    https://zenodo.org/record/3603221/files/chrom.tab
+>    https://zenodo.org/record/3603221/files/highlights.tab
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
