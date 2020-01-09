@@ -128,13 +128,13 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 					<thead><tr><th>Chromosome</th><th>Start</th><th>End</th><th>Label</th><th>Attributes (optional)</th></tr></thead>
 						<tbody>
 						<tr>
-							<td>hs1</td><td>10119128</td><td>10345073</td><td>C_994</td><td>id=Conrad_994</td>
+							<td>chr1</td><td>10119128</td><td>10345073</td><td>C_994</td><td>id=Conrad_994</td>
 						</tr>
 						<tr>
-							<td>hs1</td><td>10171406</td><td>10415218</td><td>M_1535</td><td>id=McCarroll_1535</td>
+							<td>chr1</td><td>10171406</td><td>10415218</td><td>M_1535</td><td>id=McCarroll_1535</td>
 						</tr>
 						<tr>
-							<td>hs1</td><td>103351772</td><td>103448763</td><td>M_5507</td><td>id=Mills_5507</td>
+							<td>chr1</td><td>103351772</td><td>103448763</td><td>M_5507</td><td>id=Mills_5507</td>
 						</tr>
 					</tbody>
 				</table>
@@ -161,13 +161,13 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 					</thead>
 					<tbody>
 						<tr>
-							<td>chrX</td><td>87655109</td><td>107655109</td><td>hs12</td><td>109275831</td><td>129275831</td><td>color=blue,value=0</td>
+							<td>chrX</td><td>87655109</td><td>107655109</td><td>chr12</td><td>109275831</td><td>129275831</td><td>color=blue,value=0</td>
 						</tr>
 						<tr>
-							<td>chrX</td><td>73701156</td><td>93701156</td><td>hs22</td><td>26513447</td><td>46513447</td><td>color=green,value=1</td>
+							<td>chrX</td><td>73701156</td><td>93701156</td><td>chr22</td><td>26513447</td><td>46513447</td><td>color=green,value=1</td>
 						</tr>
 						<tr>
-							<td>chr12</td><td>121879007</td><td>132349534</td><td>hs7</td><td>43840633</td><td>63840633</td><td>color=red,value=2</td>
+							<td>chr12</td><td>121879007</td><td>132349534</td><td>chr7</td><td>43840633</td><td>63840633</td><td>color=red,value=2</td>
 						</tr>
 					</tbody>
 				</table>
@@ -230,12 +230,12 @@ We will now illustrate Circos further with a number of example plots. Each of th
 In this section, we will recreate a Circos plot of the VCaP cancer cell line presented in {% cite alves2013gene %}. In this study, data from various sources were combined into a single integrative Circos plot.
 
 
-![VCaP cancer Circos plot](../../images/circos/vcap.png "Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants"){: width="60%"}
+![VCaP cancer Circos plot](../../images/circos/vcap.png "Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants")
 
 
 This plot has 4 tracks:
  - Structural variants (2 tracks, data obtained from whole-genome NGS sequencing data)
- - B-allele Frequency (obtained from SNP-array data)
+ - B-allele Frequency (obtained from SNP array data)
  - Copy Number (obtained from SNP array data)
 
 
@@ -278,7 +278,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
-> 1. **Circos** {% icon tool %} with the following parameters:
+> 1. **Circos** visualizes data in a ciruclar layout {% icon tool %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.tsv`
@@ -374,7 +374,7 @@ The first data track we will configure, will be the structural variants (SVs) us
 >
 > Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (>50 bp) that are deleted, duplicated, translocated or inverted.
 >
-> ![Overview of types of SVs](../../images/circos/sv-types.jpg "Different types of SVs"){: width="50%"}
+> ![Overview of types of SVs](../../images/circos/sv-types.jpg "Different types of SVs")
 >
 > Image Credit: {% cite alkan2011genome%}
 >
@@ -422,14 +422,14 @@ So in order to convert this to Circos format, we need to
 
 > ### {% icon hands_on %} Hands-on: Prepare input data
 >
-> 1. **Select** {% icon tool %} with the following parameters:
+> 1. **Select** lines that match an expression {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `VCaP highConfidenceJunctions.tsv`
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `^[#><]`
 >
-> 2. **Cut** {% icon tool %} with the following parameters:
+> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
 >    - *"Cut columns"*: `c2,c3,c3,c6,c7,c7`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
+>    - {% icon param-file %} *"From"*: output of **Select** {% icon tool %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} this output to `SVs Circos.tsv`
 >
@@ -437,9 +437,11 @@ So in order to convert this to Circos format, we need to
 
 Now that we have the correct format, we can plot our data in Circos. We will plot the SVs as links; showing which parts of genome have been fused together in our sample.
 
+Given that Circos is a very complex with dozens of parameters to set, we re-run previous circos runs to build on the existing configuration we have done, without losing the progress and having to re-specify parameters every time.
+
 > ### {% icon hands_on %} Hands-on: Add Circos link track for SVs
 >
-> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot ideogram`)
+> 1. Click **Re-run** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot ideogram`)
 >
 > 2. Add a new Link Track for the SV data, colouring by SV type:
 >    - In *"Link Tracks"*:
@@ -468,7 +470,7 @@ Now that we have the correct format, we can plot our data in Circos. We will plo
 
 Your output should look something like this:
 
-![The plot with an SV track](../../images/circos/cancer_svs1.png "SVs on the VCaP cell line. Red line indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome."){: width="60%"}
+![The plot with an SV track](../../images/circos/cancer_svs1.png "SVs on the VCaP cell line. Red lines indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome."){: width="60%"}
 
 > ### {% icon question %} Questions
 >
@@ -500,7 +502,7 @@ We see from this image that chromosome 5 has an unusually large number of SVs, l
 
 You should see a plot like:
 
-![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png "Chromosome 5 of the VCaP cancer cell line. The q arm of this chromosome appears to be affected by an unusually large number of SVs"){: width="50%"}
+![Circos plot of chromosome 5 SVs](../../images/circos/cancer_svs_chr5.png "Chromosome 5 of the VCaP cancer cell line. The <a href="https://en.wikipedia.org/wiki/Locus_(genetics)">q arm</a> of this chromosome appears to be affected by an unusually large number of SVs"){: width="50%"}
 
 
 
@@ -534,11 +536,14 @@ together by the cell's repair mechanisms. This leads to a huge number of SV junc
 >
 > ![](../../images/circos/chromothripsis.png "Chromothripsis is a scattering of the DNA, followed by an imprecise repair process, leading to many structural rearrangements."){: width="60%"}
 >
-> **Characteristics of chromothripsis:**
->
-> 1. **Large numbers of complex rearrangements** in localised regions of single chromosomes or chromosome arms (showed by high density and clustered breakpoints) which suggests that chromosomes need to be condensed e.g. in mitosis for chromothripsis to occur.
-> 2. Low **copy number states- alternation between 2 states** (sometimes 3) suggesting that rearrangements occurred in a short period of time.
-> 3. In chromothriptic areas you get **alternation of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy** (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.
+> > **Characteristics of chromothripsis:**
+> >
+> > 1. **Large numbers of complex rearrangements** in localised regions of single chromosomes or chromosome arms (showed by high density and clustered breakpoints) which suggests that chromosomes need to be condensed e.g. in mitosis for chromothripsis to occur.
+> > 2. Low **copy number states- alternation between 2 states** (sometimes 3) suggesting that rearrangements occurred in a short period of time.
+> > 3. In chromothriptic areas you get **alternation of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy** (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.
+> >
+> > *from [https://en.wikipedia.org/wiki/Chromothripsis](https://en.wikipedia.org/wiki/Chromothripsis)*
+> {: .quote}
 >
 {: .comment}
 
@@ -569,7 +574,7 @@ Next, we will create a track displaying copy number. This data comes from Affyme
 > ### {% icon comment %} Background: DNA Microarrays
 >
 > **Microarrays** are used to measure the expression levels of large number of genes simultaneously, or to genotype multiple regions of a genome. In this example in our tutorial, we have data from a **SNP array**. This type of microarray detects the presence and proportion (homozyogous/heterozygous) of a
-> wide range of SNPS (Single Nucleotide Polymorphisms) known to exist within the population. A set of **probes** targeting positions of a large number of known SNPs
+> wide range of SNPs (Single Nucleotide Polymorphisms) known to exist within the population. A set of **probes** targeting positions of a large number of known SNPs
 > are used to detect the presence or absence of the SNPs in the sample.
 >
 > <br>
@@ -608,12 +613,11 @@ This is pretty close to the format expected by Circos for 2D data tracks (`chr -
 >
 > 2. **Cut** columns from a table {% icon tool %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Remove beginning** {% icon tool %})
+>    - {% icon param-file %} *"From"*: output of **Remove beginning** {% icon tool %}
 >
 > 3. **Select random lines** {% icon tool %} with the following parameters:
 >    - *"Randomly select"*: `25000`
->    - {% icon param-file %} *"from"*: `out_file1` (output of **Cut** {% icon tool %})
->    - *"Set a random seed"*: `Don't set seed`
+>    - {% icon param-file %} *"from"*: output of **Cut** {% icon tool %}
 >
 > 4. **Rename** {% icon galaxy-pencil %} the output file `cnv-circos.txt`
 >
@@ -753,7 +757,7 @@ Next, we will visualize the B-allele frequency (also known as minor allele frequ
 >
 > <br>
 >
-> By plotting this percentage, we get our B-allele frequency plot:;
+> By plotting this percentage, we get our B-allele frequency plot:
 >
 > ![Example CNV and BAF plots for different copy number states](../../images/circos/cnv-baf-intro.png "expected B-allele frequency plot (top) and Log R ratio plot (bottom) for different copy number states")
 >
@@ -790,7 +794,7 @@ We will make another scatterplot, so our data should be in the same format as th
 >
 > 2. **Select random lines** {% icon tool %} with the following parameters:
 >    - *"Randomly select"*: `25000`
->    - {% icon param-file %} *"from"*: `out_file1` (output of **Select** {% icon tool %})
+>    - {% icon param-file %} *"from"*: output of **Select** {% icon tool %}
 >    - *"Set a random seed"*: `Don't set seed`
 >
 > 3. **Rename** {% icon galaxy-pencil %} this file to `baf-circos.tsv`
@@ -1010,7 +1014,7 @@ chr - romney ROMNEY 0 1750 rep
 chr - huckabee HUCKABEE 0 1250 rep
 ```
 
-In this example, Obama spoke 2000 workds, Richardson spoke a total of 1000 words, etc. These are not the real values, but we are using them as an example.
+In this example, Obama spoke 2000 words, Richardson spoke a total of 1000 words, etc. These are not the real values, but we are using them as an example.
 The last column indicates the party of each candidate (democratic or republican), and will be used for the color of the segments.
 
 Let's start by creating the ideogram for our plot:
@@ -1025,7 +1029,6 @@ Let's start by creating the ideogram for our plot:
 >    - In *"Ideogram"*:
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `40`
->        - In *"Cytogenic Bands"*:
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot karyotype`
 >
@@ -1199,20 +1202,20 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 
 We will now create the plot all at once. Normally, this would be a more iterative step-by-step process. The previous examples show how this stepwise approach is normally used, here we just give you all the configuration to create this plot all at once.
 
+> ### {% icon tip %} Tip: Interface Complexity
+> The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.
+{: .tip}
+
 > ### {% icon hands_on %} Hands-on: Circos
->
-> > ### {% icon tip %} Tip: Interface Complexity
-> > The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.
-> {: .tip}
 >
 > 1. **Circos** {% icon tool %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
->    - In *"Plot Options"*:
->        - *"Plot Format"*: `Color`
+>    - In *"General"*:
+>        - *"Plot Background"*: `Solid Color`
 >            - *"Background Color"*: {% color_picker #000000 %}
->    - In *"Ideogram Configuration (Genome/Chromosomes)"*:
+>    - In *"Ideogram"*:
 >        - *"Thickness"*: `0.0`
 >        - In *"Labels"*:
 >            - *"Show Label"*: `Yes`
@@ -1297,6 +1300,83 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 When this has complete, your output should look similar to the following;
 
 ![Circos simplified Nature ENCODE Cover](../../images/circos-encode.png "Simplified Nature Cover")
+
+# Further Editing
+
+Sometimes the plots you create will be very close to what you want for a final image, but might be missing something, or the slightly wrong colour, or something else you want to tweak. We will look at an example of taking the final microbe graphic from above and making some additional changes. This is *not* a hands-on as installing circos on your local system is outside of the scope of this tutorial, but if you have Circos [installed locally](http://circos.ca/software/download/circos/), you're welcome to follow along.
+
+Re-running the final step of the cancer genomics example:
+
+1. In outputs, enable the **Configuration Archive**
+2. You can download this `.tar.gz` archive, and unpack it.
+3. You should see files like:
+
+   ```
+   .
+   └── circos
+       ├── conf
+       │   ├── circos.conf
+       │   ├── data.conf
+       │   ├── galaxy_test_case.json
+       │   ├── highlight.conf
+       │   ├── ideogram.conf
+       │   ├── karyotype-colors.conf
+       │   ├── karyotype.txt
+       │   ├── links.conf
+       │   └── ticks.conf
+       └── data
+           ├── data-0.txt
+           ├── data-1.txt
+           └── links-0.txt
+   ```
+
+4. In this directory, you can run the `circos` command to rebuild the image locally.
+
+    ```
+    $ circos -conf circos/conf/circos.conf
+    debuggroup summary 0.16s welcome to circos v0.69-6 31 July 2017 on Perl 5.026001
+    debuggroup summary 0.17s current working directory /tmp/tmp.LqWqFc7RNW
+    debuggroup summary 0.17s command /home/hxr/arbeit/circos/circos-0.69-6/bin/circos -conf circos/conf/circos.conf
+    debuggroup summary 0.17s loading configuration from file circos/conf/circos.conf
+    debuggroup summary 0.17s found conf file circos/conf/circos.conf
+    debuggroup summary 0.30s debug will appear for these features: output,summary
+    debuggroup summary 0.30s bitmap output image ./circos.png
+    debuggroup summary 0.30s parsing karyotype and organizing ideograms
+    debuggroup summary 0.39s karyotype has 24 chromosomes of total size 3,080,419,504
+    debuggroup summary 0.40s applying global and local scaling
+    debuggroup summary 0.41s allocating image, colors and brushes
+    debuggroup summary 7.03s drawing 24 ideograms of total size 3,080,419,504
+    debuggroup summary 7.03s drawing highlights and ideograms
+    debuggroup summary 7.33s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/link.conf
+    debuggroup summary 7.33s process track_0 link circos/conf/../data/links-0.txt
+    debuggroup summary 7.85s drawing link track_0 z 0
+    debuggroup summary 9.42s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/scatter.conf
+    debuggroup summary 9.42s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/scatter.conf
+    debuggroup summary 9.42s processing track_0 scatter circos/conf/../data/data-0.txt
+    debuggroup summary 23.98s processing track_1 scatter circos/conf/../data/data-1.txt
+    debuggroup summary 31.57s drawing track_0 scatter z 0 data-0.txt orient out
+    debuggroup summary 32.48s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/axis.conf
+    debuggroup summary 38.92s drawing track_1 scatter z 0 data-1.txt orient out
+    debuggroup summary 39.84s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/axis.conf
+    debuggroup output 46.53s generating output
+    debuggroup output 47.02s created PNG image ./circos.png (1004 kb)
+    debuggroup summary,timer 47.02s image took more than 30 s to generate. Component timings are shown above. To always show them, use -debug_group timer. To adjust the time cutoff, change debug_auto_timer_report in etc/housekeeping.conf.
+    ```
+
+Looking at the extracted files, where possible the configuration files within the archive are annotated with their specific inputs, e.g.:
+
+```
+<plot>
+    file        = data/data-1.txt # baf-circos.tsv
+    r1          = 0.75r
+    r0          = 0.6r
+    orientation = out
+    min         = 0.0
+    max         = 1.0
+```
+
+Hopefully this helps you take your Circos plots from 90% to 100% publication ready! If there are any changes you find yourself making manually very often, please [let the tool authors know](https://github.com/galaxyproject/tools-iuc/issues/new) and maybe they can add that configuration to the Galaxy tool.
+
 
 # Conclusion
 {:.no_toc}
