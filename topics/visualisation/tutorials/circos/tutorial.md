@@ -1303,7 +1303,7 @@ When this has complete, your output should look similar to the following;
 
 # Further Editing
 
-Sometimes the plots you create will be very close to what you want for a final image, but might be missing something, or the slightly wrong colour, or something else you want to tweak. We will look at an example of taking the final microbe graphic from above and making some additional changes. This is *not* a hands-on as installing circos on your local system is outside of the scope of this tutorial, but if you have Circos [installed locally](http://circos.ca/software/download/circos/), you're welcome to follow along.
+Sometimes the plots you create will be very close to what you want for a final image, but might be missing something, or the slightly wrong colour, or something else you want to tweak. We will look at an example of taking the final microbe graphic from above and making some additional changes. This is *not* a hands-on as installing Circos on your local system is outside of the scope of this tutorial, but if you have Circos [installed locally](http://circos.ca/software/download/circos/), you're welcome to follow along.
 
 Re-running the final step of the cancer genomics example:
 
@@ -1381,5 +1381,4 @@ Hopefully this helps you take your Circos plots from 90% to 100% publication rea
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Congratulations on finishing this tutorial! You have now seen how you can create Circos plots within Galaxy. Circos is a very flexible tool, but this flexibility also comes with a certain degreen of complexity and a steep learning curve. When you are making your own plots, remember that Circos is an iterative process, don't try to do too much at once, but build your plot up step by step, and check the output often.
