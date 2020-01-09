@@ -593,6 +593,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
             UseGalaxy.eu
         </a>
@@ -615,7 +617,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 19, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 9, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -636,7 +638,7 @@
 <p>In this tutorial we will use data from the study of <a class="citation" href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million <span class="notranslate">reads</span> and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected <span class="notranslate">reads</span>. We also added about 200,000 <span class="notranslate">reads</span> pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million <span class="notranslate">reads</span> in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a <span class="notranslate">DNA</span>-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
 
 <h3 class="no_toc" id="when-working-with-real-data">When working with real data</h3>
-<p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/heylf/w/atac-seq-gtm-with-control">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
+<p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/heylf/w/atac-seq-gtm-with-control">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -1070,7 +1072,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
 
 <h2 id="mapping-reads-to-reference-genome"><span class="notranslate">Mapping</span> <span class="notranslate">Reads</span> to Reference Genome</h2>
 
-<p>Next we map the trimmed <span class="notranslate">reads</span> to the human reference genome. Here we will use <strong>Bowtie2</strong>. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the <code class="highlighter-rouge">--very-sensitive</code> parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the <strong>end-to-end</strong> mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains <a href="https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE">alte<span class="notranslate">rna</span>te loci</a>. This means that some region of the genome are prensent both in the canonical chromosome and on its alte<span class="notranslate">rna</span>te loci. The <span class="notranslate">reads</span> that map to these regions would map twice. To be able to filter <span class="notranslate">reads</span> falling into repetitive regions but keep <span class="notranslate">reads</span> falling into regions present in alte<span class="notranslate">rna</span>te loci, we will map on the Canonical version of hg39 (only the chromosome with numbers, chrX, chrY, and chrM).</p>
+<p>Next we map the trimmed <span class="notranslate">reads</span> to the human reference genome. Here we will use <strong>Bowtie2</strong>. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the <code class="highlighter-rouge">--very-sensitive</code> parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the <strong>end-to-end</strong> mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains <a href="https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE">alte<span class="notranslate">rna</span>te loci</a>. This means that some region of the genome are present both in the canonical chromosome and on its alte<span class="notranslate">rna</span>te loci. The <span class="notranslate">reads</span> that map to these regions would map twice. To be able to filter <span class="notranslate">reads</span> falling into repetitive regions but keep <span class="notranslate">reads</span> falling into regions present in alte<span class="notranslate">rna</span>te loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).</p>
 
 <blockquote class="comment">
   <h3 id="comment-dovetailing"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Dovetailing</h3>
@@ -1231,7 +1233,7 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
 
 </blockquote>
 
-<p>High numbers of mitochondrial <span class="notranslate">reads</span> can be a problem in ATAC-Seq. Some ATAC-seq samples have been reported to be 80% mitochondrial <span class="notranslate">reads</span> and so wet-lab methods have been developed to deal with this issue <a class="citation" href="#Corces2017">Corces <i>et al.</i> 2017</a> and <a class="citation" href="#Litzenburger2017">Litzenburger <i>et al.</i> 2017</a>. It can be a useful QC to assess the number of mitochondrial <span class="notranslate">reads</span>.</p>
+<p>High numbers of mitochondrial <span class="notranslate">reads</span> can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial <span class="notranslate">reads</span> and so wet-lab methods have been developed to deal with this issue <a class="citation" href="#Corces2017">Corces <i>et al.</i> 2017</a> and <a class="citation" href="#Litzenburger2017">Litzenburger <i>et al.</i> 2017</a>. It can be a useful QC to assess the number of mitochondrial <span class="notranslate">reads</span>.</p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-getting-the-number-of-mitochondrial-reads"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Getting the number of mitochondrial <span class="notranslate">reads</span></h3>
@@ -1389,7 +1391,7 @@ Here, we expected FR and we got some RF for small <span class="notranslate">read
 
 <h2 id="call-peaks">Call Peaks</h2>
 
-<p>We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where <span class="notranslate">reads</span> have piled up (peaks) greater than the background read coverage. The tools which are currently used are <a href="https://github.com/jsh58/Genrich">Genrich</a> and <a href="https://github.com/taoliu/MACS">MACS2</a>. Genrich has a mode dedicated to ATAC-seq but is still not published, so both are presented here. It is very important at this point that we center the <span class="notranslate">reads</span> on the 5’ extremity (read start site) as this is where Tn5 cut. You want your peaks around the nucleosomes and not directly on the nucleosome:</p>
+<p>We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where <span class="notranslate">reads</span> have piled up (peaks) greater than the background read coverage. The tools which are currently used are <a href="https://github.com/jsh58/Genrich">Genrich</a> and <a href="https://github.com/taoliu/MACS">MACS2</a>. Genrich has a mode dedicated to ATAC-Seq but is still not published, so both are presented here. It is very important at this point that we center the <span class="notranslate">reads</span> on the 5’ extremity (read start site) as this is where Tn5 cuts. You want your peaks around the nucleosomes and not directly on the nucleosome:</p>
 <figure id="figure-15"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Scheme of ATAC-Seq <span class="notranslate">reads</span> relative to nucleosomes</figcaption></figure>
 
 <blockquote class="comment">
@@ -1961,7 +1963,7 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>Ge
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Lucille Delisle, Maria Doyle, Florian Heyl, 2019 <b>ATAC-Seq data analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html">/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Lucille Delisle, Maria Doyle, Florian Heyl, 2020 <b>ATAC-Seq data analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html">/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1978,9 +1980,9 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>Ge
 <code id="citation-code">@misc{epigenetics-atac-seq,
     author = "Lucille Delisle and Maria Doyle and Florian Heyl",
     title = "ATAC-Seq data analysis (Galaxy Training Materials)",
-    year = "2019",
-    month = "12",
-    day = "19"
+    year = "2020",
+    month = "01",
+    day = "09"
     url = "\url{/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
