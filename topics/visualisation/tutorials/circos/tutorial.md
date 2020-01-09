@@ -22,7 +22,7 @@ contributors:
 {:.no_toc}
 
 
-Circos {% cite krzywinski2009circos %} is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.
+Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.
 
 ![Panel of example Circos images](../../images/circos-sample-panel.png)
 
@@ -67,7 +67,7 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 
 The ideogram depicts your major data classes. For genomics data this is usually chromosomes, but could also be species, or genes, or another resolution level depending on what relationships you want to show. For non-genomic data this could be individuals in a population, countries, or any other major facet of your data that you want to use for grouping.
 
-![Examples of ideograms in Circos](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as neeeded and when available."){: width="70%"}
+![Examples of ideograms in Circos](../../images/circos/ideograms_examples.png "The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as needed and when available."){: width="70%"}
 
 
 ## Data Tracks
@@ -204,7 +204,7 @@ Within this ideogram, we can plot *data tracks*. There are different plot types 
 </table>
 
 Tracks can be customized a lot, some relevant concepts are:
-  - **Radius** of the track determines it location between the center (0) and the ideogram (1).
+  - **Radius** of the track determines its location between the center (0) and the ideogram (1).
   - **Rules** can be defined to change for example the color of data points depending on the value of the data points.
   - **Axes and backgrounds** can be drawn on a data track
 
@@ -1125,7 +1125,7 @@ Let's add it to our plot:
 ![Debate plot with link track](../../images/circos/debate_links.png){: width="50%"}
 
 
-> ### {% icon question %} Exercise: Color links by party of candidate
+> ### {% icon question %} Exercise: Focus on a single
 >
 > 1. As an exercise, try to add rules to the link track to colour the links red or blue depending on party of the person who spoke (`from_chromosom`)
 >    - The link should be blue for Obama, and red for McCain and Huckabee
