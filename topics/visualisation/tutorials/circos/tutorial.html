@@ -1,0 +1,3005 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Visualisation with Circos</title>
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-45719423-18' , 'auto');
+            ga('send', 'pageview');
+        </script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for data visualisation in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Visualisation with Circos" />
+        <meta property="og:description" content="Training material for data visualisation in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/visualisation" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Visualisation
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvisualisation%2Ftutorials%2Fcircos%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvisualisation%2Ftutorials%2Fcircos%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvisualisation%2Ftutorials%2Fcircos%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvisualisation%2Ftutorials%2Fcircos%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fvisualisation%2Ftutorials%2Fcircos%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/visualisation/tutorials/circos/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Visualisation with Circos",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "/blob//LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Visualisation",
+    "description": "Training material for data visualisation in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/visualisation/"
+  },
+  "courseCode": "visualisation / circos / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Visualisation with Circos' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/visualisation/tutorials/circos/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - What can the Circos Galaxy tool be used for?\n - How can I visualise common genomic datasets using Circos?\n\n\\nThe objectives are:\n - Create a number of Circos plots using the Galaxy tool\n - Familiarise yourself with the various different track types\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Visualisation",
+      "description": "Training material for data visualisation in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/visualisation/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Visualisation with Circos</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#erasche" class="contributor-badge"><img src="https://avatars.githubusercontent.com/erasche" alt="Helena Rasche">Helena Rasche</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What can the Circos Galaxy tool be used for?</p>
+</li>
+            
+            <li><p>How can I visualise common genomic datasets using Circos?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Create a number of Circos plots using the Galaxy tool</p>
+</li>
+            
+            <li><p>Familiarise yourself with the various different track types</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default"><a href="/training-material/topics/visualisation/tutorials/circos/slides.html" title="Slides for this tutorial">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/3603221">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/visualisation/tutorials/circos/workflows/" title="Workflows" alt="Visualisation with Circos workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+    
+        
+        <a class="dropdown-item" href="http://motherbox.chemeng.ntua.gr/anastasia_dev/" title="ANASTASIA">
+            ANASTASIA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://apostl.moffitt.org/" title="APOSTL">
+            APOSTL
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8083/" title="ARGA">
+            ARGA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://smile.hku.hk/SARGs" title="ARGs-OAP">
+            ARGs-OAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/argalaxy/" title="Antigen Receptor Galaxy (ARGalaxy)">
+            Antigen Receptor Galaxy (ARGalaxy)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://bf2i-galaxy.insa-lyon.fr:8080/" title="BF2I-MAP">
+            BF2I-MAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ugent.be/" title="BioBix">
+            BioBix
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://pistacho.ac.uma.es/galaxy-bitlab" title="BitLAB">
+            BitLAB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://services.cbib.u-bordeaux2.fr/galaxy/" title="CBiB Galaxy">
+            CBiB Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://iris.angers.inra.fr/galaxypub-cfbp" title="CIRM-CFBP">
+            CIRM-CFBP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cpt.tamu.edu/galaxy-public/" title="Center for Phage Technology (CPT)">
+            Center for Phage Technology (CPT)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://vm-chemflow-francegrille.eu/" title="ChemFlow">
+            ChemFlow
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.unmc.edu/" title="ChimeRScope">
+            ChimeRScope
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://codonharmonizer.systemsbiology.nl/" title="Codon Harmonizer">
+            Codon Harmonizer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://bioinf-galaxian.erasmusmc.nl/galaxy/" title="Erasmus MC">
+            Erasmus MC
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.freebioinfo.org/" title="FreeBioinfo">
+            FreeBioinfo
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://igg.cloud.ba.infn.it/galaxy" title="GASLINI">
+            GASLINI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gio.sbcs.qmul.ac.uk/" title="Galaxy Integrated Omics (GIO)">
+            Galaxy Integrated Omics (GIO)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.prabi.fr/" title="Galaxy@PRABI">
+            Galaxy@PRABI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="Galaxy@Pasteur">
+            Galaxy@Pasteur
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://hyperbrowser.uio.no/hb/" title="Genomic Hyperbrowser">
+            Genomic Hyperbrowser
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gigagalaxy.net/" title="GigaGalaxy">
+            GigaGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.hunter.cuny.edu:8080/" title="Hunter College Galaxy">
+            Hunter College Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://huttenhower.sph.harvard.edu/galaxy/" title="Huttenhower Lab">
+            Huttenhower Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
+            HyPhy HIV NGS Tools
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8081/" title="IDENAP">
+            IDENAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://math-galaxy.cgrb.oregonstate.edu:8080/" title="Koslicki Lab">
+            Koslicki Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.lappsgrid.org/" title="LAPPS Grid">
+            LAPPS Grid
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.morganlangille.com/" title="Langille Lab">
+            Langille Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ul.edu.lb/" title="Lebanese University Galaxy">
+            Lebanese University Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mississippi.fr/" title="MISSISSIPPI">
+            MISSISSIPPI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://genomequebec.mcgill.ca/exomeai" title="Majewski Lab">
+            Majewski Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://neo.engr.uconn.edu/" title="Mandoiu Lab">
+            Mandoiu Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.informatik.uni-halle.de" title="Martin Luther U. Halle-Wittenberg">
+            Martin Luther U. Halle-Wittenberg
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/" title="MiModD NacreousMap">
+            MiModD NacreousMap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.migale.inra.fr/" title="Migale">
+            Migale
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.mpds-diabetes.in/" title="Molecular Property Diagnostic Suite - Diabetes Mellitus Portal (MPDSDM)">
+            Molecular Property Diagnostic Suite - Diabetes Mellitus Portal (MPDSDM)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.inf.ethz.ch" title="Oqtans">
+            Oqtans
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://palfinder.ls.manchester.ac.uk/" title="Palfinder">
+            Palfinder
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://pepsimili.e-nios.com:8080/" title="PepSimili">
+            PepSimili
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://public.phenomenal-h2020.eu/" title="PhenoMeNal">
+            PhenoMeNal
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.proteore.org/" title="ProteoRE">
+            ProteoRE
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://bioinformatics.hsanmartino.it:8080/" title="USMI Galaxy Demonstrator">
+            USMI Galaxy Demonstrator
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.csb.univie.ac.at:8080/" title="VarCap">
+            VarCap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.bio.ku.dk/" title="Vinther Lab">
+            Vinther Lab
+        </a>
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 9, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Circos (<a class="citation" href="#krzywinski2009circos">Krzywinski <i>et al.</i> 2009</a>) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.</p>
+
+<p><img src="../../images/circos-sample-panel.png" alt="Panel of example Circos images" /></p>
+
+<p>In this tutorial you will learn how to create such publication-ready Circos plots within <span class="notranslate">Galaxy</span>, and hopefully you can draw inspiration from these for developing your own plots.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#background" id="markdown-toc-background">Background</a>    <ol>
+      <li><a href="#circos-is-an-iterative-process" id="markdown-toc-circos-is-an-iterative-process">Circos is an Iterative Process</a></li>
+    </ol>
+  </li>
+  <li><a href="#circos-basics" id="markdown-toc-circos-basics">Circos Basics</a>    <ol>
+      <li><a href="#ideogram" id="markdown-toc-ideogram">Ideogram</a></li>
+      <li><a href="#data-tracks" id="markdown-toc-data-tracks">Data Tracks</a></li>
+    </ol>
+  </li>
+  <li><a href="#tutorial-overview" id="markdown-toc-tutorial-overview">Tutorial Overview</a></li>
+  <li><a href="#example-cancer-genomics" id="markdown-toc-example-cancer-genomics">Example: Cancer Genomics</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#ideogram-1" id="markdown-toc-ideogram-1">Ideogram</a></li>
+      <li><a href="#structural-variations" id="markdown-toc-structural-variations">Structural Variations</a></li>
+      <li><a href="#copy-number-variation" id="markdown-toc-copy-number-variation">Copy Number Variation</a></li>
+      <li><a href="#b-allele-frequency" id="markdown-toc-b-allele-frequency">B-allele Frequency</a></li>
+      <li><a href="#optional-final-tweaking-of-circos-plot" id="markdown-toc-optional-final-tweaking-of-circos-plot">Optional: Final Tweaking of Circos plot</a></li>
+    </ol>
+  </li>
+  <li><a href="#example-presidential-debate" id="markdown-toc-example-presidential-debate">Example: Presidential Debate</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
+      <li><a href="#ideogram-2" id="markdown-toc-ideogram-2">Ideogram</a></li>
+      <li><a href="#highlights-track" id="markdown-toc-highlights-track">Highlights track</a></li>
+      <li><a href="#link-track" id="markdown-toc-link-track">Link Track</a></li>
+    </ol>
+  </li>
+  <li><a href="#example-nature-cover-encode" id="markdown-toc-example-nature-cover-encode">Example: Nature Cover ENCODE</a>    <ol>
+      <li><a href="#data-formats" id="markdown-toc-data-formats">Data Formats</a></li>
+      <li><a href="#get-data-1" id="markdown-toc-get-data-1">Get data</a></li>
+      <li><a href="#create-plot" id="markdown-toc-create-plot">Create Plot</a></li>
+    </ol>
+  </li>
+  <li><a href="#further-editing" id="markdown-toc-further-editing">Further Editing</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="background">Background</h1>
+
+<p>Circos supports various different plot types, such as histograms, scatter plots and heat maps. Each Circos plot may contain multiple tracks containing different sub-plots, making it ideal for visualisation of high-dimensional data.</p>
+
+<h2 id="circos-is-an-iterative-process">Circos is an Iterative Process</h2>
+
+<p>Publication quality circos plots are <em>rarely</em> produced on the first try. Developing a quality Circos plot involves a lot of trial and error to find the best way to convey specific pieces of your data to your audience. Usually you will build up the circos plot one track at a time, and play around with different parameter settings until the plot looks exactly like you want it to:</p>
+
+<figure id="figure-1"><img src="../../images/circos2.gif" alt="Gif of a circos plots through the development process" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Circos plots are an iterative process, requiring many iterative steps, each improving your plot and getting you closer to a final image.</figcaption></figure>
+
+<p>Circos is an extremely flexible but also very complex tool. The <span class="notranslate">Galaxy</span> Circos tool covers the most commonly used Circos features, but in order to avoid becoming too complex, it does not expose every single configuration option available in Circos. However, the <span class="notranslate">Galaxy</span> Circos tool allows you to download the full set of configuration files it uses, allowing you to manually tweak the plot further.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-circos-tutorials"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Circos tutorials</h3>
+
+  <p>To learn more about using Circos outside of <span class="notranslate">Galaxy</span> (e.g. for tweaking the
+Circos configuration output by the <span class="notranslate">Galaxy</span> tool), there are a wide range
+of tutorials available from the <a href="https://circos.ca">Circos website</a></p>
+</blockquote>
+
+<h1 id="circos-basics">Circos Basics</h1>
+
+<h2 id="ideogram">Ideogram</h2>
+
+<p>The ideogram depicts your major data classes. For genomics data this is usually chromosomes, but could also be species, or genes, or another resolution level depending on what relationships you want to show. For non-genomic data this could be individuals in a population, countries, or any other major facet of your data that you want to use for grouping.</p>
+
+<figure id="figure-2"><img src="../../images/circos/ideograms_examples.png" alt="Examples of ideograms in Circos" width="70%" /><figcaption><span class="figcaption-prefix">Figure 2:</span> The ideogram shows the objects for which you will plot data. Cytogenic bands can be shown as needed and when available.</figcaption></figure>
+
+<h2 id="data-tracks">Data Tracks</h2>
+
+<p>Within this ideogram, we can plot <em>data tracks</em>. There are different plot types available, such as scatterplots, histograms, heatmaps, and link tracks. Below is a list of the main track types with example images:</p>
+
+<table style="table-layout: fixed">
+	<thead>
+		<tr>
+			<th width="300">Example</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_scatter.png" alt="Example of a Circos scatter track" /></td>
+			<td>
+				<b>Scatter plot</b> track type. All data points are indicated by a glyph (shape).
+				<br /><br />
+
+				<u>Data format</u>: four or five columns, tab separated. While Circos accepts space or tab separated, to use <span class="notranslate">Galaxy</span>'s data manipulation tools you will need tab separated data. The attributes colum is completely optional but can be used to override colours, or provide extra context like "strand" or something else on which it might be diserable to filter. The format is <code>key=value,key2=value2,...</code>
+				<table>
+					<thead><tr><th>Chromosome</th><th>Start</th><th>End</th><th>Value</th><th>Attributes (optional)</th></tr></thead>
+						<tbody>
+						<tr>
+							<td>chrX</td><td>0</td><td>7499999</td><td>50</td><td></td>
+						</tr>
+						<tr>
+							<td>chrX</td><td>7500000</td><td>14999999</td><td>100</td><td>fill_color=red</td>
+						</tr>
+						<tr>
+							<td>chrX</td><td>15000000</td><td>22499999</td><td>-25</td><td>fill_color=(140,104,137)</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_line.png" alt="Example of a Circos line track" /></td>
+			<td><strong>Line plot</strong> track type. Data points are connected by a line. <br /><br /><u>Data format</u>: identical to scatter plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_histogram.png" alt="Example of a Circos Histogram track" /></td>
+			<td><strong>Histogram</strong> track type. Data points are connected to form a step-like trace. <br /><br /><u>Data format</u>: identical to scatter plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_heatmap.png" alt="Example of a Circos Heatmap track" /></td>
+			<td><strong>Heatmap</strong> track type. <br /><br /><u>Data format</u>: identical to scatter plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_tiles.png" alt="Example of a Circos tile track" /></td>
+			<td>
+				<strong>Tile</strong> track type. This is useful to indicate a range of the chromosome, for example to show genes, <span class="notranslate"><span class="notranslate">reads</span></span>, repeat regions, etc.
+				<br /><br />
+
+				<u>Data format</u>: four or five columns, similar to scatter plot but instead of a value or a score, we have a text label that can be displayed.
+				<table>
+					<thead><tr><th>Chromosome</th><th>Start</th><th>End</th><th>Label</th><th>Attributes (optional)</th></tr></thead>
+						<tbody>
+						<tr>
+							<td>chr1</td><td>10119128</td><td>10345073</td><td>C_994</td><td>id=Conrad_994</td>
+						</tr>
+						<tr>
+							<td>chr1</td><td>10171406</td><td>10415218</td><td>M_1535</td><td>id=McCarroll_1535</td>
+						</tr>
+						<tr>
+							<td>chr1</td><td>103351772</td><td>103448763</td><td>M_5507</td><td>id=Mills_5507</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_text.png" alt="Example of a Circos text track" /></td>
+			<td><strong>Text</strong> track type. Text may also be added to a plot, for instance to indicate names of impacted genes. <br /><br /><u>Data format</u>: identical to tiles plot.</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_links.png" alt="Example of a Circos link track" /></td>
+			<td>
+				<strong>Link</strong> track type. Relationship between objects can be indicated by a line between them.
+				<br /><br />
+
+				<u>Data format 1</u>: six or seven columns, including the optional attribute column.
+				<table>
+					<thead>
+						<tr>
+							<th>Chromosome 1</th><th>Start 1</th><th>End 1</th>
+							<th>Chromosome 2</th><th>Start 2</th><th>End 2</th>
+							<th>Attributes (optional)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>chrX</td><td>87655109</td><td>107655109</td><td>chr12</td><td>109275831</td><td>129275831</td><td>color=blue,value=0</td>
+						</tr>
+						<tr>
+							<td>chrX</td><td>73701156</td><td>93701156</td><td>chr22</td><td>26513447</td><td>46513447</td><td>color=green,value=1</td>
+						</tr>
+						<tr>
+							<td>chr12</td><td>121879007</td><td>132349534</td><td>chr7</td><td>43840633</td><td>63840633</td><td>color=red,value=2</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<u>Data format 2</u>: four or five columns, including the optional attribute column.
+				<table>
+					<thead>
+						<tr>
+							<th>Link ID</th><th>Chromosome</th><th>Start</th><th>End</th><th>Attributes (optional)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>link_0</td><td>chrX</td><td>87655109</td><td>107655109</td><td>color=red</td>
+						</tr>
+						<tr>
+							<td>link_0</td><td>chr12</td><td>109275831</td><td>129275831</td><td>color=blue</td>
+						</tr>
+						<tr>
+							<td>link_1</td><td>chrX</td><td>73701156</td><td>93701156</td><td>color=green</td>
+						</tr>
+						<tr>
+							<td>link_1</td><td>chr22</td><td>26513447</td><td>46513447</td><td>color=black</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="../../images/circos/data_tracks_ribbons.png" alt="Example of a Circos link track with ribbons" /></td>
+			<td><strong>Ribbons</strong> are a type of link track. These can be coloured and twisted as desired. <br /><br /><u>Data format</u>: identical to links.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>Tracks can be customized a lot, some relevant concepts are:</p>
+<ul>
+  <li><strong>Radius</strong> of the track determines its location between the center (0) and the ideogram (1).</li>
+  <li><strong>Rules</strong> can be defined to change for example the color of data points depending on the value of the data points.</li>
+  <li><strong>Axes and backgrounds</strong> can be drawn on a data track</li>
+</ul>
+
+<p>There are a <em>lot</em> of further customizations available within Circos, but in this tutorial, we will start with the basics.</p>
+
+<h1 id="tutorial-overview">Tutorial Overview</h1>
+
+<p>We will now illustrate Circos further with a number of example plots. Each of these can be run independently of each other, so feel free to pick an example that suits your interest. If this is your first time using Circos, we suggest doing the examples in order.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Link to Section</th>
+      <th style="text-align: center">Preview</th>
+      <th style="text-align: left">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="#example-cancer-genomics">Cancer Genomics</a></td>
+      <td style="text-align: center"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot" width="45%" /></td>
+      <td style="text-align: left">Create a plot using data from a cancer cell line. This tutorial will guide you through the iterative process of building your first Circos image, and covers some cancer background as well.</td>
+    </tr>
+    <tr>
+      <td><a href="#example-presidential-debate">Presidential Debate</a></td>
+      <td style="text-align: center"><img src="../../images/circos/candidatenetworkdiagram.png" alt="Presidential Debate NYT Circos plot" width="45%" /></td>
+      <td style="text-align: left">To show that Circos can be used for non-genomics data as well, this example recreates a plot that appeared in the New York times, visualizing data of the presidential debates.</td>
+    </tr>
+    <tr>
+      <td><a href="#example-nature-cover-encode">ENCODE cover</a></td>
+      <td style="text-align: center"><img src="../../images/nature_cover_encode.png" alt="Nature Cover ENCODE" width="30%" /></td>
+      <td style="text-align: left">Recreate a Nature Cover!</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="example-cancer-genomics">Example: Cancer Genomics</h1>
+
+<p>In this section, we will recreate a Circos plot of the VCaP cancer cell line presented in <a class="citation" href="#alves2013gene">Alves <i>et al.</i> 2013</a>. In this study, data from various sources were combined into a single integrative Circos plot.</p>
+
+<figure id="figure-3"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Circos plot of the VCaP cancer cell line displaying from the outside in: copy number variation, B-allele frequency, structural variants</figcaption></figure>
+
+<p>This plot has 4 tracks:</p>
+<ul>
+  <li>Structural variants (2 tracks, data obtained from whole-genome NGS sequencing data)</li>
+  <li>B-allele Frequency (obtained from SNP array data)</li>
+  <li>Copy Number (obtained from SNP array data)</li>
+</ul>
+
+<p>In this section we will reproduce this Circos plot step by step.</p>
+
+<h2 id="data-upload">Data upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-obtaining-our-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you have an empty analysis history. Give it a name.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Import Data.</strong></p>
+      <ul>
+        <li>Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:</li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3603221/files/VCaP_Copy-Number.tsv
+https://zenodo.org/record/3603221/files/VCaP_B-allele-Frequency.tsv
+https://zenodo.org/record/3603221/files/VCaP-highConfidenceJunctions.tsv
+https://zenodo.org/record/3603221/files/hg18_karyotype_bands.tsv
+https://zenodo.org/record/3603221/files/hg18_karyotype.txt
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="ideogram-1">Ideogram</h2>
+
+<p>As the first step to this Circos plot, let’s configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-set-ideogram-configuration"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Set ideogram configuration</h3>
+
+  <ol>
+    <li><strong>Circos</strong> visualizes data in a ciruclar layout <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“Karyotype”</em>:
+          <ul>
+            <li><em>“Reference Genome”</em>: <code class="highlighter-rouge">Karyotype</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Karyotype Configuration”</em>: <code class="highlighter-rouge">hg18_karyotype.tsv</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Ideogram”</em>:
+          <ul>
+            <li><em>“Radius”</em>: <code class="highlighter-rouge">0.85</code></li>
+            <li><em>“Thickness”</em>: <code class="highlighter-rouge">45</code></li>
+            <li>In <em>“Labels”</em>:
+              <ul>
+                <li><em>“Label Font Size”</em>: <code class="highlighter-rouge">64</code></li>
+              </ul>
+            </li>
+            <li>In <em>“Cytogenic Bands”</em>:
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Cytogenic Bands”</em>: <code class="highlighter-rouge">hg18_karyotype_bands.tsv</code></li>
+                <li><em>“Convert bands from <span class="notranslate">BED</span> format to circos karyotype band format”</em>: <code class="highlighter-rouge">No</code></li>
+                <li><em>“Fill Bands”</em>: <code class="highlighter-rouge">2</code></li>
+                <li><em>“Band Stroke Thickness”</em>: <code class="highlighter-rouge">1</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output <code class="highlighter-rouge">Circos Plot ideogram</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should now have a plot that looks like this:</p>
+
+<p><img src="../../images/circos/cancer_ideogram.png" alt="Circos output with only the ideogram" width="50%" /></p>
+
+<p>We will use this as the basis for our plot, and add data tracks one at a time.</p>
+
+<blockquote class="tip">
+  <h3 id="comment-advanced-info-defining-your-karyotype-file"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Advanced info: defining your karyotype file</h3>
+
+  <p>Since our data uses <code class="highlighter-rouge">hg18</code> reference genome, we supply a corresponding karyotype file:</p>
+
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr - chr1 1 0 247249719 chr1
+chr - chr2 2 0 242951149 chr2
+chr - chr3 3 0 199501827 chr3
+chr - chr4 4 0 191273063 chr4
+chr - chr5 5 0 180857866 chr5
+chr - chr6 6 0 170899992 chr6
+chr - chr7 7 0 158821424 chr7
+chr - chr8 8 0 146274826 chr8
+chr - chr9 9 0 140273252 chr9
+chr - chr10 10 0 135374737 chr10
+chr - chr11 11 0 134452384 chr11
+chr - chr12 12 0 132349534 chr12
+chr - chr13 13 0 114142980 chr13
+chr - chr14 14 0 106368585 chr14
+chr - chr15 15 0 100338915 chr15
+chr - chr16 16 0 88827254 chr16
+chr - chr17 17 0 78774742 chr17
+chr - chr18 18 0 76117153 chr18
+chr - chr19 19 0 63811651 chr19
+chr - chr20 20 0 62435964 chr20
+chr - chr21 21 0 46944323 chr21
+chr - chr22 22 0 49691432 chr22
+chr - chrX x 0 154913754 chrx
+chr - chrY y 0 57772954 chry
+</code></pre></div>  </div>
+
+  <p>Chromosome definitions are formatted as follows: <code class="highlighter-rouge">chr - ID LABEL START END COLOR</code></p>
+
+  <ul>
+    <li>The first two fields are always <code class="highlighter-rouge">chr</code>, indicating that the line defines a chromosome, and <code class="highlighter-rouge">-</code>. The second field defines the parent structure and is used only for band definitions.</li>
+    <li>The <code class="highlighter-rouge">ID</code> is the identifier used in data files whereas the <code class="highlighter-rouge">LABEL</code> is the text that will appear next to the ideogram on the image.</li>
+    <li>The <code class="highlighter-rouge">start</code> and <code class="highlighter-rouge">end</code> values define the size of the chromosome. The karyotype file should store the entire chromsome size, not just the region you wish to draw.
+There are other parameters we can use to draw only a subset of the data (e.g. just one chromosome).</li>
+    <li>The <code class="highlighter-rouge">color</code> parameter is optional, to use built-in color scheme, use <code class="highlighter-rouge">chr1, chr2. etc</code> again in this column</li>
+  </ul>
+
+  <p>More information about this format (including karyotype definitions for several species) can be found on the <a href="http://circos.ca/documentation/tutorials/ideograms/karyotypes/">Circos website</a></p>
+
+  <blockquote class="question">
+    <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <ol>
+      <li>Why didn’t we use the <code class="highlighter-rouge">hg18</code> built-in genome (using the <code class="highlighter-rouge">Locally Cached</code> option)?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <ol>
+        <li>
+          <p>These built-in definitions often include more than the canonical chromosomes (chr1-chr22, chrX, chrY), which we might not want to plot. For example, using
+The full definition of <code class="highlighter-rouge">hg18</code> built-in to <span class="notranslate">Galaxy</span>, we get the following ideogram:</p>
+
+          <p><img src="../../images/circos/cancer_ideogram_cached.png" alt="Example of ideogram generated using built-in genome definition" width="85%" /></p>
+
+          <p>We could still use this karyotype, but we would have to limit the chromosomes to be drawn in the Circos settings (we will cover this later). In this example however, we supply our own karyotype file defining only the canonical chromosomes.</p>
+        </li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="structural-variations">Structural Variations</h2>
+
+<p>The first data track we will configure, will be the structural variants (SVs) using the <em>link</em> track type in Circos. We will colour the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).</p>
+
+<blockquote class="comment">
+  <h3 id="comment-background-structural-variants"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Structural Variants</h3>
+
+  <p>Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of <span class="notranslate">DNA</span> (&gt;50 bp) that are deleted, duplicated, translocated or inverted.</p>
+
+  <figure id="figure-4"><img src="../../images/circos/sv-types.jpg" alt="Overview of types of SVs" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Different types of SVs</figcaption></figure>
+
+  <p>Image Credit: <a class="citation" href="#alkan2011genome">Alkan <i>et al.</i> 2011</a></p>
+
+  <p>One of the first observations of SVs in the human genome is known as the <a href="https://en.wikipedia.org/wiki/Philadelphia_chromosome">Philadelphia Chromosome</a>, a SV observed in leukemia. In this mutation, a translocation of genetic material  occurs between chromosomes 9 and 22, resulting in a fusion between genes <em>BCR</em> and <em>ABL1</em>, causing the production of a hybrid protein, impairing various signalling pathways and causing the cell to divide uncontrollably.</p>
+
+  <figure id="figure-5"><img src="../../images/circos/sv.jpg" alt="the Philedelphia chromosome" width="70%" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The Philadelphia chromosome</figcaption></figure>
+
+  <p>In cancer analyses it is therefore often useful to examine SVs and look for potential fusion genes that may affect cell function.</p>
+
+</blockquote>
+
+<p>SVs are usually described in terms of the SV <strong>breakpoints</strong> (or <strong>junctions</strong>); sets of genomic locations which are separated by a large distance on the reference genome, but have become adjacent in the sample through the occurrence of structural variants. Unfortunately, there is no standard file format for SV data, with different SV callers outputting different formats. Therefore, our first step will be to transform our input dataset to the Circos format for link tracks.</p>
+
+<p><strong>SV File Format:</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#ASSEMBLY_ID	GS000008107-ASM
+#SOFTWARE_VERSION	2.0.2.22
+#GENERATED_BY cgatools
+#GENERATED_AT	2012-Mar-07 19:33:32.930656
+#FORMAT_VERSION	2.0
+#GENOME_REFERENCE	NCBI build 36
+#SAMPLE	GS00669-<span class="notranslate">DNA</span>_D02
+#TYPE	JUNCTIONS
+#DBSNP_BUILD	dbSNP build 130
+#GENE_ANNOTATIONS	NCBI build 36.3
+&gt;Id	LeftChr	LeftPosition	LeftStrand	LeftLength	RightChr	RightPosition	RightStrand	RightLength	StrandConsistent	Interchromosomal	Distance	DiscordantMatePairAlignments	JunctionSequenceResolved	TransitionSequence	TransitionLength	LeftRepeatClassification	RightRepeatClassification	LeftGenes	RightGenes	XRef	DeletedTransposableElement	KnownUnderrepresentedRepeat	FrequencyInBaselineGenomeSet	AssembledSequence	EventId	Type	RelatedJunctions
+3872	chr1	815629	-	155	chr1	5649523	-	822	Y	N	4833894	13	Y		0	AluS:SINE:Alu;SegDup;Self chain	AluSx:SINE:Alu;Self chain						0.92	gcaaccaaaatgactattctttctaccctcCTAGTTCAGACATAGCCTGAGACTTTTTTTTTTTTGAGATGAAGTCTCACTCTGTCACTCAGGCTGGAGTGCAGTGGCATGGTCTCGGCTCATTGCAATCTCTACCTCCCGGGTTCAAGTGATTCTCCTGCCTCAGCCTCCCAAGTAGCTGGGGCTACAGGCGTGCACCACCACACCTGGCTAATTTTCATATTATTAGTAGAGATGGGGTTTCACCATGTTGGTCAGACTGGTCTTGAACTCCTGACCTCAGGTGATCTGCCCGCCTCTGCCTCCCAAAATGCTGAGATTACAGATGTGAGCCACTGtgcccggccgcctgagacattttggacgac	490	complex	6269;6270;8575;8577;8578
+8577	chr1	816163	+	449	chr1	5650075	+	435	Y	N	4833912	21	Y		0	SegDup;Self chain	Self chain						1.00	gactgcagggggcaggagctctctggctggGCCTTGATCGTGTTCAAGCCACAACCACAGACCTAGGCGTGGTCCCTCAGCCACCTTGTAGCCTTGGCTTGCAACATCTCGACATGGAAACCAAAATGCAGCAGGGCCAATGTGATCTGAAGTTTCCTGAAAAGTTTCTCAGACCCcctcttttaccccttgtgcaacctgcacac	490	complex	3872;6269;6270;8575;8578
+8578	chr1	816176	+	363	chr1	5650768	+	228	Y	N	4834592	12	Y	CTTTTGTAACCTGCACACAGTGACCTGTATTCTAGAGGGTCCACACAGAGCTGCCATTCCTTCTGCCAGACCCTGCGGGACTCAGGCATTCTGGAGGCTTCCTGCCCTACAAAGGCAGCCAGACTCCCGCCATGCATCCCTGCACCAGCGGCTCACGGCCAGCTCCCTCACCTGCACCAGCGGCTCACGGCTAGCTCCCTCATCTGCATTCCAGTGGCTCATGGCCAGCTCCCTCACCTGCACCAGCGGCTCTCGGCCGGCTCCCTCCCCTGCACTCCAGCGGC	284	Self chain	Self chain;Tandem period 100;Tandem period 34;Tandem period 66						1.00	aaaccaaaacgcagcagagcccatgtgatcTGAAAGTTCCTGAAAAGTTGCCCAGACCCCCTCTTGTACCCCTTTTGTAACCTGCACACAGTGACCTGTATTCTAGAGGGTCCACACAGAGCTGCCATTCCTTCTGCCAGACCCTGCGGGACTCAGGCATTCTGGAGGCTTCCTGCCCTACAAAGGCAGCCAGACTCCCGCCATGCATCCCTGCACCAGCGGCTCACGGCCAGCTCCCTCACCTGCACCAGCGGCTCACGGCTAGCTCCCTCATCTGCATTCCAGTGGCTCATGGCCAGCTCCCTCACCTGCACCAGCGGCTCTCGGCCGGCTCCCTCCCCTGCACTCCAGCGGCtcaccgccggctccctcacctgcactccag	490	complex	3872;6269;6270;8575;8577
+</code></pre></div></div>
+
+<p><strong>Circos Input Format:</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chromosome - start - end - chromosome - start - end
+</code></pre></div></div>
+
+<p>So in order to convert this to Circos format, we need to</p>
+<ul>
+  <li>Remove header lines (lines starting with <code class="highlighter-rouge">#</code>)</li>
+  <li>Select the columns containing the chromosomes and positions of the breaks (junctions)</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-input-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare input data</h3>
+
+  <ol>
+    <li><strong>Select</strong> lines that match an <span class="notranslate">expression</span> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="highlighter-rouge">VCaP highConfidenceJunctions.tsv</code></li>
+        <li><em>“that”</em>: <code class="highlighter-rouge">NOT Matching</code></li>
+        <li><em>“the pattern”</em>: <code class="highlighter-rouge">^[#&gt;&lt;]</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut</strong> columns from a table <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c2,c3,c3,c6,c7,c7</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> this output to <code class="highlighter-rouge">SVs Circos.tsv</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Now that we have the correct format, we can plot our data in Circos. We will plot the SVs as links; showing which parts of genome have been fused together in our sample.</p>
+
+<p>Given that Circos is a very complex with dozens of parameters to set, we re-run previous circos runs to build on the existing configuration we have done, without losing the progress and having to re-specify parameters every time.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-circos-link-track-for-svs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add Circos link track for SVs</h3>
+
+  <ol>
+    <li>
+      <p>Click <strong>Re-run</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (<code class="highlighter-rouge">Circos Plot ideogram</code>)</p>
+    </li>
+    <li>Add a new Link Track for the SV data, colouring by SV type:
+      <ul>
+        <li>In <em>“Link Tracks”</em>:
+          <ul>
+            <li>In <em>“Link Data”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Link Data”</em>
+                  <ul>
+                    <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.95</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Link Data Source”</em>: <code class="highlighter-rouge">SVs Circos.tsv</code></li>
+                    <li><em>“Link Type”</em>: <code class="highlighter-rouge">basic</code></li>
+                    <li><em>“Thickness”</em>: <code class="highlighter-rouge">3.0</code></li>
+                    <li><em>“Bezier Radius”</em>: <code class="highlighter-rouge">0.5</code></li>
+                    <li>In <em>“Rules”</em>:
+                      <ul>
+                        <li>In <em>“Rule”</em>:
+                          <ul>
+                            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Interchromosomal</code></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Link Colour</code></li>
+                                        <li><em>“Link Color”</em>: <span style="background-color:#ff0000;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (red)</li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output <code class="highlighter-rouge">Circos Plot SVs</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Your output should look something like this:</p>
+
+<figure id="figure-6"><img src="../../images/circos/cancer_svs1.png" alt="The plot with an SV track" width="60%" /><figcaption><span class="figcaption-prefix">Figure 6:</span> SVs on the VCaP cell line. Red lines indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Are there more interchromosomal or intrachromosomal SVs?</li>
+    <li>Which chromosome appears to have the most SVs?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Interchromosomal SVs (between different chromosomes) are coloured red in this
+plot, while SVs within a single chromosome are coloured black. By plotting the data with Circos, you can now easily see
+at a glance that there are more intrachromosomal SVs (black) than interchromosomal SVs (red).</li>
+      <li>Chromosome 5 appears to have a lot more SVs than the other chromosomes (it looks almost completely black!)</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>We see from this image that chromosome 5 has an unusually large number of SVs, let’s look at that chromosome more closely, by limiting the chromosomes Circos should draw:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plot-only-chromosome-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot only Chromosome 5</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</p>
+    </li>
+    <li>
+      <p><strong>Change</strong> the following tool parameters:</p>
+      <ul>
+        <li>In <em>“Ideogram”</em>:
+          <ul>
+            <li><em>“Limit/Filter Chromosomes”</em>: <code class="highlighter-rouge">chr5</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should see a plot like:</p>
+
+<figure id="figure-7"><img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 5 SVs" width="50%" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Chromosome 5 of the VCaP cancer cell line. The <a href="https://en.wikipedia.org/wiki/Locus_(genetics)">q arm</a> of this chromosome appears to be affected by an unusually large number of SVs</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Are there indeed significantly more SVs on chromosome 5 than on the other chromosomes? (hint: plot some of the other chromosomes as well)</li>
+    <li>Are the SVs equally distributed over chromosome 5? Can you think of an explanation for this?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>
+        <p>Yes, plotting for example only chromosome 1 (left) and comparing this with the chromosome 5 plot (right), reveals that chr5 has abnormally high number of SVs compared to the other chromosomes</p>
+
+        <p><img src="../../images/circos/cancer_svs_chr1.png" alt="Circos plot of chromosome 5 SVs" width="40%" />
+<img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 1 SVs" width="40%" /></p>
+      </li>
+      <li>
+        <p>No, only part of chromosome 5 appears to be affected. It turns out that this region is exactly one arm of the chromosome.
+This could be caused by a phenomenon known as <em>chromothripsis</em> (see next box).</p>
+
+        <figure id="figure-8"><img src="../../images/circos/chromosome-arms.jpg" alt="Chromosome arms" width="50%" /><figcaption><span class="figcaption-prefix">Figure 8:</span> The different arms of a chromosome. The short arm is termed p, the long arm is q. In our sample, the 5q arm appears to be affected by chromothripsis</figcaption></figure>
+      </li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background-chromothripsis"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Chromothripsis</h3>
+
+  <p><strong>Chromothripsis</strong> is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
+together by the cell’s repair mechanisms. This leads to a huge number of SV junctions.</p>
+
+  <figure id="figure-9"><img src="../../images/circos/chromothripsis.png" alt="Chromothripsis" width="60%" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Chromothripsis is a scattering of the <span class="notranslate">DNA</span>, followed by an imprecise repair process, leading to many structural rearrangements.</figcaption></figure>
+
+  <blockquote class="quote">
+    <p><strong>Characteristics of chromothripsis:</strong></p>
+
+    <ol>
+      <li><strong>Large numbers of complex rearrangements</strong> in localised regions of single chromosomes or chromosome arms (showed by high density and clustered breakpoints) which suggests that chromosomes need to be condensed e.g. in mitosis for chromothripsis to occur.</li>
+      <li>Low <strong>copy number states- alte<span class="notranslate">rna</span>tion between 2 states</strong> (sometimes 3) suggesting that rearrangements occurred in a short period of time.</li>
+      <li>In chromothriptic areas you get <strong>alte<span class="notranslate">rna</span>tion of regions which retain heterozygosity-two copy (no loss or gain), with regions that have loss of heterozygosity- one copy</strong> (heterozygous deletion). This suggest that the rearrangements took place at a time that both parental copies of the chromosome were present and hence early on the development of the cancer cell.</li>
+    </ol>
+
+    <p><em>from <a href="https://en.wikipedia.org/wiki/Chromothripsis">https://en.wikipedia.org/wiki/Chromothripsis</a></em></p>
+  </blockquote>
+
+</blockquote>
+
+<p>By visualizing the SVs, we have observed characteristic 1 of the list above; large number of complex rearrangements in a localised regon of a single chromosome arm, one of the main features of chromothripsis. In order to confirm we are indeed dealing with chromothripsis, we will next look plot copy number data and B-allele frequency data (both obtained from microarrays) to ascertain whether we observe the expected patterns in copy number states and heterozygosity.</p>
+
+<h2 id="copy-number-variation">Copy Number Variation</h2>
+
+<p>Next, we will create a track displaying copy number. This data comes from Affymetrix SNP arrays.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-background-copy-number-variation-cnv"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Copy Number Variation (CNV)</h3>
+
+  <p>The human genome is a <em>diploid</em> genome, meaning there are 2 copies of each chromosome, one pate<span class="notranslate">rna</span>l, and one mate<span class="notranslate">rna</span>l. This means that for any given gene, humans have two different copies of it in our genome.</p>
+
+  <p><br /></p>
+
+  <p>Some structural variants will lead to a change in this copy number, for example duplications and deletions. Other SVs (such as inversions and translocations) do not result in a change in copy number, since the piece of <span class="notranslate">DNA</span> is just moved, but the number of copies of it remains the same.</p>
+
+  <figure id="figure-10"><img src="../../images/circos/cancer-cnv-intro.png" alt="SVs lead to CNVs" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Duplications and deletions lead to a change in copy number, measurable by a change in read depth. Other SVs such as inversions are copy-number neutral.</figcaption></figure>
+
+  <p>In a healthy diploid genome, we expect the copy number to be around 2 in most places, with occasional duplications and deletions which are part of
+the normal variation within the human population. In highly rearranged genomes such as cancer we expect to see a lot more copynumber variation.</p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background-dna-microarrays"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: <span class="notranslate">DNA</span> Microarrays</h3>
+
+  <p><strong>Microarrays</strong> are used to measure the <span class="notranslate">expression</span> levels of large number of genes simultaneously, or to genotype multiple regions of a genome. In this example in our tutorial, we have data from a <strong>SNP array</strong>. This type of microarray detects the presence and proportion (homozyogous/heterozygous) of a
+wide range of SNPs (Single Nucleotide Polymorphisms) known to exist within the population. A set of <strong>probes</strong> targeting positions of a large number of known SNPs
+are used to detect the presence or absence of the SNPs in the sample.</p>
+
+  <p><br />
+Each SNP location is covered by 2 probes (one for the reference allele, and one for the variant allele). By comparing their combined intensity to the expected intensity (e.g. the sample average), a measure known as the <strong>Log R ratio</strong>, we can learn something about copy number. The resulting plots often look something like this:</p>
+
+  <p><img src="../../images/circos/cnv-plot.png" alt="Example of a Log R ration plot" width="50%" /></p>
+
+  <p>With a value of 0 indicating the normalized copy number (2 in the case of a diploid genome), and significant diversions from this expected value
+point to copy number gains or losses (the figure above shows 1 region with a copy number loss).</p>
+
+</blockquote>
+
+<p>Let’s look at our file format (VCaP-copynumber.txt`):</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chromosome	Start	End	Value	Array
+chr1	10004	10004	0.07110633	0
+chr1	28663	28663	0.2057637	0
+chr1	46844	46844	0.2016204	0
+chr1	59415	59415	0.1775235	0
+chr1	72017	72017	-0.1353417	0
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">Value</code> column indicates the copy number state, and is always between -1 and 1. the position has expected copy-number (<code class="highlighter-rouge">0</code>), indicating 2 copies in the case of diploid genomes, or whether it has a copy number loss (negative values) or a gain in copy number (positive values).</p>
+
+<p>This is pretty close to the format expected by Circos for 2D data tracks (<code class="highlighter-rouge">chr - start - end - value</code>), all we need to do to prepare this file is remove the first header line, and remove column 5. Furthermore, because this file is quite large, we do a subsampling down to 25000 lines; this is enough to get a genome-level overview of the data, but small enough that Circos will complete plotting quickly.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-cnv-input-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare CNV input file</h3>
+
+  <ol>
+    <li><strong>Remove beginning</strong> of a file <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Remove first”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="highlighter-rouge">VCaP copy number.tsv</code></li>
+      </ul>
+    </li>
+    <li><strong>Cut</strong> columns from a table <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2,c3,c4</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Remove beginning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>Select random lines</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Randomly select”</em>: <code class="highlighter-rouge">25000</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output file <code class="highlighter-rouge">cnv-circos.txt</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Now that our file is prepared, we can add a track to our Circos image. We will create a scatterplot, and colour each data point depending on copy number state (green=gain, red=loss)</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-copy-number-track-to-circos"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add Copy Number track to Circos</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the Circos plot containing the SV track <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (<code class="highlighter-rouge">Circos Plot SVs</code>)</p>
+    </li>
+    <li>Add a new scatterplot track to the image
+      <ul>
+        <li>In <em>“2D Data Tracks”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+              <ul>
+                <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">0.95</code></li>
+                <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.8</code></li>
+                <li><em>“Plot Type”</em>: <code class="highlighter-rouge">Scatter</code>
+                  <ul>
+                    <li><em>“Scatter Plot Data Source”</em>: <code class="highlighter-rouge">cnv-circos.txt</code></li>
+                    <li>In <em>“Plot Format Specific Options”</em>:
+                      <ul>
+                        <li><em>“Glyph Size”</em>: <code class="highlighter-rouge">4</code></li>
+                        <li><em>“Color”</em>: <span style="background-color:#7f7f7f;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (gray)</li>
+                        <li><em>“Stroke Thickness”</em>: <code class="highlighter-rouge">0</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><em>“Minimum / maximum options”</em>: <code class="highlighter-rouge">Supply min/max values</code>
+                  <ul>
+                    <li><em>“Minimum value”</em>: <code class="highlighter-rouge">-1.0</code></li>
+                    <li><em>“Maximum value”</em>: <code class="highlighter-rouge">1.0</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Examine</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <ol>
+          <li>Examine the resulting plot, what do you see?</li>
+          <li>How could we solve this?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>
+              <p>We see the new track, but it overlaps with the SV track. This is because we used the same <code class="highlighter-rouge">radius</code> parameter.
+This parameter determines the position of the track within the plot.</p>
+
+              <p><img src="../../images/circos/cancer-overlap.png" alt="Circos plot of chromosome 5 SVs" width="80%" /></p>
+            </li>
+            <li>
+              <p>To fix this, we can rerun the Circos tool, and change the radius of the link track (SVs) to be inside the new copynumber track (&lt;<code class="highlighter-rouge">0.8</code>).
+We will do this in the next step. This is what we mean by Circos being an iterative process; the tool is too complex to define a multitrack plot
+all at once, rather, you build it up step by step and frequently check the output.</p>
+            </li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool, changing the following parameters.
+      <ul>
+        <li>In <em>“Link Tracks”</em>:
+          <ul>
+            <li>In <em>“1: Link Data”</em>:
+              <ul>
+                <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.75</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You should see a plot that looks like:</p>
+
+<p><img src="../../images/circos/cancer-cnv.png" alt="Circos plot with CNV track" width="75%" /></p>
+
+<p>Now that we are happy with the placement of our track, let’s tweak it a bit more. Let’s colour positions showing a significant copy number loss (&lt; <code class="highlighter-rouge">-0.15</code>) red, and positions with a copy number gain (&gt; <code class="highlighter-rouge">0.15</code>) green, leaving everything inbetween gray (expected copy number):</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-colour-data-points-by-copy-number-state"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Colour data points by copy number state</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</p>
+    </li>
+    <li>
+      <p>In the <strong>2D data track</strong> of the CNV track we just created, add the following rules:</p>
+      <ul>
+        <li>In <em>“Rules”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+              <ul>
+                <li>In <em>“Conditions to Apply”</em>:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                      <ul>
+                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Apply based on point value</code>
+                          <ul>
+                            <li><em>“Points above this value”</em>: <code class="highlighter-rouge">0.15</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>In <em>“Actions to Apply”</em>:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                      <ul>
+                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code>
+                          <ul>
+                            <li><em>“Fill Color”</em>: <span style="background-color:#00b050;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (green)</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+              <ul>
+                <li>In <em>“Conditions to Apply”</em>:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                      <ul>
+                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Apply based on point value</code>
+                          <ul>
+                            <li><em>“Points below this value”</em>: <code class="highlighter-rouge">-0.15</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>In <em>“Actions to Apply”</em>:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                      <ul>
+                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code>
+                          <ul>
+                            <li><em>“Fill Color”</em>: <span style="background-color:#ff0000;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (red)</li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Sometimes it can also be nice to see the axes of the plot, to more accurately judge the values of the different data points.
+We can do this as follows:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-plot-axes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add plot axes</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</p>
+    </li>
+    <li>In the <strong>2D data track</strong> of the CNV track we just created, add plot axes as follows:
+      <ul>
+        <li>In <em>“Axes”</em>:
+          <ul>
+            <li>In <em>“Axis”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Axis”</em>
+                  <ul>
+                    <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">-1</code></li>
+                    <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">1</code></li>
+                    <li><em>“Color”</em>: <span style="background-color:#7f7f7f;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (gray)</li>
+                    <li><em>“Spacing”</em>: <code class="highlighter-rouge">0.25</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output <code class="highlighter-rouge">Circos Plot CopyNumber</code></li>
+  </ol>
+
+</blockquote>
+
+<p>You should now see a plot like this:</p>
+
+<p><img src="../../images/circos/cancer-cnv-full.png" alt="Circos plot with SNV track with rules and axes defined" width="75%" /></p>
+
+<!-- TODO: update image when axes are fixed (should be able to go to -1) -->
+
+<h2 id="b-allele-frequency">B-allele Frequency</h2>
+
+<p>Next, we will visualize the B-allele frequency (also known as minor allele frequency)</p>
+
+<blockquote class="comment">
+  <h3 id="comment-background-b-allele-frequency-baf"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: B-allele Frequency (BAF)</h3>
+
+  <p>The B-allele frequency is closely related to copy number. There are many nuances to the measurement of B-allele frequency,
+but roughly speaking it indicates the frequency (ratio) of the non-reference allele of the SNP within the sample</p>
+
+  <p>This can be used to estimate copy number changes; in a diploid genome we expect to observe 3 states:</p>
+  <ol>
+    <li>SNP is present in 100% of the probes (<strong>homozygous variant</strong>)</li>
+    <li>SNP is present in 0% of the probes (<strong>homozygous reference</strong>)</li>
+    <li>SNP is present in 50% of the probes (<strong>heterozygous</strong>)</li>
+  </ol>
+
+  <p><br /></p>
+
+  <p>By plotting this percentage, we get our B-allele frequency plot:</p>
+
+  <figure id="figure-11"><img src="../../images/circos/cnv-baf-intro.png" alt="Example CNV and BAF plots for different copy number states" /><figcaption><span class="figcaption-prefix">Figure 11:</span> expected B-allele frequency plot (top) and Log R ratio plot (bottom) for different copy number states</figcaption></figure>
+
+  <p>When these SNPs are detected at different ratios, it may indicate copy number variation. For example, a region displaying SNP ratios of 33% and 66% may indicate a copy number of 3 for that region (see image above).</p>
+
+</blockquote>
+
+<p>Now we will add such a B-allele frequency plot as track in our Circos visualization.
+The data we will use for this is also obtained from SNP array data, and looks like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chromosome	Start	End	Value
+chr1	10004	10004	0.9956236
+chr1	28663	28663	0.005509489
+chr1	46844	46844	0.488594
+chr1	59415	59415	0.570193
+chr1	72017	72017	0.006410222
+chr1	97215	97215	0.0
+chr1	110905	110905	0.9918569
+[..]
+</code></pre></div></div>
+
+<p>Note that the B-allele frequency value is always between 0 and 1.</p>
+
+<p>We will make another scatterplot, so our data should be in the same format as the copynumber track: <code class="highlighter-rouge">chr - start - end - value</code>. Luckily, this data is already in the correct format, all we have to do is remove the header line! We will also subset the data again by selecting lines randomly from the file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-b-allele-frequency-table"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the B-allele frequency table</h3>
+
+  <ol>
+    <li><strong>Remove beginning</strong> of a file <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Remove first”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="highlighter-rouge">B-allele frequence.tsv</code></li>
+      </ul>
+    </li>
+    <li><strong>Select random lines</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Randomly select”</em>: <code class="highlighter-rouge">25000</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of <strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Set a random seed”</em>: <code class="highlighter-rouge">Don't set seed</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> this file to <code class="highlighter-rouge">baf-circos.tsv</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Now are data is ready to be plotted in Circos. We will plot this track directly inside the CNV track, which means we will have to change the radius of the SV link track again as well.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-b-allele-frequency-track-to-circos"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add B-allele Frequency track to Circos</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (<code class="highlighter-rouge">Circos Plot CopyNumber</code>)</p>
+    </li>
+    <li>Add a new scatterplot track to the image
+      <ul>
+        <li>In <em>“2D Data Tracks”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+              <ul>
+                <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">0.75</code></li>
+                <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.6</code></li>
+                <li><em>“Plot Format”</em>: <code class="highlighter-rouge">Scatter</code>
+                  <ul>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Scatter Plot Data Source”</em>: <code class="highlighter-rouge">baf-circos.tsv</code> (output of <strong>Select random lines</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li>In <em>“Plot Format Specific Options”</em>:
+                      <ul>
+                        <li><em>“Glyph Size”</em>: <code class="highlighter-rouge">4</code></li>
+                        <li><em>“Color”</em>: <span style="background-color:#7f7f7f;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (gray)</li>
+                        <li><em>“Stroke Thickness”</em>: <code class="highlighter-rouge">0</code></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><em>“Minimum / maximum options”</em>: <code class="highlighter-rouge">Supply min/max values</code>
+                  <ul>
+                    <li><em>“Minimum value”</em>: <code class="highlighter-rouge">0.0</code></li>
+                    <li><em>“Maximum value”</em>: <code class="highlighter-rouge">1.0</code></li>
+                  </ul>
+                </li>
+                <li>In <em>“Axes”</em>:
+                  <ul>
+                    <li>In <em>“Axis”</em>:
+                      <ul>
+                        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Axis”</em>
+                          <ul>
+                            <li><em>“Spacing”</em>: <code class="highlighter-rouge">0.25</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Link Tracks”</em>:
+          <ul>
+            <li>In <em>“1: Link Data”</em>:
+              <ul>
+                <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.55</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> this plot to <code class="highlighter-rouge">Circos Plot BAF</code></li>
+  </ol>
+
+</blockquote>
+
+<p>You should see a plot that looks like this:</p>
+
+<p><img src="../../images/circos/cancer-baf.png" alt="Circos output with BAF track" width="60%" /></p>
+
+<p>Great! we can see our B-allele frequency plot track added.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Look at the B-allele frequency track, try to identify chromosome(s) having a copy number of:
+      <ol>
+        <li><code class="highlighter-rouge">CN=2</code> (diploid)</li>
+        <li><code class="highlighter-rouge">CN=1</code> (haploid)</li>
+        <li><code class="highlighter-rouge">CN=3</code> (triploid)</li>
+      </ol>
+
+      <p>Hint: <img src="../../images/circos/cnv-baf-intro.png" alt="Example CNV and BAF plots for different copy number states" /></p>
+    </li>
+    <li>Do you see anything other than these states?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Compare the B-allele frequency plot to the expected plot shown above for the different copynumber states.
+        <ol>
+          <li>Chromosome 12 appears completely diploid</li>
+          <li>Chromosomes 16 and X appear to have only 1 copy (no heterozygosity and a loss in copynumber as shown by the CNV track)</li>
+          <li>Chromosomes 1,2, and 3 show a pattern consistent with <code class="highlighter-rouge">CN=3</code></li>
+        </ol>
+      </li>
+      <li>Chromosome 5 shows a lot of changes in B-allele frequency. Chromosome 19 displays a pattern that could potentially indicate 4 copies (B-allele frequencies of 0, 0.25, 0.5, 0.75 and 1)</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="optional-final-tweaking-of-circos-plot">Optional: Final Tweaking of Circos plot</h2>
+
+<p>You may have noticed, that by moving the link track closer to the center repeatedly, the track of intrachromosomal links has become rather narrow.
+There is a parameter of the link track type called <em>Bezier</em>, which controls how tightly the links arc (i.e. how close to the center they reach. By playing around with this parameter, we can fine a more pleasing</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-bezier-radius"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change Bezier radius</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (<code class="highlighter-rouge">Circos Plot CopyNumber</code>)</p>
+    </li>
+    <li>
+      <p>Change the Bezier parameter of the SV track:</p>
+      <ul>
+        <li>In <em>“Link Tracks”</em>:
+          <ul>
+            <li>In <em>“1: Link Data”</em>:
+              <ul>
+                <li><em>“Bezier Radius”</em>: <code class="highlighter-rouge">0.25</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/circos/cancer-all.png" alt="Final Circos image" width="60%" /></p>
+
+<p>Another thing you may have noticed, is that in the original image we showed at the start of this section, the red links (interchromosomal SVs) were displayed as a completely different track. To do this, instead of creating a single track with a rule to change the colour of a subset of the data, we can make 2 separate tracks, with rules to only plot a subset of the data.</p>
+
+<blockquote class="question">
+  <h3 id="question-exercise-split-sv-track-into-two"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Exercise: Split SV track into two</h3>
+
+  <ol>
+    <li>Try to split the link track in two so that it matches the original image. This may take some trial and error. The full configuration is shown in the answer box below, but we provede some hints if you want to try it yourself first:
+      <ol>
+        <li><strong>Change the existing link track:</strong>
+          <ol>
+            <li>instead of a rule to change the colour of <em>interchromosomal</em> SVs, change their visibility (hide them)</li>
+          </ol>
+        </li>
+        <li><strong>Add a new link track</strong>
+          <ol>
+            <li>Choose an appropriate radius</li>
+            <li>Set the link colour to red</li>
+            <li>Add a rule to hide the <em>intrachromosomal</em> SVs</li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+
+  <figure id="figure-12"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot" width="40%" /><figcaption><span class="figcaption-prefix">Figure 12:</span> The original image from the paper. Try to make the two link tracks look like this</figcaption></figure>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The full configuration  of the two link tracks is:</p>
+
+    <blockquote class="notranslate hands_on">
+      <h3 id="hands_on-hands-on-two-link-tracks"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on: Two link tracks</h3>
+
+      <ol>
+        <li>
+          <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</p>
+        </li>
+        <li>
+          <p>Configure two separate link tracks:</p>
+          <ul>
+            <li>In <em>“Link Tracks”</em>:
+              <ul>
+                <li>In <em>“Link Data”</em>:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Link Data”</em>
+                      <ul>
+                        <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.55</code></li>
+                        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Link Data Source”</em>: <code class="highlighter-rouge">SVs Circos.tsv</code></li>
+                        <li><em>“Link Type”</em>: <code class="highlighter-rouge">basic</code></li>
+                        <li><em>“Thickness”</em>: <code class="highlighter-rouge">1.0</code></li>
+                        <li><em>“Bezier Radius”</em>: <code class="highlighter-rouge">0.25</code></li>
+                        <li>In <em>“Advanced Settings”</em>:
+                          <ul>
+                            <li><em>“Bezier Radius Purity”</em>: <code class="highlighter-rouge">1.0</code></li>
+                            <li><em>“Perturb links?”</em>: <code class="highlighter-rouge">no</code></li>
+                          </ul>
+                        </li>
+                        <li>In <em>“Rules”</em>:
+                          <ul>
+                            <li>In <em>“Rule”</em>:
+                              <ul>
+                                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                                  <ul>
+                                    <li>In <em>“Conditions to Apply”</em>:
+                                      <ul>
+                                        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                          <ul>
+                                            <li><em>“Condition”</em>: <code class="highlighter-rouge">Interchromosomal</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                    <li>In <em>“Actions to Apply”</em>:
+                                      <ul>
+                                        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                          <ul>
+                                            <li><em>“Action”</em>: <code class="highlighter-rouge">Change Visibility</code></li>
+                                            <li><em>“Show”</em>: <code class="highlighter-rouge">No</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Link Data”</em>
+                      <ul>
+                        <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.3</code></li>
+                        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Link Data Source”</em>: <code class="highlighter-rouge">SVs Circos.tsv</code></li>
+                        <li><em>“Link Type”</em>: <code class="highlighter-rouge">basic</code></li>
+                        <li><em>“Link Color”</em>: <span style="background-color:#ff0000;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (red)</li>
+                        <li><em>“Thickness”</em>: <code class="highlighter-rouge">2.0</code></li>
+                        <li><em>“Bezier Radius”</em>: <code class="highlighter-rouge">0.0</code></li>
+                        <li>In <em>“Rules”</em>:
+                          <ul>
+                            <li>In <em>“Rule”</em>:
+                              <ul>
+                                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                                  <ul>
+                                    <li>In <em>“Conditions to Apply”</em>:
+                                      <ul>
+                                        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                          <ul>
+                                            <li><em>“Condition”</em>: <code class="highlighter-rouge">Intrachromosomal</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                    <li>In <em>“Actions to Apply”</em>:
+                                      <ul>
+                                        <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                          <ul>
+                                            <li><em>“Action”</em>: <code class="highlighter-rouge">Change Visibility</code></li>
+                                            <li><em>“Show”</em>: <code class="highlighter-rouge">No</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<p>Awesome! You have now created a publication-quality Circos plot within <span class="notranslate">Galaxy</span>! There are more example plots in the sections below if you would like to get some more practice with the tool.</p>
+
+<h1 id="example-presidential-debate">Example: Presidential Debate</h1>
+
+<p>Circos was originally developed for genomics data, and a lot of the terminology in the tool is reminiscent of genomics (karyotype, ideogram, chromosome), but Circos can be used to plot any type of data. To illustrate this, the next example involves recreating a plot that appeared in <a href="http://www.nytimes.com/interactive/2007/12/15/us/politics/DEBATE.html">an article in the New York Times</a>, visualizing the 2008 presidential debates.</p>
+
+<figure id="figure-13"><img src="../../images/circos/presidential_debate_nyt.png" alt="Original plot from the NYT article" width="80%" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Plot showing how many times each presidential candidate mentioned each other candidate in the debates leading up to the 2008 US presidential election.</figcaption></figure>
+
+<blockquote class="comment">
+  <h3 id="comment-note"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
+
+  <p>This tutorial is based on one of the <a href="http://circos.ca/documentation/tutorials/recipes/naming_names/">tutorials on the Circos website</a>.</p>
+
+</blockquote>
+
+<p>Since we could not obtain the original datasets used to generate this image, we will re-create a similar plot using an artificial dataset:</p>
+
+<p><img src="../../images/circos/presidential_debate_plot.png" alt="Presidential plot we will create this tutorial" width="60%" /></p>
+
+<h2 id="get-data">Get Data</h2>
+
+<p>First, let’s get the data we need for this plot:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-obtaining-our-data-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
+
+  <ol>
+    <li>
+      <p>Make sure you have an empty analysis history. Give it a name.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Import Data.</strong></p>
+      <ul>
+        <li>Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:</li>
+      </ul>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3603221/files/debate_karyotype.txt
+https://zenodo.org/record/3603221/files/debate_links.tab
+https://zenodo.org/record/3603221/files/debate_slices.tab
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="ideogram-2">Ideogram</h2>
+
+<p>Ideograms can be used to depict any axes, not just a stretch of genomics sequence like a chromosome. In this example, each segment corresponds to a candidate’s total word count during all the debates.</p>
+
+<p>The karyotype file (<code class="highlighter-rouge">debate_karyotype.tab</code>) defines these segments:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr - obama OBAMA 0 2000 dem
+chr - richardson RICHARDSON 0 1000 dem
+chr - clinton CLINTON 0 1500 dem
+chr - mccain MCCAIN 0 1000 rep
+chr - romney ROMNEY 0 1750 rep
+chr - huckabee HUCKABEE 0 1250 rep
+</code></pre></div></div>
+
+<p>In this example, Obama spoke 2000 words, Richardson spoke a total of 1000 words, etc. These are not the real values, but we are using them as an example.
+The last column indicates the party of each candidate (democratic or republican), and will be used for the color of the segments.</p>
+
+<p>Let’s start by creating the ideogram for our plot:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-set-ideogram-configuration-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Set ideogram configuration</h3>
+
+  <ol>
+    <li><strong>Circos</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“Karyotype”</em>:
+          <ul>
+            <li><em>“Reference Genome”</em>: <code class="highlighter-rouge">Karyotype</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Karyotype Configuration”</em>: <code class="highlighter-rouge">debate_karyotype.tab</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Ideogram”</em>:
+          <ul>
+            <li>In <em>“Labels”</em>:
+              <ul>
+                <li><em>“Label Font Size”</em>: <code class="highlighter-rouge">40</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output <code class="highlighter-rouge">Circos Plot karyotype</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The resulting file should look something like this:</p>
+
+<p><img src="../../images/circos/debate_karyotype.png" alt="first step of the debate circos plot" width="50%" /></p>
+
+<p>That looks right, but we want to colour each candidate’s segment according to their party. We will do this using a <em>highlights</em> track.</p>
+
+<h2 id="highlights-track">Highlights track</h2>
+
+<p>This highlights track shows a highlight for each debate, in the color of their party (blue for democrat, red for republican). The size of each highlight indicates the number of words spoken by the candidate in each debate. The file <code class="highlighter-rouge">debate_slices.tab</code> contains this information and looks like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>obama       0    300    stroke_thickness=5,stroke_color=white
+obama       301  750    stroke_thickness=5,stroke_color=white
+obama       751  950    stroke_thickness=5,stroke_color=white
+obama       951  1250   stroke_thickness=5,stroke_color=white
+obama       1251 1500   stroke_thickness=5,stroke_color=white
+obama       1501 2000   stroke_thickness=5,stroke_color=white
+richardson  0    250    stroke_thickness=5,stroke_color=white
+richardson  251  750    stroke_thickness=5,stroke_color=white
+[..]
+</code></pre></div></div>
+
+<p>It is of format <code class="highlighter-rouge">segment - start - end</code>, with an optional 4th column, which can contain some additional Circos parameter settings.</p>
+
+<p>Now, let’s use this file to create our highlights track</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-highlights-track-to-circos-plot"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add Highlights track to Circos Plot</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (<code class="highlighter-rouge">Circos Plot karyotype</code>)</p>
+    </li>
+    <li>Add highlights to the ideogram:
+      <ul>
+        <li>In “Highlights”:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Highlight:
+              <ul>
+                <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">1</code></li>
+                <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.9</code></li>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Highlight Data Source”</em>: <code class="highlighter-rouge">debate_slices.tab</code></li>
+                <li><em>“Fill Color”</em>: <span style="background-color:#d99696;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (light red)</li>
+                <li>In “Rules”:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Rule
+                      <ul>
+                        <li>In <em>“Conditions to Apply”</em>:
+                          <ul>
+                            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                              <ul>
+                                <li><em>“Condition”</em>: <code class="highlighter-rouge">Check for presence/absence per chromosome</code></li>
+                                <li><em>“Contig IDs”</em>: <code class="highlighter-rouge">obama|richardson|clinton</code></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                        <li>In <em>“Actions to Apply”</em>:
+                          <ul>
+                            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                              <ul>
+                                <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code></li>
+                                <li><em>“Fill Color”</em>: <span style="background-color:#548dd4;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (light blue)</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output <code class="highlighter-rouge">Circos Plot highlights</code></li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/circos/debate_highlights.png" alt="The debate plot with highlights track" width="50%" /></p>
+
+<p>Great! All that is left to do now is add a link track. One line will be drawn for each time a candidate mentioned another candidate’s name.</p>
+
+<h2 id="link-track">Link Track</h2>
+
+<p>The data is stored in the file named <code class="highlighter-rouge">debate_links.tab</code>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>obama	150	150	clinton	750	750
+mccain	875	875	clinton	750	750
+huckabee	525	525	clinton	750	750
+</code></pre></div></div>
+
+<p>The format is <code class="highlighter-rouge">segment start end segment start end</code>. The first line indicates that Obama mentioned Clinton in a debate.</p>
+
+<p>Let’s add it to our plot:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-highlights-track-to-circos-plot-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add Highlights track to Circos Plot</h3>
+
+  <ol>
+    <li>
+      <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (<code class="highlighter-rouge">Circos Plot highlights</code>)</p>
+    </li>
+    <li>
+      <p>Add a link track:</p>
+      <ul>
+        <li>In <em>“Link Tracks”</em>:
+          <ul>
+            <li>In <em>“Link Data”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Link Data”</em>
+                  <ul>
+                    <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.89</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Link Data Source”</em>: <code class="highlighter-rouge">debate_links.tab</code></li>
+                    <li><em>“Link Type”</em>: <code class="highlighter-rouge">basic</code></li>
+                    <li><em>“Thickness”</em>: <code class="highlighter-rouge">5.0</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/circos/debate_links.png" alt="Debate plot with link track" width="50%" /></p>
+
+<blockquote class="question">
+  <h3 id="question-exercise-focus-on-a-single"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Exercise: Focus on a single</h3>
+
+  <ol>
+    <li>As an exercise, try to add rules to the link track to colour the links red or blue depending on party of the person who spoke (<code class="highlighter-rouge">from_chromosom</code>)
+      <ul>
+        <li>The link should be blue for Obama, and red for McCain and Huckabee</li>
+        <li>Hint 1: since two of the links should be red, and one blue, it is easiest to make red the default colour, and use a rule to change the colour for Obama</li>
+        <li>Hint 2: use <code class="highlighter-rouge">Chromosome</code> as the condition for the rule</li>
+      </ul>
+    </li>
+  </ol>
+
+  <figure id="figure-14"><img src="../../images/circos/presidential_debate_plot.png" alt="Debate plot with coloured links" width="40%" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Try to make the link track look like this</figcaption></figure>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The full configuration  of the rules for the link tracks is:</p>
+
+    <blockquote class="notranslate hands_on">
+      <h3 id="hands_on-hands-on-two-link-tracks-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands on: Two link tracks</h3>
+
+      <ol>
+        <li>
+          <p>Hit <strong>Rerun</strong> <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on the previous Circos <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</p>
+        </li>
+        <li>
+          <p>Add rules to the link track:</p>
+          <ul>
+            <li>In <em>“Link Tracks”</em>:
+              <ul>
+                <li><em>“Link Color”</em>: <span style="background-color:#d99696;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (light red)</li>
+                <li>In <em>“Rules”</em>:
+                  <ul>
+                    <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                      <ul>
+                        <li>In <em>“Conditions to Apply”</em>:
+                          <ul>
+                            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                              <ul>
+                                <li><em>“Condition”</em>: <code class="highlighter-rouge">Chromosome</code>
+                                  <ul>
+                                    <li><em>“Comparison”</em>: <code class="highlighter-rouge">from chromosome</code></li>
+                                    <li><em>“Chromosome”</em>: <code class="highlighter-rouge">obama</code></li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                            <li>In <em>“Actions to Apply”</em>:
+                              <ul>
+                                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                  <ul>
+                                    <li><em>“Action”</em>: <code class="highlighter-rouge">Change Link Color</code></li>
+                                    <li><em>“Link Color”</em>: <span style="background-color:#548dd4;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (light blue)</li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<p>Great work! You have now created a Circos plot with non-genomics data!</p>
+
+<p>The next example will show you how to recreate a Nature cover, if you would like to keep going.</p>
+
+<h1 id="example-nature-cover-encode">Example: Nature Cover ENCODE</h1>
+
+<p>Here we will reproduce the output of the <a href="http://circos.ca/documentation/tutorials/recipes/nature_cover_encode/lesson">Circos tutorial</a> for producing an image like that which was used on Nature’s Cover:</p>
+
+<figure id="figure-15"><img src="../../images/nature_cover_encode.png" alt="Nature Cover ENCODE" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Nature Cover</figcaption></figure>
+
+<h2 id="data-formats">Data Formats</h2>
+
+<!-- TODO(hxr): document it all -->
+
+<p>The Circos <span class="notranslate">Galaxy</span> tool mostly accepts <code class="highlighter-rouge">tabular</code> files. These always have at least three columns <code class="highlighter-rouge">chromosome start end</code>.</p>
+
+<h2 id="get-data-1">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="">Zenodo</a> or from the shared data library</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3603221/files/chrom.tab
+https://zenodo.org/record/3603221/files/highlights.tab
+</code></pre></div>      </div>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+    </li>
+    <li>Rename the datasets</li>
+    <li>
+      <p>Check that the datatype is <code class="highlighter-rouge">tabular</code> for both files</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="create-plot">Create Plot</h2>
+
+<p>We will now create the plot all at once. Normally, this would be a more iterative step-by-step process. The previous examples show how this stepwise approach is normally used, here we just give you all the configuration to create this plot all at once.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-interface-complexity"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Interface Complexity</h3>
+  <p>The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-circos"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Circos</h3>
+
+  <ol>
+    <li><strong>Circos</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“Karyotype”</em>:
+          <ul>
+            <li><em>“Reference Genome”</em>: <code class="highlighter-rouge">Karyotype</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Karyotype Configuration”</em>: <code class="highlighter-rouge">chrom.tab</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“General”</em>:
+          <ul>
+            <li><em>“Plot Background”</em>: <code class="highlighter-rouge">Solid Color</code>
+              <ul>
+                <li><em>“Background Color”</em>: <span style="background-color:#000000;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Ideogram”</em>:
+          <ul>
+            <li><em>“Thickness”</em>: <code class="highlighter-rouge">0.0</code></li>
+            <li>In <em>“Labels”</em>:
+              <ul>
+                <li><em>“Show Label”</em>: <code class="highlighter-rouge">Yes</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Highlights”</em>:
+          <ul>
+            <li>In <em>“Highlight”</em>:
+              <ul>
+                <li>Click on <em>“Insert Highlight”</em>:</li>
+                <li>In <em>“1: Highlight”</em>:
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">0.99</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.9</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Highlight Data Source”</em>: <code class="highlighter-rouge">highlights.tab</code></li>
+                  </ul>
+                </li>
+                <li>Click on <em>“Insert Highlight”</em>:</li>
+                <li>In <em>“2: Highlight”</em>:
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">0.89</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.8</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Highlight Data Source”</em>: <code class="highlighter-rouge">highlights.tab</code></li>
+                    <li>In <em>“Rules”</em>:
+                      <ul>
+                        <li>In <em>“Rule”</em>:
+                          <ul>
+                            <li>Click on <em>“Insert Rule”</em>:</li>
+                            <li>In <em>“1: Rule”</em>:
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Conditions to Apply”</em>:</li>
+                                    <li>In <em>“1: Conditions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Randomly</code>
+                                          <ul>
+                                            <li><em>“Percentage of bins”</em>: <code class="highlighter-rouge">0.1</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Actions to Apply”</em>:</li>
+                                    <li>In <em>“1: Actions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code>
+                                          <ul>
+                                            <li><em>“Fill Color”</em>: <span style="background-color:#8064a2;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (light purple)</li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li><em>“Continue flow”</em>: <code class="highlighter-rouge">Yes</code></li>
+                              </ul>
+                            </li>
+                            <li>Click on <em>“Insert Rule”</em>:</li>
+                            <li>In <em>“2: Rule”</em>:
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Conditions to Apply”</em>:</li>
+                                    <li>In <em>“1: Conditions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Randomly</code>
+                                          <ul>
+                                            <li><em>“Percentage of bins”</em>: <code class="highlighter-rouge">0.1</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Actions to Apply”</em>:</li>
+                                    <li>In <em>“1: Actions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code>
+                                          <ul>
+                                            <li><em>“Fill Color”</em>: <span style="background-color:#ffff00;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (yellow)</li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li><em>“Continue flow”</em>: <code class="highlighter-rouge">Yes</code></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>Click on <em>“Insert Highlight”</em>:</li>
+                <li>In <em>“3: Highlight”</em>:
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="highlighter-rouge">0.79</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="highlighter-rouge">0.7</code></li>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Highlight Data Source”</em>: <code class="highlighter-rouge">highlights.tab</code></li>
+                    <li>In <em>“Rules”</em>:
+                      <ul>
+                        <li>In <em>“Rule”</em>:
+                          <ul>
+                            <li>Click on <em>“Insert Rule”</em>:</li>
+                            <li>In <em>“1: Rule”</em>:
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Conditions to Apply”</em>:</li>
+                                    <li>In <em>“1: Conditions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Randomly</code>
+                                          <ul>
+                                            <li><em>“Percentage of bins”</em>: <code class="highlighter-rouge">0.2</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Actions to Apply”</em>:</li>
+                                    <li>In <em>“1: Actions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code>
+                                          <ul>
+                                            <li><em>“Fill Color”</em>: <span style="background-color:#8064a2;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (light purple)</li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li><em>“Continue flow”</em>: <code class="highlighter-rouge">Yes</code></li>
+                              </ul>
+                            </li>
+                            <li>Click on <em>“Insert Rule”</em>:</li>
+                            <li>In <em>“2: Rule”</em>:
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Conditions to Apply”</em>:</li>
+                                    <li>In <em>“1: Conditions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="highlighter-rouge">Randomly</code>
+                                          <ul>
+                                            <li><em>“Percentage of bins”</em>: <code class="highlighter-rouge">0.2</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li>Click on <em>“Insert Actions to Apply”</em>:</li>
+                                    <li>In <em>“1: Actions to Apply”</em>:
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="highlighter-rouge">Change Fill Color for all points</code>
+                                          <ul>
+                                            <li><em>“Fill Color”</em>: <span style="background-color:#ffff00;border-radius:3px;border:1px solid #000;width:12px;height:12px;margin-right:5px;">     </span> (yellow)</li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>View <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output PNG file</li>
+  </ol>
+
+</blockquote>
+
+<p>When this has complete, your output should look similar to the following;</p>
+
+<figure id="figure-16"><img src="../../images/circos-encode.png" alt="Circos simplified Nature ENCODE Cover" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Simplified Nature Cover</figcaption></figure>
+
+<h1 id="further-editing">Further Editing</h1>
+
+<p>Sometimes the plots you create will be very close to what you want for a final image, but might be missing something, or the slightly wrong colour, or something else you want to tweak. We will look at an example of taking the final microbe graphic from above and making some additional changes. This is <em>not</em> a hands-on as installing Circos on your local system is outside of the scope of this tutorial, but if you have Circos <a href="http://circos.ca/software/download/circos/">installed locally</a>, you’re welcome to follow along.</p>
+
+<p>Re-running the final step of the cancer genomics example:</p>
+
+<ol>
+  <li>In outputs, enable the <strong>Configuration Archive</strong></li>
+  <li>You can download this <code class="highlighter-rouge">.tar.gz</code> archive, and unpack it.</li>
+  <li>
+    <p>You should see files like:</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+└── circos
+    ├── conf
+    │   ├── circos.conf
+    │   ├── data.conf
+    │   ├── <span class="notranslate">galaxy</span>_test_case.json
+    │   ├── highlight.conf
+    │   ├── ideogram.conf
+    │   ├── karyotype-colors.conf
+    │   ├── karyotype.txt
+    │   ├── links.conf
+    │   └── ticks.conf
+    └── data
+        ├── data-0.txt
+        ├── data-1.txt
+        └── links-0.txt
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>In this directory, you can run the <code class="highlighter-rouge">circos</code> command to rebuild the image locally.</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ circos -conf circos/conf/circos.conf
+ debuggroup summary 0.16s welcome to circos v0.69-6 31 July 2017 on Perl 5.026001
+ debuggroup summary 0.17s current working directory /tmp/tmp.LqWqFc7RNW
+ debuggroup summary 0.17s command /home/hxr/arbeit/circos/circos-0.69-6/bin/circos -conf circos/conf/circos.conf
+ debuggroup summary 0.17s loading configuration from file circos/conf/circos.conf
+ debuggroup summary 0.17s found conf file circos/conf/circos.conf
+ debuggroup summary 0.30s debug will appear for these features: output,summary
+ debuggroup summary 0.30s bitmap output image ./circos.png
+ debuggroup summary 0.30s parsing karyotype and organizing ideograms
+ debuggroup summary 0.39s karyotype has 24 chromosomes of total size 3,080,419,504
+ debuggroup summary 0.40s applying global and local scaling
+ debuggroup summary 0.41s allocating image, colors and brushes
+ debuggroup summary 7.03s drawing 24 ideograms of total size 3,080,419,504
+ debuggroup summary 7.03s drawing highlights and ideograms
+ debuggroup summary 7.33s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/link.conf
+ debuggroup summary 7.33s process track_0 link circos/conf/../data/links-0.txt
+ debuggroup summary 7.85s drawing link track_0 z 0
+ debuggroup summary 9.42s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/scatter.conf
+ debuggroup summary 9.42s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/scatter.conf
+ debuggroup summary 9.42s processing track_0 scatter circos/conf/../data/data-0.txt
+ debuggroup summary 23.98s processing track_1 scatter circos/conf/../data/data-1.txt
+ debuggroup summary 31.57s drawing track_0 scatter z 0 data-0.txt orient out
+ debuggroup summary 32.48s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/axis.conf
+ debuggroup summary 38.92s drawing track_1 scatter z 0 data-1.txt orient out
+ debuggroup summary 39.84s found conf file /home/hxr/arbeit/circos/circos-0.69-6/bin/../etc/tracks/axis.conf
+ debuggroup output 46.53s generating output
+ debuggroup output 47.02s created PNG image ./circos.png (1004 kb)
+ debuggroup summary,timer 47.02s image took more than 30 s to generate. Component timings are shown above. To always show them, use -debug_group timer. To adjust the time cutoff, change debug_auto_timer_report in etc/housekeeping.conf.
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Looking at the extracted files, where possible the configuration files within the archive are annotated with their specific inputs, e.g.:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;plot&gt;
+    file        = data/data-1.txt # baf-circos.tsv
+    r1          = 0.75r
+    r0          = 0.6r
+    orientation = out
+    min         = 0.0
+    max         = 1.0
+</code></pre></div></div>
+
+<p>Hopefully this helps you take your Circos plots from 90% to 100% publication ready! If there are any changes you find yourself making manually very often, please <a href="https://github.com/galaxyproject/tools-iuc/issues/new">let the tool authors know</a> and maybe they can add that configuration to the <span class="notranslate">Galaxy</span> tool.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Congratulations on finishing this tutorial! You have now seen how you can create Circos plots within <span class="notranslate">Galaxy</span>. Circos is a very flexible tool, but this flexibility also comes with a certain degree of complexity and a steep learning curve. When you are making your own plots, remember that Circos is an iterative process, don’t try to do too much at once, but build your plot up step by step, and check the output often.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Circos is an effective tool to make circular visualisation of high-dimensional datasets</p>
+</li>
+                            
+                            <li><p>Circos is often used for genomics, but can also be used for other types of data</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="krzywinski2009circos">Krzywinski, M., J. Schein, I. Birol, J. Connors, R. Gascoyne <i>et al.</i>, 2009 <b>Circos: an information aesthetic for comparative genomics</b>. Genome research 19: 1639–1645.</span>
+    
+    
+    
+
+</li>
+<li><span id="alkan2011genome">Alkan, C., B. P. Coe, and E. E. Eichler, 2011 <b>Genome structural variation discovery and genotyping</b>. Nature Reviews Genetics 12: 363.</span>
+    
+    
+    
+
+</li>
+<li><span id="alves2013gene">Alves, I. T., S. Hiltemann, T. Hartjes, P. van der Spek, A. Stubbs <i>et al.</i>, 2013 <b>Gene fusions by chromothripsis of chromosome 5q in the VCaP prostate cancer cell line</b>. Human genetics 132: 709–713.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Saskia Hiltemann, Helena Rasche, 2020 <b>Visualisation with Circos (Galaxy Training Materials)</b>. <a href="/training-material/topics/visualisation/tutorials/circos/tutorial.html">/training-material/topics/visualisation/tutorials/circos/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{visualisation-circos,
+    author = "Saskia Hiltemann and Helena Rasche",
+    title = "Visualisation with Circos (Galaxy Training Materials)",
+    year = "2020",
+    month = "01",
+    day = "09"
+    url = "\url{/training-material/topics/visualisation/tutorials/circos/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Visualisation with Circos (Visualisation)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Visualisation with Circos (Visualisation)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Saskia Hiltemann, Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/visualisation/tutorials/circos/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>

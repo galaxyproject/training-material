@@ -420,8 +420,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
         </a>
@@ -431,6 +429,8 @@
         <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
             Galaxy for Ecology
         </a>
+        
+    
         
     
         
@@ -520,7 +520,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 21, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 9, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -543,7 +543,7 @@
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>Features and targets of a breast cancer dataset:</p>
-    <figure id="figure-1"><img src="images/breast_cancer_classification.png" alt="Breast_cancer_targets" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about the cells whether they are mono or multi-layered. Similarly, other columns/features provide different information about tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discreet which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.</figcaption></figure>
+    <figure id="figure-1"><img src="images/breast_cancer_classification.png" alt="Breast_cancer_targets" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The image shows a breast cancer dataset with 8 rows and 10 columns. Each column is a feature and encodes a specific information about breast cancer or detected tumor. For example, the feature "clump thickness" gives information about whether the cells are mono or multi-layered. Similarly, other columns/features provide different information about the tumor. The last column is the "target" column which identifies whether the tumor is benign (0) or malignant (1) for each row of the dataset. Here, the targets are discrete which makes the learning task classification. In another task, if these targets contain continuous values, the learning task will become regression.</figcaption></figure>
 
   </blockquote>
 
@@ -559,7 +559,7 @@
       <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
       <li><a href="#learn-using-training-dataset" id="markdown-toc-learn-using-training-dataset">Learn using training dataset</a></li>
       <li><a href="#predict-categories-of-test-dataset" id="markdown-toc-predict-categories-of-test-dataset">Predict categories of test dataset</a></li>
-      <li><a href="#visualise-prediction" id="markdown-toc-visualise-prediction">Visualise prediction</a></li>
+      <li><a href="#visualise-the-predictions" id="markdown-toc-visualise-the-predictions">Visualise the predictions</a></li>
       <li><a href="#summary" id="markdown-toc-summary">Summary</a></li>
     </ol>
   </li>
@@ -578,7 +578,7 @@
 
 <h1 id="classification">Classification</h1>
 
-<p><a href="https://en.wikipedia.org/wiki/Statistical_classification">Classification</a> task assigns a category/class to each sample by learning a decision boundary in a dataset. This dataset is called a training dataset and contains samples and desired class/category for each sample. The training dataset contains “features” as columns and a <span class="notranslate">mapping</span> between these features and the target is learned for each sample. The performance of <span class="notranslate">mapping</span> is evaluated using a test dataset (it is separate from training dataset). The test dataset contains only the feature columns and not the target column. The target column is predicted using the <span class="notranslate">mapping</span> learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a> task assigns a category/class to each sample by learning a decision boundary in a dataset. This dataset is called a training dataset and contains samples and desired class/category for each sample. The training dataset contains “features” as columns and a <span class="notranslate">mapping</span> between these features and the target is learned for each sample. The performance of <span class="notranslate">mapping</span> is evaluated using a test dataset (which is separate from training dataset). The test dataset contains only the feature columns and not the target column. The target column is predicted using the <span class="notranslate">mapping</span> learned on the training dataset. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -587,18 +587,18 @@
 
 <figure id="figure-2"><img src="images/classification.png" alt="classification" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Classification of samples belonging to different classes (green for no tumor and violet for tumor). The line creates a boundary between two sets of samples and is learned by a classifier. When a new sample comes for which we do not know whether it is a tumor or no tumor, we use this decision boundary to compute the actual class.</figcaption></figure>
 
-<p>In figure <a href="#figure-2">2</a>, the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, the powerful classifiers like <code class="highlighter-rouge">support vector machine</code> or  <code class="highlighter-rouge">tree</code> or <code class="highlighter-rouge">ensemble</code> based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let’s begin by uploading the necessary datasets.</p>
+<p>In figure <a href="#figure-2">2</a>, the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like <code class="highlighter-rouge">support vector machine</code> or  <code class="highlighter-rouge">tree</code> or <code class="highlighter-rouge">ensemble</code> based classifiers may prove to be beneficial. In the following part, we will perform classification on breast cancer dataset using a linear classifier and then will analyze the results with plots. Let’s begin by uploading the necessary datasets.</p>
 
 <h2 id="data-upload">Data upload</h2>
 
-<p>The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on. More information about the dataset can be found here - <a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(original)">a</a> and <a href="https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations">b</a>. In addition to these features, the training dataset contains one more column as the <code class="highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="highlighter-rouge">0</code> indicates no breast cancer (benign) and <code class="highlighter-rouge">1</code> (malignant) indicates breast cancer. The test dataset does not contain the <code class="highlighter-rouge">target</code> column (which should be predicted by a classifier). The third dataset contains all the samples from the test dataset but also the <code class="highlighter-rouge">target</code> column which would be needed to compare between real and predicted targets.</p>
+<p>The datasets to be used for classification contain 9 features. Each feature contains some unique information about breast cancer including the thickness of clump, cell-size, cell-shape and so on. More information about the dataset can be found here - <a href="https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(original)">a</a> and <a href="https://sites.google.com/a/googlesciencefair.com/science-fair-2012-project-64a91af142a459cfb486ed5cb05f803b2eb41354-1333130785-87/observations">b</a>. In addition to these features, the training dataset contains one more column as the <code class="highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="highlighter-rouge">0</code> indicates no breast cancer (benign) and <code class="highlighter-rouge">1</code> (malignant) indicates breast cancer. The test dataset does not contain the <code class="highlighter-rouge">target</code> column (which should be predicted by a classifier). The third dataset contains all the samples from the test dataset, this time including the <code class="highlighter-rouge">target</code> column which is needed to compare between real and predicted targets.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
     <li>
-      <p>Create a new history for this tutorial</p>
+      <p>Create a new history for this tutorial.</p>
 
       <blockquote class="tip">
 
@@ -614,7 +614,7 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the following datasets and choose the type of data as <code class="highlighter-rouge">tabular</code></p>
+      <p>Import the following datasets and choose the type of data as <code class="highlighter-rouge">tabular</code>.</p>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3248907/files/breast-w_targets.tsv
 https://zenodo.org/record/3248907/files/breast-w_test.tsv
@@ -645,7 +645,7 @@ https://zenodo.org/record/3248907/files/breast-w_train.tsv
       </blockquote>
     </li>
     <li>
-      <p>Rename datasets to <code class="highlighter-rouge">breast-w_train</code>, <code class="highlighter-rouge">breast-w_test</code> and <code class="highlighter-rouge">breast-w_targets</code></p>
+      <p>Rename datasets to <code class="highlighter-rouge">breast-w_train</code>, <code class="highlighter-rouge">breast-w_test</code> and <code class="highlighter-rouge">breast-w_targets</code>.</p>
 
       <blockquote class="tip">
 
@@ -721,7 +721,7 @@ These attributes are stored in the trained model and can be accessed by reading 
 
 <h2 id="predict-categories-of-test-dataset">Predict categories of test dataset</h2>
 
-<p>After the training process completes, we can see the trained model file (<code class="highlighter-rouge">zip</code> file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (<code class="highlighter-rouge">breast-w_test</code>) dataset. It assigns a class (either tumor or no tumor) to each row in the <code class="highlighter-rouge">breast-w_test</code> dataset.</p>
+<p>After the training process is complete, we can see the trained model file (<code class="highlighter-rouge">zip</code> file) which contains information about patterns in the form of weights. The trained model is used to predict the classes of the test (<code class="highlighter-rouge">breast-w_test</code>) dataset. It assigns a class (either tumor or no tumor) to each row in the <code class="highlighter-rouge">breast-w_test</code> dataset.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-classes-using-the-trained-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict classes using the trained model</h3>
@@ -739,13 +739,13 @@ These attributes are stored in the trained model and can be accessed by reading 
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">predicted_labels</code></li>
+    <li>Rename the generated file to <code class="highlighter-rouge">predicted_labels</code>.</li>
   </ol>
 </blockquote>
 
-<h2 id="visualise-prediction">Visualise prediction</h2>
+<h2 id="visualise-the-predictions">Visualise the predictions</h2>
 
-<p>We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (<code class="highlighter-rouge">breast-w_targets</code>). It is the same as the test dataset (<code class="highlighter-rouge">breast-w_test</code>) but contains an extra <code class="highlighter-rouge">target</code> column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and F1 and ROC and AUC. We will mainly analyze the precision and recall plot.</p>
+<p>We should evaluate the quality of predictions by comparing them against the true targets. To do this, we will use another dataset (<code class="highlighter-rouge">breast-w_targets</code>). This is the same as the test dataset (<code class="highlighter-rouge">breast-w_test</code>) but contains an extra <code class="highlighter-rouge">target</code> column containing the true classes of the test dataset. With the predicted and true classes, the learned model is evaluated to verify how correct the predictions are. To visualise these predictions, a plotting tool is used. It creates three plots - confusion matrix, precision, recall and F1 and ROC and AUC. We will mainly analyze the precision and recall plot.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-and-visualize-the-predictions"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check and visualize the predictions</h3>
@@ -788,21 +788,21 @@ These attributes are stored in the trained model and can be accessed by reading 
 
 <h1 id="regression">Regression</h1>
 
-<p>For classification, the targets are integers. But, when the targets in a dataset are real numbers, the machine learning task becomes <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>. Each sample in the dataset has a real-valued output or target. Figure <a href="#figure-6">6</a> shows how a (regression) curve is fit which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. A regressor learns the <span class="notranslate">mapping</span> between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear or non-linear. In this part of the tutorial, we will perform regression on <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a> dataset.</p>
+<p>For classification, the targets are integers. However, when the targets in a dataset are real numbers, the machine learning task becomes <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>. Each sample in the dataset has a real-valued output or target. Figure <a href="#figure-6">6</a> shows how a (regression) curve is fitted which explains most of the data points (blue balls). Here, the curve is a straight line (red). The regression task is to learn this curve which explains the underlying distribution of the data points. The target for a new sample will lie on the curve learned by the regression task. A regressor learns the <span class="notranslate">mapping</span> between the features of a dataset row and its target value. Inherently, it tries to fit a curve for the targets. This curve can be linear or non-linear. In this part of the tutorial, we will perform regression on <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a> dataset.</p>
 
 <figure id="figure-6"><img src="images/regression.png" alt="regression" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Regression fit through data points. These data points are the targets of the training dataset. A curve is learned which best explains all these points. The target for a new sample will lie along the curve learned by the regression task.</figcaption></figure>
 
 <h2 id="data-upload-1">Data upload</h2>
 
-<p>The dataset contains information about human <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a>. It includes 14 features like underwater body density, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a <span class="notranslate">mapping</span> between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To execute this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. <code class="highlighter-rouge">body_fat_train</code> dataset is used as the training dataset and <code class="highlighter-rouge">body_fat_test</code> as the test dataset. The dataset <code class="highlighter-rouge">body_fat_test_labels</code> contains the true targets for the test dataset (<code class="highlighter-rouge">body_fat_test</code>).</p>
+<p>The dataset contains information about human <a href="https://rstudio-pubs-static.s3.amazonaws.com/65314_c0d1e5696cdd4e93a3784ea67f9e3d34.html">body density</a>. It includes 14 features like underwater body density, age, weight, height, neck circumference and so on. The target is the percent body fat. The aim of the task is to learn a <span class="notranslate">mapping</span> between several body features and fat content inside the human body. Using this learning, the body fat percentage can be predicted using other features. To carry out this task, we will need training and test datasets. Again, we will also prepare another test dataset with targets included to evaluate the regression performance. <code class="highlighter-rouge">body_fat_train</code> dataset is used as the training dataset and <code class="highlighter-rouge">body_fat_test</code> as the test dataset. The dataset <code class="highlighter-rouge">body_fat_test_labels</code> contains the true targets for the test dataset (<code class="highlighter-rouge">body_fat_test</code>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create a new history for this tutorial</li>
+    <li>Create a new history for this tutorial.</li>
     <li>
-      <p>Import the following datasets and choose the type of data as <code class="highlighter-rouge">tabular</code></p>
+      <p>Import the following datasets and choose the type of data as <code class="highlighter-rouge">tabular</code>.</p>
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3248907/files/body_fat_train.tsv
 https://zenodo.org/record/3248907/files/body_fat_test_labels.tsv
@@ -833,7 +833,7 @@ https://zenodo.org/record/3248907/files/body_fat_test.tsv
       </blockquote>
     </li>
     <li>
-      <p>Rename datasets to <code class="highlighter-rouge">body_fat_train</code>, <code class="highlighter-rouge">body_fat_test_labels</code> and <code class="highlighter-rouge">body_fat_test</code></p>
+      <p>Rename datasets to <code class="highlighter-rouge">body_fat_train</code>, <code class="highlighter-rouge">body_fat_test_labels</code> and <code class="highlighter-rouge">body_fat_test</code>.</p>
 
       <blockquote class="tip">
 
@@ -852,7 +852,7 @@ https://zenodo.org/record/3248907/files/body_fat_test.tsv
 <h2 id="learn-from-training-dataset">Learn from training dataset</h2>
 
 <p>To learn the <span class="notranslate">mapping</span> between several features and the targets, we will apply a regressor which is called
-<a href="http://scikit-learn.org/stable/modules/ensemble.html#regression">Gradient boosting regressor</a>. It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset (<code class="highlighter-rouge">body_fat_train</code>) and maps all the rows to their respective targets (real numbers). The process of <span class="notranslate">mapping</span> gives a trained model.</p>
+the <a href="http://scikit-learn.org/stable/modules/ensemble.html#regression">Gradient boosting regressor</a>. It is an ensemble-based regressor because its prediction is the collective performance of multiple weak learners (e.g. decision trees). It learns features from training dataset (<code class="highlighter-rouge">body_fat_train</code>) and maps all the rows to their respective targets (real numbers). The process of <span class="notranslate">mapping</span> gives a trained model.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-train-a-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train a model</h3>
@@ -888,7 +888,7 @@ https://zenodo.org/record/3248907/files/body_fat_test.tsv
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">model</code></li>
+    <li>Rename the generated file to <code class="highlighter-rouge">model</code>.</li>
   </ol>
 </blockquote>
 
@@ -901,7 +901,7 @@ https://zenodo.org/record/3248907/files/body_fat_test.tsv
     <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>Unlike the <strong>Linear support vector</strong> classifier (used for classification in the first part of the tutorial) which learned only two attributes,
-<strong>Gradient boosting</strong> regressor learns multiple attributes like <strong>feature_importances_</strong> (weight for each feature/column),
+the <strong>Gradient boosting</strong> regressor learns multiple attributes such as <strong>feature_importances_</strong> (weight for each feature/column),
 <strong>oob_improvement_</strong> (which stores incremental improvements in learning), <strong>estimators_</strong> (collection of weak learners) and a few more.
 These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by reading this file.</p>
 
@@ -929,7 +929,7 @@ These attributes are used to predict the target for a new sample and are stored 
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">predicted_data</code></li>
+    <li>Rename the generated file to <code class="highlighter-rouge">predicted_data</code>.</li>
   </ol>
 </blockquote>
 
@@ -960,7 +960,7 @@ These attributes are used to predict the target for a new sample and are stored 
   <li>
     <p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5">Scatter plot</a> for true vs. predicted targets:</p>
 
-    <figure id="figure-8"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. More the number of points are aligned along the x = y line, better is the prediction. R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also says that the predicted targets are close to the true targets.</figcaption></figure>
+    <figure id="figure-8"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Scatter plot for true vs. predicted targets. The plot shows the performance of the regression task. The data points (blue) lie along the orange curve (y = x) which shows that the true and predicted values are close. The more points are aligned along the x = y line, the better the prediction. The R2 (coefficient of determination) score (0.98) is close to the best possible score of 1.0. The RMSE (root mean squared error) is also small (1.32) which also tells us that the predicted targets are close to the true targets.</figcaption></figure>
   </li>
   <li>
     <p><a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">Residual plot</a> between residual (predicted - true) and predicted targets:</p>
@@ -969,7 +969,7 @@ These attributes are used to predict the target for a new sample and are stored 
   </li>
 </ol>
 
-<p>These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better is the prediction.</p>
+<p>These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.</p>
 
 <h2 id="summary-1">Summary</h2>
 <p>By following these steps, we learned how to perform regression and visualise the predictions using <span class="notranslate">Galaxy</span>’s machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This <span class="notranslate">mapping</span> is used to make predictions on an unseen (test) dataset. The quality of predictions is visualised using a plotting tool. There are multiple other regression algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well.</p>
@@ -1009,7 +1009,7 @@ These attributes are used to predict the target for a new sample and are stored 
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Anup Kumar, Bérénice Batut, 2019 <b>Machine learning: classification and regression (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/classification_regression/tutorial.html">/training-material/topics/statistics/tutorials/classification_regression/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Anup Kumar, Bérénice Batut, 2020 <b>Machine learning: classification and regression (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/classification_regression/tutorial.html">/training-material/topics/statistics/tutorials/classification_regression/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1026,9 +1026,9 @@ These attributes are used to predict the target for a new sample and are stored 
 <code id="citation-code">@misc{statistics-classification_regression,
     author = "Anup Kumar and Bérénice Batut",
     title = "Machine learning: classification and regression (Galaxy Training Materials)",
-    year = "2019",
-    month = "11",
-    day = "21"
+    year = "2020",
+    month = "01",
+    day = "09"
     url = "\url{/training-material/topics/statistics/tutorials/classification_regression/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
