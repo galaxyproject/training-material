@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Apollo
+title: Refining Genome Annotations with Apollo
 zenodo_link: https://zenodo.org/record/3270822
 tags:
 - eukaryote
@@ -276,13 +276,13 @@ We can now see two evidence tracks: one is the set of [genes from NCBI](https://
 
 View data at a particular position
 
-## Search for a gene
+### Search for a gene
 
 Enter the gene XXX into the gene box.
 
 Zoom in to the proper region.
 
-## Create structural edits
+### Create structural edits
 
 Drag annotation from evidence to HTML region.
 
@@ -293,9 +293,9 @@ Conversely, if you right-click you can any type of genome feature annotation.
 
 Additional isoforms may be dragged up from the evidence.
 
-## Edit structure
+### Edit structure
 
-### Update exon position
+#### Update exon position
 Once isoforms have been created, the edges may be dragged to best match the biological evidence.
 
 CDS's are automatically updated.
@@ -314,7 +314,7 @@ By right-clicking on the refined genome feature the details of the genome featur
 (SCREEN SHOT of right-click menu)
 ![Alternative text](../../images/image_name "Legend of the image")
 
-### View structured data
+#### View structured data
 
 Selecting the features allows us to view the gene directly.
 
@@ -322,7 +322,7 @@ Selecting the features allows us to view the gene directly.
 ![Alternative text](../../images/image_name "Legend of the image")
 
 
-### Edit structured data
+#### Edit structured data
 
 There are various structured data options from the figure.
 
@@ -337,7 +337,7 @@ All structured data
 ![Alternative text](../../images/image_name "Legend of the image")
 
 
-### Edit functional data
+#### Edit functional data
 
 There is various functional data.
 
