@@ -26,9 +26,13 @@ contributors:
 - nathandunn
 ---
 
+> {% icon warning %} Only works on UseGalaxy.eu
+> Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
+{: .warning}
+
 
 # Introduction
-{:.no_toc}
+{:.toc}
 
 After automatically editing annotations using 
 [Prokker](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html) or 
@@ -37,12 +41,11 @@ After automatically editing annotations using
 
 This process is most often done as part of a group.  
 
-This demo is inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. 
+This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance. 
 
-***TODO***: *Add links to the Apollo User's Gropu and GGA*
+Technical help was also provided by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group and their provided [python library that wraps Apollo](https://pypi.org/project/apollo/).
 
 {% raw %} `{% cite Dunn2019 %}`{% endraw %}
-
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
@@ -69,6 +72,9 @@ This will result in several types of evidence:
 - Individual read files in BAM format if available.
 - Additional visual data to help indicate things like read density such as BigWig files.
 
+> ### {% icon comment %} Real Data: Unreal Circumstances
+> While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on *E. coli K12*, this is not necessarily the data *you* might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.
+{: .comment}
 
 ## Get data
 

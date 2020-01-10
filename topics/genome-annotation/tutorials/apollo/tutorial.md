@@ -46,7 +46,7 @@ After automatically annotating your genome using [Prokka](../annotation-with-pro
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this, it is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
-This demo was inspired by the [Apollo User's Guide](http://genomearchitect.github.io/users-guide/), which provides additional guidance. This tutorial was further developed by the [Galaxy Genome Annotation](https://galaxy-genome-annotation.github.io/) group who developed the Galaxy-Apollo bridge. It focuses on the mechanics of moving data into and out of Apollo, and not as much on how to use Apollo. The most up-to-date information on Apollo usage can be found in their [User Guide](http://genomearchitect.github.io/users-guide/).
+This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance. 
 
 > ### Agenda
 >
