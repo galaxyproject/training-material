@@ -787,7 +787,7 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 > > 
 > > Firstable, we can see that the *clodipogrel* compound has **no reference in KEGG database**. This is due to the poor referencing of MSMS data. But it exists bigger databases that can contain this compound. Whereas the process is very longer with this king of database contrary to KEGG database where we have the principal compounds and which is **not too big to have a process running in a few time**.
 > > {: .text-justify}
-> > Masses in the table are **monoisotopic masses** and we have to add the mass of the adduct to be able to find the good precursor mass in our results. For example here, we just have to **add 1.0072 to the monoisotopic mass because of the adduct [M+H]+**. When we have these values for each compound we are searching for these values in our results. One value can have multiple lines because the retention time can be different (mass has been found during different retention time). After that, you just have to look at the corresponding compound that matched and **verify if it corresponds to the one you are searching for**. You can also do it other way around : **searching for the compound names you want and verify if the mass correspond**. If you find something that match between mass and compound name, you have also to verify their score and their number of explain peaks. With the parameters that we completed for the processing, you should not have some bad results... 
+> > Masses in the table are **monoisotopic masses** and we have to add the mass of the adduct to be able to find the good precursor mass in our results. For example here, we just have to **add 1.007276 to the monoisotopic mass because of the adduct [M+H]+** (please take a look at [this site](https://fiehnlab.ucdavis.edu/staff/kind/Metabolomics/MS-Adduct-Calculator "find your adducts")). When we have these values for each compound we are searching for these values in our results. One value can have multiple lines because the retention time can be different (mass has been found during different retention time). After that, you just have to look at the corresponding compound that matched and **verify if it corresponds to the one you are searching for**. You can also do it other way around : **searching for the compound names you want and verify if the mass correspond**. If you find something that match between mass and compound name, you have also to verify their score and their number of explain peaks. With the parameters that we completed for the processing, you should not have some bad results... 
 > > {: .text-justify}
 > > In our example, we can find *irbesartan* with a MZ = 429.2406 and *metformin* with MZ = 130.1089. But we only have these two compounds where we can find the name and the mass matched correctly... But if you search a little bit more, you can find that we also have some compounds with MZ = 267.1693 which is *practolol* and with mz = 152.0706 which is *acetaminophen*. The first one corresponds to the *atenolol* and the second *paracetamol*. So it is **important to know that we can have differents names for the same compound !!** 
 > > {: .text-justify}
@@ -805,11 +805,14 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 >
 > ![mass_diff](../../images/tutorial_msms_mass_diff.png)
 > 
+> So we can't find anything from these compounds but we know that raw datas has been obtained in switching mode between positive and negative. And here, our datas are only positive. So, maybe these compounds has been found in negative datas.
+> 
 {: .solution}
 
 
 ## With Sirius CSI-FingerID
 
+SIRIUS is a java-based software framework for discovering a landscape of de-novo identification of metabolites using single and tandem mass spectrometry. SIRIUS uses isotope pattern analysis for detecting the molecular formula and further analyses the fragmentation pattern of a compound using fragmentation trees
 
 # Conclusion 
 {:.no_toc} 
