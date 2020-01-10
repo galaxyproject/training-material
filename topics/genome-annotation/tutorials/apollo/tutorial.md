@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Apollo
 zenodo_link: https://zenodo.org/record/3270822
 tags:
-- intro
+- eukaryote
 questions:
 - How to visualize your genome after automated annotations have been performed?
 - How to manually annotate genome after automated annotations have been performed?
@@ -15,7 +15,7 @@ objectives:
 - Learn how to load JBrowse data into Apollo
 - Learn how to manually refine genome annotations within Apollo
 - Export refined genome annotations
-time_estimation: 3H
+time_estimation: 3h
 key_points:
 - Apollo allows a group to view and manually refine predicged genome annotations
 - Use Apollo to edit annotations within your group.

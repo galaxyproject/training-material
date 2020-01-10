@@ -127,4 +127,4 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 After automatic annotation of prokaryotic genome, if inspection of predicted genes with JBrowse introduced mistakes, e.g. wrong exon/intron limits, splitted genes, or merged genes -- or simply if you wish to rename genes or provide additional functional (e.g., Gene Ontology) data, setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors.
 
-The [Apollo training](../annotation-with-apollo-old) should provide additional guidance.
+The [Apollo training](../apollo) should provide additional guidance.
