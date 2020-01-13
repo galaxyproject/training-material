@@ -101,7 +101,7 @@ Not everyone is always outwardly enthusiastic about the course for any number of
 
    2. A Private Galaxy?
 
-      Check our tutorial on [how to set up a Galaxy for Training]({{ site.baseurl}}{% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %})
+      Check our tutorial on [how to set up a Galaxy for Training]({% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %})
 
       - Technical infrastructure
       - Install the needed tools and data
@@ -141,6 +141,11 @@ Not everyone is always outwardly enthusiastic about the course for any number of
    - Where is the data coming from?
    - What data transformation is being made?
    - What were the data formats used today?
+repository_branch: "master"
+eepository_branch: "master"
+repository_branch: "master"
+sitory_branch: "master"
+
    - What were the main steps of today's workflow?
 7. Regularly remind trainees of things you've taught them
 

@@ -137,7 +137,7 @@ The most important file is the `tutorial.md` where the content of the tutorial i
 > 3. Make sure that Jekyll is running
 >
 >    > ### {% icon comment %} Jekyll
->    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
 >
 > 2. Check if the tutorial has been correctly added at [http://localhost:4000/training-material/](http://localhost:4000/training-material/)

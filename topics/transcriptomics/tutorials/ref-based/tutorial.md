@@ -128,7 +128,7 @@ The reads are raw data from the sequencing machine without any pretreatments. Th
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}).
+Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) ({% cite marcel2011cutadapt %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -248,7 +248,7 @@ This process is known as aligning or 'mapping' the reads to a reference. This is
 
 > ### {% icon comment %} Comment
 >
-> Do you want to learn more about the principles behind mapping? Follow our [training]({{site.baseurl}}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
+> Do you want to learn more about the principles behind mapping? Follow our [training]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}).
 {: .comment}
 
 As a reference genome for *Drosophila melanogaster* is available, we can map the sequences to this genome in order to identify which genes are affected by the *Pasilla* gene depletion.
@@ -432,7 +432,7 @@ A powerful tool to visualize the content of BAM files is the Integrative Genomic
 >
 > The quality of the data and mapping can be checked further, e.g. by inspecting read duplication level, number of reads mapped to each chromosome, gene body coverage, and read distribution across features.
 >
-> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
+> *These steps have been inspired by the ones provided in the [great "RNA-Seq reads to counts" tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}) and adapted to our datasets.*
 >
 > #### Duplicate reads
 >
@@ -1397,8 +1397,8 @@ We proceed in several steps:
 > ### {% icon comment %} Advanced tutorials on visualization
 >
 > In this tutorial, we will quickly explain some possible visualization. For more details, please have a look in the extra tutorials on visualization of RNA-Seq results:
-> - [Visualization of RNA-Seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
-> - [Visualization of RNA-Seq results with Volcano Plot]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
+> - [Visualization of RNA-Seq results with heatmap2]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
+> - [Visualization of RNA-Seq results with Volcano Plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
 {: .comment}
 
 ### Visualization of the normalized counts
@@ -1650,7 +1650,7 @@ We have now the two required input files for goseq.
 
 > ### {% icon comment %} Advanced tutorial on visualization
 >
-> In this tutorial, we covered GO enrichment analysis with **goseq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-Seq genes to pathways"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
+> In this tutorial, we covered GO enrichment analysis with **goseq**. To learn other gene set enrichment analysis, please have a look at the ["RNA-Seq genes to pathways"]({% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) tutorial.
 {: .comment}
 
 ## KEGG pathways analysis

@@ -139,7 +139,7 @@ Once the topic name has been chosen, we can create it.
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 =======
 >    > ### {% icon comment %} Jekyll
->    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
 >>>>>>> master
 >
@@ -194,7 +194,7 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 =======
 >    > ### {% icon comment %} Jekyll
->    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({{ site.baseurl }}{% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
+>    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
 >>>>>>> master
 >
