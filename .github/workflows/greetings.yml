@@ -1,0 +1,19 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          Hi! Welcome to the Galaxy Training Community
+          
+          Thanks for filing an issue. If you don't receive a response here quickly, you can also get in touch with us on the [gitter channel](https://gitter.im/Galaxy-Training-Network/Lobby).
+        pr-message: |
+          Hi! Welcome to the Galaxy Training Community
+          
+          Thanks for your contribution! We will evaluate it soon and let you know if we need any changes before we can merge it. You can also get in touch with us on the [gitter channel](https://gitter.im/Galaxy-Training-Network/Lobby).

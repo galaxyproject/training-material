@@ -21,6 +21,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
 contributors:
   - pajanne
   - blankclemens

@@ -1,5 +1,8 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna_preprocessing/tutorial
+
 title: "Pre-processing of Single-Cell RNA Data"
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
@@ -65,8 +68,8 @@ Other than cell development, there are many more factors that can shape the leve
 
 ![Facets of Cellular Identity]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
-
 This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
+
 
 # Analysis Strategy
 {:.no_toc}
@@ -85,6 +88,14 @@ The tutorial is structured in two parts:
 ![Overview of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "An overview of the entire workflow")
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#barcode-extraction) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.
+
+> ### {% icon comment %} 10x Datasets
+>
+> 10x Genomics datasets can be processed in a much easier way that is outlined in the [*Pre-processing of 10X Single-Cell RNA Datasets*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
+>
+> However, much of the essential concepts for scRNA-seq pre-processing are not explained, so it is a good idea to familiarise yourself with them in this tutorial.
+>
+{: .comment}
 
 The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are [merged together](#merging-count-matrices) and quality control performed. This produces a final count matrix valid for downstream analysis.
 
@@ -412,7 +423,7 @@ Let us annotate our BAM file with desired gene tags.
 >        - {% icon param-file %} *"Gene annotation file"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`
 >    - In *"Advanced options"*:
 >        - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
->        - *"Exon-exon junctions"*: `Yes`
+>        - *"Exon-exon junctions"*: `No (default)`
 >        - *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)."*: `Yes`
 >
 > 2. Examine the output BAM file
@@ -503,6 +514,7 @@ This concludes the first part of the tutorial which focused on the transformatio
 >
 {: .details}
 
+For the processing of 10x Genomics datasets, please refer to the [*Pre-processing of 10X Single-Cell RNA Datasets*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
 
 # Multi-Batch Processing
 

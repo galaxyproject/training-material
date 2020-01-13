@@ -419,23 +419,62 @@ read mappings we will do some postprocessing next.
 
 ## Filtering on mapped reads properties
 
-To produce new filtered BAM datasets with only those reads retained that
-have a minimal mapping quality of 1 and are mapped in a proper pair:
+To produce new filtered BAM datasets with only those reads retained that have
+been mapped to the reference successfully, have a minimal mapping quality of 1,
+and for which the mate read has also been mapped:
 
 > ### {% icon hands_on %} Hands-on: Filtering for mapping status and quality
 >
-> 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %} with the following
-> parameters (leaving non-mentioned ones at their defaults):
->   - {% icon param-files %} *"SAM or BAM file to filter"*: mapped reads datasets from
->     the normal *and* the tumor tissue data, outputs of **Map with BWA-MEM** {% icon tool %}
->   - *"Minimum MAPQ quality score"*: `1`
->   - *"Filter on bitwise flag"*: `yes`
->     - *"Only output alignments with all of these flag bits set"*:
->        - {% icon param-check %} *"Read is mapped in a proper pair"*
+> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
+>   - {% icon param-files %} *"BAM dataset(s) to filter"*: mapped reads
+>     datasets from the normal *and* the tumor tissue data, outputs of
+>     **Map with BWA-MEM** {% icon tool %}
+>   - In *"Condition"*:
+>     - In *"1: Condition"*:
+>       - In *"Filter"*:
+>         - In *"1: Filter"*:
+>           - *"Select BAM property to filter on"*: `mapQuality`
+>             - *"Filter on read mapping quality (phred scale)"*: `>=1`
+>         - In *"2: Filter"*:
+>           - *"Select BAM property to filter on"*: `isMapped`
+>             - *"Selected mapped reads"*: `Yes`
+>         - Click on *"Insert Filter"*
+>         - In *"3: Filter"*:
+>           - *"Select BAM property to filter on"*: `isMateMapped`
+>             - *"Select reads with mapped mate"*: `Yes`
+>
+>       When you configure multiple filters within one condition, reads have
+>       to pass *all* the filters to be retained in the output. The above
+>       settings, thus, retain only read pairs, for which both mates are
+>       mapped.
+>
+>       Note that filtering for a minimal mapping quality is not strictly
+>       necessary. Most variant callers (including **VarScan somatic, which we
+>       will be using later) have an option for using only reads above a
+>       certain mapping quality. In this section, however, we are going to
+>       process the retained reads further rather extensively so it pays off
+>       in terms of performance to eliminate reads we do not plan to use at an
+>       early step.
+>
+>   - *"Would you like to set rules?"*: `No`
 >
 {: .hands_on}
 
 This will result in two new datasets, one for each of the normal and tumor data.
+
+> ### {% icon details %} Tools for filtering BAM datasets
+> The related tutorial on variant detection from exome-seq data, demonstrates
+> nearly identical filtering of BAM datasets using the tool **Filter BAM
+> datasets on a variety of attributes** {% icon tool %}.
+>
+> These two tools offer very similar functionality and can often be used
+> interchangeably. Under the hood, **Filter SAM or BAM, output SAM or BAM**
+> {% icon tool %} uses the `samtools view` command line tool, while **Filter
+> BAM datasets on a variety of attributes** {% icon tool %} uses `bamtools
+> filter`. Whatever the BAM filtering task, you should be able to perform it in
+> Galaxy with one of these two tools.
+>
+{: .details}
 
 ## Removing duplicate reads
 
@@ -536,6 +575,30 @@ As before, this will generate two new datasets, one for each of the normal and t
 This will, once more, produce two new datasets, one for each of the normal
 and tumor data.
 
+## Refilter reads based on mapping quality
+
+During recalibration of read mapping qualities **CalMD** may have set some
+mapping quality scores to 255. This special value is reserved for *undefined*
+mapping qualities and is used by the tool when a recalibrated mapping quality
+would drop below zero. In other words, a value of 255 does not indicate a
+particularly good mapping score, but a really poor one.
+To remove such reads from the data:
+
+> ### {% icon hands_on %} Hands-on: Eliminating reads with undefined mapping quality
+>
+> 1. **Filter BAM datasets on a variety of attributes** {% icon tool %} with the following parameters:
+>   - {% icon param-files %} *"BAM dataset(s) to filter"*: the recalibrated
+>     datasets from the normal and the tumor tissue data; the outputs of
+>     **CalMD** {% icon tool %}
+>   - In *"Condition"*:
+>     - In *"1: Condition"*:
+>       - In *"Filter"*:
+>         - In *"1: Filter"*:
+>           - *"Select BAM property to filter on"*: `mapQuality`
+>             - *"Filter on read mapping quality (phred scale)"*: `<=254`
+>
+{: .hands_on}
+
 
 # Variant calling and classification
 
@@ -559,8 +622,8 @@ somatic variant calling that:
 >      > ### {% icon comment %} Using the imported `hg19` sequence
 >      > If you have imported the `hg19` sequence as a fasta dataset into your
 >      > history instead:
->      >   - *"Will you select a reference genome from your history or use a built-in
->      >     genome?"*: `Use a genome from the history`
+>      >   - *"Will you select a reference genome from your history or use a
+>      >     built-in genome?"*: `Use a genome from the history`
 >      >      - {% icon param-file %} *"reference genome"*: your imported `hg19` fasta dataset.
 >      {: .comment}
 >
@@ -584,9 +647,9 @@ somatic variant calling that:
 >
 >      - *"Minimum mapping quality"*: `1`
 >
->        During postprocessing, we have filtered our reads for ones with a mapping
->        quality of at least one, so requiring this quality also here does not
->        actually change the results, but it makes the requirement more explicit.
+>        During postprocessing, we have filtered our reads for ones with a
+>        mapping quality of at least one, but **CalMD** may have lowered some
+>        mapping qualities to zero afterwards.
 >
 >      Leave all other settings in this section at their default values.
 >    - *"Settings for Posterior Variant Filtering"*: `Use default values`
@@ -656,7 +719,7 @@ license.
 >    > `Homo sapiens: hg19` as a locally installed snpEff database. You can
 >    > check the **SnpEff eff** {% icon tool%} tool under **Genome source** to
 >    > see if this is the case.
->    {: .tip}
+>    {: .comment}
 >
 >    Use **SnpEff Download** {% icon tool %} to download genome annotation
 >    database `hg19`.
@@ -894,30 +957,6 @@ want to add:
 >        This recipe extracts the dbSNP *SAO* field and adds it as *rs_ss* to
 >        the GEMINI database.
 >
->      - {% icon param-repeat %} *"Insert Annotation extraction recipe"*
->      - In *"2: Annotation extraction recipe"*:
->        - *"Elements to extract from the annotation source"*: `CFL`
->        - *"Database column name to use for recording annotations"*:
->       `rs_cfl`
->        - *"What type of data are you trying to extract?"*: `Numbers with
->        decimal precision`
->        - *"If multiple annotations are found for the same variant,
->        store ..."*: `the first annotation found`
->
->        This recipe extracts the dbSNP *CFL* field and adds it as *rs_cfl* to
->        the GEMINI database.
->
->      - {% icon param-repeat %} *"Insert Annotation extraction recipe"*
->      - In *"3: Annotation extraction recipe"*:
->        - *"Elements to extract from the annotation source"*: `ASP`
->        - *"Database column name to use for recording annotations"*:
->       `rs_asp`
->        - *"What type of data are you trying to extract?"*: `Integer numbers`
->        - *"If multiple annotations are found for the same variant,
->        store ..."*: `the first annotation found`
->
->        This recipe extracts the dbSNP *ASP* field and adds it as *rs_asp* to
->        the GEMINI database.
 > 2. **GEMINI annotate** {% icon tool %} to add further annotations from **cancerhotspots**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
@@ -1099,12 +1138,10 @@ What about more sophisticated filtering?
 
 > ### {% icon hands_on %} Hands-on: More complex filter criteria
 > 1. **GEMINI query** {% icon tool %} with the exact same settings as before, but:
->    - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2 AND somatic_p <= 0.05 AND (filter IS NULL OR rs_ids IS NOT NULL) AND rs_cfl != 1 AND rs_asp != 1`
+>    - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2 AND somatic_p <= 0.05 AND filter IS NULL`
 >
 >     This translates into "variants classified as somatic with a p-value <=
->     0.05, which haven't been flagged as likely false-positives or, if so, are
->     listed in dbSNP, but in there, are not flagged as being assembly-dependent
->     or -specific".
+>     0.05, which haven't been flagged as likely false-positives".
 {: .hands_on}
 
 > ### {% icon comment %} SQL keywords
@@ -1192,8 +1229,7 @@ advanced mode for composing the query.
 >     g.synonym, g.hgnc_id, g.entrez_id, g.rvis_pct, v.clinvar_gene_phenotype
 >     FROM variants v, gene_detailed g WHERE v.chrom = g.chrom AND
 >     v.gene = g.gene AND v.somatic_status = 2 AND v.somatic_p <= 0.05 AND
->     (v.filter IS NULL OR v.rs_ids IS NOT NULL) AND v.rs_cfl != 1 and
->     v.rs_asp != 1 GROUP BY g.gene`
+>     v.filter IS NULL GROUP BY g.gene`
 >
 >     > ### {% icon comment %} Elements of the SQL query
 >     > In this full SQL query, the part between `SELECT` and `FROM` states which

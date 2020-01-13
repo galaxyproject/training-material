@@ -1,1 +1,150 @@
-{"uuid": "b34603f1-4a6f-4d9c-ac69-fbf70989278c", "tags": [], "format-version": "0.1", "name": "Phenology \"stacked\" visualization creation", "steps": {"0": {"tool_id": null, "tool_version": null, "outputs": [], "workflow_outputs": [], "input_connections": {}, "tool_state": "{}", "id": 0, "uuid": "b3818227-75db-4863-af80-c732aa543d8d", "errors": null, "name": "Input dataset", "label": "Flight curve dataset", "inputs": [], "position": {"top": 321.5, "left": 200}, "annotation": "", "content_id": null, "type": "data_input"}, "1": {"tool_id": "Filter1", "tool_version": "1.1.0", "outputs": [{"type": "input", "name": "out_file1"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c2==2003\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", "id": 1, "uuid": "1cba88e4-5a39-4798-91f8-68cc0f639245", "errors": null, "name": "Filter", "post_job_actions": {}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Filter"}], "position": {"top": 231, "left": 496}, "annotation": "", "content_id": "Filter1", "type": "tool"}, "2": {"tool_id": "Filter1", "tool_version": "1.1.0", "outputs": [{"type": "input", "name": "out_file1"}], "workflow_outputs": [], "input_connections": {"input": {"output_name": "output", "id": 0}}, "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c2==2004\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", "id": 2, "uuid": "cd8893fe-a66a-4f13-aad7-c499d055ec89", "errors": null, "name": "Filter", "post_job_actions": {}, "label": null, "inputs": [{"name": "input", "description": "runtime parameter for tool Filter"}], "position": {"top": 396, "left": 520}, "annotation": "", "content_id": "Filter1", "type": "tool"}, "3": {"tool_id": "Paste1", "tool_version": "1.0.0", "outputs": [{"type": "input", "name": "out_file1"}], "workflow_outputs": [], "input_connections": {"input2": {"output_name": "out_file1", "id": 2}, "input1": {"output_name": "out_file1", "id": 1}}, "tool_state": "{\"input2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}", "id": 3, "uuid": "ab191e5a-9930-43a0-a291-e60533ca34a1", "errors": null, "name": "Paste", "post_job_actions": {}, "label": null, "inputs": [{"name": "input2", "description": "runtime parameter for tool Paste"}, {"name": "input1", "description": "runtime parameter for tool Paste"}], "position": {"top": 310, "left": 776}, "annotation": "", "content_id": "Paste1", "type": "tool"}}, "annotation": "", "a_galaxy_workflow": "true"}
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "",
+  "format-version": "0.1",
+  "name": "Phenology \"stacked\" visualization creation",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Flight curve dataset",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 321.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "b3818227-75db-4863-af80-c732aa543d8d",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 496,
+        "top": 231
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c2==2003\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "1cba88e4-5a39-4798-91f8-68cc0f639245",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 520,
+        "top": 396
+      },
+      "post_job_actions": {},
+      "tool_id": "Filter1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"cond\": \"\\\"c2==2004\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"header_lines\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.1.0",
+      "type": "tool",
+      "uuid": "cd8893fe-a66a-4f13-aad7-c499d055ec89",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "Paste1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input1": {
+          "id": 1,
+          "output_name": "out_file1"
+        },
+        "input2": {
+          "id": 2,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Paste",
+          "name": "input2"
+        },
+        {
+          "description": "runtime parameter for tool Paste",
+          "name": "input1"
+        }
+      ],
+      "label": null,
+      "name": "Paste",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 776,
+        "top": 310
+      },
+      "post_job_actions": {},
+      "tool_id": "Paste1",
+      "tool_state": "{\"input2\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": null, \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"chromInfo\": \"\\\"/galaxy-central/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "ab191e5a-9930-43a0-a291-e60533ca34a1",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [],
+  "uuid": "b34603f1-4a6f-4d9c-ac69-fbf70989278c"
+}
