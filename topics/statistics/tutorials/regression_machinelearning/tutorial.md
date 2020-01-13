@@ -30,7 +30,7 @@ Finally, we will discuss how to train our models by finding the values of their 
 
 In this tutorial we will build a regression model for chronological age prediction, based on DNA methylation. This is based on the work of [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), in which biomarkers are examined to predict the chronological age of humans by analyzing the DNA methylation patterns. Different machine learning algorithms are used in this study to make an age prediction.
 
-Over the years, it has been recognized that within each individual, the level of [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to select useful biomarkers from DNA methylation datasets. The [CpG sites](https://en.wikipedia.org/wiki/CpG_site) with the highest correlation to age are selected as the biomarkers (and therefore features for building a regression model). In this tutorial, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
+It has been recognized that within each individual, the level of [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to select useful biomarkers from DNA methylation datasets. The [CpG sites](https://en.wikipedia.org/wiki/CpG_site) with the highest correlation to age are selected as the biomarkers (and therefore features for building a regression model). In this tutorial, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
 
 
 
@@ -72,7 +72,7 @@ We know an error above the actual value and an error below the actual value shou
 # Analyze DNA methylation dataset
 
 As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. 
-Over the years it has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information beside the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
+It has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information beside the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
 
 Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. This knowledge is used to select useful biomarkers from the DNA methylation dataset. The CpG sites with the highest correlation to age are selected as the biomarkers (features). In this study, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
 
@@ -395,7 +395,7 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 >
 {: .question}
 
-Using the **Hyperparameter search** tool, we optimized our model, based on the training data. Now, we will predict age from the test dataset using this model.
+Using the **Hyperparameter search** tool, we optimized our model, based on the training data. Now, we will predict the age from the test dataset using this model.
 
 > ### {% icon hands_on %} Hands-on: Predict age
 >
@@ -425,7 +425,7 @@ Now we will verify the performance by creating and analyzing the plots.
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures show that the prediction is very good because the predicted age lies close to the true age. 
+> > The figures show that the prediction is very good because the predicted age lies close to the true age. 
 > {: .solution}
 {: .question}
 
@@ -446,6 +446,5 @@ Figure [13](#figure-13) shows that we achieved an R2 score of `0.94` and root me
 
 
 # Conclusion
-By following these steps, we learned how to perform regression and visualize the predictions using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. The quality of predictions is visualized using a plotting tool. There are multiple other regression algorithms; some are simpler to use (with fewer parameters) and some are more powerful. You can try them out on this dataset, and on other datasets as well.
-
-Moreover, we visualized the results using multiple plots to ascertain the robustness of machine learning tasks. There are many other regressors in the machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analyzed using these regressors. The regressors have many parameters which can be altered while performing the analyses to see if they affect the prediction accuracy. It may be beneficial to perform a hyperparameter search to tune these parameters for different datasets. 
+By following these steps, we learned how to perform regression and visualize the predictions using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. 
+The quality of predictions is visualized using multiple plots to ascertain the robustness of machine learning tasks. There are many other regressors in the machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analyzed using these regressors. The regressors have many parameters which can be altered while performing the analyses to see if they affect the prediction accuracy. It may be beneficial to perform a hyperparameter search to tune these parameters for different datasets. 
