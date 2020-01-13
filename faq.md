@@ -40,7 +40,7 @@ We wrote an [article](https://doi.org/10.1016/j.cels.2018.05.012) about our effo
 
 ## How can I advertise the training materials on my posters?
 
-We provide some QR codes and logos in the [images folder]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/assets/images).
+We provide some QR codes and logos in the [images folder]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/assets/images).
 
 # For Individual Learners
 
@@ -166,18 +166,18 @@ Below is a checklist of things to look out for to help you get started. If you f
 
 ### 2. Reviewing pull requests
 
-Another great way to help out the project is by reviewing [open pull requests]({{ site.github.repository_url }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
+Another great way to help out the project is by reviewing [open pull requests]({{ site.github_repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
 
 
 ## How can I give feedback?
 
 At the end of each tutorial, there is a link to [a feedback form](https://docs.google.com/forms/d/1BILuBp8bPv42odpZ55Kcf2rqzR-k0Czx46agVVSRgm4/edit). We use this information to improve our tutorials.
 
-For global feedbacks, you can open an [issue on GitHub]({{ site.github.repository_url }}/issues/new), write us on [Gitter]({{ site.gitter_url }}) or send us an [email](mailto:{{ site.email }}).
+For global feedbacks, you can open an [issue on GitHub]({{ site.github_repository }}/issues/new), write us on [Gitter]({{ site.gitter_url }}) or send us an [email](mailto:{{ site.email }}).
 
 ## How can I report mistakes or errors?
 
-The easiest way to start contributing is to [file an issue]({{ site.github.repository_url }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
+The easiest way to start contributing is to [file an issue]({{ site.github_repository }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
 
 
 ## How can I test an Interactive Tour?
@@ -201,7 +201,7 @@ If you feel uncomfortable with using the git and the [GitHub flow](https://guide
 
 ## How can I contribute in "advanced" mode?
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github.repository_url }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
 
 ![Structure of the repository](shared/images/repo_organization.png){: width="400px"}
 
@@ -226,7 +226,7 @@ To manage changes, we use [GitHub flow](https://guides.github.com/introduction/f
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
-6. Submit a pull request from that branch to the [original repository]({{ site.github.repository_url }})
+6. Submit a pull request from that branch to the [original repository]({{ site.github_repository }})
 7. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 8. Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
 
@@ -276,7 +276,7 @@ We also strongly recommend you read and follow [The Carpentries](https://carpent
 
 ## What can I do to help the project?
 
-In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github.repository_url }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
+In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
 
 # Other Questions
 

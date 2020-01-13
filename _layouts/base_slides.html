@@ -43,9 +43,9 @@ class: center, middle, inverse
 <div class="my-header"><span>
 <a href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
 {% if page.type == "introduction" %}
-  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/slides/{{ page.tutorial_name }}.html{% endcapture %}
 {% else %}
-  {% capture link %}{{ site.github.repository_url }}/edit/{{ site.repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
+  {% capture link %}{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/topics/{{ topic.name }}/tutorials/{{ page.tutorial_name }}/slides.html{% endcapture %}
 {% endif %}
 <a class="nav-link" href="{{ link }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
@@ -107,7 +107,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 {% endif %}
 
 {% if page.layout == "base_slides" %}
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github.repository_url }}/tree/master{{ page.url }})]
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/master{{ page.url }})]
 {% endif %}
     </textarea>
     <script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript">
