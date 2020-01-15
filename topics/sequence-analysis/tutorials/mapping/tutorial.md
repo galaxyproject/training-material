@@ -89,7 +89,7 @@ We just imported in Galaxy FASTQ files corresponding to paired-end data as we co
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality. 
 
-There is a dedicated tutorial for [quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further. 
+There is a dedicated tutorial for [quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further. 
 
 # Map reads on a reference genome
 
