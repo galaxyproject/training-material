@@ -354,7 +354,7 @@ RStudio will keep running until you stop it, so you can always come back to your
 you should save the work you did within RStudio by exporting any files you created back to your Galaxy history, as well as the log describing all the commands you ran.
 Then you can safely shut down RStudio.
 
-{% include _snippets/stop_RStudio.md  %}
+{% include snippets/stop_RStudio.md  %}
 
 
 # Interaction between RStudio and Galaxy
