@@ -6,14 +6,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Reference-based RNA-Seq data analysis</title>
         
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-45719423-18' , 'auto');
-            ga('send', 'pageview');
-        </script>
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
         
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
         <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
@@ -181,7 +181,7 @@
   },
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
-  "license": "/blob//LICENSE.md",
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
   "producer": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
@@ -700,7 +700,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 12, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 13, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1083,7 +1083,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
   </blockquote>
 </blockquote>
 
-<blockquote class="notranslate hands_on">
+<blockquote>
   <h3 id="hands_on-hands-on-quality-control-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
 
   <ol>
@@ -1128,6 +1128,13 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
         </li>
       </ul>
     </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+
+  <ol>
     <li>
       <p>Inspect the generated txt files (<code class="highlighter-rouge">Report</code>)</p>
 
@@ -3243,7 +3250,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
     <ol>
       <li>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (<script type="math/tex">% <![CDATA[
 4.0 \cdot 10^{-178} << 0.05 %]]></script>). It is less expressed (<code class="highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (<script type="math/tex">2^{log2FC} = 2^{2.99977727873544}</script>).</li>
-      <li>DESeq2 in <span class="notranslate">Galaxy</span> returns the comparison between the different levels for the 1st factor, after 
+      <li>DESeq2 in <span class="notranslate">Galaxy</span> returns the comparison between the different levels for the 1st factor, after
 correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
 both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.</li>
       <li>To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
@@ -4183,7 +4190,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Bérénice Batut, Mallory Freeberg, Mo Heydarian, Anika Erxleben, Pavankumar Videm, Clemens Blank, Maria Doyle, Nicola Soranzo, Peter van Heusden, 2019 <b>Reference-based RNA-Seq data analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Bérénice Batut, Mallory Freeberg, Mo Heydarian, Anika Erxleben, Pavankumar Videm, Clemens Blank, Maria Doyle, Nicola Soranzo, Peter van Heusden, 2020 <b>Reference-based RNA-Seq data analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -4200,9 +4207,9 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 <code id="citation-code">@misc{transcriptomics-ref-based,
     author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxleben and Pavankumar Videm and Clemens Blank and Maria Doyle and Nicola Soranzo and Peter van Heusden",
     title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
-    year = "2019",
-    month = "11",
-    day = "12"
+    year = "2020",
+    month = "01",
+    day = "13"
     url = "\url{/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
