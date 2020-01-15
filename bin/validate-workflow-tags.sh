@@ -1,6 +1,7 @@
 #!/bin/bash
 exit_with=0
 
+#python script to iterate over the steps in the workflow.
 function tester { 
     python3 - <<END
 import sys 
@@ -10,6 +11,10 @@ with open("$1") as json_file:
     if 'tags' not in data or "$2" not in data['tags']: 
         sys.exit(False)
     else:
+        #Checking if there are tools used from the testtoolshed
+        for step in data['steps'].values():
+            if step['tool_id'] and step['type'] == 'tool' and 'testtoolshed.g2.bx.psu.edu' in step['tool_id']:
+                    sys.exit(False)
         sys.exit(True)
 END
 }
@@ -26,7 +31,7 @@ do
                 echo "Checking tutorial $w for tags" 
                 if tester $w $topic;
                 then
-                    echo "No 'tags' attribute found in workflow $w with its corresponding topic."
+                    echo "No 'tags' attribute found with its corresponding topic or workflow includes tool(s) from testtoolshed."
 		            exit_with=1
                 fi
             done
