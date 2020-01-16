@@ -14,7 +14,7 @@ with open("$1") as json_file:
         #Checking if there are tools used from the testtoolshed
         for step in data['steps'].values():
             if step['tool_id'] and step['type'] == 'tool' and 'testtoolshed.g2.bx.psu.edu' in step['tool_id']:
-                    sys.exit(False)
+                sys.exit(False)
         sys.exit(True)
 END
 }
