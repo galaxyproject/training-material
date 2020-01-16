@@ -168,7 +168,7 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 >
 > This will open in the Center Pane. Select the MVP application.
 >
->![MVP](../../images/Open_MVP.png){:width="20%"}
+> ![MVP](../../images/Open_MVP.png){:width="20%"}
 >
 > This is how it will look.
 >
@@ -178,11 +178,10 @@ The Multiomics Visualization Platform is a galaxy visualization plugin that allo
 >
 > ![load from galaxy](../../images/load_from_Galaxy.png){:width="80%"}
 >
->This will open a dropdown list. Select the novel peptides from there.
+> This will open a dropdown list. Select the novel peptides from there.
 >
 >
 > ![dropdown](../../images/DropDown_novel.png){:width="50%"}
->
 >
 > 3) Select **Novel Peptides** from the right hand side.
 >
