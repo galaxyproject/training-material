@@ -31,7 +31,7 @@ do
                 echo "Checking tutorial $w for tags" 
                 if tester $w $topic;
                 then
-                    echo "No 'tags' attribute found with its corresponding topic or workflow includes tool(s) from testtoolshed."
+                    echo "ERROR: No 'tags' attribute found with its corresponding topic or workflow includes tool(s) from testtoolshed."
 		            exit_with=1
                 fi
             done
