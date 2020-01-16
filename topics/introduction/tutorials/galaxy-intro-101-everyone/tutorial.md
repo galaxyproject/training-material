@@ -78,7 +78,7 @@ The Galaxy interface consists of three main parts:
 2. Your analysis history is recorded on the right
 3. The central panel will let you run analyses and view outputs
 
-![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+![Galaxy ecosystem]({% link shared/images/galaxy_interface.png %})
 
 
 # Create a history
@@ -548,7 +548,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 
 > ### {% icon comment %} Tip: Problems creating your workflow?
-> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
+> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
 > {% include snippets/import_workflow.md %}

@@ -84,7 +84,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 {: .hands_on}
 
 > ### {% icon comment %} FASTQ format
-> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
 {: .comment}
 >
 > ### {% icon comment %} BED format
