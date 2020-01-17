@@ -1,0 +1,53 @@
+---
+id: Top-down analysis of Ribo-Seq data
+name: Galaxy Tour
+description: A tour aim to teach users how to analyze Ribo-Seq data.
+title_default: Top-down analysis of Ribo-Seq data
+steps:
+  - title: Create a new History for this practice
+    element: '#history-new-button .fa.fa-plus'
+    content: >-
+      Click on this button to create a new history.
+    placement: left
+    postclick:
+      - '#history-new-button .fa.fa-plus'
+  - title: Modify the name for this history
+    content: >-
+      Replace "Unnamed history" in the top right corner of the panel with "Top-down analysis of Ribo-Seq data analysis"
+    placement: top
+  - title: Upload data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: Open the Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Upload data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Paste links of the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: >-
+      The corresponding link should be provided in this field
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/889072/files/gencode.v25.annotation_chr22Entries.gtf?download=1
+      https://figshare.com/s/b746ccf9f27f4135aa1d
+    backdrop: false
+  - title: Quality control 
+    element: >-
+      #left .unified-panel-wrapper .unified-panel-controls .search-input
+      .search-query.parent-width tool-search-query
+    content: ''
+    textinsert: fastqc
+    placement: right
+  - title: Fastqc
+    element: '#tool-search'
+    content: ''
+    placement: right
+    postclick:
+      - >-
+        a[href$="/galaxy/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72%2Bgalaxy1"]
