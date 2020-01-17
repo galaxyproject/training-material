@@ -92,7 +92,8 @@ check-html: build ## validate HTML
 
 check-workflows: build ## validate Workflows
 	$(ACTIVATE_ENV) && \
-		bash bin/validate-json.sh
+		bash bin/validate-json.sh && \
+		bash bin/validate-workflow-tags.sh
 .PHONY: check-workflows
 
 check-references: build ## validate no missing references
