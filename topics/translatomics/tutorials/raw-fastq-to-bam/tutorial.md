@@ -63,7 +63,7 @@ FastQ files, produced by the sequencing, contain sequences and quality informati
 
 > ### {% icon details %} What is the FastQ file?
 >
-> If you want to know more information about FASTQ, see the [Quality Control tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+> If you want to know more information about FASTQ, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
 {: .details}
 
 2. Import Ribo-Seq raw data via links
