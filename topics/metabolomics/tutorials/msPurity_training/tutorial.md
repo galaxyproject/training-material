@@ -698,7 +698,47 @@ The way you make the average will depend of the user wishes to treat its fragmen
 >
 {: .hands_on}
 
-## 5 - (Optionnal) Create a database
+## 5 - Create your MSP file
+
+This is the last step of the msPurity part. This **msPurity.createMSP {% icon tool %} tool** can construct a `msp` file from our `RData` file outputted from matching or averaging. So, all the fragmentation spectra that has been linked to an XCMS feature are export with their own informations. 
+
+> ### {% icon hands_on %} Hands-on : msPurity.createMSP {% icon tool %}
+>
+> This tool has some parameters to complete and each one is important depending to our datas and our process made before. So four our tutorial, we need the following parameters : 
+>   - **msPurity purityA dataset** : this is the RData file outputted from our msPurity part we have done. The file should be named `msPurity.averageFragSpectra(all)_on_your_data.RData`.
+>   - **How to choose fragmentation spectra (if precursor was fragmented in >1 scans per XCMS group feature)** : here you have to adjust your choice according to the process you made before during averaging part. For our tutorial `select "average(all)"` to have all your datas you averaged. 
+>   - **Use additional metadata?** : choose if you use additional metadata for the `msp` file. If "yes" you have to add a dataframe containing a column with the "grpid" of each peak you want to complete. But for our tutorial `keep it to "no"`.
+>   - **Select XCMS groups?** : choose if you want to select some peaks. If "yes" you have to enter each grpid you want separated by comas. But for our tutorial `keep it to "no"`.
+>   - **Include intensity, relative abundance or both in the MSP file** : in the `msp` file you will have the spectra with values of m/z and you can choose the intensity or the relative abundance. For our tutorial `just keep the default values`.
+>   - **MSP schema to use for files** : choose the schema you want for your `msp` file. You have 2 options : MAssBank or MoNa. For the tutorial `keep the default parameter`.
+>   - **Filter peaks that have been flagged in prior processing steps** : during the filtering step some peaks can have been flagged because they didn't respect threshold or parameters we completed. Here you have to choose if you want to keep or not this flagged peaks. For the tutorial `keep it to "yes"` to filter these flagged peaks.
+>   - **Always include the following adduct descriptions in the MSP file** : if you want to check some adducts, select them in the list. For our tutorial `keep it empty` to have the default adduct [M+H]+.
+>   - **Create MSP spectra for each adduct?** : here you choose if you want one file per adduct. You should `keep it to "yes"` to have different file for different adducts.
+>
+{: .hands_on}
+
+So when you look at your output, you should have something like this : 
+![MSP file example](../../images/tutorial_msms_msp_example.png "MSP file example (MassBank format)")
+
+- *RECORD_TITLE* : the title given for this peak. **msPurity** take informations about its mass (MZ), retention time (RT), group id (grpid), file, adduct and compile all of them to build the name. 
+{: .text-justify}
+- *MS$FOCUSED_ION* : the exact mass of the precursor.
+{: .text-justify}
+- *AC$CHROMATOGRAPHY* : the exact retention time of the precursor.
+{: .text-justify}
+- *XCMS groupid (grpid)* : the group id in which the precursor has been classed.
+{: .text-justify}
+- *COMMENT* : some words about how we obtained this peak and which tool we used to.
+{: .text-justify}
+- *PK$NUM_PEAK* : number of peaks in the MS/MS spectra.
+{: .text-justify}
+- *PK$PEAK* : the column names of the list of peaks containing in the MS/MS spectra, follow by all the peaks in lines below.  
+{: .text-justify}
+
+We can now use this file to make our annotation with different software like *MetFrag*, *Sirius CSI-Finger-ID*, etc.... This can be done on Galaxy (and describe later in this tutorial) or you can also take informations directly in your `msp` file and work peak by peak in [this website](https://msbi.ipb-halle.de/MetFragBeta/ "MetFrag web version") for example.
+{: .text-justify}
+
+## 6 - (Optionnal) Create a database
 
 This function can be used to create an SQLite database for the LC-MS/MS example experiment. It can be done just after the averaging to be sure that we will create the database of our spectra already sorted. 
 The SQLite schema of the spectral database can be detailed here : 
@@ -724,7 +764,7 @@ Add more explanations about the schema  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 {: .hands_on}
 
 
-## 6 - (Optionnal) Matching of databases
+## 7 - (Optionnal) Matching of databases
   
 Firstly, this function is coupled and must be executed after the previous **msPurity.createDatabase {% icon tool %}** tool. Indeed, this **msPurity.spectralMatching {% icon tool %}** tool allows the matching between the just created database and an other one.  
 
@@ -794,23 +834,13 @@ The spectral matching functionality includes four main components :
 >
 {: .hands_on}
 
-## 7 - Create your MSP file
-
-Create an MSP file for all the fragmentation spectra that has been linked to an XCMS feature via frag4feature. Can export all the associated scans individually or the averaged fragmentation spectra can be exported.
-
-Additional metadata can be included in a dataframe (each column will be added to metadata of the MSP spectra). The dataframe must contain the column “grpid” corresponding to the XCMS grouped feature.
-
-```
-td <- tempdir()
-createMSP(pa, msp_file_pth = file.path(td, 'out.msp'))
-```
-
 
 # Stopover : Verify your datas after the msPurity processing
+  
 
-You have now finish the msPurity package part. Like in the previous stopover, we will verify your files to know if you have done msPurity steps correctly. This package has a function named "createMSP" which is installed as tool in Galaxy. With this, you can obtain a MSP format file which contains each saved MS/MS fragmentation spectra and its peaks. For the annotation step, we will need this MSP file as input for each tool we will want to use. 
+You have now finish the msPurity package part. Like in the previous stopover, we will verify your files to know if you have done msPurity steps correctly. This package has a function named "createMSP" which is installed as tool in Galaxy. With this, you obtained a `msp` format file which contains each saved MS/MS fragmentation spectra and its peaks. For the annotation step, we will need this `msp` file as input for each tool we will want to use. 
 
-The MSP file should contains lines like these repeated for each spectra and its precursor : 
+The `msp` file should contains lines like these repeated for each spectra and its precursor : 
 
 ```
 RECORD_TITLE: MZ:71.0605 | RT:848.8 | grpid:3 | file:NA | adduct:NA
