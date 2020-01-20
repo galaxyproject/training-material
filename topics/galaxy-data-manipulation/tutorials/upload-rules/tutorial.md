@@ -18,7 +18,7 @@ requirements:
       - collections
 contributors:
   - jmchilton
-  - erasche
+  - hexylena
 ---
 
 # Introduction

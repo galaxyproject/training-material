@@ -16,7 +16,7 @@ key_points:
   - Do not manage your Galaxy's tools manually
 contributors:
   - martenson
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - tools

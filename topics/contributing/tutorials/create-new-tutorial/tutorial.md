@@ -16,7 +16,7 @@ key_points:
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
 contributors:
   - bebatut
-  - erasche
+  - hexylena
   - shiltemann
   - lldelisle
 ---

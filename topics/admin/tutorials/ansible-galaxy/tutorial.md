@@ -13,7 +13,7 @@ key_points:
 - Basic deployment with Ansible is surprisingly easy
 - Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
 contributors:
-  - erasche
+  - hexylena
   - natefoo
   - slugger70
   - shiltemann

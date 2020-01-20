@@ -15,7 +15,7 @@ key_points:
 - JBrowse is a great, workflow-compatible alternative to other genome browsers
 - You can build visualisations that summarise dozens of analyses in one visualisation
 contributors:
-  - erasche
+  - hexylena
   - shiltemann
 ---
 

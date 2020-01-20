@@ -15,7 +15,7 @@ key_points:
   - "Circos is often used for genomics, but can also be used for other types of data"
 contributors:
   - shiltemann
-  - erasche
+  - hexylena
 ---
 
 # Introduction
