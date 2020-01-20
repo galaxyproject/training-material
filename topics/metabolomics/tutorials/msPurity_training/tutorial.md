@@ -424,14 +424,17 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 > ### {% icon question %} Question
 > 
 > **1** - How many lines do you have in your `msPurity.purityA_on_yourdata.tsv` file ?
-> <br>
-> **2** - Can you explain briefly what each column corresponds to ?
-> 
+>
 > > ### {% icon solution %} Solution
-> > 
 > > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **31 897** lines. Each line corresponds to a MS/MS spectra and its informations. 
 > > {: .text-justify}
-> > <br>
+> {: .solution}
+>
+> <br>
+>
+> **2** - Can you explain briefly what each column corresponds to ?
+>
+> > ### {% icon solution %} Solution
 > > **2** - During this first part of **msPurity** processing, only the *@puritydf* slot has been modified. It is now a table containing the following informations : 
 > > {: .text-justify}
 > >  - **pid** : unique id for MS/MS scan
@@ -454,9 +457,7 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 > >  - **ipkNm** : The number of peaks in the isolation window for iMz
 > >  - **inPkNm** : The interpolated number of peaks in the isolation window
 > >  - **inPurity** :  The interpolated purity score (the purity score is calculated at neighbouring MS1 scans and interpolated at the point of the MS/MS acquisition)
-> > 
 > {: .solution}
-> 
 {: .question}
 
 The output is a RData file with the purityA S4 class object (referred to as *pa* for convenience throughout the manual). The object contains a slot (pa@puritydf) where we can find the details of the purity assessments for each MS/MS scan. The purityA object can then be used for further processing including linking the fragmentation spectra to XCMS features, averaging fragmentation, database creation and spectral matching (from the created database).
@@ -546,14 +547,16 @@ The `frag4feature` function from msPurity package will link the fragmentation sp
 > ### {% icon question %} Question
 > 
 > **1** - How many lines do you have in your `msPurity.frag4feature_on_yourdata.tsv` file ?
-> <br>
-> **2** - Can you explain briefly what each column corresponds to ?
 > 
 > > ### {% icon solution %} Solution
-> > 
 > > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **7 528** lines. Each line corresponds to a MS/MS spectra which matched with a precursor ion. 
 > > {: .text-justify}
-> > <br>
+> {: .solution}
+>
+> <br>
+>
+> **2** - Can you explain briefly what each column corresponds to ?
+> > ### {% icon solution %} Solution
 > > **2** - During this first part of **msPurity** processing, only the *@puritydf* slot has been modified. It is now a table containing the following informations : 
 > > {: .text-justify}
 > >  - **grpid** : group id from XCMS feature
@@ -581,12 +584,10 @@ The `frag4feature` function from msPurity package will link the fragmentation sp
 > >  - **retentionTime** : 
 > >  - **fileid** : 
 > >  - **seqNum** : 
-> > 
 > {: .solution}
-> 
 {: .question}
 
-> ### {% icon solution %} Go further
+> ### {% icon details %} Go further
 > The slot grped_df is a dataframe of the grouped XCMS features linked to a reference to any associated MS/MS scans in the region of the full width of the XCMS feature in each file. The dataframe contains the following columns.
 > {: .text-justify}
 >
@@ -618,7 +619,7 @@ The `frag4feature` function from msPurity package will link the fragmentation sp
 >
 > The slot grped_MS2 is a list of the associated fragmentation spectra for the grouped features.
 > {: .text-justify}
-{: .solution}
+{: .details}
 
 ## 3 - Filter your results
 
@@ -860,14 +861,39 @@ PK$PEAK: m/z int. rel.int.
 74.0707550048828    408.659912109375    6.77
 ```
 
-Line 1 : this is the title line and it contains informations about the spectra and its precursor.  
-Line 2 : it informs the exact precursor mass  
-Line 3 : it is the exact retention time  
-Line 4 : it is the group id  
-Line 5 : it is a comment about the source and how we obtain this  
-Line 6 : it is the number of peaks in the spectra  
-Line 7 : it is the title line for peaks  
-After : it is all peaks with their mass and their intensity or/and relatve intensity.
+> ### {% icon question %} Question before MS/MS steps
+> 
+>  **1** - What are the **steps of processing** with msPurity you made before your final file ? And what is **the aim of each one** ?
+> > ### {% icon solution %} Solution
+> > 
+> > During the msPurity part process, we used a lot of different tools. But each one has its specificity and is important to filter our datas. Each one is describe just below : 
+> > {: .text-justify}
+> >   - **Assessing the purity** : this step enables to calculate the purity score for each MS/MS spectra and its precursor (directly output from file). It creates a dataframe containing each spectra with its precursor, some informations and the purity score.
+> > {: .text-justify}
+> >   - **Matching features with spectra** : we made a preprocessing step where we obtained all peaks according to our parameters. This list of features will be match against the list of spectra obtained during the previous step. This step searches for matches between these 2 tables and writes a new one containing only matches. 
+> > {: .text-justify}
+> >   - **Filtering results** : during this step we can reduce a lot our results. Effectively, if our datas are quite good, we should have thousands of matches during the previous step and with a lot of bad purity or intensity peaks. With these filters, you can obtain only matches better than threshold you enterred as parameters. 
+> > {: .text-justify}
+> >   - **Averaging results** : inside and between your different files, you can have some equivalent datas. To group these datas, the averaging tool able to find similar peaks. At the end of this processus, you will obtain a new table of matches in which precursor peaks are grouped by a `grpid` column. 
+> >  {: .text-justify}
+> {: .solution}
+> <br>
+>  **2** - What is **the difference** between average all spectra and average spectra intra then inter files ?
+> > ### {% icon solution %} Solution
+> > 
+> > When you average on **all** spectra you try to group all peaks in files **AND** between files with the **same** parameters. Whereas when you filter in files **THEN** between files, you **can** group with **different** parameters in each step. These 2 methods can be exactly the same thing when you set the same parameters in grouping in and between files. 
+> > {: .text-justify}
+> {: .solution}
+> <br>
+> **3** - How many precursors do you have finally ? and how can you see it ?
+> > ### {% icon solution %} Solution
+> > 
+> > To know how many precursors we have just before doing our annotation, we can look in our `msp` file outputted from msPurity.createMSP {% icon tool %} tool. But it can be very long to count one by one to know how many precursors we have. So, to know it fast and esayly, we can serach for `RECORD_TITLE` in our `msp` file (after clicking on `show all`). With this research, we will find all these words and they are writed only one time per precursor. 
+> > {: .text-justify}
+> > 
+> {: .solution}
+>
+{: .question}
 
 
 # Annotation
@@ -895,22 +921,23 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 > > For the last parameter it is important to `set it on "no"` because we haven't defined any adduct type for our data.
 > > 
 > {: .warning}
-
+>
 {: .hands_on}
 
 > ### {% icon question %} Question
 > 
 > **1** - How many results do you have after the MetFrag processing ?
-> <br>
-> **2** - Can you explain each column of the result file ?
-> <br>
-> **3** - Can you find the following drugs that should be present in our datas according to the publication : *clodipogrel, irbesartan, verapamil, atenolol, ranitidine, metformin, paracetamol* ?
-> 
+>
 > > ### {% icon solution %} Solution
-> > 
 > > **1** - To see the number of results, you just have to look at the number of line of the `tsv` file. For our example, we can see that we have **560** lines. Each line corresponds to one result from MetFrag. 
 > > {: .text-justify}
-> > <br>
+> {: .solution}
+>
+> <br>
+>
+> **2** - Can you explain each column of the result file ?
+>
+> > ### {% icon solution %} Solution
 > > **2** - There are multiple informations about results from MetFrag : 
 > >  - **adduct** : the adduct used to obtain these results
 > >  - **name** : name of the spectra
@@ -933,8 +960,13 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 > >  - **NumberPeaksUsed** : number of peaks used for matching (= total number of peaks in spectra)
 > >  - **SMILES** : SMILES code of the compound
 > >  - **Score** : final score
-> > 
-> > <br>
+> {: .solution}
+>
+> <br>
+>
+> **3** - Can you find the following drugs that should be present in our datas according to the publication : *clodipogrel, irbesartan, verapamil, atenolol, ranitidine, metformin, paracetamol* ?
+>
+> > ### {% icon solution %} Solution
 > > **3** - After searching each compound in our database (here it is KEGG) we want to find, we have the following informations : 
 > > 
 > > ![compound table](../../images/tutorial_msms_compound_table.png)
@@ -946,12 +978,12 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 > > In our example, we can find *irbesartan* with a MZ = 429.2406 and *metformin* with MZ = 130.1089. But we only have these two compounds where we can find the name and the mass matched correctly... But if you search a little bit more, you can find that we also have some compounds with MZ = 267.1693 which is *practolol* and with mz = 152.0706 which is *acetaminophen*. The first one corresponds to the *atenolol* and the second *paracetamol*. So it is **important to know that we can have differents names for the same compound !!** 
 > > {: .text-justify}
 > > To resume, we have found 4 compounds : *irbesartan, metformin, practolol(atenolol), acetaminophen(paracetamol)*. 3 haven't been found : one is **not in KEGG database**, so it is normal, the 2 others are not in MetFrag result but it could be interesting to **investigate earlier in the workflow** to know if we found something about these compounds. Please open the "go further" section just after to know more about it.
-> > 
+> > {: .text-justify}
 > {: .solution}
 > 
 {: .question}
 
-> ### {% icon solution %} Go further
+> ### {% icon details %} Go further
 > 
 > We will try to find all our compounds. We **already have 4 of them** found during the MetFrag annotation we performed just after the msPurity part. But it misses 3 of them... The first one (*clodipogrel*) **may be find in PubChem database or some other**. The two others we can try to find if we have them in our previous files of the workflow : 
 >  - in the `msp` file : try to find the associated MZ for each of these not found compounds. Here we should find something around MZ = 455 and MZ = 315... Whereas we don't have anything between MZ = 446 and MZ = 464 or MZ = 314 and MZ = 316. So with the adduct [M+H]+, we don't have these 2 compounds. But maybe we can find them with a better investigation on the adduct type of these compounds.
@@ -961,7 +993,7 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 > 
 > So we can't find anything from these compounds but we know that raw datas has been obtained in switching mode between positive and negative. And here, our datas are only positive. So, maybe these compounds has been found in negative datas.
 > 
-{: .solution}
+{: .details}
 
 
 ## With Sirius CSI-FingerID
