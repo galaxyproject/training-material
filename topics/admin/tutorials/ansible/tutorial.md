@@ -17,7 +17,7 @@ key_points:
   - Ansible lets you do system administration at scale
   - Many system administration, software installation, and software management tasks are already available as ansible tasks or roles
 contributors:
-  - erasche
+  - hexylena
   - shiltemann
 subtopic: core
 

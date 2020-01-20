@@ -35,7 +35,7 @@ follow_up_training:
 contributors:
   - joachimwolff
   - bebatut
-  - erasche
+  - hexylena
 ---
 
 # Introduction

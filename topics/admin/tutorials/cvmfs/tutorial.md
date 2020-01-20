@@ -13,7 +13,7 @@ time_estimation: "1h"
 key_points:
 contributors:
   - slugger70
-  - erasche
+  - hexylena
 subtopic: features
 requirements:
   - type: "internal"

@@ -15,7 +15,7 @@ contributors:
   - natefoo
   - bgruening
   - slugger70
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - monitoring

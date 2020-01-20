@@ -23,7 +23,7 @@ key_points:
   - InfluxDB can collect metrics from Telegraf
   - Use Grafana to visualise these metrics, and monitor their values
 contributors:
-  - erasche
+  - hexylena
 requirements:
   - type: "internal"
     topic_name: admin

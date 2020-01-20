@@ -30,7 +30,7 @@ contributors:
   - nsoranzo
   - dyusuf
   - sarah-peter
-  - erasche
+  - hexylena
 ---
 
 # Introduction

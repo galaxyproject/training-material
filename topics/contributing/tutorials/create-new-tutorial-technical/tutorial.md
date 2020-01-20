@@ -23,7 +23,7 @@ contributors:
   - bebatut
   - bgruening
   - shiltemann
-  - erasche
+  - hexylena
 ---
 
 # Building a Galaxy instance specifically for your training
