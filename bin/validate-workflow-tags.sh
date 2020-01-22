@@ -10,6 +10,9 @@ with open("$1") as json_file:
     data = json.load(json_file) 
     if 'tags' not in data or "$2" not in data['tags']: 
         sys.exit(False)
+    elif 'annotation' not in data or not data['annotation']:
+        #Checking for annotation in workflow
+        sys.exit(False)
     else:
         #Checking if there are tools used from the testtoolshed
         for step in data['steps'].values():
@@ -31,7 +34,7 @@ do
                 echo "Checking tutorial $w for tags" 
                 if tester $w $topic;
                 then
-                    echo "ERROR: No 'tags' attribute found with its corresponding topic or workflow includes tool(s) from testtoolshed."
+                    echo "ERROR: No 'tags' attribute found with its corresponding topic or 'annotation' attribute with for example the title of the tutorial or workflow includes tool(s) from testtoolshed."
 		            exit_with=1
                 fi
             done
