@@ -3,7 +3,7 @@ layout : tutorial_hands_on
 
 title : 'Mass spectrometry : MS/MS analysis with msPurity package'
 level : Introductory
-zenodo_link : 'https://zenodo.org/record/3244991' 
+zenodo_link : 'https://zenodo.org/record/3614672' 
 questions : 
     - What are the main steps of MS/MS datas processing for metabolomic analysis ? 
     - How te be able to annotate the maximum of spectra using Galaxy ? 
