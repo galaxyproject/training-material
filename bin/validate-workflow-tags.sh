@@ -10,19 +10,19 @@ with open("$1") as json_file:
     data = json.load(json_file) 
     if 'tags' not in data or "$2" not in data['tags']: 
         #Checking for 'tags' in workflow
-        sys.stderr.write("Workflow {} has no corresponding 'tags' attribute. Please add:".format(data['name']))
-        sys.stderr.write('"tags": [' + "\n\t" + '"' + "$2" + '"'+ "\n]")
+        sys.stderr.write("Workflow {} has no corresponding 'tags' attribute. Please add:\n".format(data['name']))
+        sys.stderr.write('"tags": [' + "\n\t" + '"' + "$2" + '"'+ "\n]\n")
         sys.exit(False)
     elif 'annotation' not in data or not data['annotation']:
         #Checking for 'annotation' in workflow
         sys.stderr.write("Workflow {} has no corresponding 'annotation' attribute. Please add: \n".format(data['name']))
-        sys.stderr.write('"annotation": "<title of tutorial>"')
+        sys.stderr.write('"annotation": "<title of tutorial>"' + "\n")
         sys.exit(False)
     else:
         #Checking if there are tools used from the testtoolshed
         for stepnr, step in data['steps'].items():
             if step['tool_id'] and step['type'] == 'tool' and 'testtoolshed.g2.bx.psu.edu' in step['tool_id']:
-                sys.stderr.write("Workflow {} has a tool from the testtoolshed in step {}.".format(data['name'], str(stepnr)))
+                sys.stderr.write("Workflow {} has a tool from the testtoolshed in step {}.\n".format(data['name'], str(stepnr)))
                 sys.exit(False)
         sys.exit(True)
 END
@@ -37,11 +37,12 @@ do
         then
             for w in $tutdir/workflows/*.ga
             do
-                echo "Checking tutorial $w for tags" 
                 if tester $w $topic;
                 then
-                    echo "  Invalid workflow"
+                    echo "ERROR:  Invalid workflow"
 		            exit_with=1
+                else
+                    echo "$w validated succesfully"
                 fi
             done
         fi
