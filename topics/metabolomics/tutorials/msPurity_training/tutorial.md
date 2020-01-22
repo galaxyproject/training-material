@@ -1,7 +1,7 @@
 --- 
 layout : tutorial_hands_on
 
-title : 'Mass spectrometry : MSMS analysis with msPurity package'
+title : 'Mass spectrometry : MS/MS analysis with msPurity package'
 level : Introductory
 zenodo_link : 'https://zenodo.org/record/3244991' 
 questions : 
@@ -28,7 +28,7 @@ contributors :
 # Introduction
 {:.no_toc}
 
-MsPurity paper authors ({% cite Lawson2017%}) said “mass spectrometry (MS) is routinely used to quantify, annotate, and identify small molecules in complex biological matrices.[..] Tandem mass spectrometry (MS/MS or MS/MS) is a widely used approach for structural annotation and identification of metabolites in complex biological samples”. MS is used to generate theoretical formula for a metabolite of interest while MS/MS provides additional information regarding molecular structure and chemical groups. Authors also highlight the key point of MS/MS : “the term “tandem mass spectrometry” is used when a single collision step is used, but product ions can be isolated for further collision to provide MSn spectra where n ≥ 3. A key component of any MS/MS (or higher) technology is the isolation of selected m/z windows for gas-phase fragmentation and the mapping back of the fragmentation (product) spectrum to the selected m/z window”.
+MsPurity paper authors ({% cite Lawson2017%}) said “mass spectrometry (MS) is routinely used to quantify, annotate, and identify small molecules in complex biological matrices.[..] Tandem mass spectrometry (MS/MS) is a widely used approach for structural annotation and identification of metabolites in complex biological samples”. MS is used to generate theoretical formula for a metabolite of interest while MS/MS provides additional information regarding molecular structure and chemical groups. Authors also highlight the key point of MS/MS : “the term “tandem mass spectrometry” is used when a single collision step is used, but product ions can be isolated for further collision to provide MSn spectra where n ≥ 3. A key component of any MS/MS (or higher) technology is the isolation of selected m/z windows for gas-phase fragmentation and the mapping back of the fragmentation (product) spectrum to the selected m/z window”.
 {: .text-justify}
 
 This previous paper deals with a metabolomics analytical and data analysis workflow that directly takes into consideration the purity of an isolation window by using the msPurity package. “The approach, demonstrated using an Agilent6520 Q-TOF instrument, requires sliding isolation windows to be acquired surrounding the precursor of interest.[...] In these cases, simply assessing the targeted precursor purity can be useful in interpreting the MS/MS spectra and aid in assessing the reliability of any subsequent annotation. [...] What we call here “precursor purity” is calculated with a revised Michalski approach”. The software has been applied to investigate DDA (Data Dependant Acquisition) or DIA (Data Independent Acquisition) metabolomics data sets for different biological samples retrieved from the data repositories MetaboLights, Metabolomics Workbench, and PRIMeData Resource of Plant Metabolomics (DROP Met). They also detail how theoretical isolation windows can be assessed using MS1 data sets collected independent of MS/MS acquisitions. The computational methods detailed in the msPurity paper (Lawson et al. 2017) are available in the R package msPurity. The package has been developed to work as a standalone or to be used in conjunction with the metabolomics peak detection and processing R package XCMS 2.0.
@@ -66,17 +66,16 @@ This software is based on different algorithms that have been published, and is 
 First step of this tutorial is to download the data test. As describe in the introduction, we will use data from {% cite VanDerHooft2016 %}. We will only process on a subset of these data. So, you can **import your files directly in Galaxy by using the following URLs below** or download files into your computer (then upload them on Galaxy) : 
 {: .text-justify}
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg)](https://doi.org/10.5281/zenodo.3244991)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3614672.svg)](https://doi.org/10.5281/zenodo.3614672)
+
 ```
-https://zenodo.org/record/3244991/files/HU_neg_048.mzML
-https://zenodo.org/record/3244991/files/HU_neg_090.mzML
-https://zenodo.org/record/3244991/files/HU_neg_123.mzML
-https://zenodo.org/record/3244991/files/HU_neg_157.mzML
-https://zenodo.org/record/3244991/files/HU_neg_173.mzML
-https://zenodo.org/record/3244991/files/HU_neg_192.mzML
-https://zenodo.org/record/3244991/files/QC1_002.mzML
-https://zenodo.org/record/3244991/files/QC1_008.mzML
-https://zenodo.org/record/3244991/files/QC1_014.mzML
+https://zenodo.org/record/3614672/files/sampleMetadata_manVSwoman.csv
+https://zenodo.org/record/3614672/files/Urine_23_Top10_posneg_pos.mzML
+https://zenodo.org/record/3614672/files/Urine_44_Top10_posneg_pos.mzML
+https://zenodo.org/record/3614672/files/Urine_66_Top10_posneg_pos.mzML
+https://zenodo.org/record/3614672/files/Urine_73_Top10_posneg_pos.mzML
+https://zenodo.org/record/3614672/files/Urine_90_Top10_posneg_pos.mzML
+https://zenodo.org/record/3614672/files/Urine_91_Top10_posneg_pos.mzML
 ```
 This step is described as number 1 in details part below.
 
@@ -329,7 +328,7 @@ Before the next step with msPurity package on MS/MS data, here are some question
 > **3** - What is the size (in MB) of your final RData file ?
 > > ### {% icon solution %} Solution
 > > 
-> > To be able to see the size of a file in your history, you just have to select it. It will deployed informations about it and you can see the size of yours. For our example, the size of the final file is **1.4 MB**.
+> > To be able to see the size of a file in your history, you just have to select it. It will deployed informations about it and you can see the size of yours. For our example, the size of the final file is **863,4 kB**.
 > > {: .text-justify}
 > > 
 > {: .solution}
@@ -426,7 +425,7 @@ Let's try assessing the purity of precursors with the Galaxy tool **msPurity.pur
 > **1** - How many lines do you have in your `msPurity.purityA_on_yourdata.tsv` file ?
 >
 > > ### {% icon solution %} Solution
-> > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **31 897** lines. Each line corresponds to a MS/MS spectra and its informations. 
+> > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **19 373** lines. Each line corresponds to a MS/MS spectra and its informations. 
 > > {: .text-justify}
 > {: .solution}
 >
@@ -549,7 +548,7 @@ The `frag4feature` function from msPurity package will link the fragmentation sp
 > **1** - How many lines do you have in your `msPurity.frag4feature_on_yourdata.tsv` file ?
 > 
 > > ### {% icon solution %} Solution
-> > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **7 528** lines. Each line corresponds to a MS/MS spectra which matched with a precursor ion. 
+> > **1** - To see the number of line from a `tsv` file, just select the concerning file and it will deployed informations about it. For our example, we can see that we have **5 554** lines. Each line corresponds to a MS/MS spectra which matched with a precursor ion. 
 > > {: .text-justify}
 > {: .solution}
 >
@@ -665,7 +664,7 @@ The fragmentation spectra can be averaged in multiple ways :
 The way you make the average will depend of the user wishes to treat its fragmentation spectra. Another alternative is to ignore the averaging completely and just use the non-averaged fragmentation spectra for the spectral matching.
 {: .text-justify}
 
-> ### {% icon warning %} Be careful to process the averaging ?
+> ### {% icon warning %} Be careful when processing the averaging ?
 > If the inter and intra fragmentation scans have to be treated differently the following should be followed :
 > {: .text-justify}
 >  - Start by running the **msPurity.averageFragSpectra** {% icon tool %} tool with the following parameters : 
@@ -876,6 +875,8 @@ PK$PEAK: m/z int. rel.int.
 > > {: .text-justify}
 > >   - **Averaging results** : inside and between your different files, you can have some equivalent datas. To group these datas, the averaging tool able to find similar peaks. At the end of this processus, you will obtain a new table of matches in which precursor peaks are grouped by a `grpid` column. 
 > >  {: .text-justify}
+> >   - **Creating `msp` file** : to be able to have a readable file for the annotation, there is msPurity.createMSP {% icon tool %} tool which transform your datas into a `msp` file. This file contains informations about precursor and its MS/MS spectra.
+> > {: .text-justify}
 > {: .solution}
 > <br>
 >  **2** - What is **the difference** between average all spectra and average spectra intra then inter files ?
@@ -888,7 +889,7 @@ PK$PEAK: m/z int. rel.int.
 > **3** - How many precursors do you have finally ? and how can you see it ?
 > > ### {% icon solution %} Solution
 > > 
-> > To know how many precursors we have just before doing our annotation, we can look in our `msp` file outputted from msPurity.createMSP {% icon tool %} tool. But it can be very long to count one by one to know how many precursors we have. So, to know it fast and esayly, we can serach for `RECORD_TITLE` in our `msp` file (after clicking on `show all`). With this research, we will find all these words and they are writed only one time per precursor. 
+> > To know how many precursors we have just before doing our annotation, we can look in our `msp` file outputted from msPurity.createMSP {% icon tool %} tool. But it can be very long to count one by one to know how many precursors we have. So, to know it fast and esayly, we can serach for `RECORD_TITLE` in our `msp` file (after clicking on `show all`). With this research, we will find all these words and they are writed only one time per precursor. Here, we obtain 705 results. So, we have `705 different precursors` which can be potentially anotated. 
 > > {: .text-justify}
 > > 
 > {: .solution}
@@ -906,19 +907,19 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 
 > ### {% icon hands_on %} Hands-on : MetFrag {% icon tool %}
 > This tool is named **MetFrag** {% icon tool %} in Galaxy instance. It is the principal step of annotation after the msPurity part. To link these two parts, we already saw the **msPurity.createMSP** {% icon tool %} tool which able us to obtain a MSP file where we have all our interesting masses link to their spectrum and informations. So to run the metfrag tool, we need to set up these parameters for the tutorial : 
->  - **MSP file (Output from Create MSP tool)** : it is the file outputed from createMSP tool and containing all your spectra and their informations. For the tutorial you should have the **msPurity.createMSP_on_data_x:msp** file.
->  - **Choose Compound Database** : with this parameter you can choose the database you want to compare to. There are multiple databases you can choose : *KEGG, PubChem, MetChem* or your own database if you want. For the tutorial, please **set it to KEGG** to have less possibility compare to *PubChem*. For more informations about these databases, please look at "go further" part just after.
->  - **Polarity** : just be sure the polarity parameter match with your datas. **Keep it at positive** for the tutorial because our datas are in positive mode.
->  - **MetFrag Score Types** : here you choose the differents scores you want to apply during the processing. To see what score you can obtain, just clic on *Select/Unselect all*. And to choose the score, just delete with the cross the score you don't want. For the tutorial, **just keep the FragmenterScore**
->  - **MetFrag Score Weights** : it is the weight for each score you choose in the parameter just before. For each one you add before, you need to precise the value max for this one, separate by a coma. For the tutorial, **you just need to set it to 1** because you just selected *FragmenterScore*.
->  - **Minimum number of MS/MS peaks** : you can set a threshold to the spectra on the minimum number of peaks. It can be a good process to reduce the time of the processing avoiding useless spectra. For our tutorial, **please set it to 5**.
+>  - **MSP file (Output from Create MSP tool)** : it is the file outputed from createMSP tool and containing all your spectra and their informations. For the tutorial you should have the `msPurity.createMSP_on_data_x:msp` file.
+>  - **Choose Compound Database** : with this parameter you can choose the database you want to compare to. There are multiple databases you can choose : *KEGG, PubChem, MetChem* or your own database if you want. For the tutorial, please `set it to KEGG` to have less possibility compare to *PubChem*. For more informations about these databases, please look at "go further" part just after.
+>  - **Polarity** : just be sure the polarity parameter match with your datas. `Keep it at positive` for the tutorial because our datas are in positive mode.
+>  - **MetFrag Score Types** : here you choose the differents scores you want to apply during the processing. To see what score you can obtain, just clic on *Select/Unselect all*. And to choose the score, just delete with the cross the score you don't want. For the tutorial, `just keep the FragmenterScore`.
+>  - **MetFrag Score Weights** : it is the weight for each score you choose in the parameter just before. For each one you add before, you need to precise the value max for this one, separate by a coma. For the tutorial, `you just need to set it to 1` because you just selected *FragmenterScore*.
+>  - **Minimum number of MS/MS peaks** : you can set a threshold to the spectra on the minimum number of peaks. It can be a good process to reduce the time of the processing avoiding useless spectra. For our tutorial, `please set it to 5`.
 >  - **In post-processing section** :
->    - **Threshold for score after MetFrag search** : this parameter filter results which have a better score than the threshold we fix here. It can be good to set it to have less results which will probably be some bad matches between database and spectra. For the tutorial **set it to 0.7**.
->    - **Minimum percentage of explain peaks** : during the matching part of MetFrag between database and spectra, it compare spectra peaks and database peaks. When it finds that peaks are quite the same, it adds them into explain peaks. They can probably explain something similar between database and spectra. So for the tutorial, **we would like 50% of explain peaks** in our results to have only good matches.
+>    - **Threshold for score after MetFrag search** : this parameter filter results which have a better score than the threshold we fix here. It can be good to set it to have less results which will probably be some bad matches between database and spectra. For the tutorial `set it to 0.7`.
+>    - **Minimum percentage of explain peaks** : during the matching part of MetFrag between database and spectra, it compare spectra peaks and database peaks. When it finds that peaks are quite the same, it adds them into explain peaks. They can probably explain something similar between database and spectra. So for the tutorial, `we would like 50% of explain peaks` in our results to have only good matches.
 >
 > > ### {% icon warning %} How to process the averaging ?
 > > 
-> > For the last parameter it is important to `set it on "no"` because we haven't defined any adduct type for our data.
+> > For the last parameter (*Skip invalide or undefined adduct types*) it is important to `set it on "no"` because we haven't defined any adduct type for our data.
 > > 
 > {: .warning}
 >
@@ -929,7 +930,7 @@ A tool has been developped on Galaxy instance and is available on W4M Galaxy. Wi
 > **1** - How many results do you have after the MetFrag processing ?
 >
 > > ### {% icon solution %} Solution
-> > **1** - To see the number of results, you just have to look at the number of line of the `tsv` file. For our example, we can see that we have **560** lines. Each line corresponds to one result from MetFrag. 
+> > **1** - To see the number of results, you just have to look at the number of line of the `tsv` file. For our example, we can see that we have **454** lines. Each line corresponds to one result from MetFrag. 
 > > {: .text-justify}
 > {: .solution}
 >
