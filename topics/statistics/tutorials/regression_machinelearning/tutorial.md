@@ -128,14 +128,14 @@ The dataset is divided into two parts - training and test sets. The training set
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Regression model`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Age`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels or target values"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
->                - {% icon param-text %} *"Select target column(s)"*: `Age`
+>                - {% icon param-text %} *"Type header name(s)"*: `Age`
 > 2. Rename the generated file to `LinearRegression_model`
 {: .hands_on}
 
@@ -163,7 +163,7 @@ Now, we will predict age in the test dataset using this model in order to see if
 > 1. **Generalized linear models for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LinearRegression_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `predicted_data_linear`
@@ -177,8 +177,8 @@ We will evaluate the predictions by comparing them to the expected targets. In t
 >
 > 1. **Remove beginning of a file** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Remove first"*: `1`
->       - {% icon param-file %} *"from"*: `test_rows_labels.csv`
-> 2. Rename the generated file to `test_rows_labels_without_header.csv`
+>       - {% icon param-file %} *"from"*: `test_rows_labels`
+> 2. Rename the generated file to `test_rows_labels_without_header`
 {: .hands_on}
 
 
@@ -254,14 +254,14 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Gradient Boosting Regressor`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Age`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels or target values"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
->                - {% icon param-text %} *"Select target column(s)"*: `Age`
+>                - {% icon param-text %} *"Type header name(s)"*: `Age`
 > 2. Rename the generated file to `gradient_boosting_model`
 {: .hands_on}
 
@@ -286,7 +286,7 @@ After learning on the training dataset, we should evaluate the performance on th
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `gradient_boosting_model`
->       - {% icon param-file %} *"Data (tabular)"*: `train_rows_test.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `predicted_data_gradient_boosting`
@@ -295,7 +295,7 @@ After learning on the training dataset, we should evaluate the performance on th
 Now we can visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool.
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_gradient_boosting`
 {: .hands_on}
 
@@ -346,7 +346,7 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 >             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (the other output of **Pipeline builder** {% icon tool %})
 >             - In *"Parameter settings for search"*:
 >                 - {% icon param-repeat %} *"1: Parameter settings for search"*
->                    - *"Choose a parameter name (with current value)"*: `gradientboostingregressor_n_estimators: 100`
+>                    - *"Choose a parameter name (with current value)"*: `n_estimators: 100`
 >                    - *"Search list"*: `[25, 50, 75, 100, 200]`
 >        - In *"Advanced Options for SearchCV"*:
 >            - *"Select the primary metric (scoring)"*: `Regression -- 'r2'`
@@ -370,7 +370,7 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 >    - *"Select input type"*: `tabular data`
 >        - {% icon param-files %} *"Training samples dataset"*: `train_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
->        - *"Choose how to select data by column"*: `All columns BUT by column header name(s)`
+>        - *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - *"Type header name(s)"*: `Age`
 >        - {% icon param-files %} *"Dataset containing class labels or target values"*: `train_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
