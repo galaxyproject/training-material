@@ -1,5 +1,8 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna_preprocessing/tutorial
+
 title: "Pre-processing of Single-Cell RNA Data"
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
@@ -51,22 +54,22 @@ contributors:
 #### Why do Single Cell sequencing?
 {:.no_toc}
 
-Single-cell RNA (scRNA) sequencing is the technological successor to classical "bulk" RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in [previous hands-on material]({{site.baseurl}}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.
+Single-cell RNA (scRNA) sequencing is the technological successor to classical "bulk" RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in [previous hands-on material]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.
 
 The rise of scRNA sequencing provides the means to explore this heterogeneity by examining samples at the individual cell level, enabling a greater understanding of the development and function of such samples, by the characteristics of their constituent cells.
 
 Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
 
-![Cell Differentiation of Hematopoietic Stem cells]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_hematopoiesis.png %} "Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg")
+![Cell Differentiation of Hematopoietic Stem cells]({% link topics/transcriptomics/images/scrna_hematopoiesis.png %} "Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg")
 
 The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.
 
 Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.
 
-![Facets of Cellular Identity]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
+![Facets of Cellular Identity]({% link topics/transcriptomics/images/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
+This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
 
-This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
 
 # Analysis Strategy
 {:.no_toc}
@@ -82,9 +85,17 @@ The tutorial is structured in two parts:
 1. **Single-Batch Processing**
 1. **Multi-Batch Processing**
 
-![Overview of workflow]({{ site.baseurl }}{% link topics/transcriptomics/images/scrna_workflow.svg %} "An overview of the entire workflow")
+![Overview of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "An overview of the entire workflow")
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#barcode-extraction) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.
+
+> ### {% icon comment %} 10x Datasets
+>
+> 10x Genomics datasets can be processed in a much easier way that is outlined in the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
+>
+> However, much of the essential concepts for scRNA-seq pre-processing are not explained, so it is a good idea to familiarise yourself with them in this tutorial.
+>
+{: .comment}
 
 The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are [merged together](#merging-count-matrices) and quality control performed. This produces a final count matrix valid for downstream analysis.
 
@@ -107,7 +118,7 @@ In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken 
 The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using *Mus Musculus* annotation data (.gtf) from the  [NCBI RefSeq](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/) track, as well as a barcodes file (.tsv).
 
 
-![Workflow Upper]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow_upper.png %} "Single batch processing")
+![Workflow Upper]({% link topics/transcriptomics/images/scrna_workflow_upper.png %} "Single batch processing")
 
 
 > ### {% icon hands_on %} Hands-on: Data upload and organization
@@ -138,14 +149,14 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 
 
 <!--
-For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
+For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
 -->
 
 ## Barcode Extraction
 
 > ### {% icon comment %} Note
 >
-> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, as well as the [*Understanding Barcodes*]({{site.baseurl}}{% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
+> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, as well as the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
 >
 {: .comment}
 
@@ -182,7 +193,7 @@ Verifying that the desired UMI and cell barcodes have been extracted from the se
 
 ## Mapping / Alignment
 
-FASTQ files contain sequence information that we wish to map to genes in a genome. Mapping is a relatively straightforward process, and is covered more extensively in the [*Sequence Analysis*]({{site.baseurl}}{% link topics/sequence-analysis/index.md %}) tutorials:
+FASTQ files contain sequence information that we wish to map to genes in a genome. Mapping is a relatively straightforward process, and is covered more extensively in the [*Sequence Analysis*]({% link topics/sequence-analysis/index.md %}) tutorials:
 
 1. Select your genome
 1. Select your gene annotation file
@@ -412,7 +423,7 @@ Let us annotate our BAM file with desired gene tags.
 >        - {% icon param-file %} *"Gene annotation file"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq.gtf`
 >    - In *"Advanced options"*:
 >        - *"Count multi-mapping reads/fragments"*: `Disabled; multi-mapping reads are excluded (default)`
->        - *"Exon-exon junctions"*: `Yes`
+>        - *"Exon-exon junctions"*: `No (default)`
 >        - *"Annotates the alignment file with 'XS:Z:'-tags to described per read or read-pair the corresponding assigned feature(s)."*: `Yes`
 >
 > 2. Examine the output BAM file
@@ -503,11 +514,12 @@ This concludes the first part of the tutorial which focused on the transformatio
 >
 {: .details}
 
+For the processing of 10x Genomics datasets, please refer to the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
 
 # Multi-Batch Processing
 
 
-![Workflow Lower]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow_lower.png %} "Multiple batch processing")
+![Workflow Lower]({% link topics/transcriptomics/images/scrna_workflow_lower.png %} "Multiple batch processing")
 
 Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:
 
@@ -562,7 +574,7 @@ We have the problem that only *GeneC* and *GeneD* appear in both batches, whilst
 
 To resolve this we can perform a "Full Table Join" where the missing data for *GeneE* and *GeneA* in Batch1 and Batch2 respectively are replaced with zeroes:
 
-![Table Join]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_fulltable.svg %} "Full Table Join")
+![Table Join]({% link topics/transcriptomics/images/scrna_fulltable.svg %} "Full Table Join")
 
 > ### {% icon comment %} Comments
 > For more information on table joins, see [here](http://www.sql-join.com/sql-join-types/)
@@ -624,7 +636,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 In the new combined matrix we see that we have 1536 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the [*Barcode Extraction*](#barcode-extraction) stage previously.
 
-The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
+The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
 
 
 ## Guarding against Cross-Contamination
@@ -717,7 +729,7 @@ The plot that follows tells us everything we need to know about each of our batc
 
 #### Cross-contamination Plot
 
-![Contamination Plots]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
+![Contamination Plots]({% link topics/transcriptomics/images/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
 
 Two things to take note of:
 
@@ -749,4 +761,4 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
-![Recap of workflow]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
+![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")

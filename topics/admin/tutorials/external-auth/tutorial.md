@@ -13,7 +13,7 @@ key_points:
 contributors:
   - natefoo
   - nsoranzo
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - authentication

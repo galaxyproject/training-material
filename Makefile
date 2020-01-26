@@ -3,6 +3,7 @@ JEKYLL=jekyll
 PORT?=4000
 HOST?=0.0.0.0
 FLAGS?=""
+ENV?="development"
 CHROME=google-chrome-stable
 TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
 SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
@@ -44,10 +45,10 @@ create-env: ## create conda environment
 
 ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 
-install: clean ## install dependencies
+install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --system && \
-		gem install addressable:'2.5.2' jekyll:'< 4' jekyll-feed jekyll-environment-variables jekyll-github-metadata jekyll-scholar:'< 6' csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
@@ -68,7 +69,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
+		JEKYLL_ENV=${ENV} ${JEKYLL} build --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: build
 
 check-frontmatter: ## Validate the frontmatter
@@ -91,7 +92,8 @@ check-html: build ## validate HTML
 
 check-workflows: build ## validate Workflows
 	$(ACTIVATE_ENV) && \
-		bash bin/validate-json.sh
+		bash bin/validate-json.sh && \
+		bash bin/validate-workflow-tags.sh
 .PHONY: check-workflows
 
 check-references: build ## validate no missing references
@@ -139,6 +141,10 @@ check-framework:
 	$(ACTIVATE_ENV) && \
 		ruby _plugins/jekyll-notranslate.rb
 .PHONY: check-framework
+
+check-broken-boxes: build ## List tutorials containing broken boxes
+	./bin/check-broken-boxes
+.PHONY: check-broken-boxes
 
 check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check

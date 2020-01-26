@@ -1,0 +1,128 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Visualisation with Circos",
+  "format-version": "0.1",
+  "name": "Asdf",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "highlight-0.tabular"
+        }
+      ],
+      "label": "highlight-0.tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 358
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"highlight-0.tabular\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "24f62bb0-cf08-4877-b408-9f9ec24cf45f",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Chromsomes"
+        }
+      ],
+      "label": "Chromsomes",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 598
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Chromsomes\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "3fa30125-fd7e-494c-99ba-7afb4e49f333",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "circos",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "reference_genome|ref|input_karyotype": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "sec_highlight|data_0|data_source": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "sec_highlight|data_1|data_source": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "sec_highlight|data_2|data_source": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Circos",
+          "name": "reference_genome"
+        }
+      ],
+      "label": null,
+      "name": "Circos",
+      "outputs": [
+        {
+          "name": "output_png",
+          "type": "png"
+        },
+        {
+          "name": "output_svg",
+          "type": "svg"
+        },
+        {
+          "name": "output_tar",
+          "type": "tar.gz"
+        }
+      ],
+      "position": {
+        "left": 473,
+        "top": 324
+      },
+      "post_job_actions": {},
+      "tool_id": "circos_wiggle_to_scatter",
+      "tool_state": "{\"__page__\": null, \"ideogram\": \"{\\\"bands\\\": {\\\"band_stroke_color\\\": \\\"#000000\\\", \\\"band_stroke_thickness\\\": \\\"2\\\", \\\"band_transparency\\\": \\\"0\\\", \\\"fill_bands\\\": \\\"true\\\", \\\"show_bands\\\": \\\"true\\\", \\\"transparency\\\": \\\"1.0\\\"}, \\\"ideogram_labels\\\": {\\\"parallel\\\": \\\"true\\\", \\\"radius_offset\\\": \\\"0.075\\\", \\\"show_label\\\": \\\"false\\\", \\\"size\\\": \\\"24\\\"}, \\\"radius\\\": \\\"0.9\\\", \\\"spacing\\\": \\\"0.005\\\", \\\"thickness\\\": \\\"0.0\\\", \\\"units\\\": \\\"mb\\\"}\", \"sec_highlight\": \"{\\\"data\\\": [{\\\"__index__\\\": 0, \\\"data_source\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"fill_color\\\": \\\"#000000\\\", \\\"fill_color_alpha\\\": \\\"1.0\\\", \\\"r0\\\": \\\"0.9\\\", \\\"r1\\\": \\\"0.99\\\", \\\"sec_rule\\\": {\\\"rules\\\": []}}, {\\\"__index__\\\": 1, \\\"data_source\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"fill_color\\\": \\\"#000000\\\", \\\"fill_color_alpha\\\": \\\"1.0\\\", \\\"r0\\\": \\\"0.8\\\", \\\"r1\\\": \\\"0.89\\\", \\\"sec_rule\\\": {\\\"rules\\\": [{\\\"__index__\\\": 0, \\\"actions\\\": [{\\\"__index__\\\": 0, \\\"action\\\": {\\\"__current_case__\\\": 1, \\\"action_select\\\": \\\"fill_color\\\", \\\"action_value\\\": \\\"#8064a2\\\", \\\"transparency\\\": \\\"1.0\\\"}}], \\\"conditions\\\": [{\\\"__index__\\\": 0, \\\"application\\\": {\\\"__current_case__\\\": 3, \\\"application_select\\\": \\\"random\\\", \\\"value\\\": \\\"0.1\\\"}}], \\\"continue_flow\\\": \\\"true\\\"}, {\\\"__index__\\\": 1, \\\"actions\\\": [{\\\"__index__\\\": 0, \\\"action\\\": {\\\"__current_case__\\\": 1, \\\"action_select\\\": \\\"fill_color\\\", \\\"action_value\\\": \\\"#ffff00\\\", \\\"transparency\\\": \\\"1.0\\\"}}], \\\"conditions\\\": [{\\\"__index__\\\": 0, \\\"application\\\": {\\\"__current_case__\\\": 2, \\\"application_select\\\": \\\"pos\\\", \\\"pos_gt\\\": \\\"5000000.0\\\", \\\"pos_lt\\\": \\\"5000000.0\\\", \\\"pos_lt_sub\\\": \\\"true\\\"}}, {\\\"__index__\\\": 1, \\\"application\\\": {\\\"__current_case__\\\": 3, \\\"application_select\\\": \\\"random\\\", \\\"value\\\": \\\"0.1\\\"}}], \\\"continue_flow\\\": \\\"true\\\"}]}}, {\\\"__index__\\\": 2, \\\"data_source\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"fill_color\\\": \\\"#000000\\\", \\\"fill_color_alpha\\\": \\\"1.0\\\", \\\"r0\\\": \\\"0.7\\\", \\\"r1\\\": \\\"0.79\\\", \\\"sec_rule\\\": {\\\"rules\\\": [{\\\"__index__\\\": 0, \\\"actions\\\": [{\\\"__index__\\\": 0, \\\"action\\\": {\\\"__current_case__\\\": 1, \\\"action_select\\\": \\\"fill_color\\\", \\\"action_value\\\": \\\"#8064a2\\\", \\\"transparency\\\": \\\"1.0\\\"}}], \\\"conditions\\\": [{\\\"__index__\\\": 0, \\\"application\\\": {\\\"__current_case__\\\": 3, \\\"application_select\\\": \\\"random\\\", \\\"value\\\": \\\"0.2\\\"}}], \\\"continue_flow\\\": \\\"true\\\"}, {\\\"__index__\\\": 1, \\\"actions\\\": [{\\\"__index__\\\": 0, \\\"action\\\": {\\\"__current_case__\\\": 1, \\\"action_select\\\": \\\"fill_color\\\", \\\"action_value\\\": \\\"#ffff00\\\", \\\"transparency\\\": \\\"1.0\\\"}}], \\\"conditions\\\": [{\\\"__index__\\\": 0, \\\"application\\\": {\\\"__current_case__\\\": 3, \\\"application_select\\\": \\\"random\\\", \\\"value\\\": \\\"0.2\\\"}}], \\\"continue_flow\\\": \\\"false\\\"}]}}]}\", \"plot_options\": \"{\\\"background\\\": {\\\"__current_case__\\\": 1, \\\"background_color\\\": \\\"#000000\\\", \\\"background_select\\\": \\\"color\\\", \\\"transparency\\\": \\\"1.0\\\"}, \\\"colour_profile\\\": null, \\\"radius\\\": \\\"1500\\\"}\", \"outputs\": \"{\\\"png\\\": \\\"true\\\", \\\"svg\\\": \\\"false\\\", \\\"tar\\\": \\\"false\\\"}\", \"__rerun_remap_job_id__\": null, \"ticks\": \"{\\\"radius\\\": \\\"1.0\\\", \\\"show_ticks\\\": \\\"false\\\", \\\"tick_group\\\": []}\", \"reference_genome\": \"{\\\"bands\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"convert_bands\\\": \\\"true\\\", \\\"limit_chromosomes\\\": \\\"\\\", \\\"ref\\\": {\\\"__current_case__\\\": 2, \\\"input_karyotype\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"ref_source\\\": \\\"karyotype\\\"}}\", \"chromInfo\": \"\\\"/home/hxr/arbeit/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"sec_links\": \"{\\\"data\\\": []}\", \"sec_tdd\": \"{\\\"data\\\": []}\"}",
+      "tool_version": "0.69.8+galaxy2",
+      "type": "tool",
+      "uuid": "0ee778ee-2bc1-4042-9359-f6dae90ff544",
+      "workflow_outputs": [],
+      "tool_shed_repository": {
+        "changeset_revision": "fd59d783248a",
+        "name": "circos",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    }
+  },
+  "tags": [
+    "visualisation"
+  ],
+  "uuid": "9006b0f5-8510-4f48-bda9-fcf5ac626b95",
+  "version": 1
+}

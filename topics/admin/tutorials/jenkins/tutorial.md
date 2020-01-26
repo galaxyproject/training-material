@@ -20,7 +20,7 @@ key_points:
   - Especially regular tasks you might forget to do
   - Automatically run Ansible to ensure machines are in compliance
 contributors:
-  - erasche
+  - hexylena
 requirements:
   - type: "internal"
     topic_name: admin
@@ -450,7 +450,7 @@ scp -i $PRIV_KEY \
 
 Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.
 
-Here we store both the [build](https://github.com/erasche/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/erasche/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
+Here we store both the [build](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
 
 ### Job: Website
 

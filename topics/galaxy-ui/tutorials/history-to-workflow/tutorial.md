@@ -117,8 +117,9 @@ Now that we have the history we want, let's use Galaxy to create a reusable work
 >     - If there were any missteps or dead-ends in your history, uncheck those steps here.
 >     - Don't worry if you miss one - we can drop it in a subsequent step.
 > 5. Once you have named your workflow, click the **Create Workflow** button.
->    > ![Create workflow form](../../images/workflow_strand_create.png)
->    >
+>
+>    ![Create workflow form](../../images/workflow_strand_create.png)
+>
 >    - This replaces the workflow creation form with a box that says:
 >       - Workflow *`whatever name you entered`* created from current history. You can edit or run the workflow.
 > 6. *Click* on the **edit** link in the box.
@@ -194,14 +195,14 @@ Now that we have finished creating our workflow, it is time to test it.
 >
 > 1. *Click* on the **gear icon** and this time select **Run**.
 > 2. *Examine* the workflow run form.
->   >
->   >
->   >This form lists all the inputs and steps in the workflow also asks if you want to run this workflow in a new history, of just add it to your existing history.
->   >![Run workflow form](../../images/workflow_run_strand_landing.png)
->   >
->   >In this form you can also change the run-time parameters of any of the steps.  We aren't going to do that, but it can be useful when are experimenting with different parameters in different steps.
->   >Let's test the workflow by running it on the same input datasets we used in the current history.  If we created the workflow correctly, we should get the same results as in the history.
->   >
+>
+>
+>    This form lists all the inputs and steps in the workflow also asks if you want to run this workflow in a new history, of just add it to your existing history.
+>    ![Run workflow form](../../images/workflow_run_strand_landing.png)
+>
+>    In this form you can also change the run-time parameters of any of the steps.  We aren't going to do that, but it can be useful when are experimenting with different parameters in different steps.
+>    Let's test the workflow by running it on the same input datasets we used in the current history.  If we created the workflow correctly, we should get the same results as in the history.
+>
 > 3. *Select* **Yes** under **Send results to a new history**.
 >    - Sometimes you'll be building analyses out of component workflows and you will want to run them all in the same history.  Here we want a new history because the results will be cleaner and easier to understand.
 > 4. Give the new history a meaningful name.
@@ -212,7 +213,7 @@ Now that we have finished creating our workflow, it is time to test it.
 
 And Galaxy launches the workflow, running in a new history.  It says (in a nice big green box) something like:
 
-> You can check the status of queued jobs and view the resulting data *by refreshing the History pane.* When the job has been run the status will change from 'running' to 'finished' if completed successfully or 'error' if problems were encountered.
+You can check the status of queued jobs and view the resulting data *by refreshing the History pane.* When the job has been run the status will change from 'running' to 'finished' if completed successfully or 'error' if problems were encountered.
 
 But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the histories view (*click* the **table icon** at top of history) and then make the newly created history be the current history.
 

@@ -6,6 +6,7 @@ zenodo_link: "https://doi.org/10.5281/zenodo.1250793"
 tags:
   - prokaryote
 questions:
+enable: false
 objectives:
 time_estimation: "2H"
 key_points:
@@ -37,19 +38,19 @@ It consists of three main steps:
 
 **FASTA**
 
-> DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
+DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
 
 ![FASTA file](../../images/fasta_format.png)
 
 **GFF3**
 
-> The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
+The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
 <img src="../../images/gff3_format.png" alt="GFF3 overview" width="70%">
 
 **GENBANK**
 
->The genbank sequence format is a rich format for storing sequences and associated annotations.
+The genbank sequence format is a rich format for storing sequences and associated annotations.
 
 ![genbank file](../../images/gb_full.png)
 
@@ -143,7 +144,7 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > What information do you see in the BLAST output?
 >    >
-> {: .question}
+>    {: .question}
 >
 >
 > From BLAST search results we want to get only the best hit for each protein.
@@ -153,17 +154,17 @@ For similarity searches we use *NCBI BLAST+ blastp* to find similar proteins in 
 >    >
 >    > For how many proteins we do not get a BLAST hit?
 >    >
-> {: .question}
+>    {: .question}
 >
 > 5. {% icon tool %} Choose the tool **Select lines that match an expression** and enter the following information: *Select lines from* [select the BLAST top hit descriptions result file]; *that* [not matching]; *the pattern* [gi].
 >
 >    <img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%">
 >
->    ### {% icon comment %} Results file
+>    > ### {% icon comment %} Results file
 >    > The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.
 >    {: .comment}
 >
->    ### {% icon comment %} Obtaining unannotated proteins for analysis
+>    > ### {% icon comment %} Obtaining unannotated proteins for analysis
 >    > For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool **Filter sequences by ID from a tabular file** and select for *Sequence file to filter on the identifiers* [Augustus protein sequences] and for *Tabular file containing sequence identifiers* the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.
 >    {: .comment}
 >

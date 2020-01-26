@@ -15,7 +15,7 @@ key_points:
   - gxadmin is a tool to run common database queries useful for Galaxy admins
   - new queries are welcome and easy to contribute
 contributors:
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - monitoring
@@ -28,7 +28,7 @@ We will just briefly cover the features available in `gxadmin`, there are lots o
 
 It started life as a small shell script that Helena wrote because she couldn't remember what [Gravity](https://github.com/galaxyproject/gravity) was called or where it could be found. Some of the functions needed for things like swapping zerglings are still included in gxadmin but are highly specific to UseGalaxy.eu and not generally useful.
 
-Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @erasche and @natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
+Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
 
 > ### Agenda
 >
@@ -107,7 +107,7 @@ id    |        create_time         | disk_usage | username | email | groups | ac
 3934  | 2019-01-27 10:06:40.973938 | 0 bytes    | xxxx     | xxxx  |        | f
 3933  | 2019-01-27 10:01:22.562782 |            | xxxx     | xxxx  |        | f
 
-**@erasche's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
+**@hexylena's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
 
 ```text
 # Galaxy Job 5132146

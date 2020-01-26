@@ -16,7 +16,7 @@ key_points:
   - Do not manage your Galaxy's tools manually
 contributors:
   - martenson
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - tools
@@ -36,7 +36,7 @@ This tutorial will introduce you to one of Galaxy's associated projects - [Ephem
 
 # Background
 
-You are an administrator of your lab's Galaxy. A colleague has approached you with a request to run a specific [Galaxy workflow]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}) on the lab's data. In order to run this workflow you have to accomplish several substeps first. You will need to:
+You are an administrator of your lab's Galaxy. A colleague has approached you with a request to run a specific [Galaxy workflow]({% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}) on the lab's data. In order to run this workflow you have to accomplish several substeps first. You will need to:
 
 - identify what tools are required for the workflow
 - and install these on your Galaxy instance
@@ -78,7 +78,7 @@ Let's try running this on a real worfklow.
 >
 > 1. Download the mapping workflow:
 >    ```console
->    $ wget {{ site.url }}{{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
+>    $ wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
 >    ```
 >
 > 2. Use the Ephemeris command [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) to extract the tool list from this workflow, into a file named `workflow_tools.yml`.
