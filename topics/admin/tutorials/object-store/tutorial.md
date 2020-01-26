@@ -14,8 +14,9 @@ key_points:
 contributors:
   - natefoo
   - erasche
+subtopic: features
 tags:
- - ansible
+  - storage
 requirements:
  - type: "internal"
    topic_name: admin

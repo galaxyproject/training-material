@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: 'Mass spectrometry imaging: Finding differential analytes'
 zenodo_link: 'https://zenodo.org/record/2628280'
+level: Intermediate
 questions:
 - Can N-linked glycans from FFPE tissues be detected by MALDI imaging?
 - Can potential N-linked glycans be identified by an additional LC-MS/MS experiment?
