@@ -29,7 +29,7 @@ contributors :
 # Introduction
 {:.no_toc}
 
-
+A lot of packages are available for the analysis of GC-MS or LC-MS datas. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developped to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals of setting upmetaMSwas to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. 
 
 > ### Agenda
 >
@@ -167,9 +167,14 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > > ### {% icon solution %} 3 - First XCMS step : *peak picking*
 > >    
 > > Open and run the **xcms findChromPeaks (xcmsSet)** {% icon tool %} tool and set your parameters. For our training please enter the following parameters : 
-> >   - **Extraction method for peaks detection** : there are 4 different possible options here. Please select `CentWave - chromatographic peak detection using the centWave method` for our training.
-> >   - **Max tolerated ppm m/z deviation in consecutive scans in ppm** : it corresponds to the maximum deviation in ppm. Please set it to `5` for our training.
-> >   - **Min, Max peak width in seconds** : it corresponds to the expected approximate peak width in chromatographic space. Please set it to `5,20` in our training to have a large example. 
+> >   - **Extraction method for peaks detection** : there are 4 different possible options here. Please select `MatchedFilter - peak detection in chromatographic space` for our tutorial.
+> >   - **Full width at half maximum of matched filtration gaussian model peak** : it corresponds to the full width at half maximum. Please set it at `5`.
+> >   - **Step size to use for profile generation** : the peak detection algorithm creates extracted ion base peak chromatograms on a fixed step size. For our tutorial please set it to `0.5`. 
+> >   - **Advanced options** :  
+> >     - **Maximum number of peaks that are expected/will be identified per slice** : Set to `500` the maximum number of peaks identified per slice.
+> >     - **Signal to noise ratio cutoff** : set it to `2` for the signal to noise cutoff to be used in the chromatographic peak detection step. 
+> >     - **Number of bins to be merged before filtration** : it is the number of neighboring bins that will be joined to the slice in which filtration and peak detection will be performed. Please set it to `2`.
+> >     - **Minimum difference in m/z for peaks with overlapping retention times** : set to `0.5` the minimum difference of m/z for peaks with overlapping retention times.
 > > 
 > > Here, you have all the right parameters for our example. These are the two dataset collection you will have in your hsitory on the right of Galaxy instance : 
 > >    - **Input** : collection of Rdata object(s) obtained just before (format : `collection.raw.RData`)
@@ -183,11 +188,11 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > > 
 > > | sample_name |  class  | 
 > > |:-----------:|:-------:|
-> > |    file1    |  homme  |
+> > |    file1    |   man   |
 > > |-------------+---------|
-> > |    file2    |  femme  |
+> > |    file2    |  woman  |
 > > |-------------+---------|
-> > |    file3    |  homme  |
+> > |    file3    |   man   |
 > > 
 > > You have just to enter the following files in the tool and process it. You should now have these files in your history :
 > >   - **Input** : 
@@ -212,27 +217,12 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > >  - **Output** : 
 > >    - one Rdata file named `xset.merged.groupChromPeaks.RData` containing all peaks grouped according to their mz and retention time.
 > >    - one `pdf` file named `xset.merged.groupChromPeaks.plotChromPeakDensity.pdf`. It contains chromatographic density plots.
-> >    - 2 `tsv` files. The first one named `xset.merged.group.dataMatrix.tsv` contains informations about ions intensities. The second one named `xset.merged.group.variableMetadata.tsv` contains an other table with informations about ions. These files are generated only if you set the parameter **Get peaklist** to `yes`. It is just more informations after the grouping step. 
+> >    - 2 `tsv` files. The first one named `xset.merged.group.dataMatrix.tsv` contains informations about ions intensities. The second one named `xset.merged.group.variableMetadata.tsv` contains an other table with informations about ions. These files are generated **only if you set the parameter *Get peaklist*** to `yes`. It is just more informations after the grouping step. 
 > {: .solution}
 >
-> > ### {% icon solution %} 6 - Optional XCMS step : *retention time correction*
+> > ### {% icon solution %} 7 - (Optionnal) XCMS step : *integrating areas of missing peaks*
 > >
-> > This step is optionnal, it aims to correct retention time drift for each peak among samples. You have to use the **xcms adjustRtime (retcor)** {% icon tool%} tool to correct this retention time. We `don't use it in our example`. But if you will use it during an other processing, you should have these files in your history : 
-> >  - **Input** : 
-> >    - the Rdata file already with peaks grouped and named `xset.merged.groupChromPeaks.RData`
-> >  - **Output** : 
-> >    - new RData file named `xset.merged.groupChromPeaks.adjustRtime.RData` with correction of retention time
-> >    - one `pdf` file named `xset.merged.groupChromPeaks_rawVSadjusted.adjustRtime.Rplots.pdf`  and containing a plot to show the difference between rt and adjusted rt for each file.
-> >    
-> > > ### {% icon comment %} Important : Have to group again !
-> > >
-> > > Retention time have been modified. Consequently, it requires to complete it with an additionnal grouping step with **xcms groupChromPeaks (group)** {% icon tool%}. You will obtain a new Rdata file named `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.RData`
-> >    {: .warning}
-> {: .solution}
->
-> > ### {% icon solution %} 7 - Final XCMS step *integrating areas of missing peaks*
-> >
-> > This last step can be run after grouping your peaks and don't need the retention time correction. Run **xcms fillChromPeaks (fillPeaks)** {% icon tool%} to identify, for each sample, peak groups where that sample is not represented. 
+> > This last step can be run after grouping your peaks and don't need the retention time correction. It is not an obligation to process it but when you have low peaks it can be helpfull to obtain something around them. Run **xcms fillChromPeaks (fillPeaks)** {% icon tool%} to identify, for each sample, peak groups where that sample is not represented. 
 > >  - **Input** : 
 > >    - your Rdata file `xset.merged.groupChromPeaks.*.RData`
 > >  - **Output** : 
@@ -304,117 +294,136 @@ Before the next step with msPurity package on MS/MS datas, here are some questio
 > **3** - What is the size (in MB) of your final RData file ?
 > > ### {% icon solution %} Solution
 > > 
-> > To be able to see the size of a file in your history, you just have to select it. It will deployed informations about it and you can see the size of yours. For our example, the size of the final file is **1.4 MB**.
+> > To be able to see the size of a file in your history, you just have to select it. It will deploy informations about it and you can see the size of yours. For our example, the size of the final file is **1.4 MB**.
 > > {: .text-justify}
 > > 
 > {: .solution}
 {: .question}
 
 
-# Stopover : Verify your datas after the XCMS preprocessing
+# Processing with metaMS part
+
+**metaMS** is a R package for MS-based metabolomics data. It can does basic peak picking and grouping using functions from **XCMS** and **CAMERA** packages. The main output of **metaMS** is a table of feature intensities in all samples which can be analysed with multivariate methods immediately. The package also offers the possibility to create in-house databases of mass spectra (including retention information) of pure chemical compounds. These databases can then be used for annotation purposes. The most important functions of this package are *runGC* and *runLC* (and each one to create databases *createSTDdbGC* and *createSTDdbLC*).
+{: .text-justify}
+During this tutorial we are interested in GC-MS analysis, so we will use the *runGC* function of **metaMS** and described it in details to be able to understand this function. The standard workflow of **metaMS** for GC-MS data is the following : 
+
+![Workflow metaMS](../../images/tuto_gcms_workflow_metaMS.png "Workflow of metaMS for GC datas")
+
+The *runGC* function is implemented in **metaMS.runGC {% icon tool %} tool** in W4M Galaxy. It takes a vector of file names, corresponding to the samples, and a settings list as mandatory arguments. In addition, some extra arguments can be provided. In particular, a database of standards, as discussed later in tutorial, can be provided for annotation purposes. This tool regroups all these steps that are described in the following parts to be able to understand all its functionnalities and particularities. We will run the tool after we understand each of its steps because it is important to know what are the best parameters for our datas and why each parameter is done. 
+{: .text-justify}
 
 
+## 1 - Peak picking
 
-# Processing with msPurity package
+The peak picking is performed by the usual **XCMS** functions. A function has been written in **metaMS** to allow the individual parameters to be passed to the function as a settings list. The result is that the whole of the **XCMS** functionality is available, simply by changing the values of some settings, or by adding fields. 
+ {: .text-justify}
+Whereas the package is not up-to-date since the new version of **XCMS** (3.x). This new version brought a lot of new object and transformed the peak picking processus. To have the last version of this processus, **metaMS** authorized **to start its function directly with the file containing all peak picking results**. 
+{: .text-justify}
+Due to this update, **we have already processed the peak picking during the first part** of this tutorial. So we can continue it with the file outputted from the peak picking part. This also allow us to make a good peak picking without the following step include in **metaMS** functions. So it takes less time of processing and we can verify our peaks with this cut between peak picking and the following steps of GC-MS analysis. 
+{: .text-justify}
+
+## 2 - Definition of pseudo-spectra
+
+Rather than a feature-based analysis with individual peaks, as is the case with **XCMS**, **metaMS** performs a pseudospectrum-based analysis. So, the basic entity is a set of m/z values showing a chromatographic peak at the same retention time.
+{: .text-justify}
+
+![Pseudospectrum example](../../images/tuto_gcms_pseudospectrum_example.png "Pseudospectrum example from `msp` file")
+
+This choice is motivated by several considerations. First of all, **in GC the amount of overlap is much less than in LC** : peaks are much narrower. This means that even a one- or two-second difference in retention time can be enough to separate the corresponding mass spectra. Secondly, fragmentation patterns for many compounds are **available in extensive libraries like the [NIST library](http://www.nist.gov/srd/nist1a.cfm "NIST library")**. In addition, the spectra are somewhat easier to interpret since adducts, such as found in LC, are not present. The main advantage of pseudo-spectra, however, is that their use allows the results to be interpreted directly as relative concentrations of chemical compounds : **a fingerprint in terms of chemical composition is obtained**, rather than a fingerprint in terms of hard-to-interpret features. The pseudo-spectra are obtained by simply clustering on retention time, using the *runCAMERA* function, which for GC data calls *groupFWHM*. All the usual parameters for the *groupFWHM* function are included in W4M Galaxy **metaMS.runGC {% icon tool %} tool**. The most important parameter is *perfwhm*, which determines the maximal retention time difference of features in one pseudospectrum. 
+{: .text-justify}
+
+The final step is to convert the **CAMERA** objects into easily handled lists, which are basically the R equivalent of the often-used `msp` format from the AMDIS software ({% cite Stein1999 %}). The `msp`  file is a nested list, with one entry for each sample, and each sample represented by a number of fields. The pseudo-spectra are three-column matrices, containing m/z, intensity and retention time information, respectively. They can be draw with the *plotPseudoSpectrum* function of **metaMS** package easily (Figure 2).
+{: .text-justify}
 
 
-## 1 - Assessing the purity (*purityA function*)
+## 3 - Annotation
+
+Once we have identified our pseudo-spectra, we can start the annotation process. This is done by **comparing every pseudospectrum to a database of spectra**. As a similarity measure, we use the weighted dot product as it is fast, simple, and gives good results ({% cite Stein1994 %}). The first step in the comparison is based on retention, since a comparison of either retention time or retention index is much faster than a spectral comparison. The corresponding function is *matchSamples2DB*. Since the weighted dot product uses scaled mass spectra, the scaling of the database is done once, and then used in all comparisons.
+{: .text-justify}
+
+![Match spectra](../../images/tuto_gcms_match_spec.png "Best match between an experimental pseudospectrum (red) and a database entry (blue)")
+
+This *matchSamples2DB* function returns a table where all patterns that have a match with a DB entry are shown in the first column, and the DB entry itself in the second column. If for a particular experimental pattern more than one match is found, the alternatives (with a lower match factor) are shown in the last column. To see the match for a particular pattern, one can use the function *matchExpSpec*, returning matchfactors (numbers between 0 and 1, where the latter means a perfect match) for all entries in the database (if the plotIt argument is TRUE, the best match is shown – see Figure 2). Samples may contain compounds that are not of any interest, such as plasticizers, internal standards, column material etc.... These can be filtered out before doing an annotation : **metaMS** allows certain categories of database entries (defined in slot *matchIrrelevants* of the settings object) to be removed before further annotation. If the spectra of these compounds are very specific (and they often are), the retention criterion may be bypassed by setting the maximal retention time difference to very high values, which leads to the removal of such spectra wherever they occur in the chromatogram.
+{: .text-justify}
 
 
-> ### {% icon hands_on %} Hands-on : msPurity.purityA {% icon tool %}
+## 4 - Unknowns research
+
+The most important aspect of untargeted metabolomics is the definition of unknowns, patterns that occur repeatedly in several samples, but for which no annotation has been found. In **metaMS** these unknowns are found by comparing all patterns within a certain retention time (or retention index) difference on their spectral characteristics. The same match function is used, but the threshold may be different from the threshold used to match with the database of standards. Likewise, the maximum retention time(index)difference may be different, too. In defining unknowns we have so far used settings that are more strict than when comparing to a database : since all samples are typically measured in one single run, expected retention time differences are rather small. In addition, one would expect reproducible spectra for a single compound. A true unknown, or at least an interesting one, is also present in a significant fraction of the samples. All these parameters are gathered in thebetweenSampleselement of the settingsobject.Since the matching is done using scaled patterns, we need to created a scaled version of the experimental pseudo-spectra first.
+{: .text-justify}
+
+For large numbers of samples, this process can take quite some time (it scales quadratically), especiallyif the allowed difference in retention time is large. The result now is a list of two elements : the first is the annotation table that we also saw after the comparison with the database, and the second is a list of pseudo-spectra corresponding to unknowns. In the annotation table, negative indices correspond to the pseudo-spectra in this list.
+{: .text-justify}
+
+
+## 5 - Outputs and results
+
+At this stage, all elements are complete : we have the list of pseudo-spectra with an annotation, either as a chemical standard from the database, or an unknown occurring in a sizeable fraction of the injections. The only things left to do is to calculate relative intensities for the pseudo-spectra, and to put the results in an easy-to-use table. This table consists of two parts. The first part is the information on the “features”, which here are the pseudo-spectra. The second part of the table contains the intensities of these features in the individual injections. 
+{: .text-justify}
+
+![Match spectra](../../images/tuto_gcms_finale_table.png "Final table with unknowns and compounds found during **metaMS** processus")
+
+The first five lines are the standards, and the next ones are the unknowns that are identified by the  pipeline.  
+In manual interpretation of this kind of data, the intensities of one or two “highly specific” features are often used to achieve relative quantitation. In an automatic pipeline, this is a risky strategy : not only can the intensity of a peak vary quite dramatically (relative standard deviations of up to 30% are assumed acceptable in GC-MS, e.g.  when SPME is applied), but these errors are all the more pronounced in high-intensity peaks (hence the common use of a relative standard deviation).
+In addition, one is ignoring the information in the other peaks of the pseudospectrum. In **metaMS**, pseudospectrum intensity is expressed as a multiple of the corresponding reference pattern (either a database pattern or an unknown), where the intensity ratio is determined using robust regression to avoid one deviating feature to influence the results too much ({% cite Wehrens2014 %}). First, we define an object containing all relevant pseudo-spectra, and next the intensities are generated.
+{: .text-justify}
+
+In both cases, the result is a list containing a set of patterns corresponding with the compounds that have been found, either annotated or unknown, the relative intensities of these patterns in the individual annotations, and possibly the xcmsSetobject for further inspection. In practice, the *runGC* function is all that users need to use.
+{: .text-justify}
+
+That file can be used for database search online (Golm, MassBank) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.
+{: .text-justify}
+
+> ### {% icon hands_on %} Hands-on : metaMS.runGC {% icon tool %}
 > 
-> 
-> > ### {% icon comment %} Resume
-> > 
-> {: .comment}
-{: .hands_on}
-
-> ### {% icon question %} Question
-> 
-> 
-> > ### {% icon solution %} Solution
-> > 
-> > 
-> {: .solution}
-> 
-{: .question}
-
-
-> ### {% icon details %} Advanced parameters
-> 
-{: .details}
-
-## 2 - Match features with fragmentation spectra (*frag4feature function*)
-
-
-
-> ### {% icon hands_on %} Hands-on : msPurity.frag4feature {% icon tool %}
+> We now know each step of this *runGC* function. So, please open the **metaMS.runGC {% icon tool %} too** to run it. You should enter the following parameters for our tutorial : 
+>   - **Rdata from xcms and merged** : here you have to select your file from **XCMS** where you made the peak picking, grouping and all the preprocessing. It should be named `xset.merged.groupdChromPeaks.RData`.
+>   - **Settings** : you can keep it at *user_default* but to see all possible parameters please set it at `use_defnied`.
+>     - **RT range option** : it ables to select a region of retention time. If you select to *show* it, you have to enter the window in minutes, separate by a coma (for example 5,20 to have results between 5 minutes and 20 minutes). For our tutorial, we `keep it to hide`. 
+>     - **RT_Diff** : it is the allowed retention time difference in minutes between the same compound/unknown in different sample. For our tutorial, `keep it at 0.05` to have low differences between unknowns' retention times.
+>     - **Min_Features** : this parameter is used during the comparison with database or unknowns. It corresponds to the minimal number of features required to have a valid pseudospectrum. For our tutorial, please `keep it to 5` to have really good compounds.
+>     - **similarity_threshold** : this parameter is also used for comparison. It is the minimum similarity allowed between peaks mass spectra to be considers as equal. For our tutorial, please `keep it to 0.7`.
+>     - **min.class.fract** : it corresponds to the minimal fraction of samples in which a pseudospectrum is present before it is regarded as an unknown. For the tutorial, please `keep it to 0.5`.
+>     - **min.class.size** : it corresponds to the minimum number of samples in which a pseudospectrum should be present before it is regarded as an unknown. For our tutorial, please `set it to 2` because we have classes with only 2 samples. 
+>   - **Use Personnal DataBase option** : you can compare your datas to a personnal database. If you want to do it start to choose `show` in this parameter. Then you will be able to select your file. If not, keep it to `hide` and you will only have unknowns as results.
+>     - **DB file** : this parameter will appear if you choose to show it. You just have to `select your database in your file` to add this here. Be careful, this database has to respect some rules (please look at *?????????????????? part*).
+>   - **Use RI option** : choose if you want to use the RI for standards.
+>     - **RI file** : enter here `your RI file` which have to contains two columns : retention time and retention indices. 
+>   - **Use RI as filter** : just to know if you want to use RI parameter as a filter.
+>     - **RIshift** : if you want to use RI as filter, please precise here the RI shift. For our tutorial `keep the previous parameter to FALSE`. 
 >
 >
-> > ### {% icon comment %} Resume
-> > 
-> {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Question
-> 
-> 
-> 
-> > ### {% icon solution %} Solution
-> > 
-> {: .solution}
-> 
-{: .question}
 
-> ### {% icon solution %} Go further
+# Take a look at your results after metaMS processing
+
+We choose to separate our first W4M Galaxy tool into 2 parts : the processing of GC-MS datas (**metaMS.runGC {% icon tool %}**) and the plotting results of these datas (**metaMS.plot {% icon tool %}**). So we now have the first part describes just before and the second part we will describe just after. This part allows users to see their TIC (Total Ion Chromatogram), BPC (Base Peak Chromatogram) and also all EICs (Extracted Ion Chromatogram) you want, from our previous result outputted from **metaMS.runGC {% icon tool %} tool**. 
+{: .text-justify}
+
+If you separated your samples into different classes, this tool can constructs TICs and BPCs one class against one class, in a `pdf` file (Figure 5) : 
+{: .text-justify}
+
+![TIC](../../images/tuto_gcms_tic.png "TIC comparing 2 classes")
+
+Concerning EICs, it is possible to choose for which compound you want to draw an EIC when you run the W4M Galaxy tool. According to your choice, you will obtain EICs for one compound in each sample you enter in the previous **metaMS** part. 
+{: .text-justify}
+
+![TIC](../../images/tuto_gcms_eic.png "Example of EIC of the 'Unknown 1' in sample 'alg2'")
+
+> ### {% icon hands_on %} Hands-on : metaMS.plot {% icon tool %}
 > 
-{: .solution}
-
-## 3 - (Optionnal) Filter your results (*filterFragSpectra function*)
-
-
-> ### {% icon hands_on %} Hands-on : msPurity.filterFragSpectra {% icon tool %}
-> 
+> This tool is very easy to run. It is an obligation to process **metaMS.runGC {% icon tool %}** before this one. After that, you just have to choose if you want or not to draw your TIC, BPC or EIC : 
+>   - **Rdata from new_metaMS_runGC** : the file you obtained with the **metaMS.runGC {% icon tool %}** tool. It should be named `runGC.RData`.
+>   - **Do you want to process for TIC(s) ?** : if you select "yes" you will obtain the `pdf` file containing each TIC from each class against each others. 
+>   - **Do you want to process for BPC(s) ?** : if you select "yes" you will obtain the `pdf` file containing each BPC from each class against each others. 
+>   - **Do you want to process for EIC(s) ?** : if you select "yes" you will have to choose which compound(s) and unknown(s) you want to obtain its EIC.
+>     - **EIC_Unknown** : here please choose which compound(s) or unknown(s) you want to obtain according to the `peaktable.tsv` file.
 >
 {: .hands_on}
-
-## 4 - (Optionnal) Average your results (*averageFragSpectra function*)
-
-
-> ### {% icon details %} How to process the averaging ?
-> 
-> 
-{: .details}
-
-## 5 - (Optionnal) Create a database (*creataDatabase function*)
-
-
-
-## 6 - (Optionnal) (*spectralMatching function*)
-
-
-
-## 7 - Create your MSP file (*createMSP function*)
-
-
-
-## 8 - (Optionnal) (*flagRemove function*)
-
-blabla
-
-# Stopover : Verify your datas after the msPurity processing
-
-
-# Annotation
-
-## With MetFrag
-
-
-## With Sirius CSI-FingerID
-
 
 
 # Conclusion 
 {:.no_toc} 
 
-During this tutorial, the user learnt how to process with MS/MS datas. The peakpicking part is very very important for the rest of the annotation of MS/MS datas. 
+
