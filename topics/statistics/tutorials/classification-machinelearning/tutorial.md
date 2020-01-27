@@ -8,13 +8,14 @@ questions:
 objectives:
 - Learn classification background
 - Apply classification based machine learning algorithms
-- Learn ... (Simon)
+- Learn what a quantitative structure-analysis relationship (QSAR) model is and how it can be constructed in Galaxy
 - Learn how visualizations can be used to analyze the classification results
 key_points:
 - Classification is a supervised approach in machine learning.
 - For classification tasks, data is divided into training and test sets.
 - Using classification, the samples are learned using the training set and predicted using the test set.
-- For each classification algorithm, it parameters should be optimised based on the dataset
+- For each classification algorithm, it parameters should be optimised based on the dataset.
+- Machine learning algorithms can be applied to chemical datasets to predict important properties.
 time_estimation: 2H
 contributors:
 - khanteymoori
@@ -25,11 +26,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial you will learn how to use galaxy tools in [classification](ttps://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier.  Next, we will discuss nearest neighbor classifier, nonlinear but a simple classifier. Then advanced classifiers, such as support vector machines, random forest and esnemble classifiers will be introduces and applied. Furthermore, we will show how to visulaize the reults in each step. 
+In this tutorial you will learn how to apply Galaxy tools to solving [classification](ttps://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step. 
 Finally, we will discuss how to train the classifiers by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the classifiers and learning algorithms work.
-Classification is a [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) method in machine learning and the algorithm which is used for this learning task is called a classifier. 
-In this tutorial we will build classifiers to ... (Simon: a short description to problem).
-
+Classification is a [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) method in machine learning and the algorithm which is used for this learning task is called a classifier. In this tutorial we will build a classifier which can predict whether a chemical substance is biodegradable or not. Substances which degrade quickly are preferable to those which degrade slowly, as they do not accumulate and pose a risk to the environment. Therefore, it is useful to be able to predict easily in advance whether a substance is biodegradable prior to production and usage in consumer products.
 
 > ### Agenda
 >
@@ -56,16 +55,20 @@ The Data Classification process includes two steps:
 
 
 # Quantitative Structure - Activity Relationship biodegradation
-(Simon: Problem definition)
 
-As a benchmark, we will use the [... dataset](https://...) to predict ...
+The classification problem we will study in this tutorial is related to biodegradation. Chemical substances which decay slowly will accumulate over time, which poses a threat to the environment. Therefore, it is useful to be able to predict in advance whether a substance will break down quickly or not.
 
-In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to ... datasets to predict ... . 
-In the following part, we will perform classification on ... (Simon: a short description to dataset ) dataset using a linear classifier and then will analyze the results with plots. 
+Quantitative structure-activity relationip (QSAR) and quantitative structure-property relationship (QSPR) models attempt to predict the activity or property of chemicals based on their chemical structure. To achieve this, a database of compounds is collected for which the property of interest is known. For each compound, molecular descriptors are collected which describe the structure (for example: molecular weight, number of nitrogen atoms, number of carbon-carbon double bonds). Using these descriptors, a model is constructed which is capable of predicting the property of interest for a new, unknown molecule. In this tutorial we will use a database assembled from experimental data of the Japanese Ministry of International Trade and Industry to create a classification model for biodegradation. We then will be able to use this model to classify new molecules into one of two classes: biodegradable or non-biodegradable.
+
+As a benchmark, we will use the [dataset](https://pubs.acs.org/doi/10.1021/ci4000213) assembled by Mansouri et al. using data from the National Institute of Technology and Evaluation of Japan. This database contains 1055 moelecules, together with precalculated molecular descriptors.
+
+In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to dataset created by Mansouri et al. to predict whether a molecule is biodegradable or not.
+In the following part, we will perform classification on the biodegradability dataset using a linear classifier and then will analyze the results with plots.
 
 ## Get train and test datasets
 
-(Simon: dataset description)
+We have two datasets available; the training dataset contains 837 molecules, while the test dataset contains 218 molecules.
+
 Let's begin by uploading the necessary datasets.
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -536,13 +539,8 @@ Now we will verify the performance by creating and analysing the plots:
     ![roc_scores](images/roc_bagging.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
 
 
-Figure ... shows that we again achieved  AUC `1.00` which shows that the .. (simon: interpretation related to our case study)
+Figure ... shows that we again achieved  AUC `1.00` which shows that our model is highly effective at predicting whether or not a molecule is biodegradable.
 
 
 # Conclusion
-By following these steps, we learned how to build classifiers and visualize the classification results using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the classes. This mapping is used to make predictions on an unseen (test) dataset. The quality of classifiers is visualized using a plotting tool. There are multiple other classification algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well. Different datasets can also be analyzed using these classifiers. The classifiers have lots of parameters which can be altered while performing the analyzes to see if they affect the classification accuracy. It may be beneficial to perform hyperparameter search to tune these parameters of classifiers for different datasets. (simon: additional conclusion related to case study)
-
-
-
-
-
+By following these steps, we learned how to build classifiers and visualize the classification results using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the classes. This mapping is used to make predictions on an unseen (test) dataset. The quality of classifiers is visualized using a plotting tool. There are multiple other classification algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well. Different datasets can also be analyzed using these classifiers. The classifiers have lots of parameters which can be altered while performing the analyzes to see if they affect the classification accuracy. It may be beneficial to perform hyperparameter search to tune these parameters of classifiers for different datasets. In addition, we learned the relevance of machine algorithms for QSAR analyses and constructed a model which successfully predicted an important chemical property - the biodegradability of a substance.
