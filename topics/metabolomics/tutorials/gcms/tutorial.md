@@ -8,7 +8,7 @@ questions :
     - What are the main steps of GC-MS datas processing for metabolomic analysis ? 
     - How te be able to annotate the maximum of unknowns using Galaxy ? 
 objectives : 
-    - To be sure you have already comprehend the diversity of MS preprocessing analysis. 
+    - To be sure you have already comprehend the diversity of MS pre-processing analysis. 
     - To learn the principal functions of metaMS package through Galaxy.
     - To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis. 
 time_estimation : 2H 
@@ -29,7 +29,8 @@ contributors :
 # Introduction
 {:.no_toc}
 
-A lot of packages are available for the analysis of GC-MS or LC-MS datas. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developped to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals of setting upmetaMSwas to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. 
+A lot of packages are available for the analysis of GC-MS or LC-MS datas. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developped to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals **metaMS** was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. During this tutorial, we will learn how to process easily a test dataset from raw files to the annotation using W4M Galaxy. Datas are from {% cite Dittami2012 %} and have been used as test dataset for the development of the Galaxy wrappers. 
+
 
 > ### Agenda
 >
@@ -40,12 +41,13 @@ A lot of packages are available for the analysis of GC-MS or LC-MS datas. Typica
 >
 {: .agenda}
 
-# Preprocessing with XCMS
+
+# pre-processing with XCMS
 
 The first step of the workflow is the pre-processing of the raw data with **XCMS** ({% cite Smith2006 %}).
 {: .text-justify}
 
-**XCMS** {% icon tool %} is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
+**XCMS** is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
 {: .text-justify}
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software.
@@ -54,34 +56,34 @@ This software is based on different algorithms that have been published, and is 
 **MSnbase readMSData** {% icon tool %} function, prior to **XCMS**, is able to read files with open format as `mzXML`, `mzML`, `mzData` and `netCDF`, which are independent of the constructors' formats. The **XCMS** package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes, adducts and fragments (using the R package CAMERA, {% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well adapted to define workflows, one of the key points of Galaxy.
 {: .text-justify}
 
-First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from ??????????. We will only process on a subset of these datas. So, you can **import your files directly in Galaxy by using the following URLs below** or download files into your computer (then upload them on Galaxy) : 
+First step of this tutorial is to download the data test. As describe in the introduction, we will use datas from {% cite Dittami2012 %}. We will only process on a subset of their datas. So, you can **import your files directly in Galaxy by using the following URLs below** or download files into your computer (then upload them on Galaxy) : 
 {: .text-justify}
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg)](https://doi.org/10.5281/zenodo.3244991)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3631074.svg)](https://doi.org/10.5281/zenodo.3631074)
+
 ```
-https://zenodo.org/record/3244991/files/HU_neg_048.mzML
-https://zenodo.org/record/3244991/files/HU_neg_090.mzML
-https://zenodo.org/record/3244991/files/HU_neg_123.mzML
-https://zenodo.org/record/3244991/files/HU_neg_157.mzML
-https://zenodo.org/record/3244991/files/HU_neg_173.mzML
-https://zenodo.org/record/3244991/files/HU_neg_192.mzML
-https://zenodo.org/record/3244991/files/QC1_002.mzML
-https://zenodo.org/record/3244991/files/QC1_008.mzML
-https://zenodo.org/record/3244991/files/QC1_014.mzML
+https://zenodo.org/record/3631074/files/alg11.mzData
+https://zenodo.org/record/3631074/files/alg2.mzData
+https://zenodo.org/record/3631074/files/alg3.mzData
+https://zenodo.org/record/3631074/files/alg7.mzData
+https://zenodo.org/record/3631074/files/alg8.mzData
+https://zenodo.org/record/3631074/files/alg9.mzData
+https://zenodo.org/record/3631074/files/sampleMetadata.tsv
+https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
 ```
 This step is described as number 1 in details part below.
 
-Then, to be able to process your MS/MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to process with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For MS/MS analysis you **don't really need to finish** this previous tutorial but for a better understanding of your datas, it is recommanded. In this tutorial, you **just have to compute** your datas with the **following steps** briefly describe in the *details* part below (please follow parameters values to have the same results during the training).
+Then, to be able to pre-process our GC-MS datas, we need to **start with the peakpicking of MS datas**. One Galaxy Training already explains how to act with your MS datas. You should **follow this link and complete this tutorial** : [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html). For GC-MS analysis you **don't really need to follow all of this previous tutorial** but for a better understanding of your datas, it is recommanded to try it with their test dataset. In this tutorial, you **just have to compute** your datas with the **following steps and specific parameters** describe in the *details* part below (please follow parameters values to have the same results during the training).
 {: .text-justify}
 
-> ### {% icon details %} Some help : Resume of the XCMS preprocessing
+> ### {% icon details %} Some help : Resume of the XCMS pre-processing
 >
-> Here is a resume of the **XCMS** {% icon tool %} preprocessing. Please follow instructions for this training tutorial. It has few steps that are an obligation to be able to obtain the final file. With this file, we can continue the workflow to process our MS/MS datas with **msPurity** {% icon tool %} package.
+> Here is a resume of the **XCMS** {% icon tool %} pre-processing. Please follow instructions for this training tutorial. It has few steps that are an obligation to be able to obtain the final file. With this file, we can continue the workflow to process our GC-MS datas with **metaMS** {% icon tool %} R package.
 > {: .text-justify}
 >
 > > ### {% icon solution %} 1 - Import your datas into a Galaxy collection
 > > 
-> > For a good workflow, you need to create a collection in Galaxy which contains **all** your datas. It can be MS only datas, MSMS with MS also files but it can **NOT** be only MSMS datas.
+> > For a good workflow, you need to create a collection in Galaxy which contains **all** your datas. When we write **all** datas, it means all **raw files** from the mass spectrometer and already transforms with **msConvert** into `mzML`, `mzXML`, `mzData` or some other format. But don't download `sampleMetadata file` (for example) in your collection. 
 > > 
 > > > ### {% icon tip %} Tip: Create a dataset collection
 > > > 1. Click on {% icon galaxy-selector %} icon (**Operation on multiple datasets**) on the top of the history
@@ -230,20 +232,20 @@ Then, to be able to process your MS/MS datas, we need to **start with the peakpi
 > {: .solution}
 > > ### {% icon comment %} Important : Be careful of the file format
 > >
-> > During each step of preprocessing, your file has its format changed and can have also its name changed.
+> > During each step of pre-processing, your file has its format changed and can have also its name changed.
 > > To be able to continue to MSMS processing, you need to have a RData object wich is **merged and grouped** (step 4 and 5) at least. It means that you should have a file named `xset.merged.groupChromPeaks.RData` (and maybe with some step more in it).
 > {: .warning} 
 {: .details}
 
 
-# Stopover : Verify your datas after the XCMS preprocessing
+# Stopover : Verify your datas after the XCMS pre-processing
 
 When you have process **all or only needed** steps described before, you can continue with the MS/MS processing part with **msPurity** package. Don't forget to always check your files format ! For the next step you need to have this file `xset.merged.groupChromPeaks.*.RData` where * is the name of **optionnal** steps you could do during the pre-processing. For our example, your file should be named `xset.merged.groupchromPeaks.RData`. 
 {: .text-justify}
 
 > ### {% icon comment %} Comment
 > 
-> The preprocessing part of this analysis can be **quite time-consuming**, and already corresponds to quite a few number of steps, depending of your analysis. We highly recommend, at this step of the MS/MS workflow, to split your analysis by beginning a new Galaxy history with **only the files you need** (final xset Rdata file and your data collection of mzML). This will help you in limiting selecting the wrong dataset in further analysis, and bring a little **tidiness** for future review of your MS/MS analysis process. You should also be able to make a better peakpicking in the future in the same history and it will not be polluated by MS/MS part of your process.
+> The pre-processing part of this analysis can be **quite time-consuming**, and already corresponds to quite a few number of steps, depending of your analysis. We highly recommend, at this step of the MS/MS workflow, to split your analysis by beginning a new Galaxy history with **only the files you need** (final xset Rdata file and your data collection of mzML). This will help you in limiting selecting the wrong dataset in further analysis, and bring a little **tidiness** for future review of your MS/MS analysis process. You should also be able to make a better peakpicking in the future in the same history and it will not be polluated by MS/MS part of your process.
 > {: .text-justify}
 > 
 > > ### {% icon tip %} Tip: Copy dataset to a new history
@@ -286,7 +288,7 @@ Before the next step with msPurity package on MS/MS datas, here are some questio
 >  **2** - Concerning what we said before and the previous answer, what is the complete name of your final RData file ?
 > > ### {% icon solution %} Solution
 > > 
-> > During each step of XCMS preprocessing, the name of the file which is processing is completed by the name of the step you were doing. So, finally your file should be name `xset.merged.groupChromPeaks.fillChromPeaks.RData`. That because (as seen in previous answer) you ran a grouping and the integration after merged datas.
+> > During each step of XCMS pre-processing, the name of the file which is processing is completed by the name of the step you were doing. So, finally your file should be name `xset.merged.groupChromPeaks.fillChromPeaks.RData`. That because (as seen in previous answer) you ran a grouping and the integration after merged datas.
 > > {: .text-justify}
 > > 
 > {: .solution}
@@ -313,7 +315,7 @@ The *runGC* function is implemented in **metaMS.runGC {% icon tool %} tool** in 
 {: .text-justify}
 
 
-## 1 - Peak picking
+## Peak picking
 
 The peak picking is performed by the usual **XCMS** functions. A function has been written in **metaMS** to allow the individual parameters to be passed to the function as a settings list. The result is that the whole of the **XCMS** functionality is available, simply by changing the values of some settings, or by adding fields. 
  {: .text-justify}
@@ -322,7 +324,7 @@ Whereas the package is not up-to-date since the new version of **XCMS** (3.x). T
 Due to this update, **we have already processed the peak picking during the first part** of this tutorial. So we can continue it with the file outputted from the peak picking part. This also allow us to make a good peak picking without the following step include in **metaMS** functions. So it takes less time of processing and we can verify our peaks with this cut between peak picking and the following steps of GC-MS analysis. 
 {: .text-justify}
 
-## 2 - Definition of pseudo-spectra
+## Definition of pseudo-spectra
 
 Rather than a feature-based analysis with individual peaks, as is the case with **XCMS**, **metaMS** performs a pseudospectrum-based analysis. So, the basic entity is a set of m/z values showing a chromatographic peak at the same retention time.
 {: .text-justify}
@@ -336,7 +338,7 @@ The final step is to convert the **CAMERA** objects into easily handled lists, w
 {: .text-justify}
 
 
-## 3 - Annotation
+## Annotation
 
 Once we have identified our pseudo-spectra, we can start the annotation process. This is done by **comparing every pseudospectrum to a database of spectra**. As a similarity measure, we use the weighted dot product as it is fast, simple, and gives good results ({% cite Stein1994 %}). The first step in the comparison is based on retention, since a comparison of either retention time or retention index is much faster than a spectral comparison. The corresponding function is *matchSamples2DB*. Since the weighted dot product uses scaled mass spectra, the scaling of the database is done once, and then used in all comparisons.
 {: .text-justify}
@@ -347,7 +349,7 @@ This *matchSamples2DB* function returns a table where all patterns that have a m
 {: .text-justify}
 
 
-## 4 - Unknowns research
+## Unknowns research
 
 The most important aspect of untargeted metabolomics is the definition of unknowns, patterns that occur repeatedly in several samples, but for which no annotation has been found. In **metaMS** these unknowns are found by comparing all patterns within a certain retention time (or retention index) difference on their spectral characteristics. The same match function is used, but the threshold may be different from the threshold used to match with the database of standards. Likewise, the maximum retention time(index)difference may be different, too. In defining unknowns we have so far used settings that are more strict than when comparing to a database : since all samples are typically measured in one single run, expected retention time differences are rather small. In addition, one would expect reproducible spectra for a single compound. A true unknown, or at least an interesting one, is also present in a significant fraction of the samples. All these parameters are gathered in thebetweenSampleselement of the settingsobject.Since the matching is done using scaled patterns, we need to created a scaled version of the experimental pseudo-spectra first.
 {: .text-justify}
@@ -356,7 +358,7 @@ For large numbers of samples, this process can take quite some time (it scales q
 {: .text-justify}
 
 
-## 5 - Outputs and results
+## Outputs and results
 
 At this stage, all elements are complete : we have the list of pseudo-spectra with an annotation, either as a chemical standard from the database, or an unknown occurring in a sizeable fraction of the injections. The only things left to do is to calculate relative intensities for the pseudo-spectra, and to put the results in an easy-to-use table. This table consists of two parts. The first part is the information on the “features”, which here are the pseudo-spectra. The second part of the table contains the intensities of these features in the individual injections. 
 {: .text-justify}
@@ -377,7 +379,7 @@ That file can be used for database search online (Golm, MassBank) or locally (NI
 > ### {% icon hands_on %} Hands-on : metaMS.runGC {% icon tool %}
 > 
 > We now know each step of this *runGC* function. So, please open the **metaMS.runGC {% icon tool %} too** to run it. You should enter the following parameters for our tutorial : 
->   - **Rdata from xcms and merged** : here you have to select your file from **XCMS** where you made the peak picking, grouping and all the preprocessing. It should be named `xset.merged.groupdChromPeaks.RData`.
+>   - **Rdata from xcms and merged** : here you have to select your file from **XCMS** where you made the peak picking, grouping and all the pre-processing. It should be named `xset.merged.groupdChromPeaks.RData`.
 >   - **Settings** : you can keep it at *user_default* but to see all possible parameters please set it at `use_defnied`.
 >     - **RT range option** : it ables to select a region of retention time. If you select to *show* it, you have to enter the window in minutes, separate by a coma (for example 5,20 to have results between 5 minutes and 20 minutes). For our tutorial, we `keep it to hide`. 
 >     - **RT_Diff** : it is the allowed retention time difference in minutes between the same compound/unknown in different sample. For our tutorial, `keep it at 0.05` to have low differences between unknowns' retention times.
@@ -418,7 +420,7 @@ Concerning EICs, it is possible to choose for which compound you want to draw an
 >   - **Do you want to process for TIC(s) ?** : if you select "yes" you will obtain the `pdf` file containing each TIC from each class against each others. 
 >   - **Do you want to process for BPC(s) ?** : if you select "yes" you will obtain the `pdf` file containing each BPC from each class against each others. 
 >   - **Do you want to process for EIC(s) ?** : if you select "yes" you will have to choose which compound(s) and unknown(s) you want to obtain its EIC.
->     - **EIC_Unknown** : here please choose which compound(s) or unknown(s) you want to obtain according to the `peaktable.tsv` file.
+>     - **EIC_Unknown** : here please choose which compound(s) or unknown(s) you want to obtain according to the `peaktable.tsv` file. For out tutorial it can be interesting to have a look at **all** the EICs. So put the `value to 0`. 
 >
 {: .hands_on}
 
