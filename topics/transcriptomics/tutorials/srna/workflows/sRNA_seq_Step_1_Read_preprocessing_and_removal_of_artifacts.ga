@@ -1,1073 +1,1076 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "This workflow completes the first part of the small RNA-seq tutorial from read pre-processing to trimming.e", 
-    "format-version": "0.1", 
-    "name": "sRNA-seq Step 1: Read pre-processing and removal of artifacts (no grooming)", 
-    "steps": {
-        "0": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "Input Dataset Collection"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset collection", 
-            "outputs": [], 
-            "position": {
-                "left": 278, 
-                "top": 200.96875
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection\"}", 
-            "tool_version": null, 
-            "type": "data_collection_input", 
-            "uuid": "5e34fb1f-fa44-4178-9d5e-953d69030004", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "12c8979f-7a43-4133-98ac-6b4c1b6d9e57"
-                }
-            ]
-        }, 
-        "1": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 1, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "rRNA reference FASTA"
-                }
-            ], 
-            "label": "rRNA reference FASTA", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 842.5, 
-                "top": 239
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"rRNA reference FASTA\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "01fce37f-1a11-4d1e-b039-6d53ba373064", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "6fafacef-3b18-425e-9f15-e717d0febbdc"
-                }
-            ]
-        }, 
-        "2": {
-            "annotation": "Be sure to use hairpin sequences, not just mature miRNA sequences.", 
-            "content_id": null, 
-            "id": 2, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "Be sure to use hairpin sequences, not just mature miRNA sequences.", 
-                    "name": "miRNA hairpin reference FASTA"
-                }
-            ], 
-            "label": "miRNA hairpin reference FASTA", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 1159.5, 
-                "top": 232
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"miRNA hairpin reference FASTA\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "cba8d787-dc52-4ed6-bc9a-d697db038495", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "c8ab4106-9b66-4c54-8d62-27b370fbff01"
-                }
-            ]
-        }, 
-        "3": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "id": 3, 
-            "input_connections": {
-                "input_file": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "contaminants"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "limits"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "input_file"
-                }
-            ], 
-            "label": null, 
-            "name": "FastQC", 
-            "outputs": [
-                {
-                    "name": "html_file", 
-                    "type": "html"
-                }, 
-                {
-                    "name": "text_file", 
-                    "type": "txt"
-                }
-            ], 
-            "position": {
-                "left": 272, 
-                "top": 341.5
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionhtml_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "html_file"
-                }, 
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "text_file"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "tool_shed_repository": {
-                "changeset_revision": "3fdc1a74d866", 
-                "name": "fastqc", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "0.65", 
-            "type": "tool", 
-            "uuid": "f5973070-0a0f-438b-9b94-67ee36eab2c5", 
-            "workflow_outputs": []
-        }, 
-        "4": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.2", 
-            "id": 4, 
-            "input_connections": {
-                "singlePaired|input_singles": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Trim Galore!", 
-                    "name": "singlePaired"
-                }
-            ], 
-            "label": null, 
-            "name": "Trim Galore!", 
-            "outputs": [
-                {
-                    "name": "trimmed_reads_paired_collection", 
-                    "type": "input"
-                }, 
-                {
-                    "name": "trimmed_reads_unpaired_collection", 
-                    "type": "input"
-                }, 
-                {
-                    "name": "trimmed_reads_single", 
-                    "type": "fastqsanger"
-                }, 
-                {
-                    "name": "trimmed_reads_pair1", 
-                    "type": "fastqsanger"
-                }, 
-                {
-                    "name": "trimmed_reads_pair2", 
-                    "type": "fastqsanger"
-                }, 
-                {
-                    "name": "unpaired_reads_1", 
-                    "type": "fastqsanger"
-                }, 
-                {
-                    "name": "unpaired_reads_2", 
-                    "type": "fastqsanger"
-                }, 
-                {
-                    "name": "report_file", 
-                    "type": "txt"
-                }
-            ], 
-            "position": {
-                "left": 549.5, 
-                "top": 238
-            }, 
-            "post_job_actions": {
-                "HideDatasetActiontrimmed_reads_pair1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "trimmed_reads_pair1"
-                }, 
-                "HideDatasetActiontrimmed_reads_pair2": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "trimmed_reads_pair2"
-                }, 
-                "HideDatasetActiontrimmed_reads_paired_collection": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "trimmed_reads_paired_collection"
-                }, 
-                "HideDatasetActiontrimmed_reads_unpaired_collection": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "trimmed_reads_unpaired_collection"
-                }, 
-                "HideDatasetActionunpaired_reads_1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "unpaired_reads_1"
-                }, 
-                "HideDatasetActionunpaired_reads_2": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "unpaired_reads_2"
-                }, 
-                "RenameDatasetActiontrimmed_reads_single": {
-                    "action_arguments": {
-                        "newname": "Trimmed reads"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "trimmed_reads_single"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "f1e71aeaa923", 
-                "name": "trim_galore", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"params\": \"{\\\"min_length\\\": \\\"12\\\", \\\"stringency\\\": \\\"1\\\", \\\"error_rate\\\": \\\"0.1\\\", \\\"retain_unpaired\\\": {\\\"retain_unpaired_select\\\": \\\"no_output\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1, \\\"report\\\": \\\"true\\\", \\\"settingsType\\\": \\\"custom\\\", \\\"quality\\\": \\\"0\\\", \\\"clip_R1\\\": \\\"\\\", \\\"clip_R2\\\": \\\"\\\"}\", \"rrbs\": \"{\\\"settingsType\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"singlePaired\": \"{\\\"three_prime_clip_R1\\\": \\\"\\\", \\\"trimming\\\": {\\\"trimming_select\\\": \\\"\\\", \\\"__current_case__\\\": 0}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0, \\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\"}", 
-            "tool_version": "0.4.2", 
-            "type": "tool", 
-            "uuid": "21f6bafb-48bb-4f7d-8543-8b8b96345d1a", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "report_file", 
-                    "uuid": "8d621eea-f61d-4780-b3d7-d1de6a7a9e12"
-                }, 
-                {
-                    "label": null, 
-                    "output_name": "trimmed_reads_single", 
-                    "uuid": "d148afd4-9b94-4ef6-9856-98963e71ef6d"
-                }
-            ]
-        }, 
-        "5": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "id": 5, 
-            "input_connections": {
-                "input_file": {
-                    "id": 4, 
-                    "output_name": "trimmed_reads_single"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "contaminants"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "limits"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "input_file"
-                }
-            ], 
-            "label": null, 
-            "name": "FastQC", 
-            "outputs": [
-                {
-                    "name": "html_file", 
-                    "type": "html"
-                }, 
-                {
-                    "name": "text_file", 
-                    "type": "txt"
-                }
-            ], 
-            "position": {
-                "left": 548.5, 
-                "top": 615
-            }, 
-            "post_job_actions": {
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "text_file"
-                }, 
-                "RenameDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "newname": "FastQC on Groomed and Trimmed data"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "html_file"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "tool_shed_repository": {
-                "changeset_revision": "3fdc1a74d866", 
-                "name": "fastqc", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "0.65", 
-            "type": "tool", 
-            "uuid": "972f64c0-14f5-460e-9d30-27faa6df86d4", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "html_file", 
-                    "uuid": "da777968-7f09-4ba1-8ff0-1c9358de161c"
-                }
-            ]
-        }, 
-        "6": {
-            "annotation": "Alignment of reads against rRNA sequences to filter them out.", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3", 
-            "id": 6, 
-            "input_connections": {
-                "input_format|paired|reads": {
-                    "id": 4, 
-                    "output_name": "trimmed_reads_single"
-                }, 
-                "reference_genome|history_item": {
-                    "id": 1, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool HISAT", 
-                    "name": "reference_genome"
-                }, 
-                {
-                    "description": "runtime parameter for tool HISAT", 
-                    "name": "spliced_options"
-                }
-            ], 
-            "label": null, 
-            "name": "HISAT", 
-            "outputs": [
-                {
-                    "name": "output_alignments", 
-                    "type": "bam"
-                }
-            ], 
-            "position": {
-                "left": 851.5, 
-                "top": 350
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionoutput_alignments": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_alignments"
-                }, 
-                "RenameDatasetActionoutput_alignments": {
-                    "action_arguments": {
-                        "newname": "HISAT vs. rRNA sequences"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output_alignments"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3", 
-            "tool_shed_repository": {
-                "changeset_revision": "1eb21dccc2fa", 
-                "name": "hisat2", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"alignment_options\": \"{\\\"__current_case__\\\": 0, \\\"alignment_options_selector\\\": \\\"defaults\\\"}\", \"input_format\": \"{\\\"paired\\\": {\\\"reads\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2, \\\"paired_selector\\\": \\\"single\\\"}, \\\"input_format_selector\\\": \\\"fastq\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"max_primary\": \"\\\"5\\\"\", \"scoring_options\": \"{\\\"scoring_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"reference_genome\": \"{\\\"reference_genome_source\\\": \\\"history\\\", \\\"history_item\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"spliced_options\": \"{\\\"coefficient\\\": \\\"0\\\", \\\"canonical_penalty\\\": \\\"0\\\", \\\"no_spliced_alignment\\\": \\\"false\\\", \\\"nc_function_type\\\": \\\"C\\\", \\\"constant_term\\\": \\\"0\\\", \\\"nc_coefficient\\\": \\\"1\\\", \\\"noncanonical_penalty\\\": \\\"3\\\", \\\"known_splice_gtf\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"nc_constant_term\\\": \\\"-8\\\", \\\"min_intron\\\": \\\"20\\\", \\\"function_type\\\": \\\"C\\\", \\\"rna_strandness\\\": \\\"F\\\", \\\"__current_case__\\\": 1, \\\"tma\\\": \\\"\\\", \\\"max_intron\\\": \\\"500000\\\", \\\"spliced_options_selector\\\": \\\"advanced\\\"}\", \"paired_options\": \"{\\\"paired_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"input_options\": \"{\\\"input_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\"}", 
-            "tool_version": "2.0.3", 
-            "type": "tool", 
-            "uuid": "b4d85932-ab16-4488-8421-9dab303029cd", 
-            "workflow_outputs": []
-        }, 
-        "7": {
-            "annotation": "Keep reads that did NOT align to rRNA sequences.", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2", 
-            "id": 7, 
-            "input_connections": {
-                "input1": {
-                    "id": 6, 
-                    "output_name": "output_alignments"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM", 
-                    "name": "bed_file"
-                }, 
-                {
-                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM", 
-                    "name": "input1"
-                }
-            ], 
-            "label": null, 
-            "name": "Filter SAM or BAM, output SAM or BAM", 
-            "outputs": [
-                {
-                    "name": "output1", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 854, 
-                "top": 560
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionoutput1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output1"
-                }, 
-                "RenameDatasetActionoutput1": {
-                    "action_arguments": {
-                        "newname": "Non-rRNA reads (BAM)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "d3292b4a0c78", 
-                "name": "samtool_filter2", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"filter\\\": \\\"yes\\\", \\\"skipBits\\\": null, \\\"__current_case__\\\": 1, \\\"reqBits\\\": [\\\"0x0004\\\"]}\", \"mapq\": \"\\\"\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}", 
-            "tool_version": "1.1.2", 
-            "type": "tool", 
-            "uuid": "e502a8a1-e847-4ab8-a030-7f4f24a22ab3", 
-            "workflow_outputs": []
-        }, 
-        "8": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0", 
-            "id": 8, 
-            "input_connections": {
-                "input": {
-                    "id": 7, 
-                    "output_name": "output1"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Convert from BAM to FastQ", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Convert from BAM to FastQ", 
-            "outputs": [
-                {
-                    "name": "output", 
-                    "type": "fastq"
-                }, 
-                {
-                    "name": "output2", 
-                    "type": "fastq2"
-                }
-            ], 
-            "position": {
-                "left": 859, 
-                "top": 763
-            }, 
-            "post_job_actions": {
-                "ChangeDatatypeActionoutput": {
-                    "action_arguments": {
-                        "newtype": "fastqsanger"
-                    }, 
-                    "action_type": "ChangeDatatypeAction", 
-                    "output_name": "output"
-                }, 
-                "HideDatasetActionoutput2": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output2"
-                }, 
-                "RenameDatasetActionoutput": {
-                    "action_arguments": {
-                        "newname": "Non-rRNA reads (FASTQ)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "d25966c8ddeb", 
-                "name": "bedtools", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"fq2\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"tags\": \"\\\"false\\\"\"}", 
-            "tool_version": "2.24.0", 
-            "type": "tool", 
-            "uuid": "697122c3-2a2b-4e20-aae7-9179d7e8d4a6", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "9ef5503f-5cfa-4195-9985-4f1743a556cc"
-                }
-            ]
-        }, 
-        "9": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3", 
-            "id": 9, 
-            "input_connections": {
-                "input_format|paired|reads": {
-                    "id": 8, 
-                    "output_name": "output"
-                }, 
-                "reference_genome|history_item": {
-                    "id": 2, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool HISAT", 
-                    "name": "reference_genome"
-                }, 
-                {
-                    "description": "runtime parameter for tool HISAT", 
-                    "name": "spliced_options"
-                }
-            ], 
-            "label": null, 
-            "name": "HISAT", 
-            "outputs": [
-                {
-                    "name": "output_alignments", 
-                    "type": "bam"
-                }
-            ], 
-            "position": {
-                "left": 1156.5, 
-                "top": 350
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionoutput_alignments": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_alignments"
-                }, 
-                "RenameDatasetActionoutput_alignments": {
-                    "action_arguments": {
-                        "newname": "HISAT vs. miRNA sequences"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output_alignments"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3", 
-            "tool_shed_repository": {
-                "changeset_revision": "1eb21dccc2fa", 
-                "name": "hisat2", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"alignment_options\": \"{\\\"__current_case__\\\": 0, \\\"alignment_options_selector\\\": \\\"defaults\\\"}\", \"input_format\": \"{\\\"paired\\\": {\\\"reads\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2, \\\"paired_selector\\\": \\\"single\\\"}, \\\"input_format_selector\\\": \\\"fastq\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"max_primary\": \"\\\"5\\\"\", \"scoring_options\": \"{\\\"scoring_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"reference_genome\": \"{\\\"reference_genome_source\\\": \\\"history\\\", \\\"history_item\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"spliced_options\": \"{\\\"coefficient\\\": \\\"0\\\", \\\"canonical_penalty\\\": \\\"0\\\", \\\"no_spliced_alignment\\\": \\\"false\\\", \\\"nc_function_type\\\": \\\"C\\\", \\\"constant_term\\\": \\\"0\\\", \\\"nc_coefficient\\\": \\\"1\\\", \\\"noncanonical_penalty\\\": \\\"3\\\", \\\"known_splice_gtf\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"nc_constant_term\\\": \\\"-8\\\", \\\"min_intron\\\": \\\"20\\\", \\\"function_type\\\": \\\"C\\\", \\\"rna_strandness\\\": \\\"F\\\", \\\"__current_case__\\\": 1, \\\"tma\\\": \\\"\\\", \\\"max_intron\\\": \\\"500000\\\", \\\"spliced_options_selector\\\": \\\"advanced\\\"}\", \"paired_options\": \"{\\\"paired_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"input_options\": \"{\\\"input_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\"}", 
-            "tool_version": "2.0.3", 
-            "type": "tool", 
-            "uuid": "de47c982-6102-4fc9-8080-f01970fcac5b", 
-            "workflow_outputs": []
-        }, 
-        "10": {
-            "annotation": "Keep reads that did NOT align to miRNA sequences.", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2", 
-            "id": 10, 
-            "input_connections": {
-                "input1": {
-                    "id": 9, 
-                    "output_name": "output_alignments"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM", 
-                    "name": "bed_file"
-                }, 
-                {
-                    "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM", 
-                    "name": "input1"
-                }
-            ], 
-            "label": null, 
-            "name": "Filter SAM or BAM, output SAM or BAM", 
-            "outputs": [
-                {
-                    "name": "output1", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 1150, 
-                "top": 558
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionoutput1": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output1"
-                }, 
-                "RenameDatasetActionoutput1": {
-                    "action_arguments": {
-                        "newname": "Non-r/miRNA reads (BAM)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output1"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2", 
-            "tool_shed_repository": {
-                "changeset_revision": "d3292b4a0c78", 
-                "name": "samtool_filter2", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"filter\\\": \\\"yes\\\", \\\"skipBits\\\": null, \\\"__current_case__\\\": 1, \\\"reqBits\\\": [\\\"0x0004\\\"]}\", \"mapq\": \"\\\"\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}", 
-            "tool_version": "1.1.2", 
-            "type": "tool", 
-            "uuid": "facc21d9-45a0-45e4-ad2b-cc14a45a715b", 
-            "workflow_outputs": []
-        }, 
-        "11": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0", 
-            "id": 11, 
-            "input_connections": {
-                "input": {
-                    "id": 10, 
-                    "output_name": "output1"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Convert from BAM to FastQ", 
-                    "name": "input"
-                }
-            ], 
-            "label": null, 
-            "name": "Convert from BAM to FastQ", 
-            "outputs": [
-                {
-                    "name": "output", 
-                    "type": "fastq"
-                }, 
-                {
-                    "name": "output2", 
-                    "type": "fastq2"
-                }
-            ], 
-            "position": {
-                "left": 1156, 
-                "top": 769
-            }, 
-            "post_job_actions": {
-                "ChangeDatatypeActionoutput": {
-                    "action_arguments": {
-                        "newtype": "fastqsanger"
-                    }, 
-                    "action_type": "ChangeDatatypeAction", 
-                    "output_name": "output"
-                }, 
-                "ChangeDatatypeActionoutput2": {
-                    "action_arguments": {
-                        "newtype": "fastqsanger"
-                    }, 
-                    "action_type": "ChangeDatatypeAction", 
-                    "output_name": "output2"
-                }, 
-                "HideDatasetActionoutput2": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output2"
-                }, 
-                "RenameDatasetActionoutput": {
-                    "action_arguments": {
-                        "newname": "Non-r/miRNA reads (FASTQ)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output"
-                }, 
-                "RenameDatasetActionoutput2": {
-                    "action_arguments": {
-                        "newname": "Non-r/miRNA reads (FASTQ)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output2"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "d25966c8ddeb", 
-                "name": "bedtools", 
-                "owner": "iuc", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"fq2\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"tags\": \"\\\"false\\\"\"}", 
-            "tool_version": "2.24.0", 
-            "type": "tool", 
-            "uuid": "2af3a8c2-4056-4922-9353-c693d78230c9", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "cd5b8c93-9ea0-422b-8f0a-9643961b1ab4"
-                }
-            ]
-        }, 
-        "12": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1", 
-            "id": 12, 
-            "input_connections": {
-                "input_file": {
-                    "id": 11, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Manipulate FASTQ", 
-                    "name": "input_file"
-                }
-            ], 
-            "label": null, 
-            "name": "Manipulate FASTQ", 
-            "outputs": [
-                {
-                    "name": "output_file", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1458.5, 
-                "top": 232.5
-            }, 
-            "post_job_actions": {
-                "ChangeDatatypeActionoutput_file": {
-                    "action_arguments": {
-                        "newtype": "fastqsanger"
-                    }, 
-                    "action_type": "ChangeDatatypeAction", 
-                    "output_name": "output_file"
-                }, 
-                "HideDatasetActionoutput_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_file"
-                }, 
-                "RenameDatasetActionoutput_file": {
-                    "action_arguments": {
-                        "newname": "Reads 20-22nt length (siRNAs)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output_file"
-                }, 
-                "TagDatasetActionoutput_file": {
-                    "action_arguments": {
-                        "tags": "siRNA"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "output_file"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1", 
-            "tool_shed_repository": {
-                "changeset_revision": "bb07615a5b6a", 
-                "name": "fastq_manipulation", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"match_blocks\": \"[{\\\"__index__\\\": 0, \\\"match_type\\\": {\\\"match_type_selector\\\": \\\"sequence\\\", \\\"match\\\": {\\\"match_by\\\": \\\"^.{12,19}$|^.{23,51}$\\\", \\\"match_selector\\\": \\\"regex\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1}}]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"manipulate_blocks\": \"[{\\\"__index__\\\": 0, \\\"manipulation_type\\\": {\\\"manipulation_type_selector\\\": \\\"miscellaneous\\\", \\\"__current_case__\\\": 3, \\\"manipulation\\\": {\\\"manipulation_selector\\\": \\\"remove\\\", \\\"__current_case__\\\": 0}}}]\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "1.0.1", 
-            "type": "tool", 
-            "uuid": "12226194-4fc5-4523-9898-14dfa7f30311", 
-            "workflow_outputs": []
-        }, 
-        "13": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1", 
-            "id": 13, 
-            "input_connections": {
-                "input_file": {
-                    "id": 11, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Manipulate FASTQ", 
-                    "name": "input_file"
-                }
-            ], 
-            "label": null, 
-            "name": "Manipulate FASTQ", 
-            "outputs": [
-                {
-                    "name": "output_file", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1469.5, 
-                "top": 573.5
-            }, 
-            "post_job_actions": {
-                "ChangeDatatypeActionoutput_file": {
-                    "action_arguments": {
-                        "newtype": "fastqsanger"
-                    }, 
-                    "action_type": "ChangeDatatypeAction", 
-                    "output_name": "output_file"
-                }, 
-                "HideDatasetActionoutput_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "output_file"
-                }, 
-                "RenameDatasetActionoutput_file": {
-                    "action_arguments": {
-                        "newname": "Reads 23-29nt length (piRNAs)"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "output_file"
-                }, 
-                "TagDatasetActionoutput_file": {
-                    "action_arguments": {
-                        "tags": "piRNA"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "output_file"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1", 
-            "tool_shed_repository": {
-                "changeset_revision": "bb07615a5b6a", 
-                "name": "fastq_manipulation", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"match_blocks\": \"[{\\\"__index__\\\": 0, \\\"match_type\\\": {\\\"match_type_selector\\\": \\\"sequence\\\", \\\"match\\\": {\\\"match_by\\\": \\\"^.{12,22}$|^.{30,51}$\\\", \\\"match_selector\\\": \\\"regex\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1}}]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"manipulate_blocks\": \"[{\\\"__index__\\\": 0, \\\"manipulation_type\\\": {\\\"manipulation_type_selector\\\": \\\"miscellaneous\\\", \\\"__current_case__\\\": 3, \\\"manipulation\\\": {\\\"manipulation_selector\\\": \\\"remove\\\", \\\"__current_case__\\\": 0}}}]\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "1.0.1", 
-            "type": "tool", 
-            "uuid": "41d81175-b654-4e82-be38-d79b5a9b0ad4", 
-            "workflow_outputs": []
-        }, 
-        "14": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "id": 14, 
-            "input_connections": {
-                "input_file": {
-                    "id": 12, 
-                    "output_name": "output_file"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "contaminants"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "limits"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "input_file"
-                }
-            ], 
-            "label": null, 
-            "name": "FastQC", 
-            "outputs": [
-                {
-                    "name": "html_file", 
-                    "type": "html"
-                }, 
-                {
-                    "name": "text_file", 
-                    "type": "txt"
-                }
-            ], 
-            "position": {
-                "left": 1617, 
-                "top": 356.5
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionhtml_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "html_file"
-                }, 
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "text_file"
-                }, 
-                "RenameDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "newname": "FastQC on siRNAs"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "html_file"
-                }, 
-                "TagDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "tags": "siRNA"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "html_file"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "tool_shed_repository": {
-                "changeset_revision": "3fdc1a74d866", 
-                "name": "fastqc", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "0.65", 
-            "type": "tool", 
-            "uuid": "0e07b939-e6fc-4dea-8c5e-0cb9a035174c", 
-            "workflow_outputs": []
-        }, 
-        "15": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "id": 15, 
-            "input_connections": {
-                "input_file": {
-                    "id": 13, 
-                    "output_name": "output_file"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "contaminants"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "limits"
-                }, 
-                {
-                    "description": "runtime parameter for tool FastQC", 
-                    "name": "input_file"
-                }
-            ], 
-            "label": null, 
-            "name": "FastQC", 
-            "outputs": [
-                {
-                    "name": "html_file", 
-                    "type": "html"
-                }, 
-                {
-                    "name": "text_file", 
-                    "type": "txt"
-                }
-            ], 
-            "position": {
-                "left": 1611, 
-                "top": 709.5
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionhtml_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "html_file"
-                }, 
-                "HideDatasetActiontext_file": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "text_file"
-                }, 
-                "RenameDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "newname": "FastQC on piRNAs"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "html_file"
-                }, 
-                "TagDatasetActionhtml_file": {
-                    "action_arguments": {
-                        "tags": "piRNA"
-                    }, 
-                    "action_type": "TagDatasetAction", 
-                    "output_name": "html_file"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65", 
-            "tool_shed_repository": {
-                "changeset_revision": "3fdc1a74d866", 
-                "name": "fastqc", 
-                "owner": "devteam", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "0.65", 
-            "type": "tool", 
-            "uuid": "4343bf44-1ad4-42da-99a5-c93c3a8f2ec2", 
-            "workflow_outputs": []
+  "a_galaxy_workflow": "true",
+  "annotation": "This workflow completes the first part of the small RNA-seq tutorial from read pre-processing to trimming.e",
+  "format-version": "0.1",
+  "name": "sRNA Seq Step 1: Read Pre Processing And Removal Of Artifacts (no Grooming)",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input Dataset Collection"
         }
-    }, 
-    "uuid": "d224ba20-da46-42b2-b4fb-7289d1cc9825"
+      ],
+      "label": null,
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 278,
+        "top": 200.96875
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "5e34fb1f-fa44-4178-9d5e-953d69030004",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "12c8979f-7a43-4133-98ac-6b4c1b6d9e57"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "rRNA reference FASTA"
+        }
+      ],
+      "label": "rRNA reference FASTA",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 842.5,
+        "top": 239
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"name\": \"rRNA reference FASTA\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "01fce37f-1a11-4d1e-b039-6d53ba373064",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "6fafacef-3b18-425e-9f15-e717d0febbdc"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "Be sure to use hairpin sequences, not just mature miRNA sequences.",
+      "content_id": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "Be sure to use hairpin sequences, not just mature miRNA sequences.",
+          "name": "miRNA hairpin reference FASTA"
+        }
+      ],
+      "label": "miRNA hairpin reference FASTA",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 1159.5,
+        "top": 232
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"name\": \"miRNA hairpin reference FASTA\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "cba8d787-dc52-4ed6-bc9a-d697db038495",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "c8ab4106-9b66-4c54-8d62-27b370fbff01"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "id": 3,
+      "input_connections": {
+        "input_file": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "contaminants"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "limits"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "input_file"
+        }
+      ],
+      "label": null,
+      "name": "FastQC",
+      "outputs": [
+        {
+          "name": "html_file",
+          "type": "html"
+        },
+        {
+          "name": "text_file",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 272,
+        "top": 341.5
+      },
+      "post_job_actions": {
+        "HideDatasetActionhtml_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "html_file"
+        },
+        "HideDatasetActiontext_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "text_file"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "tool_shed_repository": {
+        "changeset_revision": "3fdc1a74d866",
+        "name": "fastqc",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.65",
+      "type": "tool",
+      "uuid": "f5973070-0a0f-438b-9b94-67ee36eab2c5",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.2",
+      "id": 4,
+      "input_connections": {
+        "singlePaired|input_singles": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Trim Galore!",
+          "name": "singlePaired"
+        }
+      ],
+      "label": null,
+      "name": "Trim Galore!",
+      "outputs": [
+        {
+          "name": "trimmed_reads_paired_collection",
+          "type": "input"
+        },
+        {
+          "name": "trimmed_reads_unpaired_collection",
+          "type": "input"
+        },
+        {
+          "name": "trimmed_reads_single",
+          "type": "fastqsanger"
+        },
+        {
+          "name": "trimmed_reads_pair1",
+          "type": "fastqsanger"
+        },
+        {
+          "name": "trimmed_reads_pair2",
+          "type": "fastqsanger"
+        },
+        {
+          "name": "unpaired_reads_1",
+          "type": "fastqsanger"
+        },
+        {
+          "name": "unpaired_reads_2",
+          "type": "fastqsanger"
+        },
+        {
+          "name": "report_file",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 549.5,
+        "top": 238
+      },
+      "post_job_actions": {
+        "HideDatasetActiontrimmed_reads_pair1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "trimmed_reads_pair1"
+        },
+        "HideDatasetActiontrimmed_reads_pair2": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "trimmed_reads_pair2"
+        },
+        "HideDatasetActiontrimmed_reads_paired_collection": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "trimmed_reads_paired_collection"
+        },
+        "HideDatasetActiontrimmed_reads_unpaired_collection": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "trimmed_reads_unpaired_collection"
+        },
+        "HideDatasetActionunpaired_reads_1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "unpaired_reads_1"
+        },
+        "HideDatasetActionunpaired_reads_2": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "unpaired_reads_2"
+        },
+        "RenameDatasetActiontrimmed_reads_single": {
+          "action_arguments": {
+            "newname": "Trimmed reads"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "trimmed_reads_single"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.2",
+      "tool_shed_repository": {
+        "changeset_revision": "f1e71aeaa923",
+        "name": "trim_galore",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"__rerun_remap_job_id__\": null, \"params\": \"{\\\"min_length\\\": \\\"12\\\", \\\"stringency\\\": \\\"1\\\", \\\"error_rate\\\": \\\"0.1\\\", \\\"retain_unpaired\\\": {\\\"retain_unpaired_select\\\": \\\"no_output\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1, \\\"report\\\": \\\"true\\\", \\\"settingsType\\\": \\\"custom\\\", \\\"quality\\\": \\\"0\\\", \\\"clip_R1\\\": \\\"\\\", \\\"clip_R2\\\": \\\"\\\"}\", \"rrbs\": \"{\\\"settingsType\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"singlePaired\": \"{\\\"three_prime_clip_R1\\\": \\\"\\\", \\\"trimming\\\": {\\\"trimming_select\\\": \\\"\\\", \\\"__current_case__\\\": 0}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0, \\\"input_singles\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\"}",
+      "tool_version": "0.4.2",
+      "type": "tool",
+      "uuid": "21f6bafb-48bb-4f7d-8543-8b8b96345d1a",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "report_file",
+          "uuid": "8d621eea-f61d-4780-b3d7-d1de6a7a9e12"
+        },
+        {
+          "label": null,
+          "output_name": "trimmed_reads_single",
+          "uuid": "d148afd4-9b94-4ef6-9856-98963e71ef6d"
+        }
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "id": 5,
+      "input_connections": {
+        "input_file": {
+          "id": 4,
+          "output_name": "trimmed_reads_single"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "contaminants"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "limits"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "input_file"
+        }
+      ],
+      "label": null,
+      "name": "FastQC",
+      "outputs": [
+        {
+          "name": "html_file",
+          "type": "html"
+        },
+        {
+          "name": "text_file",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 548.5,
+        "top": 615
+      },
+      "post_job_actions": {
+        "HideDatasetActiontext_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "text_file"
+        },
+        "RenameDatasetActionhtml_file": {
+          "action_arguments": {
+            "newname": "FastQC on Groomed and Trimmed data"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "html_file"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "tool_shed_repository": {
+        "changeset_revision": "3fdc1a74d866",
+        "name": "fastqc",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.65",
+      "type": "tool",
+      "uuid": "972f64c0-14f5-460e-9d30-27faa6df86d4",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "html_file",
+          "uuid": "da777968-7f09-4ba1-8ff0-1c9358de161c"
+        }
+      ]
+    },
+    "6": {
+      "annotation": "Alignment of reads against rRNA sequences to filter them out.",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3",
+      "id": 6,
+      "input_connections": {
+        "input_format|paired|reads": {
+          "id": 4,
+          "output_name": "trimmed_reads_single"
+        },
+        "reference_genome|history_item": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool HISAT",
+          "name": "reference_genome"
+        },
+        {
+          "description": "runtime parameter for tool HISAT",
+          "name": "spliced_options"
+        }
+      ],
+      "label": null,
+      "name": "HISAT",
+      "outputs": [
+        {
+          "name": "output_alignments",
+          "type": "bam"
+        }
+      ],
+      "position": {
+        "left": 851.5,
+        "top": 350
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput_alignments": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_alignments"
+        },
+        "RenameDatasetActionoutput_alignments": {
+          "action_arguments": {
+            "newname": "HISAT vs. rRNA sequences"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_alignments"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3",
+      "tool_shed_repository": {
+        "changeset_revision": "1eb21dccc2fa",
+        "name": "hisat2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"alignment_options\": \"{\\\"__current_case__\\\": 0, \\\"alignment_options_selector\\\": \\\"defaults\\\"}\", \"input_format\": \"{\\\"paired\\\": {\\\"reads\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2, \\\"paired_selector\\\": \\\"single\\\"}, \\\"input_format_selector\\\": \\\"fastq\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"max_primary\": \"\\\"5\\\"\", \"scoring_options\": \"{\\\"scoring_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"reference_genome\": \"{\\\"reference_genome_source\\\": \\\"history\\\", \\\"history_item\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"spliced_options\": \"{\\\"coefficient\\\": \\\"0\\\", \\\"canonical_penalty\\\": \\\"0\\\", \\\"no_spliced_alignment\\\": \\\"false\\\", \\\"nc_function_type\\\": \\\"C\\\", \\\"constant_term\\\": \\\"0\\\", \\\"nc_coefficient\\\": \\\"1\\\", \\\"noncanonical_penalty\\\": \\\"3\\\", \\\"known_splice_gtf\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"nc_constant_term\\\": \\\"-8\\\", \\\"min_intron\\\": \\\"20\\\", \\\"function_type\\\": \\\"C\\\", \\\"rna_strandness\\\": \\\"F\\\", \\\"__current_case__\\\": 1, \\\"tma\\\": \\\"\\\", \\\"max_intron\\\": \\\"500000\\\", \\\"spliced_options_selector\\\": \\\"advanced\\\"}\", \"paired_options\": \"{\\\"paired_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"input_options\": \"{\\\"input_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\"}",
+      "tool_version": "2.0.3",
+      "type": "tool",
+      "uuid": "b4d85932-ab16-4488-8421-9dab303029cd",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "Keep reads that did NOT align to rRNA sequences.",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+      "id": 7,
+      "input_connections": {
+        "input1": {
+          "id": 6,
+          "output_name": "output_alignments"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+          "name": "bed_file"
+        },
+        {
+          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+          "name": "input1"
+        }
+      ],
+      "label": null,
+      "name": "Filter SAM or BAM, output SAM or BAM",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 854,
+        "top": 560
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output1"
+        },
+        "RenameDatasetActionoutput1": {
+          "action_arguments": {
+            "newname": "Non-rRNA reads (BAM)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "d3292b4a0c78",
+        "name": "samtool_filter2",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"filter\\\": \\\"yes\\\", \\\"skipBits\\\": null, \\\"__current_case__\\\": 1, \\\"reqBits\\\": [\\\"0x0004\\\"]}\", \"mapq\": \"\\\"\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.2",
+      "type": "tool",
+      "uuid": "e502a8a1-e847-4ab8-a030-7f4f24a22ab3",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0",
+      "id": 8,
+      "input_connections": {
+        "input": {
+          "id": 7,
+          "output_name": "output1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Convert from BAM to FastQ",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Convert from BAM to FastQ",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "fastq"
+        },
+        {
+          "name": "output2",
+          "type": "fastq2"
+        }
+      ],
+      "position": {
+        "left": 859,
+        "top": 763
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output"
+        },
+        "HideDatasetActionoutput2": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output2"
+        },
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Non-rRNA reads (FASTQ)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0",
+      "tool_shed_repository": {
+        "changeset_revision": "d25966c8ddeb",
+        "name": "bedtools",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"fq2\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"tags\": \"\\\"false\\\"\"}",
+      "tool_version": "2.24.0",
+      "type": "tool",
+      "uuid": "697122c3-2a2b-4e20-aae7-9179d7e8d4a6",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "9ef5503f-5cfa-4195-9985-4f1743a556cc"
+        }
+      ]
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3",
+      "id": 9,
+      "input_connections": {
+        "input_format|paired|reads": {
+          "id": 8,
+          "output_name": "output"
+        },
+        "reference_genome|history_item": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool HISAT",
+          "name": "reference_genome"
+        },
+        {
+          "description": "runtime parameter for tool HISAT",
+          "name": "spliced_options"
+        }
+      ],
+      "label": null,
+      "name": "HISAT",
+      "outputs": [
+        {
+          "name": "output_alignments",
+          "type": "bam"
+        }
+      ],
+      "position": {
+        "left": 1156.5,
+        "top": 350
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput_alignments": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_alignments"
+        },
+        "RenameDatasetActionoutput_alignments": {
+          "action_arguments": {
+            "newname": "HISAT vs. miRNA sequences"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_alignments"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3",
+      "tool_shed_repository": {
+        "changeset_revision": "1eb21dccc2fa",
+        "name": "hisat2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"alignment_options\": \"{\\\"__current_case__\\\": 0, \\\"alignment_options_selector\\\": \\\"defaults\\\"}\", \"input_format\": \"{\\\"paired\\\": {\\\"reads\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2, \\\"paired_selector\\\": \\\"single\\\"}, \\\"input_format_selector\\\": \\\"fastq\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"max_primary\": \"\\\"5\\\"\", \"scoring_options\": \"{\\\"scoring_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"reference_genome\": \"{\\\"reference_genome_source\\\": \\\"history\\\", \\\"history_item\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"spliced_options\": \"{\\\"coefficient\\\": \\\"0\\\", \\\"canonical_penalty\\\": \\\"0\\\", \\\"no_spliced_alignment\\\": \\\"false\\\", \\\"nc_function_type\\\": \\\"C\\\", \\\"constant_term\\\": \\\"0\\\", \\\"nc_coefficient\\\": \\\"1\\\", \\\"noncanonical_penalty\\\": \\\"3\\\", \\\"known_splice_gtf\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"nc_constant_term\\\": \\\"-8\\\", \\\"min_intron\\\": \\\"20\\\", \\\"function_type\\\": \\\"C\\\", \\\"rna_strandness\\\": \\\"F\\\", \\\"__current_case__\\\": 1, \\\"tma\\\": \\\"\\\", \\\"max_intron\\\": \\\"500000\\\", \\\"spliced_options_selector\\\": \\\"advanced\\\"}\", \"paired_options\": \"{\\\"paired_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"input_options\": \"{\\\"input_options_selector\\\": \\\"defaults\\\", \\\"__current_case__\\\": 0}\"}",
+      "tool_version": "2.0.3",
+      "type": "tool",
+      "uuid": "de47c982-6102-4fc9-8080-f01970fcac5b",
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "Keep reads that did NOT align to miRNA sequences.",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+      "id": 10,
+      "input_connections": {
+        "input1": {
+          "id": 9,
+          "output_name": "output_alignments"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+          "name": "bed_file"
+        },
+        {
+          "description": "runtime parameter for tool Filter SAM or BAM, output SAM or BAM",
+          "name": "input1"
+        }
+      ],
+      "label": null,
+      "name": "Filter SAM or BAM, output SAM or BAM",
+      "outputs": [
+        {
+          "name": "output1",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 1150,
+        "top": 558
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput1": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output1"
+        },
+        "RenameDatasetActionoutput1": {
+          "action_arguments": {
+            "newname": "Non-r/miRNA reads (BAM)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output1"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+      "tool_shed_repository": {
+        "changeset_revision": "d3292b4a0c78",
+        "name": "samtool_filter2",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"bed_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"possibly_select_inverse\": \"\\\"false\\\"\", \"outputtype\": \"\\\"bam\\\"\", \"library\": \"\\\"\\\"\", \"regions\": \"\\\"\\\"\", \"header\": \"\\\"-h\\\"\", \"flag\": \"{\\\"filter\\\": \\\"yes\\\", \\\"skipBits\\\": null, \\\"__current_case__\\\": 1, \\\"reqBits\\\": [\\\"0x0004\\\"]}\", \"mapq\": \"\\\"\\\"\", \"read_group\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.2",
+      "type": "tool",
+      "uuid": "facc21d9-45a0-45e4-ad2b-cc14a45a715b",
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0",
+      "id": 11,
+      "input_connections": {
+        "input": {
+          "id": 10,
+          "output_name": "output1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Convert from BAM to FastQ",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "Convert from BAM to FastQ",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "fastq"
+        },
+        {
+          "name": "output2",
+          "type": "fastq2"
+        }
+      ],
+      "position": {
+        "left": 1156,
+        "top": 769
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output"
+        },
+        "ChangeDatatypeActionoutput2": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output2"
+        },
+        "HideDatasetActionoutput2": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output2"
+        },
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Non-r/miRNA reads (FASTQ)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        },
+        "RenameDatasetActionoutput2": {
+          "action_arguments": {
+            "newname": "Non-r/miRNA reads (FASTQ)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output2"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0",
+      "tool_shed_repository": {
+        "changeset_revision": "d25966c8ddeb",
+        "name": "bedtools",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"fq2\": \"\\\"false\\\"\", \"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"tags\": \"\\\"false\\\"\"}",
+      "tool_version": "2.24.0",
+      "type": "tool",
+      "uuid": "2af3a8c2-4056-4922-9353-c693d78230c9",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "cd5b8c93-9ea0-422b-8f0a-9643961b1ab4"
+        }
+      ]
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1",
+      "id": 12,
+      "input_connections": {
+        "input_file": {
+          "id": 11,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Manipulate FASTQ",
+          "name": "input_file"
+        }
+      ],
+      "label": null,
+      "name": "Manipulate FASTQ",
+      "outputs": [
+        {
+          "name": "output_file",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1458.5,
+        "top": 232.5
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput_file": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output_file"
+        },
+        "HideDatasetActionoutput_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_file"
+        },
+        "RenameDatasetActionoutput_file": {
+          "action_arguments": {
+            "newname": "Reads 20-22nt length (siRNAs)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_file"
+        },
+        "TagDatasetActionoutput_file": {
+          "action_arguments": {
+            "tags": "siRNA"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output_file"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "bb07615a5b6a",
+        "name": "fastq_manipulation",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"match_blocks\": \"[{\\\"__index__\\\": 0, \\\"match_type\\\": {\\\"match_type_selector\\\": \\\"sequence\\\", \\\"match\\\": {\\\"match_by\\\": \\\"^.{12,19}$|^.{23,51}$\\\", \\\"match_selector\\\": \\\"regex\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1}}]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"manipulate_blocks\": \"[{\\\"__index__\\\": 0, \\\"manipulation_type\\\": {\\\"manipulation_type_selector\\\": \\\"miscellaneous\\\", \\\"__current_case__\\\": 3, \\\"manipulation\\\": {\\\"manipulation_selector\\\": \\\"remove\\\", \\\"__current_case__\\\": 0}}}]\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "12226194-4fc5-4523-9898-14dfa7f30311",
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1",
+      "id": 13,
+      "input_connections": {
+        "input_file": {
+          "id": 11,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Manipulate FASTQ",
+          "name": "input_file"
+        }
+      ],
+      "label": null,
+      "name": "Manipulate FASTQ",
+      "outputs": [
+        {
+          "name": "output_file",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1469.5,
+        "top": 573.5
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionoutput_file": {
+          "action_arguments": {
+            "newtype": "fastqsanger"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "output_file"
+        },
+        "HideDatasetActionoutput_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_file"
+        },
+        "RenameDatasetActionoutput_file": {
+          "action_arguments": {
+            "newname": "Reads 23-29nt length (piRNAs)"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_file"
+        },
+        "TagDatasetActionoutput_file": {
+          "action_arguments": {
+            "tags": "piRNA"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "output_file"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1",
+      "tool_shed_repository": {
+        "changeset_revision": "bb07615a5b6a",
+        "name": "fastq_manipulation",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"match_blocks\": \"[{\\\"__index__\\\": 0, \\\"match_type\\\": {\\\"match_type_selector\\\": \\\"sequence\\\", \\\"match\\\": {\\\"match_by\\\": \\\"^.{12,22}$|^.{30,51}$\\\", \\\"match_selector\\\": \\\"regex\\\", \\\"__current_case__\\\": 0}, \\\"__current_case__\\\": 1}}]\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"manipulate_blocks\": \"[{\\\"__index__\\\": 0, \\\"manipulation_type\\\": {\\\"manipulation_type_selector\\\": \\\"miscellaneous\\\", \\\"__current_case__\\\": 3, \\\"manipulation\\\": {\\\"manipulation_selector\\\": \\\"remove\\\", \\\"__current_case__\\\": 0}}}]\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "1.0.1",
+      "type": "tool",
+      "uuid": "41d81175-b654-4e82-be38-d79b5a9b0ad4",
+      "workflow_outputs": []
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "id": 14,
+      "input_connections": {
+        "input_file": {
+          "id": 12,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "contaminants"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "limits"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "input_file"
+        }
+      ],
+      "label": null,
+      "name": "FastQC",
+      "outputs": [
+        {
+          "name": "html_file",
+          "type": "html"
+        },
+        {
+          "name": "text_file",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 1617,
+        "top": 356.5
+      },
+      "post_job_actions": {
+        "HideDatasetActionhtml_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "html_file"
+        },
+        "HideDatasetActiontext_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "text_file"
+        },
+        "RenameDatasetActionhtml_file": {
+          "action_arguments": {
+            "newname": "FastQC on siRNAs"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "html_file"
+        },
+        "TagDatasetActionhtml_file": {
+          "action_arguments": {
+            "tags": "siRNA"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "html_file"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "tool_shed_repository": {
+        "changeset_revision": "3fdc1a74d866",
+        "name": "fastqc",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.65",
+      "type": "tool",
+      "uuid": "0e07b939-e6fc-4dea-8c5e-0cb9a035174c",
+      "workflow_outputs": []
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "id": 15,
+      "input_connections": {
+        "input_file": {
+          "id": 13,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "contaminants"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "limits"
+        },
+        {
+          "description": "runtime parameter for tool FastQC",
+          "name": "input_file"
+        }
+      ],
+      "label": null,
+      "name": "FastQC",
+      "outputs": [
+        {
+          "name": "html_file",
+          "type": "html"
+        },
+        {
+          "name": "text_file",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 1611,
+        "top": 709.5
+      },
+      "post_job_actions": {
+        "HideDatasetActionhtml_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "html_file"
+        },
+        "HideDatasetActiontext_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "text_file"
+        },
+        "RenameDatasetActionhtml_file": {
+          "action_arguments": {
+            "newname": "FastQC on piRNAs"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "html_file"
+        },
+        "TagDatasetActionhtml_file": {
+          "action_arguments": {
+            "tags": "piRNA"
+          },
+          "action_type": "TagDatasetAction",
+          "output_name": "html_file"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+      "tool_shed_repository": {
+        "changeset_revision": "3fdc1a74d866",
+        "name": "fastqc",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": 0, \"contaminants\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"limits\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"input_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "0.65",
+      "type": "tool",
+      "uuid": "4343bf44-1ad4-42da-99a5-c93c3a8f2ec2",
+      "workflow_outputs": []
+    }
+  },
+  "uuid": "d224ba20-da46-42b2-b4fb-7289d1cc9825",
+  "tags": [
+    "transcriptomics"
+  ]
 }

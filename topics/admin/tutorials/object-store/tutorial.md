@@ -13,7 +13,7 @@ key_points:
 - You can move data around without affecting users.
 contributors:
   - natefoo
-  - erasche
+  - hexylena
 subtopic: features
 tags:
   - storage

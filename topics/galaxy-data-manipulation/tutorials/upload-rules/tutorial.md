@@ -18,7 +18,7 @@ requirements:
       - collections
 contributors:
   - jmchilton
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -27,7 +27,7 @@ contributors:
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
 
 > ###  {% icon comment %} Audience
-> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) tutorial.
+> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) tutorial.
 {: .comment}
 
 > ### Agenda

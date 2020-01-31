@@ -40,7 +40,7 @@ contributors:
 
 {% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
 
-With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
+With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
 
@@ -79,7 +79,7 @@ Sometimes we want to have some customizations on visualization, some complex tab
 > {: .hands_on}
 {: .tip}
 
-In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
+In this tutorial, we will take the list of DE genes extracted from DESEq2's output that we generated in the ["Reference-based RNA-Seq data analysis" tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), manipulate it and create some visualizations.
 
 > ### Agenda
 >
@@ -434,9 +434,9 @@ We would like now to make a barplot showing the number of differentially express
 
 Data manipulation and visualization are important parts of any RNA-Seq analysis. Galaxy provides several tools for that as explained in several tutorials:
 
-- [Reference-based RNA-Seq]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %})
-- [Visualization of RNA-seq results with heatmap2]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
-- [Visualization of RNA-seq results with Volcano Plot]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
+- [Reference-based RNA-Seq]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %})
+- [Visualization of RNA-seq results with heatmap2]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %})
+- [Visualization of RNA-seq results with Volcano Plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %})
 
 But sometimes we need more customization and then need to use programming languages as R or Python.
 

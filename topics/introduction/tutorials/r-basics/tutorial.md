@@ -51,7 +51,7 @@ contributors:
 >
 {: .agenda}
 
-Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({{ site.baseurl }}{% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
+Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-ui/tutorials/rstudio/tutorial.md %}).
 
 {% include snippets/launch_rstudio.md %}
 
