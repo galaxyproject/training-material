@@ -1,19 +1,19 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Mass spectrometry: LC-MS preprocessing advanced'
+title: 'Mass spectrometry: LC-MS preprocessing - advanced'
 zenodo_link: 'https://zenodo.org/record/3244991'
 questions:
 - What are the main steps of untargeted LC-MS data preprocessing for metabolomic analysis?
 - How to conduct metabolomic data preprocessing using Galaxy?
 objectives:
-- To comprehend the diversity of LC-MS metabolomic data analysis.
-- To get familiar with the main steps constituting a metabolomic workflow for untargeted LC-MS analysis.
-- To evaluate the potential of a workflow approach when dealing with LC-MS metabolomic data.
+- To comprehend the diversity of steps necessary to perform untargetted LC-MS metabolomic preprocessing.
+- To get familiar with the way to use XCMS-based Galaxy modules dedicated to LC-MS data preprocessing.
+- To evaluate the potential of a workflow approach when dealing with LC-MS preprocessing.
 time_estimation: '3h'
 key_points:
-- To process untargeted LC-MS metabolomic data, you need a large variety of steps and tools.
-- Although main steps are standard, various ways to combined tools exist, depending on your data.
+- To process untargeted LC-MS metabolomic data preprocessing, you need a large variety of steps and tools.
+- Although main steps are standard, various ways to combine and to set parameters for tools exist, depending on your data.
 - Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis.
 contributors:
 - melpetera
@@ -26,17 +26,13 @@ contributors:
 # Introduction
 {:.no_toc}
 
-**TODO** Updating the intro to make it relevant with this tutorial. 
-
-You may already know that there are different types of *-omic* sciences; out of these, metabolomics is most closely related to phenotypes.
-Metabolomics involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. It  focuses on studying the very small molecules
-which are called *metabolites*, to better understand matters linked to the metabolism. However, studying metabolites is not a piece of cake
-since it requires several critical steps which still have some major bottlenecks. Metabolomics is still quite a young science, and has many
-kinds of specific challenges.
+Metabolomics is a *-omic* science known for being one of the most closely related to phenotypes.
+It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. 
+It focuses on studying the very small molecules which are called *metabolites*, to better understand matters linked to the metabolism. 
 
 One of the three main technologies used to perform metabolomic analysis is **Liquid-Chromatography Mass Spectrometry** (LC-MS). Data analysis
-for this technology requires a large variety of steps, ranging from extracting information from the raw data, to statistical analysis
-and annotation. To be able to perform a complete LC-MS analysis in a single environment, the [Wokflow4Metabolomics](http://workflow4metabolomics.org/)
+for this technology requires a large variety of steps, ranging from extracting information from the raw data, to statistical analysis and annotation. 
+To be able to perform a complete LC-MS analysis in a single environment, the [Wokflow4Metabolomics](http://workflow4metabolomics.org/)
 team provides Galaxy tools dedicated to metabolomics. This tutorial explains the main steps involved in untargeted LC-MS data processing
 for metabolomic analysis, and shows how to conduct metabolomic data analysis from preprocessing to annotation using Galaxy.
 
@@ -46,36 +42,34 @@ from 183 employees from the French Alternative Energies and Atomic Energy Commis
 (negative ionization mode).
 
 Since the original dataset takes a few hours to be processed, we chose to take a limited subset of individuals for this tutorial.
-This will allow you to perform an example of metabolomic workflow, from pre-processing to annotation, in a limited time, even though
-the results obtained may not be reliable from a scientific point of view due to the small sample size. Nevertheless,
-the chosen diversity of sample will allow you to explore the basics of a metabolomic workflow.
+This will allow you to perform an example of metabolomic preprocessing workflow in a limited time, even though
+the results obtained may not be reliable enough for biological interpretation due to the small sample size. 
+Nevertheless, the chosen diversity of sample will allow you to explore the basics of a metabolomic workflow.
 
-We chose a subset of 9 samples, composed of 6 biological samples and 3 quality-control pooled samples (QC pools - mix of all
-biological samples).
+We chose a subset of 12 samples, composed of 6 biological samples, 3 quality-control pooled samples ('QC pools' - mix of all
+biological samples) and 3 blank samples ('blanks' - injection solvent).
 
-To analyze these data, we will then follow a light version of the [LC-MS workflow](http://workflow4metabolomics.org/the-lc-ms-workflow),
+To analyze these data, we will then follow a Galaxy workflow 
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 
-[![The full tutorial workflow](../../images/tutorial-lcms-workflow.png)](../../images/tutorial-lcms-workflow.png)
+[![The full tutorial workflow](../../images/lcmspreproc_wf.png)](../../images/lcmspreproc_wf.png)
+
+> ### {% icon comment %} Workflow4Metabolomics public history
+>
+> This training material can be followed by running it on any Galaxy instance holding the Galaxy modules needed.
+> Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
+> you can find the entire history in the 'published histories' section: 
+> [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing)
+> 
+{: .comment}
 
 **Preprocessing with XCMS**
 
-The first step in the workflow is the pre-processing of the raw data with **XCMS** ({% cite Smith2006 %}).
-
-**XCMS** {% icon tool %} is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
+**XCMS** ({% cite Smith2006 %}) is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
 used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software.
-
-**MSnbase readMSData** {% icon tool %}, prior to **XCMS** {% icon tool %} is able to read files with open format as `mzXML`, `mzMl`, `mzData` and `netCDF`, which are independent of the constructors' formats. The **XCMS** {% icon tool %} package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
-adducts and fragments using the R package CAMERA ({% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well
-adapted to define workflows, one of the key points of Galaxy.
-
-
-**TODO** Adding a comment providing a link to a published history for W4M user 
-"if you happen to be a W4M user and do not want to run the hands-on, you can find the entire histories here" 
-
 
 
 > ### Agenda
@@ -88,13 +82,22 @@ adapted to define workflows, one of the key points of Galaxy.
 {: .agenda}
 
 
+# Data preparation for XCMS
 
+The **XCMS** {% icon tool %} R package is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
+adducts and fragments using the R package CAMERA ({% cite CAMERA %}). This set of functions gives modularity, and thus is particularly well
+adapted to define workflows, one of the key points of Galaxy.
+
+The first Galaxy module, **MSnbase readMSData** {% icon tool %}, is meant to read files with open format as `mzXML`, `mzMl`, `mzData` and `netCDF`, 
+which are independent of the constructors' formats. 
+First of all, you need to upload your data (that should be in one of the cited open formats) into Galaxy. 
 
 
 ## Importing the LC/MS data into Galaxy
 
 In metabolomics studies, the number of samples can vary a lot (from a handful to several hundreds). Thus, extracting your
-data from the raw files can be very fast, or take quite a long time. To optimise the computation time as much as possible, the W4M core team chose to develop tools that can run single raw files for the first steps of
+data from the raw files can be very fast, or take quite a long time. To optimise the computation time as much as possible, 
+the W4M core team chose to develop tools that can run single raw files for the first steps of
 pre-processing in parallel, since the initial actions in the extraction process treat files independently.
 
 Since the first steps can be run on each file independently, the use of **Dataset collections** in Galaxy is recommended, to avoid
@@ -106,7 +109,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the 9 `mzXML` files into a collection named `sacurine`
+> 2. Import the 12 `mzXML` files into a collection named `sacurine`
 >    - Option 1: from a shared data library (ask your instructor)
 >    - Option 2: from Zenodo using the URLs given below
 >
@@ -123,26 +126,32 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >    https://zenodo.org/record/3244991/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true format="mzml" collection_name="sacurine" renaming=false %}
+> **TODO** Update with the right zenodo URLs
+>    {% include snippets/import_via_link.md collection=true format="mzml" collection_name="mzML" renaming=false %}
 >    {% include snippets/import_from_data_library.md astype="as a Collection" %}
 >
-> 3. Make sure your data is in a **collection**. Make sure it is named `sacurine`
+> 3. Make sure your data is in a **collection**. Make sure it is named `mzML`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
 >    {% include snippets/create_dataset_collection.md %}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > If you happen to be a W4M user, please not that you can find at the following link a ready-to-start history:
+> > [GTN_LCMSpreprocessing_mzML](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessingmzml)
+> > We highly recommend to get started by importing this history.
+> > 
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the dataset collection number 13. 
+> {: .tip}
 >   
 {: .hands_on}
 
-You should have in your history a green Dataset collection (`sacurine`) with 9 datasets in mzml format.
+You should have in your history a green Dataset collection (`mzML`) with 12 datasets in mzml format.
 
 Their size can be checked by clicking on the information icon {% icon galaxy-info %} on the individual datasets
 
-## Data preparation for XCMS: *MSnbase readMSData*
+## First Galaxy module: *MSnbase readMSData*
 
 This first step is only meant to read your `mzXML` file and generate an object usable by **XCMS** {% icon tool %}.
 
@@ -151,14 +160,15 @@ This first step is only meant to read your `mzXML` file and generate an object u
 > ### {% icon hands_on %} Hands-on: MSnbase readMSData
 >
 > **MSnbase readMSData** {% icon tool %} with the following parameters:
->   - *"File(s) from your history containing your chromatograms"*: the `sacurine` dataset collection
+>   - *"File(s) from your history containing your chromatograms"*: the `mzML` dataset collection
 >
 >   {% include snippets/select_collection.md %}
 >
->  > ### {% icon comment %} Comment to W4M users
+>  > ### {% icon tip %} Comment to W4M users
 >  >
->  > **TODO** Giving the link to the step in published history to visualise the parameters. 
->  {: .comment}
+>  > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the dataset collection number 14. 
+>  {: .tip}
 >
 >  > ### {% icon question %} Question
 >  >
@@ -166,7 +176,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 >  >
 >  > > ### {% icon solution %} Solution
 >  > >
->  > > 1. A **Dataset collection** containing 9 dataset.
+>  > > 1. A **Dataset collection** containing 12 datasets.
 >  > > 2. The datasets are some RData objects with the **rdata.msnbase.raw** datatype.
 >  > >
 >  > {: .solution}
@@ -176,7 +186,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 Now that you have prepared your data, you can begin with the first XCMS extraction step: peakpicking. However, before beginning to
 extract meaningful information from your raw data, you may be interested in visualising your chromatograms. This can be of particular
-interest if you want to check whether you should consider discarding some range of your analytical sequence (some scan or *retention
+interest if you want to check whether you should consider discarding some range of your analytical sequence (some scans or *retention
 time* (RT) ranges).
 
 To do so, you can use a tool that is called **xcms plot chromatogram** {% icon tool %} that will plot each sample's chromatogram (see dedicated section
@@ -211,13 +221,14 @@ Note that you can either:
 > > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
 > >
 > > **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
-> >    - *"RData file"*: the `sacurine.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
+> >    - *"RData file"*: the `mzML.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >      {% include snippets/select_collection.md %}
 > >
-> > > ### {% icon comment %} Comment to W4M users
+> > > ### {% icon tip %} Comment to W4M users
 > > >
-> > > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> > {: .comment}
+> > > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the dataset number 27. 
+> > {: .tip}
 > >
 > {: .hands_on}
 >
@@ -263,6 +274,9 @@ explain how we filled this file from the template we generated in Galaxy.
 > HU_neg_123 | .
 > HU_neg_090 | .
 > HU_neg_048 | .
+> Blanc16 | .
+> Blanc10 | .
+> Blanc05 | .
 >
 > We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
 second column matters.
@@ -278,24 +292,31 @@ second column matters.
 > HU_neg_123 | sample
 > HU_neg_090 | sample
 > HU_neg_048 | sample
+> Blanc16 | blk
+> Blanc10 | blk
+> Blanc05 | blk
 >
-> With this column, we will be able to colour the samples depending on the sample type (QC or sample).
+> With this column, we will be able to colour the samples depending on the sample type (QC, sample, blk).
 > Next, we added columns with interesting or needed information, as following:
 >
-> sample_name | class | polarity | sampleType | injectionOrder | batch | osmolality | sampling | age | bmi | gender
-> --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-> QC1_014 | QC | 0 | pool | 185 | ne1 | NA | NA | NA | NA | NA
-> QC1_008 | QC | 0 | pool | 105 | ne1 | NA | NA | NA | NA | NA
-> QC1_002 | QC | 0 | pool | 27 | ne1 | NA | NA | NA | NA | NA
-> HU_neg_192 | sample | 0 | sample | 165 | ne1 | 1184 | 8 | 31 | 24.22 | Male
-> HU_neg_173 | sample | 0 | sample | 148 | ne1 | 182 | 7 | 55 | 20.28 | Female
-> HU_neg_157 | sample | 0 | sample | 137 | ne1 | 504 | 7 | 43 | 21.95 | Female
-> HU_neg_123 | sample | 0 | sample | 100 | ne1 | 808 | 5 | 49 | 24.39 | Male
-> HU_neg_090 | sample | 0 | sample | 75 | ne1 | 787 | 4 | 46 | 19.79 | Male
-> HU_neg_048 | sample | 0 | sample | 39 | ne1 | 997 | 3 | 39 | 19.49 | Female
+> sample_name | class | sampleType | injectionOrder | batch | osmolality | sampling | age | bmi | gender
+> --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+> QC1_014 | QC | pool | 185 | ne1 | NA | NA | NA | NA | NA
+> QC1_008 | QC | pool | 105 | ne1 | NA | NA | NA | NA | NA
+> QC1_002 | QC | pool | 27 | ne1 | NA | NA | NA | NA | NA
+> HU_neg_192 | sample | sample | 165 | ne1 | 1184 | 8 | 31 | 24.22 | Male
+> HU_neg_173 | sample | sample | 148 | ne1 | 182 | 7 | 55 | 20.28 | Female
+> HU_neg_157 | sample | sample | 137 | ne1 | 504 | 7 | 43 | 21.95 | Female
+> HU_neg_123 | sample | sample | 100 | ne1 | 808 | 5 | 49 | 24.39 | Male
+> HU_neg_090 | sample | sample | 75 | ne1 | 787 | 4 | 46 | 19.79 | Male
+> HU_neg_048 | sample | sample | 39 | ne1 | 997 | 3 | 39 | 19.49 | Female
+> Blanc16 | blk | blank | 173 | ne1 | NA | NA | NA | NA | NA
+> Blanc10 | blk | blank | 94 | ne1 | NA | NA | NA | NA | NA
+> Blanc05 | blk | blank | 29 | ne1 | NA | NA | NA | NA | NA
 >
-> In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift (see later in
-the tutorial).
+> In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift during later quality processing
+(see the [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html)
+Galaxy training material for more information). 
 > Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our *sampleMetadata* was ready to
 be uploaded into Galaxy.
 >
@@ -306,11 +327,12 @@ be uploaded into Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Upload the sampleMetada
 >
-> 1. Import the `sampleMetadata_completed.tsv` file from Zenodo or from a shared data library
+> 1. Import the `sampleMetadata_completed.tsv` file from your computer, from Zenodo or from a shared data library
 >    ```
 >    https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
 >    ```
 >
+> **TODO** Update with the right zenodo URL
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
@@ -328,10 +350,11 @@ not following all the requirements about the format (*e.g.* wrong separator, or 
 right away if you appear to get one of these obvious issues.
 >     {: .comment}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the dataset number 28. 
+> {: .tip}
 >
 >
 > > ### {% icon question %} Question
@@ -367,7 +390,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
 >
 > **xcms plot chromatogram** {% icon tool %} with the following parameters:
->   - *"RData file"*: `sacurine.raw.RData` (collection)
+>   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
 >     {% include snippets/select_collection.md %}
@@ -378,19 +401,20 @@ Note that you can also check the chromatograms at any moment during the workflow
 (see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
 >    {: .comment}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 29 and 30. 
+> {: .tip}
 >
 {: .hands_on}
 
-This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provided groups like we do here, you obtain two plots: one with colours based on provided groups, one with one colour per sample.
+This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provided groups like we do here, you obtain two plots: 
+one with colours based on provided groups, one with one colour per sample.
 
-![Base Peak Intensity Chromatograms](../../images/BPC_9samp.png)
+![Base Peak Intensity Chromatograms](../../images/lcmspreproc_BPC12samp.png)
 
-
-## First XCMS step: *peak picking*
+# First XCMS step: *peak picking*
 
 Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
 independently. The idea here is, for each peak, to proceed to chromatographic peak detection.
@@ -404,6 +428,10 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 
 > ### {% icon comment %} How the centWave algorithm works
 >
+> Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides (from X to X) some material to help
+> you understand how the centWave algorithm works:
+> **TO DO** Add the link to slides and update 'from X to X'
+>
 > Remember that these steps are performed for each of your data files independently.
 >  - Firstly, the algorithm detects series of scans with close values of m/z. They are called 'region of interest' (ROI).
 > The m/z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
@@ -414,6 +442,7 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 > At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
 > of your sample; if an existing peak is not considered a peak at this step, then it can not be considered in the next steps of
 > pre-processing.
+>
 {: .comment}
 
 Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSet)** {% icon tool %}
@@ -422,7 +451,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 > ### {% icon hands_on %} Hands-on: xcms findChromPeaks (xcmsSet)
 >
 > **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
->   - *"RData file"*: `sacurine.raw.RData` (collection)
+>   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >     - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
 >     - *"Min,Max peak width in seconds"*: `5,20`
@@ -432,17 +461,18 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 >
 > You can leave the other parameters with their default values.
 >
->    > ### {% icon comment %} Comment
->    >
->    > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
+> > ### {% icon comment %} Comment
+> >
+> > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
 rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or M/z
 ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
->    {: .comment}
->
-> > ### {% icon comment %} Comment to W4M users
-> >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
 > {: .comment}
+>
+> > ### {% icon tip %} Comment to W4M users
+> >
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the dataset collections number 31 and 32. 
+> {: .tip}
 >
 {: .hands_on}
 
@@ -451,12 +481,12 @@ is already a nice result, what you may want now is to get all this files togethe
 To do so, XCMS provides a function that is called *groupChromPeaks* (or group). But before proceeding to this grouping step, first you
 need to group your individual RData files into a single one.
 
-
 ## Merge the different samples in one dataset
 
 A dedicated tool exists to merge the different `RData` files into a single one: **xcms findChromPeaks Merger** {% icon tool %}. Although you can simply take as
 input your dataset collection alone, the tool also provides de possibility to take into account a sampleMetadata file. Indeed,
-depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to the grouping step **xcms groupChromPeaks (group)** {% icon tool %}.
+depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to 
+the grouping step **xcms groupChromPeaks (group)** {% icon tool %}.
 
 This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
 extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that
@@ -464,32 +494,39 @@ these blank samples have different characteristics compared to your biological s
 your grouping step. You will see what this is all about in the 'grouping' section of this tutorial, but in the workflow order, it is
 at this step that you need to provide the needed information if you want distinction in your grouping step.
 
-**In the case of our tutorial data**, we do not want to separate the samples according to groups, so we do not provide the sampleMetadata when executing
-the Merger tool.
+In the case of our tutorial data, we have three sample types: the original biological samples ('samples'), quality-control pooled samples ('pools')
+corresponding to a mix of all biological samples, and blank samples ('blanks') constituted of injection solvent.
+We will consider these three classes for the grouping step. Thus, we need to provide the sampleMetadata file during the merging step, 
+with the second column defining theses classes. 
 
 
 > ### {% icon hands_on %} Hands-on: xcms findChromPeaks Merger
 >
 > **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
->   - *"RData file"*: `sacurine.raw.xset.RData` (collection)
->   - *"Sample metadata file"*: `Nothing selected`
+>   - *"RData file"*: `mzML.raw.xset.RData` (collection)
+>   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 >
 >     {% include snippets/select_collection.md %}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the dataset number 57. 
+> {: .tip}
 >
 {: .hands_on}
 
 The tool generates a single `RData` file containing information from all the samples in your dataset collection input.
 
-## Second XCMS step: *determining shared ions across samples*
+# Second XCMS step: *determining shared ions across samples*
 
 The first peak picking step gave us lists of ions for each sample. However, what we want now is a single matrix of ions intensities for all samples.
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called
 'grouping'.
+
+In the [set of slides](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/xxxxxx) from slide X to slide X,
+you will find additional material to help you understand the grouping algorithm.
+**TO DO** Add the slide link and update the X to X values. 
 
 The group function aligns ions extracted with close retention time and close m/z values in the different samples. In order to define this
 similarity, we have to define on one hand a m/z windows and on the other hand a retention time window. A binning is then performed in the
@@ -508,12 +545,30 @@ than a given number of samples. Either a percentage of the total number of sampl
 >   - *"RData file"*: `xset.merged.RData`
 >   - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >     - *"Bandwidth"*: `5.0`
+>     - *"Minimum fraction of samples"*: `0.9`
 >     - *"Width of overlapping m/z slices"*: `0.01`
+>   - *"Get the Peak List"*: `Yes`
+>     - *"Replace the remain NA by 0 in the dataMatrix"*: `No`
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon comment %} Minimum fraction of samples
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
+> > This parameter sets the minimum proportion of samples in a class where a peak should have been found to keep the corresponding ion in the peaktable. 
+> > The idea is to look inside each class (*i.e.* each group of samples defined in the second column of the sampleMetadata file) and to keep
+> > an ion if there is at least one class where the ion is found in at least the specified proportion of samples. 
+> > 
+> > In this tutorial, we considered three classes: one for samples, one for pools and one for blanks. Since pools are a mix of all biological samples,
+> > we may want to consider an ion only if it is find in every pools. Thus, we may consider setting the 'Minimum fraction of samples' parameter to 1. 
+> > Considering that it sometimes happens that one sample can be a little out of the box for various reasons (pools do not make exception), 
+> > we may consider to lower a little this threshold, for example using a proportion of 0.9. 
+> > 
+> > Please note that in our example, since the dataset contains only 3 pools, this would make no difference to 1.0 concerning the 'pools' class. 
 > {: .comment}
+>
+> > ### {% icon tip %} Comment to W4M users
+> >
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 58 to 61. 
+> {: .tip}
 >
 {: .hands_on}
 
@@ -525,9 +580,9 @@ In order to check the result of the grouping function, a pdf file is created. It
 represents the peak density across samples, plotting the corresponding Gaussian model which width is defined by the bandwidth parameter. Each red
 dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line width is associated with the bandwidth parameter.
 
-Hear is an example of two m/z slides obtained from the hands-on:
+Here is an example of two m/z slides obtained from the hands-on:
 
-![plotChromPeakDensity.pdf](../../images/group_9samp.png)
+![plotChromPeakDensity.pdf](../../images/lcmspreproc_group12samp.png)
 
 
 > ### {% icon question %} Questions
@@ -538,23 +593,92 @@ Hear is an example of two m/z slides obtained from the hands-on:
 > > ### {% icon solution %} Solution
 > >
 > > 1. There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
-the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.5) to consider a peak group.
+the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.9) to consider a peak group,
+> > in any specified class.
 > > 2. If the bandwidth value had been set to a smaller value, the density peak width would have been smaller. With a small enough bandwidth value,
 there could have been two density peaks instead of one under the current first density peak. Thus, the sample in line 5 would have been out of the
-previous peak group, thus not assigned to any peak group due to the 0.5 minimum fraction limit.
+previous peak group, thus not assigned to any peak group due to the 0.9 minimum fraction limit.
 > >
 > {: .solution}
 >
 {: .question}
 
+When performing a grouping step, you construct a peak table. Even if this step may not be the final extraction step, you can take this opportunity 
+to check how your peak table looks like at this point of the XCMS extraction. For this, you need to set the 'Get the Peak List' option to `Yes`
+as done in this tutorial hands-on. This option generates two additional tables:
+- a data matrix (xset.merged.group.dataMatrix.tsv) with intensities for each ion and each sample;
+- a variable metadata file (xset.merged.group.variableMetadata.tsv) with information concerning the ions. 
 
-## Optional XCMS step: *retention time correction*
+The variable metadata file contains various information that can be of interest:
+- information about the m/z ratio of each ion (`mz`, `mzmin`, `mzmax` columns);
+- information about the retention time of each ion (`rt`, `rtmin`, `rtmax` columns);
+- the total number of peaks that were found for each ion (`npeaks` column);
+- the number of samples in which each ion has been found, for each class (one column per class).
+
+The data matrix contains the intensities for each ion and each sample. When no peak was found in a sample for a specific ion, value is given as NA
+(you can choose to get a '0' value instead, using the 'Replace the remain NA by 0 in the dataMatrix' option). You can get a summary of NA proportions
+using the **Intensity Check** {% icon tool %} module. 
+
+> ### {% icon tip %} Optional: Getting an overview of the proportion of NA in your data
+>
+> When you choose to export the peak list when using the **xcms groupChromPeaks (group)** {% icon tool %} module, you can have a first level of
+> information regarding the proportion of NA by looking at the columns of classes you specified (or the `.` column when no class where given) in
+> the variable metadata file ('variableMetadata'). 
+> However, since the number of ions can be of hundreds or thousands, it can be difficult to evaluate the overall proportion in the dataset.
+> Thus, one way to go is to use the variableMetadata to check specific ions (ones you may have chosen a priori and/or ones you spotted due to
+> outstanding behaviour), and to use the **Intensity Check** {% icon tool %} module to get an overview of the whole dataset. 
+>
+> > ### {% icon hands_on %} Hands-on: Intensity Check
+> >
+> > **Intensity Check** {% icon tool %} with the following parameters:
+> >   - *"Data matrix file"*: `xset.merged.group.dataMatrix.tsv`
+> >   - *"Sample metadata file"*: `sampleMetadata.tsv`
+> >   - *"Variable metadata file"*: `xset.merged.group.variableMetadata.tsv`
+> >   - *"Computation method"*: `For each class of samples`
+> >     - *"Class column"*: `c2: class`
+> >     - *"Statistics"*: tick `Missing values`
+> >     - *"Calculate the mean fold change"*: tick `No`
+> >
+> > > ### {% icon tip %} Comment to W4M users
+> > >
+> > > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 62 and 63. 
+> > {: .tip}
+> >
+> {: .hands_on}
+>
+> In the pdf file you will get as output, you can find a plot displaying proportions of NA for each class you specified. 
+> With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 7088 ions
+> that have not been found, in any blank. 
+>
+> ![IC_Graphs.pdf](../../images/lcmspreproc_ICgp1.png)
+>
+> > ### {% icon question %} Question
+> >
+> > How many ions in the table have been found in all the pools?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > Knowing that there are 3 pools in the QC class, we can determine there are 4738 ions that have been found in all pools.
+> > >
+> > {: .solution}
+> >
+> {: .question}
+>
+{: .tip}
+
+
+# Optional XCMS step: *retention time correction*
 
 Sometimes with LC-MS techniques, a deviation in retention time occurs from a sample to another. In particular, this is likely to be observed when you
 inject large sequences of samples.
 
 This optional step aims to correct retention time drift for each peak among samples. The correction is based on what is called *well behaved peaks*,
 that are peaks found in all samples or at least in most of the samples.
+
+You can find in the [set of slides](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/xxxxxx) from slide X to slide X
+additional material to help you understand the retention time correction algorithm.
+**TO DO** Add the slide link and update the X to X values. 
 
 Sometimes it is difficult to find enough peaks present in all samples. The user can define a percentage of the total number of samples in which
 a peak should be found to be considered a well behaved peak. This parameter is called *minimum required fraction of samples*.
@@ -582,10 +706,11 @@ If that is the case and you still set a very high value for the minimum required
 time correction.
 >    {: .comment}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 64 and 65. 
+> {: .tip}
 >
 {: .hands_on}
 
@@ -640,9 +765,9 @@ lower a little the bandwidth parameter.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > When performing this second grouping (or at the first one if you do not plan to perform retention time correction),
-you can take this opportunity to check how your peak table looks like at this point of the XCMS extraction. For this, you can
-set the 'Get the Peak List' option to `Yes`.
+>    > When performing this second grouping, similarly to the first grouping you can take this opportunity to check how your peak table 
+looks like at this point of the XCMS extraction, setting the 'Get the Peak List' option to `Yes`. As previously explained, you can
+look at your variableMetadata file as well as perform an NA diagnostic using the **Intensity Check** {% icon tool %} module. 
 >    {: .comment}
 >
 > > ### {% icon comment %} Comment to W4M users
@@ -689,7 +814,7 @@ about the number of peaks detected for each ion. The dataMatrix files contains t
 {: .comment}
 
 
-## Final XCMS step: *integrating areas of missing peaks*
+# Final XCMS step: *integrating areas of missing peaks*
 
 The idea of the XCMS step is to integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no
 chromatographic peak for this ion was identified.
@@ -739,7 +864,7 @@ Nonetheless, before proceeding with the next step in the workflow (processing an
 with **CAMERA.annotate** {% icon tool %}. This tool uses the CAMERA R package to perform a first annotation of your data based on XCMS outputs.
 
 
-## Annotation with CAMERA [Optional]
+# Annotation with CAMERA [Optional]
 
 This last step provides annotation of isotopes, adducts and neutral losses. It gives also some basic univariate statistics in case you
 considered several groups for your XCMS extraction.
