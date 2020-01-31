@@ -175,7 +175,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > index	MIR1302-10	FAM138A	OR4F5	RP11-34P13.7	RP11-34P13.8 ...
+>    > index	ENSG00000243485	ENSG00000237613	ENSG00000186092	ENSG00000238009 ...
 >    > AAACATACAACCAC-1	0.0	0.0	0.0	0.0
 >    > AAACATTGAGCTAC-1	0.0	0.0	0.0	0.0
 >    > AAACATTGATCAGC-1	0.0	0.0	0.0	0.0
