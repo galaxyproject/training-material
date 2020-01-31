@@ -229,12 +229,12 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > index	gene_ids
->    > MIR1302-10	ENSG00000243485
->    > FAM138A	ENSG00000237613
->    > OR4F5	ENSG00000186092
->    > RP11-34P13.7	ENSG00000238009
->    > RP11-34P13.8	ENSG00000239945
+>    > index	gene_symbols
+>    > ENSG00000243485	MIR1302-10
+>    > ENSG00000237613	FAM138A
+>    > ENSG00000186092	OR4F5
+>    > ENSG00000238009	RP11-34P13.7
+>    > ENSG00000239945	RP11-34P13.8
 >    > ```
 >    >
 >    > What is stored in the generated file?
