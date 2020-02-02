@@ -71,6 +71,13 @@ used worldwide by a huge community of specialists in metabolomics using mass spe
 
 This software is based on different algorithms that have been published, and is provided and maintained using R software.
 
+Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides some material to help
+you understand how XCMS works:
+[Slides](../../tutorials/lcms-preprocessing/slides.html)
+This document is refered to as "Check slides from X to X" in the present training material. 
+As en example, [check slides 2 and 3](../../tutorials/lcms-preprocessing/slides.html)
+for complementary material about XCMS R package. 
+
 
 > ### Agenda
 >
@@ -315,7 +322,7 @@ second column matters.
 > Blanc05 | blk | blank | 29 | ne1 | NA | NA | NA | NA | NA
 >
 > In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift during later quality processing
-(see the [Mass spectrometry: LC-MS analysis](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms/tutorial.html)
+(see the [Mass spectrometry: LC-MS analysis](../../tutorials/lcms/tutorial.html)
 Galaxy training material for more information). 
 > Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our *sampleMetadata* was ready to
 be uploaded into Galaxy.
@@ -428,10 +435,8 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 
 > ### {% icon comment %} How the centWave algorithm works
 >
-> Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides (from X to X) some material to help
-> you understand how the centWave algorithm works:
-> **TO DO** Add the link to slides and update 'from X to X'
->
+> [Check slides from 4 to 10](../../tutorials/lcms-preprocessing/slides.html) 
+> to help you understand how the centWave algorithm works.
 > Remember that these steps are performed for each of your data files independently.
 >  - Firstly, the algorithm detects series of scans with close values of m/z. They are called 'region of interest' (ROI).
 > The m/z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.
@@ -524,9 +529,8 @@ The first peak picking step gave us lists of ions for each sample. However, what
 To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called
 'grouping'.
 
-In the [set of slides](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/xxxxxx) from slide X to slide X,
+[Check slides from 11 to 18](../../tutorials/lcms-preprocessing/slides.html),
 you will find additional material to help you understand the grouping algorithm.
-**TO DO** Add the slide link and update the X to X values. 
 
 The group function aligns ions extracted with close retention time and close m/z values in the different samples. In order to define this
 similarity, we have to define on one hand a m/z windows and on the other hand a retention time window. A binning is then performed in the
@@ -676,9 +680,8 @@ inject large sequences of samples.
 This optional step aims to correct retention time drift for each peak among samples. The correction is based on what is called *well behaved peaks*,
 that are peaks found in all samples or at least in most of the samples.
 
-You can find in the [set of slides](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/xxxxxx) from slide X to slide X
-additional material to help you understand the retention time correction algorithm.
-**TO DO** Add the slide link and update the X to X values. 
+[Check slides from 19 to 21](../../tutorials/lcms-preprocessing/slides.html),
+you will find additional material to help you understand the retention time correction algorithm. 
 
 Sometimes it is difficult to find enough peaks present in all samples. The user can define a percentage of the total number of samples in which
 a peak should be found to be considered a well behaved peak. This parameter is called *minimum required fraction of samples*.
@@ -715,7 +718,7 @@ the datasets number 64 and 65.
 {: .hands_on}
 
 
-This tool generates a plot output that you can use to visualise how retention time was apply across the samples and along the chromatogram.
+This tool generates a plot output that you can use to visualise how retention time correction was applied across the samples and along the chromatogram.
 It also allows you to check whether the well behaved peaks were distributed homogeneously along the chromatogram.
 
 > ### {% icon tip %} Tip: Check the impact of RT correction using 'xcms plot chromatogram'
@@ -733,10 +736,11 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 > >    > As in the previous 'plot chromatogram', you can use your completed sampleMetadata file to get colours.
 > >    {: .comment}
 > >
-> > > ### {% icon comment %} Comment to W4M users
+> > > ### {% icon tip %} Comment to W4M users
 > > >
-> > > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> > {: .comment}
+> > > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 66 and 67. 
+> > {: .tip}
 > >
 > {: .hands_on}
 >
@@ -750,6 +754,9 @@ Consequently, applying this step on your data requires to complete it with an ad
 Parameters for this second group step are expected to be similar to the first group step. Nonetheless,
 since retention times are supposed to be less variable inside a same peak group now, in some cases it can be relevant to
 lower a little the bandwidth parameter.
+
+[Check slide 22](../../tutorials/lcms-preprocessing/slides.html)
+to get an illustration of grouping before/after retention time correction.
 
 > ### {% icon hands_on %} Hands-on: second 'xcms groupChromPeaks (group)'
 >
@@ -770,10 +777,11 @@ looks like at this point of the XCMS extraction, setting the 'Get the Peak List'
 look at your variableMetadata file as well as perform an NA diagnostic using the **Intensity Check** {% icon tool %} module. 
 >    {: .comment}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets from number 68 to number 71.
+> {: .tip}
 >
 {: .hands_on}
 
@@ -788,7 +796,7 @@ sample. What do you notice when looking at the intensity of the first ion regard
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The final grouping step led to 5815 ions.
+> > 1. The final grouping step led to 8105 ions.
 > > 2. The first ion (M58T69) has an 'NA' value for the first sample (QC1_014). This is also the case for several other ions
 and samples.
 > >
@@ -796,7 +804,7 @@ and samples.
 >
 {: .question}
 
-At this point of the XCMS extraction workflow, the peak list may contain NA when peaks where not considered peaks in only some
+At this point of the XCMS extraction workflow, the peak list may contain NA when peaks were not considered peaks in only some
 of the samples in the first 'findChromPeaks' step. This does not necessary means that no peak exists for these samples. For example,
 sometimes peaks are of very low intensity for some samples and were not kept as peaks because of that in the first 'findChromPeaks'
 step.
@@ -810,7 +818,9 @@ of NAs in your data. Indeed, this will allow you to check whether your results a
 may want to go back to some of your parameter choices in previous XCMS steps.
 > To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
 with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information
-about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
+about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample. 
+As suggested previously (after the first groupping step), you can use the **Intensity Check** {% icon tool %} module to get an overview
+of the proportion of NA in your dataset at this step.
 {: .comment}
 
 
@@ -818,18 +828,20 @@ about the number of peaks detected for each ion. The dataMatrix files contains t
 
 The idea of the XCMS step is to integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no
 chromatographic peak for this ion was identified.
-To do so, you can use the *xcms fillChromPeaks (fillPeaks)*.
+To do so, you can use the *xcms fillChromPeaks (fillPeaks)* tool 
+([check slide 23](../../tutorials/lcms-preprocessing/slides.html)). 
 
 However, before any automatic filling of missing values, you may be interested in an overview of the NA distribution in your data. 
 Indeed, depending on you extraction parameters, you may have an unexpectedly high proportion of NAs in your data. If that is the case, 
 you may consider reviewing your previous extraction parameters and re-running previous steps to obtain consistant results before 
 proceeding to the integration of missing peak areas. 
 
-To get an overview of your missing data, you can use the *Intensity check* module.
+To get an overview of your missing data, as specified previously you can use the **Intensity check** module.
+
 **TODO** Adding the hands-on for Intensity checks. 
 
 
-
+Once you are satisfied with the optimisation of previous extraction parameters, you can proceed to the integration of missing peak areas.
 
 > ### {% icon hands_on %} Hands-on: xcms fillChromPeaks (fillPeaks)
 >
@@ -847,10 +859,11 @@ To get an overview of your missing data, you can use the *Intensity check* modul
 >    > - intb : integration of peaks with baseline subtraction
 >    {: .comment}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 72 to 74.
+> {: .tip}
 >
 {: .hands_on}
 
@@ -899,10 +912,11 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
 In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).
 >    {: .comment}
 >
-> > ### {% icon comment %} Comment to W4M users
+> > ### {% icon tip %} Comment to W4M users
 > >
-> > **TODO** Giving the link to the step in published history to visualise the parameters. 
-> {: .comment}
+> > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
+the datasets number 75 and 76.
+> {: .tip}
 >
 {: .hands_on}
 
@@ -914,9 +928,8 @@ corresponding information in your variableMetadata file for later use.
 # Conclusion
 {:.no_toc}
 
-This tutorial allowed you to get a glance at what data analysis in Metabolomics could look like when dealing with LC-MS data.
-The workflow used here as an example is only one of many that you can already construct using Galaxy. For each of the four main steps described
-here, you can find a variety of combinations and tools to use, to try to reach the highest potential of Galaxy when dealing with
-LC-MS metabolomic data. Now that you know that tools exist and are available in this accessible, reproducible and transparent resource
+This tutorial allowed you to get a glance at what data pre-processing in Metabolomics could look like when dealing with LC-MS data.
+The workflow used here as an example is only one glance at what you can construct using Galaxy.
+Now that you know that tools exist and are available in this accessible, reproducible and transparent resource
 that Galaxy is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics,
 and create, run and share!
