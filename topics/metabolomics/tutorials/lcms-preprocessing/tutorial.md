@@ -18,6 +18,7 @@ key_points:
 contributors:
 - melpetera
 - jfrancoismartin
+- lecorguille
 - workflow4metabolomics
 
 ---
@@ -73,7 +74,7 @@ This software is based on different algorithms that have been published, and is 
 
 Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides some material to help
 you understand how XCMS works:
-[Slides](../../tutorials/lcms-preprocessing/slides.html)
+[link to slides](../../tutorials/lcms-preprocessing/slides.html). 
 This document is refered to as "Check slides from X to X" in the present training material. 
 As en example, [check slides 2 and 3](../../tutorials/lcms-preprocessing/slides.html)
 for complementary material about XCMS R package. 
@@ -145,7 +146,8 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > > ### {% icon tip %} Comment to W4M users
 > >
 > > If you happen to be a W4M user, please not that you can find at the following link a ready-to-start history:
-> > [GTN_LCMSpreprocessing_mzML](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessingmzml)
+> > [GTN_LCMSpreprocessing_mzML](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessingmzml).
+> > 
 > > We highly recommend to get started by importing this history.
 > > 
 > > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to 
@@ -837,9 +839,6 @@ you may consider reviewing your previous extraction parameters and re-running pr
 proceeding to the integration of missing peak areas. 
 
 To get an overview of your missing data, as specified previously you can use the **Intensity check** module.
-
-**TODO** Adding the hands-on for Intensity checks. 
-
 
 Once you are satisfied with the optimisation of previous extraction parameters, you can proceed to the integration of missing peak areas.
 
