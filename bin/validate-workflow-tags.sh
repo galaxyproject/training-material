@@ -6,14 +6,32 @@ function tester {
     python3 - <<END
 import sys 
 import json 
-with open("$1") as json_file: 
-    data = json.load(json_file) 
-    if 'tags' not in data or "$2" not in data['tags']: 
+
+with open("$1") as json_file:
+    data = json.load(json_file)
+    # Checking for 'tags' in workflow
+    if 'tags' not in data or "$2" not in data['tags']:
+        sys.stderr.write("-------------------------------------------\n")
+        sys.stderr.write(
+            "Workflow {} has no corresponding 'tags' attribute. Please add:\n".format(data['name']))
+        sys.stderr.write('"tags": [' + "\n\t" + '"' + "$2" + '"' + "\n]\n")
         sys.exit(False)
+
+    # Checking for 'annotation' in workflow
+    elif 'annotation' not in data or not data['annotation']:
+        sys.stderr.write("-------------------------------------------\n")
+        sys.stderr.write(
+            "Workflow {} has no corresponding 'annotation' attribute. Please add: \n".format(data['name']))
+        sys.stderr.write('"annotation": "<title of tutorial>"' + "\n")
+        sys.exit(False)
+
+    # Checking if there are tools used from the testtoolshed
     else:
-        #Checking if there are tools used from the testtoolshed
-        for step in data['steps'].values():
+        for stepnr, step in data['steps'].items():
             if step['tool_id'] and step['type'] == 'tool' and 'testtoolshed.g2.bx.psu.edu' in step['tool_id']:
+                sys.stderr.write("-------------------------------------------\n")
+                sys.stderr.write("Workflow {} has a tool from the testtoolshed in step {}.\n".format(
+                    data['name'], str(stepnr)))
                 sys.exit(False)
         sys.exit(True)
 END
@@ -28,10 +46,11 @@ do
         then
             for w in $tutdir/workflows/*.ga
             do
-                echo "Checking tutorial $w for tags" 
+                echo "Checking $w"
+
                 if tester $w $topic;
                 then
-                    echo "ERROR: No 'tags' attribute found with its corresponding topic or workflow includes tool(s) from testtoolshed."
+                    echo "-------------Invalid workflow--------------"
 		            exit_with=1
                 fi
             done
