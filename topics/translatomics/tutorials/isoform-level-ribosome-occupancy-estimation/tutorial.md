@@ -10,7 +10,7 @@ objectives:
 - Learning how to calculate gene expression at the isoform level
 - Aware the fine tuning mechanism that occurred in the gene regulation at the isoform level
 - You will know the complexity and precision of gene regualtion at the translational level
-time_estimation: '30 min'
+time_estimation: '30m'
 key_points:
 - You can learn about the complexity of gene expression due to various isoforms of them through this tutorial, hence the quatification of genes and their isoforms expression accurately is very necessary.
 contributors:

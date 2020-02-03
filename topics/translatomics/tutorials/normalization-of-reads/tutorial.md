@@ -9,7 +9,7 @@ questions:
 objectives:
 - Get information of read counts from the bam files
 - Learn to normalize read counts using DESeq2
-time_estimation: '1 hour'
+time_estimation: '1H'
 key_points:
 - We can obtain a read count matrix through featureCounts and DESeq2
 - The matrix could be used for differential expression analysis

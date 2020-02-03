@@ -8,7 +8,7 @@ questions:
 objectives:
 - Learn the basic knowledge of manipulating tabular data
 - Visualize the translatomics results
-time_estimation: '1 hour'
+time_estimation: '1H'
 key_points:
 - We can visualize results to make it articulate the problem more clearly.
 contributors:
