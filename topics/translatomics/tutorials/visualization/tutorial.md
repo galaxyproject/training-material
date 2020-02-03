@@ -6,9 +6,9 @@ zenodo_link: 'https://figshare.com/s/40b21b68241fab3e2758'
 questions:
 - How to visualize results during the analysis of translatomics data?
 objectives:
-- Learn the basic knowledge of manipulating tabular data 
-- Visualize the translatomics results 
-time_estimation: 0.5H
+- Learn the basic knowledge of manipulating tabular data
+- Visualize the translatomics results
+time_estimation: '1 hour'
 key_points:
 - We can visualize results to make it articulate the problem more clearly.
 contributors:
@@ -22,7 +22,7 @@ contributors:
 
 <!-- This is a comment. -->
 
-At this point, we have introduced almost all analyzing methods and aspects for Ribo-Seq data. However, some tools merely produced text files other than figures or generated figures are unstatisfactory. As a consequence, we introduce how to utilize relavant tools for visualizing results generated during the data processing, so as to more vividly reflect the conclusions obtained from Ribo-Seq data analysis. 
+At this point, we have introduced almost all analyzing methods and aspects for Ribo-Seq data. However, some tools merely produced text files other than figures or generated figures are unstatisfactory. As a consequence, we introduce how to utilize relavant tools for visualizing results generated during the data processing, so as to more vividly reflect the conclusions obtained from Ribo-Seq data analysis.
 
 > ### Agenda
 >
@@ -68,11 +68,11 @@ We firstly need to manipulate data making them to conform the requirements as th
 > ### {% icon hands_on %} Hands-on: Prepare data matrix
 >
 > 1. **ctat_concatenate** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Concatenate Dataset"*: `header.tabular` 
+>    - {% icon param-file %} *"Concatenate Dataset"*: `header.tabular`
 >    
 >    - In *"Dataset"*:
 >        - {% icon param-repeat %} *"Insert Dataset"*
->            - {% icon param-file %} *"Select"*: `Normalized_counts_file.tabular` 
+>            - {% icon param-file %} *"Select"*: `Normalized_counts_file.tabular`
 >       
 >    - Rename output file as `nomarlized count matrix`
 >    
@@ -83,7 +83,7 @@ We firstly need to manipulate data making them to conform the requirements as th
 >    - {% icon param-file %} *"Select table"*: `nomarlized count matrix` (output of **ctat_concatenate** {% icon tool %})
 >    - In *"Select table"*:
 >      - {% icon param-repeat %} *"Insert Select table"*
->        - {% icon param-file %} *"Select table"*: `DESeq2_result_file.tabular ` 
+>        - {% icon param-file %} *"Select table"*: `DESeq2_result_file.tabular `
 >    - *"Column used for joining"*: `c1`
 >
 > 3. **Filter** {% icon tool %} with the following parameters:
@@ -126,7 +126,7 @@ We firstly need to manipulate data making them to conform the requirements as th
 >
 {: .hands_on}
 
-Finally, you would get a heatmap like below. You can observe the gene expression between samples at the translational level. Moreover, you can deduce and inquiry about the function of these genes combined with your experiment conditions. 
+Finally, you would get a heatmap like below. You can observe the gene expression between samples at the translational level. Moreover, you can deduce and inquiry about the function of these genes combined with your experiment conditions.
 
 ![Heatmap of Top 20 DEGs](../../images/visualization/heatmap-Top20-DEGs.png "Heatmap of Top 20 DEGs")
 
@@ -134,4 +134,4 @@ Finally, you would get a heatmap like below. You can observe the gene expression
 
 {:.no_toc}
 
-Here, we introduced how to manipulate results from DESeq2 to make it conform the requirements for the downstream analysis. We also present one method to visualize this result, thus users can get their visualized results in the light of this tutorial. 
+Here, we introduced how to manipulate results from DESeq2 to make it conform the requirements for the downstream analysis. We also present one method to visualize this result, thus users can get their visualized results in the light of this tutorial.
