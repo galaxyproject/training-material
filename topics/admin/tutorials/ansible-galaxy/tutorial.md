@@ -398,7 +398,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_20.01`                           | The git reference to check out, which in this case is the branch for Galaxy Release 19.09
+>    `galaxy_commit_id`           | `release_20.01`                           | The git reference to check out, which in this case is the branch for Galaxy Release 20.01
 >    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`           | `{{ galaxy_tool_dependency_dir }}/_conda` | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
