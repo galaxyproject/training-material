@@ -185,10 +185,12 @@ With the necessary background in place, you are ready to install Galaxy with Ans
 
 To proceed from here it is expected that:
 
-1. You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your local machine
-   > ### {% icon comment %} Comment: Running Ansible on your remote machine
-   > It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to pass `ansible_connection=local`. Be **certain** that the playbook that you're building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.
+1. You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+
+   > ### {% icon comment %} Comment: Running Ansible on remote machine
+   > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will *not* do that in this training.
    {: .comment}
+
 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
@@ -208,22 +210,21 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 >    ```yaml
 >    - src: galaxyproject.galaxy
->      version: 0.9.1
+>      version: 0.9.2
 >    - src: galaxyproject.nginx
->      version: 0.6.3
+>      version: 0.6.4
 >    - src: galaxyproject.postgresql
->      version: 1.0.1
+>      version: 1.0.2
 >    - src: natefoo.postgresql_objects
 >      version: 1.1
 >    - src: geerlingguy.pip
->      version: 1.0.0
+>      version: 1.3.0
 >    - src: uchida.miniconda
 >      version: 0.3.0
->    - src: https://github.com/usegalaxy-eu/ansible-galaxy-systemd
->      name: usegalaxy-eu.galaxy-systemd
->      version: py3
->    - src: https://github.com/usegalaxy-eu/ansible-certbot
->      name: usegalaxy-eu.certbot
+>    - src: usegalaxy_eu.galaxy_systemd
+>      version: 0.1.1
+>    - src: usegalaxy_eu.certbot
+>      version: 0.1.2
 >    ```
 >
 > 3. In the same directory, run:
@@ -397,7 +398,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_19.09`                           | The git reference to check out, which in this case is the branch for Galaxy Release 19.09
+>    `galaxy_commit_id`           | `release_20.01`                           | The git reference to check out, which in this case is the branch for Galaxy Release 19.09
 >    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`           | `{{ galaxy_tool_dependency_dir }}/_conda` | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
@@ -448,7 +449,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
 >    > > galaxy_user: {name: galaxy, shell: /bin/bash}
->    > > galaxy_commit_id: release_19.09
+>    > > galaxy_commit_id: release_20.01
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
 >    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
@@ -545,7 +546,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
 >    > > galaxy_user: {name: galaxy, shell: /bin/bash, home: "{{ galaxy_root }}"}
->    > > galaxy_commit_id: release_19.09
+>    > > galaxy_commit_id: release_20.01
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
 >    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
@@ -656,12 +657,11 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
 >
-> 1. SSH into your server
-> 2. Switch user to Galaxy account (`sudo -iu galaxy`)
-> 3. Change directory into `/srv/galaxy/server`
-> 4. Activate virtualenv (`. ../venv/bin/activate`)
-> 5. `uwsgi --yaml ../config/galaxy.yml`
-> 6. Access at port `<ip address>:8080` once the server has started
+> 1. Switch user to Galaxy account (`sudo -iu galaxy`)
+> 2. Change directory into `/srv/galaxy/server`
+> 3. Activate virtualenv (`. ../venv/bin/activate`)
+> 4. `uwsgi --yaml ../config/galaxy.yml`
+> 5. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
 ## SystemD
@@ -670,7 +670,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 
 > ### {% icon hands_on %} Hands-on: SystemD
 >
-> 1. Add the role `usegalaxy-eu.galaxy-systemd` to your playbook. This should run **after** all of the roles we have already added so far.
+> 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
 >    Add the following to the bottom of your `group_vars/galaxyservers.yml` file:
 >
@@ -679,8 +679,11 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    # SystemD
 >    galaxy_systemd_mode: mule
 >    galaxy_zergpool_listen_addr: 127.0.0.1:8080
+>    galaxy_restart_handler_name: "Restart Galaxy"
 >    ```
 >    {% endraw %}
+>
+>    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
 > 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use SystemD to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `galaxy.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [SystemD Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
 >
@@ -693,7 +696,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >             name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
 >    +  handlers:
 >    +    - name: Restart Galaxy
->    +      systemctl:
+>    +      systemd:
 >    +        name: galaxy
 >    +        state: restarted
 >       roles:
@@ -703,7 +706,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 4. Run the playbook
 >
-> 5. Log in and check the status with `systemctl status galaxy`
+> 5. Log in and check the status with `sudo systemctl status galaxy`
 >
 >    > ### {% icon question %} Question
 >    >
@@ -771,7 +774,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 
 > ### {% icon hands_on %} Hands-on: NGINX
 >
-> 1. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
+> 1. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
+>
+> 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
 >    ```diff
 >    --- group_vars/galaxyservers.yml.orig
@@ -786,8 +791,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         processes: 1
 >         threads: 4
 >    ```
->
-> 2. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
 >
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
@@ -821,7 +824,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    nginx_conf_http:
 >      client_max_body_size: 1g
 >    nginx_remove_default_vhost: true
->    nginx_ssl_role: usegalaxy-eu.certbot
+>    nginx_ssl_role: usegalaxy_eu.certbot
 >    nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >    ```
@@ -899,7 +902,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > nginx_conf_http:
 >    >   client_max_body_size: 1g
 >    > nginx_remove_default_vhost: true
->    > # nginx_ssl_role: usegalaxy-eu.certbot
+>    > # nginx_ssl_role: usegalaxy_eu.certbot
 >    > # nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    > # nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >    > ```
@@ -1052,7 +1055,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
 >  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
->  `usegalaxy-eu.galaxy-systemd`| This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
+>  `usegalaxy_eu.galaxy_systemd`| This requires Galaxy to be configured + functional, or it will fail to start the handler. Additionally there are a couple of Galaxy variables used in the group vars.
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
