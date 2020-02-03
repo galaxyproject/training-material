@@ -1,5 +1,6 @@
 ---
 layout: tutorial_hands_on
+enable: false 
 
 title: 'Mass spectrometry: LC-MS preprocessing - advanced'
 zenodo_link: 'https://zenodo.org/record/3244991'
