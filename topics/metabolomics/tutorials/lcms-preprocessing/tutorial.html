@@ -1,0 +1,2094 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Mass spectrometry: LC-MS preprocessing - advanced</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material to analyse Mass spectrometry data in Ga..." />
+        <meta property="og:title" content="Galaxy Training: Mass spectrometry: LC-MS preprocessing - advanced" />
+        <meta property="og:description" content="Training material to analyse Mass spectrometry data in Ga..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/metabolomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Metabolomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fmetabolomics%2Ftutorials%2Flcms-preprocessing%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Mass spectrometry: LC-MS preprocessing - advanced",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metabolomics",
+    "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+    "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/"
+  },
+  "courseCode": "metabolomics / lcms-preprocessing / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Mass spectrometry: LC-MS preprocessing - advanced' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html",
+  "timeRequired": "PT3H",
+  "description": "The questions this  addresses are:\n - What are the main steps of untargeted LC-MS data preprocessing for metabolomic analysis?\n - How to conduct metabolomic data preprocessing using Galaxy?\n\n\\nThe objectives are:\n - To comprehend the diversity of steps necessary to perform untargetted LC-MS metabolomic preprocessing.\n - To get familiar with the way to use XCMS-based Galaxy modules dedicated to LC-MS data preprocessing.\n - To evaluate the potential of a workflow approach when dealing with LC-MS preprocessing.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Mélanie Petera"
+    },
+    {
+      "@type": "Person",
+      "name": "Jean-François Martin"
+    },
+    {
+      "@type": "Person",
+      "name": "Gildas Le Corguillé"
+    },
+    {
+      "@type": "Person",
+      "name": "Workflow4Metabolomics core team"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Mélanie Petera"
+    },
+    {
+      "@type": "Person",
+      "name": "Jean-François Martin"
+    },
+    {
+      "@type": "Person",
+      "name": "Gildas Le Corguillé"
+    },
+    {
+      "@type": "Person",
+      "name": "Workflow4Metabolomics core team"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metabolomics",
+      "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
+      "url": "https://training.galaxyproject.org//training-material/topics/metabolomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3172",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3172",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3172"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Mass spectrometry: LC-MS preprocessing - advanced</h1>
+        
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Under Development!</h4>
+            <p>This tutorial is not in its final state. The content may change a lot in the next months.
+            Because of this status, it is also not listed in the topic pages.</p>
+        </div>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#melpetera" class="contributor-badge"><img src="https://avatars.githubusercontent.com/melpetera" alt="Mélanie Petera">Mélanie Petera</a>, <a href="/training-material/hall-of-fame#jfrancoismartin" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jfrancoismartin" alt="Jean-François Martin">Jean-François Martin</a>, <a href="/training-material/hall-of-fame#lecorguille" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lecorguille" alt="Gildas Le Corguillé">Gildas Le Corguillé</a>, <a href="/training-material/hall-of-fame#workflow4metabolomics" class="contributor-badge"><img src="https://avatars.githubusercontent.com/workflow4metabolomics" alt="Workflow4Metabolomics core team">Workflow4Metabolomics core team</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What are the main steps of untargeted LC-MS data preprocessing for metabolomic analysis?</p>
+</li>
+            
+            <li><p>How to conduct metabolomic data preprocessing using Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>To comprehend the diversity of steps necessary to perform untargetted LC-MS metabolomic preprocessing.</p>
+</li>
+            
+            <li><p>To get familiar with the way to use XCMS-based Galaxy modules dedicated to LC-MS data preprocessing.</p>
+</li>
+            
+            <li><p>To evaluate the potential of a workflow approach when dealing with LC-MS preprocessing.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 3 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/metabolomics/slides/introduction.html" title="Introduction slides">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+</li>
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/metabolomics/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 3, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Metabolomics is a <em>-omic</em> science known for being one of the most closely related to phenotypes.
+It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants.
+It focuses on studying the very small molecules which are called <em>metabolites</em>, to better understand matters linked to the metabolism.</p>
+
+<p>One of the three main technologies used to perform metabolomic analysis is <strong>Liquid-Chromatography Mass Spectrometry</strong> (LC-MS). Data analysis
+for this technology requires a large variety of steps, ranging from extracting information from the raw data, to statistical analysis and annotation.
+To be able to perform a complete LC-MS analysis in a single environment, the <a href="http://workflow4metabolomics.org/">Wokflow4Metabolomics</a>
+team provides <span class="notranslate">Galaxy</span> tools dedicated to metabolomics. This tutorial explains the main steps involved in untargeted LC-MS data processing
+for metabolomic analysis, and shows how to conduct metabolomic data analysis from preprocessing to annotation using <span class="notranslate">Galaxy</span>.</p>
+
+<p>To illustrate this approach, we will use data from <a class="citation" href="#Thvenot2015">Thévenot <i>et al.</i> 2015</a>. The objectives of this paper was to analyze
+the influence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
+from 183 employees from the French Alte<span class="notranslate">rna</span>tive Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap
+(negative ionization mode).</p>
+
+<p>Since the original dataset takes a few hours to be processed, we chose to take a limited subset of individuals for this tutorial.
+This will allow you to perform an example of metabolomic preprocessing <span class="notranslate">workflow</span> in a limited time, even though
+the results obtained may not be reliable enough for biological interpretation due to the small sample size.
+Nevertheless, the chosen diversity of sample will allow you to explore the basics of a metabolomic <span class="notranslate">workflow</span>.</p>
+
+<p>We chose a subset of 12 samples, composed of 6 biological samples, 3 quality-control pooled samples (‘QC pools’ - mix of all
+biological samples) and 3 blank samples (‘blanks’ - injection solvent).</p>
+
+<p>To analyze these data, we will then follow a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span>
+developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomics group</a> (<a class="citation" href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a>, <a class="citation" href="#Guitton2017">Guitton <i>et al.</i> 2017</a>).</p>
+
+<p><a href="../../images/lcmspreproc_wf.png"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow" /></a></p>
+
+<blockquote class="comment">
+  <h3 id="comment-workflow4metabolomics-public-history"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Workflow4Metabolomics public history</h3>
+
+  <p>This training material can be followed by running it on any <span class="notranslate">Galaxy</span> instance holding the <span class="notranslate">Galaxy</span> modules needed.
+Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
+you can find the entire history in the ‘published histories’ section:
+<a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a></p>
+
+</blockquote>
+
+<p><strong>Preprocessing with XCMS</strong></p>
+
+<p><strong>XCMS</strong> (<a class="citation" href="#Smith2006">Smith <i>et al.</i> 2006</a>) is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
+high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
+used worldwide by a huge community of specialists in metabolomics using mass spectrometry methods.</p>
+
+<p>This software is based on different algorithms that have been published, and is provided and maintained using R software.</p>
+
+<p>Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides some material to help
+you understand how XCMS works:
+<a href="../../tutorials/lcms-preprocessing/slides.html">link to slides</a>.
+This document is refered to as “Check slides from X to X” in the present training material.
+As en example, <a href="../../tutorials/lcms-preprocessing/slides.html">check slides 2 and 3</a>
+for complementary material about XCMS R package.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-preparation-for-xcms" id="markdown-toc-data-preparation-for-xcms">Data preparation for XCMS</a>    <ol>
+      <li><a href="#importing-the-lcms-data-into-galaxy" id="markdown-toc-importing-the-lcms-data-into-galaxy">Importing the LC/MS data into <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#first-galaxy-module-msnbase-readmsdata" id="markdown-toc-first-galaxy-module-msnbase-readmsdata">First <span class="notranslate">Galaxy</span> module: <em>MSnbase readMSData</em></a></li>
+      <li><a href="#importing-a-sample-metadata-file" id="markdown-toc-importing-a-sample-metadata-file">Importing a sample metadata file</a></li>
+      <li><a href="#getting-an-overview-of-your-samples-chromatograms" id="markdown-toc-getting-an-overview-of-your-samples-chromatograms">Getting an overview of your samples’ chromatograms</a></li>
+    </ol>
+  </li>
+  <li><a href="#first-xcms-step-peak-picking" id="markdown-toc-first-xcms-step-peak-picking">First XCMS step: <em>peak picking</em></a></li>
+  <li><a href="#merge-the-different-samples-in-one-dataset" id="markdown-toc-merge-the-different-samples-in-one-dataset">Merge the different samples in one dataset</a></li>
+  <li><a href="#second-xcms-step-determining-shared-ions-across-samples" id="markdown-toc-second-xcms-step-determining-shared-ions-across-samples">Second XCMS step: <em>determining shared ions across samples</em></a></li>
+  <li><a href="#optional-xcms-step-retention-time-correction" id="markdown-toc-optional-xcms-step-retention-time-correction">Optional XCMS step: <em>retention time correction</em></a></li>
+  <li><a href="#final-xcms-step-integrating-areas-of-missing-peaks" id="markdown-toc-final-xcms-step-integrating-areas-of-missing-peaks">Final XCMS step: <em>integrating areas of missing peaks</em></a></li>
+  <li><a href="#annotation-with-camera-optional" id="markdown-toc-annotation-with-camera-optional">Annotation with CAMERA [Optional]</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-preparation-for-xcms">Data preparation for XCMS</h1>
+
+<p>The <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> R package is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
+adducts and fragments using the R package CAMERA (<a class="citation" href="#CAMERA">Carsten Kuhl 2017</a>). This set of functions gives modularity, and thus is particularly well
+adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
+
+<p>The first <span class="notranslate">Galaxy</span> module, <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, is meant to read files with open format as <code class="highlighter-rouge">mzXML</code>, <code class="highlighter-rouge">mzMl</code>, <code class="highlighter-rouge">mzData</code> and <code class="highlighter-rouge">netCDF</code>,
+which are independent of the constructors’ formats.
+First of all, you need to upload your data (that should be in one of the cited open formats) into <span class="notranslate">Galaxy</span>.</p>
+
+<h2 id="importing-the-lcms-data-into-galaxy">Importing the LC/MS data into <span class="notranslate">Galaxy</span></h2>
+
+<p>In metabolomics studies, the number of samples can vary a lot (from a handful to several hundreds). Thus, extracting your
+data from the raw files can be very fast, or take quite a long time. To optimise the computation time as much as possible,
+the W4M core team chose to develop tools that can run single raw files for the first steps of
+pre-processing in parallel, since the initial actions in the extraction process treat files independently.</p>
+
+<p>Since the first steps can be run on each file independently, the use of <strong>Dataset collections</strong> in <span class="notranslate">Galaxy</span> is recommended, to avoid
+having to launch jobs manually for each sample. You can start using the dataset collection option from the very beginning of your analysis, when uploading your data into <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload-the-mzxml-with-get-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload the mzXML with <strong>Get data</strong></h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the 12 <code class="highlighter-rouge">mzXML</code> files into a collection named <code class="highlighter-rouge">sacurine</code></p>
+      <ul>
+        <li>Option 1: from a shared data library (ask your instructor)</li>
+        <li>
+          <p>Option 2: from Zenodo using the URLs given below</p>
+
+          <p><a href="https://doi.org/10.5281/zenodo.3244991"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg" alt="DOI" /></a></p>
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
+https://zenodo.org/record/3244991/files/HU_neg_090.mzML
+https://zenodo.org/record/3244991/files/HU_neg_123.mzML
+https://zenodo.org/record/3244991/files/HU_neg_157.mzML
+https://zenodo.org/record/3244991/files/HU_neg_173.mzML
+https://zenodo.org/record/3244991/files/HU_neg_192.mzML
+https://zenodo.org/record/3244991/files/QC1_002.mzML
+https://zenodo.org/record/3244991/files/QC1_008.mzML
+https://zenodo.org/record/3244991/files/QC1_014.mzML
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <p><strong>TODO</strong> Update with the right zenodo URLs</p>
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+    <ul>
+      <li>Copy the link location</li>
+      <li>
+        <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+      </li>
+      <li>
+        <p>Click on <strong>Collection</strong> on the top</p>
+      </li>
+      <li>Select <strong>Paste/Fetch Data</strong></li>
+      <li>
+        <p>Paste the link into the text field</p>
+      </li>
+      <li>
+        <p>Change <strong>Type</strong> from “Auto-detect” to <code class="highlighter-rouge">mzml</code></p>
+      </li>
+      <li>
+        <p>Press <strong>Start</strong></p>
+      </li>
+      <li>
+        <p>Click on <strong>Build</strong> when available</p>
+      </li>
+      <li>
+        <p>Enter a name for the collection</p>
+
+        <ul>
+          <li>mzML</li>
+        </ul>
+      </li>
+      <li>Click on <strong>Create list</strong> (and wait a bit)</li>
+    </ul>
+
+  </blockquote>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+    <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+    <ul>
+      <li>
+        <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+      </li>
+      <li>
+        <p>Find the correct folder (ask your instructor)</p>
+      </li>
+      <li>Select the desired files</li>
+      <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>
+      <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+      <li>Click on <strong>Import</strong></li>
+    </ul>
+  </blockquote>
+
+  <ol>
+    <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="highlighter-rouge">mzML</code>
+      <ul>
+        <li>If you forgot to select the collection option during import, you can create the collection now:</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-create-a-dataset-collection"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create a dataset collection</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-selector</span> icon (<strong>Operation on multiple datasets</strong>) on the top of the history</li>
+          <li>Select all the datasets for the collection</li>
+          <li>Expand <strong>For all selected</strong> menu</li>
+          <li>Select <strong>Build dataset list</strong></li>
+          <li>Enter a name for the collection</li>
+          <li>Tick <strong>Hide original elements?</strong></li>
+          <li>Click on <strong>Create list</strong> (and wait a bit)</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>If you happen to be a W4M user, please not that you can find at the following link a ready-to-start history:
+<a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessingmzml">GTN_LCMSpreprocessing_mzML</a>.</p>
+
+    <p>We highly recommend to get started by importing this history.</p>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the dataset collection number 13.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>You should have in your history a green Dataset collection (<code class="highlighter-rouge">mzML</code>) with 12 datasets in mzml format.</p>
+
+<p>Their size can be checked by clicking on the information icon <i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> on the individual datasets</p>
+
+<h2 id="first-galaxy-module-msnbase-readmsdata">First <span class="notranslate">Galaxy</span> module: <em>MSnbase readMSData</em></h2>
+
+<p>This first step is only meant to read your <code class="highlighter-rouge">mzXML</code> file and generate an object usable by <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="highlighter-rouge">RData</code> files for the first XCMS step.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-msnbase-readmsdata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MSnbase readMSData</h3>
+
+  <p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="highlighter-rouge">mzML</code> dataset collection</li>
+  </ul>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-selecting-a-dataset-collection-as-input"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>
+
+    <ol>
+      <li>Click on <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in
+front of the input parameter you want to supply the collection to.</li>
+      <li>Select the collection you want to use from the list</li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the dataset collection number 14.</p>
+  </blockquote>
+
+  <blockquote class="question">
+    <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>What do you get as output?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <ol>
+        <li>A <strong>Dataset collection</strong> containing 12 datasets.</li>
+        <li>The datasets are some RData objects with the <strong>rdata.msnbase.raw</strong> datatype.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<p>Now that you have prepared your data, you can begin with the first XCMS extraction step: peakpicking. However, before beginning to
+extract meaningful information from your raw data, you may be interested in visualising your chromatograms. This can be of particular
+interest if you want to check whether you should consider discarding some range of your analytical sequence (some scans or <em>retention
+time</em> (RT) ranges).</p>
+
+<p>To do so, you can use a tool that is called <strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that will plot each sample’s chromatogram (see dedicated section
+further). However, to use this tool, you may need additional information about your samples for colouring purpose. Thus, you may need
+to upload into <span class="notranslate">Galaxy</span> a table containing metadata of your samples (a <em>sampleMetadata</em> file).</p>
+
+<h2 id="importing-a-sample-metadata-file">Importing a sample metadata file</h2>
+
+<p>What we referenced here as a <em>sampleMetadata</em> file corresponds to a table containing information about your samples (= sample metadata).</p>
+
+<p>A sample metadata file contains various information for each of your raw files:</p>
+<ul>
+  <li><strong>Classes</strong> which will be used during the preprocessing steps</li>
+  <li><strong>Number of batches</strong> which will be useful for a batch correction step, along with sample types (pool/sample) and injection order</li>
+  <li>Different <strong>experimental conditions</strong> which can be used for the statistics</li>
+  <li>Any information about samples that you want to keep, in a <em>column</em> format</li>
+</ul>
+
+<p>The content of your sample metadata file has to be filled by you, since it is not contained in your raw data.
+Note that you can either:</p>
+<ul>
+  <li>Upload an existing metadata file</li>
+  <li>Use a template to create one (because it can be painful to get the sample list without misspelling or omission)
+    <ol>
+      <li>Generate a template with the tool <strong>xcms get a sampleMetadata file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      <li>Fill it using your favorite table editor (Excel, LibreOffice)</li>
+      <li>Upload it within <span class="notranslate">Galaxy</span></li>
+    </ol>
+  </li>
+</ul>
+
+<blockquote class="tip">
+  <h3 id="tip-optional-generate-the-right-template-with-xcms-get-a-samplemetadata-file-tool"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Optional: Generate the right template with <strong>xcms get a sampleMetadata file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></h3>
+
+  <p>In the case of this tutorial, we already prepared a <em>sampleMetadata</em> file with all the necessary information. Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:</p>
+  <ol>
+    <li>You will have the exact list of the samples you used in <span class="notranslate">Galaxy</span>, with the exact identifiers (<em>i.e.</em> exact sample names)</li>
+    <li>You will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.</li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="hands_on-hands-on-xcms-get-a-samplemetadata-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms get a sampleMetadata file</h3>
+
+    <p><strong>xcms get a sampleMetadata file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <ul>
+      <li><em>“RData file”</em>: the <code class="highlighter-rouge">mzML.raw.RData</code> collection output from <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+        <blockquote>
+
+          <h3 id="tip-tip-selecting-a-dataset-collection-as-input-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>
+        </blockquote>
+      </li>
+    </ul>
+
+    <ol>
+      <li>Click on <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in
+front of the input parameter you want to supply the collection to.</li>
+      <li>Select the collection you want to use from the list</li>
+    </ol>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+
+    <blockquote class="tip">
+      <h3 id="tip-comment-to-w4m-users-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+      <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the dataset number 27.</p>
+    </blockquote>
+
+  </blockquote>
+
+  <p>An easy step for an easy sampleMetadata filling!</p>
+
+  <p>From this tool, you will obtain a <code class="highlighter-rouge">tabular</code> file (meaning a tab-separated text file) with a first column of identifiers and a
+second column called <em>class</em> which is empty for the moment (only ‘.’ for each sample). You can now download this file by clicking on the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon.</p>
+
+</blockquote>
+
+<h4 id="prepare-your-samplemetadata-file">Prepare your sampleMetadata file</h4>
+
+<p>The sampleMetadata file is a tab-separated table, in text format. This table has to be filled by the user. You can use any
+software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
+use a sp<span class="notranslate">reads</span>heet software such as Microsoft Excel or LibreOffice.</p>
+
+<blockquote class="warning">
+  <h3 id="comment-important-save-your-table-in-the-correct-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Important: Save your table in the correct format</h3>
+
+  <p>The file has to be a <code class="highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="highlighter-rouge">.xlsx</code> nor <code class="highlighter-rouge">.odt</code> are supported.
+If you use a sp<span class="notranslate">reads</span>heet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
+</blockquote>
+
+<p>Once your sampleMetadata table is ready, you can proceed to the upload. In this tutorial we already prepared the table for you ;)</p>
+
+<blockquote class="tip">
+  <h3 id="tip-optional-filling-the-samplemetadata-using-the-template-obtained-from-galaxy"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Optional: Filling the <em>sampleMetadata</em> using the template obtained from <span class="notranslate">Galaxy</span></h3>
+
+  <p>For this tutorial, we already provide the <em>sampleMetadata</em> file, so you only have upload it to <span class="notranslate">Galaxy</span>. Below we
+explain how we filled this file from the template we generated in <span class="notranslate">Galaxy</span>.</p>
+
+  <p>First, we used <strong>xcms get a sampleMetadata file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> as mentioned in the previous tip box.</p>
+
+  <p>We obtained the following table:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>sample_name</th>
+        <th>class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>QC1_014</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>QC1_008</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>QC1_002</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>HU_neg_192</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>HU_neg_173</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>HU_neg_157</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>HU_neg_123</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>HU_neg_090</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>HU_neg_048</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>Blanc16</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>Blanc10</td>
+        <td>.</td>
+      </tr>
+      <tr>
+        <td>Blanc05</td>
+        <td>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>We used a sp<span class="notranslate">reads</span>heet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
+second column matters.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>sample_name</th>
+        <th>class</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>QC1_014</td>
+        <td>QC</td>
+      </tr>
+      <tr>
+        <td>QC1_008</td>
+        <td>QC</td>
+      </tr>
+      <tr>
+        <td>QC1_002</td>
+        <td>QC</td>
+      </tr>
+      <tr>
+        <td>HU_neg_192</td>
+        <td>sample</td>
+      </tr>
+      <tr>
+        <td>HU_neg_173</td>
+        <td>sample</td>
+      </tr>
+      <tr>
+        <td>HU_neg_157</td>
+        <td>sample</td>
+      </tr>
+      <tr>
+        <td>HU_neg_123</td>
+        <td>sample</td>
+      </tr>
+      <tr>
+        <td>HU_neg_090</td>
+        <td>sample</td>
+      </tr>
+      <tr>
+        <td>HU_neg_048</td>
+        <td>sample</td>
+      </tr>
+      <tr>
+        <td>Blanc16</td>
+        <td>blk</td>
+      </tr>
+      <tr>
+        <td>Blanc10</td>
+        <td>blk</td>
+      </tr>
+      <tr>
+        <td>Blanc05</td>
+        <td>blk</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>With this column, we will be able to colour the samples depending on the sample type (QC, sample, blk).
+Next, we added columns with interesting or needed information, as following:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>sample_name</th>
+        <th>class</th>
+        <th>sampleType</th>
+        <th>injectionOrder</th>
+        <th>batch</th>
+        <th>osmolality</th>
+        <th>sampling</th>
+        <th>age</th>
+        <th>bmi</th>
+        <th>gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>QC1_014</td>
+        <td>QC</td>
+        <td>pool</td>
+        <td>185</td>
+        <td>ne1</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+      </tr>
+      <tr>
+        <td>QC1_008</td>
+        <td>QC</td>
+        <td>pool</td>
+        <td>105</td>
+        <td>ne1</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+      </tr>
+      <tr>
+        <td>QC1_002</td>
+        <td>QC</td>
+        <td>pool</td>
+        <td>27</td>
+        <td>ne1</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+      </tr>
+      <tr>
+        <td>HU_neg_192</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>165</td>
+        <td>ne1</td>
+        <td>1184</td>
+        <td>8</td>
+        <td>31</td>
+        <td>24.22</td>
+        <td>Male</td>
+      </tr>
+      <tr>
+        <td>HU_neg_173</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>148</td>
+        <td>ne1</td>
+        <td>182</td>
+        <td>7</td>
+        <td>55</td>
+        <td>20.28</td>
+        <td>Female</td>
+      </tr>
+      <tr>
+        <td>HU_neg_157</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>137</td>
+        <td>ne1</td>
+        <td>504</td>
+        <td>7</td>
+        <td>43</td>
+        <td>21.95</td>
+        <td>Female</td>
+      </tr>
+      <tr>
+        <td>HU_neg_123</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>100</td>
+        <td>ne1</td>
+        <td>808</td>
+        <td>5</td>
+        <td>49</td>
+        <td>24.39</td>
+        <td>Male</td>
+      </tr>
+      <tr>
+        <td>HU_neg_090</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>75</td>
+        <td>ne1</td>
+        <td>787</td>
+        <td>4</td>
+        <td>46</td>
+        <td>19.79</td>
+        <td>Male</td>
+      </tr>
+      <tr>
+        <td>HU_neg_048</td>
+        <td>sample</td>
+        <td>sample</td>
+        <td>39</td>
+        <td>ne1</td>
+        <td>997</td>
+        <td>3</td>
+        <td>39</td>
+        <td>19.49</td>
+        <td>Female</td>
+      </tr>
+      <tr>
+        <td>Blanc16</td>
+        <td>blk</td>
+        <td>blank</td>
+        <td>173</td>
+        <td>ne1</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+      </tr>
+      <tr>
+        <td>Blanc10</td>
+        <td>blk</td>
+        <td>blank</td>
+        <td>94</td>
+        <td>ne1</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+      </tr>
+      <tr>
+        <td>Blanc05</td>
+        <td>blk</td>
+        <td>blank</td>
+        <td>29</td>
+        <td>ne1</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+        <td>NA</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>In particular, the <code class="highlighter-rouge">batch</code>, <code class="highlighter-rouge">sampleType</code> and <code class="highlighter-rouge">injectionOrder</code> columns are mandatory to correct the data from signal drift during later quality processing
+(see the <a href="../../tutorials/lcms/tutorial.html">Mass spectrometry: LC-MS analysis</a>
+<span class="notranslate">Galaxy</span> training material for more information).
+Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our <em>sampleMetadata</em> was ready to
+be uploaded into <span class="notranslate">Galaxy</span>.</p>
+
+</blockquote>
+
+<h4 id="upload-the-samplemetada-file-with-get-data">Upload the sampleMetada file with ‘Get data’</h4>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-the-samplemetada"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload the sampleMetada</h3>
+
+  <ol>
+    <li>Import the <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> file from your computer, from Zenodo or from a shared data library
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+  <p><strong>TODO</strong> Update with the right zenodo URL</p>
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-via-links-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+    <ul>
+      <li>Copy the link location</li>
+      <li>
+        <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+      </li>
+      <li>Select <strong>Paste/Fetch Data</strong></li>
+      <li>
+        <p>Paste the link into the text field</p>
+      </li>
+      <li>
+        <p>Press <strong>Start</strong></p>
+      </li>
+      <li><strong>Close</strong> the window</li>
+    </ul>
+
+    <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+  </blockquote>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-from-a-data-library-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+    <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+    <ul>
+      <li>
+        <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+      </li>
+      <li>
+        <p>Find the correct folder (ask your instructor)</p>
+      </li>
+      <li>Select the desired files</li>
+      <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+      <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+      <li>Click on <strong>Import</strong></li>
+    </ul>
+  </blockquote>
+
+  <ol>
+    <li>Check the data type of your imported files.
+      <ul>
+        <li>The datatype should be <code class="highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select ``</li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>Here we provided the sampleMetadata file so we know that the upload led to a ‘tabular’ file. But from experience we also know that
+it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file
+not following all the requirements about the format (<em>e.g.</em> wrong separator, or lines with different numbers of columns).
+Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
+right away if you appear to get one of these obvious issues.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-3"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the dataset number 28.</p>
+  </blockquote>
+
+  <blockquote class="question">
+    <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <ol>
+      <li>How many columns should I have in my sampleMetadata file?</li>
+      <li>What kind of class can I have?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <ol>
+        <li>At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
+(<em>e.g.</em> the person in charge of the sample preparation, the temperature…). The statistical analysis will expose the relevant parameters.</li>
+        <li>Sample, QC, blank… The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
+So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don’t have any specific class
+that you want to consider in XCMS preprocessing, just fill everywhere with <code class="highlighter-rouge">sample</code> or a dot <code class="highlighter-rouge">.</code> for example.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+</blockquote>
+
+<h2 id="getting-an-overview-of-your-samples-chromatograms">Getting an overview of your samples’ chromatograms</h2>
+
+<p>You may be interested in getting an overview of what your samples’ chromatograms look like, for example to see if some of
+your samples have distinct overall characteristics, for example unexpected chromatographic peaks, or huge overall intensity.</p>
+
+<p>You can use the <em>sampleMedata</em> file we previously uploaded to add some group colours to your samples when visualising your chromatograms.
+The tool automatically takes the second column as colour groups when a file is provided.</p>
+
+<p>Note that you can also check the chromatograms at any moment during the <span class="notranslate">workflow</span>, in particular at the following steps:</p>
+<ul>
+  <li>After <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: to help you to define retention time ranges that you may want to discard from the very beginning (<em>“Specta Filters”</em> in <strong>findChromPeaks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+  <li>After <strong>adjustRtime</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: to check the result of the correction (rerun <em>adjustRtime</em> with other settings)</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-xcms-plot-chromatogram"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms plot chromatogram</h3>
+
+  <p><strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul class="tip">
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">mzML.raw.RData</code> (collection)</li>
+    <li>
+      <p><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> you uploaded previously</p>
+
+      <blockquote>
+
+        <h3 id="tip-tip-selecting-a-dataset-collection-as-input-2"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in
+front of the input parameter you want to supply the collection to.</li>
+          <li>Select the collection you want to use from the list</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ul>
+
+  <blockquote class="comment">
+    <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>If you use this tool at a later step of XCMS <span class="notranslate">workflow</span> and provided in the Merger step a sampleMetadata with a second column containing groups
+(see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a ‘plot chromatogram’ parameter.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-4"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 29 and 30.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provided groups like we do here, you obtain two plots:
+one with colours based on provided groups, one with one colour per sample.</p>
+
+<p><img src="../../images/lcmspreproc_BPC12samp.png" alt="Base Peak Intensity Chromatograms" /></p>
+
+<h1 id="first-xcms-step-peak-picking">First XCMS step: <em>peak picking</em></h1>
+
+<p>Now that your data is ready for XCMS processing, the first step is to extract peaks from each of your data files
+independently. The idea here is, for each peak, to proceed to chromatographic peak detection.</p>
+
+<p>The XCMS solution provides two different algorithms to perform chromatographic peak detection: <em>matchedFilter</em> and
+<em>centWave</em>. The matchedFilter strategy is the first one provided by the XCMS R package. It is compatible with any
+LC-MS device, but was developed at a time when high resolution mass spectrometry was not common standard yet. On the
+other side, the <strong>centWave</strong> algorithm <a class="citation" href="#Tautenhahn2008">Tautenhahn <i>et al.</i> 2008</a> was specifically developed for high resolution mass spectrometry, dedicated to
+data in centroid mode. In this tutorial, you will practice using the centWave algorithm.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-how-the-centwave-algorithm-works"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> How the centWave algorithm works</h3>
+
+  <p><a href="../../tutorials/lcms-preprocessing/slides.html">Check slides from 4 to 10</a>
+to help you understand how the centWave algorithm works.
+Remember that these steps are performed for each of your data files independently.</p>
+  <ul>
+    <li>Firstly, the algorithm detects series of scans with close values of m/z. They are called ‘region of interest’ (ROI).
+The m/z deviation is defined by the user. The tolerance value should be set according to the mass spectrometer accuracy.</li>
+    <li>On these regions of interest, a second derivative of a Gaussian model is applied to these consecutive scans in order to define
+the extracted ion chromatographic peak. The Gaussian model is defined by the peak width which corresponds to the standard deviation
+of the Gaussian model. Depending on the shape, the peak is added to the peak list of the current sample.</li>
+  </ul>
+
+  <p>At the end of the algorithm, a list of peaks is obtained for each sample. This list is then considered to represent the content
+of your sample; if an existing peak is not considered a peak at this step, then it can not be considered in the next steps of
+pre-processing.</p>
+
+</blockquote>
+
+<p>Let’s try performing the peakpicking step with the <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-xcms-findchrompeaks-xcmsset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms findChromPeaks (xcmsSet)</h3>
+
+  <p><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">mzML.raw.RData</code> (collection)</li>
+    <li><em>“Extraction method for peaks detection”</em>: <code class="highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code>
+      <ul>
+        <li><em>“Max tolerated ppm m/z deviation in consecutive scans in ppm”</em>: <code class="highlighter-rouge">3</code></li>
+        <li><em>“Min,Max peak width in seconds”</em>: <code class="highlighter-rouge">5,20</code></li>
+        <li>In <strong>Advanced Options</strong>:
+          <ul>
+            <li><em>“Prefilter step for for the first analysis step (ROI detection)”</em>: <code class="highlighter-rouge">3,5000</code></li>
+            <li><em>“Noise filter”</em>: <code class="highlighter-rouge">1000</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>You can leave the other parameters with their default values.</p>
+
+  <blockquote class="comment">
+    <h3 id="comment-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
+rid of ions that you don’t want to consider. For example, you can use <em>Spectra Filters</em> allowing you to discard some RT or M/z
+ranges, or <em>Noise filter</em> (as in this hands-on) not to use low intensity measures in the ROI detection step.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-5"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the dataset collections number 31 and 32.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>At this step, you obtained a dataset collection containing one <code class="highlighter-rouge">RData</code> file per sample, with independent lists of ions. Although this
+is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
+To do so, XCMS provides a function that is called <em>groupChromPeaks</em> (or group). But before proceeding to this grouping step, first you
+need to group your individual RData files into a single one.</p>
+
+<h1 id="merge-the-different-samples-in-one-dataset">Merge the different samples in one dataset</h1>
+
+<p>A dedicated tool exists to merge the different <code class="highlighter-rouge">RData</code> files into a single one: <strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Although you can simply take as
+input your dataset collection alone, the tool also provides de possibility to take into account a sampleMetadata file. Indeed,
+depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to
+the grouping step <strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+
+<p>This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
+extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that
+these blank samples have different characteristics compared to your biological samples can be of importance when setting parameters of
+your grouping step. You will see what this is all about in the ‘grouping’ section of this tutorial, but in the <span class="notranslate">workflow</span> order, it is
+at this step that you need to provide the needed information if you want distinction in your grouping step.</p>
+
+<p>In the case of our tutorial data, we have three sample types: the original biological samples (‘samples’), quality-control pooled samples (‘pools’)
+corresponding to a mix of all biological samples, and blank samples (‘blanks’) constituted of injection solvent.
+We will consider these three classes for the grouping step. Thus, we need to provide the sampleMetadata file during the merging step,
+with the second column defining theses classes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-xcms-findchrompeaks-merger"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms findChromPeaks Merger</h3>
+
+  <p><strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul class="tip">
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">mzML.raw.xset.RData</code> (collection)</li>
+    <li>
+      <p><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code></p>
+
+      <blockquote>
+
+        <h3 id="tip-tip-selecting-a-dataset-collection-as-input-3"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>
+
+        <ol>
+          <li>Click on <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in
+front of the input parameter you want to supply the collection to.</li>
+          <li>Select the collection you want to use from the list</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ul>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-6"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the dataset number 57.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>The tool generates a single <code class="highlighter-rouge">RData</code> file containing information from all the samples in your dataset collection input.</p>
+
+<h1 id="second-xcms-step-determining-shared-ions-across-samples">Second XCMS step: <em>determining shared ions across samples</em></h1>
+
+<p>The first peak picking step gave us lists of ions for each sample. However, what we want now is a single matrix of ions intensities for all samples.
+To obtain such a table, we need to determine, among the individual ion lists, which ions are the same. This is the aim of the present step, called
+‘grouping’.</p>
+
+<p><a href="../../tutorials/lcms-preprocessing/slides.html">Check slides from 11 to 18</a>,
+you will find additional material to help you understand the grouping algorithm.</p>
+
+<p>The group function aligns ions extracted with close retention time and close m/z values in the different samples. In order to define this
+similarity, we have to define on one hand a m/z windows and on the other hand a retention time window. A binning is then performed in the
+mass domain. The size of the bins is called width of overlapping m/z slices. You have to set it according to your mass spectrometer resolution.</p>
+
+<p>Then, a kernel density estimator algorithm is used to detect region of retention time with high density of ions. This algorithm uses a Gaussian
+model to group together peaks with similar retention time.</p>
+
+<p>The inclusion of ions in a group is defined by the standard deviation of the Gaussian model, called bandwidth. This parameter has a large weight
+on the resulting matrix. It must be chosen according to the quality of the chromatography. To be valid, the number of ions in a group must be greater
+than a given number of samples. Either a percentage of the total number of samples or an absolute value of samples can be given. This is defined by the user.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-xcms-groupchrompeaks-group"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms groupChromPeaks (group)</h3>
+
+  <p><strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.RData</code></li>
+    <li><em>“Method to use for grouping”</em>: <code class="highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
+      <ul>
+        <li><em>“Bandwidth”</em>: <code class="highlighter-rouge">5.0</code></li>
+        <li><em>“Minimum fraction of samples”</em>: <code class="highlighter-rouge">0.9</code></li>
+        <li><em>“Width of overlapping m/z slices”</em>: <code class="highlighter-rouge">0.01</code></li>
+      </ul>
+    </li>
+    <li><em>“Get the Peak List”</em>: <code class="highlighter-rouge">Yes</code>
+      <ul>
+        <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <blockquote class="comment">
+    <h3 id="comment-minimum-fraction-of-samples"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Minimum fraction of samples</h3>
+
+    <p>This parameter sets the minimum proportion of samples in a class where a peak should have been found to keep the corresponding ion in the peaktable.
+The idea is to look inside each class (<em>i.e.</em> each group of samples defined in the second column of the sampleMetadata file) and to keep
+an ion if there is at least one class where the ion is found in at least the specified proportion of samples.</p>
+
+    <p>In this tutorial, we considered three classes: one for samples, one for pools and one for blanks. Since pools are a mix of all biological samples,
+we may want to consider an ion only if it is find in every pools. Thus, we may consider setting the ‘Minimum fraction of samples’ parameter to 1.
+Considering that it sometimes happens that one sample can be a little out of the box for various reasons (pools do not make exception),
+we may consider to lower a little this threshold, for example using a proportion of 0.9.</p>
+
+    <p>Please note that in our example, since the dataset contains only 3 pools, this would make no difference to 1.0 concerning the ‘pools’ class.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-7"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 58 to 61.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>This grouping step is very important because it defines the final data matrix which will be used especially for the statistical analyses.
+User has to check the effect of parameter values on the result.</p>
+
+<p>In order to check the result of the grouping function, a pdf file is created. It provides one plot per m/z slice found in the data. Each picture
+represents the peak density across samples, plotting the corresponding Gaussian model which width is defined by the bandwidth parameter. Each red
+dot corresponds to a sample. The plot allows to assess the quality of alignment. The vertical grey line width is associated with the bandwidth parameter.</p>
+
+<p>Here is an example of two m/z slides obtained from the hands-on:</p>
+
+<p><img src="../../images/lcmspreproc_group12samp.png" alt="plotChromPeakDensity.pdf" /></p>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Look at the <code class="highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
+    <li>Look at the <code class="highlighter-rouge">284.1198 - 284.1253</code> m/z slice. What do you think could have happened if you had used a smaller bandwidth value?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
+the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.9) to consider a peak group,
+in any specified class.</li>
+      <li>If the bandwidth value had been set to a smaller value, the density peak width would have been smaller. With a small enough bandwidth value,
+there could have been two density peaks instead of one under the current first density peak. Thus, the sample in line 5 would have been out of the
+previous peak group, thus not assigned to any peak group due to the 0.9 minimum fraction limit.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>When performing a grouping step, you construct a peak table. Even if this step may not be the final extraction step, you can take this opportunity
+to check how your peak table looks like at this point of the XCMS extraction. For this, you need to set the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>
+as done in this tutorial hands-on. This option generates two additional tables:</p>
+<ul>
+  <li>a data matrix (xset.merged.group.dataMatrix.tsv) with intensities for each ion and each sample;</li>
+  <li>a variable metadata file (xset.merged.group.variableMetadata.tsv) with information concerning the ions.</li>
+</ul>
+
+<p>The variable metadata file contains various information that can be of interest:</p>
+<ul>
+  <li>information about the m/z ratio of each ion (<code class="highlighter-rouge">mz</code>, <code class="highlighter-rouge">mzmin</code>, <code class="highlighter-rouge">mzmax</code> columns);</li>
+  <li>information about the retention time of each ion (<code class="highlighter-rouge">rt</code>, <code class="highlighter-rouge">rtmin</code>, <code class="highlighter-rouge">rtmax</code> columns);</li>
+  <li>the total number of peaks that were found for each ion (<code class="highlighter-rouge">npeaks</code> column);</li>
+  <li>the number of samples in which each ion has been found, for each class (one column per class).</li>
+</ul>
+
+<p>The data matrix contains the intensities for each ion and each sample. When no peak was found in a sample for a specific ion, value is given as NA
+(you can choose to get a ‘0’ value instead, using the ‘Replace the remain NA by 0 in the dataMatrix’ option). You can get a summary of NA proportions
+using the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-optional-getting-an-overview-of-the-proportion-of-na-in-your-data"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Optional: Getting an overview of the proportion of NA in your data</h3>
+
+  <p>When you choose to export the peak list when using the <strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module, you can have a first level of
+information regarding the proportion of NA by looking at the columns of classes you specified (or the <code class="highlighter-rouge">.</code> column when no class where given) in
+the variable metadata file (‘variableMetadata’).
+However, since the number of ions can be of hundreds or thousands, it can be difficult to evaluate the overall proportion in the dataset.
+Thus, one way to go is to use the variableMetadata to check specific ions (ones you may have chosen a priori and/or ones you spotted due to
+outstanding behaviour), and to use the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module to get an overview of the whole dataset.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-intensity-check"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Intensity Check</h3>
+
+    <p><strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <ul>
+      <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">xset.merged.group.dataMatrix.tsv</code></li>
+      <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata.tsv</code></li>
+      <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">xset.merged.group.variableMetadata.tsv</code></li>
+      <li><em>“Computation method”</em>: <code class="highlighter-rouge">For each class of samples</code>
+        <ul>
+          <li><em>“Class column”</em>: <code class="highlighter-rouge">c2: class</code></li>
+          <li><em>“Statistics”</em>: tick <code class="highlighter-rouge">Missing values</code></li>
+          <li><em>“Calculate the mean fold change”</em>: tick <code class="highlighter-rouge">No</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <blockquote class="tip">
+      <h3 id="tip-comment-to-w4m-users-8"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+      <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 62 and 63.</p>
+    </blockquote>
+
+  </blockquote>
+
+  <p>In the pdf file you will get as output, you can find a plot displaying proportions of NA for each class you specified.
+With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 7088 ions
+that have not been found, in any blank.</p>
+
+  <p><img src="../../images/lcmspreproc_ICgp1.png" alt="IC_Graphs.pdf" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+    <p>How many ions in the table have been found in all the pools?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>Knowing that there are 3 pools in the QC class, we can determine there are 4738 ions that have been found in all pools.</p>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="optional-xcms-step-retention-time-correction">Optional XCMS step: <em>retention time correction</em></h1>
+
+<p>Sometimes with LC-MS techniques, a deviation in retention time occurs from a sample to another. In particular, this is likely to be observed when you
+inject large sequences of samples.</p>
+
+<p>This optional step aims to correct retention time drift for each peak among samples. The correction is based on what is called <em>well behaved peaks</em>,
+that are peaks found in all samples or at least in most of the samples.</p>
+
+<p><a href="../../tutorials/lcms-preprocessing/slides.html">Check slides from 19 to 21</a>,
+you will find additional material to help you understand the retention time correction algorithm.</p>
+
+<p>Sometimes it is difficult to find enough peaks present in all samples. The user can define a percentage of the total number of samples in which
+a peak should be found to be considered a well behaved peak. This parameter is called <em>minimum required fraction of samples</em>.</p>
+
+<p>On the contrary, you may have peak groups with more detected peaks than the total number of samples. Those peaks are called <em>additional peaks</em>.
+If you do not want to consider peak groups with too much additional peaks as ‘well behaved peaks’, you can use the ‘maximal number of additional
+peaks’ parameter to put them aside.</p>
+
+<p>The algorithm uses statistical smoothing methods. You can choose between linear or loess regression.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-xcms-adjustrtime-retcor"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms adjustRtime (retcor)</h3>
+
+  <p><strong>xcms adjustRtime (retcor)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.RData</code></li>
+    <li><em>“Method to use for retention time correction”</em>: <code class="highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
+      <ul>
+        <li><em>“Minimum required fraction of samples in which peaks for the peak group were identified”</em>: <code class="highlighter-rouge">0.8299</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>You can leave the other parameters to default values.</p>
+
+  <blockquote class="comment">
+    <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>If you have a very large number of samples (<em>e.g.</em> a thousand), it might be impossible to find peaks that are present in 100% of your samples.
+If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
+time correction.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-9"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 64 and 65.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>This tool generates a plot output that you can use to visualise how retention time correction was applied across the samples and along the chromatogram.
+It also allows you to check whether the well behaved peaks were distributed homogeneously along the chromatogram.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Check the impact of RT correction using ‘xcms plot chromatogram’</h3>
+
+  <p>Apart from the plots generated by the adjustRtime tool, you can check the impact of the retention time
+correction by comparing the chromatogram you obtained previously to a new one generated after correction.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-xcms-plot-chromatogram-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms plot chromatogram</h3>
+
+    <p><strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <ul>
+      <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
+    </ul>
+
+    <blockquote class="comment">
+      <h3 id="comment-comment-4"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+      <p>As in the previous ‘plot chromatogram’, you can use your completed sampleMetadata file to get colours.</p>
+    </blockquote>
+
+    <blockquote class="tip">
+      <h3 id="tip-comment-to-w4m-users-10"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+      <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 66 and 67.</p>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The retention time correction step is not mandatory. However, when it is used retention time are modified.
+Consequently, applying this step on your data requires to complete it with an additional ‘grouping’ step: <strong>xcms groupChromPeaks (group)</strong></p>
+
+<p>Parameters for this second group step are expected to be similar to the first group step. Nonetheless,
+since retention times are supposed to be less variable inside a same peak group now, in some cases it can be relevant to
+lower a little the bandwidth parameter.</p>
+
+<p><a href="../../tutorials/lcms-preprocessing/slides.html">Check slide 22</a>
+to get an illustration of grouping before/after retention time correction.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-second-xcms-groupchrompeaks-group"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: second ‘xcms groupChromPeaks (group)’</h3>
+
+  <p><strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
+    <li><em>“Method to use for grouping”</em>: <code class="highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
+      <ul>
+        <li><em>“Bandwidth”</em>: <code class="highlighter-rouge">5.0</code></li>
+        <li><em>“Width of overlapping m/z slices”</em>: <code class="highlighter-rouge">0.01</code></li>
+      </ul>
+    </li>
+    <li><em>“Get the Peak List”</em>: <code class="highlighter-rouge">Yes</code>
+      <ul>
+        <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+        <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <blockquote class="comment">
+    <h3 id="comment-comment-5"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>When performing this second grouping, similarly to the first grouping you can take this opportunity to check how your peak table
+looks like at this point of the XCMS extraction, setting the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>. As previously explained, you can
+look at your variableMetadata file as well as perform an NA diagnostic using the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-11"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets from number 68 to number 71.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>It is possible to use the retention time correction and grouping step in an iterative way if needed. Once you perform your
+last adjustRtime step and thus your last grouping step, you will obtain your final peak list (<em>i.e.</em> final list of ions).</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many ions did you obtained with the final grouping step?</li>
+    <li>Open the dataMatrix file you obtained with the final grouping. This table corresponds to intensities for each ion and each
+sample. What do you notice when looking at the intensity of the first ion regarding the first sample?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The final grouping step led to 8105 ions.</li>
+      <li>The first ion (M58T69) has an ‘NA’ value for the first sample (QC1_014). This is also the case for several other ions
+and samples.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>At this point of the XCMS extraction <span class="notranslate">workflow</span>, the peak list may contain NA when peaks were not considered peaks in only some
+of the samples in the first ‘findChromPeaks’ step. This does not necessary means that no peak exists for these samples. For example,
+sometimes peaks are of very low intensity for some samples and were not kept as peaks because of that in the first ‘findChromPeaks’
+step.</p>
+
+<p>To be able to get the information that may actually exist behind NAs, there is an additional XCMS step that is called <em>fillChromPeaks</em>.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-6"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>Before performing the ‘fillChromPeaks’ step, it is highly recommended to first have a look at your data concerning the distribution
+of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
+may want to go back to some of your parameter choices in previous XCMS steps.
+To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
+with the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>. The variableMetadata file contains information about your ions: you will find information
+about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
+As suggested previously (after the first groupping step), you can use the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module to get an overview
+of the proportion of NA in your dataset at this step.</p>
+</blockquote>
+
+<h1 id="final-xcms-step-integrating-areas-of-missing-peaks">Final XCMS step: <em>integrating areas of missing peaks</em></h1>
+
+<p>The idea of the XCMS step is to integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no
+chromatographic peak for this ion was identified.
+To do so, you can use the <em>xcms fillChromPeaks (fillPeaks)</em> tool
+(<a href="../../tutorials/lcms-preprocessing/slides.html">check slide 23</a>).</p>
+
+<p>However, before any automatic filling of missing values, you may be interested in an overview of the NA distribution in your data.
+Indeed, depending on you extraction parameters, you may have an unexpectedly high proportion of NAs in your data. If that is the case,
+you may consider reviewing your previous extraction parameters and re-running previous steps to obtain consistant results before
+proceeding to the integration of missing peak areas.</p>
+
+<p>To get an overview of your missing data, as specified previously you can use the <strong>Intensity check</strong> module.</p>
+
+<p>Once you are satisfied with the optimisation of previous extraction parameters, you can proceed to the integration of missing peak areas.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-xcms-fillchrompeaks-fillpeaks"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: xcms fillChromPeaks (fillPeaks)</h3>
+
+  <p><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code></li>
+    <li>In <em>“Peak List”</em>:
+      <ul>
+        <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <blockquote class="comment">
+    <h3 id="comment-comment-7"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+    <p>The <em>“Reported intensity values”</em> parameter is important here. It defines how the intensity will be computed. You have three choices:</p>
+    <ul>
+      <li>into : integration of peaks (<em>i.e.</em> areas under the peaks)</li>
+      <li>maxo : maximum height of peaks</li>
+      <li>intb : integration of peaks with baseline subtraction</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-12"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 72 to 74.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>With this ‘fillChromPeaks’ step, you obtain your final intensity table. At this step, you have everything mandatory to begin analysing
+your data:</p>
+<ul>
+  <li>A <em>sampleMetadata</em> file (if not done yet, to be completed with information about your samples)</li>
+  <li>A <em>dataMatrix</em> file (with the intensities)</li>
+  <li>A <em>variableMetadata</em> file (with information about ions such as retention times, m/z)</li>
+</ul>
+
+<p>Nonetheless, before proceeding with the next step in the <span class="notranslate">workflow</span> (processing and filtering of your data), you can add an optional step
+with <strong>CAMERA.annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool uses the CAMERA R package to perform a first annotation of your data based on XCMS outputs.</p>
+
+<h1 id="annotation-with-camera-optional">Annotation with CAMERA [Optional]</h1>
+
+<p>This last step provides annotation of isotopes, adducts and neutral losses. It gives also some basic univariate statistics in case you
+considered several groups for your XCMS extraction.</p>
+
+<p>There is a huge number of parameters that will not be detailed in this short tutorial. However most of the default values are suitable
+to run this function for a first attempt. Nevertheless, a few parameters have to be set at each run:</p>
+<ul>
+  <li>The polarity has to be set since it affects annotation.</li>
+  <li>For statistical analysis, you have to define if you have two or more conditions to compare. These conditions had to be defined in the
+ sample metadata uploaded with your sample files.</li>
+  <li>You can define how many significant ions will be used for extracted ions chromatogram (EIC) plot. These plots will be included in a pdf file.</li>
+</ul>
+
+<p>Apart from the PDF file, the main three outcomes from <strong>CAMERA.annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> are three columns added in the variableMetadata file:</p>
+<ul>
+  <li><strong>isotopes:</strong> the name says everything</li>
+  <li><strong>adduct:</strong> same here; this column is filled only in the ‘All functions’ mode</li>
+  <li><strong>pcgroup:</strong> this stands for Pearson’s correlation group; it corresponds to groups of ions that match regarding retention time and intensity
+ correlations, leading to think that maybe they could come from the same original metabolite.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-cameraannotate"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: CAMERA.annotate</h3>
+
+  <ol>
+    <li><strong>CAMERA.annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.RData</code></li>
+        <li>In <em>“Annotate Isotopes [findIsotopes]”</em>:
+          <ul>
+            <li><em>“Max. ion charge”</em>: <code class="highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+        <li><em>“Mode”</em>: <code class="highlighter-rouge">Only groupFWHM and findIsotopes functions [quick]</code></li>
+        <li>In <em>“Export options”</em>:
+          <ul>
+            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-8"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>As said previously, there are quite a few parameters in this tool, some of them having very high impact on your annotations.
+In particular, the <strong>Mode</strong> parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).</p>
+      </blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <h3 id="tip-comment-to-w4m-users-13"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Comment to W4M users</h3>
+
+    <p>In the <a href="https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+the datasets number 75 and 76.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>The information given by this tool is not mandatory for the next step of the metabolomic <span class="notranslate">workflow</span>. Commonly, annotation is considered a later
+step in the pipeline, but since CAMERA uses the outputs of XCMS, if you want to use it you better do it at this step, allowing you to have the
+corresponding information in your variableMetadata file for later use.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>This tutorial allowed you to get a glance at what data pre-processing in Metabolomics could look like when dealing with LC-MS data.
+The <span class="notranslate">workflow</span> used here as an example is only one glance at what you can construct using <span class="notranslate">Galaxy</span>.
+Now that you know that tools exist and are available in this accessible, reproducible and transparent resource
+that <span class="notranslate">Galaxy</span> is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics,
+and create, run and share!</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>To process untargeted LC-MS metabolomic data preprocessing, you need a large variety of steps and tools.</p>
+</li>
+                            
+                            <li><p>Although main steps are standard, various ways to combine and to set parameters for tools exist, depending on your data.</p>
+</li>
+                            
+                            <li><p>Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Smith2006">Smith, C. A., E. J. Want, G. O’Maille, R. Abagyan, and G. Siuzdak, 2006 <b>XCMS:  Processing Mass Spectrometry Data for Metabolite Profiling Using Nonlinear Peak Alignment,  Matching,  and Identification</b>. Analytical Chemistry 78: 779–787.</span>
+    
+    
+    <a href="https://doi.org/10.1021/ac051437y">10.1021/ac051437y</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Tautenhahn2008">Tautenhahn, R., C. Böttcher, and S. Neumann, 2008 <b>Highly sensitive feature detection for high resolution LC/MS</b>. BMC Bioinformatics 9: 504.</span>
+    
+    
+    <a href="https://doi.org/10.1186/1471-2105-9-504">10.1186/1471-2105-9-504</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Giacomoni2014">Giacomoni, F., G. L. Corguille, M. Monsoor, M. Landi, P. Pericard <i>et al.</i>, 2014 <b>Workflow4Metabolomics: a collaborative research infrastructure for computational metabolomics</b>. Bioinformatics 31: 1493–1495.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btu813">10.1093/bioinformatics/btu813</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Thvenot2015">Thévenot, E. A., A. Roux, Y. Xu, E. Ezan, and C. Junot, 2015 <b>Analysis of the Human Adult Urinary Metabolome Variations with Age,  Body Mass Index,  and Gender by Implementing a Comprehensive Workflow for Univariate and OPLS Statistical Analyses</b>. Journal of Proteome Research 14: 3322–3335.</span>
+    
+    
+    <a href="https://doi.org/10.1021/acs.jproteome.5b00354">10.1021/acs.jproteome.5b00354</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="CAMERA">Carsten Kuhl, R. T., 2017 <b>CAMERA</b>.</span>
+    
+    
+    <a href="https://doi.org/10.18129/b9.bioc.camera">10.18129/b9.bioc.camera</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://bioconductor.org/packages/CAMERA">https://bioconductor.org/packages/CAMERA</a>
+      
+    
+
+</li>
+<li><span id="Guitton2017">Guitton, Y., M. Tremblay-Franco, G. L. Corguillé, J.-F. Martin, M. Pétéra <i>et al.</i>, 2017 <b>Create,  run,  share,  publish,  and reference your LC–MS,  FIA–MS,  GC–MS,  and NMR data analysis workflows with the Workflow4Metabolomics 3.0 Galaxy online infrastructure for metabolomics</b>. The International Journal of Biochemistry &amp; Cell Biology 93: 89–101.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.biocel.2017.07.002">10.1016/j.biocel.2017.07.002</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Mélanie Petera, Jean-François Martin, Gildas Le Corguillé, Workflow4Metabolomics core team, 2020 <b>Mass spectrometry: LC-MS preprocessing - advanced (Galaxy Training Materials)</b>. <a href="/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html">/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{metabolomics-lcms-preprocessing,
+    author = "Mélanie Petera and Jean-François Martin and Gildas Le Corguillé and Workflow4Metabolomics core team",
+    title = "Mass spectrometry: LC-MS preprocessing - advanced (Galaxy Training Materials)",
+    year = "2020",
+    month = "02",
+    day = "03"
+    url = "\url{/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Mass spectrometry: LC-MS preprocessing - advanced (Metabolomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Mass spectrometry: LC-MS preprocessing - advanced (Metabolomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mélanie Petera, Jean-François Martin, Gildas Le Corguillé, Workflow4Metabolomics core team)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
