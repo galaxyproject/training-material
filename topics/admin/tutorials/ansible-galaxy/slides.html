@@ -1,0 +1,66 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: "Galaxy Installation with Ansible"
+questions:
+  - How does it all connect?
+  - What steps will we go through?
+objectives:
+  - Get a high-level overview of a Galaxy server setup
+key_points:
+  - Everything can be accomplished with Ansible roles from Galaxy
+  - You can easily deploy a base Galaxy, or one with more features.
+contributors:
+  - slugger70
+---
+
+## Install PostgreSQL & Galaxy extensions
+
+![Graph showing a Postgres DB](../../images/ansible-galaxy-intro-0.png)
+
+---
+
+
+## Install Galaxy & Attach Storage
+
+![Galaxy is now attached to the DB. uWSGI, storage, and compute are attached to Galaxy](../../images/ansible-galaxy-intro-1.png)
+
+---
+
+
+## Configure NGINX
+
+![NGINX is added to proxy uWSGI](../../images/ansible-galaxy-intro-2.png)
+
+---
+
+
+## Configure Job Handlers
+
+![Job Handlers are added, between Galaxy and the Compute](../../images/ansible-galaxy-intro-3.png)
+
+---
+
+
+## Install & Configure Slurm
+
+![Slurm is attached to the handlers](../../images/ansible-galaxy-intro-4.png)
+
+
+---
+
+
+
+## Connect CVMFS & Reference Data
+
+![CVMFS is attached to storage + compute + galaxy](../../images/ansible-galaxy-intro-5.png)
+
+
+---
+
+
+
+## Setup Remote Compute
+
+![Remote compute site, with Pulsar and compute is attached to the job handlers](../../images/ansible-galaxy-intro-6.png)
