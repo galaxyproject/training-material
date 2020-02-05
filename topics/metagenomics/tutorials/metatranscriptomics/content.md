@@ -6,6 +6,27 @@
   {% assign other_tutorial_name = "short"%}
 {% endif %}
 
+# Overview
+
+In this tutorial we will perform a metatranscriptomics analysis based on the ASAIM workflow ({% cite batut2018asaim %}), using data from {% cite kunath2018proteins %}.
+
+> ### {% icon comment %} Note: Two versions of this tutorial
+>
+> Because this tutorial consists of many steps, we have made two versions of it, one long and one short.
+>
+> {% if include.short %}
+> This is the **shortened version**. Instead of running each tool individually, we will employ
+> workflows to run groups of analysis steps (e.g. data cleaning) at once. If you would like
+> more in-depth discussion of each step, please see the [longer version of tutorial]({% link topics/metagenomics/tutorials/metatranscriptomics/tutorial.md %})
+> {% else %}
+> This is the **extended version**. We will run every tool manually and discuss the results in detail.
+> If you would like to run through the tutorial a bit quicker and use workflows to run groups of
+> analysis steps (e.g. data cleaning) at once, please see the [shorter version of this tutorial]({% link topics/metagenomics/tutorials/metatranscriptomics-short/tutorial.md %})
+> {% endif %}
+> You can also **switch** between the long and short version at the start of any section.
+{: .comment}
+
+
 
 # Introduction
 {:.no_toc}
@@ -80,12 +101,56 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 {: .hands_on}
 
 # Pretreatments
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="Pretreatments" %}
+
+{% if include.short %}
+
+Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it where possible by trimming and filtering reads.
+
+In this section we will run a workflow that performs the following tasks:
+1. Assess read quality using **FastQC** {% icon tool %} and  **MultiQC** {% icon tool %}
+2. Filter reads by length and quality using **Cutadapt** {% icon tool %}
+3. Remove ribosomal RNA (rRNA) using **SortMeRNA** {% icon tool %}
+4. Combine the high-quality reads into a single *interlaced* FastQ file for downstream analysis using **FastQ interlacer** {% icon tool %}
+
+We will run all these steps using a single workflow, then discuss each step and the results in more detail.
+
+> ### {% icon hands_on %} Hands-on: Pretreatments
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_pretreatments.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Forward FastQ file"*: `T1A_forward`
+>    - {% icon param-file %} *"2: Reverse FastQ file"*: `T1A_reverse`
+>
+>    {% include snippets/run_workflow.md %}
+>
+{: .hands_on}
+
+The workflow will take a little while to complete. Once tools have completed, the results will be available in your history for viewing. Note that only the most important outputs will he visible; intermediate files are hidden by default.
+
+While you wait for the workflow to complete, please continue reading, in the next section(s) we will go into a bit more detail about what happens in each step of this workflow and examine the results.
+
+{% endif %}
 
 ## Quality control
 
 During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.
 
-Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" training]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html).
+Sequence quality control is therefore an essential first step in your analysis.
+In this tutorial we use similar tools as described in the tutorial ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}):
+- [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) generates a web report that will aid you in assessing the quality of your data
+- [MultiQC](https://multiqc.info/) combines multiple FastQC reports into a single overview report
+- [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) for trimming and filtering
+
+
+
+{% unless include.short %} <!-- only in extended tutorial -->
 
 > ### {% icon hands_on %} Hands-on: Quality control
 >
@@ -119,7 +184,13 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 {: .hands_on}
 
+{% endunless %}
+
+For more information about how to interpret the plots generated by FastQC and MultiQC, please see [this section]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}#assess-the-read-quality) in our dedicated Quality Control Tutorial.
+
 > ### {% icon question %} Questions
+>
+> Inspect the webpage output from MultiQC
 >
 > 1. How many sequences does each file have?
 > 2. How is the quality score over the reads? And the mean score?
@@ -179,9 +250,18 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > {: .solution}
 {: .question}
 
-We should now trim reads to remove bases that were sequenced with less certainty (= low-quality bases) at the read ends in addition to removing reads of overall bad quality. Several tools can do that but here we will use **Cutadapt** ({% cite martin2011cutadapt %}).
+## Data Cleaning
+
+Even though our data is already of pretty high quality, we can improve it even more by:
+1. Trimming reads to remove bases that were sequenced with low certainty (= low-quality bases) at the ends of the reads
+2. Removing reads of overall bad quality.
+3. Removing reads that are too short to be informative in downstream analysis
+
+There are several tools out there that can perform theses steps, but in this analysis we use **Cutadapt** ({% cite martin2011cutadapt %}).
 
 **Cutadapt** also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering reads.
+
+{% unless include.short %}
 
 > ### {% icon question %} Questions
 >
@@ -194,7 +274,7 @@ We should now trim reads to remove bases that were sequenced with less certainty
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> ### {% icon hands_on %} Hands-on: Read trimming and filtering
 >
 > 1. **Cutadapt** {% icon tool %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
@@ -212,25 +292,35 @@ We should now trim reads to remove bases that were sequenced with less certainty
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
 >
-> 2. Inspect the generated txt files (`Report`)
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many basepairs has been removed from the forwards reads because of bad quality? And from the reverse reads?
->    > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. 203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.
->    > > 2. 1,500 (0.6%) reads were too short after trimming and then filtered.
->    > {: .solution }
->    {: .question}
 {: .hands_on}
+
+{% endunless %}
+
+**Cutadapt** {% icon tool %} outputs a report file containing some information about the trimming and filtering it performed.
+
+
+> ### {% icon question %} Questions
+>
+> View the output report from **Cutadapt** {% icon tool %}.
+>
+> 1. How many basepairs has been removed from the forwards reads because of bad quality? And from the reverse reads?
+> 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
+>
+> > ### {% icon solution %} Solution
+> > 1. 203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.
+> > 2. 1,500 (0.6%) reads were too short after trimming and then filtered.
+> {: .solution }
+{: .question}
+
 
 ## Ribosomal RNA fragments filtering
 
 Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The highest proportion of the RNA sequences in any organism will be ribosomal RNAs. These rRNAs are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed) To make the downstream functional annotation faster, we will sort the rRNA sequences using **SortMeRNA** ({% cite kopylova2012sortmerna %}). It can handle large RNA databases and sort out all fragments matching to the database with high accuracy and specificity:
 
 ![SortMeRNA](../../images/metatranscriptomics/sortmerna.png)
+
+
+{% unless include.short %}
 
 > ### {% icon hands_on %} Hands-on: Ribosomal RNA fragments filtering
 >
@@ -268,29 +358,41 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 >
 > 2. Inspect the log file (`Log`)
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. How many reads have been processed?
->    > 2. How many reads have been identified as rRNA given the log file?
->    > 3. Which type of rRNA are identified? Which organisms are we then expected to identify?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. 518,108 reads are processed: 259,054 for forward and 259,054 for reverse (given the **Cutadapt** report)
->    > > 2. Out of the 518,108 reads, 136,622 (26%) have passed the e-value threshold and are identified as rRNA. The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
->    > >    Some of the aligned reads are forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`, if one read in a pair does not align, both go to unaligned.
->    > > 3. The 20.18% rRNA reads are 23S bacterial rRNA, 2.62% 16S bacterial rRNA and 2.22% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).
->    > {: .solution }
->    {: .question}
+{: .hands_on }
+
+{% endunless %}
+
+**SortMeRNA** {% icon tool %} removes any reads identified as rRNA from our dataset, and outputs a log file with more information about this filtering.
+
+> ### {% icon question %} Questions
 >
-{: .hands_on}
+> View the log file output from **SortMeRNA** {% icon tool %}, and scroll down to the
+> `Results` section.
+>
+> 1. How many reads have been processed?
+> 2. How many reads have been identified as rRNA given the log file?
+> 3. Which type of rRNA are identified? Which organisms are we then expected to identify?
+>
+> > ### {% icon solution %} Solution
+> > 1. 518,108 reads are processed: 259,054 for forward and 259,054 for reverse (given the **Cutadapt** report)
+> > 2. Out of the 518,108 reads, 136,622 (26%) have passed the e-value threshold and are identified as rRNA. The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
+> >    Some of the aligned reads are forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`, if one read in a pair does not align, both go to unaligned.
+> > 3. The 20.18% rRNA reads are 23S bacterial rRNA, 2.62% 16S bacterial rRNA and 2.22% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).
+> {: .solution }
+{: .question}
+
+
 
 ## Interlace forward and reverse reads
 
-Tools for taxonomic and functional annotations need a single file as input, even with paired-end data. We need to join the two separate files (forward and reverse) to create a single interleaced file, using **FASTQ interlacer**, in which the forward reads have `/1` in their id and reverse reads `/2`. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
+Tools for taxonomic and functional annotations need a single file as input, even with paired-end data. We need to join the two separate files (forward and reverse) to create a single interleaced file, using **FASTQ interlacer** {% icon tool %}, in which the forward reads have `/1` in their id and reverse reads `/2`. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it provides a separate file.
 
-We will run **FASTQ interlacer** on the outputs of **Cutadapt** and on the unaligned (non rRNA) reads from **SortMeRNA**.
+We use **FASTQ interlacer** {% icon tool %} on the outputs of **Cutadapt** {% icon tool %} and on the unaligned (non-rRNA) reads from **SortMeRNA** {% icon tool %} to prepare for downstream analysis
 
-> ### {% icon hands_on %} Hands-on:
+
+{% unless include.short %}
+
+> ### {% icon hands_on %} Hands-on: Interlace FastQ files
 >
 > 1. **FASTQ interlacer** {% icon tool %} with the following parameters:
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
@@ -312,6 +414,8 @@ We will run **FASTQ interlacer** on the outputs of **Cutadapt** and on the unali
 >
 > 5. Rename the pair output to `Interlaced non rRNA reads`
 {: .hands_on}
+
+{% endunless %}
 
 # Extraction of the community profile
 
