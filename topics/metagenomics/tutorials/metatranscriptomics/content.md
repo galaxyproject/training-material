@@ -90,7 +90,7 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the file to `T1A_forward` and `T1A_reverse`
+> 3. **Rename** {% icon galaxy-pencil %} the files to `T1A_forward` and `T1A_reverse`
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -399,11 +399,11 @@ We use **FASTQ interlacer** {% icon tool %} on the outputs of **Cutadapt** {% ic
 >       - {% icon param-file %} *"Left-hand mates"*: `Read 1 Output` (outputs of **Cutadapt** {% icon tool %})
 >       - {% icon param-file %} *"Right-hand mates"*: `Read 2 Output` (outputs of **Cutadapt** {% icon tool %})
 >
-> 2. Rename the pair output to `Interlaced QC controlled reads`
+> 2. **Rename** {% icon galaxy-pencil %} the pair output to `Interlaced QC controlled reads`
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. Change the datatype to `fastq`
+> 3. **Change the datatype** {% icon galaxy-pencil %} to `fastq`
 >
 >    {% include snippets/change_datatype.md datatype="fastq" %}
 >
@@ -412,7 +412,8 @@ We use **FASTQ interlacer** {% icon tool %} on the outputs of **Cutadapt** {% ic
 >      - {% icon param-file %} *"Left-hand mates"*: `Unaligned Forward reads` (output of **SortMeRNA** {% icon tool %})
 >      - {% icon param-file %} *"Right-hand mates"*: `Unaligned Reverse reads` (output of **SortMeRNA** {% icon tool %})
 >
-> 5. Rename the pair output to `Interlaced non rRNA reads`
+> 5. **Rename** {% icon galaxy-pencil %} the pair output to `Interlaced non rRNA reads`
+>
 {: .hands_on}
 
 {% endunless %}
@@ -619,6 +620,7 @@ It takes a taxonomic tree file as the input. We first need to convert the **Meta
 >    - *"Output format"*: `PNG`
 >
 > 4. Inspect **GraPhlAn** output
+>
 {: .hands_on}
 
 {% endunless %}
@@ -652,16 +654,15 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 >    {% include snippets/run_workflow.md %}
 >
-> > ### {% icon details %} Running low on time? Use this faster approach
+> > ### {% icon tip %} Tip: Running low on time? Use this faster approach
 > >
 > > The first step of this workflow may take quite a bit of time to complete (> 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:
+> >
 > > 1. **Import the workflow** into Galaxy
 > >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information_short.ga) or download it to your computer.
 > >    - Import the workflow into Galaxy
 > >
-> >    {% include snippets/import_workflow.md %}
-> >
-> > 2. Import the 2 files:
+> > 2. **Import** the following 2 files (these are the outputs from **HUMAnN2** {% icon tool %}):
 > >
 > >    ```
 > >    {{ page.zenodo_link }}/files/T1A_humann2_gene_family_abundances.tsv
@@ -672,11 +673,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 > >    - *"Send results to a new history"*: `No`
 > >    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
 > >
-> > {% include snippets/run_workflow.md %}
-> >
-> >
-> >
-> {: .details}
+> {: .tip}
 {: .hands_on}
 
 {% endif %}
@@ -685,10 +682,11 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 {% unless include.short %}
 
 > ### {% icon hands_on %} Hands-on: Extract the functional information
+>
 > 1. **HUMAnN2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input sequence file"*: `Interlaced non rRNA reads`
 >    - *"Use of a custom taxonomic profile"*: `Yes`
->       - *"Taxonomic profile file"*: `Community profile` (output of **MetaPhlAn2**)
+>       - {% icon param-file %}*"Taxonomic profile file"*: `Community profile` (output of **MetaPhlAn2** {% icon tool %})
 >    - *"Nucleotide database"*: `Locally cached`
 >      - *"Nucleotide database"*: `Full`
 >    - *"Software to use for translated alignment"*: `Diamond`
@@ -709,9 +707,9 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
 {% endunless %}
 
-HUMAnN2 generates 3 files
+**HUMAnN2** {% icon tool %} generates 3 files:
 
-- A file with the abundance of gene families
+1. A file with the **abundance of gene families**:
 
     ```
     # Gene Family	humann2_Abundance-RPKs
@@ -750,7 +748,7 @@ HUMAnN2 generates 3 files
     > {: .solution }
     {: .question}
 
-- A file with the abundance of pathways
+2. A file with the **abundance of pathways**:
 
     ```
     # Pathway	humann2_Abundance
@@ -786,7 +784,7 @@ HUMAnN2 generates 3 files
     > {: .solution }
     {: .question}
 
-- A file with the coverage of pathways
+3. A file with the **coverage of pathways**:
 
     Pathway coverage provides an alternative description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.
 
@@ -802,9 +800,14 @@ HUMAnN2 generates 3 files
 >
 {: .comment}
 
+
+
 ## Normalize the abundances
 
 Gene family and pathway abundances are in RPKs (reads per kilobase), accounting for gene length but not sample sequencing depth. While there are some applications, e.g. strain profiling, where RPK units are superior to depth-normalized units, most of the time we need to renormalize our samples prior to downstream analysis.
+
+
+{% unless include.short %}
 
 > ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
@@ -813,45 +816,66 @@ Gene family and pathway abundances are in RPKs (reads per kilobase), accounting 
 >    - *"Normalization scheme"*: `Relative abundance`
 >    - *"Normalization level"*: `Normalization of all levels by community total`
 >
-> 3. Rename the generated file `Normalized gene families`
-> 4. Inspect the file
+> 2. **Rename** {% icon galaxy-pencil %} the generated file `Normalized gene families`
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. What percentage of sequences has not been assigned to a gene family?
->    > 2. What is the relative abundance of the most abundant gene family?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. 14% (`0.140345 x 100`) of the sequences have not be assigned to a gene family
->    > > 2. The Beta-lactamase TEM gene family represents 6% of the reads.
->    > {: .solution }
->    {: .question}
+{: .hands_on}
+
+{% endunless %}
+
+> ### {% icon question %} Questions
 >
-> 5. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
+> **Inspect** {% icon galaxy-eye %} the `Normalized gene families` file
+>
+> 1. What percentage of sequences has not been assigned to a gene family?
+> 2. What is the relative abundance of the most abundant gene family?
+>
+> > ### {% icon solution %} Solution
+> > 1. 14% (`0.140345 x 100`) of the sequences have not be assigned to a gene family
+> > 2. The Beta-lactamase TEM gene family represents 6% of the reads.
+> {: .solution }
+{: .question}
+
+
+
+{% unless include.short %}
+
+Let's do the same for the pathway abundances.
+
+> ### {% icon hands_on %} Hands-on: Normalize the pathway abundances
+>
+> 1. **Renormalize a HUMAnN2 generated table** {% icon tool %} with
 >    - *"Gene/pathway table"*: `Pathways and their abundance` (output of **HUMAnN2**)
 >    - *"Normalization scheme"*: `Relative abundance`
 >    - *"Normalization level"*: `Normalization of all levels by community total`
 >
-> 6. Rename the generated file `Normalized pathways`
-> 7. Inspect the file
+> 2. **Rename** {% icon galaxy-pencil %} the generated file `Normalized pathways`
 >
->    > ### {% icon question %} Questions
->    >
->    > 1. What is the UNMAPPED percentage?
->    > 2. What percentage of reads assigned to a gene family has not be assigned to a pathway?
->    > 3. What is the relative abundance of the most abundant gene family?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. UNMAPPED, here 14% of the reads, corresponds to the percentage of reads not assigned to gene families. It is the same value as in the normalized gene family file.
->    > > 2. 81% (UNINTEGRATED) of reads assigned to a gene family have not be assigned to a pathway
->    > > 3. The PWY-6305 pathway represents 0.9% of the reads.
->    > {: .solution }
->    {: .question}
-{: .hands_on}
+{: .hands-on}
+
+{% endunless %}
+
+
+> ### {% icon question %} Questions
+>
+> **Examine** {% icon galaxy-eye %} the `Normalized pathways` file.
+> 1. What is the UNMAPPED percentage?
+> 2. What percentage of reads assigned to a gene family has not be assigned to a pathway?
+> 3. What is the relative abundance of the most abundant gene family?
+>
+> > ### {% icon solution %} Solution
+> > 1. UNMAPPED, here 14% of the reads, corresponds to the percentage of reads not assigned to gene families. It is the same value as in the normalized gene family file.
+> > 2. 81% (UNINTEGRATED) of reads assigned to a gene family have not be assigned to a pathway
+> > 3. The PWY-6305 pathway represents 0.9% of the reads.
+> {: .solution }
+{: .question}
+
 
 ## Identify the gene families involved in the pathways
 
 We would like to know which gene families are involved in our most abundant pathways and which species.
+For this, we use the tool **Unpack pathway abundances to show genes included** {% icon tool %}
+
+{% unless include.short %}
 
 > ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
 >
@@ -860,8 +884,9 @@ We would like to know which gene families are involved in our most abundant path
 >    - *"Pathway abundance file"*: `Normalized pathways`
 >    - *"Remove the taxonomy from the output file?"*: `No`
 >
-> 2. Inspect the generated file
 {: .hands_on}
+
+{% endunless %}
 
 This tool unpacks the pathways to show the genes for each. It adds another level of stratification to the pathway abundance table by including the gene family abundances:
 
@@ -876,10 +901,12 @@ ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef
 
 > ### {% icon question %} Questions
 >
-> Which gene families are involved in the PWY-6305 pathway? And which species?
+> **View** {% icon galaxy-eye %} the normalized gene family abundances file
+>
+> 1. Which gene families are involved in the PWY-6305 pathway? And which species?
 >
 > > ### {% icon solution %} Solution
-> > If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd>):
+> > 1. If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd>):
 > >
 > > ````
 > > PWY-6305: putrescine biosynthesis IV	0.00939758
@@ -897,23 +924,28 @@ ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef
 
 The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help constuct a big picture, we could identify and use categories of genes using the gene families. [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with HUMAnN2 into GO slim terms.
 
+{% unless include.short %}
+
 > ### {% icon hands_on %} Hands-on: Group abundances into GO slim terms
 >
 > 1. **Group abundances** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"HUMAnN2 output with UniRef 50 gene family abundance"*: `Gene families and their abundance` (output of **HUMAnN2**)
 >
-> 2. Inspect the generated file
 {: .hands_on}
+
+{% endunless %}
 
 3 outputs are generated from executing this tool: the abundances of GO slim terms grouped in 3 groups (molecular functions, biological processes and cellular components). Each file is a tabular file with 3 columns: GO slim term id, name and abundance.
 
 > ### {% icon question %} Questions
 >
-> Which of the GO terms related to molecular functions is the most abundant?
+> **View** {% icon galaxy-eye %} the outputs of this tool
+>
+> 1. Which of the GO terms related to molecular functions is the most abundant?
 >
 > > ### {% icon solution %} Solution
 > >
-> > The GO terms in the `Molecular function abundance` file are not sorted by abundance:
+> > 1. The GO terms in the `Molecular function abundance` file are not sorted by abundance:
 > >
 > > ```
 > > GO id	GO name	Abundance
