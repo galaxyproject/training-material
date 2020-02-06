@@ -101,7 +101,7 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 {: .hands_on}
 
 # Pretreatments
-{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="Pretreatments" %}
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="pretreatments" %}
 
 {% if include.short %}
 
@@ -421,6 +421,7 @@ We use **FASTQ interlacer** {% icon tool %} on the outputs of **Cutadapt** {% ic
 
 
 # Extraction of the community profile
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="extraction-of-the-community-profile" %}
 
 The first important information to get from microbiome data is the community structure: which organisms are present and in which abundance. This is called taxonomic profiling. Different approaches can be used:
 
@@ -514,12 +515,12 @@ This step may take a couple of minutes as each sequence is compare to the full d
     > {: .solution }
     {: .question}
 
-> ### {% icon warning %} Analyzing an isolated metatranscriptome
+> ### {% icon comment %} Note: Analyzing an isolated metatranscriptome
 >
 > We are analyzing our RNA reads as we would do for DNA reads. This approach has one main caveat. In **MetaPhlAn2**, the species are quantified based on the recruitment of reads to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for RNA data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species' markers is expressed.
 >
 > We should then carefully interpret the species relative abundance. These values reflect species' relative contributions to the pool of species-specific transcripts and not the overall transcript pool.
-{: .warning}
+{: .comment}
 
 
 
@@ -626,12 +627,62 @@ It takes a taxonomic tree file as the input. We first need to convert the **Meta
 
 
 # Extract the functional information
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="extract-the-functional-information" %}
 
 We would now like to answer the question "What are the micro-organisms doing?" or "Which functions are performed by the micro-organisms in the environment?".
 
 In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using **HUMAnN2** ({% cite franzosa2018species %}). **HUMAnN2** is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.
 
 To identify the functions made by the community, we do not need the rRNA sequences, specially because they had noise and will slow the run. We will then use the output of **SortMeRNA**, but also the identified community profile from **MetaPhlAn2**. This will help **HUMAnN2** to focus on the know sequences for the identified organisms.
+
+
+{% if include.short %}
+
+> ### {% icon hands_on %} Hands-on: Functional Information
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% include snippets/import_workflow.md %}
+>
+> 2. Run **Workflow 3: Functional Information** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
+>
+>    {% include snippets/run_workflow.md %}
+>
+> > ### {% icon details %} Running low on time? Use this faster approach
+> >
+> > The first step of this workflow may take quite a bit of time to complete (> 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:
+> > 1. **Import the workflow** into Galaxy
+> >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information_short.ga) or download it to your computer.
+> >    - Import the workflow into Galaxy
+> >
+> >    {% include snippets/import_workflow.md %}
+> >
+> > 2. Import the 2 files:
+> >
+> >    ```
+> >    {{ page.zenodo_link }}/files/T1A_humann2_gene_family_abundances.tsv
+> >    {{ page.zenodo_link }}/files/T1A_humann2_pathway_abundances.tsv
+> >    ```
+> >
+> > 3. Run **Workflow 3: Functional Information (short)** {% icon workflow %} using the following parameters:
+> >    - *"Send results to a new history"*: `No`
+> >    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
+> >
+> > {% include snippets/run_workflow.md %}
+> >
+> >
+> >
+> {: .details}
+{: .hands_on}
+
+{% endif %}
+
+
+{% unless include.short %}
 
 > ### {% icon hands_on %} Hands-on: Extract the functional information
 > 1. **HUMAnN2** {% icon tool %} with the following parameters:
@@ -655,6 +706,8 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >    {{ page.zenodo_link }}/files/T1A_humann2_pathway_abundances.tsv
 >    ```
 {: .hands_on}
+
+{% endunless %}
 
 HUMAnN2 generates 3 files
 
@@ -737,7 +790,7 @@ HUMAnN2 generates 3 files
 
     Pathway coverage provides an alternative description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.
 
-> ### {% icon warning %} Analyzing an isolated metatranscriptome
+> ### {% icon comment %} Note: Analyzing an isolated metatranscriptome
 >
 > As we already mentioned above, we are analyzing our RNA reads as we would do for DNA reads and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species' relative abundance from **MetaPhlAn2**, but there is another aspect we should be careful about.
 >
@@ -747,7 +800,7 @@ HUMAnN2 generates 3 files
 >
 > Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation
 >
-{: .warning}
+{: .comment}
 
 ## Normalize the abundances
 
