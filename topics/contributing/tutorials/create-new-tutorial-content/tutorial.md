@@ -211,6 +211,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >    {: .comment}
 >
 > 5. Inspect the generated `tutorial.md`
+> 6. Edit the workflow file with a text editor to add the topic name as 'tags' and to add the tutorial title as 'annotation' to the workflow.
 {: .hands_on}
 
 The generated tutorial is structured with:

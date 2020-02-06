@@ -288,4 +288,5 @@ For the next times, you can make it quicker.
 > 5. Fill the remaining metadata in the `tutorial.md`
 > 6. Fill the content of the `tutorial.md`
 > 7. Check it using Jekyll
+> 8. Edit the workflow file with a text editor to add the topic name as 'tags' and to add the tutorial title as 'annotation' to the workflow.
 {: .hands_on}
