@@ -150,26 +150,24 @@ Prokka predicts protein-coding regions using a two step process. It first identi
 
 In this example we will use a downsampled version of *E. coli* C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT. All data are in [fastq](https://en.wikipedia.org/wiki/FASTQ_format) format.
 
-> ### {% icon hands_on %} Hands-on: Load data into History
+> ### {% icon hands_on %} Hands-on: Obtaining our data
 >
-> 1. To load data into your Galaxy instance:
->   - Log in into Galaxy
->   - Create new history (if you are new to Galaxy see [Galaxy 101 tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) first).
+> 1. Make sure you have an empty analysis history. Give it a name.
 >
-> 2. **Get data** {% icon tool %} as shown below (see [these slides]({{site.baseurl}}/topics/galaxy-data-manipulation/tutorials/get-data/slides.html) for an introduction on how to load data into Galaxy):
+>    {% include snippets/create_new_history.md %}
 >
->       ![Get Data](../../images/get_data.png "Getting data into history starts with clicking <b>Get data</b> button")
+> 2. Import the following file from [Zenodo](https://zenodo.org/record/940733)
 >
-> 3. Open Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg)](https://doi.org/10.5281/zenodo.940733)
- link in a **new browser window** and right-click on dataset links:
->       ![Get Data](../../images/zenodo.png "Right click on links to copy them into clipboard")
-> 4. And paste them into the **Galaxy upload**:
+>    ```
+>    https://zenodo.org/record/940733/files/illumina_f.fq
+>    https://zenodo.org/record/940733/files/illumina_r.fq
+>    https://zenodo.org/record/940733/files/minion_2d.fq
+>    ```
 >
->
->       ![Upload file](../../images/upload_file.png  "Uploading data into Galaxy. First (1) click **Paste/Fetch data** link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).")
+>    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
 {: .hands_on}
-
 
 If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.
 
