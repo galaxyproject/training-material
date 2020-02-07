@@ -100,7 +100,7 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 >
 {: .hands_on}
 
-# Pretreatments
+# Preprocessing
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="pretreatments" %}
 
 {% if include.short %}
@@ -123,7 +123,7 @@ We will run all these steps using a single workflow, then discuss each step and 
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
+> 2. Run **Workflow 1: Preprocessing** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Forward FastQ file"*: `T1A_forward`
 >    - {% icon param-file %} *"2: Reverse FastQ file"*: `T1A_reverse`
@@ -656,7 +656,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 > > ### {% icon tip %} Tip: Running low on time? Use this faster approach
 > >
-> > The first step of this workflow may take quite a bit of time to complete (> 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:
+> > The first step of this workflow (**HUMAnN2** {% icon tool %}) may take quite a bit of time to complete (> 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:
 > >
 > > 1. **Import the workflow** into Galaxy
 > >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information_short.ga) or download it to your computer.
@@ -669,7 +669,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 > >    {{ page.zenodo_link }}/files/T1A_humann2_pathway_abundances.tsv
 > >    ```
 > >
-> > 3. Run **Workflow 3: Functional Information (short)** {% icon workflow %} using the following parameters:
+> > 3. Run **Workflow 3: Functional Information (quick)** {% icon workflow %} using the following parameters:
 > >    - *"Send results to a new history"*: `No`
 > >    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
 > >
