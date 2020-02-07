@@ -484,7 +484,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
 - A **SAM file** with the results of the sequence mapping via the reference database.
 - A **BIOM file** with the same information as the previous file but in BIOM format
   BIOM format is quite common in microbiomics. This is standard, for example, as the input for tools like mothur or QIIME.
-- A **tabular file** with the **community structure**
+- A **tabular file** with the **community profile*
 
     ```
     #SampleID	Metaphlan2_Analysis
@@ -499,9 +499,9 @@ This step may take a couple of minutes as each sequence is compare to the full d
 
     > ### {% icon question %} Questions
     >
-    > Inspect the tabular file output by **MetaPhlAn2** {% icon tool %}
+    > Inspect the `Community profile` file output by **MetaPhlAn2** {% icon tool %}
     >
-    > 1. How many taxon have been identified?
+    > 1. How many taxons have been identified?
     > 2. What are the different taxonomic levels we have access to with MetaPhlAn2?
     > 3. What genus and species are found in our sample?
     > 4. Has only bacteria been identified in our sample?
