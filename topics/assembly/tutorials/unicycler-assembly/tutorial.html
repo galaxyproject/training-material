@@ -488,27 +488,9 @@
         
     
         
-    
-        
-    
-        
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
         </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         
@@ -566,12 +548,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
-            UseGalaxy.eu
-        </a>
-        
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -596,7 +572,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 6, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -761,28 +737,75 @@
 <p>In this example we will use a downsampled version of <em>E. coli</em> C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse <span class="notranslate">reads</span> for Illumina, and Long read file produced by ONT. All data are in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-load-data-into-history"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Load data into History</h3>
+  <h3 id="hands_on-hands-on-obtaining-our-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
 
   <ol>
-    <li>To load data into your <span class="notranslate">Galaxy</span> instance:
-      <ul>
-        <li>Log in into <span class="notranslate">Galaxy</span></li>
-        <li>Create new history (if you are new to <span class="notranslate">Galaxy</span> see <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html"><span class="notranslate">Galaxy</span> 101 tutorial</a> first).</li>
-      </ul>
+    <li>
+      <p>Make sure you have an empty analysis history. Give it a name.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
     </li>
     <li>
-      <p><strong>Get data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> as shown below (see <a href="/training-material/topics/galaxy-data-manipulation/tutorials/get-data/slides.html">these slides</a> for an introduction on how to load data into <span class="notranslate">Galaxy</span>):</p>
+      <p>Import the following file from <a href="https://zenodo.org/record/940733">Zenodo</a></p>
 
-      <figure id="figure-6"><img src="../../images/get_data.png" alt="Get Data" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Getting data into history starts with clicking <b>Get data</b> button</figcaption></figure>
-    </li>
-    <li>Open Zenodo <a href="https://doi.org/10.5281/zenodo.940733"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.940733.svg" alt="DOI" /></a>
- link in a <strong>new browser window</strong> and right-click on dataset links:
-      <figure id="figure-7"><img src="../../images/zenodo.png" alt="Get Data" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Right click on links to copy them into clipboard</figcaption></figure>
-    </li>
-    <li>
-      <p>And paste them into the <strong><span class="notranslate">Galaxy</span> upload</strong>:</p>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/940733/files/illumina_f.fq
+https://zenodo.org/record/940733/files/illumina_r.fq
+https://zenodo.org/record/940733/files/minion_2d.fq
+</code></pre></div>      </div>
 
-      <figure id="figure-8"><img src="../../images/upload_file.png" alt="Upload file" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Uploading data into <span class="notranslate">Galaxy</span>. First (1) click **Paste/Fetch data** link. Next (2), paste URL copied from Zenodo. Finally (3), set type of all datasets to <tt>fastqsanger</tt>. Click <b>Start</b> (4).</figcaption></figure>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
     </li>
   </ol>
 
@@ -790,7 +813,7 @@
 
 <p>If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.</p>
 
-<figure id="figure-9"><img src="../../images/starting_data.png" alt="Datasets in History" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Sequencing data loaded into <span class="notranslate">Galaxy</span> history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/starting_data.png" alt="Datasets in History" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequencing data loaded into <span class="notranslate">Galaxy</span> history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
 
 <h3 id="assess-read-quality">Assess Read Quality</h3>
 
@@ -821,11 +844,11 @@
 
 <p>A quick look at quality score distribution will show a confusing picture:</p>
 
-<figure id="figure-10"><img src="../../images/multiqc1.png" alt="QC reported zoomed out" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Because Illumina <span class="notranslate">reads</span> (green) are <b>much</b> shorter that ONT <span class="notranslate">reads</span> (red) the plot looks strange. ONT <span class="notranslate">reads</span> generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
+<figure id="figure-7"><img src="../../images/multiqc1.png" alt="QC reported zoomed out" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Because Illumina <span class="notranslate">reads</span> (green) are <b>much</b> shorter that ONT <span class="notranslate">reads</span> (red) the plot looks strange. ONT <span class="notranslate">reads</span> generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
 
 <p>So let’s zoom in into Illumina data:</p>
 
-<figure id="figure-11"><img src="../../images/multiqc2.png" alt="QC reported zoomed in" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Zooming in shows quality distribution for Illumina <span class="notranslate">reads</span>. This is excellent data with mean base qualities above 30 across all <span class="notranslate">reads</span>.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/multiqc2.png" alt="QC reported zoomed in" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Zooming in shows quality distribution for Illumina <span class="notranslate">reads</span>. This is excellent data with mean base qualities above 30 across all <span class="notranslate">reads</span>.</figcaption></figure>
 
 <h2 id="assembly-with-unicycler">Assembly with Unicycler</h2>
 
@@ -873,7 +896,7 @@
 
 <p>The Quast tool outputs assembly metrics as an html file with metrics and graphs. The image below looks exceptionally boring. This is a <strong>good</strong> thing:</p>
 
-<figure id="figure-12"><img src="../../images/quast_output.png" alt="Quast Interface" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.</figcaption></figure>
+<figure id="figure-9"><img src="../../images/quast_output.png" alt="Quast Interface" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Quast Output: Quast provides different statistics such as the number of contigs or scaffolds, the N50 and N75, and the total length of the assembly. You can also access 3 plots, the cumulative length of the contigs, the Nx, or the GC content.</figcaption></figure>
 
 <p>One can see that there are two (!) contigs. The largest contig is 4,576,290 bp (for comparison <em>E. coli</em> K12 MG1655 strain genome length is <a href="https://www.ncbi.nlm.nih.gov/nuccore/NZ_APIN00000000.1">4,656,144 bp</a>) and the smallest is 4,581,676 (total length) - 4,576,290 (length of the largest) = 5,386 bp. When we analyzed this dataset for the first time we were initially puzzled by this second contig. But we quickly realized that this is simply the genome of bacteriophage <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_001422.1">phiX174</a> which is routinely used as a spike-in in Illumina sequencing. Thus we have two genomes: the one of <em>E.coli</em> C-1 and phiX174! We can now use Prokka to annotate our two genomes.</p>
 
@@ -927,22 +950,22 @@
     <li>
       <p>Start IGV. It will look something like this:</p>
 
-      <figure id="figure-13"><img src="../../images/igv1.png" alt="IGV just started" /><figcaption><span class="figcaption-prefix">Figure 13:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
+      <figure id="figure-10"><img src="../../images/igv1.png" alt="IGV just started" /><figcaption><span class="figcaption-prefix">Figure 10:</span> IGV started by using Java Web Start. Note that it is currently showing Human Genome (hg38) build. This is obviously <b>not</b> what we want.</figcaption></figure>
     </li>
     <li>
       <p>Locate the output of Unicycler and expand it :</p>
 
-      <figure id="figure-14"><img src="../../images/unicycler_igv.png" alt="Unicycler result Visualization" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Expanding Unicycler assembly reveals IGV link.</figcaption></figure>
+      <figure id="figure-11"><img src="../../images/unicycler_igv.png" alt="Unicycler result Visualization" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Expanding Unicycler assembly reveals IGV link.</figcaption></figure>
     </li>
     <li>
       <p>Click on the <em>local</em> link highlighted with orange outline. The browser will change:</p>
 
-      <figure id="figure-15"><img src="../../images/igv2.png" alt="IGV with Unicycler assembly" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Now you can see the major contig shown in the browser window.</figcaption></figure>
+      <figure id="figure-12"><img src="../../images/igv2.png" alt="IGV with Unicycler assembly" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Now you can see the major contig shown in the browser window.</figcaption></figure>
     </li>
     <li>
       <p>Let’s add Prokka annotations to the browser image. For this simply expand Prokka’s GFF3 dataset and click on the <em>local</em> link:</p>
 
-      <figure id="figure-16"><img src="../../images/prokka_item.png" alt="Expanded GFF3 dataset representing Prokka annotations" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.</figcaption></figure>
+      <figure id="figure-13"><img src="../../images/prokka_item.png" alt="Expanded GFF3 dataset representing Prokka annotations" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Expanded GFF dataset generated with Prokka. Click on the <em>local</em> link (highlighted with orange outline) to display this dataset within IGV.</figcaption></figure>
     </li>
   </ol>
 
@@ -950,7 +973,7 @@
 
 <p>You will now see the annotations within the browser window:</p>
 
-<figure id="figure-17"><img src="../../images/igv3.png" alt="Prokka result Visualization" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Viewing annotated assembly withing IGV.</figcaption></figure>
+<figure id="figure-14"><img src="../../images/igv3.png" alt="Prokka result Visualization" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Viewing annotated assembly withing IGV.</figcaption></figure>
 
 
                     
@@ -1104,7 +1127,7 @@
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Anton Nekrutenko, Delphine Lariviere, Simon Gladman, 2019 <b>Unicycler Assembly (Galaxy Training Materials)</b>. <a href="/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Anton Nekrutenko, Delphine Lariviere, Simon Gladman, 2020 <b>Unicycler Assembly (Galaxy Training Materials)</b>. <a href="/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html">/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1121,9 +1144,9 @@
 <code id="citation-code">@misc{assembly-unicycler-assembly,
     author = "Anton Nekrutenko and Delphine Lariviere and Simon Gladman",
     title = "Unicycler Assembly (Galaxy Training Materials)",
-    year = "2019",
-    month = "07",
-    day = "17"
+    year = "2020",
+    month = "02",
+    day = "06"
     url = "\url{/training-material/topics/assembly/tutorials/unicycler-assembly/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
