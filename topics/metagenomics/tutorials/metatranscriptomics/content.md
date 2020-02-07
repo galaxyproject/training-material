@@ -308,7 +308,7 @@ There are several tools out there that can perform theses steps, but in this ana
 >
 > > ### {% icon solution %} Solution
 > > 1. 203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.
-> > 2. 1,500 (0.6%) reads were too short after trimming and then filtered.
+> > 2. 27,677 (10.6%) reads were too short after trimming and then filtered.
 > {: .solution }
 {: .question}
 
@@ -445,7 +445,7 @@ In this tutorial, we follow second approach using **MetaPhlAn2** ({% cite truong
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. Run **Workflow 1: Community Profile** {% icon workflow %} using the following parameters:
+> 2. Run **Workflow 2: Community Profile** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
 >
