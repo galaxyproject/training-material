@@ -17,6 +17,7 @@ key_points:
   - "FreeBayes can be effectively used to call variants in haploid systems."
 contributors:
   - nekrut
+  - astrovsky01
 ---
 
 # Introduction
