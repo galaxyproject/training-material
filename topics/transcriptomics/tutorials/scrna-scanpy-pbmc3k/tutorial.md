@@ -130,7 +130,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 >        - *"Use 10x Genomics formatted mtx"*: `Output from Cell Ranger v2 or earlier versions`
 >            - {% icon param-file %} *"Genes"*: `genes.tsv`
 >            - {% icon param-file %} *"Barcodes"*: `barcodes.tsv`
->            - *"Variables index"*: `gene_ids`
+>            - *"Variables index"*: `gene_symbols`
 >            - *"Make the variable index unique by appending '-1', '-2'?"*: `Yes`
 >
 > 2. Rename the generated file to `Input 3k PBMC`
