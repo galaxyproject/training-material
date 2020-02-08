@@ -430,7 +430,7 @@ To create this table, we need to:
 >
 > 9. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC`
->    - *"Function of manipulate the object"*: `Add new annotation(s) for observations or variables`
+>    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >      - *"What to annotate?"*: `Variables (var)`
 >      - {% icon param-file %} *"Table with new annotations"*: `Mitochondrial annotation`
 >
@@ -654,8 +654,8 @@ Based on the previous plot, we would like to remove cells that have:
 >
 > 5. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
->    - *"Function of manipulate the object"*: `Filter observations or variables`
 >        - *"What to annotate?"*: `Observations (obs)`
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
 >        - *"Type of filtering?"*: `By key (column) values`
 >            - *"Key to filter"*: `pct_counts_mito`
 >            - *"Type of value to filter"*: `Number`
@@ -725,7 +725,7 @@ We will freeze the current state of the AnnData object, i.e. the logarithmized r
 >
 > 1. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Inspect and manipulate** {% icon tool %}
->    - *"Function of manipulate the object"*: `Freeze the current state into the 'raw' attribute`
+>    - *"Function to manipulate the object"*: `Freeze the current state into the 'raw' attribute`
 >
 > 2. Rename the generated output `3k PBMC after QC filtering and normalization/scaling`
 {: .hands_on}
@@ -791,7 +791,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >
 > 2. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of the last **Filter** {% icon tool %}
->    - *"Function of manipulate the object"*: `Filter observations or variables`
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
 >      - *"What to filter?"*: `Variables (var)`
 >        - *"Type of filtering?"*: `By key (column) values`
 >          - *"Key to filter"*: `highly_variable`
@@ -1682,7 +1682,7 @@ Cluster | Cell type
 >
 > 1. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
->    - *"Function of manipulate the object"*: `Rename categories of annotation`
+>    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >      - *"Key for observations or variables annotation"*: `louvain`
 >      - *"Comma-separated list of new categories"*: `CD4+ T, CD14+, B, CD8+ T, FCGR3A+, NK, Dendritic, Megakaryocytes`
 >
