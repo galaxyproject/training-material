@@ -654,8 +654,8 @@ Based on the previous plot, we would like to remove cells that have:
 >
 > 5. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
->        - *"What to annotate?"*: `Observations (obs)`
 >    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"What to filter?"*: `Observations (obs)`
 >        - *"Type of filtering?"*: `By key (column) values`
 >            - *"Key to filter"*: `pct_counts_mito`
 >            - *"Type of value to filter"*: `Number`
@@ -746,7 +746,7 @@ Once the per-gene variation has been quantified, we need to select the subset of
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering and normalization`
->    - *"Method used for filtering"*: `Annotate highly variable genes, using 'pp.highly_variable_genes'`
+>    - *"Method used for filtering"*: `Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'`
 >      - *"Flavor for computing normalized dispersion"*: `seurat`
 >        - *"Minimal mean cutoff"*: `0.0125`
 >        - *"Maximal mean cutoff"*: `3`
@@ -1017,7 +1017,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >
 > 2. **Plot** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
->    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca'`
+>    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `CST3, NKG7, PPBP`
 >      - In *"Plot attributes"*
 >        - In *"Component"*
