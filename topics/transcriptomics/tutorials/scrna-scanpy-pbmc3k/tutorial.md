@@ -1306,10 +1306,10 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >    > > 
 >    > > This information can be accessed using:
 >    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    > >    - *"What to inspect?"*: `Generalinformation about the object`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    > >    - *"What to inspect?"*: `Unstructured annotation (uns)`
 >    > >      - *"What to inspect in uns?"*: `Rank gene groups (rank_genes_groups)`
 >    > >
@@ -1324,7 +1324,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >      - *"Should the y-axis of each panels be shared?"*: `No`
 >
 > 4. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    - *"What to inspect?"*: `Unstructured annotation (uns)`
 >      - *"What to inspect in uns?"*: `Rank gene groups (rank_genes_groups)`
 >
@@ -1422,7 +1422,7 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields in '.obs'`
->         - *"Keys for accessing variables"*: `CST3, NKG7 and PPBP`
+>         - *"Keys for accessing variables"*: `CST3, NKG7, PPBP`
 >      - *"The key of the observation grouping to consider"*: `louvain`
 >
 {: .hands_on}
@@ -1730,7 +1730,7 @@ With the annotated cell types, we can also visualize the expression of their can
 > ### {% icon hands_on %} Hands-on: Plot expression of canonical marker genes for the annotated cell types
 >
 > 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation`
 >    - *"Method used for plotting"*: `Generic: Makes a dot plot of the expression values, using 'pl.dotplot'`
 >        - *"Variables to plot (columns of the heatmaps)"*: `Subset of variables in 'adata.var_names'`
 >            - *"List of variables to plot"*: `IL7R, CCR7, CD8A, CD14, LYZ, MS4A1, CD79A, GNLY, NKG7, KLRB1, FCER1A, CST3, PPBP, FCGR3A`
