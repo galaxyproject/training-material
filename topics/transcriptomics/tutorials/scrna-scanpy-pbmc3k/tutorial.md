@@ -782,7 +782,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. There are now 32,738 genes, as initially
+>    > > 1. There are now 13,714 genes, as before.
 >    > > 2. Extra annotations have been added to `var`, whose a boolean annotation `highly_variable` for highly variable genes.
 >    > >
 >    > {: .solution}
