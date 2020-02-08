@@ -318,7 +318,7 @@ Low-quality cells may be due to a variety of sources such as cell damage during 
 
 To mitigate these problems, we need to remove these low-quality cells at the start of the analysis. Several common QC metrics can be used to identify these cells based on their expression profile:
 
-- **Cell size**, i.e. the total sum of counts accross all genes for each cells
+- **Cell size**, i.e. the total sum of counts across all genes for each cells
 
     When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. Cells with small sizes are then considered to be of low quality: the RNA has been lost during the library preparation (cell lysis, inefficient cDNA capture and amplification, etc.)
 
@@ -777,7 +777,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    >     var: 'gene_ids', 'n_genes', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
 >    > ```
 >    >
->    > 1. How many genes are the `AnnData` object?
+>    > 1. How many genes are in the `AnnData` object?
 >    > 2. Where is the stored the information about the genes and if they are highly variable or not?
 >    > 
 >    > > ### {% icon solution %} Solution
@@ -823,7 +823,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 ## Scaling the data
 
-Prior to any downstream analysis like dimensional reduction, we need to apply a linear transformation or scaling to
+Prior to any downstream analysis like dimensional reduction, we need to apply a linear transformation or scaling to:
 
 1. Regress out unwanted sources of variation in the total counts per cell and the percentage of mitochondrial genes expressed.
 2. Scale data to unit variance and zero mean, i.e. the variance across cells is 1 and the mean expression is 0, in order to give equal weight in downstream analyses and ensure that highly-expressed genes do not dominate.
@@ -1064,7 +1064,7 @@ A simple heuristic for choosing the number of PCs generates an "Elbow plot": a r
 
 ![PCA variance ratio](../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png)
 
-To determine the elbow point, we assume that that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.
+To determine the elbow point, we assume that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.
 
 > ### {% icon question %} Questions
 >
@@ -1102,7 +1102,7 @@ When running graph-based clustering, we need to think about:
 - How many neighbors are considered when constructing the graph.
 - What scheme is used to weight the edges.
 
-Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the euclidian distance metrics and the UMAP method ({% cite mcinnes2018umap %}) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.
+Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the Euclidian distance metrics and the UMAP method ({% cite mcinnes2018umap %}) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.
 
 > ### {% icon hands_on %} Hands-on: Compute the neighborhood graph
 >
@@ -1619,7 +1619,7 @@ FCGR3A+ Monocytes | FCGR3A, MS4A7
 
 > ### {% icon tip %} How to find canonical markers?
 > 
-> Canonical markers are usually found in the litterature and are also aggregated into dedicated database like the [PanglaoDB](https://panglaodb.se/markers.html) {% cite franzen2019panglaodb %}
+> Canonical markers are usually found in the literature and are also aggregated into dedicated database like the [PanglaoDB](https://panglaodb.se/markers.html) {% cite franzen2019panglaodb %}
 {: .tip}
 
 > ### {% icon question %} Questions
