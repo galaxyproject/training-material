@@ -702,7 +702,9 @@
         
     
         
-    
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
         
     
         
@@ -733,6 +735,30 @@
     
         
     
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
         
     
         
@@ -752,7 +778,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 13, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 8, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -946,7 +972,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
               <ul>
                 <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes”</em>: <code class="highlighter-rouge">genes.tsv</code></li>
                 <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes”</em>: <code class="highlighter-rouge">barcodes.tsv</code></li>
-                <li><em>“Variables index”</em>: <code class="highlighter-rouge">gene_ids</code></li>
+                <li><em>“Variables index”</em>: <code class="highlighter-rouge">gene_symbols</code></li>
                 <li><em>“Make the variable index unique by appending ‘-1’, ‘-2’?”</em>: <code class="highlighter-rouge">Yes</code></li>
               </ul>
             </li>
@@ -1188,7 +1214,7 @@ RP11-34P13.8	ENSG00000239945
 
 <ul>
   <li>
-    <p><strong>Cell size</strong>, i.e. the total sum of counts accross all genes for each cells</p>
+    <p><strong>Cell size</strong>, i.e. the total sum of counts across all genes for each cells</p>
 
     <p>When cells are very degraded or absent from the library preparation, the number of <span class="notranslate">reads</span> sequenced from that library will be very low. Cells with small sizes are then considered to be of low quality: the <span class="notranslate">RNA</span> has been lost during the library preparation (cell lysis, inefficient c<span class="notranslate">DNA</span> capture and amplification, etc.)</p>
   </li>
@@ -1365,7 +1391,7 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC</code></li>
-        <li><em>“Function of manipulate the object”</em>: <code class="highlighter-rouge">Add new annotation(s) for observations or variables</code>
+        <li><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Add new annotation(s) for observations or variables</code>
           <ul>
             <li><em>“What to annotate?”</em>: <code class="highlighter-rouge">Variables (var)</code></li>
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table with new annotations”</em>: <code class="highlighter-rouge">Mitochondrial annotation</code></li>
@@ -1694,9 +1720,9 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Function of manipulate the object”</em>: <code class="highlighter-rouge">Filter observations or variables</code>
+        <li><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Filter observations or variables</code>
           <ul>
-            <li><em>“What to annotate?”</em>: <code class="highlighter-rouge">Observations (obs)</code></li>
+            <li><em>“What to filter?”</em>: <code class="highlighter-rouge">Observations (obs)</code></li>
             <li><em>“Type of filtering?”</em>: <code class="highlighter-rouge">By key (column) values</code>
               <ul>
                 <li><em>“Key to filter”</em>: <code class="highlighter-rouge">pct_counts_mito</code></li>
@@ -1799,7 +1825,7 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Function of manipulate the object”</em>: <code class="highlighter-rouge">Freeze the current state into the 'raw' attribute</code></li>
+        <li><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Freeze the current state into the 'raw' attribute</code></li>
       </ul>
     </li>
     <li>Rename the generated output <code class="highlighter-rouge">3k PBMC after QC filtering and normalization/scaling</code></li>
@@ -1825,7 +1851,7 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC after QC filtering and normalization</code></li>
-        <li><em>“Method used for filtering”</em>: <code class="highlighter-rouge">Annotate highly variable genes, using 'pp.highly_variable_genes'</code>
+        <li><em>“Method used for filtering”</em>: <code class="highlighter-rouge">Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'</code>
           <ul>
             <li><em>“Flavor for computing normalized dispersion”</em>: <code class="highlighter-rouge">seurat</code>
               <ul>
@@ -1872,7 +1898,7 @@ RP11-34P13.8	ENSG00000239945
 </code></pre></div>        </div>
 
         <ol>
-          <li>How many genes are the <code class="highlighter-rouge">AnnData</code> object?</li>
+          <li>How many genes are in the <code class="highlighter-rouge">AnnData</code> object?</li>
           <li>Where is the stored the information about the genes and if they are highly variable or not?</li>
         </ol>
 
@@ -1880,7 +1906,7 @@ RP11-34P13.8	ENSG00000239945
           <h3 id="solution-solution-14"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
-            <li>There are now 32,738 genes, as initially</li>
+            <li>There are now 13,714 genes, as before.</li>
             <li>Extra annotations have been added to <code class="highlighter-rouge">var</code>, whose a boolean annotation <code class="highlighter-rouge">highly_variable</code> for highly variable genes.</li>
           </ol>
 
@@ -1891,7 +1917,7 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Function of manipulate the object”</em>: <code class="highlighter-rouge">Filter observations or variables</code>
+        <li><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Filter observations or variables</code>
           <ul>
             <li><em>“What to filter?”</em>: <code class="highlighter-rouge">Variables (var)</code>
               <ul>
@@ -1939,7 +1965,7 @@ RP11-34P13.8	ENSG00000239945
 
 <h2 id="scaling-the-data">Scaling the data</h2>
 
-<p>Prior to any <span class="notranslate">downstream</span> analysis like dimensional reduction, we need to apply a linear transformation or scaling to</p>
+<p>Prior to any <span class="notranslate">downstream</span> analysis like dimensional reduction, we need to apply a linear transformation or scaling to:</p>
 
 <ol>
   <li>Regress out unwanted sources of variation in the total counts per cell and the percentage of mitochondrial genes expressed.</li>
@@ -2225,7 +2251,7 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
-        <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">PCA: Plot PCA results, using 'pl.pca'</code>
+        <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
           <ul>
             <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="highlighter-rouge">CST3, NKG7, PPBP</code></li>
             <li>In <em>“Plot attributes”</em>
@@ -2301,7 +2327,7 @@ RP11-34P13.8	ENSG00000239945
 
 <p><img src="../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png" alt="PCA variance ratio" /></p>
 
-<p>To determine the elbow point, we assume that that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.</p>
+<p>To determine the elbow point, we assume that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-22"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2348,7 +2374,7 @@ RP11-34P13.8	ENSG00000239945
   <li>What scheme is used to weight the edges.</li>
 </ul>
 
-<p>Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the euclidian distance metrics and the UMAP method (<a class="citation" href="#mcinnes2018umap">McInnes <i>et al.</i> 2018</a>) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.</p>
+<p>Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the Euclidian distance metrics and the UMAP method (<a class="citation" href="#mcinnes2018umap">McInnes <i>et al.</i> 2018</a>) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-compute-the-neighborhood-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute the neighborhood graph</h3>
@@ -2658,13 +2684,13 @@ RP11-34P13.8	ENSG00000239945
           <ol>
             <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
               <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
                 <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Generalinformation about the object</code></li>
               </ul>
             </li>
             <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
               <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
                 <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Unstructured annotation (uns)</code>
                   <ul>
                     <li><em>“What to inspect in uns?”</em>: <code class="highlighter-rouge">Rank gene groups (rank_genes_groups)</code></li>
@@ -2691,7 +2717,7 @@ RP11-34P13.8	ENSG00000239945
     </li>
     <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
         <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Unstructured annotation (uns)</code>
           <ul>
             <li><em>“What to inspect in uns?”</em>: <code class="highlighter-rouge">Rank gene groups (rank_genes_groups)</code></li>
@@ -2964,7 +2990,7 @@ RP11-34P13.8	ENSG00000239945
           <ul>
             <li><em>“Keys for accessing variables”</em>: <code class="highlighter-rouge">Subset of variables in 'adata.var_names' or fields in '.obs'</code>
               <ul>
-                <li><em>“Keys for accessing variables”</em>: <code class="highlighter-rouge">CST3, NKG7 and PPBP</code></li>
+                <li><em>“Keys for accessing variables”</em>: <code class="highlighter-rouge">CST3, NKG7, PPBP</code></li>
               </ul>
             </li>
             <li><em>“The key of the observation grouping to consider”</em>: <code class="highlighter-rouge">louvain</code></li>
@@ -3282,7 +3308,7 @@ RP11-34P13.8	ENSG00000239945
 <blockquote class="tip">
   <h3 id="tip-how-to-find-canonical-markers"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> How to find canonical markers?</h3>
 
-  <p>Canonical markers are usually found in the litterature and are also aggregated into dedicated database like the <a href="https://panglaodb.se/markers.html">PanglaoDB</a> <a class="citation" href="#franzen2019panglaodb">Franzén <i>et al.</i> 2019</a></p>
+  <p>Canonical markers are usually found in the literature and are also aggregated into dedicated database like the <a href="https://panglaodb.se/markers.html">PanglaoDB</a> <a class="citation" href="#franzen2019panglaodb">Franzén <i>et al.</i> 2019</a></p>
 </blockquote>
 
 <blockquote class="question">
@@ -3488,7 +3514,7 @@ RP11-34P13.8	ENSG00000239945
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
-        <li><em>“Function of manipulate the object”</em>: <code class="highlighter-rouge">Rename categories of annotation</code>
+        <li><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Rename categories of annotation</code>
           <ul>
             <li><em>“Key for observations or variables annotation”</em>: <code class="highlighter-rouge">louvain</code></li>
             <li><em>“Comma-separated list of new categories”</em>: <code class="highlighter-rouge">CD4+ T, CD14+, B, CD8+ T, FCGR3A+, NK, Dendritic, Megakaryocytes</code></li>
@@ -3560,7 +3586,7 @@ RP11-34P13.8	ENSG00000239945
   <ol>
     <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">anndata</code> (output of <strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Makes a dot plot of the <span class="notranslate">expression</span> values, using 'pl.dotplot'</code>
           <ul>
             <li><em>“Variables to plot (columns of the heatmaps)”</em>: <code class="highlighter-rouge">Subset of variables in 'adata.var_names'</code>
@@ -3887,8 +3913,8 @@ RP11-34P13.8	ENSG00000239945
     author = "Bérénice Batut",
     title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "13"
+    month = "02",
+    day = "08"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
