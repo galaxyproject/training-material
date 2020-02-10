@@ -380,10 +380,10 @@ Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The
 > 3. Which type of rRNA are identified? Which organisms are we then expected to identify?
 >
 > > ### {% icon solution %} Solution
-> > 1. 518,108 reads are processed: 259,054 for forward and 259,054 for reverse (given the **Cutadapt** report)
-> > 2. Out of the 518,108 reads, 136,622 (26%) have passed the e-value threshold and are identified as rRNA. The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
+> > 1. 465,754 reads are processed: 232,877 for forward and 232,877 for reverse (given the **Cutadapt** report)
+> > 2. Out of the 465,754 reads, 119,646 (26%) have passed the e-value threshold and are identified as rRNA. The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent < 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.
 > >    Some of the aligned reads are forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose *"If one of the paired-end reads aligns and the other one does not"*: `Output both reads to rejected file (--paired_out)`, if one read in a pair does not align, both go to unaligned.
-> > 3. The 20.18% rRNA reads are 23S bacterial rRNA, 2.62% 16S bacterial rRNA and 2.22% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).
+> > 3. The 20.56% rRNA reads are 23S bacterial rRNA, 2.34% 16S bacterial rRNA and 1.74% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).
 > {: .solution }
 {: .question}
 
