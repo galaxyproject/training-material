@@ -738,6 +738,8 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
     > ### {% icon question %} Questions
     >
+    > **Inspect** the `Gene Family Abundances` file from **HUMAnN2** {% icon tool %}
+    >
     > 1. What is the most abundant family?
     > 2. Which species is involved in production of this family?
     > 3. How many gene families have been identified?
@@ -776,6 +778,8 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     The pathway abundance is computed once for all species (community level) and again for each species  using species gene abundances along the components of the pathway. Unlike gene abundance, a pathway's  abundance at community-level is not necessarily the sum of the abundance values of each species. For example, for the same pathway example as above, if the abundances of RXNs 1-4 are [5, 5, 10, 10] in Species A and [10, 10, 5, 5] in Species B, the pathway abundance would be 5 for Species A and Species B, but 15 at the community level as the reaction totals are [15, 15, 15, 15].
 
     > ### {% icon question %} Questions
+    >
+    > **View** the `Pathway Abundances` output from **HUMAnN2** {% icon tool %}
     >
     > 1. What is the most abundant pathway?
     > 2. Which species is involved in production of this pathway?
@@ -858,7 +862,7 @@ Let's do the same for the pathway abundances.
 >
 > 2. **Rename** {% icon galaxy-pencil %} the generated file `Normalized pathways`
 >
-{: .hands-on}
+{: .hands_on}
 
 {% endunless %}
 
@@ -909,7 +913,7 @@ ANAGLYCOLYSIS-PWY|g__Coprothermobacter.s__Coprothermobacter_proteolyticus|UniRef
 
 > ### {% icon question %} Questions
 >
-> **View** {% icon galaxy-eye %} the normalized gene family abundances file
+> **View** {% icon galaxy-eye %} the output from **Unpack pathway abundances to show genes included** {% icon tool %}
 >
 > 1. Which gene families are involved in the PWY-6305 pathway? And which species?
 >
@@ -947,7 +951,7 @@ The gene families can be a long list of ids and going through the gene families 
 
 > ### {% icon question %} Questions
 >
-> **View** {% icon galaxy-eye %} the outputs of this tool
+> **View** {% icon galaxy-eye %} the 3 outputs of this tool (`Group abundances ..`)
 >
 > 1. Which of the GO terms related to molecular functions is the most abundant?
 >
