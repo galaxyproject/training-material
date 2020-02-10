@@ -204,7 +204,8 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 > 2. **GFFCompare** {% icon tool %}: Run `GFFCompare` on the `Stringtie-merge` generated transcriptome along with the RefSeq annotation file.
 >    - {% icon param-file %} *"GTF inputs for comparison"*: `output of Stringtie-merge`
 >    - *"Use Reference Annotation"*: `Yes`
->       - {% icon param-file %} *"Reference Annotation"*: `RefSeq_reference_GTF`
+>       - *"Choose the source for the reference annotation"*: `History`
+>           - {% icon param-file %} *"Reference Annotation"*: `RefSeq_reference_GTF`
 >    - *"Use Sequence Data"*: `Yes`
 >       - *"Choose the source for the reference list"*: `Locally cached`
 >           - *"Using reference genome"*: 'Mouse (Mus Musculus): mm10'
