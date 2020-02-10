@@ -1,0 +1,169 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Introduction to metatranscriptomics"
+contributors:
+  - subinamehta
+  - pratikdjagtap
+  - shiltemann
+---
+
+## Why study the microbiome?
+
+.pull-left[
+
+- Health care research
+ - Humans are full of microorganisms
+ - Skin, gut, oral cavity, nasal cavity, eyes, ..
+ - Affects health, drug efficacy, etc
+
+]
+.pull-right[
+
+.image-100[ ![](../../images/human_microbiome.png) ]
+
+]
+
+- Sometimes referred to as your **second genome**
+ - ~10 times more cells than you
+ - ~100 times more genes than you
+ - ~1000s different species
+
+
+---
+
+## Why study the microbiome?
+
+- Environmental studies
+  - Microbes in the soil affect plants and animals
+  - Improve agriculture
+
+.image-75[ ![](../../images/environmentalstudies.png) ]
+
+
+---
+
+## Meta- Omics
+
+![](../../images/metatranscriptomics/metaomics.png)
+
+
+---
+
+## Meta- Omics
+
+![](../../images/metatranscriptomics/metaomics2.png)
+
+---
+
+## ASaiM pipeline
+
+![ASiaiM diagram](../../images/asaim-wf.png)
+
+.footnote[Batut et al Gigascience. 2018 7(6) doi: 10.1093/gigascience/giy057]
+
+---
+
+## This tutorial
+
+---
+
+## Input data
+
+
+---
+
+## Cellulose Degradation in a Biogas Reactor
+
+![](../../images/metatranscriptomics/experimental_setup.png)
+
+
+
+???
+
+A 100 µl aliquot of an enriched community from a biogas reactor was transferred to 27 anaerobic bottles containing a rich medium and 10g/L of cellulose as sole carbon source and incubated at 65 °C.
+
+Three bottles were collected at 9 different time points (0, 8, 13, 18, 23, 28, 33, 38 and 43 h) and processed in triplicates. Metatranscriptomic analysis was performed on all time points. Metaproteomics analysis on 4 data points.
+
+---
+
+## Preprocessing
+
+In this tutorial we start with some preprocessing steps
+
+- Quality Control with **FastQC** and **MultiQC**
+- Trimming and Filtering with **Cutadapt**
+- Filter ribosomal RNA with **SortMeRNA**
+- Interlace FastQ files
+
+---
+
+### FastQC
+
+- Generate a web report with quality metrics of your FastQ file
+
+![](../../../sequence-analysis/images/fastqc-report.png)
+
+---
+
+### MultiQC
+
+.pull-left[
+- Combine multiple FastQC reports into one report
+
+- Also for outputs of other tools
+
+- Great when sequencing large numbers of samples
+]
+
+.pull-right[
+![](../../images/metatranscriptomics/multiqc.png)
+]
+
+---
+
+### Read Trimming and Filtering
+
+- Remove adapters
+- Trim low-quality bases from reads
+- Filter reads based on length, quality, ..
+- Many tools that do this: CutAdapt, TrimGalore, ..
+
+---
+
+### SortMeRNA
+
+.pull-left[
+- Most RNA sequences will be ribosomal RNA (rRNA)
+
+- Great for taxonomical assignment (who is there?)
+
+- Not informative for functional analysis (What are they doing?)
+
+- Filter out rRNA before doing functional analysis
+]
+
+.pull-right[
+.image-90[![SortMeRNA](../../images/metatranscriptomics/sortmerna.png)]
+]
+
+---
+
+## Community Profile
+
+---
+
+## Genus Abundance
+
+- Tutorial: one timepoint
+- Over multiple timepoints:
+
+![](../../images/metatranscriptomics/genus_abundance.png)
+
+---
+
+## Functional Analysis
+
+<!-- TODO: Subina -->
+
