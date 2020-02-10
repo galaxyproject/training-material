@@ -130,7 +130,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 >        - *"Use 10x Genomics formatted mtx"*: `Output from Cell Ranger v2 or earlier versions`
 >            - {% icon param-file %} *"Genes"*: `genes.tsv`
 >            - {% icon param-file %} *"Barcodes"*: `barcodes.tsv`
->            - *"Variables index"*: `gene_ids`
+>            - *"Variables index"*: `gene_symbols`
 >            - *"Make the variable index unique by appending '-1', '-2'?"*: `Yes`
 >
 > 2. Rename the generated file to `Input 3k PBMC`
@@ -318,7 +318,7 @@ Low-quality cells may be due to a variety of sources such as cell damage during 
 
 To mitigate these problems, we need to remove these low-quality cells at the start of the analysis. Several common QC metrics can be used to identify these cells based on their expression profile:
 
-- **Cell size**, i.e. the total sum of counts accross all genes for each cells
+- **Cell size**, i.e. the total sum of counts across all genes for each cells
 
     When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. Cells with small sizes are then considered to be of low quality: the RNA has been lost during the library preparation (cell lysis, inefficient cDNA capture and amplification, etc.)
 
@@ -430,7 +430,7 @@ To create this table, we need to:
 >
 > 9. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC`
->    - *"Function of manipulate the object"*: `Add new annotation(s) for observations or variables`
+>    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >      - *"What to annotate?"*: `Variables (var)`
 >      - {% icon param-file %} *"Table with new annotations"*: `Mitochondrial annotation`
 >
@@ -654,8 +654,8 @@ Based on the previous plot, we would like to remove cells that have:
 >
 > 5. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
->    - *"Function of manipulate the object"*: `Filter observations or variables`
->        - *"What to annotate?"*: `Observations (obs)`
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"What to filter?"*: `Observations (obs)`
 >        - *"Type of filtering?"*: `By key (column) values`
 >            - *"Key to filter"*: `pct_counts_mito`
 >            - *"Type of value to filter"*: `Number`
@@ -725,7 +725,7 @@ We will freeze the current state of the AnnData object, i.e. the logarithmized r
 >
 > 1. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Inspect and manipulate** {% icon tool %}
->    - *"Function of manipulate the object"*: `Freeze the current state into the 'raw' attribute`
+>    - *"Function to manipulate the object"*: `Freeze the current state into the 'raw' attribute`
 >
 > 2. Rename the generated output `3k PBMC after QC filtering and normalization/scaling`
 {: .hands_on}
@@ -746,7 +746,7 @@ Once the per-gene variation has been quantified, we need to select the subset of
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering and normalization`
->    - *"Method used for filtering"*: `Annotate highly variable genes, using 'pp.highly_variable_genes'`
+>    - *"Method used for filtering"*: `Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'`
 >      - *"Flavor for computing normalized dispersion"*: `seurat`
 >        - *"Minimal mean cutoff"*: `0.0125`
 >        - *"Maximal mean cutoff"*: `3`
@@ -777,12 +777,12 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    >     var: 'gene_ids', 'n_genes', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
 >    > ```
 >    >
->    > 1. How many genes are the `AnnData` object?
+>    > 1. How many genes are in the `AnnData` object?
 >    > 2. Where is the stored the information about the genes and if they are highly variable or not?
 >    > 
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. There are now 32,738 genes, as initially
+>    > > 1. There are now 13,714 genes, as before.
 >    > > 2. Extra annotations have been added to `var`, whose a boolean annotation `highly_variable` for highly variable genes.
 >    > >
 >    > {: .solution}
@@ -791,7 +791,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >
 > 2. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of the last **Filter** {% icon tool %}
->    - *"Function of manipulate the object"*: `Filter observations or variables`
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
 >      - *"What to filter?"*: `Variables (var)`
 >        - *"Type of filtering?"*: `By key (column) values`
 >          - *"Key to filter"*: `highly_variable`
@@ -823,7 +823,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 ## Scaling the data
 
-Prior to any downstream analysis like dimensional reduction, we need to apply a linear transformation or scaling to
+Prior to any downstream analysis like dimensional reduction, we need to apply a linear transformation or scaling to:
 
 1. Regress out unwanted sources of variation in the total counts per cell and the percentage of mitochondrial genes expressed.
 2. Scale data to unit variance and zero mean, i.e. the variance across cells is 1 and the mean expression is 0, in order to give equal weight in downstream analyses and ensure that highly-expressed genes do not dominate.
@@ -1017,7 +1017,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >
 > 2. **Plot** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
->    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca'`
+>    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `CST3, NKG7, PPBP`
 >      - In *"Plot attributes"*
 >        - In *"Component"*
@@ -1064,7 +1064,7 @@ A simple heuristic for choosing the number of PCs generates an "Elbow plot": a r
 
 ![PCA variance ratio](../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png)
 
-To determine the elbow point, we assume that that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.
+To determine the elbow point, we assume that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.
 
 > ### {% icon question %} Questions
 >
@@ -1102,7 +1102,7 @@ When running graph-based clustering, we need to think about:
 - How many neighbors are considered when constructing the graph.
 - What scheme is used to weight the edges.
 
-Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the euclidian distance metrics and the UMAP method ({% cite mcinnes2018umap %}) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.
+Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the Euclidian distance metrics and the UMAP method ({% cite mcinnes2018umap %}) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.
 
 > ### {% icon hands_on %} Hands-on: Compute the neighborhood graph
 >
@@ -1306,10 +1306,10 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >    > > 
 >    > > This information can be accessed using:
 >    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    > >    - *"What to inspect?"*: `Generalinformation about the object`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    > >    - *"What to inspect?"*: `Unstructured annotation (uns)`
 >    > >      - *"What to inspect in uns?"*: `Rank gene groups (rank_genes_groups)`
 >    > >
@@ -1324,7 +1324,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >      - *"Should the y-axis of each panels be shared?"*: `No`
 >
 > 4. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
 >    - *"What to inspect?"*: `Unstructured annotation (uns)`
 >      - *"What to inspect in uns?"*: `Rank gene groups (rank_genes_groups)`
 >
@@ -1422,7 +1422,7 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields in '.obs'`
->         - *"Keys for accessing variables"*: `CST3, NKG7 and PPBP`
+>         - *"Keys for accessing variables"*: `CST3, NKG7, PPBP`
 >      - *"The key of the observation grouping to consider"*: `louvain`
 >
 {: .hands_on}
@@ -1619,7 +1619,7 @@ FCGR3A+ Monocytes | FCGR3A, MS4A7
 
 > ### {% icon tip %} How to find canonical markers?
 > 
-> Canonical markers are usually found in the litterature and are also aggregated into dedicated database like the [PanglaoDB](https://panglaodb.se/markers.html) {% cite franzen2019panglaodb %}
+> Canonical markers are usually found in the literature and are also aggregated into dedicated database like the [PanglaoDB](https://panglaodb.se/markers.html) {% cite franzen2019panglaodb %}
 {: .tip}
 
 > ### {% icon question %} Questions
@@ -1682,7 +1682,7 @@ Cluster | Cell type
 >
 > 1. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
->    - *"Function of manipulate the object"*: `Rename categories of annotation`
+>    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >      - *"Key for observations or variables annotation"*: `louvain`
 >      - *"Comma-separated list of new categories"*: `CD4+ T, CD14+, B, CD8+ T, FCGR3A+, NK, Dendritic, Megakaryocytes`
 >
@@ -1730,7 +1730,7 @@ With the annotated cell types, we can also visualize the expression of their can
 > ### {% icon hands_on %} Hands-on: Plot expression of canonical marker genes for the annotated cell types
 >
 > 1. **Plot** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation`
 >    - *"Method used for plotting"*: `Generic: Makes a dot plot of the expression values, using 'pl.dotplot'`
 >        - *"Variables to plot (columns of the heatmaps)"*: `Subset of variables in 'adata.var_names'`
 >            - *"List of variables to plot"*: `IL7R, CCR7, CD8A, CD14, LYZ, MS4A1, CD79A, GNLY, NKG7, KLRB1, FCER1A, CST3, PPBP, FCGR3A`
