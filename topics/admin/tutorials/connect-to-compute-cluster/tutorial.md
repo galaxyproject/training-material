@@ -285,13 +285,13 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 > ### {% icon hands_on %} Hands-on: Making Galaxy aware of DRMAA
 >
-> 1. Open your group variables  and add the environment variable:
+> 1. Open your group variables and add the environment variable:
 >
 >    ```yaml
 >    galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
 >    ```
 >
->    This environment variable will then be supplied to any web process (zerglings or mules)
+>    This environment variable will then be supplied to any web process (zerglings or mules).
 >
 > 2. We need to modify `job_conf.xml` to instruct Galaxy on how to use a more advanced job submission setup. We will begin with a basic job conf:
 >
@@ -309,7 +309,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >        </destinations>
 >    </job_conf>
 >    ```
-> 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of defined plugin:
+> 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
 >    ```diff
 >    --- files/galaxy/config/job_conf.xml.old
