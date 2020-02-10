@@ -656,7 +656,8 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 > 2. Run **Workflow 3: Functional Information** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
+>    - {% icon param-file %} *"1: Interlaced non-rRNA reads"*: `Interlaced non-rRNA reads` output from the first workflow
+>    - {% icon param-file %} *"2: Community Profile"*: `MetaPhlAn2 Community Profile` output from the second workflow
 >
 >    {% include snippets/run_workflow.md %}
 >
