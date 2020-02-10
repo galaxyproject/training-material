@@ -677,7 +677,8 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 > >
 > > 3. Run **Workflow 3: Functional Information (quick)** {% icon workflow %} using the following parameters:
 > >    - *"Send results to a new history"*: `No`
-> >    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
+> >    - {% icon param-file %} *"1: Gene Family abundance"*: `T1A_humann2_gene_family_abundances.tsv` you uploaded
+> >    - {% icon param-file %} *"2: Pathway abundance"*: `T1A_humann2_pathway_abundances.tsv` you uploaded
 > >
 > {: .tip}
 {: .hands_on}
