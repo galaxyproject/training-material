@@ -28,6 +28,7 @@ In this tutorial we will perform a metatranscriptomics analysis based on the ASA
 
 
 
+
 # Introduction
 {:.no_toc}
 
@@ -55,6 +56,11 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 2. Extract and analyze the community structure (taxonomic information)
 2. Extract and analyze the community functions (functional information)
 3. Combine taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.
+
+A graphical representation of the ASaiM workflow which we will be using today is given below:
+
+![ASaiM diagram](../../images/asaim-wf.png){: width="75%"}
+
 
 > ### {% icon comment %} Workflow also applicable to metagenomics data
 > The approach with the tools described here can also apply to metagenomics data. What will change are the quality control profiles and proportion of rRNA sequences.
@@ -101,7 +107,7 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 {: .hands_on}
 
 # Preprocessing
-{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="pretreatments" %}
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="preprocessing" %}
 
 {% if include.short %}
 
@@ -118,7 +124,7 @@ We will run all these steps using a single workflow, then discuss each step and 
 > ### {% icon hands_on %} Hands-on: Pretreatments
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_pretreatments.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_preprocessing.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% include snippets/import_workflow.md %}
@@ -659,7 +665,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 > > The first step of this workflow (**HUMAnN2** {% icon tool %}) may take quite a bit of time to complete (> 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:
 > >
 > > 1. **Import the workflow** into Galaxy
-> >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information_short.ga) or download it to your computer.
+> >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information_quick.ga) or download it to your computer.
 > >    - Import the workflow into Galaxy
 > >
 > > 2. **Import** the following 2 files (these are the outputs from **HUMAnN2** {% icon tool %}):
