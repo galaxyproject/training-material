@@ -274,13 +274,13 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 
 > ### {% icon hands_on %} Hands-on: Plotting TADs
 >
-> 1. **hicPlotTADs** {% icon tool %}: Run hicPlotTADs adjusting the parameters:
+> 1. **pyGenomeTracks** {% icon tool %}: Run pyGenomeTracks adjusting the parameters:
 >    - "Region of the genome to limit the operation" to `chr2L:14500000-16500000`
 >    - "Choose style of the track" to `TAD visualization`
 >         - "Plot title" to `HiC dm3 chr2L:14500000-16500000`
 >         - "Matrix to compute on." to the corrected matrix from hicCorrectMatrix step
 >         - "Depth" to `750000`
->         - "Width" to `4`
+>         - "Height" to `4`
 >         - "Boundaries file" to `hicFindTads on data XX: TAD domains`
 >         - "Show x labels" to `Yes`
 >
@@ -288,7 +288,7 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >        - "Choose style of the track" to `Bedgraph matrix track`
 >        - "Plot title" to `TAD separation score`
 >        - "Track file bedgraph format" to `hicFindTads on data XX: TAD information in bm file`
->        - "Width" to `4`
+>        - "Height" to `4`
 >        - "Set type to lines" to 'True'
 >
 >
@@ -296,50 +296,49 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `PC1`
 >        - "Track file bigwig format" the first computed `hicPCA` result
->        - "Minimum value" to `-0.03`
->        - "Maximum value" to `0.03`
->        - "Width" to `1.5`
+>        - "Height" to `1.5`
 >        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `PC2`
 >        - "Track file bigwig format" the second computed `hicPCA` result
->        - "Minimum value" to `-0.03`
->        - "Maximum value" to `0.03`
->        - "Width" to `1.5`
+>        - "Height" to `1.5`
 >        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `H3K36me3`
 >        - "Track file bigwig format" to `H3K36me3`
->        - "Width" to `1.5`
+>        - "Height" to `1.5`
 >        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `H3K27me3`
 >        - "Track file bigwig format" to `H3K27me3`
->        - "Width" to `1.5`
+>        - "Height" to `1.5`
 >        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Bigwig track`
 >        - "Plot title" to `H4K16ac`
 >        - "Track file bigwig format" to `H4K16ac`
->        - "Width" to `1.5`
+>        - "Height" to `1.5`
 >        - "Color of track" to a color of your choice
 >
 >    - "+Insert Include tracks in your plot"
 >        - "Choose style of the track" to `Gene track`
 >        - "Plot title" to `dm3 genes`
 >        - "Track file bedgraph format" the imported .bed file
->        - "Width" to `3`
+>        - "Height" to `3`
 >        - "Type" to `genes`
 >        - "Gene rows" to `15`
 >        - "Color of track" to a color of your choice
 >
+>    - "+Insert Include tracks in your plot"
+>        - "Choose style of the track" to `Vlines track`
+>        - "Track file bed format" to `hicFindTads on data XX: TAD domains`
 {: .hands_on}
 
 The resulting image should look like this one:
