@@ -100,7 +100,7 @@ requirements:
 >    ```
 >
 >
-> 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook
+> 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
 >
 > 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy:
 >
@@ -124,7 +124,7 @@ requirements:
 >
 >    ```
 >
-> 5. Run the playbook
+> 5. Run the playbook (`ansible-playbook -i hosts galaxy.yml`)
 >
 > 6. TIaaS should be available now! Check out the following routes on your server:
 >
