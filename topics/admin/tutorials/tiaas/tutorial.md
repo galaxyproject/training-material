@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Training Infrastructure as a Service"
+title: "Training Infrastructure as a Service (TIaaS)"
 zenodo_link: ""
 questions:
   - How to deploy EU's TIaaS
