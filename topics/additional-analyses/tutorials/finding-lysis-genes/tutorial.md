@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-topic_name: genome-annotation
+topic_name: additional-analyses
 tutorial_name: finding-lysis-genes
 ---
 
