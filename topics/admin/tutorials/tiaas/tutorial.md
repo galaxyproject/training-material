@@ -128,12 +128,13 @@ requirements:
 >
 > 6. TIaaS should be available now! Check out the following routes on your server:
 >
->    URL | Use
->    --- | ---
->    https://server/tiaas/add | Request a new training, send this URLs to trainers who will use your instance
->    https://server/tiaas/admin/ | You can login here with the credentials you set for `tiaas_admin_user` and `tiaas_admin_pass`, and then approve trainings
->    https://server/join-training/<training-id>/ | Join an existing training, it must be status=approved in the admin interface, and you must be logged in to Galaxy
->    https://server/join-training/<training-id>/status | See a training overview, the state of jobs in the queue of trainees.
+>
+>    |URL | Use
+>    |----|----
+>    |https://server/tiaas/add | Request a new training, send this URLs to trainers who will use your instance |
+>    |https://server/tiaas/admin/ | You can login here with the credentials you set for `tiaas_admin_user` and `tiaas_admin_pass`, and then approve trainings|
+>    |https://server/join-training/\<training-id\>/ | Join an existing training, it must be status=approved in the admin interface, and you must be logged in to Galaxy|
+>    |https://server/join-training/\<training-id\>/status | See a training overview, the state of jobs in the queue of trainees.|
 >
 {: .hands_on}
 
