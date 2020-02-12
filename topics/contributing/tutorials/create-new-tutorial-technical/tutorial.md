@@ -52,7 +52,14 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 >
 > 1. Download the workflow for the tutorial
 > 2. Save it in the `workflow` directory of the tutorial
-> 3. Edit the workflow file with a text editor to add the topic name as 'tags' and to add the tutorial title as 'annotation' to the workflow.
+> 3. Check that your `workflow` directory has an `index.md` with the contents:
+>
+>    ```yaml
+>    ---
+>    layout: workflow-list
+>    ---
+>    ```
+> 4. Edit the workflow file with a text editor to add the topic name as 'tags' and to add the tutorial title as 'annotation' to the workflow.
 {: .hands_on}
 
 ## Testing the workflow (recommended)
