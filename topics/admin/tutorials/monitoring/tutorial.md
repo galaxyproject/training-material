@@ -113,7 +113,7 @@ This will setup an InfluxDB server listening on port `:8086`. The service is cur
 
 You can access the InfluxDB service by running the command `influx`.
 
-```
+```sql
 $ influx
 Connected to http://localhost:8086 version 1.7.7
 InfluxDB shell version: 1.7.7
