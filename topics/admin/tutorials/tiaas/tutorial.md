@@ -14,6 +14,7 @@ key_points:
   - TIaaS is an additional service you can deploy which can help you provide a better service to your users
 contributors:
   - hexylena
+  - shiltemann
 subtopic: features
 tags:
   - training
@@ -39,6 +40,17 @@ requirements:
 > {:toc}
 >
 {: .agenda}
+
+# Introduction
+
+Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy Europe](https://usegalaxy.eu) has developed Training Infrastructure as a Service (TIaaS).
+Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
+resources, thus reducing queue times on the day of the training.
+
+![TIaaS idea](../../../instructors/images/workshop-intro/tiaas.png){: width="60%"}
+
+This tutorial will go cover how to set up such a service on your own Galaxy server.
+
 
 # Setting up TIaaS
 
