@@ -72,8 +72,8 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yaml
->    - src: mtchavez.influxdb
->      version: v6.0.0
+>    - src: usegalaxy_eu.influxdb
+>      version: v6.0.1
 >    ```
 >
 > 2. `ansible-galaxy install -p roles -r requirements.yml`
@@ -85,7 +85,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    - hosts: monitoring
 >      become: true
 >      roles:
->        - mtchavez.influxdb
+>        - usegalaxy_eu.influxdb
 >    ```
 >
 >    During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB) on a separate host.
