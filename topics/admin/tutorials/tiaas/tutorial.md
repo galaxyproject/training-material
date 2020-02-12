@@ -138,17 +138,79 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 > 5. Run the playbook (`ansible-playbook -i hosts galaxy.yml`)
 >
-> 6. TIaaS should be available now! Check out the following routes on your server:
+{: .hands_on}
+
+
+TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)
+
+
+|URL | Use | Who |
+|:----|----|-----|
+|https://\<server\>/tiaas/new/ | Request a new TIaaS training | Instructors |
+|https://\<server\>/tiaas/admin/ | Approve and Manage requests | Admin |
+|https://\<server\>/join-training/\<training-id\> | Join an TIaaS training | Participants |
+|https://\<server\>/join-training/\<training-id\>/status | Dashboard with job states of trainees.| Instructors|
+
+
+Let's see it in action!
+
+> ### {% icon hands_on %} Hands-on: Using TIaaS
 >
+> 1. **Create a new TIaaS request**
+>    - Go to https://\<server\>/tiaas/new/
+>    - Here you will find the request form users will fill in to request TIaaS:
+>      ![TIaaS request form](../../images/tiaas/tiaas_request_form.png)
+>    - For *"Training Identifier"*, fill in `testtraining` (or remember this value if you enter something different)
+>      - This is the `<training-id>` used in the URLs listed above used for:
+>        1. Workshop participants to join the tiaas group
+>        2. Workshop instructors to monitor the progress of their participants.
+>    - Fill in the rest of the form as you like
+>    - Submit the form and you should see a confirmation dialog:
+>      ![TIaaS requested successfully](../../images/tiaas/tiaas_request_form_submitted.png)
 >
->    |URL | Use
->    |----|----
->    |https://server/tiaas/new/ | Request a new training, send this URLs to trainers who will use your instance |
->    |https://server/tiaas/admin/ | You can login here with the values you set for `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file, and then approve the training you requested|
->    |https://server/join-training/\<training-id\>/ | Join an existing training, it must be status=approved in the admin interface, and you must be logged in to Galaxy|
->    |https://server/join-training/\<training-id\>/status | See a training overview, the state of jobs in the queue of trainees.|
+> 2. **Approve TIaaS request**
+>    - Next, the request will have to be approved by an admin
+>    - Go to https://\<server\>/tiaas/admin
+>    - **Log in** using the values you configured `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file
+>      - Default values were `admin:changme`
+>    - You should now see the admin panel:
+>      ![TIaaS admin console](../../images/tiaas/tiaas_admin_console.png)
+>    - Click on **Trainings**, you should see the TIaaS request listed here:
+>      ![TIaaS request list](../../images/tiaas/tiaas_request_list.png)
+>    - **Approve the request**
+>      - Click on the training
+>      - Scroll down to the bottom
+>      - Change *"Processed"* to `Approved` and **Save**
+>        ![Approve TIaaS](../../images/tiaas/tiaas_request_approve.png)
+>    - At this point, you would likely email the person who made the request to inform them of approval
+>
+> 3. **Join TIaaS Training**
+>    - Make sure you are logged in to Galaxy
+>    - On the day of the workshop, participants will visit a following URL to join the TIaaS group
+>      - https://\<server\>/join-training/testtraining
+>      - A confirmation dialog should appear if all went well:
+>        ![Join TIaaS](../../images/tiaas/tiaas_join_training.png)
+>
+> 4. **Monitor TIaaS status**
+>    - This is very useful for instructors to monitor the job state of their participants
+>    - Go to https://\<server\>/join-training/testtraining/status
+>    - In the Dasboard you should see that one user (you) has joined the training \
+>    - Run some jobs to see the dashboard in action
+>      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard.png)
+>    - Scroll down to get some more information on a per-user level (anonymized)
+>      - Every user designated by their own identifier and colour, but no personal information
+>      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard2.png)
 >
 {: .hands_on}
+
+
+> ### {% icon comment %} Note: GDPR compliance
+>
+> This setup aims to be GDPR compliant in the following ways:
+>  - Users in dashboard are only visible by an anonymized identifier and colour
+>  - Email addressses in the TIaaS admin panel will be expunged after 60 days post-workshop
+>
+{: .comment}
 
 
 # Job Configuration
@@ -213,3 +275,5 @@ While observability for teachers or trainers is already a huge benefit, one of t
 > 7. Run a job and observe the logs to see where it goes (`journalctf -u galaxy -f`)
 >
 {: .hands_on}
+
+Congratulations! you have now set up TIaaS on your Galaxy server.
