@@ -154,13 +154,20 @@ While observability for teachers or trainers is already a huge benefit, one of t
 >    import os
 >
 >    def sorting_hat(app, user):
->        # Check if the user is in a training group
+>        # Check that the user is not anonymous
+>        if not user:
+>            return app.job_config.get_destination('slurm')
+>
+>        # Collect the user's roles
 >        user_roles = [role.name for role in user.all_roles() if not role.deleted]
+>
+>        # If any of these are prefixed with 'training-'
 >        if any([role.startswith('training-') for role in user_roles]):
->            # This is a training user, we will send their jobs to pulsar
->            return JobDestination(runner="pulsar")
->        else:
->            return JobDestination(runner="slurm")
+>            # Then they are a training user, we will send their jobs to pulsar,
+>            # Or give them extra resources
+>            return app.job_config.get_destination('slurm-2c') # or pulsar, if available
+>
+>        return app.job_config.get_destination('slurm')
 >    ```
 >
 >    This destination will check that the `user_email` is in a training group (role starting with `training-`).
@@ -186,7 +193,7 @@ While observability for teachers or trainers is already a huge benefit, one of t
 >
 >    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml`
 >
-> 4. Finally, in `job_conf.xml`, update the top level `<destinations>` definition and point it to the sorting hat:
+> 4. Again In `job_conf.xml`, update the top level `<destinations>` definition and point it to the sorting hat:
 >
 >    ```xml
 >    <destinations default="sorting_hat">
@@ -194,10 +201,19 @@ While observability for teachers or trainers is already a huge benefit, one of t
 >    </destinations>
 >    ```
 >
-> 5. Run the playbook
+> 5. Finally, upload jobs *must* stay local, the input files are a bit special, so we just send those to the local slurm cluster:
 >
-> 6. Ensure your user is joined to a training
+>    ```xml
+>        <tools>
+>            ...
+>            <tool id="upload1" destination="slurm"/>
+>        </tools>
+>    ```
 >
-> 7. Run a job and observe the logs to see where it goes (`journalctf -u galaxy -f`)
+> 6. Run the playbook
+>
+> 7. Ensure your user is joined to a training
+>
+> 8. Run a job and observe the logs to see where it goes (`journalctf -u galaxy -f`)
 >
 {: .hands_on}
