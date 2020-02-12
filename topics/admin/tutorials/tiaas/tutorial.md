@@ -160,7 +160,7 @@ Let's see it in action!
 >    - Go to https://\<server\>/tiaas/new/
 >    - Here you will find the request form users will fill in to request TIaaS:
 >      ![TIaaS request form](../../images/tiaas/tiaas_request_form.png)
->    - For *"Training Identifier"*, fill in `testtraining` (or remember this value if you enter something different)
+>    - For *"Training Identifier"*, fill in `gryffindor` (or remember this value if you enter something different)
 >      - This is the `<training-id>` used in the URLs listed above used for:
 >        1. Workshop participants to join the tiaas group
 >        2. Workshop instructors to monitor the progress of their participants.
@@ -187,13 +187,13 @@ Let's see it in action!
 > 3. **Join TIaaS Training**
 >    - Make sure you are logged in to Galaxy
 >    - On the day of the workshop, participants will visit a following URL to join the TIaaS group
->      - https://\<server\>/join-training/testtraining
+>      - https://\<server\>/join-training/gryffindor
 >      - A confirmation dialog should appear if all went well:
 >        ![Join TIaaS](../../images/tiaas/tiaas_join_training.png)
 >
 > 4. **Monitor TIaaS status**
 >    - This is very useful for instructors to monitor the job state of their participants
->    - Go to https://\<server\>/join-training/testtraining/status
+>    - Go to https://\<server\>/join-training/gryffindor/status
 >    - In the Dasboard you should see that one user (you) has joined the training \
 >    - Run some jobs to see the dashboard in action
 >      ![TIaaS dashboard](../../images/tiaas/tiaas_dashboard.png)
