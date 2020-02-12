@@ -47,7 +47,7 @@ Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy 
 Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.
 
-![TIaaS idea](../../../instructors/images/workshop-intro/tiaas.png){: width="60%"}
+![TIaaS concept](../../images/tiaas/tiaas_intro.png "With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available."){: width="70%"}
 
 This tutorial will go cover how to set up such a service on your own Galaxy server.
 
@@ -204,11 +204,14 @@ Let's see it in action!
 {: .hands_on}
 
 
-> ### {% icon comment %} Note: GDPR compliance
+> ### {% icon comment %} Note: GDPR assistance
 >
-> This setup aims to be GDPR compliant in the following ways:
->  - Users in dashboard are only visible by an anonymized identifier and colour
->  - Email addressses in the TIaaS admin panel will be expunged after 60 days post-workshop
+> Since this setup tracks additional personal information (submitter name & email, users in the queue view), TIaaS includes some always-on features to assist with your GDPR compliance.
+>
+>  - Users in public status dashboard are only visible by an anonymized identifier and colour
+>  - Email addressses in the TIaaS admin panel will be automatically expunged 60 days after a training event
+>
+>  Of course you need to review any GDPR compliance concerns with your group's legal representative(s), this only attempts to ensure some protections exist for the users of the system.
 >
 {: .comment}
 
