@@ -72,11 +72,11 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yaml
->    - src: trombik.influxdb
->      version: 1.2.0
+>    - src: mtchavez.influxdb
+>      version: v6.0.0
 >    ```
 >
-> 2. **Install** the InfluxDB role: `ansible-galaxy install -p roles -r requirements.yml`
+> 2. `ansible-galaxy install -p roles -r requirements.yml`
 >
 > 3. Create a new playbook, `monitoring.yml` with the following:
 >
@@ -84,10 +84,8 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ---
 >    - hosts: monitoring
 >      become: true
->       vars:
->        - influxdb_bind_address: 127.0.0.1:8086
 >      roles:
->        - trombik.influxdb
+>        - mtchavez.influxdb
 >    ```
 >
 >    During this tutorial we will install everything on the same host, but often one keeps the monitoring infrastructure (Grafana, InfluxDB) on a separate host.
@@ -99,7 +97,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    training-0.example.org ansible_connection=local
 >    ```
 >
->    **Important: Ensure that the hostname is the full hostname of your machine.**
+>    **Ensure that the hostname is the full hostname of your machine.**
 >
 > 4. Run the playbook:
 >
