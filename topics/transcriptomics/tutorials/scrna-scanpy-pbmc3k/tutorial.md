@@ -124,7 +124,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 
 > ### {% icon hands_on %} Hands-on: Transform matrix and all into AnnData object
 >
-> 1. **Import AnnData** {% icon tool %} with the following parameters:
+> 1. **Import AnnData and Loom** {% icon tool %} with the following parameters:
 >    - *"Format for the annotated data matrix"*: `Matrix Market (mtx), from Cell ranger or not`
 >        - {% icon param-file %} *"Matrix"*: `matrix.mtx`
 >        - *"Use 10x Genomics formatted mtx"*: `Output from Cell Ranger v2 or earlier versions`
@@ -165,6 +165,13 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > {: .solution}
 >    >
 >    {: .question}
+>
+>    > ### {% icon comment %} Comment: Faster Method for General Information
+>    > 
+>    > * Click on the name of the dataset in the history to expand it.
+>    > * General Anndata information is given in the expanded box.
+>    > * For more specific queries, **Inspect AnnData** is required.
+>    {: .comment}
 >
 > 3. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Input 3k PBMC`
@@ -277,14 +284,16 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
 >
 > 2. Rename the generated file `3k PBMC`
-> 3. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC`
->    - *"What to inspect?"*: `General information about the object`
+> 3. Expand the dataset.
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2700 × 13714
+>    > [var]
+>    > -    gene_ids
+>    > -    n_cells
 >    > ```
 >    >
 >    > How many genes have been removed because they are expressed in less than 3 expressed cells?
