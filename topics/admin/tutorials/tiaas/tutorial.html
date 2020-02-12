@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Training Infrastructure as a Service (TIaaS)</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Training Infrastructure as a Service (TIaaS)" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftiaas%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftiaas%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftiaas%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftiaas%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Ftiaas%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/tiaas/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Training Infrastructure as a Service (TIaaS)",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "courseCode": "admin / tiaas / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Training Infrastructure as a Service (TIaaS)' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/tiaas/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "training, jobs",
+  "description": "The questions this  addresses are:\n - How to deploy EU's TIaaS\n\n\\nThe objectives are:\n - Setup TIaaS\n - Request and manage trainings\n - Join a training\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html",
+      "name": "Connecting Galaxy to a compute cluster",
+      "description": "Slides for 'Connecting Galaxy to a compute cluster' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
+      "name": "Connecting Galaxy to a compute cluster",
+      "description": "Hands-on for 'Connecting Galaxy to a compute cluster' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/heterogeneous-compute/tutorial.html",
+      "name": "Running Jobs on Remote Resources with Pulsar",
+      "description": "Hands-on for 'Running Jobs on Remote Resources with Pulsar' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Training Infrastructure as a Service (TIaaS)</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#hexylena" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to deploy EU’s TIaaS</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Setup TIaaS</p>
+</li>
+            
+            <li><p>Request and manage trainings</p>
+</li>
+            
+            <li><p>Join a training</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Connecting Galaxy to a compute cluster:
+                            
+                                <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Running Jobs on Remote Resources with Pulsar:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/admin/tutorials/heterogeneous-compute/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/admin/slides/introduction.html" title="Introduction slides">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+</li>
+                
+
+                
+
+                
+
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 12, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#setting-up-tiaas" id="markdown-toc-setting-up-tiaas">Setting up TIaaS</a></li>
+  <li><a href="#job-configuration" id="markdown-toc-job-configuration">Job Configuration</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="introduction">Introduction</h1>
+
+<p><span class="notranslate">Galaxy</span> is widely used for teaching. In order to facilitate instructors, <a href="https://usegalaxy.eu"><span class="notranslate">Galaxy</span> Europe</a> has developed Training Infrastructure as a Service (TIaaS).
+Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
+resources, thus reducing queue times on the day of the training.</p>
+
+<figure id="figure-1"><img src="../../images/tiaas/tiaas_intro.png" alt="TIaaS concept" width="70%" /><figcaption><span class="figcaption-prefix">Figure 1:</span> With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available.</figcaption></figure>
+
+<p>This tutorial will go cover how to set up such a service on your own <span class="notranslate">Galaxy</span> server.</p>
+
+<h1 id="setting-up-tiaas">Setting up TIaaS</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setup-tiaas"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup TIaaS</h3>
+
+  <ol>
+    <li>
+      <p>In your <code class="highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.tiaas2</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.1</span>
+</code></pre></div>      </div>
+
+      <p>And run the install step:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>In your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, add the following:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># TIaaS setup</span>
+<span class="na">tiaas_dir</span><span class="pi">:</span> <span class="s">/opt/tiaas</span>
+<span class="na">tiaas_user</span><span class="pi">:</span> <span class="s">tiaas</span>
+<span class="na">tiaas_group</span><span class="pi">:</span> <span class="s">tiaas</span>
+<span class="na">tiaas_version</span><span class="pi">:</span> <span class="s">master</span>
+<span class="na">tiaas_admin_user</span><span class="pi">:</span> <span class="s">admin</span>
+<span class="na">tiaas_admin_pass</span><span class="pi">:</span> <span class="s">changeme</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>In the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some <span class="notranslate">Galaxy</span> tables, and we will carefully define only the ones we really need:</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gi">+++ group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span> postgresql_objects_users:
+   - name: <span class="notranslate">galaxy</span>
+     password: null
+<span class="gi">+  - name: tiaas
++    password: null
+</span> postgresql_objects_databases:
+   - name: <span class="notranslate">galaxy</span>
+     owner: <span class="notranslate">galaxy</span>
+<span class="gi">+postgresql_objects_privileges:
++- database: <span class="notranslate">galaxy</span>
++  roles: tiaas
++  objs: <span class="notranslate">galaxy</span>_user,<span class="notranslate">galaxy</span>_session,job
++  type: table
++  privs: SELECT
++- database: <span class="notranslate">galaxy</span>
++  roles: tiaas
++  objs: user_group_association,<span class="notranslate">galaxy</span>_group,role,group_role_association
++  type: table
++  privs: SELECT,INSERT
++- database: <span class="notranslate">galaxy</span>
++  roles: tiaas
++  objs: role_id_seq,<span class="notranslate">galaxy</span>_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
++  type: sequence
++  privs: USAGE,SELECT
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>We need to add the <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role to the end of the playbook (<code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>)</p>
+    </li>
+    <li>
+      <p>Lastly we should add the routes for TIaaS to the NGINX template for <span class="notranslate">Galaxy</span>:</p>
+
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">location</span> <span class="n">/tiaas</span> <span class="p">{</span>
+    <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">5000</span><span class="p">;</span>
+    <span class="kn">uwsgi_param</span> <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="n">/tiaas/static</span> <span class="p">{</span>
+    <span class="kn">alias</span> <span class="n">/opt/tiaas/static</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">location</span> <span class="n">/join-training</span> <span class="p">{</span>
+    <span class="kn">uwsgi_pass</span> <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">5000</span><span class="p">;</span>
+    <span class="kn">uwsgi_param</span> <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
+    <span class="kn">include</span> <span class="s">uwsgi_params</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook (<code class="highlighter-rouge">ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml</code>)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">URL</th>
+      <th>Use</th>
+      <th>Who</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">https://&lt;server&gt;/tiaas/new/</td>
+      <td>Request a new TIaaS training</td>
+      <td>Instructors</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">https://&lt;server&gt;/tiaas/admin/</td>
+      <td>Approve and Manage requests</td>
+      <td>Admin</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">https://&lt;server&gt;/join-training/&lt;training-id&gt;</td>
+      <td>Join an TIaaS training</td>
+      <td>Participants</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">https://&lt;server&gt;/join-training/&lt;training-id&gt;/status</td>
+      <td>Dashboard with job states of trainees.</td>
+      <td>Instructors</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Let’s see it in action!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-using-tiaas"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using TIaaS</h3>
+
+  <ol>
+    <li><strong>Create a new TIaaS request</strong>
+      <ul>
+        <li>Go to https://&lt;server&gt;/tiaas/new/</li>
+        <li>Here you will find the request form users will fill in to request TIaaS:
+<img src="../../images/tiaas/tiaas_request_form.png" alt="TIaaS request form" /></li>
+        <li>For <em>“Training Identifier”</em>, fill in <code class="highlighter-rouge">gryffindor</code> (or remember this value if you enter something different)
+          <ul>
+            <li>This is the <code class="highlighter-rouge">&lt;training-id&gt;</code> used in the URLs listed above used for:
+              <ol>
+                <li>Workshop participants to join the tiaas group</li>
+                <li>Workshop instructors to monitor the progress of their participants.</li>
+              </ol>
+            </li>
+          </ul>
+        </li>
+        <li>Fill in the rest of the form as you like</li>
+        <li>Submit the form and you should see a confirmation dialog:
+<img src="../../images/tiaas/tiaas_request_form_submitted.png" alt="TIaaS requested successfully" /></li>
+      </ul>
+    </li>
+    <li><strong>Approve TIaaS request</strong>
+      <ul>
+        <li>Next, the request will have to be approved by an admin</li>
+        <li>Go to https://&lt;server&gt;/tiaas/admin</li>
+        <li><strong>Log in</strong> using the values you configured <code class="highlighter-rouge">tiaas_admin_user</code> and <code class="highlighter-rouge">tiaas_admin_pass</code> in your group variables file
+          <ul>
+            <li>Default values were <code class="highlighter-rouge">admin:changme</code></li>
+          </ul>
+        </li>
+        <li>You should now see the admin panel:
+<img src="../../images/tiaas/tiaas_admin_console.png" alt="TIaaS admin console" /></li>
+        <li>Click on <strong>Trainings</strong>, you should see the TIaaS request listed here:
+<img src="../../images/tiaas/tiaas_request_list.png" alt="TIaaS request list" /></li>
+        <li><strong>Approve the request</strong>
+          <ul>
+            <li>Click on the training</li>
+            <li>Scroll down to the bottom</li>
+            <li>Change <em>“Processed”</em> to <code class="highlighter-rouge">Approved</code> and <strong>Save</strong>
+<img src="../../images/tiaas/tiaas_request_approve.png" alt="Approve TIaaS" /></li>
+          </ul>
+        </li>
+        <li>At this point, you would likely email the person who made the request to inform them of approval</li>
+      </ul>
+    </li>
+    <li><strong>Join TIaaS Training</strong>
+      <ul>
+        <li>Make sure you are logged in to <span class="notranslate">Galaxy</span></li>
+        <li>On the day of the workshop, participants will visit a following URL to join the TIaaS group
+          <ul>
+            <li>https://&lt;server&gt;/join-training/gryffindor</li>
+            <li>A confirmation dialog should appear if all went well:
+<img src="../../images/tiaas/tiaas_join_training.png" alt="Join TIaaS" /></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Monitor TIaaS status</strong>
+      <ul>
+        <li>This is very useful for instructors to monitor the job state of their participants</li>
+        <li>Go to https://&lt;server&gt;/join-training/gryffindor/status</li>
+        <li>In the Dasboard you should see that one user (you) has joined the training \</li>
+        <li>Run some jobs to see the dashboard in action
+<img src="../../images/tiaas/tiaas_dashboard.png" alt="TIaaS dashboard" /></li>
+        <li>Scroll down to get some more information on a per-user level (anonymized)
+          <ul>
+            <li>Every user designated by their own identifier and colour, but no personal information
+<img src="../../images/tiaas/tiaas_dashboard2.png" alt="TIaaS dashboard" /></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-note-gdpr-assistance"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: GDPR assistance</h3>
+
+  <p>Since this setup tracks additional personal information (submitter name &amp; email, users in the queue view), TIaaS includes some always-on features to assist with your GDPR compliance.</p>
+
+  <ul>
+    <li>Users in public status dashboard are only visible by an anonymized identifier and colour</li>
+    <li>Email addressses in the TIaaS admin panel will be automatically expunged 60 days after a training event</li>
+  </ul>
+
+  <p>Of course you need to review any GDPR compliance concerns with your group’s legal representative(s), this only attempts to ensure some protections exist for the users of the system.</p>
+
+</blockquote>
+
+<h1 id="job-configuration">Job Configuration</h1>
+
+<p>While observability for teachers or trainers is already a huge benefit, one of the primary benefits of TIaaS from Use<span class="notranslate">Galaxy</span>.eu is that your jobs get sent to dedicated compute resources, which won’t be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.</p>
+
+<p>In order to achieve this, we first need some way to <em>sort</em> the jobs of the training users into these private queues, while letting the other jobs continue on. So let’s create a <em>sorting hat</em> to figure out where jobs belong.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-writing-a-dynamic-job-destination"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Writing a dynamic job destination</h3>
+
+  <ol>
+    <li>
+      <p>Create and open <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
+
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
+<span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">sorting_hat</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+    <span class="c1"># Check that the user is not anonymous
+</span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
+
+    <span class="c1"># Collect the user's roles
+</span>    <span class="n">user_roles</span> <span class="o">=</span> <span class="p">[</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">all_roles</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="o">.</span><span class="n">deleted</span><span class="p">]</span>
+
+    <span class="c1"># If any of these are prefixed with 'training-'
+</span>    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">role</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'training-'</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user_roles</span><span class="p">]):</span>
+        <span class="c1"># Then they are a training user, we will send their jobs to pulsar,
+</span>        <span class="c1"># Or give them extra resources
+</span>        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm-2c'</span><span class="p">)</span> <span class="c1"># or pulsar, if available
+</span>
+    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
+</code></pre></div>      </div>
+
+      <p>This destination will check that the <code class="highlighter-rouge">user_email</code> is in a training group (role starting with <code class="highlighter-rouge">training-</code>).</p>
+    </li>
+    <li>
+      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
+
+      <ul>
+        <li>
+          <p>Edit your group variables file and add the following:</p>
+
+          <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="notranslate">galaxy</span>_dynamic_job_rules:
+   - my_rules.py
+<span class="gi">+  - hogwarts.py
+</span></code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>We next need to configure this plugin in our job configuration (<code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>):</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"sorting_hat"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"function"</span><span class="nt">&gt;</span>sorting_hat<span class="nt">&lt;/param&gt;</span>
+<span class="nt">&lt;/destination&gt;</span>
+</code></pre></div>      </div>
+
+      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
+    </li>
+    <li>
+      <p>Again In <code class="highlighter-rouge">job_conf.xml</code>, update the top level <code class="highlighter-rouge">&lt;destinations&gt;</code> definition and point it to the sorting hat:</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"sorting_hat"</span><span class="nt">&gt;</span>
+...
+<span class="nt">&lt;/destinations&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Finally, upload jobs <em>must</em> stay local, the input files are a bit special, so we just send those to the local slurm cluster:</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tools&gt;</span>
+        ...
+        <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"upload1"</span> <span class="na">destination=</span><span class="s">"slurm"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/tools&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+    </li>
+    <li>
+      <p>Ensure your user is joined to a training</p>
+    </li>
+    <li>
+      <p>Run a job and observe the logs to see where it goes (<code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctf -u <span class="notranslate">galaxy</span> -f</code>)</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Congratulations! you have now set up TIaaS on your <span class="notranslate">Galaxy</span> server.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>TIaaS is an additional service you can deploy which can help you provide a better service to your users</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Helena Rasche, Saskia Hiltemann, 2020 <b>Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">/training-material/topics/admin/tutorials/tiaas/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-tiaas,
+    author = "Helena Rasche and Saskia Hiltemann",
+    title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
+    year = "2020",
+    month = "02",
+    day = "12"
+    url = "\url{/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Training Infrastructure as a Service (TIaaS) (Galaxy Server administration)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Training Infrastructure as a Service (TIaaS) (Galaxy Server administration)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche, Saskia Hiltemann)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/tiaas/tutorial.md">GitHub</a>.
+        </p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
