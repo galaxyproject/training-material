@@ -153,17 +153,17 @@ While observability for teachers or trainers is already a huge benefit, one of t
 >    from galaxy.jobs.mapper import JobMappingException
 >    import os
 >
->    def sorting_hat(app, user_email):
+>    def sorting_hat(app, user):
 >        # Check if the user is in a training group
 >        user_roles = [role.name for role in user.all_roles() if not role.deleted]
 >        if any([role.startswith('training-') for role in user_roles]):
 >            # This is a training user, we will send their jobs to pulsar
 >            return JobDestination(runner="pulsar")
->        else
+>        else:
 >            return JobDestination(runner="slurm")
 >    ```
 >
->    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
+>    This destination will check that the `user_email` is in a training group (role starting with `training-`).
 >
 > 2. As usual, we need to instruct Galaxy of where to find this file:
 >
@@ -175,16 +175,16 @@ While observability for teachers or trainers is already a huge benefit, one of t
 >      +  - hogwarts.py
 >      ```
 >
-> 3. We next need to configure this plugin in our job configuration:
+> 3. We next need to configure this plugin in our job configuration (`files/galaxy/config/job_conf.xml`):
 >
 >    ```xml
->    <destination id="dynamic_admin_only" runner="dynamic">
+>    <destination id="sorting_hat" runner="dynamic">
 >        <param id="type">python</param>
 >        <param id="function">sorting_hat</param>
 >    </destination>
 >    ```
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `hogwarts.py` to be used in the `job_conf.xml`
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml`
 >
 > 4. Finally, in `job_conf.xml`, update the top level `<destinations>` definition and point it to the sorting hat:
 >
@@ -198,6 +198,6 @@ While observability for teachers or trainers is already a huge benefit, one of t
 >
 > 6. Ensure your user is joined to a training
 >
-> 7. Run a job and observe the logs to see where it goes
+> 7. Run a job and observe the logs to see where it goes (`journalctf -u galaxy -f`)
 >
 {: .hands_on}
