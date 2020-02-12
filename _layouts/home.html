@@ -20,12 +20,11 @@ layout: base
     <section>
         <h1>Welcome to {{ site.title }}</h1>
         <p class="lead">
-            Collection of tutorials for CPT Galaxy users and BICH464 students. Further tutorials  developed and maintained by the worldwide Galaxy community are available here.
+        Collection of tutorials for CPT Galaxy users and BICH464 students. Further tutorials developed and maintained by the worldwide Galaxy community are available <a href="https://galaxyproject.github.io/training-material/">here</a>.
         </p>
 
         <div class="row">
             <div class="col">
-                <h3>CPT Galaxy for Students</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -35,7 +34,6 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "use" %}
                         <tr>
                             {% assign tutorial_number=0 %}
                             {% assign introduction=0 %}
@@ -51,121 +49,24 @@ layout: base
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
                             <td>{{ tutorial_number }}</td>
                         </tr>
-                        {% endif %}
                     {% endfor %}
                     </tbody>
                 </table>
-            </div>
-            <div class="col">
-                <h3>CPT Galaxy for Scientists</h3>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Topic</th>
-                            <th>Tutorials</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for topic in sorted_topics %}
-                        {% if topic[1].type == "admin-dev" %}
-                        <tr>
-                            {% assign tutorial_number=0 %}
-                            {% assign introduction=0 %}
-                            {% for tuto in topic[1].material %}
-                                {% if tuto.type == "tutorial" %}
-                                    {% assign tutorial_number=tutorial_number | plus:1 %}
-                                {% endif %}
-                                {% if tuto.type == "introduction" %}
-                                    {% assign introduction=introduction | plus:1 %}
-                                {% endif %}
-                            {% endfor %}
-
-                            <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}">{{ topic[1].title }}</a></td>
-                            <td>{{ tutorial_number }}</td>
-                        </tr>
-                        {% endif %}
-                    {% endfor %}
-                    </tbody>
-                </table>
-
-
             </div>
         </div>
 
         <h2>Acknowledgment and Funding</h2>
         <p>
-            We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a>
-            to our Galaxy courses, the Galaxy community for their constant
-            support, and our funding sources:
+        We would like to thank all contributors to our Galaxy courses, 
+        the <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network community</a> 
+        for making this framework available. Please see the <a href="https://cpt.tamu.edu">CPT Website</a> for funding information.
         </p>
-
+        <h2>License</h2>
         <p>
-            <a href="https://www.denbi.de/"><img src="https://raw.githubusercontent.com/bgruening/rbc_docs/master/logo/deNBI_Logo_rgb.png" alt="de.NBI" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.nih.gov"><img src="{{ site.baseurl }}/shared/images/nih.png" alt="National Institutes of Health" width="7%" style="max-width:100%;"></a>
-            <a href="https://www.sfb992.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" alt="Collaborative Research Centre 992" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.ie-freiburg.mpg.de"><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" alt="Max Planck Institute of Immunology and Epigenetics" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.uni-freiburg.de/"><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" alt="University of Freiburg" width="15%" style="max-width:100%;"></a>
-            <a href="http://www.psu.edu"><img src="{{ site.baseurl }}/shared/images/psu.png" alt="The Pennsylvania State University" width="5%" style="max-width:100%;"></a>
-            <a href="https://wiki.galaxyproject.org/Teach/GTN"><img src="{{ site.baseurl }}/shared/images/GTNLogo1000.png" alt="Galaxy Training Network" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.france-bioinformatique.fr/"><img src="https://www.france-bioinformatique.fr/sites/default/files/ifb-logo_1.png" alt="Institut Français de Bioinformatique" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/"><img src="{{ site.baseurl }}/shared/images/elixir.png" alt="Elixir" width="10%" style="max-width:100%;"></a>
-            <a href="https://www.elixir-europe.org/excelerate/"><img src="{{ site.baseurl }}/shared/images/Excelerate_whitebackground.png" alt="Elixir Excelerate" width="15%" style="max-width:100%;"></a>
-            <a href="https://www.nsf.gov"><img src="{{ site.baseurl }}/shared/images/nsf.gif" alt="National Science Foundation" width="7%" style="max-width:100%;"></a>
+        ""This work is licensed under the "
+        <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>"."
         </p>
 
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Contributor Hall of Fame</h2>
-                <p>
-                    This project would not be possible without the many amazing
-                    community contributors!
-                </p>
-
-                <div class="container-fluid contributors">
-                    <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
-                        <div class="carousel-inner" role="listbox">
-                            {% for contributor in contributors %}
-                                {% capture modulo %}{{ forloop.index0 | modulo:4 }}{% endcapture %}
-
-                                {% if modulo == '0' or forloop.first %}
-                                {% if forloop.first == false %}</div>{% endif %}
-                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                                {% endif %}
-
-                                {% assign username = contributor[0] %}
-                                {% assign fullname = contributor[1].name %}
-                                <div class="hall-of-fame-hero">
-                                    <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame#{{ username }}">
-                                        <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                                    </a>
-                                    <p class="name">{{ username }}</p>
-                                </div>
-
-                                {% if forloop.last %}
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-
-                <p>
-                    Check out the full <a href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
-                </p>
-
-                <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
-
-                <h2>License</h2>
-                <p>This work is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
-
-            </div>
-            <div class="col-md-6">
-                <h2>The Galaxy Training Network<h2>
-                <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="https://www.google.com/maps/d/embed?mid=1r8LJy6la-JeIrg23aZjpwVNjJDE"></iframe>
-                </div>
-            </div>
-        </div>
     </section>
 </div>
 
