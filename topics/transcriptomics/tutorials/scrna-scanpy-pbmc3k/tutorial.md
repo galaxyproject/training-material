@@ -170,6 +170,10 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > 
 >    > * Click on the name of the dataset in the history to expand it.
 >    > * General Anndata information is given in the expanded box.
+>    >   ```
+>    >   [n_obs x n_vars]
+>    >   -    2700 x 32738
+>    >   ```
 >    > * For more specific queries, **Inspect AnnData** is required.
 >    {: .comment}
 >
@@ -465,11 +469,7 @@ We can now compute QC metrics on the `AnnData` object.
 >
 > 2. Rename the generated file `3k PBMC with mito annotation and qc metrics`
 >
-> 3. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
->    - *"What to inspect?"*: `General information about the object`
->
-> 4. Inspect the generated file
+> 3. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -615,9 +615,7 @@ Based on the previous plot, we would like to remove cells that have:
 >        - *"Filter"*: `Minimum number of genes expressed`
 >            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `200`
 >
-> 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
->    - *"What to inspect?"*: `General information about the object`
+> 2. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -641,10 +639,8 @@ Based on the previous plot, we would like to remove cells that have:
 >        - *"Filter"*: `Maximum number of genes expressed`
 >            - *"Maximum number of genes expressed required for a cell to pass filtering"*: `2500`
 >
-> 4. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of the last **Filter** {% icon tool %}
->    - *"What to inspect?"*: `General information about the object`
->
+> 4. Expand and inspect the dataset
+
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
@@ -673,9 +669,7 @@ Based on the previous plot, we would like to remove cells that have:
 >
 > 6. Rename the generated file `3k PBMC after QC filtering`
 >
-> 7. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering`
->    - *"What to inspect?"*: `General information about the object`
+> 7. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -774,9 +768,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 > ### {% icon hands_on %} Hands-on: Keep the highly variable genes
 >
-> 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: Output of the last **Filter** {% icon tool %}
->    - *"What to inspect?"*: `General information about the object`
+> 1. Expand and inspect the output of the last **Filter** {% icon tool %})
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -809,9 +801,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >
 > 3. Rename the generated output `3k PBMC with only HVG`
 >
-> 4. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG`
->    - *"What to inspect?"*: `General information about the object`
+> 4. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -897,9 +887,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > 
 > > ### {% icon hands_on %} Hands-on: Inspect the PCA inside an `AnnData` object
 > >
-> > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
-> >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, > after scaling and PCA`
-> >    - *"What to inspect?"*: `General information about the object`
+> > 1. Expand and inspect the `3k PBMC with only HVG, > after scaling and PCA` dataset
 > >
 > >    > ### {% icon question %} Questions
 > >    >
@@ -1126,9 +1114,7 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >
-> 3. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
->    - *"What to inspect?"*: `General information about the object`
+> 3. Expand and inspect the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 > 
 >    > ### {% icon question %} Questions
 >    >
@@ -1175,9 +1161,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 >    > > An extra object `X_umap` has been added to `obsm` with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.
 >    > > 
 >    > > This information can be accessed using:
->    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
->    > >    - *"What to inspect?"*: `Generalinformation about the object`
+>    > > 1. Expanding and inspecting the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > >    - *"What to inspect?"*: `Multi-dimensional observations annotation (obsm)`
