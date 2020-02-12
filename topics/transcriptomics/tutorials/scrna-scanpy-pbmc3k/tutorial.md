@@ -474,9 +474,30 @@ We can now compute QC metrics on the `AnnData` object.
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 13714 
->    >     obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito'
->    >     var: 'gene_ids', 'n_cells', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts'
+>    > [n_obs × n_vars]
+>    > -    2700 × 13714
+>    > [obs]
+>    > -    n_genes_by_counts
+>    > -    log1p_n_genes_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
+>    > -    pct_counts_in_top_50_genes
+>    > -    pct_counts_in_top_100_genes
+>    > -    pct_counts_in_top_200_genes
+>    > -    pct_counts_in_top_500_genes
+>    > -    total_counts_mito
+>    > -    log1p_total_counts_mito
+>    > -    pct_counts_mito
+>    > [var]
+>    > -    gene_ids
+>    > -    n_cells
+>    > -    mito
+>    > -    n_cells_by_counts
+>    > -    mean_counts
+>    > -    log1p_mean_counts
+>    > -    pct_dropout_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
 >    > ```
 >    >
 >    > Which QC metrics have been computed?
@@ -620,7 +641,8 @@ Based on the previous plot, we would like to remove cells that have:
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2700 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have less than 200 expressed genes?
@@ -644,7 +666,8 @@ Based on the previous plot, we would like to remove cells that have:
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2695 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2695 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 2,500 expressed genes?
@@ -674,7 +697,8 @@ Based on the previous plot, we would like to remove cells that have:
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2638 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2638 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 5% of reads mapped to mitochondrial genes?
@@ -773,9 +797,36 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2638 × 13714 
->    >     obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito', 'n_genes', 'norm'
->    >     var: 'gene_ids', 'n_genes', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+>    > [n_obs × n_vars]
+>    > -    2638 × 13714
+>    > [obs]
+>    > -    n_genes_by_counts
+>    > -    log1p_n_genes_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
+>    > -    pct_counts_in_top_50_genes
+>    > -    pct_counts_in_top_100_genes
+>    > -    pct_counts_in_top_200_genes
+>    > -    pct_counts_in_top_500_genes
+>    > -    total_counts_mito
+>    > -    log1p_total_counts_mito
+>    > -    pct_counts_mito
+>    > -    n_genes
+>    > -    norm
+>    > [var]
+>    > -    gene_ids
+>    > -    n_genes
+>    > -    mito
+>    > -    n_cells_by_counts
+>    > -    mean_counts
+>    > -    log1p_mean_counts
+>    > -    pct_dropout_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
+>    > -    highly_variable
+>    > -    means
+>    > -    dispersions
+>    > -    dispersions_norm
 >    > ```
 >    >
 >    > 1. How many genes are in the `AnnData` object?
@@ -806,7 +857,8 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2638 × 1838
+>    > [n_obs × n_vars]
+>    > -    2638 × 1838
 >    > ```
 >    >
 >    > How many genes have been removed?
@@ -892,12 +944,41 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    > ### {% icon question %} Questions
 > >    >
 > >    > ```
-> >    > AnnData object with n_obs × n_vars = 2638 × 2013 
-> >    >     obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito', 'n_genes', 'norm'
-> >    >     var: 'gene_ids', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
-> >    >     uns: 'pca'
-> >    >     obsm: 'X_pca'
-> >    >     varm: 'PCs'
+> >    > [n_obs × n_vars]
+> >    > -    2638 × 2013
+> >    > [obs]
+> >    > -    n_genes_by_counts
+> >    > -    log1p_n_genes_by_counts
+> >    > -    total_counts
+> >    > -    log1p_total_counts
+> >    > -    pct_counts_in_top_50_genes
+> >    > -    pct_counts_in_top_100_genes
+> >    > -    pct_counts_in_top_200_genes
+> >    > -    pct_counts_in_top_500_genes
+> >    > -    total_counts_mito
+> >    > -    log1p_total_counts_mito
+> >    > -    pct_counts_mito
+> >    > -    n_genes
+> >    > -    norm
+> >    > [var]
+> >    > -    gene_ids
+> >    > -    mito
+> >    > -    n_cells_by_counts
+> >    > -    mean_counts
+> >    > -    log1p_mean_counts
+> >    > -    pct_dropout_by_counts
+> >    > -    total_counts
+> >    > -    log1p_total_counts
+> >    > -    highly_variable
+> >    > -    means
+> >    > -    dispersions
+> >    > -    dispersions_norm
+> >    > [uns]
+> >    > -    pca
+> >    > [obsm]
+> >    > -    X_pca
+> >    > [varm]
+> >    > -    PCs
 > >    > ```
 > >    >
 > >    > How is the PCA stored in the `AnnData` object?
