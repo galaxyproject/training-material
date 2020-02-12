@@ -82,13 +82,14 @@ If the terms "ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    ```yaml
 >    ---
->    - galaxyproject.cvmfs
+>    - src: galaxyproject.cvmfs
+>      version: 0.2.8
 >    ```
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
->    ```bash
->    ansible-galaxy install -p roles -r requirements.yml
+>    ```console
+>    ansible-galaxy role install -p roles -r requirements.yml
 >    ```
 >
 > 3. Create and edit the group variables file, `group_vars/galaxyservers.yml` file.
