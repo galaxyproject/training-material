@@ -131,8 +131,8 @@ requirements:
 >
 >    |URL | Use
 >    |----|----
->    |https://server/tiaas/add | Request a new training, send this URLs to trainers who will use your instance |
->    |https://server/tiaas/admin/ | You can login here with the credentials you set for `tiaas_admin_user` and `tiaas_admin_pass`, and then approve trainings|
+>    |https://server/tiaas/new/ | Request a new training, send this URLs to trainers who will use your instance |
+>    |https://server/tiaas/admin/ | You can login here with the values you set for `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file, and then approve the training you requested|
 >    |https://server/join-training/\<training-id\>/ | Join an existing training, it must be status=approved in the admin interface, and you must be logged in to Galaxy|
 >    |https://server/join-training/\<training-id\>/status | See a training overview, the state of jobs in the queue of trainees.|
 >
