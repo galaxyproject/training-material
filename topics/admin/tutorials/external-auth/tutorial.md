@@ -81,9 +81,9 @@ For this exercise we will use a basic password file method for authenticating - 
 >    > >     name: passlib
 >    > > - htpasswd:
 >    > >     path: /etc/nginx/passwd
->    > >     name: helena                    # Pick a username
->    > >     password: 'squeamish ossifrage' # and a password
->    > >     owner: www-data # nginx on centos
+>    > >     name: user1        # Pick a username
+>    > >     password: changeme # and a password
+>    > >     owner: www-data    # nginx on centos
 >    > >     group: root
 >    > >     mode: 0640
 >    > > ```
