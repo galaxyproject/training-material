@@ -73,7 +73,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 >    ```yaml
 >    - src: usegalaxy_eu.influxdb
->      version: v6.0.2
+>      version: v6.0.3
 >    ```
 >
 > 2. `ansible-galaxy install -p roles -r requirements.yml`
