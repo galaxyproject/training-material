@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Metatranscriptomics analysis using microbiome RNA-seq data
+title: Metatranscriptomics analysis using microbiome RNA-seq data (short)
 zenodo_link: https://zenodo.org/record/3362849
 questions:
 - "How to analyze metatranscriptomics data?"
@@ -33,4 +33,4 @@ contributors:
 ---
 
 
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/metagenomics/tutorials/metatranscriptomics/content.md short=true %}
