@@ -605,7 +605,7 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 >
 >    # Configure locations for gxadmin that all
 >    # users can access
->    gxadmin_bin: /opt/gxadmin
+>    gxadmin_dir: /opt/gxadmin
 >    gxadmin_bin_dir: /usr/bin
 >    ```
 >
