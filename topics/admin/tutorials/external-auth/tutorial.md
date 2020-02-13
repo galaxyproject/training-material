@@ -41,10 +41,11 @@ For this exercise we will use a basic password file method for authenticating - 
 
 > ### {% icon hands_on %} Hands-on: Configuring everything
 >
-> 1. Edit your `galaxyservers` group variables file and update the main location block defined for serving galaxy. Add the parameters:
+> 1. Edit the galaxy.j2 template file in the templates/nginx directory and update the main location block defined for serving galaxy. Add the parameters:
 >      - `auth_basic galaxy;`
 >      - `auth_basic_user_file /etc/nginx/passwd;`
 >      - `uwsgi_param HTTP_REMOTE_USER $remote_user;`
+>      - `uwsgi_param HTTP_GX_SECRET SOME_SECRET_STRING;`
 >
 >    It should look like:
 >
@@ -64,7 +65,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >    `auth_basic_user_file` specifies the file that keeps usernames and passwords.
 >    `uwsgi_param` adds `HTTP_REMOTE_USER` to the special variables passed by nginx to uwsgi, with value `$remote_user`, which is a nginx embedded variable containing the username supplied with the Basic authentication.
 >
->    `GX_SECRET` is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent `REMOTE_USER` headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the `REMOTE_USER` header, you can impersonate any other use. While having Galaxy listen on `127.0.0.1` prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. For using sockets, we ins
+>    `GX_SECRET` is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent `REMOTE_USER` headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the `REMOTE_USER` header, you can impersonate any other use. While having Galaxy listen on `127.0.0.1` prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. `GX_SECRET` adds additional security as it needs to match `remote_user_secret` in your galaxy configutation.
 >
 > 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/latest/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
 >
@@ -98,7 +99,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >      galaxy:
 >        ...
 >        use_remote_user: true
->        remote_user_maildomain: "{{ hostname }}"
+>        remote_user_maildomain: "{% raw %}{{ hostname }}{% endraw %}"
 >        remote_user_secret: SOME_SECRET_STRING
 >    ```
 >
