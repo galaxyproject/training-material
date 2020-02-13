@@ -420,7 +420,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    1. `admin_users` to the email address you will use with this Galaxy.
 >    2. `brand` to something fun!
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
->    4. `file_path` to a place to store data, `/data` for this lesson.
+>    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will need to be storage shared between the galaxy node and compute nodes.
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `shed_tool_data_dir` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
