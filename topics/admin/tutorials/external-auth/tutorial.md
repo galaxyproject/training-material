@@ -99,7 +99,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >      galaxy:
 >        ...
 >        use_remote_user: true
->        remote_user_maildomain: "{% raw %}{{ hostname }}{% endraw %}"
+>        remote_user_maildomain: "{% raw %}{{ inventory_hostname }}{% endraw %}"
 >        remote_user_secret: SOME_SECRET_STRING
 >    ```
 >
