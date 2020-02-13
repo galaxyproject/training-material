@@ -167,7 +167,6 @@ There are some nice examples of dashboards available from the public Galaxies, w
 > 4. Edit the file `group_vars/galaxyservers.yml` and set the following variables:
 >
 >    ```yaml
->    ---
 >    grafana_url: "https://{{ inventory_hostname }}/grafana/"
 >
 >    grafana_security:
@@ -421,7 +420,7 @@ With this, your first dashboard should be live! You should see some data from yo
 
 ## Setting up a Galaxy dashboard
 
-Importing dashboards is a good start, but it's more interesting to create our own that's personalise to our needs.
+Importing dashboards is a good start, but it's more interesting to create our own that's personalised to our needs.
 
 > ### {% icon hands_on %} Hands-on: Create a dashboard
 >
