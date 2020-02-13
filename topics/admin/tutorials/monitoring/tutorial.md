@@ -570,7 +570,7 @@ We will add an example alert, to make you familiar with the process. This is not
 
 # Telegraf & `gxadmin`
 
-We need to setup gxadmin, and to configure Telegraf to have permissions to run it.
+Via this setup using `systemd` we collect metrics about Galaxy request times. To get statistics about other Galaxy-specific metrics such as the job queue status, we need to use `gxadmin` to query the Galaxy database and configure Telegraf to consume this data. In this section we will setup gxadmin, and to configure Telegraf to have permissions to run it.
 
 > ### {% icon hands_on %} Hands-on: Installing gxadmin and configuring Telegraf
 >
