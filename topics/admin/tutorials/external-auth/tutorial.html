@@ -567,7 +567,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -599,11 +599,12 @@
   <h3 id="hands_on-hands-on-configuring-everything"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuring everything</h3>
 
   <ol>
-    <li>Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file and update the main location block defined for serving <span class="notranslate">galaxy</span>. Add the parameters:
+    <li>Edit the <span class="notranslate">galaxy</span>.j2 template file in the templates/nginx directory and update the main location block defined for serving <span class="notranslate">galaxy</span>. Add the parameters:
       <ul>
         <li><code class="highlighter-rouge">auth_basic <span class="notranslate">galaxy</span>;</code></li>
         <li><code class="highlighter-rouge">auth_basic_user_file /etc/nginx/passwd;</code></li>
-        <li><code class="highlighter-rouge">uwsgi_param HTTP_REMOTE_USER $reomte_user;</code></li>
+        <li><code class="highlighter-rouge">uwsgi_param HTTP_REMOTE_USER $remote_user;</code></li>
+        <li><code class="highlighter-rouge">uwsgi_param HTTP_GX_SECRET SOME_SECRET_STRING;</code></li>
       </ul>
 
       <p>It should look like:</p>
@@ -623,7 +624,7 @@
 <code class="highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps use<span class="notranslate">rna</span>mes and passwords.
 <code class="highlighter-rouge">uwsgi_param</code> adds <code class="highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to uwsgi, with value <code class="highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
 
-      <p><code class="highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. For using sockets, we ins</p>
+      <p><code class="highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. <code class="highlighter-rouge">GX_SECRET</code> adds additional security as it needs to match <code class="highlighter-rouge">remote_user_secret</code> in your <span class="notranslate">galaxy</span> configutation.</p>
     </li>
     <li>
       <p>Add a pre_task using the <a href="https://docs.ansible.com/ansible/latest/modules/pip_module.html"><code class="highlighter-rouge">pip</code></a> module which installs the library <code class="highlighter-rouge">passlib</code>, which is required for <code class="highlighter-rouge">htpasswd</code>.</p>
@@ -641,9 +642,9 @@
     name: passlib
 - htpasswd:
     path: /etc/nginx/passwd
-    name: helena                    # Pick a use<span class="notranslate">rna</span>me
-    password: 'squeamish ossifrage' # and a password
-    owner: www-data # nginx on centos
+    name: user1        # Pick a use<span class="notranslate">rna</span>me
+    password: changeme # and a password
+    owner: www-data    # nginx on centos
     group: root
     mode: 0640
 </code></pre></div>          </div>
@@ -659,7 +660,7 @@
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
     <span class="s">...</span>
     <span class="s">use_remote_user</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">remote_user_maildomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+    <span class="na">remote_user_maildomain</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
     <span class="na">remote_user_secret</span><span class="pi">:</span> <span class="s">SOME_SECRET_STRING</span>
 </code></pre></div>      </div>
 
@@ -773,8 +774,8 @@
     author = "Nate Coraor and Nicola Soranzo and Helena Rasche",
     title = "External Authentication (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "20"
+    month = "02",
+    day = "13"
     url = "\url{/training-material/topics/admin/tutorials/external-auth/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
