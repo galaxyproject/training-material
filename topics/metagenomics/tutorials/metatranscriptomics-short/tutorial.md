@@ -15,7 +15,7 @@ objectives:
 level: Introductory
 tags:
 - metatranscriptomics
-time_estimation: 6H
+time_estimation: 3H
 key_points:
 - "Metatranscriptomics data have the same QC profile that RNA-seq data"
 - "A lot of metatranscriptomics sequences are identified as rRNA sequences"
