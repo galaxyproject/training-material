@@ -387,9 +387,9 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `3000`
@@ -446,9 +446,9 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Rank Barcodes`
 >        - *"Lower Bound"*: `100`
 >
@@ -477,9 +477,9 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `EmptyDrops`
 >            - *"Lower-bound Threshold"*: `200`
