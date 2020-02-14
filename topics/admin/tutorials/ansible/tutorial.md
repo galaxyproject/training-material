@@ -675,18 +675,18 @@ Now that you have a small role built up, you might start thinking about deployin
 > 5. Add encrypted variable file to `playbook.yml`
 >
 >    ```yaml
->     - hosts: my_hosts
->       ...
->       vars_files:
->        - secret_group_vars/all.yml
->     ```
+>    - hosts: my_hosts
+>      ...
+>      vars_files:
+>       - secret_group_vars/all.yml
+>    ```
 >
 > 6. Tell ansible where to find the decryption file. Create file `ansible.cfg` with content
 >
->     ```yaml
->     [defaults]
->     vault_password_file=vault-password.txt
->     ```
+>    ```yaml
+>    [defaults]
+>    vault_password_file=vault-password.txt
+>    ```
 > 7. Run the playbook
 >
 > 8. Check the contents of `/tmp/test.ini`
