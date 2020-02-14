@@ -577,8 +577,8 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yml
->    - src: https://github.com/usegalaxy-eu/ansible-gxadmin
->      name: usegalaxy-eu.gxadmin
+>    - src: usegalaxy_eu.gxadmin
+>      version: 0.0.2
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
