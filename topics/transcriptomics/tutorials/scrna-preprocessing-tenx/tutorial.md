@@ -292,7 +292,7 @@ Let us investigate the output log. This type of quality control is essential in 
 >        - In *"STAR output"*:
 >          - In *"1:STAR output"*:
 >            - *"Type of STAR output?"*: `Log`
->            - {% icon param-file %} *"STAR log output"*: `log output of RNA STARsolo`
+>            - {% icon param-file %} *"STAR log output"*: `RNA STARsolo: log`
 {: .hands_on}
 
 
@@ -413,7 +413,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > > ### {% icon solution %} Solution
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
-> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that 5200 barcodes were detected in total, but only 272 of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that *5200* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
 > {: .solution}
 {: .question}
 
