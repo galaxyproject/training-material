@@ -578,8 +578,8 @@ We need to setup gxadmin, and to configure Telegraf to have permissions to run i
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yml
->    - src: https://github.com/usegalaxy-eu/ansible-gxadmin
->      name: usegalaxy-eu.gxadmin
+>    - src: usegalaxy_eu.gxadmin
+>      version: 0.0.2
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
@@ -606,7 +606,7 @@ We need to setup gxadmin, and to configure Telegraf to have permissions to run i
 >
 >    # Configure locations for gxadmin that all
 >    # users can access
->    gxadmin_bin: /opt/gxadmin
+>    gxadmin_dir: /opt/gxadmin
 >    gxadmin_bin_dir: /usr/bin
 >    ```
 >
