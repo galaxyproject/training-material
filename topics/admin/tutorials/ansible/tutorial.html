@@ -331,7 +331,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 14, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -738,14 +738,7 @@ Ansible provides some flags which can help you identify changes before they’re
       </blockquote>
     </li>
     <li>
-      <p>Run one of the following command, whichever is appropriate:</p>
-
-      <ul>
-        <li>Real remote host: <code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></li>
-        <li>Localhost: <code class="highlighter-rouge">ansible-playbook -i hosts -c local playbook.yml</code></li>
-      </ul>
-
-      <p>Even local users can run the ‘real remote host’ command, Ansible will just issue a warning. Running with <code class="highlighter-rouge">-c local</code> silences this warning.</p>
+      <p>Run the playbook: <code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1051,7 +1044,16 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
           <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
-The solution to this is to set <code class="highlighter-rouge">become: true</code>. Edit your playbook.yml and add <code class="highlighter-rouge">become: true</code> just below <code class="highlighter-rouge">hosts: my_hosts</code>.</p>
+The solution to this is to set <code class="highlighter-rouge">become: true</code>.</p>
+
+          <ol>
+            <li>Edit your playbook.yml
+              <ul>
+                <li>add <code class="highlighter-rouge">become: true</code> just below <code class="highlighter-rouge">hosts: my_hosts</code></li>
+              </ul>
+            </li>
+            <li>Run the playbook again</li>
+          </ol>
 
           <p><code class="highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="highlighter-rouge">root</code>. If you want to become a different user, just set <code class="highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
 
@@ -1141,17 +1143,17 @@ $ANSIBLE_VAULT;1.1;AES256
     <li>
       <p>Add encrypted variable file to <code class="highlighter-rouge">playbook.yml</code></p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
-   <span class="s">...</span>
-   <span class="na">vars_files</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s">secret_group_vars/all.yml</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
+  <span class="s">...</span>
+  <span class="na">vars_files</span><span class="pi">:</span>
+   <span class="pi">-</span> <span class="s">secret_group_vars/all.yml</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Tell ansible where to find the decryption file. Create file <code class="highlighter-rouge">ansible.cfg</code> with content</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="pi">[</span><span class="nv">default</span><span class="pi">]</span>
- <span class="s">vault_password_file=vault-password.txt</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">[</span><span class="nv">defaults</span><span class="pi">]</span>
+<span class="s">vault_password_file=vault-password.txt</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1171,7 +1173,7 @@ $ANSIBLE_VAULT;1.1;AES256
           <p>The file should look like:</p>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
-<span class="py">server_name</span> <span class="p">=</span> <span class="s">Cats!</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">Dogs!</span>
 <span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
 <span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
 </code></pre></div>          </div>
@@ -1301,8 +1303,8 @@ $ANSIBLE_VAULT;1.1;AES256
     author = "Helena Rasche and Saskia Hiltemann",
     title = "Ansible (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "20"
+    month = "02",
+    day = "14"
     url = "\url{/training-material/topics/admin/tutorials/ansible/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

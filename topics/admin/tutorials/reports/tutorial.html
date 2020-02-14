@@ -219,7 +219,7 @@
   "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/reports/tutorial.html",
   "timeRequired": "PT30M",
   "keywords": "monitoring",
-  "description": "The questions this  addresses are:\n - How to monitor a Galaxy service with the Reports?\n\n\\nThe objectives are:\n - Setup and start the Galaxy reports app.\n\n",
+  "description": "The questions this  addresses are:\n - How to monitor a Galaxy service with the Reports application?\n\n\\nThe objectives are:\n - Setup and start the Galaxy reports app.\n\n",
   "coursePrerequisites": [
     {
       "@type": "Course",
@@ -343,7 +343,7 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li><p>How to monitor a Galaxy service with the Reports?</p>
+            <li><p>How to monitor a Galaxy service with the Reports application?</p>
 </li>
             
             </ul>
@@ -572,7 +572,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 14, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -639,33 +639,22 @@
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
 <span class="nn">...</span>
-<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/reports.yml</span>
-  <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/reports.yml"</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/reports.yml</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/reports.yml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Similar to <span class="notranslate">Galaxy</span> we will again use Supervisor to manage the Reports process. In the same file (<code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file) edit the <code class="highlighter-rouge">supervisor_programs</code> section - add an entry for the Reports webapp:</p>
+      <p>Similar to <span class="notranslate">Galaxy</span> we will again use systemd to manage the Reports process. In the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file edit the <code class="highlighter-rouge">supervisor_programs</code> section - add an entry for the Reports webapp:</p>
 
-      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">supervisor_programs</span><span class="pi">:</span>
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SystemD</span>
+<span class="na"><span class="notranslate">galaxy</span>_systemd_reports</span><span class="pi">:</span> <span class="no">true</span>
   <span class="s">....</span>
-  <span class="s">- name</span><span class="pi">:</span> <span class="s">reports</span>
-    <span class="s">state</span><span class="pi">:</span> <span class="s">present</span>
-    <span class="s">command</span><span class="pi">:</span> <span class="s">uwsgi --yaml {{ <span class="notranslate">galaxy</span>_config_dir }}/reports.yml</span>
-    <span class="s">configuration</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="s">autostart=true</span>
-      <span class="s">autorestart=true</span>
-      <span class="s">startretries=1</span>
-      <span class="s">startsecs=10</span>
-      <span class="s">user=<span class="notranslate">galaxy</span></span>
-      <span class="s">umask=022</span>
-      <span class="s">directory={{ <span class="notranslate">galaxy</span>_server_dir }}</span>
-      <span class="s">environment=HOME={{ <span class="notranslate">galaxy</span>_mutable_data_dir }},VIRTUAL_ENV={{ <span class="notranslate">galaxy</span>_venv_dir }},PATH={{ <span class="notranslate">galaxy</span>_venv_dir }}/bin:%(ENV_PATH)s</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:</p>
 
-      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports</span> <span class="p">{</span>
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports/</span> <span class="p">{</span>
     <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
     <span class="kn">uwsgi_param</span>          <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
     <span class="kn">include</span>              <span class="s">uwsgi_params</span><span class="p">;</span>
@@ -676,10 +665,9 @@
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>The reports application should be available, under <code class="highlighter-rouge">&lt;server_url&gt;/reports/</code>. Note the trailing slash.</p>
+      <p>The reports application should be available, under <code class="highlighter-rouge">&lt;server_url&gt;/reports/</code>.&gt;</p>
     </li>
   </ol>
-
 </blockquote>
 
 
@@ -723,8 +711,8 @@
     author = "Nate Coraor and Björn Grüning and Simon Gladman and Helena Rasche",
     title = "Galaxy Monitoring with Reports (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "20"
+    month = "02",
+    day = "14"
     url = "\url{/training-material/topics/admin/tutorials/reports/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

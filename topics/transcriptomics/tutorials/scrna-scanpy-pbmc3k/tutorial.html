@@ -778,7 +778,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 8, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -965,6 +965,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
   <ol>
     <li><strong>Import AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
+        <li><em>“hd5 format to be created”</em>: <code class="highlighter-rouge">Anndata file</code></li>
         <li><em>“Format for the annotated data matrix”</em>: <code class="highlighter-rouge">Matrix Market (mtx), from Cell ranger or not</code>
           <ul>
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix”</em>: <code class="highlighter-rouge">matrix.mtx</code></li>
@@ -1150,7 +1151,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-remove-genes-found-in-less-than-3-cells"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove genes found in less than 3 cells</h3>
 
   <ol>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">Input 3k PBMC</code></li>
         <li><em>“Method used for filtering”</em>: <code class="highlighter-rouge">Filter genes based on number of cells or counts, using 'pp.filter_genes'</code>
@@ -1418,7 +1419,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-compute-qc-metrics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute QC metrics</h3>
 
   <ol>
-    <li><strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with mito annotation</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Calculate quality control metrics, using 'pp.calculate_qc_metrics'</code>
@@ -1495,7 +1496,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-visualize-qc-metrics"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize QC metrics</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1547,10 +1548,10 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
-        <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Scatter plot along observations or variables axes, using </code>pl.scatter``
+        <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
           <ul>
             <li><em>“Plotting tool that computed coordinates”</em>: <code class="highlighter-rouge">Using coordinates</code>
               <ul>
@@ -1582,7 +1583,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1643,7 +1644,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-remove-low-quality-cells"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove low-quality cells</h3>
 
   <ol>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
         <li><em>“Method used for filtering”</em>: <code class="highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
@@ -1680,7 +1681,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Method used for filtering”</em>: <code class="highlighter-rouge">Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'</code>
@@ -3914,7 +3915,7 @@ RP11-34P13.8	ENSG00000239945
     title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "08"
+    day = "13"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
