@@ -684,7 +684,7 @@ Now that you have a small role built up, you might start thinking about deployin
 > 6. Tell ansible where to find the decryption file. Create file `ansible.cfg` with content
 >
 >     ```yaml
->     [default]
+>     [defaults]
 >     vault_password_file=vault-password.txt
 >     ```
 > 7. Run the playbook
