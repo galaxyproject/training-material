@@ -241,12 +241,16 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 > ### {% icon hands_on %} Hands-on
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->    - {% icon param-repeat %} *Insert Input Pairs*
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - *"Input Type"*: `Single files`
+>        - In *"Input Pairs"*:
+>            - In *"1: Input Pairs"*:
+>                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
+>                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
+>            - Select {% icon param-repeat %} *Insert Input Pairs*
+>            - In *"2: Input Pairs"*:
+>               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
+>               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
+>                 (*pay attention to the* **L001** *and* **L002** *names*)
 >    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
