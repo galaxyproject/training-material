@@ -125,6 +125,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 > ### {% icon hands_on %} Hands-on: Transform matrix and all into AnnData object
 >
 > 1. **Import AnnData** {% icon tool %} with the following parameters:
+>    - *"hd5 format to be created"*: `Anndata file`
 >    - *"Format for the annotated data matrix"*: `Matrix Market (mtx), from Cell ranger or not`
 >        - {% icon param-file %} *"Matrix"*: `matrix.mtx`
 >        - *"Use 10x Genomics formatted mtx"*: `Output from Cell Ranger v2 or earlier versions`
@@ -270,7 +271,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 
 > ### {% icon hands_on %} Hands-on: Remove genes found in less than 3 cells
 >
-> 1. **Filter** {% icon tool %} with the following parameters:
+> 1. **Filter** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Input 3k PBMC`
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
@@ -447,7 +448,7 @@ We can now compute QC metrics on the `AnnData` object.
 
 > ### {% icon hands_on %} Hands-on: Compute QC metrics
 >
-> 1. **Inspect and manipulate** {% icon tool %} with the following parameters:
+> 1. **Inspect and manipulate** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation`
 >    - *"Method used for inspecting"*: `Calculate quality control metrics, using 'pp.calculate_qc_metrics'`
 >      - *"Name of kind of values in X"*: `counts`
@@ -504,7 +505,7 @@ We would like to visualize 3 of the more informative QC metrics:
 
 > ### {% icon hands_on %} Hands-on: Visualize QC metrics
 >
-> 1. **Plot** {% icon tool %} with the following parameters:
+> 1. **Plot** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -536,9 +537,9 @@ We would like to visualize 3 of the more informative QC metrics:
 >    >
 >    {: .question}
 >
-> 3. **Plot** {% icon tool %} with the following parameters:
+> 3. **Plot** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
->    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using `pl.scatter``
+>    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >      - *"Plotting tool that computed coordinates"*: `Using coordinates`
 >        - *"x coordinate"*: `total_counts`
 >        - *"y coordinate"*: `n_genes_by_counts`
@@ -560,7 +561,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    >
 >    {: .question}
 >
-> 5. **Plot** {% icon tool %} with the following parameters:
+> 5. **Plot** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"Plotting tool that computed coordinates"*: `Using coordinates`
@@ -600,7 +601,7 @@ Based on the previous plot, we would like to remove cells that have:
 
 > ### {% icon hands_on %} Hands-on: Remove low-quality cells
 >
-> 1. **Filter** {% icon tool %} with the following parameters:
+> 1. **Filter** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Minimum number of genes expressed`
@@ -626,7 +627,7 @@ Based on the previous plot, we would like to remove cells that have:
 >    >
 >    {: .question}
 >
-> 3. **Filter** {% icon tool %} with the following parameters:
+> 3. **Filter** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
 >    - *"Method used for filtering"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - *"Filter"*: `Maximum number of genes expressed`
