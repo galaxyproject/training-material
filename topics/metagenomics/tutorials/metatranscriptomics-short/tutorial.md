@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Metatranscriptomics analysis using microbiome RNA-seq data
+title: Metatranscriptomics analysis using microbiome RNA-seq data (short)
 zenodo_link: https://zenodo.org/record/3362849
 questions:
 - "How to analyze metatranscriptomics data?"
@@ -15,7 +15,7 @@ objectives:
 level: Introductory
 tags:
 - metatranscriptomics
-time_estimation: 6H
+time_estimation: 3H
 key_points:
 - "Metatranscriptomics data have the same QC profile that RNA-seq data"
 - "A lot of metatranscriptomics sequences are identified as rRNA sequences"
@@ -33,4 +33,4 @@ contributors:
 ---
 
 
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/metagenomics/tutorials/metatranscriptomics/content.md short=true %}
