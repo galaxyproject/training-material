@@ -483,7 +483,7 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `EmptyDrops`
 >            - *"Lower-bound Threshold"*: `200`
->            - *"FDR Threshold"*: `0`
+>            - *"FDR Threshold"*: `0.01`
 >        - *"Format for output matrices"*: `Tabular`
 >
 {: .hands_on}
