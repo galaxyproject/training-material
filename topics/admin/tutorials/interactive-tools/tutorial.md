@@ -24,7 +24,7 @@ requirements:
 ---
 
 > ### {% icon warning %} Evolving Topic
-> Galaxy Interactive Tools are a **new feature** and there are some rough edges and ongoing work to improve the experience of deploying and using them.
+> Galaxy Interactive Tools are a **new feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.
 {: .warning}
 
 # Overview
@@ -48,7 +48,7 @@ There are two sections to this exercise. The first shows you how to use Ansible 
 
 If the terms "Ansible," "role," and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({{ site.baseurl }}{% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({{ site.baseurl }}{% link topics/admin/tutorials/ansible/tutorial.md %}).
 
-**This section of the tutorial builds upon the work in the Ansible introduction tutorial, please ensure that you have completed that tutorial first.**
+**This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.**
 
 > ### {% icon comment %} Ansible Best Practices
 > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.
@@ -178,15 +178,16 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >
 >    The relevant variables to set for this role are:
 >
->    | Variable                   | Type          | Description                                                           |
->    | ----------                 | -------       | -------------                                                         |
->    | `gie_proxy_dir`            | path (string) | Path of directory into which the proxy application will be installed  |
->    | `gie_proxy_git_version`    | string        | Git reference to clone                                                |
->    | `gie_proxy_setup_nodejs`   | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
->    | `gie_proxy_nodejs_version` | string        | Version of Node.js to install if using `nodeenv` method               |
->    | `gie_proxy_virtualenv`     | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
->    | `gie_proxy_setup_service`  | string        | Whether to configure the proxy as a service, only option is `systemd` |
->    | `gie_proxy_sessions_path`  | path (string) | Path of Interactive Tools sessions map                                |
+>    | Variable                      | Type          | Description                                                           |
+>    | ----------                    | -------       | -------------                                                         |
+>    | `gie_proxy_dir`               | path (string) | Path of directory into which the proxy application will be installed  |
+>    | `gie_proxy_git_version`       | string        | Git reference to clone                                                |
+>    | `gie_proxy_setup_nodejs`      | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
+>    | `gie_proxy_virtulenv_command` | string        | Command to create virtualenv when using `nodeenv` method              |
+>    | `gie_proxy_nodejs_version`    | string        | Version of Node.js to install if using `nodeenv` method               |
+>    | `gie_proxy_virtualenv`        | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
+>    | `gie_proxy_setup_service`     | string        | Whether to configure the proxy as a service, only option is `systemd` |
+>    | `gie_proxy_sessions_path`     | path (string) | Path of Interactive Tools sessions map                                |
 >
 >    Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
@@ -195,6 +196,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
 >    gie_proxy_git_version: ie2
 >    gie_proxy_setup_nodejs: nodeenv
+>    gie_proxy_virtulenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"
 >    gie_proxy_virtualenv: /srv/galaxy/gie-proxy/venv
 >    gie_proxy_setup_service: systemd
@@ -238,3 +240,43 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 {: .hands_on}
 
 [nodeenv]: https://github.com/ekalinin/nodeenv
+
+> ### {% icon question %} Question
+>
+> What did running the playbook change?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. A new Python venv was created at `/srv/galaxy/gie-proxy/venv`
+> > 2. Node.js version 10.13.0 was installed in to the venv
+> > 3. The proxy was cloned to `/srv/galaxy/gie-proxy/proxy`
+> > 4. The proxy's Node dependencies were installed to `/srv/galaxy/gie-proxy/proxy/node_modules` using the venv's `npm`
+> > 5. A SystemD service unit was installed at `/etc/systemd/system/galaxy-gie-proxy.service`
+> > 6. The SystemD daemon was reloaded to read this new service unit
+> > 7. The service was set to start on boot and started
+> >
+> {: .solution }
+>
+{: .question}
+
+Because the proxy runs as a SystemD service, you can inspect the log of the service using `journalctl`. The service name is `galaxy-gie-proxy`:
+
+```console
+$ sudo journalctl -eu galaxy-gie-proxy
+Feb 14 17:38:49 gcc-4 systemd[1]: Started Galaxy IE/IT Proxy.
+Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools_map.sqlite
+```
+
+> ### {% icon comment %} Note
+>
+> You can ignore errors about failing to read the sessions map file for now - Galaxy will create it when it's needed.
+>
+{: .comment}
+
+## Getting an SSL Certificate
+
+During the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
+
+In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`.
+
+[lets-encrypt]: https://letsencrypt.org/
