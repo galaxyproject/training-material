@@ -334,12 +334,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > {: .solution }
 >     {: .question}
 >
-> 11. Run one of the following command, whichever is appropriate:
->
->     - Real remote host: `ansible-playbook -i hosts playbook.yml`
->     - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
->
->     Even local users can run the 'real remote host' command, Ansible will just issue a warning. Running with `-c local` silences this warning.
+> 11. Run the playbook: `ansible-playbook -i hosts playbook.yml`
 >
 >     > ### {% icon question %} Question
 >     >
