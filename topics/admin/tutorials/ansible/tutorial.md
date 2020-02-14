@@ -701,7 +701,7 @@ Now that you have a small role built up, you might start thinking about deployin
 >    > >
 >    > > ```ini
 >    > > [example]
->    > > server_name = Cats!
+>    > > server_name = Dogs!
 >    > > listen = 192.168.0.2
 >    > > apikey = super-secret-api-key-wow!
 >    > > ```
