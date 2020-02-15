@@ -109,11 +109,15 @@ First we need to get some data into our history. You can upload files from your 
 >     - *"genome"*: `Human`
 >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >     - *"group"*: `Genes and Gene Predictions`
->     - *"track"*: `GENCODE v29`
+>     - *"track"*: `GENCODE v32`
 >     - *"table"*: `knownGene`
 >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
 >     - *"output format"* should be changed to `BED - browser extensible data`
 >     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
+>
+>     > ### {% icon comment %} Comment
+>     > If the *"table"* drop down menu does not show the `knownGene` option. Set *"group"* to `All tables` and scroll down.
+>     {: .comment}
 >
 > 2. Click on the **get output** button and you will see the next screen:
 >
