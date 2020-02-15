@@ -1301,10 +1301,10 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 >    > > 
 >    > > This information can be accessed using:
 >    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >    > >    - *"What to inspect?"*: `Generalinformation about the object`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >    > >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >    > >
 >    > {: .solution}
