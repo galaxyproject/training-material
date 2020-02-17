@@ -300,7 +300,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
 >     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
->     - *"in column"*: `Column:1`
+>     - *"in column"*: `1`
 >     - *"Find pattern"*: `[0-9]+`
 >
 >         This will look for numerical digits
@@ -313,7 +313,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 3. **Replace Text** {% icon tool %}: Let's rerun the tool with
 >    - *"File to process"*: the output from the last run, `chr prefix added`
->    - *"in column"*: `Column:1`
+>    - *"in column"*: `1`
 >    - *"Find pattern"*: `chr20`
 >    - *"Replace with"*: `chrX`
 >
@@ -327,7 +327,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 5. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
 >    - *"File to process"*: `chrX fixed`, the output from the last run
->    - *"in column"*: `Column:1`
+>    - *"in column"*: `1`
 >    - *"Find pattern"*: `chr21`
 >    - *"Replace with"*: `chrY`
 >
