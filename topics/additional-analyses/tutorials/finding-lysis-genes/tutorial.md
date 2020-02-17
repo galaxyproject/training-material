@@ -9,21 +9,20 @@ tutorial_name: finding-lysis-genes
 > 1. Background on Lysis Genes
 >    > * Holin-Endolysin Pathway
 >    > * Spanins
+>    > * Spanin Architectures: i-spanin/o-spanin, u-spanin
 >    > * Expected Genetic Context
 > 2. Finding the Endolysin
 >    > * Conserved Domain (InterPro)
 >    > * BLAST Hits
 >    > * SAR Endolysins
->    > * Types of Endolysins
+>    > * Endolysin Type
 > 3. Finding Holins and Antiholins
 >    > * TMHMM Tracks - Transmembrane Prediction
 >    > * BLAST Homology
 >    > * Basic Considerations When Looking for Holins
->    > * Annotating Holoin/Antiholin Pairs
-> 4. Spanin Genes
->    > * Gram-Negative Hosts
->    > * Spanin Architectures: i-spanin/o-spanin, u-spanin
->    > * What is an SPII signal? What is a lipobox?
+>    > * Annotating Holin/Antiholin Pairs
+> 4. Finding Spanin Genes
+>    > * Looking for the genetic signatures
 > 5. Missing Lysis Genes
 > {:toc}
 >
@@ -73,8 +72,6 @@ The formations of these holes collapses the membrane potential and stops macromo
 
 ![](../../images/finding-lysis-genes-screenshots/3_holin_endolysin_pathway.png)
 
-![](../../images/finding-lysis-genes-screenshots/4_pinholin_sar_endolysin_pathway.png)
-
 > {% icon comment %} Pinholins and SAR Endolysins
 > * A **pinholin** has similar functionality to a holin, but will instead form ~1000 small heptameric holes in the membrane, called "pinholes." The diameter of the pinholes is less than 2 nm, which is too small to allow an endolysin to pass through the hole. This system requires a particular endolysin called a SAR endolysin.
 > * A **SAR endolysin** (SAR = **S**ignal **A**nchor **R**elease domain) accumulates in the cytoplasmic membrane as an inactive enzyme, tethered by an N-terminal transmembrane domain (TMD). When the pinholes collapses the membrane potential, the TMD is able to exit the bilayer; the SAR endolysin is released, allowing it to refold into its active form and attack the peptidoglycan.
@@ -103,10 +100,6 @@ Once the spanins have been liberated from the peptidoglycan that was keeping the
 >
 {: .comment}
 
-![](../../images/finding-lysis-genes-screenshots/10_spanins_oligomerize.png)
-
-![](../../images/finding-lysis-genes-screenshots/11_membrane_disruption.png)
-
 ## Gram-Negative Hosts
 
 Spanins are only expected in the genomes of phages that infect Gram-negative hosts. From detailed molecular characterization of the lamdba spanins Rz and Rz1, see this [recent review](https://www.ncbi.nlm.nih.gov/pubmed/30635077), and an [in-depth bioinformatic analysis](https://www.ncbi.nlm.nih.gov/pubmed/30219026) of many more spanin sequences, we know the essential genetic signatures and genomic architectures to search for in novel genomes. 
@@ -117,7 +110,7 @@ The lipobox consists of a conserved sequence that ends in a Cys residue. That Cy
 
 ![](../../images/finding-lysis-genes-screenshots/19_lipoprotein.png)
 
-A signal sequence allows for proper secretion and localization of a protein. Below is the makeup of a typical SPI signal. An SPII signal sequence has additionally a lipobox with its Cys residue after the C domain.
+A signal sequence allows for proper secretion and localization of a protein. Below is the makeup of a typical SPII signal sequence, which includes a lipobox with its Cys residue after the C domain.
 
 ![](../../images/finding-lysis-genes-screenshots/20_spii_signal_lipobox.png)
 
@@ -139,8 +132,6 @@ A signal sequence allows for proper secretion and localization of a protein. Bel
 > * u-spanin
 >    > * 1 N-terminal SPII signal
 >    > * 1 C-terminal TMD 
-> ![](../../images/finding-lysis-genes-screenshots/9_lambda_t1_spanin_comparison.png)
-
 
 ## Spanin Two-component gene architectures: embedded, overlapping, and separate
 
@@ -163,7 +154,7 @@ When the lysis genes are encoded as a module, the order is not necessarily conse
 > 
 > ![](../../images/finding-lysis-genes-screenshots/14_distributed_lysis_genes.png)
 >
-{: .comment}
+> {: .comment}
 
 Note that in many cases, there will be two genes in tandem that encode transmembrane domain-containing proteins. These are sometimes predicted to be a holin/antiholin pair, or they may be two holins. 
 ![](../../images/finding-lysis-genes-screenshots/15_holin_antiholin_pairs.png)
@@ -179,15 +170,32 @@ Conserved domains are typically found in the InterProScan evidence track in Apol
 
 ## BLAST Hits
 
-BLASTp hits to known and characterized lysozymes or endolysins are a good clue to finding the endolysin.
+BLASTp hits to known and characterized lysozymes or endolysins are a good clue to finding the endolysin. Check BLAST hits in against canonical phages and curated databases like SwissProt first.
 
 ## SAR Endolysins
 
-Pay careful attention to the N-terminus of your endolysin sequence. If there is evidence of a transmembrane domain, or a long stretch of weakly hydrophobic residues (especially Glycines), you may be looking at a SAR endolysin!
+Pay careful attention to the N-terminus of your endolysin sequence. If there is evidence of a transmembrane domain, or a long stretch of weakly hydrophobic residues (especially Glycines, Alanines, and Serines), you may be looking at a SAR endolysin!
 
-## Types of Endolysins
+> * **Transmembrane domains**
+>    > * Generally 15-20 amino acids in length
+>    > * Hydrophobic, uncharged (Ile, Leu, Val, Phi, Tyr, Trp, Met) 
+>    > * Lys can snorkel if up to three residues inside the hydrophobic region, and adjacent oppositely charged residues can neutralize each other in the same helix
+>    > * Alpha-helical
 
-Where possible, it is preferable to name an endolysin according to its known type. If similar to one of the proteins below, you may be able to determine its type. 
+> * **“Positive Inside” Rule**
+>    > * The inner membrane carries a net positive charge on the outside surface
+>    > *  Membrane proteins will take a topology that keeps net negative charges on the outside, and net positive charges on the inside
+>    > *  Note that TMD prediction tools often mistake SPI and SPII signals for N-terminal TMDs!
+>    > *  Orientation matters, because a SAR endolysin must have its catalytic domain in the periplasm
+
+> * **SAR (Signal-Anchor-Release) domain**
+>    > * Similar to transmembrane domains, but enriched in Gly, Ala, and Ser
+>    > * Often missed by prediction software
+>    > * Always check the N-terminus of your endolysin protein!
+
+## Endolysin Type
+
+Where possible, it is preferable to name an endolysin according to its known type. Examine the InterProScan results and BLAST hits to help determine its catalytic type. These are some characterized examples you may find in the BLAST tracks.
 
 > * **Glycosidase** (T4 E)
 
@@ -228,7 +236,7 @@ The antiholin can be encoded partly or completely overlapping the holin. There a
 
 The typical signals for spanins are displayed in Apollo in a few different evidence tracks. 
 > * Transmembrane domains
->    > * THMHH
+>    > * TMHMM
 >    > * InterProScan (under Phobius)
 > * Signal sequences
 >    > * InterProScan
