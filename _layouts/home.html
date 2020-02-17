@@ -8,6 +8,7 @@ layout: base
 {% assign sorted_topics = "" | split: "," %}
 {% assign sorted_topics_pre = site.data | sort | order:"ranking" %}
 {% for topic in sorted_topics_pre %}
+    {{ topic }}
     {% if topic[0] == "introduction" %}
         {% assign sorted_topics = sorted_topics | unshift: topic %}
     {% elsif topic[0] == "instances" %}
