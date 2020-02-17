@@ -871,7 +871,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 
 > ### {% icon hands_on %} Hands-on: Perform the PCA
 >
-> 1. **Cluster,** infer trajectories and embed with scanpy {% icon tool %} with the following parameters:
+> 1. **Cluster, infer trajectories and embed** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling`
 >    - *"Method used for plotting"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
 >      - *"Number of principal components to compute"*: `50`
@@ -1152,7 +1152,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 
 > ### {% icon hands_on %} Hands-on: Embed and plot the neighborhood graph
 >
-> 1. **Cluster,** infer trajectories and embed with scanpy {% icon tool %} with the following parameters:
+> 1. **Cluster, infer trajectories and embed** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    - *"Method used for plotting"*: `Embed the neighborhood graph using UMAP, using 'tl.umap'`
 >
@@ -1210,7 +1210,7 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 
 > ### {% icon hands_on %} Hands-on: Cluster the neighborhood graph
 >
-> 1. **Cluster,** infer trajectories and embed with scanpy {% icon tool %} with the following parameters:
+> 1. **Cluster, infer trajectories and embed** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP`
 >    - *"Method used for plotting"*: `Cluster cells into subgroups, using 'tl.louvain'`
 >       - *"Flavor for the clustering"*: `vtraag (much more powerful)`
