@@ -6,7 +6,9 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 
 {% assign sorted_topics = "" | split: "," %}
-{% assign sorted_topics_pre = site.data | sort:"meta" %}
+{% assign sorted_topics_pre = site.data | sort | order: "meta" %}
+
+{% sorted_topics_pre %}
 
 {% for topic in sorted_topics_pre %}
     {% if topic[0] == "introduction" %}
