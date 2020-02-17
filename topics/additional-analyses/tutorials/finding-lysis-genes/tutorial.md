@@ -218,6 +218,7 @@ Where possible, it is preferable to name an endolysin according to its known typ
 {: .tip}
 
 ## BLAST Homology
+This is not very common, but helpful if the annotation of the BLAST hit is trustworthy (has evidence, or is related to a phage whose holin has experimental evidence for function as a holin).
 
 ## Basic Considerations When Looking for Holins
 
