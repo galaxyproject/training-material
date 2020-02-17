@@ -6,7 +6,7 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 
 {% assign sorted_topics = "" | split: "," %}
-{% assign sorted_topics_pre = site.data | sort | order: "title" %}
+{% assign sorted_topics_pre = site.data | reverse | order: "title" %}
 
 {% for topic in sorted_topics_pre %}
     {% if topic[0] == "introduction" %}
@@ -19,7 +19,6 @@ layout: base
         {% assign sorted_topics = sorted_topics | push: topic %}
     {% endif %}
 {% endfor %}
-{% sorted_topics | reverse %}
 
 <div class="container main-content">
     <section>
