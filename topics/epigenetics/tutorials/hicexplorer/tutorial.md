@@ -343,10 +343,63 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 
 The resulting image should look like this one:
 ![TAD plot](../../images/plotTADs.png)
+
+# Loop detection
+
+In Hi-C data, the term `loop` refers to a 3D structure which represent enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also so called long-range interactions with an expected maximum distance of 2 MB (see [Rao et al. 2014](https://doi.org/10.1016/j.cell.2014.11.021).
+
+![Loops visualization](../../images/loops_bonev_cavalli.png)
+
+To compute loops, we have to import a new data set from the shared library to our history: `GM12878-MboI-allreps-filtered.10kb.cool` or download it via the [FTP cool files server](ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool). 
+
+This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolution. We use a new file because to detect loop structures the read coverage is required to be in the hunderts of million; this was not the case for the previous used drosophila dataset.
+
+> ### {% icon hands_on %} Hands-on: Matrix information 
+>
+> 1. **hicInfo** {% icon tool %}: Run hicInfo adjusting the parameters:
+>    - "Select" `Multiple datasets`
+>    - "Matrix to compute on" to `corrected contact matrix dm3 large` and `GM12878-MboI-allreps-filtered.10kb.cool`
+{: .hands_on}
+
+We now investigate the result of hicInfo and see that the new importet file is having a deep read coverage of , while the other 
+
+> ### {% icon hands_on %} Hands-on: Computing loops
+>
+> 1. **hicDetectLoops** {% icon tool %}: Run hicDetectLoops adjusting the parameters:
+>    - "Matrix to compute on" to `GM12878-MboI-allreps-filtered.10kb.cool`
+>    - "Peak width" to `6`
+>    - "Window size" to `10`
+>    - "P-value preselection" to `0.01`
+>    - "P-value" to `0.01`
+>    - "Chromosomes to include" to `chr1`
+>
+{: .hands_on}
+
+
+The detection of the loops is based on a preselection of interactions based on p-values given a continuous negative binomial distribution based on all interactions of a relative distance. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.
+
+As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.
+
+![Loops computed_file](../../images/loops_result.png)
+
+> ### {% icon hands_on %} Hands-on: Plotting of loops
+>
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix adjusting the parameters:
+>    - "Matrix to compute on" to `GM12878-MboI-allreps-filtered.10kb.cool`
+>    - "Plot title" to `Loops`
+>    - "Plot only this region" to `chr1:18000000-22000000`
+>    - "Plot the log1p of the matrix values" to `Yes`
+>    - "Add detected loops" to `Computed loops` of the previous step
+>    - "DPI for image" to `300`
+>
+{: .hands_on}
+
+![Loops result_plot](../../images/loops_plot.png)
+
 # Conclusion
 {:.no_toc}
 
-In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.
+In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.
 
 
  To improve your learned skills we offer an additional tutorial based on mouse stem cells: [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
