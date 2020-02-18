@@ -30,6 +30,10 @@ For this the following steps are necessary to be performed:
 3. Plotting the Hi-C matrix
 4. Correction of Hi-C matrix
 5. TAD Calling
+6. A/B compartments computation
+7. pyGenomeTracks visualization
+8. Loop detection
+
 
 After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.
 
@@ -257,18 +261,48 @@ TAD calling works in two steps: First HiCExplorer computes a TAD-separation scor
 
 As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.
 
+# A/B compartments computation
 
 > ### {% icon hands_on %} Hands-on: Computing A / B compartments
 >
 > 1. **hicPCA** {% icon tool %}: Run hicPCA adjusting the parameters:
 >    - "Matrix to compute on" to `corrected contact matrix dm3 large`
 >    - "Output file format" to `bigwig`
+>    - "Return internally used Pearson matrix" to `Yes`
 >
 {: .hands_on}
 
+> ### {% icon hands_on %} Hands-on: Plotting the pearson matrix and PCA track
+>
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `pearson_matrix from PCA computation` adjusting the parameters:
+>    - "Plot title" to `Pearson matrix and PC1`
+>    - "Chromosomes to include" to `chr2L`
+>    - "Color map to use for the heatmap" to `gist_heat`
+>    - "Datatype of eigenvector file" to `bigwig`
+>    - "Eigenvector file" to `hicPCA on [...] PC1`
+>
+{: .hands_on}
+
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `pearson_matrix from PCA computation` adjusting the parameters:
+>    - "Plot title" to `Pearson matrix and PC2`
+>    - "Chromosomes to include" to `chr2L`
+>    - "Color map to use for the heatmap" to `gist_heat`
+>    - "Datatype of eigenvector file" to `bigwig`
+>    - "Eigenvector file" to `hicPCA on [...] PC2`
+>
+{: .hands_on}
+
+
+![Pearson PC1](../../images/pearson_pc1.png)
+
+
+![Pearson PC2](../../images/pearson_pc2.png)
+
+The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments. 
+
 # Integrating Hi-C and other data
 
-We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html).
+We can plot the TADs for a given chromosomal region. For this we will use [pyGenomeTracks](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html).
 
 For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
@@ -361,7 +395,7 @@ This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolut
 >    - "Matrix to compute on" to `corrected contact matrix dm3 large` and `GM12878-MboI-allreps-filtered.10kb.cool`
 {: .hands_on}
 
-We now investigate the result of hicInfo and see that the new importet file is having a deep read coverage of , while the other 
+We now investigate the result of hicInfo and see that the new importet file is having 1.2 billion non-zero elements, while the drosophila Hi-C interaction matrix has around 12 million non-zero elements.
 
 > ### {% icon hands_on %} Hands-on: Computing loops
 >
@@ -376,7 +410,7 @@ We now investigate the result of hicInfo and see that the new importet file is h
 {: .hands_on}
 
 
-The detection of the loops is based on a preselection of interactions based on p-values given a continuous negative binomial distribution based on all interactions of a relative distance. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.
+The detection of the loops is based on a preselection of interactions, per interaction a p-value given a continuous negative binomial distribution over all interactions of a relative distance is computed. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.
 
 As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.
 
