@@ -380,7 +380,7 @@ The resulting image should look like this one:
 
 # Loop detection
 
-In Hi-C data, the term `loop` refers to a 3D structure which represent enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also so called long-range interactions with an expected maximum distance of 2 MB (see [Rao et al. 2014](https://doi.org/10.1016/j.cell.2014.11.021).
+In Hi-C data, the term `loop` refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see [Rao et al. 2014](https://doi.org/10.1016/j.cell.2014.11.021).
 
 ![Loops visualization](../../images/loops_bonev_cavalli.png)
 
@@ -395,7 +395,7 @@ This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolut
 >    - "Matrix to compute on" to `corrected contact matrix dm3 large` and `GM12878-MboI-allreps-filtered.10kb.cool`
 {: .hands_on}
 
-We now investigate the result of hicInfo and see that the new importet file is having 1.2 billion non-zero elements, while the drosophila Hi-C interaction matrix has around 12 million non-zero elements.
+We now investigate the result of hicInfo and see that the new imported file is having 1.2 billion non-zero elements, while the drosophila Hi-C interaction matrix has around 12 million non-zero elements.
 
 > ### {% icon hands_on %} Hands-on: Computing loops
 >
@@ -410,7 +410,7 @@ We now investigate the result of hicInfo and see that the new importet file is h
 {: .hands_on}
 
 
-The detection of the loops is based on a preselection of interactions, per interaction a p-value given a continuous negative binomial distribution over all interactions of a relative distance is computed. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.
+The detection of the loops is based on a pre-selection of interactions, a p-value given a continuous negative binomial distribution over all interactions of a relative distance is computed. All interactions are filtered with a threshold (`p-value preselection`) to retrieve loop candidates. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.
 
 As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.
 
@@ -433,7 +433,7 @@ As an output we get a loop file containing the positions of both anchor points o
 # Conclusion
 {:.no_toc}
 
-In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.
+In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.
 
 
  To improve your learned skills we offer an additional tutorial based on mouse stem cells: [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
