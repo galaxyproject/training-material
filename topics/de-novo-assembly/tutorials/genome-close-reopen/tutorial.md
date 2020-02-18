@@ -67,18 +67,18 @@ Design confirmation PCR primers off the node sequence. This primer pair can be d
 ![](../../images/genome-close-reopen-screenshots/4_sequence_file_format.png)
 
 Set up a PCR reaction with new confirmation primers as follows:
-> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 mM (1 nmol= 10 uL H20) stock, and a 10 mM working stock.
+> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM (1 nmol= 10 uL H20) stock, and a 10 uM working stock.
 > * Assemble the PCR reaction with the following agents, which can be scaled up as needed.
 
-![](../../images/genome-close-reopen-screenshots/5_pcr_agents_composition.png)
+![](../../images/genome-close-reopen-screenshots/5.1_pcr_agents_composition.png)
 
 > * Run the PCR reaction with the following conditions:
 
-![](../../images/genome-close-reopen-screenshots/6_pcr_reaction_conditions.png)
+![](../../images/genome-close-reopen-screenshots/6.1_pcr_reaction_conditions.png)
 
-Visualize the PCR product on a 1% agarose gel using a visualizing agent, such as ethidium bromide or SYBR Safe.
+Visualize the PCR product on a 2% agarose gel using a visualizing agent, such as ethidium bromide or SYBR Safe.
 > * Mix loading dye with the PCR product at the appropriate concentrations (5 uL of product with 1 uL of 6X loading dye). Also load a 100 bp ladder and perform electrophoresis at 100 constant Volts.
-> * Image the gel after approximately 45 minutes. Record whether the product sizes match the expected length.
+> * Image the gel after approximately 45-60 minutes. Record whether the product sizes match the expected length.
 > * Save the results. Upload the properly labeled images to an appropriate storage location (such as a shared Google Drive folder).
 > * Should the results be unexpected, see the troubleshooting section below.
 
@@ -101,11 +101,11 @@ Return to the FASTA file for the confirmed node (*Raw_phagename*). Design a set 
 > * For the records, highlight the amplicon and primer sequences in the genome.
 
 Set up a PCR reaction with the new closure primers as follows.
-> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 mM (1 nmol= 10 uL H20) stock, and a 10 mM working stock.
+> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM (1 nmol= 10 uL H20) stock, and a 10 uM working stock.
 > * Assemble the PCR reaction as for the confirmation reaction above.
 > * Run the reaction with the following conditions:
 
-![](../../images/genome-close-reopen-screenshots/9_closure_pcr_conditions.png)
+![](../../images/genome-close-reopen-screenshots/9.1_pcr_reaction_conditions.png)
 
 Visualize and record the gel results as described above.
 > * If an amplicon is identified, send the PCR product for sequencing.
