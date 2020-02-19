@@ -380,7 +380,7 @@ The resulting image should look like this one:
 
 # Loop detection
 
-In Hi-C data, the term `loop` refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see [Rao et al. 2014](https://doi.org/10.1016/j.cell.2014.11.021).
+In Hi-C data, the term `loop` refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see [Rao et al. 2014](https://doi.org/10.1016/j.cell.2014.11.021)).
 
 ![Loops visualization](../../images/loops_bonev_cavalli.png)
 
