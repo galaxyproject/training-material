@@ -616,7 +616,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 28, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 19, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -636,6 +636,9 @@ For this the following steps are necessary to be performed:</p>
   <li>Plotting the Hi-C matrix</li>
   <li>Correction of Hi-C matrix</li>
   <li>TAD Calling</li>
+  <li>A/B compartments computation</li>
+  <li>pyGenomeTracks visualization</li>
+  <li>Loop detection</li>
 </ol>
 
 <p>After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.</p>
@@ -652,7 +655,9 @@ For this the following steps are necessary to be performed:</p>
   <li><a href="#plotting-the-hi-c-matrix" id="markdown-toc-plotting-the-hi-c-matrix">Plotting the Hi-C matrix</a></li>
   <li><a href="#correction-of-hi-c-matrix" id="markdown-toc-correction-of-hi-c-matrix">Correction of Hi-C matrix</a></li>
   <li><a href="#tad-calling" id="markdown-toc-tad-calling">TAD calling</a></li>
+  <li><a href="#ab-compartments-computation" id="markdown-toc-ab-compartments-computation">A/B compartments computation</a></li>
   <li><a href="#integrating-hi-c-and-other-data" id="markdown-toc-integrating-hi-c-and-other-data">Integrating Hi-C and other data</a></li>
+  <li><a href="#loop-detection" id="markdown-toc-loop-detection">Loop detection</a></li>
 </ol>
 
 </blockquote>
@@ -939,6 +944,8 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.</p>
 
+<h1 id="ab-compartments-computation">A/B compartments computation</h1>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-computing-a--b-compartments"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Computing A / B compartments</h3>
 
@@ -947,15 +954,54 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
       <ul>
         <li>“Matrix to compute on” to <code class="highlighter-rouge">corrected contact matrix dm3 large</code></li>
         <li>“Output file format” to <code class="highlighter-rouge">bigwig</code></li>
+        <li>“Return inte<span class="notranslate">rna</span>lly used Pearson matrix” to <code class="highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plotting-the-pearson-matrix-and-pca-track"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plotting the pearson matrix and PCA track</h3>
+
+  <ol>
+    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicPlotMatrix on <code class="highlighter-rouge">pearson_matrix from PCA computation</code> adjusting the parameters:
+      <ul>
+        <li>“Plot title” to <code class="highlighter-rouge">Pearson matrix and PC1</code></li>
+        <li>“Chromosomes to include” to <code class="highlighter-rouge">chr2L</code></li>
+        <li>“Color map to use for the heatmap” to <code class="highlighter-rouge">gist_heat</code></li>
+        <li>“Datatype of eigenvector file” to <code class="highlighter-rouge">bigwig</code></li>
+        <li>“Eigenvector file” to <code class="highlighter-rouge">hicPCA on [...] PC1</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <ol>
+    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicPlotMatrix on <code class="highlighter-rouge">pearson_matrix from PCA computation</code> adjusting the parameters:
+      <ul>
+        <li>“Plot title” to <code class="highlighter-rouge">Pearson matrix and PC2</code></li>
+        <li>“Chromosomes to include” to <code class="highlighter-rouge">chr2L</code></li>
+        <li>“Color map to use for the heatmap” to <code class="highlighter-rouge">gist_heat</code></li>
+        <li>“Datatype of eigenvector file” to <code class="highlighter-rouge">bigwig</code></li>
+        <li>“Eigenvector file” to <code class="highlighter-rouge">hicPCA on [...] PC2</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/pearson_pc1.png" alt="Pearson PC1" /></p>
+
+<p><img src="../../images/pearson_pc2.png" alt="Pearson PC2" /></p>
+
+<p>The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments.</p>
+
 <h1 id="integrating-hi-c-and-other-data">Integrating Hi-C and other data</h1>
 
-<p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">hicPlotTADs</a>.</p>
+<p>We can plot the TADs for a given chromosomal region. For this we will use <a href="http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html">pyGenomeTracks</a>.</p>
 
 <p>For the next step we need additional data tracks. Please load <code class="highlighter-rouge">dm3_genes.<span class="notranslate">bed</span></code>, <code class="highlighter-rouge">H3K27me3.bw</code>, <code class="highlighter-rouge">H3K36me3.bw</code> and <code class="highlighter-rouge">H4K16ac.bw</code> to your history.</p>
 
@@ -1054,9 +1100,79 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 <p>The resulting image should look like this one:
 <img src="../../images/plotTADs.png" alt="TAD plot" /></p>
+
+<h1 id="loop-detection">Loop detection</h1>
+
+<p>In Hi-C data, the term <code class="highlighter-rouge">loop</code> refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see <a href="https://doi.org/10.1016/j.cell.2014.11.021">Rao et al. 2014</a>).</p>
+
+<p><img src="../../images/loops_bonev_cavalli.png" alt="Loops visualization" /></p>
+
+<p>To compute loops, we have to import a new data set from the shared library to our history: <code class="highlighter-rouge">GM12878-MboI-allreps-filtered.10kb.cool</code> or download it via the <a href="ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool">FTP cool files server</a>. (FTP links seems to be blocked, therefore the full URL: <code class="highlighter-rouge">ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool</code>)</p>
+
+<p>This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolution. We use a new file because to detect loop structures the read coverage is required to be in the hunderts of million; this was not the case for the previous used drosophila dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-matrix-information"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Matrix information</h3>
+
+  <ol>
+    <li><strong>hicInfo</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicInfo adjusting the parameters:
+      <ul>
+        <li>“Select” <code class="highlighter-rouge">Multiple datasets</code></li>
+        <li>“Matrix to compute on” to <code class="highlighter-rouge">corrected contact matrix dm3 large</code> and <code class="highlighter-rouge">GM12878-MboI-allreps-filtered.10kb.cool</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We now investigate the result of hicInfo and see that the new imported file is having 1.2 billion non-zero elements, while the drosophila Hi-C interaction matrix has around 12 million non-zero elements.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-computing-loops"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Computing loops</h3>
+
+  <ol>
+    <li><strong>hicDetectLoops</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicDetectLoops adjusting the parameters:
+      <ul>
+        <li>“Matrix to compute on” to <code class="highlighter-rouge">GM12878-MboI-allreps-filtered.10kb.cool</code></li>
+        <li>“Peak width” to <code class="highlighter-rouge">6</code></li>
+        <li>“Window size” to <code class="highlighter-rouge">10</code></li>
+        <li>“P-value preselection” to <code class="highlighter-rouge">0.01</code></li>
+        <li>“P-value” to <code class="highlighter-rouge">0.01</code></li>
+        <li>“Chromosomes to include” to <code class="highlighter-rouge">chr1</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The detection of the loops is based on a pre-selection of interactions, a p-value given a continuous negative binomial distribution over all interactions of a relative distance is computed. All interactions are filtered with a threshold (<code class="highlighter-rouge">p-value preselection</code>) to retrieve loop candidates. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.</p>
+
+<p>As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.</p>
+
+<p><img src="../../images/loops_result.png" alt="Loops computed_file" /></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plotting-of-loops"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plotting of loops</h3>
+
+  <ol>
+    <li><strong>hicPlotMatrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run hicPlotMatrix adjusting the parameters:
+      <ul>
+        <li>“Matrix to compute on” to <code class="highlighter-rouge">GM12878-MboI-allreps-filtered.10kb.cool</code></li>
+        <li>“Plot title” to <code class="highlighter-rouge">Loops</code></li>
+        <li>“Plot only this region” to <code class="highlighter-rouge">chr1:18000000-22000000</code></li>
+        <li>“Plot the log1p of the matrix values” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Add detected loops” to <code class="highlighter-rouge">Computed loops</code> of the previous step</li>
+        <li>“DPI for image” to <code class="highlighter-rouge">300</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/loops_plot.png" alt="Loops result_plot" /></p>
+
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric <span class="notranslate">reads</span> and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.</p>
+<p>In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped chimeric <span class="notranslate">reads</span> and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.</p>
 
 <p>To improve your learned skills we offer an additional tutorial based on mouse stem cells: <a href="http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html">following work</a>.</p>
 
@@ -1104,8 +1220,8 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
     author = "Joachim Wolff and Fidel Ramirez and Vivek Bhardwaj and Ekaterina Polkh",
     title = "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "28"
+    month = "02",
+    day = "19"
     url = "\url{/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
