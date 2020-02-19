@@ -32,6 +32,39 @@ requirements:
 
 Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.
 
+> ### {% icon warning %} Before You Continue
+> If you are *not* completing this tutorial as part of a [Galaxy Admin Training][gat] course, **you will need a wildcard DNS record for your Galaxy server and a method for obtaining a wildcard SSL certificate for your Galaxy server**.
+>
+> <br/>
+>
+> Galaxy Interactive Tools require a [wildcard SSL certificate][wildcard-cert]. Because the **Galaxy Installation with Ansible** tutorial fetches [Let's Encrypt][lets-encrypt] certificates, this tutorial fetches Let's Encrypt wildcard certificates. However, this process is only valid for Galaxy Admin Training courses, because Let's Encrypt wildcard certificates [can only be fetched using the DNS-01 challenge method][lets-encrypt-faq], which requires control of a [dynamic DNS][ddns] server (which we have preconfigured for use at training courses). Configuring your DNS service for dynamic updates is outside the scope of this tutorial, but it will show you how to request certificates using DNS-01, which can be adapted for your site.
+>
+> <br/>
+>
+> If you are using Let's Encrypt, [a list of available DNS plugins for Certbot][certbot-dns-plugins] can be found in the Certbot documentation. If you are not using Let's Encrypt, please consult your certificate vendor's documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the [subject alternative name][san]s `galaxy.example.org` and `*.interactivetoolentrypoint.interactivetool.galaxy.example.org` (where `galaxy.example.org` is the hostname of your Galaxy server).
+>
+> <br/>
+>
+> You will also need a wildcard DNS `CNAME` record for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`. You can verify that your Galaxy server has such a record using the `host` or `dig` command line tools like so:
+>
+>    ```console
+>    $ host -t cname foo.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu
+>    foo.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
+>    $ host -t cname bar.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu
+>    bar.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
+>    ```
+>
+> Please consult your DNS server software or cloud provider's documentation for information on how to set up a wildcard record.
+{: .warning}
+
+[wildcard-cert]: https://en.wikipedia.org/wiki/Wildcard_certificate
+[lets-encrypt]: https://letsencrypt.org/
+[gat]: https://github.com/galaxyproject/dagobah-training
+[lets-encrypt-faq]: https://letsencrypt.org/docs/faq/
+[ddns]: https://en.wikipedia.org/wiki/Dynamic_DNS
+[certbot-dns-plugins]: https://certbot.eff.org/docs/using.html#dns-plugins
+[san]: https://en.wikipedia.org/wiki/Subject_Alternative_Name
+
 There are two sections to this exercise. The first shows you how to use Ansible to setup and configure Galaxy Interactive Tools. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.
 
 [jupyter]: https://jupyter.org/
@@ -172,7 +205,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 [usegalaxy_eu-gie_proxy-readme]: https://github.com/usegalaxy-eu/ansible-gie-proxy/blob/master/README.md
 [usegalaxy_eu-gie_proxy-defaults]: https://github.com/usegalaxy-eu/ansible-gie-proxy/blob/master/defaults/main.yml
 
-> ### {% icon hands_on %} Hands-on: Installing the Proxy  with Ansible
+> ### {% icon hands_on %} Hands-on: Installing the Proxy with Ansible
 >
 > 1. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
@@ -273,10 +306,88 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 >
 {: .comment}
 
-## Getting an SSL Certificate
+## Getting a Wildcard SSL Certificate
 
 During the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
 
-In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`.
+In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`. Let's Encrypt wildcard certificates [can only be generated using the DNS-01 challenge method][lets-encrypt-faq], which works by issuing a [dynamic DNS][ddns] update to set the requested domain's `TXT` record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.
 
-[lets-encrypt]: https://letsencrypt.org/
+If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, we have precreated a dynamic DNS server that you will use for this step. The *TSIG key* that allows you to perform dynamic DNS updates will be provided to you.
+
+> ### {% icon hands_on %} Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible
+>
+> 1. Edit the group variables file, `group_vars/galaxyservers.yml`:
+>
+>    The relevant variables to set for this role are:
+>
+>    | Variable                  | Type       | Description                                                                                                      |
+>    | ----------                | -------    | -------------                                                                                                    |
+>    | `certbot_domains`         | list       | List of domains to include as subject alternative names (the first will also be the certificate's *common name*) |
+>    | `certbot_dns_provider`    | string     | Name of [Certbot DNS plugin][certbot-dns-plugins] to use                                                         |
+>    | `certbot_dns_credentials` | dictionary | Plugin-specific credentials for performing dynamic DNS updates                                                   |
+>    | `certbot_expand`          | boolean    | Whether to "expand" an existing certificate (add new domain names to it)                                         |
+>
+>    - Add a new item to the **existing** `certbot_domains` so it matches:
+>        {% raw %}
+>        ```yaml
+>        certbot_domains:
+>          - "{{ inventory_hostname }}"
+>          - "*.interactivetoolentrypoint.interactivetool.{{ inventory_hostname }}"
+>        ```
+>        {% endraw %}
+>
+>    - Comment out the existing `certbot_auth_method` like so:
+>
+>        {% raw %}
+>        ```yaml
+>        #certbot_auth_method: --webroot
+>        ```
+>        {% endraw %}
+>
+>        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
+>
+>    - Add the following lines to your `group_vars/galaxyservers.yml` file:
+>
+>        {% raw %}
+>        ```yaml
+>        certbot_dns_provider: rfc2136
+>        certbot_dns_credentials:
+>          server: ns-training.galaxyproject.org
+>          port: 53
+>          name: certbot-training.
+>          secret: <SECRET PROVIDED BY INSTRUCTOR>
+>          algorithm: HMAC-SHA512
+>        ```
+>        {% endraw %}
+>
+> 2. Run the playbook **with `certbot_expand`**:
+>
+>    ```
+>    ansible-playbook -i hosts playbook.yml -e certbot_expand=true
+>    ```
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What is the `-e` flag to `ansible-playbook` and why did we use it?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > As per `ansible-playbook --help`:
+>    > >
+>    > > ```
+>    > >   -e EXTRA_VARS, --extra-vars EXTRA_VARS
+>    > >                         set additional variables as key=value or YAML/JSON, if
+>    > >                         filename prepend with @
+>    > > ```
+>    > >
+>    > > We used this flag because `certbot_expand` only needs to be set *once*, when we are adding a new domain to the certificate. It should not be enabled on subsequent runs of the playbook, or else we would request a new certificate on each run! Thus, it does not make sense to add it to a vars file.
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
+{: .hands_on}
+
+You can verify that your certificate has been expanded using your browser's developer tools:
+
+![Wildcard Certificate Dialog](../../images/interactive-tools/wildcard-cert.png "Wildcard Certificate Dialog")
