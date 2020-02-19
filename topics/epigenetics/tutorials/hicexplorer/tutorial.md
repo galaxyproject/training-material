@@ -30,6 +30,10 @@ For this the following steps are necessary to be performed:
 3. Plotting the Hi-C matrix
 4. Correction of Hi-C matrix
 5. TAD Calling
+6. A/B compartments computation
+7. pyGenomeTracks visualization
+8. Loop detection
+
 
 After a corrected Hi-C matrix is created other tools can be used to visualize it, call TADS or compare it with other matrices.
 
@@ -257,18 +261,48 @@ TAD calling works in two steps: First HiCExplorer computes a TAD-separation scor
 
 As an output we get the boundaries, domains and scores separated files. We will use in the plot later only the TAD-score file.
 
+# A/B compartments computation
 
 > ### {% icon hands_on %} Hands-on: Computing A / B compartments
 >
 > 1. **hicPCA** {% icon tool %}: Run hicPCA adjusting the parameters:
 >    - "Matrix to compute on" to `corrected contact matrix dm3 large`
 >    - "Output file format" to `bigwig`
+>    - "Return internally used Pearson matrix" to `Yes`
 >
 {: .hands_on}
 
+> ### {% icon hands_on %} Hands-on: Plotting the pearson matrix and PCA track
+>
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `pearson_matrix from PCA computation` adjusting the parameters:
+>    - "Plot title" to `Pearson matrix and PC1`
+>    - "Chromosomes to include" to `chr2L`
+>    - "Color map to use for the heatmap" to `gist_heat`
+>    - "Datatype of eigenvector file" to `bigwig`
+>    - "Eigenvector file" to `hicPCA on [...] PC1`
+>
+{: .hands_on}
+
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix on `pearson_matrix from PCA computation` adjusting the parameters:
+>    - "Plot title" to `Pearson matrix and PC2`
+>    - "Chromosomes to include" to `chr2L`
+>    - "Color map to use for the heatmap" to `gist_heat`
+>    - "Datatype of eigenvector file" to `bigwig`
+>    - "Eigenvector file" to `hicPCA on [...] PC2`
+>
+{: .hands_on}
+
+
+![Pearson PC1](../../images/pearson_pc1.png)
+
+
+![Pearson PC2](../../images/pearson_pc2.png)
+
+The first principal component correlates with the chromosome arms, while the second component correlates with A/B compartments. 
+
 # Integrating Hi-C and other data
 
-We can plot the TADs for a given chromosomal region. For this we will use [hicPlotTADs](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html).
+We can plot the TADs for a given chromosomal region. For this we will use [pyGenomeTracks](http://hicexplorer.readthedocs.io/en/latest/content/tools/hicPlotTADs.html).
 
 For the next step we need additional data tracks. Please load `dm3_genes.bed`, `H3K27me3.bw`, `H3K36me3.bw` and `H4K16ac.bw` to your history.
 
@@ -343,10 +377,63 @@ For the next step we need additional data tracks. Please load `dm3_genes.bed`, `
 
 The resulting image should look like this one:
 ![TAD plot](../../images/plotTADs.png)
+
+# Loop detection
+
+In Hi-C data, the term `loop` refers to a 3D structure which represents enhancer-promoter, gene, architectural or polycomb-mediated interactions. These interactions have the characteristics to be enriched in a single region compared to the local background. These loops are also called long-range interactions with an expected maximum distance of 2 MB (see [Rao et al. 2014](https://doi.org/10.1016/j.cell.2014.11.021)).
+
+![Loops visualization](../../images/loops_bonev_cavalli.png)
+
+To compute loops, we have to import a new data set from the shared library to our history: `GM12878-MboI-allreps-filtered.10kb.cool` or download it via the <a href="ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool">FTP cool files server</a>. (FTP links seems to be blocked, therefore the full URL: `ftp://cooler.csail.mit.edu/coolers/hg19/Rao2014-GM12878-MboI-allreps-filtered.10kb.cool`)
+
+This dataset is from the human cell GM12878, mapped to hg19 and of 10 kb resolution. We use a new file because to detect loop structures the read coverage is required to be in the hunderts of million; this was not the case for the previous used drosophila dataset.
+
+> ### {% icon hands_on %} Hands-on: Matrix information 
+>
+> 1. **hicInfo** {% icon tool %}: Run hicInfo adjusting the parameters:
+>    - "Select" `Multiple datasets`
+>    - "Matrix to compute on" to `corrected contact matrix dm3 large` and `GM12878-MboI-allreps-filtered.10kb.cool`
+{: .hands_on}
+
+We now investigate the result of hicInfo and see that the new imported file is having 1.2 billion non-zero elements, while the drosophila Hi-C interaction matrix has around 12 million non-zero elements.
+
+> ### {% icon hands_on %} Hands-on: Computing loops
+>
+> 1. **hicDetectLoops** {% icon tool %}: Run hicDetectLoops adjusting the parameters:
+>    - "Matrix to compute on" to `GM12878-MboI-allreps-filtered.10kb.cool`
+>    - "Peak width" to `6`
+>    - "Window size" to `10`
+>    - "P-value preselection" to `0.01`
+>    - "P-value" to `0.01`
+>    - "Chromosomes to include" to `chr1`
+>
+{: .hands_on}
+
+
+The detection of the loops is based on a pre-selection of interactions, a p-value given a continuous negative binomial distribution over all interactions of a relative distance is computed. All interactions are filtered with a threshold (`p-value preselection`) to retrieve loop candidates. In a second step, the selected peak candidate is compared against its background using a Wilcoxon rank-sum test.
+
+As an output we get a loop file containing the positions of both anchor points of the loop and the p-value of the used statistical test.
+
+![Loops computed_file](../../images/loops_result.png)
+
+> ### {% icon hands_on %} Hands-on: Plotting of loops
+>
+> 1. **hicPlotMatrix** {% icon tool %}: Run hicPlotMatrix adjusting the parameters:
+>    - "Matrix to compute on" to `GM12878-MboI-allreps-filtered.10kb.cool`
+>    - "Plot title" to `Loops`
+>    - "Plot only this region" to `chr1:18000000-22000000`
+>    - "Plot the log1p of the matrix values" to `Yes`
+>    - "Add detected loops" to `Computed loops` of the previous step
+>    - "DPI for image" to `300`
+>
+{: .hands_on}
+
+![Loops result_plot](../../images/loops_plot.png)
+
 # Conclusion
 {:.no_toc}
 
-In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped the chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks.
+In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.
 
 
  To improve your learned skills we offer an additional tutorial based on mouse stem cells: [following work](http://hicexplorer.readthedocs.io/en/latest/content/example_usage.html).
