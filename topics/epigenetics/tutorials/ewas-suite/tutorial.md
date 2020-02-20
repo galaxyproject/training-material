@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "🔬📚 Infinium Human Methylation BeadChip: a pipeline for population epigenetics integrated into Galaxy"
+title: "EWAS data analysis of 450k data"
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
 questions:
   - "What is a epigenome-wide association studies?"
@@ -253,4 +253,3 @@ GO:0048545 | response to steroid hormone | 1.38EE-54 | 2.11E-51 | HDAC9/ RAB10/ 
 {:.no_toc}
 
 Epigenetic aberrations which involve DNA modifications give researchers an interest in identifying novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as a ready to run pipline in supplementary materials.
-
