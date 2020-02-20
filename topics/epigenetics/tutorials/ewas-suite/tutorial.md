@@ -26,7 +26,7 @@ contributors:
 > We will use a small subset of the original data. If we run the tutorial on the orginal dataset, analysis will be time consuming and not reproducible Infinium Human Methylation BeadChip computation on the orginal data can be found at [case study](https://github.com/kpbioteam/case_study).
 {: .agenda}
 
-This tutorial is based on [Hugo W, Shi H, Sun L, Piva M et al.: 'Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance.'](https://doi.org/10.1016/j.cell.2015.07.061).
+This tutorial is based on [Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance.](https://doi.org/10.1016/j.cell.2015.07.061).
 
 The data we use in this tutorial are available at [Zenodo](https://zenodo.org/record/1251211).
 
