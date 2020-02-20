@@ -241,12 +241,16 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 > ### {% icon hands_on %} Hands-on
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->    - {% icon param-repeat %} *Insert Input Pairs*
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - *"Input Type"*: `Single files`
+>        - In *"Input Pairs"*:
+>            - In *"1: Input Pairs"*:
+>                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
+>                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
+>            - Select {% icon param-repeat %} *Insert Input Pairs*
+>            - In *"2: Input Pairs"*:
+>               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
+>               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
+>                 (*pay attention to the* **L001** *and* **L002** *names*)
 >    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
@@ -288,7 +292,7 @@ Let us investigate the output log. This type of quality control is essential in 
 >        - In *"STAR output"*:
 >          - In *"1:STAR output"*:
 >            - *"Type of STAR output?"*: `Log`
->            - {% icon param-file %} *"STAR log output"*: `log output of RNA STARsolo`
+>            - {% icon param-file %} *"STAR log output"*: `RNA STARsolo: log`
 {: .hands_on}
 
 
@@ -383,9 +387,9 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `3000`
@@ -409,7 +413,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > > ### {% icon solution %} Solution
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
-> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that 5200 barcodes were detected in total, but only 272 of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that *5200* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
 > {: .solution}
 {: .question}
 
@@ -442,9 +446,9 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Rank Barcodes`
 >        - *"Lower Bound"*: `100`
 >
@@ -473,13 +477,13 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `EmptyDrops`
 >            - *"Lower-bound Threshold"*: `200`
->            - *"FDR Threshold"*: `0`
+>            - *"FDR Threshold"*: `0.01`
 >        - *"Format for output matrices"*: `Tabular`
 >
 {: .hands_on}
