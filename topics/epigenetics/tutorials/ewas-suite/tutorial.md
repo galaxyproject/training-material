@@ -55,7 +55,7 @@ GSM1588706 | resistant   | BRAFi
 GSM1588707 | resistant   | BRAFi
 
 
-# raw intensity data loading
+# Raw intensity data loading
 
 The first step of EWAS data analysis is the raw methylation data loading (intensity information files for each two color micro array)
 
@@ -110,7 +110,7 @@ The first step of EWAS data analysis is the raw methylation data loading (intens
 {: .question}
 
 # .idat preprocessing 
-# quality control
+# Quality control
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.
 
@@ -131,7 +131,7 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 ![Quality Control](../../images/qcplot.png "Quality control plot")
 
-# (optional) normalisation of the data
+# (optional) Normalisation of the data
 Removing probes affected by genetic variation
 
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.
@@ -142,7 +142,7 @@ Hansen, J. P. 2014 highly recommended to remove the probes that contain either a
 > 1. Run **minfi dropsnp** {% icon tool %}  on the output of minfi_maptogenome to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension
 {: .hands_on}
 
-# differentially methylated regions and positions analysis
+# Differentially methylated regions and positions analysis
 DMPs and DMRs Identification
 
 The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
@@ -220,7 +220,7 @@ From the next step we will need an additional file that annotates illumina450K w
 > {: .solution}
 {: .question}
 
-# Annotation and Visualization
+# Annotation and visualization
 
 In addition to downstream analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function description, and relationships between these concepts.
 
