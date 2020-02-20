@@ -57,7 +57,7 @@ GSM1588707 | resistant   | BRAFi
 
 # Raw intensity data loading
 
-The first step of EWAS data analysis is the raw methylation data loading (intensity information files for each two color micro array)
+The first step of Infinium Human Methylation BeadChip array analysis is the raw methylation data loading (intensity information files for each two color micro array)
 
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
