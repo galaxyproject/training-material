@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "EWAS data analysis of 450k data"
+title: "🔬📚 Infinium Human Methylation BeadChip: a pipeline for population epigenetics integrated into Galaxy"
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
 questions:
   - "What is a epigenome-wide association studies?"
