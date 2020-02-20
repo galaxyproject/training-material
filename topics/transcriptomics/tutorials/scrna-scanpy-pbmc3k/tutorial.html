@@ -690,6 +690,10 @@
         
     
         
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
     
         
     
@@ -705,8 +709,6 @@
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
         
     
         
@@ -778,7 +780,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 20, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -963,7 +965,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
   <h3 id="hands_on-hands-on-transform-matrix-and-all-into-anndata-object"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Transform matrix and all into AnnData object</h3>
 
   <ol>
-    <li><strong>Import AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Import AnnData and Loom</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“hd5 format to be created”</em>: <code class="highlighter-rouge">Anndata file</code></li>
         <li><em>“Format for the annotated data matrix”</em>: <code class="highlighter-rouge">Matrix Market (mtx), from Cell ranger or not</code>
@@ -1023,6 +1025,23 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 
         </blockquote>
 
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-faster-method-for-general-information"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Faster Method for General Information</h3>
+
+        <ul>
+          <li>Click on the name of the dataset in the history to expand it.</li>
+          <li>General Anndata information is given in the expanded box.
+```
+[n_obs x n_vars]
+            <ul>
+              <li>2700 x 32738
+```</li>
+            </ul>
+          </li>
+          <li>For more specific queries, <strong>Inspect AnnData</strong> is required.</li>
+        </ul>
       </blockquote>
     </li>
     <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1166,16 +1185,17 @@ RP11-34P13.8	ENSG00000239945
       </ul>
     </li>
     <li>Rename the generated file <code class="highlighter-rouge">3k PBMC</code></li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC</code></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>
+      <p>Expand the dataset.</p>
 
       <blockquote class="question">
         <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2700 × 13714 
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2700 × 13714
+[var]
+-    gene_ids
+-    n_cells
 </code></pre></div>        </div>
 
         <p>How many genes have been removed because they are expressed in less than 3 expressed cells?</p>
@@ -1434,21 +1454,36 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated file <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></p>
     </li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
-    </li>
     <li>
-      <p>Inspect the generated file</p>
+      <p>Expand and inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2700 × 13714 
-    obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito'
-    var: 'gene_ids', 'n_cells', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts'
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2700 × 13714
+[obs]
+-    n_genes_by_counts
+-    log1p_n_genes_by_counts
+-    total_counts
+-    log1p_total_counts
+-    pct_counts_in_top_50_genes
+-    pct_counts_in_top_100_genes
+-    pct_counts_in_top_200_genes
+-    pct_counts_in_top_500_genes
+-    total_counts_mito
+-    log1p_total_counts_mito
+-    pct_counts_mito
+[var]
+-    gene_ids
+-    n_cells
+-    mito
+-    n_cells_by_counts
+-    mean_counts
+-    log1p_mean_counts
+-    pct_dropout_by_counts
+-    total_counts
+-    log1p_total_counts
 </code></pre></div>        </div>
 
         <p>Which QC metrics have been computed?</p>
@@ -1640,7 +1675,7 @@ RP11-34P13.8	ENSG00000239945
   <li>a percentage of <span class="notranslate">reads</span> mapped to mitochondrial genes above 5%</li>
 </ul>
 
-<blockquote class="notranslate hands_on">
+<blockquote>
   <h3 id="hands_on-hands-on-remove-low-quality-cells"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove low-quality cells</h3>
 
   <ol>
@@ -1658,16 +1693,14 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>
+      <p>Expand and inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2700 × 13714 
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2700 × 13714
 </code></pre></div>        </div>
 
         <p>How many cells have been removed because they have less than 200 expressed genes?</p>
@@ -1695,29 +1728,30 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>Expand and inspect the dataset</li>
+  </ol>
+</blockquote>
 
-      <blockquote class="question">
-        <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+<blockquote class="notranslate hands_on">
+  <blockquote class="question">
+    <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2695 × 13714 
-</code></pre></div>        </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2695 × 13714
+</code></pre></div>    </div>
 
-        <p>How many cells have been removed because they have more than 2,500 expressed genes?</p>
+    <p>How many cells have been removed because they have more than 2,500 expressed genes?</p>
 
-        <blockquote class="solution">
-          <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <blockquote class="solution">
+      <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>There are now 2,695 cells. So 5 cells have been removed because they have more than 2,500 expressed genes.</p>
+      <p>There are now 2,695 cells. So 5 cells have been removed because they have more than 2,500 expressed genes.</p>
 
-        </blockquote>
+    </blockquote>
 
-      </blockquote>
-    </li>
+  </blockquote>
+
+  <ol>
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1742,16 +1776,14 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated file <code class="highlighter-rouge">3k PBMC after QC filtering</code></p>
     </li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC after QC filtering</code></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>
+      <p>Expand and inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-13"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 13714 
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2638 × 13714
 </code></pre></div>        </div>
 
         <p>How many cells have been removed because they have more than 5% of <span class="notranslate">reads</span> mapped to mitochondrial genes?</p>
@@ -1782,7 +1814,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-normalize-for-cell-size"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize for cell size</h3>
 
   <ol>
-    <li><strong>Normalize</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Normalize</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC after QC filtering</code></li>
         <li><em>“Method used for normalization”</em>: <code class="highlighter-rouge">Normalize counts per cell, using 'pp.normalize_total'</code>
@@ -1849,7 +1881,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-identify-the-highly-variable-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Identify the highly variable genes</h3>
 
   <ol>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Filter</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC after QC filtering and normalization</code></li>
         <li><em>“Method used for filtering”</em>: <code class="highlighter-rouge">Annotate (and filter) highly variable genes, using 'pp.highly_variable_genes'</code>
@@ -1866,7 +1898,7 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Preprocessing: Plot dispersions versus means for genes, using 'pl.highly_variable_genes'</code></li>
@@ -1884,18 +1916,42 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-keep-the-highly-variable-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Keep the highly variable genes</h3>
 
   <ol>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: Output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>
+      <p>Expand and inspect the output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
 
       <blockquote class="question">
         <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 13714 
-    obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito', 'n_genes', 'norm'
-    var: 'gene_ids', 'n_genes', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2638 × 13714
+[obs]
+-    n_genes_by_counts
+-    log1p_n_genes_by_counts
+-    total_counts
+-    log1p_total_counts
+-    pct_counts_in_top_50_genes
+-    pct_counts_in_top_100_genes
+-    pct_counts_in_top_200_genes
+-    pct_counts_in_top_500_genes
+-    total_counts_mito
+-    log1p_total_counts_mito
+-    pct_counts_mito
+-    n_genes
+-    norm
+[var]
+-    gene_ids
+-    n_genes
+-    mito
+-    n_cells_by_counts
+-    mean_counts
+-    log1p_mean_counts
+-    pct_dropout_by_counts
+-    total_counts
+-    log1p_total_counts
+-    highly_variable
+-    means
+-    dispersions
+-    dispersions_norm
 </code></pre></div>        </div>
 
         <ol>
@@ -1938,16 +1994,14 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated output <code class="highlighter-rouge">3k PBMC with only HVG</code></p>
     </li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG</code></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>
+      <p>Expand and inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-15"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 1838
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2638 × 1838
 </code></pre></div>        </div>
 
         <p>How many genes have been removed?</p>
@@ -1977,7 +2031,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-scale-the-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Scale the data</h3>
 
   <ol>
-    <li><strong>Remove confounders</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Remove confounders</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Regress out unwanted sources of variation, using 'pp.regress_out'</code>
@@ -1987,7 +2041,7 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li><strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Remove confounders</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Scale data to unit variance and zero mean, using 'pp.scale'</code>
@@ -2034,7 +2088,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-perform-the-pca"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform the PCA</h3>
 
   <ol>
-    <li><strong>Cluster, infer trajectories and embed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Cluster, infer trajectories and embed</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'</code>
@@ -2064,21 +2118,47 @@ RP11-34P13.8	ENSG00000239945
     <h3 id="hands_on-hands-on-inspect-the-pca-inside-an-anndata-object"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect the PCA inside an <code class="highlighter-rouge">AnnData</code> object</h3>
 
     <ol>
-      <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-        <ul>
-          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, &gt; after scaling and PCA</code></li>
-          <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-        </ul>
+      <li>
+        <p>Expand and inspect the <code class="highlighter-rouge">3k PBMC with only HVG, &gt; after scaling and PCA</code> dataset</p>
 
         <blockquote class="question">
           <h3 id="question-questions-16"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 2013 
-    obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito', 'n_genes', 'norm'
-    var: 'gene_ids', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
-    uns: 'pca'
-    obsm: 'X_pca'
-    varm: 'PCs'
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+-    2638 × 2013
+[obs]
+-    n_genes_by_counts
+-    log1p_n_genes_by_counts
+-    total_counts
+-    log1p_total_counts
+-    pct_counts_in_top_50_genes
+-    pct_counts_in_top_100_genes
+-    pct_counts_in_top_200_genes
+-    pct_counts_in_top_500_genes
+-    total_counts_mito
+-    log1p_total_counts_mito
+-    pct_counts_mito
+-    n_genes
+-    norm
+[var]
+-    gene_ids
+-    mito
+-    n_cells_by_counts
+-    mean_counts
+-    log1p_mean_counts
+-    pct_dropout_by_counts
+-    total_counts
+-    log1p_total_counts
+-    highly_variable
+-    means
+-    dispersions
+-    dispersions_norm
+[uns]
+-    pca
+[obsm]
+-    X_pca
+[varm]
+-    PCs
 </code></pre></div>          </div>
 
           <p>How is the PCA stored in the <code class="highlighter-rouge">AnnData</code> object?</p>
@@ -2181,7 +2261,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-plot-the-top-2-pcs-the-pca"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the top 2 PCs the PCA</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
@@ -2224,7 +2304,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-visualize-the-top-genes-associated-with-pcs"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize the top genes associated with PCs</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">PCA: Rank genes according to contributions to PCs, using 'pl.pca_loadings'</code>
@@ -2249,7 +2329,7 @@ RP11-34P13.8	ENSG00000239945
         </blockquote>
       </blockquote>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
@@ -2312,7 +2392,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-generate-an-elbow-plot"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate an Elbow plot</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'</code>
@@ -2381,7 +2461,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-compute-the-neighborhood-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute the neighborhood graph</h3>
 
   <ol>
-    <li><strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Compute a neighborhood graph of observations, using 'pp.neighbors'</code>
@@ -2398,11 +2478,8 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated output <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></p>
     </li>
-    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
-        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
-      </ul>
+    <li>
+      <p>Expand and inspect the dataset <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></p>
 
       <blockquote class="question">
         <h3 id="question-questions-23"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2447,7 +2524,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-embed-and-plot-the-neighborhood-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Embed and plot the neighborhood graph</h3>
 
   <ol>
-    <li><strong>Cluster, infer trajectories and embed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Cluster, infer trajectories and embed</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Embed the neighborhood graph using UMAP, using 'tl.umap'</code></li>
@@ -2468,12 +2545,7 @@ RP11-34P13.8	ENSG00000239945
 
           <p>This information can be accessed using:</p>
           <ol>
-            <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-              <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
-                <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Generalinformation about the object</code></li>
-              </ul>
-            </li>
+            <li>Expanding and inspecting the dataset <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
             <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
               <ul>
                 <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
@@ -2489,7 +2561,7 @@ RP11-34P13.8	ENSG00000239945
 
       </blockquote>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -2532,7 +2604,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-cluster-the-neighborhood-graph"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster the neighborhood graph</h3>
 
   <ol>
-    <li><strong>Cluster, infer trajectories and embed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Cluster, infer trajectories and embed</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Cluster cells into subgroups, using 'tl.louvain'</code>
@@ -2563,13 +2635,13 @@ RP11-34P13.8	ENSG00000239945
           <ol>
             <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
               <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
                 <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Generalinformation about the object</code></li>
               </ul>
             </li>
             <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
               <ul>
-                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
                 <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
               </ul>
             </li>
@@ -2587,7 +2659,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-plot-the-neighborhood-graph-and-the-clusters"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the neighborhood graph and the clusters</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -2642,7 +2714,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-rank-the-highly-differential-genes-using-t-test"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank the highly differential genes using t-test</h3>
 
   <ol>
-    <li><strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
@@ -2704,7 +2776,7 @@ RP11-34P13.8	ENSG00000239945
         </blockquote>
       </blockquote>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'</code>
@@ -2822,7 +2894,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-rank-the-highly-differential-genes-using-wilcoxon-rank-sum"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank the highly differential genes using Wilcoxon rank sum</h3>
 
   <ol>
-    <li><strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
@@ -2843,7 +2915,7 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated output <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></p>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'</code>
@@ -2984,7 +3056,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-compare-differential-expression-for-cst3-nkg7-and-ppbp-in-the-different-clusters"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare differential <span class="notranslate">expression</span> for CST3, NKG7 and PPBP in the different clusters</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -3033,7 +3105,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-plot-expression-probability-distributions-across-clusters-of-top-marker-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot <span class="notranslate">expression</span> probability distributions across clusters of top marker genes</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Stacked violin plot, using 'pl.stacked_violin'</code>
@@ -3084,7 +3156,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-plot-top-marker-gene-expression-on-an-umap-plot"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot top marker gene <span class="notranslate">expression</span> on an UMAP plot</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -3126,7 +3198,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-plot-heatmap-of-the-gene-expression-in-cells"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot heatmap of the gene <span class="notranslate">expression</span> in cells</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Marker genes: Plot ranking of genes as heatmap plot, using 'pl.rank_genes_groups_heatmap'</code>
@@ -3170,7 +3242,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-identify-the-marker-genes-distinguishing-cluster-0-from-cluster-1-using-wilcoxon-rank-sum"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum</h3>
 
   <ol>
-    <li><strong>Inspect and manipulate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
@@ -3196,7 +3268,7 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated output <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test</code></p>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Marker genes: Plot ranking of genes using dotplot plot, using 'pl.rank_genes_groups'</code>
@@ -3231,7 +3303,7 @@ RP11-34P13.8	ENSG00000239945
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-plot-expression-difference-for-the-marker-genes-distinguishing-cluster-0-from-cluster-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot <span class="notranslate">expression</span> difference for the marker genes distinguishing cluster 0 from cluster 1</h3>
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes for 0 vs 1 with Wilcoxon test</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Marker genes: Plot ranking of genes as violin plot, using 'pl.rank_genes_groups_violin'</code>
@@ -3241,7 +3313,7 @@ RP11-34P13.8	ENSG00000239945
                 <li><em>“Number of genes to show”</em>: <code class="highlighter-rouge">10</code></li>
               </ul>
             </li>
-            <li><em>“Use ‘raw’ attribute of input if present”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Use ‘raw’ attribute of input if present”</em>: <code class="highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -3544,7 +3616,7 @@ RP11-34P13.8	ENSG00000239945
         </blockquote>
       </blockquote>
     </li>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Embeddings: Scatter plot in UMAP basis, using 'pl.umap'</code>
@@ -3585,7 +3657,7 @@ RP11-34P13.8	ENSG00000239945
   <h3 id="hands_on-hands-on-plot-expression-of-canonical-marker-genes-for-the-annotated-cell-types"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot <span class="notranslate">expression</span> of canonical marker genes for the annotated cell types</h3>
 
   <ol>
-    <li><strong>Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Plot</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation</code></li>
         <li><em>“Method used for plotting”</em>: <code class="highlighter-rouge">Generic: Makes a dot plot of the <span class="notranslate">expression</span> values, using 'pl.dotplot'</code>
@@ -3915,7 +3987,7 @@ RP11-34P13.8	ENSG00000239945
     title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "13"
+    day = "20"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
