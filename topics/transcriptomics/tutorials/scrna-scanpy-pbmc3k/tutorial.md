@@ -124,7 +124,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 
 > ### {% icon hands_on %} Hands-on: Transform matrix and all into AnnData object
 >
-> 1. **Import AnnData** {% icon tool %} with the following parameters:
+> 1. **Import AnnData and Loom** {% icon tool %} with the following parameters:
 >    - *"hd5 format to be created"*: `Anndata file`
 >    - *"Format for the annotated data matrix"*: `Matrix Market (mtx), from Cell ranger or not`
 >        - {% icon param-file %} *"Matrix"*: `matrix.mtx`
@@ -166,6 +166,17 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > {: .solution}
 >    >
 >    {: .question}
+>
+>    > ### {% icon comment %} Comment: Faster Method for General Information
+>    > 
+>    > * Click on the name of the dataset in the history to expand it.
+>    > * General Anndata information is given in the expanded box.
+>    >   ```
+>    >   [n_obs x n_vars]
+>    >   -    2700 x 32738
+>    >   ```
+>    > * For more specific queries, **Inspect AnnData** is required.
+>    {: .comment}
 >
 > 3. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Input 3k PBMC`
@@ -278,14 +289,16 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
 >
 > 2. Rename the generated file `3k PBMC`
-> 3. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC`
->    - *"What to inspect?"*: `General information about the object`
+> 3. Expand the dataset.
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2700 × 13714
+>    > [var]
+>    > -    gene_ids
+>    > -    n_cells
 >    > ```
 >    >
 >    > How many genes have been removed because they are expressed in less than 3 expressed cells?
@@ -457,18 +470,35 @@ We can now compute QC metrics on the `AnnData` object.
 >
 > 2. Rename the generated file `3k PBMC with mito annotation and qc metrics`
 >
-> 3. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
->    - *"What to inspect?"*: `General information about the object`
->
-> 4. Inspect the generated file
+> 3. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 13714 
->    >     obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito'
->    >     var: 'gene_ids', 'n_cells', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts'
+>    > [n_obs × n_vars]
+>    > -    2700 × 13714
+>    > [obs]
+>    > -    n_genes_by_counts
+>    > -    log1p_n_genes_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
+>    > -    pct_counts_in_top_50_genes
+>    > -    pct_counts_in_top_100_genes
+>    > -    pct_counts_in_top_200_genes
+>    > -    pct_counts_in_top_500_genes
+>    > -    total_counts_mito
+>    > -    log1p_total_counts_mito
+>    > -    pct_counts_mito
+>    > [var]
+>    > -    gene_ids
+>    > -    n_cells
+>    > -    mito
+>    > -    n_cells_by_counts
+>    > -    mean_counts
+>    > -    log1p_mean_counts
+>    > -    pct_dropout_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
 >    > ```
 >    >
 >    > Which QC metrics have been computed?
@@ -607,14 +637,13 @@ Based on the previous plot, we would like to remove cells that have:
 >        - *"Filter"*: `Minimum number of genes expressed`
 >            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `200`
 >
-> 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Filter** {% icon tool %}
->    - *"What to inspect?"*: `General information about the object`
+> 2. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2700 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have less than 200 expressed genes?
@@ -633,14 +662,13 @@ Based on the previous plot, we would like to remove cells that have:
 >        - *"Filter"*: `Maximum number of genes expressed`
 >            - *"Maximum number of genes expressed required for a cell to pass filtering"*: `2500`
 >
-> 4. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of the last **Filter** {% icon tool %}
->    - *"What to inspect?"*: `General information about the object`
->
+> 4. Expand and inspect the dataset
+
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2695 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2695 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 2,500 expressed genes?
@@ -665,14 +693,13 @@ Based on the previous plot, we would like to remove cells that have:
 >
 > 6. Rename the generated file `3k PBMC after QC filtering`
 >
-> 7. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering`
->    - *"What to inspect?"*: `General information about the object`
+> 7. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2638 × 13714 
+>    > [n_obs × n_vars]
+>    > -    2638 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 5% of reads mapped to mitochondrial genes?
@@ -766,16 +793,41 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 > ### {% icon hands_on %} Hands-on: Keep the highly variable genes
 >
-> 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: Output of the last **Filter** {% icon tool %}
->    - *"What to inspect?"*: `General information about the object`
+> 1. Expand and inspect the output of the last **Filter** {% icon tool %})
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2638 × 13714 
->    >     obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito', 'n_genes', 'norm'
->    >     var: 'gene_ids', 'n_genes', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+>    > [n_obs × n_vars]
+>    > -    2638 × 13714
+>    > [obs]
+>    > -    n_genes_by_counts
+>    > -    log1p_n_genes_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
+>    > -    pct_counts_in_top_50_genes
+>    > -    pct_counts_in_top_100_genes
+>    > -    pct_counts_in_top_200_genes
+>    > -    pct_counts_in_top_500_genes
+>    > -    total_counts_mito
+>    > -    log1p_total_counts_mito
+>    > -    pct_counts_mito
+>    > -    n_genes
+>    > -    norm
+>    > [var]
+>    > -    gene_ids
+>    > -    n_genes
+>    > -    mito
+>    > -    n_cells_by_counts
+>    > -    mean_counts
+>    > -    log1p_mean_counts
+>    > -    pct_dropout_by_counts
+>    > -    total_counts
+>    > -    log1p_total_counts
+>    > -    highly_variable
+>    > -    means
+>    > -    dispersions
+>    > -    dispersions_norm
 >    > ```
 >    >
 >    > 1. How many genes are in the `AnnData` object?
@@ -801,14 +853,13 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >
 > 3. Rename the generated output `3k PBMC with only HVG`
 >
-> 4. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG`
->    - *"What to inspect?"*: `General information about the object`
+> 4. Expand and inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2638 × 1838
+>    > [n_obs × n_vars]
+>    > -    2638 × 1838
 >    > ```
 >    >
 >    > How many genes have been removed?
@@ -889,19 +940,46 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > 
 > > ### {% icon hands_on %} Hands-on: Inspect the PCA inside an `AnnData` object
 > >
-> > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
-> >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, > after scaling and PCA`
-> >    - *"What to inspect?"*: `General information about the object`
+> > 1. Expand and inspect the `3k PBMC with only HVG, > after scaling and PCA` dataset
 > >
 > >    > ### {% icon question %} Questions
 > >    >
 > >    > ```
-> >    > AnnData object with n_obs × n_vars = 2638 × 2013 
-> >    >     obs: 'n_genes_by_counts', 'log1p_n_genes_by_counts', 'total_counts', 'log1p_total_counts', 'pct_counts_in_top_50_genes', 'pct_counts_in_top_100_genes', 'pct_counts_in_top_200_genes', 'pct_counts_in_top_500_genes', 'total_counts_mito', 'log1p_total_counts_mito', 'pct_counts_mito', 'n_genes', 'norm'
-> >    >     var: 'gene_ids', 'mito', 'n_cells_by_counts', 'mean_counts', 'log1p_mean_counts', 'pct_dropout_by_counts', 'total_counts', 'log1p_total_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
-> >    >     uns: 'pca'
-> >    >     obsm: 'X_pca'
-> >    >     varm: 'PCs'
+> >    > [n_obs × n_vars]
+> >    > -    2638 × 2013
+> >    > [obs]
+> >    > -    n_genes_by_counts
+> >    > -    log1p_n_genes_by_counts
+> >    > -    total_counts
+> >    > -    log1p_total_counts
+> >    > -    pct_counts_in_top_50_genes
+> >    > -    pct_counts_in_top_100_genes
+> >    > -    pct_counts_in_top_200_genes
+> >    > -    pct_counts_in_top_500_genes
+> >    > -    total_counts_mito
+> >    > -    log1p_total_counts_mito
+> >    > -    pct_counts_mito
+> >    > -    n_genes
+> >    > -    norm
+> >    > [var]
+> >    > -    gene_ids
+> >    > -    mito
+> >    > -    n_cells_by_counts
+> >    > -    mean_counts
+> >    > -    log1p_mean_counts
+> >    > -    pct_dropout_by_counts
+> >    > -    total_counts
+> >    > -    log1p_total_counts
+> >    > -    highly_variable
+> >    > -    means
+> >    > -    dispersions
+> >    > -    dispersions_norm
+> >    > [uns]
+> >    > -    pca
+> >    > [obsm]
+> >    > -    X_pca
+> >    > [varm]
+> >    > -    PCs
 > >    > ```
 > >    >
 > >    > How is the PCA stored in the `AnnData` object?
@@ -1118,9 +1196,7 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >
-> 3. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
->    - *"What to inspect?"*: `General information about the object`
+> 3. Expand and inspect the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 > 
 >    > ### {% icon question %} Questions
 >    >
@@ -1167,9 +1243,7 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 >    > > An extra object `X_umap` has been added to `obsm` with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.
 >    > > 
 >    > > This information can be accessed using:
->    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
->    > >    - *"What to inspect?"*: `Generalinformation about the object`
+>    > > 1. Expanding and inspecting the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > >    - *"What to inspect?"*: `Multi-dimensional observations annotation (obsm)`
@@ -1228,10 +1302,10 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 >    > > 
 >    > > This information can be accessed using:
 >    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >    > >    - *"What to inspect?"*: `Generalinformation about the object`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
 >    > >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 >    > >
 >    > {: .solution}
