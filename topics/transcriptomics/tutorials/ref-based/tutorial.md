@@ -1064,8 +1064,8 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 >     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
 >      |  |  |
->     B | -1.0 | 0.1 | 0.5
->     C | -0.8 | -0.3 | 1.3
+>     B | -1.0 | 0.1 | 0.8
+>     C | -0.8 | -0.3 | 1.0
 >
 >     $$log(\textrm{counts for gene X}) - average(\textrm{log values for counts for gene X}) = log(\frac{\textrm{counts for gene X}}{\textrm{average for gene X}})$$
 >
@@ -1075,8 +1075,8 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 >     Gene | log(Sample 1) | log(Sample 2) | log(Sample 3)
 >      |  |  |
->     B | -1.0 | 0.1 | 0.5
->     C | -0.8 | -0.3 | 1.3
+>     B | -1.0 | 0.1 | 0.8
+>     C | -0.8 | -0.3 | 1.0
 >     **Median** | -0.9 | -0.1 | 0.9
 >
 >     The median is used here to avoid extreme genes (most likely rare ones) from swaying the value too much in one direction. It helps to put more emphasis on moderately expressed genes.
@@ -1085,14 +1085,14 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
 >     **Median** | -0.9 | -0.1 | 0.9
->     **Scaling factors** | 0.4 | 0.7 | 2.5
+>     **Scaling factors** | 0.4 | 0.9 | 2.5
 >
 > 7. Compute the normalized counts: divide the original counts by the scaling factors
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
->     A | 0 | 14 | 2
->     B | 5 | 9 | 5
->     C | 83 | 79 | 80
+>     A | 0 | 23 | 9
+>     B | 2 | 6 | 12
+>     C | 13 | 21 | 78
 >
 > *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU)*
 {: .details}
