@@ -49,13 +49,13 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 
 > ### {% icon tip %} Installing Ephemeris in a Python virtual environment
 >
-> - Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
-> - Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
->   ```console
->   virtualenv -p python3 ephemeris_venv
->   . ephemeris_venv/bin/activate
->   pip install ephemeris
->   ```
+> 1. Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
+> 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
+>    ```console
+>    virtualenv -p python3 ephemeris_venv
+>    . ephemeris_venv/bin/activate
+>    pip install ephemeris
+>    ```
 {: .tip}
 
 
@@ -115,6 +115,16 @@ Now that you have extracted a list of tools, let's install these on your Galaxy 
 
 - The URL of your Galaxy server
 - The API key for your account, which must be an admin
+
+> ### {% icon tip %} Get the API key of an admin account
+>
+> Galaxy admin accounts are specified as a comma-separated email list in the `admin_users` directive of `galaxy.yml` . If you have set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, this is set to `admin@example.org` .
+> 1. In your browser, open your Galaxy homepage
+> 2. Log in using the admin email, or register a new account with it if it is the first time you use it
+> 3. Go to `User -> Preferences` in the top menu bar, then click on `Manage API key`
+> 4. If there is no current API key available, click on `Create a new key` to generate it
+> 5. Copy your API key to somewhere convenient, you will need it throughout this tutorial
+{: .tip}
 
 There are two ways to install tools, depending on how you specify the tools to install:
 
