@@ -1590,7 +1590,7 @@ The marker genes distinguishing cluster 0 from cluster 1 are extracted based on 
 >    - *"Method used for plotting"*: `Marker genes: Plot ranking of genes as violin plot, using 'pl.rank_genes_groups_violin'`
 >      - *"Which genes to plot?"*: `A number of genes`
 >        - *"Number of genes to show"*: `10`
->      - *"Use 'raw' attribute of input if present"*: `No`
+>      - *"Use 'raw' attribute of input if present"*: `Yes`
 {: .hands_on}
 
 ![Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon](../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png)
