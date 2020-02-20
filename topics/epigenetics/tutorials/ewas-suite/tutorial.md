@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "🔬📚 Infinium Human Methylation BeadChip: a pipeline for population epigenetics integrated into Galaxy"
+title: "Infinium Human Methylation BeadChip"
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
 enable: "false"
 questions:
