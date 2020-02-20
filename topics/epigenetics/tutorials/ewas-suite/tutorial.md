@@ -1,21 +1,43 @@
 ---
 layout: tutorial_hands_on
 
-title: "EWAS data analysis of 450k data"
+title: "🔬📚 Infinium Human Methylation BeadChip: a pipeline for population epigenetics integrated into Galaxy"
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
+enable: "false"
 questions:
-  - "What is a epigenome-wide association studies?"
-  - "Why is a EWAS analysis useful?"
-  - "Why 450k data?"
+  - "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?"
+  - "How to analyse and visualise Infinium Human Methylation BeadChip's?"
 time_estimation: "1h"
 objectives:
-  - "Learn how to perform reproducible EWAS analysis"
+  - "Learn how to perform reproducible Infinium Human Methylation BeadChip analysis"
+  - "Visualise differentially methylated positions using UCSC browser"
 key_points:
-  - "EWAS analyse changes in DNA methylation in cohorts of different individuals effected by diseases"
-  - "DNA methylation changes can be triggered by environment (i.e. sun exposure, diet) and effect the way how our cells works and in long term cause cancer"
+- "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology."
+- "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
 contributors:
   - kpbioteam
   - kpoterlowicz
+
+---  
+
+> ### Agenda
+>
+> In this tutorial we will do:
+>
+> 1. raw intensity data loading
+> 2. .idat preprocessing
+> 3. quality control
+> 4. (optional) normalisation of the data
+> 5. differentially methylated regions and positions analysis
+>
+> We will use a small subset of the original data. If we run the tutorial on the orginal dataset, analysis will be time consuming and not reproducible Infinium Human Methylation BeadChip computation on the orginal data can be found at [case study](https://github.com/kpbioteam/case_study). 
+>
+>
+{: .agenda}
+
+This tutorial is based on [Hugo W, Shi H, Sun L, Piva M et al.: 'Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance.'](https://doi.org/10.1016/j.cell.2015.07.061).
+
+The data we use in this tutorial are available at [Zenodo](https://zenodo.org/record/1251211).
 
 ---
 
