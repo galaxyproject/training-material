@@ -56,11 +56,13 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 > ### {% icon hands_on %} Hands-on: Installing Slurm
 >
-> 1. Create and edit a file in your working directory called `requirements.yml` and include the following contents:
+> 1. Create (if needed) and edit a file in your working directory called `requirements.yml` and include the following contents:
 >
 >    ```yaml
->    - galaxyproject.repos
->    - galaxyproject.slurm
+>    - src: galaxyproject.repos
+>      version: 0.0.1
+>    - src: galaxyproject.slurm
+>      version: 0.1.2
 >    ```
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
@@ -254,6 +256,13 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >      become: true
 >      vars:
 >        slurm_roles: ['controller', 'exec']
+>        slurm_nodes:
+>        - name: localhost
+>          CPUs: 2                              # Here you would need to figure out how many cores your machine has. (Hint, `htop`)
+>        slurm_config:
+>          FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
+>          SelectType: select/cons_res
+>          SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >      roles:
 >        - galaxyproject.repos
 >        - galaxyproject.slurm
@@ -276,18 +285,15 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 > ### {% icon hands_on %} Hands-on: Making Galaxy aware of DRMAA
 >
-> 1. Open your group variables and edit the supervisor task, update the environment variable:
+> 1. Open your group variables and add the environment variable:
 >
 >    ```yaml
->    supervisor_programs:
->      - name: galaxy
->        ...
->        configuration: |
->          ...
->          {% raw %}environment=HOME="{{ galaxy_mutable_data_dir }}",VIRTUAL_ENV="{{ galaxy_venv_dir }}",PATH="{{ galaxy_venv_dir }}/bin:%(ENV_PATH)s",DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"{% endraw %}
->   ```
+>    galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
+>    ```
 >
-> 2. We need to modify `job_conf.xml` to instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. The entire `<plugins>` tag group should look like:
+>    This environment variable will then be supplied to any web process (zerglings or mules).
+>
+> 2. We need to modify `job_conf.xml` to instruct Galaxy on how to use a more advanced job submission setup. We will begin with a basic job conf:
 >
 >    If the folder does not exist, create `files/galaxy/config` next to your `playbook.yml` (`mkdir -p files/galaxy/config/`)
 >
@@ -297,20 +303,29 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    <job_conf>
 >        <plugins workers="4">
 >            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->            <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
 >        </plugins>
 >        <destinations>
 >            <destination id="local" runner="local"/>
 >        </destinations>
 >    </job_conf>
 >    ```
-> 3. Next, we need to add a new destination for the Slurm job runner. This is a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of defined plugin:
+> 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
->    ```xml
->    <destinations default="slurm">
->        <destination id="slurm" runner="slurm"/>
->        <destination id="local" runner="local"/>
->    </destinations>
+>    ```diff
+>    --- files/galaxy/config/job_conf.xml.old
+>    +++ files/galaxy/config/job_conf.xml
+>    @@ -1,8 +1,9 @@
+>     <job_conf>
+>         <plugins workers="4">
+>             <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
+>         </plugins>
+>    -    <destinations>
+>    +    <destinations default="slurm">
+>    +        <destination id="slurm" runner="slurm"/>
+>             <destination id="local" runner="local"/>
+>         </destinations>
+>     </job_conf>
 >    ```
 >
 > 4. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside in your group variables:
@@ -331,36 +346,25 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
 >
-> 5. Run your *Galaxy* playbook (`ansible-playbook -i hosts playbook.yml`)
+> 5. Run your *Galaxy* playbook (`ansible-playbook -i hosts galaxy.yml`)
 >
-> 6. Follow the logs with `supervisorctl tail -f galaxy stderr`
->
-> 7. Rerun the playbook. Because we updated the supervisor config, Galaxy will automatically be restarted.
+> 6. Follow the logs with `journalctl -f -u galaxy`
 >
 {: .hands_on}
 
-Two sections of the log output are of interest. First, when Galaxy parses `job_conf.xml`:
+Here is the interesting portion of the log output:
 
 ```
-galaxy.jobs DEBUG 2016-11-05 14:07:12,649 Loading job configuration from /srv/galaxy/config/job_conf.xml
-galaxy.jobs DEBUG 2016-11-05 14:07:12,650 Read definition for handler 'handler0'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,651 Read definition for handler 'handler1'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,652 <handlers> default set to child with id or tag 'handlers'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,652 <destinations> default set to child with id or tag 'slurm'
-galaxy.jobs DEBUG 2016-11-05 14:07:12,653 Done loading job configuration
-```
+galaxy.jobs DEBUG 2020-02-10 09:32:06,297 [p:9453,w:0,m:0] [MainThread] Loading job configuration from /srv/galaxy/config/job_conf.xml
+galaxy.web_stack DEBUG 2020-02-10 09:32:06,297 [p:9453,w:0,m:0] [MainThread] JobConfiguration: No job handler assignment methods were configured but a uWSGI farm named 'job-handlers' exists, automatically enabling the 'uwsgi-mule-message' assignment method
+galaxy.web_stack DEBUG 2020-02-10 09:32:06,297 [p:9453,w:0,m:0] [MainThread] JobConfiguration: Removed 'db-self' from handler assignment methods due to use of mules
+galaxy.web_stack DEBUG 2020-02-10 09:32:06,297 [p:9453,w:0,m:0] [MainThread] JobConfiguration: handler assignment methods updated to: uwsgi-mule-message
+galaxy.web_stack.handlers INFO 2020-02-10 09:32:06,301 [p:9453,w:0,m:0] [MainThread] JobConfiguration: No job handler assignment method is set, defaulting to 'uwsgi-mule-message', set the `assign_with` attribute on <handlers> to override the default
+galaxy.jobs INFO 2020-02-10 09:32:06,302 [p:9453,w:0,m:0] [MainThread] Job handler assignment methods set to: uwsgi-mule-message
+galaxy.jobs INFO 2020-02-10 09:32:06,303 [p:9453,w:0,m:0] [MainThread] Tag [_default_] handlers: main.job-handlers.1, main.job-handlers.2
+galaxy.web_stack.handlers DEBUG 2020-02-10 09:32:06,303 [p:9453,w:0,m:0] [MainThread] default set to child with id or tag 'slurm'
+galaxy.jobs DEBUG 2020-02-10 09:32:06,303 [p:9453,w:0,m:0] [MainThread] Done loading job configuration
 
-Second, when Galaxy loads job runner plugins:
-
-```
-galaxy.jobs.manager DEBUG 2016-11-05 14:07:22,341 Starting job handler
-galaxy.jobs INFO 2016-11-05 14:07:22,347 Handler 'handler0' will load all configured runner plugins
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,355 Starting 4 LocalRunner workers
-galaxy.jobs DEBUG 2016-11-05 14:07:22,367 Loaded job runner 'galaxy.jobs.runners.local:LocalJobRunner' as 'local'
-pulsar.managers.util.drmaa DEBUG 2016-11-05 14:07:22,434 Initializing DRMAA session from thread MainThread
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,443 Starting 4 SlurmRunner workers
-galaxy.jobs DEBUG 2016-11-05 14:07:22,455 Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
-galaxy.jobs.handler DEBUG 2016-11-05 14:07:22,455 Loaded job runners plugins: slurm:local
 ```
 
 ## Running a Job
@@ -369,7 +373,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 
 > ### {% icon hands_on %} Hands-on: Testing a Slurm Job
 >
-> 1. If you're not still following the log files with `tail`, do so now.
+> 1. If you're not still following the log files with `journalctl`, do so now.
 > 2. Click the upload button at the top of the tool panel (on the left side of the Galaxy UI).
 > 3. In the resulting modal dialog, click the "Paste/Fetch data" button.
 > 4. Type some random characters into the text field that has just appeared.
@@ -377,77 +381,75 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 >
 {: .hands_on}
 
-In your `tail` terminal window you should see the following messages:
+In your `journalctl` terminal window you should see the following messages:
 
 ```
-galaxy.jobs DEBUG 2016-11-05 14:07:22,862 (2) Persisting job destination (destination id: slurm)
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:22,958 Job [2] queued (328.180 ms)
-galaxy.jobs.handler INFO 2016-11-05 14:07:22,996 (2) Job dispatched
-galaxy.tools.deps DEBUG 2016-11-05 14:07:23,621 Building dependency shell command for dependency 'samtools'
-  ...
-galaxy.tools.deps WARNING 2016-11-05 14:07:23,631 Failed to resolve dependency on 'samtools', ignoring
-galaxy.jobs.command_factory INFO 2016-11-05 14:07:23,674 Built script [/srv/galaxy/server/database/jobs/000/2/tool_script.sh] for tool command[python /srv/galaxy/server/tools/data_source/upload.py /srv/galaxy/server /srv/galaxy/server/database/tmp/tmpkiMZKd /srv/galaxy/server/database/tmp/tmpJuSMo5 2:/srv/galaxy/server/database/jobs/000/2/dataset_2_files:/srv/galaxy/server/database/datasets/000/dataset_2.dat]
-galaxy.tools.deps DEBUG 2016-11-05 14:07:24,033 Building dependency shell command for dependency 'samtools'
-  ...
-galaxy.tools.deps WARNING 2016-11-05 14:07:24,038 Failed to resolve dependency on 'samtools', ignoring
-galaxy.jobs.runners DEBUG 2016-11-05 14:07:24,052 (2) command is: mkdir -p working; cd working; /srv/galaxy/server/database/jobs/000/2/tool_script.sh; return_code=$?; cd '/srv/galaxy/server/database/jobs/000/2'; python "/srv/galaxy/server/database/jobs/000/2/set_metadata_CALKH0.py" "/srv/galaxy/server/database/tmp/tmpkiMZKd" "/srv/galaxy/server/database/jobs/000/2/working/galaxy.json" "/srv/galaxy/server/database/jobs/000/2/metadata_in_HistoryDatasetAssociation_2_nnti4M,/srv/galaxy/server/database/jobs/000/2/metadata_kwds_HistoryDatasetAssociation_2_sN3gVP,/srv/galaxy/server/database/jobs/000/2/metadata_out_HistoryDatasetAssociation_2_jIhXJJ,/srv/galaxy/server/database/jobs/000/2/metadata_results_HistoryDatasetAssociation_2_v4v_dv,/srv/galaxy/server/database/datasets/000/dataset_2.dat,/srv/galaxy/server/database/jobs/000/2/metadata_override_HistoryDatasetAssociation_2_OQwwTH" 5242880; sh -c "exit $return_code"
-galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,125 (2) submitting file /srv/galaxy/server/database/jobs/000/2/galaxy_2.sh
-galaxy.jobs.runners.drmaa INFO 2016-11-05 14:07:24,172 (2) queued as 7
-galaxy.jobs DEBUG 2016-11-05 14:07:24,172 (2) Persisting job destination (destination id: slurm)
-galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:24,539 (2/7) state change: job is queued and active
+
+galaxy.jobs.mapper DEBUG 2020-02-10 09:37:17,946 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Mapped job to destination id: slurm
+galaxy.jobs.handler DEBUG 2020-02-10 09:37:17,976 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Dispatching to slurm runner
+galaxy.jobs DEBUG 2020-02-10 09:37:18,016 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Persisting job destination (destination id: slurm)
+galaxy.jobs DEBUG 2020-02-10 09:37:18,021 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Working directory for job is: /srv/galaxy/jobs/000/1
+galaxy.jobs.runners DEBUG 2020-02-10 09:37:18,358 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] Job [1] queued (380.809 ms)
+galaxy.jobs.handler INFO 2020-02-10 09:37:18,372 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Job dispatched
+galaxy.jobs.command_factory INFO 2020-02-10 09:37:18,564 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] Built script [/srv/galaxy/jobs/000/1/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/data_source/upload.py' /srv/galaxy/server /srv/galaxy/jobs/000/1/registry.xml /srv/galaxy/jobs/000/1/upload_params.json 1:/srv/galaxy/jobs/000/1/working/dataset_1_files:/data/000/dataset_1.dat]
+...
+galaxy.jobs.runners.drmaa DEBUG 2020-02-10 09:37:18,645 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) submitting file /srv/galaxy/jobs/000/1/galaxy_1.sh
+galaxy.jobs.runners.drmaa INFO 2020-02-10 09:37:18,654 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) queued as 4
+galaxy.jobs DEBUG 2020-02-10 09:37:18,654 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) Persisting job destination (destination id: slurm)
 ```
 
 At this point the job has been accepted by Slurm and is awaiting scheduling on a node. Once it's been sent to a node and starts running, Galaxy logs this event:
 
 ```
-galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:25,559 (2/7) state change: job is running
+galaxy.jobs.runners.drmaa DEBUG 2020-02-10 09:37:19,537 [p:9859,w:0,m:2] [SlurmRunner.monitor_thread] (1/4) state change: job is running
 ```
 
 Finally, when the job is complete, Galaxy performs its job finalization process:
 
 ```
-galaxy.jobs.runners.drmaa DEBUG 2016-11-05 14:07:30,883 (2/7) state change: job finished normally
-galaxy.model.metadata DEBUG 2016-11-05 14:07:31,132 loading metadata from file for: HistoryDatasetAssociation 2
-galaxy.jobs INFO 2016-11-05 14:07:31,336 Collecting metrics for Job 2
-galaxy.jobs DEBUG 2016-11-05 14:07:31,370 job 2 ended (finish() executed in (411.821 ms))
-galaxy.model.metadata DEBUG 2016-11-05 14:07:31,375 Cleaning up external metadata files
+galaxy.jobs.runners.drmaa DEBUG 2020-02-10 09:37:24,700 [p:9859,w:0,m:2] [SlurmRunner.monitor_thread] (1/4) state change: job finished normally
+galaxy.model.metadata DEBUG 2020-02-10 09:37:24,788 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] loading metadata from file for: HistoryDatasetAssociation 1
+galaxy.jobs INFO 2020-02-10 09:37:24,883 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] Collecting metrics for Job 1 in /srv/galaxy/jobs/000/1
+galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] job_wrapper.finish for job 1 executed (154.514 ms)
 ```
 
 Note a few useful bits in the output:
 - `Persisting job destination (destination id: slurm)`: Galaxy has selected the `slurm` destination we defined
 - `submitting file /srv/galaxy/server/database/jobs/000/2/galaxy_2.sh`: This is the path to the script that is submitted to Slurm as it would be with `sbatch`
-- `(2) queued as 7`: Galaxy job id "2" is Slurm job id "7".
+- `(1) queued as 4`: Galaxy job id "1" is Slurm job id "4", this can also be seen with the `(1/4)` in other output lines.
 - If `job <id> ended` is reached, the job should show as done in the UI
 
 Slurm allows us to query the exit state of jobs for a time period of the value of Slurm's `MinJobAge` option, which defaults to 300 (seconds, == 5 minutes):
 
 ```console
-$ scontrol show job 7
-JobId=7 JobName=g2_upload1_anonymous_10_0_2_2
-   UserId=galaxy(999) GroupId=galaxy(999)
-   Priority=4294901754 Nice=0 Account=(null) QOS=(null)
+$ scontrol show job 4
+JobId=4 JobName=g1_upload1_admin_example_org
+   UserId=galaxy(999) GroupId=galaxy(999) MCS_label=N/A
+   Priority=4294901757 Nice=0 Account=(null) QOS=(null)
    JobState=COMPLETED Reason=None Dependency=(null)
    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
-   RunTime=00:00:06 TimeLimit=UNLIMITED TimeMin=N/A
-   SubmitTime=2016-11-05T14:07:24 EligibleTime=2016-11-05T14:07:24
-   StartTime=2016-11-05T14:07:24 EndTime=2016-11-05T14:07:30
+   RunTime=00:00:05 TimeLimit=UNLIMITED TimeMin=N/A
+   SubmitTime=2020-02-10T09:37:18 EligibleTime=2020-02-10T09:37:18
+   StartTime=2020-02-10T09:37:19 EndTime=2020-02-10T09:37:24 Deadline=N/A
    PreemptTime=None SuspendTime=None SecsPreSuspend=0
-   Partition=debug AllocNode:Sid=gat2016:16025
+   LastSchedEval=2020-02-10T09:37:19
+   Partition=debug AllocNode:Sid=gcc-1:9453
    ReqNodeList=(null) ExcNodeList=(null)
    NodeList=localhost
    BatchHost=localhost
-   NumNodes=1 NumCPUs=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
-   TRES=cpu=1,node=1
+   NumNodes=1 NumCPUs=1 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   TRES=cpu=1,mem=1M,node=1,billing=1
    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
-   MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0
-   Features=(null) Gres=(null) Reservation=(null)
-   Shared=0 Contiguous=0 Licenses=(null) Network=(null)
+   MinCPUsNode=1 MinMemoryNode=1M MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   Gres=(null) Reservation=(null)
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=(null)
-   WorkDir=/srv/galaxy/server/database/jobs/000/2
-   StdErr=/srv/galaxy/server/database/jobs/000/2/galaxy_2.e
+   WorkDir=/srv/galaxy/jobs/000/1
+   StdErr=/srv/galaxy/jobs/000/1/galaxy_1.e
    StdIn=StdIn=/dev/null
-   StdOut=/srv/galaxy/server/database/jobs/000/2/galaxy_2.o
-   Power= SICP=0
+   StdOut=/srv/galaxy/jobs/000/1/galaxy_1.o
+   Power=
 ```
 
 After the job has been purged from the active jobs database, a bit of information (but not as much as `scontrol` provides) can be retrieved from Slurm's logs. However, it's a good idea to set up Slurm's accounting database to keep old job information in a queryable format.
@@ -473,7 +475,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 > 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
 >    ```xml
->    <tool id="testing" name="Multicore Tool">
+>    <tool id="testing" name="Testing Tool">
 >        <command>
 >            <![CDATA[echo "Running with '\${GALAXY_SLOTS:-1}' threads" > "$output1"]]>
 >        </command>
@@ -487,7 +489,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```
 >    {: .question}
 >
-> 2. Add the tool to the Ansible automated tool conf, `galaxy_local_tools`
+> 2. Add the tool to the galaxy group variables under the new item `galaxy_local_tools`
 >
 >    ```yaml
 >    galaxy_local_tools:
@@ -525,11 +527,11 @@ We want our tool to run with more than one core. To do this, we need to instruct
 > 1. Edit your `files/galaxy/config/job_conf.xml` and add the following destination:
 >
 >    ```xml
->    <destination id="slurm-2c" runner="slurm">
->        <param id="nativeSpecification">--nodes=1 --ntasks=2</param>
->    </destination>
+>            <destination id="slurm-2c" runner="slurm">
+>                <param id="nativeSpecification">--nodes=1 --ntasks=2</param>
+>            </destination>
 >    ```
-> 2. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`:
+> 2. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
 >
 >    ```xml
 >        <tools>
@@ -583,20 +585,20 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 > 2. As usual, we need to instruct Galaxy of where to find this file:
 >
->    - Edit your group variables file and add the following:
+>    Edit your group variables file and add the following:
 >
->      ```yml
->      galaxy_dynamic_job_rules:
->        - my_rules.py
->      ```
+>    ```yml
+>    galaxy_dynamic_job_rules:
+>      - my_rules.py
+>    ```
 >
 > 3. We next need to configure this plugin in our job configuration:
 >
 >    ```xml
->    <destination id="dynamic_admin_only" runner="dynamic">
->        <param id="type">python</param>
->        <param id="function">admin_only</param>
->    </destination>
+>            <destination id="dynamic_admin_only" runner="dynamic">
+>                <param id="type">python</param>
+>                <param id="function">admin_only</param>
+>            </destination>
 >    ```
 >
 >    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
@@ -604,17 +606,21 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 > 4. Finally, in `job_conf.xml`, update the `<tool>` definition and point it to this destination:
 >
 >    ```xml
->    <tools>
->        <tool id="testing" destination="dynamic_admin_only" />
->    </tools>
+>        <tools>
+>            <tool id="testing" destination="dynamic_admin_only" />
+>        </tools>
 >    ```
 >
-> 5. Run the playbook / restart Galaxy
+> 5. Run the playbook
 >
 {: .hands_on}
 
 
-Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can imagine extending this to complex logic for permissions, or for destination mapping depending on numerous factors. We did not cover it, but in the documentation you can add additional variables to your function signature, and they will be automatically supplied. Some useful variables are `tool`, `user`, `job`, and `app` if you need to load configuration information.
+Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can start a private browsing session to test as a non-admin, anonymous user. Anonymous users were enabled in your Galaxy configuration.
+
+![Unauthorized](../../images/unauthorized.png)
+
+You can imagine extending this to [complex logic for permissions](https://galaxyproject.org/admin/config/access-control/), or for destination mapping depending on numerous factors. We did not cover it, but in the documentation you can add additional variables to your function signature, and they will be automatically supplied. Some useful variables are `tool`, `user`, `job`, and `app` if you need to load configuration information, and more [can be found in the documentation](https://docs.galaxyproject.org/en/master/admin/jobs.html#dynamic-destination-mapping-python-method).
 
 # Dynamically map a tool to a job destination
 
@@ -654,32 +660,32 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >        tool_destinations_config_file: {% raw %}"{{ galaxy_config_dir }}/tool_destinations.yml"{% endraw %}
 >    ...
 >    galaxy_config_files:
->        ...
->        - src: files/galaxy/config/tool_destinations.yml
->          dest: {% raw %}"{{ galaxy_config['galaxy']['tool_destinations_config_file'] }}"{% endraw %}
+>      ...
+>      - src: files/galaxy/config/tool_destinations.yml
+>        dest: {% raw %}"{{ galaxy_config['galaxy']['tool_destinations_config_file'] }}"{% endraw %}
 >    ```
 >
 > 3. We need to update Galaxy's job configuration to use this rule. Open `files/galaxy/config/job_conf.xml` and add a DTD destination:
 >
 >    ```xml
->    <destination id="dtd" runner="dynamic">
->        <param id="type">dtd</param>
->    </destination>
+>            <destination id="dtd" runner="dynamic">
+>                <param id="type">dtd</param>
+>            </destination>
 >    ```
 >
 >    Also, comment out the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
 >
 >    ```xml
->    <tools>
->    <!--
->        <tool id="testing" destination="slurm-2c"/>
->        <tool id="testing" destination="dynamic_admin_only" />
->    -->
->        <tool id="testing" destination="dtd"/>
->    </tools>
+>        <tools>
+>        <!--
+>            <tool id="testing" destination="slurm-2c"/>
+>            <tool id="testing" destination="dynamic_admin_only" />
+>        -->
+>            <tool id="testing" destination="dtd"/>
+>        </tools>
 >    ```
 >
-> 4. Run the playbook and restart Galaxy
+> 4. Run the playbook
 >
 {: .hands_on}
 
@@ -739,9 +745,9 @@ Such form elements can be added to tools without modifying each tool's configura
 > 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `files/galaxy/config/job_conf.xml`:
 >
 >    ```xml
->    <resources>
->        <group id="testing">cores,time</group>
->    </resources>
+>        <resources>
+>            <group id="testing">cores,time</group>
+>        </resources>
 >    ```
 >
 >    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
@@ -750,21 +756,21 @@ Such form elements can be added to tools without modifying each tool's configura
 > 4. Finally, in `job_conf.xml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
 >
 >    ```xml
->    <tools>
->        <!--
->        <tool id="testing" destination="slurm-2c"/>
->        <tool id="testing" destination="dtd"/>
->        -->
->        <tool id="testing" destination="dynamic_cores_time" resources="testing"/>
->    </tools>
+>        <tools>
+>            <!--
+>            <tool id="testing" destination="slurm-2c"/>
+>            <tool id="testing" destination="dtd"/>
+>            -->
+>            <tool id="testing" destination="dynamic_cores_time" resources="testing"/>
+>        </tools>
 >    ```
 > 5. We have assigned the `testing` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination in your job conf:
 >
 >    ```xml
->    <destination id="dynamic_cores_time" runner="dynamic">
->        <param id="type">python</param>
->        <param id="function">dynamic_cores_time</param>
->    </destination>
+>            <destination id="dynamic_cores_time" runner="dynamic">
+>                <param id="type">python</param>
+>                <param id="function">dynamic_cores_time</param>
+>            </destination>
 >    ```
 >
 >    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
@@ -842,9 +848,9 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >        - map_resources.py
 >      ```
 >
-> 3. Run the playbook, restart Galaxy
+> 3. Run the playbook
 >
-> 4. Run the **Multicore Tool** with various resource parameter selections
+> 4. Run the **Testing Tool** with various resource parameter selections
 >
 >    - Use default job resource parameters
 >    - Specify job resource parameters:
