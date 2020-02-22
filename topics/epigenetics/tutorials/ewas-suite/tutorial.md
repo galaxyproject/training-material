@@ -210,7 +210,7 @@ From the next step we will need an additional file that annotates illumina450K w
 > 6. Click on `display at UCSC` towards the bottom of the history item.
 >     This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
-![UCSC bed](../../images/6UCSC_bed.png "UCSC bed")
+
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > ### {% icon comment %} Phenotype table
