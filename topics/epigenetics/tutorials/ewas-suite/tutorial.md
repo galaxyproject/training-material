@@ -111,22 +111,16 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 {: .question}
 
 # .idat preprocessing 
-![idat_preprocessing](../../images/2idat_preprocessing.png ".idat preprocessing")
 
-Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.
-
-.idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
+Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. Idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
 
 ![quality_control](../../images/quality_control.png "quality control")
 
 > ### {% icon hands_on %} Hands-on: Preprocessing
-> 1. Run **minfi mset** {% icon tool %} on the output from minfi_read450K to create `MethylSet` object
-> 2. Run **minfi qc** {% icon tool %}  on the 'MethylSet' object created in the previous step to estimate sample-specific quality control. Once it is done click on the {% icon galaxy-eye %} (eye) icon next to the QC filename in your history to view QC image.
-> 3.  Once you have inspected the quality control run **minfi rset** {% icon tool %} on the  'MethylSet'output from minfi_read450K  to convert methylation data from the `MethylSet` to a ratio of the methylated probe intensity and the overall intensity (sum of methylated and unmethylated probe intensities)
-> 4. Run **minfi maptogenome** {% icon tool %} on the output from the previous step to map ratio data to the genomic positions
->
-> > ### {% icon comment %} Preprocess and Normalize data
-> > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in EWAS suite i.e. **minfi ppfun** {% icon tool %} or **minfi ppquantile**  {% icon tool %} look for recommendation at (ref).
+> 1. Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.  {% cite Hansen %} highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
+![idat_preprocessing](../../images/2idat_preprocessing.png ".idat preprocessing")
+> > ### {% icon comment %}(optional) Normalisation of the data
+> > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
 > >
 > {: .comment}
 >
@@ -136,10 +130,6 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 ![Normalisation of the data](../../images/3parameters.png "Normalisation of the data")
 
 Removing probes affected by genetic variation
-
-Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.
-
-Hansen, J. P. 2014 highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension
 
 > ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
 > 1. Run **minfi dropsnp** {% icon tool %}  on the output of minfi_maptogenome to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension
