@@ -44,7 +44,7 @@ Datasets include the Infinium Human Methylation BeadChip array performed in mela
 
 The Infinium Human Methylation BeadChip uses two different bead types to detect changes in DNA methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. In our study unmethylated and methylated bead signals are reported as green and red colors respectively.
 
-![methassay](../../images/methylationassay.png "Infinium Methylation Assay Overview (adapted from https://emea.illumina.com/science/technology/beadarray-technology/infinium-methylation-assay.html?langsel=/gb/)")
+![methassay](../../images/methylationassay.png "Infinium Methylation Assay Overview (adapted from {% cite Illumina %})")
 
 
 Accession  | Sensitivity | Treatment
