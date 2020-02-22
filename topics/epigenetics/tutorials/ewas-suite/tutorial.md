@@ -62,11 +62,11 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 
 > ### {% icon hands_on %} Hands-on: Data Loading
 >
-> 1. Create a new history for this tutorial and give it a proper name
+> Create a new history for this tutorial and give it a proper name
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
+> Import the following IDAT files from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or from the data library (ask your instructor)
 >    - `GSM1588704_8795207135_R01C02_Red.idat`
 >    - `GSM1588705_8795207119_R05C02_Red.idat`
 >    - `GSM1588706_8795207135_R02C02_Red.idat`
@@ -93,7 +93,7 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 >
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
+> Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
 ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
@@ -117,7 +117,7 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 ![quality_control](../../images/quality_control.png "quality control")
 
 > ### {% icon hands_on %} Hands-on: Preprocessing
-> 1. Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.  {% cite Hansen %} highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
+> Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.  {% cite Hansen %} highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
 ![idat_preprocessing](../../images/2idat_preprocessing.png ".idat preprocessing")
 > > ### {% icon comment %}(optional) Normalisation of the data
 > > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
