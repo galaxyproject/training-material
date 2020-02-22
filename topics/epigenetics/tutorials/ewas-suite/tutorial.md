@@ -125,11 +125,19 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 > {: .comment}
 >
 {: .hands_on}
+# Differentially methylated regions and positions analysis
 
+
+
+
+
+
+
+
+> ### {% icon hands_on %} Hands-on: Differentially methylated regions and positions analysis
 ![pheno table](../../images/3parameters.png)
 
 
-# Differentially methylated regions and positions analysis
 DMPs and DMRs Identification
 ![genome table](../../images/4parameters.png)
 ![UCSC](../../images/5UCSC.png "UCSC")
