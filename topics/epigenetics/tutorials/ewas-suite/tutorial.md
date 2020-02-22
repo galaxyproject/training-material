@@ -57,6 +57,7 @@ GSM1588707 | resistant   | BRAFi
 The workflow combines 5 main steps, starting with raw intensity data loading (.idat) and then optional preprocessing and normalisation of the data. The next quality control step performs an additional sample check to remove low-quality data, which normalisation cannot detect. The workflow gives the user the opportunity to perform any of these preparation and data cleaning steps, including highly recommended genetic variation annotation step resulting in single nucleotide polymorphism identification and removal. Finally, the dataset generated through all of these steps can be used to hunt (find) differentially-methylated positions (DMP)and regions (DMR) with respect to a phenotype covariate.
 
 # Raw intensity data loading
+![Quality Control](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
 
 The first step of Infinium Human Methylation BeadChip array analysis is the raw methylation data loading (intensity information files for each two color micro array)
 
