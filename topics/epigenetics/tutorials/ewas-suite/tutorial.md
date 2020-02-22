@@ -96,7 +96,7 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 > Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
-> ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
+> ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
 {: .hands_on}
 # .idat preprocessing 
 
@@ -106,7 +106,7 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 > ### {% icon hands_on %} Hands-on: Preprocessing
 > Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.  {% cite Hansen %} highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
-![idat_preprocessing](../../images/2idat_preprocessing.png ".idat preprocessing")
+![idat_preprocessing](../../images/2idat_preprocessing.png)
 >
 {: .hands_on}
 > > ### {% icon comment %}(optional) Normalisation of the data
@@ -117,35 +117,29 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 # Differentially methylated regions and positions analysis
 
-
-
-
-
-
-
-
-> ### {% icon hands_on %} Hands-on: Differentially methylated regions and positions analysis 
->
-{: .hands_on}
-
-![pheno table](../../images/3parameters.png)
-
-
-DMPs and DMRs Identification
-![genome table](../../images/4parameters.png)
-![UCSC](../../images/5UCSC.png "UCSC")
-
-The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
-
-From the next step we will need an additional file that annotates illumina450K with genomic features, which we can obtain from UCSC.
-
-> ### {% icon hands_on %} Hands-on: Data upload from UCSC
->
-> 1. Search for `UCSC Main` in the tool search bar (top left)
->
-> 2. Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
->
-> 3. Set the following options:
+The main goal of the **Infinium Human Methylation BeadChip** analysis is to simplify the way differentially methylated loci sites are detected. The **Infinium Human Methylation BeadChip** pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
+> ### {% icon comment %} Phenotype table
+> Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
+{: .comment}
+However, for the purpose of this tutorial we would like you to upload phenotype table from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) repository.
+> ### {% icon hands_on %} Hands-on: Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:
+>    ```
+>    https://zenodo.org/record/1251211/files/phenotypeTable.txt
+>    ```
+> ![pheno table](../../images/3parameters.png)
+> Set the following parameters:
+>    - *"maxGap Size"*:`250`
+>    - *"Cutoff Size"*:`0.1`
+> We will map now the imported datasets against phenotype covariate and reference genome obtained from UCSC.
+> Search for `UCSC Main` in the tool search bar (top left)
+> ![params](../../images/4parameters.png)
+>    - *"Number of Resamples"*:`0`
+>    - *"nullMethod"*:`permutation`
+>    - *"Phenotype Type"*:`categorical`
+> ![params](../../images/5parameters.png)
+> Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
+> ![UCSC](../../images/5UCSC.png "UCSC")
+> Set the following options:
 >     - *"clade"*: `Mammal`
 >     - *"genome"*: `Human`
 >     - *"assembly"*: `Feb. 2009 (GRCh37/hg19)`
@@ -155,10 +149,9 @@ From the next step we will need an additional file that annotates illumina450K w
 >     - *"region"*: `genome`
 >     - *"output format"*: `GTF - gene transfer (limited)`
 >     - *"Send output to"*: `Galaxy` (only)
->
-> 4. Click on the **get output** button at the bottom of the screen
-> 5. On the next page, click on the **Send Query to Galaxy** button
-> 6. Wait for the upload to finish
+> Click on the **get output** button at the bottom of the screen
+> On the next page, click on the **Send Query to Galaxy** button
+> Wait for the upload to finish
 >
 {: .hands_on}
 
@@ -166,10 +159,6 @@ From the next step we will need an additional file that annotates illumina450K w
 
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
 >
-> 1. Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:
->    ```
->    https://zenodo.org/record/1251211/files/phenotypeTable.txt
->    ```
 >
 > 2. Run **minfi dmp** {% icon tool %} on the output of the minfi dropsnp tool adjusting the following parameters
 >    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
@@ -199,9 +188,6 @@ From the next step we will need an additional file that annotates illumina450K w
 
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
-> ### {% icon comment %} Phenotype table
-> Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
-{: .comment}
 
 > ### {% icon question %} Questions
 > How do we define phenotype covariate?
