@@ -57,7 +57,7 @@ GSM1588707 | resistant   | BRAFi
 The workflow combines 5 main steps, starting with raw intensity data loading (.idat) and then optional preprocessing and normalisation of the data. The next quality control step performs an additional sample check to remove low-quality data, which normalisation cannot detect. The workflow gives the user the opportunity to perform any of these preparation and data cleaning steps, including highly recommended genetic variation annotation step resulting in single nucleotide polymorphism identification and removal. Finally, the dataset generated through all of these steps can be used to hunt (find) differentially-methylated positions (DMP)and regions (DMR) with respect to a phenotype covariate.
 
 # Raw intensity data loading
-![Quality Control](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
+![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
 
 The first step of Infinium Human Methylation BeadChip array analysis is the raw methylation data loading (intensity information files for each two color micro array)
 
@@ -112,7 +112,7 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 {: .question}
 
 # .idat preprocessing 
-# Quality control
+![idat_preprocessing](../../images/2idat_preprocessing.png ".idat preprocessing")
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.
 
@@ -131,9 +131,9 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 >
 {: .hands_on}
 
-![Quality Control](../../images/qcplot.png "Quality control plot")
-
 # (optional) Normalisation of the data
+![Normalisation of the data](../../images/3parameters.png "Normalisation of the data")
+
 Removing probes affected by genetic variation
 
 Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.
@@ -146,6 +146,8 @@ Hansen, J. P. 2014 highly recommended to remove the probes that contain either a
 
 # Differentially methylated regions and positions analysis
 DMPs and DMRs Identification
+![DMPs and DMRs Identification](../../images/4parameters.png "DMPs and DMRs Identification")
+![UCSC](../../images/5UCSC.png "UCSC")
 
 The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
 
@@ -208,7 +210,7 @@ From the next step we will need an additional file that annotates illumina450K w
 > 6. Click on `display at UCSC` towards the bottom of the history item.
 >     This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
-
+![UCSC bed](../../images/6UCSC_bed.png "UCSC bed")
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > ### {% icon comment %} Phenotype table
@@ -221,6 +223,11 @@ From the next step we will need an additional file that annotates illumina450K w
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions
 > {: .solution}
 {: .question}
+
+
+# Quality control
+![quality_control](../../images/quality_control.png "quality control")
+
 
 # Annotation and visualization
 
