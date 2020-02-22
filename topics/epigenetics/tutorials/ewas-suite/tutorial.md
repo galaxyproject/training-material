@@ -98,7 +98,6 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
 ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
 >
-> 4. Inspect the generated set of data
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -116,7 +115,9 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.
 
-`RGChannelSet` represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to `MethylSet` or into Beta values build in `RatioSet`. Users can convert from `RGChannelSet` into `MethylSet` using the **minfi mset** {% icon tool %} or compute Beta values using **minfi set** {% icon tool %}. The **minfi qc** {% icon tool %} tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of `MethylSet` signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
+.idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
+
+![quality_control](../../images/quality_control.png "quality control")
 
 > ### {% icon hands_on %} Hands-on: Preprocessing
 > 1. Run **minfi mset** {% icon tool %} on the output from minfi_read450K to create `MethylSet` object
@@ -224,9 +225,6 @@ From the next step we will need an additional file that annotates illumina450K w
 > {: .solution}
 {: .question}
 
-
-# Quality control
-![quality_control](../../images/quality_control.png "quality control")
 
 
 # Annotation and visualization
