@@ -126,18 +126,12 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 >
 {: .hands_on}
 
-# (optional) Normalisation of the data
-![Normalisation of the data](../../images/3parameters.png "Normalisation of the data")
+![pheno table](../../images/3parameters.png)
 
-Removing probes affected by genetic variation
-
-> ### {% icon hands_on %} Hands-on: Removing probes affected by genetic variation
-> 1. Run **minfi dropsnp** {% icon tool %}  on the output of minfi_maptogenome to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension
-{: .hands_on}
 
 # Differentially methylated regions and positions analysis
 DMPs and DMRs Identification
-![DMPs and DMRs Identification](../../images/4parameters.png "DMPs and DMRs Identification")
+![genome table](../../images/4parameters.png)
 ![UCSC](../../images/5UCSC.png "UCSC")
 
 The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains **minfi dmp** {% icon tool %} tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex **minfi dmr** {% icon tool %} solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
