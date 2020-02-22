@@ -96,9 +96,8 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 > Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
+> ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
 {: .hands_on}
-![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png "Raw intensity data loading")
-
 # .idat preprocessing 
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. Idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
