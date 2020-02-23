@@ -164,7 +164,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > Click on the **get output** button at the bottom of the screen
 > On the next page, click on the **Send Query to Galaxy** button
 > Wait for the upload to finish
-{: .hands_on}
+>
 > We will map now the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 > Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
@@ -197,7 +197,7 @@ In addition to downstream analysis users can annotate the differentially methyla
 >        Position of column of score optional value if it is required
 >
 > 2. **Cut** {% icon tool %} on the previous output adjusting the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of geenes
->   - *"Cut columns"*: `c16`
+>   - *"Cut columns"*: `c16`hhh
 >   - *"Delimited by"*: `Tab`
 >   - {% icon param-file %} *"From"*: output of **chipeakanno annopeaks** {% icon tool %}
 >
