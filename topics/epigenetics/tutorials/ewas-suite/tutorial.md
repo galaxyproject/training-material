@@ -164,7 +164,6 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > Click on the **get output** button at the bottom of the screen
 > On the next page, click on the **Send Query to Galaxy** button
 > Wait for the upload to finish
->
 > We will map now the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 > Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
