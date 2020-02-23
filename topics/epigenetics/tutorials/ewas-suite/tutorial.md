@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "Infinium Human Methylation BeadChip"
 zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
-enable: "false"
 questions:
   - "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?"
   - "How to analyse and visualise Infinium Human Methylation BeadChip's?"
@@ -17,13 +16,14 @@ key_points:
 contributors:
   - kpbioteam
   - kpoterlowicz
-
 ---  
 > ### Agenda
 > In this tutorial we will do:
 > 1. TOC
 > {:toc}
 > We will use a small subset of the original data. If we run the tutorial on the orginal dataset, analysis will be time consuming and not reproducible Infinium Human Methylation BeadChip computation on the orginal data can be found at [case study](https://github.com/kpbioteam/case_study).
+>
+>
 {: .agenda}
 
 This tutorial is based on [Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance.](https://doi.org/10.1016/j.cell.2015.07.061).
@@ -98,6 +98,7 @@ The first step of Infinium Human Methylation BeadChip array analysis is the raw 
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
 > ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
 {: .hands_on}
+
 # .idat preprocessing 
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. Idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
@@ -106,14 +107,13 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 > ### {% icon hands_on %} Hands-on: Preprocessing
 > Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and interfere results from downstream analysis.  {% cite Hansen %} highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
-![idat_preprocessing](../../images/2idat_preprocessing.png)
+> ![idat_preprocessing](../../images/2idat_preprocessing.png)
 >
 {: .hands_on}
 > > ### {% icon comment %}(optional) Normalisation of the data
 > > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
 > >
 > {: .comment}
-
 
 # Differentially methylated regions and positions analysis
 
@@ -172,7 +172,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
 
-![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
+> ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > ### {% icon question %} Questions
 > How do we define phenotype covariate?
