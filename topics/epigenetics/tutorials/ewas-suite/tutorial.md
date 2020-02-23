@@ -129,13 +129,16 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > ![pheno table](../../images/3parameters.png)
 > Set the following parameters:
 >    - *"maxGap Size"*:`250`
+>    We will use the default gap of 250 base pairs (bps), i.e. any two points more than 250 bps away are put in a new cluster.
 >    - *"Cutoff Size"*:`0.1`
-> We will map now the imported datasets against phenotype covariate and reference genome obtained from UCSC.
-> Search for `UCSC Main` in the tool search bar (top left)
+>    In order to find segments that are positive, near zero, and negative. We need a cutoff which is one number in which case “near zero” default 0.1
+>
 > ![params](../../images/4parameters.png)
 >    - *"Number of Resamples"*:`0`
 >    - *"nullMethod"*:`permutation`
 >    - *"Phenotype Type"*:`categorical`
+>
+> Search for `UCSC Main` in the tool search bar (top left)
 > ![params](../../images/5parameters.png)
 > Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
 > ![UCSC](../../images/5UCSC.png "UCSC")
@@ -155,6 +158,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 >
 {: .hands_on}
 
+> We will map now the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 
 
 > ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
