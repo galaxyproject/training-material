@@ -182,8 +182,6 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > {: .solution}
 {: .question}
 
-
-
 # Annotation and visualization
 
 In addition to downstream analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function description, and relationships between these concepts.
