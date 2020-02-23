@@ -134,12 +134,21 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 >    In order to find segments that are positive, near zero, and negative. We need a cutoff which is one number in which case “near zero” default 0.1
 >
 > ![params](../../images/4parameters.png)
->    - *"Number of Resamples"*:`0`
+>    - *"Number of Resamples"*:`0` 
+> Default value 0 for permutation method apply selection of randomized cases with replacement from the original data while using 'bootstrap' method.
 >    - *"nullMethod"*:`permutation`
+> Method used to generate null candidate regions, must be one of ‘bootstrap’ or
+‘permutation’ (defaults to ‘permutation’).
 >    - *"Phenotype Type"*:`categorical`
+> Identify regions where methylation is associated with a continuous or categorical phenotype.
 >
 > Search for `UCSC Main` in the tool search bar (top left)
 > ![params](../../images/5parameters.png)
+>    - *"qCutoff Size"*:`0.5` 
+> Diffrentialy methylated positions with an FDR q-value greater than this value will not be returned.
+>    - *"Variance Shrinkage"*:` TRUE` 
+> Default TRUE as it is recommended when sample sizes are small <10
+>    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
 > Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
 > ![UCSC](../../images/5UCSC.png "UCSC")
 > Set the following options:
@@ -155,43 +164,16 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > Click on the **get output** button at the bottom of the screen
 > On the next page, click on the **Send Query to Galaxy** button
 > Wait for the upload to finish
->
 {: .hands_on}
-
 > We will map now the imported datasets against phenotype covariate and reference genome obtained from UCSC.
-
-
-> ### {% icon hands_on %} Hands-on: DMPs and DMRs Identification
->
->
-> 2. Run **minfi dmp** {% icon tool %} on the output of the minfi dropsnp tool adjusting the following parameters
->    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
->    - {% icon param-file %} *"Phenotype Table"*:`phenotypeTable.txt`
->    - *"Phenotype Type"*:`categorical`
->    - *"qCutoff Size"*:`0.5` (DMPs with an FDR q-value greater than this will not be returned)
->    - *"Variance Shrinkage"*:` TRUE` (This is recommended when sample sizes are small <10}
->    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
->
-> 3. Run **minfi dmr** {% icon tool %} on the output of minfi_dmp adjusting the following parameters
->    - {% icon param-file %} *"Input set"*:`GenomicRatioSet`
->    - {% icon param-file %} *"Phenotype Table"*:`phenotypeTable.txt`
->    - *"factor1"*: `sensitive`
->    - *"factor2"*: `resistant`
->    - *"maxGap Size"*:`250`
->    - *"coef Size"*:`2`
->    - *"Cutoff Size"*:`0.1`
->    - *"nullMethod"*:`permutation`
->    - *"verbose"*:`TRUE`
->
-> 4. Click on the **minfi dmr** {% icon tool %} output in your history to expand it
-> 5. Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`
+> Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
+> Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
 >    {% include snippets/change_dbkey.md dbkey="hg19" %}
-> 6. Click on `display at UCSC` towards the bottom of the history item.
->     This will launch UCSC Genome Browser with your Custom Track
+> Click on `display at UCSC` towards the bottom of the history item.
+> This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
 
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
-
 
 > ### {% icon question %} Questions
 > How do we define phenotype covariate?
