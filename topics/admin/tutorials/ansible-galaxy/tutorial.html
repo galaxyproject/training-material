@@ -476,7 +476,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 24, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1165,31 +1165,6 @@ So it is not always easy to tell what variables will be set, or what their final
 
 </blockquote>
 
-<blockquote class="details">
-  <h3 id="details-simplifying-the-command-line-with-ansiblecfg"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Simplifying the command line with ansible.cfg</h3>
-  <p>Typing <code class="highlighter-rouge">-i hosts</code> every time can be a bit repetitive, you can save having to type this flag by creating an <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) with the following contents:</p>
-
-  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
-<span class="py">inventory</span> <span class="p">=</span> <span class="s">hosts</span>
-</code></pre></div>  </div>
-
-  <p>There are some additional useful options that you might want to add to your <code class="highlighter-rouge">ansible.cfg</code> file:</p>
-
-  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[ssh_connection]</span>
-<span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
-<span class="nn">[defaults]</span>
-<span class="py">retry_files_enabled</span> <span class="p">=</span> <span class="s">false</span>
-</code></pre></div>  </div>
-
-  <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened. Setting <code class="highlighter-rouge">retry_files_enabled = false</code> will prevent Ansible from creating <code class="highlighter-rouge">playbook.retry</code> files whenever a playbook crashes before finishing. These are rarely useful for the cases in which we run Ansible.</p>
-
-  <p>For users running with the local connection, you can specify this in your <code class="highlighter-rouge">hosts</code> inventory file:</p>
-
-  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[<span class="notranslate">galaxy</span>servers]</span>
-<span class="err">your.host.name</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
-</code></pre></div>  </div>
-</blockquote>
-
 <p><span class="notranslate">Galaxy</span> is now configured with an admin user, a database, and a place to store data. Additionally we’ve immediately configured the mules for production <span class="notranslate">Galaxy</span> serving. So we’re ready to set up supervisord which will manage the <span class="notranslate">Galaxy</span> processes!</p>
 
 <blockquote class="notranslate hands_on">
@@ -1203,6 +1178,34 @@ So it is not always easy to tell what variables will be set, or what their final
     <li><code class="highlighter-rouge">uwsgi --yaml ../config/<span class="notranslate">galaxy</span>.yml</code></li>
     <li>Access at port <code class="highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
   </ol>
+</blockquote>
+
+<h3 id="a-brief-aside-reduce-repetitive-typing">A brief aside: Reduce repetitive typing</h3>
+
+<p>No system administrator likes reptitive tasks, and throughout these Ansible-based tutorials, we will be running the playbook repeatedly. So far this has been done with:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ansible-playbook <span class="nt">-i</span> hosts &lt;playbook&gt;.yml
+</code></pre></div></div>
+
+<p>However, the inventory file, <code class="highlighter-rouge">hosts</code>, never changes. The <code class="highlighter-rouge">-i</code> option can be eliminated.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-simplifying-the-command-line-with-ansiblecfg"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Simplifying the command line with ansible.cfg</h3>
+
+  <p>You can save having to type the <code class="highlighter-rouge">-i</code> flag by creating an <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) with the following contents:</p>
+
+  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
+<span class="py">inventory</span> <span class="p">=</span> <span class="s">hosts</span>
+</code></pre></div>  </div>
+
+  <p>There is an additional useful option that you might want to add to your <code class="highlighter-rouge">ansible.cfg</code> file if you are connecting over SSH:</p>
+
+  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[ssh_connection]</span>
+<span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
+</code></pre></div>  </div>
+
+  <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
+
 </blockquote>
 
 <h2 id="supervisord">Supervisord</h2>
@@ -1683,7 +1686,7 @@ In a training setting there is no need to request certificates that will be trus
   <h3 id="hands_on-hands-on-revert-the-apocalypse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Revert the Apocalypse</h3>
 
   <ol>
-    <li><code class="highlighter-rouge">ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml</code></li>
+    <li><code class="highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code></li>
   </ol>
 
 </blockquote>
@@ -1788,8 +1791,8 @@ index ce17525..54d0746 100644
     author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann",
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "20"
+    month = "02",
+    day = "24"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
