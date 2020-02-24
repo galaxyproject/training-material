@@ -286,14 +286,16 @@ These are some examples of ways to trim and filter data, but many more are possi
 
 
 ???
-forward and reverse files are 'zipped' together
+forward and reverse files are 'zipped' together into a single file
 
 ---
 
 ## Community Profile
 
-- We want to identify which organisms are present in our sample
-- And their relative abundances
+- We want to identify which organisms are present in our sample, and their relative abundances
+
+![](../../images/microbial-community.png)
+
 - **MetaPhlan2** {% icon tool %} for identification
 - **Krona** {% icon tool %} and **Graphlan** {% icon tool %} for visualisation
 
@@ -301,22 +303,29 @@ forward and reverse files are 'zipped' together
 
 ## MetaPhlan2 {% icon tool %}
 
-- Estimates the relative abundance of microbial cells
+- Estimates the presence and relative abundance of microbial cells
 - Maps reads against a set of marker sequences
--
+- Caveat: this tool is designed for DNA-seq
+  - Be careful interpreting abundances when using this tool with transcriptomics data
+
+.footnote[Nat Methods. 2012 Jun 10;9(8):811-4. doi: 10.1038/nmeth.2066.]
+
+???
+
+About the caveat: The theoretical problem is that we quantify species abundance by averaging the coverage of marker genes. Marker genes are supposed to be at the same coverage as they are single copy genes from the same genome, but this is not true for their transcripts. So MetaPhlAn2 on metatranscriptomics gives an idea about the average transcriptional rate of a given species. So it _can_ be used with caution...
+
 
 ---
 
-## Krona
+## Krona {% icon tool %}
 
-- Visualize community composition
-- Interactive
+- Visualization of community composition, interactive plot
 
-<iframe id="krona" src="krona.html" frameBorder="0" width="90%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe>
+<iframe id="krona" src="krona.html" frameBorder="0" width="80%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe>
 
 ---
 
-## Graphlan
+## Graphlan {% icon tool %}
 
 - *Cladogram* visualisation
 
