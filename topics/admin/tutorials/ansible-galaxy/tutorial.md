@@ -424,7 +424,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
->    6. `shed_tool_data_dir` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -435,7 +435,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```yaml
 >    > > ---
 >    > > # python3 support
->    > > galaxy_venv_python: 3
 >    > > pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
 >    > > certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
 >    > > pip_package: python3-pip                               # geerlingguy.pip
@@ -467,7 +466,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    > >     file_path: /data
 >    > >     check_migrate_tools: false
->    > >     shed_tool_data_dir: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    > >     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    > > ```
 >    > > {% endraw %}
 >    > {: .solution }
@@ -534,8 +533,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```yaml
 >    > > ---
 >    > > # python3 support
->    > > galaxy_venv_python: 3
->    > > pip_virtualenv_command: /usr/bin/python3 -m virtualenv
+>    > > pip_virtualenv_command: virtualenv
 >    > >
 >    > > # PostgreSQL
 >    > > postgresql_objects_users:
@@ -564,7 +562,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    > >     file_path: /data
 >    > >     check_migrate_tools: false
->    > >     shed_tool_data_dir: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    > >     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    > >   uwsgi:
 >    > >     # Default values
 >    > >     http: 0.0.0.0:8080
@@ -788,7 +786,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- group_vars/galaxyservers.yml.orig
 >    +++ group_vars/galaxyservers.yml
 >    @@ -29,7 +29,7 @@
->         shed_tool_data_dir: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >       uwsgi:
 >         # Default values
 >    -    http: 0.0.0.0:8080
