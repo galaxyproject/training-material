@@ -219,7 +219,7 @@ Sometimes a user might ask you to install all the tools they were previously usi
 >    {: .question}
 {: .hands_on}
 
-We will not install all the tools from the EU Galaxy server as that server has likely more tools than any other Galaxy instance, but it is useful as an example of how you can use Ephemeris to facilitate the mirroring of another Galaxy instance.
+We will not install all the tools from the EU Galaxy server as that server likely has more tools than any other Galaxy instance, but it is useful as an example of how you can use Ephemeris to facilitate the mirroring of another Galaxy instance.
 
 # Production Best Practices
 
