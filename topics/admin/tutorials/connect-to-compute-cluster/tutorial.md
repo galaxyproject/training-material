@@ -90,7 +90,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >        - galaxyproject.slurm
 >    ```
 >
-> 5. Run the playbook (`ansible-playbook -i hosts slurm.yml`)
+> 5. Run the playbook (`ansible-playbook slurm.yml`)
 >
 {: .hands_on}
 
@@ -272,7 +272,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >            name: slurm-drmaa1
 >    ```
 >
-> 2. Run the playbook (`ansible-playbook -i hosts slurm.yml`)
+> 2. Run the playbook (`ansible-playbook slurm.yml`)
 >
 {: .hands_on}
 
@@ -346,7 +346,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
 >
-> 5. Run your *Galaxy* playbook (`ansible-playbook -i hosts galaxy.yml`)
+> 5. Run your *Galaxy* playbook (`ansible-playbook galaxy.yml`)
 >
 > 6. Follow the logs with `journalctl -f -u galaxy`
 >
