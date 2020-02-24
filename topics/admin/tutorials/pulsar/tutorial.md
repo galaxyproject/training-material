@@ -81,7 +81,7 @@ We need to create a new ansible playbook to install Pulsar. We will be using a *
 >
 >    ```yaml
 >    - src: galaxyproject.pulsar
->      version: 0.4.5
+>      version: 1.0.0
 >    ```
 >
 > 2. Now install it with:
@@ -103,17 +103,18 @@ There is one required variable:
 
 Then there are a lot of optional variables. They are listed here for information. We will set some for this tutorial but not all.
 
- Variable Name                  | Description                                                                                        | Default
----------------                 | -------------                                                                                      | ---
- `pulsar_pip_install`           | Set to `true` to get pulsar to be sourced from pip.                                                | `false`
- `pulsar_yaml_config`           | a YAML dictionary whose contents will be used to create Pulsar's `app.yml`                         |
- `pulsar_git_repo`              | Upstream git repository from which Pulsar should be cloned.                                        | https://github.com/galaxyproject/pulsar
- `pulsar_changeset_id`          | A changeset id, tag, branch, or other valid git identifier for which version of Pulsar to load     | `master`
- `pulsar_venv_dir`              | The role will create a virtualenv from which Pulsar will run                                       | `<pulsar_server_dir>/venv` if installing via pip, `<pulsar_server_dir>/.venv` if not.
- `pulsar_config_dir`            | Directory that will be used for Pulsar configuration files.                                        | `<pulsar_server_dir>/config` if installing via pip, `<pulsar_server_dir>` if not
- `pulsar_optional_dependencies` | List of optional dependency modules to install, depending on which features you are enabling.      | `None`
- `pulsar_install_environments`  | Installing dependencies may require setting certain environment variables to compile successfully. |
-
+ Variable Name                 | Description                                                                                        | Default
+---------------                | -------------                                                                                      | ---
+`pulsar_pip_install`           | Set to `true` to get pulsar to be sourced from pip.                                                | `false`
+`pulsar_yaml_config`           | a YAML dictionary whose contents will be used to create Pulsar's `app.yml`                         |
+`pulsar_git_repo`              | Upstream git repository from which Pulsar should be cloned.                                        | https://github.com/galaxyproject/pulsar
+`pulsar_changeset_id`          | A changeset id, tag, branch, or other valid git identifier for which version of Pulsar to load     | `master`
+`pulsar_venv_dir`              | The role will create a virtualenv from which Pulsar will run                                       | `<pulsar_server_dir>/venv` if installing via pip, `<pulsar_server_dir>/.venv` if not.
+`pulsar_config_dir`            | Directory that will be used for Pulsar configuration files.                                        | `<pulsar_server_dir>/config` if installing via pip, `<pulsar_server_dir>` if not
+`pulsar_optional_dependencies` | List of optional dependency modules to install, depending on which features you are enabling.      | `None`
+`pulsar_install_environments`  | Installing dependencies may require setting certain environment variables to compile successfully. |
+`pulsar_create_user`           | Should a user be created for running pulsar?                                                       |
+`pulsar_user`                  | Define the user details                                                                            |
 
 Additional options from Pulsar's server.ini are configurable via the following variables (these options are explained in the Pulsar documentation and server.ini.sample):
 
@@ -149,12 +150,24 @@ Some of the other options we will be using are:
 >
 >    private_token: '<some_really_long_string_here>'
 >
+>    pulsar_create_user: true
+>    pulsar_user: {name: pulsar, shell: /bin/bash}
+>
 >    pulsar_optional_dependencies:
 >      - pyOpenSSL
->      - psutil
+>      # For remote transfers initiated on the Pulsar end rather than the Galaxy end
 >      - pycurl
+>      # uwsgi used for more robust deployment than paste
+>      - uwsgi
+>      # drmaa required if connecting to an external DRM using it.
+>      - drmaa
+>      # kombu needed if using a message queue
+>      - kombu
+>      # requests and poster using Pulsar remote staging and pycurl is unavailable
 >      - requests
->      - poster
+>      # psutil and pylockfile are optional dependencies but can make Pulsar
+>      # more robust in small ways.
+>      - psutil
 >
 >    pulsar_yaml_config:
 >      dependency_resolvers_config_file: dependency_resolvers_conf.xml
@@ -250,7 +263,7 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 > 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
 >
 >    ```bash
->    ansible-playbook pulsar_playbook.yml
+>    ansible-playbook pulsar-playbook.yml
 >    ```
 >
 >    After the script has run, pulsar will be installed on the remote machines!
@@ -273,9 +286,7 @@ There are three things we need to do here:
 
 * We will need to create a job runner which uses the  `galaxy.jobs.runners.pulsar:PulsarRESTJobRunner` code.
 * Create job destination which references the above job runner.
-* Tell Galaxy which tools to send to the job destination.
-
-(We will use bwa-mem)
+* Tell Galaxy which tools to send to the job destination: We will use `bwa-mem`
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
