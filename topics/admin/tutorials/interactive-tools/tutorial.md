@@ -470,7 +470,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >
 >    ```xml
 >    <toolbox monitor="true">
->        <section id="interactivetools" name="Interactive tools">
+>        <section id="interactivetools" name="Interactive Tools">
 >            <tool file="interactive/interactivetool_ethercalc.xml" />
 >        </section>
 >    </toolbox>
@@ -496,7 +496,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
 >
-> 3. Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default `local` destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the [advanced sample job configuration][job-conf-docker] as a guide:
+> 3. Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default `local` destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the [advanced sample job configuration][job-conf-docker] as a guide. Finally, use the [EtherCalc GxIT's][ethercalc-tool-wrapper] tool ID to route executions of the EtherCalc GxIT to the newly created destination:
 >
 >    ```diff
 >    --- job_conf.xml.old
@@ -572,7 +572,37 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 {: .hands_on}
 
 [job-conf-docker]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410
+[ethercalc-tool-wrapper]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/tools/interactive/interactivetool_ethercalc.xml
 
 ## Run an Interactive Tool
 
 You should now be ready to run an Interactive Tool in Galaxy!
+
+> ### {% icon hands_on %} Hands-on: Running an Interactive Tool
+>
+> 1. Ensure that you are logged in to your Galaxy server by checking the **User** menu in the masthead.
+> 2. We'll need an input for our test GxIT (EtherCalc). Any tabular file can be used, such as Galaxy's [1.tabular][1-tabular] test data. Copy this file's URL:
+>
+>    ```
+>    https://raw.githubusercontent.com/galaxyproject/galaxy/release_20.01/test-data/1.tabular
+>    ```
+>
+> 3. Click {% icon galaxy-upload %} **Upload** at the top of the tool panel (on the left side of the Galaxy UI).
+> 4. In the resulting modal dialog, click the **Paste/Fetch data** button.
+> 5. Paste the URL in the **text field** that has just appeared.
+> 6. Give the new dataset a name such as `tabular`, if you like.
+> 7. Click **Start** and then **Close**.
+> 8. From the tool menu, click the **Interactive Tools** section, then click **EtherCalc** {% icon tool %}.
+> 9. Ensure that your newly uploaded tabular dataset is selected as the input **Some tabular dataset**, then click **Execute**.
+> 10. Monitor the blue **info box** on the next page, which will inform you when the Interactive Tool is accessible and provide you with a link to access it.
+>
+>     <br/>
+>
+>     If you navigate away from this page, you can view your running Interactive Tools from the **Active InteractiveTools** menu item in the **User** menu.
+> 11. Click the **click here to display** link.
+>
+{: .hands_on}
+
+If everything has worked correctly, your browser will load EtherCalc with your tabular data preloaded. Once you're done working with the data, return to Galaxy and stop EtherCalc by deleting its output dataset from your history, or stopping it via the interface from the **Active InteractiveTools** menu item in the **User** menu.
+
+[1-tabular]: https://raw.githubusercontent.com/galaxyproject/galaxy/release_20.01/test-data/1.tabular
