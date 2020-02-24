@@ -164,7 +164,7 @@ Currently, Galaxy Interactive Tools must be run in Docker containers. It may be 
 >    >
 >    {: .question}
 >
-> 2. Add the new role to the list of roles under the `roles` key in your playbook, `playbook.yml`:
+> 2. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
 >    ```yaml
 >    ---
@@ -178,7 +178,7 @@ Currently, Galaxy Interactive Tools must be run in Docker containers. It may be 
 > 3. Run the playbook:
 >
 >    ```
->    ansible-playbook -i hosts playbook.yml
+>    ansible-playbook galaxy.yml
 >    ```
 {: .hands_on}
 
@@ -193,6 +193,8 @@ When an Interactive Tool's Docker container starts, it will be assigned a random
 - Requests for Interactive Tools are delivered from nginx to the Interactive Tools Proxy over (by default) **port 8000** (http)
   - GxIT http requests are forwarded by the proxy to Docker on the node on the container's (randomly assigned) **port 32768**
   - GxIT http requests are again forwarded by Docker to Jupyter on its in-container "published" **port 8888*
+
+[//]: # The source for this figure can be found at: https://docs.google.com/presentation/d/1_4PtfM6A4mOxOlgGh6OGWvzFcxD1bdw4CydEWtm5n8k/
 
 ![Galaxy Interactive Tools Proxy Diagram](../../images/interactive-tools/gxit-proxy-diagram.png "Galaxy Interactive Tools Proxy Diagram")
 
@@ -254,7 +256,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    >
 >    {: .question}
 >
-> 2. Add the new role to `playbook.yml`:
+> 2. Add the new role to `galaxy.yml`:
 >
 >    ```yaml
 >    - hosts: galaxyservers
@@ -268,8 +270,9 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 > 3. Run the playbook:
 >
 >    ```
->    ansible-playbook -i hosts playbook.yml
+>    ansible-playbook galaxy.yml
 >    ```
+>
 {: .hands_on}
 
 [nodeenv]: https://github.com/ekalinin/nodeenv
@@ -306,6 +309,60 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 >
 {: .comment}
 
+## Proxying the Proxy
+
+As explained in the previous section, we will proxy the Interactive Tools Proxy with nginx so that it can serve requests on the standard HTTPS port, 443. Because we've configured nginx with Ansible, this is relatively simple.
+
+> ### {% icon hands_on %} Hands-on: Installing the Proxy with Ansible
+>
+> 1. Edit the group variables file, `group_vars/galaxyservers.yml` and add a new item to the **existing** `nginx_ssl_servers` so it matches:
+>
+>    {% raw %}
+>    ```yaml
+>    nginx_ssl_servers:
+>      - galaxy
+>      - galaxy-gie-proxy
+>    ```
+>    {% endraw %}
+>
+>    The nginx configuration `galaxy-gie-proxy` doesn't exist yet, but we'll create it in a moment.
+>
+> 2. Create `templates/nginx/galaxy-gie-proxy.j2` with the following contents:
+>
+>    {% raw %}
+>    ```nginx
+>    server {
+>        # Listen on port 443
+>        listen       *:443 ssl;
+>        # Match all requests for the interactive tools subdomain
+>        server_name  *.interactivetool.{{ inventory_hostname }};
+>    
+>        # Our log files will go here.
+>        access_log  /var/log/nginx/galaxy-gie-proxy-access.log;
+>        error_log   /var/log/nginx/galaxy-gie-proxy-error.log;
+>    
+>        # Proxy all requests to the GIE Proxy application
+>        location / {
+>            proxy_redirect off;
+>            proxy_http_version 1.1;
+>            proxy_set_header Host $host;
+>            proxy_set_header X-Real-IP $remote_addr;
+>            proxy_set_header Upgrade $http_upgrade;
+>            proxy_set_header Connection "upgrade";
+>            proxy_pass http://localhost:{{ gie_proxy_port }};
+>        }
+>    }
+>    ```
+>    {% endraw %}
+>
+> 3. Run the playbook:
+>
+>    ```
+>    ansible-playbook galaxy.yml
+>    ```
+>
+{: .hands_on}
+
 ## Getting a Wildcard SSL Certificate
 
 During the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
@@ -327,7 +384,7 @@ If you are completing this tutorial as part of a [Galaxy Admin Training][gat] co
 >    | `certbot_dns_credentials` | dictionary | Plugin-specific credentials for performing dynamic DNS updates                                                   |
 >    | `certbot_expand`          | boolean    | Whether to "expand" an existing certificate (add new domain names to it)                                         |
 >
->    - Add a new item to the **existing** `certbot_domains` so it matches:
+>    - Add a new item to the **existing** `certbot_domains` list so it matches:
 >        {% raw %}
 >        ```yaml
 >        certbot_domains:
@@ -363,7 +420,7 @@ If you are completing this tutorial as part of a [Galaxy Admin Training][gat] co
 > 2. Run the playbook **with `certbot_expand`**:
 >
 >    ```
->    ansible-playbook -i hosts playbook.yml -e certbot_expand=true
+>    ansible-playbook galaxy.yml -e certbot_expand=true
 >    ```
 >
 >    > ### {% icon question %} Question
@@ -386,8 +443,136 @@ If you are completing this tutorial as part of a [Galaxy Admin Training][gat] co
 >    >
 >    {: .question}
 >
+>    Be patient! The certificate request step can take time due to the time allowed for DNS propagation to occur.
+>
 {: .hands_on}
 
 You can verify that your certificate has been expanded using your browser's developer tools:
 
 ![Wildcard Certificate Dialog](../../images/interactive-tools/wildcard-cert.png "Wildcard Certificate Dialog")
+
+## Enabling Interactive Tools in Galaxy
+
+A few Interactive Tool wrappers are provided with Galaxy, but they are [commented out in Galaxy's default tool config file][tool-conf-gxits]. As a result, we need to instruct the [galaxyproject.galaxy role][galaxy-role] to install a tool panel configuration file containing at least one of these tools in order to try them out. For the purposes of this tutorial, a good choice is the [EtherCalc][ethercalc] GxIT, because it has a relatively small [Docker image][ethercalc-docker-image].
+
+[tool-conf-gxits]: https://github.com/galaxyproject/galaxy/blob/9d788cb144a18570e7e5e948ac1f7bc04fec4e75/lib/galaxy/config/sample/tool_conf.xml.sample#L126
+[galaxy-role]: https://github.com/galaxyproject/ansible-galaxy
+[ethercalc]: https://ethercalc.net/
+[ethercalc-docker-image]: https://hub.docker.com/r/shiltemann/ethercalc-galaxy-ie
+
+> ### {% icon hands_on %} Hands-on: Enabling Interactive Tools in Galaxy
+>
+> 1. Rather than modify the default tool configuration file, we'll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.
+>
+>    If the folder does not exist, create `files/galaxy/config` next to your `galaxy.yml` (`mkdir -p files/galaxy/config/`)
+>
+>    Create `files/galaxy/config/tool_conf_interactive.xml` with the following contents:
+>
+>    ```xml
+>    <toolbox monitor="true">
+>        <section id="interactivetools" name="Interactive tools">
+>            <tool file="interactive/interactivetool_ethercalc.xml" />
+>        </section>
+>    </toolbox>
+>    ```
+>
+> 2. We need to modify `job_conf.xml` to instruct Galaxy on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
+>
+>    Create `files/galaxy/config/job_conf.xml` with the following contents:
+>
+>    ```xml
+>    <job_conf>
+>        <plugins workers="4">
+>            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>        </plugins>
+>        <destinations>
+>            <destination id="local" runner="local"/>
+>        </destinations>
+>    </job_conf>
+>    ```
+>
+>    > ### {% icon comment %} Note
+>    >
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
+>    {: .comment}
+>
+> 3. Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default `local` destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the [advanced sample job configuration][job-conf-docker] as a guide:
+>
+>    ```diff
+>    --- job_conf.xml.old
+>    +++ job_conf.xml
+>         <plugins workers="4">
+>             <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>         </plugins>
+>    -    <destinations>
+>    +    <destinations default="local">
+>             <destination id="local" runner="local"/>
+>    +        <destination id="interactive_local" runner="local">
+>    +            <param id="docker_enabled">true</param>
+>    +            <param id="docker_volumes">$galaxy_root:ro,$tool_directory:ro,$job_directory:rw,$working_directory:rw,$default_file_path:ro</param>
+>    +            <param id="docker_sudo">false</param>
+>    +            <param id="docker_net">bridge</param>
+>    +            <param id="docker_auto_rm">true</param>
+>    +            <param id="docker_set_user"></param>
+>    +            <param id="require_container">true</param>
+>    +        </destination>
+>         </destinations>
+>    +    <tools>
+>    +        <tool destination="interactive_local" id="interactive_tool_ethercalc" />
+>    +    </tools>
+>     </job_conf>
+>    ```
+>
+>    Of considerable note is the `docker_volumes` param: the variable expansions are explained in the [advanced sample job configuration][job-conf-docker] and there is something about this configuration that should concern you from a security perspective (which will be addressed at the end of this tutorial).
+>
+> 4. Inform `galaxyproject.galaxy` of what tool configuration files to load in your group variables (`group_vars/galaxyservers.yml`):
+>
+>    {% raw %}
+>    ```yaml
+>    galaxy_tool_config_files:
+>      - "{{ galaxy_server_dir }}/config/tool_conf.xml.sample"
+>      - "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
+>    ```
+>    {% endraw %}
+>
+>    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside:
+>
+>    {% raw %}
+>    ```yaml
+>    galaxy_job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>
+>    galaxy_config:
+>      galaxy:
+>        # ... existing configuration options in the `galaxy` section ...
+>        job_config_file: "{{ galaxy_job_config_file }}"
+>    ```
+>    {% endraw %}
+>
+>    And then deploy the new config files using the `galaxy_config_files` var in your group vars:
+>
+>    {% raw %}
+>    ```yaml
+>    galaxy_config_files:
+>      # ... possible existing config file definitions
+>      - src: files/galaxy/config/tool_conf_interactive.xml
+>        dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
+>      - src: files/galaxy/config/job_conf.xml
+>        dest: "{{ galaxy_job_config_file }}"
+>    ```
+>    {% endraw %}
+>
+> 5. Run the playbook:
+>
+>    ```
+>    ansible-playbook galaxy.yml
+>    ```
+>
+> 6. Follow the Galaxy logs with `journalctl -f -u galaxy`
+>
+{: .hands_on}
+
+[job-conf-docker]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410
+
+## Run an Interactive Tool
+
+You should now be ready to run an Interactive Tool in Galaxy!
