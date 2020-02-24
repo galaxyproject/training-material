@@ -210,7 +210,7 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 >    ```yaml
 >    - src: galaxyproject.galaxy
->      version: 0.9.2
+>      version: 0.9.5
 >    - src: galaxyproject.nginx
 >      version: 0.6.4
 >    - src: galaxyproject.postgresql
@@ -222,9 +222,9 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >    - src: uchida.miniconda
 >      version: 0.3.0
 >    - src: usegalaxy_eu.galaxy_systemd
->      version: 0.1.1
->    - src: usegalaxy_eu.certbot
 >      version: 0.1.2
+>    - src: usegalaxy_eu.certbot
+>      version: 0.1.3
 >    ```
 >
 > 3. In the same directory, run:
@@ -271,8 +271,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 >    ```yaml
 >    ---
->    # python3 support
->    galaxy_venv_python: 3
+>    # Python 3 support
 >    pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
 >    certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
 >    pip_package: python3-pip # geerlingguy.pip
@@ -357,7 +356,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, and `python3-virtualenv`
+>    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, and `virtualenv`
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end
 >
 >    > ### {% icon question %} Question
@@ -372,7 +371,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >   pre_tasks:
 >    > >     - name: Install Dependencies
 >    > >       package:
->    > >         name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
+>    > >         name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
 >    > >   roles:
 >    > >     - galaxyproject.postgresql
 >    > >     - role: natefoo.postgresql_objects
@@ -674,7 +673,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
->    Add the following to the bottom of your `group_vars/galaxyservers.yml` file:
+> 2. Add the following to the bottom of your `group_vars/galaxyservers.yml` file:
 >
 >    {% raw %}
 >    ```yaml
