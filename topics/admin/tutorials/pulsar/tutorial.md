@@ -73,14 +73,15 @@ This tutorial assumes that you have:
 
 # Installing the Pulsar Role
 
-We need to create a new ansible playbook to install Pulsar. We will be using a *role* written by Nate Coraor - `galaxyproject.pulsar`
+We need to create a new ansible playbook to install Pulsar. We will be using a *role* developed by the Galaxy community - `galaxyproject.pulsar`
 
 > ### {% icon hands_on %} Hands-on: Install the `galaxyproject.pulsar` ansible role
 >
 > 1. From your ansible working directory, edit the `requirements.yml` file and add the following line:
 >
 >    ```yaml
->    - galaxyproject.pulsar
+>    - src: galaxyproject.pulsar
+>      version: 0.4.5
 >    ```
 >
 > 2. Now install it with:
@@ -176,30 +177,28 @@ Some of the other options we will be using are:
 
 We will now write a new playbook for the pulsar installation similar to the one we did for the CVMFS installation earlier in the week.
 
-We need to include a couple of pre-tasks to install python-virtualenv, python-pip and git etc.
+We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 > ### {% icon hands_on %} Hands-on: Creating the playbook
 >
-> 1. Create a `pulsar_playbook.yml` file with the following contents:
+> 1. Create a `pulsar-playbook.yml` file with the following contents:
 >
 >    {% raw %}
 >    ```yaml
 >    - hosts: pulsarservers
 >      pre_tasks:
 >        - name: Install some packages
->          apt:
->            name: "{{ item }}"
->            state: installed
+>          package:
+>            name:
+>              - build-essential
+>              - git
+>              - python3-dev
+>              - libcurl4-openssl-dev
+>              - libssl-dev
+>              - virtualenv
+>            state: present
 >            update_cache: yes
 >          become: yes
->          with_items:
->            - build-essential
->            - vim
->            - git
->            - python-dev
->            - libcurl4-openssl-dev
->            - libssl-dev
->            - virtualenv
 >        - name: chown the /mnt dir to ubuntu
 >          file:
 >            path: /mnt
@@ -318,7 +317,7 @@ There are three things we need to do here:
 Now we will upload a small set of data to run bwa-mem with.
 
 
-> ### {% icon hands_on %} Hands-on: Testing the Pulsar destinatoin
+> ### {% icon hands_on %} Hands-on: Testing the Pulsar destination
 >
 > 1. Upload the following files from zenodo.
 >
@@ -333,13 +332,13 @@ Now we will upload a small set of data to run bwa-mem with.
 >    As soon as you press *execute* Galaxy will send the job to the pulsar server. You can watch the log in Galaxy using:
 >
 >    ```
->    sudo supervisorctl tail -f galaxy stderr
+>    journalctcl -fu galaxy
 >    ```
 >
 >    You can watch the log in Pulsar by ssh'ing to it and tailing the log file with:
 >
 >    ```
->    tail -f /mnt/pulsar/paster.log
+>    journalctl -fu pulsar
 >    ```
 >
 {: .hands_on}
