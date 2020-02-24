@@ -590,33 +590,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 {: .hands_on}
 
-> ### {% icon details %} Simplifying the command line with ansible.cfg
-> Typing `-i hosts` every time can be a bit repetitive, you can save having to type this flag by creating an `ansible.cfg` file (next to your playbook) with the following contents:
->
-> ```ini
-> [defaults]
-> inventory = hosts
-> ```
->
-> There are some additional useful options that you might want to add to your `ansible.cfg` file:
->
-> ```ini
-> [ssh_connection]
-> pipelining = true
-> [defaults]
-> retry_files_enabled = false
-> ```
->
-> Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened. Setting `retry_files_enabled = false` will prevent Ansible from creating `playbook.retry` files whenever a playbook crashes before finishing. These are rarely useful for the cases in which we run Ansible.
->
-> For users running with the local connection, you can specify this in your `hosts` inventory file:
->
-> ```ini
-> [galaxyservers]
-> your.host.name ansible_connection=local
-> ```
-{: .details}
-
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up supervisord which will manage the Galaxy processes!
 
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
@@ -627,6 +600,36 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 4. Activate virtualenv (`. ../venv/bin/activate`)
 > 5. `uwsgi --yaml ../config/galaxy.yml`
 > 6. Access at port `<ip address>:8080` once the server has started
+{: .hands_on}
+
+### A brief aside: Reduce repetitive typing
+
+No system administrator likes reptitive tasks, and throughout these Ansible-based tutorials, we will be running the playbook repeatedly. So far this has been done with:
+
+```console
+$ ansible-playbook -i hosts <playbook>.yml
+```
+
+However, the inventory file, `hosts`, never changes. The `-i` option can be eliminated.
+
+> ### {% icon hands_on %} Simplifying the command line with ansible.cfg
+>
+> You can save having to type the `-i` flag by creating an `ansible.cfg` file (next to your playbook) with the following contents:
+>
+> ```ini
+> [defaults]
+> inventory = hosts
+> ```
+>
+> There is an additional useful option that you might want to add to your `ansible.cfg` file if you are connecting over SSH:
+>
+> ```ini
+> [ssh_connection]
+> pipelining = true
+> ```
+>
+> Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
+>
 {: .hands_on}
 
 ## Supervisord
@@ -1055,7 +1058,7 @@ But not you! You spent the day writing this Ansible playbook that describes your
 
 > ### {% icon hands_on %} Hands-on: Revert the Apocalypse
 >
-> 1. `ansible-playbook -i hosts galaxy.yml`
+> 1. `ansible-playbook galaxy.yml`
 >
 {: .hands_on}
 

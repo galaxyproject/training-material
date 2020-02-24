@@ -127,7 +127,7 @@ If the terms "ansible", "role" and "playbook" mean nothing to you, please checko
 > 5. Run the playbook
 >
 >    ```
->    ansible-playbook -i hosts cvmfs_playbook.yml
+>    ansible-playbook cvmfs_playbook.yml
 >    ```
 {: .hands_on}
 
@@ -232,7 +232,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
 >    {: .comment}
 >
-> 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
+> 3. Re-run the CVMFS playbook (`ansible-playbook cvmfs_playbook.yml`)
 >
 > 4. Restart Galaxy
 >
