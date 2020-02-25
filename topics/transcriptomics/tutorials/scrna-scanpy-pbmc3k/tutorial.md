@@ -289,7 +289,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
 >
 > 2. Rename the generated file `3k PBMC`
-> 3. Expand the dataset.
+> 3. Inpect the dataset.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -470,7 +470,7 @@ We can now compute QC metrics on the `AnnData` object.
 >
 > 2. Rename the generated file `3k PBMC with mito annotation and qc metrics`
 >
-> 3. Expand and inspect the dataset
+> 3. Inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -637,7 +637,7 @@ Based on the previous plot, we would like to remove cells that have:
 >        - *"Filter"*: `Minimum number of genes expressed`
 >            - *"Minimum number of genes expressed required for a cell to pass filtering"*: `200`
 >
-> 2. Expand and inspect the dataset
+> 2. Inspect the dataset
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -662,8 +662,8 @@ Based on the previous plot, we would like to remove cells that have:
 >        - *"Filter"*: `Maximum number of genes expressed`
 >            - *"Maximum number of genes expressed required for a cell to pass filtering"*: `2500`
 >
-> 4. Expand and inspect the dataset
-
+> 4. Inspect the dataset
+>    >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
@@ -693,7 +693,7 @@ Based on the previous plot, we would like to remove cells that have:
 >
 > 6. Rename the generated file `3k PBMC after QC filtering`
 >
-> 7. Expand and inspect the dataset
+> 7. **Inspect AnnData** {% icon tool %} with the following parameters:
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -793,7 +793,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 > ### {% icon hands_on %} Hands-on: Keep the highly variable genes
 >
-> 1. Expand and inspect the output of the last **Filter** {% icon tool %})
+> 1. Inspect the output of the last **Filter** {% icon tool %})
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -940,7 +940,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > 
 > > ### {% icon hands_on %} Hands-on: Inspect the PCA inside an `AnnData` object
 > >
-> > 1. Expand and inspect the `3k PBMC with only HVG, > after scaling and PCA` dataset
+> > 1. Inspect the `3k PBMC with only HVG, after scaling and PCA` dataset
 > >
 > >    > ### {% icon question %} Questions
 > >    >
@@ -1196,7 +1196,7 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >
-> 3. Expand and inspect the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+> 3. Inspect the dataset
 > 
 >    > ### {% icon question %} Questions
 >    >
