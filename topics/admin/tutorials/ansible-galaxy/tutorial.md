@@ -17,6 +17,7 @@ contributors:
   - natefoo
   - slugger70
   - shiltemann
+  - nsoranzo
 tags:
   - deploying
 subtopic: core
@@ -300,6 +301,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > ```yaml
+>    > > ---
 >    > > - hosts: galaxyservers
 >    > >   become: true
 >    > >   pre_tasks:
@@ -359,16 +361,17 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, and `virtualenv`
->    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end
+>    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, and `virtualenv`.
+>    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    > ### {% icon question %} Question
 >    >
->    > How does your final configuration look?
+>    > How does the updated playbook look?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > ```yaml
+>    > > ---
 >    > > - hosts: galaxyservers
 >    > >   become: true
 >    > >   pre_tasks:
@@ -382,7 +385,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >       become_user: postgres
 >    > >     - geerlingguy.pip
 >    > >     - galaxyproject.galaxy
->    > >     - uchida.miniconda
+>    > >     - role: uchida.miniconda
+>    > >       become: true
+>    > >       become_user: galaxy
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -443,7 +448,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > # PostgreSQL
 >    > > postgresql_objects_users:
 >    > >   - name: galaxy
->    > >     password: null
 >    > > postgresql_objects_databases:
 >    > >   - name: galaxy
 >    > >     owner: galaxy
@@ -498,7 +502,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >      galaxy:
 >      ...
 >      uwsgi:
->        # Default values
 >        http: 0.0.0.0:8080
 >        buffer-size: 16384
 >        processes: 1
@@ -507,6 +510,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >        static-map:
 >          - /static/style={{ galaxy_server_dir }}/static/style/blue
 >          - /static={{ galaxy_server_dir }}/static
+>          - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
+>        static-safe: client/galaxy/images
 >        master: true
 >        virtualenv: "{{ galaxy_venv_dir }}"
 >        pythonpath: "{{ galaxy_server_dir }}/lib"
@@ -518,7 +523,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >          - unix_signal:15 gracefully_kill_them_all
 >        py-call-osafterfork: true
 >        enable-threads: true
->        # Our additions
 >        mule:
 >          - lib/galaxy/main.py
 >          - lib/galaxy/main.py
@@ -540,7 +544,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > # PostgreSQL
 >    > > postgresql_objects_users:
 >    > >   - name: galaxy
->    > >     password: null
 >    > > postgresql_objects_databases:
 >    > >   - name: galaxy
 >    > >     owner: galaxy
@@ -567,7 +570,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     check_migrate_tools: false
 >    > >     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    > >   uwsgi:
->    > >     # Default values
 >    > >     http: 0.0.0.0:8080
 >    > >     buffer-size: 16384
 >    > >     processes: 1
@@ -576,6 +578,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     static-map:
 >    > >       - /static/style={{ galaxy_server_dir }}/static/style/blue
 >    > >       - /static={{ galaxy_server_dir }}/static
+>    > >       - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
+>    > >     static-safe: client/galaxy/images
 >    > >     master: true
 >    > >     virtualenv: "{{ galaxy_venv_dir }}"
 >    > >     pythonpath: "{{ galaxy_server_dir }}/lib"
@@ -587,7 +591,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >       - unix_signal:15 gracefully_kill_them_all
 >    > >     py-call-osafterfork: true
 >    > >     enable-threads: true
->    > >     # Our additions
 >    > >     mule:
 >    > >       - lib/galaxy/main.py
 >    > >       - lib/galaxy/main.py
@@ -692,12 +695,12 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use SystemD to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open `galaxy.yml` and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [SystemD Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use SystemD to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [SystemD Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
 >
 >    ```diff
 >    --- galaxy.yml
 >    +++ galaxy.yml
->    @@ -4,6 +4,11 @@
+>    @@ -5,6 +5,11 @@
 >         - name: Install Dependencies
 >           package:
 >             name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
@@ -789,9 +792,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- group_vars/galaxyservers.yml.orig
 >    +++ group_vars/galaxyservers.yml
 >    @@ -29,7 +29,7 @@
+>         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >       uwsgi:
->         # Default values
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080
 >         buffer-size: 16384
@@ -830,7 +833,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >      - galaxy
 >    nginx_conf_http:
 >      client_max_body_size: 1g
->    nginx_remove_default_vhost: true
 >    nginx_ssl_role: usegalaxy_eu.certbot
 >    nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -908,7 +910,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > #   - galaxy
 >    > nginx_conf_http:
 >    >   client_max_body_size: 1g
->    > nginx_remove_default_vhost: true
 >    > # nginx_ssl_role: usegalaxy_eu.certbot
 >    > # nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    > # nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
