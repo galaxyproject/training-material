@@ -112,7 +112,7 @@ We will use several Ansible roles for this tutorial. In order to avoid repetetiv
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
->    ```console
+>    ```
 >    ansible-galaxy role install -p roles -r requirements.yml
 >    ```
 
