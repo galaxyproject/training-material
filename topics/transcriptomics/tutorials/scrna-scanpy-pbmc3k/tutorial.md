@@ -294,7 +294,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >            - *"Minimum number of cells expressed required for a gene to pass filtering"*: `3`
 >
 > 2. Rename the generated file `3k PBMC`
-> 3. Inpect the dataset.
+> 3. Inspect the dataset.
 >
 >    > ### {% icon question %} Questions
 >    >
