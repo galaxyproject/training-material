@@ -169,13 +169,18 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >
 >    > ### {% icon comment %} Comment: Faster Method for General Information
 >    > 
->    > * Click on the name of the dataset in the history to expand it.
->    > * General Anndata information is given in the expanded box.
->    >   ```
->    >   [n_obs x n_vars]
->    >   -    2700 x 32738
->    >   ```
->    > * For more specific queries, **Inspect AnnData** is required.
+>    > * The **ScanPy** toolset in Galaxy produces *AnnData* formats as
+>    >   output, where general information is provided for each dataset:
+>    >    * Click on the name of the dataset in the history to expand it.
+>    >    * General Anndata information would be given in the expanded box:
+>    >
+>    >      e.g.
+>    >
+>    >      ```
+>    >      [n_obs x n_vars]
+>    >      -    2700 x 32738
+>    >      ```
+>    > * For more specific queries, **Inspect AnnData** {% icon tool %} is required.
 >    {: .comment}
 >
 > 3. **Inspect AnnData** {% icon tool %} with the following parameters:
@@ -417,6 +422,8 @@ To create this table, we need to:
 >            - *"Find pattern"*: `1`
 >            - *"Replace with"*: `True`
 >
+>    <small>**Note**: *Ensure that you have selected the same column for both replacements.*</small>
+>
 > 4. **Select last** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Text file"*: output of **Replace Text** {% icon tool %}
 >    - *"Operation"*: `Keep everything from this line on`
@@ -440,7 +447,7 @@ To create this table, we need to:
 >        - {% icon param-repeat %} *"Insert Dataset"*
 >            - {% icon param-file %} *"Select"*: output of **Cut** {% icon tool %}
 >
-> 8. Rename the generated file `Mitochondrial annotation`
+> 8. Rename the generated file `Mitochondrial annotation` and ensure that the datatype is `tabular`
 >
 > 9. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC`
@@ -694,12 +701,13 @@ Based on the previous plot, we would like to remove cells that have:
 > 6. Rename the generated file `3k PBMC after QC filtering`
 >
 > 7. **Inspect AnnData** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC after QC filtering`
+>    - *"What to inspect?"*: `General information about the object`
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > [n_obs × n_vars]
->    > -    2638 × 13714
+>    > AnnData object with n_obs × n_vars = 2638 × 13714
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 5% of reads mapped to mitochondrial genes?
@@ -853,13 +861,14 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >
 > 3. Rename the generated output `3k PBMC with only HVG`
 >
-> 4. Expand and inspect the dataset
+> 4. **Inspect AnnData** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG`
+>    - *"What to inspect?"*: `General information about the object`
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > [n_obs × n_vars]
->    > -    2638 × 1838
+>    > AnnData object with n_obs × n_vars = 2638 × 1838
 >    > ```
 >    >
 >    > How many genes have been removed?
@@ -946,7 +955,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    >
 > >    > ```
 > >    > [n_obs × n_vars]
-> >    > -    2638 × 2013
+> >    > -    2638 × 1838
 > >    > [obs]
 > >    > -    n_genes_by_counts
 > >    > -    log1p_n_genes_by_counts
@@ -986,7 +995,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    > 
 > >    > > ### {% icon solution %} Solution
 > >    > >
-> >    > > 3 new objects (`uns`, `obsm`, `varm`) have been added to the `AnnData` > object with information that seem related to PCA.
+> >    > > 3 new objects (`uns`, `obsm`, `varm`) have been added to the `AnnData` object with information that seem related to PCA.
 > >    > > 
 > >    > > `uns` is an unstructured annotation, `obsm` multi-dimensional annotation of the observations (i.e. genes) and `varm` multi-dimensional annotation of the variables (i.e. cells).
 > >    > {: .solution}
@@ -994,13 +1003,13 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    {: .question}
 > >
 > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
-> >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, > after scaling and PCA`
+> >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 > >    - *"What to inspect?"*: `Unstructured annotation (uns)`
 > >      - *"What to inspect in uns?"*: `PCA`
 > >
 > >    > ### {% icon question %} Questions
 > >    >
-> >    > What are the information stored in `uns` regarding the PCA?
+> >    > What information is stored in `uns` regarding the PCA?
 > >    > 
 > >    > > ### {% icon solution %} Solution
 > >    > >
@@ -1119,7 +1128,9 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 > 
 > > ### {% icon solution %} Solution
 > >
-> > For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot. For NKG7, the differences of expression are projected on PC2 and for PPBP on PC3.
+> > * For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot. 
+> > * For NKG7, the differences in expression are seen on PC2.
+> > * For PPBP, the differences in expression are seen on PC3.
 > > 
 > {: .solution}
 {: .question}
@@ -1191,7 +1202,7 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 >      - *"The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation"*: `10`
 >      - *"Number of PCs to use"*: `10`
 >      - *"Use a hard threshold to restrict the number of neighbors to n_neighbors?"*: `Yes`
->      - *"Method for computing connectivities"*: `umap`
+>      - *"Method for computing connectivities"*: `umap (McInnes et al, 2018)`
 >      - *"Distance metric"*: `euclidean`
 >
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA and KNN graph`
@@ -1242,8 +1253,8 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 >    > >
 >    > > An extra object `X_umap` has been added to `obsm` with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.
 >    > > 
->    > > This information can be accessed using:
->    > > 1. Expanding and inspecting the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > > This information can be accessed by:
+>    > > 1. Inspect the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > >    - *"What to inspect?"*: `Multi-dimensional observations annotation (obsm)`
@@ -1335,7 +1346,10 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 > > ### {% icon solution %} Solution
 > >
 > > 1. 8 clusters are identified, more or less corresponding to the ones we could see on the UMAP plots.
-> > 2. CST3 should be representative of clusters 1, 3, 4, 7; NKG7 for clusters 0, 3 and 5 and PPBP for cluster 7
+> > 2. We expect that:
+> >    * CST3 should be representative of clusters 1, 3, 4, 7
+> >    * NKG7 for clusters 0, 3 and 5
+> >    * PPBP for cluster 7
 > {: .solution}
 {: .question}
 
@@ -1425,7 +1439,9 @@ RPS25 | S100A9 | HLA-DRB1 | CST7 | FTH1 | GNLY | HLA-DRB1 | NRGN
 > 
 > > ### {% icon solution %} Solution
 > >
-> > CST3 is a marker gene for clusters 1, 4, 7 (not 3 as guessed); NKG7 for clusters 3 and 5 (not 0 as guessed) and PPBP for cluster 7, as we guessed before.
+> > * CST3 is a marker gene for clusters 1, 4, 7 (not 3 as guessed previously)
+> > * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
+> > * PPBP for cluster 7, as guessed previously
 > > 
 > {: .solution}
 {: .question}
@@ -1438,6 +1454,8 @@ Another widely used method for pairwise comparisons between groups of observatio
 >
 > 1. **Inspect and manipulate** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
+>      
+>      <small>**Note:** *Please pay attention to the dataset name.*</small>
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >      - *"The key of the observations grouping to consider"*: `louvain`
 >      - *"Use 'raw' attribute of input if present"*: `Yes`
@@ -1486,7 +1504,10 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > > ### {% icon solution %} Solution
 > >
 > > 1. The 5 top ranked genes are slightly different, at least in their order.
-> > 2. CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed); NKG7 for clusters 3 and 5 (not 0 as guessed) and PPBP for cluster 7, as we guessed before.
+> > 2. We see that:
+> >    * CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed previously)
+> >    * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
+> >    * PPBP for cluster 7, as we guessed previously.
 > > 
 > {: .solution}
 {: .question}
@@ -1509,9 +1530,9 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > 
 > > ### {% icon solution %} Solution
 > >
+> > - CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.
 > > - NKG7 is more expressed in clusters 3 and 5, the ones for which it was previously found as a marker gene.
 > > - PPBP is very pronounced in cluster 7, for which it was previously found as a marker gene.
-> > - CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.
 > > 
 > {: .solution}
 {: .question}
@@ -1534,6 +1555,7 @@ The assumption should be even more true for the top marker genes. The first way 
 >      - *"The key of the observation grouping to consider"*: `louvain`
 >      - *"Number of categories"*: `8`
 >      - *"Use 'raw' attribute of input if present"*: `Yes`
+>      - *"Custom figure size*: `Yes`
 >      - *"Swap axes?"*: `Yes`
 >      - In *"Violin plot attributes"*:
 >        - *"Add a stripplot on top of the violin plot"*: `No`
@@ -1547,11 +1569,11 @@ The assumption should be even more true for the top marker genes. The first way 
 > 
 > > ### {% icon solution %} Solution
 > >
-> > LDHB, LYZ and CD74, even if they are top markers genes for the cluster 0, 1, 2 respectively, are also expressed in all other clusters (and also found in the top 100 marker genes for other clusters), but with higher level in the cluster for they are markers. 
+> > * LDHB, LYZ and CD74, even if they are top markers genes for the cluster 0, 1, 2 respectively, are also expressed in all other clusters (and also found in the top 100 marker genes for other clusters), but with higher level in the cluster for they are markers. 
 > > 
-> > CCL5, LST1, NKG7 and HLA-DPA1 are not expressed in all clusters but also not only in the one they are markers.
+> > * CCL5, LST1, NKG7 and HLA-DPA1 are not expressed in all clusters but also not only in the one they are markers.
 > >
-> > PF4 is only expressed in cluster 7.
+> > * PF4 is only expressed in cluster 7.
 > > 
 > {: .solution}
 {: .question}
@@ -1606,9 +1628,9 @@ Each cells is shown in a row and in columns are the marker genes for each cluste
 > 
 > > ### {% icon solution %} Solution
 > >
-> > Clusters 0, 3, and 5 are similar in term of expression. This was expected as they are physically close on the neighborhood graph.
+> > * Clusters 0, 3, and 5 are similar in term of expression. This was expected as they are physically close on the neighborhood graph.
 > >
-> > Clusters 1 and 4 are together and then 2 and 6 are together after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.
+> > * Clusters 1 and 4 are together and then 2 and 6 are together after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.
 > > 
 > {: .solution}
 {: .question}
@@ -1622,7 +1644,7 @@ In some cases, it may also be interesting to find marker genes distinguishing on
 > ### {% icon hands_on %} Hands-on: Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum
 >
 > 1. **Inspect and manipulate** with scanpy {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >      - *"The key of the observations grouping to consider"*: `louvain`
 >      - *"Use 'raw' attribute of input if present"*: `Yes`
@@ -1757,6 +1779,8 @@ Cluster | Cell type
 >
 > 1. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
+>      
+>      <small>**Note**: *Take note that this is not the "0 vs 1 Wilcoxon" dataset*</small>
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >      - *"Key for observations or variables annotation"*: `louvain`
 >      - *"Comma-separated list of new categories"*: `CD4+ T, CD14+, B, CD8+ T, FCGR3A+, NK, Dendritic, Megakaryocytes`
