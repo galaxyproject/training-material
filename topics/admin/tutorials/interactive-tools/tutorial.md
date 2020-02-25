@@ -5,10 +5,18 @@ title: "Galaxy Interactive Tools"
 zenodo_link: ""
 questions:
 objectives:
-- Have an understanding of what Galaxy Interactive Tools are and how they work
-- Configure your Galaxy to serve Interactive Tools using an Ansible Playbook
-time_estimation: "1h"
+  - Understand what Galaxy Interactive Tools are and how they work
+  - Be aware of the security implications of Interactive Tools
+  - Have a basic understanding of the Interactive Tools (GxIT/GIE) Proxy, its purpose, and configuration
+  - Be familiar with wildcard SSL certificates and how to get them from Let's Encrypt
+  - Configure your Galaxy to serve Interactive Tools using an Ansible Playbook
+  - Start, run, and use an Interactive Tool
+time_estimation: "2h"
 key_points:
+  - Galaxy Interactive Tools run as jobs in largely the same manner as any other Galaxy job
+  - nginx routes GxIT requests to the GxIT(/GIE) Proxy, which routes them to the node/port on which the GxIT is running
+  - GxITs require wildcard SSL certificates
+  - GxITs expose your Galaxy server's user datasets unless configured to use Pulsar
 contributors:
   - natefoo
   - slugger70
@@ -492,7 +500,6 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    ```
 >
 >    > ### {% icon comment %} Note
->    >
 >    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
 >
@@ -509,7 +516,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >             <destination id="local" runner="local"/>
 >    +        <destination id="interactive_local" runner="local">
 >    +            <param id="docker_enabled">true</param>
->    +            <param id="docker_volumes">$galaxy_root:ro,$tool_directory:ro,$job_directory:rw,$working_directory:rw,$default_file_path:ro</param>
+>    +            <param id="docker_volumes">$defaults</param>
 >    +            <param id="docker_sudo">false</param>
 >    +            <param id="docker_net">bridge</param>
 >    +            <param id="docker_auto_rm">true</param>
@@ -523,7 +530,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >     </job_conf>
 >    ```
 >
->    Of considerable note is the `docker_volumes` param: the variable expansions are explained in the [advanced sample job configuration][job-conf-docker] and there is something about this configuration that should concern you from a security perspective (which will be addressed at the end of this tutorial).
+>    Of considerable note is the `docker_volumes` param: the variable expansions are explained in the [advanced sample job configuration][job-conf-docker].  We'll use this volume configuration for now but it has some considerable data security problems. We'll discuss a better solution at the end of this tutorial.
 >
 > 4. Inform `galaxyproject.galaxy` of what tool configuration files to load in your group variables (`group_vars/galaxyservers.yml`):
 >
@@ -535,7 +542,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    ```
 >    {% endraw %}
 >
->    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside:
+>    Next, inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, that GxITs should be enabled, and where the GxIT map database can be found:
 >
 >    {% raw %}
 >    ```yaml
@@ -545,6 +552,8 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
 >        job_config_file: "{{ galaxy_job_config_file }}"
+>        interactivetools_enable: "True"
+>        interactivetools_map: "{{ gie_proxy_sessions_path }}"
 >    ```
 >    {% endraw %}
 >
@@ -606,3 +615,176 @@ You should now be ready to run an Interactive Tool in Galaxy!
 If everything has worked correctly, your browser will load EtherCalc with your tabular data preloaded. Once you're done working with the data, return to Galaxy and stop EtherCalc by deleting its output dataset from your history, or stopping it via the interface from the **Active InteractiveTools** menu item in the **User** menu.
 
 [1-tabular]: https://raw.githubusercontent.com/galaxyproject/galaxy/release_20.01/test-data/1.tabular
+
+## Securing Interactive Tools
+
+Inspecting the Docker container of a running Interactive Tool shows the volume configuration expanded from `$galaxy_root` in the job destination's `docker_volumes` param:
+
+```console
+$ docker inspect $(docker ps -q) | jq '.[0].HostConfig.Binds'
+[
+  "/srv/galaxy/server:/srv/galaxy/server:ro",                                     # Galaxy server dir
+  "/srv/galaxy/server/tools/interactive:/srv/galaxy/server/tools/interactive:ro", # EtherCalc tool wrapper parent dir
+  "/srv/galaxy/jobs/000/1:/srv/galaxy/jobs/000/1:ro",                             # Per-job root dir
+  "/srv/galaxy/jobs/000/1/outputs:/srv/galaxy/jobs/000/1/outputs:rw",             # Job outputs dir
+  "/srv/galaxy/jobs/000/1/configs:/srv/galaxy/jobs/000/1/configs:rw",             # Job config files dir
+  "/srv/galaxy/jobs/000/1/working:/srv/galaxy/jobs/000/1/working:rw",             # Job working (cwd) dir
+  "/data:/data:rw",                                                               # GALAXY USER DATASETS DIR (RW!)
+  "/srv/galaxy/server/tool-data:/srv/galaxy/server/tool-data:ro"                  # Galaxy reference data dir
+]
+```
+
+As hinted earlier, there is a concerning state here: The directory containing **all** of the the user-generated data in Galaxy (not just the data for this job) has been mounted **read-write** in to the container. **This configuration grants users running interactive tools full access to all the data in Galaxy, which is a very bad idea.** Unlike standard Galaxy tools, where the tool's design prevents users from writing to arbitrary paths, Interactive Tools are fully user controllable. Although EtherCalc does not provide a mechanism for writing to this path, other Interactive Tools (such as Jupyter Notebook) do.
+
+Two solutions are discussed in the [advanced sample job configuration][job-conf-docker]:
+
+1. Use the `outputs_to_working_directory` job configuration option, which allows you to mount datasets read-only: this prevents manipulation, but still allows GxIT users to read any dataset in your Galaxy server.
+2. Use [Pulsar][pulsar], Galaxy's remote job execution engine, to provide full job isolation: this avoids all access to Galaxy data, with the performance penalty of copying input dataset(s) to the job directory.
+
+Because we want to maintain dataset privacy, Pulsar is the better choice here. And in fact, we don't even need to set up a Pulsar server: because we only need Pulsar's input staging and isolation features, we can use [Embedded Pulsar][job-conf-pulsar-embedded], which runs a Pulsar server within the Galaxy application to perform these tasks. Embedded Pulsar can even interface with your distributed resource manager (aka cluster scheduler) of choice, as long as your Galaxy server and cluster both have access to a common filesystem (otherwise, you will need to use Pulsar in standalone mode; see the [Running Jobs on Remote Resources with Pulsar]({{ site.baseurl }}{% link topics/admin/tutorials/heterogeneous-compute/tutorial.md %}) tutorial).
+
+[pulsar]: https://github.com/galaxyproject/pulsar
+[job-conf-pulsar-embedded]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106
+
+> ### {% icon hands_on %} Hands-on: Running Interactive Tools with Embedded Pulsar
+>
+> 1. Create a configuration file *template* for the Pulsar application at `templates/galaxy/config/pulsar_app.yml.j2`.
+>
+>    <br/>
+>
+>    If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` (`mkdir -p templates/galaxy/config/`).
+>
+>    <br/>
+>
+>    Add the following contents to the template:
+>
+>    {% raw %}
+>    ```yaml
+>    ---
+>  
+>    # The path where per-job directories will be created
+>    staging_directory: "{{ galaxy_job_working_directory }}/_interactive"
+>
+>    # Where Pulsar state information will be stored (e.g. currently active jobs)
+>    persistence_directory: "{{ galaxy_mutable_data_dir }}/pulsar"
+>
+>    # Where to find Galaxy tool dependencies
+>    tool_dependency_dir: "{{ galaxy_tool_dependency_dir }}"
+>
+>    # How to run jobs (see https://pulsar.readthedocs.io/en/latest/job_managers.html)
+>    managers:
+>      _default_:
+>        type: queued_python
+>        num_concurrent_jobs: 1
+>    ```
+>    {% endraw %}
+>
+> 2. Modify the job configuration file, `files/galaxy/config/job_conf.xml`, to configure Interactive Tools to use the embedded Pulsar runner.
+>
+>    <br/>
+>
+>    **Add** the embedded Pulsar runner plugin to the `<plugins>` section of the config:
+>
+>    ```xml
+>    <plugin id="pulsar_embedded" type="runner" load="galaxy.jobs.runners.pulsar:PulsarEmbeddedJobRunner">
+>        <param id="pulsar_config">/srv/galaxy/config/pulsar_app.yml</param>
+>    </plugin>
+>    ```
+>
+>    > ### {% icon tip %} Tip: Ansible Best Practices
+>    > We have used a bit of bad practice here: hardcoding the Pulsar config file path in to the job config file. At this point, we should convert the job config file to a template (in the same manner as the Pulsar config template). The reason we don't do it in this tutorial is to maintain compatibility with other tutorials, but you may do so by following the same pattern as is used for the Pulsar config template.
+>    {: .tip}
+>
+>    Next, **modify** the `interactive_local` destination to use the new runner and set the new parameter `container_monitor_result` to `callback` (explained in more detail in the next step):
+>
+>    > ### {% icon warning %} Warning: Untrusted SSL Certificates
+>    > If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, you will also need the `<env>` setting shown below to prevent problems with the untrusted SSL certificates in use during the course. Galaxy servers with valid SSL certificates *do not need this option*.
+>    {: .warning}
+>
+>    ```diff
+>    --- job_conf.xml.old
+>    +++ job_conf.xml
+>         <destinations default="local">
+>             <destination id="local" runner="local"/>
+>    -        <destination id="interactive_local" runner="local">
+>    +        <destination id="interactive_local" runner="pulsar_embedded">
+>                 <param id="docker_enabled">true</param>
+>                 <param id="docker_volumes">$defaults</param>
+>                 <param id="docker_sudo">false</param>
+>                 <param id="docker_net">bridge</param>
+>                 <param id="docker_auto_rm">true</param>
+>                 <param id="docker_set_user"></param>
+>                 <param id="require_container">true</param>
+>    +            <param id="container_monitor_result">callback</param>
+>    +            <env id="REQUESTS_CA_BUNDLE">/etc/ssl/certs/ca-certificates.crt</env>
+>             </destination>
+>         </destinations>
+>    ```
+>
+> 3. Open your `galaxyservers` group variables file and instruct `galaxyproject.galaxy` to install the Pulsar configuration file:
+>
+>    > ### {% icon comment %} Note
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already defined `galaxy_config_templates`. If this is the case, be sure to **merge the changes in this step with your existing playbook**.
+>    {: .comment}
+>
+>    {% raw %}
+>    ```yaml
+>    galaxy_config_templates:
+>      - src: templates/galaxy/config/pulsar_app.yml.j2
+>        dest: "{{ galaxy_config_dir }}/pulsar_app.yml"
+>    ```
+>    {% endraw %}
+>
+>    Addiitionally, you will need to set the `galaxy_infrastructure_url` config option:
+>
+>    {% raw %}
+>    ```yaml
+>    galaxy_config:
+>      galaxy:
+>        # ... existing configuration options in the `galaxy` section ...
+>        galaxy_infrastructure_url: "https://{{ inventory_hostname }}/"
+>    ```
+>    {% endraw %}
+>
+>    > ### {% icon details %} Detail: Infrastructure URL/Callback
+>    > Galaxy must be made aware of the randomly selected port Docker has assigned after the GxIT begins operating, in order to update the proxy map. By default, this is done by writing a JSON file in the job directory. This method does not work with Pulsar since Pulsar uses a different job directory from the Galaxy job directory. As a result, Pulsar jobs use the `callback` method configured in the previous step to make a request to Galaxy's API, the URL for which is set in `galaxy_infrastructure_url`.
+>    {: .details}
+>
+> 4. Run the playbook:
+>
+>    ```
+>    ansible-playbook galaxy.yml
+>    ```
+>
+{: .hands_on}
+
+Once the playbook run is complete and your Galaxy server has restarted, run the EtherCalc Interactive Tool again.
+
+> ### {% icon question %} Question
+>
+> Once EtherCalc is running, check the mounts of its container. What do you observe?
+>
+> > ### {% icon solution %} Solution
+> >
+> > ```console
+> > $ docker inspect $(docker ps -q) | jq '.[0].HostConfig.Binds'
+> > [
+> >   "/srv/galaxy/jobs/_interactive/2:/srv/galaxy/jobs/_interactive/2:ro",                       # Per-job root dir
+> >   "/srv/galaxy/jobs/_interactive/2/tool_files:/srv/galaxy/jobs/_interactive/2/tool_files:ro", # EtherCalc tool wrapper parent dir
+> >   "/srv/galaxy/jobs/_interactive/2/outputs:/srv/galaxy/jobs/_interactive/2/outputs:rw",       # Job outputs dir
+> >   "/srv/galaxy/jobs/_interactive/2/working:/srv/galaxy/jobs/_interactive/2/working:rw",       # Job working (cwd) dir
+> >   "/srv/galaxy/server/tool-data:/srv/galaxy/server/tool-data:ro"                              # Galaxy reference data dir
+> > ]
+> > ```
+> >
+> > Of note, the user data directory, `/data`, is no longer mounted in the container!
+> >
+> {: .solution }
+>
+{: .question }
+
+# Final Notes
+
+As mentioned at the beginning of this tutorial, Galaxy Interactive Tools are a relatively new and rapidly evolving feature. At the time of writing, there is no official documentation for Interactive Tools. Please watch the [Galaxy Release Notes][galaxy-release-notes] for updates, changes, new documentation, and bug fixes.
+
+[galaxy-release-notes]: https://docs.galaxyproject.org/en/master/releases/index.html
