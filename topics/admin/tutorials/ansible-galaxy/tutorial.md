@@ -204,9 +204,9 @@ To proceed from here it is expected that:
 
 ## Requirements
 
-We have codified all of the dependencies you will need into a yaml file that `ansible-galaxy` can install
+We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
 
-> ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
+> ### {% icon hands_on %} Hands-on: Installing roles
 >
 > 1. Create a new directory `galaxy` in your home folder, and `cd` into that directory
 >
@@ -239,7 +239,30 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
-> 4. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. Remember, if you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
+> 4. Inspect the contents of the newly created `roles` directory in your working directory.
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Configuration files
+>
+> 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/latest/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
+>
+>    > ```ini
+>    > [defaults]
+>    > interpreter_python = /usr/bin/python3
+>    > inventory = hosts
+>    > retry_files_enabled = false
+>    > ```
+>
+>    There is an additional useful option that you might want to add to your `ansible.cfg` file if you are connecting over SSH:
+>
+>    > ```ini
+>    > [ssh_connection]
+>    > pipelining = true
+>    > ```
+>
+>    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
+>
+> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. Remember, if you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -249,16 +272,13 @@ We have codified all of the dependencies you will need into a yaml file that `an
 >    > >
 >    > > Your hostname is probably different
 >    > >
->    > > ```yaml
+>    > > ```ini
 >    > > [galaxyservers]
 >    > > training-0.example.org ansible_connection=local
 >    > > ```
 >    > >
 >    > {: .solution}
 >    {: .question}
->
-> 5. Inspect the contents of the newly created `roles` directory in your working directory.
->
 {: .hands_on}
 
 ## PostgreSQL
@@ -322,7 +342,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 > 3. Run the playbook:
 >
 >    ```
->    ansible-playbook -i hosts galaxy.yml
+>    ansible-playbook galaxy.yml
 >    ```
 >
 >    > ### {% icon comment %} Comment: When running Ansible
@@ -404,7 +424,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_create_user`         | `true`                                    | Instruct the role to create a Galaxy user
 >    `galaxy_separate_privileges` | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
 >    `galaxy_manage_paths`        | `true`                                    | Instruct thre role to create the needed directories.
->    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout:all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
 >    `galaxy_commit_id`           | `release_20.01`                           | The git reference to check out, which in this case is the branch for Galaxy Release 20.01
@@ -605,7 +625,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 5. Run the playbook.
 >
 >    ```
->    ansible-playbook -i hosts galaxy.yml
+>    ansible-playbook galaxy.yml
 >    ```
 >
 > 6. Explore what has been set up for you.
@@ -628,40 +648,6 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 5. `uwsgi --yaml ../config/galaxy.yml`
 > 6. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
-
-### A brief aside: Reduce repetitive typing
-
-No system administrator likes reptitive tasks, and throughout these Ansible-based tutorials, we will be running the playbook repeatedly. So far this has been done with:
-
-```console
-$ ansible-playbook -i hosts <playbook>.yml
-```
-
-However, the inventory file, `hosts`, never changes. The `-i` option can be eliminated.
-
-> ### {% icon hands_on %} Simplifying the command line with ansible.cfg
->
-> You can save having to type the `-i` flag by creating an `ansible.cfg` file (next to your playbook) with the following contents:
->
-> ```ini
-> [defaults]
-> inventory = hosts
-> ```
->
-> There is an additional useful option that you might want to add to your `ansible.cfg` file if you are connecting over SSH:
->
-> ```ini
-> [ssh_connection]
-> pipelining = true
-> ```
->
-> Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
->
-> ```ini
-> [galaxyservers]
-> your.host.name ansible_connection=local
-> ```
-{: .details}
 
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up SystemD which will manage the Galaxy processes!
 
