@@ -136,7 +136,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    ```
 >
-> 5. Run the playbook (`ansible-playbook -i hosts galaxy.yml`)
+> 5. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 {: .hands_on}
 
