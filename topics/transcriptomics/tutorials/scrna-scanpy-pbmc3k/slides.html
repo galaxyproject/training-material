@@ -4,71 +4,77 @@ logo: "GTN"
 title: "Clustering 3K PBMCs with Scanpy"
 zenodo_link: ''
 questions:
-  - "What is metatranscriptomics"
-  - "Which pathways are potentially contributing to dental caries?"
+  - "What are the 6 main steps of scRNA-seq?"
+  - "What kind of variation can confound an analysis?"
 objectives:
-  - "Learn some background knowledge about microbiome"
-  - "Understand metatranscriptomics"
-  - "Familiarize yourself with KEGG terminology"
-  - "Understand how network(pathway) analysis works"
+  - "Learn the main stages of an scRNA-seq analysis"
+  - "Understand the methods and concepts underlying scRNA-seq"
 time_estimation: 1H
 key_points:
-  - "Analyzing differential expression for (meta)transcriptomics data"
-  - "Validating the p-value distribution of the differential expression analysis"
-  - "Finding the most differentially expressed subnetwork in a gene functional network using Heinz"
-  - "Interpreting the pinpointed subnetwork"
+  - "Understanding the purpose of barcoding"
+  - "Knowing the difference between hard and soft clustering"
+  - "A KNN graph can be generated from a count matrix."
+  - "Community clustering can be generated from a KNN graph."
+  - "Interpreting scRNA-seq plots"
 contributors:
   - mtekman
 
 ---
 
-# Single Cell RNA Pre-processing
+### Single Cell RNA Pre-processing
 
+.image-100[![fig0](../../images/scrna_workflow_upper.png)]
+
+
+???
 - Barcoding and (de-)multiplexing
 - Quantification
 
+---
+
+### Single Cell RNA Downstream Analysis
+
+.image-100[![fig0](../../images/scrna_workflow_lower.png)]
+
+???
+1. Filtering
+1. Normalising
+   * Confounder Removal
+1. Dimension Reduction
+1. Clustering
+   * Annotation
 
 ---
 
-# Barcoding Cells
+### Barcoding Cells
 
-.center[![fig1](../../images/scrna_pbb_barcodes_add.svg)]
-
----
-
-# Single Cell RNA Downstream Analysis
-
-- Filtering
-- Normalising
-  - Confounder Removal
-- Dimension Reduction
-- Clustering
-- Annotation
+.image-100[![fig1](../../images/scrna_pbb_barcodes_add.svg)]
 
 ---
 
-# Filtering: Cell and Gene
 
-.center[![fig2](../../images/raceid_libsize.svg)]
+### Filtering: Cell and Gene
 
----
-
-# Normalisation: Technical Variation
-
-.center[![fig3](../../images/raceid_technical_variation.svg)]
+.image-50[![fig2](../../images/raceid_libsize.svg)]
 
 ---
 
-# Normalisation: Biological Variation
+### Normalisation: Technical Variation
 
-
-.center[![fig4](../../images/raceid_cellcycle.svg)]
+.image-50[![fig3](../../images/raceid_technical_variation.svg)]
 
 ---
 
-# DimRed: Relatedness of Cells
+### Normalisation: Biological Variation
 
-.center[![fig5](../../images/scrna_knn.svg)]
+
+.image-50[![fig4](../../images/raceid_cellcycle.svg)]
+
+---
+
+### DimRed: Relatedness of Cells
+
+.image-50[![fig5](../../images/scrna_knn.svg)]
 
 
 ???
@@ -77,9 +83,9 @@ Build a KNN graph from distance matrix:
 
 ---
 
-# DimRed: Projection
+### DimRed: Projection
 
-.center[![fig6](../../images/raceid_dimred.svg)]
+.image-50[![fig6](../../images/raceid_dimred.svg)]
 
 - Can use tSNE, PCA, UMAP
 
@@ -87,15 +93,15 @@ Build a KNN graph from distance matrix:
 
 ### Community Clustering: Louvain
 
-.center[![fig7](../../images/commgraph1.svg)]
+.image-50[![fig7](../../images/commgraph1.svg)]
 
 Aim: Maximise internal links and minimise external links
 
 ---
 
-# Community Clustering: Louvain
+### Community Clustering: Louvain
 
-.center[![fig8](../../images/commgraph2.svg)]
+.image-50[![fig8](../../images/commgraph2.svg)]
 
 * Randomly pick a cell and try to place it in a neighbour's cluster
   * Accept if *Internal:External* increases
@@ -103,14 +109,14 @@ Aim: Maximise internal links and minimise external links
 
 ---
 
-# Cell Type: Identifying Cluster Types
+### Cell Type: Identifying Cluster Types
 
 .pull-left[![fig9](../../images/singlecellplot3.png)]
 .pull-right[![fig10](../../images/singlecellplot4.png)]
 
 ---
 
-# Clustering: Hard vs Soft
+### Clustering: Hard vs Soft
 
 .pull-left[
 ![fig11](../../images/singlecellplot3.png)
@@ -137,16 +143,23 @@ Why? Why would there be clusters so close to one another?
 
 ---
 
-# Continuous Phenotypes:
+### Continuous Phenotypes:
 
-.center[![fig13](../../images/raceid_contpheno.svg)]
+.image-50[![fig13](../../images/raceid_contpheno.svg)]
 
 * Cells aren't discrete, they transition
 * Continuously changing over time from a less mature type to more mature type
 
+
 ---
 
-## Interactive Environments: live.usegalaxy.eu
+### What is Differential Expression in scRNA-seq?
+
+
+
+---
+
+### Interactive Environments: live.usegalaxy.eu
 
 
 <video style="width:100%;height:auto" controls>
@@ -156,7 +169,7 @@ Why? Why would there be clusters so close to one another?
 
 ---
 
-## Test
+### Test
 
 CellxGene
 
