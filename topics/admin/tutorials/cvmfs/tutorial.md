@@ -195,7 +195,7 @@ Examples of data include:
 * Mutation Annotation Format (`.maf`) files
 * SAMTools FASTA indexes (`.fai`)
 
-Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, "Galaxy Installation with Ansible". The hands-on below will use the Galaxy Project Ansible role to configure everything.
+Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}). The hands-on below will use the Galaxy Project Ansible role to configure everything.
 
 > ### {% icon hands_on %} Hands-on: Configuring Galaxy to use CVMFS
 >
