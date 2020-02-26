@@ -4,7 +4,7 @@ logo: "GTN"
 title: "Clustering 3K PBMCs with Scanpy"
 zenodo_link: ''
 questions:
-  - "What are the 6 main steps of scRNA-seq?"
+  - "What are the main steps of scRNA-seq?"
   - "What kind of variation can confound an analysis?"
 objectives:
   - "Learn the main stages of an scRNA-seq analysis"
@@ -23,18 +23,20 @@ contributors:
 
 ### Single Cell RNA Pre-processing
 
-.image-100[![fig0](../../images/scrna_workflow_upper.png)]
-
+![fig01](../../images/scrna_preproc.svg)
 
 ???
-- Barcoding and (de-)multiplexing
-- Quantification
+1. Barcode Extraction
+1. Mapping
+1. Gene Annotation
+1. Batch count matrices
+
 
 ---
 
 ### Single Cell RNA Downstream Analysis
 
-.image-100[![fig0](../../images/scrna_workflow_lower.png)]
+![fig10](../../images/scrna_downstream.svg)
 
 ???
 1. Filtering
@@ -44,37 +46,37 @@ contributors:
 1. Clustering
    * Annotation
 
+
 ---
 
 ### Barcoding Cells
 
-.image-100[![fig1](../../images/scrna_pbb_barcodes_add.svg)]
+![fig1](../../images/scrna_pbb_barcodes_add.svg)
 
 ---
 
-
 ### Filtering: Cell and Gene
 
-.image-50[![fig2](../../images/raceid_libsize.svg)]
+![fig2](../../images/raceid_libsize.svg)
 
 ---
 
 ### Normalisation: Technical Variation
 
-.image-50[![fig3](../../images/raceid_technical_variation.svg)]
+![fig3](../../images/raceid_technical_variation.svg)
 
 ---
 
 ### Normalisation: Biological Variation
 
 
-.image-50[![fig4](../../images/raceid_cellcycle.svg)]
+![fig4](../../images/raceid_cellcycle.svg)
 
 ---
 
-### DimRed: Relatedness of Cells
+### Dimension Reduction: Relatedness of Cells
 
-.image-50[![fig5](../../images/scrna_knn.svg)]
+![fig5](../../images/scrna_knn.svg)
 
 
 ???
@@ -83,43 +85,48 @@ Build a KNN graph from distance matrix:
 
 ---
 
-### DimRed: Projection
+### Dimension Reduction: Projection
 
-.image-50[![fig6](../../images/raceid_dimred.svg)]
+![fig6](../../images/raceid_dimred.svg)
 
+???
 - Can use tSNE, PCA, UMAP
 
 ---
 
 ### Community Clustering: Louvain
 
-.image-50[![fig7](../../images/commgraph1.svg)]
-
 Aim: Maximise internal links and minimise external links
+
+![fig7](../../images/commgraph1.svg)
+
 
 ---
 
 ### Community Clustering: Louvain
 
-.image-50[![fig8](../../images/commgraph2.svg)]
+Pick a cell, place in neighbour, and accept if *internal:external* increases 
 
-* Randomly pick a cell and try to place it in a neighbour's cluster
-  * Accept if *Internal:External* increases
-  * Reject and pick another
+
+![fig8](../../images/commgraph2.svg)
+
 
 ---
 
 ### Cell Type: Identifying Cluster Types
 
-.pull-left[![fig9](../../images/singlecellplot3.png)]
-.pull-right[![fig10](../../images/singlecellplot4.png)]
+.left-column50[.image-100[![fig9](../../images/singlecellplot3.png)]]
+.left-column50[.image-100[![fig10](../../images/singlecellplot4.png)]]
 
 ---
 
 ### Clustering: Hard vs Soft
 
 .pull-left[
-![fig11](../../images/singlecellplot3.png)
+
+<br />
+
+.image-100[![fig11](../../images/singlecellplot3.png)]
 
 *Hard*
   * Big spaces between clusters
@@ -130,7 +137,7 @@ Aim: Maximise internal links and minimise external links
 --
 
 .pull-right[
-![fig12](../../images/10xdata.png)
+.image-100[![fig12](../../images/10xdata.png)]
 
 *Soft*
   * Clusters bleed into one another
@@ -145,38 +152,35 @@ Why? Why would there be clusters so close to one another?
 
 ### Continuous Phenotypes:
 
-.image-50[![fig13](../../images/raceid_contpheno.svg)]
+.image-100[![fig13](../../images/raceid_contpheno.svg)]
 
+???
 * Cells aren't discrete, they transition
+
 * Continuously changing over time from a less mature type to more mature type
-
-
----
-
-### What is Differential Expression in scRNA-seq?
-
 
 
 ---
 
 ### Interactive Environments: live.usegalaxy.eu
 
+<br/>
 
-<video style="width:100%;height:auto" controls>
+<video style="width:100%;height:auto;" controls>
     <source src="https://zenodo.org/record/3687100/files/live_cellxgene.mp4" />
 </video>
 
+???
+What is Differential Expression in scRNA-seq?
 
 ---
 
-### Test
-
-CellxGene
+### CellxGene Local Test
 
 * We can probe clusters to see how they are so differentially expressed
 
-> `pip3 install cellxgene`  
-> `cellxgene launch https://cellxgene-example-data.czi.technology/pbmc3k.h5ad`
+        pip3 install cellxgene
+        cellxgene launch https://cellxgene-example-data.czi.technology/pbmc3k.h5ad
 
 * Launch locally: http://127.0.0.1:5005
 
