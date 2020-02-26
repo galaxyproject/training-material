@@ -3,6 +3,10 @@ layout: tutorial_slides
 logo: "GTN"
 
 title: "Introduction to metatranscriptomics"
+questions:
+- "How to analyze metatranscriptomics data?"
+- "What information can be extracted of metatranscriptomics data?"
+- "How to assign taxa and function to the identified sequences?"
 contributors:
   - subinamehta
   - pratikdjagtap
@@ -58,8 +62,6 @@ contributors:
 .footnote[Batut et al Gigascience. 2018 7(6) doi: 10.1093/gigascience/giy057]
 
 ---
-
-## This tutorial
 
 - Quality Control
   - Assess Quality
@@ -144,6 +146,19 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 In this tutorial we start with some preprocessing steps
 
+![preprocessing workflow](../../images/metatranscriptomics/workflow_qc.png)
+
+---
+
+## Preprocessing: Tools
+
+In this tutorial we start with some preprocessing steps
+
+
+![preprocessing workflow](../../images/metatranscriptomics/workflow_qc_tools.png)
+
+
+???
 | Step | Tools |
 |:------|-------|
 |Quality Control reports &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | FastQC {% icon tool %} and MultiQC {% icon tool %} |
@@ -153,7 +168,7 @@ In this tutorial we start with some preprocessing steps
 
 ---
 
-### Qualty Reports: FastQC
+## Quality Reports: FastQC
 
 - Generate a web report with quality metrics of your FastQ file
 
@@ -163,7 +178,7 @@ In this tutorial we start with some preprocessing steps
 
 ---
 
-### Quality Reports: FastQC
+## Quality Reports: FastQC
 
 - Many different QC plots
 - Example: Per-base sequence Quality plot
@@ -180,7 +195,7 @@ In this tutorial we start with some preprocessing steps
 
 ---
 
-### Quality Reports: FastQC
+## Quality Reports: FastQC
 
 - Many more plots
 - See [QC tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) for more information
@@ -190,7 +205,7 @@ In this tutorial we start with some preprocessing steps
 
 ---
 
-### Quality Reports: MultiQC
+## Quality Reports: MultiQC
 
 .pull-left[
 - Combine multiple FastQC reports into one report
@@ -206,7 +221,7 @@ In this tutorial we start with some preprocessing steps
 
 ---
 
-### Read Trimming and Filtering: Cutadapt
+## Read Trimming and Filtering: Cutadapt
 
 - Trim low-quality bases from reads
 - Filter reads based on length, mean quality score, ..
@@ -221,7 +236,7 @@ These are some examples of ways to trim and filter data, but many more are possi
 
 ---
 
-### SortMeRNA
+## SortMeRNA
 
 .pull-left[
 
@@ -240,7 +255,7 @@ These are some examples of ways to trim and filter data, but many more are possi
 
 ---
 
-### FastQ interlace
+## FastQ interlace
 
 - Paired-end data often comes in two separate FastQ files
 - One file with *forward* reads, one with *reverse* reads
@@ -251,7 +266,7 @@ These are some examples of ways to trim and filter data, but many more are possi
 
 ---
 
-### FastQ interlace
+## FastQ interlace
 
 - Some tools require a single **interlaced** FastQ file
 - Galaxy has tools for **interlacing** and **deinterlacing** FastQ files
@@ -335,7 +350,7 @@ About the caveat: The theoretical problem is that we quantify species abundance 
 
 ---
 
-## HUMAnN2
+## HUMAnN2 {% icon tool %}
 
 - Profiles presence/absence and abundance of microbial community
 - Efficiently characterizes microbial metabolic pathways
