@@ -148,7 +148,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 
 > ### {% icon tip %} Certificate issues
 >
-> If your Galaxy instance is served via the HTTPS protocol (as it should!), ephemeris will use the [requests](https://requests.readthedocs.io) Python library to encrypt the communication with Galaxy. Therefore, if your Galaxy uses a self-signed SSL certificate, `shed-tools` may fail with a `CERTIFICATE_VERIFY_FAILED` error.
+> If your Galaxy instance is served via the HTTPS protocol (as it should be!), ephemeris will use the [requests](https://requests.readthedocs.io) Python library to encrypt the communication with Galaxy. Therefore, if your Galaxy uses a self-signed SSL certificate, `shed-tools` may fail with a `CERTIFICATE_VERIFY_FAILED` error.
 >
 > Under Ubuntu, you can allow the use of the unrecognized certificate as follows:
 > 1. Get hold of the Certificate Authority (CA) certificate used to sign your Galaxy SSL certificate. For a [Galaxy Admin Training](https://github.com/galaxyproject/dagobah-training) course, this is usually the [Fake LE Root X1 certificate](https://letsencrypt.org/certs/fakelerootx1.pem).
