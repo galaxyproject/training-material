@@ -218,7 +218,7 @@
   "name": "Hands-on for 'Reference Data with CVMFS' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/cvmfs/tutorial.html",
   "timeRequired": "PT1H",
-  "description": "The objectives are:\n - Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices\n - Use an ansible playbook for all of the above.\n\n",
+  "description": "The objectives are:\n - Have an understanding of what CVMFS is and how it works\n - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository\n - Configure your Galaxy to use these reference genomes and indices\n - Use an Ansible playbook for all of the above.\n\n",
   "coursePrerequisites": [
     {
       "@type": "Course",
@@ -340,7 +340,7 @@
             <li><p>Configure your Galaxy to use these reference genomes and indices</p>
 </li>
             
-            <li><p>Use an ansible playbook for all of the above.</p>
+            <li><p>Use an Ansible playbook for all of the above.</p>
 </li>
             
             </ul>
@@ -561,7 +561,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 24, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 26, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -600,7 +600,7 @@
 
 <p>A slideshow presentation on this subject can be found <a href="slides.html">here</a>. More details on the use<span class="notranslate">galaxy</span>.org (<span class="notranslate">Galaxy</span> Main’s) reference data setup and CVMFS system can be found <a href="https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data">here</a></p>
 
-<p>There are two sections to this exercise. The first shows you how to use ansible to setup and configure CVMFS for <span class="notranslate">Galaxy</span>. The second shows you how to do everything manually. It is recommended that you use the ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.</p>
+<p>There are two sections to this exercise. The first shows you how to use Ansible to setup and configure CVMFS for <span class="notranslate">Galaxy</span>. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.</p>
 
 <p>If you really want to perform all these tasks manually, go <a href="#cvmfs-and-galaxy-without-ansible">here</a>, otherwise just follow along.</p>
 
@@ -609,7 +609,7 @@
 
 <ol id="markdown-toc">
   <li><a href="#ansible-cvmfs-and-galaxy" id="markdown-toc-ansible-cvmfs-and-galaxy">Ansible-CVMFS and <span class="notranslate">Galaxy</span></a>    <ol>
-      <li><a href="#installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible" id="markdown-toc-installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible">Installing and configuring <span class="notranslate">Galaxy</span>’s CVMFS reference data with ansible</a></li>
+      <li><a href="#installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible" id="markdown-toc-installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible">Installing and configuring <span class="notranslate">Galaxy</span>’s CVMFS reference data with Ansible</a></li>
       <li><a href="#exploring-the-cvmfs-installation" id="markdown-toc-exploring-the-cvmfs-installation">Exploring the CVMFS Installation</a></li>
       <li><a href="#configuring-galaxy-to-use-the-cvmfs-references" id="markdown-toc-configuring-galaxy-to-use-the-cvmfs-references">Configuring <span class="notranslate">Galaxy</span> to use the CVMFS references.</a></li>
     </ol>
@@ -656,11 +656,11 @@
 
 <p>You can browse the contents of <code class="highlighter-rouge">data.<span class="notranslate">galaxy</span>project.org</code> at the <a href="http://datacache.galaxyproject.org/">datacache</a>.</p>
 
-<h2 id="installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible">Installing and configuring <span class="notranslate">Galaxy</span>’s CVMFS reference data with ansible</h2>
+<h2 id="installing-and-configuring-galaxys-cvmfs-reference-data-with-ansible">Installing and configuring <span class="notranslate">Galaxy</span>’s CVMFS reference data with Ansible</h2>
 
-<p>Luckily for us, the <span class="notranslate">Galaxy</span> Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our <span class="notranslate">Galaxy</span> server, we will use the ansible role for CVMFS written by the <span class="notranslate">Galaxy</span> Project. Firstly, we need to install the role and then write a playbook for using it.</p>
+<p>Luckily for us, the <span class="notranslate">Galaxy</span> Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our <span class="notranslate">Galaxy</span> server, we will use the Ansible role for CVMFS written by the <span class="notranslate">Galaxy</span> Project. Firstly, we need to install the role and then write a playbook for using it.</p>
 
-<p>If the terms “ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the ansible introduction tutorial</a></p>
+<p>If the terms “Ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a></p>
 
 <blockquote class="tip">
   <h3 id="tip-tip-running-ansible-on-your-remote-machine"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running Ansible on your remote machine</h3>
@@ -678,18 +678,20 @@
     <li>
       <p>In your working directory, add the CVMFS role to your <code class="highlighter-rouge">requirements.yml</code></p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.2.8</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Install the requirements with <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code>:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> role install -p roles -r requirements.yml
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file.</p>
+      <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+
+      <p><br /></p>
 
       <p>The variables available in this role are:</p>
 
@@ -730,30 +732,34 @@
         </tbody>
       </table>
 
-      <p>But, luckily for us, the <span class="notranslate">Galaxy</span> Project CVMFS role has a lot of defaults for these variables which we can use by just setting <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_cvmfs_repos_enabled</code> to true. We will also set the <code class="highlighter-rouge">cvmfs_quota_limit</code> to something sensible as we have relatively small disks on our instances (2000MB).</p>
+      <p><br /></p>
+
+      <p>But, luckily for us, the <span class="notranslate">Galaxy</span> Project CVMFS role has a lot of defaults for these variables which we can use by just setting <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_cvmfs_repos_enabled</code> to <code class="highlighter-rouge">config-repo</code>. We will also set the <code class="highlighter-rouge">cvmfs_quota_limit</code> to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.</p>
+
+      <p><br /></p>
 
       <p>Add the following lines to your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="c1"># CVMFS vars</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># CVMFS vars</span>
 <span class="na">cvmfs_role</span><span class="pi">:</span> <span class="s">client</span>
-<span class="na"><span class="notranslate">galaxy</span>_cvmfs_repos_enabled</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">cvmfs_quota_limit</span><span class="pi">:</span> <span class="m">2000</span>
+<span class="na"><span class="notranslate">galaxy</span>_cvmfs_repos_enabled</span><span class="pi">:</span> <span class="s">config-repo</span>
+<span class="na">cvmfs_quota_limit</span><span class="pi">:</span> <span class="m">500</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and edit a new playbook which uses the CVMFS role, name it <code class="highlighter-rouge">cvmfs_playbook.yml</code></p>
+      <p>Add the new role to the list of roles under the <code class="highlighter-rouge">roles</code> key in your playbook, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">roles</span><span class="pi">:</span>
+    <span class="c1"># ... existing roles ...</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook cvmfs_playbook.yml
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -797,7 +803,7 @@
 
 <h2 id="configuring-galaxy-to-use-the-cvmfs-references">Configuring <span class="notranslate">Galaxy</span> to use the CVMFS references.</h2>
 
-<p>Now that we have mounted the cvmfs repository we need to tell <span class="notranslate">Galaxy</span> how to find it and use it.</p>
+<p>Now that we have mounted the CVMFS repository we need to tell <span class="notranslate">Galaxy</span> how to find it and use it.</p>
 
 <p>There are two primary directories in the reference data repository:</p>
 
@@ -852,13 +858,7 @@
 
   <ol>
     <li>
-      <p>Edit the <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and add a <code class="highlighter-rouge">tool_data_table_config_path</code> entry under the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config:</code> section in the <code class="highlighter-rouge">groupvars/<span class="notranslate">galaxy</span>servers.yml</code> file.</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="s">...</span>
-    <span class="s">tool_data_table_config_path</span><span class="pi">:</span> <span class="s">/cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml</span>
-</code></pre></div>      </div>
+      <p>Edit the <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and add a <code class="highlighter-rouge">tool_data_table_config_path</code> entry under the <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> key of the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> section in the <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file. This new entry should be a list containing the paths to both <code class="highlighter-rouge">tool_data_table_conf.xml</code> files referenced above.</p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -868,42 +868,28 @@
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div>          </div>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
+    <span class="na">tool_data_table_config_path</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">/cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml</span>
+      <span class="pi">-</span> <span class="s">/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml</span>
+</code></pre></div>          </div>
 
         </blockquote>
 
       </blockquote>
     </li>
     <li>
-      <p>Because we want to alter some <span class="notranslate">Galaxy</span> settings now, we need to add the <span class="notranslate">Galaxy</span> role to our playbook.</p>
-
-      <p>Add <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to the <code class="highlighter-rouge">roles</code> in our <code class="highlighter-rouge">cvmfs_playbook.yml</code> file.</p>
-
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
-  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
-    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-</code></pre></div>      </div>
-
-      <blockquote class="comment">
-        <h3 id="comment-ansible-heads-up"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Heads-up</h3>
-        <p>If you’ve set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, you will have created a <em>handler</em> for restarting <span class="notranslate">Galaxy</span> (its name is set in the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code> option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!</p>
-      </blockquote>
+      <p>Re-run the playbook (<code class="highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>)</p>
     </li>
     <li>
-      <p>Re-run the CVMFS playbook (<code class="highlighter-rouge">ansible-playbook cvmfs_playbook.yml</code>)</p>
-    </li>
-    <li>
-      <p>Restart <span class="notranslate">Galaxy</span></p>
-    </li>
-    <li>
-      <p>In your <span class="notranslate">Galaxy</span> interface, open the <code class="highlighter-rouge">bwa</code>, <code class="highlighter-rouge">bwa-mem</code> or <code class="highlighter-rouge">Bowtie2</code> tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!</p>
+      <p>In your <span class="notranslate">Galaxy</span> interface, open the <strong>BWA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, <strong>BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or <strong>Bowtie2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!</p>
 
       <p><img src="../../images/available_genomes.png" alt="available_genomes.png" /></p>
     </li>
     <li>
-      <p>Login to <span class="notranslate">Galaxy</span> as the admin user, and go to <strong>Admin → Local Data → View Tool Data Table Entries → bwa_mem indexes</strong></p>
+      <p>Login to <span class="notranslate">Galaxy</span> as the admin user, and go to <strong>Admin → Data Tables → bwa_mem indexes</strong></p>
 
       <p><img src="../../images/bwa_mem_indices.png" alt="bwa_mem_indices.png" /></p>
     </li>
@@ -927,7 +913,7 @@
 
   <ol>
     <li>
-      <p>On your remote machine, we need to first install the Cern software apt repo and then the cvmfs client and config utility:</p>
+      <p>On your remote machine, we need to first install the Cern software apt repo and then the CVMFS client and config utility:</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt <span class="nb">install </span>lsb-release
 wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
@@ -939,7 +925,7 @@ wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Now we need to run the cvmfs setup script.</p>
+      <p>Now we need to run the CVMFS setup script.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>cvmfs_config setup
 </code></pre></div>      </div>
@@ -961,12 +947,12 @@ wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
 
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_REPOSITORIES="data.<span class="notranslate">galaxy</span>project.org"
 CVMFS_HTTP_PROXY="DIRECT"
-CVMFS_QUOTA_LIMIT="4000"
+CVMFS_QUOTA_LIMIT="500"
 CVMFS_CACHE_BASE="/srv/cvmfs/cache"
 CVMFS_USE_GEOAPI=yes
 </code></pre></div>      </div>
 
-      <p>This tells cvmfs to mount the <span class="notranslate">Galaxy</span> reference data repository and use a specific location for the cache which is limited to 4GB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to.</p>
+      <p>This tells CVMFS to mount the <span class="notranslate">Galaxy</span> reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to.</p>
     </li>
     <li>
       <p>Create a <code class="highlighter-rouge">/etc/cvmfs/domain.d/<span class="notranslate">galaxy</span>project.org.conf</code> file with the following contents:</p>
@@ -974,7 +960,7 @@ CVMFS_USE_GEOAPI=yes
       <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_SERVER_URL="http://cvmfs1-tacc0.<span class="notranslate">galaxy</span>project.org/cvmfs/@fqrn@;http://cvmfs1-iu0.<span class="notranslate">galaxy</span>project.org/cvmfs/@fqrn@;http://cvmfs1-psu0.<span class="notranslate">galaxy</span>project.org/cvmfs/@fqrn@;http://<span class="notranslate">galaxy</span>.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.<span class="notranslate">galaxy</span>project.eu/cvmfs/@fqrn@"
 </code></pre></div>      </div>
 
-      <p>This is a list of the available tier1 servers that have this repo. Note there is one in Penn State. We will most likely be connecting to this one.</p>
+      <p>This is a list of the available stratum 1 servers that have this repo.</p>
     </li>
     <li>
       <p>Create a <code class="highlighter-rouge">/etc/cvmfs/keys/data.<span class="notranslate">galaxy</span>project.org.pub</code> file with the following contents:</p>
@@ -1085,7 +1071,7 @@ owIDAQAB
     title = "Reference Data with CVMFS (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "24"
+    day = "26"
     url = "\url{/training-material/topics/admin/tutorials/cvmfs/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
