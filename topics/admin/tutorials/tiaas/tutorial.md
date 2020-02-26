@@ -148,6 +148,8 @@ TIaaS should be available now! The following routes on your server are now confi
 |:----|----|-----|
 |https://\<server\>/tiaas/new/ | Request a new TIaaS training | Instructors |
 |https://\<server\>/tiaas/admin/ | Approve and Manage requests | Admin |
+|https://\<server\>/tiaas/stats/ | Overall TIaaS statistics ([EU Stats](https://usegalaxy.eu/tiaas/stats/)) | Admins, Funding Agencies |
+|https://\<server\>/tiaas/calendar/ | Calendar of trainings ([EU Calendar](https://usegalaxy.eu/tiaas/calendar/))| Admins, Funding Agencies |
 |https://\<server\>/join-training/\<training-id\> | Join an TIaaS training | Participants |
 |https://\<server\>/join-training/\<training-id\>/status | Dashboard with job states of trainees.| Instructors|
 
