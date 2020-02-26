@@ -11,10 +11,13 @@ contributors:
 
 # What is uWSGI?
 
-- HTTP server
-- WSGI (Web Server Gateway Interface) client
-- Application framework
+- Python WSGI (Web Server Gateway Interface) application framework
+- Written in C
+- Forking application server
+- Optional HTTP server
 - Process manager
+
+...and the rest of the kitchen sink
 
 ---
 
@@ -23,27 +26,35 @@ contributors:
 - Galaxy is a Python web application without a web server
 - Implements standard Python WSGI
 - Some other application does the web serving
-- Technically we could use any HTTP/WSGI interface (traditionally [Python Paste](https://github.com/cdent/paste/))
+- Technically we could use any HTTP/WSGI interface
+  - Traditionally [Python Paste](https://github.com/cdent/paste/)
 
 ---
 
 # What is uWSGI used for?
 
-- In a production Galaxy server, to start, manage, and scale web workers
+.left[In a production Galaxy server:]
+- To start, manage, and scale web workers
 - Optionally, to start, manage, and scale job handlers
 
 ---
 
 # Why uWSGI?
 
+Because Python can't multithread.
+
 ![Python GIL](../../images/gil.png)
 
 .footnote[Image credit: [Dariusz Fryta](http://www.tivix.com/blog/lets-go-python/)]
+
+???
+Python can't multithread, but it can *multiprocess*.
 
 ---
 
 # Why uWSGI?
 
+- Fork many Galaxy server processes
 - Isolate job functions from web functions
 - Built in load balancing
 - Speak native high performance uWSGI protocol to nginx
