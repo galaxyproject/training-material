@@ -36,7 +36,14 @@ layout: base
 		{% assign maybe_ga = file.name | slice:-3,name_size %}
 		{% assign maybe_gxwf = file.name | slice:-9,name_size %}
 
+		{% if page.filter %}
 		{% if maybe_ga == ".ga" or maybe_gxwf == ".gxwf.yml" %}
+		<tr>
+			<td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
+			<td>{{ file.date | date: "%b %-d, %Y" }}</td>
+		</tr>
+		{% endif %}
+		{% else %}
 		<tr>
 			<td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
 			<td>{{ file.date | date: "%b %-d, %Y" }}</td>
