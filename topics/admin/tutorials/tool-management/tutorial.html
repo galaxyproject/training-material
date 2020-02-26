@@ -334,7 +334,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 24, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 26, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -490,6 +490,22 @@ pip install ephemeris
 
 </blockquote>
 
+<blockquote class="tip">
+  <h3 id="tip-certificate-issues"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Certificate issues</h3>
+
+  <p>If your <span class="notranslate">Galaxy</span> instance is served via the HTTPS protocol (as it should be!), ephemeris will use the <a href="https://requests.readthedocs.io">requests</a> Python library to encrypt the communication with <span class="notranslate">Galaxy</span>. Therefore, if your <span class="notranslate">Galaxy</span> uses a self-signed SSL certificate, <code class="highlighter-rouge">shed-tools</code> may fail with a <code class="highlighter-rouge">CERTIFICATE_VERIFY_FAILED</code> error.</p>
+
+  <p>Under Ubuntu, you can allow the use of the unrecognized certificate as follows:</p>
+  <ol>
+    <li>Get hold of the Certificate Authority (CA) certificate used to sign your <span class="notranslate">Galaxy</span> SSL certificate. For a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, this is usually the <a href="https://letsencrypt.org/certs/fakelerootx1.pem">Fake LE Root X1 certificate</a>.</li>
+    <li>Copy the CA certificate file into <code class="highlighter-rouge">/usr/local/share/ca-certificates/</code> with a <code class="highlighter-rouge">.crt</code> extension.</li>
+    <li>Run <code class="highlighter-rouge">update-ca-certificates</code> as root.</li>
+    <li>Execute <code class="highlighter-rouge">export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt</code>, as explained in <a href="https://requests.readthedocs.io/en/master/user/advanced/#ssl-cert-verification">requests docs</a>.</li>
+  </ol>
+
+  <p>Now you should be able to execute successfully the <code class="highlighter-rouge">shed-tools</code> commands.</p>
+</blockquote>
+
 <p>This provides an easy way to do a one-off installation of a tool, but is not very convenient if you want to install many tools.
 For that, you can install from a YAML file:</p>
 
@@ -643,7 +659,7 @@ For that, you can install from a YAML file:</p>
     title = "Ephemeris for Galaxy Tool Management (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "24"
+    day = "26"
     url = "\url{/training-material/topics/admin/tutorials/tool-management/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
