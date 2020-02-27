@@ -87,12 +87,12 @@ There are two sections to this exercise. The first shows you how to use Ansible 
 
 # Configuring Galaxy Interactive Tools using Ansible
 
-If the terms "Ansible," "role," and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({{ site.baseurl }}{% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({{ site.baseurl }}{% link topics/admin/tutorials/ansible/tutorial.md %}).
+If the terms "Ansible," "role," and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}).
 
-**This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.**
+**This section of the tutorial builds upon the work in the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, please ensure that you have completed that tutorial first.**
 
 > ### {% icon comment %} Ansible Best Practices
-> If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.
+> If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.
 {: .comment}
 
 ## Installing Ansible Roles
@@ -361,7 +361,7 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 
 ## Getting a Wildcard SSL Certificate
 
-During the [Galaxy Installation with Ansible]({{ site.baseurl }}{% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
+During the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
 
 In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`. Let's Encrypt wildcard certificates [can only be generated using the DNS-01 challenge method][lets-encrypt-faq], which works by issuing a [dynamic DNS][ddns] update to set the requested domain's `TXT` record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.
 
@@ -629,7 +629,7 @@ Two solutions are discussed in the [advanced sample job configuration][job-conf-
 1. Use the `outputs_to_working_directory` job configuration option, which allows you to mount datasets read-only: this prevents manipulation, but still allows GxIT users to read any dataset in your Galaxy server.
 2. Use [Pulsar][pulsar], Galaxy's remote job execution engine, to provide full job isolation: this avoids all access to Galaxy data, with the performance penalty of copying input dataset(s) to the job directory.
 
-Because we want to maintain dataset privacy, Pulsar is the better choice here. And in fact, we don't even need to set up a Pulsar server: because we only need Pulsar's input staging and isolation features, we can use [Embedded Pulsar][job-conf-pulsar-embedded], which runs a Pulsar server within the Galaxy application to perform these tasks. Embedded Pulsar can even interface with your distributed resource manager (aka cluster scheduler) of choice, as long as your Galaxy server and cluster both have access to a common filesystem (otherwise, you will need to use Pulsar in standalone mode; see the [Running Jobs on Remote Resources with Pulsar]({{ site.baseurl }}{% link topics/admin/tutorials/heterogeneous-compute/tutorial.md %}) tutorial).
+Because we want to maintain dataset privacy, Pulsar is the better choice here. And in fact, we don't even need to set up a Pulsar server: because we only need Pulsar's input staging and isolation features, we can use [Embedded Pulsar][job-conf-pulsar-embedded], which runs a Pulsar server within the Galaxy application to perform these tasks. Embedded Pulsar can even interface with your distributed resource manager (aka cluster scheduler) of choice, as long as your Galaxy server and cluster both have access to a common filesystem (otherwise, you will need to use Pulsar in standalone mode; see the [Running Jobs on Remote Resources with Pulsar]({% link topics/admin/tutorials/heterogeneous-compute/tutorial.md %}) tutorial).
 
 [pulsar]: https://github.com/galaxyproject/pulsar
 [job-conf-pulsar-embedded]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106
