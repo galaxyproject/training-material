@@ -124,6 +124,10 @@
     {
       "@type": "Person",
       "name": "Nicola Soranzo"
+    },
+    {
+      "@type": "Person",
+      "name": "Nate Coraor"
     }
   ],
   "contributor": [
@@ -134,6 +138,10 @@
     {
       "@type": "Person",
       "name": "Nicola Soranzo"
+    },
+    {
+      "@type": "Person",
+      "name": "Nate Coraor"
     }
   ],
   "about": [
@@ -182,6 +190,17 @@ Press `P` again to switch presenter notes off
 
 ---
 
+# Galactic Database
+
+.left[Galaxy uses a database for:]
+* Galaxy objects and all their relations (users, histories, datasets, workflows)
+* Job state persistence, job dispatching
+
+.left[Galaxy does not use a database for:]
+* Dataset **contents**: files on disk
+
+---
+
 # Defaults
 
 * Galaxy uses the [SQLAlchemy](http://www.sqlalchemy.org/) database abstraction layer. This allows for different database servers to be plugged in.
@@ -199,56 +218,38 @@ Press `P` again to switch presenter notes off
   * Supported by SQLAlchemy but Galaxy is not tested against it.
 
 ---
+# Sizing
+
+Galaxy rarely deletes from the database, most objects are *marked* deleted.
+
+Allocate at least 20 GB of disk to start, 50+ GB if expanding would be difficult.
+
+8-16 GB memory should be sufficient.
+
+Recommended: Run PostgreSQL on a different server for resource isolation.
+
+---
 # Configuration
 
 `database_connection` is specified as a [database URL](http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls) in `galaxy.yml`
-  * Default SQLite: `sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE`
-  * Local PostgreSQL (socket) `postgresql://&lt;user&gt;:&lt;password&gt;@/&lt;db_name&gt;?host=/var/run/postgresql`
-  * Network PostgreSQL: `postgresql://&lt;user&gt;:&lt;password&gt;@&lt;host&gt;:5432/&lt;db_name&gt;`
+  * Default SQLite:  
+      `sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE`
+
+  * Local PostgreSQL (socket):  
+       `postgresql:///&lt;db_name&gt;[?host=/var/run/postgresql]`
+
+  * Network PostgreSQL:  
+      `postgresql://[user][:password]@&lt;host&gt;[:5432]/&lt;db_name&gt;`
 
 ---
-# Tuning - Pool
+# New Database
 
-If the server logs errors about not having enough database pool connections.
-* `database_engine_option_pool_size: 5` (10 on Main)
-* `database_engine_option_max_overflow: 10` (20 on Main)
-
-???
-Values for Main are available at https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/group_vars/galaxyservers/vars.yml
-
----
-# Tuning - Server-side cursors
-
-If large database query results are causing memory or response time issues in the Galaxy process, leave it on server.
-* `database_engine_option_server_side_cursors: False` (True on Main, PostgreSQL only, recommended)
-
----
-# Tuning - Slow query logging
-
-Queries slower than this threshold (in s) will be logged at debug level
-
-`slow_query_log_threshold: 0` (5000 on Main)
-
----
-# Tuning - TS install database
-
-Galaxy can track Tool Shed data in a separate DB.
-
-```ini
-install_database_connection: sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE
-```
-
-This allows:
-* Bootstrapping fresh Galaxy instances with prebuilt/tested tool sets
-* Atomic installation/rollback (esp. with SQLite)
-
-???
-All other database config options but prefixed with `install_` are also available.
+On first startup with an empty database, Galaxy creates its schema
 
 ---
 # Migrations
 
-Changes in the Galaxy DB model are captured incrementally in the form of [atomic scripts](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/model/migrate/versions).
+Changes in the Galaxy DB model (when upgrading Galaxy) are captured incrementally in the form of [atomic scripts](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/model/migrate/versions).
 
 Each script can both upgrade and downgrade a DB.
 
@@ -258,12 +259,66 @@ $ ./manage_db.sh downgrade --version=132
 ```
 
 ---
+# Tuning - Pool
+
+If the server logs errors about not having enough database pool connections.
+
+| Galaxy config option                  | default value | usegalaxy.org value |
+| ------                                | ------------- | ------------------- |
+| `database_engine_option_pool_size`    | `5`           | `10`                |
+| `database_engine_option_max_overflow` | `10`          | `20`                |
+
+???
+Values for usegalaxy.org are available at https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/group_vars/all/galaxy_config_vars.yml
+
+---
+# Tuning - Server-side cursors
+
+If large database query results are causing memory or response time issues in the Galaxy process, leave it on server
+(PostgreSQL only, recommended).
+
+| Galaxy config option                         | default value | usegalaxy.org value |
+| ------                                       | ------------- | ------------------- |
+| `database_engine_option_server_side_cursors` | `false`       | `true`              |
+
+---
+# Tuning - Slow query logging
+
+Queries slower than this threshold (in s) will be logged at debug level.
+
+| Galaxy config option       | default value | usegalaxy.org value |
+| ------                     | ------------- | ------------------- |
+| `slow_query_log_threshold` | `0`           | `2`                 |
+
+---
+# Tuning - TS install database
+
+Galaxy can track Tool Shed data in a separate DB.
+
+| Galaxy config option          | default value                  | usegalaxy.org value |
+| ------                        | -------------                  | ------------------- |
+| `install_database_connection` | value of `database_connection` | SQLite DB in CVMFS  |
+
+.left[This allows:]
+* Bootstrapping fresh Galaxy instances with prebuilt/tested tool sets
+* Atomic installation/rollback (esp. with SQLite: backup and restore DB file)
+
+???
+All other database config options but prefixed with `install_` are also available.
+
+---
+# Other Databases
+
+* The Reports app is hooked to the Galaxy DB to present data in useful format.
+* The Tool Shed app has its own database.
+
+---
 # Access through model
 
-Python script to access Galaxy's database layer **via the Galaxy models**.
+Python script to access Galaxy's database layer **via the Galaxy model**.
 
 ```console
-$ python -i scripts/db_shell.py
+(venv)$ python -i scripts/db_shell.py
 &gt;&gt;&gt; new_user = User('foo@example.org', 'secret')
 &gt;&gt;&gt; new_user.username = 'foo'
 &gt;&gt;&gt; sa_session.add(new_user)
@@ -275,10 +330,9 @@ $ python -i scripts/db_shell.py
 Need to be inside the Galaxy virtualenv for this to work
 
 ---
-# Other Databases
+# Useful queries
 
-* The Reports app is hooked to the Galaxy DB to present data in useful format.
-* The Tool Shed app has its own database.
+Captured in [gxadmin](/training-material/topics/admin/tutorials/gxadmin/slides.html) ([tutorial](/training-material/topics/admin/tutorials/gxadmin/tutorial.html))
 
 
 ---
@@ -291,7 +345,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 <div class="contributors-line">
 
 
-<a href="/training-material/hall-of-fame#martenson" class="contributor-badge"><img src="https://avatars.githubusercontent.com/martenson" alt="Martin Čech">Martin Čech</a>, <a href="/training-material/hall-of-fame#nsoranzo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>
+<a href="/training-material/hall-of-fame#martenson" class="contributor-badge"><img src="https://avatars.githubusercontent.com/martenson" alt="Martin Čech">Martin Čech</a>, <a href="/training-material/hall-of-fame#nsoranzo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>, <a href="/training-material/hall-of-fame#natefoo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>
 
 
 </div>
