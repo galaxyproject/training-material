@@ -270,6 +270,10 @@
     {
       "@type": "Person",
       "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Nicola Soranzo"
     }
   ],
   "contributor": [
@@ -288,6 +292,10 @@
     {
       "@type": "Person",
       "name": "Saskia Hiltemann"
+    },
+    {
+      "@type": "Person",
+      "name": "Nicola Soranzo"
     }
   ],
   "about": [
@@ -307,7 +315,7 @@
 
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame#hexylena" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>, <a href="/training-material/hall-of-fame#natefoo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame#slugger70" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
+<a href="/training-material/hall-of-fame#hexylena" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>, <a href="/training-material/hall-of-fame#natefoo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame#slugger70" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>, <a href="/training-material/hall-of-fame#shiltemann" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>, <a href="/training-material/hall-of-fame#nsoranzo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>
 
 </div>
 
@@ -428,6 +436,8 @@
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -476,7 +486,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 24, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 27, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -512,7 +522,7 @@
       <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
       <li><a href="#postgresql" id="markdown-toc-postgresql">PostgreSQL</a></li>
       <li><a href="#galaxy" id="markdown-toc-galaxy"><span class="notranslate">Galaxy</span></a></li>
-      <li><a href="#supervisord" id="markdown-toc-supervisord">Supervisord</a></li>
+      <li><a href="#systemd" id="markdown-toc-systemd">SystemD</a></li>
       <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
       <li><a href="#disaster-strikes-optional" id="markdown-toc-disaster-strikes-optional">Disaster Strikes! (Optional)</a></li>
       <li><a href="#keeping-galaxy-updated" id="markdown-toc-keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</a></li>
@@ -671,25 +681,31 @@ best practices and knowledge from previous admins codified for you.</p>
 <p>To proceed from here it is expected that:</p>
 
 <ol>
-  <li>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on your local machine
+  <li>
+    <p>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on the machine where you will install <span class="notranslate">Galaxy</span></p>
+
     <blockquote class="comment">
-      <h3 id="comment-comment-running-ansible-on-your-remote-machine"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Running Ansible on your remote machine</h3>
-      <p>It is possible to have Ansible installed on the remote machine and run it there as well. You will need to update your inventory file to pass <code class="highlighter-rouge">ansible_connection=local</code>. Be <strong>certain</strong> that the playbook that you’re building is stored somewhere safe like your user home directory. We will remove data at one point during this tutorial and would not want you to lose your progress.</p>
+      <h3 id="comment-comment-running-ansible-on-remote-machine"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Running Ansible on remote machine</h3>
+      <p>It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will <em>not</em> do that in this training.</p>
     </blockquote>
   </li>
   <li>Your <code class="highlighter-rouge">ansible</code> version is <code class="highlighter-rouge">&gt;=2.7</code>, you can check this by running <code class="highlighter-rouge">ansible --version</code></li>
   <li>You have an <a href="../ansible/tutorial.html#inventory-file">inventory file</a> with the VM or host specified where you will deploy <span class="notranslate">Galaxy</span>. We will refer to this group of hosts as “<span class="notranslate">galaxy</span>servers.”</li>
   <li>Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.</li>
-  <li>Your VM has <code class="highlighter-rouge">python2.7</code> installed.</li>
+  <li>
+    <p>Your VM has <code class="highlighter-rouge">python3</code> installed.</p>
+
+    <p>If you follow the official Ansible instructions to install Ansible on a blank machine, you will probably end up with py2 installed. You will need to install python3 in addition.</p>
+  </li>
   <li>In your inventory file, you have written the full DNS hostname that has been provided, and <strong>not</strong> <code class="highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
 </ol>
 
 <h2 id="requirements">Requirements</h2>
 
-<p>We have codified all of the dependencies you will need into a yaml file that <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code> can install</p>
+<p>We have codified all of the dependencies you will need into a YAML file that <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code> can install.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-minimal-galaxy-playbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Minimal <span class="notranslate">Galaxy</span> Playbook</h3>
+  <h3 id="hands_on-hands-on-installing-roles"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing roles</h3>
 
   <ol>
     <li>
@@ -699,21 +715,21 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Create a new file in your working directory called <code class="highlighter-rouge">requirements.yml</code> and include the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.8.4</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.9.5</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.nginx</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.6.0</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.6.4</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.1</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.2</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
   <span class="na">version</span><span class="pi">:</span> <span class="m">1.1</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">geerlingguy.pip</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.0</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.3.0</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">uchida.miniconda</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.3.0</span>
-<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/use<span class="notranslate">galaxy</span>-eu/ansible-role-supervisor</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>-eu.supervisor</span>
-<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">https://github.com/use<span class="notranslate">galaxy</span>-eu/ansible-certbot</span>
-  <span class="na">name</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>-eu.certbot</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.2</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.certbot</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.3</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -723,6 +739,37 @@ best practices and knowledge from previous admins codified for you.</p>
 </code></pre></div>      </div>
 
       <p>This will install all of the required modules for this training into the <code class="highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
+    </li>
+    <li>
+      <p>Inspect the contents of the newly created <code class="highlighter-rouge">roles</code> directory in your working directory.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configuration-files"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuration files</h3>
+
+  <ol>
+    <li>
+      <p>Create a <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) to <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html">configure settings</a> like the inventory file (and save ourselves some typing!), or the Python interpreter to use:</p>
+
+      <blockquote>
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
+<span class="py">interpreter_python</span> <span class="p">=</span> <span class="s">/usr/bin/python3</span>
+<span class="py">inventory</span> <span class="p">=</span> <span class="s">hosts</span>
+<span class="py">retry_files_enabled</span> <span class="p">=</span> <span class="s">false</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>There is an additional useful option that you might want to add to your <code class="highlighter-rouge">ansible.cfg</code> file if you are connecting over SSH:</p>
+
+      <blockquote>
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[ssh_connection]</span>
+<span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
     </li>
     <li>
       <p>Create the <code class="highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. Remember, if you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="highlighter-rouge">ansible_connection=local</code>.</p>
@@ -737,18 +784,14 @@ best practices and knowledge from previous admins codified for you.</p>
 
           <p>Your hostname is probably different</p>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">[</span><span class="nv"><span class="notranslate">galaxy</span>servers</span><span class="pi">]</span>
-<span class="s">training-0.example.org ansible_connection=local</span>
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[<span class="notranslate">galaxy</span>servers]</span>
+<span class="err">training-0.example.org</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
 </code></pre></div>          </div>
 
         </blockquote>
       </blockquote>
     </li>
-    <li>
-      <p>Inspect the contents of the newly created <code class="highlighter-rouge">roles</code> directory in your working directory.</p>
-    </li>
   </ol>
-
 </blockquote>
 
 <h2 id="postgresql">PostgreSQL</h2>
@@ -766,7 +809,14 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Create and edit <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and add some variables to configure PostgreSQL:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">postgresql_objects_users</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1"># Python 3 support</span>
+<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">/usr/bin/python3 -m virtualenv</span> <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot, use<span class="notranslate">galaxy</span>_eu.tiaas2, <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
+<span class="na">certbot_virtualenv_package_name</span><span class="pi">:</span> <span class="s">python3-virtualenv</span>    <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot</span>
+<span class="na">pip_package</span><span class="pi">:</span> <span class="s">python3-pip</span>                               <span class="c1"># geerlingguy.pip</span>
+
+<span class="c1"># PostgreSQL</span>
+<span class="na">postgresql_objects_users</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
 <span class="na">postgresql_objects_databases</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
@@ -777,7 +827,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Create and open <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> which will be our playbook. Add the following:</p>
 
       <ul>
-        <li>Add a pre-task to install the necessary dependency, <code class="highlighter-rouge">python-psycopg2</code></li>
+        <li>Add a pre-task to install the necessary dependency, <code class="highlighter-rouge">python3-psycopg2</code></li>
         <li>A role for <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code>. This will handle the installation of PostgreSQL.</li>
         <li>A role for <code class="highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="highlighter-rouge">become</code>/<code class="highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
       </ul>
@@ -790,12 +840,13 @@ best practices and knowledge from previous admins codified for you.</p>
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
       <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">python-psycopg2'</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">python3-psycopg2'</span>
   <span class="na">roles</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
@@ -810,7 +861,7 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
 
       <blockquote class="comment">
@@ -854,31 +905,32 @@ best practices and knowledge from previous admins codified for you.</p>
 <p>The configuration is quite simple thanks to the many sensible defaults that are provided in the Ansible roles.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-minimal-galaxy-playbook-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Minimal <span class="notranslate">Galaxy</span> Playbook</h3>
+  <h3 id="hands_on-hands-on-minimal-galaxy-playbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Minimal <span class="notranslate">Galaxy</span> Playbook</h3>
 
   <ol>
     <li>
       <p>Open <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> with your text editor and set the following:</p>
 
       <ul>
-        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">make</code>, and <code class="highlighter-rouge">python-virtualenv</code></li>
-        <li>Add the roles <code class="highlighter-rouge">geerlingguy.pip</code>, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="highlighter-rouge">uchida.miniconda</code> (in this order) at the end</li>
+        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">make</code>, and <code class="highlighter-rouge">virtualenv</code>.</li>
+        <li>Add the roles <code class="highlighter-rouge">geerlingguy.pip</code>, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="highlighter-rouge">uchida.miniconda</code> run as the <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
       </ul>
 
       <blockquote class="question">
         <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <p>How does your final configuration look?</p>
+        <p>How does the updated playbook look?</p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
       <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python3-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">virtualenv'</span><span class="pi">]</span>
   <span class="na">roles</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
@@ -886,7 +938,9 @@ best practices and knowledge from previous admins codified for you.</p>
       <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
     <span class="pi">-</span> <span class="s">geerlingguy.pip</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-    <span class="pi">-</span> <span class="s">uchida.miniconda</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">uchida.miniconda</span>
+      <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">become_user</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
 </code></pre></div>          </div>
 
         </blockquote>
@@ -925,7 +979,7 @@ best practices and knowledge from previous admins codified for you.</p>
           <tr>
             <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_layout</code></td>
             <td><code class="highlighter-rouge">root-dir</code></td>
-            <td>This enables the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> <span class="notranslate">Galaxy</span> deployment layout:all of the code, configuration, and data folders will live beneath <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>.</td>
+            <td>This enables the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> <span class="notranslate">Galaxy</span> deployment layout: all of the code, configuration, and data folders will live beneath <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>.</td>
           </tr>
           <tr>
             <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></td>
@@ -939,8 +993,8 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
           <tr>
             <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></td>
-            <td><code class="highlighter-rouge">release_19.05</code></td>
-            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 19.05</td>
+            <td><code class="highlighter-rouge">release_20.01</code></td>
+            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 20.01</td>
           </tr>
           <tr>
             <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_style</code></td>
@@ -956,6 +1010,11 @@ best practices and knowledge from previous admins codified for you.</p>
             <td><code class="highlighter-rouge">miniconda_prefix</code></td>
             <td><code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code></td>
             <td>We will manually install conda as well. Normally <span class="notranslate">Galaxy</span> will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.</td>
+          </tr>
+          <tr>
+            <td><code class="highlighter-rouge">miniconda_version</code></td>
+            <td><code class="highlighter-rouge">4.6.14</code></td>
+            <td>Install a specific miniconda version, the latest one at the time of writing that was tested and working.</td>
           </tr>
         </tbody>
       </table>
@@ -974,9 +1033,9 @@ best practices and knowledge from previous admins codified for you.</p>
         <li><code class="highlighter-rouge">admin_users</code> to the email address you will use with this <span class="notranslate">Galaxy</span>.</li>
         <li><code class="highlighter-rouge">brand</code> to something fun!</li>
         <li><code class="highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="highlighter-rouge">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql</code>).</li>
-        <li><code class="highlighter-rouge">file_path</code> to a place to store data, <code class="highlighter-rouge">/data</code> for this lesson.</li>
+        <li><code class="highlighter-rouge">file_path</code> to a place to store data, <code class="highlighter-rouge">/data</code> is fine for this lesson which sets up a single-node <span class="notranslate">Galaxy</span>. If you have separate compute machines, this will normally need to be storage shared between the <span class="notranslate">Galaxy</span> node and compute nodes.</li>
         <li><code class="highlighter-rouge">check_migrate_tools</code> must be set to <code class="highlighter-rouge">false</code> due to a new installation of <span class="notranslate">Galaxy</span>.</li>
-        <li><code class="highlighter-rouge">shed_tool_data_dir</code> to <code class="highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
+        <li><code class="highlighter-rouge">tool_data_path</code> to <code class="highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
       </ol>
 
       <blockquote class="question">
@@ -988,10 +1047,14 @@ best practices and knowledge from previous admins codified for you.</p>
           <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1"># python3 support</span>
+<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">/usr/bin/python3 -m virtualenv</span> <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot, use<span class="notranslate">galaxy</span>_eu.tiaas2, <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
+<span class="na">certbot_virtualenv_package_name</span><span class="pi">:</span> <span class="s">python3-virtualenv</span>    <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot</span>
+<span class="na">pip_package</span><span class="pi">:</span> <span class="s">python3-pip</span>                               <span class="c1"># geerlingguy.pip</span>
+
 <span class="c1"># PostgreSQL</span>
 <span class="na">postgresql_objects_users</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-    <span class="na">password</span><span class="pi">:</span> <span class="no">null</span>
 <span class="na">postgresql_objects_databases</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
     <span class="na">owner</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
@@ -1003,10 +1066,11 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="na"><span class="notranslate">galaxy</span>_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
 <span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span></span>
 <span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
-<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_19.05</span>
+<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.01</span>
 <span class="na"><span class="notranslate">galaxy</span>_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
 <span class="na"><span class="notranslate">galaxy</span>_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">miniconda_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_tool_dependency_dir</span><span class="nv"> </span><span class="s">}}/_conda"</span>
+<span class="na">miniconda_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4.6.14"</span>
 
 <span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
@@ -1015,7 +1079,7 @@ best practices and knowledge from previous admins codified for you.</p>
     <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
     <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
     <span class="na">check_migrate_tools</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="na">shed_tool_data_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/tool-data"</span>
+    <span class="na">tool_data_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/tool-data"</span>
 </code></pre></div>          </div>
 
         </blockquote>
@@ -1050,7 +1114,6 @@ So it is not always easy to tell what variables will be set, or what their final
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
   <span class="s">...</span>
   <span class="na">uwsgi</span><span class="pi">:</span>
-    <span class="c1"># Default values</span>
     <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
     <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
     <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
@@ -1059,6 +1122,8 @@ So it is not always easy to tell what variables will be set, or what their final
     <span class="na">static-map</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">/static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue</span>
       <span class="pi">-</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
+      <span class="pi">-</span> <span class="s">/favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico</span>
+    <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
     <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
     <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
@@ -1070,7 +1135,6 @@ So it is not always easy to tell what variables will be set, or what their final
       <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
     <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
-    <span class="c1"># Our additions</span>
     <span class="na">mule</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
       <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
@@ -1085,10 +1149,13 @@ So it is not always easy to tell what variables will be set, or what their final
         <blockquote class="solution">
           <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PostgreSQL</span>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1"># python3 support</span>
+<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">virtualenv</span>
+
+<span class="c1"># PostgreSQL</span>
 <span class="na">postgresql_objects_users</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-    <span class="na">password</span><span class="pi">:</span> <span class="no">null</span>
 <span class="na">postgresql_objects_databases</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
     <span class="na">owner</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
@@ -1100,10 +1167,11 @@ So it is not always easy to tell what variables will be set, or what their final
 <span class="na"><span class="notranslate">galaxy</span>_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
 <span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span></span>
 <span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">,</span> <span class="nv">home</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_root</span><span class="nv"> </span><span class="s">}}"</span><span class="pi">}</span>
-<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_19.05</span>
+<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.01</span>
 <span class="na"><span class="notranslate">galaxy</span>_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
 <span class="na"><span class="notranslate">galaxy</span>_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">miniconda_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_tool_dependency_dir</span><span class="nv"> </span><span class="s">}}/_conda"</span>
+<span class="na">miniconda_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4.6.14"</span>
 
 <span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
@@ -1112,9 +1180,8 @@ So it is not always easy to tell what variables will be set, or what their final
     <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
     <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
     <span class="na">check_migrate_tools</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="na">shed_tool_data_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/tool-data"</span>
+    <span class="na">tool_data_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/tool-data"</span>
   <span class="na">uwsgi</span><span class="pi">:</span>
-    <span class="c1"># Default values</span>
     <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
     <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
     <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
@@ -1123,6 +1190,8 @@ So it is not always easy to tell what variables will be set, or what their final
     <span class="na">static-map</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">/static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue</span>
       <span class="pi">-</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
+      <span class="pi">-</span> <span class="s">/favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico</span>
+    <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
     <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
     <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
@@ -1134,7 +1203,6 @@ So it is not always easy to tell what variables will be set, or what their final
       <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
     <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
-    <span class="c1"># Our additions</span>
     <span class="na">mule</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
       <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
@@ -1148,7 +1216,7 @@ So it is not always easy to tell what variables will be set, or what their final
     <li>
       <p>Run the playbook.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1180,96 +1248,66 @@ So it is not always easy to tell what variables will be set, or what their final
   </ol>
 </blockquote>
 
-<h3 id="a-brief-aside-reduce-repetitive-typing">A brief aside: Reduce repetitive typing</h3>
-
-<p>No system administrator likes reptitive tasks, and throughout these Ansible-based tutorials, we will be running the playbook repeatedly. So far this has been done with:</p>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ansible-playbook <span class="nt">-i</span> hosts &lt;playbook&gt;.yml
-</code></pre></div></div>
-
-<p>However, the inventory file, <code class="highlighter-rouge">hosts</code>, never changes. The <code class="highlighter-rouge">-i</code> option can be eliminated.</p>
+<p><span class="notranslate">Galaxy</span> is now configured with an admin user, a database, and a place to store data. Additionally we’ve immediately configured the mules for production <span class="notranslate">Galaxy</span> serving. So we’re ready to set up SystemD which will manage the <span class="notranslate">Galaxy</span> processes!</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-simplifying-the-command-line-with-ansiblecfg"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Simplifying the command line with ansible.cfg</h3>
+  <h3 id="hands_on-hands-on-optional-launching-uwsgi-by-hand-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: (Optional) Launching uWSGI by hand</h3>
 
-  <p>You can save having to type the <code class="highlighter-rouge">-i</code> flag by creating an <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) with the following contents:</p>
-
-  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
-<span class="py">inventory</span> <span class="p">=</span> <span class="s">hosts</span>
-</code></pre></div>  </div>
-
-  <p>There is an additional useful option that you might want to add to your <code class="highlighter-rouge">ansible.cfg</code> file if you are connecting over SSH:</p>
-
-  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[ssh_connection]</span>
-<span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
-</code></pre></div>  </div>
-
-  <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
-
+  <ol>
+    <li>Switch user to <span class="notranslate">Galaxy</span> account (<code class="highlighter-rouge">sudo -iu <span class="notranslate">galaxy</span></code>)</li>
+    <li>Change directory into <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server</code></li>
+    <li>Activate virtualenv (<code class="highlighter-rouge">. ../venv/bin/activate</code>)</li>
+    <li><code class="highlighter-rouge">uwsgi --yaml ../config/<span class="notranslate">galaxy</span>.yml</code></li>
+    <li>Access at port <code class="highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
+  </ol>
 </blockquote>
 
-<h2 id="supervisord">Supervisord</h2>
+<h2 id="systemd">SystemD</h2>
 
-<p>Launching <span class="notranslate">Galaxy</span> by hand is not a good use of your time, so we will immediately switch to a process manager for that, <a href="http://supervisord.org/">supervisord</a>. If you’re familiar with systemd, supervisord does many of the same things. We use supervisord instead of the native init system as it supports some of <span class="notranslate">Galaxy</span>’s use cases better and was fully featured long before SystemD became common.</p>
+<p>Launching <span class="notranslate">Galaxy</span> by hand is not a good use of your time, so we will immediately switch to a process manager for that, <a href="https://freedesktop.org/wiki/Software/systemd/">SystemD</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-supervisord"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Supervisord</h3>
+  <h3 id="hands_on-hands-on-systemd"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SystemD</h3>
 
   <ol>
     <li>
-      <p>Add the role <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>-eu.supervisor</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
+      <p>Add the role <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
     </li>
     <li>
-      <p>Supervisor defines <code class="highlighter-rouge">programs</code> which should be executed with additional metadata like whether or not they should be restarted, what user they should run as, etc. Just like SystemD or any other init system you may be familiar with. We will define a program for <span class="notranslate">Galaxy</span> which will directly invoke uWSGI, rather than <code class="highlighter-rouge">run.sh</code>, as <code class="highlighter-rouge">run.sh</code> does some extra tasks that are not needed in a true production environment. Supervisor communicates over a unix or tcp socket; we will use the unix socket without password authentication, instead of using user/group authentication. We will thus need to set a couple of variables to allow our <span class="notranslate">Galaxy</span> user to access this. Lastly, since we now define how the <span class="notranslate">Galaxy</span> processes will be managed, we can inform <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> how to automatically restart the server whenever it is changed.</p>
-
       <p>Add the following to the bottom of your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Automatically restart <span class="notranslate">Galaxy</span> by calling a handler named 'Restart</span>
-<span class="c1"># <span class="notranslate">Galaxy</span>', whenever the server changes.</span>
-<span class="na"><span class="notranslate">galaxy</span>_restart_handler_name</span><span class="pi">:</span> <span class="s">Restart <span class="notranslate">Galaxy</span></span>
-
-<span class="c1"># supervisord</span>
-<span class="na">supervisor_socket_user</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-<span class="na">supervisor_socket_chown</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-<span class="na">supervisor_programs</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-    <span class="na">state</span><span class="pi">:</span> <span class="s">present</span>
-    <span class="na">command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">uwsgi</span><span class="nv"> </span><span class="s">--yaml</span><span class="nv"> </span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/<span class="notranslate">galaxy</span>.yml"</span>
-    <span class="na">configuration</span><span class="pi">:</span> <span class="pi">|</span>
-      <span class="s">autostart=true</span>
-      <span class="s">autorestart=true</span>
-      <span class="s">startretries=1</span>
-      <span class="s">startsecs=10</span>
-      <span class="s">user=<span class="notranslate">galaxy</span></span>
-      <span class="s">umask=022</span>
-      <span class="s">directory={{ <span class="notranslate">galaxy</span>_server_dir }}</span>
-      <span class="s">environment=HOME={{ <span class="notranslate">galaxy</span>_mutable_data_dir }},VIRTUAL_ENV={{ <span class="notranslate">galaxy</span>_venv_dir }},PATH={{ <span class="notranslate">galaxy</span>_venv_dir }}/bin:%(ENV_PATH)s</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SystemD</span>
+<span class="na"><span class="notranslate">galaxy</span>_systemd_mode</span><span class="pi">:</span> <span class="s">mule</span>
+<span class="na"><span class="notranslate">galaxy</span>_zergpool_listen_addr</span><span class="pi">:</span> <span class="s">127.0.0.1:8080</span>
+<span class="na"><span class="notranslate">galaxy</span>_restart_handler_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Restart</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
 </code></pre></div>      </div>
 
-      <p>Here we’ve defined a <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> command that should be <code class="highlighter-rouge">present</code>. It will run the command <code class="highlighter-rouge">uwsgi ...</code> and is set to automatically start when supervisord starts and restart if it crashes, with 1 second between the retries. It will wait 10 seconds to see if the program has not crashed, and if it reaches this threshold it will be marked as <code class="highlighter-rouge">running</code>. It starts as the <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> user with a umask of <code class="highlighter-rouge">022</code> (files created will be world readable by default). Its working directory on startup is the root of the <span class="notranslate">Galaxy</span> (cloned) code, and will run with the defined environment variables set.</p>
+      <p>The last variable, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>, informs the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role that it should look for a handler with that name, and trigger it whenever changes are made to <span class="notranslate">Galaxy</span>’s configuration. Now we’ll define the handler:</p>
     </li>
     <li>
-      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use Supervisor to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/supervisorctl_module.html">supervisorctl Ansible module</a>. Handlers are structured just like tasks:</p>
+      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use SystemD to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/systemd_module.html">SystemD Ansible module</a>. Handlers are structured just like tasks:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
-  <span class="na">pre_tasks</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
-      <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python-virtualenv'</span><span class="pi">]</span>
-  <span class="na">handlers</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Restart <span class="notranslate">Galaxy</span></span>
-      <span class="na">supervisorctl</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-        <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span>
-  <span class="na">roles</span><span class="pi">:</span>
-    <span class="s">...</span>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ <span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -5,6 +5,11 @@</span>
+     - name: Install Dependencies
+       package:
+         name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
+<span class="gi">+  handlers:
++    - name: Restart <span class="notranslate">Galaxy</span>
++      systemd:
++        name: <span class="notranslate">galaxy</span>
++        state: restarted
+</span>   roles:
+     - <span class="notranslate">galaxy</span>project.postgresql
+     - role: natefoo.postgresql_objects
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>Log in and check the status with <code class="highlighter-rouge">supervisorctl status</code> (remember to change to the <span class="notranslate">Galaxy</span> user)</p>
+      <p>Log in and check the status with <code class="highlighter-rouge">sudo systemctl status <span class="notranslate">galaxy</span></code></p>
 
       <blockquote class="question">
         <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1281,22 +1319,32 @@ So it is not always easy to tell what variables will be set, or what their final
 
           <p>If everything went correctly you should see something like</p>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s"><span class="notranslate">galaxy</span>                  RUNNING   pid 2246972, uptime 0:02:00</span>
+          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ systemctl status <span class="notranslate">galaxy</span>
+● <span class="notranslate">galaxy</span>.service - <span class="notranslate">Galaxy</span>
+   Loaded: loaded (/etc/systemd/system/<span class="notranslate">galaxy</span>.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2019-11-20 17:11:11 UTC; 9s ago
+ Main PID: 20862 (uwsgi)
+    Tasks: 13 (limit: 4915)
+   Memory: 271.5M (limit: 32.0G)
+      CPU: 9.939s
+   CGroup: /system.slice/<span class="notranslate">galaxy</span>.service
+           ├─20862 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
+           ├─20897 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
+           ├─20903 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
+           └─20907 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
 </code></pre></div>          </div>
 
         </blockquote>
 
       </blockquote>
-
-      <p>Take a look at the supervisor configs that have been written in <code class="highlighter-rouge">/etc/supervisor</code> and <code class="highlighter-rouge">/etc/supervisor/conf.d</code>.</p>
     </li>
     <li>
       <p>Some things to note:</p>
 
       <ol>
         <li>Refreshing the page before <span class="notranslate">Galaxy</span> has restarted will hang until the process is ready, a nice feature of uWSGI</li>
-        <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="highlighter-rouge">supervisorctl restart <span class="notranslate">galaxy</span></code></li>
-        <li>You can use <code class="highlighter-rouge">supervisorctl tail -f <span class="notranslate">galaxy</span></code> and <code class="highlighter-rouge">supervisorctl tail -f <span class="notranslate">galaxy</span> stderr</code> to see the logs of <span class="notranslate">Galaxy</span></li>
+        <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="highlighter-rouge">systemctl restart <span class="notranslate">galaxy</span></code></li>
+        <li>You can use <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
       </ol>
     </li>
   </ol>
@@ -1324,7 +1372,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
 <ul>
   <li>PostgreSQL running</li>
-  <li><span class="notranslate">Galaxy</span> running (managed by supervisord)</li>
+  <li><span class="notranslate">Galaxy</span> running (managed by SystemD)</li>
 </ul>
 
 <p>When we first configured <span class="notranslate">Galaxy</span>, we used the setting <code class="highlighter-rouge">http: 0.0.0.0:8080</code>, which instructed uWSGI to handle the serving of <span class="notranslate">Galaxy</span>, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.</p>
@@ -1338,23 +1386,23 @@ So it is not always easy to tell what variables will be set, or what their final
 
   <ol>
     <li>
+      <p>Add the role <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code> to the end of your playbook and have it run as root.</p>
+    </li>
+    <li>
       <p>Edit your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we will update the line that <code class="highlighter-rouge">http: 0.0.0.0:8080</code> to be <code class="highlighter-rouge">socket: 127.0.0.1:8080</code>. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- group_vars/<span class="notranslate">galaxy</span>servers.yml.orig
 </span><span class="gi">+++ group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -29,7 +29,7 @@</span>
-     shed_tool_data_dir: "/tool-data"
+     check_migrate_tools: false
+     tool_data_path: "/tool-data"
    uwsgi:
-     # Default values
 <span class="gd">-    http: 0.0.0.0:8080
 </span><span class="gi">+    socket: 127.0.0.1:8080
 </span>     buffer-size: 16384
      processes: 1
      th<span class="notranslate">reads</span>: 4
 </code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Add the role <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code> to the end of your playbook and have it run as root.</p>
     </li>
     <li>
       <p>We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by <a href="https://certbot.eff.org/">certbot</a>.</p>
@@ -1387,8 +1435,7 @@ So it is not always easy to tell what variables will be set, or what their final
   <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span></span>
 <span class="na">nginx_conf_http</span><span class="pi">:</span>
   <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">1g</span>
-<span class="na">nginx_remove_default_vhost</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">nginx_ssl_role</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>-eu.certbot</span>
+<span class="na">nginx_ssl_role</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.certbot</span>
 <span class="na">nginx_conf_ssl_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/fullchain.pem</span>
 <span class="na">nginx_conf_ssl_certificate_key</span><span class="pi">:</span> <span class="s">/etc/ssl/user/privkey-nginx.pem</span>
 </code></pre></div>      </div>
@@ -1470,8 +1517,7 @@ So it is not always easy to tell what variables will be set, or what their final
 <span class="c1">#   - <span class="notranslate">galaxy</span></span>
 <span class="na">nginx_conf_http</span><span class="pi">:</span>
   <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">1g</span>
-<span class="na">nginx_remove_default_vhost</span><span class="pi">:</span> <span class="no">true</span>
-<span class="c1"># nginx_ssl_role: use<span class="notranslate">galaxy</span>-eu.certbot</span>
+<span class="c1"># nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot</span>
 <span class="c1"># nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem</span>
 <span class="c1"># nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem</span>
 </code></pre></div>        </div>
@@ -1644,7 +1690,7 @@ In a training setting there is no need to request certificates that will be trus
         <td>In our group variables, we define the path to <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code>, so <span class="notranslate">Galaxy</span> needs to have set those variables</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge">use<span class="notranslate">galaxy</span>-eu.supervisor</code></td>
+        <td><code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code></td>
         <td>This requires <span class="notranslate">Galaxy</span> to be configured + functional, or it will fail to start the handler. Additionally there are a couple of <span class="notranslate">Galaxy</span> variables used in the group vars.</td>
       </tr>
       <tr>
@@ -1748,7 +1794,7 @@ index ce17525..54d0746 100644
 
 <p>If you’ve been following along you should have a production-ready <span class="notranslate">Galaxy</span>, secured, everything ready to go.</p>
 
-<p>If you missed any steps, you can compare against a reference <a href="./playbook.txt">playbook.yml</a>, and <a href="./galaxyservers.txt">group_vars/<span class="notranslate">galaxy</span>servers.yml</a></p>
+<p>If you missed any steps, you can compare against the <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/ansible-galaxy">reference files</a>.</p>
 
 
                     
@@ -1773,7 +1819,7 @@ index ce17525..54d0746 100644
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Helena Rasche, Nate Coraor, Simon Gladman, Saskia Hiltemann, 2020 <b>Galaxy Installation with Ansible (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Helena Rasche, Nate Coraor, Simon Gladman, Saskia Hiltemann, Nicola Soranzo, 2020 <b>Galaxy Installation with Ansible (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1788,11 +1834,11 @@ index ce17525..54d0746 100644
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{admin-ansible-galaxy,
-    author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann",
+    author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "24"
+    day = "27"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1851,7 +1897,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche, Nate Coraor, Simon Gladman, Saskia Hiltemann)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche, Nate Coraor, Simon Gladman, Saskia Hiltemann, Nicola Soranzo)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on

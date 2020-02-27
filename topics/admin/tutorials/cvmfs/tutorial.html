@@ -438,6 +438,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -483,6 +485,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -678,15 +682,16 @@
     <li>
       <p>In your working directory, add the CVMFS role to your <code class="highlighter-rouge">requirements.yml</code></p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.2.8</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Install the requirements with <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code>:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> role install -p roles -r requirements.yml
-</code></pre></div>      </div>
+      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ansible-<span class="notranslate">galaxy</span> role install -p roles -r requirements.yml
+</span></code></pre></div>      </div>
     </li>
     <li>
       <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>

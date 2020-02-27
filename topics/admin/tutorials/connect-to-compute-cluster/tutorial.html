@@ -474,6 +474,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -555,6 +557,8 @@
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -597,7 +601,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 24, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 27, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -658,6 +662,11 @@ be taken into consideration when choosing where to run jobs and what parameters 
 </blockquote>
 
 <h2 id="installing-slurm">Installing Slurm</h2>
+
+<blockquote class="comment">
+  <h3 id="comment-ansible-best-practices"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Best Practices</h3>
+  <p>If you’ve set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, you will have created a <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group in your inventory file, <code class="highlighter-rouge">hosts</code>, and placed your variables in <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>. Although for the purposes of this tutorial, the <span class="notranslate">Galaxy</span> server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.</p>
+</blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-slurm"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing Slurm</h3>
@@ -941,6 +950,12 @@ sleep </span>30
     <span class="nt">&lt;/destinations&gt;</span>
 <span class="nt">&lt;/job_conf&gt;</span>
 </code></pre></div>      </div>
+
+      <blockquote class="comment">
+        <h3 id="comment-note"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
+
+        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="highlighter-rouge">job_conf.xml</code> file, as well as defined <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> and set the <code class="highlighter-rouge">job_config_file</code> option in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
+      </blockquote>
     </li>
     <li>
       <p>Next, we need to configure the Slurm job runner. First, we instruct <span class="notranslate">Galaxy</span>’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="highlighter-rouge">id</code>, <code class="highlighter-rouge">type</code>, and <code class="highlighter-rouge">load</code> attributes. Then we add a basic destination with no parameters, <span class="notranslate">Galaxy</span> will do the equivalent of submitting a job as <code class="highlighter-rouge">sbatch /path/to/job_script.sh</code>. Note that we also need to set a default destination now that more than one destination is defined. In a <code class="highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="highlighter-rouge">runner</code> attribute must match the <code class="highlighter-rouge">id</code> of a defined plugin:</p>
@@ -964,16 +979,20 @@ sleep </span>30
     <li>
       <p>Inform <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="highlighter-rouge">job_conf.xml</code> to reside in your group variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
+
+<span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
+    <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
+    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
-      <p>And then deploy the new config file using the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var in your group vars</p>
+      <p>And then deploy the new config file using the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var in your group vars:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
+  <span class="c1"># ... possible existing config file definitions</span>
   <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config['<span class="notranslate">galaxy</span>']['job_config_file']</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
       <p>The variable <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> is an array of hashes, each with <code class="highlighter-rouge">src</code> and <code class="highlighter-rouge">dest</code>, the files from src will be copied to dest on the server. <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_template_files</code> exist to template files out.</p>
@@ -1643,7 +1662,7 @@ sleep </span>30
     title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "24"
+    day = "27"
     url = "\url{/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
