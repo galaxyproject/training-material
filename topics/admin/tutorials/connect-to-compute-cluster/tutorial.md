@@ -54,6 +54,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 ## Installing Slurm
 
+> ### {% icon comment %} Ansible Best Practices
+> If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.
+{: .comment}
+
 > ### {% icon hands_on %} Hands-on: Installing Slurm
 >
 > 1. Create (if needed) and edit a file in your working directory called `requirements.yml` and include the following contents:
@@ -309,6 +313,12 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >        </destinations>
 >    </job_conf>
 >    ```
+>
+>    > ### {% icon comment %} Note
+>    >
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
+>    {: .comment}
+>
 > 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
 >    ```diff
@@ -330,19 +340,27 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 > 4. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside in your group variables:
 >
+>    {% raw %}
 >    ```yaml
+>    galaxy_job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>
 >    galaxy_config:
 >      galaxy:
->        job_config_file: {% raw %}"{{ galaxy_config_dir }}/job_conf.xml"{% endraw %}
+>        # ... existing configuration options in the `galaxy` section ...
+>        job_config_file: "{{ galaxy_job_config_file }}"
 >    ```
+>    {% endraw %}
 >
->    And then deploy the new config file using the `galaxy_config_files` var in your group vars
+>    And then deploy the new config file using the `galaxy_config_files` var in your group vars:
 >
+>    {% raw %}
 >    ```yaml
 >    galaxy_config_files:
+>      # ... possible existing config file definitions
 >      - src: files/galaxy/config/job_conf.xml
->        dest: {% raw %}"{{ galaxy_config['galaxy']['job_config_file'] }}"{% endraw %}
+>        dest: "{{ galaxy_job_config_file }}"
 >    ```
+>    {% endraw %}
 >
 >      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
 >
