@@ -1136,4 +1136,4 @@ When you've read the documentation and checked out the new features, you can the
 
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
 
-If you missed any steps, you can compare against the [reference files]({{ site.baseurl }}{{ page.dir }}workflows/).
+If you missed any steps, you can compare against the [reference files]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/admin/tutorials/ansible-galaxy).
