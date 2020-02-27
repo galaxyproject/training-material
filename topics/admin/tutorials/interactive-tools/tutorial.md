@@ -115,6 +115,7 @@ We will use several Ansible roles for this tutorial. In order to avoid repetetiv
 >    ```
 >    ansible-galaxy role install -p roles -r requirements.yml
 >    ```
+{: .hands_on}
 
 ## Installing Docker
 
@@ -251,19 +252,6 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >
 >    We have chosen to install Node.js using [nodeenv][] because the version in the training image's package manager is fairly old.
 >
->    > ### {% icon question %} Question
->    >
->    > {% raw %}
->    > Why is `"{{ galaxy_user.name }}"` specified instead of just the user `galaxy`?
->    > {% endraw %}
->    >
->    > > ### {% icon solution %} Solution
->    > > Duplicating values is never a good idea. If we needed to change the Galaxy user down the line or wanted to reuse this playbook on another host where the Galaxy username was different, we would have to change the value in multiple locations.
->    > >
->    > {: .solution }
->    >
->    {: .question}
->
 > 2. Add the new role to `galaxy.yml`:
 >
 >    ```yaml
@@ -344,11 +332,11 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 >        listen       *:443 ssl;
 >        # Match all requests for the interactive tools subdomain
 >        server_name  *.interactivetool.{{ inventory_hostname }};
->    
+>
 >        # Our log files will go here.
 >        access_log  /var/log/nginx/galaxy-gie-proxy-access.log;
 >        error_log   /var/log/nginx/galaxy-gie-proxy-error.log;
->    
+>
 >        # Proxy all requests to the GIE Proxy application
 >        location / {
 >            proxy_redirect off;
@@ -661,7 +649,7 @@ Because we want to maintain dataset privacy, Pulsar is the better choice here. A
 >    {% raw %}
 >    ```yaml
 >    ---
->  
+>
 >    # The path where per-job directories will be created
 >    staging_directory: "{{ galaxy_job_working_directory }}/_interactive"
 >
