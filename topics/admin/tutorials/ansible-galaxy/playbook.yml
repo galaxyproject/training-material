@@ -1,12 +1,13 @@
+---
 - hosts: galaxyservers
   become: true
   pre_tasks:
     - name: Install Dependencies
       package:
-        name: ['git', 'make', 'python-psycopg2', 'python-virtualenv']
+        name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
   handlers:
     - name: Restart Galaxy
-      supervisorctl:
+      systemd:
         name: galaxy
         state: restarted
   roles:
@@ -16,6 +17,8 @@
       become_user: postgres
     - geerlingguy.pip
     - galaxyproject.galaxy
-    - uchida.miniconda
-    - usegalaxy-eu.supervisor
+    - role: uchida.miniconda
+      become: true
+      become_user: galaxy
+    - usegalaxy_eu.galaxy_systemd
     - galaxyproject.nginx
