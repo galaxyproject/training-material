@@ -649,7 +649,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 6. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
-Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up SystemD which will manage the Galaxy processes!
+Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!
 
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
 >
@@ -660,11 +660,11 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 > 5. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
-## SystemD
+## systemd
 
-Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [SystemD](https://freedesktop.org/wiki/Software/systemd/).
+Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [systemd](https://freedesktop.org/wiki/Software/systemd/).
 
-> ### {% icon hands_on %} Hands-on: SystemD
+> ### {% icon hands_on %} Hands-on: systemd
 >
 > 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
@@ -672,7 +672,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    {% raw %}
 >    ```yaml
->    # SystemD
+>    # systemd
 >    galaxy_systemd_mode: mule
 >    galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    galaxy_restart_handler_name: "Restart Galaxy"
@@ -681,7 +681,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use SystemD to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [SystemD Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
 >
 >    ```diff
 >    --- galaxy.yml
@@ -759,7 +759,7 @@ Galaxy should now be accessible over port :8080, again try connecting to your VM
 With this we have:
 
 - PostgreSQL running
-- Galaxy running (managed by SystemD)
+- Galaxy running (managed by systemd)
 
 When we first configured Galaxy, we used the setting `http: 0.0.0.0:8080`, which instructed uWSGI to handle the serving of Galaxy, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.
 

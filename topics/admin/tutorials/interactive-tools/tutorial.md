@@ -283,15 +283,15 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 > > 2. Node.js version 10.13.0 was installed in to the venv
 > > 3. The proxy was cloned to `/srv/galaxy/gie-proxy/proxy`
 > > 4. The proxy's Node dependencies were installed to `/srv/galaxy/gie-proxy/proxy/node_modules` using the venv's `npm`
-> > 5. A SystemD service unit was installed at `/etc/systemd/system/galaxy-gie-proxy.service`
-> > 6. The SystemD daemon was reloaded to read this new service unit
+> > 5. A systemd service unit was installed at `/etc/systemd/system/galaxy-gie-proxy.service`
+> > 6. The systemd daemon was reloaded to read this new service unit
 > > 7. The service was set to start on boot and started
 > >
 > {: .solution }
 >
 {: .question}
 
-Because the proxy runs as a SystemD service, you can inspect the log of the service using `journalctl`. The service name is `galaxy-gie-proxy`:
+Because the proxy runs as a systemd service, you can inspect the log of the service using `journalctl`. The service name is `galaxy-gie-proxy`:
 
 ```console
 $ sudo journalctl -eu galaxy-gie-proxy

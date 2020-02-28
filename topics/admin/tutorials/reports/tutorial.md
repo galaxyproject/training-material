@@ -96,7 +96,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >
 >    {% raw %}
 >    ```yml
->    # SystemD
+>    # systemd
 >    galaxy_systemd_reports: true
 >      ....
 >    ```
