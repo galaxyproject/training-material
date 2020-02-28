@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/heterogeneous-compute/tutorial
 
 title: "Running Jobs on Remote Resources with Pulsar"
 questions:
