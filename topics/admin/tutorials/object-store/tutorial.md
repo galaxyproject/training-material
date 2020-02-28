@@ -84,7 +84,19 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    </object_store>
 >    ```
 >
-> 4. Add a `pre_task` to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/latest/modules/file_module.html), exactly like for the `/data` folder.
+> 4. Add a `pre_task` to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/latest/modules/file_module.html).
+>
+>    ```
+>        - name: Create the second storage directory
+>          file:
+>            owner: galaxy
+>            group: galaxy
+>            path: /data2
+>            state: directory
+>            mode: '0755'
+>    ```
+>
+>    We've hardcoded the user/group because creating a storage directory is unusual. In normal practice someone provides you with an NFS mount and you will simply point your Galaxy there.
 >
 > 5. Run the playbook and restart Galaxy
 >
