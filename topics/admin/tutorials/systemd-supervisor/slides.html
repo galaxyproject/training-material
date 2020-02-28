@@ -35,38 +35,7 @@ INI config format
 - `/etc/systemd/system` - User-defined service definitions
 
 ---
-# systemd - Service file
-
-```ini
-[Unit]
-Description=Supervisor process control system for UNIX
-Documentation=http://supervisord.org
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
-KillMode=process
-Restart=on-failure
-RestartSec=50s
-
-[Install]
-WantedBy=multi-user.target
-```
-
----
-# systemd - systemctl
-
-`systemctl` is the command line interface to systemd
-
-- `systemctl status <name>[.service]`
-- `systemctl <start|stop|restart|...> <name>[.service]`
-- `systemctl <enable|disable> <name>[.service]`
-
----
 # systemd - Galaxy service unit
-
 
 ```ini
 [Unit]
@@ -93,6 +62,15 @@ BlockIOAccounting=yes
 [Install]
 WantedBy=multi-user.target
 ```
+
+---
+# systemd - systemctl
+
+`systemctl` is the command line interface to systemd
+
+- `systemctl status <name>[.service]`
+- `systemctl <start|stop|restart|...> <name>[.service]`
+- `systemctl <enable|disable> <name>[.service]`
 
 ---
 # systemd - Galaxy service
