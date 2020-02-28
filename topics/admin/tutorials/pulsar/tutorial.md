@@ -81,7 +81,7 @@ We need to create a new ansible playbook to install Pulsar. We will be using a *
 >
 >    ```yaml
 >    - src: galaxyproject.pulsar
->      version: 1.0.0
+>      version: 1.0.1
 >    ```
 >
 > 2. Now install it with:
@@ -105,10 +105,7 @@ Then there are a lot of optional variables. They are listed here for information
 
  Variable Name                 | Description                                                                                        | Default
 ---------------                | -------------                                                                                      | ---
-`pulsar_pip_install`           | Set to `true` to get pulsar to be sourced from pip.                                                | `false`
 `pulsar_yaml_config`           | a YAML dictionary whose contents will be used to create Pulsar's `app.yml`                         |
-`pulsar_git_repo`              | Upstream git repository from which Pulsar should be cloned.                                        | https://github.com/galaxyproject/pulsar
-`pulsar_changeset_id`          | A changeset id, tag, branch, or other valid git identifier for which version of Pulsar to load     | `master`
 `pulsar_venv_dir`              | The role will create a virtualenv from which Pulsar will run                                       | `<pulsar_server_dir>/venv` if installing via pip, `<pulsar_server_dir>/.venv` if not.
 `pulsar_config_dir`            | Directory that will be used for Pulsar configuration files.                                        | `<pulsar_server_dir>/config` if installing via pip, `<pulsar_server_dir>` if not
 `pulsar_optional_dependencies` | List of optional dependency modules to install, depending on which features you are enabling.      | `None`
@@ -142,7 +139,6 @@ Some of the other options we will be using are:
 >    pulsar_venv_dir: /mnt/pulsar/venv
 >    pulsar_config_dir: /mnt/pulsar/config
 >    pulsar_staging_dir: /mnt/pulsar/staging
->    pulsar_pip_install: true
 >    pulsar_systemd: true
 >
 >    pulsar_host: 0.0.0.0
@@ -332,13 +328,18 @@ Now we will upload a small set of data to run bwa-mem with.
 >
 > 1. Upload the following files from zenodo.
 >
->    | File URL                                                 | filetype    |
->    | ----------                                               | ----------  |
->    | `https://zenodo.org/record/582600/files/mutant_R1.fastq` | fastqsanger |
->    | `https://zenodo.org/record/582600/files/mutant_R2.fastq` | fastqsanger |
->    | `https://zenodo.org/record/582600/files/wildtype.fna`    | fasta       |
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    ```
 >
-> 2. Now run the bwa-mem tool with the `wildtype.fna` file as the reference, and the two fastq files as the paired end reads. Leave everything default.
+> 2. **Map with BWA-MEM** {% icon tool %} with the following parameters
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference genome"*: `wildtype.fna`
+>    - *"Single or Paired-end reads"*: `Paired end`
+>    - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
+>    - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
 >
 >    As soon as you press *execute* Galaxy will send the job to the pulsar server. You can watch the log in Galaxy using:
 >
