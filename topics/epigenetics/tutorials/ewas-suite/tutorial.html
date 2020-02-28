@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>EWAS data analysis of 450k data</title>
+        <title>Infinium Human Methylation BeadChip</title>
         
             <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -29,7 +29,7 @@
         
         
         <meta name="description" content="DNA methylation is an epigenetic mechanism used by higher..." />
-        <meta property="og:title" content="Galaxy Training: EWAS data analysis of 450k data" />
+        <meta property="og:title" content="Galaxy Training: Infinium Human Methylation BeadChip" />
         <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     </head>
@@ -173,7 +173,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "EWAS data analysis of 450k data",
+  "headline": "Infinium Human Methylation BeadChip",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -208,10 +208,10 @@
   },
   "courseCode": "epigenetics / ewas-suite / hands-on",
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'EWAS data analysis of 450k data' tutorial",
+  "name": "Hands-on for 'Infinium Human Methylation BeadChip' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html",
   "timeRequired": "PT1H",
-  "description": "The questions this  addresses are:\n - What is a epigenome-wide association studies?\n - Why is a EWAS analysis useful?\n - Why 450k data?\n\n\\nThe objectives are:\n - Learn how to perform reproducible EWAS analysis\n\n",
+  "description": "The questions this  addresses are:\n - Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?\n - How to analyse and visualise Infinium Human Methylation BeadChip's?\n\n\\nThe objectives are:\n - Learn how to perform reproducible Infinium Human Methylation BeadChip analysis\n - Visualise differentially methylated positions using UCSC browser\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -324,7 +324,7 @@
     </script>
 
     <section class="tutorial">
-        <h1 data-toc-skip>EWAS data analysis of 450k data</h1>
+        <h1 data-toc-skip>Infinium Human Methylation BeadChip</h1>
         
 
         <div class="contributors-line">By: 
@@ -338,13 +338,10 @@
             <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
             <ul>
             
-            <li><p>What is a epigenome-wide association studies?</p>
+            <li><p>Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?</p>
 </li>
             
-            <li><p>Why is a EWAS analysis useful?</p>
-</li>
-            
-            <li><p>Why 450k data?</p>
+            <li><p>How to analyse and visualise Infinium Human Methylation BeadChip’s?</p>
 </li>
             
             </ul>
@@ -352,7 +349,10 @@
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li><p>Learn how to perform reproducible EWAS analysis</p>
+            <li><p>Learn how to perform reproducible Infinium Human Methylation BeadChip analysis</p>
+</li>
+            
+            <li><p>Visualise differentially methylated positions using UCSC browser</p>
 </li>
             
             </ul>
@@ -455,13 +455,20 @@
 
                 
                     <li class="btn btn-default supporting_material">
-    <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/" title="Workflows" alt="EWAS data analysis of 450k data workflows">
+    <a class="topic-icon" href="/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/" title="Workflows" alt="Infinium Human Methylation BeadChip workflows">
         <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
     </a>
 
 </li>
                 
 
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://github.com/galaxyproject/training-material/tree/master/topics/epigenetics/tutorials/ewas-suite/tours/">
+    <i class="fa fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> Tours
+</a>
+
+</li>
                 
 
                 
@@ -478,6 +485,8 @@
             </a>
         </li>
     
+    
+        
     
         
     
@@ -606,7 +615,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 11, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 23, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -616,18 +625,37 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+                    <blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+  <p>In this tutorial we will do:</p>
+<ol id="markdown-toc">
+  <li><a href="#raw-intensity-data-loading" id="markdown-toc-raw-intensity-data-loading">Raw intensity data loading</a></li>
+  <li><a href="#idat-preprocessing" id="markdown-toc-idat-preprocessing">.idat preprocessing</a></li>
+  <li><a href="#differentially-methylated-regions-and-positions-analysis" id="markdown-toc-differentially-methylated-regions-and-positions-analysis">Differentially methylated regions and positions analysis</a></li>
+  <li><a href="#annotation-and-visualization" id="markdown-toc-annotation-and-visualization">Annotation and visualization</a></li>
+</ol>
+  <p>We will use a small subset of the original data. If we run the tutorial on the orginal dataset, analysis will be time consuming and not reproducible Infinium Human Methylation BeadChip computation on the orginal data can be found at <a href="https://github.com/kpbioteam/case_study">case study</a>.</p>
 
-<p>The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provide training based on <span class="notranslate">Galaxy</span> tools EWAS suite that represent many popular algorithms for detecting somatic genetic alterations from cancer genome and exome data.</p>
+</blockquote>
+
+<p>This tutorial is based on <a href="https://doi.org/10.1016/j.cell.2015.07.061">Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance.</a>.</p>
+
+<p>The data we use in this tutorial are available at <a href="https://zenodo.org/record/1251211">Zenodo</a>.</p>
+
+<hr />
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provided training based on <span class="notranslate">Galaxy</span> Infinium Human Methylation BeadChip tool that represents many popular algorithms for detecting somatic genetic alterations from genome and exome data.</p>
 
 <figure id="figure-1"><img src="../../images/Epigenetic_mechanisms.jpg" alt="epimechanism" /><figcaption><span class="figcaption-prefix">Figure 1:</span> How epigenetics mechanism can effect health (adapted from https://commonfund.nih.gov/epigenomics/figure)</figcaption></figure>
 
-<p>This exercise uses datasets from the Cell publication by Hugo, Willy, et al., 2015 <a class="citation" href="#Hugo2015">Hugo <i>et al.</i> 2015</a>. with the goal being to identify differentially methylated regions and positions associated with treatment resistant melanomas.
-Datasets include the Illumina 450K Methylation array performed in melanoma tumors in a sample of patients pre and post MAPKi and BRAFi treatment with different outcomes (sensitive and resistant). For each sample there is raw green and red colour arrays containing the summarized bead information generated by the Illumina 450k scanner, i.e. there are 8 files in total:</p>
+<p>This exercise uses datasets from the Cell publication by <a class="citation" href="#Hugo2015">Hugo <i>et al.</i> 2015</a>. with the goal being the identification of differentially methylated regions and positions associated with treatment resistant melanomas.
+Datasets include the Infinium Human Methylation BeadChip array performed in melanoma tumors in a sample of patients pre and post MAPKi and BRAFi treatment with different outcomes (sensitive and resistant). For each sample there is raw green (methylated) and red (unmethylated) colour arrays containing the summarised bead information generated by the Infinium Human Methylation BeadChip scanner.</p>
 
-<p>The Infinium Methylation Assay 450k uses two different bead types to detect changes in <span class="notranslate">DNA</span> methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. In our study unmethylated and methylated bead signals are reported as green and red colors respectively.</p>
+<p>The Infinium Human Methylation BeadChip uses two different bead types to detect changes in <span class="notranslate">DNA</span> methylation levels. In the figure we can see M - methylated and U - unmethylated bead types. In our study unmethylated and methylated bead signals are reported as green and red colors respectively.</p>
 
-<figure id="figure-2"><img src="../../images/methylationassay.png" alt="methassay" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Infinium Methylation Assay Overview (adapted from https://emea.illumina.com/science/technology/beadarray-technology/infinium-methylation-assay.html?langsel=/gb/)</figcaption></figure>
+<figure id="figure-2"><img src="../../images/methylationassay.png" alt="methassay" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Infinium Methylation Assay Overview (adapted from <a class="citation" href="#Illumina">“<b>Illumina Infinium Methylation Assay Overview</b>”</a>)</figcaption></figure>
 
 <table>
   <thead>
@@ -661,58 +689,45 @@ Datasets include the Illumina 450K Methylation array performed in melanoma tumor
   </tbody>
 </table>
 
-<blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+<p>The <span class="notranslate">workflow</span> combines 5 main steps, starting with raw intensity data loading (.idat) and then optional preprocessing and normalisation of the data. The next quality control step performs an additional sample check to remove low-quality data, which normalisation cannot detect. The <span class="notranslate">workflow</span> gives the user the opportunity to perform any of these preparation and data cleaning steps, including a highly recommended genetic variation annotation step resulting in single nucleotide polymorphism identification and removal. Finally, the dataset generated through all of these steps can be used to hunt (find) differentially-methylated positions (DMP) and regions (DMR) with respect to a phenotype covariate.</p>
 
-<ol id="markdown-toc">
-  <li><a href="#450k-array-data-upload" id="markdown-toc-450k-array-data-upload">450K Array Data Upload</a></li>
-  <li><a href="#preprocessing-and--quality-assessment" id="markdown-toc-preprocessing-and--quality-assessment">Preprocessing and  Quality Assessment</a></li>
-  <li><a href="#removing-probes-affected-by-genetic-variation" id="markdown-toc-removing-probes-affected-by-genetic-variation">Removing probes affected by genetic variation</a></li>
-  <li><a href="#dmps-and-dmrs-identification" id="markdown-toc-dmps-and-dmrs-identification">DMPs and DMRs Identification</a></li>
-  <li><a href="#annotation-and-visualization" id="markdown-toc-annotation-and-visualization">Annotation and Visualization</a></li>
-</ol>
+<h1 id="raw-intensity-data-loading">Raw intensity data loading</h1>
 
-</blockquote>
-
-<h1 id="450k-array-data-upload">450K Array Data Upload</h1>
-
-<p>The first step of EWAS data analysis is the raw methylation data loading (intensity information files for each two color micro array)</p>
+<p>The first step of the Infinium Human Methylation BeadChip array analysis is raw methylation data loading (intensity information files for each two colour micro array)</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-loading"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data Loading</h3>
 
-  <ol>
-    <li>
-      <p>Create a new history for this tutorial and give it a proper name</p>
+  <p>Create a new history for this tutorial and give it a proper name</p>
 
-      <blockquote class="tip">
+  <blockquote class="tip">
 
-        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+    <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
 
-        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+    <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
 
-        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
-        <ol>
-          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
-          <li>Select the option <strong>Create New</strong> from the menu</li>
-        </ol>
-      </blockquote>
-    </li>
-    <li>Import the following IDAT files from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or from the data library (ask your instructor)
-      <ul>
-        <li><code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Red.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Red.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Red.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Red.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Grn.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Grn.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Grn.idat</code></li>
-        <li><code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Grn.idat</code></li>
-      </ul>
+    <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+    <ol>
+      <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+      <li>Select the option <strong>Create New</strong> from the menu</li>
+    </ol>
+  </blockquote>
 
-      <blockquote class="details">
-        <h3 id="details-list-of-zenodo-urls"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> List of Zenodo URLs</h3>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
+  <p>Import the following IDAT files from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or from the data library (ask your instructor)</p>
+  <ul>
+    <li><code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Red.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Red.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Red.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Red.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588704_8795207135_R01C02_Grn.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588705_8795207119_R05C02_Grn.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588706_8795207135_R02C02_Grn.idat</code></li>
+    <li><code class="highlighter-rouge">GSM1588707_8795207119_R06C02_Grn.idat</code></li>
+  </ul>
+
+  <blockquote class="details">
+    <h3 id="details-list-of-zenodo-urls"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> List of Zenodo URLs</h3>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Red.idat
@@ -720,216 +735,170 @@ https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Grn.idat
 https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat
 https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat
 https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
-</code></pre></div>        </div>
-      </blockquote>
-
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
-
-        <ul>
-          <li>Copy the link location</li>
-          <li>
-            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
-          </li>
-          <li>Select <strong>Paste/Fetch Data</strong></li>
-          <li>
-            <p>Paste the link into the text field</p>
-          </li>
-          <li>
-            <p>Press <strong>Start</strong></p>
-          </li>
-          <li><strong>Close</strong> the window</li>
-        </ul>
-
-        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
-
-      </blockquote>
-
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
-
-        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
-
-        <ul>
-          <li>
-            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
-          </li>
-          <li>
-            <p>Find the correct folder (ask your instructor)</p>
-          </li>
-          <li>Select the desired files</li>
-          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
-          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
-          <li>Click on <strong>Import</strong></li>
-        </ul>
-      </blockquote>
-    </li>
-    <li>Run <strong>minfi read450k</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“red channel files”</em>: all files ending in <code class="highlighter-rouge">_Red</code></li>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“green channel files”</em>: all files ending in <code class="highlighter-rouge">Grn</code></li>
-      </ul>
-    </li>
-    <li>Inspect the generated set of data</li>
-  </ol>
-</blockquote>
-
-<blockquote class="question">
-  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <p>How are the Green and Red signals stored?</p>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Green and Red micro arrays are built up into <code class="highlighter-rouge">RGChannelSet</code></p>
+</code></pre></div>    </div>
   </blockquote>
 
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+    <ul>
+      <li>Copy the link location</li>
+      <li>
+        <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+      </li>
+      <li>Select <strong>Paste/Fetch Data</strong></li>
+      <li>
+        <p>Paste the link into the text field</p>
+      </li>
+      <li>
+        <p>Press <strong>Start</strong></p>
+      </li>
+      <li><strong>Close</strong> the window</li>
+    </ul>
+
+    <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+  </blockquote>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+    <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+    <ul>
+      <li>
+        <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+      </li>
+      <li>
+        <p>Find the correct folder (ask your instructor)</p>
+      </li>
+      <li>Select the desired files</li>
+      <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+      <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+      <li>Click on <strong>Import</strong></li>
+    </ul>
+  </blockquote>
+
+  <p>Run <strong>Infinium Human Methylation BeadChip</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“red channel files”</em>: all files ending in <code class="highlighter-rouge">_Red</code></li>
+    <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“green channel files”</em>: all files ending in <code class="highlighter-rouge">Grn</code>
+<img src="../../images/1Raw_intensity_data_loading.png" alt="Raw_intensity_data_loading" /></li>
+  </ul>
 </blockquote>
 
-<h1 id="preprocessing-and--quality-assessment">Preprocessing and  Quality Assessment</h1>
+<h1 id="idat-preprocessing">.idat preprocessing</h1>
 
-<p>Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis.</p>
+<p>Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. Idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. The Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.</p>
 
-<p><code class="highlighter-rouge">RGChannelSet</code> represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals assigned to <code class="highlighter-rouge">MethylSet</code> or into Beta values build in <code class="highlighter-rouge">RatioSet</code>. Users can convert from <code class="highlighter-rouge">RGChannelSet</code> into <code class="highlighter-rouge">MethylSet</code> using the <strong>minfi mset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or compute Beta values using <strong>minfi set</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. The <strong>minfi qc</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of <code class="highlighter-rouge">MethylSet</code> signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.</p>
+<p><img src="../../images/quality_control.png" alt="quality_control" /></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-preprocessing"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Preprocessing</h3>
-  <ol>
-    <li>Run <strong>minfi mset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output from minfi_read450K to create <code class="highlighter-rouge">MethylSet</code> object</li>
-    <li>Run <strong>minfi qc</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  on the ‘MethylSet’ object created in the previous step to estimate sample-specific quality control. Once it is done click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the QC filename in your history to view QC image.</li>
-    <li>Once you have inspected the quality control run <strong>minfi rset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the  ‘MethylSet’output from minfi_read450K  to convert methylation data from the <code class="highlighter-rouge">MethylSet</code> to a ratio of the methylated probe intensity and the overall intensity (sum of methylated and unmethylated probe intensities)</li>
-    <li>Run <strong>minfi maptogenome</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output from the previous step to map ratio data to the genomic positions</li>
-  </ol>
+  <p>Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect <span class="notranslate">DNA</span> measurements and disrupt <span class="notranslate">downstream</span> analysis of results.  <a class="citation" href="#Hansen">Aryee <i>et al.</i> 2014</a> It is highly recommended to remove the probes that contain either an SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting <strong>(Optional) Preprocessing Method</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.
+<img src="../../images/2idat_preprocessing.png" alt="idat_preprocessing" /></p>
 
+</blockquote>
+<blockquote>
   <blockquote class="comment">
-    <h3 id="comment-preprocess-and-normalize-data"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Preprocess and Normalize data</h3>
-    <p>If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in EWAS suite i.e. <strong>minfi ppfun</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> or <strong>minfi ppquantile</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> look for recommendation at (ref).</p>
+    <h3 id="commentoptional-normalisation-of-the-data"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span>(optional) Normalisation of the data</h3>
+    <p>If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at <a class="citation" href="#Hansen">Aryee <i>et al.</i> 2014</a>.</p>
 
   </blockquote>
-
 </blockquote>
 
-<figure id="figure-3"><img src="../../images/qcplot.png" alt="Quality Control" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Quality control plot</figcaption></figure>
+<h1 id="differentially-methylated-regions-and-positions-analysis">Differentially methylated regions and positions analysis</h1>
 
-<h1 id="removing-probes-affected-by-genetic-variation">Removing probes affected by genetic variation</h1>
-
-<p>Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect <span class="notranslate">DNA</span> measurements and interfere results from <span class="notranslate">downstream</span> analysis.</p>
-
-<p>Hansen, J. P. 2014 highly recommended to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-removing-probes-affected-by-genetic-variation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing probes affected by genetic variation</h3>
-  <ol>
-    <li>Run <strong>minfi dropsnp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>  on the output of minfi_maptogenome to remove the probes that contain either a SNP at the methylated loci interrogation or at the single nucleotide extension</li>
-  </ol>
-</blockquote>
-
-<h1 id="dmps-and-dmrs-identification">DMPs and DMRs Identification</h1>
-
-<p>The main goal of the EWAS suite is to simplify the way differentially methylated loci sites are detected. The EWAS suite contains <strong>minfi dmp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool detecting differentially methylated positions (DMPs) with respect to a phenotype covariate, and more complex <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> solution for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probe into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.</p>
-
-<p>From the next step we will need an additional file that annotates illumina450K with genomic features, which we can obtain from UCSC.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload-from-ucsc"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload from UCSC</h3>
-
-  <ol>
-    <li>
-      <p>Search for <code class="highlighter-rouge">UCSC Main</code> in the tool search bar (top left)</p>
-    </li>
-    <li>
-      <p>Click on <code class="highlighter-rouge">UCSC Main</code> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. You will be taken to the <strong>UCSC table browser</strong></p>
-    </li>
-    <li>Set the following options:
-      <ul>
-        <li><em>“clade”</em>: <code class="highlighter-rouge">Mammal</code></li>
-        <li><em>“genome”</em>: <code class="highlighter-rouge">Human</code></li>
-        <li><em>“assembly”</em>: <code class="highlighter-rouge">Feb. 2009 (GRCh37/hg19)</code></li>
-        <li><em>“group”</em>: <code class="highlighter-rouge">Regulation</code></li>
-        <li><em>“track”</em>: <code class="highlighter-rouge">HAIB Methyl450</code></li>
-        <li><em>“table”</em>: <code class="highlighter-rouge">GM12878 (wgEncodeHaibMethyl450Gm12878SitesRep1)</code></li>
-        <li><em>“region”</em>: <code class="highlighter-rouge">genome</code></li>
-        <li><em>“output format”</em>: <code class="highlighter-rouge">GTF - gene transfer (limited)</code></li>
-        <li><em>“Send output to”</em>: <code class="highlighter-rouge"><span class="notranslate">Galaxy</span></code> (only)</li>
-      </ul>
-    </li>
-    <li>Click on the <strong>get output</strong> button at the bottom of the screen</li>
-    <li>On the next page, click on the <strong>Send Query to <span class="notranslate">Galaxy</span></strong> button</li>
-    <li>Wait for the upload to finish</li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-dmps-and-dmrs-identification"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: DMPs and DMRs Identification</h3>
-
-  <ol>
-    <li>Import <code class="highlighter-rouge">phenotypeTable.txt</code> from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or data library:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/phenotypeTable.txt
-</code></pre></div>      </div>
-    </li>
-    <li>Run <strong>minfi dmp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output of the minfi dropsnp tool adjusting the following parameters
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input set”</em>:<code class="highlighter-rouge">GenomicRatioSet</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Table”</em>:<code class="highlighter-rouge">phenotypeTable.txt</code></li>
-        <li><em>“Phenotype Type”</em>:<code class="highlighter-rouge">categorical</code></li>
-        <li><em>“qCutoff Size”</em>:<code class="highlighter-rouge">0.5</code> (DMPs with an FDR q-value greater than this will not be returned)</li>
-        <li><em>“Variance Shrinkage”</em>:<code class="highlighter-rouge"> TRUE</code> (This is recommended when sample sizes are small &lt;10}</li>
-        <li><em>“Genome Table”</em>: <code class="highlighter-rouge">wgEncodeHaibMethyl450 ... </code></li>
-      </ul>
-    </li>
-    <li>Run <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output of minfi_dmp adjusting the following parameters
-      <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input set”</em>:<code class="highlighter-rouge">GenomicRatioSet</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Phenotype Table”</em>:<code class="highlighter-rouge">phenotypeTable.txt</code></li>
-        <li><em>“factor1”</em>: <code class="highlighter-rouge">sensitive</code></li>
-        <li><em>“factor2”</em>: <code class="highlighter-rouge">resistant</code></li>
-        <li><em>“maxGap Size”</em>:<code class="highlighter-rouge">250</code></li>
-        <li><em>“coef Size”</em>:<code class="highlighter-rouge">2</code></li>
-        <li><em>“Cutoff Size”</em>:<code class="highlighter-rouge">0.1</code></li>
-        <li><em>“nullMethod”</em>:<code class="highlighter-rouge">permutation</code></li>
-        <li><em>“verbose”</em>:<code class="highlighter-rouge">TRUE</code></li>
-      </ul>
-    </li>
-    <li>Click on the <strong>minfi dmr</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output in your history to expand it</li>
-    <li>Set the database build of your dataset to <code class="highlighter-rouge">Human Feb. 2009 (GRCh37/hg19) (hg19)</code>
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>
-        <ul>
-          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, change the <strong>Database/Build</strong> field</li>
-          <li>Select your desired database key from the dropdown list: <code class="highlighter-rouge">hg19</code></li>
-          <li>Click the <strong>Save</strong> button</li>
-        </ul>
-      </blockquote>
-    </li>
-    <li>Click on <code class="highlighter-rouge">display at UCSC</code> towards the bottom of the history item.
- This will launch UCSC Genome Browser with your Custom Track</li>
-  </ol>
-</blockquote>
-
-<figure id="figure-4"><img src="../../images/ucsc.png" alt="Display at UCSC" /><figcaption><span class="figcaption-prefix">Figure 4:</span> UCSC genome track showing differentialy methylated regions located on chromosome 6</figcaption></figure>
-
+<p>The main goal of the <strong>Infinium Human Methylation BeadChip</strong> analysis is to simplify the way differentially methylated loci sites are detected. The <strong>Infinium Human Methylation BeadChip</strong> pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solutions for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.</p>
 <blockquote class="comment">
   <h3 id="comment-phenotype-table"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Phenotype table</h3>
   <p>Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.</p>
 </blockquote>
+<p>However, for the purpose of this tutorial we would like you to upload phenotype table from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> repository.</p>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-phenotypetabletxt-from-zenodo-or-data-library"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import <code class="highlighter-rouge">phenotypeTable.txt</code> from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> or data library:</h3>
+  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/1251211/files/phenotypeTable.txt
+</code></pre></div>  </div>
+  <p><img src="../../images/3parameters.png" alt="pheno table" />
+Set the following parameters:</p>
+  <ul>
+    <li><em>“maxGap Size”</em>:<code class="highlighter-rouge">250</code>
+   We will use the default gap of 250 base pairs (bps), i.e. any two points more than 250 bps away are put in a new cluster.</li>
+    <li><em>“Cutoff Size”</em>:<code class="highlighter-rouge">0.1</code>
+   In order to find segments that are positive, near zero, and negative. We need a cutoff which is one number in which case “near zero” default 0.1</li>
+  </ul>
+
+  <p><img src="../../images/4parameters.png" alt="params" /></p>
+  <ul>
+    <li><em>“Number of Resamples”</em>:<code class="highlighter-rouge">0</code> 
+Default value 0 for permutation method apply selection of randomized cases with replacement from the original data while using ‘bootstrap’ method.</li>
+    <li><em>“nullMethod”</em>:<code class="highlighter-rouge">permutation</code>
+Method used to generate null candidate regions, must be one of ‘bootstrap’ or
+‘permutation’ (defaults to ‘permutation’).</li>
+    <li><em>“Phenotype Type”</em>:<code class="highlighter-rouge">categorical</code>
+Identify regions where methylation is associated with a continuous or categorical phenotype.</li>
+  </ul>
+
+  <p>Search for <code class="highlighter-rouge">UCSC Main</code> in the tool search bar (top left)
+<img src="../../images/5parameters.png" alt="params" /></p>
+  <ul>
+    <li><em>“qCutoff Size”</em>:<code class="highlighter-rouge">0.5</code> 
+Diffrentialy methylated positions with an FDR q-value greater than this value will not be returned.</li>
+    <li><em>“Variance Shrinkage”</em>:<code class="highlighter-rouge"> TRUE</code> 
+Default TRUE as it is recommended when sample sizes are small &lt;10</li>
+    <li><em>“Genome Table”</em>: <code class="highlighter-rouge">wgEncodeHaibMethyl450 ... </code>
+Click on <code class="highlighter-rouge">UCSC Main</code> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. You will be taken to the <strong>UCSC table browser</strong></li>
+  </ul>
+  <figure id="figure-3"><img src="../../images/5UCSC.png" alt="UCSC" /><figcaption><span class="figcaption-prefix">Figure 3:</span> UCSC</figcaption></figure>
+  <p>Set the following options:
+    - <em>“clade”</em>: <code class="highlighter-rouge">Mammal</code>
+    - <em>“genome”</em>: <code class="highlighter-rouge">Human</code>
+    - <em>“assembly”</em>: <code class="highlighter-rouge">Feb. 2009 (GRCh37/hg19)</code>
+    - <em>“group”</em>: <code class="highlighter-rouge">Regulation</code>
+    - <em>“track”</em>: <code class="highlighter-rouge">HAIB Methyl450</code>
+    - <em>“table”</em>: <code class="highlighter-rouge">GM12878 (wgEncodeHaibMethyl450Gm12878SitesRep1)</code>
+    - <em>“region”</em>: <code class="highlighter-rouge">genome</code>
+    - <em>“output format”</em>: <code class="highlighter-rouge">GTF - gene transfer (limited)</code>
+    - <em>“Send output to”</em>: <code class="highlighter-rouge"><span class="notranslate">Galaxy</span></code> (only)
+Click on the <strong>get output</strong> button at the bottom of the screen
+On the next page, click on the <strong>Send Query to <span class="notranslate">Galaxy</span></strong> button
+Wait for the upload to finish
+We will now map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
+Click on the <strong>Differentially_Methylated_Positions.<span class="notranslate">bed</span></strong> output in your history to expand it.
+Set the database build of your dataset to <code class="highlighter-rouge">Human Feb. 2009 (GRCh37/hg19) (hg19)</code>(if it is not set automatically)</p>
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-changing-databasebuild-dbkey"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing Database/Build (dbkey)</h3>
+    <ul>
+      <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+      <li>In the central panel, change the <strong>Database/Build</strong> field</li>
+      <li>Select your desired database key from the dropdown list: <code class="highlighter-rouge">hg19</code></li>
+      <li>Click the <strong>Save</strong> button</li>
+    </ul>
+  </blockquote>
+
+  <p>Click on <code class="highlighter-rouge">display at UCSC</code> towards the bottom of the history item.
+This will launch UCSC Genome Browser with your Custom Track</p>
+</blockquote>
+
+<blockquote>
+  <figure id="figure-4"><img src="../../images/ucsc.png" alt="Display at UCSC" /><figcaption><span class="figcaption-prefix">Figure 4:</span> UCSC genome track showing differentialy methylated regions located on chromosome 6</figcaption></figure>
+</blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
   <p>How do we define phenotype covariate?</p>
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions</p>
   </blockquote>
 </blockquote>
 
-<h1 id="annotation-and-visualization">Annotation and Visualization</h1>
+<h1 id="annotation-and-visualization">Annotation and visualization</h1>
 
-<p>In addition to <span class="notranslate">downstream</span> analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function description, and relationships between these concepts.</p>
+<p>In addition to <span class="notranslate">downstream</span> analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function descriptions, and relationships between these concepts.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on--annotate-differentially-methylated-position"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Annotate Differentially Methylated Position</h3>
@@ -947,9 +916,9 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
         </li>
       </ul>
     </li>
-    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the previous output adjusting the following parameters to cut “gene_name” column from table of annotated peaks and then get a list of geenes
+    <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the previous output adjusting the following parameters to cut “gene_name” column from table of annotated peaks and then get a list of genes
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c16</code></li>
+        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c16</code>hhh</li>
         <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>chipeakanno annopeaks</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1016,16 +985,15 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
 <p>Epigenetic aberrations which involve <span class="notranslate">DNA</span> modifications give researchers an interest in identifying novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified <span class="notranslate">downstream</span> analysis available as a ready to run pipline in supplementary materials.</p>
 
 
-
                     
                     <blockquote class="key_points">
                         <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li><p>EWAS analyse changes in DNA methylation in cohorts of different individuals effected by diseases</p>
+                            <li><p>Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology.</p>
 </li>
                             
-                            <li><p>DNA methylation changes can be triggered by environment (i.e. sun exposure, diet) and effect the way how our cells works and in long term cause cancer</p>
+                            <li><p>Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market.</p>
 </li>
                             
                         </ul>
@@ -1036,7 +1004,26 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
 
                     
                     <h1 id="bibliography">References</h1>
-                    <ol class="bibliography"><li><span id="Hugo2015">Hugo, W., H. Shi, L. Sun, M. Piva, C. Song <i>et al.</i>, 2015 <b>Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance</b>. Cell 162: 1271–1285.</span>
+                    <ol class="bibliography"><li><span id="Illumina"><b>Illumina Infinium Methylation Assay Overview</b>.</span>
+    
+    Accessed: 2020-02-22.
+    
+    
+    
+
+</li>
+<li><span id="Hansen">Aryee, M. J., A. E. Jaffe, H. Corrada-Bravo, C. Ladd-Acosta, A. P. Feinberg <i>et al.</i>, 2014 <b>Minfi: a flexible and comprehensive Bioconductor package for the analysis of Infinium DNA methylation microarrays</b>. Bioinformatics 30: 1363–1369.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btu049">10.1093/bioinformatics/btu049</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Hugo2015">Hugo, W., H. Shi, L. Sun, M. Piva, C. Song <i>et al.</i>, 2015 <b>Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance</b>. Cell 162: 1271–1285.</span>
     
     
     <a href="https://doi.org/10.1016/j.cell.2015.07.061">10.1016/j.cell.2015.07.061</a>
@@ -1052,7 +1039,7 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Katarzyna Murat, Krzysztof Poterlowicz, 2019 <b>EWAS data analysis of 450k data (Galaxy Training Materials)</b>. <a href="/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html">/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Katarzyna Murat, Krzysztof Poterlowicz, 2020 <b>Infinium Human Methylation BeadChip (Galaxy Training Materials)</b>. <a href="/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html">/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1068,10 +1055,10 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{epigenetics-ewas-suite,
     author = "Katarzyna Murat and Krzysztof Poterlowicz",
-    title = "EWAS data analysis of 450k data (Galaxy Training Materials)",
-    year = "2019",
-    month = "09",
-    day = "11"
+    title = "Infinium Human Methylation BeadChip (Galaxy Training Materials)",
+    year = "2020",
+    month = "02",
+    day = "23"
     url = "\url{/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1114,12 +1101,12 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <br>
 
         <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
-        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=EWAS data analysis of 450k data (Epigenetics)">Loading...
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Infinium Human Methylation BeadChip (Epigenetics)">Loading...
         </iframe>
 
         <blockquote class="feedback">
             <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
-            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=EWAS data analysis of 450k data (Epigenetics)">Feedback Form</a>.</p>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Infinium Human Methylation BeadChip (Epigenetics)">Feedback Form</a>.</p>
         </blockquote>
     </section>
 </div>
