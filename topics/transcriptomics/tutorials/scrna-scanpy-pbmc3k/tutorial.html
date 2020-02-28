@@ -609,8 +609,8 @@
             <ul>
                 <div class="supporting_material">
                 
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Introduction slides">
-                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    <li class="btn btn-default"><a href="/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/slides.html" title="Slides for this tutorial">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
                     </a></li>
                 
 
@@ -786,7 +786,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1037,16 +1037,22 @@ https://zenodo.org/record/3581213/files/matrix.mtx
         <h3 id="comment-comment-faster-method-for-general-information"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Faster Method for General Information</h3>
 
         <ul>
-          <li>Click on the name of the dataset in the history to expand it.</li>
-          <li>General Anndata information is given in the expanded box.
-```
-[n_obs x n_vars]
+          <li>The <strong>ScanPy</strong> toolset in <span class="notranslate">Galaxy</span> produces <em>AnnData</em> formats as
+output, where general information is provided for each dataset:
             <ul>
-              <li>2700 x 32738
-```</li>
+              <li>Click on the name of the dataset in the history to expand it.</li>
+              <li>
+                <p>General Anndata information would be given in the expanded box:</p>
+
+                <p>e.g.</p>
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs x n_vars]
+-    2700 x 32738
+</code></pre></div>                </div>
+              </li>
             </ul>
           </li>
-          <li>For more specific queries, <strong>Inspect AnnData</strong> is required.</li>
+          <li>For more specific queries, <strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is required.</li>
         </ul>
       </blockquote>
     </li>
@@ -1192,7 +1198,7 @@ RP11-34P13.8	ENSG00000239945
     </li>
     <li>Rename the generated file <code class="highlighter-rouge">3k PBMC</code></li>
     <li>
-      <p>Expand the dataset.</p>
+      <p>Inspect the dataset.</p>
 
       <blockquote class="question">
         <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1361,6 +1367,8 @@ RP11-34P13.8	ENSG00000239945
           </ul>
         </li>
       </ul>
+
+      <p><small><strong>Note</strong>: <em>Ensure that you have selected the same column for both replacements.</em></small></p>
     </li>
     <li><strong>Select last</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -1413,7 +1421,7 @@ RP11-34P13.8	ENSG00000239945
       </ul>
     </li>
     <li>
-      <p>Rename the generated file <code class="highlighter-rouge">Mitochondrial annotation</code></p>
+      <p>Rename the generated file <code class="highlighter-rouge">Mitochondrial annotation</code> and ensure that the datatype is <code class="highlighter-rouge">tabular</code></p>
     </li>
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -1461,7 +1469,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Rename the generated file <code class="highlighter-rouge">3k PBMC with mito annotation and qc metrics</code></p>
     </li>
     <li>
-      <p>Expand and inspect the dataset</p>
+      <p>Inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1681,7 +1689,7 @@ RP11-34P13.8	ENSG00000239945
   <li>a percentage of <span class="notranslate">reads</span> mapped to mitochondrial genes above 5%</li>
 </ul>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-low-quality-cells"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove low-quality cells</h3>
 
   <ol>
@@ -1700,7 +1708,7 @@ RP11-34P13.8	ENSG00000239945
       </ul>
     </li>
     <li>
-      <p>Expand and inspect the dataset</p>
+      <p>Inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-11"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1734,30 +1742,26 @@ RP11-34P13.8	ENSG00000239945
         </li>
       </ul>
     </li>
-    <li>Expand and inspect the dataset</li>
-  </ol>
-</blockquote>
+    <li>Inspect the dataset
+      <blockquote class="question">
 
-<blockquote class="notranslate hands_on">
-  <blockquote class="question">
-    <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <h3 id="question-questions-12"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2695 × 13714
-</code></pre></div>    </div>
+</code></pre></div>        </div>
 
-    <p>How many cells have been removed because they have more than 2,500 expressed genes?</p>
+        <p>How many cells have been removed because they have more than 2,500 expressed genes?</p>
 
-    <blockquote class="solution">
-      <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <blockquote class="solution">
+          <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-      <p>There are now 2,695 cells. So 5 cells have been removed because they have more than 2,500 expressed genes.</p>
+          <p>There are now 2,695 cells. So 5 cells have been removed because they have more than 2,500 expressed genes.</p>
 
-    </blockquote>
+        </blockquote>
 
-  </blockquote>
-
-  <ol>
+      </blockquote>
+    </li>
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1782,14 +1786,16 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated file <code class="highlighter-rouge">3k PBMC after QC filtering</code></p>
     </li>
-    <li>
-      <p>Expand and inspect the dataset</p>
+    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC after QC filtering</code></li>
+        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
+      </ul>
 
       <blockquote class="question">
         <h3 id="question-questions-13"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
--    2638 × 13714
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 13714
 </code></pre></div>        </div>
 
         <p>How many cells have been removed because they have more than 5% of <span class="notranslate">reads</span> mapped to mitochondrial genes?</p>
@@ -1923,7 +1929,7 @@ RP11-34P13.8	ENSG00000239945
 
   <ol>
     <li>
-      <p>Expand and inspect the output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
+      <p>Inspect the output of the last <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
 
       <blockquote class="question">
         <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2000,14 +2006,16 @@ RP11-34P13.8	ENSG00000239945
     <li>
       <p>Rename the generated output <code class="highlighter-rouge">3k PBMC with only HVG</code></p>
     </li>
-    <li>
-      <p>Expand and inspect the dataset</p>
+    <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG</code></li>
+        <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">General information about the object</code></li>
+      </ul>
 
       <blockquote class="question">
         <h3 id="question-questions-15"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
--    2638 × 1838
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 1838
 </code></pre></div>        </div>
 
         <p>How many genes have been removed?</p>
@@ -2125,13 +2133,13 @@ RP11-34P13.8	ENSG00000239945
 
     <ol>
       <li>
-        <p>Expand and inspect the <code class="highlighter-rouge">3k PBMC with only HVG, &gt; after scaling and PCA</code> dataset</p>
+        <p>Inspect the <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code> dataset</p>
 
         <blockquote class="question">
           <h3 id="question-questions-16"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
           <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
--    2638 × 2013
+-    2638 × 1838
 [obs]
 -    n_genes_by_counts
 -    log1p_n_genes_by_counts
@@ -2172,7 +2180,7 @@ RP11-34P13.8	ENSG00000239945
           <blockquote class="solution">
             <h3 id="solution-solution-16"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-            <p>3 new objects (<code class="highlighter-rouge">uns</code>, <code class="highlighter-rouge">obsm</code>, <code class="highlighter-rouge">varm</code>) have been added to the <code class="highlighter-rouge">AnnData</code> &gt; object with information that seem related to PCA.</p>
+            <p>3 new objects (<code class="highlighter-rouge">uns</code>, <code class="highlighter-rouge">obsm</code>, <code class="highlighter-rouge">varm</code>) have been added to the <code class="highlighter-rouge">AnnData</code> object with information that seem related to PCA.</p>
 
             <p><code class="highlighter-rouge">uns</code> is an unstructured annotation, <code class="highlighter-rouge">obsm</code> multi-dimensional annotation of the observations (i.e. genes) and <code class="highlighter-rouge">varm</code> multi-dimensional annotation of the variables (i.e. cells).</p>
           </blockquote>
@@ -2181,7 +2189,7 @@ RP11-34P13.8	ENSG00000239945
       </li>
       <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
         <ul>
-          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, &gt; after scaling and PCA</code></li>
+          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code></li>
           <li><em>“What to inspect?”</em>: <code class="highlighter-rouge">Unstructured annotation (uns)</code>
             <ul>
               <li><em>“What to inspect in uns?”</em>: <code class="highlighter-rouge">PCA</code></li>
@@ -2192,7 +2200,7 @@ RP11-34P13.8	ENSG00000239945
         <blockquote class="question">
           <h3 id="question-questions-17"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-          <p>What are the information stored in <code class="highlighter-rouge">uns</code> regarding the PCA?</p>
+          <p>What information is stored in <code class="highlighter-rouge">uns</code> regarding the PCA?</p>
 
           <blockquote class="solution">
             <h3 id="solution-solution-17"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2381,7 +2389,11 @@ RP11-34P13.8	ENSG00000239945
   <blockquote class="solution">
     <h3 id="solution-solution-21"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot. For NKG7, the differences of <span class="notranslate">expression</span> are projected on PC2 and for PPBP on PC3.</p>
+    <ul>
+      <li>For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot.</li>
+      <li>For NKG7, the differences in <span class="notranslate">expression</span> are seen on PC2.</li>
+      <li>For PPBP, the differences in <span class="notranslate">expression</span> are seen on PC3.</li>
+    </ul>
 
   </blockquote>
 </blockquote>
@@ -2475,7 +2487,7 @@ RP11-34P13.8	ENSG00000239945
             <li><em>“The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation”</em>: <code class="highlighter-rouge">10</code></li>
             <li><em>“Number of PCs to use”</em>: <code class="highlighter-rouge">10</code></li>
             <li><em>“Use a hard threshold to restrict the number of neighbors to n_neighbors?”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Method for computing connectivities”</em>: <code class="highlighter-rouge">umap</code></li>
+            <li><em>“Method for computing connectivities”</em>: <code class="highlighter-rouge">umap (McInnes et al, 2018)</code></li>
             <li><em>“Distance metric”</em>: <code class="highlighter-rouge">euclidean</code></li>
           </ul>
         </li>
@@ -2485,7 +2497,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Rename the generated output <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></p>
     </li>
     <li>
-      <p>Expand and inspect the dataset <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></p>
+      <p>Inspect the dataset</p>
 
       <blockquote class="question">
         <h3 id="question-questions-23"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -2549,9 +2561,9 @@ RP11-34P13.8	ENSG00000239945
 
           <p>An extra object <code class="highlighter-rouge">X_umap</code> has been added to <code class="highlighter-rouge">obsm</code> with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.</p>
 
-          <p>This information can be accessed using:</p>
+          <p>This information can be accessed by:</p>
           <ol>
-            <li>Expanding and inspecting the dataset <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
+            <li>Inspect the dataset <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
             <li><strong>Inspect AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
               <ul>
                 <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA and KNN graph</code></li>
@@ -2699,7 +2711,13 @@ RP11-34P13.8	ENSG00000239945
 
     <ol>
       <li>8 clusters are identified, more or less corresponding to the ones we could see on the UMAP plots.</li>
-      <li>CST3 should be representative of clusters 1, 3, 4, 7; NKG7 for clusters 0, 3 and 5 and PPBP for cluster 7</li>
+      <li>We expect that:
+        <ul>
+          <li>CST3 should be representative of clusters 1, 3, 4, 7</li>
+          <li>NKG7 for clusters 0, 3 and 5</li>
+          <li>PPBP for cluster 7</li>
+        </ul>
+      </li>
     </ol>
   </blockquote>
 </blockquote>
@@ -2887,7 +2905,11 @@ RP11-34P13.8	ENSG00000239945
   <blockquote class="solution">
     <h3 id="solution-solution-29"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>CST3 is a marker gene for clusters 1, 4, 7 (not 3 as guessed); NKG7 for clusters 3 and 5 (not 0 as guessed) and PPBP for cluster 7, as we guessed before.</p>
+    <ul>
+      <li>CST3 is a marker gene for clusters 1, 4, 7 (not 3 as guessed previously)</li>
+      <li>NKG7 for clusters 3 and 5 (not 0 as guessed previously)</li>
+      <li>PPBP for cluster 7, as guessed previously</li>
+    </ul>
 
   </blockquote>
 </blockquote>
@@ -2902,8 +2924,13 @@ RP11-34P13.8	ENSG00000239945
   <ol>
     <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
-        <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
+        <li>
+          <p><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></p>
+
+          <p><small><strong>Note:</strong> <em>Please pay attention to the dataset name.</em></small></p>
+        </li>
+        <li>
+          <p><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code></p>
           <ul>
             <li><em>“The key of the observations grouping to consider”</em>: <code class="highlighter-rouge">louvain</code></li>
             <li><em>“Use ‘raw’ attribute of input if present”</em>: <code class="highlighter-rouge">Yes</code></li>
@@ -3052,7 +3079,13 @@ RP11-34P13.8	ENSG00000239945
 
     <ol>
       <li>The 5 top ranked genes are slightly different, at least in their order.</li>
-      <li>CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed); NKG7 for clusters 3 and 5 (not 0 as guessed) and PPBP for cluster 7, as we guessed before.</li>
+      <li>We see that:
+        <ul>
+          <li>CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed previously)</li>
+          <li>NKG7 for clusters 3 and 5 (not 0 as guessed previously)</li>
+          <li>PPBP for cluster 7, as we guessed previously.</li>
+        </ul>
+      </li>
     </ol>
 
   </blockquote>
@@ -3091,9 +3124,9 @@ RP11-34P13.8	ENSG00000239945
     <h3 id="solution-solution-31"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ul>
+      <li>CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.</li>
       <li>NKG7 is more expressed in clusters 3 and 5, the ones for which it was previously found as a marker gene.</li>
       <li>PPBP is very pronounced in cluster 7, for which it was previously found as a marker gene.</li>
-      <li>CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.</li>
     </ul>
 
   </blockquote>
@@ -3124,6 +3157,7 @@ RP11-34P13.8	ENSG00000239945
             <li><em>“The key of the observation grouping to consider”</em>: <code class="highlighter-rouge">louvain</code></li>
             <li><em>“Number of categories”</em>: <code class="highlighter-rouge">8</code></li>
             <li><em>“Use ‘raw’ attribute of input if present”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Custom figure size</em>: <code class="highlighter-rouge">Yes</code></li>
             <li><em>“Swap axes?”</em>: <code class="highlighter-rouge">Yes</code></li>
             <li>In <em>“Violin plot attributes”</em>:
               <ul>
@@ -3147,11 +3181,17 @@ RP11-34P13.8	ENSG00000239945
   <blockquote class="solution">
     <h3 id="solution-solution-32"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>LDHB, LYZ and CD74, even if they are top markers genes for the cluster 0, 1, 2 respectively, are also expressed in all other clusters (and also found in the top 100 marker genes for other clusters), but with higher level in the cluster for they are markers.</p>
-
-    <p>CCL5, LST1, NKG7 and HLA-DPA1 are not expressed in all clusters but also not only in the one they are markers.</p>
-
-    <p>PF4 is only expressed in cluster 7.</p>
+    <ul>
+      <li>
+        <p>LDHB, LYZ and CD74, even if they are top markers genes for the cluster 0, 1, 2 respectively, are also expressed in all other clusters (and also found in the top 100 marker genes for other clusters), but with higher level in the cluster for they are markers.</p>
+      </li>
+      <li>
+        <p>CCL5, LST1, NKG7 and HLA-DPA1 are not expressed in all clusters but also not only in the one they are markers.</p>
+      </li>
+      <li>
+        <p>PF4 is only expressed in cluster 7.</p>
+      </li>
+    </ul>
 
   </blockquote>
 </blockquote>
@@ -3231,9 +3271,14 @@ RP11-34P13.8	ENSG00000239945
   <blockquote class="solution">
     <h3 id="solution-solution-34"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Clusters 0, 3, and 5 are similar in term of <span class="notranslate">expression</span>. This was expected as they are physically close on the neighborhood graph.</p>
-
-    <p>Clusters 1 and 4 are together and then 2 and 6 are together after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.</p>
+    <ul>
+      <li>
+        <p>Clusters 0, 3, and 5 are similar in term of <span class="notranslate">expression</span>. This was expected as they are physically close on the neighborhood graph.</p>
+      </li>
+      <li>
+        <p>Clusters 1 and 4 are together and then 2 and 6 are together after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.</p>
+      </li>
+    </ul>
 
   </blockquote>
 </blockquote>
@@ -3250,7 +3295,7 @@ RP11-34P13.8	ENSG00000239945
   <ol>
     <li><strong>Inspect and manipulate</strong> with scanpy <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
         <li><em>“Method used for inspecting”</em>: <code class="highlighter-rouge">Rank genes for characterizing groups, using 'tl.rank_genes_groups'</code>
           <ul>
             <li><em>“The key of the observations grouping to consider”</em>: <code class="highlighter-rouge">louvain</code></li>
@@ -3592,8 +3637,13 @@ RP11-34P13.8	ENSG00000239945
   <ol>
     <li><strong>Manipulate AnnData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></li>
-        <li><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Rename categories of annotation</code>
+        <li>
+          <p><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test</code></p>
+
+          <p><small><strong>Note</strong>: <em>Take note that this is not the “0 vs 1 Wilcoxon” dataset</em></small></p>
+        </li>
+        <li>
+          <p><em>“Function to manipulate the object”</em>: <code class="highlighter-rouge">Rename categories of annotation</code></p>
           <ul>
             <li><em>“Key for observations or variables annotation”</em>: <code class="highlighter-rouge">louvain</code></li>
             <li><em>“Comma-separated list of new categories”</em>: <code class="highlighter-rouge">CD4+ T, CD14+, B, CD8+ T, FCGR3A+, NK, Dendritic, Megakaryocytes</code></li>
@@ -3993,7 +4043,7 @@ RP11-34P13.8	ENSG00000239945
     title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "20"
+    day = "25"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
