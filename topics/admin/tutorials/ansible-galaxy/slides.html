@@ -13,6 +13,7 @@ key_points:
   - You can easily deploy a base Galaxy, or one with more features.
 contributors:
   - slugger70
+  - natefoo
 ---
 
 ## Install PostgreSQL & Galaxy extensions
@@ -21,13 +22,11 @@ contributors:
 
 ---
 
-
 ## Install Galaxy & Attach Storage
 
 ![Galaxy is now attached to the DB. uWSGI, storage, and compute are attached to Galaxy](../../images/ansible-galaxy-intro-1.png)
 
 ---
-
 
 ## Configure NGINX
 
@@ -35,32 +34,61 @@ contributors:
 
 ---
 
-
 ## Configure Job Handlers
 
 ![Job Handlers are added, between Galaxy and the Compute](../../images/ansible-galaxy-intro-3.png)
 
 ---
 
-
 ## Install & Configure Slurm
 
 ![Slurm is attached to the handlers](../../images/ansible-galaxy-intro-4.png)
 
-
 ---
-
-
 
 ## Connect CVMFS & Reference Data
 
 ![CVMFS is attached to storage + compute + galaxy](../../images/ansible-galaxy-intro-5.png)
 
-
 ---
-
-
 
 ## Setup Remote Compute
 
 ![Remote compute site, with Pulsar and compute is attached to the job handlers](../../images/ansible-galaxy-intro-6.png)
+
+---
+
+## Major Initial Decisions
+
+* Where to install Galaxy
+* Where to store Galaxy datasets
+* Database location
+
+---
+## Where to install Galaxy
+
+* Must be at same path on cluster - more on this in cluster sessions
+
+---
+## Where to store Galaxy datasets
+
+* Must be at same path on cluster
+* Consider future scalability
+
+---
+## Database location
+
+* Fast local, reliable storage
+* Consider future scalability
+
+---
+## Basic best practices
+
+* Run as an **unprivileged user**
+* When possible, separate *code* from *data* and *configs*
+* Write protect code and configs
+
+.left[All of these practices are supported in the [galaxyproject.galaxy][galaxy-role] Ansible role and covered in the [Galaxy Installation with Ansible][ansible-galaxy-tutorial] tutorial!]
+
+[galaxy-role]: https://galaxy.ansible.com/galaxyproject/galaxy
+[ansible-galaxy-tutorial]: {% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}
