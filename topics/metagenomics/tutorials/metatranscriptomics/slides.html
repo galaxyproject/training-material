@@ -261,7 +261,7 @@ These are some examples of ways to trim and filter data, but many more are possi
 
 ---
 
-## FastQ interlace
+## FastQ interlacer
 
 - Paired-end data often comes in two separate FastQ files
 - One file with *forward* reads, one with *reverse* reads
@@ -272,7 +272,7 @@ These are some examples of ways to trim and filter data, but many more are possi
 
 ---
 
-## FastQ interlace
+## FastQ interlacer
 
 - Some tools require a single **interlaced** FastQ file
 - Galaxy has tools for **interlacing** and **deinterlacing** FastQ files
@@ -354,12 +354,21 @@ About the caveat: The theoretical problem is that we quantify species abundance 
 
 ![functional analysis workflow schematic](../../images/metatranscriptomics/workflow_functional.png)
 
+???
+HUMAnN2 
+- next generation
+- HMP Unified Metabolic Analysis Network
+- developed by Huttenhower lab 
+- itself a workflow/pipeline
+- basically answering the question about what the microbial community is capable of?
+
 ---
 
 ## HUMAnN2 {% icon tool %}
 
 - Profiles presence/absence and abundance of microbial community
 - Efficiently characterizes microbial metabolic pathways
+
 
 - **Input**
   - Interlaced non-rRNA reads
@@ -369,6 +378,10 @@ About the caveat: The theoretical problem is that we quantify species abundance 
   - Gene families and their abundance
   - Pathways and their coverage
   - Pathways and their abundance
+
+???
+- contains 5 parts -> non rRNA reads, MetaPhlAn taxonomy, NCBI nucleotide db, Uniref 50/90 protein db, MetaCyc/Unipathway.
+- Show the Galaxy wrapper
 
 ---
 
@@ -431,14 +444,10 @@ class: top
 .image-75[![](../../images/metatranscriptomics/humann2_tiered4.png)]
 ]
 
----
-
-## Gene Families Abundances
-
-![](../../images/metatranscriptomics/gene_family_abundance.png)
-
-RPK (reads per kilobase) = sum of alignment scores
-
+???
+Takes non rRNA reads + MetaPhlAn2 gives list of abundant organism, then it does Nucleotide level pangenome mapping with Bowtie and uses CHocophlAN db
+giving unmapped and organims specific gene hits, the unmapped reads are further searched against accelerated translated protein database
+the protein hits are tehn combined with gene hits and metacyc to give the output.
 
 ---
 
@@ -449,15 +458,37 @@ RPK (reads per kilobase) = sum of alignment scores
 
 ---
 
+## Gene Families Abundances
+
+![](../../images/metatranscriptomics/gene_family_abundance.png)
+
+RPK (reads per kilobase) = sum of alignment scores
+
+???
+Gene families: groups of evolutionary related protein that perform similar function
+Pathway: sum over genes catalyzing the reaction
+Pathway coverage: presence/absence
+RPK relative gene copy number : is computed as the sum of all alignments scores over a particular gene family
+UNMAPPED: total number of reads that remained unmapped even after both alignment steps
+UNINTEGRATED: no pathway detected.
+
+---
+
 ## Gene Families to Functional Annotation
 
 ![](../../images/metatranscriptomics/results_functional_annotation.png)
 
+???
+Gene familes are too large depending on the complexity thus to simplify users can regroup gene families using grouping tool, can download mapping files.
+HUMAnN2 regroups Uniref 50/90 values to Go terms to get a broad overview.
 ---
 
 ## Group Abundances
 
 ![](../../images/metatranscriptomics/results_group_abundances.png)
+
+??? 
+Group abundances converts GO terms to Go slim (subset of GO terms) into Mol function, biological process and cellular components.
 
 ---
 
@@ -511,7 +542,9 @@ Cellular Component
 
 ]
 
-
+???
+g is genus
+s is species level
 ---
 
 ## Unpack pathway abundances to show genes included
@@ -529,11 +562,23 @@ Cellular Component
 
 .image-75[![results](../../images/metatranscriptomics/results_cellulose_degradation.png)]
 
+???
+explain about datasets first
+cellulose 1,4 beta-cellulobiosidase responsible for hydrolysis of cellulose
+Gene encoding for the cellulose-binding domain
+protein shows an initial decrease and subsequent
+increase during cellulose degradation. 
 ---
 
 ## Functions associated with a selected taxon
 
 .image-75[![results](../../images/metatranscriptomics/results_functions_taxon.png)]
+
+???
+In gene abundance, Coprothermobacter and Clostridium were observed to be the
+most abundant. 
+In this figure we are looking at Coprothermobacter only->Glycolysis is observed to be the most abundant functional pathway across time points in
+Coprothermobacter
 
 ---
 
@@ -541,7 +586,9 @@ Cellular Component
 
 .image-75[![results](../../images/metatranscriptomics/results_taxa_function.png)]
 
-
+???
+This figure shows the contribution of genera to adenosine ribonucleotides denovo biosynthesis across time points.
+it shows during ATP synthesis, we see clostridium and coprothermobacter in abundance.
 ---
 
 # Tabular Outputs from ASaIM Workflow
@@ -556,5 +603,6 @@ Cellular Component
     - Molecular Function
     - Cellular Component
   - Gene Family
+
 
 
