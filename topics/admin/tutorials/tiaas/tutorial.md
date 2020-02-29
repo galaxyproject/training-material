@@ -26,7 +26,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
-      - heterogeneous-compute
+      - pulsar
 ---
 
 
