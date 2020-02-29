@@ -11,7 +11,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Controlling Galaxy with Supervisor</title>
+    <title>Controlling Galaxy with systemd or Supervisor</title>
     
         <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,7 +32,7 @@
     
     
     <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-    <meta property="og:title" content="Galaxy Training: Controlling Galaxy with Supervisor" />
+    <meta property="og:title" content="Galaxy Training: Controlling Galaxy with systemd or Supervisor" />
     <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
     <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     <script type="application/ld+json">
@@ -75,7 +75,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Controlling Galaxy with Supervisor",
+  "headline": "Controlling Galaxy with systemd or Supervisor",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -110,7 +110,7 @@
   },
   "courseCode": "admin / systemd-supervisor / slides",
   "learningResourceType": "slides",
-  "name": "Slides for 'Controlling Galaxy with Supervisor' tutorial",
+  "name": "Slides for 'Controlling Galaxy with systemd or Supervisor' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/systemd-supervisor/slides.html",
   "description": "",
   "hasPart": [
@@ -120,12 +120,20 @@
     {
       "@type": "Person",
       "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "about": [
@@ -160,7 +168,7 @@ class: center, middle, inverse
 
 ---
 
-# Controlling Galaxy with Supervisor
+# Controlling Galaxy with systemd or Supervisor
 
 
 
@@ -176,9 +184,93 @@ Press `P` again to switch presenter notes off
 
 class: special
 
+# systemd
+
+The current Linux init system
+
+Used to bootstrap the user space and to manage system processes after booting
+
+---
+class: left
+
+# systemd
+
+Replaces:
+- `/etc/init.d/*`, `/etc/rc?.d`
+- `service` command
+- Upstart
+- `update-rc.d`
+
+INI config format
+
+---
+# systemd - Layout
+
+- `/lib/systemd/system` - System service definitions
+- `/etc/systemd/system` - User-defined service definitions
+
+---
+# systemd - Galaxy service unit
+
+```ini
+[Unit]
+Description=Galaxy
+After=network.target
+After=time-sync.target
+
+[Service]
+UMask=022
+Type=simple
+User=galaxy
+Group=galaxy
+WorkingDirectory=/srv/galaxy/server
+TimeoutStartSec=10
+ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+Environment=HOME=/srv/galaxy VIRTUAL_ENV=/srv/galaxy/venv PATH=/srv/galaxy/venv/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin DOCUTILSCONFIG= PYTHONPATH=/srv/galaxy/server/lib/galaxy/jobs/rules 
+MemoryLimit=32G
+Restart=always
+
+MemoryAccounting=yes
+CPUAccounting=yes
+BlockIOAccounting=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+# systemd - systemctl
+
+`systemctl` is the command line interface to systemd
+
+- `systemctl status &lt;name&gt;[.service]`
+- `systemctl &lt;start|stop|restart|...&gt; &lt;name&gt;[.service]`
+- `systemctl &lt;enable|disable&gt; &lt;name&gt;[.service]`
+
+---
+# systemd - Galaxy service
+
+```console
+$ systemctl status galaxy
+● galaxy.service - Galaxy
+   Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-02-26 19:46:03 UTC; 1 day 20h ago
+ Main PID: 7845 (uwsgi)
+    Tasks: 45 (limit: 4915)
+   Memory: 569.2M (limit: 32.0G)
+      CPU: 5h 43min 35.436s
+   CGroup: /system.slice/galaxy.service
+           ├─7845 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           ├─8106 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           ├─8111 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           └─8112 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+```
+
+---
+
 # Supervisor
 
-.footnote[\#usegalaxy / @galaxyproject]
+The former recommended method for managing multiple Galaxy processes
 
 ---
 # Supervisor
@@ -233,66 +325,9 @@ stopsignal      = INT
 ```
 
 ---
-class: special
+# Supervisor + systemd
 
-# Systemd
-
-The current Linux init system
-- Used to bootstrap the user space and to manage system processes after booting
-
-.footnote[\#usegalaxy / @galaxyproject]
-
----
-# Systemd
-
-Replaces:
-- `/etc/init.d/*`, `/etc/rc?.d`
-- `service` command
-- Upstart
-- `update-rc.d`
-
-INI config format
-
----
-# Systemd - Layout
-
-- `/lib/systemd/system` - System service definitions
-- `/etc/systemd/system` - User-defined service definitions
-
----
-class: smaller
-# Systemd - Service file
-
-```ini
-[Unit]
-Description=Supervisor process control system for UNIX
-Documentation=http://supervisord.org
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
-KillMode=process
-Restart=on-failure
-RestartSec=50s
-
-[Install]
-WantedBy=multi-user.target
-```
-
----
-# Systemd - systemctl
-
-`systemctl` is the command line interface to systemd
-
-- `systemctl &lt;start|stop|restart|...&gt; &lt;name&gt;[.service]`
-- `systemctl &lt;enable|disable&gt; &lt;name&gt;[.service]`
-
----
-# Systemd + supervisor
-
-Ensure that systemd is configured to start supervisor with:
+If you prefer, you can use Supervisor to manage the Galaxy processes. The OS needs to ensure the Supervisor daemon is running, and probably manages it with systemd, as is common on most systems currently.
 
 ```console
 $ systemctl status supervisor
@@ -319,7 +354,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 <div class="contributors-line">
 
 
-<a href="/training-material/hall-of-fame#natefoo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>
+<a href="/training-material/hall-of-fame#natefoo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame#hexylena" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
 
 
 </div>

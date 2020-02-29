@@ -563,7 +563,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 28, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -635,7 +635,18 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add a <code class="highlighter-rouge">pre_task</code> to create the <code class="highlighter-rouge">/data2</code> folder <a href="https://docs.ansible.com/ansible/latest/modules/file_module.html">using the file module</a>, exactly like for the <code class="highlighter-rouge">/data</code> folder.</p>
+      <p>Add a <code class="highlighter-rouge">pre_task</code> to create the <code class="highlighter-rouge">/data2</code> folder <a href="https://docs.ansible.com/ansible/latest/modules/file_module.html">using the file module</a>.</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - name: Create the second storage directory
+      file:
+        owner: <span class="notranslate">galaxy</span>
+        group: <span class="notranslate">galaxy</span>
+        path: /data2
+        state: directory
+        mode: '0755'
+</code></pre></div>      </div>
+
+      <p>We’ve hardcoded the user/group because creating a storage directory is unusual. In normal practice someone provides you with an NFS mount and you will simply point your <span class="notranslate">Galaxy</span> there.</p>
     </li>
     <li>
       <p>Run the playbook and restart <span class="notranslate">Galaxy</span></p>
@@ -765,8 +776,8 @@
     author = "Nate Coraor and Helena Rasche",
     title = "Distributed Object Storage (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "20"
+    month = "02",
+    day = "28"
     url = "\url{/training-material/topics/admin/tutorials/object-store/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

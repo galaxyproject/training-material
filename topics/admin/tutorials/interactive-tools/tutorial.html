@@ -580,7 +580,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 27, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 29, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -907,8 +907,8 @@
       <li>Node.js version 10.13.0 was installed in to the venv</li>
       <li>The proxy was cloned to <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy</code></li>
       <li>The proxy’s Node dependencies were installed to <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy/node_modules</code> using the venv’s <code class="highlighter-rouge">npm</code></li>
-      <li>A SystemD service unit was installed at <code class="highlighter-rouge">/etc/systemd/system/<span class="notranslate">galaxy</span>-gie-proxy.service</code></li>
-      <li>The SystemD daemon was reloaded to read this new service unit</li>
+      <li>A systemd service unit was installed at <code class="highlighter-rouge">/etc/systemd/system/<span class="notranslate">galaxy</span>-gie-proxy.service</code></li>
+      <li>The systemd daemon was reloaded to read this new service unit</li>
       <li>The service was set to start on boot and started</li>
     </ol>
 
@@ -916,7 +916,7 @@
 
 </blockquote>
 
-<p>Because the proxy runs as a SystemD service, you can inspect the log of the service using <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code>. The service name is <code class="highlighter-rouge"><span class="notranslate">galaxy</span>-gie-proxy</code>:</p>
+<p>Because the proxy runs as a systemd service, you can inspect the log of the service using <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code>. The service name is <code class="highlighter-rouge"><span class="notranslate">galaxy</span>-gie-proxy</code>:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>jou<span class="notranslate">rna</span>lctl <span class="nt">-eu</span> <span class="notranslate">galaxy</span>-gie-proxy
 <span class="go">Feb 14 17:38:49 gcc-4 systemd[1]: Started <span class="notranslate">Galaxy</span> IE/IT Proxy.
@@ -1277,7 +1277,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
   <li>Use <a href="https://github.com/galaxyproject/pulsar">Pulsar</a>, <span class="notranslate">Galaxy</span>’s remote job execution engine, to provide full job isolation: this avoids all access to <span class="notranslate">Galaxy</span> data, with the performance penalty of copying input dataset(s) to the job directory.</li>
 </ol>
 
-<p>Because we want to maintain dataset privacy, Pulsar is the better choice here. And in fact, we don’t even need to set up a Pulsar server: because we only need Pulsar’s input staging and isolation features, we can use <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106">Embedded Pulsar</a>, which runs a Pulsar server within the <span class="notranslate">Galaxy</span> application to perform these tasks. Embedded Pulsar can even interface with your distributed resource manager (aka cluster scheduler) of choice, as long as your <span class="notranslate">Galaxy</span> server and cluster both have access to a common filesystem (otherwise, you will need to use Pulsar in standalone mode; see the <a href="/training-material/topics/admin/tutorials/heterogeneous-compute/tutorial.html">Running Jobs on Remote Resources with Pulsar</a> tutorial).</p>
+<p>Because we want to maintain dataset privacy, Pulsar is the better choice here. And in fact, we don’t even need to set up a Pulsar server: because we only need Pulsar’s input staging and isolation features, we can use <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106">Embedded Pulsar</a>, which runs a Pulsar server within the <span class="notranslate">Galaxy</span> application to perform these tasks. Embedded Pulsar can even interface with your distributed resource manager (aka cluster scheduler) of choice, as long as your <span class="notranslate">Galaxy</span> server and cluster both have access to a common filesystem (otherwise, you will need to use Pulsar in standalone mode; see the <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">Running Jobs on Remote Resources with Pulsar</a> tutorial).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-running-interactive-tools-with-embedded-pulsar"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running Interactive Tools with Embedded Pulsar</h3>
@@ -1470,7 +1470,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     title = "Galaxy Interactive Tools (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "27"
+    day = "29"
     url = "\url{/training-material/topics/admin/tutorials/interactive-tools/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

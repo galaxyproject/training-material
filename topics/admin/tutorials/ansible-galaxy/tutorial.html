@@ -486,7 +486,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 27, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 28, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -522,7 +522,7 @@
       <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
       <li><a href="#postgresql" id="markdown-toc-postgresql">PostgreSQL</a></li>
       <li><a href="#galaxy" id="markdown-toc-galaxy"><span class="notranslate">Galaxy</span></a></li>
-      <li><a href="#systemd" id="markdown-toc-systemd">SystemD</a></li>
+      <li><a href="#systemd" id="markdown-toc-systemd">systemd</a></li>
       <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
       <li><a href="#disaster-strikes-optional" id="markdown-toc-disaster-strikes-optional">Disaster Strikes! (Optional)</a></li>
       <li><a href="#keeping-galaxy-updated" id="markdown-toc-keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</a></li>
@@ -1248,7 +1248,7 @@ So it is not always easy to tell what variables will be set, or what their final
   </ol>
 </blockquote>
 
-<p><span class="notranslate">Galaxy</span> is now configured with an admin user, a database, and a place to store data. Additionally we’ve immediately configured the mules for production <span class="notranslate">Galaxy</span> serving. So we’re ready to set up SystemD which will manage the <span class="notranslate">Galaxy</span> processes!</p>
+<p><span class="notranslate">Galaxy</span> is now configured with an admin user, a database, and a place to store data. Additionally we’ve immediately configured the mules for production <span class="notranslate">Galaxy</span> serving. So we’re ready to set up systemd which will manage the <span class="notranslate">Galaxy</span> processes!</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-optional-launching-uwsgi-by-hand-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: (Optional) Launching uWSGI by hand</h3>
@@ -1262,12 +1262,12 @@ So it is not always easy to tell what variables will be set, or what their final
   </ol>
 </blockquote>
 
-<h2 id="systemd">SystemD</h2>
+<h2 id="systemd">systemd</h2>
 
-<p>Launching <span class="notranslate">Galaxy</span> by hand is not a good use of your time, so we will immediately switch to a process manager for that, <a href="https://freedesktop.org/wiki/Software/systemd/">SystemD</a>.</p>
+<p>Launching <span class="notranslate">Galaxy</span> by hand is not a good use of your time, so we will immediately switch to a process manager for that, <a href="https://freedesktop.org/wiki/Software/systemd/">systemd</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-systemd"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SystemD</h3>
+  <h3 id="hands_on-hands-on-systemd"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: systemd</h3>
 
   <ol>
     <li>
@@ -1276,7 +1276,7 @@ So it is not always easy to tell what variables will be set, or what their final
     <li>
       <p>Add the following to the bottom of your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># SystemD</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># systemd</span>
 <span class="na"><span class="notranslate">galaxy</span>_systemd_mode</span><span class="pi">:</span> <span class="s">mule</span>
 <span class="na"><span class="notranslate">galaxy</span>_zergpool_listen_addr</span><span class="pi">:</span> <span class="s">127.0.0.1:8080</span>
 <span class="na"><span class="notranslate">galaxy</span>_restart_handler_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Restart</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
@@ -1285,7 +1285,7 @@ So it is not always easy to tell what variables will be set, or what their final
       <p>The last variable, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>, informs the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role that it should look for a handler with that name, and trigger it whenever changes are made to <span class="notranslate">Galaxy</span>’s configuration. Now we’ll define the handler:</p>
     </li>
     <li>
-      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use SystemD to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/systemd_module.html">SystemD Ansible module</a>. Handlers are structured just like tasks:</p>
+      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use systemd to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/systemd_module.html">systemd Ansible module</a>. Handlers are structured just like tasks:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ <span class="notranslate">galaxy</span>.yml
@@ -1372,7 +1372,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
 <ul>
   <li>PostgreSQL running</li>
-  <li><span class="notranslate">Galaxy</span> running (managed by SystemD)</li>
+  <li><span class="notranslate">Galaxy</span> running (managed by systemd)</li>
 </ul>
 
 <p>When we first configured <span class="notranslate">Galaxy</span>, we used the setting <code class="highlighter-rouge">http: 0.0.0.0:8080</code>, which instructed uWSGI to handle the serving of <span class="notranslate">Galaxy</span>, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.</p>
@@ -1838,7 +1838,7 @@ index ce17525..54d0746 100644
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "02",
-    day = "27"
+    day = "28"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

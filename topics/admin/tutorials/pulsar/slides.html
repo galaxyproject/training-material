@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Running Jobs on Remote Resources with Pulsar</title>
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css" id="theme">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+    <meta property="og:title" content="Galaxy Training: Running Jobs on Remote Resources with Pulsar" />
+    <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Running Jobs on Remote Resources with Pulsar",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "courseCode": "admin / pulsar / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Running Jobs on Remote Resources with Pulsar' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/pulsar/slides.html",
+  "timeRequired": "PT60M",
+  "keywords": "jobs",
+  "description": "The questions this  addresses are:\n - How does pulsar work?\n - How can I deploy it?\n\n\\nThe objectives are:\n - Have an understanding of what Pulsar is and how it works\n - Install and configure a Pulsar server on a remote linux machine\n - Be able to get Galaxy to send jobs to a remote Pulsar server\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    "A server/VM on which to deploy Pulsar"
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Simon Gladman"
+    },
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/admin" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/pulsar/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Running Jobs on Remote Resources with Pulsar
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+
+
+    
+        
+        
+            
+        
+- [Galaxy Server administration](/training-material/topics/admin)
+    - Ansible: [<i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/admin/tutorials/ansible/slides.html) - [<i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/admin/tutorials/ansible/tutorial.html)
+    - Galaxy Installation with Ansible: [<i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/admin/tutorials/ansible-galaxy/slides.html) - [<i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html)
+    
+
+    
+- A server/VM on which to deploy Pulsar
+    
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+---
+
+# What are heterogenous compute resources?
+
+Differences in:
+- Operating system or version
+- Users/groups
+- Data accessibility
+- Administrative control
+- Physical Location (i.e. Cities)
+
+Galaxy expects:
+- One OS, version (dependencies)
+- Shared filesystem w/ fixed paths
+
+---
+# Example - Australia
+
+![australia_locations.png](../../images/australia_locations.png)
+
+---
+# Partial solution - CLI job runner
+
+SSH to remote, submit jobs with CLI `sbatch`, `qsub`, etc.
+
+Still depends on shared FS
+
+---
+# Pulsar
+
+![pulsar_logo.png](../../images/pulsar_logo.png)
+
+Galaxy's remote job management system
+
+* Can run jobs on any(?) OS including Windows
+
+* Multiple modes of operation for every environment
+
+---
+# Pulsar - Architecture
+
+* Pulsar server runs on remote resource (e.g. cluster head node)
+
+* Galaxy Pulsar job runner is Pulsar client
+
+* Transport is HTTP or AMQP, language is JSON
+
+---
+# Pulsar - Architecture
+
+![pulsar_schematic.png](../../images/pulsar_schematic.png)
+
+---
+# Pulsar Transports - RESTful
+
+Pulsar server listens over HTTP(S)
+
+Pulsar client initiates connections to server
+
+Good for:
+- Environments where firewall, open ports are not concerns
+- No external dependencies (AMQP server)
+
+---
+# Pulsar Transports - AMQP
+
+Pulsar server and client connect to AMQP server
+
+Good for:
+- Firewalled/NATted remote compute
+- Networks w/ bad connectivity
+
+---
+# Pulsar Transports - Embedded
+
+Galaxy runs Pulsar server internally
+
+Good for:
+- Manipulating paths
+- Copying input datasets from non-shared filesystem
+
+---
+# Pulsar - Job file staging
+
+Pulsar can be configured to *push* or *pull* when using RESTful:
+- Push
+  - Galaxy sends job inputs, metadata to Pulsar over HTTP
+  - Upon completion signal from Pulsar, Galaxy pulls from Pulsar over HTTP
+- Pull
+  - Upon setup signal, Pulsar pulls job inputs, metadata from Galaxy over HTTP
+  - Upon completion, Pulsar pushes to Galaxy over HTTP
+
+Pulsar can use libcurl for more robust transfers with resume capability
+
+AMQP is pull-only because Pulsar does not run HTTP server
+
+---
+# Pulsar - Dependency management
+
+Pulsar does not provide Tool Shed tool dependency management. But:
+- It has a similar dependency resolver config to Galaxy
+- It can auto-install **conda** dependencies
+- It can use containers too!
+
+---
+# Pulsar - Job management
+
+Pulsar &quot;managers&quot; provide job running interfaces:
+- `queued_python`: Run locally on the Pulsar server
+- `queued_drmaa`: Run on a cluster with DRMAA
+- `queued_cli`: Run on a cluster with local `qsub`, `sbatch`, etc.
+- `queued_condor`: Run on HTCondor
+
+---
+# Pulsar Australia
+
+![pulsar_australia.png](../../images/pulsar_australia.png)
+
+---
+
+# Resources
+
+* Pulsar Read-the-docs
+    * [https://pulsar.readthedocs.io/en/latest/index.html](https://pulsar.readthedocs.io/en/latest/index.html)
+* Pulsar on galaxyproject.org
+    * [https://galaxyproject.org/admin/config/pulsar/](https://galaxyproject.org/admin/config/pulsar/)
+* Pulsar Github
+    * [https://github.com/galaxyproject/pulsar](https://github.com/galaxyproject/pulsar)
+* Pulsar Ansible
+    * [https://github.com/galaxyproject/ansible-pulsar](https://github.com/galaxyproject/ansible-pulsar)
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+<a href="/training-material/hall-of-fame#natefoo" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame#slugger70" class="contributor-badge"><img src="https://avatars.githubusercontent.com/slugger70" alt="Simon Gladman">Simon Gladman</a>, <a href="/training-material/hall-of-fame#mvdbeek" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek">Marius van den Beek</a>, <a href="/training-material/hall-of-fame#hexylena" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/pulsar/slides.html)]
+
+    </textarea>
+    <script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+  </body>
+</html>
