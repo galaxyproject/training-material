@@ -81,7 +81,7 @@ We need to create a new ansible playbook to install Pulsar. We will be using a *
 >
 >    ```yaml
 >    - src: galaxyproject.pulsar
->      version: 1.0.1
+>      version: 1.0.2
 >    ```
 >
 > 2. Now install it with:
