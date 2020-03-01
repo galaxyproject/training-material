@@ -144,7 +144,7 @@ Some of the other options we will be using are:
 >    pulsar_host: 0.0.0.0
 >    pulsar_port: 8913
 >
->    private_token: '<some_really_long_string_here>'
+>    private_token: your_private_token_here
 >
 >    pulsar_create_user: true
 >    pulsar_user: {name: pulsar, shell: /bin/bash}
@@ -171,10 +171,18 @@ Some of the other options we will be using are:
 >      conda_auto_install: True
 >      staging_directory: "{{ pulsar_staging_dir }}"
 >      private_token: "{{ private_token }}"
+>
+>    # NGINX
+>    nginx_selinux_allow_local_connections: true
+>    nginx_servers:
+>      - pulsar-proxy
+>    nginx_enable_default_server: false
+>    nginx_conf_http:
+>      client_max_body_size: 5g
 >    ```
 >    {% endraw %}
 >
-> 2. Replace `<some_really_long_string_here>` with a long randomish (or not) string.
+> 2. Replace `your_private_token_here` with a long randomish (or not) string.
 >
 > 3. Add the following lines to your `hosts` file:
 >
@@ -182,6 +190,24 @@ Some of the other options we will be using are:
 >    [pulsarservers]
 >    <ip_address of your pulsar server>
 >    ```
+>
+> 4. Create the file `templates/nginx/pulsar-proxy.j2` with the following contents:
+>
+>    ```nginx
+>    server {
+>        # Listen on 80, you should secure your server better :)
+>        listen 80 default_server;
+>        listen [::]:80 default_server;
+>
+>        location / {
+>            proxy_redirect off;
+>            proxy_set_header Host $host;
+>            proxy_set_header X-Real-IP $remote_addr;
+>            proxy_pass http://localhost:8913;
+>        }
+>    }
+>    ```
+>
 {: .hands_on}
 
 We will now write a new playbook for the pulsar installation similar to the one we did for the CVMFS installation earlier in the week.
@@ -216,11 +242,17 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >            mode: 0755
 >          become: yes
 >      roles:
+>        - role: galaxyproject.nginx
+>          become: yes
 >        - galaxyproject.pulsar
 >    ```
 >    {% endraw %}
 >
 >    There are a couple of *pre-tasks* here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.
+>
+>    > ### {% icon comment %} Why NGINX?
+>    Additionally we install NGINX, you might not have expected this! We used to use Pulsar's webserving directly via uWSGI, but in Python 3 Galaxy, the requests that are sent to Pulsar are chunked, a transfer encoding that is not part of the wsgi spec and unsupported. *Our recommendation*: avoid all of this weirdness and use RabbitMQ as the transport instead. Unfortunately that is currently outside of the scope of this tutorial.
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -298,7 +330,7 @@ There are three things we need to do here:
 >
 >    ```xml
 >    <destination id="pulsar" runner="pulsar_runner" >
->        <param id="url">http://your_ip_address_here:8913/</param>
+>        <param id="url">http://your_ip_address_here:80/</param>
 >        <param id="private_token">your_private_token_here</param>
 >    </destination>
 >    ```
