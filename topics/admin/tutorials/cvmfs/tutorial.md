@@ -5,10 +5,10 @@ title: "Reference Data with CVMFS"
 zenodo_link: ""
 questions:
 objectives:
-- Have an understanding of what CVMFS is and how it works
-- Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository
-- Configure your Galaxy to use these reference genomes and indices
-- Use an ansible playbook for all of the above.
+  - Have an understanding of what CVMFS is and how it works
+  - Install and configure the CVMFS client on a linux machine and mount the Galaxy reference data repository
+  - Configure your Galaxy to use these reference genomes and indices
+  - Use an Ansible playbook for all of the above.
 time_estimation: "1h"
 key_points:
 contributors:
@@ -44,7 +44,7 @@ From the Cern website:
 
 A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
 
-There are two sections to this exercise. The first shows you how to use ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.
+There are two sections to this exercise. The first shows you how to use Ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.
 
 If you really want to perform all these tasks manually, go [here](#cvmfs-and-galaxy-without-ansible), otherwise just follow along.
 
@@ -68,11 +68,11 @@ The Galaxy project supports a few CVMFS repositories.
 
 You can browse the contents of `data.galaxyproject.org` at the [datacache](http://datacache.galaxyproject.org/).
 
-## Installing and configuring Galaxy's CVMFS reference data with ansible
+## Installing and configuring Galaxy's CVMFS reference data with Ansible
 
-Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.
+Luckily for us, the Galaxy Project has a lot of experience with using and configuring CVMFS and we are going to leverage off that. To get CVMFS working on our Galaxy server, we will use the Ansible role for CVMFS written by the Galaxy Project. Firstly, we need to install the role and then write a playbook for using it.
 
-If the terms "ansible", "role" and "playbook" mean nothing to you, please checkout [the ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %})
+If the terms "Ansible", "role" and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %})
 
 {% include snippets/ansible_local.md %}
 
@@ -82,16 +82,19 @@ If the terms "ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    ```yaml
 >    ---
->    - galaxyproject.cvmfs
+>    - src: galaxyproject.cvmfs
+>      version: 0.2.8
 >    ```
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
->    ```bash
->    ansible-galaxy install -p roles -r requirements.yml
+>    ```console
+>    ansible-galaxy role install -p roles -r requirements.yml
 >    ```
 >
-> 3. Create and edit the group variables file, `group_vars/galaxyservers.yml` file.
+> 3. Edit the group variables file, `group_vars/galaxyservers.yml`:
+>
+>    <br/>
 >
 >    The variables available in this role are:
 >
@@ -103,31 +106,35 @@ If the terms "ansible", "role" and "playbook" mean nothing to you, please checko
 >    | `cvmfs_repositories` | list of dicts | CVMFS repository configurations, `CVMFS_REPOSITORIES` in `/etc/cvmfs/default.local` plus additional settings in `/etc/cvmfs/repositories.d/<repository>/{client,server}.conf`. |
 >    | `cvmfs_quota_limit`  | integer in MB | Size of CVMFS client cache. Default is `4000`.                                                                                                                                 |
 >
->    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to true. We will also set the `cvmfs_quota_limit` to something sensible as we have relatively small disks on our instances (2000MB).
+>    <br/>
+>
+>    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to `config-repo`. We will also set the `cvmfs_quota_limit` to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.
+>
+>    <br/>
 >
 >    Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
 >    ```yaml
->    ---
 >    # CVMFS vars
 >    cvmfs_role: client
->    galaxy_cvmfs_repos_enabled: true
->    cvmfs_quota_limit: 2000
+>    galaxy_cvmfs_repos_enabled: config-repo
+>    cvmfs_quota_limit: 500
 >    ```
 >
-> 4. Create and edit a new playbook which uses the CVMFS role, name it `cvmfs_playbook.yml`
+> 4. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
 >    ```yaml
 >    - hosts: galaxyservers
 >      become: true
 >      roles:
+>        # ... existing roles ...
 >        - galaxyproject.cvmfs
 >    ```
 >
 > 5. Run the playbook
 >
 >    ```
->    ansible-playbook -i hosts cvmfs_playbook.yml
+>    ansible-playbook galaxy.yml
 >    ```
 {: .hands_on}
 
@@ -161,7 +168,7 @@ Congratulations, you've set up CVMFS.
 
 ## Configuring Galaxy to use the CVMFS references.
 
-Now that we have mounted the cvmfs repository we need to tell Galaxy how to find it and use it.
+Now that we have mounted the CVMFS repository we need to tell Galaxy how to find it and use it.
 
 There are two primary directories in the reference data repository:
 
@@ -189,18 +196,11 @@ Examples of data include:
 * Mutation Annotation Format (`.maf`) files
 * SAMTools FASTA indexes (`.fai`)
 
-Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, "Galaxy Installation with Ansible". The hands-on below will use the Galaxy Project Ansible role to configure everything.
+Now all we need to do is tell Galaxy how to find it! This tutorial assumes that you have run the tutorial in the requirements, [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}). The hands-on below will use the Galaxy Project Ansible role to configure everything.
 
 > ### {% icon hands_on %} Hands-on: Configuring Galaxy to use CVMFS
 >
-> 1. Edit the `group_vars/galaxyservers.yml` file and add a `tool_data_table_config_path` entry under the `galaxy_config:` section in the `groupvars/galaxyservers.yml` file.
->
->    ```yaml
->    galaxy_config:
->      galaxy:
->        ...
->        tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->    ```
+> 1. Edit the `group_vars/galaxyservers.yml` file and add a `tool_data_table_config_path` entry under the `galaxy` key of the `galaxy_config` section in the `group_vars/galaxyservers.yml` file. This new entry should be a list containing the paths to both `tool_data_table_conf.xml` files referenced above.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -208,7 +208,13 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > ```
+>    > > ```yaml
+>    > > galaxy_config:
+>    > >   galaxy:
+>    > >     # ... existing configuration options in the `galaxy` section ...
+>    > >     tool_data_table_config_path:
+>    > >       - /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml
+>    > >       - /cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -216,31 +222,13 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    {: .question}
 >
 >
-> 2. Because we want to alter some Galaxy settings now, we need to add the Galaxy role to our playbook.
+> 2. Re-run the playbook (`ansible-playbook galaxy.yml`)
 >
->    Add `galaxyproject.galaxy` to the `roles` in our `cvmfs_playbook.yml` file.
->
->    ```yaml
->    - hosts: galaxyservers
->      become: true
->      roles:
->        - galaxyproject.cvmfs
->        - galaxyproject.galaxy
->    ```
->
->    > ### {% icon comment %} Ansible Heads-up
->    > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a *handler* for restarting Galaxy (its name is set in the `galaxy_restart_handler_name` option in your group vars). You will need to define that handler in the CVMFS playbook the same way as you defined it in your original playbook. This also means that Ansible will perform the restart step below for you!
->    {: .comment}
->
-> 3. Re-run the CVMFS playbook (`ansible-playbook -i hosts cvmfs_playbook.yml`)
->
-> 4. Restart Galaxy
->
-> 5. In your Galaxy interface, open the `bwa`, `bwa-mem` or `Bowtie2` tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!
+> 3. In your Galaxy interface, open the **BWA** {% icon tool %}, **BWA-MEM** {% icon tool %} or **Bowtie2** {% icon tool %} tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!
 >
 >    ![available_genomes.png](../../images/available_genomes.png)
 >
-> 5. Login to Galaxy as the admin user, and go to **Admin → Local Data → View Tool Data Table Entries → bwa_mem indexes**
+> 4. Login to Galaxy as the admin user, and go to **Admin → Data Tables → bwa_mem indexes**
 >
 >    ![bwa_mem_indices.png](../../images/bwa_mem_indices.png)
 >
@@ -258,7 +246,7 @@ We are going to setup a CVMFS mount to the Galaxy reference data repository on o
 
 > ### {% icon hands_on %} Hands-on: Installing the CVMFS Client
 >
-> 1. On your remote machine, we need to first install the Cern software apt repo and then the cvmfs client and config utility:
+> 1. On your remote machine, we need to first install the Cern software apt repo and then the CVMFS client and config utility:
 >
 >    ```bash
 >    sudo apt install lsb-release
@@ -270,7 +258,7 @@ We are going to setup a CVMFS mount to the Galaxy reference data repository on o
 >    sudo apt install cvmfs cvmfs-config
 >    ```
 >
-> 2. Now we need to run the cvmfs setup script.
+> 2. Now we need to run the CVMFS setup script.
 >
 >    ```bash
 >    sudo cvmfs_config setup
@@ -290,12 +278,12 @@ The configuration is not complex for CVMFS:
 >    ```
 >    CVMFS_REPOSITORIES="data.galaxyproject.org"
 >    CVMFS_HTTP_PROXY="DIRECT"
->    CVMFS_QUOTA_LIMIT="4000"
+>    CVMFS_QUOTA_LIMIT="500"
 >    CVMFS_CACHE_BASE="/srv/cvmfs/cache"
 >    CVMFS_USE_GEOAPI=yes
 >    ```
 >
->    This tells cvmfs to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 4GB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to.
+>    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to.
 >
 > 2. Create a `/etc/cvmfs/domain.d/galaxyproject.org.conf` file with the following contents:
 >
@@ -303,7 +291,7 @@ The configuration is not complex for CVMFS:
 >    CVMFS_SERVER_URL="http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://galaxy.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
 >    ```
 >
->    This is a list of the available tier1 servers that have this repo. Note there is one in Penn State. We will most likely be connecting to this one.
+>    This is a list of the available stratum 1 servers that have this repo.
 >
 > 3. Create a `/etc/cvmfs/keys/data.galaxyproject.org.pub` file with the following contents:
 >

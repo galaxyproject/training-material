@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/heterogeneous-compute/tutorial
 
 title: "Running Jobs on Remote Resources with Pulsar"
 questions:
@@ -249,7 +251,7 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 > 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
 >
 >    ```bash
->    ansible-playbook -i hosts pulsar_playbook.yml
+>    ansible-playbook pulsar_playbook.yml
 >    ```
 >
 >    After the script has run, pulsar will be installed on the remote machines!

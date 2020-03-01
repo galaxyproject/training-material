@@ -1,0 +1,452 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "\n",
+  "format-version": "0.1",
+  "name": "Workflow 2: Community Profile [Metatranscriptomics]",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Interlaced QC controlled reads",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 885
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "98585ca9-938d-4d10-8ddd-3f3d3de7b73f",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "7feced94-5466-4d0e-92a0-c148321aff53"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2/metaphlan2/2.6.0.0",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+        "input_file": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "MetaPhlAn2",
+      "outputs": [
+        {
+          "name": "output_file",
+          "type": "tabular"
+        },
+        {
+          "name": "sam_output_file",
+          "type": "sam"
+        },
+        {
+          "name": "biom_output_file",
+          "type": "biom1"
+        }
+      ],
+      "position": {
+        "left": 497.5,
+        "top": 882
+      },
+      "post_job_actions": {
+        "HideDatasetActionbiom_output_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "biom_output_file"
+        },
+        "HideDatasetActionsam_output_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "sam_output_file"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2/metaphlan2/2.6.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "8c82c4d90cc6",
+        "name": "metaphlan2",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"min_cu_len\": \"\\\"2000\\\"\", \"min_alignment_len\": \"\\\"0\\\"\", \"input_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"ignore_eukaryotes\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"db\": \"{\\\"__current_case__\\\": 0, \\\"cached_db\\\": \\\"mpa_v20_m200\\\", \\\"db_selector\\\": \\\"cached\\\"}\", \"stat_q\": \"\\\"0.1\\\"\", \"ignore_viruses\": \"\\\"true\\\"\", \"ignore_archaea\": \"\\\"true\\\"\", \"analysis_type\": \"{\\\"__current_case__\\\": 0, \\\"analysis_type_select\\\": \\\"rel_ab\\\", \\\"tax_lev\\\": \\\"a\\\"}\", \"ignore_bacteria\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "2.6.0.0",
+      "type": "tool",
+      "uuid": "591f7aac-41ee-4c0a-b059-9fabfc27d62e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output_file",
+          "uuid": "fe1f2c48-463d-4e9b-aac1-5cab954bfcc2"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bebatut/format_metaphlan2_output/format_metaphlan2_output/0.1.0",
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+        "input_file": {
+          "id": 1,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Format MetaPhlAn2",
+      "outputs": [
+        {
+          "name": "all_taxo_level_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "kingdom_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "phylum_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "class_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "order_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "family_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "genus_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "species_abundance_file",
+          "type": "tabular"
+        },
+        {
+          "name": "strains_abundance_file",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 886.5,
+        "top": 163
+      },
+      "post_job_actions": {
+        "HideDatasetActionall_taxo_level_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "all_taxo_level_abundance_file"
+        },
+        "HideDatasetActionclass_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "class_abundance_file"
+        },
+        "HideDatasetActionfamily_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "family_abundance_file"
+        },
+        "HideDatasetActiongenus_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "genus_abundance_file"
+        },
+        "HideDatasetActionkingdom_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "kingdom_abundance_file"
+        },
+        "HideDatasetActionorder_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "order_abundance_file"
+        },
+        "HideDatasetActionphylum_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "phylum_abundance_file"
+        },
+        "HideDatasetActionspecies_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "species_abundance_file"
+        },
+        "HideDatasetActionstrains_abundance_file": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "strains_abundance_file"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bebatut/format_metaphlan2_output/format_metaphlan2_output/0.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "2bfa9b200600",
+        "name": "format_metaphlan2_output",
+        "owner": "bebatut",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"input_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": "0.1.0",
+      "type": "tool",
+      "uuid": "6e3762fe-0519-47a3-9cb3-9a1dcc680e23",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "profile": {
+          "id": 1,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Format MetaPhlAn2",
+      "outputs": [
+        {
+          "name": "krona",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 842.5,
+        "top": 968
+      },
+      "post_job_actions": {
+        "HideDatasetActionkrona": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "krona"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "fdbd63e92b01",
+        "name": "metaphlan2krona",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"profile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "2.6.0.0",
+      "type": "tool",
+      "uuid": "862f97cb-cdb9-436e-902f-8c33fa71a874",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "lefse_input": {
+          "id": 1,
+          "output_name": "output_file"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Export to GraPhlAn",
+      "outputs": [
+        {
+          "name": "tree",
+          "type": "txt"
+        },
+        {
+          "name": "annotation",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 847.5,
+        "top": 1201
+      },
+      "post_job_actions": {
+        "HideDatasetActionannotation": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "annotation"
+        },
+        "HideDatasetActiontree": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "tree"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "b16989c1e3a7",
+        "name": "export2graphlan",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"ftop\": \"\\\"\\\"\", \"background_clades\": \"\\\"\\\"\", \"max_clade_size\": \"\\\"\\\"\", \"def_font_size\": \"\\\"\\\"\", \"external_annotations\": \"\\\"3,4,5\\\"\", \"sperc\": \"\\\"\\\"\", \"__page__\": null, \"skip_rows\": \"\\\"\\\"\", \"title\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"metadata_rows\": \"\\\"\\\"\", \"least_biomarkers\": \"\\\"\\\"\", \"min_clade_size\": \"\\\"\\\"\", \"annotation_legend_font_size\": \"\\\"\\\"\", \"fperc\": \"\\\"\\\"\", \"annotations\": \"\\\"1,2\\\"\", \"lefse_input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"background_colors\": \"\\\"\\\"\", \"def_clade_size\": \"\\\"\\\"\", \"stop\": \"\\\"\\\"\", \"sname_row\": \"\\\"\\\"\", \"max_font_size\": \"\\\"\\\"\", \"fname_row\": \"\\\"\\\"\", \"abundance_threshold\": \"\\\"\\\"\", \"title_font_size\": \"\\\"\\\"\", \"input_lefse_output\": \"{\\\"__current_case__\\\": 1, \\\"input_lefse_output_test\\\": \\\"false\\\"}\", \"background_levels\": \"\\\"1\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"min_font_size\": \"\\\"\\\"\", \"most_abundant\": \"\\\"\\\"\"}",
+      "tool_version": "0.20+galaxy0",
+      "type": "tool",
+      "uuid": "d9d0bed2-f2fb-448c-bfc1-1fc575d60815",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "type_of_data|input": {
+          "id": 3,
+          "output_name": "krona"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Krona pie chart",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 1166.5,
+        "top": 1018
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1",
+      "tool_shed_repository": {
+        "changeset_revision": "1334cb4c6b68",
+        "name": "taxonomy_krona_chart",
+        "owner": "crs4",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"type_of_data\": \"{\\\"__current_case__\\\": 1, \\\"input\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"type_of_data_selector\\\": \\\"text\\\"}\", \"__rerun_remap_job_id__\": null, \"root_name\": \"\\\"Root\\\"\", \"combine_inputs\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "2.7.1",
+      "type": "tool",
+      "uuid": "77a05ed7-03e3-4131-be51-8be6160a075e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "8ac59669-c48b-4ad9-9e3c-bf03496c3541"
+        }
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "annot": {
+          "id": 4,
+          "output_name": "annotation"
+        },
+        "input_tree": {
+          "id": 4,
+          "output_name": "tree"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Generation, personalization and annotation of tree",
+      "outputs": [
+        {
+          "name": "output_tree",
+          "type": "phyloxml"
+        }
+      ],
+      "position": {
+        "left": 1164.5,
+        "top": 1262
+      },
+      "post_job_actions": {
+        "HideDatasetActionoutput_tree": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "output_tree"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/graphlan_annotate/graphlan_annotate/1.0.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "5d6f8f0bef7c",
+        "name": "graphlan_annotate",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"input_tree\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"annot\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null}",
+      "tool_version": "1.0.0.0",
+      "type": "tool",
+      "uuid": "891cb77c-c17f-48ff-9f3c-34d29da5ce99",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input_tree": {
+          "id": 6,
+          "output_name": "output_tree"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "GraPhlAn",
+      "outputs": [
+        {
+          "name": "png_output_image",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 1466.5,
+        "top": 1385
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/graphlan/graphlan/1.0.0.0",
+      "tool_shed_repository": {
+        "changeset_revision": "8f62f666dcb6",
+        "name": "graphlan",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"input_tree\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"pad\": \"\\\"\\\"\", \"image_format\": \"{\\\"__current_case__\\\": 0, \\\"dpi\\\": \\\"\\\", \\\"format\\\": \\\"png\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"size\": \"\\\"7\\\"\"}",
+      "tool_version": "1.0.0.0",
+      "type": "tool",
+      "uuid": "cc5c65ef-9902-4a2d-a501-97fa7d679a25",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "png_output_image",
+          "uuid": "318b525d-fc83-4feb-a5a5-6dd3833824b1"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "metagenomics"
+  ],
+  "uuid": "d6ff1144-2d19-4fa8-a17b-28e081a5d4ae",
+  "version": 3
+}

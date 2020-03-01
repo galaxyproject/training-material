@@ -233,7 +233,7 @@ Setting up Jenkins jobs is as simple as setting up a cron job, but the results a
 
 ## Ansible in Jenkins
 
-We will now setup Jenkins to run Ansible on cron. In the "Galaxy Installation with Ansible" tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.
+We will now setup Jenkins to run Ansible on cron. In the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.
 
 > ### {% icon hands_on %} Hands-on: Jenkins running Ansible
 >

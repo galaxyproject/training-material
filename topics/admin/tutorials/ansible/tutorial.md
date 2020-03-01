@@ -257,7 +257,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    > ### {% icon details %} Running Ansible on a different machine
 >    >
->    > The best practice is to have playbooks in git, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machine is one of the strengths of Ansible.
+>    > The best practice is to store playbooks in a git repository, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machine is one of the strengths of Ansible.
 >    >
 >    > In order to run remotely:
 >    >
@@ -334,12 +334,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > {: .solution }
 >     {: .question}
 >
-> 11. Run one of the following command, whichever is appropriate:
->
->     - Real remote host: `ansible-playbook -i hosts playbook.yml`
->     - Localhost: `ansible-playbook -i hosts -c local playbook.yml`
->
->     Even local users can run the 'real remote host' command, Ansible will just issue a warning. Running with `-c local` silences this warning.
+> 11. Run the playbook: `ansible-playbook -i hosts playbook.yml`
 >
 >     > ### {% icon question %} Question
 >     >
@@ -601,7 +596,11 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
->    > > The solution to this is to set `become: true`. Edit your playbook.yml and add `become: true` just below `hosts: my_hosts`.
+>    > > The solution to this is to set `become: true`.
+>    > >
+>    > > 1. Edit your playbook.yml
+>    > >   - add `become: true` just below `hosts: my_hosts`
+>    > > 2. Run the playbook again
 >    > >
 >    > > `become` causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is `root`. If you want to become a different user, just set `become_user`. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set `--ask-become-pass`, using the privilege escalation password for that host.
 >    > >
@@ -676,18 +675,18 @@ Now that you have a small role built up, you might start thinking about deployin
 > 5. Add encrypted variable file to `playbook.yml`
 >
 >    ```yaml
->     - hosts: my_hosts
->       ...
->       vars_files:
->        - secret_group_vars/all.yml
->     ```
+>    - hosts: my_hosts
+>      ...
+>      vars_files:
+>       - secret_group_vars/all.yml
+>    ```
 >
 > 6. Tell ansible where to find the decryption file. Create file `ansible.cfg` with content
 >
->     ```yaml
->     [default]
->     vault_password_file=vault-password.txt
->     ```
+>    ```yaml
+>    [defaults]
+>    vault_password_file=vault-password.txt
+>    ```
 > 7. Run the playbook
 >
 > 8. Check the contents of `/tmp/test.ini`
@@ -702,7 +701,7 @@ Now that you have a small role built up, you might start thinking about deployin
 >    > >
 >    > > ```ini
 >    > > [example]
->    > > server_name = Cats!
+>    > > server_name = Dogs!
 >    > > listen = 192.168.0.2
 >    > > apikey = super-secret-api-key-wow!
 >    > > ```
