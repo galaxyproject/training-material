@@ -51,7 +51,7 @@ We will introduce additional benefits of using JupyterLab as you cover the lesso
 
 ## Opening up JupyterLab
 
-{% include snippets/launch_jupyterlab %}
+{% include snippets/launch_jupyterlab.md %}
 
 You should now be looking at a page with the JupyterLab interface:
 
