@@ -1,7 +1,12 @@
+---
+# Python 3 support
+pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
+certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
+pip_package: python3-pip                               # geerlingguy.pip
+
 # PostgreSQL
 postgresql_objects_users:
   - name: galaxy
-    password: null
 postgresql_objects_databases:
   - name: galaxy
     owner: galaxy
@@ -12,23 +17,22 @@ galaxy_separate_privileges: true
 galaxy_manage_paths: true
 galaxy_layout: root-dir
 galaxy_root: /srv/galaxy
-galaxy_file_path: /data
 galaxy_user: {name: galaxy, shell: /bin/bash}
-galaxy_commit_id: release_19.05
+galaxy_commit_id: release_20.01
 galaxy_config_style: yaml
 galaxy_force_checkout: true
 miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+miniconda_version: "4.6.14"
 
 galaxy_config:
   galaxy:
     brand: "My Galaxy"
     admin_users: admin@example.org
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
-    file_path: "{{ galaxy_file_path }}"
+    file_path: /data
     check_migrate_tools: false
-    shed_tool_data_dir: "{{ galaxy_mutable_data_dir }}/tool-data"
+    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
   uwsgi:
-    # Default values
     socket: 127.0.0.1:8080
     buffer-size: 16384
     processes: 1
@@ -37,6 +41,8 @@ galaxy_config:
     static-map:
       - /static/style={{ galaxy_server_dir }}/static/style/blue
       - /static={{ galaxy_server_dir }}/static
+      - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
+    static-safe: client/galaxy/images
     master: true
     virtualenv: "{{ galaxy_venv_dir }}"
     pythonpath: "{{ galaxy_server_dir }}/lib"
@@ -48,32 +54,15 @@ galaxy_config:
       - unix_signal:15 gracefully_kill_them_all
     py-call-osafterfork: true
     enable-threads: true
-    # Our additions
     mule:
       - lib/galaxy/main.py
       - lib/galaxy/main.py
     farm: job-handlers:1,2
 
-# Automatically restart Galaxy by calling a handler named 'Restart
-# Galaxy', whenever the server changes.
-galaxy_restart_handler_name: Restart Galaxy
-
-# supervisord
-supervisor_socket_user: galaxy
-supervisor_socket_chown: galaxy
-supervisor_programs:
-  - name: galaxy
-    state: present
-    command: "uwsgi --yaml {{ galaxy_config_dir }}/galaxy.yml"
-    configuration: |
-      autostart=true
-      autorestart=true
-      startretries=1
-      startsecs=10
-      user=galaxy
-      umask=022
-      directory={{ galaxy_server_dir }}
-      environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
+# systemd
+galaxy_systemd_mode: mule
+galaxy_zergpool_listen_addr: 127.0.0.1:8080
+galaxy_restart_handler_name: "Restart Galaxy"
 
 # Certbot
 certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -101,8 +90,6 @@ nginx_ssl_servers:
   - galaxy
 nginx_conf_http:
   client_max_body_size: 1g
-nginx_remove_default_vhost: true
-nginx_ssl_role: usegalaxy-eu.certbot
+nginx_ssl_role: usegalaxy_eu.certbot
 nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
-
