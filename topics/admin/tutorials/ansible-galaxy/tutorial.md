@@ -637,8 +637,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 {: .hands_on}
 
-Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up supervisord which will manage the Galaxy processes!
-
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
 >
 > 1. SSH into your server
@@ -650,15 +648,6 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 {: .hands_on}
 
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!
-
-> ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
->
-> 1. Switch user to Galaxy account (`sudo -iu galaxy`)
-> 2. Change directory into `/srv/galaxy/server`
-> 3. Activate virtualenv (`. ../venv/bin/activate`)
-> 4. `uwsgi --yaml ../config/galaxy.yml`
-> 5. Access at port `<ip address>:8080` once the server has started
-{: .hands_on}
 
 ## systemd
 
