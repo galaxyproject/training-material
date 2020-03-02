@@ -637,8 +637,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 {: .hands_on}
 
-Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up supervisord which will manage the Galaxy processes!
-
 > ### {% icon hands_on %} Hands-on: (Optional) Launching uWSGI by hand
 >
 > 1. SSH into your server
