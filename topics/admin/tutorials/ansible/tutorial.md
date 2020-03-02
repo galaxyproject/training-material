@@ -54,13 +54,13 @@ task
 :    A call to an Ansible module that should be executed and the configuration for this module.
 
 role
-:    A folder containing some tasks, templates, files, and default values for variables. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
+:    A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
 
 playbook
 :    a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
 
 vault
-:    An encrypted YAML file. You put your secrets here and then you can use them in tasks/roles/playbooks.
+:    An encrypted YAML file. You put your secrets here and then you can use them in tasks, roles and playbooks.
 
 Looking at each of these briefly:
 
@@ -83,7 +83,7 @@ Here we've defined two groups of computers, `webservers` and `databases`. `ansib
 
 ## Roles
 
-We will look at [ansible-cvmfs](https://github.com/galaxyproject/ansible-cvmfs) as our example for the layout of a role:
+We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible-cvmfs) as an example for the layout of a role:
 
 ```
 ├── defaults
@@ -97,21 +97,28 @@ We will look at [ansible-cvmfs](https://github.com/galaxyproject/ansible-cvmfs) 
 ├── meta
 │   └── main.yml
 ├── tasks
-│   └── main.yml
-└── templates
-    └── stratum1_squid.conf.j2
+│   ├── apache.yml
+│   ├── main.yml
+│   └── ...
+├── templates
+│   └── stratum1_squid.conf.j2
+└── vars
+    ├── debian.yml
+    └── redhat.yml
 ```
 
 These are the folders that are included in many complex roles. Simpler roles will often not need all of the folders.
 
 Folder    | Usage
 --------- | ------
-defaults  | Default variables values go here (e.g. "version of software to install").
+defaults  | Default values for variables the user can set (e.g. "version of software to install").
 files     | These are files which should be copied as-is over to the remote location.
-handlers  | This is for restarting processes usually.
-meta      | Only needed if you publish your role to Ansible Galaxy.
+handlers  | This is typically used for restarting processes.
+library   | For internal modules (rarely used)
+meta      | Only needed to publish your role to Ansible Galaxy.
 tasks     | **Always start reading here**. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here, e.g. variables to load, handlers, files, templates.
 templates | Files that are templated out with variables before being copied.
+vars      | Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions)
 
 > ### {% icon details %} Ansible Role Documentation
 >
@@ -214,7 +221,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > ### {% icon warning %} Safety First
 >
-> Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the Linux command line, but scaled across N machines. Be very careful with the changes you plan to make.
+> Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the command line, but scaled across N machines. Be very careful with the changes you plan to make.
 > Ansible provides some flags which can help you identify changes before they're made to production systems:
 >
 > **`--diff`**
@@ -296,13 +303,13 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    You can read about all of the parameters available to the [`copy`](http://docs.ansible.com/ansible/latest/copy_module.html) module on Ansible's documentation.
 >
 >    > ### {% icon details %} Ansible Module Documentation
->    > You can usually find a module that will represent most commands you will run at the linux cli. Usually by searching the internet for "ansible $do-some-action" e.g. "ansible copy file to server" or "ansible restart service." If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/latest/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
+>    > You can usually find a module that will represent most commands you will run at a shell. Usually by searching the internet for "ansible do-some-action" e.g. "ansible copy file to server" or "ansible restart service." If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/latest/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
 >    >
 >    {: .details }
 >
 > 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
 >
-> 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the remote server and place it in `/tmp`.
+> 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the target host and place it in `/tmp`.
 >
 > 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
 >
@@ -346,12 +353,12 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > >
 >     > > ```
 >     > > $ ansible-playbook -i hosts playbook.yml -c local
->     > > PLAY [my_hosts] *********************************
->     > > TASK [Gathering Facts] *************************
+>     > > PLAY [my_hosts] ****************************************************************
+>     > > TASK [Gathering Facts] *********************************************************
 >     > > ok: [localhost]
->     > > TASK [my-role : Copy] **************************
+>     > > TASK [my-role : Copy a file to the remote host] ********************************
 >     > > changed: [localhost]
->     > > PLAY RECAP *************************************
+>     > > PLAY RECAP *********************************************************************
 >     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 >     > > ```
 >     > >
@@ -395,10 +402,10 @@ Now that you've done this, here are some starting points for exploration:
 
 ## Facts
 
-In the last step of the last hands on, you ran your playbook. The first `TASK` that was executed was not one that you had written, it read:
+In the last step of the last hands-on, you ran your playbook. The first `TASK` that was executed was not one that you had written, it read:
 
 ```
-TASK [Gathering Facts] *************************
+TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 ```
 
@@ -406,7 +413,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 
 > ### {% icon hands_on %} Hands-on: The Setup Module
 >
-> 1. Run the command `ansible -i hosts -c local -m setup my_hosts`.
+> 1. Run the command `ansible -i hosts -m setup my_hosts | less`.
 >
 >    The `my_hosts` at the end of the command refers to the group we defined in our `hosts` inventory file.
 >
@@ -424,7 +431,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 >    > > 2. Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:
 >    > >
 >    > >    - `ansible_all_ipv4_addresses`
->    > >    - `ansible_default_ipv4`
+>    > >    - `ansible_default_ipv4.address`
 >    > >    - `ansible_<interface_name>.ipv4`
 >    > >
 >    > {: .solution }
@@ -436,7 +443,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 
 ## Templates
 
-Templates give you greater control over the files you are deploying to the remote system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
+Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
 
 > ### {% icon details %} Template Syntax
 > Templates use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial.
@@ -525,13 +532,13 @@ Templates give you greater control over the files you are deploying to the remot
 >     > > ### {% icon solution %} Solution
 >     > >
 >     > > ```
->     > > $ ansible-playbook -i hosts playbook.yml -c local --check --diff
->     > > PLAY [my_hosts] ******************************************
->     > > TASK [Gathering Facts] **********************************
+>     > > $ ansible-playbook -i hosts playbook.yml --check --diff
+>     > > PLAY [my_hosts] ****************************************************************
+>     > > TASK [Gathering Facts] *********************************************************
 >     > > ok: [localhost]
->     > > TASK [my-role : Copy] ***********************************
+>     > > TASK [my-role : Copy a file to the remote host] ********************************
 >     > > ok: [localhost]
->     > > TASK [my-role : Template the configuration file] ********
+>     > > TASK [my-role : Template the configuration file] *******************************
 >     > > --- before: /tmp/test.ini
 >     > > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
 >     > > @@ -1,3 +1,3 @@
@@ -552,7 +559,7 @@ Templates give you greater control over the files you are deploying to the remot
 {: .hands_on}
 
 > ### {% icon comment %} Ansible Variable Templating
-> In this step we use some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
+> In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
 >
 > It is common to see things like this in Ansible roles:
 >
@@ -577,7 +584,7 @@ Templates give you greater control over the files you are deploying to the remot
 
 Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
 
-**Warning**: This will install git on the remote machine.
+**Warning**: This will install git on the target machine.
 
 > ### {% icon hands_on %} Hands-on: Installing a module using ansible-galaxy
 >
