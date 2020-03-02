@@ -240,12 +240,12 @@ Galaxy Version: 17.05
 
 ---
 
-## What happens during tool installation
+## What happens when installing a tool from TS
 
-* Repository was downloaded.
-* If needed Galaxy installed the tool's dependencies using [conda][conda].
-* Galaxy created an entry for the tool in the DB.
-* Galaxy added the tool to one of the tool configs (`shed_tool_conf.xml`).
+* Repository is downloaded.
+* If needed, Galaxy installs the tool's dependencies typically using [conda][conda].
+* Galaxy creates an entry for the tool in its database.
+* Galaxy adds the tool to `shed_tool_conf.xml` .
 
 [conda]: https://conda.io/
 
@@ -269,45 +269,15 @@ Galaxy Version: 17.05
 
 ---
 
-## Example config entry
+## Tool panel management
 
-one entry in `integrated_tool_panel.xml`
-```xml
-<section id="filter" name="Filter and Sort" version="">
-    <tool id="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1" />
-</section>
-```
-
----
-
-## Suites - more repos in one
-
-* To install multiple repositories some authors offer suites.
-* Suite is a single repository that 'depends' on many other.
-* If you install the suite all 'dependency repositories' will be installed too.
-
----
-
-## Toolpanel management
-
-* How the toolpanel looks like is decided in a file called `integrated_tool_panel.xml`.
+* How the tool panel looks like is decided in a file called `integrated_tool_panel.xml`.
 * By default it resides in Galaxy's `config/` folder.
 * If missing it is generated from all other tool config files during startup.
 * Modify it if you want to reorder tools or move section.
 
----
-
-## Dependency resolvers
-
-* We aim to make Galaxy resolver-independent.
-* What resolver is going to be used for the tool dependency is determined at runtime and prioritised in `config/dependency_resolvers_conf.xml`.
-
 ```xml
-<dependency_resolvers>
-  <tool_shed_packages />
-  <galaxy_packages />
-  <conda />
-  <galaxy_packages versionless="true" />
-  <conda versionless="true" />
-</dependency_resolvers>
+<section id="filter" name="Filter and Sort" version="">
+    <tool id="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1" />
+</section>
 ```
