@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/upstream-auth/tutorial
 
 title: "External Authentication"
 questions:
@@ -49,16 +51,18 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    It should look like:
 >
->    ```nginx
->        location / {
->            uwsgi_pass           127.0.0.1:8080;
->            uwsgi_param          UWSGI_SCHEME $scheme;
->            include              uwsgi_params;
->            auth_basic           galaxy;
->            auth_basic_user_file /etc/nginx/passwd;
->            uwsgi_param          HTTP_REMOTE_USER $remote_user;
->            uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
->        }
+>    ```diff
+>    @@ -14,6 +14,10 @@
+>             uwsgi_pass 127.0.0.1:8080;
+>             uwsgi_param UWSGI_SCHEME $scheme;
+>             include uwsgi_params;
+>    +        auth_basic           galaxy;
+>    +        auth_basic_user_file /etc/nginx/passwd;
+>    +        uwsgi_param          HTTP_REMOTE_USER $remote_user;
+>    +        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
+>         }
+>
+>         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
 >
 >    `auth_basic` enables validation of username and password using the "HTTP Basic Authentication" protocol. Its value `galaxy` is used as a realm name to be displayed to the user when prompting for credentials.
@@ -76,16 +80,23 @@ For this exercise we will use a basic password file method for authenticating - 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > ```
->    > > - pip:
->    > >     name: passlib
->    > > - htpasswd:
->    > >     path: /etc/nginx/passwd
->    > >     name: user1        # Pick a username
->    > >     password: changeme # and a password
->    > >     owner: www-data    # nginx on centos
->    > >     group: root
->    > >     mode: 0640
+>    > > ```diff
+>    > > @@ -7,6 +7,15 @@
+>    > >          name: galaxy
+>    > >          state: restarted
+>    > >    pre_tasks:
+>    > > +    - pip:
+>    > > +        name: passlib
+>    > > +    - htpasswd:
+>    > > +        path: /etc/nginx/passwd
+>    > > +        name: user1        # Pick a username
+>    > > +        password: changeme # and a password
+>    > > +        owner: www-data    # nginx on centos
+>    > > +        group: root
+>    > > +        mode: 0640
+>    > >      - name: Install Dependencies
+>    > >        package:
+>    > >          name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
 >    > > ```
 >    > {: .solution }
 >    >
