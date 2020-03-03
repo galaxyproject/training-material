@@ -44,8 +44,8 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yml
->    - src: https://github.com/usegalaxy-eu/ansible-gxadmin
->      name: usegalaxy-eu.gxadmin
+>    - src: usegalaxy_eu.gxadmin
+>      version: 0.0.2
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
@@ -70,7 +70,7 @@ Category      | Keyword             | Purpose
 Configuration | `config`            | Commands relating to galaxy's configuration files like XML validation.
 Filters       | `filter`            | Transforming streams of text.
 Galaxy Admin  | `galaxy`            | Miscellaneous galaxy related commands like a cleanup wrapper.
-uWSGI         | `uwsgi`             | If you're using [SystemD for Galaxy](https://github.com/usegalaxy-eu/ansible-galaxy-systemd/) and a handler/zergling setup, then this lets you manage your handlers and zerglings.
+uWSGI         | `uwsgi`             | If you're using [systemd for Galaxy](https://github.com/usegalaxy-eu/ansible-galaxy-systemd/) and a handler/zergling setup, then this lets you manage your handlers and zerglings.
 DB Queries    | `{csv,tsv,i,}query` | Queries against the database which return tabular output.
 Report        | `report`            | Queries which return more complex and structured markdown reports.
 Mutations     | `mutate`            | These are like queries, except they mutate the database. All other queries are read-only.

@@ -26,14 +26,14 @@ tags:
 
 # Galaxy Job Configuration
 
-`config/job_conf.xml`:
+- Configured in `config/job_conf.xml`
 - XML format with macro support
 - Major components:
   - **Plugins**: distributed resource manager (DRM) modules to load
   - **Handlers**: job handler processes managing the lifecycle of jobs
   - **Destinations**: where to send jobs, and what parameters to run those jobs with
   - **Tool** to destination/handler mappings
-  - **Resource** selection mappings: give users job execution options on the tool form (experimental!)
+  - **Resource** selection mappings: give users job execution options on the tool form
   - **Limits**: job runtime limits, e.g. the max number of concurrent jobs
 
 ---
@@ -52,7 +52,7 @@ Can restart Galaxy without interrupting jobs
 
 Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/jobs/runners)
 
-Plugins for:
+.left[Plugins for:]
 - local
 - Slurm (DRMAA subclass)
 - DRMAA: SGE, PBS Pro, LSF, Torque
@@ -74,16 +74,19 @@ Plugins for:
 
 # Handlers
 
-Define which Galaxy processes are job handlers:
+Define which Galaxy processes are job handlers
+
 - `id` attribute should match the `--server-name` param value of a process
 - Dedicated handlers can be reserved, e.g. for small, high throughput jobs
 - The list of plugins that are loaded by a job handler can be limited using `<plugin>` subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)
+- Not defined in `job_conf.xml` when using *job handler mules*
 
 ---
 
 # Destinations
 
-Define *how* jobs should be run:
+Define *how* jobs should be run
+
 - Which plugin?
 - In a Docker container? Which one?
 - **DRM params** (queue, cores, memory, walltime)?
@@ -93,7 +96,7 @@ Define *how* jobs should be run:
 
 # The default job configuration
 
-`config/job_conf.xml.sample_basic`:
+.left[`config/job_conf.xml.sample_basic`:]
 ```xml
 <?xml version="1.0"?>
 <job_conf>
@@ -112,17 +115,21 @@ Define *how* jobs should be run:
 
 # Job Config - Tags
 
-Both destinations and handlers can be grouped by **tags**:
+Both destinations and handlers can be grouped by **tags**
+
 - Allows random selection from multiple resources
 - Allows concurrency limits at the destination group level
 ---
 
 # Job Environment
 
-`<env>` tag in destinations: configure the job exec environment:
-- `<env id="NAME">VALUE</env>`: Set `$NAME` to `VALUE`
-- `<env file="/path/to/file" />`: Source shell file at `/path/to/file`
-- `<env exec="CMD" />`: Execute `CMD`
+`<env>` tag in destinations: configure the job exec environment
+
+| tag syntax | function |
+| ---- | ---- |
+| `<env id="NAME">VALUE</env>` | Set `$NAME` to `VALUE` |
+| `<env file="/path/to/file" />` | Source shell file at `/path/to/file` |
+| `<env exec="CMD" />` | Execute `CMD` |
 
 Source and command execution will be handled on the remote destination, don't need to work on the Galaxy server
 
@@ -130,7 +137,8 @@ Source and command execution will be handled on the remote destination, don't ne
 
 # Limits
 
-Available limits:
+Available limits
+
 - Walltime (if not available with your DRM)
 - Output size (if *any* tool output grows larger than this limit)
 - Concurrency: Number of "active" (queued or running) jobs
@@ -139,7 +147,8 @@ Available limits:
 
 # Concurrency Limits
 
-Available limits:
+Available limits
+
 - Number of active jobs per registered user
 - Number of active jobs per unregistered user
 - Number of active jobs per registered user in a specified destination or destination tag
@@ -152,7 +161,6 @@ Available limits:
 Most job plugins require a **shared filesystem** between the Galaxy server and compute.
 
 The exception is **Pulsar**. More on this in *Using heterogeneous compute resources*
-
 
 ---
 
@@ -251,7 +259,7 @@ A special built-in job runner plugin
 
 Map jobs to destinations on more than just tool IDs
 
-Two types:
+.left[Two types:]
 - Dynamic Tool Destinations
 - Python function
 
@@ -261,7 +269,7 @@ See: [Dynamic Destination Mapping](https://docs.galaxyproject.org/en/master/admi
 
 ## Dynamic Tool Destinations
 
-Configurable mappings without programming:
+.left[Configurable mappings without programming:]
 - YAML format config file `tool_destinations.yml`
 - Map based on tool ID plus:
   - Input dataset size(s)
@@ -273,7 +281,7 @@ Configurable mappings without programming:
 
 ## Arbitrary Python Functions
 
-Programmable mappings:
+.left[Programmable mappings:]
 - Written as Python function in `lib/galaxy/jobs/rules/`
 - Map based on:
   - Tool ID

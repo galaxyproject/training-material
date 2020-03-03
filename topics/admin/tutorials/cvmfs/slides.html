@@ -86,20 +86,16 @@ contributors:
 bwa_index.loc
 
 ```text
-...
 #
 #<unique_build_id>   <dbkey>   <display_name>   <file_path>
 #
-...
-
-bosTau7 bosTau7 Cow (bosTau7)   /mnt/galaxyIndices/genomes/bosTau7/bwa_mem_index/bosTau7/bosTau7.fa
-ce10    ce10    C. elegans (ce10)       /mnt/galaxyIndices/genomes/ce10/bwa_mem_index/ce10/ce10.fa
-danRer7 danRer7 Zebrafish (danRer7)     /mnt/galaxyIndices/genomes/danRer7/bwa_mem_index/danRer7/danRer7.fa
-dm3     dm3     D. melanogaster Apr. 2006 (BDGP R5/dm3) (dm3)   /mnt/galaxyIndices/genomes/dm3/bwa_mem_index/dm3/dm3.fa
-hg19    hg19    Human (hg19)    /mnt/galaxyIndices/genomes/hg19/bwa_mem_index/hg19/hg19.fa
-hg38    hg38    Human (hg38)    /mnt/galaxyIndices/genomes/hg38/bwa_mem_index/hg38/hg38.fa
-mm10    mm10    Mouse (mm10)    /mnt/galaxyIndices/genomes/mm10/bwa_mem_index/mm10/mm10.fa
-...
+bosTau7 bosTau7 Cow (bosTau7)   /genomes/bosTau7/bwa_mem_index/bosTau7/bosTau7.fa
+ce10    ce10    C. elegans (ce10)       /genomes/ce10/bwa_mem_index/ce10/ce10.fa
+danRer7 danRer7 Zebrafish (danRer7)     /genomes/danRer7/bwa_mem_index/danRer7/danRer7.fa
+dm3     dm3     D. melanogaster Apr. 2006 (BDGP R5/dm3) (dm3)   /genomes/dm3/bwa_mem_index/dm3/dm3.fa
+hg19    hg19    Human (hg19)    /genomes/hg19/bwa_mem_index/hg19/hg19.fa
+hg38    hg38    Human (hg38)    /genomes/hg38/bwa_mem_index/hg38/hg38.fa
+mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 ```
 
 ---
@@ -131,18 +127,17 @@ mm10    mm10    Mouse (mm10)    /mnt/galaxyIndices/genomes/mm10/bwa_mem_index/mm
 
 ---
 
-# CernVM-fs to the rescue
+# CernVM-FS to the rescue
 
-.largeish[
 * Needed a method of sharing reference data across country efficiently
-* **CVM-FS** is an efficient method for read only data sharing between systems
+* **CVMFS** is an efficient method for read only data sharing between systems
     * Originally designed for distributed software installation at Cern
     * Turns out it's really useful for read only data sets as well
-* All nodes of Galaxy Main get their reference genomes and indices from CVM-FS
+    * HTTP-based, firewall friendly
+* All nodes of Galaxy Main get their reference genomes and indices from CVMFS
     * Shared via mirroring and caching across the country
 * It's also really useful to share data **globally**
     * The **usegalaxy.*** initiative has taken full advantage of this.
-]
 
 ---
 
@@ -152,7 +147,7 @@ mm10    mm10    Mouse (mm10)    /mnt/galaxyIndices/genomes/mm10/bwa_mem_index/mm
 
 ---
 
-# CVM-FS Global Structure
+# CVMFS Global Structure
 
 .widen_image[
 ![cvmfs_global_structure.png](../../images/cvmfs_global_structure.png)
