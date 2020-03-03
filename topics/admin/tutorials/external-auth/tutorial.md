@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/upstream-auth/tutorial
 
 title: "External Authentication"
 questions:
