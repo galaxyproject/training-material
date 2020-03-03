@@ -17,5 +17,4 @@
 > > If JupyterLab is not available on the Galaxy instance:
 > > 1. Start [Try JupyterLab](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab)
 > {: .tip}
->
 {: .hands_on}

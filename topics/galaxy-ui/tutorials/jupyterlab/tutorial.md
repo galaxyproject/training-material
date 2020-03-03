@@ -55,7 +55,7 @@ We will introduce additional benefits of using JupyterLab as you cover the lesso
 
 You should now be looking at a page with the JupyterLab interface:
 
-![Jupyterlab default session](../../images/jupyterlab/jupyterlab_default_session.png)
+![Jupyterlab default session](../../images/jupyterlab_default_session.png)
 
 As shown on the figure above, JupyterLab interface is made of 3 main areas:
 - The menu barat the top 
@@ -90,7 +90,7 @@ A new notebook appears in the centre panel. Before we go any further, you should
 
 The new script `ipython_galaxy_notebook.ipynb` should appear in the **File Browser*** in the left panel. By convention, Jupyter notebooks end with the file extension `.ipynb` independently of the programming language (R, Python, Octave, Julia, etc.).
 
-![jupyterlab default notebook](../../images/jupyterlab/jupyterlab_session_default_notebook.png)
+![jupyterlab default notebook](../../images/jupyterlab_session_default_notebook.png)
 
 > ### {% icon comment %} Note: supported programming languages
 > 
@@ -111,7 +111,7 @@ By default, a **Python notebook** is started. Don't worry if you are not familia
 >
 > Once you have created a Notebook, you can switch to another available programming language (**Switch kernel**).
 > 1. On the top right of your running Notebook, click on **Python 3**. A new window pops up:
-> ![jupyterlab switch kernel](../../images/jupyterlab/jupyterlab_switch_kernel.png)
+> ![jupyterlab switch kernel](../../images/jupyterlab_switch_kernel.png)
 > 2. In this new window, click on **Python 3** to select an available programming language (R, octave, Julia, etc.).
 > 3. Click on **Select** to activate your selection. The pop-up window closes and you are ready to use your notebook with the selected programming language.
 >    Alternatively, you can also:
