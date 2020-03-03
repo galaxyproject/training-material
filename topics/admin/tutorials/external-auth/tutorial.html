@@ -571,7 +571,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 3, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -613,15 +613,17 @@
 
       <p>It should look like:</p>
 
-      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">location</span> <span class="n">/</span> <span class="p">{</span>
-        <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">8080</span><span class="p">;</span>
-        <span class="kn">uwsgi_param</span>          <span class="s">UWSGI_SCHEME</span> <span class="nv">$scheme</span><span class="p">;</span>
-        <span class="kn">include</span>              <span class="s">uwsgi_params</span><span class="p">;</span>
-        <span class="kn">auth_basic</span>           <span class="s"><span class="notranslate">galaxy</span></span><span class="p">;</span>
-        <span class="kn">auth_basic_user_file</span> <span class="n">/etc/nginx/passwd</span><span class="p">;</span>
-        <span class="kn">uwsgi_param</span>          <span class="s">HTTP_REMOTE_USER</span> <span class="nv">$remote_user</span><span class="p">;</span>
-        <span class="kn">uwsgi_param</span>          <span class="s">HTTP_GX_SECRET</span> <span class="s">SOME_SECRET_STRING</span><span class="p">;</span>
-    <span class="p">}</span>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -14,6 +14,10 @@</span>
+         uwsgi_pass 127.0.0.1:8080;
+         uwsgi_param UWSGI_SCHEME $scheme;
+         include uwsgi_params;
+<span class="gi">+        auth_basic           <span class="notranslate">galaxy</span>;
++        auth_basic_user_file /etc/nginx/passwd;
++        uwsgi_param          HTTP_REMOTE_USER $remote_user;
++        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
+</span>     }
+
+     # Static files can be more efficiently served by Nginx. Why send the
 </code></pre></div>      </div>
 
       <p><code class="highlighter-rouge">auth_basic</code> enables validation of use<span class="notranslate">rna</span>me and password using the “HTTP Basic Authentication” protocol. Its value <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> is used as a realm name to be displayed to the user when prompting for credentials.
@@ -642,15 +644,22 @@
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- pip:
-    name: passlib
-- htpasswd:
-    path: /etc/nginx/passwd
-    name: user1        # Pick a use<span class="notranslate">rna</span>me
-    password: changeme # and a password
-    owner: www-data    # nginx on centos
-    group: root
-    mode: 0640
+          <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -7,6 +7,15 @@</span>
+         name: <span class="notranslate">galaxy</span>
+         state: restarted
+   pre_tasks:
+<span class="gi">+    - pip:
++        name: passlib
++    - htpasswd:
++        path: /etc/nginx/passwd
++        name: user1        # Pick a use<span class="notranslate">rna</span>me
++        password: changeme # and a password
++        owner: www-data    # nginx on centos
++        group: root
++        mode: 0640
+</span>     - name: Install Dependencies
+       package:
+         name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
 </code></pre></div>          </div>
         </blockquote>
 
@@ -778,8 +787,8 @@
     author = "Nate Coraor and Nicola Soranzo and Helena Rasche",
     title = "External Authentication (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "13"
+    month = "03",
+    day = "03"
     url = "\url{/training-material/topics/admin/tutorials/external-auth/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
