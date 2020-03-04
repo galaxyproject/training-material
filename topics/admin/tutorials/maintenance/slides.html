@@ -13,6 +13,7 @@ objectives:
 time_estimation: "30m"
 key_points:
   - Use configuration management (e.g. Ansible)
+  - Store configuration management in git
   - Back up the parts of Galaxy that can't be recreated
 contributors:
   - natefoo
@@ -119,15 +120,7 @@ class: left, reduce90
 
 ## What to backup
 
-Restorable from Ansible Playbook:
-
-| item | path (from tutorials) |
-| ---- | ---- |
-| Galaxy | `/srv/galaxy/server` |
-| Virtualenv | `/srv/galaxy/venv` |
-| *Static* configs | `/srv/galaxy/config` |
-
-What to back up:
+**Must** be backed up:
 
 | item | path (from tutorials) |
 | ---- | ---- |
@@ -137,23 +130,33 @@ What to back up:
 | Logs (if you like...) | `systemd-journald` |
 | Datasets (if you can...) | `/data` |
 
----
-class: left, reduce90
-
-# Backups (continued)
-
-What to back up if absolute reproducibility matters:
+If absolute reproducibility matters:
 
 | item | path (from tutorials) |
 | ---- | ---- |
 | Tool dependencies | `/srv/galaxy/var/dependencies` |
 | Data manager-installed reference data | `/srv/galaxy/var/tool-data` |
 
-What not to back up:
+---
+class: left, reduce90
+
+# Backup
+
+## What not to back up
+
+Restorable from Ansible Playbook:
 
 | item | path (from tutorials) |
 | ---- | ---- |
-| Anything in *managed/mutable data dir* not mentioned above | `/srv/galaxy/var` |
+| Galaxy | `/srv/galaxy/server` |
+| Virtualenv | `/srv/galaxy/venv` |
+| *Static* configs | `/srv/galaxy/config` |
+
+Recreatable at runtime:
+
+| item | path (from tutorials) |
+| ---- | ---- |
+| Anything in *managed/mutable data dir* not previously mentioned | `/srv/galaxy/var` |
 | Job working directories | `/srv/galaxy/jobs` |
 
 [postgresql-pitr]: https://www.postgresql.org/docs/current/continuous-archiving.html
