@@ -563,7 +563,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 28, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -588,6 +588,7 @@
   <li><a href="#expanding-storage" id="markdown-toc-expanding-storage">Expanding Storage</a></li>
   <li><a href="#hierarchical-object-store" id="markdown-toc-hierarchical-object-store">Hierarchical Object Store</a></li>
   <li><a href="#distributed-object-store" id="markdown-toc-distributed-object-store">Distributed Object Store</a></li>
+  <li><a href="#s3-object-store" id="markdown-toc-s3-object-store">S3 Object Store</a></li>
 </ol>
 
 </blockquote>
@@ -609,15 +610,15 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your group variables file, add it to the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> section:</p>
+      <p>In your group variables file, add it to the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> section:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.object_store_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and edit <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> with the following contents:</p>
+      <p>Create and edit <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"hierarchical"</span><span class="nt">&gt;</span>
@@ -681,7 +682,7 @@
 
   <ol>
     <li>
-      <p>Edit your <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> file and replace the contents with:</p>
+      <p>Edit your <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code> file and replace the contents with:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"distributed"</span><span class="nt">&gt;</span>
@@ -735,6 +736,89 @@
 
 </blockquote>
 
+<h1 id="s3-object-store">S3 Object Store</h1>
+
+<p>Many sites have access to an S3 service (either public AWS, or something private like Swift or Ceph), and you can take advantage of this for data storage.</p>
+
+<p>we will set up a local S3-compatible object store, and then talk to the API of this service.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-an-s3-compatible-object-store"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up an S3-compatible Object Store</h3>
+
+  <ol>
+    <li>
+      <p>Edit your <code class="highlighter-rouge">requirements.yml</code> file and add:</p>
+
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">atosatto.minio</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">v1.1.0</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
+    </li>
+    <li>
+      <p>Edit your group variables to configure the object store:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>minio_server_datadirs: ["/minio-test"]
+minio_access_key: "my-access-key"
+minio_secret_key: "my-super-extra-top-secret-key"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Edit your playbook and add the minio role <strong>before</strong> <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code>:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - atosatto.minio
+</code></pre></div>      </div>
+
+      <p><span class="notranslate">Galaxy</span> will need to use the bucket, and will want it to be there when it boots, so we need to setup the object store first.</p>
+    </li>
+    <li>
+      <p>Edit the <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml</code>, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -1,13 +1,21 @@</span>
+ &lt;?xml version="1.0"?&gt;
+<span class="gd">- &lt;object_store type="distributed"&gt;
+</span><span class="gi">+ &lt;object_store type="hierarchical"&gt;
+</span>     &lt;backends&gt;
+<span class="gd">-        &lt;backend id="newdata" type="disk" weight="1"&gt;
+</span><span class="gi">+        &lt;backend id="newdata" type="disk" order="1"&gt;
+</span>             &lt;files_dir path="/data2"/&gt;
+             &lt;extra_dir type="job_work" path="/data2/job_work_dir"/&gt;
+         &lt;/backend&gt;
+<span class="gd">-        &lt;backend id="olddata" type="disk" weight="1"&gt;
+</span><span class="gi">+        &lt;backend id="olddata" type="disk" order="2"&gt;
+</span>             &lt;files_dir path="/data"/&gt;
+             &lt;extra_dir type="job_work" path="/data/job_work_dir"/&gt;
+         &lt;/backend&gt;
+<span class="gi">+        &lt;object_store id="swifty" type="swift" order="0"&gt;
++            &lt;auth access_key="{{ minio_access_key }}" secret_key="{{ minio_secret_key }}" /&gt;
++            &lt;bucket name="<span class="notranslate">galaxy</span>" use_reduced_redundancy="False" max_chunk_size="250"/&gt;
++            &lt;connection host="127.0.0.1" port="9091" is_secure="False" conn_path="" multipart="True"/&gt;
++            &lt;cache path="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/database/object_store_cache" size="1000" /&gt;
++            &lt;extra_dir type="job_work" path="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/database/job_working_directory_swift"/&gt;
++            &lt;extra_dir type="temp" path="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/database/tmp_swift"/&gt;
++        &lt;/object_store&gt;
+</span>     &lt;/backends&gt;
+ &lt;/object_store&gt;
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook.</p>
+    </li>
+    <li>
+      <p><span class="notranslate">Galaxy</span> should now be configure to use the object store!</p>
+    </li>
+    <li>
+      <p>When the playbook is done, upload a dataset to <span class="notranslate">Galaxy</span>, and check if it shows up in the bucket:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo ls /minio-test/<span class="notranslate">galaxy</span>/000/
+dataset_24.dat
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
 
                     
                     <blockquote class="key_points">
@@ -776,8 +860,8 @@
     author = "Nate Coraor and Helena Rasche",
     title = "Distributed Object Storage (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "28"
+    month = "03",
+    day = "04"
     url = "\url{/training-material/topics/admin/tutorials/object-store/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
