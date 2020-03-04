@@ -932,7 +932,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     <li>
       <p>Now with the generic configuration applied to all of our hosts, we will apply some specific configuration to the <span class="notranslate">Galaxy</span> server.</p>
 
-      <p>Open your <code class="highlighter-rouge">group_vars/monitoring.yml</code> file, and add the following variables:</p>
+      <p>Open your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file, and add the following variables:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">telegraf_plugins_extra</span><span class="pi">:</span>
   <span class="na">listen_<span class="notranslate">galaxy</span>_routes</span><span class="pi">:</span>
@@ -1272,7 +1272,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Again edit the <code class="highlighter-rouge">group_vars/monitoring.yml</code>, we need to configure Telegraf to run <code class="highlighter-rouge">gxadmin</code></p>
+      <p>Again edit the <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we need to configure Telegraf to run <code class="highlighter-rouge">gxadmin</code></p>
 
       <p>Under <code class="highlighter-rouge">telegraf_plugins_extra</code>, where we already have set a <span class="notranslate">Galaxy</span> StatsD listener, add a stanza to monitor the <span class="notranslate">Galaxy</span> queue</p>
 
