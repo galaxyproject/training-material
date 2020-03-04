@@ -202,8 +202,8 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >
 > 5. Edit the `templates/galaxy/config/object_store_conf.xml`, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.
 >
+>    {% raw %}
 >    ```diff
->    {%- raw -%}
 >    @@ -1,13 +1,21 @@
 >     <?xml version="1.0"?>
 >     -<object_store type="distributed">
@@ -229,8 +229,8 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >    +        </object_store>
 >         </backends>
 >     </object_store>
->    {%- endraw -%}
 >    ```
+>    {% endraw %}
 >
 > 6. Run the playbook.
 >
