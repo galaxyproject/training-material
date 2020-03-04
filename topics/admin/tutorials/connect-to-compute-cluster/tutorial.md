@@ -294,9 +294,9 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 > 2. We need to modify `job_conf.xml` to instruct Galaxy on how to use a more advanced job submission setup. We will begin with a basic job conf:
 >
->    If the folder does not exist, create `files/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p files/galaxy/config/`).
+>    If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p templates/galaxy/config/`).
 >
->    Create `files/galaxy/config/job_conf.xml` with the following contents:
+>    Create `templates/galaxy/config/job_conf.xml` with the following contents:
 >
 >    ```xml
 >    <job_conf>
@@ -311,14 +311,14 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    > ### {% icon comment %} Note
 >    >
->    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_templates` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
 >
 > 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
 >    ```diff
->    --- files/galaxy/config/job_conf.xml.old
->    +++ files/galaxy/config/job_conf.xml
+>    --- templates/galaxy/config/job_conf.xml.old
+>    +++ templates/galaxy/config/job_conf.xml
 >    @@ -1,8 +1,9 @@
 >     <job_conf>
 >         <plugins workers="4">
@@ -346,18 +346,18 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```
 >    {% endraw %}
 >
->    And then deploy the new config file using the `galaxy_config_files` var in your group vars:
+>    And then deploy the new config file using the `galaxy_config_templates` var in your group vars:
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_config_files:
+>    galaxy_config_templates:
 >      # ... possible existing config file definitions
->      - src: files/galaxy/config/job_conf.xml
+>      - src: templates/galaxy/config/job_conf.xml
 >        dest: "{{ galaxy_job_config_file }}"
 >    ```
 >    {% endraw %}
 >
->      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
+>    The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_config_templates` exist to template files out. We use templates by default, because in some of the later tutorials there will be variables we want to use in the templates.
 >
 > 5. Run your Galaxy playbook (`ansible-playbook galaxy.yml`)
 >
@@ -537,7 +537,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 > ### {% icon hands_on %} Hands-on: Allocating more resources
 >
-> 1. Edit your `files/galaxy/config/job_conf.xml` and add the following destination:
+> 1. Edit your `templates/galaxy/config/job_conf.xml` and add the following destination:
 >
 >    ```xml
 >            <destination id="slurm-2c" runner="slurm">
@@ -726,7 +726,7 @@ Such form elements can be added to tools without modifying each tool's configura
 
 > ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
 >
-> 1. Create and open `files/galaxy/config/job_resource_params_conf.xml`
+> 1. Create and open `templates/galaxy/config/job_resource_params_conf.xml`
 >
 >    ```xml
 >    <parameters>
@@ -749,13 +749,13 @@ Such form elements can be added to tools without modifying each tool's configura
 >        galaxy:
 >          job_resource_params_file: {% raw %}"{{ galaxy_config_dir }}/job_resource_params_conf.xml"{% endraw %}
 >      ...
->      galaxy_config_files:
+>      galaxy_config_templates:
 >        ...
->        - src: files/galaxy/config/job_resource_params_conf.xml
+>        - src: templates/galaxy/config/job_resource_params_conf.xml
 >          dest: {% raw %}"{{ galaxy_config.galaxy.job_resource_params_file }}"{% endraw %}
 >      ```
 >
-> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `files/galaxy/config/job_conf.xml`:
+> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.xml`:
 >
 >    ```xml
 >        <resources>
