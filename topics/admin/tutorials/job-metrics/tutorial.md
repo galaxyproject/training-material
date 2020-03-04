@@ -37,6 +37,12 @@ Job metrics record properties of the jobs that are executed, information that ca
 
 Galaxy includes a built-in framework to collect job metrics and store these in its database. [Some work was done](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/job_metrics_conf.xml.sample) to try and analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission ({% cite Tyryshkina_2019 %}). More work will be done in this area.
 
+> ### {% icon comment %} Note
+>
+> Job metrics are only visible to Galaxy *admin users*.
+>
+{: .comment}
+
 ## Setting up Galaxy
 
 By default, Galaxy enables the `core` metrics:
@@ -74,11 +80,14 @@ These include very basic submission parameters. We want more information!
 >
 >    {% raw %}
 >    ```diff
->    @@ -26,6 +26,7 @@ miniconda_version: "4.6.14"
+>    --- galaxyservers.yml.old
+>    +++ galaxyservers.yml
+>
+>    +galaxy_job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
 >
 >     galaxy_config:
 >       galaxy:
->    +    job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
+>    +    job_metrics_config_file: "{{ galaxy_job_metrics_config_file }}"
 >         brand: "My Galaxy"
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
@@ -87,7 +96,7 @@ These include very basic submission parameters. We want more information!
 >
 >     galaxy_config_files:
 >    +  - src: files/galaxy/config/job_metrics_conf.xml
->    +    dest: "{{ galaxy_config.galaxy.job_metrics_config_file }}"
+>    +    dest: "{{ galaxy_job_metrics_config_file }}"
 >       - src: files/galaxy/config/tool_conf_interactive.xml
 >         dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
 >       - src: files/galaxy/config/job_conf.xml
