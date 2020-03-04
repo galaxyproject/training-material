@@ -102,7 +102,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 > 4. Run the playbook:
 >
 >    ```
->    ansible-playbook -i hosts monitoring.yml
+>    ansible-playbook monitoring.yml
 >    ```
 >
 {: .hands_on}
@@ -189,7 +189,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 > 5. Run the playbook:
 >
 >    ```
->    ansible-playbook -i hosts monitoring.yml
+>    ansible-playbook monitoring.yml
 >    ```
 >
 > 5. Update the nginx configuration in `templates/nginx/galaxy.j2` to include the following at the end, before the last curly brace
@@ -206,7 +206,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 > 5. Run the Galaxy playbook which includes Nginx:
 >
 >    ```
->    ansible-playbook -i hosts galaxy.yml
+>    ansible-playbook galaxy.yml
 >    ```
 >
 {: .hands_on}

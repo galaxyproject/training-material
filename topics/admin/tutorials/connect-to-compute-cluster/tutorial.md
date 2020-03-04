@@ -299,7 +299,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 > 2. We need to modify `job_conf.xml` to instruct Galaxy on how to use a more advanced job submission setup. We will begin with a basic job conf:
 >
->    If the folder does not exist, create `files/galaxy/config` next to your `playbook.yml` (`mkdir -p files/galaxy/config/`)
+>    If the folder does not exist, create `files/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p files/galaxy/config/`).
 >
 >    Create `files/galaxy/config/job_conf.xml` with the following contents:
 >
@@ -507,14 +507,14 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```
 >    {: .question}
 >
-> 2. Add the tool to the galaxy group variables under the new item `galaxy_local_tools`
+> 2. Add the tool to the Galaxy group variables under the new item `galaxy_local_tools` :
 >
 >    ```yaml
 >    galaxy_local_tools:
 >    - testing.xml
 >    ```
 >
-> 3. Run the playbook
+> 3. Run the Galaxy playbook.
 >
 > 4. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute.
 >
@@ -557,7 +557,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >        </tools>
 >    ```
 >
-> 3. Run the playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
+> 3. Run the Galaxy playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
 >
 > 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
@@ -629,7 +629,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >        </tools>
 >    ```
 >
-> 5. Run the playbook
+> 5. Run the Galaxy playbook.
 >
 {: .hands_on}
 
@@ -703,7 +703,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >        </tools>
 >    ```
 >
-> 4. Run the playbook
+> 4. Run the Galaxy playbook.
 >
 {: .hands_on}
 
@@ -866,7 +866,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >        - map_resources.py
 >      ```
 >
-> 3. Run the playbook
+> 3. Run the Galaxy playbook.
 >
 > 4. Run the **Testing Tool** with various resource parameter selections
 >
