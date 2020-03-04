@@ -29,6 +29,7 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+      - connect-to-compute-cluster
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
 ---
@@ -342,9 +343,12 @@ There are three things we need to do here:
 >
 >    ```xml
 >    <tools>
->        <tool id="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" destination="pulsar"/>
+>        <tool id="bwa" destination="pulsar"/>
+>        <tool id="bwa_mem" destination="pulsar"/>
 >    </tools>
 >    ```
+>
+>    You can use the full tool ID here (toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.
 >
 > 3. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
