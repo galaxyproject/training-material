@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: JupyterLab in Galaxy
 zenodo_link: ""
 questions:
