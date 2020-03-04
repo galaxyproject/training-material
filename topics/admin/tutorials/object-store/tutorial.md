@@ -151,7 +151,7 @@ Sites like UseGalaxy.eu use the distributed object store in order to balance dat
 
 > ### {% icon details %} More documentation
 >
-> More information can be found in the [sample file](https://github.com/galaxyproject/galaxy/blob/dev/config/object_store_conf.xml.sample).
+> More information can be found in the [sample file](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/object_store_conf.xml.sample).
 >
 {: .details}
 
