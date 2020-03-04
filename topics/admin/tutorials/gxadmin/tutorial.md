@@ -252,7 +252,7 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 > 3. Add the following to the file and save it.
 >
 >    ```bash
->    local_hello() { ## hello: Says hi
+>    local_hello() { ## : Says hi
 >    	echo "hi!"
 >    }
 >    ```
@@ -306,7 +306,7 @@ Every function is improved by documentation! Let's add that now:
 > 2. Update your function to add the `handle_help` call:
 >
 >    ```bash
->    local_hello() { ## hello: Says hi
+>    local_hello() { ## : Says hi
 >    	handle_help "$@" <<-EOF
 >    		Greets you
 >    	EOF
@@ -356,7 +356,7 @@ The bulk of gxadmin is not functions calling shell commands though, it's mostly 
 > 2. Add a new function:
 >
 >    ```bash
->    local_query-latest() { ## query-latest [jobs|10]: Queries latest N jobs (default to 10)
+>    local_query-latest() { ## [jobs|10]: Queries latest N jobs (default to 10)
 >    	handle_help "$@" <<-EOF
 >    		Find information about the latest jobs on your server.
 >    	EOF
