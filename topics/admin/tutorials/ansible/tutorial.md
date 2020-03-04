@@ -446,7 +446,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
 
 > ### {% icon details %} Template Syntax
-> Templates use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial.
+> Templates end with the `.j2` suffix and use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the .j2 suffix.
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Variables and Templates
