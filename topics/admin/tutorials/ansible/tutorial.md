@@ -307,7 +307,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .details }
 >
-> 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, Galaxy"
+> 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, Galaxy 🚀"
 >
 > 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the target host and place it in `/tmp`.
 >
