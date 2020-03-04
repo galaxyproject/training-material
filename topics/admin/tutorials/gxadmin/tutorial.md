@@ -97,7 +97,7 @@ hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted 
 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 
-**@bgruening's favourite**: `gxamdin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
+**@bgruening's favourite**: `gxadmin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
 
 id    |        create_time         | disk_usage | username | email | groups | active
 ----- | -------------------------- | ---------- | -------- | ----- | ------ | -------
