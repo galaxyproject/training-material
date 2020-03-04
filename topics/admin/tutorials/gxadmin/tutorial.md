@@ -338,7 +338,7 @@ Every function is improved by documentation! Let's add that now:
 
 ## Adding a query
 
-The bulk of gxadmin is not fnuctions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
+The bulk of gxadmin is not functions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
 
 > ### {% icon hands_on %} Hands-on: Adding a query
 >
