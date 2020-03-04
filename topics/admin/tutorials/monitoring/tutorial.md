@@ -30,6 +30,7 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+      - gxadmin
 ---
 
 

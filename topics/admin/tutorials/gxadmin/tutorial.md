@@ -50,9 +50,18 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
 >
-> 3. Add the role to your playbook, it should run as root
+> 3. Add the following variables to your group variables file:
 >
-> 4. Run the playbook
+>    ```
+>    # Configure locations for gxadmin that all
+>    # users can access
+>    gxadmin_dir: /opt/gxadmin
+>    gxadmin_bin_dir: /usr/bin
+>    ```
+>
+> 4. Add the role to your playbook, it should run as root
+>
+> 5. Run the playbook
 >
 {: .hands_on}
 
