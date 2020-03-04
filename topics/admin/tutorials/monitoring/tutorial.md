@@ -361,7 +361,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >
 > 5. Now with the generic configuration applied to all of our hosts, we will apply some specific configuration to the Galaxy server.
 >
->    Open your `group_vars/monitoring.yml` file, and add the following variables:
+>    Open your `group_vars/galaxyservers.yml` file, and add the following variables:
 >
 >    ```yaml
 >    telegraf_plugins_extra:
@@ -610,7 +610,7 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 >    ```
 >
 >
-> 5. Again edit the `group_vars/monitoring.yml`, we need to configure Telegraf to run `gxadmin`
+> 5. Again edit the `group_vars/galaxyservers.yml`, we need to configure Telegraf to run `gxadmin`
 >
 >    Under `telegraf_plugins_extra`, where we already have set a Galaxy StatsD listener, add a stanza to monitor the Galaxy queue
 >
