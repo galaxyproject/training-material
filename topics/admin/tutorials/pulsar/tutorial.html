@@ -277,6 +277,34 @@
         "url": "https://galaxyproject.org/teach/gtn/"
       }
     },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html",
+      "name": "Connecting Galaxy to a compute cluster",
+      "description": "Slides for 'Connecting Galaxy to a compute cluster' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
+      "name": "Connecting Galaxy to a compute cluster",
+      "description": "Hands-on for 'Connecting Galaxy to a compute cluster' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
     "A server/VM on which to deploy Pulsar"
   ],
   "hasPart": [
@@ -545,6 +573,89 @@
                         
                     
                 
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Connecting Galaxy to a compute cluster:
+                            
+                                <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
             </ul>
         
     
@@ -592,7 +703,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 28, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -654,7 +765,7 @@
 
 <h1 id="installing-the-pulsar-role">Installing the Pulsar Role</h1>
 
-<p>We need to create a new ansible playbook to install Pulsar. We will be using a <em>role</em> written by Nate Coraor - <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code></p>
+<p>We need to create a new ansible playbook to install Pulsar. We will be using a <em>role</em> developed by the <span class="notranslate">Galaxy</span> community - <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-install-the-galaxyprojectpulsar-ansible-role"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role</h3>
@@ -663,7 +774,8 @@
     <li>
       <p>From your ansible working directory, edit the <code class="highlighter-rouge">requirements.yml</code> file and add the following line:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.2</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -696,24 +808,9 @@
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_pip_install</code></td>
-      <td>Set to <code class="highlighter-rouge">true</code> to get pulsar to be sourced from pip.</td>
-      <td><code class="highlighter-rouge">false</code></td>
-    </tr>
-    <tr>
       <td><code class="highlighter-rouge">pulsar_yaml_config</code></td>
       <td>a YAML dictionary whose contents will be used to create Pulsar’s <code class="highlighter-rouge">app.yml</code></td>
       <td> </td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">pulsar_git_repo</code></td>
-      <td><span class="notranslate">Upstream</span> git repository from which Pulsar should be cloned.</td>
-      <td>https://github.com/<span class="notranslate">galaxy</span>project/pulsar</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">pulsar_changeset_id</code></td>
-      <td>A changeset id, tag, branch, or other valid git identifier for which version of Pulsar to load</td>
-      <td><code class="highlighter-rouge">master</code></td>
     </tr>
     <tr>
       <td><code class="highlighter-rouge">pulsar_venv_dir</code></td>
@@ -733,6 +830,16 @@
     <tr>
       <td><code class="highlighter-rouge">pulsar_install_environments</code></td>
       <td>Installing dependencies may require setting certain environment variables to compile successfully.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">pulsar_create_user</code></td>
+      <td>Should a user be created for running pulsar?</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">pulsar_user</code></td>
+      <td>Define the user details</td>
       <td> </td>
     </tr>
   </tbody>
@@ -791,20 +898,31 @@
 <span class="na">pulsar_venv_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/venv</span>
 <span class="na">pulsar_config_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/config</span>
 <span class="na">pulsar_staging_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/staging</span>
-<span class="na">pulsar_pip_install</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">pulsar_systemd</span><span class="pi">:</span> <span class="no">true</span>
 
 <span class="na">pulsar_host</span><span class="pi">:</span> <span class="s">0.0.0.0</span>
 <span class="na">pulsar_port</span><span class="pi">:</span> <span class="m">8913</span>
 
-<span class="na">private_token</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&lt;some_really_long_string_here&gt;'</span>
+<span class="na">private_token</span><span class="pi">:</span> <span class="s">your_private_token_here</span>
+
+<span class="na">pulsar_create_user</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">pulsar_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv">pulsar</span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
 
 <span class="na">pulsar_optional_dependencies</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">pyOpenSSL</span>
-  <span class="pi">-</span> <span class="s">psutil</span>
+  <span class="c1"># For remote transfers initiated on the Pulsar end rather than the <span class="notranslate">Galaxy</span> end</span>
   <span class="pi">-</span> <span class="s">pycurl</span>
+  <span class="c1"># uwsgi used for more robust deployment than paste</span>
+  <span class="pi">-</span> <span class="s">uwsgi</span>
+  <span class="c1"># drmaa required if connecting to an exte<span class="notranslate">rna</span>l DRM using it.</span>
+  <span class="pi">-</span> <span class="s">drmaa</span>
+  <span class="c1"># kombu needed if using a message queue</span>
+  <span class="pi">-</span> <span class="s">kombu</span>
+  <span class="c1"># requests and poster using Pulsar remote staging and pycurl is unavailable</span>
   <span class="pi">-</span> <span class="s">requests</span>
-  <span class="pi">-</span> <span class="s">poster</span>
+  <span class="c1"># psutil and pylockfile are optional dependencies but can make Pulsar</span>
+  <span class="c1"># more robust in small ways.</span>
+  <span class="pi">-</span> <span class="s">psutil</span>
 
 <span class="na">pulsar_yaml_config</span><span class="pi">:</span>
   <span class="na">dependency_resolvers_config_file</span><span class="pi">:</span> <span class="s">dependency_resolvers_conf.xml</span>
@@ -812,10 +930,18 @@
   <span class="na">conda_auto_install</span><span class="pi">:</span> <span class="s">True</span>
   <span class="na">staging_directory</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">pulsar_staging_dir</span><span class="nv"> </span><span class="s">}}"</span>
   <span class="na">private_token</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">private_token</span><span class="nv"> </span><span class="s">}}"</span>
+
+<span class="c1"># NGINX</span>
+<span class="na">nginx_selinux_allow_local_connections</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">nginx_servers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">pulsar-proxy</span>
+<span class="na">nginx_enable_default_server</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">nginx_conf_http</span><span class="pi">:</span>
+  <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">5g</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Replace <code class="highlighter-rouge">&lt;some_really_long_string_here&gt;</code> with a long randomish (or not) string.</p>
+      <p>Replace <code class="highlighter-rouge">your_private_token_here</code> with a long randomish (or not) string.</p>
     </li>
     <li>
       <p>Add the following lines to your <code class="highlighter-rouge">hosts</code> file:</p>
@@ -824,36 +950,52 @@
 <span class="err">&lt;ip_address</span> <span class="err">of</span> <span class="err">your</span> <span class="err">pulsar</span> <span class="err">server&gt;</span>
 </code></pre></div>      </div>
     </li>
+    <li>
+      <p>Create the file <code class="highlighter-rouge">templates/nginx/pulsar-proxy.j2</code> with the following contents:</p>
+
+      <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
+    <span class="c1"># Listen on 80, you should secure your server better :)</span>
+    <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
+    <span class="kn">listen</span> <span class="s">[::]:80</span> <span class="s">default_server</span><span class="p">;</span>
+
+    <span class="kn">location</span> <span class="n">/</span> <span class="p">{</span>
+        <span class="kn">proxy_redirect</span> <span class="no">off</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span> <span class="s">Host</span> <span class="nv">$host</span><span class="p">;</span>
+        <span class="kn">proxy_set_header</span> <span class="s">X-Real-IP</span> <span class="nv">$remote_addr</span><span class="p">;</span>
+        <span class="kn">proxy_pass</span> <span class="s">http://localhost:8913</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>      </div>
+    </li>
   </ol>
+
 </blockquote>
 
 <p>We will now write a new playbook for the pulsar installation similar to the one we did for the CVMFS installation earlier in the week.</p>
 
-<p>We need to include a couple of pre-tasks to install python-virtualenv, python-pip and git etc.</p>
+<p>We need to include a couple of pre-tasks to install virtualenv, git, etc.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-the-playbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the playbook</h3>
 
   <ol>
     <li>
-      <p>Create a <code class="highlighter-rouge">pulsar_playbook.yml</code> file with the following contents:</p>
+      <p>Create a <code class="highlighter-rouge">pulsar-playbook.yml</code> file with the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">pulsarservers</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install some packages</span>
-      <span class="na">apt</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}"</span>
-        <span class="na">state</span><span class="pi">:</span> <span class="s">installed</span>
+      <span class="na">package</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="s">build-essential</span>
+          <span class="pi">-</span> <span class="s">git</span>
+          <span class="pi">-</span> <span class="s">python3-dev</span>
+          <span class="pi">-</span> <span class="s">libcurl4-openssl-dev</span>
+          <span class="pi">-</span> <span class="s">libssl-dev</span>
+          <span class="pi">-</span> <span class="s">virtualenv</span>
+        <span class="na">state</span><span class="pi">:</span> <span class="s">present</span>
         <span class="na">update_cache</span><span class="pi">:</span> <span class="s">yes</span>
       <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
-      <span class="na">with_items</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="s">build-essential</span>
-        <span class="pi">-</span> <span class="s">vim</span>
-        <span class="pi">-</span> <span class="s">git</span>
-        <span class="pi">-</span> <span class="s">python-dev</span>
-        <span class="pi">-</span> <span class="s">libcurl4-openssl-dev</span>
-        <span class="pi">-</span> <span class="s">libssl-dev</span>
-        <span class="pi">-</span> <span class="s">virtualenv</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">chown the /mnt dir to ubuntu</span>
       <span class="na">file</span><span class="pi">:</span>
         <span class="na">path</span><span class="pi">:</span> <span class="s">/mnt</span>
@@ -862,10 +1004,17 @@
         <span class="na">mode</span><span class="pi">:</span> <span class="m">0755</span>
       <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
   <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.nginx</span>
+      <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
 </code></pre></div>      </div>
 
       <p>There are a couple of <em>pre-tasks</em> here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-why-nginx"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Why NGINX?</h3>
+        <p>Additionally we install NGINX, you might not have expected this! We used to use Pulsar’s webserving directly via uWSGI, but in Python 3 <span class="notranslate">Galaxy</span>, the requests that are sent to Pulsar are chunked, a transfer encoding that is not part of the wsgi spec and unsupported. <em>Our recommendation</em>: avoid all of this weirdness and use RabbitMQ as the transport instead. Unfortunately that is currently outside of the scope of this tutorial. <a href="https://pulsar.readthedocs.io/en/latest/galaxy_with_rabbitmq_conf.html">The documentation</a> covers it in detail.</p>
+      </blockquote>
     </li>
   </ol>
 
@@ -909,7 +1058,7 @@
     <li>
       <p>Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the <code class="highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="highlighter-rouge">--private-key key.pem</code> option.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar_playbook.yml
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar-playbook.yml
 </code></pre></div>      </div>
 
       <p>After the script has run, pulsar will be installed on the remote machines!</p>
@@ -937,10 +1086,8 @@
 <ul>
   <li>We will need to create a job runner which uses the  <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> code.</li>
   <li>Create job destination which references the above job runner.</li>
-  <li>Tell <span class="notranslate">Galaxy</span> which tools to send to the job destination.</li>
+  <li>Tell <span class="notranslate">Galaxy</span> which tools to send to the job destination: We will use <code class="highlighter-rouge">bwa-mem</code></li>
 </ul>
-
-<p>(We will use bwa-mem)</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-configure-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure <span class="notranslate">Galaxy</span></h3>
@@ -957,7 +1104,7 @@
       <p>Add the following to the <code class="highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="highlighter-rouge">job_conf.xml</code> file:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"pulsar"</span> <span class="na">runner=</span><span class="s">"pulsar_runner"</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"url"</span><span class="nt">&gt;</span>http://your_ip_address_here:8913/<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"url"</span><span class="nt">&gt;</span>http://your_ip_address_here:80/<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"private_token"</span><span class="nt">&gt;</span>your_private_token_here<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
@@ -969,9 +1116,12 @@ We need to know the full id of the tool in question, we can get this out of the 
       <p>Add the following to the end of the <code class="highlighter-rouge">job_conf.xml</code> file (inside the <code class="highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tools&gt;</span>
-    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"bwa"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"bwa_mem"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/tools&gt;</span>
 </code></pre></div>      </div>
+
+      <p>You can use the full tool ID here (<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.</p>
     </li>
     <li>
       <p>Run the <span class="notranslate">Galaxy</span> playbook in order to deploy the updated job configuration, and to restart <span class="notranslate">Galaxy</span>.</p>
@@ -985,46 +1135,35 @@ We need to know the full id of the tool in question, we can get this out of the 
 <p>Now we will upload a small set of data to run bwa-mem with.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-testing-the-pulsar-destinatoin"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing the Pulsar destinatoin</h3>
+  <h3 id="hands_on-hands-on-testing-the-pulsar-destination"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing the Pulsar destination</h3>
 
   <ol>
     <li>
       <p>Upload the following files from zenodo.</p>
 
-      <table>
-        <thead>
-          <tr>
-            <th>File URL</th>
-            <th>filetype</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code class="highlighter-rouge">https://zenodo.org/record/582600/files/mutant_R1.fastq</code></td>
-            <td>fastqsanger</td>
-          </tr>
-          <tr>
-            <td><code class="highlighter-rouge">https://zenodo.org/record/582600/files/mutant_R2.fastq</code></td>
-            <td>fastqsanger</td>
-          </tr>
-          <tr>
-            <td><code class="highlighter-rouge">https://zenodo.org/record/582600/files/wildtype.fna</code></td>
-            <td>fasta</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
+https://zenodo.org/record/582600/files/mutant_R2.fastq
+https://zenodo.org/record/582600/files/wildtype.fna
+</code></pre></div>      </div>
     </li>
     <li>
-      <p>Now run the bwa-mem tool with the <code class="highlighter-rouge">wildtype.fna</code> file as the reference, and the two fastq files as the paired end <span class="notranslate">reads</span>. Leave everything default.</p>
+      <p><strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index”</em>: <code class="highlighter-rouge">Use a genome from history and build index</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference genome”</em>: <code class="highlighter-rouge">wildtype.fna</code></li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Paired end</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+      </ul>
 
       <p>As soon as you press <em>execute</em> <span class="notranslate">Galaxy</span> will send the job to the pulsar server. You can watch the log in <span class="notranslate">Galaxy</span> using:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo supervisorctl tail -f <span class="notranslate">galaxy</span> stderr
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctcl -fu <span class="notranslate">galaxy</span>
 </code></pre></div>      </div>
 
       <p>You can watch the log in Pulsar by ssh’ing to it and tailing the log file with:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tail -f /mnt/pulsar/paster.log
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -fu pulsar
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1076,8 +1215,8 @@ We need to know the full id of the tool in question, we can get this out of the 
     author = "Nate Coraor and Simon Gladman and Marius van den Beek and Helena Rasche",
     title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "28"
+    month = "03",
+    day = "04"
     url = "\url{/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

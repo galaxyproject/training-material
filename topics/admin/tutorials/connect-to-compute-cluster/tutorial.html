@@ -601,7 +601,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 27, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -920,7 +920,7 @@ sleep </span>30
 
 <h1 id="galaxy-and-slurm"><span class="notranslate">Galaxy</span> and Slurm</h1>
 
-<p>At the top of the stack sits <span class="notranslate">Galaxy</span>. <span class="notranslate">Galaxy</span> must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and <span class="notranslate">Galaxy</span>’s own documentation) instruct that you should set the <code class="highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because <span class="notranslate">Galaxy</span> runs under supervisor, the environment that <span class="notranslate">Galaxy</span> starts under is controlled by the <code class="highlighter-rouge">environment</code> option in <code class="highlighter-rouge">/etc/supervisor/conf.d/<span class="notranslate">galaxy</span>.conf</code>. The <span class="notranslate">galaxy</span> task should thus be updated to refer to the path to slurm-drmaa, which is <code class="highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
+<p>At the top of the stack sits <span class="notranslate">Galaxy</span>. <span class="notranslate">Galaxy</span> must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and <span class="notranslate">Galaxy</span>’s own documentation) instruct that you should set the <code class="highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because <span class="notranslate">Galaxy</span> runs under systemd, the environment that <span class="notranslate">Galaxy</span> starts under is controlled by the <code class="highlighter-rouge">environment</code> option in systemd service unit that the ansible role manages. The <span class="notranslate">galaxy</span> task should thus be updated to refer to the path to slurm-drmaa, which is <code class="highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-making-galaxy-aware-of-drmaa"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Making <span class="notranslate">Galaxy</span> aware of DRMAA</h3>
@@ -1661,8 +1661,8 @@ sleep </span>30
     author = "Nate Coraor and Björn Grüning and Helena Rasche",
     title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "27"
+    month = "03",
+    day = "04"
     url = "\url{/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
