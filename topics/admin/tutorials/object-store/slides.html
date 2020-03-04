@@ -15,29 +15,9 @@ contributors:
   - natefoo
   - martenson
   - hexylena
----
-
-class: normal
-# Mechanics
-
-* When files are produced they are stored in the filesystem defined by `file_path` config in `galaxy.yml`.
-  * Defaults to `database/files`.
-
---
-*  A database entry in `Dataset` table is created.
-  * Among others it has:  `| id	| deleted	| purged | file_size |`
-
---
-* To user we present the data through:
-  * Entries in `HistoryDatasetAssociation` table.
-    * Among others it has:  `| id	| history_id | deleted	| dataset_id |`
-  * Entries in `LibraryDatasetDatasetAssociation` table.
-    * Among others it has:  `| id	| library_dataset_id | deleted	| dataset_id |`
-
---
-Any number of 'Association' records can point to a base Dataset -- this is how copying histories, history items, and libraries work without needing to copy actual file contents.
 
 ---
+
 # Object Store Plugins
 
 Direct:
