@@ -179,7 +179,7 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >
 >    ```yml
 >    - src: atosatto.minio
->      version: 1.1.0
+>      version: v1.1.0
 >    ```
 >
 > 2. `ansible-galaxy install -p roles -r requirements.yml`
@@ -206,8 +206,8 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >    ```diff
 >    @@ -1,13 +1,21 @@
 >     <?xml version="1.0"?>
->     -<object_store type="distributed">
->     +<object_store type="hierarchical">
+>    - <object_store type="distributed">
+>    + <object_store type="hierarchical">
 >         <backends>
 >    -        <backend id="newdata" type="disk" weight="1">
 >    +        <backend id="newdata" type="disk" order="1">
@@ -221,7 +221,7 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >             </backend>
 >    +        <object_store id="swifty" type="swift" order="0">
 >    +            <auth access_key="{{ minio_access_key }}" secret_key="{{ minio_secret_key }}" />
->    +            <bucket name="test" use_reduced_redundancy="False" max_chunk_size="250"/>
+>    +            <bucket name="galaxy" use_reduced_redundancy="False" max_chunk_size="250"/>
 >    +            <connection host="127.0.0.1" port="9091" is_secure="False" conn_path="" multipart="True"/>
 >    +            <cache path="{{ galaxy_mutable_data_dir }}/database/object_store_cache" size="1000" />
 >    +            <extra_dir type="job_work" path="{{ galaxy_mutable_data_dir }}/database/job_working_directory_swift"/>
@@ -234,7 +234,9 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >
 > 6. Run the playbook.
 >
-> 7. Galaxy should now be configure to use the object store! When the playbook is done, upload a dataset to Galaxy, and check if it shows up in the bucket:
+> 7. Galaxy should now be configure to use the object store!
+>
+> 8. When the playbook is done, upload a dataset to Galaxy, and check if it shows up in the bucket:
 >
 >    ```
 >    $ sudo ls /minio-test/galaxy/000/
