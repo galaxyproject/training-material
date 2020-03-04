@@ -540,7 +540,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
 >        job_config_file: "{{ galaxy_job_config_file }}"
->        interactivetools_enable: "True"
+>        interactivetools_enable: true
 >        interactivetools_map: "{{ gie_proxy_sessions_path }}"
 >    ```
 >    {% endraw %}
