@@ -39,7 +39,7 @@ Galaxy includes a built-in framework to collect job metrics and store these in i
 
 > ### {% icon comment %} Note
 >
-> Job metrics are only visible to Galaxy *admin users*.
+> Job metrics are only visible to Galaxy *admin users*, unless you set `expose_potentially_sensitive_job_metrics: true`, like UseGalaxy.eu does. EU's intention with this is to empower users and make everything as transparent as possible.
 >
 {: .comment}
 
