@@ -26,7 +26,7 @@ subtopic: core
 # Overview
 {:.no_toc}
 
-In this tutorial we have briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
+In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.
 
@@ -307,7 +307,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >    >
 >    {: .details }
 >
-> 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, World"
+> 8. Create a `roles/my-role/files` folder, and within it a file named `test.txt`, containing the content "Hello, Galaxy 🚀"
 >
 > 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the target host and place it in `/tmp`.
 >
@@ -446,7 +446,7 @@ The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html)
 Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
 
 > ### {% icon details %} Template Syntax
-> Templates use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial.
+> Templates end with the `.j2` suffix and use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the .j2 suffix.
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Variables and Templates
@@ -626,7 +626,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you'll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:
 
 - The name should match the software you are using (I.e. ignore a role named `stackstorm` when you are trying to set up `rabbitmq`. Ansible Galaxy does not have perfect search.)
-- `geerlingguy` wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice.
+- `geerlingguy` wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend `galaxyproject` and `usegalaxy_eu` roles.
 - Check the GitHub readme of each role you consider using. Look for:
   - Extensive documentation of all of the variables, their default values, and how they behave.
   - An example playbook using the role
@@ -727,20 +727,31 @@ Ansible has a huge array of features and we can't cover them all. Some commonly 
 
 ## With Items
 
-Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides `with_items` construct
+Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides `loop` construct
 
 ```yaml
 - name: Install stuff
   package:
     name: {% raw %}"{{ item }}"{% endraw %}
     state: installed
-  with_items:
+  loop:
     - htop
     - git
     - vim
 ```
 
 This works for any task, not just package installation if you have things you'd like to repeat.
+Note that for this task one would normally list multiple packages in the `name` parameter of the package module
+
+```yaml
+- name: Install stuff
+  package:
+    name:
+      - htop
+      - git
+      - vim
+    state: installed
+```
 
 ## When Changed
 
@@ -761,7 +772,7 @@ Doing something only when a task is in the "changed" state is a common pattern. 
     name: service
     enabled: yes
     state: restarted
-  when: service_conf.changed
+  when: service_conf is changed
 ```
 
 ## Notifying Handlers
@@ -770,7 +781,7 @@ Often you want to restart a service whenever something has changed, like above. 
 
 First, move the restarting or reloading of the service into the `handlers/main.yml`
 
-```
+```yaml
 - name: restart service
   service:
     name: service
