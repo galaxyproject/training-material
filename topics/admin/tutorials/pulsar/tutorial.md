@@ -29,6 +29,7 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+      - connect-to-compute-cluster
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
 ---
@@ -73,14 +74,15 @@ This tutorial assumes that you have:
 
 # Installing the Pulsar Role
 
-We need to create a new ansible playbook to install Pulsar. We will be using a *role* written by Nate Coraor - `galaxyproject.pulsar`
+We need to create a new ansible playbook to install Pulsar. We will be using a *role* developed by the Galaxy community - `galaxyproject.pulsar`
 
 > ### {% icon hands_on %} Hands-on: Install the `galaxyproject.pulsar` ansible role
 >
 > 1. From your ansible working directory, edit the `requirements.yml` file and add the following line:
 >
 >    ```yaml
->    - galaxyproject.pulsar
+>    - src: galaxyproject.pulsar
+>      version: 1.0.2
 >    ```
 >
 > 2. Now install it with:
@@ -102,17 +104,15 @@ There is one required variable:
 
 Then there are a lot of optional variables. They are listed here for information. We will set some for this tutorial but not all.
 
- Variable Name                  | Description                                                                                        | Default
----------------                 | -------------                                                                                      | ---
- `pulsar_pip_install`           | Set to `true` to get pulsar to be sourced from pip.                                                | `false`
- `pulsar_yaml_config`           | a YAML dictionary whose contents will be used to create Pulsar's `app.yml`                         |
- `pulsar_git_repo`              | Upstream git repository from which Pulsar should be cloned.                                        | https://github.com/galaxyproject/pulsar
- `pulsar_changeset_id`          | A changeset id, tag, branch, or other valid git identifier for which version of Pulsar to load     | `master`
- `pulsar_venv_dir`              | The role will create a virtualenv from which Pulsar will run                                       | `<pulsar_server_dir>/venv` if installing via pip, `<pulsar_server_dir>/.venv` if not.
- `pulsar_config_dir`            | Directory that will be used for Pulsar configuration files.                                        | `<pulsar_server_dir>/config` if installing via pip, `<pulsar_server_dir>` if not
- `pulsar_optional_dependencies` | List of optional dependency modules to install, depending on which features you are enabling.      | `None`
- `pulsar_install_environments`  | Installing dependencies may require setting certain environment variables to compile successfully. |
-
+ Variable Name                 | Description                                                                                        | Default
+---------------                | -------------                                                                                      | ---
+`pulsar_yaml_config`           | a YAML dictionary whose contents will be used to create Pulsar's `app.yml`                         |
+`pulsar_venv_dir`              | The role will create a virtualenv from which Pulsar will run                                       | `<pulsar_server_dir>/venv` if installing via pip, `<pulsar_server_dir>/.venv` if not.
+`pulsar_config_dir`            | Directory that will be used for Pulsar configuration files.                                        | `<pulsar_server_dir>/config` if installing via pip, `<pulsar_server_dir>` if not
+`pulsar_optional_dependencies` | List of optional dependency modules to install, depending on which features you are enabling.      | `None`
+`pulsar_install_environments`  | Installing dependencies may require setting certain environment variables to compile successfully. |
+`pulsar_create_user`           | Should a user be created for running pulsar?                                                       |
+`pulsar_user`                  | Define the user details                                                                            |
 
 Additional options from Pulsar's server.ini are configurable via the following variables (these options are explained in the Pulsar documentation and server.ini.sample):
 
@@ -140,20 +140,31 @@ Some of the other options we will be using are:
 >    pulsar_venv_dir: /mnt/pulsar/venv
 >    pulsar_config_dir: /mnt/pulsar/config
 >    pulsar_staging_dir: /mnt/pulsar/staging
->    pulsar_pip_install: true
 >    pulsar_systemd: true
 >
 >    pulsar_host: 0.0.0.0
 >    pulsar_port: 8913
 >
->    private_token: '<some_really_long_string_here>'
+>    private_token: your_private_token_here
+>
+>    pulsar_create_user: true
+>    pulsar_user: {name: pulsar, shell: /bin/bash}
 >
 >    pulsar_optional_dependencies:
 >      - pyOpenSSL
->      - psutil
+>      # For remote transfers initiated on the Pulsar end rather than the Galaxy end
 >      - pycurl
+>      # uwsgi used for more robust deployment than paste
+>      - uwsgi
+>      # drmaa required if connecting to an external DRM using it.
+>      - drmaa
+>      # kombu needed if using a message queue
+>      - kombu
+>      # requests and poster using Pulsar remote staging and pycurl is unavailable
 >      - requests
->      - poster
+>      # psutil and pylockfile are optional dependencies but can make Pulsar
+>      # more robust in small ways.
+>      - psutil
 >
 >    pulsar_yaml_config:
 >      dependency_resolvers_config_file: dependency_resolvers_conf.xml
@@ -161,10 +172,18 @@ Some of the other options we will be using are:
 >      conda_auto_install: True
 >      staging_directory: "{{ pulsar_staging_dir }}"
 >      private_token: "{{ private_token }}"
+>
+>    # NGINX
+>    nginx_selinux_allow_local_connections: true
+>    nginx_servers:
+>      - pulsar-proxy
+>    nginx_enable_default_server: false
+>    nginx_conf_http:
+>      client_max_body_size: 5g
 >    ```
 >    {% endraw %}
 >
-> 2. Replace `<some_really_long_string_here>` with a long randomish (or not) string.
+> 2. Replace `your_private_token_here` with a long randomish (or not) string.
 >
 > 3. Add the following lines to your `hosts` file:
 >
@@ -172,34 +191,50 @@ Some of the other options we will be using are:
 >    [pulsarservers]
 >    <ip_address of your pulsar server>
 >    ```
+>
+> 4. Create the file `templates/nginx/pulsar-proxy.j2` with the following contents:
+>
+>    ```nginx
+>    server {
+>        # Listen on 80, you should secure your server better :)
+>        listen 80 default_server;
+>        listen [::]:80 default_server;
+>
+>        location / {
+>            proxy_redirect off;
+>            proxy_set_header Host $host;
+>            proxy_set_header X-Real-IP $remote_addr;
+>            proxy_pass http://localhost:8913;
+>        }
+>    }
+>    ```
+>
 {: .hands_on}
 
 We will now write a new playbook for the pulsar installation similar to the one we did for the CVMFS installation earlier in the week.
 
-We need to include a couple of pre-tasks to install python-virtualenv, python-pip and git etc.
+We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 > ### {% icon hands_on %} Hands-on: Creating the playbook
 >
-> 1. Create a `pulsar_playbook.yml` file with the following contents:
+> 1. Create a `pulsar-playbook.yml` file with the following contents:
 >
 >    {% raw %}
 >    ```yaml
 >    - hosts: pulsarservers
 >      pre_tasks:
 >        - name: Install some packages
->          apt:
->            name: "{{ item }}"
->            state: installed
+>          package:
+>            name:
+>              - build-essential
+>              - git
+>              - python3-dev
+>              - libcurl4-openssl-dev
+>              - libssl-dev
+>              - virtualenv
+>            state: present
 >            update_cache: yes
 >          become: yes
->          with_items:
->            - build-essential
->            - vim
->            - git
->            - python-dev
->            - libcurl4-openssl-dev
->            - libssl-dev
->            - virtualenv
 >        - name: chown the /mnt dir to ubuntu
 >          file:
 >            path: /mnt
@@ -208,11 +243,17 @@ We need to include a couple of pre-tasks to install python-virtualenv, python-pi
 >            mode: 0755
 >          become: yes
 >      roles:
+>        - role: galaxyproject.nginx
+>          become: yes
 >        - galaxyproject.pulsar
 >    ```
 >    {% endraw %}
 >
 >    There are a couple of *pre-tasks* here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.
+>
+>    > ### {% icon comment %} Why NGINX?
+>    Additionally we install NGINX, you might not have expected this! We used to use Pulsar's webserving directly via uWSGI, but in Python 3 Galaxy, the requests that are sent to Pulsar are chunked, a transfer encoding that is not part of the wsgi spec and unsupported. *Our recommendation*: avoid all of this weirdness and use RabbitMQ as the transport instead. Unfortunately that is currently outside of the scope of this tutorial. [The documentation](https://pulsar.readthedocs.io/en/latest/galaxy_with_rabbitmq_conf.html) covers it in detail.
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -251,7 +292,7 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 > 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
 >
 >    ```bash
->    ansible-playbook pulsar_playbook.yml
+>    ansible-playbook pulsar-playbook.yml
 >    ```
 >
 >    After the script has run, pulsar will be installed on the remote machines!
@@ -274,9 +315,7 @@ There are three things we need to do here:
 
 * We will need to create a job runner which uses the  `galaxy.jobs.runners.pulsar:PulsarRESTJobRunner` code.
 * Create job destination which references the above job runner.
-* Tell Galaxy which tools to send to the job destination.
-
-(We will use bwa-mem)
+* Tell Galaxy which tools to send to the job destination: We will use `bwa-mem`
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
@@ -292,7 +331,7 @@ There are three things we need to do here:
 >
 >    ```xml
 >    <destination id="pulsar" runner="pulsar_runner" >
->        <param id="url">http://your_ip_address_here:8913/</param>
+>        <param id="url">http://your_ip_address_here:80/</param>
 >        <param id="private_token">your_private_token_here</param>
 >    </destination>
 >    ```
@@ -304,9 +343,12 @@ There are three things we need to do here:
 >
 >    ```xml
 >    <tools>
->        <tool id="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" destination="pulsar"/>
+>        <tool id="bwa" destination="pulsar"/>
+>        <tool id="bwa_mem" destination="pulsar"/>
 >    </tools>
 >    ```
+>
+>    You can use the full tool ID here (toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.
 >
 > 3. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
@@ -318,28 +360,33 @@ There are three things we need to do here:
 Now we will upload a small set of data to run bwa-mem with.
 
 
-> ### {% icon hands_on %} Hands-on: Testing the Pulsar destinatoin
+> ### {% icon hands_on %} Hands-on: Testing the Pulsar destination
 >
 > 1. Upload the following files from zenodo.
 >
->    | File URL                                                 | filetype    |
->    | ----------                                               | ----------  |
->    | `https://zenodo.org/record/582600/files/mutant_R1.fastq` | fastqsanger |
->    | `https://zenodo.org/record/582600/files/mutant_R2.fastq` | fastqsanger |
->    | `https://zenodo.org/record/582600/files/wildtype.fna`    | fasta       |
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    ```
 >
-> 2. Now run the bwa-mem tool with the `wildtype.fna` file as the reference, and the two fastq files as the paired end reads. Leave everything default.
+> 2. **Map with BWA-MEM** {% icon tool %} with the following parameters
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference genome"*: `wildtype.fna`
+>    - *"Single or Paired-end reads"*: `Paired end`
+>    - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
+>    - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
 >
 >    As soon as you press *execute* Galaxy will send the job to the pulsar server. You can watch the log in Galaxy using:
 >
 >    ```
->    sudo supervisorctl tail -f galaxy stderr
+>    journalctcl -fu galaxy
 >    ```
 >
 >    You can watch the log in Pulsar by ssh'ing to it and tailing the log file with:
 >
 >    ```
->    tail -f /mnt/pulsar/paster.log
+>    journalctl -fu pulsar
 >    ```
 >
 {: .hands_on}

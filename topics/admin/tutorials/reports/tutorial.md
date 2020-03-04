@@ -42,7 +42,7 @@ The reports application gives some pre-configured analytics screens.
 
 # Setting up Reports
 
-The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.
+The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, systemd, uWSGI, and NGINX.
 
 > ### {% icon hands_on %} Hands-on: Setup Reports
 >
@@ -92,7 +92,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    {% endraw %}
 >
 >
-> 3. Similar to Galaxy we will again use systemd to manage the Reports process. In the `galaxyservers` group variables file edit the `supervisor_programs` section - add an entry for the Reports webapp:
+> 3. Similar to Galaxy we will again use systemd to manage the Reports process.
 >
 >    {% raw %}
 >    ```yml
