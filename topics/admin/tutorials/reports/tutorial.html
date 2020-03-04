@@ -451,6 +451,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -496,6 +498,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -656,7 +660,7 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:</p>
+      <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuration, add a block for proxying the reports application. It should look like:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports/</span> <span class="p">{</span>
     <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
