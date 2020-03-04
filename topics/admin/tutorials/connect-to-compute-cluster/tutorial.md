@@ -60,7 +60,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 > ### {% icon hands_on %} Hands-on: Installing Slurm
 >
-> 1. Create (if needed) and edit a file in your working directory called `requirements.yml` and include the following contents:
+> 1. Edit your `requirements.yml` and include the following contents:
 >
 >    ```yaml
 >    - src: galaxyproject.repos
@@ -71,30 +71,32 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
 >
-> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
+> 2. In the same directory, run:
 >
-> 3. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Slurm
->
-> 4. Create a playbook, `slurm.yml` which looks like the following:
->
->    ```yaml
->    - hosts: galaxyservers
->      become: true
->      vars:
->        slurm_roles: ['controller', 'exec']
->        slurm_nodes:
->        - name: localhost
->          CPUs: 2                              # Here you would need to figure out how many cores your machine has. (Hint, `htop`)
->        slurm_config:
->          FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
->          SelectType: select/cons_res
->          SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->      roles:
->        - galaxyproject.repos
->        - galaxyproject.slurm
+>    ```
+>    ansible-galaxy install -p roles -r requirements.yml
 >    ```
 >
-> 5. Run the playbook (`ansible-playbook slurm.yml`)
+> 4. Add the following roles to the *beginning* of your roles section in your `galaxy.yml` playbook:
+>
+>    - `galaxyproject.repos`
+>    - `galaxyproject.slurm`
+>
+> 5. Add the slurm variables to your  `group_vars/galaxyservers.yml`:
+>
+>    ```
+>    # slurm
+>    slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
+>    slurm_nodes:
+>    - name: localhost # Name of our host
+>      CPUs: 2         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+>    slurm_config:
+>      FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
+>      SelectType: select/cons_res
+>      SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>    ```
+>
+> 5. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 {: .hands_on}
 
@@ -258,25 +260,18 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```yaml
 >    - hosts: galaxyservers
 >      become: true
->      vars:
->        slurm_roles: ['controller', 'exec']
->        slurm_nodes:
->        - name: localhost
->          CPUs: 2                              # Here you would need to figure out how many cores your machine has. (Hint, `htop`)
->        slurm_config:
->          FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
->          SelectType: select/cons_res
->          SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>      ...
 >      roles:
 >        - galaxyproject.repos
 >        - galaxyproject.slurm
+>        ...
 >      post_tasks:
 >        - name: Install slurm-drmaa
 >          package:
 >            name: slurm-drmaa1
 >    ```
 >
-> 2. Run the playbook (`ansible-playbook slurm.yml`)
+> 2. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 {: .hands_on}
 
@@ -364,7 +359,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
 >
-> 5. Run your *Galaxy* playbook (`ansible-playbook galaxy.yml`)
+> 5. Run your Galaxy playbook (`ansible-playbook galaxy.yml`)
 >
 > 6. Follow the logs with `journalctl -f -u galaxy`
 >
@@ -546,7 +541,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 >    ```xml
 >            <destination id="slurm-2c" runner="slurm">
->                <param id="nativeSpecification">--nodes=1 --ntasks=2</param>
+>                <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=4</param>
 >            </destination>
 >    ```
 > 2. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
