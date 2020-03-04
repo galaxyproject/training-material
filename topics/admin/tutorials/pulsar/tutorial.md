@@ -380,7 +380,7 @@ Now we will upload a small set of data to run bwa-mem with.
 >    As soon as you press *execute* Galaxy will send the job to the pulsar server. You can watch the log in Galaxy using:
 >
 >    ```
->    journalctcl -fu galaxy
+>    journalctl -fu galaxy
 >    ```
 >
 >    You can watch the log in Pulsar by ssh'ing to it and tailing the log file with:
