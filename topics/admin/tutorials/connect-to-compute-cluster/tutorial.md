@@ -680,7 +680,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    galaxy_config_files:
 >      ...
 >      - src: files/galaxy/config/tool_destinations.yml
->        dest: {% raw %}"{{ galaxy_config['galaxy']['tool_destinations_config_file'] }}"{% endraw %}
+>        dest: {% raw %}"{{ galaxy_config.galaxy.tool_destinations_config_file }}"{% endraw %}
 >    ```
 >
 > 3. We need to update Galaxy's job configuration to use this rule. Open `files/galaxy/config/job_conf.xml` and add a DTD destination:
@@ -757,7 +757,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >      galaxy_config_files:
 >        ...
 >        - src: files/galaxy/config/job_resource_params_conf.xml
->          dest: {% raw %}"{{ galaxy_config['galaxy']['job_resource_params_file'] }}"{% endraw %}
+>          dest: {% raw %}"{{ galaxy_config.galaxy.job_resource_params_file }}"{% endraw %}
 >      ```
 >
 > 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `files/galaxy/config/job_conf.xml`:
