@@ -15,12 +15,6 @@ objectives:
 - "Use get() to import datasets from your history to the notebook"
 - "Use put() to export datasets from the notebook to your history"
 - "Save your notebook into your history"
-follow_up_training:
--
-    type: "internal"
-    topic_name: introduction
-    tutorials:
-        - r-basics
 time_estimation: 1H
 key_points:
 - How to work with JupyterLab interactively within Galaxy
