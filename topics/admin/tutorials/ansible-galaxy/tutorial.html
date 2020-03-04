@@ -488,7 +488,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 2, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -555,7 +555,7 @@
 
 <p>These are largely self explanatory: a directory for all of <span class="notranslate">Galaxy</span>’s code and configuration, which commit should be installed, and the <span class="notranslate">Galaxy</span> configuration. We will not explain <span class="notranslate">Galaxy</span> configuration variables in detail as they are covered sufficiently in the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> sample file or the <a href="https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options">online documentation</a>.</p>
 
-<p>The official recommendation is that you should have a variables file such as a <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>.yml</code> for storing all of the <span class="notranslate">Galaxy</span> configuration.</p>
+<p>The official recommendation is that you should have a variables file such as a <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> for storing all of the <span class="notranslate">Galaxy</span> configuration.</p>
 
 <h2 id="tasks">Tasks</h2>
 
@@ -1040,54 +1040,6 @@ best practices and knowledge from previous admins codified for you.</p>
         <li><code class="highlighter-rouge">tool_data_path</code> to <code class="highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
       </ol>
 
-      <blockquote class="question">
-        <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-        <p>How does your current group variables file look?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="c1"># python3 support</span>
-<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">/usr/bin/python3 -m virtualenv</span> <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot, use<span class="notranslate">galaxy</span>_eu.tiaas2, <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-<span class="na">certbot_virtualenv_package_name</span><span class="pi">:</span> <span class="s">python3-virtualenv</span>    <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot</span>
-<span class="na">pip_package</span><span class="pi">:</span> <span class="s">python3-pip</span>                               <span class="c1"># geerlingguy.pip</span>
-
-<span class="c1"># PostgreSQL</span>
-<span class="na">postgresql_objects_users</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-<span class="na">postgresql_objects_databases</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-    <span class="na">owner</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-
-<span class="c1"># <span class="notranslate">Galaxy</span></span>
-<span class="na"><span class="notranslate">galaxy</span>_create_user</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span>_separate_privileges</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span>_manage_paths</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span>_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
-<span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span></span>
-<span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
-<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.01</span>
-<span class="na"><span class="notranslate">galaxy</span>_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
-<span class="na"><span class="notranslate">galaxy</span>_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">miniconda_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_tool_dependency_dir</span><span class="nv"> </span><span class="s">}}/_conda"</span>
-<span class="na">miniconda_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4.6.14"</span>
-
-<span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">brand</span><span class="pi">:</span> <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
-    <span class="na">admin_users</span><span class="pi">:</span> <span class="s">admin@example.org</span>
-    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
-    <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
-    <span class="na">check_migrate_tools</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="na">tool_data_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/tool-data"</span>
-</code></pre></div>          </div>
-
-        </blockquote>
-
-      </blockquote>
-
       <blockquote class="comment">
         <h3 id="comment-ansible-variable-templating"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Variable Templating</h3>
         <p>In this step we use some templated variables. These are seen in our group variables, among other places, and look like <code class="highlighter-rouge">miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir  }}/_conda"</code>.</p>
@@ -1144,12 +1096,12 @@ So it is not always easy to tell what variables will be set, or what their final
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How does your current group variables file look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="c1"># python3 support</span>
@@ -1298,12 +1250,12 @@ So it is not always easy to tell what variables will be set, or what their final
       <p>Log in and check the status with <code class="highlighter-rouge">sudo systemctl status <span class="notranslate">galaxy</span></code></p>
 
       <blockquote class="question">
-        <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How does the output look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>If everything went correctly you should see something like</p>
 
@@ -1753,10 +1705,10 @@ In a training setting there is no need to request certificates that will be trus
 
 <p>With Ansible, upgrading <span class="notranslate">Galaxy</span> to a new release is incredibly easy. Here is a commit from Use<span class="notranslate">Galaxy</span>.eu’s upgrade:</p>
 
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/group_vars/<span class="notranslate">galaxy</span>.yml b/group_vars/<span class="notranslate">galaxy</span>.yml
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/group_vars/<span class="notranslate">galaxy</span>servers.yml b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 index ce17525..54d0746 100644
-</span><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>.yml
+</span><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -345,7 +345,7 @@</span> <span class="notranslate">galaxy</span>_instance_hostname: use<span class="notranslate">galaxy</span>.eu
  <span class="notranslate">galaxy</span>_config_style: ini
 
@@ -1826,7 +1778,7 @@ index ce17525..54d0746 100644
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "02"
+    day = "04"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

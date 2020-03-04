@@ -331,7 +331,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 2, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -343,7 +343,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>In this tutorial we have briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible"><span class="notranslate">Galaxy</span>project Ansible roles</a>.</p>
+<p>In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible"><span class="notranslate">Galaxy</span>project Ansible roles</a>.</p>
 
 <p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.</p>
 
@@ -714,7 +714,7 @@ Ansible provides some flags which can help you identify changes before they’re
       </blockquote>
     </li>
     <li>
-      <p>Create a <code class="highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="highlighter-rouge">test.txt</code>, containing the content “Hello, World”</p>
+      <p>Create a <code class="highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="highlighter-rouge">test.txt</code>, containing the content “Hello, <span class="notranslate">Galaxy</span> 🚀”</p>
     </li>
     <li>
       <p>This is a complete role by itself and will copy the file <code class="highlighter-rouge">test.txt</code> from the <code class="highlighter-rouge">roles/my-role/files/</code> folder over to the target host and place it in <code class="highlighter-rouge">/tmp</code>.</p>
@@ -876,7 +876,7 @@ ok: [localhost]
 
 <blockquote class="details">
   <h3 id="details-template-syntax"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Template Syntax</h3>
-  <p>Templates use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial.</p>
+  <p>Templates end with the <code class="highlighter-rouge">.j2</code> suffix and use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the .j2 suffix.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1089,7 +1089,7 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
 <ul>
   <li>The name should match the software you are using (I.e. ignore a role named <code class="highlighter-rouge">stackstorm</code> when you are trying to set up <code class="highlighter-rouge">rabbitmq</code>. Ansible <span class="notranslate">Galaxy</span> does not have perfect search.)</li>
-  <li><code class="highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice.</li>
+  <li><code class="highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project</code> and <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu</code> roles.</li>
   <li>Check the GitHub readme of each role you consider using. Look for:
     <ul>
       <li>Extensive documentation of all of the variables, their default values, and how they behave.</li>
@@ -1207,19 +1207,29 @@ $ANSIBLE_VAULT;1.1;AES256
 
 <h2 id="with-items">With Items</h2>
 
-<p>Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides <code class="highlighter-rouge">with_items</code> construct</p>
+<p>Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides <code class="highlighter-rouge">loop</code> construct</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
   <span class="na">package</span><span class="pi">:</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">}}"</span>
     <span class="na">state</span><span class="pi">:</span> <span class="s">installed</span>
-  <span class="na">with_items</span><span class="pi">:</span>
+  <span class="na">loop</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s">htop</span>
     <span class="pi">-</span> <span class="s">git</span>
     <span class="pi">-</span> <span class="s">vim</span>
 </code></pre></div></div>
 
-<p>This works for any task, not just package installation if you have things you’d like to repeat.</p>
+<p>This works for any task, not just package installation if you have things you’d like to repeat.
+Note that for this task one would normally list multiple packages in the <code class="highlighter-rouge">name</code> parameter of the package module</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
+  <span class="na">package</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">htop</span>
+      <span class="pi">-</span> <span class="s">git</span>
+      <span class="pi">-</span> <span class="s">vim</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">installed</span>
+</code></pre></div></div>
 
 <h2 id="when-changed">When Changed</h2>
 
@@ -1239,7 +1249,7 @@ $ANSIBLE_VAULT;1.1;AES256
     <span class="na">name</span><span class="pi">:</span> <span class="s">service</span>
     <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
     <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span>
-  <span class="na">when</span><span class="pi">:</span> <span class="s">service_conf.changed</span>
+  <span class="na">when</span><span class="pi">:</span> <span class="s">service_conf is changed</span>
 </code></pre></div></div>
 
 <h2 id="notifying-handlers">Notifying Handlers</h2>
@@ -1248,17 +1258,17 @@ $ANSIBLE_VAULT;1.1;AES256
 
 <p>First, move the restarting or reloading of the service into the <code class="highlighter-rouge">handlers/main.yml</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: restart service
-  service:
-    name: service
-    enabled: yes
-    state: restarted
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">restart service</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">service</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">restarted</span>
 
-- name: reload httpd
-  service:
-    name: httpd
-    enabled: yes
-    state: reloaded
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">reload httpd</span>
+  <span class="na">service</span><span class="pi">:</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">httpd</span>
+    <span class="na">enabled</span><span class="pi">:</span> <span class="s">yes</span>
+    <span class="na">state</span><span class="pi">:</span> <span class="s">reloaded</span>
 </code></pre></div></div>
 
 <p>Now you can change your task definitions:</p>
@@ -1317,7 +1327,7 @@ $ANSIBLE_VAULT;1.1;AES256
     title = "Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "02"
+    day = "04"
     url = "\url{/training-material/topics/admin/tutorials/ansible/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
