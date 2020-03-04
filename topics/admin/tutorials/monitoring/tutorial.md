@@ -167,6 +167,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >
 > 4. Edit the file `group_vars/monitoring.yml` and set the following variables:
 >
+>    {% raw %}
 >    ```yaml
 >    grafana_url: "https://{{ inventory_hostname }}/grafana/"
 >
@@ -186,6 +187,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >       editable: false
 >       database: telegraf
 >    ```
+>    {% endraw %}
 >
 > 5. Run the playbook:
 >
