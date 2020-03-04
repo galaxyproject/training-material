@@ -828,6 +828,10 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >        # build the param dictionary
 >        param_dict = job.get_param_values(app)
 >
+>        if param_dict.get('__job_resource', {}).get('__job_resource__select') != 'yes':
+>            log.info("Job resource parameters not seleted, returning default destination")
+>            return destination_id
+>
 >        # handle job resource parameters
 >        try:
 >            # validate params
@@ -845,6 +849,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >            raise JobMappingException(FAILURE_MESSAGE)
 >
 >        log.info('returning destination: %s', destination_id)
+>        log.info('native specification: %s', destination.params.get('nativeSpecification'))
 >        return destination or destination_id
 >    ```
 >
