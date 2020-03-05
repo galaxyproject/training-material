@@ -295,7 +295,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 > 7. Ensure your user is joined to a training
 >
-> 8. Run a job and observe the logs to see where it goes (`journalctf -u galaxy -f`)
+> 8. Run a job and observe the logs to see where it goes (`journalctl -u galaxy -f`)
 >
 {: .hands_on}
 
