@@ -43,7 +43,8 @@ In system administration...
 - Web/UI problems
 - Tool failures
 - Job execution problems
-- ...
+- General performance problems
+- Other stuff
 - ...
 - ...?ASF?ASD?FAS?DF
 
@@ -160,7 +161,7 @@ Galaxy is not processing requests in a timely manner
 2. Restart Galaxy
 
 ---
-# 504 Gateway Timeout
+# 504 Gateway Timeout or slow UI
 
 Check load
 
@@ -185,6 +186,21 @@ More on troubleshooting load later
 *often I now begin in Grafana
 
 ![Grafana Load Graph](../../images/troubleshooting/grafana-load-graph.png "Grafana Load Graph")
+
+---
+# 504 Gateway Timeout or slow UI
+
+- Investigate load
+  - Web server(s)
+  - Database server
+- Investigate memory usage, swapping
+- Investigate iowait
+
+---
+# Galaxy UI is slow
+
+- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
+- Use `py-spy`
 
 ---
 # Blank page or no CSS/JavaScript
@@ -532,9 +548,11 @@ galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunne
 - Its `state` column and its output datasets' `state` columns have been updated to `ok`
 
 ---
-# Jobs aren't running - gray (!)
+# Jobs aren't running
 
 ![Job in new state](../../images/troubleshooting/hda-new.png "Job in new state")
+
+Corresponds to `job.state = 'new'` in database
 
 Not yet picked up by the Galaxy job handler subsystem
 
@@ -543,56 +561,60 @@ Troubleshooting depends on your job handler configuration
 ---
 
 Solutions:
-- If mules
+- If using single process or mules
   - Ensure no `<handlers>` in `job_conf.xml`
-- If single or multiprocess (db-preassign)
+  - Check handler logs
+- If using `assign_with="db-skip-locked"`
+  - Ensure no `default` attribute in `<handlers>`
+  - Ensure no individual `<handler>`s defined
+  - Ensure `handler` column of `job` table is being set to `_default_`
+  - Ensure handlers started with `--attach-to-pool=job-handlers`
+- If using `assign_with="db-preassign"`
   - Ensure that handler ID(s) in `job_conf.xml` match `server_name`(s)
-- If single or multiprocess (db-skip-locked)
-  - Ensure no `<handlers>` in `job_conf.xml`
-  - Ensure assigned `handler` for `new` jobs is `_default_`
-- If multiprocess, check to ensure that your job handler(s) are running
-  - If yes, restart handler(s)
+  - Ensure `handler` column of `job` table is being set to valid handler ID
 
 ---
-class: smaller
+class: left, reduce90
 # Handler ID to server_name match check
 
-.left[Job handler assignment check:]
+Job handler assignment check:
 
 ```gxadmin
 $ grep ' is running$' /path/to/galaxy*.log
 galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler0' is running
 galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler1' is running
-$ ./gxadmin query job-info 21
+$ gxadmin query job-info 21
 ```
 .reduce70[
-id  | tool_id | state |    handler    | username |        create_time         | job_runner_name | job_runner_external_id
---- | ------- | ----- | ------------- | -------- | -------------------------- | --------------- | -----------------------
-21  | testing | new   | job_handler_0 | admin    | 2019-02-01 14:30:20.540327 |                 | 
+id  | tool_id | state |    handler        | username |        create_time         | job_runner_name | job_runner_external_id
+--- | ------- | ----- | ----------------- | -------- | -------------------------- | --------------- | -----------------------
+21  | testing | new   | **job_handler_0** | admin    | 2019-02-01 14:30:20.540327 |                 | 
 ]
 
-The value of the `handler` column in the database **must**<sup>1</sup> match one of the handler `server_name`s the handlers have started as. In this case, `job_handler_0` is not `handler0` or `handler1`, so no handler will handle this job.
+The correct value of the `handler` column in the database varies by job handler assignment method (`<handlers assign_with=...>`):
+- mules: `null` (empty) then `main.job-handlers.<mule_id>` after assignment
+- db-skip-locked: `_default_` then `handlerN` (where `handlerN` is the value of one of your handlers' `--server-name`)
+- db-preassign: `handlerN`
 
-.reduce70[.footnote[<sup>1</sup> Unless using one of the new job handler assignment methods in Galaxy 19.01]]
+In this case, `job_handler_0` is not `handler0` or `handler1` (probably due to a misconfiguration in `<handlers>` section of `job_conf.xml`), so no handler will find this job.
 
 ---
 # An aside - unruly log files
 
-By default, Galaxy web workers and mules all log to a single file. Webless handlers can easily separate, for mules you need [advanced logging configuration](https://docs.galaxyproject.org/en/master/admin/config_logging.html)
+By default, Galaxy web workers and mules all log to a single file. See [advanced logging configuration](https://docs.galaxyproject.org/en/master/admin/config_logging.html) to split mules in to their own files.
 
-tl;dr: add [the second blob 'o YAML here](https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml)<sup>2,3</sup> to your `galaxy.yml`. Most importantly:
+tl;dr: add [the second blob 'o YAML here](https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml) to your `galaxy.yml`. Most importantly:
 
 ```yaml
 filename_template: galaxy_{pool_name}_{server_id}.log
 ```
 
-Galaxy subtitutes `{pool_name}` with e.g. `job-handlers` and `{server_id}` with e.g. `1`. Full list of facts in the docs.
-
-.reduce70[.foonote[<sup>2</sup> but wait until after [#7191](https://github.com/galaxyproject/galaxy/pull/7191/) is merged]]
-.reduce70[.foonote[<sup>3</sup> note to self, make a `split_logging` config var that enables this for you]]
+Galaxy subtitutes `{pool_name}` with e.g. `job-handlers` and `{server_id}` with e.g. `1`. Full list of template vars in the docs.
 
 ---
-# Jobs aren't running - gray clock
+# Jobs aren't running
+
+![Job in queued state](../../images/troubleshooting/hda-queued.png "Job in queued state")
 
 Corresponds to `job.state = 'queued'` in database
 
@@ -605,51 +627,32 @@ A handler has seen this job
 Users are *not* informed when they have reached the job limits. Exceeding disk quota also pauses jobs, but users are notified of this.
 
 ---
-# Jobs aren't running - gray clock
+# Jobs aren't running
 
 .left[Check database for:]
-- State (`gxadmin query job-info`)
-- Destination id assigned? (ditto)
+- Destination ID (`gxadmin query job-info`)
+- Job runner external (DRM) ID (`gxadmin query job-info`)
 - Jobs owned by user in non-terminal state if limits in use (`gxadmin query jobs-nonterminal [user]`)
+- Check handler **logs**
+
+If external ID is assigned, job is queued on a cluster. Use cluster queue status tool(s) to investigate further.
 
 ---
-# Jobs aren't finishing - yellow
+# Jobs aren't finishing
+
+![Job in running state](../../images/troubleshooting/hda-running.png "Job in running state")
 
 Corresponds to `job.state = 'running'` in database
 
-The tool/dependency is no longer executing but the job is still "running"
+Get job runner external (DRM) ID (`gxadmin query job-info`), use cluster queue status tool(s) to investigate further.
 
-.left[Solutions:]
-- Check cluster for job
+.left[If the DRM job is finished but the Galaxy job is still "running":]
 - Check last job handler log message for job
 - Setting/collecting metadata can be slow: wait
-- Check handlers as with gray (!)
+- Check handlers health (`py-spy` or `gdb`)
 
 ---
-# Quota not being updated for a certain user
-
-In the Admin/Users menu you can run `Recalculate Disk Usage` on a certain user.
-
-There is also a command line version: `scripts/set_user_disk_usage.py`
-
-{% comment %}
-![Recalculate Disk Usage Option](images/admin_recalc_usage.png)
-{% endcomment %}
-
----
-# Galaxy UI is slow
-
-- Investigate load
-  - Web server(s)
-  - Database server
-- Investigate memory usage, swapping
-- Investigate iowait
-
----
-# Galaxy UI is slow
-
-- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
-- Use `gdb` (demo in a bit!)
+# General performance problems
 
 ---
 # Local or Network FS slow/down
@@ -660,10 +663,10 @@ There is also a command line version: `scripts/set_user_disk_usage.py`
 
 Solutions:
 - Don't put the Galaxy server in that FS. Local distribution, CVMFS, ??
-- Install Galaxy in two places and use [Pulsar Embedded Mode](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101) with [file actions](https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging) to rewrite paths<sup>5</sup>
+- Install Galaxy in two places and use [Pulsar Embedded Mode](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101) with [file actions](https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging) to rewrite paths<sup>3</sup>
 - Get a better network FS
 
-.reduce70[.footnote[<sup>5</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]
+.reduce70[.footnote[<sup>3</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]
 
 ---
 # NFS caching errors
@@ -675,7 +678,7 @@ galaxy:
     retry_job_output_collection: 5
 ```
 
-[retry_job_output_collection](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/__init__.py#L1229)
+[retry_job_output_collection](https://github.com/galaxyproject/galaxy/blob/476b1948190436664581cfe56c8c1c1dcc0b2370/lib/galaxy/jobs/__init__.py#L1469)
 
 ---
 # Hung server processes
@@ -799,6 +802,22 @@ Figure out why it rebooted and:
 ```console
 $ sudo scontrol update nodename=localhost state=resume
 ```
+
+---
+# Other stuff
+
+---
+# User over quota
+
+Instruct user (or use impersonate) to check for *deleted* but not *purged* histories
+
+In the Admin/Users menu you can run `Recalculate Disk Usage` on a certain user
+
+There is also a command line version: `scripts/set_user_disk_usage.py`
+
+{% comment %}
+![Recalculate Disk Usage Option](images/admin_recalc_usage.png)
+{% endcomment %}
 
 ---
 class: special, middle
