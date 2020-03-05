@@ -486,7 +486,7 @@ There is a significant amount of visual styling that one can do to the graphs to
 
 We will update the panel we've added to highlight the important information and downplay less important facets, as well as configuring it to have a nicer title than "Panel Title"
 
-> ### {% icon hands_on %} Hands-on: Add a second query to an existing graph
+> ### {% icon hands_on %} Hands-on: Styling the graph
 >
 > 1. Again edit the one graph we've added in our dashboard
 >
@@ -546,7 +546,7 @@ Doing monitoring effectively, without causing undue burden to the administrators
 
 We will add an example alert, to make you familiar with the process. This is not an alert that will probably be useful in production.
 
-> ### {% icon hands_on %} Hands-on: Add a second query to an existing graph
+> ### {% icon hands_on %} Hands-on: Add an alert to your graph
 >
 > 1. Again edit the `Galaxy Request Times` graph
 >
