@@ -512,7 +512,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```yaml
 >    > > ---
 >    > > # python3 support
->    > > pip_virtualenv_command: virtualenv
+>    > > pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
+>    > > certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
+>    > > pip_package: python3-pip                               # geerlingguy.pip
 >    > >
 >    > > # PostgreSQL
 >    > > postgresql_objects_users:
@@ -527,7 +529,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_manage_paths: true
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
->    > > galaxy_user: {name: galaxy, shell: /bin/bash, home: "{{ galaxy_root }}"}
+>    > > galaxy_user: {name: galaxy, shell: /bin/bash}
 >    > > galaxy_commit_id: release_20.01
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
