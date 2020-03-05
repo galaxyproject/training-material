@@ -213,11 +213,13 @@ annotate: ## annotate the tutorials with usable Galaxy instances and generate ba
 
 clean: ## clean up junk files
 	@rm -rf _site
+	@rm -rf .jekyll-cache
 	@rm -rf .sass-cache
 	@rm -rf .bundle
 	@rm -rf vendor
 	@rm -rf node_modules
 	@find . -name .DS_Store -exec rm {} \;
+	@find . -name .jekyll-metadaga -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 .PHONY: clean
 
