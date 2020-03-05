@@ -584,7 +584,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 29, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 5, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1041,15 +1041,15 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
         <li>
           <p>Add a new item to the <strong>existing</strong> <code class="highlighter-rouge">certbot_domains</code> list so it matches:</p>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">certbot_domains</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="pi">-</span> <span class="s2">"</span><span class="s">*.interactivetoolentrypoint.interactivetool.{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_domains</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">*.interactivetoolentrypoint.interactivetool.{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>          </div>
         </li>
         <li>
           <p>Comment out the existing <code class="highlighter-rouge">certbot_auth_method</code> like so:</p>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">#certbot_auth_method: --webroot</span>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#certbot_auth_method: --webroot</span>
 </code></pre></div>          </div>
 
           <p>Although this is not explicitly required (setting <code class="highlighter-rouge">cerbot_dns_provider</code> as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the “webroot” method for Let’s Encrypt WEB-01 challenges is no longer in use for this server.</p>
@@ -1057,13 +1057,13 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
         <li>
           <p>Add the following lines to your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">certbot_dns_provider</span><span class="pi">:</span> <span class="s">rfc2136</span>
-  <span class="na">certbot_dns_credentials</span><span class="pi">:</span>
-    <span class="na">server</span><span class="pi">:</span> <span class="s">ns-training.<span class="notranslate">galaxy</span>project.org</span>
-    <span class="na">port</span><span class="pi">:</span> <span class="m">53</span>
-    <span class="na">name</span><span class="pi">:</span> <span class="s">certbot-training.</span>
-    <span class="na">secret</span><span class="pi">:</span> <span class="s">&lt;SECRET PROVIDED BY INSTRUCTOR&gt;</span>
-    <span class="na">algorithm</span><span class="pi">:</span> <span class="s">HMAC-SHA512</span>
+          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_dns_provider</span><span class="pi">:</span> <span class="s">rfc2136</span>
+<span class="na">certbot_dns_credentials</span><span class="pi">:</span>
+  <span class="na">server</span><span class="pi">:</span> <span class="s">ns-training.<span class="notranslate">galaxy</span>project.org</span>
+  <span class="na">port</span><span class="pi">:</span> <span class="m">53</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">certbot-training.</span>
+  <span class="na">secret</span><span class="pi">:</span> <span class="s">&lt;SECRET PROVIDED BY INSTRUCTOR&gt;</span>
+  <span class="na">algorithm</span><span class="pi">:</span> <span class="s">HMAC-SHA512</span>
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1473,8 +1473,8 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     author = "Nate Coraor and Simon Gladman and Helena Rasche",
     title = "Galaxy Interactive Tools (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "29"
+    month = "03",
+    day = "05"
     url = "\url{/training-material/topics/admin/tutorials/interactive-tools/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
