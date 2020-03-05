@@ -90,7 +90,7 @@ With `make serve`, a local Jekyll server will run in background. It will check t
 >      root /home/ubuntu/training-material/_site/;
 >    }
 >    ```
->    (Change the path above to wherever you cloned the training material folder)
+>    (Change the `root` path above to wherever you cloned the training material folder)
 >
 > 2. Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:
 >    ```
