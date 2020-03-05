@@ -295,7 +295,7 @@
 
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 9, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 15, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -329,6 +329,7 @@
       <li><a href="#how-to-call-functions-in-r-without-needing-to-master-them" id="markdown-toc-how-to-call-functions-in-r-without-needing-to-master-them">How to call functions in R, without needing to master them?</a></li>
       <li><a href="#getting-help" id="markdown-toc-getting-help">Getting help</a></li>
       <li><a href="#rstudio-contextual-help" id="markdown-toc-rstudio-contextual-help">RStudio contextual help</a></li>
+      <li><a href="#stopping-rstudio" id="markdown-toc-stopping-rstudio">Stopping RStudio</a></li>
     </ol>
   </li>
   <li><a href="#interaction-between-rstudio-and-galaxy" id="markdown-toc-interaction-between-rstudio-and-galaxy">Interaction between RStudio and <span class="notranslate">Galaxy</span></a></li>
@@ -748,6 +749,34 @@ find:</p>
 
 </blockquote>
 
+<h2 id="stopping-rstudio">Stopping RStudio</h2>
+
+<p>RStudio will keep running until you stop it, so you can always come back to your analysis later. However, once you are finished with your analysis,
+you should save the work you did within RStudio by exporting any files you created back to your <span class="notranslate">Galaxy</span> history, as well as the log describing all the commands you ran.
+Then you can safely shut down RStudio.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-stop-rstudio"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Stop RStudio</h3>
+
+  <p>When you have finished your R analysis, it’s time to stop RStudio.</p>
+
+  <ol>
+    <li>First, save your work into <span class="notranslate">Galaxy</span>, to ensure reproducibility:
+      <ol>
+        <li>You can use <code class="highlighter-rouge">gx_put(filename)</code> to save individual files by supplying the filename</li>
+        <li>You can use <code class="highlighter-rouge">gx_save()</code> to save the entire analysis transcript and any data objects loaded into your environment.</li>
+      </ol>
+    </li>
+    <li>Once you have saved your data, you can proceed in 2 different ways:
+      <ul>
+        <li>Deleting the corresponding history dataset named <code class="highlighter-rouge">RStudio</code> and showing a “in progress state”, so yellow, OR</li>
+        <li>Clicking on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started, selecting the corresponding box, and finally clicking on the “Stop” button at the bottom.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
 <h1 id="interaction-between-rstudio-and-galaxy">Interaction between RStudio and <span class="notranslate">Galaxy</span></h1>
 
 <p>Getting data in and out from <span class="notranslate">Galaxy</span></p>
@@ -774,7 +803,7 @@ find:</p>
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Bérénice Batut, Fotis E. Psomopoulos, Toby Hodges, 2019 <b>RStudio in Galaxy (Galaxy Training Materials)</b>. <a href="/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html">/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Bérénice Batut, Fotis E. Psomopoulos, Toby Hodges, 2020 <b>RStudio in Galaxy (Galaxy Training Materials)</b>. <a href="/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html">/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -791,9 +820,9 @@ find:</p>
 <code id="citation-code">@misc{galaxy-ui-rstudio,
     author = "Bérénice Batut and Fotis E. Psomopoulos and Toby Hodges",
     title = "RStudio in Galaxy (Galaxy Training Materials)",
-    year = "2019",
-    month = "12",
-    day = "09"
+    year = "2020",
+    month = "01",
+    day = "15"
     url = "\url{/training-material/topics/galaxy-ui/tutorials/rstudio/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
