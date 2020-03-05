@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-
+enable: false
 title: Visualize Climate data with Panoply netCDF viewer
 zenodo_link: 'https://doi.org/10.5281/zenodo.3695482'
 questions:
