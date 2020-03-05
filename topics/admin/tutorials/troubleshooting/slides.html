@@ -6,14 +6,6 @@ title: "Galaxy Troubleshooting"
 contributors:
   - martenson
   - natefoo
-
-# TODO:
-#  - continue from slide: Jobs aren't running - gray (!)
-#  - discuss/demo manage dependencies
-#  - bad static path in nginx config
-#  - walk people through /data, /jobs, /var
-#  - heartbeat, py-spy
-#  - make sure you mention job finishing
 ---
 In system administration...
 # Everything always goes wrong
@@ -140,7 +132,9 @@ Your reverse proxy has failed to connect to the Galaxy socket
 
 - Check that your proxy and Galaxy/uWSGI socket options match
 - Check proxy server logs (e.g. `/var/log/nginx`)
-- Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` or `sudo lsof -i :port`)
+- Check uWSGI logs for `bind(): Address already in use [core/socket.c line 769]`
+- Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` (demo!) or `sudo lsof -i :port` (demo!))
+  - If it's uWSGI, make sure it's not an old one!
 
 ---
 # 504 Gateway Timeout
@@ -157,8 +151,32 @@ In uWSGI logs:
 
 Galaxy is not processing requests in a timely manner
 
-1. Use `py-spy` (demo!) and/or `gdb` to figure out what's up
-2. Restart Galaxy
+---
+# 504 Gateway Timeout
+
+Use `uwsgitop` (demo!)
+
+- `uwsgitop` state busy?
+
+```console
+uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
+node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
+ WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
+ 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
+```
+
+Process state **D**?
+
+```console
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ...
+```
+
+Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
+
+Restart Galaxy
+
+.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]
 
 ---
 # 504 Gateway Timeout or slow UI
@@ -249,6 +267,8 @@ Tool stdout/stderr is available in UI under "i" icon on history dataset
 3. Go to job working directory (find in logs or `/srv/galaxy/jobs/<hash>/<job_id>`)
 4. Poke around, try running things (`srun --pty bash` considered useful)
 
+Familiarize yourself with the places Galaxy keeps things (demo?)
+
 ---
 # Tool errors - stderr
 
@@ -337,8 +357,19 @@ sh: command not found: samtools
 
 Solutions:
 - Verify that `tool_dependency_dir` is accessible *on the cluster, as the user running Galaxy jobs*
-- Verify that tool dependencies are properly installed: Galaxy UI "Admin > Manage dependencies" (demo!)
+- Verify that tool dependencies are properly installed: Galaxy UI "Admin > Manage dependencies"
 - Use BioContainers (Docker/Singularity)
+
+---
+# Manage Dependencies
+
+An incredibly useful feature to hit unruly tool dependencies with a large hammer.
+
+![Manage Dependencies](../../images/troubleshooting/manage-dependencies.png "Manage Dependencies")
+
+--
+
+(demo!)
 
 ---
 # An aside - dependency problems on geriatric Galaxies
@@ -649,17 +680,62 @@ Get job runner external (DRM) ID (`gxadmin query job-info`), use cluster queue s
 .left[If the DRM job is finished but the Galaxy job is still "running":]
 - Check last job handler log message for job
 - Setting/collecting metadata can be slow: wait
-- Check handlers health (`py-spy` or `gdb`)
+- Check handlers health (`py-spy` or `gdb` (demos later!))
+
+---
+# Overall slow processing of jobs
+
+Process state **D**?
+
+```console
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts/galaxy-main --server-name=handler0 ...
+```
+
+Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
+
+.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]
+
+---
+# Overall slow processing of jobs
+
+Process state *not* **D**?
+
+- Use `py-spy` (demo!)
+- Use `gdb` (demo!)
 
 ---
 # General performance problems
 
 ---
+# Kernel uninterruptable sleep
+
+Process state **D**?
+
+```console
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts/galaxy-main --server-name=handler0 ...
+```
+
+Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
+
+- Investigate `/proc/<pid>/fd` (demo!) or `lsof -p <pid>` (demo!)
+- Use `strace` (demo!)
+
+.reduce70[.footnote[This slide covers how to investigate kernel uninterruptable sleep processes]]
+
+---
 # Local or Network FS slow/down
 
-- Use `iostat` to see device performance (demo!)
+- Use `iostat` and/or `nfsiostat` to see device performance (demo!)
 - Use `dstat` to see pretty device performance summary (demo!)
 - Use `time dd` (quick and dirty) or `fio` to test write performance (demo!)
+- Use Wireshark
+
+![Packet capture in Wireshark](../../images/troubleshooting/wireshark.png "Packet capture in Wireshark")
+
+---
+# Local or Network FS slow/down
 
 Solutions:
 - Don't put the Galaxy server in that FS. Local distribution, CVMFS, ??
@@ -680,44 +756,6 @@ galaxy:
 
 [retry_job_output_collection](https://github.com/galaxyproject/galaxy/blob/476b1948190436664581cfe56c8c1c1dcc0b2370/lib/galaxy/jobs/__init__.py#L1469)
 
----
-# Hung server processes
-
-Use `uwsgitop` (demo!)
-
-- `uwsgitop` state busy?
-
-```console
-uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
-node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
- WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
- 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
-```
-
-- Process state D?
-
-```console
-USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-g2main    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 /cvmfs/main.galaxyproject.org/venv/bin/uwsgi --yaml ...
-```
-
-Kernel uninterruptable sleep - normal unless stuck. Probably IO. Check filesystems, disks.
-
----
-# Hung server processes
-
-- Investigate `/proc/pid` especially `fd`
-- Use `strace` (demo!)
-- Use `gdb` (demo!)
-
----
-# Undead processes
-
-```
-bind(): Address already in use [core/socket.c line 769]
-```
-
-Use `lsof -i :<port>` (demo!)
 
 ---
 class: left
@@ -751,10 +789,15 @@ Slow queries, high load, etc.
 - Use `EXPLAIN ANALYZE` (demo!)
   - [Example of the "jobs ready to run" query](https://gist.github.com/natefoo/da46bea8136ba67d65f616c86a27c454)
   - `database_engine_option_echo` (but warning, extremely verbose)
+  - `slow_query_log_threshold` logs to Galaxy log file
   - `sentry_sloreq_threshold` if using Sentry
+  - [Postgres EXPLAIN Visualizer (PEV)](https://tatiyants.com/pev/#/plans) considered useful
 - Use `VACUUM ANALYZE`
 
 Increase `shared_buffers`. 2GB on Main (16GB of memory on VM)
+
+---
+# Other stuff
 
 ---
 # error: [Errno 32] Broken pipe
@@ -770,7 +813,7 @@ compilation terminated.
 error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
 ```
 
-Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/)
+Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/) and install that package (hint: development package for Python 3)
 
 ---
 # Other stuff
@@ -804,9 +847,6 @@ $ sudo scontrol update nodename=localhost state=resume
 ```
 
 ---
-# Other stuff
-
----
 # User over quota
 
 Instruct user (or use impersonate) to check for *deleted* but not *purged* histories
@@ -820,13 +860,12 @@ There is also a command line version: `scripts/set_user_disk_usage.py`
 {% endcomment %}
 
 ---
-class: special, middle
 # Any troubling Galaxy situations you have?
 
 ---
 # Where to get help
 
+- [Admins Chat](https://gitter.im/galaxyproject/admins)
 - [Galaxy Help](https://help.galaxyproject.org/)
 - [galaxy-dev Mailing list](http://dev.list.galaxyproject.org/)
-- [IRC](https://wiki.galaxyproject.org/Support/IRC): \#galaxyproject on Freenode
 - [Hub Support page](https://galaxyproject.org/support/)
