@@ -29,6 +29,7 @@ In system administration...
 - browser console log
 
 ---
+
 # Most common problems
 
 - Startup problems
@@ -36,6 +37,7 @@ In system administration...
 - Tool failures
 - Job execution problems
 - General performance problems
+- Dependency issues
 - Other stuff
 
 ---
@@ -62,7 +64,9 @@ backup your database and then migrate the database schema by running 'sh manage_
 ```
 ]
 
-Upgrade as instructed.
+Use Ansible! This is permanently solved for you.
+
+Otherwise, upgrade as instructed.
 
 .left[If you believe this message is in error, you can:]
 - Check DB table `migrate_version`, column `version`.
@@ -128,6 +132,7 @@ Specifically: uWSGI, nginx, and browser console logs
 
 Your reverse proxy has failed to connect to the Galaxy socket
 
+- Check that Galaxy is running / not in a reboot loop
 - Check that your proxy and Galaxy/uWSGI socket options match
 - Check proxy server logs (e.g. `/var/log/nginx`)
 - Check uWSGI logs for `bind(): Address already in use [core/socket.c line 769]`
@@ -215,6 +220,7 @@ More on troubleshooting load later
 ---
 # Galaxy UI is slow
 
+- [Tutorial from @mvdbeek](https://docs.galaxyproject.org/en/master/dev/finding_and_improving_slow_code.html#profiling)
 - Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
 - Use `py-spy`
 
@@ -253,6 +259,8 @@ Loaded tool id: toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33, version: 1.
 ...
 </tool>
 ```
+
+- Multiple job handlers? Sometimes they don't all get the update.
 
 ---
 # Tool errors
@@ -617,7 +625,7 @@ $ gxadmin query job-info 21
 .reduce70[
 id  | tool_id | state |    handler        | username |        create_time         | job_runner_name | job_runner_external_id
 --- | ------- | ----- | ----------------- | -------- | -------------------------- | --------------- | -----------------------
-21  | testing | new   | **job_handler_0** | admin    | 2019-02-01 14:30:20.540327 |                 | 
+21  | testing | new   | **job_handler_0** | admin    | 2019-02-01 14:30:20.540327 |                 |
 ]
 
 The correct value of the `handler` column in the database varies by job handler assignment method (`<handlers assign_with=...>`):
@@ -789,8 +797,9 @@ Slow queries, high load, etc.
   - `database_engine_option_echo` (but warning, extremely verbose)
   - `slow_query_log_threshold` logs to Galaxy log file
   - `sentry_sloreq_threshold` if using Sentry
-  - [Postgres EXPLAIN Visualizer (PEV)](https://tatiyants.com/pev/#/plans) considered useful
+  - [Postgres EXPLAIN Visualizer (PEV)](https://tatiyants.com/pev/#/plans) considered useful ([demo data](https://gist.github.com/hexylena/467c7726b5ab9e18c47080893dbc072e))
 - Use `VACUUM ANALYZE`
+- `gxadmin query pg-*` commands
 
 Increase `shared_buffers`. 2GB on Main (16GB of memory on VM)
 
