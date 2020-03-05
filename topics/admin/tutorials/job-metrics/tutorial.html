@@ -671,7 +671,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 5, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -754,23 +754,23 @@
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>servers.yml.old
 </span><span class="gi">+++ <span class="notranslate">galaxy</span>servers.yml
 </span>
-+<span class="notranslate">galaxy</span>_job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_metrics_conf.xml"
++ <span class="notranslate">galaxy</span>_job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_metrics_conf.xml"
 
- <span class="notranslate">galaxy</span>_config:
-   <span class="notranslate">galaxy</span>:
-<span class="gi">+    job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_job_metrics_config_file }}"
-</span>     brand: "My <span class="notranslate">Galaxy</span>"
-     admin_users: admin@example.org
-     database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
+  <span class="notranslate">galaxy</span>_config:
+    <span class="notranslate">galaxy</span>:
+<span class="gi">+     job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_job_metrics_config_file }}"
+</span>      brand: "My <span class="notranslate">Galaxy</span>"
+      admin_users: admin@example.org
+      database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
 <span class="p">@@ -120,6 +121,8 @@</span> gie_proxy_setup_service: systemd
- gie_proxy_sessions_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/interactivetools_map.sqlite"
+  gie_proxy_sessions_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/interactivetools_map.sqlite"
 
- <span class="notranslate">galaxy</span>_config_files:
-<span class="gi">+  - src: files/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml
-+    dest: "{{ <span class="notranslate">galaxy</span>_job_metrics_config_file }}"
-</span>   - src: files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml
-     dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_conf_interactive.xml"
-   - src: files/<span class="notranslate">galaxy</span>/config/job_conf.xml
+  <span class="notranslate">galaxy</span>_config_files:
+<span class="gi">+   - src: files/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml
++     dest: "{{ <span class="notranslate">galaxy</span>_job_metrics_config_file }}"
+</span>    - src: files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml
+      dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_conf_interactive.xml"
+    - src: files/<span class="notranslate">galaxy</span>/config/job_conf.xml
 </code></pre></div>      </div>
     </li>
     <li>
@@ -848,7 +848,7 @@
     title = "Recording Job Metrics (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "04"
+    day = "05"
     url = "\url{/training-material/topics/admin/tutorials/job-metrics/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
