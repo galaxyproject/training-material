@@ -488,7 +488,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 5, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1105,7 +1105,9 @@ So it is not always easy to tell what variables will be set, or what their final
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="c1"># python3 support</span>
-<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">virtualenv</span>
+<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">/usr/bin/python3 -m virtualenv</span> <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot, use<span class="notranslate">galaxy</span>_eu.tiaas2, <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
+<span class="na">certbot_virtualenv_package_name</span><span class="pi">:</span> <span class="s">python3-virtualenv</span>    <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot</span>
+<span class="na">pip_package</span><span class="pi">:</span> <span class="s">python3-pip</span>                               <span class="c1"># geerlingguy.pip</span>
 
 <span class="c1"># PostgreSQL</span>
 <span class="na">postgresql_objects_users</span><span class="pi">:</span>
@@ -1120,7 +1122,7 @@ So it is not always easy to tell what variables will be set, or what their final
 <span class="na"><span class="notranslate">galaxy</span>_manage_paths</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na"><span class="notranslate">galaxy</span>_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
 <span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span></span>
-<span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">,</span> <span class="nv">home</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_root</span><span class="nv"> </span><span class="s">}}"</span><span class="pi">}</span>
+<span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
 <span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.01</span>
 <span class="na"><span class="notranslate">galaxy</span>_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
 <span class="na"><span class="notranslate">galaxy</span>_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
@@ -1778,7 +1780,7 @@ index ce17525..54d0746 100644
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "04"
+    day = "05"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
