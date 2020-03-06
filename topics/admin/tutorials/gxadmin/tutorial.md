@@ -37,7 +37,9 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 {: .agenda}
 
-## Installation with Ansible
+## Installing gxadmin
+
+It's simple to install gxadmin. Here's how you do it, if you haven't done it already.
 
 > ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
 >
@@ -45,23 +47,14 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 >    ```yml
 >    - src: usegalaxy_eu.gxadmin
->      version: 0.0.2
+>      version: 0.0.3
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
 >
-> 3. Add the following variables to your group variables file:
+> 3. Add the role to your playbook, it should run as root
 >
->    ```
->    # Configure locations for gxadmin that all
->    # users can access
->    gxadmin_dir: /opt/gxadmin
->    gxadmin_bin_dir: /usr/bin
->    ```
->
-> 4. Add the role to your playbook, it should run as root
->
-> 5. Run the playbook
+> 4. Run the playbook
 >
 {: .hands_on}
 
