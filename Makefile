@@ -52,6 +52,7 @@ install: clean create-env ## install dependencies
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
@@ -217,6 +218,8 @@ clean: ## clean up junk files
 	@rm -rf .bundle
 	@rm -rf vendor
 	@rm -rf node_modules
+	@rm -rf .jekyll-cache
+	@rm -rf .jekyll-metadata
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;
 .PHONY: clean
