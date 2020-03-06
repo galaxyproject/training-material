@@ -111,49 +111,6 @@ Data providers process data before sending to browser - slice, filter, reformat,
 
 ---
 
-# Data Libraries
-
-Provide a way to conveniently share Galaxy datasets within a group of Galaxy users or with everybody that has access to a specific instance of Galaxy.
-
-* Can import data from filesystem *without duplicating* it.
-
-* Can import *whole directories* preserving the folder structure.
-
-* The dataset's size does not count towards user's quota.
-  * Every dataset in the library is *stored only once* no matter how many users are using it in their histories.
-
-* Uses roles and groups to control permissions on library/dataset level.
-  * Only admins can _create_ libraries.
-  * Ordinary users can be granted permission to _manage_ libraries
-
----
-# Libraries configuration
-
-In `galaxy.yml`:
-
-* `user_library_import_dir`
-  * Allows authorized non-administrators to upload a directory of files.
-  * Directory must contain sub-directories named the same as user's email.
-  * Works well in combination with `ftp_upload_dir`.
-* `allow_path_paste`
-  * Admin-only, allows importing from any path that the Galaxy's user has access to.
-
----
-# Libraries Exercise
-
-* Create a data library
-
-* Clone `https://github.com/galaxyproject/galaxy-test-data` to your home folder.
-
-* Configure your instance to allow importing data from your home folder.
-
-* Import to your library a subset of datasets from the newly created `~/galaxy-test-data/`.
-  * Use `Link files instead of copying` for some.
-
-* Import some files from the library to a new history.
-
----
-
 ## Tools
 
   * **Install new tools** - Use to install tools from the configured toolsheds.
