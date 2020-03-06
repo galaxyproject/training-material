@@ -56,6 +56,7 @@ Linear regression is a technique used to analyze a linear relationship between i
 
 In linear regression, our goal is to find the line that best models the path of the data points. Figure 3 shows the data set we used in Figure 2 with a line of best fit through it. The position of the line is determined by certain fitting coefficients (in this simple case, the gradient and intercept) and linear regression helps us pick appropriate values for these coefficients. In this example we have only one input variable and the problem is therefore simple linear regression. Note that in real problems we have more than one input variable. In this case, we call it multiple linear regression. Adding extra input variables just means that we’ll need to find more weights.
 
+
 ![regression](images/linear_regression_regressor.png "Regression fit through data points.")
 
 
