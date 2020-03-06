@@ -421,14 +421,10 @@ class: enlarge120
 - Packages through channels within Continuum.
 
 - Conda channels searched by Galaxy for packages
-    - iuc
+    - iuc (legacy)
     - conda-forge
     - bioconda
     - defaults
-
-&lt;br/&gt;
-&lt;br/&gt;
-&lt;br/&gt;
 
 .footnote[If you are interested in Natural Language Processing or Cheminformatics you may be asking if these channels can still work for your tools. Despite the name [Bioconda](https://bioconda.github.io/) - it is really more about community and a set of best practices than about bioinformatics purity - many diverse packages have been integrated.]
 
@@ -456,21 +452,21 @@ class: enlarge120
 ###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Quickstart
 #### Using Conda outside Planemo
 
-- Install a package
-
-```bash
-$ conda install pyyaml
-```
-
 - Install some packages within an isolated environment
 
 ```bash
 $ conda create -n yaml pyyaml
 $ conda env list
-yaml        *  ~/miniconda3/envs/yaml
-root             ~/miniconda3
+base        *  ~/miniconda3
+yaml           ~/miniconda3/envs/yaml
 $ conda activate yaml
 (yaml) $
+```
+
+- Install a package in the current environment
+
+```bash
+$ conda install pyyaml
 ```
 
 ---
@@ -771,60 +767,61 @@ pear.xml              test-data
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe
+## Writing a Conda recipe
 
-If searching best practice channels fails, you may need to build a Conda recipe.
+- If searching best practice channels fails, you may need to build a Conda recipe.
 
-.footnote[[Documentation about how to write conda recipes from scratch](https://conda.pydata.org/docs/build_tutorials/pkgs2.html) &lt;br/&gt; [Bioconda guidelines](https://bioconda.github.io/guidelines.html)]
+- A Conda recipe is defined by a directory, the two most important files in this directory are:
+  - `meta.yaml`: contains all the metadata of the recipe
+  - `build.sh`: the (optional) Unix script that installs the files
 
----
-
-class: left
-
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - The Files
-
-A Conda recipe is defined by a directory, the two most important files in this directory are:
-
-- `meta.yaml`: contains all the metadata of the recipe
-- `build.sh`: the Unix script that installs the files
+.footnote[[conda-build user guide](https://conda.io/projects/conda-build/en/latest/user-guide/index.html) &lt;br/&gt; [Bioconda guidelines](https://bioconda.github.io/contributor/index.html)]
 
 ---
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `meta.yaml`
+## `meta.yaml`
 
 `meta.yaml` contains basic metadata about the recipe.
 
+
 ```yaml
+{% set version = &quot;0.7.17&quot; %}
+{% set sha256 = &quot;980b9591b61c60042c4a39b9e31ccaad8d17ff179d44d347997825da3fdf47fd&quot; %}
+
 package:
   name: bwa
-  version: &quot;0.7.15&quot;
-about:
-  home: http://bio-bwa.sourceforge.net
-  license: MIT
-  summary: The BWA read mapper.
-build:
-  number: 0
-  skip: True # [osx]
+  version: {{ version }}
 source:
-  url: https://github.com/lh3/bwa/archive/v0.7.15.tar.gz
-  md5: 54fdee953c5c256d36885a1c5c6b118c
+  url: https://github.com/lh3/bwa/archive/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+  patches:
+    - Makefile.patch
+build:
+  number: 7
+about:
+  home: https://github.com/lh3/bwa
+  license: GPL3
+  license_file: COPYING
+  summary: The BWA read mapper.
 ```
+
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `requirements`
+## `meta.yaml` &gt; `requirements`
+
 
 ```yaml
-
 requirements:
   build:
     - {{ compiler('c') }}
   host:
     - zlib
   run:
-    - bowtie2
+    - zlib
+    - perl
 
 ```
 &lt;small&gt;
@@ -835,22 +832,23 @@ requirements:
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Preprocessing Selectors
+## Preprocessing Selectors
 
+- Common selectors include `linux`, `osx`, `py2k`, `py3k`.
 - Evaluated as Python expressions - feel free to use `and`, `or`, etc.
-- Other common selectors include `py2k`, `py3k`.
+
 
 ```yaml
 requirements:
   build:
-    - gcc   # [not osx]
-    - llvm  # [osx]
-    - zlib
+    - bz2file  # [py &lt; 33]
+    - typing  # [py27 or py34]
+
 ```
 
 ```yaml
 build:
-  skip: True  # [not py27]
+  skip: True  # [osx]
 ```
 
 .footer[.center[https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#preprocessing-selectors ]]
@@ -859,13 +857,9 @@ build:
 
 class: left
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Tests
-
-&lt;br/&gt;
-&lt;br/&gt;
+## Tests
 
 `meta.yaml` should contain simple tests. These are commands executed at the end of `conda build` and expected to return `0` on success.
-
 
 ```yaml
 test:
@@ -891,13 +885,13 @@ Please note that the Conda tests run inside the runtime environment and not in t
 
 ---
 
-From the [Bioconda Guidelines](https://bioconda.github.io/guidelines.html):
+From the [Bioconda Guidelines](https://bioconda.github.io/contributor/guidelines.html):
 
 &gt; An adequate test must be included in the recipe. An &quot;adequate&quot; test depends on the recipe, but must be able to detect a successful installation. While many packages may ship their own test suite (unit tests or otherwise), including these in the recipe is not recommended since it may timeout the build system on CircleCI. We especially want to avoid including any kind of test data in the repository.
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - `build.sh`
+## `build.sh`
 
 ```bash
 #!/bin/bash
@@ -921,7 +915,7 @@ cp *.py $PREFIX/bin
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Skeletons
+## Skeletons
 
 ```bash
 $ conda skeleton pypi &lt;packagename&gt;
@@ -938,11 +932,11 @@ $ conda skeleton cpan &lt;packagename&gt;`
 
 These generate pre-filled recipes &lt;small&gt;(not guaranteed to work out of the box)&lt;/small&gt; for specific programming environments.
 
-.footnote[[Building conda packages with conda skeleton](https://conda.pydata.org/docs/build_tutorials/pkgs.html)]
+.footnote[[Building conda packages with conda skeleton](https://docs.conda.io/projects/conda-build/en/latest/user-guide/tutorials/build-pkgs-skeleton.html)]
 
 ---
 
-###.image-25[![](../../../../shared/images/conda_logo.png)] &lt;br/&gt; Writing a Conda Recipe - Building
+## Building
 
 Once the recipe is ready to go, the `conda build` command can be used to build it.
 
@@ -1087,9 +1081,8 @@ class: left
 
 ## Jinja Templating
 
+
 ```yaml
-
-
 {% set name = &quot;seqtk&quot; %}
 {% set version = &quot;1.15.1&quot; %}
 
@@ -1099,9 +1092,8 @@ package:
 
 source:
     url: http://coolsoftware.com/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
-
-
 ```
+
 
 https://conda.io/projects/conda-build/en/latest/source/define-metadata.html#templating-with-jinja
 
@@ -1161,8 +1153,8 @@ $PYTHON setup.py install
 
 ## Python - pysam's `meta.yaml`
 
-.reduce50[```yaml
-
+.reduce50[
+```yaml
 {% set version = &quot;0.15.2&quot; %}
 {% set samtools_version = &quot;1.9&quot; %}
 {% set bcftools_version = &quot;1.9&quot; %}
@@ -1202,7 +1194,6 @@ requirements:
 test:
   imports:
     - pysam
-
 ```]
 
 ---
@@ -1258,14 +1249,13 @@ class: reduce70
 
 ## Java - PeptideShaker's `meta.yaml`
 
+
 ```yaml
 ...
-
 
 source:
     url: http://genesis.ugent.be/maven2/eu/isas/peptideshaker/{{ name }}/{{ version }}/{{ name }}-{{ version }}.zip
     md5: 14a48413e28a25614f5fda2b381d7197
-
 
 requirements:
   build:
@@ -1278,6 +1268,7 @@ test:
       - peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI
       - peptide-shaker eu.isas.peptideshaker.cmd.PeptideShakerCLI -Xms512m -Xmx1g
 ```
+
 
 ---
 
