@@ -62,7 +62,10 @@ def realise_badge(badge, badge_cache_dir):
             '--quiet', '-O', os.path.join(badge_cache_dir, badge)
         ]
         if not DRY_RUN:
-            subprocess.check_call(cmd)
+            try:
+                subprocess.check_call(cmd)
+            except subprocess.CalledProcessError:
+                print('unable to retrieve badges, please try again later')
             time.sleep(1)
         else:
             print(' '.join(cmd))
