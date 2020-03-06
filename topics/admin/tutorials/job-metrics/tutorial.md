@@ -53,7 +53,7 @@ These include very basic submission parameters. We want more information!
 
 > ### {% icon hands_on %} Hands-on: Setting up the job metrics file
 >
-> 1. Create the file `templates/galaxy/config/job_metrics_conf.xml` with the following contents:
+> 1. Create the file `templates/galaxy/config/job_metrics_conf.xml.j2` with the following contents:
 >
 >    ```xml
 >    <?xml version="1.0"?>
@@ -95,7 +95,7 @@ These include very basic submission parameters. We want more information!
 >     gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
 >
 >     galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_metrics_conf.xml
+>    +  - src: templates/galaxy/config/job_metrics_conf.xml.j2
 >    +    dest: "{{ galaxy_job_metrics_config_file }}"
 >       - src: templates/galaxy/config/tool_conf_interactive.xml
 >         dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
