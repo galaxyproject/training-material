@@ -66,7 +66,7 @@ The important variables for this tutorial are:
 
 These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
-The official recommendation is that you should have a variables file such as a `group_vars/galaxy.yml` for storing all of the Galaxy configuration.
+The official recommendation is that you should have a variables file such as a `group_vars/galaxyservers.yml` for storing all of the Galaxy configuration.
 
 ## Tasks
 
@@ -452,53 +452,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
->    > ### {% icon question %} Question
->    >
->    > How does your current group variables file look?
->    >
->    > > ### {% icon solution %} Solution
->    > > {% raw %}
->    > > ```yaml
->    > > ---
->    > > # python3 support
->    > > pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
->    > > certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
->    > > pip_package: python3-pip                               # geerlingguy.pip
->    > >
->    > > # PostgreSQL
->    > > postgresql_objects_users:
->    > >   - name: galaxy
->    > > postgresql_objects_databases:
->    > >   - name: galaxy
->    > >     owner: galaxy
->    > >
->    > > # Galaxy
->    > > galaxy_create_user: true
->    > > galaxy_separate_privileges: true
->    > > galaxy_manage_paths: true
->    > > galaxy_layout: root-dir
->    > > galaxy_root: /srv/galaxy
->    > > galaxy_user: {name: galaxy, shell: /bin/bash}
->    > > galaxy_commit_id: release_20.01
->    > > galaxy_config_style: yaml
->    > > galaxy_force_checkout: true
->    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    > > miniconda_version: "4.6.14"
->    > >
->    > > galaxy_config:
->    > >   galaxy:
->    > >     brand: "My Galaxy"
->    > >     admin_users: admin@example.org
->    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    > >     file_path: /data
->    > >     check_migrate_tools: false
->    > >     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->    > > ```
->    > > {% endraw %}
->    > {: .solution }
->    >
->    {: .question}
->
 >    > ### {% icon comment %} Ansible Variable Templating
 >    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
 >    >
@@ -559,7 +512,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```yaml
 >    > > ---
 >    > > # python3 support
->    > > pip_virtualenv_command: virtualenv
+>    > > pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
+>    > > certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
+>    > > pip_package: python3-pip                               # geerlingguy.pip
 >    > >
 >    > > # PostgreSQL
 >    > > postgresql_objects_users:
@@ -574,7 +529,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_manage_paths: true
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
->    > > galaxy_user: {name: galaxy, shell: /bin/bash, home: "{{ galaxy_root }}"}
+>    > > galaxy_user: {name: galaxy, shell: /bin/bash}
 >    > > galaxy_commit_id: release_20.01
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
@@ -1098,10 +1053,10 @@ If you have set your `galaxy_commit_id` group variable to a branch name like `re
 With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a commit from UseGalaxy.eu's upgrade:
 
 ```diff
-diff --git a/group_vars/galaxy.yml b/group_vars/galaxy.yml
+diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
 index ce17525..54d0746 100644
---- a/group_vars/galaxy.yml
-+++ b/group_vars/galaxy.yml
+--- a/group_vars/galaxyservers.yml
++++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
  galaxy_config_style: ini
 

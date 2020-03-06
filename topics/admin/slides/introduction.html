@@ -94,7 +94,7 @@ If possible, run the Galaxy server **separate** from Galaxy jobs
 **Storage** will be the bigger concern
 
 ---
-# Hardware Estimates
+# Server Hardware Requirements
 
 Based on concurrent user count and assuming separate compute for jobs:
 
@@ -108,19 +108,15 @@ Users     | Resource estimate
 Storage is the big variable since it, like compute, is **analysis** and **policy** dependent
 
 ---
-
 template: left-aligned
 
-# On Storage...
-
-The Philosophy of Galaxy:
+# Galaxy Storage Philosophy
 
 - Foster transparency and reproducibility
 - Data is always created, *never overwritten*
-- Data is never deleted unless *explicitly instructed*
+- Copying history or library datasets associate them with the original file on disk without an actual copy
+- By default, data is never really deleted unless *explicitly instructed*
 - Even deleted data can be undeleted unless *forcibly purged*
-
-Additionally, tools can produce large amounts of transient data while running.
 
 ---
 
@@ -135,8 +131,12 @@ An "average" NGS analysis (by Anton Nekrutenko): **66 GB**
 Solutions:
 
 - Quotas
-- Clean up deleted data (aggressively)
-- Forced removal based on age available
+- Set job limits in `job_conf.xml`
+- Clean up deleted data (with a cron job)
+- Forced removal based on age
+- Users can configure their workflows to delete intermediate tool outputs
+- Data libraries for common data
+- Public servers: require email verification (and watch for duplicates)
 
 ---
 

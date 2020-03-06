@@ -83,14 +83,14 @@ These include very basic submission parameters. We want more information!
 >    --- galaxyservers.yml.old
 >    +++ galaxyservers.yml
 >
->    +galaxy_job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
+>    + galaxy_job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
 >
->     galaxy_config:
->       galaxy:
->    +    job_metrics_config_file: "{{ galaxy_job_metrics_config_file }}"
->         brand: "My Galaxy"
->         admin_users: admin@example.org
->         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+>      galaxy_config:
+>        galaxy:
+>    +     job_metrics_config_file: "{{ galaxy_job_metrics_config_file }}"
+>          brand: "My Galaxy"
+>          admin_users: admin@example.org
+>          database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    @@ -120,6 +121,8 @@ gie_proxy_setup_service: systemd
 >     gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
 >

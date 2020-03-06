@@ -78,6 +78,27 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 
 With `make serve`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
 
+
+> ### {% icon tip %} Tips
+>
+> 1. Running on a VM or remote machine?
+>    If you are not running this on your local machine, but e.g. on a VM, you may need to configure a webserver to serve the website.
+>
+>    Below is an example NGINX configuration (e.g. in `/etc/nginx/sites-enabled/default`)
+>    ```
+>    location /training-material/ {
+>      root /home/ubuntu/training-material/_site/;
+>    }
+>    ```
+>    (Change the `root` path above to wherever you cloned the training material folder)
+>
+> 2. Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:
+>    ```
+>    git clone https://github.com/galaxyproject/training-material.git --depth 1 --branch master
+>    ```
+{: .tip}
+
+
 # Stopping the server
 
 Once you are done, you can stop the server and cleaning your repository.

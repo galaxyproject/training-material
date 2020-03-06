@@ -381,37 +381,34 @@ If you are completing this tutorial as part of a [Galaxy Admin Training][gat] co
 >    | `certbot_expand`          | boolean    | Whether to "expand" an existing certificate (add new domain names to it)                                         |
 >
 >    - Add a new item to the **existing** `certbot_domains` list so it matches:
->        {% raw %}
->        ```yaml
->        certbot_domains:
->          - "{{ inventory_hostname }}"
->          - "*.interactivetoolentrypoint.interactivetool.{{ inventory_hostname }}"
->        ```
->        {% endraw %}
+>
+>      {% raw %}
+>      ```yaml
+>      certbot_domains:
+>        - "{{ inventory_hostname }}"
+>        - "*.interactivetoolentrypoint.interactivetool.{{ inventory_hostname }}"
+>      ```
+>      {% endraw %}
 >
 >    - Comment out the existing `certbot_auth_method` like so:
 >
->        {% raw %}
->        ```yaml
->        #certbot_auth_method: --webroot
->        ```
->        {% endraw %}
+>      ```yaml
+>      #certbot_auth_method: --webroot
+>      ```
 >
 >        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
 >
 >    - Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
->        {% raw %}
->        ```yaml
->        certbot_dns_provider: rfc2136
->        certbot_dns_credentials:
->          server: ns-training.galaxyproject.org
->          port: 53
->          name: certbot-training.
->          secret: <SECRET PROVIDED BY INSTRUCTOR>
->          algorithm: HMAC-SHA512
->        ```
->        {% endraw %}
+>      ```yaml
+>      certbot_dns_provider: rfc2136
+>      certbot_dns_credentials:
+>        server: ns-training.galaxyproject.org
+>        port: 53
+>        name: certbot-training.
+>        secret: <SECRET PROVIDED BY INSTRUCTOR>
+>        algorithm: HMAC-SHA512
+>      ```
 >
 > 2. Run the playbook **with `certbot_expand`**:
 >

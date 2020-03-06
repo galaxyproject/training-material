@@ -21,20 +21,13 @@ contributors:
   - slugger70
   - hexylena
 ---
-class: left
 
-# Runaway Storage
-
-Tips:
-- Set quotas
-- `tmpwatch` (`tmpreaper` on Debian-based distros) your job working directory
-  - `cleanup_job` in `galaxy.yml` (defaults to `always` though)
-- `tmpwatch` your `new_file_path`
-  - `/usr/bin/tmpwatch -v --mtime --dirmtime 7d /srv/galaxy/var/tmp`
-- Set up dataset cleanup
+# Server Maintenance
 
 ---
 ## Dataset Cleanup
+
+Can only delete (or purge) dataset when all 'associations' pointing at it have been marked `deleted`.
 
 | method | description |
 | ---- | ---- |
@@ -112,11 +105,30 @@ class: reduce70
 | `purge_datasets` | <ul><li>Mark purged all Datasets marked deleted that are older than the specified number of days.</li></ul> |
 
 ---
+# Additional cleaning scripts
+
+* `admin_cleanup_datasets.py`
+  * Mark datasets as deleted that are older than specified cutoff.
+  * Has email templated notification (can also be used to just send info without deleting).
+  * Can be restricted to a tool.
+
+---
+class: left
+
+## Other disk space cleanups
+
+- `tmpwatch` (`tmpreaper` on Debian-based distros) your job working directory
+  - `cleanup_job` in `galaxy.yml` (defaults to `always` though)
+- `tmpwatch` your `new_file_path`
+  - `/usr/bin/tmpwatch -v --mtime --dirmtime 7d /srv/galaxy/var/tmp`
+
+---
 class: left, reduce90
 
 # Backups
 
---
+---
+class: left
 
 ## What to backup
 
@@ -138,9 +150,7 @@ If absolute reproducibility matters:
 | Data manager-installed reference data | `/srv/galaxy/var/tool-data` |
 
 ---
-class: left, reduce90
-
-# Backup
+class: left
 
 ## What not to back up
 
