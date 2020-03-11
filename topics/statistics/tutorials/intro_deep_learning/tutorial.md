@@ -19,14 +19,101 @@ contributors:
 - anuprulez
 ---
 
-# Introduction 
+## Introduction 
 
-## Relevance of deep learning in Bioinformatics
+### Relevance of deep learning in Bioinformatics
 
-# Get training and test datasets
+## Get training and test datasets
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. Create a new history for this tutorial
+>
+>    {% include snippets/create_new_history.md %}
+>
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3706539#.XmjDYHVKg5k)
+>
+>    ```
+>    https://zenodo.org/record/3706539/files/X_test.tsv
+>    https://zenodo.org/record/3706539/files/X_train.tsv
+>    https://zenodo.org/record/3706539/files/y_test.tsv
+>    https://zenodo.org/record/3706539/files/y_train.tsv
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>
+> 3. Check that the datatype is `tabular`.
+>
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
+>
+{: .hands_on}
 
 
-# Neural network architecture
+## Neural network architecture
+
+### Create architecture: Choose layers
+
+> ### {% icon hands_on %} Hands-on: Create a deep learning model architecture using Keras
+>
+> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+>    - *"Select keras model type"*: `Sequential`
+>    - *"input_shape"*: `(7129, )`
+>       
+>    - In *"LAYER"*:
+>        - In *"1: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*: `16`
+>                - *"Activation functions"*: `elu`
+>        - In *"2: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*: `16`
+>                - *"Activation functions"*: `elu`
+>        - In *"3: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*: `1`
+>                - *"Activation functions"*: `sigmoid`
+> 
+>
+{: .hands_on}
+
+The tool returns a JSON output file containing information about the nueral network layers and their attributes like their types, number of units they have and their activation functions.
+
+
+### Create architecture: Add training parameters
+
+> ### {% icon hands_on %} Hands-on: Create deep learning model with an optimizer, loss function and fit parameters
+>
+> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+>    - *"Choose a building mode"*: `Build a training model`
+>    - *"Select the dataset containing model configurations (JSON)"*: `Keras model config` (output of **Create a deep learning model architecture using Keras** {% icon tool %})
+>    - *"Do classification or regression?"*: `KerasGClassifier`
+>    - In *"Compile Parameters"*:
+>        - *"Select a loss function"*: `binary_crossentropy`
+>        - *"Select an optimizer"*: `RMSprop - RMSProp optimizer`
+>    - In *"Fit Parameters"*:
+>        - *"epochs"*: 10WWWWx`
+>        - *"batch_size"*: 4
+>
+{: .hands_on}
+
+The tool returns a zipped file
+
+### Deep learning training
+
+> ### {% icon hands_on %} Hands-on: Deep learning training and evaluation conduct deep training and evaluation either implicitly or explicitly
+>
+> 1. **Pipeline builder** {% icon tool %} with the following parameters:
+>    - *"Select a scheme"*: `Train and validate`
+>    - *"Choose the dataset containing pipeline/estimator object"*: `Keras model builder` (output of **Create deep learning model** {% icon tool %})
+>    - *"Select input type"*: `tabular data`
+>    - *"Training samples dataset"*: `X_train.tsv`
+>        - *"Does the dataset contain header"*: `Yes`
+>        - *"Choose how to select data by column"*: `All columns`
+>    - In *"Fit Parameters"*:
+>        - *"epochs"*: 10
+>        - *"batch_size"*: 4
+>
+{: .hands_on}
 
 
 # Visualisation
