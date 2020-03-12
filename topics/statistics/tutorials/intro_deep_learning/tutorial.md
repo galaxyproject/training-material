@@ -91,7 +91,7 @@ The tool returns a JSON output file containing information about the nueral netw
 >        - *"Select a loss function"*: `binary_crossentropy`
 >        - *"Select an optimizer"*: `RMSprop - RMSProp optimizer`
 >    - In *"Fit Parameters"*:
->        - *"epochs"*: 10WWWWx`
+>        - *"epochs"*: 10`
 >        - *"batch_size"*: 4
 >
 {: .hands_on}
