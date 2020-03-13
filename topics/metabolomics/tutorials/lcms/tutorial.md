@@ -359,7 +359,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 
 This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provided groups like we do here, you obtain two plots: one with colours based on provided groups, one with one colour per sample.
 
-![Base Peak Intensity Chromatograms](../../images/BPC_9samp.png)
+![Base Peak Intensity Chromatograms](../../images/lcms_BPC_9samp.png)
 
 
 ## First XCMS step: *peak picking*
@@ -484,7 +484,7 @@ dot corresponds to a sample. The plot allows to assess the quality of alignment.
 
 Hear is an example of two m/z slides obtained from the hands-on:
 
-![plotChromPeakDensity.pdf](../../images/group_9samp.png)
+![plotChromPeakDensity.pdf](../../images/lcms_group_9samp.png)
 
 
 > ### {% icon question %} Questions
@@ -860,12 +860,12 @@ get rid of it.
 
 For each ion independently, the normalisation process works as described in the following picture:
 
-![How this works](../../images/BC_theo.png)
+![How this works](../../images/lcms_BC_theo.png)
 
 The methodology is meant to correct for signal drift. In the tool, it is combined with a correction for batch effect. Thus, if your
 sequence is divided into several batches, the idea is to obtain something like the following:
 
-![Before/after picture](../../images/BC_theo2.png)
+![Before/after picture](../../images/lcms_BC_theo2.png)
 
 In the case of *linear* regression model, the tool performs some tests before applying the normalisation for quality purposes.
 For some ions, if the normalisation process would have led to inconsistent results, the concerned ions are not corrected for signal drift.
