@@ -787,14 +787,14 @@ over useful information using the **Quality Metrics** {% icon tool %} tool.
 
 For a first overview of your data, you can focus on the graphical output of this tool: **Quality_Metrics_figure.pdf**.
 It provides a variety of useful information:
- - Summary of the intensities in the dataMatrix file
- - View of these intensities with a color scale
- - 2-components PCA score plot to check for clusters or outliers
- - Sum of intensities per sample according to injection order to check the presence of signal drift or batch effect
- - Z-scores for intensity distribution and proportion of missing values
- - Ions' standard deviation (sd) and mean values
+ - Summary of the intensities in the dataMatrix file (information.txt file and plot top center paragraph)
+ - View of these intensities with a color scale (plot bottom right panel)
+ - 2-components PCA score plot to check for clusters or outliers (plot top left panel)
+ - Sum of intensities per sample according to injection order to check the presence of signal drift or batch effect (plot top center panel)
+ - Z-scores for intensity distribution and proportion of missing values (plot bottom left panel)
+ - Ions' standard deviation (sd) and mean values (plot top right panel)
 
-![Quality_Metrics_figure.pdf](../../images/QM_9samp_raw.png)
+![Quality_Metrics_figure.pdf](../../images/lcms_QM_9samp_raw.png)
 
 > ### {% icon question %} Question time: cross-referencing information
 >
@@ -939,15 +939,21 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 
 > ### {% icon question %} Questions
 >
-> 1. What does the *1.0* threshold mean in the hands-on exercise you just executed?
-> 2. How many variables are left in your dataset? How many samples?
+> 1. What does the *0.3* threshold mean in the hands-on exercise you just executed?
+> 2. What does the *1.0* threshold mean in the hands-on exercise you just executed?
+> 3. How many variables are left in your dataset? How many samples?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
+> > 1. The *0.3* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
+*poolCV* column in your *Variable metadata* file. As mentioned previously in 'Step 1: global variability in the data' section,
+pool CV values are commonly considered as reflecting unstable ions when superior to 0.3. 
+Although the signal drift correction decreased the proportion of ions with pool CV > 30% from 74% to 53%, we still need to get
+rid of these remaining unstable ions for which sample comparisons would be difficult and at high risk of being unreliable.
+> > 2. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
 *poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
 (*i.e.* a pool CV greater than the sample CV) is discarded from the dataset.
-> > 2. Filtering led to 2706 ions and 6 samples.
+> > 3. Filtering led to 2706 ions and 6 samples.
 > >
 > {: .solution}
 >
