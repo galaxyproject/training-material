@@ -75,7 +75,7 @@ contributors:
 
 .image-50[![slide7](../../images/wabbalancedbatches.png)]
 
-.center[Either of these are better set-ups. Mixing columns is good, but not required. Ultimately, batch effect can now be separated from variable effect.]
+.left[Either of these are better set-ups. Mixing columns is good, but not required. Ultimately, batch effect can now be separated from variable effect.]
 
 ---
 
@@ -83,9 +83,11 @@ contributors:
 
 .image-90[![slide7](../../images/wabreplicates.png)]
 
-.center[If putting multiple treatments on the same plate is not an option, then having enough separated replicates will also allow for batch correction. Here, you can assess the variation between replicates (and thus batches) as well as between treatments.]
+.center[Can't mix samples on plates? Separate replicates evenly and process together.]
 
+???
 
+If putting multiple treatments on the same plate is not an option, then having enough separated replicates will also allow for batch correction. Here, you can assess the variation between replicates (and thus batches) as well as between treatments.
 ---
 
 ### What about sequencing lanes?
@@ -106,15 +108,9 @@ contributors:
 
 .center[Does this look ok?]
 
----
+--
 
-### What about sequencing lanes?
 
-.center[So now it's time to sequence our samples! How do we combine samples into sequencing lanes?]
-
-.image-90[![slide7](../../images/wablanesbad.png)]
-
-.center[Does this look ok?]
 .center[No! You've turned each treatment (A & B) into a batch!]
 
 ---
@@ -136,7 +132,7 @@ contributors:
 
 * Cells are selected from a plate by their *barcodes*
 * Barcodes must be unique
-  + e.g. *96 wells in a plate, need 96 barcodes to sequence them together
+  + e.g. 96 wells in a plate, need 96 barcodes to sequence them together
 
 ---
 
@@ -357,9 +353,9 @@ Is it better to use Longer or Shorter Barcodes?
 
 * Every transcript in a specific cell has the same cell barcode
 
-* Barcodes are *designed* and are not random oligonucleotides for smaller plate-based protocols, while for split-pool and similar techniques they are randomised.
+* Barcodes are *designed* for smaller plate-based protocols, while for split-pool and similar techniques they are randomised.
 
-* Barcode use is *limited* by length and read depth (how many cells you want in a sequencing lane)
+* Barcode use is *limited* by length and read depth
 
 ]
 --
@@ -376,6 +372,9 @@ Is it better to use Longer or Shorter Barcodes?
 </small>
 ]
 
+
+???
+The number of reads you want per cell determines how many cells you run in a sequencing lane, which in turn tells you how many barcodes you need.
 ---
 
 # Summary
