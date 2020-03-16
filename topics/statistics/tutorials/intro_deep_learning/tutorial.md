@@ -149,6 +149,8 @@ The tool returns the predictions for the test data in a tabular dataset.
 >
 {: .hands_on}
 
+![data](../../images/confusion_matrix_dl.png "Confusion matrix for true and predicted classes")
+
 ## Summary
 
 
