@@ -841,7 +841,7 @@ the dataset may be due to the signal drift.
 >
 {: .question}
 
-## Step 2: handling the signal drift observed althrough the analytical sequence
+## Step 2: handling the signal drift observed all through the analytical sequence
 
 It is known that when injecting successively a large number of samples, the system tends to get dirty, and this may cause a measure drift.
 To prevent inability to catch signal anymore, in case of large injection series, the sequence is generally divided into several batches
