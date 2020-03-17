@@ -148,10 +148,6 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 {: .hands_on}
 
 
-<!--
-For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
--->
-
 ## Barcode Extraction
 
 > ### {% icon comment %} Note
