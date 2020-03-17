@@ -19,7 +19,36 @@ contributors:
 - anuprulez
 ---
 
-## Introduction 
+## Introduction
+
+### Deep learning and neural networks
+Deep learning is a branch of artificial intelligence which recognises patterns in large volumes of data. Using these learned patterns on the existing data, new data can be categorised. These patterns in data are learned by a computational model based on multiple architectures of neural networks. A neural network is a web of artificial neurons which is also called processing units. The idea of neural networks is inspired from mamalian cerebral cortex where neuronal circuits are used to learn. A neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected allowing the exchange of information. An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes inputs (x1 and x2) and computes output (y). The entities w1 and w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics.
+
+x1 = x1 * w1
+
+x2 = x2 * w2
+
+![data](../../images/neuron.svg "An artificial neuron.")
+
+The weights denote the significance of a particular input to produce the observed output. When it is large, the input is significant and whnen small, the input less significant to produce the output. These weights can be initialised randomly and they are modified over the course of learning by a neural network. Using the updated inputs (as shown in above equations), the output is computed using:
+
+y = f(x1 + x2)
+
+where *f* is an activation function. An activation function is a mathematical function which translates the combination of inputs to an output. The choices of these functions are many - sigmoid, linear, tanh, ReLU and so on. For example, sigmoid is:
+
+f(x) = 1 / (1 + exp(-x))
+
+The above equation will return a real number between 0 and 1.
+
+ReLU is:
+
+f(x) = max(0, x)
+
+Neurons make the building blocks of a neural network and are arranged in several layers. A usual neural network will look like as shown in Figure 2.
+
+![data](../../images/neural_network.svg "A neural network.")
+
+
 
 ### Relevance of deep learning in Bioinformatics
 
