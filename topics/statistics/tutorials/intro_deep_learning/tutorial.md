@@ -54,12 +54,38 @@ In the neural network (Figure 2), the input layer is shown in green. This layer 
 #### Hidden layer
 The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determine if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is deep learning. More the number of hidden layers, the more complex the architecture is. The number of hidden layers and size of each hidden layer is not fixed. It completely depends on the data that is being learned on. If the dataset is small (say only 1,000 samples), then it is important to choose a less complex set of hidden layers because if complex architecture is chosen, then there is a danger of overfitting when the deep learning model starts memorising the data. However, if the dataset is large (say > 10,000 samples), more complex architecture can be chosen. In short, the architecture of hidden layer is completely dependent on the nature and size of data. 
 
-
 #### Output layer
 The output layer collects the computed output using the input data and the weights which are optimised during learning. An activation function is chosen to transform the computed inputs and weights to an output. Some examples of activation function are sigmoid, ReLU, tanh and so on.
 
 #### Optimisation
 At the output layer, the computed output is collected and this output is compared against the actual/real output to find the difference. The aim of learning is to minimise this error so that the computed output is as close to actual output as possible. This process of minimising the error between computed and actual output is called optimisation. There are several optimisers such as gradient descent, root mean square propagation (RMSProp), adadelta etc. are available. These optimisers work by primarily adjusting the weights of connections so that the error is minimised. Once, a set of weights are achieved which provides the best accuracy or minimum error, we stop the learning as they cannot be improved.
+
+#### Neural network training
+A training is a process where input data is passed to the network at the input layer and when finished, a trained model is created containing all the learned parameters such as weights of all connections in the network. Usually, a portion of data is extracted and saved as test data which is not used for training. It is used only for evaluating the trained model to get an unbiased estimate of the learning and prediction strength. The size of the test data can be set by deep learning practitioners. An example of partition can be - 70% training data and 30% test data.
+
+#### Batch and Epoch
+While training a neural network, input data is passed in small batches. A batch is a subset of complete training data. An epoch is one iteration when all the training data is used for training in multiple batches. For example, if there is a training data of size (500, 10) where there are 500 rows or samples and batch size is fixed at 50, then there would be 10 batches (50 * 10 = 500) in each epoch. Each batch will have 50 samples and they are pssed to the input layer and the loss is propagated back and the weights are adjusted. The newly adjusted weights are used for the second batch of samples and so on. When all batches are finished, then one epoch of learning is done. The number of epochs and the size of batch are parameters to be set by deep learning practitioners. These parameters depends on the size of data and should be tuned according to the data for optimum results.
+
+> ### {% icon question %} Questions
+>
+> 1. How the neural network learning happens?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The learning happens by minimising the loss between computed and actual output. The weights of different connections are adjusted (increased or decreased) 
+to achieve the minimum loss. To ascertain the amount of change for weights, a technique known as backpropagation is used. Using this technique, the error computed at the output layer is "propagated" back in the neural network (from output to input layer) and each connection is assigned a share of the total error. In other words, how much each neuron is contributing to the total accumulated loss. For example, w1 is adjusted according to equation:
+![data](../../images/partial_derivative.png "Mean squared error loss function")
+
+In the above equation, L is the total loss, w1 is the weight of a connection between an input neuron and a hidden neuron. Similarly, all the weights are adjusted and in the subsequent iteration, the updated weights are used to compute error at the output layer. More on backpropagation can be read [here](http://neuralnetworksanddeeplearning.com/chap2.html). Parameter *n* is the learning rate which determines how small or big changes are needed for weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) along training epochs because initially large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum.
+
+> {: .solution}
+>
+{: .question}
+
+#### Loss function
+The error between the computed and actual output is calculated using a loss function. There are several choices of loss functions too. The functions such as root mean squared error and absolute error are used for regression problems while cross-entropy error functions are used in classification problems.
+
+![data](../../images/mse.png "Mean squared error loss function")
 
 
 ### Relevance of deep learning in Bioinformatics
