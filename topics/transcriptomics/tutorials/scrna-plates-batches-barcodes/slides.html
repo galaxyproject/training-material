@@ -6,22 +6,17 @@ zenodo_link: ""
 tags:
   - single-cell
 questions:
-  - "What are barcodes and how are they applied to batches?"
-  - "What is the difference between a plate and a batch?"
-  - "Are batches and lanes the same?"
-  - "Why are plating setups important to know?"
-  - "Is it necessary to check barcodes that don't exist in a batch?"
+  - "What is a batch when it comes to single cells?"
+  - "What’s the difference between a barcode and an index?"
+  - "What is batch effect and how do you prevent it?"
+  - "What is a lane?"
 objectives:
-  - "How to describe a plating setup"
-  - "Proper naming conventions when dealing with multiple batches"
-  - "Checking for false positives across batches"
+  - "How to set up plates to prevent batch effect"
+  - "Proper naming conventions when dealing with scRNA-seq samples"
 time_estimation: "1h"
 key_points:
-  - "Plates are split into Lanes"
-  - "Batches are Lanes, but names are not reused"
-  - "Multiple batches can exist in many Plates"
-  - "Checking all barcodes across Batches eliminates false positives / cross-contamination"
-  - "Intelligent plating strategies can guard against cross-contamination"
+  - "Balanced batches and replicates allow bioinformatic batch correction"
+  - "A sequencing lane often contains multiple batches, and is itself a batch effect!"
 
 # (This will be split out of the pre-processing later)
 # requirements:
@@ -39,6 +34,7 @@ follow_up_training:
         - scrna-preprocessing
 
 contributors:
+  - nomadscientist
   - mtekman
   - astrovsky01
 
@@ -48,7 +44,7 @@ contributors:
 ### Sorting Plates
 
 
-.image-100[![slide5](../../images/scrna-plates-batches-barcodes_slide5.svg)]
+.image-100[![slide5](../../images/wab96wellplate.svg)]
 
 .left[Plates are *N x M* arrays of wells that cells are sorted, to then be individually amplified and sequenced.]
 
@@ -56,72 +52,88 @@ contributors:
 
 ### Sorting Plates
 
-.image-100[![slide6](../../images/scrna-plates-batches-barcodes_slide6.svg)]
+.image-80[![slide6](../../images/wabexampleplates.png)]
 
-.left[Not all wells need to be occupied by cells, some wells are left empty.]
-.center[Why is this the case?]
 
 ---
 
-### Sorting Plates
+### Setting up Plates
 
-.image-100[![slide7](../../images/scrna-plates-batches-barcodes_slide7.svg)]
+.image-75[![slide7](../../images/wabbatchproblems.png)]
 
-.center[Library preparation is not always perfect]
-.center[Sample **contamination** from neighbouring wells]
+.center[What is the problem with this plate setup?]
 
 ---
 
-### Plates and Lanes
+### Setting up Plates
 
+.image-50[![slide7](../../images/wabbatchproblems.png)]
 
-.image-50[![slide5](../../images/scrna-plates-batches-barcodes_slide5.svg)]
+.center[Batch effect (plate vs plate) cannot be separated from treatment effect in either scenario.]
 
-.center[Sorting Plates are divided into *lanes*:]
+---
+### Setting up Plates
 
+.image-50[![slide7](../../images/wabbalancedbatches.png)]
 
-.image-50[![slide9](../../images/scrna-plates-batches-barcodes_slide9.svg)]
+.left[Either of these are better set-ups. Mixing columns is good, but not required. Ultimately, batch effect can now be separated from variable effect.]
+
+---
+
+### Setting up Plates
+
+.image-90[![slide7](../../images/wabreplicates.png)]
+
+.center[Can't mix samples on plates? Separate replicates evenly and process together.]
 
 ???
-Plates are $$N \times M$$ arrays or wells that cells are sorted into and then individually amplified and sequenced. The way these slot are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily.
 
-* Lanes demarcate evenly-sized *n x m* rectangular regions on a plate (where *n < N and m < M*).
-* Multiple lanes can exist on plate, lanes ideally do not overlap within a plate.
+If putting multiple treatments on the same plate is not an option, then having enough separated replicates will also allow for batch correction. Here, you can assess the variation between replicates (and thus batches) as well as between treatments.
+---
+
+### What about sequencing lanes?
+
+.center[So now it's time to sequence our samples! How do we combine samples into sequencing lanes?]
+
+.image-90[![slide7](../../images/wabseqlane.png)]
+
+.center[This works well, but what if you have too many samples for one lane?]
 
 ---
 
-### Plates and Lanes
+### What about sequencing lanes?
 
-.image-100[![slide9](../../images/scrna-plates-batches-barcodes_slide9.svg)]
+.center[So now it's time to sequence our samples! How do we combine samples into sequencing lanes?]
 
-* All slots within a lane are sequenced at the same time.
-* All lanes within a plate *may or may not* be sequenced at the same time.
-* Lanes can therefore be thought of as different *batches*.
+.image-90[![slide7](../../images/wablanesbad.png)]
+
+.center[Does this look ok?]
+
+--
+
+
+.center[No! You've turned each treatment (A & B) into a batch!]
 
 ---
 
-### Lanes and Batches
-
-.image-100[![slide10](../../images/scrna-plates-batches-barcodes_slide10.svg)]
+### What about sequencing lanes?
 
 
-???
-* Lanes and batches describe the same spaces, but not the same samples.
-* For this reason, batch numbers should *not* persist across different plates.
+
+.image-75[![slide7](../../images/wablanesgood.png)]
+
+.center[This is the way to balance your batches at the lane-level.]
 
 ---
 
 ### Distinguishing cells in a plate
 
-.image-100[![slide11](../../images/scrna-plates-batches-barcodes_slide11.svg)]
+.image-60[![slide11](../../images/wabplate.png)]
 
 
 * Cells are selected from a plate by their *barcodes*
 * Barcodes must be unique
-  + e.g. *4 x 18  = 72* slots in the plate, need 72 unique cell barcodes
-
-???
-The way these slots are filled depends entirely on the protocol, but usually not all slots are filled. The reason for this will become clear momentarily
+  + e.g. 96 wells in a plate, need 96 barcodes to sequence them together
 
 ---
 
@@ -149,19 +161,19 @@ The way these slots are filled depends entirely on the protocol, but usually not
 ### Questions about Cell Barcodes
 
 
-.image-75[![slide14](../../images/scrna-plates-batches-barcodes_slide14.svg)]
+.image-50[![slide14](../../images/wabplate.png)]
 
-.left[Assuming a lane is a 20x5 array:]
+.left[Assuming you sequence one 96-well plate:]
 
 1. How many cell barcodes are needed for a single lane?
 
-1. How many cell barcodes are needed for a plate with 10 lanes?
+1. How many cell barcodes are needed if you combine 10 plates into a single sequencing lane?
 
 1. What would be the minimum length of the barcodes for each of the previous questions?
 --
 .footnote[
-1. *20 x 5 = 100 unique barcodes per lane*
-1. *20 x 5 x 10 = 1,000 unique barcodes per plate*
+1. *96 unique barcodes per lane*
+1. *96 x 10 = 960 unique barcodes per plate*
 ]
 ---
 
@@ -173,26 +185,26 @@ The way these slots are filled depends entirely on the protocol, but usually not
 
 A single lane?
 
- * 100 barcodes, 4 nucleotides for each base of a barcode
+ * 96 barcodes, 4 nucleotides for each base of a barcode
 
 | Barcodes | Result |
 |---------|------|
 | $$4^2 =  16$$ | <small>No, 2 bases is not enough |
 | $$4^3  = 64$$ | <small>No, 3 bases is not enough |
-| $$4^4 = 256$$ | <small>Yes, 4 bases is enough to cover 100 barcodes (and more!) |
+| $$4^4 = 256$$ | <small>Yes, 4 bases is enough to cover 96 barcodes (and more!) |
 
 ]
 --
 .pull-right[
 
-A plate with 10 lanes?
+10 plates in a single lane?
 
- * 1000 barcodes, 4 nucleotides for each base of a barcode
+ * 960 barcodes, 4 nucleotides for each base of a barcode
 
 | Barcodes | Result |
 |---------|------|
 |$$4^4 = 256$$ | <small>No, 4 bases is not enough |
-|$$4^5 = 1024$$ | <small>Yes, 5 bases is enough to cover 1,000 barcodes (just barely!) |
+|$$4^5 = 1024$$ | <small>Yes, 5 bases is enough to cover 960 barcodes (just barely!) |
 
 ]
 
@@ -206,7 +218,7 @@ A plate with 10 lanes?
  -->
 
 .pull-left[
-* Is 5 nucleotides really enough to capture 1000 cells?
+* Is 5 nucleotides really enough to capture 960 cells?
 
 * What could go wrong if all barcodes are separated by 1 bp, as shown?
 ]
@@ -342,9 +354,9 @@ Is it better to use Longer or Shorter Barcodes?
 
 * Every transcript in a specific cell has the same cell barcode
 
-* Barcodes are *designed* and are not random oligonucleotides
+* Barcodes are *designed* for smaller plate-based protocols, while for split-pool and similar techniques they are randomised.
 
-* Barcode use is *limited* by length and plate size
+* Barcode use is *limited* by length and read depth
 
 ]
 --
@@ -360,271 +372,10 @@ Is it better to use Longer or Shorter Barcodes?
 
 </small>
 ]
---
-.pull-right[* How?]
-
-
----
-
-### Intelligent Plating Strategies
-
-* The main contending questions are:
-
- 1. How large is each batch?
-
-???
-How many slots in a batch that we need to barcode for
-
---
-
- 2. How many batches on a plate?
-
---
-
- 3. Should each batch use the same barcodes?
-
---
-
- 4. What **constraints** are there on the plate?
-
 
 
 ???
-A technician always has to balance quality against cost, and this is illustrated in the following examples:
-
----
-
-### Example Setup
-
-.pull-left[
-* Barcodes:
-  * 24 unique barcodes, with an edit distance of E=2:
-
-             AAA ACC AGG TTT TAA TCC
-             ATT CCC CAA TGG NAA NCC
-             CGG CTT GGG NGG NTT ANN
-             GAA GCC GTT CNN GNN TNN
-
-]
---
-.pull-right[
-* Plates and Lanes:
-  * 12 slots per lane (3x4)
-  * 4 lanes per plate
-
-* Constraints
-  * Only 2 lanes sequenced at the same time
-    * i.e. half the plate is sequenced at the same time
-]
-
-???
-Here we use N as an extra base just for example purposes, but you do sometimes see this in other barcodes.
-2 lanes at a time, only half
-
----
-
-### Example 1: Single Plate with a Single Lane
-
-.bottom-info-box[
-Available Barcodes
-
-    AAA ACC AGG TTT TAA TCC
-    ATT CCC CAA TGG NAA NCC
-    CGG CTT GGG NGG NTT ANN
-    GAA GCC GTT CNN GNN TNN
-
-]
---
-
-.image-75[![slide36](../../images/scrna-plates-batches-barcodes_slide36.svg)]
-
-.pull-left[
-* 12 total slots in Plate 1
-
-* 12 slots in Lane 1
-
-* All slots filled
-]
-
---
-.pull-right[
-* We only need to use half of our barcodes
-
-* Why is this wasteful?
-]
-
-
-???
-* Half of the barcodes used for that lane, and the other half we can ignore.
-* Wasteful because we are not getting full use of our 24 barcodes in a single sequencing run
-
----
-
-### Example 2: Single Plate with 2 Lanes
-
-.bottom-info-box[
-Available Barcodes
-
-    AAA ACC AGG TTT TAA TCC
-    ATT CCC CAA TGG NAA NCC
-    CGG CTT GGG NGG NTT ANN
-    GAA GCC GTT CNN GNN TNN
-
-]
-
-* 24 total slots in Plate 1
-* 12 slots in Lane 1, and 12 slots in Lane 2
-* All slots filled
-
-.image-75[![slide38](../../images/scrna-plates-batches-barcodes_slide38.svg)]
-
---
-* We can use all of our barcodes
-* Maximum number of cells can be sequenced in a single run
-* Why might this be too optimal?
-
-
-???
-Here we use all barcodes since these lanes will be sequenced at the same time
-Let's look at one final example to see why using all our barcodes on a plate might not be optimal.
-
----
-
-### Example 3: Single Plate with 2 Lanes, only 1 active
-
-.bottom-info-box[
-Available Barcodes
-
-    AAA ACC AGG TTT TAA TCC
-    ATT CCC CAA TGG NAA NCC
-    CGG CTT GGG NGG NTT ANN
-    GAA GCC GTT CNN GNN TNN
-
-]
-
-* 24 total slots in Plate 1
-* 12 slots in Lane 1, and 12 slots in Lane 2
-* Only slots in Lane 1 filled
-
-.image-75[![slide40](../../images/scrna-plates-batches-barcodes_slide40.svg)]
-
-
---
-* Why are we still using all barcodes?
-* Why have we not filled in Lane 2?
-
-
-???
-All barcodes used, why leave one lane empty?
-
----
-
-### Example 3: Single Plate with 2 Lanes, only 1 active
-
-.bottom-info-box[
-Available Barcodes
-
-    AAA ACC AGG TTT TAA TCC
-    ATT CCC CAA TGG NAA NCC
-    CGG CTT GGG NGG NTT ANN
-    GAA GCC GTT CNN GNN TNN
-
-]
-
-* What would it mean if we sequenced reads with {TTT,TAA,...,TNN} as their Cell Barcodes?
-
-.image-75[![slide40](../../images/scrna-plates-batches-barcodes_slide40.svg)]
-
-
---
-* **Cross-Contamination**
-  * There should be *no cells in that lane*!
-  * These are contaminants from Lane 1
-  * We can ignore these reads and select for the {AAA,ACC,...,GTT}
-
-
-???
-If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occurred *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used.
-
----
-
-### Example 4: 2 Plates with 2 Lanes, only 1 active (alternate)
-
-.bottom-info-box[
-Available Barcodes
-
-    AAA ACC AGG TTT TAA TCC
-    ATT CCC CAA TGG NAA NCC
-    CGG CTT GGG NGG NTT ANN
-    GAA GCC GTT CNN GNN TNN
-
-]
-
-
-* Same as before but extra plate. A single lane used to check for contaminants.
-* Alternate barcodes used for each plate
-
-.image-50[![slide44](../../images/scrna-plates-batches-barcodes_slide44.svg)]
-
-
-<small>
-* Why alternate active lanes across plates?
-</small>
-
---
-<small>
-  * Plate 1 and Plate 2 are sometimes the *same plate*
-  * Contaminants might carry over *undetected* if same lane is used!
-</small>
-
-???
-* Here we have repeated previous example, but with an extra plate. In the first plate, the first half of the barcodes are used, and in the second plate, the second half of the barcodes are used.
-
-* Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?
-
-* Loaded at different times, washed clean, re-used.
-
-* Again, the answer is to reduce cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmise where they came from. We also have the added benefit of protecting the cells in Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
-
----
-
-### Example 5: 1 Plate with 2 lanes, both active
-
-.bottom-info-box[
-Available Barcodes
-
-    AAA ACC AGG TTT TAA TCC
-    ATT CCC CAA TGG NAA NCC
-    CGG CTT GGG NGG NTT ANN
-    GAA GCC GTT CNN GNN TNN
-
-]
-
-* Both lanes filled. *All barcodes* are applied individually to *each* lane
-
-.image-100[![slide46](../../images/scrna-plates-batches-barcodes_slide46.svg)]
-
-.pull-left[
-
-* Why check all barcodes against each lane?
-
-* Why not separate lanes across different plates?
-
-]
---
-.pull-right[
-* If <small>{TTT,TAA,...,TNN}</small> is detected in Lane 1, or vice versa → **Contamination!**
-
-* *Benefit of* **detecting cross-contamination** *whilst still* **maximising plate usage**
-]
-???
-1. Why apply the full set of barcodes to each lane, when only half will actually label?
-2. What benefit does this serve, instead of separating them over different plates as in the previous example?
-
-A1. This setup is actually the same as example 4, but with the two plates merged. Here we can check for cross-contamination in each lane by measuring the real cell labels against the false barcodes. If in lane 1, we detect a significant number of reads with cell barcodes of `TAA` or `ANN`, we can assume that some cross-contamination has occurred since we should not be able to detect these barcodes in that lane. The converse is also true of lane 2.
-
-A2. We have the benefit of detecting cross-contamination with the same advantages as example 4, but with the cost advantage of sequencing two batches at the same time.
-
+The number of reads you want per cell determines how many cells you run in a sequencing lane, which in turn tells you how many barcodes you need.
 ---
 
 # Summary
@@ -642,7 +393,5 @@ A2. We have the benefit of detecting cross-contamination with the same advantage
 * Indicate what cell a transcript came from.
 
 * Reduce sequencing errors
-
-* Check for cross contamination
 
 ]
