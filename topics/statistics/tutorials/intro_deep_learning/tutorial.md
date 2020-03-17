@@ -22,7 +22,7 @@ contributors:
 ## Introduction
 
 ### Deep learning and neural networks
-Deep learning is a branch of artificial intelligence which recognises patterns in large volumes of data. Using these learned patterns on the existing data, new data can be categorised. These patterns in data are learned by a computational model based on multiple architectures of neural networks. A neural network is a web of artificial neurons which is also called processing units. The idea of neural networks is inspired from mamalian cerebral cortex where neuronal circuits are used to learn. A neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected allowing the exchange of information. An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes inputs (x1 and x2) and computes output (y). The entities w1 and w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics.
+Deep learning is a branch of artificial intelligence which recognises patterns in large volumes of data. Using these learned patterns on the existing data, new data can be categorised. These patterns in data are learned by a computational model based on multiple architectures of neural networks. A neural network is a web of artificial neurons which is also called processing units. The idea of neural networks is inspired from mamalian cerebral cortex where neuronal circuits are used to learn. A neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected allowing the exchange of information. An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes inputs (x1 and x2) and computes output (y). The entities w1 and w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics. All the variables - inputs, weights and output - can either be scalars or vectors.
 
 x1 = x1 * w1
 
@@ -48,6 +48,18 @@ Neurons make the building blocks of a neural network and are arranged in several
 
 ![data](../../images/neural_network.svg "A neural network.")
 
+#### Input layer
+In the neural network (Figure 2), the input layer is shown in green. This layer receives the input data and pass it on to the next layer. The number of neurons in this layer depends on the number of dimensions of input data. For example, if the input data (matrix) is of size (500, 10), 500 rows (samples) and 10 columns (features), then the number of neurons in the input layer is 10. Each neuron in the input layer is connected to all the neurons in the next layer. All these connections have a separate weight (denoted by w). 
+
+#### Hidden layer
+The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determine if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is deep learning. More the number of hidden layers, the more complex the architecture is. The number of hidden layers and size of each hidden layer is not fixed. It completely depends on the data that is being learned on. If the dataset is small (say only 1,000 samples), then it is important to choose a less complex set of hidden layers because if complex architecture is chosen, then there is a danger of overfitting when the deep learning model starts memorising the data. However, if the dataset is large (say > 10,000 samples), more complex architecture can be chosen. In short, the architecture of hidden layer is completely dependent on the nature and size of data. 
+
+
+#### Output layer
+The output layer collects the computed output using the input data and the weights which are optimised during learning. An activation function is chosen to transform the computed inputs and weights to an output. Some examples of activation function are sigmoid, ReLU, tanh and so on.
+
+#### Optimisation
+At the output layer, the computed output is collected and this output is compared against the actual/real output to find the difference. The aim of learning is to minimise this error so that the computed output is as close to actual output as possible. This process of minimising the error between computed and actual output is called optimisation. There are several optimisers such as gradient descent, root mean square propagation (RMSProp), adadelta etc. are available. These optimisers work by primarily adjusting the weights of connections so that the error is minimised. Once, a set of weights are achieved which provides the best accuracy or minimum error, we stop the learning as they cannot be improved.
 
 
 ### Relevance of deep learning in Bioinformatics
