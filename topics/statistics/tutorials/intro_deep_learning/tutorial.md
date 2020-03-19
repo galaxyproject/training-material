@@ -17,32 +17,38 @@ key_points:
 time_estimation: 1H
 contributors:
 - anuprulez
+- khanteymoori
 ---
 
 ## Introduction
 
 ### Deep learning and neural networks
-Deep learning is a branch of artificial intelligence which recognises patterns in large volumes of data. Using these learned patterns on the existing data, new data can be categorised. These patterns in data are learned by a computational model based on multiple architectures of neural networks. A neural network is a web of artificial neurons which is also called processing units. The idea of neural networks is inspired from mamalian cerebral cortex where neuronal circuits are used to learn. A neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected allowing the exchange of information. An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes inputs (x1 and x2) and computes output (y). The entities w1 and w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics. All the variables - inputs, weights and output - can either be scalars or vectors.
+[Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a branch of artificial intelligence which recognises patterns in large volumes of data. Using these learned patterns on the existing data, new data can be categorised. These patterns in data are learned by a computational model based on multiple architectures of neural networks. Deep neural network architectures such as convolutional and long short-term memory networks have become increasingly popular as machine learning tools during the recent years. The availability of greater computational resources, more data, new algorithms for training deep models and easy to use libraries for implementation and training of neural networks are the drivers of this development. Deep learning is a set of learning methods attempting to model data with complex architectures combining different non-linear transformations. Deep learning is recently showing a state-of-the-art performance in various fields and the goal of this tutorial is to introduce the basic principles of deep learning.
 
-x1 = x1 * w1
 
-x2 = x2 * w2
+A neural network is a web of artificial neurons which is also called processing units. The idea of neural networks is inspired from mamalian cerebral cortex where neuronal circuits are used to learn. A neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected allowing the exchange of information.
 
 ![data](../../images/neuron.svg "An artificial neuron.")
 
+An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes inputs (x1 and x2) and computes output (y). The entities w1 and w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics. All the variables - inputs, weights and output - can either be scalars or vectors.
+
+![data](../../images/eq1.png "Updated component of input vector (x).")
+
+![data](../../images/eq2.png "Updated component of input vector (x).")
+
 The weights denote the significance of a particular input to produce the observed output. When it is large, the input is significant and whnen small, the input less significant to produce the output. These weights can be initialised randomly and they are modified over the course of learning by a neural network. Using the updated inputs (as shown in above equations), the output is computed using:
 
-y = f(x1 + x2)
+![data](../../images/eq3.png "Computation of output (y).")
 
 where *f* is an activation function. An activation function is a mathematical function which translates the combination of inputs to an output. The choices of these functions are many - sigmoid, linear, tanh, ReLU and so on. For example, sigmoid is:
 
-f(x) = 1 / (1 + exp(-x))
+![data](../../images/eq4.png "Sigmoid activation function.")
 
 The above equation will return a real number between 0 and 1.
 
 ReLU is:
 
-f(x) = max(0, x)
+![data](../../images/eq5.png "Rectified exponential linear unit (ReLU) activation function.")
 
 Neurons make the building blocks of a neural network and are arranged in several layers. A usual neural network will look like as shown in Figure 2.
 
