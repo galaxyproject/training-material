@@ -1,0 +1,176 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "5 - S-gene AA", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [], 
+            "label": null, 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 164, 
+                "top": 249
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"optional\": false}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "1ee97eb6-a9ea-4b1e-b747-3f438f540d3a", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "25247099-872d-4617-b3d9-3f776a03f5e6"
+                }
+            ]
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: transeq101/5.0.0", 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {
+                "input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "transeq", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 245, 
+                "top": 436
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: transeq101/5.0.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "dba489bfcd62", 
+                "name": "emboss_5", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"trim\": \"\\\"no\\\"\", \"__page__\": null, \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"out_format1\": \"\\\"fasta\\\"\", \"frame\": \"\\\"1\\\"\", \"regions\": \"\\\"\\\"\", \"clean\": \"\\\"no\\\"\", \"table\": \"\\\"0\\\"\", \"alternative\": \"\\\"no\\\"\", \"__rerun_remap_job_id__\": null}", 
+            "tool_version": "5.0.0", 
+            "type": "tool", 
+            "uuid": "644c732c-d9d2-4d40-8a56-2fa684a6a983", 
+            "workflow_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.221.3", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "inputSequences": {
+                    "id": 1, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "MAFFT", 
+            "outputs": [
+                {
+                    "name": "outputAlignment", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 396, 
+                "top": 604
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.221.3", 
+            "tool_shed_repository": {
+                "changeset_revision": "c5908940967d", 
+                "name": "mafft", 
+                "owner": "rnateam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"__page__\": null, \"outputFormat\": \"\\\"\\\"\", \"getTree\": \"\\\"false\\\"\", \"inputSequences\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"datatype\": \"\\\"--amino\\\"\", \"cond_flavour\": \"{\\\"__current_case__\\\": 0, \\\"flavourType\\\": \\\"mafft-fftns\\\"}\", \"matrix_condition\": \"{\\\"__current_case__\\\": 0, \\\"matrix\\\": \\\"\\\"}\", \"__job_resource\": \"{\\\"__current_case__\\\": 0, \\\"__job_resource__select\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"adjustdirection\": \"\\\" \\\"\", \"ep\": \"\\\"0.123\\\"\", \"reorder\": \"\\\"false\\\"\", \"op\": \"\\\"1.53\\\"\"}", 
+            "tool_version": "7.221.3", 
+            "type": "tool", 
+            "uuid": "cd73c7c1-aa11-42b0-a129-4211e10adb3f", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "outputAlignment", 
+                    "uuid": "9a37156c-f8ce-4dad-8a6c-2d4e9d9f7007"
+                }
+            ]
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: tranalign100/5.0.0", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }, 
+                "input2": {
+                    "id": 2, 
+                    "output_name": "outputAlignment"
+                }
+            }, 
+            "inputs": [], 
+            "label": null, 
+            "name": "tranalign", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 557, 
+                "top": 214
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: tranalign100/5.0.0", 
+            "tool_shed_repository": {
+                "changeset_revision": "dba489bfcd62", 
+                "name": "emboss_5", 
+                "owner": "devteam", 
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            }, 
+            "tool_state": "{\"input2\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null, \"input1\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"out_format1\": \"\\\"fasta\\\"\", \"__rerun_remap_job_id__\": null, \"table\": \"\\\"0\\\"\"}", 
+            "tool_version": "5.0.0", 
+            "type": "tool", 
+            "uuid": "1bb583f8-ac3e-41db-a8f1-74da6cc8a58c", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "out_file1", 
+                    "uuid": "8282309f-b6de-400d-a749-4c1d66b0314a"
+                }
+            ]
+        }
+    }, 
+    "tags": [
+        "covid-19"
+    ], 
+    "uuid": "8d0e80ef-ba4d-4c51-a47e-95cd1865497e", 
+    "version": 0
+}
