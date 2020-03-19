@@ -88,13 +88,13 @@ The error between the computed and actual output is calculated using a loss func
 
 
 ### Relevance of deep learning in Bioinformatics
-Deep learning is an established tool in finding patterns in big data for multiple fields of research such as computer vision, image analysis, drug response prediction, protein structure prediction and so on. Different research areas use different architectures of neural network which are suitable to their respective data. For example, in computer vision and image analysis, convolutional neural network (CNN) is popular and produces state-of-the-art results, for drug response prediction, graph convutional neural network is often used, recurrent neural network is useful for identifying motif in protein sequences and so on. The table below shows more examples of neural networks which are popular with different fields of bioinformatics. These use-cases of deep learning prove that it is essential to explore deep learning algorithms to find patterns in big data in biology.
+Deep learning is an established tool in finding patterns in big data for multiple fields of research such as computer vision, image analysis, drug response prediction, protein structure prediction and so on. Different research areas use different architectures of neural network which are suitable to their respective data. For example, in computer vision and image analysis, convolutional neural network (CNN) is popular and produces state-of-the-art results, for drug response prediction, graph convutional neural network is often used, recurrent neural network is useful for identifying motif in protein sequences and so on. The table below shows more examples of neural networks which are popular with different fields of bioinformatics. These use-cases of deep learning prove that it is essential to explore deep learning algorithms to find patterns in big data in biology. More details can be found in [Deep learning in bioinformatics: Introduction, application, and perspective in the big data era](https://www.sciencedirect.com/science/article/pii/S1046202318303256)
 
 ![data](../../images/dl_bioinformatics.png "Different architectures of neural networks for different fields of bioinformatics")
 
 ## Get training and test datasets
 
-The datasets used for this tutorial contains gene expression profiles of humans suffering from two diseases (cancer) - [acute myeloid leukemia (AML)](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) and [acute lymphoblastic leukemia (ALL)](https://en.wikipedia.org/wiki/Acute_lymphoblastic_leukemia). The aim of this tutorial is to differentiate between these two diseases (predicting the specific cancer) by learning unique patterns in gene expression profiles of cancer patients. The data is divided into 2 parts - one for training and another for predicting. Each part contains two datasets - one has the gene expression profiles and another has labels (type of cancer). The size of the training data (`X_train.csv`) is (38, 7129) where 38 is the number of cancer patients and 7129 is the number of genes. The data contains gene expression for all the genes (7129 genes). The label data (`y_train.csv`) has size (38, 1) contains the information of the type of cancer for each cancer patient (label encoding is 0 for ALL and 1 for AML). The test data (`X_test.csv`) has size (34, 7129) containing the same genes for 34 different cancer patients. The label data for test is `y_test.csv` and has size (34, 1). The neural network, which will be formulated in the remaining part of the tutorial, learns on the training data to create a trained model. The prediction ability of this model is evaluated on the test data (which is unseen during training to get an unbiased estimate of prediction ability). These datasets are uploaded to Galaxy by following the steps defined below:
+The datasets used for this tutorial contains gene expression profiles of humans suffering from two diseases (cancer) - [acute myeloid leukemia (AML)](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) and [acute lymphoblastic leukemia (ALL)](https://en.wikipedia.org/wiki/Acute_lymphoblastic_leukemia). The aim of this tutorial is to differentiate between these two diseases (predicting the specific cancer) by learning unique patterns in gene expression profiles of cancer patients. The data is divided into 2 parts - one for training and another for predicting. Each part contains two datasets - one has the gene expression profiles and another has labels (type of cancer). The size of the training data (`X_train.csv`) is (38, 7129) where 38 is the number of cancer patients and 7129 is the number of genes. The data contains gene expression for all the genes (7129). The label data (`y_train.csv`) has size (38, 1) contains the information of the type of cancer for each cancer patient (label encoding is 0 for ALL and 1 for AML). The test data (`X_test.csv`) has size (34, 7129) containing the same genes for 34 different cancer patients. The label data for test is `y_test.csv` and has size (34, 1). The neural network, which will be formulated in the remaining part of the tutorial, learns on the training data to create a trained model. The prediction ability of this model is evaluated on the test data (which is unseen during training to get an unbiased estimate of prediction ability). These datasets are uploaded to Galaxy by following the steps defined below:
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -121,6 +121,7 @@ The datasets used for this tutorial contains gene expression profiles of humans 
 
 
 ## Neural network architecture
+Defining a neural network architecture needs to ascertain types and number of layers, the number of neurons for each layer, the activation functions for all layers, type of optimiser and loss function. Choosing these parameters may require many experiments with the data as there is no guide how to choose the best combination of these parameters. The neural network used in this tutorial has an input layer, 2 hidden layers and one output layer. The input layer has a parameter `input_shape` which is set according to the number of dimensions of data. It is set to (7129,) which is the number of genes in the data. The hidden layers have 16 neurons (units) each and the output layer has only one because a scalar output is needed (0 or 1). This partial architecture (having input shape, types and size of layers, and activation functions) of the neural network is defined as follows: 
 
 ### Create architecture: Choose layers
 
@@ -147,8 +148,7 @@ The datasets used for this tutorial contains gene expression profiles of humans 
 >
 {: .hands_on}
 
-The tool returns a JSON output file containing information about the nueral network layers and their attributes like their types, number of units they have and their activation functions.
-
+The tool returns a JSON output file containing data about the nueral network layers and their attributes like their types, number of units they have and their activation functions. This file is used as an input to the next step where the architecture of the neural network is completed by adding optimiser, loss function, and training parameters such as number of epochs and batch size.
 
 ### Create architecture: Add training parameters
 
@@ -167,7 +167,7 @@ The tool returns a JSON output file containing information about the nueral netw
 >
 {: .hands_on}
 
-The tool returns a zipped file containing the object of classifier. The classifier object will be used for training.
+The tool returns a zipped file containing an object of the neural network architecture (define in the last two steps) which is used as a classifier to train it on data.
 
 ### Deep learning training
 
