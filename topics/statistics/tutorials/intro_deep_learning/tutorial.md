@@ -148,7 +148,7 @@ Defining a neural network architecture needs to ascertain types and number of la
 >
 {: .hands_on}
 
-The tool returns a JSON output file containing data about the nueral network layers and their attributes like their types, number of units they have and their activation functions. This file is used as an input to the next step where the architecture of the neural network is completed by adding optimiser, loss function, and training parameters such as number of epochs and batch size.
+The tool returns a JSON output file containing data about the nueral network layers and their attributes like their types, number of units they have and their activation functions. This file is used as an input to the next step where the architecture of the neural network is completed by adding optimiser, loss function, and training parameters such as number of epochs and batch size. The loss function is chosen as `binary_crossentropy` as the learning task is classification of two labels (0 and 1).
 
 ### Create architecture: Add training parameters
 
@@ -167,7 +167,7 @@ The tool returns a JSON output file containing data about the nueral network lay
 >
 {: .hands_on}
 
-The tool returns a zipped file containing an object of the neural network architecture (define in the last two steps) which is used as a classifier to train it on data.
+The tool returns a zipped file containing an object of the neural network architecture (define in the last two steps) which is used as a classifier to train it on data. Once the architecture is finalised, its associated object is used for training combining it with the training data as follows:
 
 ### Deep learning training
 
@@ -186,7 +186,7 @@ The tool returns a zipped file containing an object of the neural network archit
 >
 {: .hands_on}
 
-The tool returns 3 files - a `tabular` file containing output (accuracy of cross-validation) of training, a `zipped` file with the trained model and an `H5` file containing the weights of neural network layers.
+The tool gives 3 files as output - a `tabular` file containing output (accuracy of cross-validation) of training, a `zipped` file with the trained model (fitted estimator) and an `H5` file containing the weights of neural network layers. The files containing the fitted estimator and weights are used to recreate the model and this recreated model is used to predict labels in test data.
 
 ### Prediction on test data
 
@@ -204,7 +204,7 @@ The tool returns 3 files - a `tabular` file containing output (accuracy of cross
 >
 {: .hands_on}
 
-The tool returns the predictions for the test data in a tabular dataset.
+The tool returns the predicted labels (0 for ALL and 1 AML) for the test data in a tabular format. The size of this data is (34,1) where 34 is the number of cancer patients in the test data. As there is already a data with the actual labels for the test data, the performance of the trained model is compared against the predicted labels using a confusion matrix plot.
 
 ## Visualisation
 
@@ -219,6 +219,8 @@ The tool returns the predictions for the test data in a tabular dataset.
 > 
 >
 {: .hands_on}
+
+The image below shows the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) which is a symmetric. It contains actual labels on y-axis and predicted labels on x-axis. Each cell in the matrix plot gives the number of cancer patients who got predicted correctly or incorrectly. For example, the number in the top-left cell (0, 0) denotes that how many of these patients are predicted correctly for ALL (17/20). The higher the number in this cell, the better is the model for this cell. In the top-right cell, 3 patients who actually has ALL but they are predicted having AML. Similarly, the bottom-right cell denotes how many patients are predicted correctly for AML (10/14). In the bottom-left cell, 4 patients actually has AML but are predicted as ALL.
 
 ![data](../../images/confusion_matrix_dl.png "Confusion matrix for true and predicted classes")
 
