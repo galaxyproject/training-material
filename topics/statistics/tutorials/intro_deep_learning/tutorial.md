@@ -170,6 +170,7 @@ The tool returns a JSON output file containing data about the nueral network lay
 The tool returns a zipped file containing an object of the neural network architecture (define in the last two steps) which is used as a classifier to train it on data. Once the architecture is finalised, its associated object is used for training combining it with the training data as follows:
 
 ### Deep learning training
+Neural network is trained on training data to learn hidden representations and mapping from features (genes) to both the types of cancer. As discussed earlier, the neural network minimises the error, which is given by the loss function, between actual labels and the predicted labels while adjusting the weights of connections among neurons in multiple layers. Once the training is finished, the architecture and learned weights are saved. They are used to predict labels in test data. The deep learning training is set up as follows: 
 
 > ### {% icon hands_on %} Hands-on: Deep learning training and evaluation conduct deep training and evaluation either implicitly or explicitly
 >
@@ -189,6 +190,7 @@ The tool returns a zipped file containing an object of the neural network archit
 The tool gives 3 files as output - a `tabular` file containing output (accuracy of cross-validation) of training, a `zipped` file with the trained model (fitted estimator) and an `H5` file containing the weights of neural network layers. The files containing the fitted estimator and weights are used to recreate the model and this recreated model is used to predict labels in test data.
 
 ### Prediction on test data
+After training, the saved architecture (fitted estimator) and weights are used to predict labels for the test data.
 
 > ### {% icon hands_on %} Hands-on: Model Prediction predicts on new data using a preffited model
 > 
@@ -224,10 +226,9 @@ The image below shows the [confusion matrix](https://en.wikipedia.org/wiki/Confu
 
 ![data](../../images/confusion_matrix_dl.png "Confusion matrix for true and predicted classes")
 
-## Summary
-
 
 ## Conclusion
+The tutorial presents a case-study to predict labels (ALL and AML) of 34 new cancer patients after learning gene expression profiles of 38 cancer patients through multiple steps of a deep learning pipeline. All these steps show how to create a neural network architecture using Galaxy's deep learning tools and analyse results using a confusion matrix visualisation. In a similar way, multiple different architectures of neural networks can be created well-suited to the datasets and aim of particular experiments. Moreover, it should be noted that one architecture of neural network giving promising results on a dataset may not work at all with another dataset. It should be kept in mind to perform multiple experiments with a dataset to come to an optimal neural network architecture. 
 
 
 {:.no_toc}
