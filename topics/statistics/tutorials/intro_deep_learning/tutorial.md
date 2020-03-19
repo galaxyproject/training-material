@@ -66,16 +66,15 @@ A training is a process where input data is passed to the network at the input l
 #### Batch and Epoch
 While training a neural network, input data is passed in small batches. A batch is a subset of complete training data. An epoch is one iteration when all the training data is used for training in multiple batches. For example, if there is a training data of size (500, 10) where there are 500 rows or samples and batch size is fixed at 50, then there would be 10 batches (50 * 10 = 500) in each epoch. Each batch will have 50 samples and they are pssed to the input layer and the loss is propagated back and the weights are adjusted. The newly adjusted weights are used for the second batch of samples and so on. When all batches are finished, then one epoch of learning is done. The number of epochs and the size of batch are parameters to be set by deep learning practitioners. These parameters depends on the size of data and should be tuned according to the data for optimum results.
 
-> ### {% icon question %} Questions
+> ### {% icon question %} Question
 >
-> 1. How the neural network learning happens?
+> 1. How does a neural network learn?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. The learning happens by minimising the loss between computed and actual output. The weights of different connections are adjusted (increased or decreased) 
 to achieve the minimum loss. To ascertain the amount of change for weights, a technique known as backpropagation is used. Using this technique, the error computed at the output layer is "propagated" back in the neural network (from output to input layer) and each connection is assigned a share of the total error. In other words, how much each neuron is contributing to the total accumulated loss. For example, w1 is adjusted according to equation:
-![data](../../images/partial_derivative.png "Mean squared error loss function")
-
+> > ![data](../../images/partial_derivative.png "Mean squared error loss function")
 > > In the above equation, L is the total loss, w1 is the weight of a connection between an input neuron and a hidden neuron. Similarly, all the weights are adjusted and in the subsequent iteration, the updated weights are used to compute error at the output layer. More on backpropagation can be read [here](http://neuralnetworksanddeeplearning.com/chap2.html). Parameter *n* is the learning rate which determines how small or big changes are needed for weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) along training epochs because initially large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum.
 > >
 > {: .solution}
@@ -89,6 +88,9 @@ The error between the computed and actual output is calculated using a loss func
 
 
 ### Relevance of deep learning in Bioinformatics
+Deep learning is an established tool in finding patterns in big data for multiple fields of research such as computer vision, image analysis, drug response prediction, protein structure prediction and so on. Different research areas use different architectures of neural network which are suitable to their respective data. For example, in computer vision and image analysis, convolutional neural network (CNN) is popular and produces state-of-the-art results, for drug response prediction, graph convutional neural network is often used, recurrent neural network is useful for identifying motif in protein sequences and so on. The table below shows more examples of neural networks which are popular with different fields of bioinformatics. These use-cases of deep learning prove that it is essential to explore deep learning algorithms to find patterns in big data in biology.
+
+![data](../../images/dl_bioinformatics.png "Different architectures of neural networks for different fields of bioinformatics")
 
 ## Get training and test datasets
 
