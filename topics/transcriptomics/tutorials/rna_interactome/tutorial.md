@@ -151,7 +151,7 @@ It is interesting to see whether our manually entered adapters were trimmed
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Short read data from your current history"*: `Read 1 Output` (output of **cutadapt** {% icon tool %})
 >    - Observe the **Per base sequence content**
-> ![](../../images/rna-interactome/chira_fastqc_seq_content.png)
+> ![FastQC per base sequence content](../../images/rna-interactome/chira_fastqc_seq_content.png)
 {: .hands_on}
 > ### {% icon question %} Questions
 >
@@ -304,15 +304,15 @@ sqlite database from the `ChiRA` output.
 > This loads the data into the visualization framework and shows some basic plots from the data.
 >   - The visualization split into two to show the left and the right arms information.
 >   - On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed RNAs are shown.
->![](../../images/rna-interactome/chiraviz_home.png)
+>![ChiRAViz home page](../../images/rna-interactome/chiraviz_home.png)
 > 2. Then choose the kind of interactions information you want to see. For example, choose the most abundant `miRNA` and `3_prime_UTR` and click on **"Get interactions"**.
 >
->![](../../images/rna-interactome/chiraviz_choose.png)
+>![ChiRAViz selector](../../images/rna-interactome/chiraviz_choose.png)
 >
 > - **"Chimera"** panel in the middle depicts the mapping positions on the read with read length.
 > - **"Interacting partners"** panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.
 > - **"Alignment Information"** panel shows the alignment if present with a possibility to download the alignment.
->![](../../images/rna-interactome/chiraviz_single.png)
+>![ChiRAViz single interaction](../../images/rna-interactome/chiraviz_single.png)
 >
 {: .hands_on}
 
