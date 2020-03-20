@@ -8,6 +8,7 @@ questions:
 - Why is it useful?
 - How to create a neural network architecture for classification?
 objectives:
+- Learn basic principles of deep learning.
 - Learn about how to create an end-to-end neural network architecture
 - Learn about Galaxy deep learning tools
 - Learn how to interpret predictions
@@ -23,10 +24,7 @@ contributors:
 ## Introduction
 
 ### Deep learning and neural networks
-[Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is a branch of artificial intelligence which recognises patterns in large volumes of data. Using these learned patterns on the existing data, new data can be categorised. These patterns in data are learned by a computational model based on multiple architectures of neural networks. Deep neural network architectures such as convolutional and long short-term memory networks have become increasingly popular as machine learning tools during the recent years. The availability of greater computational resources, more data, new algorithms for training deep models and easy to use libraries for implementation and training of neural networks are the drivers of this development. Deep learning is a set of learning methods attempting to model data with complex architectures combining different non-linear transformations. Deep learning is recently showing state-of-the-art performance in various fields and the goal of this tutorial is to introduce the basic principles of deep learning.
-
-
-A neural network is a web of artificial neurons which is also called processing units. The idea of neural networks is inspired from mammalian cerebral cortex where neuronal circuits are used to learn. A neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected allowing the exchange of information.
+[Deep learning](https://en.wikipedia.org/wiki/Deep_learning), a branch of artificial intelligence, provides a collection of learning methods to model data with complex architectures to perform different non-linear transformations of data. Using these transformations, patterns are recognised in large volumes of data and new data can be categorised using these patterns extracted on existing data. These patterns are learned by computational models devised using different architectures of neural networks. In the recent years, the neural network architectures such as convolutional, long short-term memory networks, deep belief networks have become increasingly popular as machine learning tools in the fields of computer vision, image analysis, bioinformatics, speech recognition, natural language processing and so on achieving state-of-the-art performance, sometimes exceeding human performance. The availability of greater computational resources, more data, new algorithms for training deep models and easy to use libraries for implementation and training of neural networks are the drivers of this development. Deep learning works by approximating the mathematical function which maps data to its output and it has been shown that it can [approximate](https://arxiv.org/pdf/1910.03344.pdf) any function. A neural network is a web of artificial neurons which are also called processing units. The idea of a neural network is inspired from mammalian cerebral cortex where neuronal circuits are used to learn. It is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected ([feed forward neural network](https://en.wikipedia.org/wiki/Feedforward_neural_network)) allowing the exchange of information between layers of neurons.
 
 ![data](../../images/neuron.svg "An artificial neuron.")
 
