@@ -77,7 +77,7 @@ While training a neural network, input data is passed in small batches. A batch 
 #### Loss function
 The error between the computed and actual output is calculated using a loss function which is necessary to evaluate the strength of learning. Learning is good when loss decreases with training epochs otherwise, training should be stopped and the architecture should be carefully adjusted. There are several choices of loss functions too. Functions such as root mean squared error (RMSE) and absolute error (AE) are used for regression problems while cross-entropy error functions such as binary cross-entropy and categorical cross-entropy are used in classification problems. An example of loss function is shown in Figure 8.
 
-> ### {% icon question %} Question
+> ### {% icon question %} Questions
 >
 > 1. What do you understand by an architecture of a neural network?
 > 2. How does a neural network learn?
