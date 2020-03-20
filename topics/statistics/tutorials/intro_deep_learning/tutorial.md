@@ -117,9 +117,12 @@ The datasets used for this tutorial contains gene expression profiles of humans 
 >    https://zenodo.org/record/3706539/files/y_train.tsv
 >    ```
 >
+> 3. Rename the datasets as `X_test`, `X_train`, `y_test` and `y_train` respectively.
+>
+>    {% include snippets/rename_dataset.md %}
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Check that the datatype is `tabular`.
+> 4. Check that the datatype is `tabular`.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -138,18 +141,18 @@ Defining a neural network architecture needs to ascertain types and number of la
 >    - *"input_shape"*: `(7129, )`
 >       
 >    - In *"LAYER"*:
->        - In *"1: LAYER"*:
+>        - {% icon param-repeat %} *"1: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*: `16`
->                - *"Activation functions"*: `elu`
->        - In *"2: LAYER"*:
+>                - *"Activation function"*: `elu`
+>        - {% icon param-repeat %} *"2: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*: `16`
->                - *"Activation functions"*: `elu`
->        - In *"3: LAYER"*:
+>                - *"Activation function"*: `elu`
+>        - {% icon param-repeat %} *"3: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*: `1`
->                - *"Activation functions"*: `sigmoid`
+>                - *"Activation function"*: `sigmoid`
 > 
 >
 {: .hands_on}
@@ -164,12 +167,15 @@ The tool returns a JSON output file containing data about the neural network lay
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configurations (JSON)"*: `Keras model config` (output of **Create a deep learning model architecture using Keras** {% icon tool %})
 >    - *"Do classification or regression?"*: `KerasGClassifier`
+>    `KerasGClassifier` is chosen because the learning task is classfication i.e. assigning each patient a type of cancer.
 >    - In *"Compile Parameters"*:
 >        - *"Select a loss function"*: `binary_crossentropy`
+>        The loss function is `binary_crossentropy` because the labels are discrete and binary (0 and 1).
 >        - *"Select an optimizer"*: `RMSprop - RMSProp optimizer`
 >    - In *"Fit Parameters"*:
->        - *"epochs"*: 10`
->        - *"batch_size"*: 4
+>        - *"epochs"*: `10`
+>        - *"batch_size"*: `4`
+>        The training data is small (only 38 patients). Therefore the number of epochs and batch size are also small.
 >
 {: .hands_on}
 
@@ -184,10 +190,10 @@ A neural network is trained on training data to learn hidden representations and
 >    - *"Select a scheme"*: `Train and validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: `Keras model builder` (output of **Create deep learning model** {% icon tool %})
 >    - *"Select input type"*: `tabular data`
->    - *"Training samples dataset"*: `X_train.tsv`
+>    - *"Training samples dataset"*: `X_train`
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `All columns`
->    - *"Dataset containing class labels or target values"*: `y_train.tsv`
+>    - *"Dataset containing class labels or target values"*: `y_train`
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `All columns`
 >
@@ -220,13 +226,18 @@ The tool returns the predicted labels (0 for ALL and 1 AML) for the test data in
 > 
 > 1. **Machine Learning Visualization Extension includes several types of plotting for machine learning** {% icon tool %} with the following parameters:
 >    - *"Select a plotting type"*: `Confusion matrix for classes` 
->    - *"Select dataset containing true labels"*: `y_test.tsv`
+>    - *"Select dataset containing true labels"*: `y_test`
 >    - *"Does the dataset contain header"*: `Yes`
 >    - *"Choose how to select data by column"*: `All columns`
 >    - *"Select dataset containing predicted labels"*: `Model prediction` (output of **Model Prediction predicts on new data using a preffited model** {% icon tool %})
+>    - *"Does the dataset contain header"*: `Yes`
 > 
 >
 {: .hands_on}
+
+> ### {% icon comment %} Comment
+> Please note that your predictions could be different from the plot shown in Figure 11 because the training data is small and the predictions may vary. A stability in predictions can be achieved if the deep learning model is trained on large data. But, for this tutorial, it is kept small to reduce the training time as the aim is to showcase how to create a pipeline for deep learning training. Generally, deep learning models are trained on large data and may keep running for a few hours to a few days. 
+{: .comment}
 
 The image below shows the [confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix) which is a square matrix. It contains actual labels on the y-axis and predicted labels on the x-axis. Each cell in the matrix plot gives the number of cancer patients who got predicted correctly or incorrectly. For example, the number in the top-left cell (0, 0) denotes how many of these patients are predicted correctly for ALL (17/20). The higher the number in this cell, the better is the model for this cell. In the top-right cell, 3 patients who has ALL but they are predicted having AML. Similarly, the bottom-right cell denotes how many patients are predicted correctly for AML (10/14). In the bottom-left cell, 4 patients has AML but are predicted as ALL.
 
