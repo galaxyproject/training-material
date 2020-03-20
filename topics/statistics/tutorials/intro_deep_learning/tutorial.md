@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Introduction to deep learning
 zenodo_link: https://zenodo.org/record/3706539#.XmjDYHVKg5k
 questions:
-- What is deep learning and neural networks?
+- What are deep learning and neural networks?
 - Why is it useful?
 - How to create a neural network architecture for classification?
 objectives:
@@ -75,7 +75,7 @@ While training a neural network, input data is passed in small batches. A batch 
 ![data](../../images/mse.png "Mean squared error loss function.")
 
 #### Loss function
-The error between the computed and actual output is calculated using a loss function which is necessary to evaluate the strength of learning. Learning is good when loss decreases with training epochs otherwise, training should be stopped and the architecture should be carefully adjusted. There are several choices of loss functions too. Functions such as root mean squared error (RMSE) and absolute error (AE) are used for regression problems while crossentropy error functions such as binary crossentropy and categorical crossentropy are used in classification problems. An example of loss function is shown in Figure 8.
+The error between the computed and actual output is calculated using a loss function which is necessary to evaluate the strength of learning. Learning is good when loss decreases with training epochs otherwise, training should be stopped and the architecture should be carefully adjusted. There are several choices of loss functions too. Functions such as root mean squared error (RMSE) and absolute error (AE) are used for regression problems while cross-entropy error functions such as binary cross-entropy and categorical cross-entropy are used in classification problems. An example of loss function is shown in Figure 8.
 
 > ### {% icon question %} Question
 >
