@@ -28,41 +28,43 @@ contributors:
 
 ![data](../../images/neuron.svg "Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output (y)")
 
-An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes inputs (x1 and x2) and computes output (y). The entities w1 and w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics. All the variables - inputs, weights and output - can either be scalars or vectors.
+An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes input x (only x1 and x2 are shown for simplicity) and computes output (y). The entities w1, w2 are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output y (shown in Figures 2, 3 and 4).
 
-![data](../../images/eq1.png "Updated component of input vector (x).")
+![data](../../images/eq1.png "Transformation of a component (x1) of the input vector (x).")
 
-![data](../../images/eq2.png "Updated component of input vector (x).")
+![data](../../images/eq2.png "Transformation of a component (x2) of the input vector (x).")
 
-The weights denote the significance of a particular input to produce the observed output. When it is large, the input is significant and when small, the input less significant to produce the output. These weights can be initialised randomly and they are modified throughout learning by a neural network. Using the updated inputs (as shown in the above equations), the output is computed using:
+Weights denote the significance of a particular input to produce the observed output. When it is large, the input is significant and when small, the input is less significant to produce the output. These weights can be initialised randomly and they are modified throughout the learning by a neural network. Using the updated inputs (as shown in the above equations), the output is computed:
 
 ![data](../../images/eq3.png "Computation of output (y).")
 
-where *f* is an activation function. An activation function is a mathematical function which translates the combination of inputs to an output. The choices of these functions are many - sigmoid, linear, tanh, ReLU and so on. For example, sigmoid is:
+where *f* is an activation function. An [activation function](https://keras.io/activations/) is a mathematical function which translates the combination of inputs to an output. The choices of these functions are many - sigmoid, linear, tanh, ReLU and so on. For example, sigmoid is:
 
 ![data](../../images/eq4.png "Sigmoid activation function.")
 
 The above equation will return a real number between 0 and 1.
 
-ReLU is:
+ReLU is given by:
 
 ![data](../../images/eq5.png "Rectified exponential linear unit (ReLU) activation function.")
 
-Neurons make the building blocks of a neural network and are arranged in several layers. A usual neural network will look like as shown in Figure 2.
+As discussed earlier, neurons make the building blocks of a neural network and are arranged in several layers and a usual neural network looks like as shown in Figure 2.
 
-![data](../../images/neural_network.svg "A neural network.")
+![data](../../images/neural_network.svg "A neural network consisting of 4 layers - 1 input, 2 hidden and 1 output. The neurons in each layer are connected to all nuerons in the adjacent layer. Each connection between a pair of neurons contain a weight.")
 
 #### Input layer
-In the neural network (Figure 2), the input layer is shown in green. This layer receives the input data and passes it on to the next layer. The number of neurons in this layer depends on the number of dimensions of input data. For example, if the input data (matrix) is of size (500, 10), 500 rows (samples) and 10 columns (features), then the number of neurons in the input layer is 10. Each neuron in the input layer is connected to all the neurons in the next layer. All these connections have a separate weight (denoted by w). 
+In the neural network (Figure 2), the input layer is shown in green. This layer receives input data and passes it on to the next layer. The number of neurons in this layer depends on the number of dimensions of input data. For example, if input data (matrix) is of size (500, 10), 500 rows (samples) and 10 columns (features), then the number of neurons in the input layer should be 10. Each neuron in input layer is connected to all neurons in the next layer. All these connections have a separate weight (denoted by w).
 
 #### Hidden layer
-The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determines if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is deep learning. More the number of hidden layers, the more complex the architecture is. The number of hidden layers and the size of each hidden layer is not fixed. It completely depends on the data that is being learned on. If the dataset is small (say only 1,000 samples), then it is important to choose a less complex set of hidden layers because if complex architecture is chosen, then there is a danger of overfitting when the deep learning model starts memorising the data. However, if the dataset is large (say > 10,000 samples), more complex architecture can be chosen. In short, the architecture of the hidden layer is completely dependent on the nature and size of the data. 
+The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determines if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is called as deep learning. More the number of hidden layers, the more complex the architecture is. A complex architecture is beneficial for learning unique patterns from big data. But, complex architecture is prone to [overfitting](https://en.wikipedia.org/wiki/Overfitting) when a neural network start memorising data without learning unique and general patterns.
+
+The number of hidden layers and the size of each hidden layer is not fixed. It completely depends on the data that is being learned on. If the dataset is small (say only 1,000 samples), then it is sufficient to choose a less complex architecture (fewer hidden layers) to avoid the danger of overfitting. However, if the dataset is large (say > 100,000 samples), more complex architecture can be chosen. In short, the architecture of the hidden layer is completely dependent on the nature and size of data.
 
 #### Output layer
-The output layer collects the computed output using the input data and the weights which are optimised during learning. An activation function is chosen to transform the computed inputs and weights to an output. Some examples of activation function are sigmoid, ReLU, tanh and so on.
+This layer collects output computed using input data and weights which are optimised during learning. An activation function is chosen to transform the combination of input and weight to an output. Some examples of activation functions have been discussed above.
 
 #### Optimisation
-At the output layer, the computed output is collected and this output is compared against the actual/real output to find the difference. Learning aims is to minimise this error so that the computed output is as close to the actual output as possible. This process of minimising the error between computed and actual output is called optimisation. There are several optimisers such as gradient descent, root mean square propagation (RMSProp), adadelta etc. are available. These optimisers work by primarily adjusting the weights of connections so that the error is minimised. Once, a set of weights are achieved which provides the best accuracy or minimum error, we stop the learning as they cannot be improved.
+Compted or predicted output, collected at the output layer, and the actual output are compared to find error (or loss). Learning aims is to minimise this error so that the predicted output is as close to the actual output as possible. This process of minimising the error between computed and actual output is called optimisation. There are several optimisers such as gradient descent, root mean square propagation (RMSProp), adadelta etc. are available. These optimisers work by primarily adjusting the weights of connections so that the error is minimised. Once, a set of weights are achieved which provides the best accuracy or minimum error, we stop the learning as they cannot be improved.
 
 #### Neural network training
 Training is a process where input data is passed to the network at the input layer and when finished, a trained model is created containing all the learned parameters such as weights of all connections in the network. Usually, a portion of data is extracted and saved as test data which is not used for training. It is used only for evaluating the trained model to get an unbiased estimate of the learning and prediction strength. The size of the test data can be set by deep learning practitioners. An example of partition can be - 70% training data and 30% test data.
