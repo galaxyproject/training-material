@@ -8,7 +8,7 @@ questions:
 - Why is it useful?
 - How to create a neural network architecture for classification?
 objectives:
-- Learn basic principles of deep learning.
+- Learn basic principles of deep learning
 - Learn about how to create an end-to-end neural network architecture
 - Learn about Galaxy deep learning tools
 - Learn how to interpret predictions
@@ -26,9 +26,9 @@ contributors:
 ### Deep learning and neural networks
 [Deep learning](https://en.wikipedia.org/wiki/Deep_learning), a branch of artificial intelligence, provides a collection of learning methods to model data with complex architectures to perform different non-linear transformations of data. Using these transformations, patterns are recognised in large volumes of data and new data can be categorised using these patterns extracted on existing data. These patterns are learned by computational models devised using different architectures of neural networks. In the recent years, the neural network architectures such as convolutional, long short-term memory networks, deep belief networks have become increasingly popular as machine learning tools in the fields of computer vision, image analysis, bioinformatics, speech recognition, natural language processing and so on achieving state-of-the-art performance, sometimes exceeding human performance. The availability of greater computational resources, more data, new algorithms for training deep models and easy to use libraries for implementation and training of neural networks are the drivers of this development. Deep learning works by approximating the mathematical function which maps data to its output and it has been shown that it can [approximate](https://arxiv.org/pdf/1910.03344.pdf) any function making it widely popular across multiple fields to analyse data. A neural network is a web of artificial neurons which are also called processing units. The idea of a neural network is inspired by [biological neural networks](https://en.wikipedia.org/wiki/Neural_circuit) where neuronal circuits are used to process information and learn. An artificial neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected ([feed-forward neural network](https://en.wikipedia.org/wiki/Feedforward_neural_network)) allowing the exchange of information between layers of neurons.
 
-![data](../../images/neuron.svg "Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output (y)")
+![data](../../images/neuron.svg "Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output y")
 
-An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes input `x` (only `x1` and `x2` are shown for simplicity) and computes output (`y`). The entities `w1`, `w2` are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output `y` (shown in Figures 2, 3 and 4).
+An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes input `x` (only `x1` and `x2` are shown for simplicity) and computes output `y`. The entities `w1`, `w2` are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output `y` (shown in Figures 2, 3 and 4).
 
 ![data](../../images/eq1.png "Transformation of a component (x1) of the input vector (x).")
 
@@ -36,7 +36,7 @@ An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes in
 
 Weights denote the significance of a particular input to produce the observed output. When it is large, the input is significant and when small, the input is less significant to produce the output. These weights can be initialised randomly and they are modified throughout the learning by a neural network. Using the updated inputs (as shown in the above equations), the output is computed:
 
-![data](../../images/eq3.png "Computation of output (y) using input x, weight w and activation function f")
+![data](../../images/eq3.png "Computation of output y using input x, weight w and activation function f.")
 
 where *f* is an activation function. An [activation function](https://keras.io/activations/) is a mathematical function which translates the combination of inputs to an output. The choices of these functions are many - sigmoid, linear, tanh, ReLU and so on. For example, sigmoid is:
 
@@ -44,19 +44,19 @@ where *f* is an activation function. An [activation function](https://keras.io/a
 
 The above equation will return a real number between 0 and 1.
 
-ReLU is given by:
+Rectified exponential linear unit (ReLU) is given by:
 
 ![data](../../images/eq5.png "Rectified exponential linear unit (ReLU) activation function.")
 
 As discussed earlier, neurons make the building blocks of a neural network and are arranged in several layers and a usual neural network looks like as shown in Figure 7.
-
-![data](../../images/neural_network.svg "A neural network consisting of 4 layers - 1 input, 2 hidden and 1 output. The neurons in each layer are connected to all neurons in the adjacent layer. Each connection between a pair of neurons contains a weight.")
 
 #### Input layer
 In the neural network (Figure 7), the input layer is shown in green. This layer receives input data and passes it on to the next layer. The number of neurons in this layer depends on the number of dimensions of input data. For example, if input data (matrix) is of size (500, 10), 500 rows (samples) and 10 columns (features), then the number of neurons in the input layer should be 10. Each neuron in input layer is connected to all neurons in the next layer. All these connections have a separate weight (denoted by `w`).
 
 #### Hidden layer
 The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determines if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is called deep learning. More the number of hidden layers, the more complex the architecture is. A complex architecture is beneficial for learning unique patterns from big data. But, complex architecture is prone to [overfitting](https://en.wikipedia.org/wiki/Overfitting) when a neural network starts memorising data without learning unique and general patterns.
+
+![data](../../images/neural_network.svg "A neural network consisting of 4 layers - 1 input, 2 hidden and 1 output. The neurons in each layer are connected to all neurons in the adjacent layer. Each connection between a pair of neurons contains a weight.")
 
 The number of hidden layers and the size of each hidden layer is not fixed as it completely depends on the data. If the dataset is small (say only 1,000 samples), then it is sufficient to choose a less complex architecture (fewer hidden layers) to avoid the danger of overfitting. However, if the dataset is large (say > 100,000 samples), more complex architecture can be chosen. In short, the architecture of the hidden layer is completely dependent on the nature and size of data.
 
@@ -72,9 +72,15 @@ Training is a process where input data is passed to a neural network at input la
 #### Batch and Epoch
 While training a neural network, input data is passed in small batches. A batch is a subset of training data. An epoch is one iteration when all the training data is used for training in multiple batches. For example, if there is training data of size (500, 10) and batch size is fixed at 50, then there would be 10 batches (50 * 10 = 500) in each epoch. Each batch will have 50 samples and they are passed to the input layer of neural network. The loss computed at the output layer is propagated back and the weights are adjusted. The newly adjusted weights are used for the second batch of samples and so on. When all batches are finished, then one epoch of learning is done. The number of epochs and the size of a batch are parameters to be set by deep learning practitioners. These parameters depend on the size of data and should be tuned according to the data for optimum results.
 
+![data](../../images/mse.png "Mean squared error loss function.")
+
+#### Loss function
+The error between the computed and actual output is calculated using a loss function which is necessary to evaluate the strength of learning. Learning is good when loss decreases with training epochs otherwise, training should be stopped and the architecture should be carefully adjusted. There are several choices of loss functions too. Functions such as root mean squared error (RMSE) and absolute error (AE) are used for regression problems while crossentropy error functions such as binary crossentropy and categorical crossentropy are used in classification problems. An example of loss function is shown in Figure 8.
+
 > ### {% icon question %} Question
 >
 > 1. How does a neural network learn?
+> 2. What do you understand by an architecture of a neural network?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -82,19 +88,16 @@ While training a neural network, input data is passed in small batches. A batch 
 > > ![data](../../images/partial_derivative.png "Weight w1 is updated by computing a partial derivative of loss L with respect to weight. The derivative is multiplied with learning rate n.")
 > > In the above equation, `L` is the total loss, `w1` is the weight of a connection between an input neuron and a hidden neuron. Similarly, all weights are adjusted and in the subsequent iteration, the updated weights are used to compute loss at the output layer. Parameter `n` is the learning rate which determines how small or big changes are needed in weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) as the training epochs proceed because initially a large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum. More on backpropagation can be read [here](http://neuralnetworksanddeeplearning.com/chap2.html).
 > >
+> > 2. Architecture of a neural network consists of multiple layers such as input, hidden, convolutional, output and their number of respective neurons, optimiser, loss and activation functions etc.
+> >
 > {: .solution}
 >
 {: .question}
 
-#### Loss function
-The error between the computed and actual output is calculated using a loss function which is necessary to evaluate the strength of learning. Learning is good when loss decreases with training epochs otherwise, training should be stopped and the architecture should be carefully adjusted. There are several choices of loss functions too. Functions such as root mean squared error (RMSE) and absolute error (AE) are used for regression problems while crossentropy error functions such as binary crossentropy and categorical crossentropy are used in classification problems.
-
-![data](../../images/mse.png "Mean squared error loss function")
-
 ### Relevance of deep learning in Bioinformatics
 Deep learning is an established tool in finding patterns in big data for multiple fields of research such as computer vision, image analysis, drug response prediction, protein structure prediction and so on. Different research areas use different architectures of neural network which are suitable to their respective data. For example - in computer vision and image analysis, convolutional neural network (CNN) is popular, graph convolutional neural network is often used for drug response prediction, recurrent neural network is useful for identifying motifs in protein sequences and so on. The table below shows more examples of neural networks which are popular with different fields of bioinformatics. These use-cases of deep learning in bioinformatics prove that it is essential to explore deep learning algorithms to find patterns in big data in biology. More details can be found in [Deep learning in bioinformatics: Introduction, application, and perspective in the big data era](https://www.sciencedirect.com/science/article/pii/S1046202318303256).
 
-![data](../../images/dl_bioinformatics.png "Different architectures of neural networks for different fields of bioinformatics")
+![data](../../images/dl_bioinformatics.png "Different architectures of neural networks for different fields of bioinformatics.")
 
 ## Get training and test datasets
 The datasets used for this tutorial contain gene expression profiles of humans suffering from two types of cancer - [acute myeloid leukemia (AML)](https://en.wikipedia.org/wiki/Acute_myeloid_leukemia) and [acute lymphoblastic leukemia (ALL)](https://en.wikipedia.org/wiki/Acute_lymphoblastic_leukemia). The tutorial aims to differentiate between these two cancer types, predicting a cancer type for each patient, by learning unique patterns in gene expression profiles of patients. The data is divided into 2 parts - one for training and another for prediction. Each part contains two datasets - one has the gene expression profiles and another has labels (the types of cancer). The size of the training data (`X_train`) is (38, 7129) where 38 is the number of patients and 7129 is the number of genes. The label dataset (`y_train`) is of size (38, 1) and contains the information of the type of cancer for each patient (label encoding is 0 for ALL and 1 for AML). The test dataset (`X_test`) is of size (34, 7129) and contains the same genes for 34 different patients. The label dataset for test is `y_test` and is of size (34, 1). The neural network, which will be formulated in the remaining part of the tutorial, learns on the training data and its labels to create a trained model. The prediction ability of this model is evaluated on the test data (which is unseen during training to get an unbiased estimate of prediction ability). These datasets are uploaded to Galaxy by following the steps defined below:
@@ -164,14 +167,17 @@ The tool returns a JSON output file containing data about the neural network lay
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configurations (JSON)"*: `Keras model config` (output of **Create a deep learning model architecture using Keras** {% icon tool %})
 >    - *"Do classification or regression?"*: `KerasGClassifier`
+> 
 >    `KerasGClassifier` is chosen because the learning task is classfication i.e. assigning each patient a type of cancer.
 >    - In *"Compile Parameters"*:
 >        - *"Select a loss function"*: `binary_crossentropy`
+> 
 >        The loss function is `binary_crossentropy` because the labels are discrete and binary (0 and 1).
 >        - *"Select an optimizer"*: `RMSprop - RMSProp optimizer`
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `10`
 >        - *"batch_size"*: `4`
+> 
 >        The training data is small (only 38 patients). Therefore the number of epochs and batch size are also small.
 >
 {: .hands_on}
