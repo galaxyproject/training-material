@@ -2,21 +2,20 @@
 layout: tutorial_hands_on
 
 title: High Throughput Molecular Dynamics and Analysis
+level: Advanced
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How are protein-ligand systems parameterized for molecular dynamics simulation?
+- What kind of analysis can be carried out on molecular trajectories?
+- How can high-throughput MD be used to study multiple ligands?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Learn about force-fields and MD parameterization
+- Learn how to conduct MD simulation and analysis for a protein-ligand system
+- Understand how different molecular interactions contribute to the binding affinity of various ligands for the Hsp90 protein.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Simulating protein-ligand systems is more complex than simply simulating protein-only systems
+- ....
 contributors:
 - simonbray
 - tsenapathi
@@ -88,33 +87,20 @@ have fun!
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
->
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 2. Search Galaxy for the 'Get PDB' tool. Request the accession code ```6hhr```.
+> 3. Rename the dataset to 'Hsp90 structure'
+> 4. Check that the datatype is correct (PDB file).
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+# Simulation
+
+Now we have downloaded a PDB structure of the protein we wish to study, we will start parameterizing it for MD simulation.
+
+Parameterization needs to be done separately for the ligand and protein. Therefore, the first step is to separate the PDB file into two sets of coordinates - one for the ligand and one for the protein.
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
@@ -130,6 +116,78 @@ The idea is to keep the theory description before quite simple to focus more on 
 
 A big step can have several subsections or sub steps:
 
+## Extract protein and ligand coordinates
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Search in textfiles** {% icon tool %} with the following parameters:
+>    - *"Select lines from"*: 'Hsp90 structure'   
+>    - *"that"*: `Don't Match`
+>    - *"Regular Expression"*: `HETATM`
+> 2. Rename output to 'Protein (PDB)'
+> 3. **Search in textfiles** {% icon tool %} with the following parameters:
+>    - *"Select lines from"*: 'Hsp90 structure'   
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `AG5E`
+> 4. Rename output to 'Ligand (PDB)'
+>
+{: .hands_on}
+
+
+## Set up protein topology
+
+Firstly, we need to calculate the topology for the protein file. We will use the **GROMACS initial setup** {% icon tool %} tool.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **GROMACS initial setup** {% icon tool %} with the following parameters:
+>    - *"PDB input file"*: 'Protein (PDB)' file
+>    - *"Force field"*: `AMBER99SB`
+>    - *"Water model"*: `TIP3P`
+>    - *"Generate detailed log"*: `Yes`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Comment here about choice of force field, water model
+>    {: .comment}
+>
+{: .hands_on}
+
+The tool produces four outputs: a GRO file (containing the coordinates of the protein), a TOP file (containing other information, including on charges, masses, bonds and angles), an ITP file (which will be used to restrain the protein position in the equilibration step later on), and a log for the tool.
+
+Please note all GROMACS tools output a log. Generally, you only need to look at this when a job fails. It provides useful information for debugging if we encounter any problems.
+
+
+## Generate a topology for the ligand
+
+To generate a topology for the ligand, we will use the **acpype** {% icon tool %} tool. This provides a convenient interface to the AmberTools suite and allows us to easily create the ligand topology in the format required by GROMACS.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
+>    - *"Input file"*: 'Ligand (PDB)'
+>    - *"Charge of the molecule"*: `0`
+>    - *"Multiplicity"*: `1`
+>    - *"Force field to use for parameterization"*: `AMBER14SB`
+>    - *"Save GRO file?"*: `Yes`
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Sub-step with **Create GROMACS index files**
 
@@ -203,58 +261,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Search in textfiles**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Search in textfiles** {% icon tool %} with the following parameters:
->    - *"that"*: `Don't Match`
->    - *"Regular Expression"*: `HETATM`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Search in textfiles**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Search in textfiles** {% icon tool %} with the following parameters:
->    - *"Regular Expression"*: `AG5E`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
@@ -341,74 +348,6 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **GROMACS initial setup**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **GROMACS initial setup** {% icon tool %} with the following parameters:
->    - *"Force field"*: `AMBER99SB`
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Compound conversion**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Compound conversion** {% icon tool %} with the following parameters:
->    - *"Output format"*: `Sybyl Mol2 format (mol2)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **GROMACS energy minimization**
 
