@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>RNA-RNA interactome data analysis</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: RNA-RNA interactome data analysis" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-interactome%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-interactome%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-interactome%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-interactome%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-interactome%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/rna-interactome/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "RNA-RNA interactome data analysis",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / rna-interactome / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'RNA-RNA interactome data analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - What are the difficulties in mapping chimeric reads from RNA interactome data?\n - How multi mapping is a big problem in these datasets?\n - How to filter for meaningful results from large analysis output files?\n\n\\nThe objectives are:\n - Quality control and data preparation\n - Mapping chimeric reads\n - Quantification of the mapped loci\n - Visualization and filtering of results\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Pavankumar Videm"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Pavankumar Videm"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>RNA-RNA interactome data analysis</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#pavanvidem" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pavanvidem" alt="Pavankumar Videm">Pavankumar Videm</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What are the difficulties in mapping chimeric reads from RNA interactome data?</p>
+</li>
+            
+            <li><p>How multi mapping is a big problem in these datasets?</p>
+</li>
+            
+            <li><p>How to filter for meaningful results from large analysis output files?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Quality control and data preparation</p>
+</li>
+            
+            <li><p>Mapping chimeric reads</p>
+</li>
+            
+            <li><p>Quantification of the mapped loci</p>
+</li>
+            
+            <li><p>Visualization and filtering of results</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Introduction slides">
+                        <i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/3696889">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/transcriptomics/tutorials/rna-interactome/workflows/" title="Workflows" alt="RNA-RNA interactome data analysis workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 21, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<!-- This is a comment. -->
+
+<p>With the advances in the next-generation sequencing technologies, genome-wide <span class="notranslate">RNA</span>-<span class="notranslate">RNA</span> interaction predictions are now
+possible. The most recent line of development has been to ligate the micro<span class="notranslate">RNA</span> to the site-specific interaction region of
+ the target, selecting these interactions via cross-linking to one of the Argonaute proteins required for micro<span class="notranslate">RNA</span>-based
+  regulation, and to sequence the resulting chimeric <span class="notranslate">RNA</span> molecule, for example, the CLASH and CLEAR-CLIP protocols.
+Going beyond micro<span class="notranslate">RNA</span>s, these protocols can be applied to <span class="notranslate">RNA</span> interactions that involve a regulatory protein
+other than Argonaute. To generalize even further, researchers have applied the same idea to the detection of all
+transcriptome-wide <span class="notranslate">RNA</span>-<span class="notranslate">RNA</span> interactions, which include both inter- and intramolecular base pairing without the necessity
+ of choosing a specific regulatory protein for cross-linking. These protocols include LIGR-Seq that maps the human
+ <span class="notranslate">RNA</span>-<span class="notranslate">RNA</span> interactome and PARIS that focused on long-range structures in human and mouse.</p>
+
+<p>The <span class="notranslate">reads</span> from these experiments are chimeric with each arm generated from one of the interaction
+partners. Due to short lengths, often these sequenced arms ambiguously map to multiple locations and  inferring the
+origin of these can be quite complicated. Theoretically, alignment tools like <code class="highlighter-rouge">HISAT2</code> and <code class="highlighter-rouge">STAR</code> can be used to align
+chimeric <span class="notranslate">reads</span>, but they are not efficient at this task. The other alignment tools like <code class="highlighter-rouge">BWA-MEM</code> or <code class="highlighter-rouge">Bowtie2</code> can be
+used in local alignment settings to map these chimeric <span class="notranslate">reads</span>. In this case user needs to adjust the alignment parameters
+to match the read lengths and there needs to be a lot of post-processing to be done to choose the best hits. Recently,
+there is also an alignment tool called <code class="highlighter-rouge">CLAN</code> published to specifically map the chimeric <span class="notranslate">reads</span> from CLASH experiments.</p>
+
+<p>In this tutorial, we will learn the analysis of a CLEAR-CLIP data set using a tool suite called <code class="highlighter-rouge">ChiRA</code>. The data used
+is a random subsampling (100k <span class="notranslate">reads</span>) of a mouse cortex sample
+(<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1881541">GSM1881541</a>) prepared using CLEAR-CLIP protocol. It is
+a complete analysis framework that can be used starting from raw sequencing <span class="notranslate">reads</span> to analysis and visualization of
+results. <code class="highlighter-rouge">ChiRA</code> uses <code class="highlighter-rouge">BWA-MEM</code> or <code class="highlighter-rouge">CLAN</code> to map the <span class="notranslate">reads</span>. Subsequently, it also merges the overlappig alignments and
+ chooses the best alignments per read by quantifying the all the loci that <span class="notranslate">reads</span> map to. In the end, it scores each
+  alignment and outputs only the best alignments per read. The final part of this tutorial gives an insight into how to
+  filter, export and visualize your results using the visualization framework <code class="highlighter-rouge">ChiRAViz</code>.</p>
+
+<figure id="figure-1"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow" /><figcaption><span class="figcaption-prefix">Figure 1:</span> ChiRA <span class="notranslate">workflow</span>. First the <span class="notranslate">reads</span> deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.</figcaption></figure>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#preprocessing" id="markdown-toc-preprocessing">Preprocessing</a>    <ol>
+      <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
+      <li><a href="#adapter-trimming" id="markdown-toc-adapter-trimming">Adapter trimming</a></li>
+    </ol>
+  </li>
+  <li><a href="#analysis-of-interactome-data-using-chira-tool-suite" id="markdown-toc-analysis-of-interactome-data-using-chira-tool-suite">Analysis of interactome data using <code class="highlighter-rouge">ChiRA</code> tool suite</a>    <ol>
+      <li><a href="#remove-duplicate-sequences" id="markdown-toc-remove-duplicate-sequences">Remove duplicate sequences</a></li>
+      <li><a href="#map-reads-to-the-reference-transcriptome" id="markdown-toc-map-reads-to-the-reference-transcriptome">Map <span class="notranslate">reads</span> to the reference transcriptome</a></li>
+      <li><a href="#merge-overlapping-alignment-information" id="markdown-toc-merge-overlapping-alignment-information">Merge overlapping alignment information</a></li>
+      <li><a href="#quantify-aligned-loci-to-score-the-alignments" id="markdown-toc-quantify-aligned-loci-to-score-the-alignments">Quantify aligned loci to score the alignments</a></li>
+      <li><a href="#extract-the-best-scoring-chimeras" id="markdown-toc-extract-the-best-scoring-chimeras">Extract the best scoring chimeras</a></li>
+    </ol>
+  </li>
+  <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/3709188">Zenodo</a> or from the shared data library</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3709188/files/mi<span class="notranslate">RNA</span>_mature.fa.gz
+https://zenodo.org/record/3709188/files/Mus_musculus.GRCm38.<span class="notranslate">dna</span>.fa.gz
+https://zenodo.org/record/3709188/files/SRR2413302.100k.fastq.gz
+https://zenodo.org/record/3709188/files/transcriptome.fa.gz
+https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Rename the datasets</li>
+    <li>
+      <p>Check that the datatype</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add to each database a tag corresponding to …</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preprocessing">Preprocessing</h1>
+
+<p>Before starting with the analysis of data it is always good to check the sequenced <span class="notranslate">reads</span> for low quality bases and
+adapters.</p>
+
+<h2 id="quality-control">Quality control</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-check"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality check</h3>
+  <p>First use <code class="highlighter-rouge">FastQC</code> to assess the read quality</p>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">SRR2413302.100k.fastq.gz</code> (Input dataset)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Why do you think <code class="highlighter-rouge">FastQC</code> failed to find any adapters?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Because <code class="highlighter-rouge">FastQC</code> it uses a set of standard adapters to screen for adapters. The “special” adapters used in this
+library preparation are not present in the <code class="highlighter-rouge">FastQC</code> standard adapters list.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="adapter-trimming">Adapter trimming</h2>
+<p>Due to the inefficiency of the current <span class="notranslate">RNA</span> interactome protocols, not all <span class="notranslate">reads</span> are not made up of <span class="notranslate">RNA</span> hybrids. In some
+cases, <span class="notranslate">reads</span> contain single <span class="notranslate">RNA</span> fragments with adapters or nothing but only adapters. Hence adapter removal is a very important step
+in this analysis. In this step, we use <code class="highlighter-rouge">cutadapt</code> to trim the adapters. As the adapters used in this library are not
+standard Illumina adapters, we need to provide them manually.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adapter-trimming"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adapter trimming</h3>
+  <p>We use <code class="highlighter-rouge">cutadapt</code> to trim the adapter content</p>
+
+  <ol>
+    <li><strong>cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="highlighter-rouge">SRR2413302.fastq</code> (Input dataset)</li>
+        <li>In <em>“Read 1 Options”</em>
+          <ul>
+            <li><em>“3’ (End) Adapters”</em> -&gt; <em>“Insert 3’ (End) Adapters”</em>
+              <ul>
+                <li><em>“Source”</em>: <code class="highlighter-rouge">Enter Custom sequence</code></li>
+                <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="highlighter-rouge">GTGTCAGTCACTTCCAGCGG</code></li>
+              </ul>
+            </li>
+            <li><em>“5’ (Front) Adapters”</em> -&gt; <em>“Insert 5’ (Front) Adapters”</em>
+              <ul>
+                <li><em>“Source”</em>: <code class="highlighter-rouge">Enter Custom sequence</code></li>
+                <li><em>“Enter custom 5’ adapter sequence”</em>: <code class="highlighter-rouge">NNNNAGGGAGGACGATGCGG</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Filter Options”</em>
+          <ul>
+            <li><em>“Minimum length”</em>: <code class="highlighter-rouge">10</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-post-adapter-trimming-quality-check"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Post adapter trimming quality check</h3>
+  <p>It is interesting to see whether our manually entered adapters were trimmed</p>
+
+  <ol>
+    <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">Read 1 Output</code> (output of <strong>cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>Observe the <strong>Per base sequence content</strong>
+<img src="../../images/rna-interactome/chira_fastqc_seq_content.png" alt="FastQC per base sequence content" /></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Would you be concerned about the abnormal “Per base sequence content towards the end”?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Normally yes, but in this case not. Always look at this plot in combination with “Sequence Length Distribution”
+plot. It looks like there is huge difference in base composition between 56th and 57th bases. But the number of
+sequences that constitute this is very important. From the sequence length distribution, almost all the sequences are of
+ length of 55 bases. Hence the abnormality in the per base sequence content is just because it is from
+ very few (if not only 1) sequence.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="analysis-of-interactome-data-using-chira-tool-suite">Analysis of interactome data using <code class="highlighter-rouge">ChiRA</code> tool suite</h1>
+
+<p>The analysis includes several steps that deal with deduplication <span class="notranslate">mapping</span>, quantification and extraction of interacting
+partners.</p>
+
+<h2 id="remove-duplicate-sequences">Remove duplicate sequences</h2>
+
+<p>First, we eliminate the duplicate sequences from the library to reduce the computational effort. This will also have an
+impact on the quantification of the loci because often these identical sequences might be PCR duplicates.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+  <ol>
+    <li><strong>ChiRA collapse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file”</em>: <code class="highlighter-rouge">Read 1 Output</code> (output of <strong>cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-dealing-with-umis"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Dealing with UMIs</h3>
+
+        <ul>
+          <li>If you have UMIs (at the 5’ end) in the sequenced <span class="notranslate">reads</span>, please set <em>“Length of the UMI if present at the 5’ end of your <span class="notranslate">reads</span>”</em>.</li>
+          <li>The UMI will be trimmed and put in the unique sequence id.</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="map-reads-to-the-reference-transcriptome">Map <span class="notranslate">reads</span> to the reference transcriptome</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-chimeric-reads-from-fasta-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map chimeric <span class="notranslate">reads</span> from fasta file</h3>
+  <p>Here we use <code class="highlighter-rouge">BWA-MEM</code> aligner in local alignment mode to locate the chimeric arms on the
+transcriptome. Your reference can be single or split in two. Two references are
+ideal for example if you have CLASH experimental data where you have separate
+mi<span class="notranslate">RNA</span> and target references.</p>
+
+  <ol>
+    <li><strong>ChiRA map</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA file”</em>: <code class="highlighter-rouge">fasta file</code> (output of <strong>ChiRA collapse</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Single or split reference?”</em>: <code class="highlighter-rouge">Split reference</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa</code> (Input dataset)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="highlighter-rouge">transcriptome.fa</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“aligner”</em>: <code class="highlighter-rouge">BWA-MEM</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="merge-overlapping-alignment-information">Merge overlapping alignment information</h2>
+
+<p>In this step, we merge the overlapping aligned positions to define the read concentrated loci. If an annotation GTF file
+produced, the transcriptomic alignment positions are first converted to their corresponding genomic positions. The
+merging is also done on <span class="notranslate">reads</span> defining which parts of the <span class="notranslate">reads</span> are <span class="notranslate">mapping</span> that indicates potential interacting segments
+of read.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:</h3>
+
+  <ol>
+    <li><strong>ChiRA merge</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input <span class="notranslate">BED</span> file of alignments”</em>: <code class="highlighter-rouge">ChiRA aligned <span class="notranslate">BED</span></code> (output of <strong>ChiRA map</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Do you have an annotation in GTF format?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotations in GTF format”</em>: <code class="highlighter-rouge">whole_transcriptome.gff.gz</code> (Input dataset)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-parameters-for-interactomestructurome-data-like-splash-paris"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Parameters for interactome/structurome data like SPLASH, PARIS</h3>
+
+        <ul>
+          <li>If you have data that contains large interaction regions, the default <code class="highlighter-rouge">Overlap based</code> merging may not capture whole interaction regions.</li>
+          <li>In that case use <code class="highlighter-rouge">blockbuster</code> merging mode and adjust the paramertes accordingly.
+            <ul>
+              <li>From <em>“Select the mode of merging”</em>: <code class="highlighter-rouge">Gaussian based (blockbuster)</code></li>
+            </ul>
+          </li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="quantify-aligned-loci-to-score-the-alignments">Quantify aligned loci to score the alignments</h2>
+
+<p>Now we have the loci where the potential interacting read segments are mapped to. Due to the small length of these arms, there is a
+very high chance of multi <span class="notranslate">mapping</span>. Another reason for this is the lenient <span class="notranslate">mapping</span> parameters that are used to increase
+the <span class="notranslate">mapping</span> sensitivity. Quantification needs 2 files containing read segements and loci where they are <span class="notranslate">mapping</span> to. From
+this information, <code class="highlighter-rouge">ChiRA quanitify</code> tries to infer the correct origin of <span class="notranslate">reads</span> and calculates the <span class="notranslate">expression</span> of the loci
+using a simple expectation-maximization algorithm.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><strong>ChiRA qauntify</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">BED</span> file of aligned segments”</em>: <code class="highlighter-rouge">ChiRA aligned read segments</code> (output of <strong>ChiRA merge</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file of merged alignments”</em>: <code class="highlighter-rouge">ChiRA merged alignments</code> (output of <strong>ChiRA merge</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="extract-the-best-scoring-chimeras">Extract the best scoring chimeras</h2>
+
+<p>After having the information about the loci <span class="notranslate">expression</span>, the final step extracts only the best scoring interacting
+partners for each read. All the combinations of the transcripts that are overlapping with the interacting loci are
+reported. If there is more than one locus with the equal best score then all the best hits are reported. If you have the
+genomic fasta file the tool can hybridize the interacting loci sequences using <code class="highlighter-rouge">Inta<span class="notranslate">RNA</span></code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-task-description-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+
+  <ol>
+    <li><strong>ChiRA extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File containing CRLs information”</em>: <code class="highlighter-rouge">ChiRA quantified loci</code> (output of <strong>ChiRA qauntify</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Have genomic information?”</em>: <code class="highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotations in GTF format”</em>: <code class="highlighter-rouge">whole_transcriptome.gff.gz</code> (Input dataset)</li>
+            <li><em>“Choose the source for the FASTA file”</em>: <code class="highlighter-rouge">History</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="highlighter-rouge">Mus_musculus.GRCm38.<span class="notranslate">dna</span>.fa.gz</code> (Input dataset)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Did you use single or split reference for alignment?”</em>: <code class="highlighter-rouge">Split reference</code>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa</code> (Input dataset)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="highlighter-rouge">transcriptome.da</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Hybridize”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="visualization">Visualization</h1>
+
+<p>The output tabular file generated in the above step can be huge with up to some millions of rows depending on the
+library size and more than 30 columns. Extracting useful data from this can be very tedious. For example, extracting and
+visualizing the distribution of target biotypes of your favorite mi<span class="notranslate">RNA</span> can be very tricky and might need more than a
+hand full of <span class="notranslate">galaxy</span> tools to achieve. For this reason, there exists a visualization and filtering tool for this data along
+with <code class="highlighter-rouge">ChiRA</code> known as <code class="highlighter-rouge">ChiRAViz</code>. It is a <span class="notranslate">galaxy</span> visualization framework to work with the output of <code class="highlighter-rouge">ChiRA</code>. But it does
+not directly work with the tabular output we have. Rather it needs a “sqlite” database. For this reason, we first build a
+sqlite database from the <code class="highlighter-rouge">ChiRA</code> output.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-preperation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data preperation</h3>
+
+  <ol>
+    <li><strong>Query Tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li>In <em>“Database Table”</em>:
+          <ul>
+            <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="highlighter-rouge">ChiRA chimeric <span class="notranslate">reads</span></code> (output of <strong>ChiRA extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Table Options”</em>
+          <ul>
+            <li><em>“Use first line as column names”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li><em>“Save the sqlite database in your history”</em>: <code class="highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Change the datatype to <code class="highlighter-rouge">chira.sqlite</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">chira.sqlite</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualize-and-chimeras"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize and chimeras</h3>
+
+  <ol>
+    <li>Please click on <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> <em>“Visualize this data”</em>. Then click on the <code class="highlighter-rouge">ChiRAViz</code> visualization.
+This loads the data into the visualization framework and shows some basic plots from the data.
+      <ul>
+        <li>The visualization split into two to show the left and the right arms information.</li>
+        <li>On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed <span class="notranslate">RNA</span>s are shown.
+<img src="../../images/rna-interactome/chiraviz_home.png" alt="ChiRAViz home page" /></li>
+      </ul>
+    </li>
+    <li>Then choose the kind of interactions information you want to see. For example, choose the most abundant <code class="highlighter-rouge">mi<span class="notranslate">RNA</span></code> and <code class="highlighter-rouge">3_prime_UTR</code> and click on <strong>“Get interactions”</strong>.</li>
+  </ol>
+
+  <p><img src="../../images/rna-interactome/chiraviz_choose.png" alt="ChiRAViz selector" /></p>
+
+  <ul>
+    <li><strong>“Chimera”</strong> panel in the middle depicts the <span class="notranslate">mapping</span> positions on the read with read length.</li>
+    <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are <span class="notranslate">mapping</span> to with their alignment positions on the transcripts.</li>
+    <li><strong>“Alignment Information”</strong> panel shows the alignment if present with a possibility to download the alignment.
+<img src="../../images/rna-interactome/chiraviz_single.png" alt="ChiRAViz single interaction" /></li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on--filter-interactions-and-export-results"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Filter interactions and export results</h3>
+  <p><code class="highlighter-rouge">ChiRAViz</code> provides filters to search for keywords like gene symbols, sort interactions by score, filter by score or hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter the interactions with most abundant mi<span class="notranslate">RNA</span> and consider those which have an <code class="highlighter-rouge">Inta<span class="notranslate">RNA</span></code> predicted hybrid.</p>
+  <ul>
+    <li>Go to the home page by clicking <strong>Home</strong> on the top.</li>
+    <li>Go to the bottom of the home page to the plot showing top 50 symbols based on their <span class="notranslate">expression</span>.</li>
+    <li>Click on the most abundant mi<span class="notranslate">RNA</span> <code class="highlighter-rouge">mmu-miR-466i-5p</code>. This will populate the left panel with all the interactions containing <code class="highlighter-rouge">mmu-miR-466i-5p</code>.</li>
+    <li>Filter the entries that contain <code class="highlighter-rouge">Inta<span class="notranslate">RNA</span></code> hybrid. If there is no hybrid predicted the value in that filed is <code class="highlighter-rouge">NA</code>
+      <ul>
+        <li>From <strong>“Filter by…“</strong> choose <code class="highlighter-rouge">Hybrid</code></li>
+        <li>From <strong>“Choose operator…“</strong> choose <code class="highlighter-rouge">&lt;&gt;</code></li>
+        <li>Enter <code class="highlighter-rouge">NA</code> in the value field and hit the enter key.</li>
+      </ul>
+    </li>
+    <li>At this point, you can click on <strong>Summary</strong> to view the summary plots for this subset of interactions.</li>
+    <li>Tick <strong>“Check all”</strong> on the bottom left corner and then click on <strong>Export</strong> to export the resulting interactions.</li>
+    <li>This will export all the results to a file.</li>
+  </ul>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Though chimeric <span class="notranslate">reads</span> look normal when inspected in a FASTQ file, the origin of each read is from two different <span class="notranslate">RNA</span> fragments. Limitations of the current sequencing protocols limit the length of each sequenced interacting <span class="notranslate">RNA</span> fragment. These smaller <span class="notranslate">RNA</span> fragments are often harder to map considering that the boundaries of each <span class="notranslate">RNA</span> fragment in the read are unknown. In this tutorial, we have seen how to map these <span class="notranslate">reads</span> and infer the true origins of them by quantifying the mapped loci. The visualization framework gives flexibility in filtering and searching output files, visualize the summaries of filtered data as well as exporting them.</p>
+
+
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                    
+
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Pavankumar Videm, 2020 <b>RNA-RNA interactome data analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html">/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{transcriptomics-rna-interactome,
+    author = "Pavankumar Videm",
+    title = "RNA-RNA interactome data analysis (Galaxy Training Materials)",
+    year = "2020",
+    month = "03",
+    day = "21"
+    url = "\url{/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-RNA interactome data analysis (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-RNA interactome data analysis (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Pavankumar Videm)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/rna-interactome/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
