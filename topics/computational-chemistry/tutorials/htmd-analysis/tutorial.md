@@ -98,6 +98,8 @@ have fun!
 
 # Simulation
 
+## Topology generation
+
 Now we have downloaded a PDB structure of the protein we wish to study, we will start parameterizing it for MD simulation.
 
 Parameterization needs to be done separately for the ligand and protein. Therefore, the first step is to separate the PDB file into two sets of coordinates - one for the ligand and one for the protein.
@@ -116,7 +118,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 
 A big step can have several subsections or sub steps:
 
-## Extract protein and ligand coordinates
+### Extract protein and ligand coordinates
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -134,7 +136,7 @@ A big step can have several subsections or sub steps:
 {: .hands_on}
 
 
-## Set up protein topology
+### Set up protein topology
 
 Firstly, we need to calculate the topology for the protein file. We will use the **GROMACS initial setup** {% icon tool %} tool.
 
@@ -142,7 +144,7 @@ Firstly, we need to calculate the topology for the protein file. We will use the
 >
 > 1. **GROMACS initial setup** {% icon tool %} with the following parameters:
 >    - *"PDB input file"*: 'Protein (PDB)' file
->    - *"Force field"*: `AMBER99SB`
+>    - *"Force field"*: `gaff`
 >    - *"Water model"*: `TIP3P`
 >    - *"Generate detailed log"*: `Yes`
 >
@@ -158,7 +160,7 @@ The tool produces four outputs: a GRO file (containing the coordinates of the pr
 Please note all GROMACS tools output a log. Generally, you only need to look at this when a job fails. It provides useful information for debugging if we encounter any problems.
 
 
-## Generate a topology for the ligand
+### Generate a topology for the ligand
 
 To generate a topology for the ligand, we will use the **acpype** {% icon tool %} tool. This provides a convenient interface to the AmberTools suite and allows us to easily create the ligand topology in the format required by GROMACS.
 
@@ -188,6 +190,128 @@ To generate a topology for the ligand, we will use the **acpype** {% icon tool %
 > {: .solution}
 >
 {: .question}
+
+
+## Solvation and energy minimization
+
+Having generated topologies, we now need to combine them, define the box which contains the system, add solvent and ions, and perform an energy minimization step.
+
+### Combine topology and GRO files
+
+> ### {% icon hands_on %} Hands-on: Combine GRO files
+>
+> 1. On the `Structure file (GRO format)` created by the **acpype** tool,click on the `Visualize this data` icon. Select `Editor` to open the file using the text editor integrated into Galaxy. Select all the lines starting with `1 GSE` and copy your selection.
+> 2. Open the Protein GRO file by clicking on the `Visualize this data` button on the dataset.
+> 3. Paste the lines from the ligand GRO file just before the last line.
+> 4. If you scroll back to the top, you will see that the total number of atoms in the system is given in the second line (`3280`). You have just added 21 new atoms, so increase the value by 21 to `3301`.
+> 5. Click `Export` to save your changes as a new dataset. Make sure the datatype of the new file is still `GRO`. Rename to `System GRO file`.
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Combine topology files
+>
+> 1. On the ligand `Topology` created by the **acpype** tool, right-click on the `Visualize this data` icon and open the link in a new tab. Select the first section in the file, starting with `[ atomtypes ]`, and copy the selection. 
+> 2. Returning to the first tab, open the protein TOP file using the text editor integrated into Galaxy by clicking on the `Visualize this data` button on the dataset. 
+> 3. Paste the lines from the ligand ITP file near to the top of the file, just after the line `#include "amber99sb.ff/forcefield.itp"`.
+> 4. Go back to the ligand ITP file and select the rest of the file (from `[ moleculetypes ]`) onwards. Copy the selection.
+> 5. In the protein TOP file, paste the selection near to the bottom of the file, before the line `; Include water topology` (and just after the position restraint file). Notice that the `[ moleculetype ]` section you just copied starts with `base` - this is the name acpype has given to the ligand. Feel free to change this to whatever you prefer - `ligand`, or `GSE`.
+> 6. Finally, we need to state in the topology that we have included a new kind of molecule. Go to the final section (`[ molecules ]`) and add a new line `base` (or whatever name you gave the ligand in step 5), with a 1 in the `#mols` column.
+> 5. Click `Export` to save your changes as a new dataset. Make sure the datatype of the new file is still `TOP`. Rename to `System topology`.
+{: .hands_on}
+
+> ### {% icon comment %} Comment
+>
+> A comment about what information is in the top and gro files, why we do it this way.
+{: .comment}
+
+If this procedure was too complicated, you can download the combined files here: LINK. However, you will find it useful to understand the information contained within topology files and learn how to make changes to it.
+
+
+# Create simulation box, solvate and minimize system
+
+The next step, once combined coordinate (GRO) and topology (TOP) files have been created, is to create a simulation box in which the system is situated.
+
+## Create the simulation box with **GROMACS structure configuration**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **GROMACS structure configuration** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input structure"*: `System GRO file` (Input dataset)
+>    - *"Configure box?"*: `Yes`
+>        - *"Box dimensions in nanometers"*: `1.0`
+>        - *"Box type"*: `Triclinic`
+>    - *"Generate detailed log"*: `Yes`
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tool simply adds a box of the required dimensions to the GRO file. A distance of at least 1.0 nm is recommended to avoid interactions between the protein and its mirror image. On the other hand, increasing the box size too will increase the simulation time, due to the greater number of solvent molecules which need to be treated.
+>    {: .comment}
+>
+{: .hands_on}
+
+## Solvation
+
+The next step is solvation of the newly created simulation box. Note that the system is charged (depending on the pH) - the solvation tool also adds ions to neutralise this.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"GRO structure file"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - {% icon param-file %} *"System topology"*: `output`
+>    - *"Generate detailed log"*: `Yes`
+>
+>
+{: .hands_on}
+
+
+## Sub-step with **GROMACS energy minimization**
+
+The next step is energy minimization, which can be carried out using the **GROMACS energy minimization** {% icon tool %}.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **GROMACS energy minimization** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"GRO structure file."*: `output1` (output of **GROMACS solvation and adding ions** {% icon tool %})
+>    - {% icon param-file %} *"Topology (TOP) file."*: `output2` (output of **GROMACS solvation and adding ions** {% icon tool %})
+>    - *"Parameter input"*: `Use default (partially customisable) setting`
+>        - *"Number of steps for the MD simulation"*: `50000`
+>        - *"EM tolerance"*: `1000.0`
+>    - *"Generate detailed log"*: `Yes`
+>    - Rename output to `Minimized GRO file`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+
+
+-----------------------------------
+
 
 ## Sub-step with **Create GROMACS index files**
 
