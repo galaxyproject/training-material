@@ -22,6 +22,8 @@ requirements:
     topic_name: computational-chemistry
     tutorials:
         - cheminformatics
+tags:
+- covid19
 contributors:
 - simonbray
 
