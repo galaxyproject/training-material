@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring
+level: Intermediate
 zenodo_link: 'https://zenodo.org/record/3730474'
 questions:
 - How can candidate ligands be generated and docked to a protein in Galaxy?
@@ -11,7 +12,7 @@ objectives:
 - Understand how Galaxy was used to perform docking and pose scoring on the SARS-CoV-2 main protease (MPro).
 - Replicate the study on a (very) small scale
 - Gain familiarity with the docking and scoring techniques involved.
-time_estimation: 2h  # Just 1 week (if you have 5000 CPUs) ;)
+time_estimation: 2H  # Just 1 week (if you have 5000 CPUs) ;)
 key_points:
 - Galaxy can support large, rapid studies in computational chemistry
 - Protein-ligand docking contributes to the discovery of new drugs
