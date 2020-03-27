@@ -1,17 +1,26 @@
 ---
 layout: tutorial_hands_on
 
-title: Virtual screening with rDock and pose scoring
-zenodo_link: ''
+title: Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring
+zenodo_link: 'https://zenodo.org/record/3730474'
 questions:
-- How can candidate ligands be generated and docked to a protein?
+- How can candidate ligands be generated and docked to a protein in Galaxy?
 - How can the poses of the docked ligands be evaluated?
+- How can a workflow for drug virtual screening be constructed in Galaxy?
 objectives:
-- How to use rDock in Galaxy
-- How to perform virtual screening in Galaxy
-time_estimation: 2h  # A week ;)
+- Understand how Galaxy was used to perform docking and pose scoring on the SARS-CoV-2 main protease (MPro).
+- Replicate the study on a (very) small scale
+- Gain familiarity with the docking and scoring techniques involved.
+time_estimation: 2h  # Just 1 week (if you have 5000 CPUs) ;)
 key_points:
-- Galaxy has tools and workflows for docking
+- Galaxy can support large, rapid studies in computational chemistry
+- Protein-ligand docking contributes to the discovery of new drugs
+requirements:
+  -
+    type: "internal"
+    topic_name: computational-chemistry
+    tutorials:
+        - cheminformatics
 contributors:
 - simonbray
 
@@ -20,21 +29,10 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro).
+This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](covid19.galaxyproject.org/).
 
-In this tutorial, you will perform protein-ligand docking to MPro using rDock {% cite rdock %} and scoring the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
+In this tutorial, you will perform protein-ligand docking to MPro using rDock ({% cite rdock %}) and scoring the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
 
-<!-- You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial. -->
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -46,18 +44,17 @@ tutorial. -->
 
 # Background
 
-Early in March 2020, the Diamond Light Source recently completed a successful fragment screen on MPro, which provided 55 fragment hits (see their [press release](https://www.diamond.ac.uk/covid-19/for-scientists/Main-protease-structure-and-XChem.html) here). In an effort to identify candidate molecules for binding, InformaticsMatters, the XChem group and the European Galaxy team joined forces to construct and execute a Galaxy workflow for performing and evaluating molecular docking on a massive scale.
+Early in March 2020, the Diamond Light Source completed a successful fragment screen on MPro, which provided 55 fragment hits (see their [press release](https://www.diamond.ac.uk/covid-19/for-scientists/Main-protease-structure-and-XChem.html) here). In an effort to identify candidate molecules for binding, InformaticsMatters, the XChem group and the European Galaxy team joined forces to construct and execute a Galaxy workflow for performing and evaluating molecular docking on a massive scale.
 
 An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described [here](https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network). These were used as inputs for the docking and scoring workflow. The workflow consists of the following steps, each of which was carried out using tools installed on the European Galaxy server:
 1. Charge enumeration of the 41,000 candidate molecules selected based on the fragment hits.
 2. Generation of 3D conformations based on SMILES strings of the candidate molecules.
 3. Docking of molecules into each of the MPro structures using rDock.
-4. Evaluation of the docking poses using a deep learning approach [3] developed by the XChem group and collaborators.
+4. Evaluation of the docking poses using a TransFS, a deep learning approach ({% cite transfs %}) developed by the XChem group and collaborators, and SuCOS scoring ({% cite sucos %}), which compares the poses with the structures of the original fragment hits.
 
-The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the workflow with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to all the original Galaxy histories, with notes to explain where and why things were done differently to the tutorial.
+The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the workflow with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original Galaxy histories, with notes to explain where and why things were done differently to the tutorial.
 
- <!-- employing augmentation of training data with incorrectly docked ligands to prompt the model to learn from protein-ligand interactions. The algorithm was deployed on the European Galaxy server inside a Docker container, thanks to work by InformaticsMatters and the European Galaxy team. -->
-
+![MPro structure, with a fragment bound]({% link topics/computational-chemistry/images/mpro.png %} "Structure of MPro, with a fragment bound. View in NGL ({% cite ngl %}) [here](https://usegalaxy.eu/u/sbray/v/mpro-x0072).")
 
 # Get data
 
@@ -70,10 +67,13 @@ We require four datasets for the simulation and analysis:
 > ### {% icon details %} Differences with the original study
 >
 > Of the initial 55 fragment hits, 17 were chosen for further study. From these, 41,587 compounds were generated using the Fragalysis fragment network for further study. The 100 compounds used in the tutorial are taken from this list.
+>
+>
+> Starting data is available from this Galaxy history: [https://usegalaxy.eu/u/sbray/h/mpro-raw-data](https://usegalaxy.eu/u/sbray/h/mpro-raw-data).
 > 
-> Starting data is available from this Galaxy history: (https://usegalaxy.eu/u/sbray/h/mpro-raw-data).
 > 
 > This history contains 103 files. One of these (`Initial candidates for docking`) contains the 41k candidate compounds in SMILES format. The remaining 102 files (all with names beginning with `Mpro-x...`) provide structural information on the fragment hits - 6 files per hit (hence 17 x 6 = 102). 
+>
 >
 > The identity of the files is as follows:
 >
@@ -87,23 +87,22 @@ We require four datasets for the simulation and analysis:
 > The PDB file of the receptor that we are using is `Mpro-x0195_0_apo-desolv.pdb`. In other words, the structure is derived from just one fragment hit. In the original study, however, all compounds were docked against all of the fragment hit structures.
 {: .details}
 
-> ## {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3730474):
 >
 >    ```
->    
+>    https://zenodo.org/record/3730474/files/candidates.smi
+>    https://zenodo.org/record/3730474/files/Mpro-x0195_0_apo-desolv.pdb
+>    https://zenodo.org/record/3730474/files/hits.sdf
+>    https://zenodo.org/record/3730474/files/frankenstein.sdf
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets ...
-> 4. Check that the datatype is correct. 
+> 3. Rename the datasets `Candidates SMILES`, `Receptor PDB`, `Hits SDF`, and `Frankenstein SDF` respectively.
+> 4. Check that the datatypes (`smi`, `pdb`, `sdf`, and `sdf` respectively) are correct. In particularly, check the `Candidates SMILES` file, as the SMILES datatype is not detected automatically by Galaxy.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 {: .hands_on}
@@ -114,9 +113,8 @@ Before docking, the candidate ligands need to be prepared for docking with the f
 
 > ### {% icon details %} Differences with the original study
 >
-> This stage is carried out as described here, except of course with the full set of 42,000 compounds. See [here](https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/) for more details. 
+> This stage is carried out as described here, except of course with the full set of 42,000 compounds. See [here](https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/) for more details.
 {: .details}
-
 
 ## Charge enumeration
 
@@ -125,14 +123,14 @@ Many of the compounds may contain functional groups which can exist in multiple 
 > ### {% icon hands_on %} Hands-on: Charge enumeration
 >
 > 1. **Enumerate changes** {% icon tool %} with the following parameters:
->    - *"Input molecule data"*: `Candidate compounds`
+>    - *"Input molecule data"*: `Candidate SMILES`
 >    - *"Minimum pH"*: `4.4`
 >    - *"Maximum pH"*: `10.4`
 > 2. Rename the output file `Enumerated candidates SMILES`.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The **Enumerate charges** {% icon tool %} tool is based on the Dimorphite-DL program {% cite Ropp2019 %}.
+>    > The **Enumerate charges** {% icon tool %} tool is based on the Dimorphite-DL program. ({% cite Ropp2019 %})
 >    {: .comment}
 >
 {: .hands_on}
@@ -155,7 +153,7 @@ If you are not familiar with SMILES and SDF formats, consult the introductory [p
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The **Compound conversion** {% icon tool %} tool is based on the OpenBabel toolkit {% cite OBoyle2011 %}.
+>    > The **Compound conversion** {% icon tool %} tool is based on the OpenBabel toolkit. ({% cite OBoyle2011 %})
 >    {: .comment}
 >
 {: .hands_on}
@@ -190,9 +188,6 @@ The next stage is to split the SD-file with the candidate ligands into a set of 
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-
 # Active site preparation
 
 The active site also needs to be prepared for docking, using the following steps: 1) conversion to MOL2 format, and 2) generation of the active site using the **rbcavity** {% icon tool %} tool.
@@ -201,7 +196,6 @@ The active site also needs to be prepared for docking, using the following steps
 >
 > This stage was carried out as described here. However, it was repeated for each of the fragment hit structures, not just the `Mpro-x0195_0_apo-desolv.pdb` file used here. See [here](https://covid19.galaxyproject.org/cheminformatics/2-ActiveSitePrep/) for more details.
 {: .details}
-
 
 ## Convert protein structure to MOL2 format
 
@@ -227,7 +221,7 @@ For docking with rDock, a file needs to be created defining the active site. Thi
 >
 > > ### {% icon solution %} Solution
 > >
-> > See the [information provided by InformaticsMatters](https://www.informaticsmatters.com/blog/2018/11/23/cavities-and-frankenstein-molecules.html) for more details.
+> > The Frankenstein ligand combines the atoms of all the fragments and therefore occupies the entire space of the binding site. Therefore, it is the best choice for cavity definition. See the [information provided by InformaticsMatters](https://www.informaticsmatters.com/blog/2018/11/23/cavities-and-frankenstein-molecules.html) for more details.
 > >
 > {: .solution}
 >
@@ -237,7 +231,7 @@ For docking with rDock, a file needs to be created defining the active site. Thi
 >
 > 1. **rDock cavity definition** {% icon tool %} with the following parameters:
 >    - *"Receptor"*: `Receptor MOL2`
->    - *"Reference ligand"*: `Frankenstein ligand`
+>    - *"Reference ligand"*: `Frankenstein SDF`
 >    - *"Mapper sphere radius"*: `3.0`
 >    - *"Mapper small sphere radius"*: `1.0`
 >    - *"Mapper minimum volume"*: `100`
@@ -284,7 +278,6 @@ Docking and scoring are now performed, using the following steps: 1) docking usi
 >
 {: .hands_on}
 
-
 ## Collapse collection to a single file 
 
 Having created a collection to parallelize the docking procedure, we can now recombine the results to a single file.
@@ -299,10 +292,9 @@ Having created a collection to parallelize the docking procedure, we can now rec
 
 The output file should contain around 1,900 docked poses in SDF format.
 
-
 ## Pose scoring with TransFS
 
-In this step, we carry out scoring of the poses using TransFS. This is a deep learning approach developed at the University of Oxford, employing augmentation of training data with incorrectly docked ligands to prompt the model to learn from protein-ligand interactions. {% cite transfs %}
+In this step, we carry out scoring of the poses using TransFS. This is a deep learning approach developed at the University of Oxford, employing augmentation of training data with incorrectly docked ligands to prompt the model to learn from protein-ligand interactions. ({% cite transfs %})
 
 The TransFS scoring returns a value (saved as `<TransFSScore>` in the SDF file) between 0 (poor) and 1 (good).
 
@@ -315,10 +307,9 @@ The TransFS scoring returns a value (saved as `<TransFSScore>` in the SDF file) 
 >
 {: .hands_on}
 
-
 ## Pose scoring with SuCOS
 
-This step involves scoring of the poses from each molecule against the original fragment screening hit ligands using the SuCOS MAX shape and feature overlay algorithm {% cite sucos %}. The conformation and position of the poses are compared to known structures (i.e. the fragment hits) to determine a score.
+This step involves scoring of the poses from each molecule against the original fragment screening hit ligands using the SuCOS MAX shape and feature overlay algorithm. ({% cite sucos %}) The conformation and position of the poses are compared to known structures (i.e. the fragment hits) to determine a score.
 
 SuCOS scoring returns a value (saved as `<Max_SuCOS_Score>` in the SDF file) between 0 (poor) and 1 (good).
 
@@ -326,7 +317,7 @@ SuCOS scoring returns a value (saved as `<Max_SuCOS_Score>` in the SDF file) bet
 >
 > 1. **Max SuCOS score** {% icon tool %} with the following parameters:
 >    - *"Ligands to be scored"*: Output of the TransFS step
->    - *"Set of clusters to score against"*: `Fragment hits`
+>    - *"Set of clusters to score against"*: `Hits SDF`
 {: .hands_on}
 
 # Compound selection
@@ -334,7 +325,6 @@ SuCOS scoring returns a value (saved as `<Max_SuCOS_Score>` in the SDF file) bet
 The aim of the original study was to select 500 candidate molecules for synthesis and experimental study. In order to do this, the data for all fragment hits had to be combined (i.e. so that each compound was assigned the lowest score from all the fragments). The resulting table was then compared with a list of compounds available from [Enamine](https://enamine.net/) and [Chemspace](https://chem-space.com/) and the 500 highest scoring matching compounds were selected for purchase.
 
 This step is skipped in the tutorial, as only 100 compounds were tested, using only a single fragment hit structure. If you want, though, check out the [history](https://usegalaxy.eu/u/timdudgeon/h/top-500-enamine--chemspace-bb) and [workflow](https://usegalaxy.eu/u/timdudgeon/w/filter-results) used.
-
 
 # Conclusion
 {:.no_toc}
