@@ -29,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](covid19.galaxyproject.org/).
+This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](https://covid19.galaxyproject.org/cheminformatics).
 
 In this tutorial, you will perform protein-ligand docking to MPro using rDock ({% cite rdock %}) and scoring the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
 
@@ -141,7 +141,7 @@ The output is another SMILES file, with several hundred entries.
 
 So far our list of enumerated candidate compounds is still in SMILES format; we need to produce three-dimensional structures in SDF format for docking. This can be done with the **Compound conversion** {% icon tool %} tool.
 
-If you are not familiar with SMILES and SDF formats, consult the introductory [protein-ligand docking tutorial](../cheminformatics/tutorial.md) for more details.
+If you are not familiar with SMILES and SDF formats, consult the introductory [protein-ligand docking tutorial](../cheminformatics/tutorial.html) for more details.
 
 > ### {% icon hands_on %} Hands-on: Convert to SDF format
 >
@@ -273,7 +273,7 @@ Docking and scoring are now performed, using the following steps: 1) docking usi
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > For more information about docking, check out the [introductory tutorial](https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/). It uses a different tool, AutoDock Vina, rather than rDock, but the general principles are the same.
+>    > For more information about docking, check out the [introductory tutorial](../cheminformatics/tutorial.html). It uses a different tool, AutoDock Vina, rather than rDock, but the general principles are the same.
 >    {: .comment}
 >
 {: .hands_on}
