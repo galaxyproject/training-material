@@ -55,7 +55,7 @@ An initial list of 41,000 candidate molecules was assembled by using the Fragaly
 
 The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the workflow with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original Galaxy histories, with notes to explain where and why things were done differently to the tutorial.
 
-![MPro structure, with a fragment bound]({% link topics/computational-chemistry/images/mpro.png %} "Structure of MPro, with a fragment bound. View in NGL ({% cite ngl %}) [here](https://usegalaxy.eu/u/sbray/v/mpro-x0072).")
+![MPro structure, with a fragment bound]({% link topics/computational-chemistry/images/mpro.png %} "Structure of MPro, with a fragment bound. <a href="https://usegalaxy.eu/u/sbray/v/mpro-x0072">Click to view</a> in NGL. ({% cite ngl %})")
 
 # Get data
 
