@@ -1,0 +1,1209 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:title" content="Galaxy Training: Virtual screening of the SARS-CoV-2 main protease with rD..." />
+        <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/computational-chemistry" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Computational chemistry
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcovid19-docking%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcovid19-docking%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcovid19-docking%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcovid19-docking%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fcomputational-chemistry%2Ftutorials%2Fcovid19-docking%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/computational-chemistry/tutorials/covid19-docking/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Computational chemistry",
+    "description": "Modelling, simulation and analysis of biomolecular systems",
+    "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/"
+  },
+  "courseCode": "computational-chemistry / covid19-docking / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "covid19",
+  "description": "The questions this  addresses are:\n - How can candidate ligands be generated and docked to a protein in Galaxy?\n - How can the poses of the docked ligands be evaluated?\n - How can a workflow for drug virtual screening be constructed in Galaxy?\n\n\\nThe objectives are:\n - Understand how Galaxy was used to perform docking and pose scoring on the SARS-CoV-2 main protease (MPro).\n - Replicate the study on a (very) small scale\n - Gain familiarity with the docking and scoring techniques involved.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html",
+      "name": "Protein-ligand docking",
+      "description": "Hands-on for 'Protein-ligand docking' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Simon Bray"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Computational chemistry",
+      "description": "Modelling, simulation and analysis of biomolecular systems",
+      "url": "https://training.galaxyproject.org//training-material/topics/computational-chemistry/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#simonbray" class="contributor-badge"><img src="https://avatars.githubusercontent.com/simonbray" alt="Simon Bray">Simon Bray</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can candidate ligands be generated and docked to a protein in Galaxy?</p>
+</li>
+            
+            <li><p>How can the poses of the docked ligands be evaluated?</p>
+</li>
+            
+            <li><p>How can a workflow for drug virtual screening be constructed in Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Understand how Galaxy was used to perform docking and pose scoring on the SARS-CoV-2 main protease (MPro).</p>
+</li>
+            
+            <li><p>Replicate the study on a (very) small scale</p>
+</li>
+            
+            <li><p>Gain familiarity with the docking and scoring techniques involved.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/computational-chemistry">Computational chemistry</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Protein-ligand docking:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+            <p><strong><i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fa fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/3730474">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/computational-chemistry/tutorials/covid19-docking/workflows/" title="Workflows" alt="Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring workflows">
+        <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 27, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European <span class="notranslate">Galaxy</span> Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described <a href="https://covid19.galaxyproject.org/cheminformatics">here</a>.</p>
+
+<p>In this tutorial, you will perform protein-ligand docking to MPro using rDock (<a class="citation" href="#rdock">Ruiz-Carmona <i>et al.</i> 2014</a>) and scoring the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#background" id="markdown-toc-background">Background</a></li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#preparation-for-docking" id="markdown-toc-preparation-for-docking">Preparation for docking</a>    <ol>
+      <li><a href="#charge-enumeration" id="markdown-toc-charge-enumeration">Charge enumeration</a></li>
+      <li><a href="#generate-three-dimensional-conformations" id="markdown-toc-generate-three-dimensional-conformations">Generate three-dimensional conformations</a></li>
+      <li><a href="#splitting-the-sd-file-into-a-collection" id="markdown-toc-splitting-the-sd-file-into-a-collection">Splitting the SD-file into a collection</a></li>
+    </ol>
+  </li>
+  <li><a href="#active-site-preparation" id="markdown-toc-active-site-preparation">Active site preparation</a>    <ol>
+      <li><a href="#convert-protein-structure-to-mol2-format" id="markdown-toc-convert-protein-structure-to-mol2-format">Convert protein structure to MOL2 format</a></li>
+      <li><a href="#generate-active-site-definition" id="markdown-toc-generate-active-site-definition">Generate active site definition</a></li>
+    </ol>
+  </li>
+  <li><a href="#docking-and-scoring" id="markdown-toc-docking-and-scoring">Docking and scoring</a>    <ol>
+      <li><a href="#docking-with-rdock" id="markdown-toc-docking-with-rdock">Docking with rDock</a></li>
+      <li><a href="#collapse-collection-to-a-single-file" id="markdown-toc-collapse-collection-to-a-single-file">Collapse collection to a single file</a></li>
+      <li><a href="#pose-scoring-with-transfs" id="markdown-toc-pose-scoring-with-transfs">Pose scoring with TransFS</a></li>
+      <li><a href="#pose-scoring-with-sucos" id="markdown-toc-pose-scoring-with-sucos">Pose scoring with SuCOS</a></li>
+    </ol>
+  </li>
+  <li><a href="#compound-selection" id="markdown-toc-compound-selection">Compound selection</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="background">Background</h1>
+
+<p>Early in March 2020, the Diamond Light Source completed a successful fragment screen on MPro, which provided 55 fragment hits (see their <a href="https://www.diamond.ac.uk/covid-19/for-scientists/Main-protease-structure-and-XChem.html">press release</a> here). In an effort to identify candidate molecules for binding, InformaticsMatters, the XChem group and the European <span class="notranslate">Galaxy</span> team joined forces to construct and execute a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for performing and evaluating molecular docking on a massive scale.</p>
+
+<p>An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described <a href="https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network">here</a>. These were used as inputs for the docking and scoring <span class="notranslate">workflow</span>. The <span class="notranslate">workflow</span> consists of the following steps, each of which was carried out using tools installed on the European <span class="notranslate">Galaxy</span> server:</p>
+<ol>
+  <li>Charge enumeration of the 41,000 candidate molecules selected based on the fragment hits.</li>
+  <li>Generation of 3D conformations based on SMILES strings of the candidate molecules.</li>
+  <li>Docking of molecules into each of the MPro structures using rDock.</li>
+  <li>Evaluation of the docking poses using a TransFS, a deep learning approach (<a class="citation" href="#transfs">Scantlebury 2019</a>) developed by the XChem group and collaborators, and SuCOS scoring (<a class="citation" href="#sucos">Leong 2019</a>), which compares the poses with the structures of the original fragment hits.</li>
+</ol>
+
+<p>The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the <span class="notranslate">workflow</span> with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original <span class="notranslate">Galaxy</span> histories, with notes to explain where and why things were done differently to the tutorial.</p>
+
+<figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/mpro.png" alt="MPro structure, with a fragment bound" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of MPro, with a fragment bound. <a href="https://usegalaxy.eu/u/sbray/v/mpro-x0072">Click to view</a> in NGL. (<a class="citation" href="#ngl">Rose <i>et al.</i> 2018</a>)</figcaption></figure>
+
+<h1 id="get-data">Get data</h1>
+
+<p>We require four datasets for the simulation and analysis:</p>
+<ol>
+  <li>A list of 100 ligand candidates. These are the molecules which will be docking into the protein binding site.</li>
+  <li>A PDB file of the receptor MPro protein (without ligand or solvent).</li>
+  <li>A list of fragment hits (17 in total) in SDF format.</li>
+  <li>A ‘Frankenstein ligand’, which combines the features of all the fragment hits. This will be used to construct a model of the active site for docking.</li>
+</ol>
+
+<blockquote class="details">
+  <h3 id="details-differences-with-the-original-study"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Differences with the original study</h3>
+
+  <p>Of the initial 55 fragment hits, 17 were chosen for further study. From these, 41,587 compounds were generated using the Fragalysis fragment network for further study. The 100 compounds used in the tutorial are taken from this list.</p>
+
+  <p>Starting data is available from this <span class="notranslate">Galaxy</span> history: <a href="https://usegalaxy.eu/u/sbray/h/mpro-raw-data">https://use<span class="notranslate">galaxy</span>.eu/u/sbray/h/mpro-raw-data</a>.</p>
+
+  <p>This history contains 103 files. One of these (<code class="highlighter-rouge">Initial candidates for docking</code>) contains the 41k candidate compounds in SMILES format. The remaining 102 files (all with names beginning with <code class="highlighter-rouge">Mpro-x...</code>) provide structural information on the fragment hits - 6 files per hit (hence 17 x 6 = 102).</p>
+
+  <p>The identity of the files is as follows:</p>
+
+  <ul>
+    <li>the <code class="highlighter-rouge">*_0.mol</code> files contain the fragment structure in mol format.</li>
+    <li>the <code class="highlighter-rouge">*_0.pdb</code> files contain the fragment structure in pdb format.</li>
+    <li>the <code class="highlighter-rouge">*_0_apo.pdb</code> files contain the protein with solvent, but without ligand</li>
+    <li>the <code class="highlighter-rouge">*_0_apo-desolv.pdb</code> files contain the protein without either solvent or ligand</li>
+    <li>the <code class="highlighter-rouge">*_0_apo-solv.pdb</code> files contain only solvent</li>
+    <li>the <code class="highlighter-rouge">*_0_bound.pdb</code> file contain everything (protein, ligand and solvent)</li>
+  </ul>
+
+  <p>The PDB file of the receptor that we are using is <code class="highlighter-rouge">Mpro-x0195_0_apo-desolv.pdb</code>. In other words, the structure is derived from just one fragment hit. In the original study, however, all compounds were docked against all of the fragment hit structures.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/3730474">Zenodo</a>:</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3730474/files/candidates.smi
+https://zenodo.org/record/3730474/files/Mpro-x0195_0_apo-desolv.pdb
+https://zenodo.org/record/3730474/files/hits.sdf
+https://zenodo.org/record/3730474/files/frankenstein.sdf
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+    </li>
+    <li>Rename the datasets <code class="highlighter-rouge">Candidates SMILES</code>, <code class="highlighter-rouge">Receptor PDB</code>, <code class="highlighter-rouge">Hits SDF</code>, and <code class="highlighter-rouge">Frankenstein SDF</code> respectively.</li>
+    <li>
+      <p>Check that the datatypes (<code class="highlighter-rouge">smi</code>, <code class="highlighter-rouge">pdb</code>, <code class="highlighter-rouge">sdf</code>, and <code class="highlighter-rouge">sdf</code> respectively) are correct. In particularly, check the <code class="highlighter-rouge">Candidates SMILES</code> file, as the SMILES datatype is not detected automatically by <span class="notranslate">Galaxy</span>.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preparation-for-docking">Preparation for docking</h1>
+
+<p>Before docking, the candidate ligands need to be prepared for docking with the following steps: 1) charge enumeration, 2) generation of three-dimensional structures, and 3) splitting the SD-file into a collection.</p>
+
+<blockquote class="details">
+  <h3 id="details-differences-with-the-original-study-1"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Differences with the original study</h3>
+
+  <p>This stage is carried out as described here, except of course with the full set of 42,000 compounds. See <a href="https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/">here</a> for more details.</p>
+</blockquote>
+
+<h2 id="charge-enumeration">Charge enumeration</h2>
+
+<p>Many of the compounds may contain functional groups which can exist in multiple charge states, and this will affect the quality of binding to the receptor dramatically. Therefore, we perform ‘charge enumeration’, which means that we generate all charge forms of the compounds within a certain pH range.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-charge-enumeration"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Charge enumeration</h3>
+
+  <ol>
+    <li><strong>Enumerate changes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input molecule data”</em>: <code class="highlighter-rouge">Candidate SMILES</code></li>
+        <li><em>“Minimum pH”</em>: <code class="highlighter-rouge">4.4</code></li>
+        <li><em>“Maximum pH”</em>: <code class="highlighter-rouge">10.4</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output file <code class="highlighter-rouge">Enumerated candidates SMILES</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>The <strong>Enumerate charges</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the Dimorphite-DL program. (<a class="citation" href="#Ropp2019">Ropp <i>et al.</i> 2019</a>)</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output is another SMILES file, with several hundred entries.</p>
+
+<h2 id="generate-three-dimensional-conformations">Generate three-dimensional conformations</h2>
+
+<p>So far our list of enumerated candidate compounds is still in SMILES format; we need to produce three-dimensional structures in SDF format for docking. This can be done with the <strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
+
+<p>If you are not familiar with SMILES and SDF formats, consult the introductory <a href="../cheminformatics/tutorial.html">protein-ligand docking tutorial</a> for more details.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-convert-to-sdf-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Convert to SDF format</h3>
+
+  <ol>
+    <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Molecular input file”</em>: <code class="highlighter-rouge">Enumerated candidates</code> dataset.</li>
+        <li><em>“Output format”</em>: <code class="highlighter-rouge">MDL MOL format (sdf, mol)</code>
+          <ul>
+            <li><em>“Generate 3D coordinates”</em>: <code class="highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output file <code class="highlighter-rouge">Enumerated candidates SDF</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>The <strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the OpenBabel toolkit. (<a class="citation" href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a>)</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="splitting-the-sd-file-into-a-collection">Splitting the SD-file into a collection</h2>
+
+<p>The next stage is to split the SD-file with the candidate ligands into a set of smaller SD-files.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Why is splitting the file necessary?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The rDock tool performs one docking at a time (more technically: the task is not parallelized, as it uses only a single CPU). Therefore, splitting the large SD-file into many small files allows the work to be carried out by multiple <span class="notranslate">Galaxy</span> jobs in parallel, so it completes faster.</p>
+
+    <p>In the original study, this kind of parallelization was absolutely essential because of the enormous dataset; at some points, there were 5,000 docking jobs running concurrently on the European <span class="notranslate">Galaxy</span> server. Even on the much smaller scale of this tutorial, we can speed things up considerably using this trick.</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-split-the-sd-files"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Split the SD-files</h3>
+
+  <ol>
+    <li><strong>Split file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Select the file type to split”</em>: <code class="highlighter-rouge">SD-files</code></li>
+        <li><em>“SD-file to split”</em>: <code class="highlighter-rouge">Enumerated candidates SDF</code>
+          <ul>
+            <li><em>“Specify number of output files or number of records per file?”</em>: <code class="highlighter-rouge">Number of output files</code>
+              <ul>
+                <li><em>“Number of new files”</em>: <code class="highlighter-rouge">10</code></li>
+              </ul>
+            </li>
+            <li><em>“Method to allocate records to new files”</em>: <code class="highlighter-rouge">Alte<span class="notranslate">rna</span>te output files</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="active-site-preparation">Active site preparation</h1>
+
+<p>The active site also needs to be prepared for docking, using the following steps: 1) conversion to MOL2 format, and 2) generation of the active site using the <strong>rbcavity</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
+
+<blockquote class="details">
+  <h3 id="details-differences-with-the-original-study-2"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Differences with the original study</h3>
+
+  <p>This stage was carried out as described here. However, it was repeated for each of the fragment hit structures, not just the <code class="highlighter-rouge">Mpro-x0195_0_apo-desolv.pdb</code> file used here. See <a href="https://covid19.galaxyproject.org/cheminformatics/2-ActiveSitePrep/">here</a> for more details.</p>
+</blockquote>
+
+<h2 id="convert-protein-structure-to-mol2-format">Convert protein structure to MOL2 format</h2>
+
+<p>The receptor file we are using is in PDB format, but the rDock tool we use for docking requires an input in MOL2 format. Therefore, we first convert the file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-conversion-to-mol2-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Conversion to MOL2 format</h3>
+
+  <ol>
+    <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Molecular input file”</em>: <code class="highlighter-rouge">Receptor PDB</code> dataset.</li>
+        <li><em>“Output format”</em>: <code class="highlighter-rouge">Sybyl Mol2 format (mol2)</code></li>
+      </ul>
+    </li>
+    <li>Rename the output file <code class="highlighter-rouge">Receptor MOL2</code>.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-active-site-definition">Generate active site definition</h2>
+
+<p>For docking with rDock, a file needs to be created defining the active site. This is done using the <strong>rbcavity</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool, which requires the receptor in MOL2 format as input as well as a single reference ligand in Mol/SDF format. We use the ‘Frankenstein ligand’ as the reference.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What is a ‘Frankenstein ligand’ and why do we need it?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The Frankenstein ligand combines the atoms of all the fragments and therefore occupies the entire space of the binding site. Therefore, it is the best choice for cavity definition. See the <a href="https://www.informaticsmatters.com/blog/2018/11/23/cavities-and-frankenstein-molecules.html">information provided by InformaticsMatters</a> for more details.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-active-site-preparation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Active site preparation</h3>
+
+  <ol>
+    <li><strong>rDock cavity definition</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Receptor”</em>: <code class="highlighter-rouge">Receptor MOL2</code></li>
+        <li><em>“Reference ligand”</em>: <code class="highlighter-rouge">Frankenstein SDF</code></li>
+        <li><em>“Mapper sphere radius”</em>: <code class="highlighter-rouge">3.0</code></li>
+        <li><em>“Mapper small sphere radius”</em>: <code class="highlighter-rouge">1.0</code></li>
+        <li><em>“Mapper minimum volume”</em>: <code class="highlighter-rouge">100</code></li>
+        <li><em>“Mapper volume increment”</em>: <code class="highlighter-rouge">0</code></li>
+        <li><em>“Mapper grid step”</em>: <code class="highlighter-rouge">0.5</code></li>
+        <li><em>“Cavity weight”</em>: <code class="highlighter-rouge">1.0</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>The meanings of these parameters are too complex to go into in this tutorial. If you are interested, see the <a href="http://rdock.sourceforge.net/wp-content/uploads/2015/08/rDock_User_Guide.pdf">rDock documentation</a> for more details.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="docking-and-scoring">Docking and scoring</h1>
+
+<p>Docking and scoring are now performed, using the following steps: 1) docking using rDock, 2) recombining the results into a single SDF file, 3) TransFS scoring, and 4) SuCOS scoring.</p>
+
+<blockquote class="details">
+  <h3 id="details-differences-with-the-original-study-3"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Differences with the original study</h3>
+
+  <p>This section in the original study differed from this tutorial in the following ways:</p>
+  <ol>
+    <li>Docking was performed on over 100,000 enumerated candidates, rather than the 300 used here.</li>
+    <li>25 different poses were generated per candidate, rather than 5, as in this tutorial.</li>
+    <li>Because of the large number of poses to score (more than a million), the scoring steps were parallelized by splitting into collections. This is skipped in the tutorial.</li>
+    <li>The entire process was repeated 17 times, using a different fragment hit as the receptor structure each time.
+See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here</a> and <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here</a> for more details. A full list of <span class="notranslate">Galaxy</span> histories generated is listed <a href="https://covid19.galaxyproject.org/cheminformatics/Histories/">here</a>.</li>
+  </ol>
+</blockquote>
+
+<h2 id="docking-with-rdock">Docking with rDock</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-docking"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Docking</h3>
+
+  <ol>
+    <li><strong>rDock docking</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Receptor”</em>: <code class="highlighter-rouge">Receptor MOL2</code></li>
+        <li><em>“Active site”</em>: <code class="highlighter-rouge">rbcavity active site</code></li>
+        <li><em>“Ligands”</em>: <code class="highlighter-rouge">Split file</code> collection</li>
+        <li><em>“Number of dockings”</em>: <code class="highlighter-rouge">5</code></li>
+        <li><em>“Number of best poses”</em>: <code class="highlighter-rouge">5</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>For more information about docking, check out the <a href="../cheminformatics/tutorial.html">introductory tutorial</a>. It uses a different tool, AutoDock Vina, rather than rDock, but the general principles are the same.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="collapse-collection-to-a-single-file">Collapse collection to a single file</h2>
+
+<p>Having created a collection to parallelize the docking procedure, we can now recombine the results to a single file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-collapse-collection"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collapse collection</h3>
+
+  <ol>
+    <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Collection of files to collapse into single dataset”</em>: Output of docking step</li>
+      </ul>
+    </li>
+    <li>Rename to <code class="highlighter-rouge">Docked poses SDF</code>.</li>
+  </ol>
+
+</blockquote>
+
+<p>The output file should contain around 1,900 docked poses in SDF format.</p>
+
+<h2 id="pose-scoring-with-transfs">Pose scoring with TransFS</h2>
+
+<p>In this step, we carry out scoring of the poses using TransFS. This is a deep learning approach developed at the University of Oxford, employing augmentation of training data with incorrectly docked ligands to prompt the model to learn from protein-ligand interactions. (<a class="citation" href="#transfs">Scantlebury 2019</a>)</p>
+
+<p>The TransFS scoring returns a value (saved as <code class="highlighter-rouge">&lt;TransFSScore&gt;</code> in the SDF file) between 0 (poor) and 1 (good).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-transfs-scoring"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: TransFS scoring</h3>
+
+  <ol>
+    <li><strong>XChem TransFS pose scoring</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Receptor”</em>: <code class="highlighter-rouge">Receptor PDB</code></li>
+        <li><em>“Ligands”</em>: <code class="highlighter-rouge">Docked poses SDF</code></li>
+        <li><em>“Distance to waters”</em>: <code class="highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="pose-scoring-with-sucos">Pose scoring with SuCOS</h2>
+
+<p>This step involves scoring of the poses from each molecule against the original fragment screening hit ligands using the SuCOS MAX shape and feature overlay algorithm. (<a class="citation" href="#sucos">Leong 2019</a>) The conformation and position of the poses are compared to known structures (i.e. the fragment hits) to determine a score.</p>
+
+<p>SuCOS scoring returns a value (saved as <code class="highlighter-rouge">&lt;Max_SuCOS_Score&gt;</code> in the SDF file) between 0 (poor) and 1 (good).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-sucos-scoring"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SuCOS scoring</h3>
+
+  <ol>
+    <li><strong>Max SuCOS score</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Ligands to be scored”</em>: Output of the TransFS step</li>
+        <li><em>“Set of clusters to score against”</em>: <code class="highlighter-rouge">Hits SDF</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="compound-selection">Compound selection</h1>
+
+<p>The aim of the original study was to select 500 candidate molecules for synthesis and experimental study. In order to do this, the data for all fragment hits had to be combined (i.e. so that each compound was assigned the lowest score from all the fragments). The resulting table was then compared with a list of compounds available from <a href="https://enamine.net/">Enamine</a> and <a href="https://chem-space.com/">Chemspace</a> and the 500 highest scoring matching compounds were selected for purchase.</p>
+
+<p>This step is skipped in the tutorial, as only 100 compounds were tested, using only a single fragment hit structure. If you want, though, check out the <a href="https://usegalaxy.eu/u/timdudgeon/h/top-500-enamine--chemspace-bb">history</a> and <a href="https://usegalaxy.eu/u/timdudgeon/w/filter-results"><span class="notranslate">workflow</span></a> used.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>This tutorial guided you through docking and scoring of a small set of compounds to the MPro protein. Hopefully, you have a better understanding of how docking can be practically used, as well as how the original study was performed.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Galaxy can support large, rapid studies in computational chemistry</p>
+</li>
+                            
+                            <li><p>Protein-ligand docking contributes to the discovery of new drugs</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/computational-chemistry#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="OBoyle2011">O’Boyle, N. M., M. Banck, C. A. James, C. Morley, T. Vandermeersch <i>et al.</i>, 2011 <b>Open Babel: An open chemical toolbox</b>. Journal of Cheminformatics 3:</span>
+    
+    
+    <a href="https://doi.org/10.1186/1758-2946-3-33">10.1186/1758-2946-3-33</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="rdock">Ruiz-Carmona, S., D. Alvarez-Garcia, N. Foloppe, A. B. Garmendia-Doval, S. Juhos <i>et al.</i>, 2014 <b>rDock: A Fast, Versatile and Open Source Program for Docking Ligands to Proteins and Nucleic Acids</b>. PLOS Computational Biology 10: 1–7.</span>
+    
+    
+    <a href="https://doi.org/10.1371/journal.pcbi.1003571">10.1371/journal.pcbi.1003571</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="ngl">Rose, A. S., A. R. Bradley, Y. Valasatava, J. M. Duarte, A. Prlić <i>et al.</i>, 2018 <b>NGL viewer: web-based molecular graphics for large complexes</b>. Bioinformatics 34: 3755–3758.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/bty419">10.1093/bioinformatics/bty419</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="transfs">Scantlebury, J. et al., 2019 <b>Dataset Augmentation Allows Deep Learning-Based Virtual Screening To Better Generalise To Unseen Target Classes, And Highlight Important Binding Interactions</b>.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://www.biorxiv.org/content/10.1101/2020.03.06.979625v1">https://www.biorxiv.org/content/10.1101/2020.03.06.979625v1</a>
+      
+    
+
+</li>
+<li><span id="sucos">Leong, S. et al., 2019 <b>SuCOS is Better than RMSD for Evaluating Fragment Elaboration and Docking Poses</b>.</span>
+    
+    
+    <a href="https://doi.org/10.26434/chemrxiv.8100203.v1">10.26434/chemrxiv.8100203.v1</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://chemrxiv.org/articles/SuCOS_is_Better_than_RMSD_for_Evaluating_Fragment_Elaboration_and_Docking_Poses/8100203/1">https://chemrxiv.org/articles/SuCOS_is_Better_than_RMSD_for_Evaluating_Fragment_Elaboration_and_Docking_Poses/8100203/1</a>
+      
+    
+
+</li>
+<li><span id="Ropp2019">Ropp, P. J., J. C. Kaminsky, S. Yablonski, and J. D. Durrant, 2019 <b>Dimorphite-DL: an open-source program for enumerating the ionization states of drug-like small molecules</b>. Journal of Cheminformatics 11:</span>
+    
+    
+    <a href="https://doi.org/10.1186/s13321-019-0336-9">10.1186/s13321-019-0336-9</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Simon Bray, 2020 <b>Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring (Galaxy Training Materials)</b>. <a href="/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html">/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{computational-chemistry-covid19-docking,
+    author = "Simon Bray",
+    title = "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring (Galaxy Training Materials)",
+    year = "2020",
+    month = "03",
+    day = "27"
+    url = "\url{/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring (Computational chemistry)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring (Computational chemistry)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Simon Bray)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/computational-chemistry/tutorials/covid19-docking/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
