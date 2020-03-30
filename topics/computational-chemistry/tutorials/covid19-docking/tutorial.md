@@ -181,7 +181,7 @@ The next stage is to split the SD-file with the candidate ligands into a set of 
 
 > ### {% icon hands_on %} Hands-on: Split the SD-files
 >
-> 1. **Split file** {% icon tool %} with the following parameters:
+> 1. **Split file to dataset collection** {% icon tool %} with the following parameters:
 >    - *"Select the file type to split"*: `SD-files`
 >    - *"SD-file to split"*: `Enumerated candidates SDF`
 >        - *"Specify number of output files or number of records per file?"*: `Number of output files`
