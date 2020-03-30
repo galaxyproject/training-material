@@ -34,7 +34,7 @@ contributors:
 
 This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](https://covid19.galaxyproject.org/cheminformatics).
 
-In this tutorial, you will perform protein-ligand docking to MPro using rDock ({% cite rdock %}) and scoring the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
+In this tutorial, you will perform protein-ligand docking to MPro using rDock ({% cite rdock %}) and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.
 
 > ### Agenda
 >
