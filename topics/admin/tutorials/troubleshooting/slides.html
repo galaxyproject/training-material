@@ -6,64 +6,448 @@ title: "Galaxy Troubleshooting"
 contributors:
   - martenson
   - natefoo
-
 ---
-class: special, middle
 In system administration...
 # Everything always goes wrong
 
 ---
+# When things go wrong, where do you begin?
+
+--
+
+## LOGS
+
+--
+
+.left[Check **all** the logs]
+- uWSGI log
+- handler logs (if not all-in-one)
+- Pulsar logs
+- nginx error and access logs
+- syslog/messages
+- authlog
+- browser console log
+
+---
+
+# Most common problems
+
+- Startup problems
+- Web/UI problems
+- Tool failures
+- Job execution problems
+- General performance problems
+- Dependency issues
+- Other stuff
+
+---
+# Startup problems
+
+--
+
+Where do you begin? In the...
+
+--
+
+## LOGS
+
+Specifically, uWSGI and job handler logs.
+
+---
+
 # Database migration
 
-In case you see database migration errors during startup you can:
+.reduce90[
+```
+Exception: Your database has version '144' but this code expects version '165'. Please
+backup your database and then migrate the database schema by running 'sh manage_db.sh upgrade'.
+```
+]
 
-* Check DB table `migrate_version` column `version`.
-* Check folder `lib/galaxy/model/migrate/versions/` - the latest migration should match the DB.
-* Clean the `*.pyc` files to make sure there is no remnant from other code revisions.
-  * See [makepyc.py in galaxyproject.galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/files/makepyc.py)
+Use Ansible! This is permanently solved for you.
 
----
-# Client build
+Otherwise, upgrade as instructed.
 
-In case your javascript/css local changes are not visible.
-
-* JavaScript files are located in `client/galaxy/scripts`.
-* CSS files are in `client/galaxy/style/`.
-* Check `client/README.md` for details regarding client build.
-* Run `$ make client` from root folder.
-  * You can also check the `Makefile` in root for other useful targets.
-* The [galaxyproject.galaxy Ansible role](https://github.com/galaxyproject/ansible-galaxy/) builds the client for you
-
-???
-* This should only matter when you modify some of the Galaxy's static assets.
-* Does not affect javascript or style in mako templates.
+.left[If you believe this message is in error, you can:]
+- Check DB table `migrate_version`, column `version`.
+- Check folder `lib/galaxy/model/migrate/versions/` - the latest migration should match the DB.
+- Clean the `*.pyc` files in migrate versions folder to make sure there is no remnant from other code revisions.
+  - See [makepyc.py in galaxyproject.galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/files/makepyc.py).
 
 ---
-class: normal
-# Missing tools
+class: left
+# Database migration
 
-* Restart Galaxy and watch the log for
+**Downgrading** - Perform in this order:
+  1. Downgrade the DB with `manage_db.sh`
+  2. Downgrade Galaxy with `git checkout`
+  3. Clean `*.pyc`
+
+---
+# Stuck in a restart loop
+
+```
+[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
+*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+... bunch of stuff ...
+[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
+*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+... bunch of stuff ...
+[uWSGI] getting YAML configuration from /srv/galaxy/config/galaxy.yml
+*** Starting uWSGI 2.0.18 (64bit) on [Wed Mar  4 16:19:27 2020] ***
+...
+```
+
+1. Open the log *without* following
+2. Scroll to the end
+3. Search/scroll back to the last startup attempt
+4. The lines *directly preceding* should offer some insight
+
+---
+# Stuck in a restart loop
+
+The reason that Galaxy is dying might not be in the log. If it's not, then
+
+If using **systemd** then it should be in `journalctl -u galaxy`
+
+If using something else, it's wherever `stderr` is being redirected to (supervisor?)
+
+Or maybe the system is killing it... (`/var/log/{messages,syslog}`)
+
+---
+# Web/UI Problems
+
+--
+
+Where do you begin? In the...
+
+--
+
+## LOGS
+
+Specifically: uWSGI, nginx, and browser console logs
+
+---
+# 502 Bad Gateway
+
+Your reverse proxy has failed to connect to the Galaxy socket
+
+- Check that Galaxy is running / not in a reboot loop
+- Check that your proxy and Galaxy/uWSGI socket options match
+- Check proxy server logs (e.g. `/var/log/nginx`)
+- Check uWSGI logs for `bind(): Address already in use [core/socket.c line 769]`
+- Check that something is listening on the correct port (`sudo ss -tlpn 'sport = :port'` (demo!) or `sudo lsof -i :port` (demo!))
+  - If it's uWSGI, make sure it's not an old one!
+
+---
+# 504 Gateway Timeout
+
+Or timeout messages in the Galaxy UI
+
+In uWSGI logs:
+```
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+*** uWSGI listen queue of socket "0.0.0.0:8080" (fd: 6) full !!! (101/100) ***
+```
+
+Galaxy is not processing requests in a timely manner
+
+---
+# 504 Gateway Timeout
+
+Use `uwsgitop` (demo!)
+
+- `uwsgitop` state busy?
+
+```console
+uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
+node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
+ WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
+ 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
+```
+
+Process state **D**?
+
+```console
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 uwsgi --yaml ...
+```
+
+Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
+
+Restart Galaxy
+
+.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]
+
+---
+# 504 Gateway Timeout or slow UI
+
+Check load
+
+```console
+$ uptime
+ 16:08:15 up 3 days,  8:34,  8 users,  load average: 0.12, 0.23, 0.24
+```
+
+Averages are 1, 5, 15 minutes.
+
+Average should be <= number of cores (`lscpu`, beware SMT)
+
+More on troubleshooting load later
+
+---
+# Where do you begin? In the...
+
+## LOGS*
+
+--
+
+*often I now begin in Grafana
+
+![Grafana Load Graph](../../images/troubleshooting/grafana-load-graph.png "Grafana Load Graph")
+
+---
+# 504 Gateway Timeout or slow UI
+
+- Investigate load
+  - Web server(s)
+  - Database server
+- Investigate memory usage, swapping
+- Investigate iowait
+
+---
+# Galaxy UI is slow
+
+- [Tutorial from @mvdbeek](https://docs.galaxyproject.org/en/master/dev/finding_and_improving_slow_code.html#profiling)
+- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
+- Use `py-spy`
+
+---
+# Blank page or no CSS/JavaScript
+
+Serving of static content is broken.
+
+- Check browser console for 404 errors.
+- Check proxy error log for permission errors.
+- Verify that your proxy static configuration is correct.
+
+---
+# Tool failures
+
+Tools can fail for a variety of reasons, some valid, some invalid.
+
+Some made up examples follow.
+
+---
+# Tool missing from Galaxy
+
+- Restart Galaxy and watch the log for
 ```console
 Loaded tool id: toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33, version: 1.33 into tool panel....
 ```
 
-* Check `integrated_tool_panel.xml` for
+- After startup, check `integrated_tool_panel.xml` for
 ```xml
 <tool id="toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33" />
 ```
 
-* If it is TS tool check `config/shed_tool_conf.xml` for
+- If it is TS tool check `shed_tool_conf.xml` for
 ```xml
 <tool file="toolshed.g2.bx.psu.edu/repos/iuc/sickle/43e081d32f90/sickle/sickle.xml" guid="toolshed.g2.bx.psu.edu/repos/iuc/sickle/sickle/1.33">
 ...
 </tool>
 ```
 
+- Multiple job handlers? Sometimes they don't all get the update.
+
+---
+# Tool errors
+
+Tool stdout/stderr is available in UI under "i" icon on history dataset
+
+.left[Debugging on the filesystem:]
+1. Set `cleanup_job` to `onsuccess`
+2. Cause a job failure
+3. Go to job working directory (find in logs or `/srv/galaxy/jobs/<hash>/<job_id>`)
+4. Poke around, try running things (`srun --pty bash` considered useful)
+
+Familiarize yourself with the places Galaxy keeps things (demo?)
+
+---
+# Tool errors - stderr
+
+**Galaxy considers *any* output to standard error (stderr) to be an error when no tool profile version is set by a tool.**
+
+Why would it do this????!?!!!11
+
+In the old days, tools were bad about setting the exit code on failure, so it could not be trusted. Galaxy had no functionality to inspect output to decide on failure.
+
+---
+class: left
+# Tool errors
+
+So what if tool stderr contains:
+```console
+Congratulations, running SuperAwesome tool was successful!
+```
+
+What happens: job fails (!!?!?)
+
+Solutions:
+- If the wrapped tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
+- Using current tool development best practices ensures this is the case
+
+---
+class: left
+# Tool errors
+
+Tool output contains:
+```console
+Warning: Discarded 10000 lines of /input/dataset_1.dat because they looked funny
+```
+
+Maybe a problem, maybe not.
+
+Solutions:
+- Check tool input(s) and parameters (maybe requires some biological knowledge)
+- Verify input is not corrupt
+- User education
+
+---
+class: left
+# Tool errors - memory errors
+
+Tool output contains one of:
+```console
+MemoryError                 # Python
+what():  std::bad_alloc     # C++
+Segmentation Fault          # C - but could be other problems too
+Killed                      # Linux OOM Killer
+```
+
+Solutions:
+- Change input sizes or params
+  - Map/reduce?
+- Decrease the amount of memory the tool needs
+- Increase the amount of memory available to the job
+  - Request more memory from cluster scheduler
+  - Use job resubmission to automatically rerun with a larger memory allocation
+- Cross your fingers and rerun the job
+
+---
+class: left
+# Tool errors - system errors
+
+Tool output contains:
+```console
+open(): /input/dataset_1.dat: No such file or directory
+```
+
+Solutions:
+- Verify that `/input/dataset_1.dat` exists.
+  - On node the job ran on
+  - As the user the job ran as
+- Fix the filesystem error (NFS?) and rerun the job
+- See NFS caching errors slide later
+
+---
+class: left
+# Tool errors - dependency problems
+
+Tool output contains:
+```console
+sh: command not found: samtools
+```
+
+Solutions:
+- Verify that `tool_dependency_dir` is accessible *on the cluster, as the user running Galaxy jobs*
+- Verify that tool dependencies are properly installed: Galaxy UI "Admin > Manage dependencies"
+- Use BioContainers (Docker/Singularity)
+
+---
+# Manage Dependencies
+
+An incredibly useful feature to hit unruly tool dependencies with a large hammer.
+
+![Manage Dependencies](../../images/troubleshooting/manage-dependencies.png "Manage Dependencies")
+
+--
+
+(demo!)
+
+---
+# An aside - dependency problems on geriatric Galaxies
+
+Galaxy Tool Shed dependencies are dead.<sup>1</sup> If you don't know what Tool Shed dependencies are (lucky you) skip this slide.
+
+Don't attempt to fix Galaxy Tool Shed dependencies, just update tool and reinstall with Conda.
+
+Put Conda first in [dependency_resolvers_conf.xml](https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample) if you still need to support both.
+
+.reduce70[.footnote[<sup>1</sup> The Tool Shed should only be used for Galaxy Tool configuration files and wrapper scripts]]
+
+---
+class: left
+# Tool errors - dependency problems
+
+Tool output contains:
+```console
+foo: error while loading shared libraries: libdeepthought.so.42: cannot open shared object file: No such file or directory
+```
+
+`foo` was compiled against `libdeepthought.so.42` but it's not on the runtime linker path
+
+Solutions:
+- Reinstall tool dependencies ("Admin > Manage dependencies"). If it still fails<sup>2</sup>:
+  - Determine conda package providing `libdeepthought.so`
+  - Downgrade it to the version that provides `libdeepthought.so.42`
+- Use BioContainers (Docker/Singularity)
+
+.center[.reduce70[.footnote[<sup>2</sup> First, Google the error because someone named Björn has probably already found and fixed the problem.]]]
+
+???
+Galaxy ensures that the correct version(s) of tool(s) immediate dependencies are controlled, but dependencies of dependencies are up to conda. Occasionally, upgrades to these second level dependencies break existing conda packages, requiring package authors to update the first level dependencies to correct the issue.
+
+---
+class: left
+# Tool errors - Empty green history item
+
+1. The tool is not correctly detecting error conditions: inspect stdout/stderr
+2. The tool correctly produced an empty dataset for the given params, inputs
+
+Solutions:
+- Fix the tool wrapper to detect errors
+- User education
+
+---
+# Summary of types of tool failures
+
+- Input/parameter problem (user or tool wrapper author problem)
+- Tool wrapper bug (tool wrapper author problem)
+- Tool bug (tool wrapper author or tool developer problem)
+- Resource problem (sysadmin problem)
+
+--
+
+Everything else: always the sysadmin's problem
+
+---
+# One last word on tool errors
+
+All IUC/devteam tools in the Tool Shed have tests
+
+Use these tests (automateable with [Ephemeris](https://github.com/galaxyproject/ephemeris)!) to verify that the tool works in the basic case
+
+---
+# Job execution problems
+
 ---
 class: smaller
 # Jobs aren't running: always gray
 
-Corresponds to `job.state = 'new'` in database
+Corresponds to `job.state = 'new'` or `'queued'` in database
 
 .left[Check the Galaxy server log for errors. Successful job lifecycle:]
 
@@ -130,7 +514,8 @@ galaxy.tools.execute DEBUG 2019-02-01 14:30:20,559 [p:6590,w:1,m:0] [uWSGIWorker
 galaxy.tools.execute DEBUG 2019-02-01 14:30:20,562 [p:6590,w:1,m:0] [uWSGIWorker1Core2] Executed 1 job(s) for tool testing request: (91.901 ms)
 ```
 
-- "Executed" is a bit misleading - the Job has been created in the "job" table of the database, but is not picked up by a job handler yet.
+- Job is assigned **Galaxy** job ID 21
+- "Executed" is misleading - the Job has been created in the `job` table of the database, but is not picked up by a job handler yet.
 - All of this has occurred in the web worker.
 - If not using mules and "Executed" is the last message you see, verify job assigned to a valid handler.
 
@@ -161,6 +546,7 @@ galaxy.jobs.runners DEBUG 2019-02-01 14:30:21,579 [p:6593,w:0,m:1] [JobHandlerQu
 galaxy.jobs.handler INFO 2019-02-01 14:30:21,585 [p:6593,w:0,m:1] [JobHandlerQueue.monitor_thread] (21) Job dispatched
 ```
 
+- `(21)` at beginning of job log messages is **Galaxy** job ID
 - Job is mapped to destination: `<destination id="slurm"/>`
 - Job is dispatched to job runner plugin: `<plugin id="slurm"/>`
 
@@ -178,7 +564,7 @@ galaxy.jobs.runners.drmaa INFO 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRu
 galaxy.jobs DEBUG 2019-02-01 14:30:21,843 [p:6593,w:0,m:1] [SlurmRunner.work_thread-2] (21) Persisting job destination (destination id: slurm)
 ```
 
-- The job has been dispatched and has been assigned Slurm job ID 19
+- The job has been dispatched and has been assigned **Slurm** job ID 19
 
 ---
 class: smaller
@@ -194,62 +580,78 @@ galaxy.jobs DEBUG 2019-02-01 14:30:51,847 [p:6593,w:0,m:1] [SlurmRunner.work_thr
 galaxy.model.metadata DEBUG 2019-02-01 14:30:51,850 [p:6593,w:0,m:1] [SlurmRunner.work_thread-3] Cleaning up external metadata files
 ```
 
+- `(21/19)` at beginning of job log messages now includes **Slurm** job ID
 - The job is done
 - Its `state` column and its output datasets' `state` columns have been updated to `ok`
 
 ---
-# Jobs aren't running - gray (!)
+# Jobs aren't running
+
+![Job in new state](../../images/troubleshooting/hda-new.png "Job in new state")
+
+Corresponds to `job.state = 'new'` in database
 
 Not yet picked up by the Galaxy job handler subsystem
 
-Solutions:
-- If mules
-  - Ensure no `<handlers>` in `job_conf.xml` or:
-- If single or multiprocess
-  - Ensure that handler ID(s) in `job_conf.xml` match `server_name`(s)
-- If multiprocess, check to ensure that your job handler(s) are running
-  - If yes, restart handler(s)
+Troubleshooting depends on your job handler configuration
 
 ---
-class: smaller
+
+Solutions:
+- If using single process or mules
+  - Ensure no `<handlers>` in `job_conf.xml`
+  - Check handler logs
+- If using `assign_with="db-skip-locked"`
+  - Ensure no `default` attribute in `<handlers>`
+  - Ensure no individual `<handler>`s defined
+  - Ensure `handler` column of `job` table is being set to `_default_`
+  - Ensure handlers started with `--attach-to-pool=job-handlers`
+- If using `assign_with="db-preassign"`
+  - Ensure that handler ID(s) in `job_conf.xml` match `server_name`(s)
+  - Ensure `handler` column of `job` table is being set to valid handler ID
+
+---
+class: left, reduce90
 # Handler ID to server_name match check
 
-.left[Job handler assignment check:]
+Job handler assignment check:
 
 ```gxadmin
 $ grep ' is running$' /path/to/galaxy*.log
 galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler0' is running
 galaxy.web.stack INFO 2019-01-31 15:18:35,228 [MainThread] Galaxy server instance 'handler1' is running
-$ ./gxadmin query job-info 21
+$ gxadmin query job-info 21
 ```
 .reduce70[
-id  | tool_id | state |    handler    | username |        create_time         | job_runner_name | job_runner_external_id
---- | ------- | ----- | ------------- | -------- | -------------------------- | --------------- | -----------------------
-21  | testing | new   | job_handler_0 | admin    | 2019-02-01 14:30:20.540327 |                 | 
+id  | tool_id | state |    handler        | username |        create_time         | job_runner_name | job_runner_external_id
+--- | ------- | ----- | ----------------- | -------- | -------------------------- | --------------- | -----------------------
+21  | testing | new   | **job_handler_0** | admin    | 2019-02-01 14:30:20.540327 |                 |
 ]
 
-The value of the `handler` column in the database **must**<sup>1</sup> match one of the handler `server_name`s the handlers have started as. In this case, `job_handler_0` is not `handler0` or `handler1`, so no handler will handle this job.
+The correct value of the `handler` column in the database varies by job handler assignment method (`<handlers assign_with=...>`):
+- mules: `null` (empty) then `main.job-handlers.<mule_id>` after assignment
+- db-skip-locked: `_default_` then `handlerN` (where `handlerN` is the value of one of your handlers' `--server-name`)
+- db-preassign: `handlerN`
 
-.reduce70[.footnote[<sup>1</sup> Unless using one of the new job handler assignment methods in Galaxy 19.01]]
+In this case, `job_handler_0` is not `handler0` or `handler1` (probably due to a misconfiguration in `<handlers>` section of `job_conf.xml`), so no handler will find this job.
 
 ---
 # An aside - unruly log files
 
-By default, Galaxy web workers and mules all log to a single file. Webless handlers can easily separate, for mules you need [advanced logging configuration](https://docs.galaxyproject.org/en/master/admin/config_logging.html)
+By default, Galaxy web workers and mules all log to a single file. See [advanced logging configuration](https://docs.galaxyproject.org/en/master/admin/config_logging.html) to split mules in to their own files.
 
-tl;dr: add [the second blob 'o YAML here](https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml)<sup>2,3</sup> to your `galaxy.yml`. Most importantly:
+tl;dr: add [the second blob 'o YAML here](https://docs.galaxyproject.org/en/latest/admin/config_logging.html#yaml) to your `galaxy.yml`. Most importantly:
 
 ```yaml
 filename_template: galaxy_{pool_name}_{server_id}.log
 ```
 
-Galaxy subtitutes `{pool_name}` with e.g. `job-handlers` and `{server_id}` with e.g. `1`. Full list of facts in the docs.
-
-.reduce70[.foonote[<sup>2</sup> but wait until after [#7191](https://github.com/galaxyproject/galaxy/pull/7191/) is merged]]
-.reduce70[.foonote[<sup>3</sup> note to self, make a `split_logging` config var that enables this for you]]
+Galaxy subtitutes `{pool_name}` with e.g. `job-handlers` and `{server_id}` with e.g. `1`. Full list of template vars in the docs.
 
 ---
-# Jobs aren't running - gray clock
+# Jobs aren't running
+
+![Job in queued state](../../images/troubleshooting/hda-queued.png "Job in queued state")
 
 Corresponds to `job.state = 'queued'` in database
 
@@ -262,254 +664,91 @@ A handler has seen this job
 Users are *not* informed when they have reached the job limits. Exceeding disk quota also pauses jobs, but users are notified of this.
 
 ---
-# Jobs aren't running - gray clock
+# Jobs aren't running
 
 .left[Check database for:]
-- State (`gxadmin query job-info`)
-- Destination id assigned? (ditto)
+- Destination ID (`gxadmin query job-info`)
+- Job runner external (DRM) ID (`gxadmin query job-info`)
 - Jobs owned by user in non-terminal state if limits in use (`gxadmin query jobs-nonterminal [user]`)
+- Check handler **logs**
+
+If external ID is assigned, job is queued on a cluster. Use cluster queue status tool(s) to investigate further.
 
 ---
-# Jobs aren't finishing - yellow
+# Jobs aren't finishing
+
+![Job in running state](../../images/troubleshooting/hda-running.png "Job in running state")
 
 Corresponds to `job.state = 'running'` in database
 
-The tool/dependency is no longer executing but the job is still "running"
+Get job runner external (DRM) ID (`gxadmin query job-info`), use cluster queue status tool(s) to investigate further.
 
-.left[Solutions:]
-- Check cluster for job
+.left[If the DRM job is finished but the Galaxy job is still "running":]
 - Check last job handler log message for job
 - Setting/collecting metadata can be slow: wait
-- Check handlers as with gray (!)
+- Check handlers health (`py-spy` or `gdb` (demos later!))
 
 ---
-# Quota not being updated for a certain user
+# Overall slow processing of jobs
 
-In the Admin/Users menu you can run `Recalculate Disk Usage` on a certain user.
+Process state **D**?
 
-There is also a command line version: `scripts/set_user_disk_usage.py`
-
-{% comment %}
-![Recalculate Disk Usage Option](images/admin_recalc_usage.png)
-{% endcomment %}
-
----
-class: special
-# Tool errors
-
-Tools can fail for a variety of reasons, some valid, some invalid.
-
-Some made up examples follow.
-
----
-# Tool errors - stderr
-
-**Galaxy considers *any* output to standard error (stderr) to be an error when no tool profile version is set by a tool.**
-
-Why would it do this????!?
-
-In the old days, tools were bad about setting the exit code on failure, so it could not be trusted. Galaxy had no functionality to inspect output to decide on failure.
-
----
-class: left
-# Tool errors
-
-So what if tool stderr contains:
 ```console
-Congratulations, running SuperAwesome tool was successful!
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts/galaxy-main --server-name=handler0 ...
 ```
 
-What happens: job fails (!!?!?)
+Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
 
-Solutions:
-- If the wrapped tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
+.reduce70[.footnote[A later slide will cover how to investigate kernel uninterruptable sleep processes]]
 
 ---
-class: left
-# Tool errors - stderr
+# Overall slow processing of jobs
 
-Tool stderr contains:
+Process state *not* **D**?
+
+- Use `py-spy` (demo!)
+- Use `gdb` (demo!)
+
+---
+# General performance problems
+
+---
+# Kernel uninterruptable sleep
+
+Process state **D**?
+
 ```console
-Warning: File /galaxy/job/working/foo.tmp created in the future!
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+galaxy    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 python3 scripts/galaxy-main --server-name=handler0 ...
 ```
 
-The system running the job has an incorrect clock, this most likely does not affect the correctness of results.
+Kernel uninterruptable sleep. Probably IO. Check filesystems, disks.
 
-Solutions:
-- Fix the problem (clock)
-- If the wrapped tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
+- Investigate `/proc/<pid>/fd` (demo!) or `lsof -p <pid>` (demo!)
+- Use `strace` (demo!)
 
----
-class: left
-# Tool errors - stderr
-
-Tool stderr contains:
-```console
-Warning: Discarded 10000 lines of /path/to/input/dataset_1.dat because they looked funny
-```
-
-Maybe a problem, maybe not.
-
-Solutions:
-- Check tool input(s) and parameters
-- Verify input is not corrupt
-- If behavior is expected and the tool uses proper exit codes, use `<tool profile="16.04">` or later to ignore stderr
-
----
-class: left
-# Tool errors - memory errors
-
-Tool stderr contains one of:
-```
-MemoryError                 # Python
-what():  std::bad_alloc     # C++
-Segmentation Fault          # C - but could be other problems too
-Killed                      # Linux OOM Killer
-```
-
-Solutions:
-- Change input sizes or params
-  - Map/reduce?
-- Decrease the amount of memory the tool needs
-- Increase the amount of memory available to the job
-  - Stop other jobs
-  - Add memory
-  - Cluster (and reserve memory for jobs)
-  - Use job resubmission to automatically rerun with a larger memory allocation
-- Cross your fingers and rerun the job
-
----
-class: left
-# Tool errors - system errors
-
-Tool stderr contains:
-```console
-open(): /path/to/input/dataset_1.dat: No such file or directory
-```
-
-Verify that `dataset_1.dat` exists.
-
-Solutions:
-- Fix the filesystem error (NFS?) and rerun the job
-- See NFS caching errors slide later
-
----
-class: left
-# Tool errors - dependency problems
-
-Tool stderr contains:
-```console
-sh: command not found: samtools
-```
-
-Solutions:
-- Verify that `tool_dependency_dir` is accessible *on the cluster*
-- Verify that tool dependencies are properly installed: Galaxy UI "Admin > Manage dependencies"
-- Install dependencies from Conda/Bioconda or Docker/Singularity/BioContainers
-
----
-# An aside - dependency problems on geriatric Galaxies
-
-Galaxy Tool Shed dependencies are dead.<sup>4</sup> If you don't know what Tool Shed dependencies are (lucky you) skip this slide.
-
-Don't attempt to fix Galaxy Tool Shed dependencies if at all possible, just move them out of the way and reinstall with Conda
-
-Put Conda first in [dependency_resolvers_conf.xml](https://github.com/galaxyproject/galaxy/blob/dev/config/dependency_resolvers_conf.xml.sample) if you still need to support both.
-
-.reduce70[.footnote[<sup>4</sup> The Tool Shed should only be used for Galaxy Tool configuration files and wrapper scripts]]
-
----
-class: left
-# Tool errors - dependency problems
-
-Tool stderr contains:
-```console
-foo: /lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_2.23' not found (required by foo)
-```
-
-`foo` was compiled against Glibc 2.23 but Glibc < 2.23 is installed. Galaxy server OS is probably newer than cluster node OS.
-
-Solutions:
-- Reinstall dependencies from Conda/Bioconda or Docker/Singularity/BioContainers
-- For local tool dependencies:
-  - Verify that tool dependencies were properly installed
-  - Recompile `foo` on the "oldest" system on which it might run
-
----
-class: left
-# Tool errors - dependency problems
-
-Tool stderr contains:
-```console
-deepthought: error while loading shared libraries: libdeepthought.so.42: cannot open shared object file: No such file or directory
-```
-
-`foo` was compiled against `libdeepthought.so.42` but it's not on the runtime linker path
-
-Solutions:
-- Reinstall dependencies from Conda/Bioconda or Docker/Singularity/BioContainers
-- Tool Shed Dependency or local dependencies:
-  - Modify dependency's `env.sh` to set `$LD_LIBRARY_PATH` as appropriate
-  - Install `libdeepthought` on target system
-  - Recompile `deepthought` with `-Wl,-rpath=/path/to/libdeepthought/dir`
-  - Recompile `deepthought` without `-ldeepthought` (if possible)
-
----
-class: left
-# Tool errors - Empty green history item
-
-1. The tool is not correctly detecting error conditions: stderr, exit code?
-2. The tool correctly produced an empty dataset for the given params, inputs
-
-Solutions:
-- If the tool uses proper exit codes, use `<tool profile="16.04">` or later to recognize them
-- Fix the tool wrapper to detect errors
-- User education
-
----
-class: left
-# One last word on tool errors
-
-All Devteam/IUC in the Tool Shed tools have tests
-
-Use these tests (now automateable with [Ephemeris](https://github.com/galaxyproject/ephemeris)!) to verify that the tool works in the basic case
-
-If yes:
-- Input/parameter problem (user or tool wrapper author problem)
-- Tool wrapper bug (tool wrapper author problem)
-- Tool bug (tool wrapper author or tool developer problem)
-- Resource problem (sysadmin problem)
-If no:
-- Sysadmin problem
-
----
-# Galaxy UI is slow
-
-- Investigate load
-  - Web server(s)
-  - Database server
-- Investigate memory usage, swapping
-- Investigate iowait
-
----
-# Galaxy UI is slow
-
-- Use Galaxy [heartbeat](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/galaxy.yml.sample#L1036) (demo!)
-- Use `gdb` (demo in a bit!)
+.reduce70[.footnote[This slide covers how to investigate kernel uninterruptable sleep processes]]
 
 ---
 # Local or Network FS slow/down
 
-- Use `iostat` to see device performance (demo!)
+- Use `iostat` and/or `nfsiostat` to see device performance (demo!)
 - Use `dstat` to see pretty device performance summary (demo!)
 - Use `time dd` (quick and dirty) or `fio` to test write performance (demo!)
+- Use Wireshark
+
+![Packet capture in Wireshark](../../images/troubleshooting/wireshark.png "Packet capture in Wireshark")
+
+---
+# Local or Network FS slow/down
 
 Solutions:
 - Don't put the Galaxy server in that FS. Local distribution, CVMFS, ??
-- Install Galaxy in two places and use [Pulsar Embedded Mode](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101) with [file actions](https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging) to rewrite paths<sup>5</sup>
+- Install Galaxy in two places and use [Pulsar Embedded Mode](https://github.com/galaxyproject/galaxy/blob/8c2066f07ac7bb48c59cf8378e5a852e6fb82a4e/config/job_conf.xml.sample_advanced#L101) with [file actions](https://pulsar.readthedocs.io/en/latest/galaxy_conf.html#data-staging) to rewrite paths<sup>3</sup>
 - Get a better network FS
 
-.reduce70[.footnote[<sup>5</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]
+.reduce70[.footnote[<sup>3</sup> Ply @jmchilton with McDonalds hashbrowns for more Pulsar Embedded Mode documentation]]
 
 ---
 # NFS caching errors
@@ -521,46 +760,8 @@ galaxy:
     retry_job_output_collection: 5
 ```
 
-[retry_job_output_collection](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/jobs/__init__.py#L1229)
+[retry_job_output_collection](https://github.com/galaxyproject/galaxy/blob/476b1948190436664581cfe56c8c1c1dcc0b2370/lib/galaxy/jobs/__init__.py#L1469)
 
----
-# Hung server processes
-
-Use `uwsgitop` (demo!)
-
-- `uwsgitop` state busy?
-
-```console
-uwsgi-2.0.17.1 - Fri Feb  1 17:13:59 2019 - req: 0 - RPS: 0 - lq: 0 - tx: 0
-node: localhost - cwd: /srv/galaxy/server - uid: 999 - gid: 999 - masterpid: 1925
- WID    %       PID     REQ     RPS     EXC     SIG     STATUS  AVG     RSS     VSZ     TX      ReSpwn  HC      RunT    LastSpwn
- 1      12.7    3453    59962   1       13      0       busy    89ms    0       0       536.0M  1       0       450m    09:35:36
-```
-
-- Process state D?
-
-```console
-USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-g2main    3440 17.2  5.2 1696480 863536 ?      D    Nov10 167:46 /cvmfs/main.galaxyproject.org/venv/bin/uwsgi --yaml ...
-```
-
-Kernel uninterruptable sleep - normal unless stuck. Probably IO. Check filesystems, disks.
-
----
-# Hung server processes
-
-- Investigate `/proc/pid` especially `fd`
-- Use `strace` (demo!)
-- Use `gdb` (demo!)
-
----
-# Undead processes
-
-```
-bind(): Address already in use [core/socket.c line 769]
-```
-
-Use `lsof -i :<port>` (demo!)
 
 ---
 class: left
@@ -587,27 +788,6 @@ This attempts to shut down gracefully, waiting for (by default) 60 seconds befor
 To alter the grace period, set the [*reload-mercy options](https://uwsgi-docs.readthedocs.io/en/latest/Options.html).
 
 ---
-# 502 Bad Gateway
-
-Your reverse proxy has failed to connect to the Galaxy socket
-
-- Check that your proxy and Galaxy/uWSGI socket options match
-- Check proxy server logs (e.g. `/var/log/nginx`)
-- Check that something is listening on the correct port (`lsof -i host:port` or `lsof -i :port`)
-
----
-# Remember ALL the log files
-
-All may be relevant:
-- uWSGI log
-- handler logs
-- Pulsar logs
-- nginx access, error logs
-- syslog/messages
-- authlog
-- browser console log
-
----
 # Database problems
 
 Slow queries, high load, etc.
@@ -615,10 +795,16 @@ Slow queries, high load, etc.
 - Use `EXPLAIN ANALYZE` (demo!)
   - [Example of the "jobs ready to run" query](https://gist.github.com/natefoo/da46bea8136ba67d65f616c86a27c454)
   - `database_engine_option_echo` (but warning, extremely verbose)
+  - `slow_query_log_threshold` logs to Galaxy log file
   - `sentry_sloreq_threshold` if using Sentry
+  - [Postgres EXPLAIN Visualizer (PEV)](https://tatiyants.com/pev/#/plans) considered useful ([demo data](https://gist.github.com/hexylena/467c7726b5ab9e18c47080893dbc072e))
 - Use `VACUUM ANALYZE`
+- `gxadmin query pg-*` commands
 
 Increase `shared_buffers`. 2GB on Main (16GB of memory on VM)
+
+---
+# Other stuff
 
 ---
 # error: [Errno 32] Broken pipe
@@ -634,7 +820,7 @@ compilation terminated.
 error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
 ```
 
-Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/)
+Find `Python.h` on [packages.ubuntu.com](http://packages.ubuntu.com/) and install that package (hint: development package for Python 3)
 
 ---
 # Other stuff
@@ -668,13 +854,25 @@ $ sudo scontrol update nodename=localhost state=resume
 ```
 
 ---
-class: special, middle
+# User over quota
+
+Instruct user (or use impersonate) to check for *deleted* but not *purged* histories
+
+In the Admin/Users menu you can run `Recalculate Disk Usage` on a certain user
+
+There is also a command line version: `scripts/set_user_disk_usage.py`
+
+{% comment %}
+![Recalculate Disk Usage Option](images/admin_recalc_usage.png)
+{% endcomment %}
+
+---
 # Any troubling Galaxy situations you have?
 
 ---
 # Where to get help
 
+- [Admins Chat](https://gitter.im/galaxyproject/admins)
 - [Galaxy Help](https://help.galaxyproject.org/)
 - [galaxy-dev Mailing list](http://dev.list.galaxyproject.org/)
-- [IRC](https://wiki.galaxyproject.org/Support/IRC): \#galaxyproject on Freenode
 - [Hub Support page](https://galaxyproject.org/support/)

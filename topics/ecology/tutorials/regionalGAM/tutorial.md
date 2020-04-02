@@ -11,7 +11,9 @@ objectives:
     - "Compute temporal abundance trends"
 time_estimation: "2h30m"
 key_points:
-    - ""
+    - "We sequentially computed phenology, abundance index, trend and model this trend"
+    - "We learned how to interpret a trend using modeling and data visualization"
+    - "This tool compute phenology in order to predict missing data, no definitive conclusion can be made on the phenology using this tool"
 contributors:
     - claraurf
     - emichn
@@ -64,21 +66,12 @@ The goal of the first step is to upload and prepare the file so that it will be 
 >
 {: .hands_on}
 
-This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of indivudals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.
+This dataset gathers years of records of the presence of butterfly species per site and per day. Columns indicates species names ("SPECIES"), observation site ("SITE"), date of the observation ("YEAR","MONTH","DAY") and number of individuals ("COUNT"). It compiles counts for the Gatekeeper (Pironia tithonus) collected between 2003 and 2012 and extracted from five European BMSs (United Kingdom, Netherlands, France, Germany, and Catalonia-Spain). The Gatekeeper has one generation per year and feeds mainly on Poaceae. It is found in the Central and Southern Europe, North Africa Anatolia, and Caucasus.
 
 ![Gatekeeper (Pironia tithonus)](../../images/regionalGAM/Gatekeeper-Pyronia_tithonus-male.jpg "Gatekeeper (Pironia tithonus) Charles J Sharp")
 
 
 ## Prepare the data
-
-The downstream tools require Tabular file and not CSV. So we need first to convert our CSV file to a tabular
-
-> ### {% icon hands_on %} Hands-on: Convert CSV to Tabular
-> 1. Run **CSV to tabular** {% icon tool %} with the following parameters:
->       - {% icon param-file %} *"CSV file"*: imported dataset
->       - *"Separator"*: ","
->       - *"Header in file"*: Yes
-{: .hands_on}
 
 The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header `SITE` of the dataset you are using is really long and the `SITES` are classified into sub-sites (like `ESBMS.12`, `ESBMS.28`, `ESBMS.55`, etc).
 
@@ -86,7 +79,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 
 > ### {% icon hands_on %} Hands-on: Downsample and hide some information
 > 1. **Text reformatting with awk** {% icon tool %} with the following parameters:
->       - {% icon param-file %} *"Select cells from"*: output of **CSV to tabular** {% icon tool %}
+>       - {% icon param-file %} *"Select cells from"*: Uploaded CSV dataset file {% icon tool %}
 >       - *"AWK Program"*:
 >
 >
@@ -95,6 +88,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 >
 >
 > The first line will skip and print the header and the second will print all the lines where NLBMS is found
+> Warning: depending on the Galaxy instance your are using, this tool can not appear on the tool panel. Another solution can be to use **Select lines that match an expression** {% icon tool %} to select lines matching 'NLBMS' pattern in addition to **Select first lines from a dataset** {% icon tool %} specifying keeping the first line, so the header, then **Concatenate datasets tail-to-head** {% icon tool %} to recreate a CSV file from concatenating the header and NLBMS lines of the original csv file.
 >
 {: .hands_on}
 
@@ -157,7 +151,7 @@ Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We wan
 
 The second step of any Regional GAM data analysis is making sure to have a dataset of only one specific species that you will then be able to use. If you want to create a graph showing abundance evolution by years of several species, you will have to superimpose the graphs on one another.
 
-As the dataset is quite big and may countain heterogeneous information, we need to know whether the data are about one species or more.
+As the dataset is quite big and may contain heterogeneous information, we need to know whether the data are about one species or more.
 
 > ### {% icon hands_on %} Hands-on: How many species are taken into account in this dataset?
 >
@@ -317,9 +311,10 @@ This shows the abundance of *Pyronia tithonus*, over the weeks. We can see there
 >    - *"Column to plot on y-axis"*: `6`
 >    - *"Plot title"*: add a meaningful title (e.g. `Pyronia tithonus phenology stacked visualization`)
 >    - *"Label for x axis"*: add a meaningful label (e.g. `Day number`)
->    - *"Label for y axis"*: add a meaningful label <!-- TODO (e.g. ????? Ask Benjamin or Reto to know more)-->
+>    - *"Label for y axis"*: add a meaningful label  (e.g. `nm value`)
 >    - *"Type of plot"*: `Line only`
 >    - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot` to superimpose years
+>    - *"column differentiating the different groups"*: `2` to affect one coulor by year
 >    - *"Color schemes to differentiate your groups"*: `set 3` or any set of color with more than 10 colors as there are 10 years in our dataset.
 >
 {: .hands_on}
@@ -385,7 +380,7 @@ We now would like to create a file showing the abundance index per year of a cho
 
 > ### {% icon hands_on %} Hands-on: Generate an abundance index
 > 1. **Abundance index** {% icon tool %} with the following parameters:
->     -  *"Count file"*: output from **Tabular to CSV**, that should be named `Counting file` and/or tagged `Count`
+>     -  *"Count file"*: output from **Text reformatting with awk**, that should be named `Counting file` and/or tagged `Count`
 >     -  *"Flight curve output"*: output from **flight curve**
 {: .hands_on}
 
@@ -419,34 +414,54 @@ Sometimes the expected temporal trend can't be done on dataset. If you want this
 
 We would like to know if the year has an influence on the abundance of a species. We will use a linear regression to do that.
 
+
+> ### {% icon details %} More details about the statistics
+> The model fitted to the data is:
+> $$ Y_i = \alpha + \beta x_i + \epsilon_i $$
+> with $$Y_i$$ = value of the dependent variable for the unit $$i$$
+> $$\alpha$$ = intercept
+> $$\beta$$ = slope
+> $$x_i$$ = value of the explanatory variable for the unit $$i$$
+> $$e_i$$ = residual for the unit $$i$$
+>
+{: .details}
+
 > ### {% icon hands_on %} Hands-on: Model temporal trend with linear regression
 > 1. **Model temporal trend with a simple linear regression** {% icon tool %}
 >    - {% icon param-file %} *"File generated by the glmmpql/Expected temporal trend tool"*: tabular output of **temporal trend**
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 {: .hands_on}
 
-Have a look at the text file result. This is the output of the linear model applied in R.
+Have a look at the text file result. This is the output of the linear model.
 
+![Output from the "model temporal trend with simple linear regression" tool ](../../images/regionalGAM/output-simple-linear-regression.png)
+
+Details about the output from the tool
+
+1. The formula of the model following this format: "Model : dependent variable ~ explanatory variable"
+2. The estimated values of the coefficients
+3. The standard error of the coefficients
+4. The value of the "hypothesis test statistic"
+5. The probability value.
+
+> ### {% icon question %} Questions
 >
-> > ### {% icon question %} Questions
-> >
-> > 1. What are the estimates of the regression coefficients?
-> > 2. Can we use this model to make good predictions?
-> > 3. Is the test p-value significant?
-> >
-> > > ### {% icon solution %} Solutions
-> > >
-> > > 1. Intercept is 183.33852 and the slope (Year) is -0.08952.
-> > > 2. No, the residual standard error is high.
-> > > 3. Yes (0.0282 < 0.05).
-> > >
-> > {: .solution}
-> {: .question}
+> 1. What are the estimates of the regression coefficients?
+> 2. Can we use this model to make good predictions?
+> 3. Is the test p-value significant?
 >
+> > ### {% icon solution %} Solutions
+> >
+> > 1. Intercept is 183.33852 and the slope (Year) is -0.08952.
+> > 2. No, the residual standard error is high.
+> > 3. Yes (0.0282 < 0.05).
+> >
+> {: .solution}
+{: .question}
 
 We can also test for autocorrelation in the data.
 
-> ### {% icon hands_on %} Hands-on: Model temporal trend taking into account autocorrelation of residuals
+> ### {% icon hands_on %} Hands-on: Check if there is autocorrelation of residuals
 > 1. **Autocorrelation test check for temporal autocorrelation in the residuals** {% icon tool %} with the following parameters.
 >    - {% icon param-file %} *"gls model"*: tabular output of **Model temporal trend**
 {: .hands_on}
@@ -454,9 +469,31 @@ We can also test for autocorrelation in the data.
 ![Autocorrelation test graph](../../images/regionalGAM/Autocorrelation_test.png)
 
 
-Have a look at this plot.
+Have a look at this plot. We can see that one of the value is above the threshold (blue dashed line), therefore we observe autocorrelation in the data. We will now take into account the autocorrelation in the next model.
+
+## Take into account the autocorrelation
 
 > ### {% icon hands_on %} Hands-on: Model temporal trend taking into account autocorrelation of residuals
+> 1. **Linear regression ajusted for autocorrelation in the residuals** {% icon tool %} with the following parameters.
+>    - {% icon param-file %} *"File generated by the glmmpql/Expected temporal trend tool"*: tabular output of **temporal trend**
+>    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
+{: .hands_on}
+
+For this step you can use the scratchbook function in order to see the results of both models at the same time.
+
+> ### {% icon details %} How to use the scratchbook
+> You can follow this tutorial if you want to learn how to use the scratchbook.
+> https://usegalaxy.org/tours/core.scratchbook
+>
+{: .details}
+
+![Plot of temporal trend with trend line](../../images/regionalGAM/output-both-models.png)
+
+Here you can compare the models using the AIC for Akaike information criterion. We can see that the AIC is lower in the model taking the autocorrelation into account. A lower AIC value is associated with less information loss.
+We will therefore, based on the AIC, select the model taking into account the autocorrelation.
+We can now represent the data with the trend line from the model.
+
+> ### {% icon hands_on %} Hands-on: Plot the data and the trend line from the model
 > 1. **Plot abundance with trend line** {% icon tool %} with the following parameters.
 >    - {% icon param-file %} *"File generated by the ab_index tool"*: output from **abundance index**
 >    - {% icon param-files %} *"gls model"*: outputs of **Model temporal trend with a simple linear regression**.
@@ -464,7 +501,7 @@ Have a look at this plot.
 
 ![Plot of temporal trend with trend line](../../images/regionalGAM/trend_simple.png)
 
-Here you can see the temporal trends modeled from the simple regression. You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.
+You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.
 
 # Conclusions
 {:.no_toc}

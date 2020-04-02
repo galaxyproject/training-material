@@ -10,6 +10,15 @@ layout: base
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages | split: ", " %}
 
+{% if topic.gitter %}
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: '{{ topic.gitter }}'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+{% endif %}
+
 <div class="container main-content">
     <section>
         <h1>{{ topic.title }}</h1>
@@ -24,95 +33,43 @@ layout: base
         </ul>
         {% endif %}
 
-        <h2 id="material">Material</h2>
-        <table class="table table-responsive table-striped">
-            <tr>
-                <th>Lesson</th>
-                <th>Slides</th>
-                <th>Hands-on</th>
-
-                {% if topic.type == "use" %}
-                <th>Input dataset</th>
-                <th>Workflows</th>
-                <th>Galaxy tour</th>
-                {% endif %}
-
-                {% if instances[topic.name].supported %}
-                <th>Galaxy instances</th>
-                {% endif %}
-            </tr>
-
-            {% for material in topic_material %}
-                {% if material.enable == nil or material.enable == true %}
-                        <script type="application/ld+json">
-                            {% include _includes/material.jsonld material=material topic=topic site=site %}
-                        </script>
-                    <tr>
-                        <td>
-                            {{ material.title }}
-                            <div class="">
-                            {% if material.level %}
-                                {% include _includes/difficulty-indicator.html level=material.level %}
-                            {% endif %}
-                            {% if material.tags %}
-                                  {% for tag in material.tags %}
-                                       <span class="label label-default" style="{{ tag | colour_tag }}">{{ tag  }}</span>
-                                  {% endfor %}
-                            {% endif %}
-                        </div>
-                        </td>
-                        {% if material.type == "introduction" %}
-                            <td>
-                                {% if material.slides %}
-                                <a class="topic-icon" href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">
-                                  {% icon slides %}
-                                </a>
-                                {% endif %}
-                            </td>
-                            <td></td>
-                            {% if topic.type == "use" %}
-                                <td></td>
-                                <td></td>
-                            {% endif %}
-                            {% if instances[topic.name].supported %}
-                                <td></td>
-                            {% endif %}
-                        {% elsif material.type == "tutorial" %}
-                            <td>
-                                {% include _includes/resource-slides.html material=material topic=topic.name %}
-                            </td>
-                            <td>
-                                {% include _includes/resource-handson.html material=material topic=topic.name %}
-                            </td>
-
-                            {% if topic.type == "use" %}
-                                <td>
-                                    {% include _includes/resource-zenodo.html material=material topic=topic.name %}
-                                </td>
-                                <td>
-                                    {% include _includes/resource-workflows.html material=material topic=topic.name %}
-                                </td>
-                                <td>
-                                    {% include _includes/resource-tours.html material=material topic=topic.name %}
-                                </td>
-                            {% endif %}
-
-                            <td>
-                                {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %}
-                            </td>
-                        {% endif %}
-                    </tr>
-                {% endif %}
-            {% endfor %}
-        </table>
+        {% unless topic.subtopics %}<div id="tutorial_list">{% endunless %}
+            <h2 id="material">Material</h2>
+            {% unless topic.subtopics %}
+            <div class="search_box">
+                {% icon search %}
+                <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+                <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
+            </div>
+            {% endunless %}
+            {% if topic.subtopics %}
+              {% for subtopic in topic.subtopics %}
+                <h3>{{ subtopic.title}}</h3>
+                {{ subtopic.description }} </br></br>
+                {% include _includes/tutorial_list.html sub=subtopic %}
+              {% endfor %}
+              <div id="tutorial_list">
+              <h3> Other </h3>
+              <div class="search_box">
+                {% icon search %}
+                <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
+                <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
+              </div></br>
+              Assorted other tutorials </br></br>
+              {% include _includes/tutorial_list.html sub="other" %}
+            {% else %}
+               {% include _includes/tutorial_list.html %}
+            {% endif %}
+        </div>
 
         {% if topic.type == "use" %}
             <h2 id="docker_image">Galaxy instances</h2>
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
             {% if topic.docker_image and topic.docker_image != "" %}
                 <p>You can also use the following Docker image for these tutorials:</p>
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
-                <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
+                <p>NOTE: Use the -d flag at the end of the command if you want to automatically download all the data-libraries into the container.</p>
+                <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>. This instance will contain all the tools and workflows to follow the tutorials in this topic. Login as admin with password admin to access everything.</p>
             {% endif %}
         {% endif %}
 
@@ -156,3 +113,6 @@ layout: base
 </div>
 
 {% include _includes/default-footer.html %}
+
+
+

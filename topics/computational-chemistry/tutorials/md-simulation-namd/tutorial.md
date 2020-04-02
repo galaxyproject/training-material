@@ -51,7 +51,7 @@ contributors:
 
 In this tutorial we will perform a simulation with the popular [NAMD](http://www.ks.uiuc.edu/Research/namd/) molecular dynamics software. Please note NAMD tools are not currently available on a public Galaxy server due to licensing issues. If you are interested in following this tutorial, you will need to download the [BRIDGE docker container](https://github.com/scientificomputing/BRIDGE) and [download NAMD](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=NAMD) yourself.
 
-This tutorial is made up of two parts. In the first section, we will look at preparation of a system (solvation, charge neutralisation, energy minimisation) using CHARMM. In the second section, we will perform an equilibration and production simulation, using NAMD. If you already completed the [Setting up molecular systems]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.md %}) tutorial, which covers the use of the CHARMM graphical user interface (GUI), you have already prepared your system, so go straight to the [second section](#md-simulations-with-namd), using the files you prepared earlier.
+This tutorial is made up of two parts. In the first section, we will look at preparation of a system (solvation, charge neutralisation, energy minimisation) using CHARMM. In the second section, we will perform an equilibration and production simulation, using NAMD. If you already completed the [Setting up molecular systems]({% link topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.md %}) tutorial, which covers the use of the CHARMM graphical user interface (GUI), you have already prepared your system, so go straight to the [second section](#md-simulations-with-namd), using the files you prepared earlier.
 
 The process can be accomplished by selecting each tool from the tools menu, or by importing the workflow. The workflow method is most efficient and the individual tools used in the workflows are discussed below. The entire workflow (preparation + simulation) is shown below for [CHARMM and NAMD](#workflows).
 
@@ -190,12 +190,12 @@ This tool runs classical molecular dynamics simulations in NAMD using an NPT ens
 
 Both the CHARMM preparatory workflow and the NAMD simulation workflow are available as an alternative to executing individual tools.
 
-![Snapshot of CHARMM and NAMD analysis workflow]({{ site.baseurl }}{% link topics/computational-chemistry/images/NAMD_CHARMMGUI_workflow.png %} "A simple simulation workflow starting with CHARMM for setup and NAMD to continue the production simulation")
+![Snapshot of CHARMM and NAMD analysis workflow]({% link topics/computational-chemistry/images/NAMD_CHARMMGUI_workflow.png %} "A simple simulation workflow starting with CHARMM for setup and NAMD to continue the production simulation")
 
-![Snapshot of NAMD analysis workflow]({{ site.baseurl }}{% link topics/computational-chemistry/images/NAMD_workflow.png %} "A simple NAMD simulation workflow")
+![Snapshot of NAMD analysis workflow]({% link topics/computational-chemistry/images/NAMD_workflow.png %} "A simple NAMD simulation workflow")
 
 # Conclusion
 {:.no_toc}
-After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
+After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 
 

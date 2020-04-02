@@ -1,0 +1,495 @@
+{
+  "uuid": "471df293-caf4-4b42-b9a2-05a8c12644de",
+  "tags": [
+    "transcriptomics"
+  ],
+  "format-version": "0.1",
+  "name": "CelSeq2: Single Batch (mm10)",
+  "steps": {
+    "0": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "d46989fb-ef46-4506-8932-d66cee38e62a",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{\"collection_type\": \"paired\"}",
+      "id": 0,
+      "uuid": "c451df86-a25e-409c-9f2e-33c22a0f1bb9",
+      "errors": null,
+      "name": "Input dataset collection",
+      "label": "Batch",
+      "inputs": [],
+      "position": {
+        "top": 293.9166717529297,
+        "left": 286
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_collection_input"
+    },
+    "1": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "2c66b77f-5ee0-4991-971c-3c43d8e7841d",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 1,
+      "uuid": "4ac7860e-01d4-4009-b1fd-899fab778eb5",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "Barcodes (single-col)",
+      "inputs": [],
+      "position": {
+        "top": 375,
+        "left": 302.5
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "2": {
+      "tool_id": null,
+      "tool_version": null,
+      "outputs": [],
+      "workflow_outputs": [
+        {
+          "output_name": "output",
+          "uuid": "7ca9e0df-159c-43f7-a0b3-e546fcd9b2c9",
+          "label": null
+        }
+      ],
+      "input_connections": {},
+      "tool_state": "{}",
+      "id": 2,
+      "uuid": "0455bae6-58da-4ec3-9688-72aba9f676fe",
+      "errors": null,
+      "name": "Input dataset",
+      "label": "GTF file (UCSC)",
+      "inputs": [],
+      "position": {
+        "top": 651.9166717529297,
+        "left": 313.5
+      },
+      "annotation": "",
+      "content_id": null,
+      "type": "data_input"
+    },
+    "3": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.3.2",
+      "tool_version": "0.5.3.2",
+      "outputs": [
+        {
+          "type": "input",
+          "name": "out"
+        },
+        {
+          "type": "input",
+          "name": "out1"
+        },
+        {
+          "type": "input",
+          "name": "out2"
+        },
+        {
+          "type": "txt",
+          "name": "out_log"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "out2",
+          "uuid": "c24e1482-bbff-4a22-8747-2ab0330fb5af",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "barcodes|filter_barcode_file": {
+          "output_name": "output",
+          "id": 1
+        },
+        "input_type|input_readpair": {
+          "output_name": "output",
+          "id": 0
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"extract_method\": \"\\\"string\\\"\", \"input_type\": \"{\\\"input_readpair\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"barcode\\\": {\\\"barcode_select\\\": \\\"first_read_only\\\", \\\"__current_case__\\\": 0}, \\\"type\\\": \\\"paired_collection\\\", \\\"__current_case__\\\": 2}\", \"__rerun_remap_job_id__\": null, \"bc_pattern\": \"\\\"NNNNNNCCCCCC\\\"\", \"print_log\": \"\\\"true\\\"\", \"prime3\": \"\\\"true\\\"\", \"quality\": \"{\\\"quality_selector\\\": \\\"false\\\", \\\"__current_case__\\\": 0}\", \"barcodes\": \"{\\\"filter_correct\\\": \\\"false\\\", \\\"filter_barcode_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"use_barcodes\\\": \\\"yes\\\"}\"}",
+      "id": 3,
+      "tool_shed_repository": {
+        "owner": "iuc",
+        "changeset_revision": "99aea37a7ff7",
+        "name": "umi_tools_extract",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "0b94d2ea-1889-4b88-b0a2-ac7b0a3452e5",
+      "errors": null,
+      "name": "UMI-tools extract",
+      "post_job_actions": {
+        "HideDatasetActionout_log": {
+          "output_name": "out_log",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionout1": {
+          "output_name": "out1",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionout": {
+          "output_name": "out",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        }
+      },
+      "label": null,
+      "inputs": [
+        {
+          "name": "input_type",
+          "description": "runtime parameter for tool UMI-tools extract"
+        },
+        {
+          "name": "barcodes",
+          "description": "runtime parameter for tool UMI-tools extract"
+        }
+      ],
+      "position": {
+        "top": 292.9166717529297,
+        "left": 554.5
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.3.2",
+      "type": "tool"
+    },
+    "4": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.5.2b-2",
+      "tool_version": "2.5.2b-2",
+      "outputs": [
+        {
+          "type": "txt",
+          "name": "output_log"
+        },
+        {
+          "type": "interval",
+          "name": "chimeric_junctions"
+        },
+        {
+          "type": "bam",
+          "name": "chimeric_reads"
+        },
+        {
+          "type": "interval",
+          "name": "splice_junctions"
+        },
+        {
+          "type": "bam",
+          "name": "mapped_reads"
+        },
+        {
+          "type": "tabular",
+          "name": "reads_per_gene"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "chimeric_reads",
+          "uuid": "f44d1ce2-b0a0-4aca-b9da-d47a9151dd8f",
+          "label": null
+        },
+        {
+          "output_name": "chimeric_junctions",
+          "uuid": "a70f8d45-eaa8-40f4-a755-99e7004ad0ee",
+          "label": null
+        },
+        {
+          "output_name": "reads_per_gene",
+          "uuid": "70ef8c03-6a54-4c88-81b6-e178dbf776c7",
+          "label": null
+        },
+        {
+          "output_name": "splice_junctions",
+          "uuid": "0896bee8-d853-4467-8143-96a4d314774c",
+          "label": null
+        },
+        {
+          "output_name": "mapped_reads",
+          "uuid": "956818b5-dc81-440c-8c2a-b10869547c70",
+          "label": null
+        },
+        {
+          "output_name": "output_log",
+          "uuid": "5714f89a-1d7f-4634-95ce-2b089e5cc83d",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "refGenomeSource|GTFconditional|sjdbGTFfile": {
+          "output_name": "output",
+          "id": 2
+        },
+        "singlePaired|input1": {
+          "output_name": "out2",
+          "id": 3
+        }
+      },
+      "tool_state": "{\"__page__\": null, \"singlePaired\": \"{\\\"sPaired\\\": \\\"single\\\", \\\"input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"output_params\": \"{\\\"__current_case__\\\": 1, \\\"output_select\\\": \\\"no\\\"}\", \"__rerun_remap_job_id__\": null, \"params\": \"{\\\"settingsType\\\": \\\"default\\\", \\\"__current_case__\\\": 0}\", \"refGenomeSource\": \"{\\\"GTFconditional\\\": {\\\"genomeDir\\\": \\\"mm10\\\", \\\"sjdbGTFfile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"GTFselect\\\": \\\"without-gtf\\\", \\\"__current_case__\\\": 1, \\\"sjdbOverhang\\\": \\\"100\\\"}, \\\"geneSource\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0}\", \"quantMode\": \"\\\"false\\\"\"}",
+      "id": 4,
+      "tool_shed_repository": {
+        "owner": "iuc",
+        "changeset_revision": "2055c2667eb3",
+        "name": "rgrnastar",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "1e4a54be-b2fb-496a-8247-ccba4ffe6f3b",
+      "errors": null,
+      "name": "RNA STAR",
+      "post_job_actions": {},
+      "label": "Alignment (Choose a Genome)",
+      "inputs": [
+        {
+          "name": "singlePaired",
+          "description": "runtime parameter for tool RNA STAR"
+        }
+      ],
+      "position": {
+        "top": 404.9166717529297,
+        "left": 832.5
+      },
+      "annotation": "The genome should match that of the GTF file",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.5.2b-2",
+      "type": "tool"
+    },
+    "5": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+      "tool_version": "2.4.1",
+      "outputs": [
+        {
+          "type": "txt",
+          "name": "out_file2"
+        },
+        {
+          "type": "bam",
+          "name": "out_file1"
+        }
+      ],
+      "workflow_outputs": [],
+      "input_connections": {
+        "input_bam": {
+          "output_name": "mapped_reads",
+          "id": 4
+        }
+      },
+      "tool_state": "{\"input_bam\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"rule_configuration\": \"{\\\"rules\\\": \\\"(1 | 2) & 3 & 4\\\", \\\"rules_selector\\\": \\\"true\\\", \\\"__current_case__\\\": 1}\", \"conditions\": \"[{\\\"__index__\\\": 0, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"bam_property_selector\\\": \\\"alignmentFlag\\\", \\\"bam_property_value\\\": \\\"0\\\", \\\"__current_case__\\\": 0}}]}, {\\\"__index__\\\": 1, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"bam_property_selector\\\": \\\"alignmentFlag\\\", \\\"bam_property_value\\\": \\\"16\\\", \\\"__current_case__\\\": 0}}]}, {\\\"__index__\\\": 2, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"bam_property_selector\\\": \\\"tag\\\", \\\"bam_property_value\\\": \\\"nM:<3\\\", \\\"__current_case__\\\": 21}}]}, {\\\"__index__\\\": 3, \\\"filters\\\": [{\\\"__index__\\\": 0, \\\"bam_property\\\": {\\\"bam_property_selector\\\": \\\"tag\\\", \\\"bam_property_value\\\": \\\"NH:<2\\\", \\\"__current_case__\\\": 21}}]}]\", \"__page__\": null}",
+      "id": 5,
+      "tool_shed_repository": {
+        "owner": "devteam",
+        "changeset_revision": "bd735cae4ce6",
+        "name": "bamtools_filter",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "cfabab7e-b11c-4476-83e4-75e219ad04eb",
+      "errors": null,
+      "name": "Filter",
+      "post_job_actions": {
+        "HideDatasetActionout_file2": {
+          "output_name": "out_file2",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionout_file1": {
+          "output_name": "out_file1",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        }
+      },
+      "label": null,
+      "inputs": [
+        {
+          "name": "input_bam",
+          "description": "runtime parameter for tool Filter"
+        }
+      ],
+      "position": {
+        "top": 554,
+        "left": 1151.5
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+      "type": "tool"
+    },
+    "6": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.2",
+      "tool_version": "1.6.2",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "output_medium"
+        },
+        {
+          "type": "bam",
+          "name": "output_bam"
+        },
+        {
+          "type": "tabular",
+          "name": "output_short"
+        },
+        {
+          "type": "tabular",
+          "name": "output_full"
+        },
+        {
+          "type": "tabular",
+          "name": "output_summary"
+        },
+        {
+          "type": "tabular",
+          "name": "output_feature_lengths"
+        },
+        {
+          "type": "tabular",
+          "name": "output_jcounts"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "output_bam",
+          "uuid": "87abf585-aae9-4af3-aed7-541795d65faf",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "alignment": {
+          "output_name": "out_file1",
+          "id": 5
+        },
+        "anno|reference_gene_sets": {
+          "output_name": "output",
+          "id": 2
+        }
+      },
+      "tool_state": "{\"pe_parameters\": \"{\\\"only_both_ends\\\": \\\"false\\\", \\\"exclude_chimerics\\\": \\\"true\\\", \\\"fragment_counting_enabled\\\": {\\\"fragment_counting\\\": \\\"\\\", \\\"__current_case__\\\": 1}}\", \"format\": \"\\\"tabdel_short\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"strand_specificity\": \"\\\"1\\\"\", \"include_feature_length_file\": \"\\\"false\\\"\", \"anno\": \"{\\\"anno_select\\\": \\\"history\\\", \\\"reference_gene_sets\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 2}\", \"extended_parameters\": \"{\\\"gff_feature_attribute\\\": \\\"gene_id\\\", \\\"exon_exon_junction_read_counting_enabled\\\": {\\\"__current_case__\\\": 1, \\\"count_exon_exon_junction_reads\\\": \\\"false\\\"}, \\\"read_extension_3p\\\": \\\"0\\\", \\\"frac_overlap_feature\\\": \\\"0\\\", \\\"min_overlap\\\": \\\"1\\\", \\\"read_extension_5p\\\": \\\"0\\\", \\\"contribute_to_multiple_features\\\": \\\"false\\\", \\\"frac_overlap\\\": \\\"0\\\", \\\"primary\\\": \\\"false\\\", \\\"count_split_alignments_only\\\": \\\"false\\\", \\\"by_read_group\\\": \\\"false\\\", \\\"ignore_dup\\\": \\\"false\\\", \\\"mapping_quality\\\": \\\"12\\\", \\\"summarization_level\\\": \\\"false\\\", \\\"R\\\": \\\"true\\\", \\\"largest_overlap\\\": \\\"false\\\", \\\"read_reduction\\\": \\\"\\\", \\\"multimapping_enabled\\\": {\\\"multimapping_counts\\\": \\\"\\\", \\\"__current_case__\\\": 1}, \\\"long_reads\\\": \\\"false\\\", \\\"gff_feature_type\\\": \\\"exon\\\"}\", \"alignment\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "id": 6,
+      "tool_shed_repository": {
+        "owner": "iuc",
+        "changeset_revision": "f3a5f075498f",
+        "name": "featurecounts",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "9506153d-d997-43a4-8ce1-216690415561",
+      "errors": null,
+      "name": "featureCounts",
+      "post_job_actions": {
+        "HideDatasetActionoutput_short": {
+          "output_name": "output_short",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionoutput_jcounts": {
+          "output_name": "output_jcounts",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionoutput_full": {
+          "output_name": "output_full",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionoutput_feature_lengths": {
+          "output_name": "output_feature_lengths",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionoutput_medium": {
+          "output_name": "output_medium",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        },
+        "HideDatasetActionoutput_summary": {
+          "output_name": "output_summary",
+          "action_type": "HideDatasetAction",
+          "action_arguments": {}
+        }
+      },
+      "label": null,
+      "inputs": [
+        {
+          "name": "anno",
+          "description": "runtime parameter for tool featureCounts"
+        },
+        {
+          "name": "alignment",
+          "description": "runtime parameter for tool featureCounts"
+        }
+      ],
+      "position": {
+        "top": 717,
+        "left": 1224.5
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.2",
+      "type": "tool"
+    },
+    "7": {
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_count/umi_tools_count/0.5.3.2",
+      "tool_version": "0.5.3.2",
+      "outputs": [
+        {
+          "type": "tabular",
+          "name": "out_counts"
+        }
+      ],
+      "workflow_outputs": [
+        {
+          "output_name": "out_counts",
+          "uuid": "209f3dd6-974f-4e76-a206-c86114a6697f",
+          "label": null
+        }
+      ],
+      "input_connections": {
+        "input_bam": {
+          "output_name": "output_bam",
+          "id": 6
+        }
+      },
+      "tool_state": "{\"wide_format_cell_counts\": \"\\\"true\\\"\", \"cond_extra\": \"{\\\"prepender\\\": \\\"none\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"edit_distance_threshold\": \"\\\"1\\\"\", \"paired\": \"\\\"false\\\"\", \"input_bam\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"method\": \"\\\"unique\\\"\", \"advanced\": \"{\\\"random_seed\\\": \\\"0\\\", \\\"gene_tag\\\": \\\"XT\\\", \\\"per_contig\\\": \\\"false\\\", \\\"mapping_quality\\\": \\\"0\\\", \\\"skip_tags_regex\\\": \\\"\\\", \\\"per_cell\\\": \\\"true\\\"}\", \"barcodes\": \"{\\\"umi_separator\\\": \\\"_\\\", \\\"extract_umi_method\\\": \\\"read_id\\\", \\\"__current_case__\\\": 0}\"}",
+      "id": 7,
+      "tool_shed_repository": {
+        "owner": "iuc",
+        "changeset_revision": "b557acca0b56",
+        "name": "umi_tools_count",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "uuid": "89675c5a-ef94-49a5-889c-c53ba1074f80",
+      "errors": null,
+      "name": "UMI-tools count",
+      "post_job_actions": {},
+      "label": null,
+      "inputs": [
+        {
+          "name": "input_bam",
+          "description": "runtime parameter for tool UMI-tools count"
+        }
+      ],
+      "position": {
+        "top": 802,
+        "left": 1536.5
+      },
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_count/umi_tools_count/0.5.3.2",
+      "type": "tool"
+    }
+  },
+  "annotation": "Pre-processing of Single-Cell RNA Data",
+  "a_galaxy_workflow": "true"
+}

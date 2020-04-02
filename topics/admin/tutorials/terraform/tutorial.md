@@ -16,9 +16,11 @@ key_points:
   - Terraform lets you develop and implement infrastructure-as-code within your organisation
   - It can drastically simplify management of large numbers of VMs
 contributors:
-  - erasche
+  - hexylena
 tags:
   - terraform
+  - deploying
+  - cloud
 ---
 
 # Overview
@@ -74,7 +76,7 @@ We will start small, by managing a single VM in our cloud account. Make sure you
 > You can download the environment file with the credentials from the OpenStack dashboard.
 >
 > - Log in to the OpenStack dashboard, choose the project for which you want to download the OpenStack RC file, and click "Access & Security".
-> - Click "Download OpenStack RC File" and save the file. 
+> - Click "Download OpenStack RC File" and save the file.
 {: .tip}
 
 <!-- TODO(hxr): add example DO config? -->

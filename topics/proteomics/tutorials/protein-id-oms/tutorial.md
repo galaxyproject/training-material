@@ -16,11 +16,17 @@ requirements:
     type: "internal"
     topic_name: proteomics
     tutorials:
-    - protein-quant-sil
+    - database-handling
 key_points:
   - "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers."
   - "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats."
   - "OpenMS provides several thirdparty search engines and Fido for protein inference."
+follow_up_training:
+-
+  type: "internal"
+  topic_name: proteomics
+  tutorials:
+    - protein-quant-sil
 contributors:
   - stortebecker
   - bgruening
@@ -125,7 +131,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 
 > ### {% icon hands_on %} Hands-On: Peptide Identification
 >
-> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({{ site.baseurl }}{% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
+> 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
 >
 >   > ### {% icon comment %} You did not run the Database Handling first?
 >   > You can upload the ready-made database from Zenodo
@@ -154,7 +160,7 @@ Different peptide search engines have been developed to fulfill the matching pro
 {: .hands_on}
 
 > ### {% icon comment %} Settings for labelled data
-> Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also [Peptide and Protein Quantification via Stable Isotope Labelling]({{ site.baseurl }}{% link topics/proteomics/tutorials/protein-quant-sil/tutorial.md %}).
+> Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also [Peptide and Protein Quantification via Stable Isotope Labelling]({% link topics/proteomics/tutorials/protein-quant-sil/tutorial.md %}).
 {: .comment}
 
 > ### {% icon comment %} Comment: Advanced Search Engine Parameters
@@ -362,9 +368,9 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found [here]({{ site.baseurl }}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
+A premade workflow for this tutorial can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
 
-A premade workflow using the search engines XTandem and MSGF+ can be found [here]({{ site.baseurl }}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
+A premade workflow using the search engines XTandem and MSGF+ can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
 
 # Further Reading
 

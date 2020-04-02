@@ -1,0 +1,119 @@
+---
+layout: base_slides
+logo: "GTN"
+
+title: "Galaxy Interactive Tools"
+objectives:
+  - Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools
+  - Have an understanding of what Galaxy Interactive Tools are and how they work
+contributors:
+  - natefoo
+
+---
+# History
+
+## 2015
+
+@hexylena, @bgruening, and @jmchilton create Galaxy Interactive Environments (GIEs)
+
+GIEs use Galaxy's *visualization framework* to run certain types of *interactive* visualizations (e.g. Jupyter Notebook)
+
+GIEs run in a docker container on the Galaxy server or a single remote Docker server
+
+---
+# History
+
+## 2016
+
+Support for Docker Swarm is added, allowing running a cluster for GIEs
+
+---
+# History
+
+## 2019
+
+@blankenberg creates Galaxy Interactive Tools (GxITs)
+
+Building on the GIE concept, but run as *tools*
+
+Tools run just as any other Galaxy job (e.g. via Slurm, HTCondor)
+
+You will sometimes see Interactive Tools referred to as Interactive Environments version 2
+
+---
+# Tool config syntax
+
+```xml
+<tool id="interactive_tool_jupyter_notebook" tool_type="interactive" name="Interactive Jupyter Notebook" version="0.1">
+    <requirements>
+        <container type="docker">quay.io/bgruening/docker-jupyter-notebook:ie2</container>
+    </requirements>
+    <entry_points>
+        <entry_point name="Jupyter Interactive Tool" requires_domain="True">
+            <port>8888</port>
+            <url>ipython/lab</url>
+        </entry_point>
+    </entry_points>
+</tool>
+```
+
+---
+# Mapping clients to containers
+
+- GIEs: Unique path, e.g. `https://galaxy.example.org/gie-proxy/jupyter/...`
+  - Pros: Works with existing SSL certificate
+  - Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session
+- GxITs: Unique hostname, e.g. `https://<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org/`
+  - Pros: Needs no special credentials (can be shared)
+  - Cons: Requires *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
+
+---
+# Anatomy of a running Interactive Tool
+
+![Galaxy Interactive Tools Proxy Diagram](../../images/interactive-tools/gxit-proxy-diagram.png "Galaxy Interactive Tools Proxy Diagram")
+
+???
+The source for this figure can be found at: https://docs.google.com/presentation/d/1_4PtfM6A4mOxOlgGh6OGWvzFcxD1bdw4CydEWtm5n8k/
+
+---
+# Galaxy configuration
+
+Enable docker on a destination in `job_conf.xml` and assign your GxITs to that destination
+
+.left[Set in `galaxy.yml`:]
+```yaml
+interactivetools_enable: true
+interactivetools_map: /srv/galaxy/var/gie-proxy-sessions.sqlite
+```
+
+---
+# Proxy configuration
+
+Use the uWSGI proxy configuration that ships with Galaxy
+
+Or the [Node.js-based proxy][usegalaxy_eu-gie_proxy]
+
+[usegalaxy_eu-gie_proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
+
+---
+# Security
+
+The default docker-enabled container exposes all datasets to the tool
+
+Normally this isn't bad (normal tools can't be controlled by the user)
+
+Interactive tools are fully user controllable
+
+Solution: [Embedded Pulsar][job-conf-pulsar-embedded]
+
+[job-conf-pulsar-embedded]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106
+
+---
+# Embedded Pulsar
+
+Runs a [Pulsar][pulsar] server within the Galaxy application to "stage" (i.e. copy) inputs.
+
+- Pros: Inputs in isolated dir so only that dir is mounted in the container: secure
+- Cons: Has to copy inputs on each Interactive Tool execution: slow
+
+[pulsar]: https://github.com/galaxyproject/pulsar

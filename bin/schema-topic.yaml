@@ -1,0 +1,88 @@
+---
+type: map
+mapping:
+    name:
+        type: str
+        required: true
+    type:
+        type: str
+        required: true
+        enum:
+            - admin-dev
+            - basics
+            - use
+            - instructors
+    title:
+        type: str
+        required: true
+    summary:
+        type: str
+        required: true
+    docker_image:
+        type: str
+    subtopics:
+        type: seq
+        required: false
+        sequence:
+            - type: map
+              mapping:
+                  id:
+                      type: str
+                      required: true
+                  title:
+                      type: str
+                      required: true
+                  description:
+                      type: str
+                      required: true
+
+    maintainers:
+        type: seq
+        required: true
+        sequence:
+            - type: str
+              required: true
+    edam_ontology:
+        type: str
+        # todo validate format
+    requirements:
+        type: seq
+        required: false
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  type:
+                      type: str
+                      required: true
+                  topic_name:
+                      type: str
+                      required: true
+                  tutorials:
+                      type: seq
+                      required: false
+                      sequence:
+                          - type: str
+
+    references:
+        type: seq
+        required: false
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  authors:
+                      type: str
+                      required: true
+                  title:
+                      type: str
+                      required: true
+                  link:
+                      type: str
+                      required: true
+                  summary:
+                      type: str
+    gitter:
+        type: str
+        required: false
+        pattern: /^[a-zA-Z0-9]+\/[a-zA-Z0-9]+/

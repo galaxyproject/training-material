@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Peptide and Protein Quantification via Stable Isotope Labelling (SIL)"
 zenodo_link: "https://zenodo.org/record/1051552"
+level: Intermediate
 questions:
   - "What are MS1 features?"
   - "How to quantify based on MS1 features?"
@@ -11,6 +12,13 @@ questions:
 objectives:
   - "MS1 feature quantitation and mapping of quantitations to peptide and protein IDs."
 time_estimation: "1h"
+requirements:
+-
+  type: "internal"
+  topic_name: proteomics
+  tutorials:
+    - database-handling
+    - protein-id-oms
 key_points:
   - "Peptides labelled with stable isotopes result in multiple parallel MS1 ion traces."
   - "MS1 features can be used for relative protein quantitation."
@@ -43,7 +51,7 @@ In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org)
 
 If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
-To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}).
+To learn about *protein identification* in Galaxy, please consider our OpenMS-based [peptide ID tutorial]({% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Introduction
 > In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
@@ -65,7 +73,7 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 
 # Peptide and Protein Identification
 
-In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}.
+In this tutorial, peptide identification will be performed using the workflow of the previous [Peptide ID Tutorial]({% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}). Alternatively one can perform the protein identification step by step in the [Peptide ID Tutorial]({% link topics/proteomics/tutorials/protein-id-oms/tutorial.md %}) using the SILAC dataset from [zenodo](https://zenodo.org/record/1051552) **but** beware to specify the labels in the `param_variable_modifications` of **XTandemAdapter** {% icon tool %}.
 
 A common problem in mass spectrometry are misassigned mono-isotopic precursor peaks. Most search engines allow for some adaptation of the monoisotopic peak and we will use this by leaving `By default, misassignment to the first and second isotopic 13C peak are also considered` at `No`.
 
@@ -96,7 +104,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >    https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
 >    ```
 >
-> 3. Import the [workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
+> 3. Import the [workflow]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 >    ```
 >    {{ site.url }}/{{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga
@@ -150,7 +158,7 @@ The OpenMS suite provides several tools (FeatureFinders) for MS1 feature detecti
 > ### {% icon comment %} Comment: Multiple labels per peptide
 > When using SILAC-KR or dimethyl-labelling and trypsin digestion, exactly one labelled amino acid per peptide is expected. The only labelled amino acids are lysine (K) and arginine (R) and trypsin cuts after each of them. However, a small percentage of missed cleavage normally occur also in those datasets. Setting *"Maximum number of missed cleavages due to incomplete digestion"* to `1` will be sufficient to deal with most missed cleavages.
 >
-> When using other enzymes (e.g. Lys-C) or other labels (e.g. $$^{18}O$$), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter **Maximum number of missed cleavages due to incomplete digestion**.
+> When using other enzymes (e.g. Lys-C) or other labels (e.g. $$^{18}O$$), several labelled amino acids per peptide are expected. You can search for those features by increasing the parameter *"Maximum number of missed cleavages due to incomplete digestion"*.
 {: .comment}
 
 # Mapping Identifications to Features
@@ -169,7 +177,7 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 >
 > 1. Run **IDMapper** {% icon tool %} with
 >   - {% icon param-file %} *"Protein/peptide identifications file"*: output of **IDFilter**
->   - {% icon param-file %} *Feature map/consensus map file"*: the `consensusXML` output of **FeatureFinderMultiplex**
+>   - {% icon param-file %} *"Feature map/consensus map file"*: the `consensusXML` output of **FeatureFinderMultiplex**
 >   - *"RT tolerance (in seconds) for the matching of peptide identifications and (consensus) features"*: `20`
 >   - *"m/z tolerance (in ppm or Da) for matching of peptide identifications and (consensus) features"*: `10`
 >   - *"Match using RT and m/z of sub-features instead of consensus RT and m/z"*: `Yes`
@@ -185,8 +193,8 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 >
 > 4. Run **MultiplexResolver** {% icon tool %} with
 >    - {% icon param-file %} *"Peptide multiplets with assigned sequence information"*: output of **IDConflictResolver**
->   - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
->   - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
+>    - *"Labels used for labelling the samples"*: `[ ][Arg6,Lys6]`
+>    - *"Maximum number of missed cleavages due to incomplete digestion"*: `1`
 >
 > 5. Run **ProteinQuantifier** {% icon tool %} with
 >   - {% icon param-file %} *"Input file"*: first output of **MultiplexResolver**
@@ -209,15 +217,15 @@ Finally, the correctly mapped peptides will be combined into protein quantificat
 For proteins, we added a log-transformed ratio to the output, which is saved in column 8 of the protein table. The ratio is calculated as **log2 (abundance2/abundance1)**, which is sometimes called the *fold change (FC)* ratio.
 
 To get a quick overview of the results, you can calculate basic descriptive statistics and plot the data as a histogram.
-Comment lines in the beginning of a `tabular` file may sometimes cause errors, therefore we will remove them with the tool **Select last (tail)**.
+Comment lines in the beginning of a `tabular` file may sometimes cause errors, therefore we will remove them with the tool **Select last lines from a dataset (tail)**.
 
 > ### {% icon hands_on %} Hands-on: Descriptive Statistics
 > 1. Run **Summary Statistics** {% icon tool %} with
->   - {% icon param-file %} *"Summary statistics on"*: protein table output of **ProteinQuantifier**
+>   - {% icon param-file %} *"Summary statistics on"*: protein table output (first file) of **ProteinQuantifier**
 >   - *"Column or expression"*: `c8`
 >
-> 2. Run **Select last** {% icon tool %} with
->   - {% icon param-file %} *"Text file"*: protein table output of **ProteinQuantifier**
+> 2. Run **Select last (tail)** {% icon tool %} with
+>   - {% icon param-file %} *"Text file"*: protein table output (first file) of **ProteinQuantifier**
 >   - *"Operation"*: `Keep everything from this line on`
 >   - *"Number of lines"*: `4`
 >
@@ -254,7 +262,7 @@ Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use **FileFilter** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
 
-Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({{site.baseurl}}{% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}).
+Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}).
 
 **Cave:** Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
 
@@ -264,7 +272,7 @@ Using Galaxy Workflows enables us to quickly re-run a full analysis with changed
 >   - {% icon param-file %} *"Input file"*: `mzML` file
 >   - *"Retention time range to extract"*: `2000:2200`
 >
-> 2. Extract a workflow out of your history or import the [premade workflow]({{site.baseurl}}{% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
+> 2. Extract a workflow out of your history or import the [premade workflow]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %})
 >
 > 3. Run the whole workflow again with default settings on the reduced `mzML` file.
 >

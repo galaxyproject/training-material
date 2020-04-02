@@ -82,7 +82,8 @@ easily achieved by installing
 For production deployments, we'll also need some storage resources for data
 persistence. This can be done by either defining a [storage class][SC] or
 creating a [Persistent Volume and a corresponding Persistent Volume Claim][PV].
-Once created, just keep a note of the resources ID and we'll use those later.
+Once created, just keep a note of the resources Persistent Volume Claim ID and
+to use later.
 
 For the CVMFS-enabled version of the chart (more on this below), it is also
 necessary to run Kubernetes version 1.13 or newer because we'll be using the
@@ -142,7 +143,7 @@ chart later in this tutorial.
 >
 > 2. We can now deploy Galaxy via the Chart. Before running this command make
 >    sure you are in the chart source code directory (where `values.yaml` file
->    resides) and note the trailing dot. Running this command will a new
+>    resides) and note the trailing dot. Running this command will create a new
 >    Helm release (i.e., chart installation) called `galaxy`.
 >
 >    {% raw %}
@@ -186,30 +187,29 @@ configurations while leveraging [BioContainers] for resolving tool dependencies.
 >    {% raw %}
 >    ```bash
 >    kubectl create namespace cvmfs
->    helm repo add cloudve https://raw.githubusercontent.com/CloudVE/helm-charts/master/
+>    helm repo add galaxy https://raw.githubusercontent.com/CloudVE/helm-charts/master/
 >    helm repo update
->    helm install --name cvmfs --namespace cvmfs cloudve/galaxy-cvmfs-csi
+>    helm install --name cvmfs --namespace cvmfs galaxy/galaxy-cvmfs-csi
 >    ```
 >    {% endraw %}
 >
-> 3. We can now install the CVMFS-enabled set of values. Before running the
->    install command, make sure you are in the Galaxy chart source directory
->    (where the `values.yaml`, and `values-cvmfs.yaml`, files reside).
+> 3. We can now install the CVMFS-enabled set of values.
 >
 >    {% raw %}
 >    ```bash
->    helm install --name galaxy -f values-cvmfs.yaml cloudve/galaxy
+>    helm install --name galaxy galaxy/galaxy
 >    ```
 >    {% endraw %}
 >
 > 4. Again, it will take a few minutes for Galaxy to start up. This time most of
->    the waiting is due to the tools loading into the tool panel. We can check
->    the status of the deployment by running `helm status galaxy`. We can also
->    watch the boot process by tailing the logs of the relevant container with a
->    command similar to `kubectl logs -f galaxy-web-7568c58b94-hjl9w` where the
->    last argument is the name of the desired pod, as printed following the
->    `helm install` command. Once the boot process has completed, we can access
->    Galaxy at `/galaxy/` URI (note the trailing `/`; it's significant).
+>    the waiting is due to the tool definition files to be cached on CVMFS and
+>    loaded into the tool panel. We can check the status of the deployment by
+>    running `helm status galaxy`. We can also watch the boot process by tailing
+>    the logs of the relevant container with a command similar to
+>    `kubectl logs -f galaxy-web-7568c58b94-hjl9w` where the last argument is
+>    the name of the desired pod, as printed following the `helm install`
+>    command. Once the boot process has completed, we can access Galaxy at
+>    `/galaxy/` URI (note the trailing `/`; it's significant).
 >
 {: .hands_on}
 
