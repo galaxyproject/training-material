@@ -28,9 +28,12 @@ contributors:
 # Introduction
 {:.no_toc}
 
+This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to N-terminus of Hsp90 (heat shock protein 90). 
+
+
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
+<!-- General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
 scheme to sum up the pipeline used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
@@ -46,11 +49,11 @@ this article here in your tutorial like this:
 {% raw %} `{% cite Batut2018 %}`{% endraw %}.
 This will be rendered like this: {% cite Batut2018 %}, and links to a
 [bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+tutorial. -->
 
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+<!-- **Please follow our
+[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)** -->
 
 > ### Agenda
 >
@@ -61,28 +64,20 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Background
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+## What is high-throughput molecular dynamics?
+Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g. potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput workflow for screening multiple small molecules, using the open-source GROMACS tools provided through the Galaxy platform.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+## Why is Hsp90 interesting to study?
+The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases. The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to slow cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents.
 
 ## Get data
+
+First of all, download the required data.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -175,9 +170,7 @@ To generate a topology for the ligand, we will use the **acpype** {% icon tool %
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> ### {% icon question %} Comment on different forcefields?
 >
 > 1. Question1?
 > 2. Question2?
@@ -225,12 +218,9 @@ Having generated topologies, we now need to combine them, define the box which c
 
 If this procedure was too complicated, you can download the combined files here: LINK. However, you will find it useful to understand the information contained within topology files and learn how to make changes to it.
 
-
-# Create simulation box, solvate and minimize system
+### Create the simulation box with **GROMACS structure configuration**
 
 The next step, once combined coordinate (GRO) and topology (TOP) files have been created, is to create a simulation box in which the system is situated.
-
-## Create the simulation box with **GROMACS structure configuration**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -249,7 +239,7 @@ The next step, once combined coordinate (GRO) and topology (TOP) files have been
 >
 {: .hands_on}
 
-## Solvation
+### Solvation
 
 The next step is solvation of the newly created simulation box. Note that the system is charged (depending on the pH) - the solvation tool also adds ions to neutralise this.
 
@@ -264,7 +254,7 @@ The next step is solvation of the newly created simulation box. Note that the sy
 {: .hands_on}
 
 
-## Sub-step with **GROMACS energy minimization**
+### Energy minimization
 
 The next step is energy minimization, which can be carried out using the **GROMACS energy minimization** {% icon tool %}.
 
@@ -290,266 +280,19 @@ The next step is energy minimization, which can be carried out using the **GROMA
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Equilibration
+
+We now carry out equilibration in two stages: NVT and NPT. This is discussed at greater length in the basic GROMACS tutorial. Equilibration requires restraining the protein structure - we use the ITP file produced by the initial setup tool for this.
 
 
-
-
-
------------------------------------
-
-
-## Sub-step with **Create GROMACS index files**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Create GROMACS index files** {% icon tool %} with the following parameters:
->    - *"Selection command"*: `0 & ! a H*`
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GROMACS structure configuration**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **GROMACS structure configuration** {% icon tool %} with the following parameters:
->    - *"Configure box?"*: `Yes`
->        - *"Box dimensions in nanometers"*: `1.0`
->        - *"Box type"*: `Triclinic`
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Create GROMACS position restraints files**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Create GROMACS position restraints files** {% icon tool %} with the following parameters:
->    - *"Index of group"*: `0`
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GROMACS solvation and adding ions**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Sub-step with **GROMACS energy minimization**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **GROMACS energy minimization** {% icon tool %} with the following parameters:
->    - *"Parameter input"*: `Use default (partially customisable) setting`
->        - *"Number of steps for the MD simulation"*: `50000`
->        - *"EM tolerance"*: `1000.0`
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Create GROMACS index files**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Create GROMACS index files** {% icon tool %} with the following parameters:
->    - *"Selection command"*: `1 | 13`
->    - *"Generate detailed log"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GROMACS simulation**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: NVT equilibration
 >
 > 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"GRO structure file"*: `Minimized GRO file` (from energy minimization step)
+>    - {% icon param-file %} *"Topology (TOP) file"*: TOP file produced by solvation step.
+>    - In *"Inputs"*:
+>        - {% icon param-file %} *"Position restraint (ITP) file"*: ITP file produced by initial setup step.
 >    - In *"Outputs"*:
 >        - *"Trajectory output"*: `Return .xtc file (reduced precision)`
 >        - *"Structure output"*: `Return .gro file`
@@ -558,43 +301,24 @@ The next step is energy minimization, which can be carried out using the **GROMA
 >        - *"Parameter input"*: `Use default (partially customisable) setting`
 >            - *"Bond constraints (constraints)"*: `All bonds (all-bonds).`
 >            - *"Temperature /K"*: `300`
->            - *"Step length in ps"*: `0.002`
+>            - *"Step length in ps"*: `0.0002`
 >            - *"Number of steps that elapse between saving data points (velocities, forces, energies)"*: `1000`
 >            - *"Number of steps for the simulation"*: `50000`
 >    - *"Generate detailed log"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+NVT is followed by NPT equilibration.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **GROMACS simulation**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: NPT equilibration
 >
 > 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"GRO structure file"*: GRO output of **GROMACS simulation** {% icon tool %} (NVT equilibration)
+>    - {% icon param-file %} *"Topology (TOP) file"*: TOP file produced by solvation step.
+>    - In *"Inputs"*:
+>        - {% icon param-file %} *"Checkpoint (CPT) file"*: Output of **GROMACS simulation** {% icon tool %} (NVT equilibration))
+>        - {% icon param-file %} *"Position restraint (ITP) file"*: ITP file produced by initial setup step.
 >    - In *"Outputs"*:
 >        - *"Trajectory output"*: `Return .xtc file (reduced precision)`
 >        - *"Structure output"*: `Return .gro file`
@@ -609,38 +333,21 @@ The next step is energy minimization, which can be carried out using the **GROMA
 >            - *"Number of steps for the simulation"*: `50000`
 >    - *"Generate detailed log"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Main simulation
 
-## Sub-step with **GROMACS simulation**
+We can now remove the restraints and continue with the simulation. The simulation will run for 1 million steps, with a step size of 1 fs, so wil have a total length of 1 ns.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **GROMACS simulation** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"GRO structure file"*: Output of **GROMACS simulation** {% icon tool %} (NPT equilibration)
+>    - {% icon param-file %} *"Topology (TOP) file"*: Output of the solvation step
+>    - In *"Inputs"*:
+>        - {% icon param-file %} *"Checkpoint (CPT) file"*: Output of **GROMACS simulation** {% icon tool %} (NPT simulation))
 >    - In *"Outputs"*:
 >        - *"Trajectory output"*: `Return .xtc file (reduced precision)`
 >        - *"Structure output"*: `Return .gro file`
@@ -654,32 +361,9 @@ The next step is energy minimization, which can be carried out using the **GROMA
 >            - *"Number of steps for the simulation"*: `1000000`
 >    - *"Generate detailed log"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **MDTraj file converter**
 
