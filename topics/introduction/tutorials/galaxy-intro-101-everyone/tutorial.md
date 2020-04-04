@@ -454,6 +454,8 @@ check whether we can spot any immediate patterns.
 >        - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
 >            - *"column differentiating the different groups"*: `5`
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
+>    - In *"Output Options"*:
+>        - *Additional output format*: `PDF`
 >
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 >
@@ -738,4 +740,3 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {:.no_toc}
 
 {% icon trophy %} Well done! You have just performed your first analysis in Galaxy. Additionally you can share your results and methods with others.
-
