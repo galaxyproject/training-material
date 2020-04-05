@@ -681,8 +681,287 @@ To create the template, each step of the workflow had its own subsection.
 ***TODO***: *Re-arrange the generated subsections into sections or other subsections.
 Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
+# Analysis
+
+Complete an analysis of the trajectory generated with Gromacs.
+
+***TODO***: *insert image of workflow*
+
+## Create PDB file needed by most analysis tools 
+
+Convert the structural coordinates of the system in GRO format into PDB format. This file will be used by most analysis tools as a starting structure.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **GROMACS structure configuration** {% icon tool %} with the following parameters:
+>    - *"Output format"*: `PDB file`
+>    - *"Configure box?"*: `No`
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tool can also be used to do initial setup for GROMACS simulations and convert from PDB to GRO format.
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Convert trajectory to DCD format
+
+Convert from XTC for DCD format. A number of the analysis tools being used have been built to analyse trajectories in CHARMM's DCD format.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **MDTraj file converter** {% icon tool %} with the following parameters:
+>    - *"Output format"*: `DCD file`
+>    >
+>    > This tool can also be used to interconvert between several trajectory formats. A downside is we are duplicating actually duplicating the data and using up storage space on the Galaxy server. 
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## RMSD analysis
+
+RMSD is a standard measure of structural distance between coordinate sets. The RMSD of the Cα atoms of the protein backbone is calculated.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+>    - *"Select domains"*: `C-alpha`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## **RMSF Analysis**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
+>    - *"Select domains"*: `C-alpha`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **RMSD Analysis**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+>    - *"Select domains"*: `Ligand`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Principal Component Analysis
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **PCA** {% icon tool %} with the following parameters:
+>    - *"Select domains"*: `C-alpha`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## PCA **Cosine Content**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Cosine Content** {% icon tool %} with the following parameters:
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **PCA visualization**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **PCA visualization** {% icon tool %} with the following parameters:
+>    - *"Select domains"*: `C-alpha`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Hydrogen Bond Analysis
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Hydrogen Bond Analysis using VMD** {% icon tool %} with the following parameters:
+>    - *"Selection 1"*: `protein`
+>    - *"Selection 2"*: `resname UNL`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 # Conclusion
 {:.no_toc}
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
