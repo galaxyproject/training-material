@@ -365,41 +365,15 @@ We can now remove the restraints and continue with the simulation. The simulatio
 {: .hands_on}
 
 
-## Sub-step with **MDTraj file converter**
+# Analysis
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MDTraj file converter** {% icon tool %} with the following parameters:
->    - *"Output format"*: `DCD file`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+Complete an analysis of the trajectory generated with Gromacs.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![Analysis workflow for Hsp90 with ligand](../../images/workflow_htmd_analysis.png "Analysis workflow for Hsp90 with a ligand")
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Create PDB file needed by most analysis tools 
 
-## Sub-step with **GROMACS structure configuration**
+Convert the structural coordinates of the system in GRO format into PDB format. This file will be used by most analysis tools as a starting structure and "it contains the topology of the system."
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -407,34 +381,34 @@ We can now remove the restraints and continue with the simulation. The simulatio
 >    - *"Output format"*: `PDB file`
 >    - *"Configure box?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This tool can also be used to do initial setup for GROMACS simulations and convert from PDB to GRO format.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Convert trajectory to DCD format
 
-## Sub-step with **RMSD Analysis**
+Convert from XTC to DCD format. A number of the analysis tools being used have been built to analyse trajectories in CHARMM's DCD format.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **MDTraj file converter** {% icon tool %} with the following parameters:
+>    - *"Output format"*: `DCD file`
+>    >
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tool can also be used to interconvert between several trajectory formats. A downside is we are duplicating actually duplicating the data and using up storage space on the Galaxy server. 
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## RMSD analysis - protein
+
+RMSD is a standard measure of structural distance between coordinate sets that measures the average distance between a group of atoms. The RMSD of the Cα atoms of the protein backbone is calculated here is and is a measire of how much the protein has changed between different time points in the trajectory.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -447,101 +421,48 @@ We can now remove the restraints and continue with the simulation. The simulatio
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > An RMSD on Cα atoms will select all protein Cα atoms. If you have a ligand that is a protein consider modifying this selection.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![RMSD timeseries Hsp90](../../images/htmd_analysis_rmsd1_series.png "RMSD timeseries for the Hsp90 Cα atoms")
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![RMSD histogram Hsp90](../../images/htmd_analysis_rmsd1_histo.png "RMSD histogram for the Hsp90 Cα atoms")
 
-## Sub-step with **RMSF Analysis**
+RMSD timeseries shows a thermally stable and equilibrated structure with an average RMSD between 1 and 1.3. There are no large conformational changes during the simulation. The RMSD histogram confirms this.
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
->    - *"Select domains"*: `C-alpha`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## RMSD analysis - ligand
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identidfy possible binding modes. If the ligand is not stable the RMSD will fluctuate excessively and there will large 'jumps' in the RMSD. 
 
-## Sub-step with **Hydrogen Bond Analysis using VMD**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Hydrogen Bond Analysis using VMD** {% icon tool %} with the following parameters:
->    - *"Selection 1"*: `protein `
->    - *"Selection 2"*: `resname UNL`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RMSD Analysis**
+Note two RMSD's are run but only one is considered further. The tool has a ligand inference option but this may fail and instead the ligand is selected by residue ID.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - *"Select domains"*: `Ligand`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `Residue ID`
 >        - *"Residue ID"*: `UNL`
 >
@@ -556,27 +477,51 @@ We can now remove the restraints and continue with the simulation. The simulatio
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clearly seen in the histogram. There is a bimodal distribution with centres at 0.3 and 1.0 which both have significant populations. There are two binding poses. These can be visually assessed. In this case the poses were viewed in VMD.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![RMSD timeseries Hsp90 ligand](../../images/htmd_analysis_rmsd2_series.png "RMSD timeseries for the Hsp90 Residue ID UNL (ligand)")
 
-## Sub-step with **PCA**
+![RMSD histogram Hsp90 ligand](../../images/htmd_analysis_rmsd2_histo.png "RMSD histogram for the Hsp90 Residue ID UNL (ligand)")
+
+![Hsp90 ligand binding poses](../../images/htmd_analysis_bindingposes.png "Two binding poses seen for this ligand")
+
+
+## RMSF analysis
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - *"Select domains"*: `C-alpha`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+When considering the RMSF fluctuations greater than 1 Angstrom are worth considering. These are seen near residue position 50, 110 and 160. Very large fluctuations are seen for the final residues i.e. the C-terminus. Fairly common and no investigation is needed. The movement could be related to binding or other motions. 
+
+![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF for Hsp90")
+
+
+## PCA analysis
+
+Principal component analysis (PCA) converts a set of correlated observations (movement of all atoms in protein) to a set of principal components which are linearly independent (or uncorrelated).
+Here we will calculate the PCA, visualise it and also calculate the cosine content. 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **PCA** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `C-alpha`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -590,61 +535,20 @@ We can now remove the restraints and continue with the simulation. The simulatio
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The first principal component (PC1) is most important accounting for 32.36% of the variance (see PC1 vs PC2 and Eigenvalue rank plots). More information on PCA can be found in the [BIO3D tutorial](http://thegrantlab.org/bio3d/tutorials/trajectory-analysis).
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![PCA Hsp90](../../images/htmd_analysis_pca.png "PCA for Hsp90")
 
-## Sub-step with **PCA visualization**
+The RMSF is in good correlation with PC1. 
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **PCA visualization** {% icon tool %} with the following parameters:
->    - *"Select domains"*: `C-alpha`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+![PC1 RMSF Hsp90](../../images/htmd_analysis_pc1_rmsf.png "PC1 vs RMSF for Hsp90")
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cosine Content**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Cosine Content** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB/GRO input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -657,32 +561,56 @@ We can now remove the restraints and continue with the simulation. The simulatio
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+The cosine content is 0.084. Non-converged simulations have a value close to 1. This value indicates that sampling is most likely sufficient. 
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. Question1?
-> 2. Question2?
+> 1. **PCA visualization** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - *"Select domains"*: `C-alpha`
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+>    ***TODO***: *Check parameter descriptions*
 >
-{: .question}
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
+*** TODO *** gif of PCA1 
+![Alternative text](../../images/image_name "Legend of the image")
+![PC1 Hsp90 gif](../../images/htmd_analysis_pc1_hsp90.gif "PC1 motion for Hsp90")
 
-## Re-arrange
+## Hydrogen bond analysis
 
-To create the template, each step of the workflow had its own subsection.
+Hydrogen bonding interactions contribute to binding and are worth investigating, in particular persistent hydrogen bonds.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Hydrogen Bond Analysis using VMD** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB/GRO input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - *"Selection 1"*: `protein`
+>    - *"Selection 2"*: `resname UNL`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
-# Conclusion
-{:.no_toc}
+The active site of this protein is quite hydrophobic. Only 1 hydrogen bond is seen between the ligand andHsp90, this is between Threonine 184 and the ligand. This hydogren bond is not persisent, the occupancy is small, 0.20%, the hydrogen is not present for most of the simulation (according to the criteria for hydrogen bonding). 
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
