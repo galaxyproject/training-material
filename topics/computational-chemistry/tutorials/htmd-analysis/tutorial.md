@@ -685,7 +685,7 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 Complete an analysis of the trajectory generated with Gromacs.
 
-***TODO***: *insert image of workflow*
+![Analysis workflow for Hsp90 with ligand](../../images/workflow_htmd_analysis.png "Analysis workflow for Hsp90 with a ligand")
 
 ## Create PDB file needed by most analysis tools 
 
@@ -722,9 +722,9 @@ Convert from XTC to DCD format. A number of the analysis tools being used have b
 {: .hands_on}
 
 
-## RMSD analysis
+## RMSD analysis - protein
 
-RMSD is a standard measure of structural distance between coordinate sets. The RMSD of the Cα atoms of the protein backbone is calculated.
+RMSD is a standard measure of structural distance between coordinate sets that measures the average distance between a group of atoms. The RMSD of the Cα atoms of the protein backbone is calculated here is and is a measire of how much the protein has changed between different time points in the trajectory.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -742,45 +742,24 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 >
 {: .hands_on}
 
-## **RMSF Analysis**
+![RMSD timeseries Hsp90](../../images/htmd_analysis_rmsd1_series.png "RMSD timeseries for the Hsp90 Cα atoms")
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
->    - *"Select domains"*: `C-alpha`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+![RMSD histogram Hsp90](../../images/htmd_analysis_rmsd1_histo.png "RMSD histogram for the Hsp90 Cα atoms")
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+RMSD timeseries shows a thermally stable and equilibrated structure with an average RMSD between 1 and 1.3. There are no large conformational changes during the simulation. The RMSD histogram confirms this.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **RMSD Analysis**
+## RMSD analysis - ligand
+
+Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identidfy possible binding modes. If the ligand is not stable the RMSD will fluctuate excessively and there will large 'jumps' in the RMSD. 
+
+Note two RMSD's are run but only one is considered further. The tool has a ligand inference option but this may fail and instead the ligand is selected by residue ID.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `Ligand`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -794,27 +773,42 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Principal Component Analysis
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **PCA** {% icon tool %} with the following parameters:
+> 1. **RMSD Analysis** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - *"Select domains"*: `Residue ID`
+>        - *"Residue ID"*: `UNL`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clearly seen in the histogram. There is a bimodal distribution with centres at 0.3 and 1.0 which both have significant populations. There are two binding poses. These can be visually assessed. In this case the poses were viewed in VMD.
+
+![RMSD timeseries Hsp90 ligand](../../images/htmd_analysis_rmsd2_series.png "RMSD timeseries for the Hsp90 Residue ID UNL (ligand)")
+
+![RMSD histogram Hsp90 ligand](../../images/htmd_analysis_rmsd2_histo.png "RMSD histogram for the Hsp90 Residue ID UNL (ligand)")
+
+![Hsp90 ligand binding poses](../../images/htmd_bindingposes.png "Two binding poses seen for this ligand")
+
+
+## RMSF analysis
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **RMSF Analysis** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `C-alpha`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -844,11 +838,49 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 >
 {: .question}
 
-## PCA **Cosine Content**
+## Sub-step with **PCA**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **PCA** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
+>    - *"Select domains"*: `C-alpha`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Cosine Content**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Cosine Content** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB/GRO input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -882,6 +914,8 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **PCA visualization** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Select domains"*: `C-alpha`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -911,11 +945,13 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 >
 {: .question}
 
-## Hydrogen Bond Analysis
+## Sub-step with **Hydrogen Bond Analysis using VMD**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **Hydrogen Bond Analysis using VMD** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
+>    - {% icon param-file %} *"PDB/GRO input"*: `output` (output of **GROMACS structure configuration** {% icon tool %})
 >    - *"Selection 1"*: `protein`
 >    - *"Selection 2"*: `resname UNL`
 >
@@ -945,8 +981,6 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 > {: .solution}
 >
 {: .question}
-# Conclusion
-{:.no_toc}
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
