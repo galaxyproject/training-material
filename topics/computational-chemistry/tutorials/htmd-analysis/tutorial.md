@@ -799,7 +799,7 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 
 ![RMSD histogram Hsp90 ligand](../../images/htmd_analysis_rmsd2_histo.png "RMSD histogram for the Hsp90 Residue ID UNL (ligand)")
 
-![Hsp90 ligand binding poses](../../images/htmd_bindingposes.png "Two binding poses seen for this ligand")
+![Hsp90 ligand binding poses](../../images/htmd_analysis_bindingposes.png "Two binding poses seen for this ligand")
 
 
 ## RMSF analysis
@@ -822,23 +822,16 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+When considering the RMSF fluctuations greater than 1 Angstrom are worth considering. These are seen near residue position 50, 110 and 160. Very large fluctuations are seen for the final residues i.e. the C-terminus. Fairly common and no investigation is needed. The movement could be related to binding or other motions. 
 
-## Sub-step with **PCA**
+![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF for Hsp90")
+
+
+## PCA analysis
+
+Principal component analysis (PCA) converts a set of correlated observations (movement of all atoms in protein) to a set of principal components which are linearly independent (or uncorrelated).
+Here we will calculate the PCA, visualise it and also calculate the cosine content. 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -858,23 +851,14 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The first principal component (PC1) is most important accounting for 32.36% of the variance (see PC1 vs PC2 and Eigenvalue rank plots). More information on PCA can be found in the [BIO3D tutorial](http://thegrantlab.org/bio3d/tutorials/trajectory-analysis).
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![PCA Hsp90](../../images/htmd_analysis_pca.png "PCA for Hsp90")
 
-## Sub-step with **Cosine Content**
+The RMSF is in good correlation with PC1. 
+
+![PC1 RMSF Hsp90](../../images/htmd_analysis_pc1_rmsf.png "PC1 vs RMSF for Hsp90")
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -893,23 +877,8 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **PCA visualization**
+The cosine content is 0.084. Non-converged simulations have a value close to 1. This value indicates that sampling is most likely sufficient. 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -929,23 +898,13 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+*** TODO *** gif of PCA1 
+![Alternative text](../../images/image_name "Legend of the image")
+![PC1 Hsp90 gif](../../images/htmd_analysis_pc1_hsp90.gif "PC1 motion for Hsp90")
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Hydrogen bond analysis
 
-## Sub-step with **Hydrogen Bond Analysis using VMD**
+Hydrogen bonding interactions contribute to binding and are worth investigating. Persistent hydrogen bonds between the ligand and protein 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -966,21 +925,7 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The active site of this protein is quite hydrophobic. Only 1 hydrogen bond is seen between the ligand andHsp90, this is between Threonine 184 and the ligand. This hydogren bond is not persisent, the occupancy is small, 0.20%, the hydrogen is not present for most of the simulation (according to the criteria for hydrogen bonding). 
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
