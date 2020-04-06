@@ -689,7 +689,7 @@ Complete an analysis of the trajectory generated with Gromacs.
 
 ## Create PDB file needed by most analysis tools 
 
-Convert the structural coordinates of the system in GRO format into PDB format. This file will be used by most analysis tools as a starting structure.
+Convert the structural coordinates of the system in GRO format into PDB format. This file will be used by most analysis tools as a starting structure and "it contains the topology of the system."
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -707,12 +707,14 @@ Convert the structural coordinates of the system in GRO format into PDB format. 
 
 ## Convert trajectory to DCD format
 
-Convert from XTC for DCD format. A number of the analysis tools being used have been built to analyse trajectories in CHARMM's DCD format.
+Convert from XTC to DCD format. A number of the analysis tools being used have been built to analyse trajectories in CHARMM's DCD format.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **MDTraj file converter** {% icon tool %} with the following parameters:
 >    - *"Output format"*: `DCD file`
+>    >
+>    > ### {% icon comment %} Comment
 >    >
 >    > This tool can also be used to interconvert between several trajectory formats. A downside is we are duplicating actually duplicating the data and using up storage space on the Galaxy server. 
 >    {: .comment}
@@ -735,26 +737,10 @@ RMSD is a standard measure of structural distance between coordinate sets. The R
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > An RMSD on Cα atoms will select all protein Cα atoms. If you have a ligand that is a protein consider modifying this selection.
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## **RMSF Analysis**
 
