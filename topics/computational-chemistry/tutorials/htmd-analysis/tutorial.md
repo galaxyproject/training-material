@@ -904,7 +904,7 @@ The cosine content is 0.084. Non-converged simulations have a value close to 1. 
 
 ## Hydrogen bond analysis
 
-Hydrogen bonding interactions contribute to binding and are worth investigating. Persistent hydrogen bonds between the ligand and protein 
+Hydrogen bonding interactions contribute to binding and are worth investigating, in particular persistent hydrogen bonds.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
