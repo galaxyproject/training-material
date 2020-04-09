@@ -149,8 +149,10 @@ Firstly, we need to calculate the topology for the protein file. We will use the
 >    - *"Generate detailed log"*: `Yes`
 >
 >    > ### {% icon comment %} Comment
+>    > A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OPLS. Here, we use GAFF (general AMBER force field), which is a generalized AMBER force field which can be applied to almost any small organic molecule, not just macromolecules such as proteins.
 >    >
->    > Comment here about choice of force field, water model
+>    >
+>    > A wide range of models exist for modeling water. Here we are using the common TIP3P model, which is an example of a 'three-site model' - so-called because the molecule is modeled using three points, corresponding to the three atoms of water. (Four- and five-site models include additional 'dummy atoms' representing the negative charges of the lone pairs of the oxygen atom).
 >    {: .comment}
 >
 {: .hands_on}
@@ -175,19 +177,6 @@ To generate a topology for the ligand, we will use the **acpype** {% icon tool %
 >
 {: .hands_on}
 
-> ### {% icon question %} Comment on different forcefields?
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## Solvation and energy minimization
@@ -294,7 +283,7 @@ We now carry out equilibration in two stages: NVT and NPT. This is discussed at 
 > At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant **n**umber of particles, **v**olume and **t**emperature, while the NPT ensemble maintains constant **n**umber of particles, **p**ressure and **t**emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).
 > 
 > For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.
-
+> 
 {: .comment}
 
 
