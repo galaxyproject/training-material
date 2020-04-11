@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: 'Clustering in Machine Learning'
 zenodo_link: https://zenodo.org/...
 questions:
-- How to use clustering methods to categorized data in different clusters
+- How to use clustering algorithms to categorized data in different clusters
 objectives:
 - Learn clustering background
 - Learn hierarchical clustering algorithm
@@ -24,24 +24,28 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial we will discuss an unsupervised learning task called clustering. The goal of unsupervised learning is to discover hidden structure or patterns in unlabeled training data.  Clustering is used to find groups of similar observations within a set of unlabeled data, such that members of the same group, or cluster, are more similar to each other by a given metric than they are to the members of the other clusters. Clustering is commonly used to explore a dataset. For example, in biology, clustering is used to find groups of genes with similar expression patterns. We cluster objects in multiple groups , such that objects within the same cluster are as similar as possible (i.e., high intra-class similarity), whereas objects from dierent clusters are as dissimilar as possible (i.e., low inter-class similarity).
+The goal of unsupervised learning is to discover hidden structure or patterns in unlabeled training data. In this tutorial we will discuss an unsupervised learning task called clustering.   
+Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data object with high inter similarity and low intra similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this to cluster the items? 
+Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example clustering of gene expressions provides understanding gene functions, cellular processes, subtypes of cells and gene regulations.
+
+For example, in biology, clustering is often one of the first steps in gene expression analysis and is used to find groups of genes with similar expression patterns.
 
 We represent an observation as an n-dimensional vector. For example, assume that your training data consists of the samples plotted in the following Figure 1:
 
 >    ![data](images/data_before_clustering.png "Sample data before clustering")
 
-Clustering might reveal the following four groups, indicated by different colors:
+Clustering reveal the following four groups, indicated by different colors:
 
 >    ![data](images/data_after_clustering.png "Sample data after clustering")
 
 
 Broadly speaking, clustering can be divided into two subgroups :
 
-- Hard Clustering: In hard clustering, each data point either belongs to a cluster completely or not.
+- Hard Clustering: Each data point either belongs to a cluster completely or not.
 	
-- Soft Clustering: In soft clustering, instead of putting each data point into a separate cluster, a probability or likelihood of that data point to be in those clusters is assigned. 
+- Soft Clustering: Instead of putting each data point into a separate cluster, a probability or likelihood of that data point to be in those clusters is assigned. 
 
-The goal of clustering is to determine the internal grouping in a set of unlabeled data. But how to decide what constitutes a good clustering? It can be shown that there is no absolute best criterion which would be independent of the final aim of the clustering. Consequently, it is the user who should supply this criterion, in such a way that the result of the clustering will suit their needs.
+The goal of clustering is to determine the internal grouping in a set of unlabeled data. But how to decide what constitutes a good clustering? It can be shown that there is no absolute best criterion which would be independent of the final aim of the clustering. Consequently, the users should apply an appropriate criterion based on the problem. 
 
 
 
@@ -57,7 +61,7 @@ The goal of clustering is to determine the internal grouping in a set of unlabel
 
 # Types of clustering algorithms
 
-Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining the similarity among the There are  many clustering algorithms known. But few of the algorithms are used popularly and we can categorized them as follows: 
+Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining similarity. There are many clustering algorithms known. But few of the algorithms are used popularly and we can categorized them as follows: 
 
  - Connectivity models: As the name suggests, these models are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches. In the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lacks scalability for handling big datasets. Examples of these models are hierarchical clustering algorithm and its variants.
 
@@ -65,10 +69,10 @@ Since clustering is a subjective task, there are many algorithms for data cluste
 
  - Density Models: These models search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular example of density models is DBSCAN.
 
- - Distribution models: These clustering models are based on the notion of how probable is it that all data points in the cluster belong to the same distribution, for example normal, Gaussian. These models often suffer from overfitting. A popular example of these models is Expectation-maximization algorithm which uses multivariate normal distributions.
+ - Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in the cluster belong to the same distribution, for example normal, Gaussian. These models often suffer from overfitting. A popular example of these models is expectation-maximization algorithm which uses multivariate normal distributions.
 
 
-Now, in this tutorail, we will be taking you through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means and DBSCAN and a comparison between these methods.
+Now, in this tutorial, we will be taking you through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means and DBSCAN and a comparison between these methods.
 
  In the following, We will discuss these clustering algorithm and their parameters and how to apply them to categorize iris data and some other data sets. 
 
@@ -77,13 +81,13 @@ Now, in this tutorail, we will be taking you through three of the most popular c
 
 Since clustering is the grouping of similar objects, some sort of measure that can determine whether two objects are similar or dissimilar is required. There are two main type of measures used to estimate this relation: distance measures and similarity measures. The notions of distance and similarity are related, since the smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure, since the usage depends on the task.
 
-Many clustering methods use distance measures to determine the similarity or dissimilarity between any pair of objects.  A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors.
+Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects.  A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors.
 The clustering requires some methods for computing the distance or the (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.
 
 The choice of distance measures is a critical step in clustering. It defines how the similarity of two elements (x, y) is calculated and it will influence the shape of the
 clusters. The classical distance measures are Euclidean and Manhattan distances and for most common clustering tools, the default distance measure is Euclidean. If Euclidean distance is chosen, then observations with high values of features will be clustered together. The same holds true for observations with low values of features. In Figure 3, we are trying to group the cells using Euclidean distance and this distance matrix.
 
-![Distances]({{site.baseurl}}{% link topics/transcriptomics/images/raceid_distance.svg %} "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
+![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
 
  > ### {% icon question %} Questions
@@ -100,7 +104,7 @@ clusters. The classical distance measures are Euclidean and Manhattan distances 
  >
  {: .question }
 
-Other dissimilarity measures exist such as correlation-based distances, which is widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of Euclidean distance. The distance between two objects is 0 when they are perfectly correlated. Pearson’s correlation is quite sensitive to outliers. This does not matter
+Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of Euclidean distance. The distance between two objects is 0 when they are perfectly correlated. Pearson’s correlation is quite sensitive to outliers. This does not matter
 when clustering samples, because the correlation is over thousands of genes. During clustering genes, it is important to be aware of the possible impact of outliers. This
 can be mitigated by using Spearman’s correlation instead of Pearson’s correlation.
 
@@ -136,7 +140,7 @@ This algorithm has been implemented above using bottom up approach. It is also p
 The decision of merging two clusters is taken on the basis of closeness of these clusters. 
 
 
-Now we will apply hierarchical clustering to iris data, and learn to measure its performance. At the first step, we should upload the Iris data set.
+Now we will apply hierarchical clustering to Iris data set, and learn to measure its performance. At the first step, we should upload the Iris data set.
 
 > ### {% icon comment %} Background
 > The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
@@ -250,18 +254,17 @@ Let's visualize the clustering results to see how groups have been built.
 
 # K-means Algorithm
 
-K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given data set into a set of k clusters, where k represents the number of groups pre-specified by the analyst. 
-In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster.
-The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
+K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given data set into a set of k clusters, where k represents the number of groups pre-specified by the user.
+In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster.The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
 The K-Means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a the hyperparameter of the algorithm and k-means algorithm can be summarized as follow:
 
 1. Specify the number of clusters (K) to be created (by the analyst)
 
 2. Select randomly k objects from the data set as the initial cluster centers or means
 
-3. Assigns each observation to their closest centroid, based on the Euclidean distance between the object and the centroid
+3. Assign each observation to their closest centroid, based on the Euclidean distance between the object and the centroid
 
-4. For each of the k clusters update the cluster centroid by calculating the new mean values of all the data points in the cluster. 
+4. For each of the k clusters update cluster centroid by calculating the new mean values of all the data points in the cluster. 
 
 5. Iteratively minimize the total within sum of square. That is, iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of
 iterations is reached. 
@@ -344,7 +347,7 @@ The parameters that minimize the cost function are learned through an iterative 
 
 # Clustering with the DBSCAN algorithm
 
-DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering method and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples, which are samples that are in areas of high density. A cluster is therefore a set of core samples, each close to each other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not themselves core samples). There are two parameters to the algorithm, Maximum neighborhood distance and Minimal core point density, which define formally what we mean when we say dense. Higher min_samples or lower eps indicate higher density necessary to form a cluster.
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples, which are samples that are in areas of high density. A cluster is therefore a set of core samples, each close to each other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not themselves core samples). There are two parameters to the algorithm, maximum neighborhood distance and minimal core point density, which define formally what we mean when we say dense. There are two important parameters in DBSCAN algorithm, min_samples, is the number of samples in a neighborhood for a point to be considered as a core point and eps is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher min_samples or lower eps indicate higher density necessary to form a cluster.
 DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
 
 
@@ -460,7 +463,7 @@ Then , you can visulaze the clustering result using the following steps:
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in simlar steps to moon and circles datasets. For the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set ( Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
+In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in simlar steps to moon and circles datasets. For the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
 
 >    ![data](images/circles_clustering.png "Plot of Clustering Algorithms on Circles Data")
 
@@ -469,8 +472,7 @@ In the next steps, you can apply these three algorithms (hierarchical, k-means a
 
 # Conclusion
 
-In this tutorial, we discussed the unsupervised learning task: clustering. Clustering is used to discover structure in unlabeled data. You learned about the
-hierarcial , k-means and DBSCAN algorithms. By following these steps, we learned how to perform clustering algorithms using clustering and plotting tools in Galaxy. Moreover, we visualized the results using multiple plots to analyse the clustering tasks. There are many other clustering approaches which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. Although clustering is easy to implement, you need to take care of some important aspects like treating outliers in your data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.
+In this tutorial, we discussed the clustering algorithms which is used to discover structure in unlabeled data. You learned about the hierarcial, k-means and DBSCAN algorithms. By following these steps, we learned how to perform clustering and visualize results using clustering and plotting tools respectively in Galaxy. There are many other clustering approaches which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. In using clustering algorithms, we need to take care of some important aspects like treating outliers in our data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.
 
 
 
