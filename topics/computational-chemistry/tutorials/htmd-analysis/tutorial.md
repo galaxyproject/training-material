@@ -75,6 +75,9 @@ The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for cat
 
 Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to slow cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents.
 
+![Hsp90 structure, with a ligand bound]({% link topics/computational-chemistry/images/hsp90lig.png %} "Structure of Hsp90, with a ligand bound. <a href="https://usegalaxy.eu/u/sbray/v/hsp90-lig">Click to view</a> in NGL. ({% cite ngl %})")
+
+
 ## Get data
 
 First of all, download the required data.
@@ -97,21 +100,23 @@ First of all, download the required data.
 
 Now we have downloaded a PDB structure of the protein we wish to study, we will start parameterizing it for MD simulation.
 
+GROMACS distinguishes between constant and dynamic attributes of the atoms in the system. The constant attributes (e.g. atom charges, bonds connecting atoms) are listed in the topology (TOP file), while dynamic attributes (attributes that can change during a simulation, e.g. atom position, velocities and forces) are stored in structure (PDB or GRO) and trajectory (XTC and TRR) files.
+
+The PDB file we start from only explicitly states atom type and position. Therefore, before beginning simulation, we need to calculate the rest of the information contained within the topology file. There are a range of force fields which perform these calculations in slightly different ways.
+
 Parameterization needs to be done separately for the ligand and protein. Therefore, the first step is to separate the PDB file into two sets of coordinates - one for the ligand and one for the protein.
 
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon question %} Question
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. Why do protein and ligand need to be parameterized separately?
 >
-{: .details}
-
-A big step can have several subsections or sub steps:
+> > ### {% icon solution %} Solution
+> >
+> > 1. Protein and small molecules are constructed differently. A protein is made up of 20 different building blocks (amino acids) - therefore, to construct a protein topology, amino acid topologies simply need to be combined appropriately. By contrast, the structure of small molecules is far more flexible and needs to be calculated for each different structure.
+> >
+> {: .solution}
+>
+{: .question}
 
 ### Extract protein and ligand coordinates
 
@@ -144,8 +149,10 @@ Firstly, we need to calculate the topology for the protein file. We will use the
 >    - *"Generate detailed log"*: `Yes`
 >
 >    > ### {% icon comment %} Comment
+>    > A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OPLS. Here, we use GAFF (general AMBER force field), which is a generalized AMBER force field which can be applied to almost any small organic molecule, not just macromolecules such as proteins.
 >    >
->    > Comment here about choice of force field, water model
+>    >
+>    > A wide range of models exist for modeling water. Here we are using the common TIP3P model, which is an example of a 'three-site model' - so-called because the molecule is modeled using three points, corresponding to the three atoms of water. (Four- and five-site models include additional 'dummy atoms' representing the negative charges of the lone pairs of the oxygen atom).
 >    {: .comment}
 >
 {: .hands_on}
@@ -170,19 +177,6 @@ To generate a topology for the ligand, we will use the **acpype** {% icon tool %
 >
 {: .hands_on}
 
-> ### {% icon question %} Comment on different forcefields?
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## Solvation and energy minimization
@@ -211,11 +205,6 @@ Having generated topologies, we now need to combine them, define the box which c
 > 5. Click `Export` to save your changes as a new dataset. Make sure the datatype of the new file is still `TOP`. Rename to `System topology`.
 {: .hands_on}
 
-> ### {% icon comment %} Comment
->
-> A comment about what information is in the top and gro files, why we do it this way.
-{: .comment}
-
 If this procedure was too complicated, you can download the combined files here: LINK. However, you will find it useful to understand the information contained within topology files and learn how to make changes to it.
 
 ### Create the simulation box with **GROMACS structure configuration**
@@ -234,14 +223,14 @@ The next step, once combined coordinate (GRO) and topology (TOP) files have been
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool simply adds a box of the required dimensions to the GRO file. A distance of at least 1.0 nm is recommended to avoid interactions between the protein and its mirror image. On the other hand, increasing the box size too will increase the simulation time, due to the greater number of solvent molecules which need to be treated.
+>    > This tool simply adds a box of the required dimensions to the GRO file. A distance of at least 1.0 nm is recommended to avoid interactions between the protein and its mirror image. On the other hand, increasing the box size too far will increase the simulation time, due to the greater number of solvent molecules which need to be treated.
 >    {: .comment}
 >
 {: .hands_on}
 
 ### Solvation
 
-The next step is solvation of the newly created simulation box. Note that the system is charged (depending on the pH) - the solvation tool also adds ions to neutralise this.
+The next step is solvation of the newly created simulation box. Note that the system is charged (depending on the pH) - the solvation tool also adds sodium or chloride ions as required to neutralise this.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -256,7 +245,20 @@ The next step is solvation of the newly created simulation box. Note that the sy
 
 ### Energy minimization
 
-The next step is energy minimization, which can be carried out using the **GROMACS energy minimization** {% icon tool %}.
+The next step is energy minimization, which can be carried out using the **GROMACS energy minimization** {% icon tool %} tool.
+
+> ### {% icon question %} Question
+>
+> 1. What is the purpose of energy minimization?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Running an energy minimization (EM) algorithm relaxes the structure by removing any steric clashes or unusual geometry which would artificially raise the energy of the system.
+> >
+> {: .solution}
+>
+{: .question}
+
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -269,21 +271,20 @@ The next step is energy minimization, which can be carried out using the **GROMA
 >    - *"Generate detailed log"*: `Yes`
 >    - Rename output to `Minimized GRO file`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 
 ## Equilibration
 
 We now carry out equilibration in two stages: NVT and NPT. This is discussed at greater length in the basic GROMACS tutorial. Equilibration requires restraining the protein structure - we use the ITP file produced by the initial setup tool for this.
+
+> ### {% icon comment %} More detail about equilibration
+>
+> At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT ensemble, followed by an NPT ensemble. Use of the NVT ensemble entails maintaining constant **n**umber of particles, **v**olume and **t**emperature, while the NPT ensemble maintains constant **n**umber of particles, **p**ressure and **t**emperature. (The NVT ensemble is also known as the isothermal-isochoric ensemble, while the NPT ensemble is also known as the isothermal-isobaric ensemble).
+> 
+> For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file we created in system setup. When we specify this restraint, protein movement is not totally forbidden, but is energetically punished.
+> 
+{: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: NVT equilibration
@@ -309,7 +310,9 @@ We now carry out equilibration in two stages: NVT and NPT. This is discussed at 
 >
 {: .hands_on}
 
-NVT is followed by NPT equilibration.
+Having stabilized the temperature of the system with NVT equilibration, we also need to stabilize the pressure of the system. We therefore equilibrate again using the NPT (constant number of particles, pressure, temperature) ensemble.
+
+Note that we can continue where the last simulation left off (with new parameters) by using the checkpoint (CPT) file saved at the end of the NVT simulation.
 
 > ### {% icon hands_on %} Hands-on: NPT equilibration
 >
