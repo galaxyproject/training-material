@@ -310,20 +310,119 @@ steps are independent of the data source you choose.
 
 # Read trimming and quality control
 
-1. Trimming of Illumina reads with fastp / visualizing results with MultiQC
+In the end, we do not want to base our mapping on low-quality reads that may
+cause misassembly of fragments or introduce sequencing artefacts into the final
+assembled sequence. Since quality control, read filtering and read trimming are
+all quite fast and computationally cheap operations compared to the read
+mapping that we will use to identify and eliminate human reads, it is best to
+perform these steps up front.
 
-   **TO DO**
+Due to their very different nature, however, Illumina- and Nanopore-sequenced
+reads should be treated rather differently.
 
-2. QC of Nanopore reads with NanoPlot and/or FastQC
+## Trimming and filtering of Illumina reads
 
-   **TO DO**
+Galaxy offers a panel of different NGS reads trimming/filtering tools. Here,
+we use **fastp** {% icon tool %}, which is straightforward to configure,
+and when combined with **MultiQC** {% icon tool %}, enables nice and
+easy-to-interpret visualizations of the effects of preprocessing, in particular
+for multiple samples.
+
+In the following, we configure the tool to retain reads only if at most 20% of
+their bases have a Phred-scaled quality >= 20 and if there length in bases after
+trimming of adapter sequences (which the tool auto-detects for us) is at least
+50.
+
+The JSON-formatted report produced by the tool, can serve as input to
+**MultiQC** {% icon tool %} for a direct visual comparison of key quality
+metrics for all samples before and after preprocessing.
+
+> ### {% icon hands_on %} Hands-on: Reads preprocessing and quality reporting
+> 1. **fastp** {% icon tool %} with the following parameters
+>    - *"Single-end or paired reads"*: `Paired Collection`
+>      - *"Select paired collection(s)"*: the collection of Illumina-sequenced
+>        reads as produced in the *Get Data* section
+>    - in *"Filter Options"*
+>      - in *"Quality filtering options"*
+>        - *"Disable quality filtering"*: `No`
+>        - *"Qualified quality phred"*: `20`
+>        - *"Unqualified percent limit"*: `20`
+>      - in *"Length filtering options"*
+>        - *"Disable length filtering"*: `No`
+>        - *"Length required"*: `50`
+>    - in *"Output Options"*
+>      - *"Output HTML report"*: `No`
+>      - *"Output JSON report"*: `Yes`
+>
+>    The tool run produces two collections - one with the actual preprocessed
+>    reads of all input samples, another one with a JSON-formatted report of
+>    the processing for every sample.
+>
+> 2. **MultiQC** {% icon tool %} with the following parameters
+>    - {% icon param-repeat %} *"Results"*
+>      - *"Which tool was used generate logs?"*: `fastp`
+>        - {% icon param-collection %} *"Output of fastp"*: the collection of
+>          JSON-formatted reports, second collection produced by **fastp**
+>          {% icon tool %}
+>
+>    This tool run generates a single output with the combined quality reports
+>    for all samples before and after processing with **fastp** {% icon tool %}.
+>
+{: .hands_on}
+
+## Quality control of Nanopore reads
+
+Nanopore-sequenced reads differ greatly in length from one another and are, on
+average, of relatively low quality (in particular when compared to
+Illumina-sequenced reads). These properties make it challenging to preprocess
+them with standard tools. Quality assessment tools calibrated to work well with
+Illumina-sequenced reads are less useful for Nanopore-sequenced reads, too, for
+the same reasons. Here we restrict ourselves to a simple quality check with
+**NanoPlot** {% icon tool %}, a dedicated QC tool for Nanopore-sequenced reads.
+
+> ### {% icon hands_on %} Hands-on: Checking the quality of Nanopore reads with NanoPlot
+> 1. **NanoPlot** {% icon tool %} with the following parameters
+>    - *"Select multifile mode"*: `batch`
+>      - *"Type of the file(s) to work on"*: `fastq`
+>        - {% icon param-collection %} *"files"*: the collection of
+>          Nanopore-sequenced reads as produced in the *Get Data* section
+>    - in *"Options for filtering or transforming input prior to plotting"*
+>      - *"Logarithmic scaling of lengths in plots."*: `Yes`
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Looking at the three generated quality reports, which of the three
+>    >    samples seems to be of better quality overall than the other two,
+>    >    and what are some criteria that support this conclusion?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. Sample `SRR10948474` has the best overall quality.
+>    > >
+>    > >    It has both higher average read length and quality than the other
+>    > >    two (see the *Summary statistics* table), has a distribution of
+>    > >    read qualities that peaks around intermediate quality scores (not
+>    > >    low ones as for the other samples), and contains some extra-long
+>    > >    (though at least partly rather low-quality) reads. Those last two
+>    > >    points become most obvious when looking at the *Read lengths vs
+>    > >    Average read quality* plots.
+>    >  {: .solution }
+>    {: .question}
+>
+{: .hands_on}
 
 # Subtraction of reads mapping to the human reference genome
 
-## Map Illumina reads with bowtie2
+## Mapping of Illumina reads
 
 In this tutorial, we are using **Bowtie2** for mapping our short-reads data to
-the human genome. *BWA
+the human genome. *BWA-MEM* would be an obvious alternative for mapping the 150
+nucleotides (see the QC report above) reads from our samples.
+
+According to its authors, the *Minimap2* aligner, which we will be using for
+mapping the Nanopore-sequenced data in the next step, is supposed to outcompete
+*Bowtie2* and *BWA-MEM* in terms of speed even for Illumina-sequenced reads
+of length > 100 nts, but we opt for the conservative approach of using a
+widely-used, well-tested tool here.
 
 > ### {% icon hands_on %} Hands-on: Mapping with Bowtie2
 > 1. **Bowtie2** {% icon tool %} with the following parameters
@@ -377,7 +476,10 @@ the human genome. *BWA
 >
 {: .hands_on}
 
-## Map Nanopore reads with minimap2
+## Mapping of Nanopore reads
+
+For the mapping of the Nanopore-sequenced data we are using the **Minimap2**
+aligner, which is particularly efficient for mapping long reads.
 
 > ### {% icon hands_on %} Hands-on: Nanopore reads mapping
 >
@@ -503,7 +605,19 @@ potential viral origin.
 
 ## Optional: Rearrange the filtered data into the original nested data structure
 
-> ### {% icon hands_on %} Hands-on: Arrange to list collections into a list of pairs
+If you compare the outputs of the last step to the input data we started out
+with, you will notice that the Illumina-sequenced data is arranged differently
+now than initially. It is arranged now into separate collections of forward and
+reverse reads, whereas we started with a single nested collection of the data.
+
+We can easily cast the data back into its original structure with one of
+Galaxy's collection manipulation tools, but note that we will not use the
+resulting nested collection for this tutorial because the **Unicycler** tool
+for assembling the reads would not be able to handle the nested data correctly.
+
+Thus, the following just serves as an illustration and is entirely optional.
+
+> ### {% icon hands_on %} Hands-on: Arrange two list collections into a list of pairs
 >
 > 1. **Zip Collection** {% icon tool %} with the following parameters
 >    - {% icon param-collection %} *"Input Dataset (Forward)"*: the collection
