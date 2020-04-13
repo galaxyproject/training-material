@@ -614,6 +614,75 @@ Hydrogen bonding interactions contribute to binding and are worth investigating,
 
 The active site of this protein is quite hydrophobic. Only 1 hydrogen bond is seen between the ligand andHsp90, this is between Threonine 184 and the ligand. This hydogren bond is not persisent, the occupancy is small, 0.20%, the hydrogen is not present for most of the simulation (according to the criteria for hydrogen bonding).
 
+## Optional: Estimate the binding free energy
+
+We can estimate the binding free energy between a ligand and a receptor using Molecular Mechanics Poisson-Boltzman Surface Area (MMPBSA). For the simplest form of calculation - a Single Trajectory Estimate -  A simulation of the complex in water is run, this was done with GROMACS previously. The trajectory of this complex is used to estimate the MMPBSA or MMGBSA depending on the options chosen. A General Born (GB) calculation is recommended here as it completes in reasonable time.
+
+### Converting parameters
+
+The MMPBSA tool support AMBER topologies only. To convert from GROMACS .top and .gro to Amber topologies, use the following tool which uses AMBER's parmed to carry out the conversion. The result will be 4 prmtop files which are required for the binding free energy estimate calculation.
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Convert Parameters** {% icon tool %} with the following parameters:
+>    - *"Force Field format"*: `GROMACS`
+>        - {% icon param-file %} *"Input topology (top) file"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Input structure (gro) file"*: `output` (Input dataset)
+>    - *"Receptor selection"*: `:NA,CL,SOL,UNL`
+>    - *"Complex selection"*: `:NA,CL,SOL`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    > The example selection makes several assumptions. The ligand is named UNL, the solvent SOL and that the ions are NA and CL. These selection will depend on the system that was built. 
+>    > 
+>    {: .comment}
+>
+
+## Binding free energy estimate
+
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **mmpbsa mmgbsa** {% icon tool %} with the following parameters:
+>    - In *"Input"*:
+>        - *"Single or Multiple Trajectories"*: `Single Trajectory Protocol (STP)`
+>            - {% icon param-file %} *"AMBER prmtop input for Ligand"*: `output` (Input dataset)
+>    - In *"General parameters"*:
+>        - *"Final frame to analyse"*: `2000`
+>        - *"interval between frames analysed"*: `5`
+>        - *"quasi-harmonic entropy calculation"*: `Yes`
+>        - *"Strip mask"*: `:NA:SOL:CL`
+>    - In *"Details of calculation and parameters"*:
+>        - *"General Born calculation"*: `yes`
+>        - *"Poisson Boltzman calculation"*: `no`
+>        - *"Decomposition Analysis"*: `yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+# Optional: Automating high throughput calculations
+In the scenario where large batches of simulations are needed, then strategies to automate this process are needed. Before rushing into high throughput make sure to understand your process, the tools and paramters, data and outputs quite well. Junk in will mean junk out. The same applies for high throughput, but you will get more junk and waste more resources. 
+First understand the complete process for at least 2 systems and use this experience to understand where errors are likely to occur. 
+Second create a workflow and run this on 2-3 systems. Again check for errors, complete a cursory analysis to ensure selected parameters give reasonable results.  
+At this point you may realise that manual intervention is required for certain systems. If this is at the setup stage, then create multiple histories (either manually or perhaps with bioblend), complete the manaual task and then run a workflow. Realise if there is a manual task, automation can only be applied to part of the system. Maybe manually choosing to run workflows will be sufficient.
+Third start to consider automation. Create a history with data that has been made into a collection. Run your workflow. If this works that is great. If not consider using bioblend. 
+
+https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/slides.html
+https://galaxyproject.github.io/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html
+
+
 # Conclusion
 {:.no_toc}
 
