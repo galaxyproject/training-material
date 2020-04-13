@@ -121,4 +121,21 @@ tutorial_name: galaxy-faq
 >    >
 > {: .solution}
 {: .question}
+> ### {% icon question %} Why does my top protein or nucleotide hit lists contain duplicate entries? 
+>    > **For Example:**
+>    > ![](../../images/galaxy-faq-screenshots/19_top_protein_list_duplicates.png)
+>    > ### {% icon solution %} Solution
+>    > The duplicate entries are caused when processing of top hits from the BLASTp job separately counts organisms that have a unique accession, or multiple TaxIDs. For organisms with a representative genome in NCBI's RefSeq collection, this will result in duplicate organisms with identical TaxIDs, but unique accessions.(**Figure 1**) For some organisms with many representative genomes in the database, they will have been assigned multiple TaxIDs, each with a unique accession. Both these cases will result in what appear to be duplicates in the Top hits list. 
+>    >
+>    > Figure 1:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/20_top_hits.png)
+>    >
+>    > **Suggested Action:**
+>    >
+>    >Verify that entries are in fact, representing the same organism. The number of top hits displayed in the output list can be manually adjusted  when running the relatedness tool.
+>    > 
+>    >
+> {: .solution}
+{: .question}
 
