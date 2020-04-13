@@ -106,17 +106,17 @@ tutorial_name: galaxy-faq
 >    >
 >    > Example 1: Galaxy warning messages indicating that tools have changed
 >    >
->    > ![](../../images/galaxy-faq-screenshots/16- outdated tool warning.png)
+>    > ![](../../images/galaxy-faq-screenshots/16_outdated_tool_warning.png)
 >    >
 >    >
 >    > Example 2: Editor warnings upon the opening of a workflow with tools that have changed. The values mention here may need to be manually set prior to saving.
 >    >
->    > ![](../../images/galaxy-faq-screenshots/17- editor warnings.png)
+>    > ![](../../images/galaxy-faq-screenshots/17_editor_warnings.png)
 >    >
 >    >
 >    > Example 3: If error messages are ignored and the user tries to run a workflow even with errors, Galaxy may give a "Workflow failed" message similar to this, which gives the first clue as to which tools are preventing the workflow from running.
 >    >
->    > ![](../../images/galaxy-faq-screenshots/18- workflow failed.png)
+>    > ![](../../images/galaxy-faq-screenshots/18_workflow_failed.png)
 >    >
 >    >
 > {: .solution}
