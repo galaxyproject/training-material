@@ -98,4 +98,27 @@ tutorial_name: galaxy-faq
 >    > 3. It is possible that some phage genome data simply cannot be run through this tool in its current state. We are in communication with the authors to attempt to remedy the situation. If you have encountered a reproducible error when running PhageTerm on a particular dataset, please send us the information (cory.maughmer@tamu.edu) so that the developers can develop a fix for that specific problem.
 > {: .solution}
 {: .question}
+> ### {% icon question %} Why won't my workflow run?
+>    > ### {% icon solution %} Solution
+>    > Sometimes when a worflow will not run, it is because tools in the Workflow may have new versions. Workflow must be opened and saved. If the tool has had new parameters added, those must be manually set (even if they have a preset default value) the first time it is viewed in the workflow edit view. Alternatively, for published workflows, they can be re-imported.
+>    >
+>    > Here are some useful examples of warnings Galaxy will give in this case:
+>    >
+>    > Example 1: Galaxy warning messages indicating that tools have changed
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/16- outdated tool warning.png)
+>    >
+>    >
+>    > Example 2: Editor warnings upon the opening of a workflow with tools that have changed. The values mention here may need to be manually set prior to saving.
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/17- editor warnings.png)
+>    >
+>    >
+>    > Example 3: If error messages are ignored and the user tries to run a workflow even with errors, Galaxy may give a "Workflow failed" message similar to this, which gives the first clue as to which tools are preventing the workflow from running.
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/18- workflow failed.png)
+>    >
+>    >
+> {: .solution}
+{: .question}
 
