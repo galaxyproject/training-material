@@ -376,7 +376,7 @@ Complete an analysis of the trajectory generated with Gromacs.
 
 ## Create PDB file needed by most analysis tools
 
-Convert the structural coordinates of the system in GRO format into PDB format. This file will be used by most analysis tools as a starting structure and "it contains the topology of the system."
+Convert the structural coordinates of the system in GRO format into PDB format. This file will be used by most analysis tools as a starting structure.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -403,7 +403,7 @@ Convert from XTC to DCD format. A number of the analysis tools being used have b
 >    >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool can also be used to interconvert between several trajectory formats. A downside is we are duplicating actually duplicating the data and using up storage space on the Galaxy server.
+>    > This tool can also be used to interconvert between several trajectory formats. A downside is we are duplicating the data and using up storage space on the Galaxy server.
 >    {: .comment}
 >
 {: .hands_on}
@@ -411,7 +411,7 @@ Convert from XTC to DCD format. A number of the analysis tools being used have b
 
 ## RMSD analysis - protein
 
-RMSD is a standard measure of structural distance between coordinate sets that measures the average distance between a group of atoms. The RMSD of the Cα atoms of the protein backbone is calculated here is and is a measire of how much the protein has changed between different time points in the trajectory.
+RMSD is a standard measure of structural distance between coordinate sets that measures the average distance between a group of atoms. The RMSD of the Cα atoms of the protein backbone is calculated here and is a measure of how much the protein conformation has changed between different time points in the trajectory.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -438,9 +438,9 @@ RMSD timeseries shows a thermally stable and equilibrated structure with an aver
 
 ## RMSD analysis - ligand
 
-Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identidfy possible binding modes. If the ligand is not stable the RMSD will fluctuate excessively and there will large 'jumps' in the RMSD.
+Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identify possible binding modes. If the ligand is not stable the RMSD will fluctuate excessively and there will be large 'jumps' in the RMSD.
 
-Note two RMSD's are run but only one is considered further. The tool has a ligand inference option but this may fail and instead the ligand is selected by residue ID.
+Note two RMSD analyses are run but only one is considered further. The tool has a ligand inference option but this may fail and instead the ligand is selected by residue ID.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -510,7 +510,7 @@ The RMSD seems to stabilise at 1.0 and then flips back to 0.5. This is more clea
 {: .hands_on}
 
 
-When considering the RMSF fluctuations greater than 1 Angstrom are worth considering. These are seen near residue position 50, 110 and 160. Very large fluctuations are seen for the final residues i.e. the C-terminus. Fairly common and no investigation is needed. The movement could be related to binding or other motions.
+When considering the RMSF fluctuations greater than 1 Angstrom are worth considering. These are seen near residue position 50, 110 and 160. Very large fluctuations are seen for the final residues i.e. the C-terminus. These are fairly common and no investigation is needed. The movement could be related to binding or other motions.
 
 ![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF for Hsp90")
 
@@ -518,7 +518,7 @@ When considering the RMSF fluctuations greater than 1 Angstrom are worth conside
 ## PCA analysis
 
 Principal component analysis (PCA) converts a set of correlated observations (movement of all atoms in protein) to a set of principal components which are linearly independent (or uncorrelated).
-Here we will calculate the PCA, visualise it and also calculate the cosine content.
+Here we will calculate the PCA, visualize it and also calculate the cosine content.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -612,15 +612,15 @@ Hydrogen bonding interactions contribute to binding and are worth investigating,
 >
 {: .hands_on}
 
-The active site of this protein is quite hydrophobic. Only 1 hydrogen bond is seen between the ligand andHsp90, this is between Threonine 184 and the ligand. This hydogren bond is not persisent, the occupancy is small, 0.20%, the hydrogen is not present for most of the simulation (according to the criteria for hydrogen bonding).
+The active site of this protein is quite hydrophobic. Only 1 hydrogen bond is seen between the ligand andHsp90, this is between Threonine 184 and the ligand. This hydogren bond is not persistent, the occupancy is small, 0.20%, the hydrogen is not present for most of the simulation (according to the criteria for hydrogen bonding).
 
 ## Optional: Estimate the binding free energy
 
-We can estimate the binding free energy between a ligand and a receptor using Molecular Mechanics Poisson-Boltzman Surface Area (MMPBSA). For the simplest form of calculation - a Single Trajectory Estimate -  A simulation of the complex in water is run, this was done with GROMACS previously. The trajectory of this complex is used to estimate the MMPBSA or MMGBSA depending on the options chosen. A General Born (GB) calculation is recommended here as it completes in reasonable time.
+We can estimate the binding free energy between a ligand and a receptor using Molecular Mechanics Poisson-Boltzman Surface Area (MMPBSA). For the simplest form of calculation, a Single Trajectory Estimate, a simulation of the complex in water is run, this was done with GROMACS previously. The trajectory of this complex is used to estimate the MMPBSA or MMGBSA depending on the options chosen. A General Born (GB) calculation is recommended here as it completes in reasonable time.
 
 ### Converting parameters
 
-The MMPBSA tool support AMBER topologies only. To convert from GROMACS .top and .gro to Amber topologies, use the following tool which uses AMBER's parmed to carry out the conversion. The result will be 4 prmtop files which are required for the binding free energy estimate calculation.
+The MMPBSA tool supports the AMBER topology format only. To convert from GROMACS `.top` and `.gro` files to Amber topologies, use the following tool which uses AMBER's parmed to carry out the conversion. The result will be 4 prmtop files which are required for the binding free energy estimate calculation.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
