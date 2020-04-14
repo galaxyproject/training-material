@@ -138,4 +138,14 @@ tutorial_name: galaxy-faq
 >    >
 > {: .solution}
 {: .question}
-
+> ### {% icon question %}Why is the dice score in the Top BLASTn results greater than 1?
+>    > **For Example:**
+>    > ![](../../images/galaxy-faq-screenshots/21_dice_score.png)
+>    > ### {% icon solution %} Cause
+>    > This happens when the aligned length is greater than the total length of query and/or subject length like in Line 1 of the above >  image.
+>    >
+>    > BLAST results contain full-length high-scoring pairs (HSPs), usually because the query is identical to the subject, plus additional duplicate smaller HSPs. The dice score calculation is (2 * # identical matches)/((genome 1 length) + (genome 2 length)). When adding up all the HSPs from a subject sequence, the additional smaller sequences push the value to slightly greater than one.
+>    >
+>    >
+> {: .solution}
+{: .question}
