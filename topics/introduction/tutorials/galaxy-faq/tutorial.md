@@ -149,3 +149,14 @@ tutorial_name: galaxy-faq
 >    >
 > {: .solution}
 {: .question}
+> ### {% icon question %} Why does the output from the GFF3 feature tool has question marks up to the correct sequence length for each gene instead of the actual nucleotide sequence?
+>    > 
+>    > ### {% icon solution %} Cause
+>    > The names of the GFF3 and the FASTA don't match. Thus, the downstream tools will run, but not reference the input fasta file to 'extract' features of the length called for by the gff3 file.
+>    >
+>    > **Suggested Action:**
+>    >
+>    > Change the names to match. Use the Rename tool for both GFF3 and FASTA files, or the FASTA sequence renamer tool.
+>    >
+> {: .solution}
+{: .question}
