@@ -158,5 +158,9 @@ tutorial_name: galaxy-faq
 >    >
 >    > Change the names to match. Use the Rename tool for both GFF3 and FASTA files, or the FASTA sequence renamer tool.
 >    >
+>    > **Note:**
+>    > The same symptom, problem, and solution occurs with ShineFind.
+>    >
+>    >
 > {: .solution}
 {: .question}
