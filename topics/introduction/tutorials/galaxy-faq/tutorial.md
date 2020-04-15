@@ -121,7 +121,7 @@ tutorial_name: galaxy-faq
 >    >
 > {: .solution}
 {: .question}
-> ### {% icon question %} Why does my top protein or nucleotide hit lists contain duplicate entries? 
+> ### {% icon question %} Why do my top protein or nucleotide hit lists contain duplicate entries? 
 >    > **For Example:**
 >    > ![](../../images/galaxy-faq-screenshots/19_top_protein_list_duplicates.png)
 >    > ### {% icon solution %} Solution
@@ -142,24 +142,24 @@ tutorial_name: galaxy-faq
 >    > **For Example:**
 >    > ![](../../images/galaxy-faq-screenshots/21_dice_score.png)
 >    > ### {% icon solution %} Cause
->    > This happens when the aligned length is greater than the total length of query and/or subject length like in Line 1 of the above >  image.
+>    > This happens when the aligned length is greater than the total length of query and/or subject length like in Line 1 of the above image.
 >    >
 >    > BLAST results contain full-length high-scoring pairs (HSPs), usually because the query is identical to the subject, plus additional duplicate smaller HSPs. The dice score calculation is (2 * # identical matches)/((genome 1 length) + (genome 2 length)). When adding up all the HSPs from a subject sequence, the additional smaller sequences push the value to slightly greater than one.
 >    >
 >    >
 > {: .solution}
 {: .question}
-> ### {% icon question %} Why does the output from the GFF3 feature tool has question marks up to the correct sequence length for each gene instead of the actual nucleotide sequence?
+> ### {% icon question %} Why does the output from the GFF3 feature extraction tool have question marks up to the correct sequence length for each gene instead of the actual nucleotide sequence?
 >    > 
 >    > ### {% icon solution %} Cause
->    > The names of the GFF3 and the FASTA don't match. Thus, the downstream tools will run, but not reference the input fasta file to 'extract' features of the length called for by the gff3 file.
+>    > The names of the GFF3 and the FASTA do not match. Thus, the downstream tools will run, but not reference the input fasta file to 'extract' features of the length called for by the gff3 file.
 >    >
 >    > **Suggested Action:**
 >    >
 >    > Change the names to match. Use the Rename tool for both GFF3 and FASTA files, or the FASTA sequence renamer tool.
 >    >
 >    > **Note:**
->    > The same symptom, problem, and solution occurs with ShineFind.
+>    > The same symptom, problem, and solution occurs with ShineFind and other similar tools.
 >    >
 >    >
 > {: .solution}
