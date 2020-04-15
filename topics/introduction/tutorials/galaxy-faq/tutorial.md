@@ -98,4 +98,69 @@ tutorial_name: galaxy-faq
 >    > 3. It is possible that some phage genome data simply cannot be run through this tool in its current state. We are in communication with the authors to attempt to remedy the situation. If you have encountered a reproducible error when running PhageTerm on a particular dataset, please send us the information (cory.maughmer@tamu.edu) so that the developers can develop a fix for that specific problem.
 > {: .solution}
 {: .question}
-
+> ### {% icon question %} Why won't my workflow run?
+>    > ### {% icon solution %} Solution
+>    > Sometimes when a worflow will not run, it is because tools in the Workflow may have new versions. Workflow must be opened and saved. If the tool has had new parameters added, those must be manually set (even if they have a preset default value) the first time it is viewed in the workflow edit view. Alternatively, for published workflows, they can be re-imported.
+>    >
+>    > Here are some useful examples of warnings Galaxy will give in this case:
+>    >
+>    > Example 1: Galaxy warning messages indicating that tools have changed
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/16_outdated_tool_warning.png)
+>    >
+>    >
+>    > Example 2: Editor warnings upon the opening of a workflow with tools that have changed. The values mention here may need to be manually set prior to saving.
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/17_editor_warnings.png)
+>    >
+>    >
+>    > Example 3: If error messages are ignored and the user tries to run a workflow even with errors, Galaxy may give a "Workflow failed" message similar to this, which gives the first clue as to which tools are preventing the workflow from running.
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/18_workflow_failed.png)
+>    >
+>    >
+> {: .solution}
+{: .question}
+> ### {% icon question %} Why do my top protein or nucleotide hit lists contain duplicate entries? 
+>    > **For Example:**
+>    > ![](../../images/galaxy-faq-screenshots/19_top_protein_list_duplicates.png)
+>    > ### {% icon solution %} Solution
+>    > The duplicate entries are caused when processing of top hits from the BLASTp job separately counts organisms that have a unique accession, or multiple TaxIDs. For organisms with a representative genome in NCBI's RefSeq collection, this will result in duplicate organisms with identical TaxIDs, but unique accessions.(**Figure 1**) For some organisms with many representative genomes in the database, they will have been assigned multiple TaxIDs, each with a unique accession. Both these cases will result in what appear to be duplicates in the Top hits list. 
+>    >
+>    > Figure 1:
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/20_top_hits.png)
+>    >
+>    > **Suggested Action:**
+>    >
+>    >Verify that entries are in fact, representing the same organism. The number of top hits displayed in the output list can be manually adjusted  when running the relatedness tool.
+>    > 
+>    >
+> {: .solution}
+{: .question}
+> ### {% icon question %}Why is the dice score in the Top BLASTn results greater than 1?
+>    > **For Example:**
+>    > ![](../../images/galaxy-faq-screenshots/21_dice_score.png)
+>    > ### {% icon solution %} Cause
+>    > This happens when the aligned length is greater than the total length of query and/or subject length like in Line 1 of the above image.
+>    >
+>    > BLAST results contain full-length high-scoring pairs (HSPs), usually because the query is identical to the subject, plus additional duplicate smaller HSPs. The dice score calculation is (2 * # identical matches)/((genome 1 length) + (genome 2 length)). When adding up all the HSPs from a subject sequence, the additional smaller sequences push the value to slightly greater than one.
+>    >
+>    >
+> {: .solution}
+{: .question}
+> ### {% icon question %} Why does the output from the GFF3 feature extraction tool have question marks up to the correct sequence length for each gene instead of the actual nucleotide sequence?
+>    > 
+>    > ### {% icon solution %} Cause
+>    > The names of the GFF3 and the FASTA do not match. Thus, the downstream tools will run, but not reference the input fasta file to 'extract' features of the length called for by the gff3 file.
+>    >
+>    > **Suggested Action:**
+>    >
+>    > Change the names to match. Use the Rename tool for both GFF3 and FASTA files, or the FASTA sequence renamer tool.
+>    >
+>    > **Note:**
+>    > The same symptom, problem, and solution occurs with ShineFind and other similar tools.
+>    >
+>    >
+> {: .solution}
+{: .question}
