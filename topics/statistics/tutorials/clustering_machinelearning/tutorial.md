@@ -34,7 +34,7 @@ We represent an observation as an n-dimensional vector. For example, assume that
 
 >    ![data](images/data_before_clustering.png "Sample data before clustering")
 
-Clustering reveal the following four groups, indicated by different colors:
+Clustering reveal the following three groups, indicated by different colors:
 
 >    ![data](images/data_after_clustering.png "Sample data after clustering")
 
@@ -108,7 +108,7 @@ Other dissimilarity measures exist such as correlation-based distances, which ar
 when clustering samples, because the correlation is over thousands of genes. During clustering genes, it is important to be aware of the possible impact of outliers. This
 can be mitigated by using Spearman’s correlation instead of Pearson’s correlation.
 
-# Hierarchial Clustering
+# Hierarchical Clustering
 
 Before seeing hierarchical clustering in action, let us first understand the theory behind the hierarchical clustering. Hierarchical clustering, as the name suggests is an algorithm that builds hierarchy of clusters. This algorithm starts with all the data points assigned to a cluster of their own. Then two nearest clusters are merged into the same cluster. In the end, this algorithm terminates when there is only a single cluster left.
 
@@ -225,7 +225,7 @@ If you view the result table, you can see the last column is the label for each 
 
 ## Visulaze the clustering results
 
-The resulting candidate clusterings can be visualized using the Scatterplot w ggplot2 tool. Each sample is color-coded based on its clustering for that sample. 
+The resulting candidate clustering can be visualized using the Scatterplot w ggplot2 tool. Each sample is color-coded based on its clustering for that sample. 
 Let's visualize the clustering results to see how groups have been built.
 
 > ### {% icon hands_on %} Hands-on: Visualize hierarchical clutsreing result
