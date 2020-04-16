@@ -55,19 +55,27 @@ anyone interested in learning about climate.
 > global and regional climate reanalyses of past observations, seasonal forecasts and climate projections. 
 {:  .comment}
 
-In this tutorial, we will be using data downloaded from [C3S](https://climate.copernicus.eu/):
-- Data collected from the [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home)
+For the purpose of this tutorial, sample datasets have been created from data downloaded from [C3S](https://climate.copernicus.eu/) through
+[Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home):
+- [E-OBS daily gridded meteorological data for Europe from 1950 to present derived from in-situ observations](https://cds.climate.copernicus.eu/cdsapp#!/dataset/insitu-gridded-observations-europe?tab=overview)
+- [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview)
+- [Agroclimatic indicators from 1951 to 2099 derived from climate projections](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agroclimatic-indicators?tab=overview)
 - Data prepared and issued by [Copernicus Climate bulletins](https://climate.copernicus.eu/climate-bulletins).
+
+To reduce the volume of data, the data resolution (in space and/or time) has been significantly reduced and/or data has been selected on sample locations (Paris, Oslo and 
+Freiburg). The data format may also have been changed (for instance to tabular) to ease processing. 
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial. If you are not inspired, you can name it *climate101* for example...
+> 1. Create a new history for this tutorial. If you are not inspired, you can name it *climate101*.
 >    {% include snippets/create_new_history.md %}
-> 2. Import the file from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo]() or from the shared data library
 >
 >    ```
+>    https://zenodo.org/record/3697454/files/ts_cities.csv
+>    https://zenodo.org/record/3461529/files/ts_1month_anomaly_Global_ea_2T_201908_v01.csv
 >    https://zenodo.org/record/3697454/files/ecv_1979.nc
 >    https://zenodo.org/record/3697454/files/ecv_2018.nc
 >    ```
@@ -94,7 +102,7 @@ other meteorological variables in a given region over long periods of time.
 Climate differs from weather, in that weather only describes the short-term conditions of these variables in a given region. 
 
 
-# Climate versus Weather
+## Climate versus Weather
 
 Quantities that climate scientists are interested in are similar to those used to assess the weather (temperature, precipitation, etc.). 
 But there is a big difference between climate and weather: **weather** varies from hour to hour and from day to day whereas **climate** 
@@ -111,10 +119,84 @@ the climate and gives us an indication of where both the woman and dog are likel
 
 You can also watch this [Video](https://youtu.be/e0vj-0imOLw) to get an animated illustration of the difference between climate and weather.
 
-Climate questions are different from weather questions:
-- Will it rain tomowrow?                  *<- weather*
-- By how much will global temperature at the end of the century be warmer than the beginning of the century?                 *<- climate*
-- What could happen if CO2 emissions double within the next century?                 *<- climate*
+# What is the weather like in Paris?
+
+In order to answer this question, we are going to inspect and visualize the dataset `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` using simple galaxy tools.
+
+> ### {% icon hands_on %} Hands-on: Daily temperature time series
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What was the temperature in Paris on the 14th of July 2003?
+>    > 2. What is the minimum and temperatures in Paris?
+>    > 3. On which dates did the minimum and maximum temperatures occured?
+>    > 4. Can we observe a trend (cooling/warming)?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+> 
+{: .hands_on}
+
+# What is the climate in Paris?
+
+To get some information about the (past and current) climate in Paris, we will first look at monthly averages.
+
+## Seasonality
+
+> ### {% icon hands_on %} Hands-on: ## What is the monthly climatological temperature in Paris?
+>
+>   To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.).
+>    > ### {% icon question %} Questions
+>    > 
+>    > 1. What is the warmest month in Paris?
+>    > 2. What is the coolest month in Paris?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+> 
+{: .hands_on}
+
+
+## Yearly average
+
+> ### {% icon hands_on %} Hands-on: What is the trend (cooling/warming) in the climate for Paris between 1950 and 2019?
+>
+>  To answer to this question, we will compute yearly mean of the temperature in Paris and visualize it.
+>
+>    > ### {% icon question %} Questions
+>    > 
+>    > 1. Can we easily observe a trend?
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+## Anomalies
+
+Observations and models have **biases** e.g. ...
+
+> ### {% icon hands_on %} Hands-on: Climate stripes for Paris
+>
+>    > ### {% icon question %} Questions
+>    > 
+>    > 1. Do you observe a warming or cooling between 1950 and 2019?
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
 
 # Climate variables
 
