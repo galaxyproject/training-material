@@ -130,7 +130,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 >
 > > ### {% icon solution %} Solution
 > >
-> > In the logistic regressoion model, the coefficients of the logistic regression algorithm have be estimated from our training data. This is done using [maximum-likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).
+> > In the logistic regressoion model, the coefficients of the logistic regression algorithm have to be estimated from our training data. This is done using [maximum-likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).
 > > 
 > {: .solution}
 >
@@ -390,7 +390,7 @@ The visualization tool creates the following ROC plot:
 > What are the advantages of random forest classifier compare with classifiers?
 >
 > > ### {% icon solution %} Solution
-> > 1. The overfitting problem will never come when we use the random forest algorithm in any classification problem.
+> > 1. The overfitting is not a problem when we use the random forest algorithm in any classification problem.
 > > 2. The same random forest algorithm can be used for both classification and regression task.
 > > 3. The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.
 > {: .solution}
