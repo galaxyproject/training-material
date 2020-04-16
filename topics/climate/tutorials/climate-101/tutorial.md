@@ -182,7 +182,10 @@ To get some information about the (past and current) climate in Paris, we will f
 
 ## Anomalies
 
-Observations and models have **biases** e.g. ...
+
+
+Climate and weather data can have **biases** e.g. ...
+
 
 > ### {% icon hands_on %} Hands-on: Climate stripes for Paris
 >
@@ -218,50 +221,44 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 <img src="../fig/ECVs_GCOS.png" width="70%"/> 
 *Source: [https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets](https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets)*
 
-> ## Which Climate variables do you plan to use?
-> Write in the workshop etherpad the list of variables you think would be useful for your study and at the same time write what you would like to do with climate data (area of application). 
-> This is a preliminary list of variables and we will re-discuss it later after learning what is generally on offer.
+> ### {% icon hands_on %} Hands-on: Essential Climate Variables
 >
-{: .challenge}
+>    > ### {% icon question %} Questions
+>    > 
+>    > 1. XXX
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
 
-# Types of climate data resources
-
-When we talk about climate data, the type of data can vary significantly. We have very little actual observations at the scale of climate and usually not covering a large area. 
-
-The type of climate data you will be using greatly depends on the period of time you are interested in:
-
-- Observations
-- Re-analyses
-- Climate models
+# Past, present and future climate?
 
 
-## Get data
+When we talk about climate data, the type of data can vary significantly. We have very little actual observations at the scale of climate and usually not covering a large area. In addition to observations, we can make use of:
+- Re-analyses where observations and numerical modelling are combined together. 
+- Climate models.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+Observations and re-analyses provide information about the past and current climate while climate models can provide past, current and future climate information.
+
+
+> ### {% icon hands_on %} Hands-on: Climate projections versus climate predictions
 >
-> 1. Create a new history for this tutorial. If you are not inspired, you can name it *Panoply* for example...
->    {% include snippets/create_new_history.md %}
-> 2. Import the file from [Zenodo]() or from the shared data library
->
->    ```
->    https://zenodo.org/record/3697454/files/ecv_1979.nc
->    https://zenodo.org/record/3697454/files/ecv_2018.nc
->    ```
->
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
->
-> 3. Check that the datatype is **netcdf**
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 4. Add a tag to the dataset corresponding to `copernicus`
->
->    {% include snippets/add_tag.md %}
+>    > ### {% icon question %} Questions
+>    > 
+>    > 1. XXX
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
 >
 {: .hands_on}
 
 # Conclusion
+
 {:.no_toc}
 
 We have learnt to differentiate climate from weather and got an overview of the terminology used by climate scientists to identify the 
