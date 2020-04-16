@@ -79,7 +79,7 @@ Most trusted record: [RefSeq NC_005859](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > ### {% icon question %} Basic Stats
 >    > ### {% icon solution %}
 >    > * Host: *E. coli*
->    > * 121,750 base pairs in genome (the RefSeq sequence comes from the Russian version [NCBI AY543070.1]()https://www.ncbi.nlm.nih.gov/nuccore/ay543070.1
+>    > * 121,750 base pairs in genome (the RefSeq sequence comes from the Russian version [NCBI AY543070.1](https://www.ncbi.nlm.nih.gov/nuccore/ay543070.1)
 >    > * Siphophage
 >    > * [T5 ViralZone page](https://viralzone.expasy.org/511)
 > {: .solution}
