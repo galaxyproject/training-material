@@ -162,6 +162,12 @@ To get some information about the (past and current) climate in Paris, we will f
 > 
 {: .hands_on}
 
+> ### {% icon tip %} Tip: Using existing climatologies
+>
+> In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing.
+>  However, many data providers have pre-computed climatologies and can be directly downloaded. For instance, on the [CDS](https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset), climatologies are provided for [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview).
+{: .tip}
+
 
 ## Yearly average
 
@@ -198,6 +204,15 @@ Climate and weather data can have **biases** (explain why we use anomalies rathe
 >    {: .question}
 >
 {: .hands_on}
+
+> ### {% icon tip %} Tip: Copernicus Climate Bulletin
+>
+> [Copernicus Climate Bulletins](https://climate.copernicus.eu/climate-bulletins) presents the current condition of the climate using key climate change indicators. 
+> They also provide data, analysis of the maps and guidance on how they are produced. Datasets for temperature anomalies can be found and are 
+> regularly updated (with recent dates). For instance, in March 2020, the corresponding dataset can be found [here](https://climate.copernicus.eu/sites/default/files/2020-04/ts_1month_anomaly_Global_ea_2t_202003_v01.csv).
+>
+{: .tip}
+
 
 ## Ensemble
 
