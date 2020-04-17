@@ -58,9 +58,8 @@ anyone interested in learning about climate.
 For the purpose of this tutorial, sample datasets have been created from data downloaded from [C3S](https://climate.copernicus.eu/) through
 [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home):
 - [E-OBS daily gridded meteorological data for Europe from 1950 to present derived from in-situ observations](https://cds.climate.copernicus.eu/cdsapp#!/dataset/insitu-gridded-observations-europe?tab=overview)
+- [Fifth generation ECMWF reanalysis for the global climate and weather (ERA5)](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means)
 - [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview)
-- [Agroclimatic indicators from 1951 to 2099 derived from climate projections](https://cds.climate.copernicus.eu/cdsapp#!/dataset/sis-agroclimatic-indicators?tab=overview)
-- Data prepared and issued by [Copernicus Climate bulletins](https://climate.copernicus.eu/climate-bulletins).
 
 To reduce the volume of data, the data resolution (in space and/or time) has been significantly reduced and/or data has been selected on sample locations (Paris, Oslo and 
 Freiburg). The data format may also have been changed (for instance to tabular) to ease processing. 
@@ -75,7 +74,8 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >
 >    ```
 >    https://zenodo.org/record/3697454/files/ts_cities.csv
->    https://zenodo.org/record/3461529/files/ts_1month_anomaly_Global_ea_2T_201908_v01.csv
+>    https://zenodo.org/record/3697454/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
+>    https://zenodo.org/record/3697454/files/era5_Paris.csv
 >    https://zenodo.org/record/3697454/files/ecv_1979.nc
 >    https://zenodo.org/record/3697454/files/ecv_2018.nc
 >    ```
@@ -151,8 +151,8 @@ To get some information about the (past and current) climate in Paris, we will f
 >   To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.).
 >    > ### {% icon question %} Questions
 >    > 
->    > 1. What is the warmest month in Paris?
->    > 2. What is the coolest month in Paris?
+>    > 1. What is the warmest summer month e.g. between June, July and August (JJA) in Paris?
+>    > 2. What is the coolest winter month e.g. between December, January and February (DJF) in Paris?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -183,8 +183,7 @@ To get some information about the (past and current) climate in Paris, we will f
 ## Anomalies
 
 
-
-Climate and weather data can have **biases** e.g. ...
+Climate and weather data can have **biases** (explain why we use anomalies rather than absolute values in climate); discuss uncertainties around observations and numerical models.
 
 
 > ### {% icon hands_on %} Hands-on: Climate stripes for Paris
@@ -192,6 +191,24 @@ Climate and weather data can have **biases** e.g. ...
 >    > ### {% icon question %} Questions
 >    > 
 >    > 1. Do you observe a warming or cooling between 1950 and 2019?
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+## Ensemble
+
+Explain why we use ensembles (more than one source of information and/or perturbations) in climate.
+
+
+> ### {% icon hands_on %} Hands-on: Heatmap for different models (use ERA5 data)
+>
+>    > ### {% icon question %} Questions
+>    > 
+>    > 1. Do you observe a warming or cooling between 1979 and 2019?
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > >
@@ -217,8 +234,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 - Atmosphere
 - Land
 - Ocean
-
-<img src="../fig/ECVs_GCOS.png" width="70%"/> 
+ 
 *Source: [https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets](https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets)*
 
 > ### {% icon hands_on %} Hands-on: Essential Climate Variables
@@ -234,7 +250,8 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >
 {: .hands_on}
 
-# Past, present and future climate?
+
+## Past, present and future climate?
 
 
 When we talk about climate data, the type of data can vary significantly. We have very little actual observations at the scale of climate and usually not covering a large area. In addition to observations, we can make use of:
@@ -242,20 +259,8 @@ When we talk about climate data, the type of data can vary significantly. We hav
 - Climate models.
 
 Observations and re-analyses provide information about the past and current climate while climate models can provide past, current and future climate information.
+When it comes to future climate, we usually need to make some assumptions (such as how much CO2 emissions, etc.) and make different scenarios e.g. we run climate models using different assumptions and look at future trends under each of these scenarios: this is what we call **climate projections**. Climate projections will be discussed in a separate Galaxy tutorial.
 
-
-> ### {% icon hands_on %} Hands-on: Climate projections versus climate predictions
->
->    > ### {% icon question %} Questions
->    > 
->    > 1. XXX
->    > > ### {% icon solution %} Solution
->    > >
->    > >
->    > {: .solution}
->    {: .question}
->
-{: .hands_on}
 
 # Conclusion
 
