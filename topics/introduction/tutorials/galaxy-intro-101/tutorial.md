@@ -231,7 +231,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
 > > ### {% icon solution %} Solution
-> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> to look for how many times each is used:
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
 > >
 > > Gene | Occurences
 > > ---- | ----------
@@ -356,7 +356,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% include snippets/change_dbkey.md dbkey="hg38" %}
 >
-> 2. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+> 2. Second, check that the **format** of your latest history dataset is `bed`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Datatype** field to `bed`.
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+> 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >
