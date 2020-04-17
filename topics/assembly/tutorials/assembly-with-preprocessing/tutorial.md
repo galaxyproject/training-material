@@ -1,15 +1,17 @@
 ---
 layout: tutorial_hands_on
 
-title: "Unicycler assembly after preprocessing to remove reads from a contaminating genome"
+title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
 zenodo_link: "https://doi.org/10.5281/zenodo.3732358"
 questions:
-  - How can I assemble a genome of interest against a background of contaminating reads from another genome?
+  - How can a genome of interest be assembled against a background of contaminating reads from other genomes?
+  - How can sequencing data from public sources be turned into assembly-ready polished datasets?
 objectives:
   - Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources
+  - Organize the data into collections and check its quality
   - Detect and remove human reads
-  - Regenerate fastq data of remaining reads for downstream analysis
-time_estimation: "4h"
+  - Assemble retained reads and explore the results
+time_estimation: "4h"  # plus additional time for (optional) NCBI SRA downloads
 level: Intermediate
 key_points:
   - Certain types of NGS samples can be heavily contaminated with sequences from other genomes
@@ -585,7 +587,12 @@ potential viral origin.
 
 # Format conversion of remaining reads
 
-## Conversion to fastq with samtools fastx
+## Conversion to fastq format
+
+Assembly tools, typically, expect their input data to be fastq-formatted, but
+what we have after mapping and filtering is data in BAM format. Hence, we need
+to convert the retained Illumina- and Nanopore-sequenced reads back into their
+original format before proceeding to assembly.
 
 > ### {% icon hands_on %} Hands-on: BAM to fastq format conversion
 >
@@ -631,7 +638,14 @@ Thus, the following just serves as an illustration and is entirely optional.
 
 ## Merging of reads with collection operations
 
-   required by unicycler
+To merge reads from several samples into a combined final assembly, we need to
+pass the data to **Unicycler** {% icon tool %} in partially merged form. The
+forward and reverse reads of paired-end data should be kept separate, and so
+should short and long reads. However, the tool has no option to combine data
+from individual samples, so we need to merge the forward, reverse, and the long
+reads data, respectively, across samples. Conveniently for us, the outputs of
+the earlier **Samtools fastx** {% icon tool %} runs have already returned the
+data structured into three corresponding collections for us.
 
 > ### {% icon hands_on %} Hands-on: Collapsing each collection into a single dataset
 >
@@ -669,12 +683,12 @@ and would best be conducted overnight.
 
 If you do not have that much time, you should downsample the Illumina-sequenced
 combined reads now. Which will reduce the time required to finish the
-subsequent assembly step to approximately 2 hours.
+subsequent assembly step to approximately 1-2 hours.
 
 > ### {% icon comment %} If you are in a hurry
 > The downsampling parameters below have been chosen to have minimal impact on
 > the assembly results. Further speed-ups are certainly possible, but will
-> likely lead to different assembly outcomes.
+> likely lead to poor assembly outcomes.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Subsampling of paired-end short-reads data
@@ -684,7 +698,7 @@ subsequent assembly step to approximately 2 hours.
 >      combined Illumina-sequenced forward and reverse reads, outputs of the
 >      first and the second run of **Collapse Collection**
 >    - *"RNG seed"*: 4
->    - *"Subsample (decimal fraction or number)"*: 0.2
+>    - *"Subsample (decimal fraction or number)"*: 0.1
 >
 {: .hands_on}
 
@@ -708,7 +722,7 @@ subsequent assembly step to approximately 2 hours.
 >      **Collapse Collection** {% icon tool %} run
 >    - *"Select Bridging mode"*: `Normal (moderate contig size and misassembly rate)`
 >    - *"Exclude contigs from the FASTA file which are shorter than this length (bp)"*:
->      `10000`
+>      `100`
 >    - *"The expected number of linear (i.e. non-circular) sequences in the assembly"*:
 >      `1`
 >
@@ -716,7 +730,26 @@ subsequent assembly step to approximately 2 hours.
 
 ## Explore assembly
 
+The **Unicycler** {% icon tool %} run above should produce two output datasets:
+
+- a final assembly in FASTA format
+- an assembly graph
+
+Of these, the assembly graph is more information-rich because it not only
+contains the sequences of *all* assembled fragments (including the ones shorter
+than the threshold length defined for inclusion of the fragments into the FASTA
+output), but also indicates the relative average coverage of the fragments by
+sequenced reads and how some of the fragments could potentially be bridged
+after resolving ambiguities manually.
+
 ### Assembly inspection with Bandage
+
+On the downside, the assembly graph format takes some getting used to before
+you can make sense out of the information it provides.
+
+This issue can be alleviated through the use of **Bandage**, a package for
+exploring assembly graphs through summary reports and visualizations of their
+contents.
 
 > ### {% icon hands_on %} Hands-on: Assembly stats and visualization with Bandage
 >
@@ -729,15 +762,149 @@ subsequent assembly step to approximately 2 hours.
 > 2. **Bandage Image** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Graphical Fragment Assembly"*: the assembly graph dataset produced by
 >      **Unicycler**
+>    - *"Node name labels?"*: `Yes`
+>    - *"Node length labels?"*: `Yes`
+>
 {: .hands_on}
+
+Let us inspect the summary report produced by **Bandage Info** {% icon tool %}
+first:
+
+You may be rather disappointed by the large *percentage of of dead ends* in the
+assembly graph (in general, lower is better here), and by the correspondingly
+large *node count*. After all, should the viral sequence not be encoded on a
+single small contig (a quick check at
+[Wikipedia](https://en.wikipedia.org/wiki/Coronavirus#Genome) reveals that
+coronaviruses have genomes in the size range of 30kb)?
+
+On the other hand, there is the *Longest node* of 29768 bp of assembled
+sequence, which is suspiciously close to the expected genome size, but a much
+larger *Estimated sequence length*.
+
+Next, take a look at the assembly graph visualization generated by **Bandage
+Image** {% icon tool %} to see if that tells us more:
+
+Indeed, this output shows that **Unicycler** {% icon tool %} managed to
+assemble a good number of contigs of moderate size, then had trouble with a
+number of really small fragments that it could only assemble with lots of
+ambiguities (leading to that ugly clutter of nodes in the top row of the
+image). Those small fragments will probably be hard to make sense of, but the
+manageable list of moderate-size contigs (nodes 1-23, 25, 26) is encouraging.
+One of them, node 2, is also outstanding since **Unicycler** claims it is
+circular (not that we expect this for the CoV-2 genome though).
 
 ### Check origin of assembled sequences with BLAST
 
-**TO DO** (point out 100% identity to published SARS-CoV-2 sequence of largest
-assembled sequence. Discuss second assembled sequence (*Prevonella* species as
-opportunistic pathogens)
+While we could view the actual contents of the assembly graph output of
+**Unicycler** {% icon tool %} and extract node sequences of interest from it
+(the longest node and that circular one could be a start), things are much
+easier if we work with the FASTA output of **Unicycler** instead.
+
+From the visualization with **Bandage Image** {% icon tool %} we know that the
+separately assembled nodes are all longer than 1000 bp. We can extract those
+sequences based on the length threshold in Galaxy, then BLAST all retained
+sequences in one go.
+
+> ### {% icon hands_on %} Hands-on: Filter FASTA sequences by their length
+>
+> 1. **Filter sequences by length** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Fasta file"*: the FASTA output produced by
+>      **Unicycler**
+>    - *"Minimal length"*: `1000`
+>
+>    This outputs a new FASTA datasets with only the sequences satisfying our
+>    length threshold.
+>
+> > ### {% icon tip %} Apply length filters after instead of during assembly
+> > You may have noted that in the **Unicycler** {% icon tool %} run we kept
+> > the tool's *"Exclude contigs from the FASTA file which are shorter than
+> > this length (bp)"* option at its default value of `100` instead of using
+> > the 1,000 bp threshold there directly to save a step in the analysis.
+> >
+> > The reason we did this is that normally you will not know the exact length
+> > threshold you want until *after* having explored the generated assembly.
+> >
+> > Length-filtering some FASTA sequences is a trivial process that takes very
+> > little time, but you would not want to rerun an hours-long assembly job
+> > just because you accidentally stripped some interesting assembled sequences
+> > from the output.
+> {: .tip}
+>
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: NCBI BLAST of multiple contigs
+>
+> 1. View the output of **Filter sequences by length** {% icon tool %} by
+>    clicking the {% icon galaxy-eye %} (eye) icon attached to that dataset.
+> 2. Click into the middle panel, which should now display the content of the
+>    dataset, select all sequences by pressing <kbd>Ctrl</kbd>+<kbd>A</kbd>,
+>    then copy the selection to the clipboard with <kbd>Ctrl</kbd>+<kbd>C</kbd>
+> 3. Head over to the
+>    [NCBI BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE=MegaBlast&PROGRAM=blastn)
+>    service, paste the copied content into the `Enter Query Sequence` text
+>    box and click `BLAST` at the bottom of the form.
+> 4. Wait for the *BLAST* run to finish.
+> 5. On the results page, look for the drop-down menu next to `Results for`.
+>    It lets you toggle the BLAST hits list further down to include only the
+>    matches to individual sequences from your multi-sequence query.
+>
+{: .hands_on}
+
+Now take a bit of time to explore the BLAST hits uncovered for some of your
+assembled nodes. Pay attention, specifically, to the node with the longest
+sequence (node #1) and the circular node #2, but also investigate the results
+for a few others.
+
+> ### {% icon question %} Question
+>
+> 1. Which genome is represented by node #1?
+> 2. Which genome corresponds to node #2? Does this finding remind you of
+>    something you have learnt before?
+> 3. What do most other node sequences have in common? Do these additinal
+>    findings make sense?
+>
+> > ### {% icon solution %} Solution
+> > 1. The sequence of node #1 is the assembled SARS-CoV-2 sequence we are
+> >    looking for. It is a perfect match to various SARS-CoV-2 genome
+> >    sequences found in Genbank over the entire assembled length, and we have
+> >    been able to assemble almost the entire genome even from the subsampled
+> >    sequencing data.
+> > 2. The circular sequence of node #2 corresponds to the 5,386 bp genome of
+> >    bacteriophage phiX174. As explained in the more general
+> >    [Unicycler assembly](../unicycler-assembly/tutorial.html) tutorial,
+> >    this genome is often used as a spike-in in Illumina sequencing.
+> >    Finding the complete sequence here is, thus,  another indication that
+> >    our analysis worked and produced meaningful results.
+> > 3. Almost all other assembled sequences appear to represent parts of
+> >    bacterial genomes. The only exceptions are the node #10 sequence, for
+> >    which no significant BLAST hits could be found, and the node #11
+> >    sequence, which represents a small stretch of left-over human genomic
+> >    DNA, which seems to have survived our subtraction approach.
+> >
+> >    What all the bacterial genomes have in common is that they represent
+> >    genera of bacteria that are known to colonize the oral cavity and
+> >    mucosa. Since all samples in this analysis are BALF samples the presence
+> >    of DNA from such bacteria should not be surprising. In addition, some
+> >    members of the identified genera are known as opportunistic pathogens.
+> >    In particular, members of the genus *Prevotella* can infect the
+> >    respiratory tract and contribute to inflammation under anaerobic
+> >    conditions caused by primary infections. Hence, an alternative
+> >    explanation for the presence of some of these sequences in the samples
+> >    might be that the corresponding bacteria contributed to the clinical
+> >    picture of some of the Covid-19 patients they were obtained from.
+> {: .solution}
+>
+{: .question}
 
 # Conclusion
 {:.no_toc}
 
-**TO DO**
+The power of modern genome assembly tools is remarkable, and so is their
+robustness in the face of data of metagenomic nature. Assembling reads derived
+from a virus and a good handful of copurified bacteria back into separate
+contigs is a challenging task, which Unicycler solved without major issues!
+
+Nevertheless, good quality assemblies still rely on proper preprocessing and
+filtering to reduce the number of misassembly events, ambiguous assemblies and
+of incorporation of sequencing errors into the final assembly.
+
