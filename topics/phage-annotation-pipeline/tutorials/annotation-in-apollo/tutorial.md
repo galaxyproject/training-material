@@ -94,7 +94,7 @@ The [CPT’s](https://cpt.tamu.edu) PAP integrates gene calls from numerous sour
 ![](../../images/annotation-in-apollo-screenshots/2_gene_calls.png)
 
 > ### {% icon tip %} Note that…
-> Gene calling is part of structurally annotating a genome in Apollo. For more information on structural annotation and gene calling, please look at [this tutorial]({{ site.baseurl }}//topics/genome-annotation/tutorials/structural-annotation-workflow/tutorial.html).
+> Gene calling is part of structurally annotating a genome in Apollo. For more information on structural annotation and gene calling, please look at [this tutorial]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/structural-annotation-workflow/tutorial.html).
 {: .tip}
 
 ### BLAST
