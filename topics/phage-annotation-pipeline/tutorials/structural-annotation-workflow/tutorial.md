@@ -41,7 +41,7 @@ The structural annotation workflow will analyze the DNA sequence of the input ge
 
 ![](../../images/structural-annotation-workflow-screenshots/2_find_workflow.png)
 
-The next page will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available [here](https://cpt.tamu.edu/galaxy/workflows/list_published). Look for most recent version labelled with the year and a version number, “PAP 2019 Structural (v #.#)”. Click on the drop-down menu arrow for that most recent structural workflow, and select “Import.”
+The next [page](https://cpt.tamu.edu/galaxy/workflows/list_published) will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for most recent version labelled with the year and a version number, “PAP 2019 Structural (v #.#)”. Click on the drop-down menu arrow for that most recent structural workflow, and select “Import.”
 
 ![](../../images/structural-annotation-workflow-screenshots/3_import_workflow.png)
 
