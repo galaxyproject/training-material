@@ -29,7 +29,7 @@ Next, these data will serve as the input for the functional annotation workflow.
 
 ![](../../images/functional-annotation-workflow-screenshots/3_shared_data_workflow.png)
 
-The next page will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for the most recent Functional Annotation Workflow version labelled with the year and a version number, “PAP 201# Functional (v #.#)”. Click on the drop-down menu arrow for that most recent functional workflow, and select “Import”.
+The next [page](https://cpt.tamu.edu/galaxy/workflows/list_published) will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for the most recent Functional Annotation Workflow version labelled with the year and a version number, “PAP 201# Functional (v #.#)”. Click on the drop-down menu arrow for that most recent functional workflow, and select “Import”.
 
 ![](../../images/functional-annotation-workflow-screenshots/4_import_functional_workflow.png)
 
