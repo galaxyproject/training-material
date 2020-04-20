@@ -47,7 +47,7 @@ Begin by retrieving the sequence from the node that putatively matches to the ph
 >    > * If you assembled the genome, locate the history in which it was assembled.
 >    > * If someone else assembled it, look under "Histories shared with me", and import the history.
 
-Design confirmation PCR primers off the node sequence. This primer pair can be designed manually, or with any primer design software. The instruction below use the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex) since it is very flexible and does automated design of high-quality primer pairs.
+Design confirmation PCR primers off the node sequence. This primer pair can be designed manually, or with any primer design software. The instruction below uses the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex) since it is very flexible and does automated design of high-quality primer pairs.
 > * Navigate to the [IDT PrimerQuest Tool.](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex) Under the Tools drop-down menu, open the "Show Custom Design Parameters" tab.
 
 ![](../../images/genome-close-reopen-screenshots/1_primerquest.png)
