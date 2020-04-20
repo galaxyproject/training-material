@@ -185,27 +185,21 @@ Having generated topologies, we now need to combine them, define the box which c
 
 ### Combine topology and GRO files
 
-> ### {% icon hands_on %} Hands-on: Combine GRO files
+> ### {% icon hands_on %} Hands-on: Combine GRO and topology files
 >
-> 1. On the `Structure file (GRO format)` created by the **acpype** tool,click on the `Visualize this data` icon. Select `Editor` to open the file using the text editor integrated into Galaxy. Select all the lines starting with `1 GSE` and copy your selection.
-> 2. Open the Protein GRO file by clicking on the `Visualize this data` button on the dataset.
-> 3. Paste the lines from the ligand GRO file just before the last line.
-> 4. If you scroll back to the top, you will see that the total number of atoms in the system is given in the second line (`3280`). You have just added 21 new atoms, so increase the value by 21 to `3301`.
-> 5. Click `Export` to save your changes as a new dataset. Make sure the datatype of the new file is still `GRO`. Rename to `System GRO file`.
+> 1. **Merge GROMACS topologies** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Protein topology (TOP) file"*: `TOP` file created by the **GROMACS initial setup** tool
+>    - {% icon param-file %} *"Ligand topology (TOP or ITP file)"*: `Topology` created by the **acpype** tool
+>    - {% icon param-file %} *"Protein structure (GRO) file"*: `GRO` file created by the **GROMACS initial setup** tool
+>    - {% icon param-file %} *"Ligand structure (GRO) file"*: `Structure file (GRO format)` created by the **acpype** tool
+>    - *"Configure box?"*: `Yes`
+>        - *"Box dimensions in nanometers"*: `1.0`
+>        - *"Box type"*: `Triclinic`
+>    - *"Generate detailed log"*: `Yes`
+>
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Combine topology files
->
-> 1. On the ligand `Topology` created by the **acpype** tool, right-click on the `Visualize this data` icon and open the link in a new tab. Select the first section in the file, starting with `[ atomtypes ]`, and copy the selection.
-> 2. Returning to the first tab, open the protein TOP file using the text editor integrated into Galaxy by clicking on the `Visualize this data` button on the dataset.
-> 3. Paste the lines from the ligand ITP file near to the top of the file, just after the line `#include "amber99sb.ff/forcefield.itp"`.
-> 4. Go back to the ligand ITP file and select the rest of the file (from `[ moleculetypes ]`) onwards. Copy the selection.
-> 5. In the protein TOP file, paste the selection near to the bottom of the file, before the line `; Include water topology` (and just after the position restraint file). Notice that the `[ moleculetype ]` section you just copied starts with `base` - this is the name acpype has given to the ligand. Feel free to change this to whatever you prefer - `ligand`, or `GSE`.
-> 6. Finally, we need to state in the topology that we have included a new kind of molecule. Go to the final section (`[ molecules ]`) and add a new line `base` (or whatever name you gave the ligand in step 5), with a 1 in the `#mols` column.
-> 5. Click `Export` to save your changes as a new dataset. Make sure the datatype of the new file is still `TOP`. Rename to `System topology`.
-{: .hands_on}
 
-If this procedure was too complicated, you can download the combined files here: LINK. However, you will find it useful to understand the information contained within topology files and learn how to make changes to it.
 
 ### Create the simulation box with **GROMACS structure configuration**
 
