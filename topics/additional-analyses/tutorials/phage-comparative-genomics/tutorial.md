@@ -51,7 +51,7 @@ The current comparative genomics workflow is set up to perform TaxID-restricted 
 > To instead compare only to sequenced (though not necessarily annotated) prophage, change the BLAST job TaxID restriction to 2 (the NCBI TaxID for Bacteria). 
 {: .tip}
 
-> * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and find the history that contains the results of the [functional workflow](LINK TUTORIAL!) for the desired phage genome.
+> * Open CPT Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)), and find the history that contains the results of the [functional workflow](https://cpt.tamu.edu/training-material/topics/phage-annotation-pipeline/tutorials/functional-annotation-workflow/tutorial.html) for the desired phage genome.
 > * Locate the genome FASTA file and the protein multi-FASTA file (likely called Fasta translate). 
 > * Create a new history by clicking on Create New (top right).
 > * Locate the two datasets needed (Translated proteins and your FASTA sequence) that you need, then click and drag them over to your new history to copy the datasets there. As you are dragging toward the active history (the new one that you just created), a box will appear that says "Drag datasets here to copy them into the current history". Drop the datasets in that box and soon a green box with your new dataset should appear.
