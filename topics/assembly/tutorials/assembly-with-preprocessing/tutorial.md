@@ -33,7 +33,6 @@ requirements:
     topic_name: galaxy-data-manipulation
     tutorials:
       - collections
-      - upload-rules
 tags:
   - covid19
 contributors:
@@ -83,10 +82,10 @@ trying to assemble the viral genome sequence.
 We are going to create an assembly of the SARS-CoV-2 genome based on mixed
 short-reads (Illumina) and long-reads (Nanopore) data from a total of six
 different samples, all of which are publicly accessible through the NCBI
-short-reads archive (SRA).
+and EBI short-reads archives (SRAs).
 
-Since automated data downloads from the SRA can be unreliable at times and
-could get broken by changes to the download interface on the NCBI side, this
+Since automated data downloads from SRAs can be unreliable at times and could
+get broken by changes to the download interface on the NCBI/EBI side, this
 tutorial offers two ways to access the sequenced reads input data:
 
 1. Direct download from the NCBI SRA based on accession numbers and using the
@@ -96,14 +95,23 @@ tutorial offers two ways to access the sequenced reads input data:
    interested in learning to obtain short-reads data directly from NCBI, in
    general.
 
-2. Download of the same data deposited as a copy at [Zenodo](https://zenodo.org)
-
+2. Download of the same data deposited as a copy at [Zenodo](https://zenodo.org/record/3732359)
    This method uses Galaxy's generic data import functionality, and should be
    very reliable and faster than the download from NCBI.
    It also showcases **rule-based** uploads and demonstrates how they can be
    used to download several datasets and to arrange them into easy to handle
    data structures at the same time.
    
+   > ### {% icon details %} Rule-based uploads
+   > In this tutorial you will only use the features of Galaxy's rule-based
+   > uploader that are required to get the input data ready for our analysis,
+   > and we will not explain those features in much detail.
+   >
+   > If, after this first taste, you are interested in a thorough introduction
+   > we recommend the advanced tutorial
+   > [Collections: Rule Based Uploader](../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html).
+   {: .details}
+
    Use this method if the direct download from the NCBI SRA does not work, or
    is too slow for your time frame, or if you are interested in advanced use
    of Galaxy's data import functionality.
@@ -417,7 +425,7 @@ the same reasons. Here we restrict ourselves to a simple quality check with
 ## Mapping of Illumina reads
 
 In this tutorial, we are using **Bowtie2** for mapping our short-reads data to
-the human genome. *BWA-MEM* would be an obvious alternative for mapping the 150
+the human genome. *BWA-MEM* would be a good alternative for mapping the 150
 nucleotides (see the QC report above) reads from our samples.
 
 According to its authors, the *Minimap2* aligner, which we will be using for
@@ -790,8 +798,12 @@ number of really small fragments that it could only assemble with lots of
 ambiguities (leading to that ugly clutter of nodes in the top row of the
 image). Those small fragments will probably be hard to make sense of, but the
 manageable list of moderate-size contigs (nodes 1-23, 25, 26) is encouraging.
-One of them, node 2, is also outstanding since **Unicycler** claims it is
-circular (not that we expect this for the CoV-2 genome though).
+
+Of these, node 1 is the longest node mentioned in the report with a size close
+to our expectations.
+
+Node 2 looks peculiar since **Unicycler** claims it is circular, while
+Coronavirus genomes are known to be linear.
 
 ### Check origin of assembled sequences with BLAST
 
