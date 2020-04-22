@@ -27,15 +27,24 @@ This tutorial will walk you through the beginning of the phage genome annotation
 
 First, you must have an active account in Galaxy. For TAMU users, navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. For external users, navigate to [**CPT Galaxy Public**](https://cpt.tamu.edu/galaxy-pub). You should be presented with the main Galaxy page and an empty history.
 
-The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* on the top menu bar and navigate to *BICH 464 Genomes* and the folder for the 2019 class genomes. You have been assigned a phage genome by name in a spreadsheet in the class Google Drive. Locate your genome and import it into a new history by clicking the checkbox to the left of your genome's name and then clicking the *To History* button at the top of the window. Select or create the history you would like to use and click *Import*.  You should import the genome into an empty history.
+> ### {% icon tip %} For BICH 464 Students
+[**Updated for 2020**] 
+The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* on the top menu bar and navigate to *BICH 464 Genomes* and the folder for your class genomes. You have been assigned a phage genome by name in a spreadsheet in the class Google Drive. Locate your genome and import it into a new history by clicking the checkbox to the left of your genome's name and then clicking the *To History* button at the top of the window. Select or create the history you would like to use and click *Import*.  You should import the genome into an empty history. 
 
-Click *Analyze Data* on the top menu bar and you should be taken to the main Galaxy window. Your active history should now contain a single dataset: the DNA sequence of your phage in FASTA format.
+Click *Analyze Data* on the top menu bar and you should be taken to the main Galaxy window. 
+{: .tip}
+
+For all other users, upload or add your phage into an empty history. Your active history should now contain a single dataset: the DNA sequence of your phage in FASTA format.
 
 # Importing and Running the Workflow
 
 > ### {% icon tip %} Annotation in a nutshell
-Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). More details on the principles of these processes will be provided in class.
+Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). 
 {: .hands_on}
+
+> ### {% icon tip %} For BICH 464 Students
+More details on the principles of these processes will be provided in class.
+{: .tip}
 
 The structural annotation workflow will analyze the DNA sequence of the input genome with two automated gene callers: *MetaGeneAnnotator* and *Glimmer3*. A completely naïve set of open reading frames (ORFs) will also be generated from the *Sixpack* prediction program to ensure even unexpected genes can be called. Lastly, tRNA and terminator finding tools will be run. To begin, click on the *Shared Data* drop-down menu at the top of the center Galaxy panel and select the *Workflows* option.
 
