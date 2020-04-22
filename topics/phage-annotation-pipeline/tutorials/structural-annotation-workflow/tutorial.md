@@ -25,7 +25,7 @@ This tutorial will walk you through the beginning of the phage genome annotation
 > [**Getting Started with Apollo**](https://cpt.tamu.edu/training-material/topics/introduction/tutorials/getting-started-with-apollo/tutorial.html).
 {: .hands_on}
 
-First, you must have an active account in Galaxy.  Navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. You should be presented with the main Galaxy page and an empty history.
+First, you must have an active account in Galaxy. For TAMU users, navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. For external users, navigate to [**CPT Galaxy Public**](https://cpt.tamu.edu/galaxy-pub). You should be presented with the main Galaxy page and an empty history.
 
 The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* on the top menu bar and navigate to *BICH 464 Genomes* and the folder for the 2019 class genomes. You have been assigned a phage genome by name in a spreadsheet in the class Google Drive. Locate your genome and import it into a new history by clicking the checkbox to the left of your genome's name and then clicking the *To History* button at the top of the window. Select or create the history you would like to use and click *Import*.  You should import the genome into an empty history.
 
