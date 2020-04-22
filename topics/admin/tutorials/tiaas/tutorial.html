@@ -1080,18 +1080,18 @@ resources, thus reducing queue times on the day of the training.</p>
 <span class="k">def</span> <span class="nf">sorting_hat</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
     <span class="c1"># Check that the user is not anonymous
 </span>    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
 
     <span class="c1"># Collect the user's roles
-</span>    <span class="n">user_roles</span> <span class="o">=</span> <span class="p">[</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user</span><span class="o">.</span><span class="n">all_roles</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="o">.</span><span class="n">deleted</span><span class="p">]</span>
+</span>    <span class="n">user_roles</span> <span class="o">=</span> <span class="p">[</span><span class="n">role</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user</span><span class="p">.</span><span class="n">all_roles</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">role</span><span class="p">.</span><span class="n">deleted</span><span class="p">]</span>
 
     <span class="c1"># If any of these are prefixed with 'training-'
-</span>    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">role</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'training-'</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user_roles</span><span class="p">]):</span>
+</span>    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">role</span><span class="p">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'training-'</span><span class="p">)</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">user_roles</span><span class="p">]):</span>
         <span class="c1"># Then they are a training user, we will send their jobs to pulsar,
 </span>        <span class="c1"># Or give them extra resources
-</span>        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm-2c'</span><span class="p">)</span> <span class="c1"># or pulsar, if available
+</span>        <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm-2c'</span><span class="p">)</span> <span class="c1"># or pulsar, if available
 </span>
-    <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>This destination will check that the <code class="highlighter-rouge">user_email</code> is in a training group (role starting with <code class="highlighter-rouge">training-</code>).</p>

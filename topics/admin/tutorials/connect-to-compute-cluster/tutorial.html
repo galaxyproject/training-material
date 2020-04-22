@@ -1250,7 +1250,7 @@ sleep </span>30
 
 <span class="k">def</span> <span class="nf">admin_only</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">user_email</span><span class="p">):</span>
     <span class="c1"># Only allow the tool to be executed if the user is an admin
-</span>    <span class="n">admin_users</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="s">"admin_users"</span><span class="p">,</span> <span class="s">""</span> <span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span> <span class="s">","</span> <span class="p">)</span>
+</span>    <span class="n">admin_users</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span> <span class="s">"admin_users"</span><span class="p">,</span> <span class="s">""</span> <span class="p">).</span><span class="n">split</span><span class="p">(</span> <span class="s">","</span> <span class="p">)</span>
     <span class="k">if</span> <span class="n">user_email</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">admin_users</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span><span class="p">(</span><span class="s">"Unauthorized."</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">JobDestination</span><span class="p">(</span><span class="n">runner</span><span class="o">=</span><span class="s">"slurm"</span><span class="p">)</span>
@@ -1507,7 +1507,7 @@ sleep </span>30
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
 
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="p">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 <span class="n">DESTINATION_IDS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="mi">1</span> <span class="p">:</span> <span class="s">'slurm'</span><span class="p">,</span>
@@ -1521,7 +1521,7 @@ sleep </span>30
     <span class="n">destination_id</span> <span class="o">=</span> <span class="s">'slurm'</span>
 
     <span class="c1"># build the param dictionary
-</span>    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</span>    <span class="n">param_dict</span> <span class="o">=</span> <span class="n">job</span><span class="p">.</span><span class="n">get_param_values</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
     <span class="c1"># handle job resource parameters
 </span>    <span class="k">try</span><span class="p">:</span>
@@ -1529,17 +1529,17 @@ sleep </span>30
 </span>        <span class="n">cores</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">param_dict</span><span class="p">[</span><span class="s">'__job_resource'</span><span class="p">][</span><span class="s">'cores'</span><span class="p">])</span>
         <span class="n">time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">param_dict</span><span class="p">[</span><span class="s">'__job_resource'</span><span class="p">][</span><span class="s">'time'</span><span class="p">])</span>
         <span class="n">destination_id</span> <span class="o">=</span> <span class="n">DESTINATION_IDS</span><span class="p">[</span><span class="n">cores</span><span class="p">]</span>
-        <span class="n">destination</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">job_config</span><span class="o">.</span><span class="n">get_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">)</span>
+        <span class="n">destination</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">)</span>
         <span class="c1"># set walltime
-</span>        <span class="k">if</span> <span class="s">'nativeSpecification'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">:</span>
-            <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
-        <span class="n">destination</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">+=</span> <span class="s">' --time=</span><span class="si">%</span><span class="s">s:00:00'</span> <span class="o">%</span> <span class="n">time</span>
+</span>        <span class="k">if</span> <span class="s">'nativeSpecification'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">:</span>
+            <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">=</span> <span class="s">''</span>
+        <span class="n">destination</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'nativeSpecification'</span><span class="p">]</span> <span class="o">+=</span> <span class="s">' --time=%s:00:00'</span> <span class="o">%</span> <span class="n">time</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="c1"># resource param selector not sent with tool form, job_conf.xml misconfigured
-</span>        <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">'(</span><span class="si">%</span><span class="s">s) error, keys were: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">job</span><span class="o">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">param_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</span>        <span class="n">log</span><span class="p">.</span><span class="n">warning</span><span class="p">(</span><span class="s">'(%s) error, keys were: %s'</span><span class="p">,</span> <span class="n">job</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="n">param_dict</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">raise</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span><span class="p">(</span><span class="n">FAILURE_MESSAGE</span><span class="p">)</span>
 
-    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'returning destination: </span><span class="si">%</span><span class="s">s'</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">)</span>
+    <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">'returning destination: %s'</span><span class="p">,</span> <span class="n">destination_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">destination</span> <span class="ow">or</span> <span class="n">destination_id</span>
 </code></pre></div>      </div>
 
