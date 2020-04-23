@@ -26,8 +26,10 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial you will learn how to apply Galaxy tools to solving [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step. 
-Finally, we will discuss how to train the classifiers by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the classifiers and learning algorithms work.
+In this tutorial you will learn how to apply Galaxy tools to solving [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
+
+Finally, we will discuss how to train the classifiers by finding the values of their parameters that minimize a cost function. We will work through a real problem in the field of cheminformatics to learn how the classifiers and learning algorithms work.
+
 Classification is a [supervised learning](https://en.wikipedia.org/wiki/Supervised_learning) method in machine learning and the algorithm which is used for this learning task is called a classifier. In this tutorial we will build a classifier which can predict whether a chemical substance is biodegradable or not. Substances which degrade quickly are preferable to those which degrade slowly, as they do not accumulate and pose a risk to the environment. Therefore, it is useful to be able to predict easily in advance whether a substance is biodegradable prior to production and usage in consumer products.
 
 > ### Agenda
@@ -42,28 +44,30 @@ Classification is a [supervised learning](https://en.wikipedia.org/wiki/Supervis
 
 # Classification
 
-Classification is the process of assigning every object from a collection to exactly one class from a known set of classes by learning a decision boundary in a dataset. This dataset is called a training dataset and contains samples and desired class for each sample. The training dataset contains "features" as columns and a mapping between these features and the class label is learned for each sample. The performance of mapping is evaluated using a test dataset which is separate from training dataset. The test dataset contains only the feature columns and not the class column. The class column is predicted using the mapping learned on the training dataset. Examples of classification task is assigning a patient (the object) to a group of healthy or ill (the classes) people on the basis of his or her medical record. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
+Classification is the process of assigning every object from a collection to exactly one class from a known set of classes by learning a "decision boundary" in a dataset. This dataset is called a training dataset and contains multiple samples, together with a desired class for each sample. The training dataset contains "features" as columns and a mapping between these features and the class label is learned for each sample.
+
+The performance of mapping is evaluated using a test dataset, which is separate from the training dataset. The test dataset contains only the feature columns, but not the class column. The class column is predicted using the mapping learned on the training dataset. An example of a classification task is assigning a patient (the object) to a group of healthy or ill (the classes) people on the basis of his or her medical record. In this tutorial, we will use a classifier to train a model using a training dataset, predict the targets for test dataset and visualize the results using plots.
 
 ![classification](images/classification.png "Classification of samples belonging to different classes.")
 
-In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary. There are different ways to learn this decision boundary. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like `support vector machine` or `ensemble` based classifiers may prove to be beneficial. 
+In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary; there are different ways to learn it, which correspond to different classification algorithms. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like `support vector machine` or `ensemble` based classifiers may prove to be beneficial.
 
-The Data Classification process includes two steps:
-1. Building the Classifier or Model: This step is the learning step or the learning phase and in this step the classification algorithms build the classifier. The classifier is built from the training set made up of database samples and their associated class labels. Each sample that constitutes the training set is referred to as a class. 
+The Data classification process includes two steps:
+1. Building the classifier or model: This step is the learning step, in which the classification algorithms build the classifier. The classifier is built from the training set made up of database samples and their associated class labels. Each sample that constitutes the training set is referred to as a class.
 
-2. Using Classifier for Classification: In this step, the classifier is used for classification. Here the test data is used to estimate the accuracy of classification rules. The classification rules can be applied to the new data samples if the accuracy is considered acceptable. 
+2. Applying the classifier to a classification task: In this step, the classifier is used for classification. Here the test data is used to estimate the accuracy of classification rules. The classification rules can be applied to the new data samples if the accuracy is considered acceptable.
 
 
 # Quantitative Structure - Activity Relationship biodegradation
 
 The classification problem we will study in this tutorial is related to biodegradation. Chemical substances which decay slowly will accumulate over time, which poses a threat to the environment. Therefore, it is useful to be able to predict in advance whether a substance will break down quickly or not.
 
-Quantitative structure-activity relationip (QSAR) and quantitative structure-property relationship (QSPR) models attempt to predict the activity or property of chemicals based on their chemical structure. To achieve this, a database of compounds is collected for which the property of interest is known. For each compound, molecular descriptors are collected which describe the structure (for example: molecular weight, number of nitrogen atoms, number of carbon-carbon double bonds). Using these descriptors, a model is constructed which is capable of predicting the property of interest for a new, unknown molecule. In this tutorial we will use a database assembled from experimental data of the Japanese Ministry of International Trade and Industry to create a classification model for biodegradation. We then will be able to use this model to classify new molecules into one of two classes: biodegradable or non-biodegradable.
+Quantitative structure-activity relationship (QSAR) and quantitative structure-property relationship (QSPR) models attempt to predict the activity or property of chemicals based on their chemical structure. To achieve this, a database of compounds is collected for which the property of interest is known. For each compound, molecular descriptors are collected which describe the structure (for example: molecular weight, number of nitrogen atoms, number of carbon-carbon double bonds). Using these descriptors, a model is constructed which is capable of predicting the property of interest for a new, unknown molecule. In this tutorial we will use a database assembled from experimental data of the Japanese Ministry of International Trade and Industry to create a classification model for biodegradation. We then will be able to use this model to classify new molecules into one of two classes: biodegradable or non-biodegradable.
 
-As a benchmark, we will use the [dataset](https://pubs.acs.org/doi/10.1021/ci4000213) assembled by Mansouri et al. using data from the National Institute of Technology and Evaluation of Japan. This database contains 1055 moelecules, together with precalculated molecular descriptors.
+As a benchmark, we will use the [dataset](https://pubs.acs.org/doi/10.1021/ci4000213) assembled by Mansouri et al. using data from the National Institute of Technology and Evaluation of Japan. This database contains 1055 molecules, together with precalculated molecular descriptors.
 
-In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to dataset created by Mansouri et al. to predict whether a molecule is biodegradable or not.
-In the following part, we will perform classification on the biodegradability dataset using a linear classifier and then will analyze the results with plots.
+In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to the dataset provided by Mansouri et al. to predict whether a molecule is biodegradable or not.
+In the following part, we will perform classification on the biodegradability dataset using a linear classifier and then will create some plots to analyze the results.
 
 ## Get train and test datasets
 
@@ -96,15 +100,16 @@ The `train_rows` contains a column `Class` which is the class label or target. W
 > ### {% icon details %} Preparing the data for classification
 >
 > Preparing the data involves these following major activities: 
-> 1. Data Cleaning: Involves removing the noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques. 
-> 2. Relevance Analysis: Database may also have the irrelevant attributes. Correlation analysis is used to know whether any two given attributes are related.
-> 3. Normalization: The data is transformed using normalization. Normalization involves scaling all values for given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, the neural networks or the methods involving measurements are used.
+> 1. Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques. 
+> 2. Relevance Analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
+> 3. Normalization: the data is transformed using normalization. Normalization involves scaling all values for q given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, neural networks or the methods involving measurements are used.
 >
 {: .details}
 
 # Learn the logistic regression classifier
 
-At the first step, to learn the mapping between several features and the classes, we will apply linear classifier. It learns features from training dataset and maps all the rows to their respective class. The process of mapping gives a trained model. [Logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) is named for the function used at the core of the method, the logistic function, and it is an instance of supervised classification in which we know the correct label of the class for each sample and the algorithm estimate of the true class. We want to learn parameters (weight and bias for the line) that make estimated calss for each training observation as close as possible to the true class label. This requires two components, the first is a metric for how close the current class label is to the true label. Rather than measure similarity, we usually talk about the opposite of this, the distance between the classifier output and the desired output, and we call this distance, the loss function or the cost function. 
+As the first step, to learn the mapping between several features and the classes, we will apply the linear classifier. It learns features from the training dataset and maps all the rows to their respective class. The process of mapping gives a trained model. [Logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) is named for the function used at the core of the method, the logistic function, and it is an instance of supervised classification in which we know the correct label of the class for each sample and the algorithm estimate of the true class. We want to learn parameters (weight and bias for the line) that make the estimated class for each training observation as close as possible to the true class label. This requires two components; the first is a metric for how close the current class label is to the true label. Rather than measure similarity, we usually talk about the opposite of this, the distance between the classifier output and the desired output, and we call this distance, the loss function or the cost function.
+
 The second thing we need is an optimization algorithm for iteratively updating the weights so as to minimize this loss function. The standard algorithm for this is gradient descent. So, the dataset is divided into two parts - training and test sets. The training set is used to train a classifier and the test set is used to evaluate the performance of the trained model.
 
 > ### {% icon hands_on %} Hands-on: Train logistic regression classifier
@@ -130,7 +135,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 >
 > > ### {% icon solution %} Solution
 > >
-> > In the logistic regressoion model, the coefficients of the logistic regression algorithm have to be estimated from our training data. This is done using [maximum-likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).
+> > In the logistic regressoion model, the coefficients of the logistic regression algorithm have be estimated from our training data. This is done using [maximum-likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).
 > > 
 > {: .solution}
 >
@@ -138,8 +143,9 @@ The second thing we need is an optimization algorithm for iteratively updating t
 
 ## Predict class using test dataset
 
-After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the learning algorithm learned a good classifier from the training dataset or not. This classifier is used to predict a new sample and a similar accuracy is expected. 
-Now, we will predict class in the test dataset using this classifier in order to see if the classifier has learned important features which can generalize on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
+After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the learning algorithm learned a good classifier from the training dataset or not. This classifier is used to predict a new sample and a similar accuracy is expected.
+
+Now, we will predict class in the test dataset using this classifier in order to see if it has learned important features which can generalize on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
 
 
 > ### {% icon hands_on %} Hands-on: Predict class using the logistic regression classifier
@@ -155,7 +161,7 @@ Now, we will predict class in the test dataset using this classifier in order to
 
 ## Visualize the logistic regression classification results
 
-We will evaluate the classification by comparing them to the expected classes. In the previous step, we classify the test dataset (`LogisticRegression_result`). We have one more dataset (`test_rows_labels`) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, `LogisticRegression_result` has no header, so first we should remove the header from `test_rows_labels` to compare. 
+We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (`LogisticRegression_result`). We have one more dataset (`test_rows_labels`) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, `LogisticRegression_result` has no header, so first we should remove the header from `test_rows_labels` to compare. 
 
 > ### {% icon hands_on %} Hands-on: Remove the header
 >
@@ -166,7 +172,7 @@ We will evaluate the classification by comparing them to the expected classes. I
 {: .hands_on}
 
 
-Now we visualize and analyze the classification using "Plot confusion matrix, precision, recall and ROC and AUC curves" tool in galaxy.
+Now we visualize and analyze the classification using the "Plot confusion matrix, precision, recall and ROC and AUC curves" tool.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
@@ -177,7 +183,7 @@ Now we visualize and analyze the classification using "Plot confusion matrix, pr
 
 The visualization tool creates the following plots:
 
-1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix): Confusion matrix summarizes the classification performance of a classifier with respect to test data. It is a two-dimensional matrix, the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, confusion matrix of the predictions is a heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain less number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.
+1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix): The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, confusion matrix of the predictions is a heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.
 
     ![confusion_matrix](images/confusion_matrix_linear.png "Confusion matrix for the logistic regression classifier. ")
 
@@ -185,11 +191,11 @@ The visualization tool creates the following plots:
 
     ![prf1_scores](images/precision_recall_linear.png "Precision, recall and F1 score for the logistic regression classifier.")
 
-3. [Receiver operator characteristics (ROC) and area under ROC (AUC)](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5): Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot. For a bad prediction, it is close to the orange line (y = x).
+3. [Receiver operator characteristics (ROC) and area under ROC (AUC)](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5): Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot, which results in a high AUC value. For a bad prediction, it is close to the orange line (y = x), resulting in a low AUC value.
 
     ![roc_scores](images/roc_linear.png "Receiver operator characteristics (ROC) and area under ROC (AUC) for the logistic regression classifier.")
 
-These plots are important to visualize the quality of classifier and the true and predicted classes.
+These plots are important to visualize the quality of the classifier and the true and predicted classes.
 
 
 > ### {% icon question %} Question
@@ -198,14 +204,14 @@ These plots are important to visualize the quality of classifier and the true an
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures 2,3 and 4 show that the classification is acceptable, but as you will see in the next steps, the reults can be improved. 
+> > Figures 2,3 and 4 show that the classification is acceptable, but as you will see in the next steps, the results can be improved. 
 > >
 > {: .solution}
 {: .question}
 
 # K-Nearest Neighbor (KNN)
 
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearst neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among it's k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifieris not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, neighborhood may include points from other classes and cause errors. To select the k that’s right for your data, we recoomend that run the KNN algorithm several times with different values of k and choose the k that reduces the number of errors. We encounter while maintaining the algorithm’s ability to accurately make predictions when it’s given data it hasn’t seen before.
+At the second step, we will use k-nearest neighbor classifier. In the [k-nearst neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that’s right for your data, we recommend running the KNN algorithm several times with different values of k and choose the k that best reduces the number of errors. We encounter while maintaining the algorithm’s ability to accurately make predictions when it is given data it hasn’t seen before.
 
 > ### {% icon question %} Question
 >
@@ -215,11 +221,11 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearst 
 > > Advantages:
 > > - It is very simple algorithm to understand and interpret.
 > >
-> > - It is very useful for nonlinear data because there is no assumption about data in this algorithm.
+> > - It is very useful for nonlinear data because there is no assumption of linearity in this algorithm.
 > >
-> > - It is a versatile algorithm as we can use it for classification as well as regression.
+> > - It is a versatile algorithm, as we can use it for classification as well as regression.
 > >
-> > - It has relatively high accuracy but there are much better supervised learning models than KNN.
+> > - It has relatively high accuracy, but there are much better supervised learning models than KNN.
 > >
 > > - It works very well in low dimensions for complex decision surfaces.
 > >
@@ -233,7 +239,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearst 
 > >
 > > - It is very sensitive to the scale of data as well as irrelevant features.
 > >
-> > - It suffers a lot from the curse-of-dimensionality.
+> > - It suffers a lot from the curse of dimensionality.
 > >
 > {: .solution}
 {: .question}
@@ -266,7 +272,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearst 
 > {: .solution}
 {: .question}
 
-Now, we should evaluate the performance on the test dataset to know whether the KNN classifier is a good model from the training dataset or not. 
+Now, we should evaluate the performance on the test dataset to find out whether the KNN classifier is a good model from the training dataset or not. 
 
 > ### {% icon hands_on %} Hands-on: Predict class using the k-nearest neighbor classifier
 >
@@ -280,7 +286,7 @@ Now, we should evaluate the performance on the test dataset to know whether the 
 {: .hands_on}
 
 
-Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has header, so use `test_rows_labels` to compare. 
+Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare. 
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
@@ -300,10 +306,11 @@ The visualization tool creates the Confusion matrix, Precision, recall and F1 sc
 
 # Support Vector Machines (SVM)
 
-[Support Vector Machines](https://en.wikipedia.org/wiki/Support-vector_machine)(SVMs) have been extensively researched in the machine learning communities for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real word data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.
-To solve this problem SVM using kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
-Without going into technical details, a kernel is a function that quantifies the similarity of two observations.
-Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
+[Support Vector Machines](https://en.wikipedia.org/wiki/Support-vector_machine)(SVMs) have been extensively researched in the machine learning communities for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real world data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.
+
+To solve this problem SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
+
+Without going into technical details, a kernel is a function that quantifies the similarity of two observations. Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
 kernel trick. In the next step, we will build a SVM classifier with our data. 
 
 > ### {% icon hands_on %} Hands-on: Train a SVM classifier
@@ -329,7 +336,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 >
 > > ### {% icon solution %} Solution
 > >
-> > The coefficients of the line with the maximal margin in the kernel space is learned in training phase.
+> > The coefficients of the line with the maximal margin in the kernel space is learned in the training phase.
 > > 
 > {: .solution}
 >
@@ -350,7 +357,7 @@ No we will evaluate the performance of the SVM classifier:
 {: .hands_on}
 
 
-Now lets visualize the resluts:
+Now let's visualize the results:
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
@@ -366,7 +373,9 @@ The visualization tool creates the following ROC plot:
 
 # Random Forest
 
-[Random forest](https://en.wikipedia.org/wiki/Random_forest) is an ensemble of decision trees, and usually trained with the “bagging” method. [Ensemble](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and the general idea of the bagging method is that a combination of learning models increases the overall result. It uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions by multiple decision trees. It has a good predictive power and is robust to the outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results better model because of wide diversity. Generally, the more trees in the forest the more robust the forest looks like. In the same way in the random forest classifier, the higher the number of trees in the forest gives the high accuracy results. Simlarly there are two stages in random forest algorithm, one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
+[Random forest](https://en.wikipedia.org/wiki/Random_forest) is an ensemble of decision trees, and usually trained with the “bagging” method. The [Ensemble](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and the general idea of the bagging method is that a combination of learning models increases the overall result. It uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error.
+
+One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm; one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
 
 > ### {% icon hands_on %} Hands-on: Train random forest
 >
@@ -387,10 +396,10 @@ The visualization tool creates the following ROC plot:
 
 > ### {% icon question %} Question
 >
-> What are the advantages of random forest classifier compare with classifiers?
+> What are the advantages of random forest classifier compared with classifiers?
 >
 > > ### {% icon solution %} Solution
-> > 1. The overfitting is not a problem when we use the random forest algorithm in any classification problem.
+> > 1. The overfitting problem will never come when we use the random forest algorithm in any classification problem.
 > > 2. The same random forest algorithm can be used for both classification and regression task.
 > > 3. The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.
 > {: .solution}
@@ -422,14 +431,14 @@ The visualization tool creates the following ROC plot:
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures show that we achieved an AUC score of `1.0`  for the test set using random forest. It means the prediction is very good and without any error.
+> > Figures show that we achieved an AUC score of `1.0`  for the test set using random forest. It means the prediction is very good, in fact it has no error at all. Unfortunately, this is not usually the case when dealing with chemical data.
 > {: .solution}
 {: .question}
 
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used an ensemble learning algorithm in machine learning. The Bagging algorithm creates multiple models from randomly taken subsets of train dataset and then aggregates learners to build overall stronger classifiers that combines the predictions to produce a final prediction. The **Pipeline builder** tool wrap the classifier and return a zipped file. 
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool wraps the classifier and return a zipped file. 
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -458,7 +467,7 @@ We use the **Estimator attributes** tool to get a list of different hyperparamet
 
 ## Search for the best values of hyperparameters
 
-After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. But, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `10` and a few more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
+After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `10` and a few which are more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
@@ -494,7 +503,7 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >
 > > ### {% icon solution %} Solution
 > >
-> > 20 (Even though the default value of the number of estimators for Bagging Classifier is `10`, `20` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset). 
+> > 20 - even though the default value of the number of estimators for Bagging Classifier is `10`, `20` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset. 
 > >
 > {: .solution}
 >
@@ -523,8 +532,10 @@ Now we will verify the performance by creating and analysing the plots:
 ![roc_scores](images/roc_bagging.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
 
 
-Figure 13 shows that we again achieved  AUC `1.00` which shows that our model is highly effective at predicting whether or not a molecule is biodegradable.
+Figure 13 shows that we again achieved an AUC value of `1.00`, which shows that our model is highly effective at predicting whether or not a molecule is biodegradable.
 
 
 # Conclusion
-By following these steps, we learned how to build classifiers and visualize the classification results using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the classes. This mapping is used to make predictions on an unseen (test) dataset. The quality of classifiers is visualized using a plotting tool. There are multiple other classification algorithms, few are simpler to use (with fewer parameters) and some are powerful, which can be tried out on this dataset and on other datasets as well. Different datasets can also be analyzed using these classifiers. The classifiers have lots of parameters which can be altered while performing the analyzes to see if they affect the classification accuracy. It may be beneficial to perform hyperparameter search to tune these parameters of classifiers for different datasets. In addition, we learned the relevance of machine algorithms for QSAR analyses and constructed a model which successfully predicted an important chemical property - the biodegradability of a substance.
+By following these steps, we learned how to build classifiers and visualize the classification results using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the classes. This mapping is used to make predictions on an unseen (test) dataset. The quality of classifiers is visualized using a plotting tool.
+
+There are multiple other classification algorithms, a few are simpler to use (with fewer parameters) and some are more powerful, which can be tried out on this dataset and on other datasets as well. Different datasets can also be analyzed using these classifiers. The classifiers have many parameters which can be altered while performing the analyses to see if they affect the classification accuracy. It may be beneficial to perform a hyperparameter search to tune these parameters for different datasets. In addition, we learned the relevance of machine algorithms for QSAR analyses and constructed a model which successfully predicted an important chemical property - the biodegradability of a substance.
