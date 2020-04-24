@@ -26,7 +26,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial you will learn how to apply Galaxy tools to solving [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
+In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
 
 Finally, we will discuss how to train the classifiers by finding the values of their parameters that minimize a cost function. We will work through a real problem in the field of cheminformatics to learn how the classifiers and learning algorithms work.
 
@@ -50,9 +50,9 @@ The performance of mapping is evaluated using a test dataset, which is separate 
 
 ![classification](images/classification.png "Classification of samples belonging to different classes.")
 
-In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary; there are different ways to learn it, which correspond to different classification algorithms. If the dataset is linearly separable, linear classifiers can produce good classification results. But, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like `support vector machine` or `ensemble` based classifiers may prove to be beneficial.
+In figure [1](#figure-1), the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary; there are different ways to learn it, which correspond to different classification algorithms. If the dataset is linearly separable, linear classifiers can produce good classification results. However, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like `support vector machine` or `ensemble` based classifiers may prove to be beneficial.
 
-The Data classification process includes two steps:
+The data classification process includes two steps:
 1. Building the classifier or model: This step is the learning step, in which the classification algorithms build the classifier. The classifier is built from the training set made up of database samples and their associated class labels. Each sample that constitutes the training set is referred to as a class.
 
 2. Applying the classifier to a classification task: In this step, the classifier is used for classification. Here the test data is used to estimate the accuracy of classification rules. The classification rules can be applied to the new data samples if the accuracy is considered acceptable.
@@ -66,7 +66,7 @@ Quantitative structure-activity relationship (QSAR) and quantitative structure-p
 
 As a benchmark, we will use the [dataset](https://pubs.acs.org/doi/10.1021/ci4000213) assembled by Mansouri et al. using data from the National Institute of Technology and Evaluation of Japan. This database contains 1055 molecules, together with precalculated molecular descriptors.
 
-In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to the dataset provided by Mansouri et al. to predict whether a molecule is biodegradable or not.
+In this tutorial, we will apply a couple of [scikit-learn](https://scikit-learn.org/stable/) machine learning tools to the dataset provided by Mansouri et al. to predict whether a molecule is biodegradable or not.
 In the following part, we will perform classification on the biodegradability dataset using a linear classifier and then will create some plots to analyze the results.
 
 ## Get train and test datasets
@@ -99,7 +99,7 @@ The `train_rows` contains a column `Class` which is the class label or target. W
 
 > ### {% icon details %} Preparing the data for classification
 >
-> Preparing the data involves these following major activities: 
+> Preparing the data involves these following major tasks:
 > 1. Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques. 
 > 2. Relevance Analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
 > 3. Normalization: the data is transformed using normalization. Normalization involves scaling all values for q given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, neural networks or the methods involving measurements are used.
@@ -191,7 +191,7 @@ The visualization tool creates the following plots:
 
     ![prf1_scores](images/precision_recall_linear.png "Precision, recall and F1 score for the logistic regression classifier.")
 
-3. [Receiver operator characteristics (ROC) and area under ROC (AUC)](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5): Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot, which results in a high AUC value. For a bad prediction, it is close to the orange line (y = x), resulting in a low AUC value.
+3. [Receiver operator characteristics (ROC) and area under ROC (AUC)](https://towardsdatascience.com/understanding-auc-roc-curve-68b2303cc9c5): Receiver operator characteristics (ROC) and area under ROC (AUC). The ROC curve is shown in blue. For a good prediction, it should be more towards the top-left of this plot, which results in a high AUC value. For a bad prediction, it is close to the orange line (y = x), resulting in a low AUC value (closer to 0.5). An AUC value of exactly 0.5 means the prediction is doing no better than a random number generator at predicting the classes.
 
     ![roc_scores](images/roc_linear.png "Receiver operator characteristics (ROC) and area under ROC (AUC) for the logistic regression classifier.")
 
@@ -211,7 +211,7 @@ These plots are important to visualize the quality of the classifier and the tru
 
 # K-Nearest Neighbor (KNN)
 
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearst neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that’s right for your data, we recommend running the KNN algorithm several times with different values of k and choose the k that best reduces the number of errors. We encounter while maintaining the algorithm’s ability to accurately make predictions when it is given data it hasn’t seen before.
+At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that’s right for your data, we recommend running the KNN algorithm several times with different values of k and choose the k that best reduces the number of errors. We encounter while maintaining the algorithm’s ability to accurately make predictions when it is given data it hasn’t seen before.
 
 > ### {% icon question %} Question
 >
@@ -295,7 +295,7 @@ Now we visualize and analyze the classification. As you can see, `NearestNeighbo
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
 {: .hands_on}
 
-The visualization tool creates the Confusion matrix, Precision, recall and F1 score, Receiver operator characteristics (ROC) and area under ROC (AUC) as follows:
+The visualization tool creates diagrams for the Confusion matrix, Precision, recall and F1 score, Receiver operator characteristics (ROC) and area under ROC (AUC) as follows:
 
 ![confusion_matrix](images/confusion_matrix_NN.png "Confusion matrix for the k-nearest neighbor classifier.")
 
@@ -306,7 +306,7 @@ The visualization tool creates the Confusion matrix, Precision, recall and F1 sc
 
 # Support Vector Machines (SVM)
 
-[Support Vector Machines](https://en.wikipedia.org/wiki/Support-vector_machine)(SVMs) have been extensively researched in the machine learning communities for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real world data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.
+[Support Vector Machines](https://en.wikipedia.org/wiki/Support-vector_machine) (SVMs) have been extensively researched in the machine learning community for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real world data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.
 
 To solve this problem SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
 
@@ -343,7 +343,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 {: .question}
 
 
-No we will evaluate the performance of the SVM classifier:
+Now we will evaluate the performance of the SVM classifier:
 
 > ### {% icon hands_on %} Hands-on: Predict class SVM classifier
 >
@@ -399,7 +399,7 @@ One big advantage of random forest is that it can be used for both classificatio
 > What are the advantages of random forest classifier compared with classifiers?
 >
 > > ### {% icon solution %} Solution
-> > 1. The overfitting problem will never come when we use the random forest algorithm in any classification problem.
+> > 1. The overfitting problem will never arise when we use the random forest algorithm in any classification problem.
 > > 2. The same random forest algorithm can be used for both classification and regression task.
 > > 3. The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.
 > {: .solution}
@@ -522,7 +522,7 @@ Using the **Hyperparameter search** tool, we found the best model, based on the 
 {: .hands_on}
 
 
-Now we will verify the performance by creating and analysing the plots:
+Now we will verify the performance by creating and inspecting the plots:
 
 
 ![confusion_matrix](images/confusion_matrix_bagging.png "Confusion matrix for the bagging classifier.")
