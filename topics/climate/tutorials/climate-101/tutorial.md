@@ -146,7 +146,7 @@ To get some information about the (past and current) climate in Paris, we will f
 
 ## Seasonality
 
-> ### {% icon hands_on %} Hands-on: ## What is the monthly climatological temperature in Paris?
+> ### {% icon hands_on %} Hands-on: What is the monthly climatological temperature in Paris?
 >
 >   To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.).
 >    > ### {% icon question %} Questions
