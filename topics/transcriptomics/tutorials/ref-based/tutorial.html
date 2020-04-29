@@ -2781,7 +2781,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
   <ol>
     <li>
-      <p>Take the log<script type="math/tex">_e</script> of all the values</p>
+      <p>Take the log\(_e\) of all the values</p>
 
       <table>
         <tbody>
@@ -2896,7 +2896,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
         </tbody>
       </table>
 
-      <script type="math/tex; mode=display">log(\textrm{counts for gene X}) - average(\textrm{log values for counts for gene X}) = log(\frac{\textrm{counts for gene X}}{\textrm{average for gene X}})</script>
+\[log(\textrm{counts for gene X}) - average(\textrm{log values for counts for gene X}) = log(\frac{\textrm{counts for gene X}}{\textrm{average for gene X}})\]
 
       <p>This step compares the ratio of the counts in each sample to the average across all samples.</p>
     </li>
@@ -3243,8 +3243,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
     <h3 id="solution-solution-21"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (<script type="math/tex">% <![CDATA[
-4.0 \cdot 10^{-178} << 0.05 %]]></script>). It is less expressed (<code class="highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (<script type="math/tex">2^{log2FC} = 2^{2.99977727873544}</script>).</li>
+      <li>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (\(4.0 \cdot 10^{-178} &lt;&lt; 0.05\)). It is less expressed (<code class="highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (\(2^{log2FC} = 2^{2.99977727873544}\)).</li>
       <li>DESeq2 in <span class="notranslate">Galaxy</span> returns the comparison between the different levels for the 1st factor, after
 correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
 both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.</li>
@@ -3301,7 +3300,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
       <p>We will now select only the genes with an absolute fold change (FC) &gt; 2</p>
     </li>
-    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with an <script type="math/tex">abs(log_{2} FC) > 1</script>:
+    <li><strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract genes with an \(abs(log_{2} FC) &gt; 1\):
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">Genes with significant adj p-value</code></li>
         <li><em>“With following condition”</em>: <code class="highlighter-rouge">abs(c3)&gt;1</code></li>
@@ -3324,7 +3323,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 </blockquote>
 
-<p>We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its <script type="math/tex">log_{2} FC</script> and other information.</p>
+<p>We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log_{2} FC\) and other information.</p>
 
 <p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase. These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to have the location of these genes within the genome. To do that, we need do add extra annotations from the annotation file which we used for <span class="notranslate">mapping</span> and counting.</p>
 
@@ -3434,7 +3433,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 <h2 id="visualization-of-the-expression-of-the-differentially-expressed-genes">Visualization of the <span class="notranslate">expression</span> of the differentially expressed genes</h2>
 
-<p>We could plot the <script type="math/tex">log_{2} FC</script> for the extracted genes, but here we would like to look at a heatmap of <span class="notranslate">expression</span> for these genes in the different samples. So we need to extract the normalized counts for these genes.</p>
+<p>We could plot the \(log_{2} FC\) for the extracted genes, but here we would like to look at a heatmap of <span class="notranslate">expression</span> for these genes in the different samples. So we need to extract the normalized counts for these genes.</p>
 
 <p>We proceed in several steps:</p>
 <ul>
@@ -3469,7 +3468,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
         <li><em>“Keep the header lines”</em>: <code class="highlighter-rouge">Yes</code></li>
       </ul>
 
-      <p>The generated file has more columns than we need for the heatmap: mean normalized counts, <script type="math/tex">log_{2} FC</script> and other annotation information. We need to remove the extra columns.</p>
+      <p>The generated file has more columns than we need for the heatmap: mean normalized counts, \(log_{2} FC\) and other annotation information. We need to remove the extra columns.</p>
     </li>
     <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene IDs and normalized counts:
       <ul>
@@ -3520,7 +3519,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     <ol>
       <li>The samples are clustering by treatment.</li>
       <li>The scale changes and the differences between the genes are not visible anymore.</li>
-      <li>Extract the genes with <script type="math/tex">log_{2} FC</script> &gt; 1 (filter for genes with <code class="highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the generated table.</li>
+      <li>Extract the genes with \(log_{2} FC\) &gt; 1 (filter for genes with <code class="highlighter-rouge">c3&gt;1</code> on the summary of the differentially expressed genes) and run <strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the generated table.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -3531,7 +3530,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 <p>The Z-score gives the number of standard-deviations that a value is away from the mean of all the values in the same group, here the same gene. A Z-score of -2 for the gene X in sample A means that this value is 2 standard-deviations lower than the mean of the values for gene X in all the samples (A, B, C, etc).</p>
 
-<p>The Z-score <script type="math/tex">z_{i,j}</script> for a gene <script type="math/tex">i</script> in a sample <script type="math/tex">j</script> given the normalized count <script type="math/tex">x_{i,j}</script> is computed as <script type="math/tex">z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}</script> with <script type="math/tex">\overline{x_i}</script> the mean and <script type="math/tex">s_i</script> the standard deviation of the normalized counts for the gene <script type="math/tex">i</script> over all samples.</p>
+<p>The Z-score \(z_{i,j}\) for a gene \(i\) in a sample \(j\) given the normalized count \(x_{i,j}\) is computed as \(z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}\) with \(\overline{x_i}\) the mean and \(s_i\) the standard deviation of the normalized counts for the gene \(i\) over all samples.</p>
 
 <blockquote class="comment">
   <h3 id="comment-compute-the-z-score-for-all-genes"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Compute the Z-score for all genes</h3>
@@ -3541,7 +3540,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 <p>To compute the Z-score, we break the process into 2 steps:</p>
 <ol>
-  <li>Substract each value by the mean of values in the row (i.e. <script type="math/tex">x_{i,j}- \overline{x_i}</script>) using the normalized count table</li>
+  <li>Substract each value by the mean of values in the row (i.e. \(x_{i,j}- \overline{x_i}\)) using the normalized count table</li>
   <li>Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)</li>
 </ol>
 
@@ -3803,7 +3802,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
       <blockquote class="solution">
         <h3 id="solution-solution-28"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-        <p>The x-axis is the percentage of genes in the category that have been identified as differentially expressed: <script type="math/tex">100 x \frac{numDEInCat}{numInCat}</script></p>
+        <p>The x-axis is the percentage of genes in the category that have been identified as differentially expressed: \(100 x \frac{numDEInCat}{numInCat}\)</p>
 
       </blockquote>
     </blockquote>

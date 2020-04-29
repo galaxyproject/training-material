@@ -1266,14 +1266,14 @@
 <blockquote class="details">
   <h3 id="details-details-raceid-histograms"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details: RaceID Histograms</h3>
 
-  <p>The top row shows the count distributions of the Library Size and Number of Features of the raw data using a Log scale on the x-axis (e.g. 2.5 on the Log10 x-axis = <script type="math/tex">10^{2.5}</script> = 316 counts).</p>
+  <p>The top row shows the count distributions of the Library Size and Number of Features of the raw data using a Log scale on the x-axis (e.g. 2.5 on the Log10 x-axis = \(10^{2.5}\) = 316 counts).</p>
 
   <ul>
     <li>
       <p>(Top-Left) A lower-tail heavy distribution centred around 3-4 Log10 (~3000) counts per cell , with a few cells having library sizes containing a handful of counts (0-1000).</p>
     </li>
     <li>
-      <p>(Top-Right) Another lower-tail heavy distribution with a peak centred around <script type="math/tex">10^{3.5}</script> counts. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (&lt; 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.</p>
+      <p>(Top-Right) Another lower-tail heavy distribution with a peak centred around \(10^{3.5}\) counts. Cells with a low number of features are hard to compare with other cells due to incomplete data. It is possible that these low feature cells (&lt; 100 genes) are rare types and that we should impute their missing values, but it is often more likely the case that these are simply just low-quality cells that will add noise to the clustering.</p>
     </li>
   </ul>
 
@@ -1281,10 +1281,10 @@
 
   <ul>
     <li>
-      <p>(Bottom-Left) The lower-tail of our previous distribution has been trimmed off, which gives an even normal-looking distribution centred around <script type="math/tex">10^{3.4}</script> transcripts per cell.</p>
+      <p>(Bottom-Left) The lower-tail of our previous distribution has been trimmed off, which gives an even normal-looking distribution centred around \(10^{3.4}\) transcripts per cell.</p>
     </li>
     <li>
-      <p>(Bottom-Right) Instead of a distribution we have a single bar that indicates that all of our cells have the exact number of features. The red line displays the number of features across all cells (~ <script type="math/tex">10^{3.3}</script>).</p>
+      <p>(Bottom-Right) Instead of a distribution we have a single bar that indicates that all of our cells have the exact number of features. The red line displays the number of features across all cells (~ \(10^{3.3}\)).</p>
     </li>
   </ul>
 
@@ -1491,7 +1491,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
   <p>Jaccard distance is measured by the intersection of the two or more sets divided by the union of those sets.</p>
 
-  <p><script type="math/tex">d_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}</script>
+  <p>\(d_J(X,Y) = 1 - J(X,Y) = \frac{|X \cup  Y| - |X \cap Y|}{|X \cup Y|}\)
 <!-- This seems to be visible when collapsed...? --></p>
 
   <p>In the case of <span class="notranslate">single-cell</span> data, sets are defined as the cells contained within a given cluster, and the Jaccard similarity score provides a quantitative measure for how distinct a given cluster is, based on its similarity to other sets.</p>
@@ -1517,7 +1517,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
     <p>(Top-Left) Outlier identification via background model based on distribution of transcript counts within a cluster.</p>
   </li>
   <li>
-    <p>(Top-Right) Outlier cells are detected if the probability for that cell <script type="math/tex">c</script> that a minimum number of genes <script type="math/tex">G_{min}</script> of observing total counts <script type="math/tex">T_{G_{min}}</script> is less than a specific threshold <script type="math/tex">P_{thr}</script>, as given by the red dotted line.</p>
+    <p>(Top-Right) Outlier cells are detected if the probability for that cell \(c\) that a minimum number of genes \(G_{min}\) of observing total counts \(T_{G_{min}}\) is less than a specific threshold \(P_{thr}\), as given by the red dotted line.</p>
   </li>
   <li>
     <p>(Bottom-Left) Outlier probabilities of all cells in all clusters.</p>
@@ -1538,9 +1538,9 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
         <li>In the background model, the upper and lower (violet and red) regression of the variance on the mean (as approximated by a second-order polynomial in logarithmic space) is higher than the variance of most genes (all grey dots below the red curve). This is expected since they are not differentially expressed, and so the genes above the background regression are therefore significant in the detection of outlier cells. The orange line is the local regression (moving average variance per mean) and is used purely for illustrative purposes. <!-- See: https://github.com/dgrun/RaceID3_StemID2_package/blob/master/R/RaceID.R#L280 --></li>
       </ul>
     </li>
-    <li>(Top-Right) Outlier cells are detected if the probability for that cell <script type="math/tex">c</script> that a minimum number of genes <script type="math/tex">G_{min}</script> of observing total counts <script type="math/tex">T_{G_{min}}</script> is less than a specific threshold <script type="math/tex">P_{thr}</script>, as given by the red dotted line.
+    <li>(Top-Right) Outlier cells are detected if the probability for that cell \(c\) that a minimum number of genes \(G_{min}\) of observing total counts \(T_{G_{min}}\) is less than a specific threshold \(P_{thr}\), as given by the red dotted line.
       <ul>
-        <li>This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to <script type="math/tex">1 \cdot 10^{-3}</script> by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).</li>
+        <li>This is shown in the chart above as the number of outliers as a function of the probability threshold, which is set to \(1 \cdot 10^{-3}\) by default. Ideally, this threshold should be chosen so that the lower tail of the distribution contains as few outliers as possible (i.e. lower than the steep rise in outliers towards the higher end of the plot) to ensure a maximum sensitivity of this method. If the sensitivity of the sequencing was low, then only a few highly expressed genes would be reliably quantified, so the outlier probability threshold would need to be higher (e.g. up to 1).</li>
       </ul>
     </li>
     <li>(Bottom-Left) A bar plot of the outlier probabilities of all cells across all clusters. All outlier cells are merged into their own clusters if their similarity exceeds a quantile threshold of the similarity distribution for all pairs of cells within one of the original clusters. After the outlier cells are merged, then the new cluster centres are defined for the original clusters after removing the outliers. Then, each cell is assigned to the nearest cluster centre using k-partitioning.</li>
@@ -1933,7 +1933,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <p>We will now look at some genes of interest to see how prevalent or unique they are across clusters. Usually known marker genes are used to identify clusters by their cell type and not just a number, but any gene of interest can be used if it is believed to characterise a cluster of cells.</p>
 
-<p>Here we will look at the combined <span class="notranslate">expression</span> of <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> which all had adjusted P-values of less than <script type="math/tex">1 \cdot 10^{-15}</script> in cluster 1.</p>
+<p>Here we will look at the combined <span class="notranslate">expression</span> of <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> which all had adjusted P-values of less than \(1 \cdot 10^{-15}\) in cluster 1.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-task-description-3"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>

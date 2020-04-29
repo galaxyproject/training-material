@@ -615,7 +615,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 13, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 28, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -841,7 +841,49 @@ https://www.encodeproject.org/files/ENCFF933NTR/@@download/ENCFF933NTR.<span cla
       </ul>
     </li>
     <li>
-      <p>Rename the dataset as <code class="highlighter-rouge">chr22 genes</code></p>
+      <p>Check the contents of your file, is this as you expect it to be?</p>
+
+      <blockquote class="question">
+        <h3 id="question-question-expected-output"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Expected output</h3>
+
+        <p>Our goal here was to convert the data to <span class="notranslate">BED</span> format.</p>
+
+        <ol>
+          <li>Which columns do you expect in your file? (Tip: read about <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span> format</a>)</li>
+          <li>Does your file look like a valid <span class="notranslate">BED</span> format?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>We expect at least 3 columns, <code class="highlighter-rouge">chromosome - start - end</code>, and possibly more optional columns</li>
+            <li>Your file should look something like this:
+              <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Chrom	Start	End	Name	Score	Strand	ThickStart	ThickEnd	ItemRGB	BlockCount	BlockSizes	BlockStarts
+chr22	10736170	10736283	RF00004	0	-
+chr22	11066417	11068174	CU104787.1	0	+
+chr22	11249808	11249959	RF00002	0	-
+[..]
+</code></pre></div>              </div>
+            </li>
+          </ol>
+
+          <ul>
+            <li><strong>Troubleshooting:</strong> Is your second column the <code class="highlighter-rouge">Strand</code> column?
+              <ul>
+                <li>Make sure you used the correct <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (the one that matches the tool name mentioned in the previous step <em>exactly</em>)</li>
+                <li>There is another tool with <code class="highlighter-rouge">(cut)</code> behind the title, we do NOT want to use this tool in this step.</li>
+              </ul>
+            </li>
+            <li><strong>Tip:</strong> Always check your output files to make sure they match your expectations!</li>
+          </ul>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset as <code class="highlighter-rouge">chr22 genes</code></p>
 
       <blockquote class="tip">
 
@@ -854,7 +896,7 @@ https://www.encodeproject.org/files/ENCFF933NTR/@@download/ENCFF933NTR.<span cla
       </blockquote>
     </li>
     <li>
-      <p>Change its datatype to <span class="notranslate">BED</span></p>
+      <p><strong>Change</strong> <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> its datatype to <span class="notranslate">BED</span></p>
 
       <blockquote class="tip">
 
@@ -862,7 +904,7 @@ https://www.encodeproject.org/files/ENCFF933NTR/@@download/ENCFF933NTR.<span cla
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="highlighter-rouge"><span class="notranslate">bed</span></code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -903,7 +945,7 @@ To be able to have the exon information, you could use a GTF file which can be d
     </ol>
 
     <blockquote class="solution">
-      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
       <ol>
         <li>There are 285247 <span class="notranslate">reads</span>.</li>
@@ -1036,7 +1078,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>~14%</li>
@@ -1130,7 +1172,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
   <p>What percentage of read pairs mapped concordantly?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>54.8+42.87=97.67%</p>
 
@@ -1216,7 +1258,7 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>
@@ -1307,7 +1349,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>135813</li>
@@ -1352,7 +1394,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
   <p>Could you guess what the peaks at approximately 50bp, 200bp, 400bp and 600bp correspond to?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <p>The first peak (50bp) corresponds to where the Tn5 transposase inserted into nucleosome-free regions. The second peak (a bit less than 200bp) corresponds to where Tn5 inserted around a single nucleosome. The third one (around 400bp) is where Tn5 inserted around two adjacent nucleosomes and the fourth one (around 600bp) is where Tn5 inserted around three adjacent nucleosomes.</p>
 
@@ -1684,7 +1726,7 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>No, it is higher on the left which is expected as usually the promoter of active genes is accessible.</li>
@@ -1832,7 +1874,7 @@ On the left a pair with a short fragment size: Genrich reports only one interval
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
       <li>
@@ -1979,8 +2021,8 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>Ge
     author = "Lucille Delisle and Maria Doyle and Florian Heyl",
     title = "ATAC-Seq data analysis (Galaxy Training Materials)",
     year = "2020",
-    month = "01",
-    day = "13"
+    month = "04",
+    day = "28"
     url = "\url{/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

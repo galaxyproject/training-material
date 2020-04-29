@@ -700,14 +700,14 @@ READ5:     atcatgacggcaGtagc
 
 <p>The modern variant callers attempt to assign a reliability estimate for each genotype call. This is done using Bayes reasoning (for a great visual explanation see <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a> by Oscar Bonilla). Here we present a SNP-relevant “translation” on this explanation (with inspiration from <a href="https://github.com/ekg">Erik Garrison</a>).</p>
 
-<p>Suppose in a population you have <script type="math/tex">A</script> individuals (not to be confused with nucleotide <strong>A</strong>; in this case <script type="math/tex">A</script> is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in <script type="math/tex">B</script> (again, a number) of your sequencing <span class="notranslate">reads</span>. We want to estimate the probability of having the real polymorphism in the population given our observations in sequencing <span class="notranslate">reads</span>. The logic is as follows:</p>
+<p>Suppose in a population you have \(A\) individuals (not to be confused with nucleotide <strong>A</strong>; in this case \(A\) is a number of individuals) with a variant. You are performing re-sequencing and observe a variant in \(B\) (again, a number) of your sequencing <span class="notranslate">reads</span>. We want to estimate the probability of having the real polymorphism in the population given our observations in sequencing <span class="notranslate">reads</span>. The logic is as follows:</p>
 
 <ul>
-  <li>The probability of having polymorphism <em>A</em> in the population is <script type="math/tex">P(A) = \lvert A \rvert / \lvert U \rvert</script></li>
-  <li>The probability of seeing a variant given our identification approach (i.e., sequencing) is <script type="math/tex">P(B) = \lvert B \rvert / \lvert U \rvert</script></li>
+  <li>The probability of having polymorphism <em>A</em> in the population is \(P(A) = \lvert A \rvert / \lvert U \rvert\)</li>
+  <li>The probability of seeing a variant given our identification approach (i.e., sequencing) is \(P(B) = \lvert B \rvert / \lvert U \rvert\)</li>
 </ul>
 
-<p>Now, the probability of having a variant and it being observed in our sequencing data is the overlap between <script type="math/tex">A</script> and <script type="math/tex">B</script> sets: <script type="math/tex">P(AB) = \lvert AB \rvert / \lvert U \rvert</script>. This is presented graphically below:</p>
+<p>Now, the probability of having a variant and it being observed in our sequencing data is the overlap between \(A\) and \(B\) sets: \(P(AB) = \lvert AB \rvert / \lvert U \rvert\). This is presented graphically below:</p>
 
 <table>
   <thead>
@@ -724,64 +724,64 @@ READ5:     atcatgacggcaGtagc
       <td style="text-align: center"><img src="../../images/pAB.png" alt="P(AB) polymorphism and variant calls" /></td>
     </tr>
     <tr>
-      <td style="text-align: center"><script type="math/tex">P(A)</script></td>
-      <td style="text-align: center"><script type="math/tex">P(B)</script></td>
-      <td style="text-align: center"><script type="math/tex">P(AB)</script></td>
+      <td style="text-align: center">\(P(A)\)</td>
+      <td style="text-align: center">\(P(B)\)</td>
+      <td style="text-align: center">\(P(AB)\)</td>
     </tr>
   </tbody>
 </table>
 
-<p>Now we can ask the following question: <em>What is the probability of a having a real polymorphism <script type="math/tex">A</script> given our observation of variants in <span class="notranslate">reads</span> <script type="math/tex">B</script>?</em> In other words, <em>what is the probability of <script type="math/tex">A</script> given <script type="math/tex">B</script>?</em> Or, as stated in the original <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a>: “<em>given that we are in region <script type="math/tex">B</script>, what is the probability that we are in the region <script type="math/tex">AB</script>?</em>”</p>
+<p>Now we can ask the following question: <em>What is the probability of a having a real polymorphism \(A\) given our observation of variants in <span class="notranslate">reads</span> \(B\)?</em> In other words, <em>what is the probability of \(A\) given \(B\)?</em> Or, as stated in the original <a href="https://oscarbonilla.com/2009/05/visualizing-bayes-theorem/">blog</a>: “<em>given that we are in region \(B\), what is the probability that we are in the region \(AB\)?</em>”</p>
 
-<script type="math/tex; mode=display">P(A \vert B) = \frac{\lvert AB \rvert}{\lvert B \rvert}</script>
+\[P(A \vert B) = \frac{\lvert AB \rvert}{\lvert B \rvert}\]
 
-<p>Dividing both numerator and denominator by <script type="math/tex">\lvert U \rvert</script>:</p>
+<p>Dividing both numerator and denominator by \(\lvert U \rvert\):</p>
 
-<script type="math/tex; mode=display">P(A \vert B) = \frac{\frac{\lvert AB \rvert}{\lvert U \rvert}}{\frac{\lvert B \rvert}{\lvert U \rvert}}</script>
+\[P(A \vert B) = \frac{\frac{\lvert AB \rvert}{\lvert U \rvert}}{\frac{\lvert B \rvert}{\lvert U \rvert}}\]
 
-<p>Because we know that <script type="math/tex">P(AB) = \frac{\lvert AB \rvert}{\lvert U \rvert}</script> and <script type="math/tex">P(B) = \frac{\lvert B \rvert}{\lvert U \rvert}</script>, we can rewrite the equation above as:</p>
+<p>Because we know that \(P(AB) = \frac{\lvert AB \rvert}{\lvert U \rvert}\) and \(P(B) = \frac{\lvert B \rvert}{\lvert U \rvert}\), we can rewrite the equation above as:</p>
 
-<script type="math/tex; mode=display">P(A \vert B) = \frac{P(AB)}{P(B)}</script>
+\[P(A \vert B) = \frac{P(AB)}{P(B)}\]
 
-<p>Now, let’s ask an opposite question. Given a true polymorphism <script type="math/tex">A</script>, what are the chances that we do detect it (i.e. find ourselves in <script type="math/tex">AB</script>)? It will be:</p>
+<p>Now, let’s ask an opposite question. Given a true polymorphism \(A\), what are the chances that we do detect it (i.e. find ourselves in \(AB\))? It will be:</p>
 
-<script type="math/tex; mode=display">P(B \vert A) = \frac{P(AB)}{P(A)}</script>
+\[P(B \vert A) = \frac{P(AB)}{P(A)}\]
 
-<p>So, because we know that <script type="math/tex">P(A \vert B) = \frac{P(AB)}{P(B)}</script> and we just reasoned that <script type="math/tex">P(B \vert A) = \frac{P(AB)}{P(A)}</script>, we can say that <script type="math/tex">P(A \vert B)P(B) = P(B \vert A)P(A)</script>, leading us to the Bayes formula:</p>
+<p>So, because we know that \(P(A \vert B) = \frac{P(AB)}{P(B)}\) and we just reasoned that \(P(B \vert A) = \frac{P(AB)}{P(A)}\), we can say that \(P(A \vert B)P(B) = P(B \vert A)P(A)\), leading us to the Bayes formula:</p>
 
-<script type="math/tex; mode=display">P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}</script>
+\[P(A \vert B) = \frac{P(B \vert A)P(A)}{P(B)}\]
 
-<p>Translating this into “genomics terms”, the probability of having a genotype <script type="math/tex">G</script> given sequencing <span class="notranslate">reads</span> <script type="math/tex">S</script> is: <script type="math/tex">P(G \vert S) = \frac{P(S \vert G)P(G)}{P(S)}</script>. Because in a given calculation of <script type="math/tex">P(G \vert S)</script> the <span class="notranslate">reads</span> are fixed, we can re-write the Bayes formula in the following way:</p>
+<p>Translating this into “genomics terms”, the probability of having a genotype \(G\) given sequencing <span class="notranslate">reads</span> \(S\) is: \(P(G \vert S) = \frac{P(S \vert G)P(G)}{P(S)}\). Because in a given calculation of \(P(G \vert S)\) the <span class="notranslate">reads</span> are fixed, we can re-write the Bayes formula in the following way:</p>
 
-<script type="math/tex; mode=display">P(G \vert S) \sim P(S \vert G)P(G)</script>
+\[P(G \vert S) \sim P(S \vert G)P(G)\]
 
-<p>with <script type="math/tex">P(S)</script> becoming a constant. This leaves us with the need to estimate two things:</p>
+<p>with \(P(S)\) becoming a constant. This leaves us with the need to estimate two things:</p>
 
 <ol>
-  <li><script type="math/tex">P(S \vert G)</script>, the data likelihood</li>
-  <li><script type="math/tex">P(G)</script>, the prior probability for the variant.</li>
+  <li>\(P(S \vert G)\), the data likelihood</li>
+  <li>\(P(G)\), the prior probability for the variant.</li>
 </ol>
 
 <p>In the simplest case we can estimate these as follows:</p>
 
-<h3 id="ps-vert-g"><script type="math/tex">P(S \vert G)</script></h3>
+<h3 id="ps-vert-g">\(P(S \vert G)\)</h3>
 
-<p>Suppose <script type="math/tex">S_i</script> is a base in read <script type="math/tex">i</script> corresponding to a genome position with genotype <script type="math/tex">G</script>. The probability of seeing <script type="math/tex">S_i</script> given <script type="math/tex">G</script>, or <script type="math/tex">P(S_i \vert G)</script>, is given by the quality score of <script type="math/tex">S_i</script> (the quality scores are given by base calling software and reported as <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scores</a>). Thus the genotype likelihood <script type="math/tex">P(S \vert G)</script> is the product of <script type="math/tex">P(S_i \vert G)</script> over all <script type="math/tex">i</script>. In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc…</p>
+<p>Suppose \(S_i\) is a base in read \(i\) corresponding to a genome position with genotype \(G\). The probability of seeing \(S_i\) given \(G\), or \(P(S_i \vert G)\), is given by the quality score of \(S_i\) (the quality scores are given by base calling software and reported as <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scores</a>). Thus the genotype likelihood \(P(S \vert G)\) is the product of \(P(S_i \vert G)\) over all \(i\). In reality however there are many other sources of uncertainty (in addition to base qualities) that are incorporated in the calculation of data likelihoods including NGS technology-related issues, dependency of error rates on substitution type (e.g., transitions versus transversions), sequencing context etc…</p>
 
-<h3 id="pg---a-single-sample-case"><script type="math/tex">P(G)</script> - a single sample case</h3>
+<h3 id="pg---a-single-sample-case">\(P(G)\) - a single sample case</h3>
 
 <p>One can assign an equal probability to all possible genotypes, or to source this information based on previously obtained knowledge containing in a database, such as <a href="https://www.ncbi.nlm.nih.gov/SNP/">dbSNP</a>. In this case (as exemplified in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">Nielsen et al. 2011</a>) we may, for instance, have a site with a <strong>G/T</strong> polymorphism and genotypes <strong>GG</strong>, <strong>TT</strong>, and <strong>GT</strong> having frequencies of 0.45, 0.45, 0.09, respectively. We will use these values as priors.</p>
 
-<h3 id="pg---a-multi-sample-case"><script type="math/tex">P(G)</script> - a multi-sample case</h3>
+<h3 id="pg---a-multi-sample-case">\(P(G)\) - a multi-sample case</h3>
 
-<p>Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium (<a href="https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle">HWE</a>). The following example (again from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">Nielsen et al. 2011</a>) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, <strong>AT</strong> and <strong>AA</strong>, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of <strong>A</strong> is 1% (<script type="math/tex">p = 0.01</script>; <script type="math/tex">q = 1 - p = 0.99</script>), then from the HWE we have:</p>
+<p>Genotype calling reliability can be significantly improved when analyzing multiple samples jointly. In this case genotype frequencies can be inferred from allele frequencies using Hardy-Weinberg equilibrium (<a href="https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle">HWE</a>). The following example (again from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3593722/">Nielsen et al. 2011</a>) illustrates this idea: suppose you are calling genotypes for a single individual using a combination of multiple samples. There are two genotypes, <strong>AT</strong> and <strong>AA</strong>, with equally large genotype likelihoods. If, however, in our collection of multiple samples the frequency of <strong>A</strong> is 1% (\(p = 0.01\); \(q = 1 - p = 0.99\)), then from the HWE we have:</p>
 
 <table>
   <thead>
     <tr>
-      <th><strong>AA</strong> (<script type="math/tex">p^2</script>)</th>
-      <th><strong>AT</strong> (<script type="math/tex">2pq</script>)</th>
-      <th><strong>TT</strong> (<script type="math/tex">q^2</script>)</th>
+      <th><strong>AA</strong> (\(p^2\))</th>
+      <th><strong>AT</strong> (\(2pq\))</th>
+      <th><strong>TT</strong> (\(q^2\))</th>
     </tr>
   </thead>
   <tbody>
