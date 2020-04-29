@@ -58,7 +58,6 @@ anyone interested in learning about climate.
 For the purpose of this tutorial, sample datasets have been created from data downloaded from [C3S](https://climate.copernicus.eu/) through
 [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home):
 - [E-OBS daily gridded meteorological data for Europe from 1950 to present derived from in-situ observations](https://cds.climate.copernicus.eu/cdsapp#!/dataset/insitu-gridded-observations-europe?tab=overview)
-- [Fifth generation ECMWF reanalysis for the global climate and weather (ERA5)](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels-monthly-means)
 - [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview)
 
 To reduce the volume of data, the data resolution (in space and/or time) has been significantly reduced and/or data has been selected on sample locations (Paris, Oslo and 
@@ -73,11 +72,8 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 > 2. Import the files from [Zenodo]() or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/3697454/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
->    https://zenodo.org/record/3697454/files/ts_cities.csv
->    https://zenodo.org/record/3697454/files/era5_Paris.csv
->    https://zenodo.org/record/3697454/files/ecv_1979.nc
->    https://zenodo.org/record/3697454/files/ecv_2018.nc
+>    https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
+>    https://zenodo.org/record/3776500/files/ts_cities.csv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -337,26 +333,6 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 >
 {: .tip}
 
-
-## Ensemble
-
-Explain why we use ensembles (more than one source of information and/or perturbations) in climate.
-
-
-> ### {% icon hands_on %} Hands-on: Heatmap for different models (use ERA5 data)
->
->    > ### {% icon question %} Questions
->    > 
->    > 1. Do you observe a warming or cooling between 1979 and 2019?
->    > > ### {% icon solution %} Solution
->    > >
->    > >
->    > {: .solution}
->    {: .question}
->
-{: .hands_on}
-
-
 # Climate variables
 
 *Temperature* is often the first variable that comes to mind when we talk about climate. However, it is insufficient to fully characterize the climate, and scientists have agreed on a number of variables to systematically observe Earth`s changing climate. 
@@ -369,18 +345,33 @@ The [Global Climate Observing System](https://gcos.wmo.int/) (GCOS) and its GCOS
 
 GCOS is co-sponsored by the [World Meteorological Organization](https://public.wmo.int/en) (WMO), the [Intergovernmental Oceanographic Commission of the United Nations Educational, Scientific and Cultural Organization](http://www.ioc-unesco.org/) (IOC-UNESCO), the [United Nations Environment Programme](https://www.unenvironment.org/) (UN Environment), and the [International Science Council](https://council.science/) (ISC). It regularly assesses the status of global climate observations of the atmosphere, land and ocean and produces guidance for its improvement.
 
-At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets) divided in 3 categories:
-- Atmosphere
-- Land
-- Ocean
- 
-*Source: [https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets](https://gcos.wmo.int/en/essential-climate-variables/ecv-factsheets)*
+At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-variables).
+
+*Source: [https://gcos.wmo.int/en/essential-climate-variables](https://gcos.wmo.int/en/essential-climate-variables)*
 
 > ### {% icon hands_on %} Hands-on: Essential Climate Variables
 >
->    > ### {% icon question %} Questions
+>    1. **Copernicus Essential Climate Variables** {% icon tool %} with the following parameters:
+>        - *"Variable(s)"*: precipitation
+>        - *"Select type of data"*: Anomaly
+>        - *"Select year(s)"*: `1980` and `2018`
+>        - *"Time aggregation"*: yearly
+>        - *"Select month"*: `July`
+>        Rename the resulting file to `precipitation_anomalies_july_1980_2018.nc`
+>    2. **map plot gridded (lat/lon) netCDF data** {% icon tool %} with the following parameters:
+>        - *"input with geographical coordinates (netCDF format)"*: `precipitation_anomalies_july_1980_2018.nc`
+>        - *"variable name as given in the netCDF file": `tp`
+>        - And finally in `Advanced Options` change:
+>            - *"multiple times"*: `Yes`
+>            - *"comma separated list of indexes for fields to plot"*: 0,1
+>            - *"number of rows for subplot grid"*: 2
+>            - *"subplot title (repeated on each subplot)"*: precipitation anomalies (m/day)
+>            - *"colormap"*: PiYG
+>    > ### {% icon question %} Precipitation anomalies
 >    > 
->    > 1. XXX
+>    > 1. Do you observe any significant precipitation anomalies in 1979 versus 2018?
+>    > 2. Do we have sufficient information to make any conclusions on the change in climate?
+>    > 
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > >
