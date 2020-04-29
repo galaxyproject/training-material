@@ -73,8 +73,8 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 > 2. Import the files from [Zenodo]() or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/3697454/files/ts_cities.csv
 >    https://zenodo.org/record/3697454/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
+>    https://zenodo.org/record/3697454/files/ts_cities.csv
 >    https://zenodo.org/record/3697454/files/era5_Paris.csv
 >    https://zenodo.org/record/3697454/files/ecv_1979.nc
 >    https://zenodo.org/record/3697454/files/ecv_2018.nc
@@ -83,7 +83,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Check that the datatype is **netcdf**
+> 3. Check that the datatype is **csv** or **netcdf** (files ending with `.nc`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -124,17 +124,54 @@ You can also watch this [Video](https://youtu.be/e0vj-0imOLw) to get an animated
 In order to answer this question, we are going to inspect and visualize the dataset `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` using simple galaxy tools.
 
 > ### {% icon hands_on %} Hands-on: Daily temperature time series
+>    > ### {% icon comment %} Tip: search for the tool
+>    >
+>    > Many different tools can be used to answer to the questions. Here we give you some guidelines to help you to choose.
+>    > Use the **tools search box** at the top of the tool panel to find **Select lines that match an expression** {% icon tool %} and **Datamash** {% icon tool %}.
+>    {: .tip}
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What was the temperature in Paris on the 14th of July 2003?
->    > 2. What is the minimum and temperatures in Paris?
+>    > 1. What was the average temperature in Paris on the 14th of July 2003?
+>    > 2. What is the minimum and maximum temperatures in Paris?
 >    > 3. On which dates did the minimum and maximum temperatures occured?
 >    > 4. Can we observe a trend (cooling/warming)?
 >    >
 >    > > ### {% icon solution %} Solution
->    > >
->    > >
+>    > > 1. The average temperature in Paris on the 14th of July 2003 was 26.73 degrees Celcius. It can be found by using **Select lines that match an expression** {% icon tool %} with parameter **"the pattern"** set to 2003-07-14.
+>    > > 2. The minimum temperature in Paris is -11.6799995 degrees celcius and the maximum temperature in Paris is 33.579998 degrees celcius. To find out, you can use **Datamash** {% icon tool %} with the following parameters:
+>    > >      - {% icon param-file %} *"Input tabular dataset"*: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
+>    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Print header line"*: `Yes`
+>    > >      - "Print all fields from input file": `No`
+>    > >      - In *"Operation to perform on each group"*:
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `minimum`
+>    > >              - *"On column"*: `c2`
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `maximum`
+>    > >              - *"On column"*: `c2`
+>    > > 
+>    > > 3. The minimum temperature (-11.6799995 degrees celcius) was observed on January 16 1985. The maximum temperature (33.579998 degrees celcius) was observed on July 25 2019. You can use different Galaxy tools to find out the solution and here we show you how to use **Datamash**  {% icon tool %} with the following parameters:
+>    > >      - {% icon param-file %} *"Input tabular dataset"*: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
+>    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Print header line"*: `Yes`
+>    > >      - "Print all fields from input file": `Yes`
+>    > >      - In *"Operation to perform on each group"*:
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `minimum`
+>    > >              - *"On column"*: `c2`
+>    > > 
+>    > > For the **maximum**, repeat **Datamash**  {% icon tool %} with the following parameters:
+>    > >      - {% icon param-file %} *"Input tabular dataset"*: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
+>    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Print header line"*: `Yes`
+>    > >      - "Print all fields from input file": `Yes`
+>    > >      - In *"Operation to perform on each group"*:
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `maximum`
+>    > >              - *"On column"*: `c2`
+>    > > 
 >    > {: .solution}
 >    {: .question}
 > 
@@ -148,15 +185,22 @@ To get some information about the (past and current) climate in Paris, we will f
 
 > ### {% icon hands_on %} Hands-on: What is the monthly climatological temperature in Paris?
 >
->   To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.).
+>   To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.). Indeed, 
+>   this period of time is sufficiently long for computing monthly climatological temperature (more than 30 years).
 >    > ### {% icon question %} Questions
 >    > 
 >    > 1. What is the warmest summer month e.g. between June, July and August (JJA) in Paris?
 >    > 2. What is the coolest winter month e.g. between December, January and February (DJF) in Paris?
 >    >
 >    > > ### {% icon solution %} Solution
+>    > > 1. The warmest summer month in Paris is July (19.921018171429 degrees celcius). However, it is interesting to remark that on our dataset we see very little difference in the mean temperature between July and August.
+>    > > 2. The coolest winter month in Paris is January (4.4669169722484 degrees celcius).
 >    > >
->    > >
+>    > > Below, we show you how we found these results.
+>    > > We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day:
+>    > > 
+>    > > Please note that you may use other Galaxy tools to reach the same results.
+>    > > Results can be slightly different when using different source of climate information. However, you will always observe the same pattern e.g. cool month in winter and warm month on summer. We can also clearly see that Paris has a mild climate with on average no extreme temperatures.
 >    > {: .solution}
 >    {: .question}
 > 
