@@ -134,8 +134,8 @@ In order to answer this question, we are going to inspect and visualize the data
 >    >
 >    > 1. What was the average temperature in Paris on the 14th of July 2003?
 >    > 2. What is the minimum and maximum temperatures in Paris?
->    > 3. On which dates did the minimum and maximum temperatures occured?
->    > 4. Can we observe a trend (cooling/warming)?
+>    > 3. On which date did the minimum temperature occured?
+>    > 4. On which date did the maximum temperature occured?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. The average temperature in Paris on the 14th of July 2003 was 26.73 degrees Celcius. It can be found by using **Select lines that match an expression** {% icon tool %} with parameter **"the pattern"** set to 2003-07-14.
@@ -152,7 +152,8 @@ In order to answer this question, we are going to inspect and visualize the data
 >    > >              - *"Type"*: `maximum`
 >    > >              - *"On column"*: `c2`
 >    > > 
->    > > 3. The minimum temperature (-11.6799995 degrees celcius) was observed on January 16 1985. The maximum temperature (33.579998 degrees celcius) was observed on July 25 2019. You can use different Galaxy tools to find out the solution and here we show you how to use **Datamash**  {% icon tool %} with the following parameters:
+>    > > 3. The minimum temperature (-11.6799995 degrees celcius) was observed on January 16 1985. 
+>    > >     You can use different Galaxy tools to find out the solution and here we show you how to use **Datamash**  {% icon tool %} with the following parameters:
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
 >    > >      - *"Input file has a header line"*: `Yes`
 >    > >      - *"Print header line"*: `Yes`
@@ -162,7 +163,8 @@ In order to answer this question, we are going to inspect and visualize the data
 >    > >              - *"Type"*: `minimum`
 >    > >              - *"On column"*: `c2`
 >    > > 
->    > > For the **maximum**, repeat **Datamash**  {% icon tool %} with the following parameters:
+>    > > 4. The maximum temperature (33.579998 degrees celcius) was observed on July 25 2019. For the **maximum**, repeat **Datamash**  {% icon tool %} with the following parameters:
+>    > >
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
 >    > >      - *"Input file has a header line"*: `Yes`
 >    > >      - *"Print header line"*: `Yes`
@@ -171,7 +173,6 @@ In order to answer this question, we are going to inspect and visualize the data
 >    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >    > >              - *"Type"*: `maximum`
 >    > >              - *"On column"*: `c2`
->    > > 
 >    > {: .solution}
 >    {: .question}
 > 
@@ -196,14 +197,14 @@ To get some information about the (past and current) climate in Paris, we will f
 >    > > 1. The warmest summer month in Paris is July (19.921018171429 degrees celcius). However, it is interesting to remark that on our dataset we see very little difference in the mean temperature between July and August.
 >    > > 2. The coolest winter month in Paris is January (4.4669169722484 degrees celcius).
 >    > >
->    > > Below, we show you how we found these results.
->    > > We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day. Use **Text reformatting with awk** {% icon tool %} with parameters:
->    > >  - **File to process**: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
->    > >  - **AWK Program**: `gsub(/-/,"\t",$1){$1=$1} {print}`
+>    > >     Below, we show you how we found these results.
+>    > >     We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day. Use **Text reformatting with awk** {% icon tool %} with parameters:
+>    > >      - **File to process**: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
+>    > >      - **AWK Program**: `gsub(/-/,"\t",$1){$1=$1} {print}`
 >    > > 
->    > > Rename the resulting file to `split_dates_Paris.csv`.
+>    > >     Rename the resulting file to `split_dates_Paris.csv`.
 >    > > 
->    > > Then use **Datamash**  {% icon tool %} with the following parameters:
+>    > >     Then use **Datamash**  {% icon tool %} with the following parameters:
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `split_dates_Paris.csv`
 >    > >      - *"Group by fields"*: 2
 >    > >      - *"Input file has a header line"*: `Yes`
@@ -214,22 +215,21 @@ To get some information about the (past and current) climate in Paris, we will f
 >    > >              - *"Type"*: `Mean`
 >    > >              - *"On column"*: `c4`
 >    > > 
->    > > Rename the resulting file to `climatology_Paris.csv`.
->    > > Then use again **Datamash** to get the month where the minimum and maximum temperatures are found:
->    > >  
+>    > >     Rename the resulting file to `climatology_Paris.csv`.
+>    > >     Then use again **Datamash** to get the month where the minimum and maximum temperatures are found:
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `climatology_Paris.csv`
->    > >      - *"Group by fields"*: ``
+>    > >      - *"Group by fields"*: 
 >    > >      - *"Input file has a header line"*: `Yes`
 >    > >      - *"Print header line"*: `No`
 >    > >      - "Print all fields from input file": `Yes`
 >    > >      - In *"Operation to perform on each group"*:
->    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
->    > >              - *"Type"*: `minimum`
->    > >              - *"On column"*: `c2`
+>    > >             - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >                 - *"Type"*: `minimum`
+>    > >                 - *"On column"*: `c2`
 >    > > 
->    > > Look at the resulting file and the first field will give you the month (07 e.g. July) where the maximum temperature is found.
+>    > >     Look at the resulting file and the first field will give you the month (07 e.g. July) where the maximum temperature is found.
 >    > >
->    > > For the **maximum**, repeat **Datamash**  {% icon tool %} with the following parameters:
+>    > >     For the **maximum**, repeat **Datamash**  {% icon tool %} with the following parameters:
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `climatology_Paris.csv`
 >    > >      - *"Group by fields"*: ``
 >    > >      - *"Input file has a header line"*: `Yes`
@@ -240,10 +240,10 @@ To get some information about the (past and current) climate in Paris, we will f
 >    > >              - *"Type"*: `maximum`
 >    > >              - *"On column"*: `c2`
 >    > >
->    > > The result is in the first column of the resulting file which indicates `01` e.g. January. 
+>    > >    The result is in the first column of the resulting file which indicates `01` e.g. January. 
 >    > >
->    > > Please note that you may use other Galaxy tools to reach the same results.
->    > > Results can be slightly different when using different source of climate information. However, you will always observe the same pattern e.g. cool month in winter and warm month on summer. We can also clearly see that Paris has a mild climate with on average no extreme temperatures.
+>    > >    Please note that you may use other Galaxy tools to reach the same results.
+>    > >    Results can be slightly different when using different source of climate information. However, you will always observe the same pattern e.g. cool month in winter and warm month on summer. We can also clearly see that Paris has a mild climate with on average no extreme temperatures.
 >    > {: .solution}
 >    {: .question}
 > 
@@ -291,7 +291,8 @@ To get some information about the (past and current) climate in Paris, we will f
 >
 >    > ### {% icon question %} Questions
 >    > 
->    > 1. Can we easily observe a trend?
+>    > Can we easily observe a trend?
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > The plot clearly shows a slight increase in the yearly mean temperature between 1950 and 2019. Even though it looks no more than a few degrees celcius, it is
@@ -310,17 +311,16 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 > ### {% icon hands_on %} Hands-on: Climate stripes for Paris
 >    Computing temperature anomalies is out of scope of this tutorial and we will therefore use pre-computed temperature anomalies `ts_cities.csv`.
 >    A simple way to visualize anomalies and highlight cooling/warming over the years,  is to use **climate stripes from timeseries** {% icon tool %} with the following parameters:
->     - *"timeseries to plot"*: `ts_cities.csv`
->     - *"column name to use for plotting"*: `tg_anomalies_paris`
->     - *"plot title"*: `Climate stripes for Paris (1950-2019)` 
+>    - *"timeseries to plot"*: `ts_cities.csv`
+>    - *"column name to use for plotting"*: `tg_anomalies_paris`
+>    - *"plot title"*: `Climate stripes for Paris (1950-2019)` 
 >
 >    **View** {% icon galaxy-eye%} the resulting plot:
 >
 >    ![Climate stripes in Paris](../../images/climate_stripes_temperature_Paris.png)
 >
->    > ### {% icon question %} Questions
+>    > ### {% icon question %} Question: do you observe a warming or cooling between 1950 and 2019?
 >    > 
->    > 1. Do you observe a warming or cooling between 1950 and 2019?
 >    > > ### {% icon solution %} Solution
 >    > > 
 >    > > The climate stripes clearly show a warming between 1950 and 2019.
