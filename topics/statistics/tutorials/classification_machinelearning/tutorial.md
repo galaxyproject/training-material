@@ -96,7 +96,7 @@ The `train_rows` contains a column `Class` which is the class label or target. W
 > ### {% icon details %} Preparing the data for classification
 >
 > Preparing the data involves these following major activities: 
-> 1. Data Cleaning: Involves removing the noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques. 
+> 1. Data Cleaning: Involves removing the noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
 > 2. Relevance Analysis: Database may also have the irrelevant attributes. Correlation analysis is used to know whether any two given attributes are related.
 > 3. Normalization: The data is transformed using normalization. Normalization involves scaling all values for given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, the neural networks or the methods involving measurements are used.
 >
@@ -205,7 +205,7 @@ These plots are important to visualize the quality of classifier and the true an
 
 # K-Nearest Neighbor (KNN)
 
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearst neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among it's k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifieris not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, neighborhood may include points from other classes and cause errors. To select the k that’s right for your data, we recoomend that run the KNN algorithm several times with different values of k and choose the k that reduces the number of errors. We encounter while maintaining the algorithm’s ability to accurately make predictions when it’s given data it hasn’t seen before.
+At the second step, we will use k-nearest neighbor classifier. In the [k-nearst neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among it's k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifieris not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, neighborhood may include points from other classes and cause errors. To select the k that is right for your data, we recoomend that run the KNN algorithm several times with different values of k and choose the k that reduces the number of errors. 
 
 > ### {% icon question %} Question
 >
@@ -258,7 +258,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearst 
 
 > ### {% icon question %} Question
 >
-> What is the value of K (number of neighbors) for the model?
+> What is the value of k (number of neighbors) for the model?
 >
 > > ### {% icon solution %} Solution
 > > As you can see in the Advanced Options, the default value for the number of neighbors is 5, and we used the default value. You can set this parameter based on your problem and data. 
@@ -387,7 +387,7 @@ The visualization tool creates the following ROC plot:
 
 > ### {% icon question %} Question
 >
-> What are the advantages of random forest classifier compare with classifiers?
+> What are the advantages of random forest classifier compare with KNN and SVM?
 >
 > > ### {% icon solution %} Solution
 > > 1. The overfitting is not a problem when we use the random forest algorithm in any classification problem.
@@ -429,7 +429,7 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used an ensemble learning algorithm in machine learning. The Bagging algorithm creates multiple models from randomly taken subsets of train dataset and then aggregates learners to build overall stronger classifiers that combines the predictions to produce a final prediction. The **Pipeline builder** tool wrap the classifier and return a zipped file. 
+At the last step, we will create a bagging classifier by using  **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used an ensemble learning algorithm in machine learning. The Bagging algorithm creates multiple models from randomly taken subsets of train dataset and then aggregates learners to build overall stronger classifiers that combines the predictions to produce a final prediction. The **Pipeline builder** tool build the classifier and return a zipped file. 
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
