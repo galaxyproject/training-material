@@ -1,0 +1,265 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Label-free quantification in MaxQuant",
+  "format-version": "0.1",
+  "name": "Maxquant_lfq_serum",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "sample1"
+        }
+      ],
+      "label": "sample1",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 189
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"sample1\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "b9140d52-823c-44a1-a317-e9efed37d9e5",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "sample2"
+        }
+      ],
+      "label": "sample2",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 201,
+        "top": 327
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"sample2\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "aa7fe2a8-8def-440f-bab3-2d30503286a9",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [],
+      "label": "Fasta file",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 206.61666870117188,
+        "top": 450.11669921875
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "7aa7bc43-1201-463b-b9c6-b782550dadf7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "c2b015dc-bbf5-4460-8af5-3f45b5262b6c"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input_opts|fasta_files": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "paramGroups_0|files": [
+          {
+            "id": 1,
+            "output_name": "output"
+          },
+          {
+            "id": 0,
+            "output_name": "output"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MaxQuant",
+          "name": "search_opts"
+        }
+      ],
+      "label": null,
+      "name": "MaxQuant",
+      "outputs": [
+        {
+          "name": "proteinGroups",
+          "type": "tabular"
+        },
+        {
+          "name": "mqpar",
+          "type": "xml"
+        },
+        {
+          "name": "peptides",
+          "type": "tabular"
+        },
+        {
+          "name": "ptxqc_report",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 490,
+        "top": 195
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43",
+      "tool_shed_repository": {
+        "changeset_revision": "7f432d87c82c",
+        "name": "maxquant",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"output_opts\": \"{\\\"dry_run\\\": \\\"false\\\", \\\"output\\\": [\\\"proteinGroups\\\", \\\"mqpar\\\", \\\"peptides\\\"]}\", \"__rerun_remap_job_id__\": null, \"paramGroups\": \"[{\\\"__index__\\\": 0, \\\"enzymes\\\": [\\\"Trypsin/P\\\"], \\\"files\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"fixedModifications\\\": [\\\"Carbamidomethyl (C)\\\"], \\\"maxMissedCleavages\\\": \\\"1\\\", \\\"quant_method\\\": {\\\"__current_case__\\\": 2, \\\"lfqAvEdgesPerNode\\\": \\\"6\\\", \\\"lfqMinEdgesPerNode\\\": \\\"3\\\", \\\"lfqMinRatioCount\\\": \\\"2\\\", \\\"lfqSkipNorm\\\": \\\"true\\\", \\\"select_quant_method\\\": \\\"lfq\\\"}, \\\"variableModifications\\\": null}]\", \"qc\": \"{\\\"__current_case__\\\": 0, \\\"do_it\\\": \\\"true\\\", \\\"evidence\\\": \\\"true\\\", \\\"msms\\\": \\\"true\\\", \\\"msmsscans\\\": \\\"true\\\", \\\"parameters\\\": \\\"true\\\", \\\"proteingroups\\\": \\\"true\\\", \\\"summary\\\": \\\"true\\\"}\", \"input_opts\": \"{\\\"description_parse_rule\\\": \\\"^>.*\\\\\\\\|.*\\\\\\\\|[^ ]+ (.*) OS.*$\\\", \\\"fasta_files\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"ftype\\\": \\\".thermo.raw\\\", \\\"identifier_parse_rule\\\": \\\"^>.*\\\\\\\\|(.*)\\\\\\\\|.*$\\\"}\", \"lfq_opts\": \"{\\\"advancedSiteIntensities\\\": \\\"true\\\", \\\"do_ibaq\\\": {\\\"__current_case__\\\": 1, \\\"ibaq\\\": \\\"False\\\"}, \\\"lfqRequireMsms\\\": \\\"true\\\", \\\"lfqStabilizeLargeRatios\\\": \\\"true\\\", \\\"separateLfq\\\": \\\"false\\\"}\", \"search_opts\": \"{\\\"calc_peak_properties\\\": \\\"false\\\", \\\"match_between_runs\\\": \\\"false\\\", \\\"max_peptide_mass\\\": \\\"4600\\\", \\\"min_peptide_len\\\": \\\"7\\\", \\\"min_unique_pep\\\": \\\"1\\\", \\\"template\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "5fb07b2a-da7c-4ac8-85ec-fd8ed99e8707",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "Cut1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "proteinGroups"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Cut",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 799,
+        "top": 184
+      },
+      "post_job_actions": {},
+      "tool_id": "Cut1",
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"delimiter\": \"\\\"T\\\"\", \"columnList\": \"\\\"c8,c32,c33\\\"\", \"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "851fb2bf-434f-4ade-b0d3-69ff35567daa",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "infile": {
+          "id": 4,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Sort",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1054,
+        "top": 194
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "74a8bef53a00",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"sortkeys\": \"[{\\\"__index__\\\": 0, \\\"column\\\": \\\"2\\\", \\\"order\\\": \\\"r\\\", \\\"style\\\": \\\"g\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"1\\\"\", \"unique\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "3dd97e27-9437-4390-a9e3-c8083dcdac56",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "infile": {
+          "id": 4,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Sort",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1053,
+        "top": 335
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "74a8bef53a00",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"sortkeys\": \"[{\\\"__index__\\\": 0, \\\"column\\\": \\\"3\\\", \\\"order\\\": \\\"r\\\", \\\"style\\\": \\\"g\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header\": \"\\\"1\\\"\", \"unique\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\"}",
+      "tool_version": null,
+      "type": "tool",
+      "uuid": "aa036605-c97c-47cd-be4b-39cc18b9887e",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+  	"proteomics"
+  ],
+  "uuid": "99b62afb-14b2-48ad-a756-3bb342d12169",
+  "version": 3
+}
