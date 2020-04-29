@@ -251,8 +251,8 @@ To get some information about the (past and current) climate in Paris, we will f
 
 > ### {% icon tip %} Tip: Using existing climatologies
 >
-> In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing. Usually, a period of reference is chosen and does not necessarily cover the entire timeseries. Here we chose to use all data from 1950 to 2019; we could have chosen a shorter period for instance 1980 to 2010.
->  However, many data providers have pre-computed climatologies and can be directly downloaded. For instance, on the [CDS](https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset), climatologies are provided for [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview).
+> In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing.
+> However, many data providers have pre-computed climatologies and can be directly downloaded. For instance, on the [CDS](https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset), climatologies are provided for [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview).
 {: .tip}
 
 
@@ -304,18 +304,26 @@ To get some information about the (past and current) climate in Paris, we will f
 
 ## Anomalies
 
-
-Climate and weather data can have **biases** (explain why we use anomalies rather than absolute values in climate); discuss uncertainties around observations and numerical models.
-
+In climate change studies, temperature **anomalies** are more important than **absolute** temperature. A temperature anomaly is the difference from an average, or baseline,
+temperature. The baseline temperature is typically computed by averaging 30 or more years of temperature data. A *positive anomaly* indicates the observed temperature was *warmer* than the baseline, while a *negative anomaly* indicates the observed temperature was *cooler* than the baseline. 
 
 > ### {% icon hands_on %} Hands-on: Climate stripes for Paris
+>    Computing temperature anomalies is out of scope of this tutorial and we will therefore use pre-computed temperature anomalies `ts_cities.csv`.
+>    A simple way to visualize anomalies and highlight cooling/warming over the years,  is to use **climate stripes from timeseries** {% icon tool %} with the following parameters:
+>     - *"timeseries to plot"*: `ts_cities.csv`
+>     - *"column name to use for plotting"*: `tg_anomalies_paris`
+>     - *"plot title"*: `Climate stripes for Paris (1950-2019)` 
+>
+>    **View** {% icon galaxy-eye%} the resulting plot:
+>
+>    ![Climate stripes in Paris](../../images/climate_stripes_temperature_Paris.png)
 >
 >    > ### {% icon question %} Questions
 >    > 
 >    > 1. Do you observe a warming or cooling between 1950 and 2019?
 >    > > ### {% icon solution %} Solution
->    > >
->    > >
+>    > > 
+>    > > The climate stripes clearly show a warming between 1950 and 2019.
 >    > {: .solution}
 >    {: .question}
 >
