@@ -197,8 +197,51 @@ To get some information about the (past and current) climate in Paris, we will f
 >    > > 2. The coolest winter month in Paris is January (4.4669169722484 degrees celcius).
 >    > >
 >    > > Below, we show you how we found these results.
->    > > We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day:
+>    > > We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day. Use **Text reformatting with awk** {% icon tool %} with parameters:
+>    > >  - **File to process**: `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`
+>    > >  - **AWK Program**: `gsub(/-/,"\t",$1){$1=$1} {print}`
 >    > > 
+>    > > Rename the resulting file to `split_dates_Paris.csv`.
+>    > > 
+>    > > Then use **Datamash**  {% icon tool %} with the following parameters:
+>    > >      - {% icon param-file %} *"Input tabular dataset"*: `split_dates_Paris.csv`
+>    > >      - *"Group by fields"*: 2
+>    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Print header line"*: `No`
+>    > >      - "Print all fields from input file": `No`
+>    > >      - In *"Operation to perform on each group"*:
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `Mean`
+>    > >              - *"On column"*: `c4`
+>    > > 
+>    > > Rename the resulting file to `climatology_Paris.csv`.
+>    > > Then use again **Datamash** to get the month where the minimum and maximum temperatures are found:
+>    > >  
+>    > >      - {% icon param-file %} *"Input tabular dataset"*: `climatology_Paris.csv`
+>    > >      - *"Group by fields"*: ``
+>    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Print header line"*: `No`
+>    > >      - "Print all fields from input file": `Yes`
+>    > >      - In *"Operation to perform on each group"*:
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `minimum`
+>    > >              - *"On column"*: `c2`
+>    > > 
+>    > > Look at the resulting file and the first field will give you the month (07 e.g. July) where the maximum temperature is found.
+>    > >
+>    > > For the **maximum**, repeat **Datamash**  {% icon tool %} with the following parameters:
+>    > >      - {% icon param-file %} *"Input tabular dataset"*: `climatology_Paris.csv`
+>    > >      - *"Group by fields"*: ``
+>    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Print header line"*: `No`
+>    > >      - "Print all fields from input file": `Yes`
+>    > >      - In *"Operation to perform on each group"*:
+>    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>    > >              - *"Type"*: `maximum`
+>    > >              - *"On column"*: `c2`
+>    > >
+>    > > The result is in the first column of the resulting file which indicates `01` e.g. January. 
+>    > >
 >    > > Please note that you may use other Galaxy tools to reach the same results.
 >    > > Results can be slightly different when using different source of climate information. However, you will always observe the same pattern e.g. cool month in winter and warm month on summer. We can also clearly see that Paris has a mild climate with on average no extreme temperatures.
 >    > {: .solution}
@@ -208,7 +251,7 @@ To get some information about the (past and current) climate in Paris, we will f
 
 > ### {% icon tip %} Tip: Using existing climatologies
 >
-> In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing.
+> In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing. Usually, a period of reference is chosen and does not necessarily cover the entire timeseries. Here we chose to use all data from 1950 to 2019; we could have chosen a shorter period for instance 1980 to 2010.
 >  However, many data providers have pre-computed climatologies and can be directly downloaded. For instance, on the [CDS](https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset), climatologies are provided for [Essential climate variables for assessment of climate variability from 1979 to present](https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview).
 {: .tip}
 
@@ -219,11 +262,40 @@ To get some information about the (past and current) climate in Paris, we will f
 >
 >  To answer to this question, we will compute yearly mean of the temperature in Paris and visualize it.
 >
+>    1. Use **Datamash**  {% icon tool %} with the following parameters:
+>      - {% icon param-file %} *"Input tabular dataset"*: `split_dates_Paris.csv`
+>      - *"Group by fields"*: 1
+>      - *"Input file has a header line"*: `Yes`
+>      - *"Print header line"*: `No`
+>      - "Print all fields from input file": `No`
+>      - *"Sort input"*: `Yes`
+>      - In *"Operation to perform on each group"*:
+>      - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>              - *"Type"*: `Mean`
+>              - *"On column"*: `c4`
+>
+>    2. Rename the resulting file to `yearly_mean_Paris.csv`.
+> 
+>    3. To make a plot, you can use **Scatterplot w ggplot2**  {% icon tool %} with the following parameters:
+>      - *"Input in tabular format"*: `yearly_mean_Paris.csv`
+>      - *"Column to plot on x-axis"*: 1
+>      - *"Column to plot on y-axis"*: 2
+>      - *"Plot title"*: Yearly mean temperature in Paris from 1950 to 2019
+>      - *"Label for x axis"*: Year (YYYY)
+>      - *"Label for y axis"*: Temperature (degrees celcius)
+>      - And finally in `Advanced Options` change `Type of plot` to **Points and Lines**.
+> 
+>    4. **View** {% icon galaxy-eye%} the resulting plot:
+>
+>    ![Yearly mean temperature in Paris](../../images/yearly_mean_temperature_Paris.png)
+>
 >    > ### {% icon question %} Questions
 >    > 
 >    > 1. Can we easily observe a trend?
 >    > > ### {% icon solution %} Solution
 >    > >
+>    > > The plot clearly shows a slight increase in the yearly mean temperature between 1950 and 2019. Even though it looks no more than a few degrees celcius, it is
+>    > > quite significant.
 >    > >
 >    > {: .solution}
 >    {: .question}
