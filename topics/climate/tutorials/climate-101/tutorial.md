@@ -354,29 +354,37 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 
 > ### {% icon hands_on %} Hands-on: Essential Climate Variables
 >
+> We will look at the [Water Vapor Essential Climate Variable ](https://gcos.wmo.int/en/essential-climate-variables/surface-vapour/): 
+> *The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.* 
+>
 >    1. **Copernicus Essential Climate Variables** {% icon tool %} with the following parameters:
->        - *"Variable(s)"*: precipitation
+>        - *"Variable(s)"*: surface_air_relative_humidity
 >        - *"Select type of data"*: Monthly mean
 >        - *"Select year(s)"*: `1980` and `2018`
->        - *"Time aggregation"*: yearly
 >        - *"Select month"*: `July`
->        Rename the resulting file to `precipitation_anomalies_july_1980_2018.nc`
+>        Rename the resulting file to `rh_mean_july_1980_2018.nc`
 >    2. **map plot gridded (lat/lon) netCDF data** {% icon tool %} with the following parameters:
->        - *"input with geographical coordinates (netCDF format)"*: `precipitation_anomalies_july_1980_2018.nc`
+>        - *"input with geographical coordinates (netCDF format)"*: `rh_mean_july_1980_2018.nc`
 >        - *"variable name as given in the netCDF file": `tp`
 >        - And finally in `Advanced Options` change:
 >            - *"multiple times"*: `Yes`
 >            - *"comma separated list of indexes for fields to plot"*: 0,1
 >            - *"number of rows for subplot grid"*: 2
->            - *"subplot title (repeated on each subplot)"*: precipitation anomalies (m/day)
+>            - *"subplot title (repeated on each subplot)"*: relative humidity in percentage
 >            - *"colormap"*: PiYG
->    > ### {% icon question %} Precipitation anomalies
+>    3. **View** {% icon galaxy-eye%} the resulting plot:
+>
+>    ![Relative humidity in July 1980 and July 2018](../../images/rh_ecv_july_1980_2018.png)
+>
+>
+>    > ### {% icon question %} Relative humidity
 >    > 
->    > 1. Do you observe any significant precipitation anomalies in 1979 versus 2018?
+>    > 1. Do you observe any significant changes relative humidity in France from 1979 to 2018?
 >    > 2. Do we have sufficient information to make any conclusions on the change in climate?
 >    > 
 >    > > ### {% icon solution %} Solution
->    > >
+>    > > 1. We can see significant changes on the plot over France. The relative humidity of the air near the surface of the Earth is lower in July 2018 than in July 1980.
+>    > > 2. We do not have sufficient information to draw any conclusions about the change in climate. In our analysis, we only used two different months (July 1980 and July 2018) and can only discuss the average changes in weather during these two periods (July 1980 and July 2018). We learnt that to draw any conclusions on the climate, we would need to make statistics over a long period of time e.g. we would need to download about 30 years of data and for instance compute anomalies in relative humidity to check if there is any trend. These aspects will be discussed further in other Galaxy tutorials. 
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -396,6 +404,8 @@ When it comes to future climate, we usually need to make some assumptions (such 
 
 
 # Conclusion
+
+This tutorial taught you some of the basics of climate data analysis, explaining the difference between weather and climate as well as the existance of Essential Climate Variables to help you choosing variables that can help you in your analysis. In future Galaxy tutorials, we will go into details on where to get Climate data and how to make statistical analysis to get an insight on the climate change.
 
 {:.no_toc}
 
