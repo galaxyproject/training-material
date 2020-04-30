@@ -405,8 +405,6 @@ When it comes to future climate, we usually need to make some assumptions (such 
 
 # Conclusion
 
-This tutorial taught you some of the basics of climate data analysis, explaining the difference between weather and climate as well as the existance of Essential Climate Variables to help you choosing variables that can help you in your analysis. In future Galaxy tutorials, we will go into details on where to get Climate data and how to make statistical analysis to get an insight on the climate change.
-
 {:.no_toc}
 
 We have learnt to differentiate climate from weather and got an overview of the terminology used by climate scientists to identify the 
