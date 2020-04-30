@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Getting your hands-on climate data
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.3776499'
 questions:
 - What is climate?
 - What type of data is available?
@@ -78,7 +78,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Check that the datatype is **csv** or **netcdf** (files ending with `.nc`)
+> 3. Check that the datatype is **csv**
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -93,7 +93,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 According to [wikipedia](https://en.wikipedia.org/wiki/Climate), 
 Climate is defined as the average state of everyday's weather condition **over a period of 30 years**. It is measured by assessing
 the patterns of variation in temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and
-other meteorological variables in a given region over long periods of time.
+other meteorological variables in a given region over a long period of time (usually 20 or 30 years).
 Climate differs from weather, in that weather only describes the short-term conditions of these variables in a given region. 
 
 
@@ -108,11 +108,15 @@ if you focus your attention on the dog, you can see that it is all over the plac
 variability. The dog (weather) is not following a fully random pattern and varies around a main direction (trend) that is given by the woman: the woman is representing
 the climate and gives us an indication of where both the woman and dog are likely to be in the future.
   
- ![Illustrate the difference beteen weather and climate](../../images/weather_versus_climate.png "Weather versus Climate")
+ ![Illustrate the difference between weather and climate](../../images/weather_versus_climate.png "Weather versus Climate")
 
-*Source: [Animated short on statistics](https://youtu.be/e0vj-0imOLw) from Norwegian infotainment program Siffer. Produced by TeddyTV for NRK. Animation by Ole Christoffer Haga*
+*Source: [Animated short introduction to statistics in climate research](https://youtu.be/e0vj-0imOLw) from Norwegian infotainment program Siffer. Produced by TeddyTV for NRK. Animation by Ole Christoffer Haga*
 
-You can also watch this [Video](https://youtu.be/e0vj-0imOLw) to get an animated illustration of the difference between climate and weather.
+
+You can also watch an animated illustration of the difference between climate and weather:
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/e0vj-0imOLw" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+
 
 # What is the weather like in Paris?
 
@@ -352,7 +356,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >
 >    1. **Copernicus Essential Climate Variables** {% icon tool %} with the following parameters:
 >        - *"Variable(s)"*: precipitation
->        - *"Select type of data"*: Anomaly
+>        - *"Select type of data"*: Monthly mean
 >        - *"Select year(s)"*: `1980` and `2018`
 >        - *"Time aggregation"*: yearly
 >        - *"Select month"*: `July`
@@ -388,7 +392,7 @@ When we talk about climate data, the type of data can vary significantly. We hav
 - Climate models.
 
 Observations and re-analyses provide information about the past and current climate while climate models can provide past, current and future climate information.
-When it comes to future climate, we usually need to make some assumptions (such as how much CO2 emissions, etc.) and make different scenarios e.g. we run climate models using different assumptions and look at future trends under each of these scenarios: this is what we call **climate projections**. Climate projections will be discussed in a separate Galaxy tutorial.
+When it comes to future climate, we usually need to make some assumptions (such as how much CO2 emissions, etc.) and simulate different scenarios e.g. we run climate models using different assumptions and look at future trends under each of these scenarios: this is what we call **climate projections**. Climate projections will be discussed in a separate Galaxy tutorial.
 
 
 # Conclusion
