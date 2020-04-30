@@ -26,7 +26,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine the logistic regression which is the linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
+In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine logistic regression, which is an example of a linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
 
 Finally, we will discuss how to train the classifiers by finding the values of their parameters that minimize a cost function. We will work through a real problem in the field of cheminformatics to learn how the classifiers and learning algorithms work.
 
@@ -99,17 +99,10 @@ The `train_rows` contains a column `Class` which is the class label or target. W
 
 > ### {% icon details %} Preparing the data for classification
 >
-<<<<<<< HEAD
-> Preparing the data involves these following major activities: 
-> 1. Data Cleaning: Involves removing the noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
-> 2. Relevance Analysis: Database may also have the irrelevant attributes. Correlation analysis is used to know whether any two given attributes are related.
-> 3. Normalization: The data is transformed using normalization. Normalization involves scaling all values for given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, the neural networks or the methods involving measurements are used.
-=======
 > Preparing the data involves these following major tasks:
-> 1. Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques. 
+> 1. Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
 > 2. Relevance Analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
 > 3. Normalization: the data is transformed using normalization. Normalization involves scaling all values for q given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, neural networks or the methods involving measurements are used.
->>>>>>> bf7fb39217cc03ecfe130e195c8e76bcfdda3182
 >
 {: .details}
 
@@ -218,11 +211,7 @@ These plots are important to visualize the quality of the classifier and the tru
 
 # K-Nearest Neighbor (KNN)
 
-<<<<<<< HEAD
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearst neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among it's k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifieris not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, neighborhood may include points from other classes and cause errors. To select the k that is right for your data, we recoomend that run the KNN algorithm several times with different values of k and choose the k that reduces the number of errors. 
-=======
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that’s right for your data, we recommend running the KNN algorithm several times with different values of k and choose the k that best reduces the number of errors. We encounter while maintaining the algorithm’s ability to accurately make predictions when it is given data it hasn’t seen before.
->>>>>>> bf7fb39217cc03ecfe130e195c8e76bcfdda3182
+At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.
 
 > ### {% icon question %} Question
 >
@@ -407,11 +396,7 @@ One big advantage of random forest is that it can be used for both classificatio
 
 > ### {% icon question %} Question
 >
-<<<<<<< HEAD
-> What are the advantages of random forest classifier compare with KNN and SVM?
-=======
-> What are the advantages of random forest classifier compared with classifiers?
->>>>>>> bf7fb39217cc03ecfe130e195c8e76bcfdda3182
+> What are the advantages of random forest classifier compared with KNN and SVM?
 >
 > > ### {% icon solution %} Solution
 > > 1. The overfitting problem will never arise when we use the random forest algorithm in any classification problem.
@@ -453,11 +438,7 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-<<<<<<< HEAD
-At the last step, we will create a bagging classifier by using  **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used an ensemble learning algorithm in machine learning. The Bagging algorithm creates multiple models from randomly taken subsets of train dataset and then aggregates learners to build overall stronger classifiers that combines the predictions to produce a final prediction. The **Pipeline builder** tool build the classifier and return a zipped file. 
-=======
-At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool wraps the classifier and return a zipped file. 
->>>>>>> bf7fb39217cc03ecfe130e195c8e76bcfdda3182
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
