@@ -355,7 +355,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 > ### {% icon hands_on %} Hands-on: Essential Climate Variables
 >
 > We will look at the [Water Vapor Essential Climate Variable ](https://gcos.wmo.int/en/essential-climate-variables/surface-vapour/): 
-> *The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.* 
+> *The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity of air near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.* 
 >
 >    1. **Copernicus Essential Climate Variables** {% icon tool %} with the following parameters:
 >        - *"Variable(s)"*: surface_air_relative_humidity
@@ -383,7 +383,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >    > 2. Do we have sufficient information to make any conclusions on the change in climate?
 >    > 
 >    > > ### {% icon solution %} Solution
->    > > 1. We can see significant changes on the plot over France. The relative humidity of the air near the surface of the Earth is lower in July 2018 than in July 1980.
+>    > > 1. We can see significant changes on the plot over France. The relative humidity of air near the surface of the Earth is lower in July 2018 than in July 1980.
 >    > > 2. We do not have sufficient information to draw any conclusions about the change in climate. In our analysis, we only used two different months (July 1980 and July 2018) and can only discuss the average changes in weather during these two periods (July 1980 and July 2018). We learnt that to draw any conclusions on the climate, we would need to make statistics over a long period of time e.g. we would need to download about 30 years of data and for instance compute anomalies in relative humidity to check if there is any trend. These aspects will be discussed further in other Galaxy tutorials. 
 >    > >
 >    > {: .solution}
