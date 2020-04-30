@@ -147,6 +147,11 @@ Most trusted record: [RefSeq NC_005856](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 > {: .solution}
 {: .question}
 
+References: 
+> * [M.B. Łobocka, D.J. Rose, G. Plunkett, M. Rusin, A. Samojedny, H. Lehnherr, M.B. Yarmolinsky, F.R. Blattner
+*Genome of bacteriophage P1*
+J Bacteriol, 186 (2004), pp. 7032‐7068](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC523184/)
+
 ### Phage P2
 
 Most trusted record: [RefSeq NC_001895](https://www.ncbi.nlm.nih.gov/nuccore/NC_001895.1)
