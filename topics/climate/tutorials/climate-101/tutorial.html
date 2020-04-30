@@ -1,0 +1,1094 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Getting your hands-on climate data</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <link rel="stylesheet" href="/training-material/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Getting your hands-on climate data" />
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">topic</span> Climate
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
+                            EN
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Fclimate-101%2Ftutorial.html&edit-text=&act=url" title="">
+                                FR
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Fclimate-101%2Ftutorial.html&edit-text=&act=url" title="">
+                                JA
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Fclimate-101%2Ftutorial.html&edit-text=&act=url" title="">
+                                ES
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Fclimate-101%2Ftutorial.html&edit-text=&act=url" title="">
+                                PT
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Fclimate-101%2Ftutorial.html&edit-text=&act=url" title="">
+                                AR
+                            </a>
+                            
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="fa fa-life-ring" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Chat on Gitter">
+            Chat on Gitter
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/climate/tutorials/climate-101/tutorial.md">
+                            <i class="fa fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Getting your hands-on climate data",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+  },
+  "courseCode": "climate / climate-101 / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Getting your hands-on climate data' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/climate-101/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - What is climate?\n - What type of data is available?\n\n\\nThe objectives are:\n - Learn about the terminology\n - Learn about the different source of climate data\n - Learn about climate observations, reanalysis, climate predictions and climate projections\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Getting your hands-on climate data</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame#annefou" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What is climate?</p>
+</li>
+            
+            <li><p>What type of data is available?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn about the terminology</p>
+</li>
+            
+            <li><p>Learn about the different source of climate data</p>
+</li>
+            
+            <li><p>Learn about climate observations, reanalysis, climate predictions and climate projections</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fa fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fa fa-hourglass-end" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.3776499">
+    <i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fa fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/climate/docker" title="Docker image for this tutorial">
+                <i class="fa fa-ship" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 30, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>This tutorial is significantly based on <a href="https://nordicesmhub.github.io/climate-data-tutorial/">Getting your hands-on Climate data</a>.</p>
+
+</blockquote>
+
+<p>The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but 
+anyone interested in learning about climate.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#what-is-climate" id="markdown-toc-what-is-climate">What is climate?</a>    <ol>
+      <li><a href="#climate-versus-weather" id="markdown-toc-climate-versus-weather">Climate versus Weather</a></li>
+    </ol>
+  </li>
+  <li><a href="#what-is-the-weather-like-in-paris" id="markdown-toc-what-is-the-weather-like-in-paris">What is the weather like in Paris?</a></li>
+  <li><a href="#what-is-the-climate-in-paris" id="markdown-toc-what-is-the-climate-in-paris">What is the climate in Paris?</a>    <ol>
+      <li><a href="#seasonality" id="markdown-toc-seasonality">Seasonality</a></li>
+      <li><a href="#yearly-average" id="markdown-toc-yearly-average">Yearly average</a></li>
+      <li><a href="#anomalies" id="markdown-toc-anomalies">Anomalies</a></li>
+    </ol>
+  </li>
+  <li><a href="#climate-variables" id="markdown-toc-climate-variables">Climate variables</a>    <ol>
+      <li><a href="#essential-climate-variables" id="markdown-toc-essential-climate-variables">Essential Climate Variables</a></li>
+      <li><a href="#past-present-and-future-climate" id="markdown-toc-past-present-and-future-climate">Past, present and future climate?</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
+
+  <p><a href="https://climate.copernicus.eu/">European Copernicus Climate Change Service (C3S)</a> provide authoritative information about the past, present
+and future climate. C3S is one of the many services provided by Copernicus, the European Union’s Earth Observation Programme, looking
+at our planet and its environment for the ultimate benefit of all European citizens.
+The C3S <a href="https://cds.climate.copernicus.eu/#!/home">Climate Data Store (CDS)</a> provides a single point of access to a wide range of 
+quality-assured climate datasets distributed in the cloud.
+Access to the CDS data is open, free and unrestricted.
+We will be using freely available datasets from the CDS, including 
+observations, historical climate data records, estimates of Essential Climate Variables (ECVs) derived from Earth observations, 
+global and regional climate reanalyses of past observations, seasonal forecasts and climate projections.</p>
+</blockquote>
+
+<p>For the purpose of this tutorial, sample datasets have been created from data downloaded from <a href="https://climate.copernicus.eu/">C3S</a> through
+<a href="https://cds.climate.copernicus.eu/#!/home">Copernicus Climate Data Store</a>:</p>
+<ul>
+  <li><a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/insitu-gridded-observations-europe?tab=overview">E-OBS daily gridded meteorological data for Europe from 1950 to present derived from in-situ observations</a></li>
+  <li><a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview">Essential climate variables for assessment of climate variability from 1979 to present</a></li>
+</ul>
+
+<p>To reduce the volume of data, the data resolution (in space and/or time) has been significantly reduced and/or data has been selected on sample locations (Paris, Oslo and 
+Freiburg). The data format may also have been changed (for instance to tabular) to ease processing.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial. If you are not inspired, you can name it <em>climate101</em>.
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fa fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fa fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the files from <a href="">Zenodo</a> or from the shared data library</p>
+
+      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
+https://zenodo.org/record/3776500/files/ts_cities.csv
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check that the datatype is <strong>csv</strong></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add a tag to the dataset corresponding to <code class="highlighter-rouge">copernicus</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="what-is-climate">What is climate?</h1>
+
+<p>According to <a href="https://en.wikipedia.org/wiki/Climate">wikipedia</a>, 
+Climate is defined as the average state of everyday’s weather condition <strong>over a period of 30 years</strong>. It is measured by assessing
+the patterns of variation in temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and
+other meteorological variables in a given region over a long period of time (usually 20 or 30 years).
+Climate differs from weather, in that weather only describes the short-term conditions of these variables in a given region.</p>
+
+<h2 id="climate-versus-weather">Climate versus Weather</h2>
+
+<p>Quantities that climate scientists are interested in are similar to those used to assess the weather (temperature, precipitation, etc.). 
+But there is a big difference between climate and weather: <strong>weather</strong> varies from hour to hour and from day to day whereas <strong>climate</strong> 
+is defined as the average of weather over several decades or longer.</p>
+
+<p>The figure below shows a woman walking her dog and we can use it to make an analogy to illustrate the difference between weather and climate. 
+if you focus your attention on the dog, you can see that it is all over the place, sometimes upwards, sometimes downwards: this can represent the weather and its 
+variability. The dog (weather) is not following a fully random pattern and varies around a main direction (trend) that is given by the woman: the woman is representing
+the climate and gives us an indication of where both the woman and dog are likely to be in the future.</p>
+
+<figure id="figure-1"><img src="../../images/weather_versus_climate.png" alt="Illustrate the difference between weather and climate" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Weather versus Climate</figcaption></figure>
+
+<p><em>Source: <a href="https://youtu.be/e0vj-0imOLw">Animated short introduction to statistics in climate research</a> from Norwegian infotainment program Siffer. Produced by TeddyTV for NRK. Animation by Ole Christoffer Haga</em></p>
+
+<p>You can also watch an animated illustration of the difference between climate and weather:</p>
+
+<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/e0vj-0imOLw" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>
+
+<h1 id="what-is-the-weather-like-in-paris">What is the weather like in Paris?</h1>
+
+<p>In order to answer this question, we are going to inspect and visualize the dataset <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code> using simple <span class="notranslate">galaxy</span> tools.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-daily-temperature-time-series"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Daily temperature time series</h3>
+  <blockquote class="tip">
+    <h3 id="comment-tip-search-for-the-tool"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: search for the tool</h3>
+
+    <p>Many different tools can be used to answer to the questions. Here we give you some guidelines to help you to choose.
+Use the <strong>tools search box</strong> at the top of the tool panel to find <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+  </blockquote>
+
+  <blockquote class="question">
+    <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>What was the average temperature in Paris on the 14th of July 2003?</li>
+      <li>What is the minimum and maximum temperatures in Paris?</li>
+      <li>On which date did the minimum temperature occured?</li>
+      <li>On which date did the maximum temperature occured?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>The average temperature in Paris on the 14th of July 2003 was 26.73 degrees Celcius. It can be found by using <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with parameter <strong>“the pattern”</strong> set to 2003-07-14.</li>
+        <li>The minimum temperature in Paris is -11.6799995 degrees celcius and the maximum temperature in Paris is 33.579998 degrees celcius. To find out, you can use <strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li>“Print all fields from input file”: <code class="highlighter-rouge">No</code></li>
+            <li>In <em>“Operation to perform on each group”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+                  <ul>
+                    <li><em>“Type”</em>: <code class="highlighter-rouge">minimum</code></li>
+                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                  </ul>
+                </li>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+                  <ul>
+                    <li><em>“Type”</em>: <code class="highlighter-rouge">maximum</code></li>
+                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>The minimum temperature (-11.6799995 degrees celcius) was observed on January 16 1985. 
+ You can use different <span class="notranslate">Galaxy</span> tools to find out the solution and here we show you how to use <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li>In <em>“Operation to perform on each group”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+                  <ul>
+                    <li><em>“Type”</em>: <code class="highlighter-rouge">minimum</code></li>
+                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <p>The maximum temperature (33.579998 degrees celcius) was observed on July 25 2019. For the <strong>maximum</strong>, repeat <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li>In <em>“Operation to perform on each group”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+                  <ul>
+                    <li><em>“Type”</em>: <code class="highlighter-rouge">maximum</code></li>
+                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="what-is-the-climate-in-paris">What is the climate in Paris?</h1>
+
+<p>To get some information about the (past and current) climate in Paris, we will first look at monthly averages.</p>
+
+<h2 id="seasonality">Seasonality</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-what-is-the-monthly-climatological-temperature-in-paris"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: What is the monthly climatological temperature in Paris?</h3>
+
+  <p>To answer to this question, we will compute the global average temperatures over the entire period 1950 and 2019 for each month (January, February, etc.). Indeed, 
+  this period of time is sufficiently long for computing monthly climatological temperature (more than 30 years).</p>
+  <blockquote class="question">
+    <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <ol>
+      <li>What is the warmest summer month e.g. between June, July and August (JJA) in Paris?</li>
+      <li>What is the coolest winter month e.g. between December, January and February (DJF) in Paris?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>The warmest summer month in Paris is July (19.921018171429 degrees celcius). However, it is interesting to remark that on our dataset we see very little difference in the mean temperature between July and August.</li>
+        <li>
+          <p>The coolest winter month in Paris is January (4.4669169722484 degrees celcius).</p>
+
+          <p>Below, we show you how we found these results.
+ We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day. Use <strong>Text reformatting with awk</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with parameters:</p>
+          <ul>
+            <li><strong>File to process</strong>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><strong>AWK Program</strong>: <code class="highlighter-rouge">gsub(/-/,"\t",$1){$1=$1} {print}</code></li>
+          </ul>
+
+          <p>Rename the resulting file to <code class="highlighter-rouge">split_dates_Paris.csv</code>.</p>
+
+          <p>Then use <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">split_dates_Paris.csv</code></li>
+            <li><em>“Group by fields”</em>: 2</li>
+            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
+            <li>“Print all fields from input file”: <code class="highlighter-rouge">No</code></li>
+            <li>In <em>“Operation to perform on each group”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+                  <ul>
+                    <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
+                    <li><em>“On column”</em>: <code class="highlighter-rouge">c4</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <p>Rename the resulting file to <code class="highlighter-rouge">climatology_Paris.csv</code>.
+ Then use again <strong>Datamash</strong> to get the month where the minimum and maximum temperatures are found:</p>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">climatology_Paris.csv</code></li>
+            <li><em>“Group by fields”</em>:</li>
+            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
+            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li>In <em>“Operation to perform on each group”</em>:
+     - <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+         - <em>“Type”</em>: <code class="highlighter-rouge">minimum</code>
+         - <em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+          </ul>
+
+          <p>Look at the resulting file and the first field will give you the month (07 e.g. July) where the maximum temperature is found.</p>
+
+          <p>For the <strong>maximum</strong>, repeat <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+          <ul>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">climatology_Paris.csv</code></li>
+            <li><em>“Group by fields”</em>: ``</li>
+            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
+            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li>In <em>“Operation to perform on each group”</em>:
+              <ul>
+                <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+                  <ul>
+                    <li><em>“Type”</em>: <code class="highlighter-rouge">maximum</code></li>
+                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <p>The result is in the first column of the resulting file which indicates <code class="highlighter-rouge">01</code> e.g. January.</p>
+
+          <p>Please note that you may use other <span class="notranslate">Galaxy</span> tools to reach the same results.
+Results can be slightly different when using different source of climate information. However, you will always observe the same pattern e.g. cool month in winter and warm month on summer. We can also clearly see that Paris has a mild climate with on average no extreme temperatures.</p>
+        </li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-using-existing-climatologies"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using existing climatologies</h3>
+
+  <p>In this tutorial, we compute manually the monthly climatological temperatures to explain you the algorithm used behing.
+However, many data providers have pre-computed climatologies and can be directly downloaded. For instance, on the <a href="https://cds.climate.copernicus.eu/cdsapp#!/search?type=dataset">CDS</a>, climatologies are provided for <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/ecv-for-climate-change?tab=overview">Essential climate variables for assessment of climate variability from 1979 to present</a>.</p>
+</blockquote>
+
+<h2 id="yearly-average">Yearly average</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-what-is-the-trend-coolingwarming-in-the-climate-for-paris-between-1950-and-2019"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: What is the trend (cooling/warming) in the climate for Paris between 1950 and 2019?</h3>
+
+  <p>To answer to this question, we will compute yearly mean of the temperature in Paris and visualize it.</p>
+
+  <ol>
+    <li>
+      <p>Use <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+     - <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">split_dates_Paris.csv</code>
+     - <em>“Group by fields”</em>: 1
+     - <em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code>
+     - <em>“Print header line”</em>: <code class="highlighter-rouge">No</code>
+     - “Print all fields from input file”: <code class="highlighter-rouge">No</code>
+     - <em>“Sort input”</em>: <code class="highlighter-rouge">Yes</code>
+     - In <em>“Operation to perform on each group”</em>:
+     - <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+       - <em>“Type”</em>: <code class="highlighter-rouge">Mean</code>
+       - <em>“On column”</em>: <code class="highlighter-rouge">c4</code></p>
+    </li>
+    <li>
+      <p>Rename the resulting file to <code class="highlighter-rouge">yearly_mean_Paris.csv</code>.</p>
+    </li>
+    <li>
+      <p>To make a plot, you can use <strong>Scatterplot w ggplot2</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+     - <em>“Input in tabular format”</em>: <code class="highlighter-rouge">yearly_mean_Paris.csv</code>
+     - <em>“Column to plot on x-axis”</em>: 1
+     - <em>“Column to plot on y-axis”</em>: 2
+     - <em>“Plot title”</em>: Yearly mean temperature in Paris from 1950 to 2019
+     - <em>“Label for x axis”</em>: Year (YYYY)
+     - <em>“Label for y axis”</em>: Temperature (degrees celcius)
+     - And finally in <code class="highlighter-rouge">Advanced Options</code> change <code class="highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</p>
+    </li>
+    <li>
+      <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
+    </li>
+  </ol>
+
+  <p><img src="../../images/yearly_mean_temperature_Paris.png" alt="Yearly mean temperature in Paris" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+    <p>Can we easily observe a trend?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>The plot clearly shows a slight increase in the yearly mean temperature between 1950 and 2019. Even though it looks no more than a few degrees celcius, it is
+quite significant.</p>
+
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="anomalies">Anomalies</h2>
+
+<p>In climate change studies, temperature <strong>anomalies</strong> are more important than <strong>absolute</strong> temperature. A temperature anomaly is the difference from an average, or baseline,
+temperature. The baseline temperature is typically computed by averaging 30 or more years of temperature data. A <em>positive anomaly</em> indicates the observed temperature was <em>warmer</em> than the baseline, while a <em>negative anomaly</em> indicates the observed temperature was <em>cooler</em> than the baseline.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-climate-stripes-for-paris"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Climate stripes for Paris</h3>
+  <p>Computing temperature anomalies is out of scope of this tutorial and we will therefore use pre-computed temperature anomalies <code class="highlighter-rouge">ts_cities.csv</code>.
+   A simple way to visualize anomalies and highlight cooling/warming over the years,  is to use <strong>climate stripes from timeseries</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“timeseries to plot”</em>: <code class="highlighter-rouge">ts_cities.csv</code></li>
+    <li><em>“column name to use for plotting”</em>: <code class="highlighter-rouge">tg_anomalies_paris</code></li>
+    <li><em>“plot title”</em>: <code class="highlighter-rouge">Climate stripes for Paris (1950-2019)</code></li>
+  </ul>
+
+  <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
+
+  <p><img src="../../images/climate_stripes_temperature_Paris.png" alt="Climate stripes in Paris" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-question-do-you-observe-a-warming-or-cooling-between-1950-and-2019"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: do you observe a warming or cooling between 1950 and 2019?</h3>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>The climate stripes clearly show a warming between 1950 and 2019.</p>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-copernicus-climate-bulletin"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Copernicus Climate Bulletin</h3>
+
+  <p><a href="https://climate.copernicus.eu/climate-bulletins">Copernicus Climate Bulletins</a> presents the current condition of the climate using key climate change indicators. 
+They also provide data, analysis of the maps and guidance on how they are produced. Datasets for temperature anomalies can be found and are 
+regularly updated (with recent dates). For instance, in March 2020, the corresponding dataset can be found <a href="https://climate.copernicus.eu/sites/default/files/2020-04/ts_1month_anomaly_Global_ea_2t_202003_v01.csv">here</a>.</p>
+
+</blockquote>
+
+<h1 id="climate-variables">Climate variables</h1>
+
+<p><em>Temperature</em> is often the first variable that comes to mind when we talk about climate. However, it is insufficient to fully characterize the climate, and scientists have agreed on a number of variables to systematically observe Earth`s changing climate.</p>
+
+<p>That is what we call <em>Essential Climate Variables</em>.</p>
+
+<h2 id="essential-climate-variables">Essential Climate Variables</h2>
+
+<p>The <a href="https://gcos.wmo.int/">Global Climate Observing System</a> (GCOS) and its GCOS expert panels maintain definitions of <a href="https://gcos.wmo.int/en/essential-climate-variables">Essential Climate Variables</a> (ECVs).</p>
+
+<p>GCOS is co-sponsored by the <a href="https://public.wmo.int/en">World Meteorological Organization</a> (WMO), the <a href="http://www.ioc-unesco.org/">Intergovernmental Oceanographic Commission of the United Nations Educational, Scientific and Cultural Organization</a> (IOC-UNESCO), the <a href="https://www.unenvironment.org/">United Nations Environment Programme</a> (UN Environment), and the <a href="https://council.science/">Inte<span class="notranslate">rna</span>tional Science Council</a> (ISC). It regularly assesses the status of global climate observations of the atmosphere, land and ocean and produces guidance for its improvement.</p>
+
+<p>At the moment, there are <a href="https://gcos.wmo.int/en/essential-climate-variables">54 ECVs</a>.</p>
+
+<p><em>Source: <a href="https://gcos.wmo.int/en/essential-climate-variables">https://gcos.wmo.int/en/essential-climate-variables</a></em></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-essential-climate-variables"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Essential Climate Variables</h3>
+
+  <p>We will look at the <a href="https://gcos.wmo.int/en/essential-climate-variables/surface-vapour/">Water Vapor Essential Climate Variable </a>: 
+<em>The humidity of air near the surface of the Earth affects the comfort and health of humans, livestock and wildlife, the swarming behaviour of insects and the occurrence of plant disease. The humidity of air near the surface affects evaporation and the strength of the hydrological and energy cycles. Evaporation from the surface of the earth is the source of water in the atmosphere and so is responsible for important feedbacks in the climate system due to clouds and radiation.</em></p>
+
+  <ol>
+    <li><strong>Copernicus Essential Climate Variables</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Variable(s)”</em>: surface_air_relative_humidity</li>
+        <li><em>“Select type of data”</em>: Monthly mean</li>
+        <li><em>“Select year(s)”</em>: <code class="highlighter-rouge">1980</code> and <code class="highlighter-rouge">2018</code></li>
+        <li><em>“Select month”</em>: <code class="highlighter-rouge">July</code>
+ Rename the resulting file to <code class="highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
+      </ul>
+    </li>
+    <li><strong>map plot gridded (lat/lon) netCDF data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“input with geographical coordinates (netCDF format)”</em>: <code class="highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
+        <li>*“variable name as given in the netCDF file”: <code class="highlighter-rouge">tp</code></li>
+        <li>And finally in <code class="highlighter-rouge">Advanced Options</code> change:
+          <ul>
+            <li><em>“multiple times”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“comma separated list of indexes for fields to plot”</em>: 0,1</li>
+            <li><em>“number of rows for subplot grid”</em>: 2</li>
+            <li><em>“subplot title (repeated on each subplot)”</em>: relative humidity in percentage</li>
+            <li><em>“colormap”</em>: PiYG</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</li>
+  </ol>
+
+  <p><img src="../../images/rh_ecv_july_1980_2018.png" alt="Relative humidity in July 1980 and July 2018" /></p>
+
+  <blockquote class="question">
+    <h3 id="question-relative-humidity"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Relative humidity</h3>
+
+    <ol>
+      <li>Do you observe any significant changes relative humidity in France from 1979 to 2018?</li>
+      <li>Do we have sufficient information to make any conclusions on the change in climate?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>We can see significant changes on the plot over France. The relative humidity of air near the surface of the Earth is lower in July 2018 than in July 1980.</li>
+        <li>We do not have sufficient information to draw any conclusions about the change in climate. In our analysis, we only used two different months (July 1980 and July 2018) and can only discuss the average changes in weather during these two periods (July 1980 and July 2018). We learnt that to draw any conclusions on the climate, we would need to make statistics over a long period of time e.g. we would need to download about 30 years of data and for instance compute anomalies in relative humidity to check if there is any trend. These aspects will be discussed further in other <span class="notranslate">Galaxy</span> tutorials.</li>
+      </ol>
+
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="past-present-and-future-climate">Past, present and future climate?</h2>
+
+<p>When we talk about climate data, the type of data can vary significantly. We have very little actual observations at the scale of climate and usually not covering a large area. In addition to observations, we can make use of:</p>
+<ul>
+  <li>Re-analyses where observations and numerical modelling are combined together.</li>
+  <li>Climate models.</li>
+</ul>
+
+<p>Observations and re-analyses provide information about the past and current climate while climate models can provide past, current and future climate information.
+When it comes to future climate, we usually need to make some assumptions (such as how much CO2 emissions, etc.) and simulate different scenarios e.g. we run climate models using different assumptions and look at future trends under each of these scenarios: this is what we call <strong>climate projections</strong>. Climate projections will be discussed in a separate <span class="notranslate">Galaxy</span> tutorial.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p class="no_toc">We have learnt to differentiate climate from weather and got an overview of the terminology used by climate scientists to identify the 
+various source of climate data.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Weather versus Climate</p>
+</li>
+                            
+                            <li><p>Essential Climate Variables</p>
+</li>
+                            
+                            <li><p>Observations, reanalysis, predictions and projections.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Anne Fouilloux, 2020 <b>Getting your hands-on climate data (Galaxy Training Materials)</b>. <a href="/training-material/topics/climate/tutorials/climate-101/tutorial.html">/training-material/topics/climate/tutorials/climate-101/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{climate-climate-101,
+    author = "Anne Fouilloux",
+    title = "Getting your hands-on climate data (Galaxy Training Materials)",
+    year = "2020",
+    month = "04",
+    day = "30"
+    url = "\url{/training-material/topics/climate/tutorials/climate-101/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="fa fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Getting your hands-on climate data (Climate)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="fa fa-comments-o" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Getting your hands-on climate data (Climate)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/climate/tutorials/climate-101/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
