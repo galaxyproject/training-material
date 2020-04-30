@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: true
 title: Getting your hands-on climate data
 zenodo_link: ''
 questions:
