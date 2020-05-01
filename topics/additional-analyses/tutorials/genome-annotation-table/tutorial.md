@@ -50,7 +50,7 @@ Once you have opened the genome annotation table in a spreadsheet. The annotatio
 > This is a snapshot in time and does not update when things are changed in Apollo. The annotation table can be generated again at any time.
 {: .tip}
 
-Using the annotation table as a temporary holding place for names and notes is fine as viewing these next to each other can be convenient. In a way it also doubles the amount of work in assigning functional predictions since the values have to manually entered into Apollo.
+Using the annotation table as a temporary holding place for names and notes is fine as viewing these next to each other can be convenient. In a way it also doubles the amount of work in assigning functional predictions since the values have to be manually entered into Apollo.
 
 The annotation table can also help you organize your thoughts, impressions, and notes relevant to consider when trying to decide on a final name. They are all right next to each other if opened in an excel-type spreadsheet. It also reduces all the clicking required to simply view notes for any feature in Apollo. 
 
