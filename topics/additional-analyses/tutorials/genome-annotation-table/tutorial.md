@@ -13,6 +13,8 @@ tutorial_name: generate-annotation-table
 >
 {: .agenda}
 
+This tutorial covers the generation of a table that can be saved and edited externally from the annotations of an organism in Apollo. It is primarily useful after gene calling is complete.
+
 # Generating the Genome Annotation Table
 
 First you will need to export sequence data and annotations of the desired phage from Apollo. Begin by running the [Retrieve Data from Apollo into Galaxy](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt2.webapollo.export) tool. Use the **Organism** drop-down menu to select the desired phage then click "Execute." 
