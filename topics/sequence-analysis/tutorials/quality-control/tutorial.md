@@ -686,7 +686,7 @@ After trimming, reverse reads will be shorter because of their quality and then 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. 44,164 bp (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
->    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
+>    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (322 when only the forward reads were analyzed).
 >    > {: .solution }
 >    {: .question}
 >
