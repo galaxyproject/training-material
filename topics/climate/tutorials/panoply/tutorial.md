@@ -87,7 +87,13 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 4. Add a tag to the dataset corresponding to `copernicus`
+> 4. Rename Datasets
+>
+>    As https://blablabla is not a beautiful name and can give error for some tools, it is a good practice to change dataset name by something more meaningfull, here removing `https://zenodo.org/record/3697454/files/` PATH as `.nc` extension for example.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 5. Add a tag to the dataset corresponding to `copernicus`
 >
 >    {% include snippets/add_tag.md %}
 >
