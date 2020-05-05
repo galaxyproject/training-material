@@ -89,7 +89,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 4. Rename Datasets
 >
->    As https://blablabla is not a beautiful name and can give error for some tools, it is a good practice to change dataset name by something more meaningfull, here removing `https://zenodo.org/record/3697454/files/` PATH as `.nc` extension for example.
+>    As https://zenodo.org/record/3697454/files/blablabla is not a beautiful name and can give error for some tools, it is a good practice to change dataset name by something more meaningfull, here removing `https://zenodo.org/record/3697454/files/` PATH for example to obtain `ecv_1979.nc` and `ecv_2018.nc` respectively.
 >
 >    {% include snippets/rename_dataset.md %}
 >
