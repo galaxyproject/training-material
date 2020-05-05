@@ -87,7 +87,13 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 4. Add a tag to the dataset corresponding to `copernicus`
+> 4. Rename Datasets
+>
+>    As "https://zenodo.org/record/3697454/files/ecv_1979.nc" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/3697454/files/` to obtain `ecv_1979.nc` and `ecv_2018.nc`, respectively.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 5. Add a tag to the dataset corresponding to `copernicus`
 >
 >    {% include snippets/add_tag.md %}
 >
