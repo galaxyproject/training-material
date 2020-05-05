@@ -102,7 +102,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
 > > ### {% icon tip %} Tip: Launch Panoply in Galaxy
-> > Currently Panoply in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu)
+> > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
 > > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
 > > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
