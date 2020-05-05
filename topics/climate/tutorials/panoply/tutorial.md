@@ -83,6 +83,8 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 3. Check that the datatype is **netcdf**
 >
+>    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 > 4. Add a tag to the dataset corresponding to `copernicus`
