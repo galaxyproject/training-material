@@ -83,6 +83,8 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 3. Check that the datatype is **netcdf**
 >
+>    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 > 4. Add a tag to the dataset corresponding to `copernicus`
@@ -100,7 +102,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
 > > ### {% icon tip %} Tip: Launch Panoply in Galaxy
-> > Currently Panoply in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu)
+> > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
 > > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
 > > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
