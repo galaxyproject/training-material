@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 topic_name: additional-analyses
 tutorial_name: advanced-lysis-genes
+title: "Advanced Lysis Gene Search"
 ---
 
 > ### Agenda
