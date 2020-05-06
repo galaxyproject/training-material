@@ -4,9 +4,6 @@ topic_name: additional-analyses
 tutorial_name: reopening-apollo-with-annotations
 ---
 
-
-# Reopening an Existing Apollo Record with Annotations
-
 > ### Agenda
 >>
 > 1. Import Apollo data into Galaxy
