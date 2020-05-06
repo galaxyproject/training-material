@@ -26,7 +26,7 @@ When you want to update annotations for a phage genome that has previously been 
 
 The NIH genetic sequence database, GenBank, is an open access collection of annotated, publicly available nucleotide sequences and protein translations. It is also one of of the largest repositories for phage genomes.
 
-1. Access [the NCBI website.](https://www.ncbi.nlm.nih.gov “NCBI Homepage”)
+1. Access [the NCBI website.](https://www.ncbi.nlm.nih.gov/)
 
 2. Using specific key words, search for your desired genome in the search box at the top of the page.
 
@@ -57,7 +57,7 @@ The NIH genetic sequence database, GenBank, is an open access collection of anno
 
 Now that the genome has been downloaded in the proper format, it is ready to be transferred to Apollo.
 
-1. Open [Galaxy](https://cpt.tamu.edu/galaxy-pub “Galaxy”) and log in.
+1. Open [Galaxy](https://cpt.tamu.edu/galaxy-pub) and log in.
 
 2. On the right side of the web page is the History column. Ensure that you are in the desired history, or create a new one.
 
@@ -105,5 +105,5 @@ You have successfully uploaded a genome into Galaxy. The next step is creating a
 
 Now you have successfully imported an annotated genome for editing into the Apollo interface.
 
-For guidance on tools and analysis that can be performed on this genome you’ve loaded into Apollo in the Galaxy interface, read [this tutorial.](https://galaxyproject.github.io/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html “Genome Annotation”) 
+For guidance on tools and analysis that can be performed on this genome you’ve loaded into Apollo in the Galaxy interface, read [this tutorial.](https://cpt.tamu.edu/training-material/topics/phage-annotation-pipeline/tutorials/annotation-in-apollo/tutorial.html) 
 
