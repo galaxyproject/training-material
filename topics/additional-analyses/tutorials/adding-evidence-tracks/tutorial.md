@@ -4,7 +4,7 @@ topic_name: additional-analyses
 tutorial_name: adding-evidence-tracks
 ---
 
-# Rationale
+# This tutorial is in progress. Check back later.
 
 While annotating a genome in Galaxy, it is possible that the annotation progress could be improved by the addition of a new evidence track that was not produced by the structural or functional workflows.
 
@@ -12,7 +12,9 @@ While annotating a genome in Galaxy, it is possible that the annotation progress
 >
 > In this tutorial, we will deal with:
 >
-> 1. TOC
+> 1. Introduction
+> 2. Custom Workflows
+> 3. Troubleshooting
 > {:toc}
 >
 {: .agenda}
