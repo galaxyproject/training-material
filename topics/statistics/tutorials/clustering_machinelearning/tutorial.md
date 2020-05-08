@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Clustering in Machine Learning'
-zenodo_link: https://zenodo.org/...
+zenodo_link: https://zenodo.org/record/3813447
 questions:
 - How to use clustering algorithms to categorized data in different clusters
 objectives:
@@ -151,10 +151,10 @@ Now we will apply hierarchical clustering to Iris data set, and learn to measure
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library
+> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/3813447/files/iris.csv) or from the data library
 >
 >    ```
->    https://zenodo.org/record/1319069/files/iris.csv
+>    https://zenodo.org/record/3813447/files/iris.csv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -382,7 +382,7 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
 >
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 >
-> 3. Rename to `k-means scatter plot`
+> 3. Rename to `DBSCAN scatter plot`
 
 
 >    ![data](images/dbscan_scatter.png "DBSCAN Clustering Scatter Plot")
@@ -406,7 +406,7 @@ the algorithm using intrinsic measures.
 
 # Appying the clustering algorithms on the other datasets
 
-You can do the same steps on the other data sets, moon and circles. First, import the data files  from [Zenodo]({{ page.zenodo_link }}) or a data library: `moon tabular` and `circles tabular`
+You can do the same steps on the other data sets, moon and circles. First, import the data files, [moon.csv](https://zenodo.org/record/3813447/files/moon.csv) and [circles.csv](https://zenodo.org/record/3813447/files/circles.csv) from Zenodo or data library and rename them to `moon` and `circles` respectively. 
 
 > ### {% icon hands_on %} Hands-on: Visualize scatter plot of data
 >
@@ -463,7 +463,7 @@ Then , you can visulaze the clustering result using the following steps:
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in simlar steps to moon and circles datasets. For the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
+In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in simlar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
 
 >    ![data](images/circles_clustering.png "Plot of Clustering Algorithms on Circles Data")
 
