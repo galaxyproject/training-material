@@ -13,7 +13,7 @@ objectives:
 - Apply clustering algorithms to different data sets
 - Learn how to visualize the results
 key_points:
-- Using clustering methods, category and cluster of the data are learned using hirarchical, k-means and DBSCAN
+- Using clustering methods, category and cluster of the data are learned using hierarchical, k-means and DBSCAN
 - For each clustering algorithm, number of clusters and the algorithm parameters should be optimised based on the dataset
 time_estimation: 2H
 contributors:
@@ -130,7 +130,7 @@ Let’s now see how dendrograms help in hierarchical clustering.
 
 At the bottom, we start with data points, each assigned to separate clusters. Two closest clusters are then merged till we have just one cluster at the top. The height in the dendrogram at which two clusters are merged represents the distance between two clusters in the data space.
 
-The decision of the number of clusters that can best depict different groups can be chosen by observing the dendrogram. The best choice of the nunmber of clusters is the nunmber of vertical lines in the dendrogram cut by a horizontal line that can transverse the maximum distance vertically without intersecting a cluster.
+The decision of the number of clusters that can best depict different groups can be chosen by observing the dendrogram. The best choice of the number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse the maximum distance vertically without intersecting a cluster.
 
 In the above example, the best choice of number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB.
 >    ![data](images/Hierarchical_clustering_2.png "Hierarchical Clustering")
@@ -228,7 +228,7 @@ If you view the result table, you can see the last column is the label for each 
 The resulting candidate clustering can be visualized using the Scatterplot w ggplot2 tool. Each sample is color-coded based on its clustering for that sample. 
 Let's visualize the clustering results to see how groups have been built.
 
-> ### {% icon hands_on %} Hands-on: Visualize hierarchical clutsreing result
+> ### {% icon hands_on %} Hands-on: Visualize hierarchical clustreing result
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **Hierarchical clustering**
@@ -286,7 +286,7 @@ The parameters that minimize the cost function are learned through an iterative 
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Visualize k-means clutsreing result
+> ### {% icon hands_on %} Hands-on: Visualize k-means clustering result
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **k-means clustering**
@@ -364,7 +364,7 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Visualize DBSCAN clutsreing result
+> ### {% icon hands_on %} Hands-on: Visualize DBSCAN clustering result
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **DBSCAN clustering**
@@ -404,7 +404,7 @@ the algorithm using intrinsic measures.
 > {: .solution}
 {: .question}
 
-# Appying the clustering algorithms on the other datasets
+# Applying the clustering algorithms on the other datasets
 
 You can do the same steps on the other data sets, moon and circles. First, import the data files, [moon.csv](https://zenodo.org/record/3813447/files/moon.csv) and [circles.csv](https://zenodo.org/record/3813447/files/circles.csv) from Zenodo or data library and rename them to `moon` and `circles` respectively. 
 
@@ -442,9 +442,9 @@ Now you can cluster these data using the introduced algorithms.
 {: .hands_on}
 
 
-Then , you can visulaze the clustering result using the following steps:
+Then , you can visualize the clustering result using the following steps:
 
-> ### {% icon hands_on %} Hands-on: Visualize hierarchical clutsreing result on circles data
+> ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result on circles data
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **circles hierarchical clustering**
@@ -463,7 +463,7 @@ Then , you can visulaze the clustering result using the following steps:
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in simlar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
+In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in similar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
 
 >    ![data](images/circles_clustering.png "Plot of Clustering Algorithms on Circles Data")
 
@@ -472,7 +472,7 @@ In the next steps, you can apply these three algorithms (hierarchical, k-means a
 
 # Conclusion
 
-In this tutorial, we discussed the clustering algorithms which is used to discover structure in unlabeled data. You learned about the hierarcial, k-means and DBSCAN algorithms. By following these steps, we learned how to perform clustering and visualize results using clustering and plotting tools respectively in Galaxy. There are many other clustering approaches which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. In using clustering algorithms, we need to take care of some important aspects like treating outliers in our data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.
+In this tutorial, we discussed the clustering algorithms which is used to discover structure in unlabeled data. You learned about the hierarchical, k-means and DBSCAN algorithms. By following these steps, we learned how to perform clustering and visualize results using clustering and plotting tools respectively in Galaxy. There are many other clustering approaches which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. In using clustering algorithms, we need to take care of some important aspects like treating outliers in our data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.
 
 
 
