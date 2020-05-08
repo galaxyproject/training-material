@@ -38,11 +38,12 @@ A second useful spanin tool is the [OSP candidates tool](https://cpt.tamu.edu/ga
 
 Finally, the [Find Spanin tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.spanin.findSpanin) can be run to narrow down the putative spanins lists to hopefully obtain more accurate candidate i-spanin and o-spanin pairs. To run this tool, use the FASTA output files from the ISP candidates and OSP candidates tools, select the preferred distance between each spanin gene, choose the strand, and click "Execute". Upon successful completion, the tool will output a file for each potential type of candidates (eg. overlap_results.txt) and  a basic summary statistics file (findSpanin_summary.txt).
 
+
 [Image of Spanin Tool output here]
 
 
 > ### {% icon tip %} Note:
-> Alternatively, you can import the [link worflow that chains all 3 together here]()to run all three tools together. 
+> Alternatively, you can import the workflow to run all three tools together. To do this, go to this [page](https://cpt.tamu.edu/galaxy/workflows/list_published) for a list of all the public and shared workflows developed at the CPT and search for the newest "Find Spanin" workflows.
 {: .tip}
 
 
@@ -61,14 +62,38 @@ Finally, the [Find Spanin tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu
 
 
 # Tools for Finding Holins
-Brief description of holin types.
+*Brief description of holin types.*
 
-Link to TMHMM tools (there are two, one makes graphs and the other the gff3 that usually goes to Apollo), and the search file tool (tell them to check the holin/antiholin boxes, search through the blast results and interpro results).
+The TMHMM tool is a functional prediction tool used to find transmembrane helices in proteins. Since holins are known to have at least two or more TMDs, this tool is helpful in accessing if a protein could be a possible holin. In Galaxy, their are two different TMHMM tools. One TMHMM tool found [here](https://cpt.tamu.edu/galaxy-pub/root?tool_id=geiger.tamu.edu/toolshed/repos/esr/cpt_external_programs/TMHMM/1.0.2) provides a graphical output.
+
+
+[image of graphical output here]
+
+
+While, the other TMHMM tool found [here](https://cpt.tamu.edu/galaxy-pub/root?tool_id=TMHMM_to_gff3) outputs GFF3 formated results which can then be exported to Apollo.
+
+Another useful tool to find holins is the [Search File Tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.proximity.searchFile). This tool can be used to search through blast or InterPro scan results. Just select the desired input file to search and check the holin/antiholin boxes before executing the search.
+
+
+[image of checked boxes]
+
 
 
 # Tools for Finding Endolysins
-Search file tool (tell them to check the endolysin boxes, search through the blast results and interpro results).
+*Breif description of endolysins?*
+
+The [Search File Tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.proximity.searchFile) can also be used here to search for endolysins in blast or InterPro scan results. This time make sure to select "endolysin" boxes before executing the search. 
+
+
+[image of checked boxes]
+
 
 
 # Tools for Checking the Proximity of Potential Lysis Genes
-Discuss cassettes, which doesn't apply to some larger phages. Leave space to describe prox to lysis concept. Link to AMH new tools. In reality this can be a Coming Soon section for now, since these tools aren't all finished.
+*Discuss cassettes, which doesn't apply to some larger phages.* 
+
+*Leave space to describe prox to lysis concept.* 
+
+> ### {% icon tip %} Note:
+> Tools for this section are currently being developed and will be coming soon!
+{: .tip}
