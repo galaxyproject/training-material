@@ -228,7 +228,7 @@ If you view the result table, you can see the last column is the label for each 
 The resulting candidate clustering can be visualized using the Scatterplot w ggplot2 tool. Each sample is color-coded based on its clustering for that sample. 
 Let's visualize the clustering results to see how groups have been built.
 
-> ### {% icon hands_on %} Hands-on: Visualize hierarchical clustreing result
+> ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result
 >
 > 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **Hierarchical clustering**
