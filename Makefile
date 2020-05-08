@@ -31,7 +31,7 @@ endif
 default: help
 
 install-conda: ## install Miniconda
-	curl $(MINICONDA_URL) -o miniconda.sh
+	curl -L $(MINICONDA_URL) -o miniconda.sh
 	bash miniconda.sh -b
 .PHONY: install-conda
 
