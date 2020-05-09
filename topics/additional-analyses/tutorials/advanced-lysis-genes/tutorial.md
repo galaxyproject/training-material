@@ -30,15 +30,19 @@ There are three tools one can use to help find spanins. The [ISP Candidates tool
 After this tool successfully runs it generates FASTA, gff3, and txt files consisting of potential i-spanins of your phage.
 
 
+
 A second useful spanin tool is the [OSP candidates tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.spanin.generate-putative-osp). Similar to the ISP Candidate tool, this tool constructs a putative list of potential o-spanin from an input genomic FASTA file. To run this tool, select the genomic FASTA file as input again and click "Execute." The default parameters for this tool should also not have to be changed.
 ![](../../images/advanced-lysis-genes-screenshots/2_OSP_tool.PNG)
 
 Successful completeion of the OSP candidates tool will generate FASTA, gff3, and txt files consisting of potential o-spanins of your phage.
 
+
+
 Finally, the [Find Spanin tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.spanin.findSpanin) can be run to narrow down the putative spanins lists to hopefully obtain more accurate candidate i-spanin and o-spanin pairs. To run this tool, use the FASTA output files from the ISP candidates and OSP candidates tools, select the preferred distance between each spanin gene, choose the strand, and click "Execute".
 ![](../../images/advanced-lysis-genes-screenshots/3_find_spanin_tool.PNG)
 
 Upon successful completion, the tool will output a file for each potential type of candidates (eg. overlap_results.txt) and  a basic summary statistics file (findSpanin_summary.txt).
+
 
 
 > ### {% icon tip %} Note:
@@ -63,13 +67,16 @@ Upon successful completion, the tool will output a file for each potential type 
 # Tools for Finding Holins
 *Brief description of holin types.*
 
-The TMHMM tool is a functional prediction tool used to find transmembrane helices in proteins. Since holins are known to have at least two or more TMDs, this tool is helpful in accessing if a protein could be a possible holin. In Galaxy, their are two different TMHMM tools. One TMHMM tool found [here](https://cpt.tamu.edu/galaxy-pub/root?tool_id=geiger.tamu.edu/toolshed/repos/esr/cpt_external_programs/TMHMM/1.0.2) provides a graphical output.
+The TMHMM tool is a functional prediction tool used to find transmembrane helices in proteins. Since holins are known to have at least two or more TMDs, this tool is helpful in accessing if a protein could be a possible holin. In Galaxy, their are two different TMHMM tools. One TMHMM tool found [here](https://cpt.tamu.edu/galaxy-pub/root?tool_id=geiger.tamu.edu/toolshed/repos/esr/cpt_external_programs/TMHMM/1.0.2) provides a graphical output. To run this tool, select the input FASTA file and change the parameters as shown below.
+![](../../images/advanced-lysis-genes-screenshots/4_TMHMM_graphic_tool.PNG)
+
+The HTML output will result in a graphical output depicted below
+![](../../images/advanced-lysis-genes-screenshots/5_TMHMM_graph_output.PNG)
 
 
-[image of graphical output here]
+The other TMHMM tool found [here](https://cpt.tamu.edu/galaxy-pub/root?tool_id=TMHMM_to_gff3) outputs GFF3 formated results which can then be exported to Apollo. 
+![](../../images/advanced-lysis-genes-screenshots/6_TMHMM_gff3_tool.PNG)
 
-
-While, the other TMHMM tool found [here](https://cpt.tamu.edu/galaxy-pub/root?tool_id=TMHMM_to_gff3) outputs GFF3 formated results which can then be exported to Apollo.
 
 Another useful tool to find holins is the [Search File Tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.proximity.searchFile). This tool can be used to search through blast or InterPro scan results. Just click "Insert Input File", choose the correct file format from the drop down menu, select the desired input file to search, and check the holin/antiholin boxes before executing the search.
 
@@ -79,7 +86,7 @@ Another useful tool to find holins is the [Search File Tool](https://cpt.tamu.ed
 # Tools for Finding Endolysins
 *Brief description of endolysins?*
 
-The [Search File Tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.proximity.searchFile) can also be used here to search for endolysins in blast or InterPro scan results. Run the tool as described in *Tools for Finding Holins* section, but this time make sure to select "endolysin" boxes before executing the search. 
+The [Search File Tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.proximity.searchFile) can also be used here to search for endolysins in blast or InterPro scan results. Run the tool as described in **Tools for Finding Holins** section, but this time make sure to select "endolysin" boxes before executing the search. 
 
 ![](../../images/advanced-lysis-genes-screenshots/endolysin-search.PNG)
 
