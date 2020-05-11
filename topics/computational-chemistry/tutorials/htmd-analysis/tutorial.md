@@ -442,7 +442,7 @@ is a measure of how much the protein conformation has changed between different 
 
 ![RMSD histogram Hsp90](../../images/htmd_analysis_rmsd1_histo.png "RMSD histogram for the Hsp90 Cα atoms")
 
-The RMSD time series for the protein shows a thermally stable and equilibrated structure that plateaus at 1.0{\AA} with an average RMSD between 0.8{\AA} and 1.0{\AA}. There are no large conformational changes during the simulation. The RMSD histogram confirms this. Note these graphs are automatically created by Galaxy as part of the tool's outputs.
+The RMSD time series for the protein shows a thermally stable and equilibrated structure that plateaus at 1.0Å with an average RMSD between 0.8Å and 1.0Å. There are no large conformational changes during the simulation. The RMSD histogram confirms this. Note these graphs are automatically created by Galaxy as part of the tool's outputs.
 
 
 ## RMSD analysis - ligand
@@ -463,7 +463,7 @@ For the RMSD analysis of the ligand, the `Select domains' parameter of the tool 
 >
 {: .hands_on}
 
-In our case the ligand is stable with a single binding mode. The RMSD fluctuates around 0.3{\AA}, with a slight fluctuation near the end of the simulation. This is more clearly seen in the histogram. The conformation seen during simulation is very similar to that in the crystal structure and the ligand is stable in the active site.
+In our case the ligand is stable with a single binding mode. The RMSD fluctuates around 0.3Å, with a slight fluctuation near the end of the simulation. This is more clearly seen in the histogram. The conformation seen during simulation is very similar to that in the crystal structure and the ligand is stable in the active site.
 
 ![RMSD timeseries Hsp90 ligand](../../images/htmd_analysis_rmsd2_series.png "RMSD timeseries for the Hsp90 Residue ID G5E (ligand)")
 
@@ -484,9 +484,9 @@ The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represent
 >
 {: .hands_on}
 
-![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF{\AA} vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.")
+![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSFÅ vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.")
 
-When considering the RMSF, fluctuations greater than 1.0{\AA} are of interest; for example see the fluctuations near residue positions 50, 110 and 160.  Inspecting the structure with molecular visualization software such as VMD, these can be seen to correspond to flexible loop regions on the protein surface. In addition, very large fluctuations are seen for the C-terminus; this is common and no investigation is needed.
+When considering the RMSF, fluctuations greater than 1.0Å are of interest; for example see the fluctuations near residue positions 50, 110 and 160.  Inspecting the structure with molecular visualization software such as VMD, these can be seen to correspond to flexible loop regions on the protein surface. In addition, very large fluctuations are seen for the C-terminus; this is common and no investigation is needed.
 
 Note that the first few residues of this protein are missing in the PDB, and therefore residue position 0 in the RMSF corresponds to position 17 in the Hsp90 FASTA primary sequence. This is a fairly common problem that can occur with molecular modeling of proteins, where there may be missing residues at the beginning or within the sequence.
 
@@ -557,63 +557,6 @@ Hydrogen bonding interactions contribute to binding and are worth investigating,
 
 The active site of this protein is quite hydrophobic, yet multiple hydrogen bonds were identified. The hydrogen bond between aspartate-93 and the ligand (as identified in the crystal structure) was found to be persistent, meeting the hydrogen bond criteria for 89.22% of the simulation. A hydrogen bond between the ligand and the carbonyl group of glycine-97 was found to have a 15.27% occupancy. Hydrogen bonding interactions with threonine-184, asparagine-51 and lysine-58 were also observed but these are not persistent and only present for a minority of the simulation. These values can be accessed from the 'Percentage occupancy of the H-bond' output of the hydrogen bond analysis tool.
 
-## Optional: Estimate the binding free energy
-
-We can estimate the binding free energy between a ligand and a receptor using Molecular Mechanics Poisson-Boltzman Surface Area (MMPBSA). For the simplest form of calculation, a Single Trajectory Estimate, a simulation of the complex in water is run, this was done with GROMACS previously. The trajectory of this complex is used to estimate the MMPBSA or MMGBSA depending on the options chosen. A General Born (GB) calculation is recommended here as it completes in reasonable time.
-
-### Converting parameters
-
-The binding free energy between a ligand and a receptor can be estimated using Molecular Mechanics Poisson-Boltzman or General Born Surface Area (MMPBSA or MMGBSA). For
-the simplest form of calculation, a Single Trajectory Estimate, a
-simulation of the complex in water is run. The trajectory of this complex is used to estimate the
-MMPBSA or MMGBSA depending on the options chosen. A General Born (GB)
-calculation is recommended here as it completes in reasonable time.
-
-The MMPBSA_MMGBSA tool supports the AMBER topology format only. To convert from GROMACS
-'.top' and '.gro' to AMBER topologies, use the 'Convert Parameters' tool which uses
-ParmEd {%cite Swails2016%} to carry out the conversion. The result will be four AMBER `.prmtop'
-files which are required for the binding free energy estimate
-calculation. Selections are provided to the tool in order to remove unneccesary molecules. For example, to create the ligand `.prmtop' output, the ligand selection `!:G5E` selects and removes all molecules that are not the ligand.
-
-> ### {% icon hands_on %} Hands-on: Convert parameter formats
->
-> 1. **Convert Parameters** {% icon tool %} with the following parameters:
->    - *"Force Field format"*: `GROMACS`
->        - {% icon param-file %} *"Input topology (top) file"*: `output` (Input dataset)
->        - {% icon param-file %} *"Input structure (gro) file"*: `output` (Input dataset)
->    - *"Ligand selection"*: `!:G5E`
->    - *"Receptor selection"*: `:NA,CL,SOL,G5E`
->    - *"Complex selection"*: `:NA,CL,SOL`
->
->    > ### {% icon comment %} Comment
->    > The example selection makes several assumptions. The ligand is named G5E, the solvent SOL and that the ions are NA and CL. These selection will depend on the system that was built.
->    >
->    {: .comment}
->
-
-## Binding free energy estimate
-
-
-> ### {% icon hands_on %} Hands-on: Free energy estimate
->
-> 1. **mmpbsa mmgbsa** {% icon tool %} with the following parameters:
->    - In *"Input"*:
->        - *"Single or Multiple Trajectories"*: `Single Trajectory Protocol (STP)`
->            - {% icon param-file %} *"AMBER prmtop input for Ligand"*: `output` (Input dataset)
->    - In *"General parameters"*:
->        - *"Final frame to analyse"*: `2000`
->        - *"interval between frames analysed"*: `5`
->        - *"quasi-harmonic entropy calculation"*: `Yes`
->        - *"Strip mask"*: `:NA:SOL:CL`
->    - In *"Details of calculation and parameters"*:
->        - *"General Born calculation"*: `yes`
->        - *"Poisson Boltzman calculation"*: `no`
->        - *"Decomposition Analysis"*: `yes`
->
-{: .hands_on}
-
-TODO
-An MMGBSA calculation using the single trajectory protocol yields a binding estimate of XXXX kcal/mol (YYYY kJ/mol) for this ligand. The negative value suggests the complex is thermodynamically stable, as we expect. Note that this value does not include the entropy contribution, but this is likely to be relatively small.
 
 # Optional: Automating high throughput calculations
 Up until this step, Galaxy tools have been applied sequentially to datasets. This is useful to gain an understanding of the steps involved, but becomes tedious if the workflow needs to be run on multiple protein-ligand systems. Fortunately, Galaxy allows entire workflows to be executed with a single mouse-click, enabling straightforward high-throughput analyses.
@@ -646,32 +589,32 @@ If you are able to write small scripts, you can automate everything you have lea
 > ### {% icon hands_on %} Hands-on: Bioblend script
 >
 >    ```
->    from bioblend import galaxy
->    
->    # Server and account details
->    API_KEY = 'YOUR USEGALAXY.EU API KEY'
->    gi = galaxy.GalaxyInstance(key=API_KEY,
->        url='https://usegalaxy.eu/')
->    
->    # ID for GROMACS workflow
->    workflow_id = 'adc6d049e9283789'
->    
->    # Dataset IDs for ligands to dock
->    ligands = {
->    # ligand_name: dataset ID,
->    'lig1': '11ac94870d0bb33a79c5fa18b0fd3b4c',
->    # ...
->    }
->    
->    # Loop over ligands, invoking workflow
->    for name, _id in ligands.items():
->        inv = gi.workflows.invoke_workflow(
->            workflow_id,
->            inputs={
->                '1': {'src': 'hda', 'id': _id}
->            },
->            history_name=f'HTMD run on {name}'
->        )
+>from bioblend import galaxy
+>
+># Server and account details
+>API_KEY = 'YOUR USEGALAXY.EU API KEY'
+>gi = galaxy.GalaxyInstance(key=API_KEY,
+>    url='https://usegalaxy.eu/')
+>
+># ID for GROMACS workflow
+>workflow_id = 'adc6d049e9283789'
+>
+># Dataset IDs for ligands to dock
+>ligands = {
+># ligand_name: dataset ID,
+>'lig1': '11ac94870d0bb33a79c5fa18b0fd3b4c',
+># ...
+>}
+>
+># Loop over ligands, invoking workflow
+>for name, _id in ligands.items():
+>    inv = gi.workflows.invoke_workflow(
+>        workflow_id,
+>        inputs={
+>            '1': {'src': 'hda', 'id': _id}
+>        },
+>        history_name=f'HTMD run on {name}'
+>    )
 >    ```
 >
 {: .hands_on}
