@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: additional-analyses
-tutorial_name: generate-annotation-table
+tutorial_name: genome-annotation-table
 title: "Generating the Genome Annotation Table"
 ---
 
