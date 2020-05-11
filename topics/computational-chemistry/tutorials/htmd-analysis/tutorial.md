@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: High Throughput Molecular Dynamics and Analysis
 level: Advanced
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/badge/latestdoi/260474701'
 questions:
 - How are protein-ligand systems parameterized for molecular dynamics simulation?
 - What kind of analysis can be carried out on molecular trajectories?
@@ -380,15 +380,13 @@ We can now remove the restraints and continue with the production simulation. Th
 
 # Analysis
 
-An analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using Galaxy tools developed for computational chemistry~\cite{senapathi_biomolecular_2019} based on popular analysis software, such as MDAnalysis~\cite{michaudagrawal_mdanalysis_2011}, MDTraj~\cite{mcgibbon_mdtraj_2015}, and  Bio3D~\cite{skjaerven_integrating_2014}. These tools output both tabular files as well as a variety of attractive plots.
-
-![Analysis workflow for Hsp90 with ligand](../../images/workflow_htmd_analysis.png "Analysis workflow for Hsp90 with a ligand")
+An analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using Galaxy tools developed for computational chemistry {% cite senapathi_biomolecular_2019 %} based on popular analysis software, such as MDAnalysis {% cite michaudagrawal_mdanalysis_2011 %}, MDTraj {% cite mcgibbon_mdtraj_2015 %}, and  Bio3D {% cite skjaerven_integrating_2014 %}. These tools output both tabular files as well as a variety of attractive plots.
 
 ## Create PDB file needed by most analysis tools
 
 Before beginning a detailed analysis, the structure and trajectory files generated previously need to be converted into different formats. First, convert the structural coordinates of the system in GRO format into PDB format. This PDB file will be used by most analysis tools as a starting structure.  Next, convert the trajectory from XTC to DCD format, as a number of tools (particularly those based on Bio3D) only accept trajectories in DCD format.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Convert coordinate format
 >
 > 1. **GROMACS structure configuration** {% icon tool %} with the following parameters:
 >    - *"Output format"*: `PDB file`
@@ -406,11 +404,11 @@ Before beginning a detailed analysis, the structure and trajectory files generat
 
 Convert from XTC to DCD format. A number of the analysis tools being used have been built to analyse trajectories in CHARMM's DCD format.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Convert trajectory format
 >
 > 1. **MDTraj file converter** {% icon tool %} with the following parameters:
 >    - *"Output format"*: `DCD file`
->    >
+>
 >    > ### {% icon comment %} Comment
 >    >
 >    > This tool can also be used to interconvert between several trajectory formats.
@@ -428,7 +426,7 @@ RMSD of the C$\alpha$ atoms of the protein backbone is calculated here and
 is a measure of how much the protein conformation has changed between different time points in the trajectory.
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: RMSD Analysis
 >
 > 1. **RMSD Analysis** {% icon tool %} with the following parameters:
 >    - *"Select domains"*: `C-alpha`
@@ -444,17 +442,17 @@ is a measure of how much the protein conformation has changed between different 
 
 ![RMSD histogram Hsp90](../../images/htmd_analysis_rmsd1_histo.png "RMSD histogram for the Hsp90 Cα atoms")
 
-The RMSD time series for the protein shows a thermally stable and equilibrated structure that plateaus at 1.0{\AA} with an average RMSD between 0.8{\AA} and 1.0{\AA}. There are no large conformational changes during the simulation. The RMSD histogram confirms this, see Figure \ref{fig:rmsdprotein}. Note these graphs are automatically created by Galaxy as part of the tool's outputs.
+The RMSD time series for the protein shows a thermally stable and equilibrated structure that plateaus at 1.0{\AA} with an average RMSD between 0.8{\AA} and 1.0{\AA}. There are no large conformational changes during the simulation. The RMSD histogram confirms this. Note these graphs are automatically created by Galaxy as part of the tool's outputs.
 
 
 ## RMSD analysis - ligand
 
 Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identify possible binding modes. If the ligand is not stable, there will be large fluctuations in the RMSD.
 
-For the RMSD analysis of the ligand, the `Select domains' parameter of the tool can for convenience be set to `Ligand'; however, this automatic selection sometimes fails. The other alternative, which we apply here, is to specify the `Residue ID' in the textbox provided. In this example the ligand's Residue ID is `G5E'. The output is the requested RMSD data as a time series, the RMSD plotted as a time series and as a histogram (for example, see Figure \ref{fig:rmsdprotein} in the results section).
+For the RMSD analysis of the ligand, the `Select domains' parameter of the tool can for convenience be set to `Ligand'; however, this automatic selection sometimes fails. The other alternative, which we apply here, is to specify the `Residue ID' in the textbox provided. In this example the ligand's Residue ID is `G5E'. The output is the requested RMSD data as a time series, the RMSD plotted as a time series and as a histogram.
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: RMSD analysis
 >
 > 1. **RMSD Analysis** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
@@ -465,20 +463,18 @@ For the RMSD analysis of the ligand, the `Select domains' parameter of the tool 
 >
 {: .hands_on}
 
-In our case the ligand is stable with a single binding mode. The RMSD fluctuates around 0.3{\AA}, with a slight fluctuation near the end of the simulation. This is more clearly seen in the histogram, see Figure \ref{fig:rmsdligand}. The conformation seen during simulation is very similar to that in the crystal structure and the ligand is stable in the active site.
+In our case the ligand is stable with a single binding mode. The RMSD fluctuates around 0.3{\AA}, with a slight fluctuation near the end of the simulation. This is more clearly seen in the histogram. The conformation seen during simulation is very similar to that in the crystal structure and the ligand is stable in the active site.
 
 ![RMSD timeseries Hsp90 ligand](../../images/htmd_analysis_rmsd2_series.png "RMSD timeseries for the Hsp90 Residue ID G5E (ligand)")
 
 ![RMSD histogram Hsp90 ligand](../../images/htmd_analysis_rmsd2_histo.png "RMSD histogram for the Hsp90 Residue ID G5E (ligand)")
 
-![Hsp90 ligand binding poses](../../images/htmd_analysis_bindingposes.png "Two binding poses seen for this ligand")
-
 
 ## RMSF analysis
 
-The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The C$\alpha$ of the protein, designated by \texttt{C-alpha}, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M\"{o}ssbauer spectroscopy~\cite{berjanskii_nmr_2006,kuzmanic_determination_2010}. The output from the tools is the requested RMSF data and the RMSF plotted as a time series (for example, see Figure \ref{fig:rmsf} in the results section).
+The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The C\alpha of the protein, designated by `C-alpha`, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M\"{o}ssbauer spectroscopy {% cite berjanskii_nmr_2006,kuzmanic_determination_2010 %}. The output from the tools is the requested RMSF data and the RMSF plotted as a time series.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: RMSF analysis
 >
 > 1. **RMSF Analysis** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
@@ -488,12 +484,12 @@ The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represent
 >
 {: .hands_on}
 
+![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF{\AA} vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.")
 
-When considering the RMSF (Figure \ref{fig:rmsf}), fluctuations greater than 1.0{\AA} are of interest; for example see the fluctuations near residue positions 50, 110 and 160.  Inspecting the structure with molecular visualization software such as VMD, these can be seen to correspond to flexible loop regions on the protein surface. In addition, very large fluctuations are seen for the C-terminus; this is common and no investigation is needed.
+When considering the RMSF, fluctuations greater than 1.0{\AA} are of interest; for example see the fluctuations near residue positions 50, 110 and 160.  Inspecting the structure with molecular visualization software such as VMD, these can be seen to correspond to flexible loop regions on the protein surface. In addition, very large fluctuations are seen for the C-terminus; this is common and no investigation is needed.
 
 Note that the first few residues of this protein are missing in the PDB, and therefore residue position 0 in the RMSF corresponds to position 17 in the Hsp90 FASTA primary sequence. This is a fairly common problem that can occur with molecular modeling of proteins, where there may be missing residues at the beginning or within the sequence.
 
-![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF for Hsp90")
 
 
 ## PCA analysis
@@ -501,10 +497,10 @@ Note that the first few residues of this protein are missing in the PDB, and the
 Principal component analysis (PCA) converts a set of correlated
 observations (movement of selected atoms in protein) to a set of principal
 components (PCs) which are linearly independent (or uncorrelated). Here several related tools are used.
-The PCA tool calculates the PCA in order to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory. The C$\alpha$ carbons of the protein backbone are again a good selection for this purpose.  Outputs include the PCA raw data and figures of the relevant principal components (PCs) as well as an eigenvalue rank plot (see Figure \ref{fig:pca}) which is used to visualize the proportion of variance due to each principal component (remembering that the PCs are ranked eigenvectors based on the variance).
-Having discovered the principal components usually these are visualized. The PCA visualization tool will create trajectories of specific principal components which can be viewed in a molecular viewer such as VMD~\cite{hump_vmd_1996} or NGL viewer~\cite{Rose2018ngl}. We also consider the PCA cosine content which when close to 1 indicates that the simulation is not converged and a longer simulation is needed. For values below 0.7, no statement can be made about convergence or lack thereof.
+The PCA tool calculates the PCA in order to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory. The C$\alpha$ carbons of the protein backbone are again a good selection for this purpose.  Outputs include the PCA raw data and figures of the relevant principal components (PCs) as well as an eigenvalue rank plot which is used to visualize the proportion of variance due to each principal component (remembering that the PCs are ranked eigenvectors based on the variance).
+Having discovered the principal components usually these are visualized. The PCA visualization tool will create trajectories of specific principal components which can be viewed in a molecular viewer such as VMD {% cite hump_vmd_1996 %} or NGL viewer {% cite Rose2018ngl %}. We also consider the PCA cosine content which when close to 1 indicates that the simulation is not converged and a longer simulation is needed. For values below 0.7, no statement can be made about convergence or lack thereof.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: PCA
 >
 > 1. **PCA** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
@@ -514,15 +510,13 @@ Having discovered the principal components usually these are visualized. The PCA
 >
 {: .hands_on}
 
-The first three principal components are responsible for 32.8\% of the total variance, as seen in the eigenvalue rank plot (Figure \ref{fig:pca}). The first principal component (PC1) accounts for 15.4\% of the variance (see PC1 vs PC2 and eigenvalue rank plots in Figure \ref{fig:pca}). Visualization of PC1 using VMD shows a rocking motion and wagging of the C-terminus.
 
-![PCA Hsp90](../../images/htmd_analysis_pca.png "PCA for Hsp90")
+![PCA Hsp90](../../images/htmd_analysis_pca.png "PCA results which include graphs of PC2 vs PC1, PC2 vs PC3, PC3 vs PC1  colored from blue to red in order of time, and an eigenvalue rank plot. In the eigenvalue plot the cumulative variance is labeled for each data point.")
 
-
-![PC1 RMSF Hsp90](../../images/htmd_analysis_pc1_rmsf.png "PC1 vs RMSF for Hsp90")
+The first three principal components are responsible for 32.8% of the total variance, as seen in the eigenvalue rank plot. The first principal component (PC1) accounts for 15.4% of the variance (see PC1 vs PC2 and eigenvalue rank plots). Visualization of PC1 using VMD shows a rocking motion and wagging of the C-terminus.
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: PCA cosine content calculation
 >
 > 1. **Cosine Content** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
@@ -534,7 +528,7 @@ The first three principal components are responsible for 32.8\% of the total var
 
 The PCA cosine content of the dominant motion related to PC1 is 0.93, indicating that the simulation is not fully converged. This is expected due to the short simulation length. For production level simulations, it is the norm to extend simulations to hundreds of nanoseconds in length, if not microseconds. As this tutorial is designed to be carried out on public webservers, we limit simulations to 1 ns, as we cannot provide a large amount of computational resources for training purposes.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: PCA visualisation
 >
 > 1. **PCA visualization** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"DCD trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
@@ -550,7 +544,7 @@ The PCA cosine content of the dominant motion related to PC1 is 0.93, indicating
 
 Hydrogen bonding interactions contribute to binding and are worth investigating, in particular persistent hydrogen bonds. All possible hydrogen bonding interactions between the two selected regions, here the protein and the ligand, are investigated over time using the VMD hydrogen bond analysis tool included in Galaxy. Hydrogen bonds are identified and in the output the total number of hydrogen bonds and  occupancy over time is returned.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Hydrogen bond analysis
 >
 > 1. **Hydrogen Bond Analysis using VMD** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"DCD/XTC trajectory input"*: `output` (output of **MDTraj file converter** {% icon tool %})
@@ -561,7 +555,7 @@ Hydrogen bonding interactions contribute to binding and are worth investigating,
 >
 {: .hands_on}
 
-The active site of this protein is quite hydrophobic, yet multiple hydrogen bonds were identified. The hydrogen bond between aspartate-93 and the ligand (as identified in the crystal structure) was found to be persistent, meeting the hydrogen bond criteria for 89.22\% of the simulation. A hydrogen bond between the ligand and the carbonyl group of glycine-97 was found to have a 15.27\% occupancy. Hydrogen bonding interactions with threonine-184, asparagine-51 and lysine-58 were also observed but these are not persistent and only present for a minority of the simulation. These values can be accessed from the 'Percentage occupancy of the H-bond' output of the hydrogen bond analysis tool.
+The active site of this protein is quite hydrophobic, yet multiple hydrogen bonds were identified. The hydrogen bond between aspartate-93 and the ligand (as identified in the crystal structure) was found to be persistent, meeting the hydrogen bond criteria for 89.22% of the simulation. A hydrogen bond between the ligand and the carbonyl group of glycine-97 was found to have a 15.27% occupancy. Hydrogen bonding interactions with threonine-184, asparagine-51 and lysine-58 were also observed but these are not persistent and only present for a minority of the simulation. These values can be accessed from the 'Percentage occupancy of the H-bond' output of the hydrogen bond analysis tool.
 
 ## Optional: Estimate the binding free energy
 
@@ -576,12 +570,12 @@ MMPBSA or MMGBSA depending on the options chosen. A General Born (GB)
 calculation is recommended here as it completes in reasonable time.
 
 The MMPBSA_MMGBSA tool supports the AMBER topology format only. To convert from GROMACS
-'.top' and '.gro' to AMBER topologies, use the `Convert Parameters' tool which uses
-ParmEd\cite{Swails2016} to carry out the conversion. The result will be four AMBER `.prmtop'
+'.top' and '.gro' to AMBER topologies, use the 'Convert Parameters' tool which uses
+ParmEd {%cite Swails2016%} to carry out the conversion. The result will be four AMBER `.prmtop'
 files which are required for the binding free energy estimate
-calculation. Selections are provided to the tool in order to remove unneccesary molecules. For example, to create the ligand `.prmtop' output, the ligand selection \texttt{!:G5E} selects and removes all molecules that are not the ligand.
+calculation. Selections are provided to the tool in order to remove unneccesary molecules. For example, to create the ligand `.prmtop' output, the ligand selection `!:G5E` selects and removes all molecules that are not the ligand.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Convert parameter formats
 >
 > 1. **Convert Parameters** {% icon tool %} with the following parameters:
 >    - *"Force Field format"*: `GROMACS`
@@ -590,10 +584,6 @@ calculation. Selections are provided to the tool in order to remove unneccesary 
 >    - *"Ligand selection"*: `!:G5E`
 >    - *"Receptor selection"*: `:NA,CL,SOL,G5E`
 >    - *"Complex selection"*: `:NA,CL,SOL`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    > The example selection makes several assumptions. The ligand is named G5E, the solvent SOL and that the ions are NA and CL. These selection will depend on the system that was built.
@@ -604,7 +594,7 @@ calculation. Selections are provided to the tool in order to remove unneccesary 
 ## Binding free energy estimate
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Free energy estimate
 >
 > 1. **mmpbsa mmgbsa** {% icon tool %} with the following parameters:
 >    - In *"Input"*:
@@ -620,15 +610,6 @@ calculation. Selections are provided to the tool in order to remove unneccesary 
 >        - *"Poisson Boltzman calculation"*: `no`
 >        - *"Decomposition Analysis"*: `yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 TODO
@@ -639,87 +620,61 @@ Up until this step, Galaxy tools have been applied sequentially to datasets. Thi
 
 We will demonstrate the high-throughput capabilities of Galaxy by running the workflow detailed so far on a further three ligands.
 
-
-<!-- \begin{tcolorbox}
-\textbf{High-throughput MD}
-%\textbf{Hands-on: Data upload}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Create a new history for running the high-throughput workflow and name it `Hsp90 HTMD simulation'
-
-\item
-  Upload the SD-file containing the new ligand structures from Zenodo (LINK...) and rename it `Ligands (SDF)'
-\item
-  Import the simulation workflow from the European~\cite{eu_htmd_simulation_workflow} or the South African Galaxy server~\cite{za_htmd_simulation_workflow}.
-\item
-  Run the imported workflow with the following parameters:
-
-  \begin{itemize}
-  \tightlist
-  \item
-    \emph{``SDF file with (docked) ligands''}: `Ligands (SDF)' file.
-  \end{itemize}
-\item
-  Import the analysis workflow from the European~\cite{eu_htmd_analysis_workflow} or the South African Galaxy server~\cite{za_htmd_analysis_workflow} (also available through Zenodo).
-\item
-  Run the imported workflow with the following parameters:
-  \begin{itemize}
-  \tightlist
-  \item
-    \emph{``Send results to a new history''}: `Yes'
-  \item
-    \emph{``History name''}: `Hsp90 HTMD analysis'
-  \item
-    \emph{``GRO input''}: Collection of GRO files produced by simulation workflow
-  \item
-    \emph{``XTC input''}: Collection of XTC files produced by simulation workflow
-  \end{itemize}
-\end{enumerate}
-\end{tcolorbox} -->
-
-This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's collection~\cite{gtn_collections} feature to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
-
-Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina~\cite{Trott2009} or rDock~\cite{Ruiz2014}; tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided~\cite{eu_6hhr}.
+> ### {% icon hands_on %} Hands-on: High-throughput MD
+>
+> 1. Create a new history for running the high-throughput workflow and name it `Hsp90 HTMD simulation'
+> 2. Upload the SD-file containing the new ligand structures from Zenodo  and rename it `Ligands (SDF)'
+> 3. Import the simulation workflow from the European {%cite eu_htmd_simulation_workflow %} or the South African Galaxy server {%cite  za_htmd_simulation_workflow %}.
+> 4. Run the imported workflow with the following parameters:
+>    - *"Send results to a new history"*: `'Yes'
+>    - *"History name results to a new history"*: `'Hsp90 HTMD analysis'
+>    - *"GRO input"*: `'Collection of GRO files produced by simulation workflow'
+>    - *"XTC input"*: `'Collection of XTC files produced by simulation workflow'
+>
+{: .hands_on}
 
 
-Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting histories to workflows~\cite{gtn_toworkflow}, using multiple histories~\cite{gtn_multiple}, and the Galaxy Application Programming Interface (API)~\cite{gtn_api}. For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
+This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's collection {% cite gtn_collections %} feature to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
 
-If you are able to write small scripts, you can automate everything you have learned here with the Galaxy API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend~\cite{sloggett_bioblend}. An example Python script, which uses BioBlend to run the GROMACS simulation workflow for each of a list of ligands, is given in the hands-on box below.
+Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina {% cite Trott2009 %} or rDock {% cite Ruiz2014 %}; tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided {% cite eu_6hhr %}.
 
-<!-- \begin{tcolorbox}
-\textbf{BioBlend script}
-\begin{minted}[linenos=false, breaklines, breakafter=d, fontsize=\small]{python}
-from bioblend import galaxy
 
-# Server and account details
-API_KEY = 'YOUR USEGALAXY.EU API KEY'
-gi = galaxy.GalaxyInstance(key=API_KEY,
-    url='https://usegalaxy.eu/')
+Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting histories to workflows {% cite gtn_toworkflow %}, using multiple histories {% cite gtn_multiple %}, and the Galaxy Application Programming Interface (API) {% cite gtn_api %}. For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
 
-# ID for GROMACS workflow
-workflow_id = 'adc6d049e9283789'
+If you are able to write small scripts, you can automate everything you have learned here with the Galaxy API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend {% cite sloggett_bioblend %}. An example Python script, which uses BioBlend to run the GROMACS simulation workflow for each of a list of ligands, is given in the hands-on box below.
 
-# Dataset IDs for ligands to dock
-ligands = {
-# ligand_name: dataset ID,
-'lig1': '11ac94870d0bb33a79c5fa18b0fd3b4c',
-# ...
-}
-
-# Loop over ligands, invoking workflow
-for name, _id in ligands.items():
-    inv = gi.workflows.invoke_workflow(
-        workflow_id,
-        inputs={
-            '1': {'src': 'hda', 'id': _id}
-        },
-        history_name=f'HTMD run on {name}'
-    )
-\end{minted}
-\end{tcolorbox} -->
+> ### {% icon hands_on %} Hands-on: Bioblend script
+>
+>    ```
+>    from bioblend import galaxy
+>    
+>    # Server and account details
+>    API_KEY = 'YOUR USEGALAXY.EU API KEY'
+>    gi = galaxy.GalaxyInstance(key=API_KEY,
+>        url='https://usegalaxy.eu/')
+>    
+>    # ID for GROMACS workflow
+>    workflow_id = 'adc6d049e9283789'
+>    
+>    # Dataset IDs for ligands to dock
+>    ligands = {
+>    # ligand_name: dataset ID,
+>    'lig1': '11ac94870d0bb33a79c5fa18b0fd3b4c',
+>    # ...
+>    }
+>    
+>    # Loop over ligands, invoking workflow
+>    for name, _id in ligands.items():
+>        inv = gi.workflows.invoke_workflow(
+>            workflow_id,
+>            inputs={
+>                '1': {'src': 'hda', 'id': _id}
+>            },
+>            history_name=f'HTMD run on {name}'
+>        )
+>    ```
+>
+{: .hands_on}
 
 
 # Conclusion
