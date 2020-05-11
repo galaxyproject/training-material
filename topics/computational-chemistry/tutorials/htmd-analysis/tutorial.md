@@ -254,7 +254,7 @@ After the solvation step, parameterization of the system is complete and prepara
 
 The EM tolerance here refers to the maximum force which will be allowed in a minimized system. The simulation will be terminated when the maximum force is less than this value, or when 50000 steps have elapsed.
 
-As an aside, we can use the `Extract energy components' tool to plot the convergence of the potential energy during the minimization.
+As an aside, we can use the `Extract energy components` tool to plot the convergence of the potential energy during the minimization.
 
 > ### {% icon hands_on %} Hands-on: Checking EM convergence
 >
@@ -380,7 +380,8 @@ We can now remove the restraints and continue with the production simulation. Th
 
 # Analysis
 
-An analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using Galaxy tools developed for computational chemistry {% cite senapathi_biomolecular_2019 %} based on popular analysis software, such as MDAnalysis {% cite michaudagrawal_mdanalysis_2011 %}, MDTraj {% cite mcgibbon_mdtraj_2015 %}, and  Bio3D {% cite skjaerven_integrating_2014 %}. These tools output both tabular files as well as a variety of attractive plots.
+After the completion of the simulation, the following questions arise: 1) is the simulation converged enough, and 2) what interesting molecular properties are observed. To answer these questions, an analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using Galaxy tools developed for computational chemistry ({% cite senapathi_biomolecular_2019 %}) based on popular analysis software, such as MDAnalysis ({% cite michaudagrawal_mdanalysis_2011 %}), MDTraj ({% cite mcgibbon_mdtraj_2015 %}), and  Bio3D ({% cite skjaerven_integrating_2014 %}). These tools output both tabular files as well as a variety of attractive plots.
+
 
 ## Create PDB file needed by most analysis tools
 
@@ -422,7 +423,7 @@ Convert from XTC to DCD format. A number of the analysis tools being used have b
 The Root Mean Square Deviation (RMSD) and Root Mean Square Fluctuation (RMSF) are calculated to check the stability and conformation of the protein and ligand through the course of the simulation.
 RMSD is a standard measure of structural distance between coordinate
 sets that measures the average distance between a group of atoms. The
-RMSD of the C$\alpha$ atoms of the protein backbone is calculated here and
+RMSD of the Cα atoms of the protein backbone is calculated here and
 is a measure of how much the protein conformation has changed between different time points in the trajectory.
 
 
@@ -449,7 +450,7 @@ The RMSD time series for the protein shows a thermally stable and equilibrated s
 
 Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identify possible binding modes. If the ligand is not stable, there will be large fluctuations in the RMSD.
 
-For the RMSD analysis of the ligand, the `Select domains' parameter of the tool can for convenience be set to `Ligand'; however, this automatic selection sometimes fails. The other alternative, which we apply here, is to specify the `Residue ID' in the textbox provided. In this example the ligand's Residue ID is `G5E'. The output is the requested RMSD data as a time series, the RMSD plotted as a time series and as a histogram.
+For the RMSD analysis of the ligand, the `Select domains` parameter of the tool can for convenience be set to `Ligand`; however, this automatic selection sometimes fails. The other alternative, which we apply here, is to specify the `Residue ID` in the textbox provided. In this example the ligand's Residue ID is `G5E`. The output is the requested RMSD data as a time series, the RMSD plotted as a time series and as a histogram.
 
 
 > ### {% icon hands_on %} Hands-on: RMSD analysis
@@ -472,7 +473,7 @@ In our case the ligand is stable with a single binding mode. The RMSD fluctuates
 
 ## RMSF analysis
 
-The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The C\alpha of the protein, designated by `C-alpha`, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M\"{o}ssbauer spectroscopy {% cite berjanskii_nmr_2006,kuzmanic_determination_2010 %}. The output from the tools is the requested RMSF data and the RMSF plotted as a time series.
+The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by `C-alpha`, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M\"{o}ssbauer spectroscopy ({% cite berjanskii_nmr_2006,kuzmanic_determination_2010 %}). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.
 
 > ### {% icon hands_on %} Hands-on: RMSF analysis
 >
@@ -484,7 +485,7 @@ The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represent
 >
 {: .hands_on}
 
-![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSFÅ vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.")
+![RMSF Hsp90](../../images/htmd_analysis_rmsf.png "RMSF(Å) vs the residue position. Large fluctuations occur at various positions, which correspond to flexible loop regions on the surface of the protein.")
 
 When considering the RMSF, fluctuations greater than 1.0Å are of interest; for example see the fluctuations near residue positions 50, 110 and 160.  Inspecting the structure with molecular visualization software such as VMD, these can be seen to correspond to flexible loop regions on the protein surface. In addition, very large fluctuations are seen for the C-terminus; this is common and no investigation is needed.
 
@@ -497,8 +498,8 @@ Note that the first few residues of this protein are missing in the PDB, and the
 Principal component analysis (PCA) converts a set of correlated
 observations (movement of selected atoms in protein) to a set of principal
 components (PCs) which are linearly independent (or uncorrelated). Here several related tools are used.
-The PCA tool calculates the PCA in order to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory. The C$\alpha$ carbons of the protein backbone are again a good selection for this purpose.  Outputs include the PCA raw data and figures of the relevant principal components (PCs) as well as an eigenvalue rank plot which is used to visualize the proportion of variance due to each principal component (remembering that the PCs are ranked eigenvectors based on the variance).
-Having discovered the principal components usually these are visualized. The PCA visualization tool will create trajectories of specific principal components which can be viewed in a molecular viewer such as VMD {% cite hump_vmd_1996 %} or NGL viewer {% cite Rose2018ngl %}. We also consider the PCA cosine content which when close to 1 indicates that the simulation is not converged and a longer simulation is needed. For values below 0.7, no statement can be made about convergence or lack thereof.
+The PCA tool calculates the PCA in order to determine the relationship between statistically meaningful conformations (major global motions) sampled during the trajectory. The Cα carbons of the protein backbone are again a good selection for this purpose.  Outputs include the PCA raw data and figures of the relevant principal components (PCs) as well as an eigenvalue rank plot which is used to visualize the proportion of variance due to each principal component (remembering that the PCs are ranked eigenvectors based on the variance).
+Having discovered the principal components usually these are visualized. The PCA visualization tool will create trajectories of specific principal components which can be viewed in a molecular viewer such as VMD ({% cite hump_vmd_1996 %}) or NGL viewer ({% cite Rose2018ngl %}). We also consider the PCA cosine content which when close to 1 indicates that the simulation is not converged and a longer simulation is needed. For values below 0.7, no statement can be made about convergence or lack thereof.
 
 > ### {% icon hands_on %} Hands-on: PCA
 >
@@ -567,7 +568,7 @@ We will demonstrate the high-throughput capabilities of Galaxy by running the wo
 >
 > 1. Create a new history for running the high-throughput workflow and name it `Hsp90 HTMD simulation'
 > 2. Upload the SD-file containing the new ligand structures from Zenodo  and rename it `Ligands (SDF)'
-> 3. Import the simulation workflow from the European {%cite eu_htmd_simulation_workflow %} or the South African Galaxy server {%cite  za_htmd_simulation_workflow %}.
+> 3. Import the simulation workflow from the European ({%cite eu_htmd_simulation_workflow %}) or the South African Galaxy server ({%cite  za_htmd_simulation_workflow %}).
 > 4. Run the imported workflow with the following parameters:
 >    - *"Send results to a new history"*: `'Yes'
 >    - *"History name results to a new history"*: `'Hsp90 HTMD analysis'
@@ -577,14 +578,14 @@ We will demonstrate the high-throughput capabilities of Galaxy by running the wo
 {: .hands_on}
 
 
-This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's collection {% cite gtn_collections %} feature to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
+This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's [collection feature]({% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
 
-Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina {% cite Trott2009 %} or rDock {% cite Ruiz2014 %}; tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided {% cite eu_6hhr %}.
+Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina ({% cite Trott2009 %}) or rDock ({% cite Ruiz2014 %}); tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided ({% cite eu_6hhr %}).
 
 
-Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting histories to workflows {% cite gtn_toworkflow %}, using multiple histories {% cite gtn_multiple %}, and the Galaxy Application Programming Interface (API) {% cite gtn_api %}. For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
+Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting [histories to workflows]({% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}), using [multiple histories]({% link topics/galaxy-ui/tutorials/history/tutorial.md %}), and the [Galaxy Application Programming Interface (API)]({% link topics/dev/tutorials/bioblend-api/slides.html %}). For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
 
-If you are able to write small scripts, you can automate everything you have learned here with the Galaxy API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend {% cite sloggett_bioblend %}. An example Python script, which uses BioBlend to run the GROMACS simulation workflow for each of a list of ligands, is given in the hands-on box below.
+If you are able to write small scripts, you can automate everything you have learned here with the Galaxy API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend ({% cite sloggett_bioblend %}). An example Python script, which uses BioBlend to run the GROMACS simulation workflow for each of a list of ligands, is given in the hands-on box below.
 
 > ### {% icon hands_on %} Hands-on: Bioblend script
 >
