@@ -1,12 +1,13 @@
 ---
 layout: tutorial_hands_on
 topic_name: additional-analyses
-tutorial_name: generate-annotation-table
+tutorial_name: genome-annotation-table
+title: "Generating the Genome Annotation Table"
 ---
 
 > ### Agenda
 >
-> 1. Generating the Genome Annotation Table
+> 1. Making the Annotation Table in Galaxy
 >
 > 2. Uses for the Genome Annotation Table
 > 
@@ -15,7 +16,7 @@ tutorial_name: generate-annotation-table
 
 This tutorial covers the generation of a table that can be saved and edited externally from the annotations of an organism in Apollo. If you have GFF3 formatted annotations, skip to step 1B. See section 2 for various uses of the table. 
 
-# Generating the Genome Annotation Table
+# Making the Annotation Table in Galaxy
 
 1A. First you will need to export sequence data and annotations of the desired phage from Apollo. Begin by running the [Retrieve Data from Apollo into Galaxy](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.webapollo.export) tool. Use the **Organism** drop-down menu to select the desired phage then click "Execute." 
 
