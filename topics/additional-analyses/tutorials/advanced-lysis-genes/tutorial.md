@@ -50,7 +50,7 @@ Upon successful completion, the Find Spanin tool will output a file for each pot
 {: .tip}
 
 
-The gff3 output can be funneled as an evidence track into an Apollo organism using a (published workflow)[https://cpt.tamu.edu/galaxy/workflows/list_published]. Search for the latest version of GFF3 to Apollo evidence track. 
+The gff3 output can be funneled as an evidence track into an Apollo organism using a [published workflow](https://cpt.tamu.edu/galaxy/workflows/list_published). Search for the latest version of GFF3 to Apollo evidence track. 
 
 > ### {% icon tip %} Note:
 > The following tools can also be run independently when searching for motifs contained by spanins:
@@ -66,7 +66,7 @@ The gff3 output can be funneled as an evidence track into an Apollo organism usi
 # Tools for Finding Holins
 Holins are membrane proteins. Experimentally verified holins contain 1-3 TMDs of varying topologies, though more are possible. Unless there is BLAST similarity to a *verified* holin or there are only 1-2 TMD-containing protein-encoding genes in the phage genome, it is not possible to be certain of a bioinformatic holin prediction, though often any predicted TMD-containing  protein near an endolysin and/or spanin gene is called a possible holin. In Galaxy, there are two tools that predict TMDs. Both are run as part of the functional workflow.
 
-The (TMHMM tool)[https://cpt.tamu.edu/galaxy-pub/root?tool_id=geiger.tamu.edu/toolshed/repos/esr/cpt_external_programs/TMHMM/1.0.2] can also be run independently with a graphical output. To run this tool, select the input protein FASTA file and adjust the parameters as shown below.
+The [TMHMM tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=geiger.tamu.edu/toolshed/repos/esr/cpt_external_programs/TMHMM/1.0.2) can also be run independently with a graphical output. To run this tool, select the input protein FASTA file and adjust the parameters as shown below.
 ![](../../images/advanced-lysis-genes-screenshots/4_TMHMM_graphic_tool.PNG)
 
 The HTML output will result in a graphical output as depicted below
