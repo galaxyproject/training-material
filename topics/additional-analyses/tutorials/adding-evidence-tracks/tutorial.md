@@ -26,7 +26,7 @@ The following are useful workflows in the [published workflows](https://cpt.tamu
 > * _Note:_ This is usually used on data coming from Genbank and allows comparison to features called by others.
 2. Published workflow: **Custom BLASTp to Apollo Evidence Track** with variations for UserDB and LocalDB
 > * Runs BlASTp against a user-created or locally installed database and creates a new Apollo evidence track.
-3. Published workflow: BLAST antiCRISPRdb to Apollo Evidence track
+3. Published workflow: **BLAST antiCRISPRdb to Apollo Evidence track**
 > * Runs BLASTp with specified input query proteins against the current anti-CRISPR database (import from Shared Data) and adds an evidence track to Apollo.
 
 # Troubleshooting
