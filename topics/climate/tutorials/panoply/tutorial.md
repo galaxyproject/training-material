@@ -125,11 +125,13 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 > ### {% icon hands_on %} Hands-on: Inspect dataset
 >
-> 1. Inspect the sea ice area fraction (**siconc**)
+> 1. Inspect dataset content
+> 
+>    Here you can look at the dataset (ecv_1979.nc) and related variables (`latitude`, `longitude`, `number`, `siconc`, etc) 
 >
 >    > ### {% icon question %} Question
 >    >
->    > what is the unit of this variable?
+>    > what is the unit of the `sea ice area fraction` variable (**siconc**) variable?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
