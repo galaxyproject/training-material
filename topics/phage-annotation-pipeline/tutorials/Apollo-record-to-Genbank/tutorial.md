@@ -30,7 +30,7 @@ Finalize the genome annotation in Apollo. Check the following before proceeding 
 > * As you review the genome, delete unnecessary comments and clean up comments with special characters (such as “) that may break other softwares. 
 > * Ensure the frameshift proteins are annotated correctly.  See this guideline  (link frameshift tutorial) for properly annotated tape measure chaperone frameshift products. 
 > * Ensure the frameshift proteins are annotated correctly. See [this guideline](https://cpt.tamu.edu/training-material/topics/phage-annotation-pipeline/tutorials/annotating-tmp-chaperone-frameshifts/tutorial.html) for properly annotated tape measure chaperone frameshift products.
-> * Review other special annotation cases such as those promoted by [Intron Detection] (https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.phage.intron_detection) tool.
+> * Review other special annotation cases such as those promoted by [Intron Detection](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.phage.intron_detection) tool.
 
 
 # Step 2: Retrieve Apollo Annotation Record into Galaxy
@@ -60,7 +60,7 @@ Typically we verify the following:
 >    > > ### {% icon comment %} Note:
 >    > >  In theory we should check each feature for its locus tag. In practice, check all tRNAs, a couple genes on the plus strand and a couple genes on the minus strand, then spot check through the rest of the way down your genome.
   
->    > {: .tip}
+>    > > {: .tip}
 >    >
 >    > See below for an example 5 column table
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/1-feature_table.PNG)
