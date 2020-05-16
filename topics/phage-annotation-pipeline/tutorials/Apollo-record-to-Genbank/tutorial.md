@@ -57,10 +57,11 @@ Typically we verify the following:
 >    >
 >    > For example, all of the exons, CDS, mRNA and gene features for a particular gene would have the same locus_tag. There should only be one locus_tag associated with one /gene, i.e. if a /locus_tag is associated with a /gene symbol in any feature, that gene symbols (and only that /gene symbol) must also be present on every other feature that contains that locus_tag.  For tRNA, the locus tag assigned usually follows the consecutive order from CDS, rather than assigning a specific prefix.  There should be one gene and one product assigned to each tRNA under the same locus tags.
 >    >
->    > > ### {% icon comment %} Note:
->    > >  In theory we should check each feature for its locus tag. In practice, check all tRNAs, a couple genes on the plus strand and a couple genes on the minus strand, then spot check through the rest of the way down your genome.
-  
->    > > {: .tip}
+
+> ### {% icon comment %} Note:
+>  In theory we should check each feature for its locus tag. In practice, check all tRNAs, a couple genes on the plus strand and a couple genes on the minus strand, then spot check through the rest of the way down your genome.
+{: .tip}
+
 >    >
 >    > See below for an example 5 column table
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/1-feature_table.PNG)
