@@ -14,8 +14,9 @@ objectives:
 - Understand how different molecular interactions contribute to the binding affinity of various ligands for the Hsp90 protein.
 time_estimation: 3H
 key_points:
-- Simulating protein-ligand systems is more complex than simply simulating protein-only systems
-- ....
+- Simulating protein-ligand systems is more complex than simply simulating protein-only systems.
+- There are a range of Galaxy tools for MD simulation (using GROMACS) and analysis.
+- Galaxy makes assembling and scaling up workflows for high-throughput MD straightforward for users.
 contributors:
 - simonbray
 - tsenapathi
