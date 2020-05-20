@@ -473,7 +473,7 @@ In our case the ligand is stable with a single binding mode. The RMSD fluctuates
 
 ## RMSF analysis
 
-The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by `C-alpha`, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M\"{o}ssbauer spectroscopy ({% cite berjanskii_nmr_2006,kuzmanic_determination_2010 %}). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.
+The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by `C-alpha`, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M\"{o}ssbauer spectroscopy ({% cite berjanskii_nmr_2006 %}, {% cite kuzmanic_determination_2010 %}). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.
 
 > ### {% icon hands_on %} Hands-on: RMSF analysis
 >
