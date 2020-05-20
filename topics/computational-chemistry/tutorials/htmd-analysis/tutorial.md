@@ -263,7 +263,7 @@ As an aside, we can use the `Extract energy components` tool to plot the converg
 >    - *"Terms to calculate"*: `Potential`
 >    - *"Output format"*: `Galaxy tabular`
 > 2. On the output tabular file, click on the 'Visualize this data' icon. This provides a range of visualization options. Select 'Line chart (jqPlot)'.
-> 3. In the visualization window which appears, click on `Select data.' Enter the following parameters:
+> 3. In the visualization window which appears, click on `Select data.` Enter the following parameters:
 >    - *"Provide a label"*: `Energy potential`
 >    - *"Values for x-axis"*: `Column: 1`
 >    - *"Values for y-axis"*: `Column: 2`
@@ -566,14 +566,14 @@ We will demonstrate the high-throughput capabilities of Galaxy by running the wo
 
 > ### {% icon hands_on %} Hands-on: High-throughput MD
 >
-> 1. Create a new history for running the high-throughput workflow and name it `Hsp90 HTMD simulation'
-> 2. Upload the SD-file containing the new ligand structures from Zenodo  and rename it `Ligands (SDF)'
+> 1. Create a new history for running the high-throughput workflow and name it `Hsp90 HTMD simulation`
+> 2. Upload the SD-file containing the new ligand structures from Zenodo  and rename it `Ligands (SDF)`
 > 3. Import the simulation workflow from the European ({%cite eu_htmd_simulation_workflow %}) or the South African Galaxy server ({%cite  za_htmd_simulation_workflow %}).
 > 4. Run the imported workflow with the following parameters:
->    - *"Send results to a new history"*: `'Yes'
->    - *"History name results to a new history"*: `'Hsp90 HTMD analysis'
->    - *"GRO input"*: `'Collection of GRO files produced by simulation workflow'
->    - *"XTC input"*: `'Collection of XTC files produced by simulation workflow'
+>    - *"Send results to a new history"*: `Yes`
+>    - *"History name results to a new history"*: `Hsp90 HTMD analysis`
+>    - *"GRO input"*: 'Collection of GRO files produced by simulation workflow'
+>    - *"XTC input"*: 'Collection of XTC files produced by simulation workflow'
 >
 {: .hands_on}
 
