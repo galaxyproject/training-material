@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
 title: Visualize Climate data with Panoply netCDF viewer
 zenodo_link: 'https://doi.org/10.5281/zenodo.3695482'
 questions:
@@ -84,9 +83,17 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 3. Check that the datatype is **netcdf**
 >
+>    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 4. Add a tag to the dataset corresponding to `copernicus`
+> 4. Rename Datasets
+>
+>    As "https://zenodo.org/record/3697454/files/ecv_1979.nc" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/3697454/files/` to obtain `ecv_1979.nc` and `ecv_2018.nc`, respectively.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 5. Add a tag to the dataset corresponding to `copernicus`
 >
 >    {% include snippets/add_tag.md %}
 >
@@ -101,7 +108,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
 > > ### {% icon tip %} Tip: Launch Panoply in Galaxy
-> > Currently Panoply in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu)
+> > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
 > > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
 > > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
@@ -118,11 +125,13 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 
 > ### {% icon hands_on %} Hands-on: Inspect dataset
 >
-> 1. Inspect the sea ice area fraction (**siconc**)
+> 1. Inspect dataset content
+> 
+>    Here you can look at the dataset (ecv_1979.nc) and related variables (`latitude`, `longitude`, `number`, `siconc`, etc) 
 >
 >    > ### {% icon question %} Question
 >    >
->    > what is the unit of this variable?
+>    > what is the unit of the `sea ice area fraction` variable (**siconc**) variable?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
