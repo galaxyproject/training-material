@@ -45,4 +45,4 @@ In cases where a genome is opened in the middle of a gene, and the interrupted g
 ![](../../images/finding-interrupted-genes-screenshots/4-genome-in-middle-image.png)
 
 ## Interrupted Genes due to SNPs, InDels, or Sequencing Errors
-Finally, the intron detection tool can be helpful for finding genes disrupted due to mutations, alternative gene arrangements, or sequencing errors (such as those produced by nanopore sequencing).   Users will need to perform additional analysis to determine the true nature of these types of gene interruptions.  
+Finally, the intron detection tool can be helpful for finding genes disrupted due to mutations, alternative gene arrangements, or sequencing errors (such as those produced by nanopore sequencing). Users will need to perform additional analysis to determine the true nature of these types of gene interruptions.  
