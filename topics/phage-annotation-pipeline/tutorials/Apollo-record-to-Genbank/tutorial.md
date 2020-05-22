@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 topic_name: phage-annotation-pipeline
-tutorial_name: Apollo-record-to Genbank
+tutorial_name: Apollo-record-to-Genbank
 ---
 This guide  covers the final steps followed to prepare an annotated Apollo phage genome record for deposit into Genbank. **First**, finalize all annotations for the Apollo record.  Reviewing all features and naming in Apollo. All feature addition, deletion, and evidence track reviewing should be completed before moving to the next step. **Second**, retrieve the annotation record out of Apollo into Galaxy and turn it into a 5-column table file.  **Next**, examine the genome features that Apollo cannot reliably support and fix manually in the local copy of the 5-column table.  This includes properly fusing frameshift proteins, adding terminal repeat features, and adding notes required by NCBI.  **Finally**, the generated 5-column table and the genome DNA FASTA files are used to deposit into Genbank.
 
