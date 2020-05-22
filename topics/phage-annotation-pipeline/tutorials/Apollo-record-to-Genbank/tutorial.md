@@ -54,7 +54,7 @@ Typically we verify the following:
 >    >
 >    > Basically, locus_tags should be assigned to all protein coding and non-coding genes such as structural RNAs.  Locus_tag should appear on gene, mRNA, CDS, 5'UTR, 3'UTR, intron, exon, tRNA, rRNA, misc_RNA, etc within a genome project submission. Repeat_regions do not have locus_tag qualifiers. The same locus_tag should be used for all components of a single gene. 
 >    >
->    > For example, all of the exons, CDS, mRNA and gene features for a particular gene would have the same locus_tag. There should only be one locus_tag associated with one gene.  For tRNA, the locus tag assigned usually follows the consecutive order from CDS, rather than assigning a specific prefix.  There should be one gene and one product assigned to each tRNA under the same locus tags.
+>    > For example, all of the exons, CDS, mRNA and gene features for a particular gene would have the same locus_tag. There should only be one locus_tag associated with one gene.  For tRNA, the locus tag assigned usually follows the consecutive order from CDS, rather than assigning a specific prefix.  There should be one gene and one product assigned to each tRNA under the same locus tags.  See below for an example 5 column table.
 >    >
 
 > ### {% icon comment %} Note:
@@ -62,7 +62,6 @@ Typically we verify the following:
 {: .tip}
 
 >    >
->    > See below for an example 5 column table
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/1-feature_table.PNG)
 >    >
 >    > ### II. Intron-containing Genes
@@ -71,18 +70,18 @@ Typically we verify the following:
 >    >
 >    > ### III. Frameshifts
 >    >
->    > > A. Make sure the base coordinates of the two joint CDS, such as “join(55078..55479,55478..56029)”, are correct. 
+>    > > > * Make sure the base coordinates of the two joint CDS, such as “join(55078..55479,55478..56029)”, are correct. 
 >    > 
->    > > B. There should be a note “exception=ribosomal slippage” added to the frameshift product.
+>    > > > * There should be a note “exception=ribosomal slippage” added to the frameshift product.
 >    >
->    > > C. Make sure the previously added qualifier “Frameshift protein a” and any other qualifier added in Apollo is stripped.
+>    > > > * Make sure the previously added qualifier “Frameshift protein a” and any other qualifier added in Apollo is stripped.
 >    >
->    > > D. Each protein (non-frameshift version and frameshift version) should have their own RBS (which will have the exact same coordinates) and their own locus tags.  
+>    > > > * Each protein (non-frameshift version and frameshift version) should have their own RBS (which will have the exact same coordinates) and their own locus tags.  
 >    >
 >    > See below for an example with properly formatted frameshifts.
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/2-formatted-frameshifts.PNG)
 >    >
->    > ### IV. Merged CDS on the Minus Strand
+>    > ### IV. Merged CDS on Minus Strand
 >    >
 >    > For cases with joint exons or joint frameshift proteins located on minus strand, make sure the order of the two CDS in the 5 column table is correct in order to avoid an error message after NCBI reviews the submission.  Here is an example for the proper order of two merged CDS in a 5 column table (*note the fragment from right side of the genome is listed first in the table*):           
 >    >
@@ -90,7 +89,7 @@ Typically we verify the following:
 >    >
 >    > ### V. Terminal Repeats
 >    >
->    > If applicable, add "terminal_repeat" for terminal repeat with the defined coordinates. The CPT convention is to put the TR at the 5’ end, not repeating the sequence at the 3’ end of the genome.  Add notes such as "direct terminal repeat predicted by PhageTerm", and "right end of genome sequence not duplicated in this record" to indicate that the bases are not repeated in the genome deposited, but that that sequence (and its genes) are present in the viral genome.  See below for an example.
+>    > If applicable, add "repeat_region" for terminal repeat with the defined coordinates. The CPT convention is to put the TR at the 5’ end, not repeating the sequence at the 3’ end of the genome.  Add notes such as "direct terminal repeat predicted by PhageTerm", and "right end of genome sequence not duplicated in this record" to indicate that the bases are not repeated in the genome deposited, but that that sequence (and its genes) are present in the viral genome.  See below for an example.
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/4-repeat-region.PNG)
 >    >
 >    > ### VI. Cos End Sequence
@@ -104,13 +103,13 @@ For Genbank submission through [BankIt](https://www.ncbi.nlm.nih.gov/WebSub/?too
 
 >    > ### I. 5-column Table Text File
 >    >
->    > > A. Check the feature table header, it should be >Feature Phagename (such as >Feature Minorna).  All the locus tags in the table can be “CPT_phagename_00X” (such as CPT_ Minorna_00X).
+>    > > > * Check the feature table header, it should be >Feature Phagename (such as >Feature Minorna).  All the locus tags in the table can be “CPT_phagename_00X” (such as CPT_ Minorna_00X).
 >    > >
->    > > B. Change phage name if needed.  In the 5 column table file, execute **Find and Replace** in a text editor.  Be careful if editing in Excel or Word because it can insert characters upon saving that **break** the NCBI uploader.
+>    > > > * Change phage name if needed.  In the 5 column table file, execute **Find and Replace** in a text editor.  Be careful if editing in Excel or Word because it can insert characters upon saving that **break** the NCBI uploader.
 >    >
 >    > ### II. DNA Sequence FASTA File
 >    >
->    > > A. Check the header, it should be >Phagename (such as >Minorna).  **This header has to match the name after “Feature” in 5 column table header.**
+>    > > > * Check the header, it should be >Phagename (such as >Minorna).  **This header has to match the name after “Feature” in 5 column table header.**
 >    >
 >    > ### III. Source Information
 >    >
