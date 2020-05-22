@@ -11,7 +11,7 @@ tutorial_name: finding-interrupted-genes
 >    > * Intron Interrupted Genes
 >    > * Programmed Translational Frameshifts
 >    > * Genome Opened in the Middle of a Gene
->    > * Interrupted Genes Due to SNPs, InDels, or Sequencing errors
+>    > * Interrupted Genes Due to SNPs, InDels, or Sequencing Errors
 >
 {: .agenda}
 
