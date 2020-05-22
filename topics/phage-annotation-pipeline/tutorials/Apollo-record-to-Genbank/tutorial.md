@@ -29,7 +29,7 @@ Finalize the genome annotation in Apollo. Check the following before proceeding 
 > * Ensure names conform to the [International Protein Nomenclature Guidelines](https://www.ncbi.nlm.nih.gov/genome/doc/internatprot_nomenguide/), which have been unified between all major organizations that store sequence databases including NCBI and UniProt.
 > * As you review the genome, delete unnecessary comments and clean up comments with special characters (such as “) that may break other softwares. 
 > * Ensure the frameshift proteins are annotated correctly. See [this guideline](https://cpt.tamu.edu/training-material/topics/phage-annotation-pipeline/tutorials/annotating-tmp-chaperone-frameshifts/tutorial.html) for properly annotated tape measure chaperone frameshift products.
-> * Review other special annotation cases such as those promoted by [Intron Detection](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.phage.intron_detection) tool.
+> * Review other special annotation cases such as those covered in [the interrupted genes tutorial](https://cpt.tamu.edu/training-material/topics/additional-analyses/tutorials/finding-interrupted-genes/tutorial.html). 
 
 
 # Step 2: Retrieve Apollo Annotation Record into Galaxy
