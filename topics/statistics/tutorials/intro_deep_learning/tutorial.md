@@ -28,7 +28,7 @@ contributors:
 
 ![data](../../images/neuron.svg "Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output y")
 
-An artificial neuron is shown in Figure 3. The neuron, shown in orange, takes input `x` (only `x1` and `x2` are shown for simplicity) and computes output `y`. The entities `w1`, `w2` are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output `y` (shown in Figures 2, 3 and 4).
+An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes input `x` (only `x1` and `x2` are shown for simplicity) and computes output `y`. The entities `w1`, `w2` are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output `y` (shown in Figures 2, 3 and 4).
 
 ![data](../../images/eq1.png "Transformation of a component (x1) of the input vector (x).")
 
