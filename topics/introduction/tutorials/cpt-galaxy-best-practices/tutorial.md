@@ -114,6 +114,10 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 > A collection of well-annotated/tagged histories can be considered akin to entries in a lab notebook for different experiments. The organization and digital tracking afforded by the Galaxy interface gives the illusion of being a lab notebook, but it requires the systematic addition of this type of metadata to *truly* function as a useful digital record. There is no consequence for using more than one history for analyses of the same phage. On the contrary, it helps with the organization of results if a new history is created for each new analysis. Clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/10_settings_icon.png) opens  drop-down menu containing History Actions. Under *Current History* is a *Create New* option. Selecting this will immediately create the new history and have that new history set as the current history. A well-documted, long list of histories is much more useful than a short list of histories that no one can interpret.
 {: .tip}
 
+> ### {% icon tip %} Further Documentation of History
+> A text or pdf file containing any additional useful information and or documentation on the project can also be uploaded as a dataset. This further enables the user to create a useful digital record and well documented history.
+{:tip}
+
 # How Implementing These Practices is Helpful
 
 ## Assists the User in Finding Their Data
