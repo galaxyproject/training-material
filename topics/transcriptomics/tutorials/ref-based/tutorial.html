@@ -710,7 +710,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 20, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 28, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -932,9 +932,9 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
 
 <h1 id="quality-control">Quality control</h1>
 
-<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data.</p>
+<p>During sequencing, errors are introduced, such as incorrect nucleotides being called. These are due to the technical limitations of each sequencing platform. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. Adapters may also be present if the <span class="notranslate">reads</span> are longer than the fragments sequenced and trimming these may improve the number of <span class="notranslate">reads</span> mapped.</p>
 
-<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<a class="citation" href="#marcel2011cutadapt">Marcel 2011</a>).</p>
+<p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> to create a report of sequence quality, <a href="https://multiqc.info/">MultiQC</a> (<a class="citation" href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a>) to aggregate generated reports and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<a class="citation" href="#marcel2011cutadapt">Marcel 2011</a>) to improve the quality of sequences via trimming and filtering.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-control"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control</h3>
@@ -1003,43 +1003,37 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
-            <li>Everything seems OK for 3 of the files, but for <code class="language-plaintext highlighter-rouge">GSM461180_2</code> the quality decreases quite a lot at the end of the sequences:
-              <ul>
-                <li>The <code class="language-plaintext highlighter-rouge">GSM461177</code> have 10.3 millions of sequences and <code class="language-plaintext highlighter-rouge">GSM461180</code> 12.3 millions</li>
-                <li>
-                  <p>All except <code class="language-plaintext highlighter-rouge">GSM461180_2</code> have a high proportion of duplicated <span class="notranslate">reads</span> (expected in <span class="notranslate">RNA</span>-Seq data)</p>
+            <li>
+              <p>Everything seems good for 3 of the files. The <code class="language-plaintext highlighter-rouge">GSM461177</code> have 10.3 millions of sequences and <code class="language-plaintext highlighter-rouge">GSM461180</code> 12.3 millions of sequences. But in <code class="language-plaintext highlighter-rouge">GSM461180_2</code> (reverse <span class="notranslate">reads</span> of GSM461180) the quality decreases quite a lot at the end of the sequences.</p>
 
-                  <figure id="figure-1"><img src="../../images/ref-based/fastqc_sequence_counts_plot.png" alt="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence Counts</figcaption></figure>
-                </li>
-                <li>
-                  <p>The “Per base sequence quality” is globally good with a slight decrease at the end of the sequences. For <code class="language-plaintext highlighter-rouge">GSM461180_2</code>, the decrease is quite large.</p>
+              <p>All files except <code class="language-plaintext highlighter-rouge">GSM461180_2</code> have a high proportion of duplicated <span class="notranslate">reads</span> (expected in <span class="notranslate">RNA</span>-Seq data)</p>
 
-                  <figure id="figure-2"><img src="../../images/ref-based/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence Quality</figcaption></figure>
-                </li>
-                <li>
-                  <p>The mean quality score over the <span class="notranslate">reads</span> is quite high, but the distribution is slightly different for <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
+              <figure id="figure-1"><img src="../../images/ref-based/fastqc_sequence_counts_plot.png" alt="Sequence Counts" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequence Counts</figcaption></figure>
 
-                  <figure id="figure-3"><img src="../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per Sequence Quality Scores</figcaption></figure>
-                </li>
-                <li>
-                  <p><span class="notranslate">Reads</span> are not really following a normal distribution of GC content, except <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
+              <p>The “Per base sequence quality” is globally good with a slight decrease at the end of the sequences. For <code class="language-plaintext highlighter-rouge">GSM461180_2</code>, the decrease is quite large.</p>
 
-                  <figure id="figure-4"><img src="../../images/ref-based/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per Sequence GC Content</figcaption></figure>
-                </li>
-                <li>
-                  <p>Few N in the <span class="notranslate">reads</span></p>
+              <figure id="figure-2"><img src="../../images/ref-based/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sequence Quality</figcaption></figure>
 
-                  <figure id="figure-5"><img src="../../images/ref-based/fastqc_per_base_n_content_plot.png" alt="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per base N content</figcaption></figure>
-                </li>
-                <li>
-                  <p>Duplicated sequences: &gt;10 to &gt;500</p>
+              <p>The mean quality score over the <span class="notranslate">reads</span> is quite high, but the distribution is slightly different for <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
 
-                  <figure id="figure-6"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Duplication Levels</figcaption></figure>
-                </li>
-                <li>Almost no known adapters and overrepresented sequences</li>
-              </ul>
+              <figure id="figure-3"><img src="../../images/ref-based/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Per Sequence Quality Scores</figcaption></figure>
+
+              <p><span class="notranslate">Reads</span> are not really following a normal distribution of GC content, except <code class="language-plaintext highlighter-rouge">GSM461180_2</code></p>
+
+              <figure id="figure-4"><img src="../../images/ref-based/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Per Sequence GC Content</figcaption></figure>
+
+              <p>Few N in the <span class="notranslate">reads</span></p>
+
+              <figure id="figure-5"><img src="../../images/ref-based/fastqc_per_base_n_content_plot.png" alt="Per base N content" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Per base N content</figcaption></figure>
+
+              <p>Duplicated sequences: &gt;10 to &gt;500</p>
+
+              <figure id="figure-6"><img src="../../images/ref-based/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequence Duplication Levels</figcaption></figure>
+
+              <p>Almost no known adapters and overrepresented sequences</p>
             </li>
-            <li>If the quality of the <span class="notranslate">reads</span> is not good, we should:
+            <li>
+              <p>If the quality of the <span class="notranslate">reads</span> is not good, we should:</p>
               <ol>
                 <li>Check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biaised percentage of bases in HiC data)</li>
                 <li>Ask the sequencing facility about it</li>
@@ -1055,7 +1049,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
 
 </blockquote>
 
-<p>We should trim sequenced read to get rid of bases that were sequenced with high uncertainty (= low quality bases) at the read ends but also remove the <span class="notranslate">reads</span> of overall bad quality.</p>
+<p>We should trim the <span class="notranslate">reads</span> to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the <span class="notranslate">reads</span> of overall bad quality.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1152,7 +1146,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>For <code class="language-plaintext highlighter-rouge">GSM461177</code>, 5,072,810 bp has been trimmed for the forward <span class="notranslate">reads</span> (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For <code class="language-plaintext highlighter-rouge">GSM461180</code>, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>, specially for <code class="language-plaintext highlighter-rouge">GSM461180_2</code>.</li>
+            <li>For <code class="language-plaintext highlighter-rouge">GSM461177</code>, 5,072,810 bp has been trimmed for the forward <span class="notranslate">reads</span> (read 1) and 8,648,619 bp on the reverse (read 2) because of quality. For <code class="language-plaintext highlighter-rouge">GSM461180</code>, 10,224,537 bp on forward and 51,746,850 bp on the reverse. It is not a surprise: we saw that at the end of the <span class="notranslate">reads</span> the quality was dropping more for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>, especially for <code class="language-plaintext highlighter-rouge">GSM461180</code>.</li>
             <li>147,810 (1.4%) <span class="notranslate">reads</span> were too short for <code class="language-plaintext highlighter-rouge">GSM461177</code> and 1,101,875 (9%) for <code class="language-plaintext highlighter-rouge">GSM461180</code>.</li>
           </ol>
         </blockquote>
@@ -1163,9 +1157,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
 
 <h1 id="mapping"><span class="notranslate">Mapping</span></h1>
 
-<p>To make sense of the <span class="notranslate">reads</span>, we need to first figure out where the sequenced <span class="notranslate">DNA</span> fragments originated from in the genome, so we can then determine to which genes they belong.</p>
-
-<p>This process is known as aligning or ‘<span class="notranslate">mapping</span>’ the <span class="notranslate">reads</span> to a reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.</p>
+<p>To make sense of the <span class="notranslate">reads</span>, we need to first figure out where the sequences originated from in the genome, so we can then determine to which genes they belong. When a reference genome for the organism is available, this process is known as aligning or “<span class="notranslate">mapping</span>” the <span class="notranslate">reads</span> to the reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1173,7 +1165,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
   <p>Do you want to learn more about the principles behind <span class="notranslate">mapping</span>? Follow our <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">training</a>.</p>
 </blockquote>
 
-<p>As a reference genome for <em>Drosophila melanogaster</em> is available, we can map the sequences to this genome in order to identify which genes are affected by the <em>Pasilla</em> gene depletion.</p>
+<p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should then map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1194,16 +1186,11 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
   </blockquote>
 </blockquote>
 
-<p>With eukaryotic transcriptomes most <span class="notranslate">reads</span> originate from processed m<span class="notranslate">RNA</span>s lacking introns, therefore they cannot be simply mapped back to the genome as we normally do for <span class="notranslate">DNA</span> data. Instead the <span class="notranslate">reads</span> must be separated into two categories:</p>
+<p>With eukaryotic transcriptomes most <span class="notranslate">reads</span> originate from processed m<span class="notranslate">RNA</span>s lacking introns:</p>
 
-<ul>
-  <li><span class="notranslate">Reads</span> that can be mapped entirely within an exon</li>
-  <li><span class="notranslate">Reads</span> spanning two or more exons</li>
-</ul>
+<figure id="figure-7"><img src="../../images/ref-based/rna-seq-reads.png" alt="Types of RNA-Seq reads" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The types of <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> (adaption of the Figure 1a from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>): <span class="notranslate">reads</span> that mapped entirely within an exon (in red), <span class="notranslate">reads</span> spanning over 2 exons (in blue), read spanning over more than 2 exons (in purple)</figcaption></figure>
 
-<figure id="figure-7"><img src="../../images/five_type_rna_seq_reads.png" alt="Five types of RNA-Seq reads" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The five types of <span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> (Figure 1a from <a class="citation" href="#kim2015hisat">Kim <i>et al.</i> 2015</a>)</figcaption></figure>
-
-<p>Spliced mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against genomes:</p>
+<p>Therefore they cannot be simply mapped back to the genome as we normally do for <span class="notranslate">DNA</span> data. Spliced-awared mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against a reference genome:</p>
 
 <figure id="figure-8"><img src="../../images/splice_aware_alignment.png" alt="Splice-aware alignment" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Principle of spliced mappers: (1) identification of the <span class="notranslate">reads</span> spanning a single exon, (2) identification of the splicing junctions on the unmapped <span class="notranslate">reads</span></figcaption></figure>
 
@@ -1238,7 +1225,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
 
 <h2 id="mapping-1"><span class="notranslate">Mapping</span></h2>
 
-<p>We will map our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> to the <em>Drosophila melanogaster</em> genome using <strong>STAR</strong> (<a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>).</p>
+<p>We will map our <span class="notranslate">reads</span> to the <em>Drosophila melanogaster</em> genome using <strong>STAR</strong> (<a class="citation" href="#dobin2013star">Dobin <i>et al.</i> 2013</a>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-spliced-mapping"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Spliced <span class="notranslate">mapping</span></h3>
@@ -1314,7 +1301,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
           <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
-            <li>More than 83% for GSM461177 and more than 79% for GSM461180</li>
+            <li>More than 83% for GSM461177 and more than 79% for GSM461180. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.</li>
             <li>
               <p>We also have access to the number and percentage of <span class="notranslate">reads</span> that are mapped at several location, mapped at too many different location, not mapped because too short.</p>
 
@@ -1330,9 +1317,11 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
   </ol>
 </blockquote>
 
-<p><strong>STAR</strong> generates a BAM file with the mapped <span class="notranslate">reads</span>.</p>
+<p>According to the <strong>MultiQC</strong> report, more than 80% of <span class="notranslate">reads</span> for both samples are mapped exactly once to the reference genome. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination. Both samples have a low (less than 10%) percentage of <span class="notranslate">reads</span> that mapped to multiple locations on the reference genome. This is in the normal range for Illumina short-read sequencing, but may be lower for newer long-read sequencing datasets that can span larger repeated regions in the reference genome.</p>
 
-<p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed, binary file storing the sequences mapped to a reference sequence.</p>
+<p>The main output of <strong>STAR</strong> is a BAM file.</p>
+
+<p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-inspect-a-bamsam-file"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect a BAM/SAM file</h3>
@@ -1450,9 +1439,7 @@ https://zenodo.org/record/1185122/files/GSM461180_2.fastqsanger
 
 <h2 id="inspection-of-the-mapping-results">Inspection of the <span class="notranslate">mapping</span> results</h2>
 
-<p>The BAM file contains information about where the <span class="notranslate">reads</span> are mapped on the reference genome. But as it is a binary file containing information for many <span class="notranslate">reads</span> (several million for these samples), it is difficult to inspect and explore the file.</p>
-
-<p>A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (<strong>IGV</strong>, <a class="citation" href="#robinson2011integrative">Robinson <i>et al.</i> 2011</a>).</p>
+<p>The BAM file contains information for all our <span class="notranslate">reads</span>, making it difficult to inspect and explore in text format. A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (<strong>IGV</strong>, <a class="citation" href="#robinson2011integrative">Robinson <i>et al.</i> 2011</a>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-inspection-of-mapping-results"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspection of <span class="notranslate">mapping</span> results</h3>
@@ -1762,7 +1749,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>Now that we have checked the results of the read <span class="notranslate">mapping</span>, we can proceed to the next phase of the analysis.</p>
 </blockquote>
 
-<p>After the <span class="notranslate">mapping</span>, we have the information on where the <span class="notranslate">reads</span> are located on the reference genome. We also know how well they were mapped. The next step in <span class="notranslate">RNA</span>-Seq data analysis is quantification of the number of <span class="notranslate">reads</span> mapped to genomic features (genes, transcripts, exons, …).</p>
+<p>After the <span class="notranslate">mapping</span>, we have now the information on where the <span class="notranslate">reads</span> are located on the reference genome and how well they were mapped. The next step in <span class="notranslate">RNA</span>-Seq data analysis is quantification of the number of <span class="notranslate">reads</span> mapped to genomic features (genes, transcripts, exons, …).</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1770,11 +1757,11 @@ installed on your machine. However, the questions in this section can also be an
   <p>The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the <span class="notranslate">mapping</span> (e.g. <code class="language-plaintext highlighter-rouge">dm6</code> here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.</p>
 </blockquote>
 
-<p>In order to identify genes that are regulated by the <em>Pasilla</em> gene, we need to identify genes which are differentially expressed between samples with PS gene depletion (treated) and control (untreated) samples.</p>
+<p>Here we will focus on the genes as we would like to identify the ones that are differentially expressed because of the Pasilla gene knockdown.</p>
 
 <h1 id="counting-the-number-of-reads-per-annotated-gene">Counting the number of <span class="notranslate">reads</span> per annotated gene</h1>
 
-<p>To compare the <span class="notranslate">expression</span> of single genes between different conditions (<em>e.g.</em> with or without PS depletion), an essential first step is to quantify the number of <span class="notranslate">reads</span> per gene.</p>
+<p>To compare the <span class="notranslate">expression</span> of single genes between different conditions (<em>e.g.</em> with or without PS depletion), an essential first step is to quantify the number of <span class="notranslate">reads</span> per gene, or more specifically the number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the exons of each gene.</p>
 
 <figure id="figure-17"><img src="../../images/gene_counting.png" alt="Counting the number of reads per annotated gene" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Counting the number of <span class="notranslate">reads</span> per annotated gene</figcaption></figure>
 
@@ -1833,13 +1820,13 @@ installed on your machine. However, the questions in this section can also be an
   </blockquote>
 </blockquote>
 
-<p>Two main tools could be used for that: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<a class="citation" href="#anders2015htseq">Anders <i>et al.</i> 2015</a>) or <strong>featureCounts</strong> (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>). FeatureCounts is considerably faster and requires far less computational resources, so we will use it here.</p>
+<p>Two main tools could be used for that: <a href="http://htseq.readthedocs.io/en/release_0.9.1/count.html"><strong>HTSeq-count</strong></a> (<a class="citation" href="#anders2015htseq">Anders <i>et al.</i> 2015</a>) or <strong>featureCounts</strong> (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>). <strong>featureCounts</strong> is considerably faster and requires far less computational resources, so we will use it here.</p>
 
-<p>In principle, the counting of <span class="notranslate">reads</span> overlapping with genomic features is a fairly simple task. But there are some details that need to be given to <strong>featureCounts</strong>: for example the strandness.</p>
+<p>In principle, the counting of <span class="notranslate">reads</span> overlapping with genomic features is a fairly simple task. But there are some details that need to be given to <strong>featureCounts</strong>, e.g. the strandness.</p>
 
 <h2 id="estimation-of-the-strandness">Estimation of the strandness</h2>
 
-<p><span class="notranslate">RNA</span>s that are typically targeted in <span class="notranslate">RNA</span>-Seq experiments are single stranded (<em>e.g.</em>, m<span class="notranslate">RNA</span>s) and thus have polarity (5’ and 3’ ends that are functionally distinct). During a typical <span class="notranslate">RNA</span>-Seq experiment the information about strandness is lost after both strands of c<span class="notranslate">DNA</span> are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step:</p>
+<p><span class="notranslate">RNA</span>s that are typically targeted in <span class="notranslate">RNA</span>-Seq experiments are single stranded (<em>e.g.</em>, m<span class="notranslate">RNA</span>s) and thus have polarity (5’ and 3’ ends that are functionally distinct). During a typical <span class="notranslate">RNA</span>-Seq experiment the information about strandness is lost after both strands of c<span class="notranslate">DNA</span> are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for <span class="notranslate">reads</span> located on the overlap of 2 genes that are on different strands.</p>
 
 <figure id="figure-18"><img src="../../images/ref-based/strandness_why.png" alt="Why strandness?" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Read1 will be assigned to gene1 located on the forward strand but Read2 could be assigned to gene1 (forward strand) or gene2 (reverse strand) depending if the strandness information is conserved.</figcaption></figure>
 
@@ -1866,7 +1853,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <p>This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.</p>
 
-<p>Another option is to estimate these parameters with a tool called <strong>Infer Experiment</strong> from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool takes the output of your <span class="notranslate">mapping</span>s (BAM files), selects a subsample of your <span class="notranslate">reads</span> and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how <span class="notranslate">reads</span> are stranded (forward or reverse):</p>
+<p>Another option is to estimate these parameters with a tool called <strong>Infer Experiment</strong> from the RSeQC (<a class="citation" href="#wang2012rseqc">Wang <i>et al.</i> 2012</a>) tool suite. This tool takes the BAM files from the <span class="notranslate">mapping</span>, selects a subsample of the <span class="notranslate">reads</span> and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how <span class="notranslate">reads</span> are stranded (forward or reverse):</p>
 
 <figure id="figure-22"><img src="../../images/ref-based/strandness_cases.png" alt="How to estimate the strandness?" /><figcaption><span class="figcaption-prefix">Figure 22:</span> In a stranded forward library, <span class="notranslate">reads</span> map mostly on the genes located on forward strand (here gene1). With stranded reverse library, <span class="notranslate">reads</span> map mostly on genes on the reverse strand (here gene2). With unstranded library, <span class="notranslate">reads</span> maps on genes on both strands.</figcaption></figure>
 
@@ -1891,6 +1878,7 @@ installed on your machine. However, the questions in this section can also be an
 </blockquote>
 
 <p><strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool generates one file with information on:</p>
+
 <ul>
   <li>Paired-end or single-end library</li>
   <li>Fraction of <span class="notranslate">reads</span> failed to determine</li>
@@ -2084,87 +2072,78 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
 
 </blockquote>
 
-<p>The main output of <strong>featureCounts</strong> is a table with the counts for each genes in the provided annotation.</p>
+<p>The main output of <strong>featureCounts</strong> is a table with the counts, i.e. the number of <span class="notranslate">reads</span> (or fragments in the case of paired-end <span class="notranslate">reads</span>) mapped to each gene (in rows, with their ID in the first column) in the provided annotation. <strong>FeatureCount</strong> generates also the <strong>feature length</strong> output datasets. We will need this file later on when we will run the <strong>goseq</strong> tool.</p>
 
 <blockquote class="question">
   <h3 id="question-question-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <ol>
-    <li>What information does the generated table contain?</li>
-    <li>Which feature has the most counts for both samples? (Hint: Use the Sort tool)</li>
-  </ol>
+  <p>Which feature has the most counts for both samples? (Hint: Use the Sort tool)</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-18"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <ol>
-      <li>The table has two columns: the gene ID and the number of <span class="notranslate">reads</span> (or fragments in the case of paired-end <span class="notranslate">reads</span>) mapped to the gene</li>
-      <li>To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool:
+    <p>To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool:</p>
+    <ul>
+      <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: count file, output of by <strong>featureCounts</strong></li>
+      <li><em>“Number of header”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      <li>In <em>“1: Column selections”</em>:
         <ul>
-          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: count file, output of by <strong>featureCounts</strong></li>
-          <li><em>“Number of header”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-          <li>In <em>“1: Column selections”</em>:
-            <ul>
-              <li>
-                <p><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">2</code></p>
+          <li>
+            <p><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">2</code></p>
 
-                <p>This column contains the number of <span class="notranslate">reads</span> = counts</p>
-              </li>
-              <li>
-                <p><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></p>
-              </li>
-            </ul>
+            <p>This column contains the number of <span class="notranslate">reads</span> = counts</p>
+          </li>
+          <li>
+            <p><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></p>
           </li>
         </ul>
-
-        <p>The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in <code class="language-plaintext highlighter-rouge">GSM461177</code> and 127,416 in <code class="language-plaintext highlighter-rouge">GSM461180</code>).</p>
-
-        <p>Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.</p>
-
-        <blockquote class="notranslate hands_on">
-          <h3 id="hands_on-optional-view-the-sorted-featurecounts-using-the-scratchbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> (Optional) View the sorted featureCounts using the Scratchbook</h3>
-
-          <ol>
-            <li>
-              <p>The <strong>Scratchbook</strong> is enabled by clicking the nine-blocks icon seen on the right of the <span class="notranslate">Galaxy</span> top menubar:</p>
-
-              <figure id="figure-24"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Menu bar with Scratchbook icon</figcaption></figure>
-            </li>
-            <li>
-              <p>When the Scratchbook is <strong>enabled</strong> datasets being viewed (by clicking the eye-icon) are added to the Scratchbook view:</p>
-
-              <figure id="figure-25"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="Scratchbook icon enabled" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
-            </li>
-            <li>
-              <p>Click the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view one of the <strong>sorted featureCounts</strong> files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:</p>
-
-              <figure id="figure-26"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="Scratchbook one dataset shown" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Scratchbook showing one dataset overlay</figcaption></figure>
-            </li>
-            <li>
-              <p>When a dataset is shown <strong>click in the main interface</strong> to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:</p>
-
-              <figure id="figure-27"><img src="../../images/ref-based/scratchbookOneSavedView.png" alt="scratchbook one saved view" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Menu bar with one saved dataset view in Scratchbook</figcaption></figure>
-            </li>
-            <li>
-              <p>Next click the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon on the <strong>second sorted featureCounts</strong> file. The two datasets can now be seen side by side:</p>
-
-              <figure id="figure-28"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="Scratchbook two datasets shown" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Scratchbook showing two side by side datasets</figcaption></figure>
-            </li>
-            <li>
-              <p>To <strong>leave</strong> Scratchbook selection mode, click on the <strong>Scratchbook icon</strong> again. Your saved view will still remain for future viewing:</p>
-
-              <figure id="figure-29"><img src="../../images/ref-based/scratchbookDisabledWithSavedDatasets.png" alt="Scratchbook disabled datasets saved" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Scratchbook disabled with two datasets saved</figcaption></figure>
-            </li>
-          </ol>
-
-        </blockquote>
       </li>
-    </ol>
+    </ul>
+
+    <p>The result of sorting the table on column 2 reveals that FBgn0000556 is the feature with the most counts (around 128,741 in <code class="language-plaintext highlighter-rouge">GSM461177</code> and 127,416 in <code class="language-plaintext highlighter-rouge">GSM461180</code>).</p>
+
+    <p>Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.</p>
+
+    <blockquote class="notranslate hands_on">
+      <h3 id="hands_on-optional-view-the-sorted-featurecounts-using-the-scratchbook"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> (Optional) View the sorted featureCounts using the Scratchbook</h3>
+
+      <ol>
+        <li>
+          <p>The <strong>Scratchbook</strong> is enabled by clicking the nine-blocks icon seen on the right of the <span class="notranslate">Galaxy</span> top menubar:</p>
+
+          <figure id="figure-24"><img src="../../images/ref-based/menubarWithScratchbook.png" alt="scratchbook icon" /><figcaption><span class="figcaption-prefix">Figure 24:</span> Menu bar with Scratchbook icon</figcaption></figure>
+        </li>
+        <li>
+          <p>When the Scratchbook is <strong>enabled</strong> datasets being viewed (by clicking the eye-icon) are added to the Scratchbook view:</p>
+
+          <figure id="figure-25"><img src="../../images/ref-based/menubarWithScratchbookEnabled.png" alt="Scratchbook icon enabled" /><figcaption><span class="figcaption-prefix">Figure 25:</span> Menu bar with Scratchbook icon enabled</figcaption></figure>
+        </li>
+        <li>
+          <p>Click the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view one of the <strong>sorted featureCounts</strong> files. Instead of occupying the entire middle bar the dataset view is now shown an overlay:</p>
+
+          <figure id="figure-26"><img src="../../images/ref-based/scratchbookOneDataset.png" alt="Scratchbook one dataset shown" /><figcaption><span class="figcaption-prefix">Figure 26:</span> Scratchbook showing one dataset overlay</figcaption></figure>
+        </li>
+        <li>
+          <p>When a dataset is shown <strong>click in the main interface</strong> to prepare to select another dataset. The interface now shows that there is one saved view in the Scratchbook:</p>
+
+          <figure id="figure-27"><img src="../../images/ref-based/scratchbookOneSavedView.png" alt="scratchbook one saved view" /><figcaption><span class="figcaption-prefix">Figure 27:</span> Menu bar with one saved dataset view in Scratchbook</figcaption></figure>
+        </li>
+        <li>
+          <p>Next click the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon on the <strong>second sorted featureCounts</strong> file. The two datasets can now be seen side by side:</p>
+
+          <figure id="figure-28"><img src="../../images/ref-based/scratchbookTwoDatasetsShown.png" alt="Scratchbook two datasets shown" /><figcaption><span class="figcaption-prefix">Figure 28:</span> Scratchbook showing two side by side datasets</figcaption></figure>
+        </li>
+        <li>
+          <p>To <strong>leave</strong> Scratchbook selection mode, click on the <strong>Scratchbook icon</strong> again. Your saved view will still remain for future viewing:</p>
+
+          <figure id="figure-29"><img src="../../images/ref-based/scratchbookDisabledWithSavedDatasets.png" alt="Scratchbook disabled datasets saved" /><figcaption><span class="figcaption-prefix">Figure 29:</span> Scratchbook disabled with two datasets saved</figcaption></figure>
+        </li>
+      </ol>
+
+    </blockquote>
 
   </blockquote>
 </blockquote>
-
-<p><strong>FeatureCount</strong> generates also the <strong>feature length</strong> output datasets. We will need this file later on when we will run the <strong>goseq</strong> tool.</p>
 
 <p>Here we counted <span class="notranslate">reads</span> mapped to genes for two samples. It is really interesting to redo the same procedure on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).</p>
 
@@ -3030,7 +3009,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
   <p>We recommend to combine the count tables for different technical replicates (but not for biological replicates) before a differential <span class="notranslate">expression</span> analysis (see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#collapsing-technical-replicates">DESeq2 documentation</a>)</p>
 </blockquote>
 
-<p>Multiple factors with several levels can then be incorporated in the analysis. After normalization we can compare the response of the <span class="notranslate">expression</span> of any gene to the presence of different levels of a factor in a statistically reliable way.</p>
+<p>Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with several levels representing the conditions for one factor. After normalization we can compare the response of the <span class="notranslate">expression</span> of any gene to the presence of different levels of a factor in a statistically reliable way.</p>
 
 <p>In our example, we have samples with two varying factors that can contribute to differences in gene <span class="notranslate">expression</span>:</p>
 
@@ -3055,49 +3034,37 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
       <ul>
         <li><em>“how”</em>: <code class="language-plaintext highlighter-rouge">Select datasets per level</code>
           <ul>
-            <li>In <em>“Factor”</em>:
+            <li>In “1: Factor”
               <ul>
-                <li>In “1: Factor”
+                <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge">Treatment</code></li>
+                <li>In <em>“1: Factor level”</em>:
                   <ul>
-                    <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge">Treatment</code></li>
-                    <li>In <em>“Factor level”</em>:
-                      <ul>
-                        <li>In <em>“1: Factor level”</em>:
-                          <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">treated</code></li>
-                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="language-plaintext highlighter-rouge">treat</code> in their name</li>
-                          </ul>
-                        </li>
-                        <li>In <em>“2: Factor level”</em>:
-                          <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">untreated</code></li>
-                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="language-plaintext highlighter-rouge">untreat</code> in their name</li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
+                    <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">treated</code></li>
+                    <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="language-plaintext highlighter-rouge">treat</code> in their name</li>
                   </ul>
                 </li>
-                <li>Click on <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor”</em> (not on “Insert Factor level”)</li>
-                <li>In “2: Factor”
+                <li>In <em>“2: Factor level”</em>:
                   <ul>
-                    <li>“Specify a factor name” to <code class="language-plaintext highlighter-rouge">Sequencing</code></li>
-                    <li>In <em>“Factor level”</em>:
-                      <ul>
-                        <li>In <em>“1: Factor level”</em>:
-                          <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">PE</code></li>
-                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="language-plaintext highlighter-rouge">paired</code> in their name</li>
-                          </ul>
-                        </li>
-                        <li>In <em>“2: Factor level”</em>:
-                          <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">SE</code></li>
-                            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="language-plaintext highlighter-rouge">single</code> in their name</li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
+                    <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">untreated</code></li>
+                    <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="language-plaintext highlighter-rouge">untreat</code> in their name</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>Click on <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Factor”</em> (not on “Insert Factor level”)</li>
+            <li>In “2: Factor”
+              <ul>
+                <li>“Specify a factor name” to <code class="language-plaintext highlighter-rouge">Sequencing</code></li>
+                <li>In <em>“1: Factor level”</em>:
+                  <ul>
+                    <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">PE</code></li>
+                    <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 4 gene count files with <code class="language-plaintext highlighter-rouge">paired</code> in their name</li>
+                  </ul>
+                </li>
+                <li>In <em>“2: Factor level”</em>:
+                  <ul>
+                    <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">SE</code></li>
+                    <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Counts file(s)”</em>: the 3 gene count files with <code class="language-plaintext highlighter-rouge">single</code> in their name</li>
                   </ul>
                 </li>
               </ul>
@@ -3333,7 +3300,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 <p>We now have a table with 130 lines corresponding to the most differentially expressed genes. For each gene, we have its ID, its mean normalized counts (averaged over all samples from both conditions), its \(log_{2} FC\) and other information.</p>
 
-<p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase. These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to have the location of these genes within the genome. To do that, we need do add extra annotations from the annotation file which we used for <span class="notranslate">mapping</span> and counting.</p>
+<p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase (<a class="citation" href="#thurmond2018flybase">Thurmond <i>et al.</i> 2018</a>). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for <span class="notranslate">mapping</span> and counting.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-annotation-of-the-differentially-expressed-genes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotation of the differentially expressed genes</h3>
@@ -3358,6 +3325,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 </blockquote>
 
 <p>The generated output is an extension of the previous file:</p>
+
 <ol>
   <li>Gene identifiers</li>
   <li>Mean normalized counts over all samples</li>
@@ -3444,6 +3412,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 <p>We could plot the \(log_{2} FC\) for the extracted genes, but here we would like to look at a heatmap of <span class="notranslate">expression</span> for these genes in the different samples. So we need to extract the normalized counts for these genes.</p>
 
 <p>We proceed in several steps:</p>
+
 <ul>
   <li>Extract and plot the normalized counts for these genes for each sample with a heatmap, using the normalized count file generated by DESeq2</li>
   <li>Compute, extract and plot the Z-score of the normalized counts</li>
@@ -3547,6 +3516,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 </blockquote>
 
 <p>To compute the Z-score, we break the process into 2 steps:</p>
+
 <ol>
   <li>Substract each value by the mean of values in the row (i.e. \(x_{i,j}- \overline{x_i}\)) using the normalized count table</li>
   <li>Divide the previous values by the standard deviation of values of row, using 2 tables (the normalized counts and the table computed in the previous step)</li>
@@ -3659,20 +3629,21 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 <h1 id="functional-enrichment-analysis-of-the-de-genes">Functional enrichment analysis of the DE genes</h1>
 
-<p>We have extracted genes that are differentially expressed in treated (PS gene-depleted) samples compared to untreated samples. Now, we would like to know if the differentially expressed genes are enriched transcripts of genes which belong to more common or specific categories to classify their potential function a bit better. These categories are called Gene Ontologies (GO).</p>
+<p>We have extracted genes that are differentially expressed in treated (PS gene-depleted) samples compared to untreated samples. Now, we would like to know if the differentially expressed genes are enriched transcripts of genes which belong to more common or specific categories in order to identify biological functions that might be impacted.</p>
 
 <h2 id="gene-ontology-analysis">Gene Ontology analysis</h2>
 
 <p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. However, standard methods give biased results on <span class="notranslate">RNA</span>-Seq data due to over-detection of differential <span class="notranslate">expression</span> for long and highly-expressed transcripts.</p>
 
-<p>The <a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf"><strong>goseq</strong></a> tool (<a class="citation" href="#young2010gene">Young <i>et al.</i> 2010</a>) provides methods for performing GO analysis of <span class="notranslate">RNA</span>-Seq data, taking length bias into account. The methods and software used by goseq are equally applicable to other category based tests of <span class="notranslate">RNA</span>-Seq data, such as KEGG pathway analysis.</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf"><strong>goseq</strong></a> (<a class="citation" href="#young2010gene">Young <i>et al.</i> 2010</a>) provides methods for performing GO analysis of <span class="notranslate">RNA</span>-Seq data while taking length bias into account. <strong>goseq</strong> could also be applied to other category based tests of <span class="notranslate">RNA</span>-Seq data, such as KEGG pathway analysis, as discussed in a further section.</p>
 
 <p><strong>goseq</strong> needs 2 files as inputs:</p>
+
 <ul>
   <li>A tabular file with the differentially expressed genes from all genes assayed in the <span class="notranslate">RNA</span>-Seq experiment with 2 columns:
     <ul>
       <li>the Gene IDs (unique within the file), in uppercase letters</li>
-      <li>a boolean telling if the gene is differentially expressed or not: <code class="language-plaintext highlighter-rouge">True</code> if differentially expressed or <code class="language-plaintext highlighter-rouge">False</code> if not</li>
+      <li>a boolean indicating whether the gene is differentially expressed or not (<code class="language-plaintext highlighter-rouge">True</code> if differentially expressed or <code class="language-plaintext highlighter-rouge">False</code> if not)</li>
     </ul>
   </li>
   <li>A file with information about the length of a gene to correct for potential length bias in differentially expressed genes</li>
@@ -3755,7 +3726,9 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 <p><strong>goseq</strong> generates with these parameters 3 outputs:</p>
 
 <ol>
-  <li>A big table (<code class="language-plaintext highlighter-rouge">Ranked category list - Wallenius method</code>) with the following columns for each GO term:
+  <li>
+    <p>A table (<code class="language-plaintext highlighter-rouge">Ranked category list - Wallenius method</code>) with the following columns for each GO term:</p>
+
     <ol>
       <li><code class="language-plaintext highlighter-rouge">category</code>: GO category</li>
       <li><code class="language-plaintext highlighter-rouge">over_rep_pval</code>: <em>p</em>-value for over-representation of the term in the differentially expressed genes</li>
@@ -3815,11 +3788,13 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
       </blockquote>
     </blockquote>
   </li>
-  <li>A table with the differentially expressed genes (from the list we provided) associated to the GO terms (<code class="language-plaintext highlighter-rouge">DE genes for categories (GO/KEGG terms)</code>)</li>
+  <li>
+    <p>A table with the differentially expressed genes (from the list we provided) associated to the GO terms (<code class="language-plaintext highlighter-rouge">DE genes for categories (GO/KEGG terms)</code>)</p>
+  </li>
 </ol>
 
 <blockquote class="comment">
-  <h3 id="comment-advanced-tutorial-on-visualization"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Advanced tutorial on visualization</h3>
+  <h3 id="comment-advanced-tutorial-on-enrichment-analysis"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Advanced tutorial on enrichment analysis</h3>
 
   <p>In this tutorial, we covered GO enrichment analysis with <strong>goseq</strong>. To learn other gene set enrichment analysis, please have a look at the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">“<span class="notranslate">RNA</span>-Seq genes to pathways”</a> tutorial.</p>
 </blockquote>
@@ -3895,6 +3870,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 <p>We could investigate which genes are involved in which pathways by looking at the second file generated by <strong>goseq</strong>. But it can be cumbersome and we would like to see the pathways as represented in the previous image. <strong>Pathview</strong> (<a class="citation" href="#luo2013pathview">Luo and Brouwer 2013</a>) can help to generate automatically similar images as the previous one but also add extra information about the genes (e.g. <span class="notranslate">expression</span>) in our study.</p>
 
 <p>This tool needs 2 main information as inputs:</p>
+
 <ul>
   <li>Pathway ID(s) to plot, either as just one ID or as a file with one column with the pathway IDs</li>
   <li>A tabular file with the genes in the <span class="notranslate">RNA</span>-Seq experiment with 2 (or more) columns:
@@ -4033,7 +4009,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="levin2010comprehensive">Levin, J. Z., M. Yassour, X. Adiconis, C. Nusbaum, D. A. Thompson <i>et al.</i>, 2010 <b>Comprehensive comparative analysis of strand-specific RNA sequencing methods</b>. Nature methods 7: 709.</span>
+<li><span id="levin2010comprehensive">Levin, J. Z., M. Yassour, X. Adiconis, C. Nusbaum, D. A. Thompson <i>et al.</i>, 2010 <b>Comprehensive comparative analysis of strand-specific RNA sequencing methods</b>. Nature Methods 7: 709.</span>
     
     
     
@@ -4044,7 +4020,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="young2010gene">Young, M. D., M. J. Wakefield, G. K. Smyth, and A. Oshlack, 2010 <b>Gene ontology analysis for RNA-seq: accounting for selection bias</b>. Genome biology 11: R14.</span>
+<li><span id="young2010gene">Young, M. D., M. J. Wakefield, G. K. Smyth, and A. Oshlack, 2010 <b>Gene ontology analysis for RNA-seq: accounting for selection bias</b>. Genome Biology 11: R14.</span>
     
     
     
@@ -4055,7 +4031,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="brooks2011conservation">Brooks, A. N., L. Yang, M. O. Duff, K. D. Hansen, J. W. Park <i>et al.</i>, 2011 <b>Conservation of an RNA regulatory map between Drosophila and mammals</b>. Genome research 21: 193–202.</span>
+<li><span id="brooks2011conservation">Brooks, A. N., L. Yang, M. O. Duff, K. D. Hansen, J. W. Park <i>et al.</i>, 2011 <b>Conservation of an RNA regulatory map between Drosophila and mammals</b>. Genome Research 21: 193–202.</span>
     
     
     
@@ -4077,7 +4053,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="robinson2011integrative">Robinson, J. T., H. Thorvaldsdóttir, W. Winckler, M. Guttman, E. S. Lander <i>et al.</i>, 2011 <b>Integrative genomics viewer</b>. Nature biotechnology 29: 24.</span>
+<li><span id="robinson2011integrative">Robinson, J. T., H. Thorvaldsdóttir, W. Winckler, M. Guttman, E. S. Lander <i>et al.</i>, 2011 <b>Integrative genomics viewer</b>. Nature Biotechnology 29: 24.</span>
     
     
     
@@ -4110,7 +4086,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="kim2013tophat2">Kim, D., G. Pertea, C. Trapnell, H. Pimentel, R. Kelley <i>et al.</i>, 2013 <b>TopHat2: accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions</b>. Genome biology 14: R36.</span>
+<li><span id="kim2013tophat2">Kim, D., G. Pertea, C. Trapnell, H. Pimentel, R. Kelley <i>et al.</i>, 2013 <b>TopHat2: accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions</b>. Genome Biology 14: R36.</span>
     
     
     
@@ -4143,7 +4119,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome biology 15: 550.</span>
+<li><span id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome Biology 15: 550.</span>
     
     
     
@@ -4165,7 +4141,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="kim2015hisat">Kim, D., B. Langmead, and S. L. Salzberg, 2015 <b>HISAT: a fast spliced aligner with low memory requirements</b>. Nature methods 12: 357.</span>
+<li><span id="kim2015hisat">Kim, D., B. Langmead, and S. L. Salzberg, 2015 <b>HISAT: a fast spliced aligner with low memory requirements</b>. Nature Methods 12: 357.</span>
     
     
     
@@ -4176,7 +4152,29 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     
 
 </li>
-<li><span id="kim2019graph">Kim, D., J. M. Paggi, C. Park, C. Bennett, and S. L. Salzberg, 2019 <b>Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</b>. Nature biotechnology 37: 907–915.</span>
+<li><span id="ewels2016multiqc">Ewels, P., M. Magnusson, S. Lundin, and M. Käller, 2016 <b>MultiQC: summarize analysis results for multiple tools and samples in a single report</b>. Bioinformatics 32: 3047–3048.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://academic.oup.com/bioinformatics/article/32/19/3047/2196507">https://academic.oup.com/bioinformatics/article/32/19/3047/2196507</a>
+      
+    
+
+</li>
+<li><span id="thurmond2018flybase">Thurmond, J., J. L. Goodman, V. B. Strelets, H. Attrill, L. S. Gramates <i>et al.</i>, 2018 <b>FlyBase 2.0: the next generation</b>. Nucleic Acids Research 47: D759–D765.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://academic.oup.com/nar/article-abstract/47/D1/D759/5144957">https://academic.oup.com/nar/article-abstract/47/D1/D759/5144957</a>
+      
+    
+
+</li>
+<li><span id="kim2019graph">Kim, D., J. M. Paggi, C. Park, C. Bennett, and S. L. Salzberg, 2019 <b>Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype</b>. Nature Biotechnology 37: 907–915.</span>
     
     
     
@@ -4210,8 +4208,8 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxleben and Pavankumar Videm and Clemens Blank and Maria Doyle and Nicola Soranzo and Peter van Heusden",
     title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "20"
+    month = "05",
+    day = "28"
     url = "\url{/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

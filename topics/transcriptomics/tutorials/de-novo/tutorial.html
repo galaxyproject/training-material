@@ -638,7 +638,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 10, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -800,8 +800,8 @@
       <ul>
         <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (two separate input files)</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">G1E forward read (R1)</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="language-plaintext highlighter-rouge">G1E reverse read (R1)</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">G1E_rep1 forward read</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="language-plaintext highlighter-rouge">G1E_rep1 reverse read</code></li>
           </ul>
         </li>
         <li><em>“Perform initial ILLUMINACLIP step?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -828,7 +828,11 @@
       </blockquote>
       <p><img src="../../images/BeforeAndAfterTrimming.png" alt="Before and after trimming comparison" /></p>
     </li>
+    <li>
+      <p><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Trimmomatic</code> on the remaining forward/reverse read pairs with the same parameters.</p>
+    </li>
   </ol>
+
 </blockquote>
 
 <p>Now that we have trimmed our <span class="notranslate">reads</span> and are fortunate that there is a reference genome assembly for mouse, we will align our trimmed <span class="notranslate">reads</span> to the genome.</p>
@@ -932,8 +936,8 @@
         </li>
         <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: trimmed G1E forward read (R1)</li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: trimmed G1E reverse read (R1)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: Trimmomatic on G1E_rep1 forward read (R1 paired)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: Trimmomatic on G1E_rep1 reverse read (R2 paired)</li>
             <li><em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Forward(FR)</code></li>
           </ul>
         </li>
@@ -984,8 +988,8 @@
   <ol>
     <li><strong>Stringtie-merge</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Stringtie-merge</code> on the <code class="language-plaintext highlighter-rouge">Stringtie</code> assembled transcripts along with the RefSeq annotation file we imported earlier.
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input_gtf”</em>: <code class="language-plaintext highlighter-rouge">all four </code>Stringtie<code class="language-plaintext highlighter-rouge"> assemblies</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“guide_gff”</em>: <code class="language-plaintext highlighter-rouge">RefSeq GTF mm10</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">all four </code>Stringtie<code class="language-plaintext highlighter-rouge"> assemblies</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation to include in the merging”</em>: <code class="language-plaintext highlighter-rouge">RefSeq_reference_GTF</code></li>
       </ul>
     </li>
     <li><strong>GFFCompare</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">GFFCompare</code> on the <code class="language-plaintext highlighter-rouge">Stringtie-merge</code> generated transcriptome along with the RefSeq annotation file.
@@ -993,7 +997,11 @@
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em>: <code class="language-plaintext highlighter-rouge">output of Stringtie-merge</code></li>
         <li><em>“Use Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">RefSeq GTF mm10</code></li>
+            <li><em>“Choose the source for the reference annotation”</em>: <code class="language-plaintext highlighter-rouge">History</code>
+              <ul>
+                <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">RefSeq_reference_GTF</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li><em>“Use Sequence Data”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
@@ -1377,7 +1385,7 @@
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Mallory Freeberg, Mo Heydarian, 2019 <b>De novo transcriptome reconstruction with RNA-Seq (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html">/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Mallory Freeberg, Mo Heydarian, 2020 <b>De novo transcriptome reconstruction with RNA-Seq (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html">/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1394,9 +1402,9 @@
 <code id="citation-code">@misc{transcriptomics-de-novo,
     author = "Mallory Freeberg and Mo Heydarian",
     title = "De novo transcriptome reconstruction with RNA-Seq (Galaxy Training Materials)",
-    year = "2019",
-    month = "09",
-    day = "18"
+    year = "2020",
+    month = "02",
+    day = "10"
     url = "\url{/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
