@@ -60,7 +60,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 > ### {% icon hands_on %} Hands-on: Installing Slurm
 >
-> 1. Create (if needed) and edit a file in your working directory called `requirements.yml` and include the following contents:
+> 1. Edit your `requirements.yml` and include the following contents:
 >
 >    ```yaml
 >    - src: galaxyproject.repos
@@ -71,30 +71,32 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
 >
-> 2. In the same directory, run `ansible-galaxy install -p roles -r requirements.yml`. This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
+> 2. In the same directory, run:
 >
-> 3. Create the hosts file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you will install Slurm
->
-> 4. Create a playbook, `slurm.yml` which looks like the following:
->
->    ```yaml
->    - hosts: galaxyservers
->      become: true
->      vars:
->        slurm_roles: ['controller', 'exec']
->        slurm_nodes:
->        - name: localhost
->          CPUs: 2                              # Here you would need to figure out how many cores your machine has. (Hint, `htop`)
->        slurm_config:
->          FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
->          SelectType: select/cons_res
->          SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->      roles:
->        - galaxyproject.repos
->        - galaxyproject.slurm
+>    ```
+>    ansible-galaxy install -p roles -r requirements.yml
 >    ```
 >
-> 5. Run the playbook (`ansible-playbook slurm.yml`)
+> 3. Add the following roles to the *beginning* of your roles section in your `galaxy.yml` playbook:
+>
+>    - `galaxyproject.repos`
+>    - `galaxyproject.slurm`
+>
+> 4. Add the slurm variables to your  `group_vars/galaxyservers.yml`:
+>
+>    ```
+>    # slurm
+>    slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
+>    slurm_nodes:
+>    - name: localhost # Name of our host
+>      CPUs: 2         # Here you would need to figure out how many cores your machine has. For this training we will use 2 but in real life, look at `htop` or similar.
+>    slurm_config:
+>      FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
+>      SelectType: select/cons_res
+>      SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>    ```
+>
+> 5. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 {: .hands_on}
 
@@ -258,25 +260,18 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```yaml
 >    - hosts: galaxyservers
 >      become: true
->      vars:
->        slurm_roles: ['controller', 'exec']
->        slurm_nodes:
->        - name: localhost
->          CPUs: 2                              # Here you would need to figure out how many cores your machine has. (Hint, `htop`)
->        slurm_config:
->          FastSchedule: 2                      # Ignore errors if the host actually has cores != 2
->          SelectType: select/cons_res
->          SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>      ...
 >      roles:
 >        - galaxyproject.repos
 >        - galaxyproject.slurm
+>        ...
 >      post_tasks:
 >        - name: Install slurm-drmaa
 >          package:
 >            name: slurm-drmaa1
 >    ```
 >
-> 2. Run the playbook (`ansible-playbook slurm.yml`)
+> 2. Run the playbook (`ansible-playbook galaxy.yml`)
 >
 {: .hands_on}
 
@@ -299,9 +294,9 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 > 2. We need to modify `job_conf.xml` to instruct Galaxy on how to use a more advanced job submission setup. We will begin with a basic job conf:
 >
->    If the folder does not exist, create `files/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p files/galaxy/config/`).
+>    If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p templates/galaxy/config/`).
 >
->    Create `files/galaxy/config/job_conf.xml` with the following contents:
+>    Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
 >
 >    ```xml
 >    <job_conf>
@@ -316,14 +311,14 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    > ### {% icon comment %} Note
 >    >
->    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml.j2` file, as well as defined `galaxy_config_templates` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
 >
 > 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
 >    ```diff
->    --- files/galaxy/config/job_conf.xml.old
->    +++ files/galaxy/config/job_conf.xml
+>    --- templates/galaxy/config/job_conf.xml.j2.old
+>    +++ templates/galaxy/config/job_conf.xml.j2
 >    @@ -1,8 +1,9 @@
 >     <job_conf>
 >         <plugins workers="4">
@@ -351,20 +346,20 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```
 >    {% endraw %}
 >
->    And then deploy the new config file using the `galaxy_config_files` var in your group vars:
+>    And then deploy the new config file using the `galaxy_config_templates` var in your group vars:
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_config_files:
+>    galaxy_config_templates:
 >      # ... possible existing config file definitions
->      - src: files/galaxy/config/job_conf.xml
+>      - src: templates/galaxy/config/job_conf.xml.j2
 >        dest: "{{ galaxy_job_config_file }}"
 >    ```
 >    {% endraw %}
 >
->      The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_template_files` exist to template files out.
+>    The variable `galaxy_config_files` is an array of hashes, each with `src` and `dest`, the files from src will be copied to dest on the server. `galaxy_config_templates` exist to template files out. We use templates by default, because in some of the later tutorials there will be variables we want to use in the templates.
 >
-> 5. Run your *Galaxy* playbook (`ansible-playbook galaxy.yml`)
+> 5. Run your Galaxy playbook (`ansible-playbook galaxy.yml`)
 >
 > 6. Follow the logs with `journalctl -f -u galaxy`
 >
@@ -542,11 +537,11 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 > ### {% icon hands_on %} Hands-on: Allocating more resources
 >
-> 1. Edit your `files/galaxy/config/job_conf.xml` and add the following destination:
+> 1. Edit your `templates/galaxy/config/job_conf.xml.j2` and add the following destination:
 >
 >    ```xml
 >            <destination id="slurm-2c" runner="slurm">
->                <param id="nativeSpecification">--nodes=1 --ntasks=2</param>
+>                <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=2</param>
 >            </destination>
 >    ```
 > 2. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
@@ -680,7 +675,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    galaxy_config_files:
 >      ...
 >      - src: files/galaxy/config/tool_destinations.yml
->        dest: {% raw %}"{{ galaxy_config['galaxy']['tool_destinations_config_file'] }}"{% endraw %}
+>        dest: {% raw %}"{{ galaxy_config.galaxy.tool_destinations_config_file }}"{% endraw %}
 >    ```
 >
 > 3. We need to update Galaxy's job configuration to use this rule. Open `files/galaxy/config/job_conf.xml` and add a DTD destination:
@@ -731,7 +726,7 @@ Such form elements can be added to tools without modifying each tool's configura
 
 > ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
 >
-> 1. Create and open `files/galaxy/config/job_resource_params_conf.xml`
+> 1. Create and open `templates/galaxy/config/job_resource_params_conf.xml.j2`
 >
 >    ```xml
 >    <parameters>
@@ -754,13 +749,13 @@ Such form elements can be added to tools without modifying each tool's configura
 >        galaxy:
 >          job_resource_params_file: {% raw %}"{{ galaxy_config_dir }}/job_resource_params_conf.xml"{% endraw %}
 >      ...
->      galaxy_config_files:
+>      galaxy_config_templates:
 >        ...
->        - src: files/galaxy/config/job_resource_params_conf.xml
->          dest: {% raw %}"{{ galaxy_config['galaxy']['job_resource_params_file'] }}"{% endraw %}
+>        - src: templates/galaxy/config/job_resource_params_conf.xml.j2
+>          dest: {% raw %}"{{ galaxy_config.galaxy.job_resource_params_file }}"{% endraw %}
 >      ```
 >
-> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `files/galaxy/config/job_conf.xml`:
+> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.xml.j2`:
 >
 >    ```xml
 >        <resources>
@@ -833,6 +828,10 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >        # build the param dictionary
 >        param_dict = job.get_param_values(app)
 >
+>        if param_dict.get('__job_resource', {}).get('__job_resource__select') != 'yes':
+>            log.info("Job resource parameters not seleted, returning default destination")
+>            return destination_id
+>
 >        # handle job resource parameters
 >        try:
 >            # validate params
@@ -850,6 +849,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >            raise JobMappingException(FAILURE_MESSAGE)
 >
 >        log.info('returning destination: %s', destination_id)
+>        log.info('native specification: %s', destination.params.get('nativeSpecification'))
 >        return destination or destination_id
 >    ```
 >

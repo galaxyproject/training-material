@@ -110,15 +110,15 @@ Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook
 ```yaml
 galaxy_config_files:
   - src: files/galaxy/config/builds.txt
-    dest: "{{ galaxy_config['galaxy']['builds_file_path'] }}"
+    dest: "{{ galaxy_config.galaxy.builds_file_path }}"
   - src: files/galaxy/config/data_manager_conf.xml
-    dest: "{{ galaxy_config['galaxy']['data_manager_config_file'] }}"
+    dest: "{{ galaxy_config.galaxy.data_manager_config_file }}"
   - src: files/galaxy/config/datatypes_conf.xml
-    dest: "{{ galaxy_config['galaxy']['datatypes_config_file'] }}"
+    dest: "{{ galaxy_config.galaxy.datatypes_config_file }}"
   - src: files/galaxy/config/dependency_resolvers_conf.xml
-    dest: "{{ galaxy_config['galaxy']['dependency_resolvers_config_file'] }}"
+    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
   - src: files/galaxy/config/disposable_email_blacklist.conf
-    dest: "{{ galaxy_config['galaxy']['blacklist_file'] }}"
+    dest: "{{ galaxy_config.galaxy.blacklist_file }}"
 ```
 {% endraw %}
 
