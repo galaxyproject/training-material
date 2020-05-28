@@ -14,7 +14,7 @@ key_points:
 - Use Workflow Parameters to make your Workflows more versatile
 contributors:
 - mvdbeek
-- erasche
+- hexylena
 level: Intermediate
 ---
 

@@ -5,6 +5,6 @@
 >    > 3. Scroll down to the **Configure Output** section of your desired parameter, and click it to expand it.
 >    >    - Under **Rename dataset**, give it meaningful name
 >    >
->    >      ![Rename output datasets]({{ site.baseurl }}{% link shared/images/workflow_rename_datasets.png %})
+>    >      ![Rename output datasets]({% link shared/images/workflow_rename_datasets.png %})
 >    {: .tip}
 >

@@ -16,7 +16,7 @@ key_points:
 - Data deletion in Galaxy is a two step process, deletion followed by purging from disk
 contributors:
 - slugger70
-- erasche
+- hexylena
 ---
 
 

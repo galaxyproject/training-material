@@ -51,9 +51,12 @@ We will now import the data that we will use for the tutorial.
 >    {% include snippets/create_new_history.md %}
 >
 > 2. Import from [Zenodo](https://doi.org/10.5281/zenodo.582600) or from the data library the files:
->    - [`mutant_R1.fastq`](https://zenodo.org/record/582600/files/mutant_R1.fastq)
->    - [`mutant_R2.fastq`](https://zenodo.org/record/582600/files/mutant_R2.fastq)
->    - [`wildtype.fna`](https://zenodo.org/record/582600/files/wildtype.fna)
+>
+>    ```
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    ```
 >
 >    > ### {% icon tip %} Tip: Importing data via links
 >    >

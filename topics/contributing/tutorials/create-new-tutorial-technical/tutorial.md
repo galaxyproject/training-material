@@ -23,7 +23,7 @@ contributors:
   - bebatut
   - bgruening
   - shiltemann
-  - erasche
+  - hexylena
 ---
 
 # Building a Galaxy instance specifically for your training
@@ -52,7 +52,15 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 >
 > 1. Download the workflow for the tutorial
 > 2. Save it in the `workflow` directory of the tutorial
+> 3. Check that your `workflow` directory has an `index.md` with the contents:
+>
+>    ```yaml
+>    ---
+>    layout: workflow-list
+>    ---
+>    ```
 {: .hands_on}
+> 3. Edit the workflow with a text editor to add the topic name as 'tags' and to add the tutorial title as 'annotation' to the workflow.
 
 
 ## Testing the workflow (recommended)

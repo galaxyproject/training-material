@@ -35,7 +35,7 @@ follow_up_training:
 contributors:
   - joachimwolff
   - bebatut
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -87,9 +87,9 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 
 We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.
 
-During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality. 
+During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality.
 
-There is a dedicated tutorial for [quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further. 
+There is a dedicated tutorial for [quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) of sequencing data. We will not repeat the steps there. You should follow the [tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) and apply it to your data before going further.
 
 # Map reads on a reference genome
 
@@ -106,8 +106,8 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 > ### {% icon hands_on %} Hands-on: Mapping with Bowtie2
 > 1. **Bowtie2** {% icon tool %} with the following parameters
 >    - *"Is this single or paired library"*: `Paired-end`
->       - {% icon param-file %} *"FASTA/Q file #1"*: `trimmed reads pair 1` (output of **Trim Galore!** {% icon tool %})
->       - {% icon param-file %} *"FASTA/Q file #2"*: `trimmed reads pair 2` (output of **Trim Galore!** {% icon tool %})
+>       - {% icon param-file %} *"FASTA/Q file #1"*: `reads_1`
+>       - {% icon param-file %} *"FASTA/Q file #2"*: `reads_2`
 >       - *"Do you want to set paired-end options?"*: `No`
 >
 >           You should have a look at the parameters there, specially the mate orientation if you know it. They can improve the quality of the paired-end mapping.

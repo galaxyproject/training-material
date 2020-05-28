@@ -9,20 +9,24 @@ contributors:
 
 ---
 
-Tool Shed is to Galaxy as App Store is to iPhone.
+## Tool Shed
 
-It is a free service that hosts repositories containing Galaxy Tools.
-Installing from the Tool Shed takes care of
+- Galaxy "App Store"
+
+- It is a free service that hosts repositories containing Galaxy tools.
+
+- Installing from the Tool Shed takes care of
   - dependencies
   - reference data tables
   - configuration files
 
 ---
-Main Tool Shed (MTS) runs at http://toolshed.g2.bx.psu.edu and serves all Galaxies worldwide.
 
-Everybody can create a repository.
+## Which Tool Shed?
 
-Every repository is public including the whole history.
+The Main Tool Shed ( https://toolshed.g2.bx.psu.edu ) serves all Galaxies worldwide.
+- Everybody can create a repository.
+- Repositories are public, including their whole history.
 
 Local sheds can be run e.g. for private or custom-licensed tools.
 
@@ -30,13 +34,12 @@ Local sheds can be run e.g. for private or custom-licensed tools.
 We discourage running local TS.
 
 ---
+
 ## Vocabulary
 
 * `wrapper` or `tool definition file` - The XML file that describes to Galaxy how the underlying software works, allowing Galaxy to render UI and execute the software in the right way.
---
 
 * `repository` - A versioned code archive with tool(s) in Tool Shed.
---
 
 * `revision` and `installable revision` - Every TS repo update generates a new revision but only certain (reproducibility-affecting) changes generate a new revision installable to Galaxy as a new version.
 
@@ -46,14 +49,11 @@ Every TS repo update can be propagated to the Galaxy though.
 ---
 ## Overview
 
-* Tool Shed is a host (not a development) platform.
---
+* The Tool Shed is a hosting (not a development) platform.
 
-* Tool Development repository should be linked from the TS repository.
---
+* Each TS repository should link to its development repository.
 
 * Tool Shed allows administrators to pick any installable revision.
---
 
 * Multiple installable revisions of any repository can be present in Galaxy.
 
@@ -64,7 +64,7 @@ Every TS repo update can be propagated to the Galaxy though.
 class: normal
 ## Galaxy's Configuration
 
-List of available sheds is defined in `tool_sheds_conf.xml` and Galaxy comes with the MTS enabled and the TTS disabled.
+The list of available sheds is defined in `tool_sheds_conf.xml`:
 ```xml
 <?xml version="1.0"?>
 <tool_sheds>
@@ -162,7 +162,7 @@ class: normal
 ```
 
 ---
-### seqtk requirements
+### Tool requirements
 
 Requirements of the wrapper.
 ```xml
@@ -171,14 +171,15 @@ Requirements of the wrapper.
 </requirements>
 ```
 
-Galaxy is aiming to be dependency resolution agnostic.
+Galaxy aims to be dependency resolution agnostic.
 
 ---
-# Approach
+## Dependency resolution
 
 * We aim to make Galaxy resolver-independent but Conda-oriented.
 * What resolver is going to be used for the tool dependency is determined at runtime
 and prioritised in the config file `dependency_resolvers_conf.xml`.
+
 ```xml
 <dependency_resolvers>
   <tool_shed_packages />
@@ -194,31 +195,9 @@ and prioritised in the config file `dependency_resolvers_conf.xml`.
 ```
 
 ---
-class: smaller
-### seqtk Conda package
 
-```yml
-package:
-  name: seqtk
-  version: 1.2
-source:
-  fn: v1.2.tar.gz
-  url: https://github.com/lh3/seqtk/archive/v1.2.tar.gz
-  md5: 255ffe05bf2f073dc57abcff97f11a37
-build:
-  number: 0
-requirements:
-  build:
-    - gcc   # [not osx]
-    - llvm  # [osx]
-    - zlib
-  run:
-    - zlib
-about:
-  home: https://github.com/lh3/seqtk
-  license: MIT License
-  summary: Seqtk is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format
-test:
-  commands:
-    - seqtk seq
-```
+## Suite repositories
+
+* To install multiple repositories some authors offer suites.
+* Suite is a single repository that 'depends' on many others.
+* If you install the suite, all 'dependency repositories' will be installed too.

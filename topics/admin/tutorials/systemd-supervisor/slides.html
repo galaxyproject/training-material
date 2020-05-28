@@ -2,16 +2,100 @@
 layout: base_slides
 logo: "GTN"
 
-title: "Controlling Galaxy with Supervisor"
+title: "Controlling Galaxy with systemd or Supervisor"
 contributors:
   - natefoo
+  - hexylena
 ---
-
 class: special
+
+# systemd
+
+The current Linux init system
+
+Used to bootstrap the user space and to manage system processes after booting
+
+---
+class: left
+
+# systemd
+
+Replaces:
+- `/etc/init.d/*`, `/etc/rc?.d`
+- `service` command
+- Upstart
+- `update-rc.d`
+
+INI config format
+
+---
+# systemd - Layout
+
+- `/lib/systemd/system` - System service definitions
+- `/etc/systemd/system` - User-defined service definitions
+
+---
+# systemd - Galaxy service unit
+
+```ini
+[Unit]
+Description=Galaxy
+After=network.target
+After=time-sync.target
+
+[Service]
+UMask=022
+Type=simple
+User=galaxy
+Group=galaxy
+WorkingDirectory=/srv/galaxy/server
+TimeoutStartSec=10
+ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+Environment=HOME=/srv/galaxy VIRTUAL_ENV=/srv/galaxy/venv PATH=/srv/galaxy/venv/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin DOCUTILSCONFIG= PYTHONPATH=/srv/galaxy/server/lib/galaxy/jobs/rules 
+MemoryLimit=32G
+Restart=always
+
+MemoryAccounting=yes
+CPUAccounting=yes
+BlockIOAccounting=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+# systemd - systemctl
+
+`systemctl` is the command line interface to systemd
+
+- `systemctl status <name>[.service]`
+- `systemctl <start|stop|restart|...> <name>[.service]`
+- `systemctl <enable|disable> <name>[.service]`
+
+---
+# systemd - Galaxy service
+
+```console
+$ systemctl status galaxy
+● galaxy.service - Galaxy
+   Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-02-26 19:46:03 UTC; 1 day 20h ago
+ Main PID: 7845 (uwsgi)
+    Tasks: 45 (limit: 4915)
+   Memory: 569.2M (limit: 32.0G)
+      CPU: 5h 43min 35.436s
+   CGroup: /system.slice/galaxy.service
+           ├─7845 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           ├─8106 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           ├─8111 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           └─8112 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+```
+
+---
 
 # Supervisor
 
-.footnote[\#usegalaxy / @galaxyproject]
+The former recommended method for managing multiple Galaxy processes
 
 ---
 # Supervisor
@@ -66,66 +150,9 @@ stopsignal      = INT
 ```
 
 ---
-class: special
+# Supervisor + systemd
 
-# Systemd
-
-The current Linux init system
-- Used to bootstrap the user space and to manage system processes after booting
-
-.footnote[\#usegalaxy / @galaxyproject]
-
----
-# Systemd
-
-Replaces:
-- `/etc/init.d/*`, `/etc/rc?.d`
-- `service` command
-- Upstart
-- `update-rc.d`
-
-INI config format
-
----
-# Systemd - Layout
-
-- `/lib/systemd/system` - System service definitions
-- `/etc/systemd/system` - User-defined service definitions
-
----
-class: smaller
-# Systemd - Service file
-
-```ini
-[Unit]
-Description=Supervisor process control system for UNIX
-Documentation=http://supervisord.org
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
-KillMode=process
-Restart=on-failure
-RestartSec=50s
-
-[Install]
-WantedBy=multi-user.target
-```
-
----
-# Systemd - systemctl
-
-`systemctl` is the command line interface to systemd
-
-- `systemctl <start|stop|restart|...> <name>[.service]`
-- `systemctl <enable|disable> <name>[.service]`
-
----
-# Systemd + supervisor
-
-Ensure that systemd is configured to start supervisor with:
+If you prefer, you can use Supervisor to manage the Galaxy processes. The OS needs to ensure the Supervisor daemon is running, and probably manages it with systemd, as is common on most systems currently.
 
 ```console
 $ systemctl status supervisor

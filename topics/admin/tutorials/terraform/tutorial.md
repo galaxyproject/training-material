@@ -16,7 +16,7 @@ key_points:
   - Terraform lets you develop and implement infrastructure-as-code within your organisation
   - It can drastically simplify management of large numbers of VMs
 contributors:
-  - erasche
+  - hexylena
 tags:
   - terraform
   - deploying

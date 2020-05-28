@@ -90,6 +90,7 @@ We will use the plasmid dataset created by {% cite LiXie2018 %} for their evalua
 
 ## Importing the data into Galaxy
 
+For this tutorial, in order to speed up the analysis time, we will use 6 of the 12 samples from the original study.
 
 > ### {% icon hands_on %} Hands-on: Obtaining our data
 >
@@ -101,20 +102,14 @@ We will use the plasmid dataset created by {% cite LiXie2018 %} for their evalua
 >    ```
 >    https://zenodo.org/record/3247504/files/RB01.fasta
 >    https://zenodo.org/record/3247504/files/RB02.fasta
->    https://zenodo.org/record/3247504/files/RB03.fasta
 >    https://zenodo.org/record/3247504/files/RB04.fasta
 >    https://zenodo.org/record/3247504/files/RB05.fasta
->    https://zenodo.org/record/3247504/files/RB06.fasta
->    https://zenodo.org/record/3247504/files/RB07.fasta
->    https://zenodo.org/record/3247504/files/RB08.fasta
->    https://zenodo.org/record/3247504/files/RB09.fasta
 >    https://zenodo.org/record/3247504/files/RB10.fasta
->    https://zenodo.org/record/3247504/files/RB11.fasta
 >    https://zenodo.org/record/3247504/files/RB12.fasta
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
-> 3. **Build a list collection** containing all 12 fasta files. Name it `Plasmids`
+> 3. **Build a list collection** containing all fasta files. Name it `Plasmids`
 >
 >    {% include snippets/build_list_collection.md %}
 >
