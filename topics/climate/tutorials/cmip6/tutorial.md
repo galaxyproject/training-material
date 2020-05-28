@@ -1,8 +1,13 @@
 ---
 layout: tutorial_hands_on
-
 title: Analyzing CMIP6 data with Galaxy Climate JupyterLab
 zenodo_link: ''
+requirements:
+  -
+    type: "internal"
+    topic_name: galaxy-ui
+    tutorials:
+        - jupyterlab
 questions:
 - Why using Climate data from the Coupled Model Intercomparison Project (CMIP) Phase 6? 
 - How to use CMIP6 data with Galaxy Climate JupyterLab?
@@ -16,7 +21,7 @@ time_estimation: 3H
 key_points:
 - The Coupled Model Intercomparison Project
 - Climate historical data and Climate projections
-- Pangeo
+- Pangeo ecosystem
 contributors:
 - annefou
 
