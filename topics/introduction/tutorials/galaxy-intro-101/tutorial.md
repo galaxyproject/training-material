@@ -109,11 +109,15 @@ First we need to get some data into our history. You can upload files from your 
 >     - *"genome"*: `Human`
 >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >     - *"group"*: `Genes and Gene Predictions`
->     - *"track"*: `GENCODE v29`
+>     - *"track"*: `GENCODE v32`
 >     - *"table"*: `knownGene`
 >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
 >     - *"output format"* should be changed to `BED - browser extensible data`
 >     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
+>
+>     > ### {% icon comment %} Comment
+>     > If the *"table"* drop down menu does not show the `knownGene` option. Set *"group"* to `All tables` and scroll down.
+>     {: .comment}
 >
 > 2. Click on the **get output** button and you will see the next screen:
 >
@@ -227,7 +231,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
 > > ### {% icon solution %} Solution
-> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> to look for how many times each is used:
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
 > >
 > > Gene | Occurences
 > > ---- | ----------
@@ -352,7 +356,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% include snippets/change_dbkey.md dbkey="hg38" %}
 >
-> 2. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+> 2. Second, check that the **format** of your latest history dataset is `bed`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Datatype** field to `bed`.
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+> 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >

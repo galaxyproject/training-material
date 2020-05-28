@@ -109,17 +109,51 @@ We will visualise regions later in the analysis and obtain the gene information 
 > 3. Click **Send query to Galaxy**
 >
 >    This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:
+>
 > 4. **Cut** columns from a table {% icon tool %} with the following parameters:
 >    - {% icon param-text %} *"Cut columns"*: `c3,c5,c6,c13,c12,c4`
 >    - {% icon param-text %} *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: `UCSC Main on Human: wgEncodeGencodeBasicV31 (chr22:1-50,818,468)`
-> 5. Rename the dataset as `chr22 genes`
+>
+> 5. Check the contents of your file, is this as you expect it to be?
+>
+>    > ### {% icon question %} Question: Expected output
+>    >
+>    > Our goal here was to convert the data to BED format.
+>    >
+>    > 1. Which columns do you expect in your file? (Tip: read about [BED format](https://genome.ucsc.edu/FAQ/FAQformat.html#format1))
+>    > 2. Does your file look like a valid BED format?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. We expect at least 3 columns, `chromosome - start - end`, and possibly more optional columns
+>    > > 2. Your file should look something like this:
+>    > >    ```
+>    > >    Chrom	Start	End	Name	Score	Strand	ThickStart	ThickEnd	ItemRGB	BlockCount	BlockSizes	BlockStarts
+>    > >    chr22	10736170	10736283	RF00004	0	-
+>    > >    chr22	11066417	11068174	CU104787.1	0	+
+>    > >    chr22	11249808	11249959	RF00002	0	-
+>    > >    [..]
+>    > >    ```
+>    > >
+>    > > - **Troubleshooting:** Is your second column the `Strand` column?
+>    > >    - Make sure you used the correct **Cut** {% icon tool %} (the one that matches the tool name mentioned in the previous step *exactly*)
+>    > >    - There is another tool with `(cut)` behind the title, we do NOT want to use this tool in this step.
+>    > >
+>    > > - **Tip:** Always check your output files to make sure they match your expectations!
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
+>
+>
+> 6. **Rename** {% icon galaxy-pencil %} the dataset as `chr22 genes`
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 6. Change its datatype to BED
+> 7. **Change** {% icon galaxy-pencil %} its datatype to BED
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="bed" %}
 >
 {: .hands_on}
 
@@ -566,7 +600,7 @@ We call peaks with MACS2. Usually people expand 200bp around cut sites (+/-100bp
 ## Prepare the Datasets
 
 Thanks to **Genrich** we now have a coverage file which represents the coverage of the read start sites extended 50 bp to each side.
-The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it. 
+The output of **Genrich** is a BedGraph-ish pileup (6 columns text format with a comment line and a header). We will first need to convert it to a bedgraph format (4 columns text format with no header) to be able to visualise it.
 
 ### Convert BedGraph-ish pileup of **Genrich** to bedgraph
 

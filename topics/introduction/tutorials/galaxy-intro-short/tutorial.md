@@ -56,7 +56,7 @@ contributors:
 >   > - The main Galaxy server is [usegalaxy.org](https://usegalaxy.org/)
 >   > - The European Galaxy server is [usegalaxy.eu](https://usegalaxy.eu/)
 >   >
->   > You can also find more possible Galaxy servers at the top of this tutorial in **Galaxy instances**
+>   > You can also find more possible Galaxy servers at the top of this tutorial in **Available on these Galaxies**
 >   {: .comment}
 {: .hands_on}
 
@@ -192,10 +192,10 @@ Let's run a tool to filter out lower-quality reads from our FASTQ file.
 
 
 > ### {% icon hands_on %} Hands-on: Run another tool
-> 1. Type **Filter by quality**
+> 1. Type **Filter by quality** in the tools panel search box (top)
 > 2. Click on the tool **Filter by quality** {% icon tool %}
 > 3. Set the following parameters:
->    - {% icon param-file %} *"Library to filter"*: the input FASTQ file
+>    - {% icon param-file %} *"Input FASTQ file"*: the input FASTQ file
 >    - *"Quality cut-off value"*: 35
 >    - *"Percent of bases in sequence that must have quality equal to / higher than cut-off value"*: 80
 > 4. Click **Execute**

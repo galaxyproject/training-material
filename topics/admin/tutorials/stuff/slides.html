@@ -35,26 +35,6 @@ Has a lot of tools and lists that are useful for administrators of the Galaxy se
 
 ---
 
-## Display applications
-
-The list of applications that can be used to display various datatypes.
-
-They are set in the `datatypes_conf.xml` file. For example:
-```
-  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
-      <converter file="bam_to_bai.xml" target_datatype="bai"/>
-      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/>
-      <display file="ucsc/bam.xml" />
-      <display file="ensembl/ensembl_bam.xml" />
-      <display file="igv/bam.xml" />
-      <display file="igb/bam.xml" />
-      <display file="iobio/bam.xml" />
-  </datatype>
-```
-
-[Tutorial](https://galaxyproject.org/admin/tools/external-display-applications-tutorial/) about creating new display apps.
-
----
 ## Data Types
 
 * Galaxy's method of understanding users' files.
@@ -98,6 +78,81 @@ Config file for datatypes.
 You'll then need to restart Galaxy.
 
 ---
+## Display applications
+
+The list of applications that can be used to display various datatypes.
+
+They are set in the `datatypes_conf.xml` file. For example:
+```
+  <datatype extension="bam" type="galaxy.datatypes.binary:Bam" mimetype="application/octet-stream" display_in_upload="true" description="A binary file compressed in the BGZF format with a '.bam' file extension." description_url="https://wiki.galaxyproject.org/Learn/Datatypes#BAM">
+      <converter file="bam_to_bai.xml" target_datatype="bai"/>
+      <converter file="bam_to_bigwig_converter.xml" target_datatype="bigwig"/>
+      <display file="ucsc/bam.xml" />
+      <display file="ensembl/ensembl_bam.xml" />
+      <display file="igv/bam.xml" />
+      <display file="igb/bam.xml" />
+      <display file="iobio/bam.xml" />
+  </datatype>
+```
+
+[Tutorial](https://galaxyproject.org/admin/tools/external-display-applications-tutorial/) about creating new display apps.
+
+---
+# Data Providers
+
+Provide efficient access to data for viz & API
+
+Framework provides direct link to read the raw dataset
+or use data providers to adapt it
+
+In config, assert that visualization requires a given type of data providers
+
+Data providers process data before sending to browser - slice, filter, reformat, ...
+
+---
+
+# Data Libraries
+
+Provide a way to conveniently share Galaxy datasets within a group of Galaxy users or with everybody that has access to a specific instance of Galaxy.
+
+* Can import data from filesystem *without duplicating* it.
+
+* Can import *whole directories* preserving the folder structure.
+
+* The dataset's size does not count towards user's quota.
+  * Every dataset in the library is *stored only once* no matter how many users are using it in their histories.
+
+* Uses roles and groups to control permissions on library/dataset level.
+  * Only admins can _create_ libraries.
+  * Ordinary users can be granted permission to _manage_ libraries
+
+---
+# Libraries configuration
+
+In `galaxy.yml`:
+
+* `user_library_import_dir`
+  * Allows authorized non-administrators to upload a directory of files.
+  * Directory must contain sub-directories named the same as user's email.
+  * Works well in combination with `ftp_upload_dir`.
+* `allow_path_paste`
+  * Admin-only, allows importing from any path that the Galaxy's user has access to.
+
+---
+# Libraries Exercise
+
+* Create a data library
+
+* Clone `https://github.com/galaxyproject/galaxy-test-data` to your home folder.
+
+* Configure your instance to allow importing data from your home folder.
+
+* Import to your library a subset of datasets from the newly created `~/galaxy-test-data/`.
+  * Use `Link files instead of copying` for some.
+
+* Import some files from the library to a new history.
+
+---
 
 ## Tools
 
@@ -139,74 +194,3 @@ $ python -i scripts/db_shell.py -c config/galaxy.yml
  >>> sa_session.commit()
  >>> sa_session.query(User).all()
 ```
-
----
-# Runaway Jobs
-
-Tips:
-- Set job output size limit in `job_conf.xml`
-- Set job concurrency limits in `job_conf.xml`
-- Public servers
-  - Require email verification
-  - Watch for duplicates
-
----
-# Runaway Storage
-
-Tips:
-- Set quotas
-- `tmpwatch` your job working directory
-  - `cleanup_job` in `galaxy.yml` (defaults to `always` though)
-- Set up dataset cleanup
-
----
-# Dataset Cleanup
-
-- `scripts/cleanup_datasets/pgcleanup.py`: PostgreSQL-optimized fast cleanup script
-- `scripts/cleanup_datasets/cleanup_datasets.py`: General cleanup script
-
----
-# Dataset Cleanup Lifecycle
-
-Mark deleted all "anonymous" histories not used within the last `$days` days:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_userless_histories`
-
-Remove all history exports older than `$days` days:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_exported_histories`
-
-Mark purged HDAs in histories deleted `$days` or more days ago (not user-recoverable):
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_deleted_histories`
-
----
-# Dataset Cleanup Lifecycle
-
-Mark purged individual HDAs deleted `$days` or more days ago (not user-recoverable):
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_deleted_hdas`
-
-Mark datasets with all purged HDAs last updated `$days` or more days ago deleted:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s delete_datasets`
-
-Mark purged all datasets last updated `$days` or more days ago **and remove from disk**:
-
-`python ./scripts/cleanup_datasets/pgcleanup.py -o $days -s purge_datasets`
-
----
-
-# Backups
-
-What to back up:
-- Configs
-- Database
-- Installed shed tools and dependencies
-- Datasets (if you can...)
-
-What not to back up:
-- Anything in `database/` not mentioned above
-- Job working directories
-
----

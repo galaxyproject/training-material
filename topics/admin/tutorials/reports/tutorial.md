@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "Galaxy Monitoring with Reports"
 zenodo_link: ""
 questions:
-  - How to monitor a Galaxy service with the Reports?
+  - How to monitor a Galaxy service with the Reports application?
 objectives:
   - Setup and start the Galaxy reports app.
 time_estimation: "30m"
@@ -42,7 +42,7 @@ The reports application gives some pre-configured analytics screens.
 
 # Setting up Reports
 
-The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, Supervisord, uWSGI, and NGINX.
+The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, systemd, uWSGI, and NGINX.
 
 > ### {% icon hands_on %} Hands-on: Setup Reports
 >
@@ -86,37 +86,26 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```yml
 >    galaxy_config_templates:
 >    ...
->    - src: templates/galaxy/config/reports.yml
->      dest: "{{ galaxy_config_dir }}/reports.yml"
+>      - src: templates/galaxy/config/reports.yml
+>        dest: "{{ galaxy_config_dir }}/reports.yml"
 >    ```
 >    {% endraw %}
 >
 >
-> 3. Similar to Galaxy we will again use Supervisor to manage the Reports process. In the same file (`galaxyservers` group variables file) edit the `supervisor_programs` section - add an entry for the Reports webapp:
+> 3. Similar to Galaxy we will again use systemd to manage the Reports process.
 >
 >    {% raw %}
 >    ```yml
->    supervisor_programs:
+>    # systemd
+>    galaxy_systemd_reports: true
 >      ....
->      - name: reports
->        state: present
->        command: uwsgi --yaml {{ galaxy_config_dir }}/reports.yml
->        configuration: |
->          autostart=true
->          autorestart=true
->          startretries=1
->          startsecs=10
->          user=galaxy
->          umask=022
->          directory={{ galaxy_server_dir }}
->          environment=HOME={{ galaxy_mutable_data_dir }},VIRTUAL_ENV={{ galaxy_venv_dir }},PATH={{ galaxy_venv_dir }}/bin:%(ENV_PATH)s
 >    ```
 >    {% endraw %}
 >
-> 4. Then we need to tell NGINX it should serve our Reports app under `<server_url>/reports` url. Edit your `galaxyservers` group variables file, and under the NGINX configuraiton, add a block for proxying the reports application. It should look like:
+> 4. Then we need to tell NGINX it should serve our Reports app under `<server_url>/reports` url. Edit your `galaxyservers` group variables file, and under the NGINX configuration, add a block for proxying the reports application. It should look like:
 >
 >    ```nginx
->    location /reports {
+>    location /reports/ {
 >        uwsgi_pass           127.0.0.1:9001;
 >        uwsgi_param          UWSGI_SCHEME $scheme;
 >        include              uwsgi_params;
@@ -125,6 +114,5 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >
 > 5. Run the playbook
 >
-> 6. The reports application should be available, under `<server_url>/reports/`. Note the trailing slash.
->
+> 6. The reports application should be available, under `<server_url>/reports/`.>
 {: .hands_on}

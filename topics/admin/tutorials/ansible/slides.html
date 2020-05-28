@@ -27,23 +27,16 @@ contributors:
 
 ---
 
-### Why Configuration Management
+### Why Configuration Management?
 
-What happened:
-
-- Precisely what changes were made?
-- Did you write them down?
-- Can you reproduce them precisely for the next machine?
-
-What if:
-
-- ... your server dies?
-- ... your VM is accidentally deleted?
-- Can you recover?
+- Are you keeping track of config changes?
+- What if your server dies?
+- ... or your VM is accidentally deleted?
+- Can you recover? How quickly?
 
 ---
 
-### Why Configuration Management
+### Configuration Management goals
 
 - Reproducibility
 
@@ -55,11 +48,13 @@ What if:
 
 ### Ansible
 
-- Ansible is one of many tools (Chef, Puppet, Salt, etc)
+- [Ansible](https://www.ansible.com/) is an open-source configuration management tool, sponsored by Red Hat
 
-- It uses a 'push' model: SSH into machine and executes commands
+- Several [alternatives](https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software) are available (Chef, Puppet, Salt, etc)
 
-- Very popular
+- It uses an agentless model: SSH into machine and executes commands
+
+- Very popular, especially among Galaxy admins!
 
 - Many modules for common tasks like copying files or managing users or services.
 
@@ -70,6 +65,8 @@ What if:
 ---
 
 ### Inventory File
+
+Defines the systems (called "hosts") against which Ansible will work.
 
 ```ini
 [webservers]
@@ -82,8 +79,6 @@ db_1.example.org ansible_user=root
 
 ???
 
-Defines the systems (called "hosts") against which Ansible will work.
-
 The headings in square brackets are group names, used to select a set of systems on which Ansible should operate.
 
 It is possible to assign variables to hosts and groups to be used later in playbooks.
@@ -91,6 +86,10 @@ It is possible to assign variables to hosts and groups to be used later in playb
 ---
 
 ### Ansible Module and Tasks
+
+A **module** is a piece of code that Ansible can execute on a host, collecting return values.
+
+A **task** is an invocation of single module with its configuration.
 
 ```yaml
 ---
@@ -107,8 +106,6 @@ It is possible to assign variables to hosts and groups to be used later in playb
 ```
 
 ???
-
-Tasks are module invocations with their configuration.
 
 Here is an example of invoking the `copy` module and the package module. Copy copies a file from `src` on the local host to destination (the remote host) and sets some attributes about the file
 
@@ -130,10 +127,13 @@ A collection of:
 ]
 
 .pull-right[
+with a predefined directory structure:
 ```
 .
 ├── defaults
 │   └── main.yml
+├── files
+│   └── cvmfs_wipecache.centos_7
 ├── handlers
 │   └── main.yml
 ├── meta
@@ -164,6 +164,8 @@ A collection of:
 
 ### Playbook
 
+A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
+
 .pull-left[
 - We define a playbook which has a name
 - And applies to some group of hosts
@@ -190,7 +192,8 @@ A collection of:
 
 ### Vault
 
-Allows encryption of files, can collaborate on Ansible playbooks without worrying about accidentally sharing secrets like passwords.
+- Ansible playbooks should be kept under **version control** (typically with Git)
+- Playbooks can be safely shared on public Git repositories (e.g. GitHub) by storing secrets like passwords in encrypted files called **vaults**
 
 ```
 $ANSIBLE_VAULT;1.1;AES256

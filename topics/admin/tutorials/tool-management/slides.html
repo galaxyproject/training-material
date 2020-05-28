@@ -1,6 +1,9 @@
 ---
 layout: base_slides
 logo: "GTN"
+redirect_from:
+- /topics/admin/tutorials/tool-install/slides
+
 
 title: "Ephemeris for Galaxy Tool Management"
 questions:
@@ -23,7 +26,7 @@ contributors:
 
 # Galaxy Vocabulary
 
-* `tool` - XML file that describes to Galaxy how the underlying software works.
+* `tool` or `tool wrapper` - XML file that describes to Galaxy how the underlying software works.
 * `repository` - Versioned code archive in Tool Shed containing Galaxy tool(s).
 
 ---
@@ -42,10 +45,15 @@ You can add tools to Galaxy either
 # How to add tools manually
 
 - By default Galaxy loads all tools in `tool_conf.xml.sample` into tool panel.
-- To add local tools you need:
+- To add local tools by hand:
   - Make a copy `$ cp tool_conf.xml.sample tool_conf.xml`.
   - Add your tool entries to the `tool_conf.xml`.
   - Refresh the site
+- To add local tools with the [galaxyproject.galaxy Ansible role][galaxy-role]:
+  - Set `galaxy_local_tools`
+  - Run the playbook
+
+[galaxy-role]: https://galaxy.ansible.com/galaxyproject/galaxy
 
 ---
 
@@ -81,7 +89,7 @@ Small Python library for Galaxy Management
 
 ## Install workflows
 
-```
+```console
 workflow-install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	-w WORKFLOW_PATH
 	[--publish_workflows]
@@ -92,7 +100,7 @@ workflow-install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 ---
 ## Get Galaxy's tool list
 
-```
+```console
 get-tool-list [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	-o OUTPUT
 	[--include_tool_panel_id]
@@ -104,7 +112,7 @@ get-tool-list [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 
 ---
 
-```
+```yaml
 tools:
 - name: 'column_maker'
   owner: 'devteam'
@@ -126,7 +134,7 @@ tools:
 ---
 ## Install/Update/Test tools
 
-```
+```console
 shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	[--log_file LOG_FILE]
 	[-t TOOL_LIST_FILE]
@@ -156,7 +164,7 @@ shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 
 ## Run data managers
 
-```
+```console
 run-data-managers [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	[--log_file LOG_FILE]
 	--config CONFIG
@@ -168,7 +176,7 @@ run-data-managers [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 
 ## Setup data libraries
 
-```
+```console
 setup-data-libraries [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	-i INFILE
 	[--training]
@@ -176,7 +184,7 @@ setup-data-libraries [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 ```
 
 ---
-```
+```yaml
 destination:
   type: library
   name: "Cool Training Library"
@@ -203,7 +211,7 @@ items:
 ---
 ## Wait for Galaxy
 
-```
+```console
 $ galaxy-wait -g http://localhost:8080 -v
 [00] Galaxy not up yet... HTTPConnectionPool(host='localhost', port=8080):
 	 Max retries exceeded with url: /api/version (Caused
@@ -232,12 +240,14 @@ Galaxy Version: 17.05
 
 ---
 
-## What happens during tool installation
+## What happens when installing a tool from TS
 
-* Repository was downloaded.
-* If needed Galaxy downloaded and compiled the needed dependencies.
-* Galaxy created an entry for the tool in the DB.
-* Galaxy added the tool to one of the tool configs (`shed_tool_conf.xml`).
+* Repository is downloaded.
+* If needed, Galaxy installs the tool's dependencies typically using [conda][conda].
+* Galaxy creates an entry for the tool in its database.
+* Galaxy adds the tool to `shed_tool_conf.xml` .
+
+[conda]: https://conda.io/
 
 ---
 
@@ -259,44 +269,15 @@ Galaxy Version: 17.05
 
 ---
 
-## Example config entry
+## Tool panel management
 
-one entry in `integrated_tool_panel.xml`
-```xml
-<section id="filter" name="Filter and Sort" version="">
-    <tool id="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1" />
-```
-
----
-
-## Suites - more repos in one
-
-* To install multiple repositories some authors offer suites.
-* Suite is a single repository that 'depends' on many other.
-* If you install the suite all 'dependency repositories' will be installed too.
-
----
-
-## Toolpanel management
-
-* How the toolpanel looks like is decided in a file called `integrated_tool_panel.xml`.
-* By default it resides in Galaxy's root folder.
+* How the tool panel looks like is decided in a file called `integrated_tool_panel.xml`.
+* By default it resides in Galaxy's `config/` folder.
 * If missing it is generated from all other tool config files during startup.
 * Modify it if you want to reorder tools or move section.
 
----
-
-## Dependency resolvers
-
-* We aim to make Galaxy resolver-independent.
-* What resolver is going to be used for the tool dependency is determined at runtime and prioritised in `config/dependency_resolvers_conf.xml`.
-
 ```xml
-<dependency_resolvers>
-  <tool_shed_packages />
-  <galaxy_packages />
-  <conda />
-  <galaxy_packages versionless="true" />
-  <conda versionless="true" />
-</dependency_resolvers>
+<section id="filter" name="Filter and Sort" version="">
+    <tool id="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1" />
+</section>
 ```

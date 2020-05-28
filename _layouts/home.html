@@ -35,7 +35,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "use" %}
+                        {% if topic[1].type == "use" and topic[1].enable != false %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -57,7 +57,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "basics" %}
+                        {% if topic[1].type == "basics" and topic[1].enable != false  %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -78,7 +78,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "admin-dev" %}
+                        {% if topic[1].type == "admin-dev" and topic[1].enable != false  %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -107,7 +107,7 @@ layout: base
                     </thead>
                     <tbody>
                     {% for topic in sorted_topics %}
-                        {% if topic[1].type == "instructors" %}
+                        {% if topic[1].type == "instructors" and topic[1].enable != false %}
                         <tr>
                             {% assign tutorial_number = site.pages | topic_filter:topic[1].name | topic_count %}
                             <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td>
@@ -185,9 +185,6 @@ layout: base
                 </p>
 
                 <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
-
-                <h2>License</h2>
-                <p>This work is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 
             </div>
             <div class="col-md-6">

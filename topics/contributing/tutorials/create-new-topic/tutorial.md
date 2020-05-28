@@ -33,6 +33,7 @@ Each training material is related to a topic. All training materials (slides, tu
 │   │   ├── slides.html
 │   │   ├── data-library.yaml
 │   │   ├── workflows
+│   │   │   ├── index.md
 │   │   │   ├── workflow.ga
 │   │   ├── tours
 │   │   │   ├── tour.yaml
