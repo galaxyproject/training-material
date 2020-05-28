@@ -276,6 +276,34 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/gxadmin/slides.html",
+      "name": "Galaxy Monitoring with gxadmin",
+      "description": "Slides for 'Galaxy Monitoring with gxadmin' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/gxadmin/tutorial.html",
+      "name": "Galaxy Monitoring with gxadmin",
+      "description": "Hands-on for 'Galaxy Monitoring with gxadmin' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -533,6 +561,91 @@
                         
                     
                 
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Monitoring with gxadmin:
+                            
+                                <a href="/training-material/topics/admin/tutorials/gxadmin/slides.html"><i class="fa fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html"><i class="fa fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
             </ul>
         
     
@@ -571,7 +684,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 5, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 6, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -603,7 +716,11 @@
       <li><a href="#monitoring" id="markdown-toc-monitoring">Monitoring</a></li>
     </ol>
   </li>
-  <li><a href="#telegraf--gxadmin" id="markdown-toc-telegraf--gxadmin">Telegraf &amp; <code class="language-plaintext highlighter-rouge">gxadmin</code></a></li>
+  <li><a href="#telegraf--gxadmin" id="markdown-toc-telegraf--gxadmin">Telegraf &amp; <code class="language-plaintext highlighter-rouge">gxadmin</code></a>    <ol>
+      <li><a href="#installing-gxadmin" id="markdown-toc-installing-gxadmin">Installing gxadmin</a></li>
+      <li><a href="#configuring-telegraf-for-gxadmin" id="markdown-toc-configuring-telegraf-for-gxadmin">Configuring Telegraf for gxadmin</a></li>
+    </ol>
+  </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -739,7 +856,7 @@
     <li>
       <p>Edit the file <code class="language-plaintext highlighter-rouge">group_vars/monitoring.yml</code> and set the following variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">grafana_url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https:///grafana/"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">grafana_url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}/grafana/"</span>
 
 <span class="na">grafana_security</span><span class="pi">:</span>
     <span class="c1"># Please change at least the password to something more suitable</span>
@@ -886,7 +1003,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add an entry to the end of your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook under <code class="language-plaintext highlighter-rouge">roles:</code></p>
+      <p>Add an entry to the <em>end</em> of your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook under <code class="language-plaintext highlighter-rouge">roles:</code></p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="s">dj-wasabi.telegraf</span>
 </code></pre></div>      </div>
@@ -1227,6 +1344,10 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
 
 <p>Via this setup using <code class="language-plaintext highlighter-rouge">systemd</code> we collect metrics about <span class="notranslate">Galaxy</span> request times. To get statistics about other <span class="notranslate">Galaxy</span>-specific metrics such as the job queue status, we need to use <code class="language-plaintext highlighter-rouge">gxadmin</code> to query the <span class="notranslate">Galaxy</span> database and configure Telegraf to consume this data. In this section we will setup gxadmin, and to configure Telegraf to have permissions to run it.</p>
 
+<h2 id="installing-gxadmin">Installing gxadmin</h2>
+
+<p>It’s simple to install gxadmin. Here’s how you do it, if you haven’t done it already:</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-gxadmin-and-configuring-telegraf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing gxadmin and configuring Telegraf</h3>
 
@@ -1235,15 +1356,27 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.gxadmin</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.2</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.3</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Install the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
     </li>
     <li>
-      <p>Add the role to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook, it should run as root, and it should come before <code class="language-plaintext highlighter-rouge">dj-wasabi.telegraf</code> (as we will configure telegraf to call some gxadmin commands).</p>
+      <p>Add the role to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook, it should come before the Telegraf role.</p>
     </li>
+  </ol>
+
+</blockquote>
+
+<p>You can run the playbook now, or wait until you have configured Telegraf below:</p>
+
+<h2 id="configuring-telegraf-for-gxadmin">Configuring Telegraf for gxadmin</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configuring-telegraf"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuring Telegraf</h3>
+
+  <ol>
     <li>
       <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we need to add some additional permissions to permit Telegraf to run <code class="language-plaintext highlighter-rouge">gxadmin</code>:</p>
 
@@ -1261,11 +1394,6 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     <span class="na">roles</span><span class="pi">:</span> <span class="s">telegraf</span>
     <span class="na">privs</span><span class="pi">:</span> <span class="s">SELECT</span>
     <span class="na">objs</span><span class="pi">:</span> <span class="s">ALL_IN_SCHEMA</span>
-
-<span class="c1"># Configure locations for gxadmin that all</span>
-<span class="c1"># users can access</span>
-<span class="na">gxadmin_dir</span><span class="pi">:</span> <span class="s">/opt/gxadmin</span>
-<span class="na">gxadmin_bin_dir</span><span class="pi">:</span> <span class="s">/usr/bin</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1471,7 +1599,7 @@ queue-overview,tool_id=iuc/mothur_pre_cluster/mothur_pre_cluster,tool_version=1.
     title = "Galaxy Monitoring with Telegraf and Grafana (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "05"
+    day = "06"
     url = "\url{/training-material/topics/admin/tutorials/monitoring/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

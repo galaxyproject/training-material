@@ -581,7 +581,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 5, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 6, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1113,9 +1113,9 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>Rather than modify the default tool configuration file, we’ll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.</p>
 
-      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="language-plaintext highlighter-rouge">mkdir -p files/<span class="notranslate">galaxy</span>/config/</code>)</p>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="language-plaintext highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>)</p>
 
-      <p>Create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml.j2</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"interactivetools"</span> <span class="na">name=</span><span class="s">"Interactive Tools"</span><span class="nt">&gt;</span>
@@ -1127,7 +1127,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>We need to modify <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to instruct <span class="notranslate">Galaxy</span> on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:</p>
 
-      <p>Create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
     <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
@@ -1141,7 +1141,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
       <blockquote class="comment">
         <h3 id="comment-note-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
-        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file, as well as defined <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> and set the <code class="language-plaintext highlighter-rouge">job_config_file</code> option in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
+        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code> file, as well as defined <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> and set the <code class="language-plaintext highlighter-rouge">job_config_file</code> option in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
       </blockquote>
     </li>
     <li>
@@ -1189,17 +1189,17 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
     <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
     <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">interactivetools_enable</span><span class="pi">:</span> <span class="s2">"</span><span class="s">True"</span>
+    <span class="na">interactivetools_enable</span><span class="pi">:</span> <span class="no">true</span>
     <span class="na">interactivetools_map</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">gie_proxy_sessions_path</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
-      <p>And then deploy the new config files using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var in your group vars:</p>
+      <p>And then deploy the new config templates using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> var in your group vars:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
   <span class="c1"># ... possible existing config file definitions</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml.j2</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/tool_conf_interactive.xml"</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
     </li>
@@ -1314,7 +1314,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Modify the job configuration file, <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>, to configure Interactive Tools to use the embedded Pulsar runner.</p>
+      <p>Modify the job configuration file, <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>, to configure Interactive Tools to use the embedded Pulsar runner.</p>
 
       <p><br /></p>
 
@@ -1471,7 +1471,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     title = "Galaxy Interactive Tools (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "05"
+    day = "06"
     url = "\url{/training-material/topics/admin/tutorials/interactive-tools/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

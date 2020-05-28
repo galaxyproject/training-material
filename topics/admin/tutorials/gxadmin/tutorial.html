@@ -315,7 +315,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 6, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -337,7 +337,7 @@
   <h3 id="agenda">Agenda</h3>
 
 <ol id="markdown-toc">
-  <li><a href="#installation-with-ansible" id="markdown-toc-installation-with-ansible">Installation with Ansible</a></li>
+  <li><a href="#installing-gxadmin" id="markdown-toc-installing-gxadmin">Installing gxadmin</a></li>
   <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
   <li><a href="#overview-1" id="markdown-toc-overview-1">Overview</a></li>
   <li><a href="#admin-favourite-queries" id="markdown-toc-admin-favourite-queries">Admin Favourite Queries</a></li>
@@ -353,7 +353,9 @@
 
 </blockquote>
 
-<h2 id="installation-with-ansible">Installation with Ansible</h2>
+<h2 id="installing-gxadmin">Installing gxadmin</h2>
+
+<p>It’s simple to install gxadmin. Here’s how you do it, if you haven’t done it already.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-gxadmin-with-ansible"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing gxadmin with Ansible</h3>
@@ -363,7 +365,7 @@
       <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.gxadmin</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.2</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.3</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -856,7 +858,7 @@ gxadmin iquery <span class="notranslate">workflow</span>-invocation-status
     <li>
       <p>Add the following to the file and save it.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_hello<span class="o">()</span> <span class="o">{</span> <span class="c">## hello: Says hi</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_hello<span class="o">()</span> <span class="o">{</span> <span class="c">## : Says hi</span>
 	<span class="nb">echo</span> <span class="s2">"hi!"</span>
 <span class="o">}</span>
 </code></pre></div>      </div>
@@ -920,7 +922,7 @@ help / -h / --help : this message. Invoke '--help' on any subcommand for help sp
     <li>
       <p>Update your function to add the <code class="language-plaintext highlighter-rouge">handle_help</code> call:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_hello<span class="o">()</span> <span class="o">{</span> <span class="c">## hello: Says hi</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_hello<span class="o">()</span> <span class="o">{</span> <span class="c">## : Says hi</span>
 	handle_help <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span> <span class="o">&lt;&lt;-</span><span class="no">EOF</span><span class="sh">
 		Greets you
 </span><span class="no">	EOF
@@ -976,7 +978,7 @@ Greets you
     <li>
       <p>Add a new function:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_query-latest<span class="o">()</span> <span class="o">{</span> <span class="c">## query-latest [jobs|10]: Queries latest N jobs (default to 10)</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_query-latest<span class="o">()</span> <span class="o">{</span> <span class="c">## [jobs|10]: Queries latest N jobs (default to 10)</span>
 	handle_help <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span> <span class="o">&lt;&lt;-</span><span class="no">EOF</span><span class="sh">
 		Find information about the latest jobs on your server.
 </span><span class="no">	EOF
@@ -1072,7 +1074,7 @@ Greets you
     title = "Galaxy Monitoring with gxadmin (Galaxy Training Materials)",
     year = "2020",
     month = "03",
-    day = "04"
+    day = "06"
     url = "\url{/training-material/topics/admin/tutorials/gxadmin/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

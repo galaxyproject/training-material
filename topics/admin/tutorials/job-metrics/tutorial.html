@@ -668,7 +668,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 5, 2020 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 28, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -720,7 +720,7 @@
 
   <ol>
     <li>
-      <p>Create the file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml</code> with the following contents:</p>
+      <p>Create the file <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml.j2</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;job_metrics&gt;</span>
@@ -745,29 +745,26 @@
       <p>You’ll need to make two edits:</p>
       <ul>
         <li>Setting the <code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>, to tell <span class="notranslate">Galaxy</span> where to look for the job metrics configuration.</li>
-        <li>Adding the file to the list of <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to deploy it to the server:</li>
+        <li>Adding the file to the list of <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> to deploy it to the server:</li>
       </ul>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>servers.yml.old
 </span><span class="gi">+++ <span class="notranslate">galaxy</span>servers.yml
-</span>
-+ <span class="notranslate">galaxy</span>_job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_metrics_conf.xml"
-
-  <span class="notranslate">galaxy</span>_config:
+</span>  <span class="notranslate">galaxy</span>_config:
     <span class="notranslate">galaxy</span>:
-<span class="gi">+     job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_job_metrics_config_file }}"
+<span class="gi">+     job_metrics_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_metrics_conf.xml"
 </span>      brand: "My <span class="notranslate">Galaxy</span>"
       admin_users: admin@example.org
       database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
 <span class="p">@@ -120,6 +121,8 @@</span> gie_proxy_setup_service: systemd
-  gie_proxy_sessions_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/interactivetools_map.sqlite"
+ gie_proxy_sessions_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/interactivetools_map.sqlite"
 
-  <span class="notranslate">galaxy</span>_config_files:
-<span class="gi">+   - src: files/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml
-+     dest: "{{ <span class="notranslate">galaxy</span>_job_metrics_config_file }}"
-</span>    - src: files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml
-      dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_conf_interactive.xml"
-    - src: files/<span class="notranslate">galaxy</span>/config/job_conf.xml
+ <span class="notranslate">galaxy</span>_config_templates:
+<span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml.j2
++    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_metrics_config_file }}"
+</span>   - src: templates/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml
+     dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/tool_conf_interactive.xml"
+   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml
 </code></pre></div>      </div>
     </li>
     <li>
@@ -844,8 +841,8 @@
     author = "Helena Rasche",
     title = "Recording Job Metrics (Galaxy Training Materials)",
     year = "2020",
-    month = "03",
-    day = "05"
+    month = "05",
+    day = "28"
     url = "\url{/training-material/topics/admin/tutorials/job-metrics/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
